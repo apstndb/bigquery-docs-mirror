@@ -6,13 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.PATH_PARAMETERS)
-  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.QUERY_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.request_body)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.response_body)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.PATH_PARAMETERS)
+- [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.QUERY_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.request_body)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.response_body)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation#try-it)
 
 Updates a BI reservation.
 
@@ -28,39 +28,29 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`biReservation.name`
-
-`string`
-
-Identifier. The resource name of the singleton BI reservation. Reservation names have the form `projects/{projectId}/locations/{locationId}/biReservation` .
+| Parameters           |                                                                                                                                                                       |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `biReservation.name` | `string` Identifier. The resource name of the singleton BI reservation. Reservation names have the form `projects/{projectId}/locations/{locationId}/biReservation` . |
 
 ### Query parameters
 
-Parameters
-
-`updateMask`
-
-` string ( FieldMask  ` format)
-
-A list of fields to be updated in this request.
-
-This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` .
+| Parameters   |                                                                                                                                                                                                                                                                  |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `updateMask` | `string ( `[`FieldMask`](https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask)` format)` A list of fields to be updated in this request. This is a comma-separated list of fully qualified names of fields. Example: `"user.displayName,photo"` . |
 
 ### Request body
 
-The request body contains an instance of `  BiReservation  ` .
+The request body contains an instance of [`BiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation) .
 
 ### Response body
 
-If successful, the response body contains an instance of `  BiReservation  ` .
+If successful, the response body contains an instance of [`BiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation) .
 
 ### Authorization scopes
 
 Requires one of the following OAuth scopes:
 
-  - `https://www.googleapis.com/auth/bigquery`
-  - `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -14,8 +14,8 @@ As a best practice, you should use [Application Default Credentials (ADC) to aut
 
 You can use JWTs to authenticate in the following ways:
 
-  - For service account keys created in Google Cloud console or by using the gcloud CLI, [use a client library](https://docs.cloud.google.com/bigquery/docs/json-web-tokens#client-libraries) that provides JWT signing.
-  - For system-managed service accounts, [use the REST API or the gcloud CLI](https://docs.cloud.google.com/bigquery/docs/json-web-tokens#rest-gcloud) .
+- For service account keys created in Google Cloud console or by using the gcloud CLI, [use a client library](https://docs.cloud.google.com/bigquery/docs/json-web-tokens#client-libraries) that provides JWT signing.
+- For system-managed service accounts, [use the REST API or the gcloud CLI](https://docs.cloud.google.com/bigquery/docs/json-web-tokens#rest-gcloud) .
 
 ### Scope and Audience
 
@@ -25,51 +25,53 @@ Use [scopes](https://developers.google.com/identity/protocols/oauth2/scopes) wit
 
 For service account keys created in Google Cloud console or by using the gcloud CLI, use a client library that provides JWT signing. The following list provides some appropriate options for popular programming languages:
 
-  - Go: [func JWTAccessTokenSourceFromJSON](https://pkg.go.dev/golang.org/x/oauth2/google#JWTAccessTokenSourceFromJSON)
-  - Java: [Class ServiceAccountCredentials](https://docs.cloud.google.com/java/docs/reference/google-auth-library/latest/com.google.auth.oauth2.ServiceAccountCredentials)
-  - Node.js: [Class JWTAccess](https://docs.cloud.google.com/nodejs/docs/reference/google-auth-library/latest/google-auth-library/jwtaccess)
-  - PHP: [ServiceAccountJwtAccessCredentials](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest#authentication)
-  - Python: [google.auth.jwt module](https://googleapis.dev/python/google-auth/latest/reference/google.auth.jwt.html)
-  - Ruby: [Class: Google::Auth::ServiceAccountJwtHeaderCredentials](https://www.rubydoc.info/gems/googleauth/Google/Auth/ServiceAccountJwtHeaderCredentials)
+- Go: [func JWTAccessTokenSourceFromJSON](https://pkg.go.dev/golang.org/x/oauth2/google#JWTAccessTokenSourceFromJSON)
+- Java: [Class ServiceAccountCredentials](https://docs.cloud.google.com/java/docs/reference/google-auth-library/latest/com.google.auth.oauth2.ServiceAccountCredentials)
+- Node.js: [Class JWTAccess](https://docs.cloud.google.com/nodejs/docs/reference/google-auth-library/latest/google-auth-library/jwtaccess)
+- PHP: [ServiceAccountJwtAccessCredentials](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest#authentication)
+- Python: [google.auth.jwt module](https://googleapis.dev/python/google-auth/latest/reference/google.auth.jwt.html)
+- Ruby: [Class: Google::Auth::ServiceAccountJwtHeaderCredentials](https://www.rubydoc.info/gems/googleauth/Google/Auth/ServiceAccountJwtHeaderCredentials)
 
 #### Java example
 
 The following example uses the [BigQuery client library for Java](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) to create and sign a JWT. The default scope for BigQuery API is set to `https://www.googleapis.com/auth/bigquery` in the client library.
 
-    import com.google.auth.oauth2.ServiceAccountCredentials;
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.common.collect.ImmutableList;
-    
-    import java.io.FileInputStream;
-    import java.io.IOException;
-    import java.net.URI;
-    
-    public class Example {
-        public static void main(String... args) throws IOException {
-            String projectId = "myproject";
-            // Load JSON file that contains service account keys and create ServiceAccountCredentials object.
-            String credentialsPath = "/path/to/key.json";
-            ServiceAccountCredentials credentials = null;
-            try (FileInputStream is = new FileInputStream(credentialsPath)) {
-              credentials =  ServiceAccountCredentials.fromStream(is);
-              // The default scope for BigQuery is used.
-              // Alternatively, use `.setScopes()` to set custom scopes.
-              credentials = credentials.toBuilder()
-                  .setUseJwtAccessWithScope(true)
-                  .build();
-            }
-            // Instantiate BigQuery client with the credentials object.
-            BigQuery bigquery =
-                    BigQueryOptions.newBuilder().setCredentials(credentials).build().getService();
-            // Use the client to list BigQuery datasets.
-            System.out.println("Datasets:");
-            bigquery
-                .listDatasets(projectId)
-                .iterateAll()
-                .forEach(dataset -> System.out.printf("%s%n", dataset.getDatasetId().getDataset()));
+```
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.common.collect.ImmutableList;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URI;
+
+public class Example {
+    public static void main(String... args) throws IOException {
+        String projectId = "myproject";
+        // Load JSON file that contains service account keys and create ServiceAccountCredentials object.
+        String credentialsPath = "/path/to/key.json";
+        ServiceAccountCredentials credentials = null;
+        try (FileInputStream is = new FileInputStream(credentialsPath)) {
+          credentials =  ServiceAccountCredentials.fromStream(is);
+          // The default scope for BigQuery is used.
+          // Alternatively, use `.setScopes()` to set custom scopes.
+          credentials = credentials.toBuilder()
+              .setUseJwtAccessWithScope(true)
+              .build();
         }
+        // Instantiate BigQuery client with the credentials object.
+        BigQuery bigquery =
+                BigQueryOptions.newBuilder().setCredentials(credentials).build().getService();
+        // Use the client to list BigQuery datasets.
+        System.out.println("Datasets:");
+        bigquery
+            .listDatasets(projectId)
+            .iterateAll()
+            .forEach(dataset -> System.out.printf("%s%n", dataset.getDatasetId().getDataset()));
     }
+}
+```
 
 ### Create JWTs with REST or the gcloud CLI
 
@@ -79,36 +81,38 @@ For system-managed service accounts, you must manually assemble the JWT, then us
 
 The following example shows a bash script that assembles a JWT and then uses the `gcloud beta iam service-accounts sign-jwt` command to sign it.
 
-    #!/bin/bash
-    
-    SA_EMAIL_ADDRESS="myserviceaccount@myproject.iam.gserviceaccount.com"
-    
-    TMP_DIR=$(mktemp -d /tmp/sa_signed_jwt.XXXXX)
-    trap "rm -rf ${TMP_DIR}" EXIT
-    JWT_FILE="${TMP_DIR}/jwt-claim-set.json"
-    SIGNED_JWT_FILE="${TMP_DIR}/output.jwt"
-    
-    IAT=$(date '+%s')
-    EXP=$((IAT+3600))
-    
-    cat <<EOF > $JWT_FILE
-    {
-      "aud": "https://bigquery.googleapis.com/",
-      "iat": $IAT,
-      "exp": $EXP,
-      "iss": "$SA_EMAIL_ADDRESS",
-      "sub": "$SA_EMAIL_ADDRESS"
-    }
-    EOF
-    
-    gcloud beta iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
-    
-    echo "Datasets:"
-    curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \
-    -X GET \
-    "https://bigquery.googleapis.com/bigquery/v2/projects/myproject/datasets?alt=json"
+```
+#!/bin/bash
+
+SA_EMAIL_ADDRESS="myserviceaccount@myproject.iam.gserviceaccount.com"
+
+TMP_DIR=$(mktemp -d /tmp/sa_signed_jwt.XXXXX)
+trap "rm -rf ${TMP_DIR}" EXIT
+JWT_FILE="${TMP_DIR}/jwt-claim-set.json"
+SIGNED_JWT_FILE="${TMP_DIR}/output.jwt"
+
+IAT=$(date '+%s')
+EXP=$((IAT+3600))
+
+cat <<EOF > $JWT_FILE
+{
+  "aud": "https://bigquery.googleapis.com/",
+  "iat": $IAT,
+  "exp": $EXP,
+  "iss": "$SA_EMAIL_ADDRESS",
+  "sub": "$SA_EMAIL_ADDRESS"
+}
+EOF
+
+gcloud beta iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
+
+echo "Datasets:"
+curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \
+-X GET \
+"https://bigquery.googleapis.com/bigquery/v2/projects/myproject/datasets?alt=json"
+```
 
 ## What's next
 
-  - Learn more about [BigQuery authentication](https://docs.cloud.google.com/bigquery/docs/authentication) .
-  - Learn how to [authenticate with end-user credentials](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed) .
+- Learn more about [BigQuery authentication](https://docs.cloud.google.com/bigquery/docs/authentication) .
+- Learn how to [authenticate with end-user credentials](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed) .

@@ -10,8 +10,8 @@ data_source: docs.cloud.google.com
 
 This document describes the types of batch inference that BigQuery ML supports, which include:
 
-  - [Batch prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#prediction)
-  - [Online prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#online_prediction)
+- [Batch prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#prediction)
+- [Online prediction](https://docs.cloud.google.com/bigquery/docs/inference-overview#online_prediction)
 
 Machine learning inference is the process of running data points into a machine learning model to calculate an output such as a single numerical score. This process is also referred to as "operationalizing a machine learning model" or "putting a machine learning model into production."
 
@@ -25,41 +25,12 @@ The following sections describe the available ways of performing prediction in B
 
 BigQuery ML supports prediction functionalities through the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) , with the following models:
 
-Model Category
-
-Model Types
-
-What `  ML.PREDICT  ` does
-
-Supervised Learning
-
-[Linear & logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)  
-  
-[Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)  
-  
-[Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)  
-  
-[Deep Neural Networks](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)  
-  
-[Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)  
-  
-[AutoML Tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
-
-Predict the label, either a numerical value for regression tasks or a categorical value for classification tasks.
-
-Unsupervised Learning
-
-[K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
-
-Assign the cluster to the entity.
-
-[PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-
-Apply dimensionality reduction to the entity by transforming it into the space spanned by the eigenvectors.
-
-[Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
-
-Transform the entity into the embedded space.
+| Model Category                                                                                                         | Model Types                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | What [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) does |
+|------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Supervised Learning                                                                                                    | [Linear & logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) [Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) [Deep Neural Networks](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) [Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) [AutoML Tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) | Predict the label, either a numerical value for regression tasks or a categorical value for classification tasks.      |
+| Unsupervised Learning                                                                                                  | [K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Assign the cluster to the entity.                                                                                      |
+| [PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)                 | Apply dimensionality reduction to the entity by transforming it into the space spanned by the eigenvectors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                        |
+| [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) | Transform the entity into the embedded space.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                        |
 
 ### Inference using imported models
 
@@ -67,18 +38,18 @@ With this approach, you create and train a model outside of BigQuery, import it 
 
 BigQuery ML supports the following types of imported models:
 
-  - [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) for models trained in PyTorch, scikit-learn, and other popular ML frameworks.
-  - [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-  - [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
-  - [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
+- [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) for models trained in PyTorch, scikit-learn, and other popular ML frameworks.
+- [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+- [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
+- [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
 
 Use this approach to make use of custom models developed with a range of ML frameworks while taking advantage of BigQuery ML's inference speed and co-location with data.
 
 To learn more, try one of the following tutorials:
 
-  - [Make predictions with imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models)
-  - [Make predictions with scikit-learn models in ONNX format](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format)
-  - [Make predictions with PyTorch models in ONNX format](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format)
+- [Make predictions with imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models)
+- [Make predictions with scikit-learn models in ONNX format](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format)
+- [Make predictions with PyTorch models in ONNX format](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format)
 
 ### Inference using remote models
 
@@ -102,13 +73,13 @@ Additionally, you have the flexibility to [export BigQuery ML models](https://do
 
 ## What's next
 
-  - For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- For more information about using Agent Platform models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
-  - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
+- For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
 
-  - For more information about supported SQL statements and functions for different model types, see the following documents:
-    
-      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+- For more information about supported SQL statements and functions for different model types, see the following documents:
+
+  - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+  - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)

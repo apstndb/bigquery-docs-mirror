@@ -22,15 +22,17 @@ Any user can be granted `TRUE` filter access, including a service account.
 
 Examples of non-query operations are:
 
-  - Other BigQuery APIs, such as the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
-  - Some [`bq` command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) commands, such as the [`bq head`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_head) command.
-  - [Copying a table](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter)
+- Other BigQuery APIs, such as the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
+- Some [`bq` command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) commands, such as the [`bq head`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_head) command.
+- [Copying a table](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter)
 
 ### `TRUE` filter example
 
-    CREATE ROW ACCESS POLICY all_access ON project.dataset.table1
-    GRANT TO ("group:all-rows-access@example.com")
-    FILTER USING (TRUE);
+```
+CREATE ROW ACCESS POLICY all_access ON project.dataset.table1
+GRANT TO ("group:all-rows-access@example.com")
+FILTER USING (TRUE);
+```
 
 ### Features that work with the `TRUE` filter
 
@@ -53,7 +55,7 @@ Row-level access policies on a table must have unique names. A collision in row-
 To copy a table with one or more row-level access policies, you must have the following permissions, in addition to the [roles to copy tables and partitions](https://docs.cloud.google.com/bigquery/docs/managing-tables#roles_to_copy_tables_and_partitions) .
 
 | **Permission**                                                                                                          | **Resource**           |
-| ----------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+|-------------------------------------------------------------------------------------------------------------------------|------------------------|
 | `bigquery.rowAccessPolicies.list`                                                                                       | The source table.      |
 | `bigquery.rowAccessPolicies.getIamPolicy`                                                                               | The source table.      |
 | The [`TRUE` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) | The source table.      |
@@ -70,8 +72,8 @@ To execute a DML statement that updates a table that has row-level access polici
 
 In particular, `MERGE` statements interact with row-level access policies as follows:
 
-  - If a target table contains row-level access policies, then you need `TRUE` filter access to the target table.
-  - If a source table contains row-level access policies, then the `MERGE` statement only acts on the rows that are visible to the user.
+- If a target table contains row-level access policies, then you need `TRUE` filter access to the target table.
+- If a source table contains row-level access policies, then the `MERGE` statement only acts on the rows that are visible to the user.
 
 #### Table snapshots
 
@@ -93,11 +95,11 @@ Row-level security and column-level security, which includes both [column-level 
 
 Key points are:
 
-  - You can apply a row-level access policy to filter data in any column, even if you don't have access to the data in that column.
-      - Attempts to access these columns with the subquery row-level access policy results in an error indicating that access is denied. These columns aren't considered system-referenced columns.
-      - Attempts to access these columns with the non-subquery row-level access policy bypass column-level security.
-  - If the column is restricted due to column-level security, and the column is named in the query's `SELECT` statement or subquery row-level access policies, you receive an error.
-  - Column-level security also applies with a `SELECT *` query statement. The `SELECT *` is treated the same as a query which explicitly names a restricted column.
+- You can apply a row-level access policy to filter data in any column, even if you don't have access to the data in that column.
+  - Attempts to access these columns with the subquery row-level access policy results in an error indicating that access is denied. These columns aren't considered system-referenced columns.
+  - Attempts to access these columns with the non-subquery row-level access policy bypass column-level security.
+- If the column is restricted due to column-level security, and the column is named in the query's `SELECT` statement or subquery row-level access policies, you receive an error.
+- Column-level security also applies with a `SELECT *` query statement. The `SELECT *` is treated the same as a query which explicitly names a restricted column.
 
 ### Example of row-level security and column-level security interacting
 
@@ -110,7 +112,7 @@ Suppose that you have the DataOwner role for a dataset named `my_dataset` which 
 In this example, one user is **Alice** , whose email address is `alice@example.com` . A second user is **Bob** , Alice's colleague.
 
 | **rank** | **fruit** | **color** |
-| -------- | --------- | --------- |
+|----------|-----------|-----------|
 | 1        | apple     | red       |
 | 2        | orange    | orange    |
 | 3        | lime      | green     |
@@ -120,160 +122,47 @@ In this example, one user is **Alice** , whose email address is `alice@example.c
 
 You want Alice to be able to see all the rows that have odd numbers in the `rank` column, but not even-numbered rows. You don't want Bob to see any rows, even or odd. You don't want anyone to see any data in the `fruit` column.
 
-  - To restrict Alice from seeing the even-numbered rows, you create a row-level access policy which has a filter expression based on the data that appears in the `rank` column. To prevent Bob from seeing even or odd rows, you don't include him in the grantee list.
-    
-        CREATE ROW ACCESS POLICY only_odd ON my_dataset.my_table GRANT
-        TO ('user:alice@example.com') FILTER USING (MOD(rank, 2) = 1);
+- To restrict Alice from seeing the even-numbered rows, you create a row-level access policy which has a filter expression based on the data that appears in the `rank` column. To prevent Bob from seeing even or odd rows, you don't include him in the grantee list.
 
-  - To restrict all users from seeing data in the column named `fruit` , you create a column-level security policy tag that prohibits all users from accessing any of its data.
+  ```
+  CREATE ROW ACCESS POLICY only_odd ON my_dataset.my_table GRANT
+  TO ('user:alice@example.com') FILTER USING (MOD(rank, 2) = 1);
+  ```
+
+- To restrict all users from seeing data in the column named `fruit` , you create a column-level security policy tag that prohibits all users from accessing any of its data.
 
 Finally, you also restrict access to the column named `color` in two ways: the column is governed both by a column-level security policy tag prohibiting all access by anyone, *and* is affected by a row-level access policy, which filters some of the row data in the `color` column.
 
-  - This second row-level access policy only displays rows with the value `green` in the `color` column.
-    
-        CREATE ROW ACCESS POLICY only_green ON my_dataset.my_table
-        GRANT TO ('user:alice@example.com') FILTER USING (color="green");
+- This second row-level access policy only displays rows with the value `green` in the `color` column.
+
+  ```
+  CREATE ROW ACCESS POLICY only_green ON my_dataset.my_table
+  GRANT TO ('user:alice@example.com') FILTER USING (color="green");
+  ```
 
 #### Bob's query
 
 If Alice's coworker Bob tries to query data from `my_dataset.my_table` , he doesn't see any rows, because Bob isn't in the grantee list for any row-level access policy on the table.
 
-**Query**
-
-**`my_dataset.my_table`**
-
-**Comments**
-
-**`rank`**  
-  
-(Some data is affected by the row access policy `only_odd` )
-
-**`fruit`**  
-  
-(All data is secured by a CLS policy tag)
-
-**`color`**  
-  
-(All data is secured by a CLS policy tag, *and* some data is affected by the row access policy `only_green` )
-
-`SELECT rank FROM my_dataset.my_table`
-
-  
-(0) rows returned.
-
-Bob is not on the row-level access policy's grantee list; therefore this query succeeds, but no row data is returned.  
-  
-A message is displayed to Bob that says his results may be filtered by the row access policy.
+| **Query**                              | **`my_dataset.my_table`**                                               | **Comments**                                          |                                                                                                                           |                                                                                                                                                                                                                     |
+|----------------------------------------|-------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                        | **`rank`** (Some data is affected by the row access policy `only_odd` ) | **`fruit`** (All data is secured by a CLS policy tag) | **`color`** (All data is secured by a CLS policy tag, *and* some data is affected by the row access policy `only_green` ) |                                                                                                                                                                                                                     |
+| `SELECT rank FROM my_dataset.my_table` | \(0\) rows returned.                                                    |                                                       |                                                                                                                           | Bob is not on the row-level access policy's grantee list; therefore this query succeeds, but no row data is returned. A message is displayed to Bob that says his results may be filtered by the row access policy. |
 
 #### Alice's queries
 
 When Alice runs queries to access data from `my_dataset.my_table` , her results depend on the query she runs and the security, as shown in the following table.
 
-**Query**
-
-**`my_dataset.my_table`**
-
-**Comments**
-
-**`rank`**  
-  
-(Some data is affected by the row access policy `only_odd` )
-
-**`fruit`**  
-  
-(All data is secured by a CLS policy tag)
-
-**`color`**  
-  
-(All data is secured by a CLS policy tag, *and* some data is affected by the row access policy `only_green` )
-
-`SELECT rank FROM my_dataset.my_table`
-
-  
-(1) row is returned.
-
-Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row:  
-  
-`rank: 3, color: green` .  
-  
-Alice does not see the fruit column because it is restricted by a column-level security policy.  
-  
-A message is displayed to Alice that says her results may be filtered by the row access policy.
-
-`SELECT fruit FROM my_dataset.my_table`
-
-  
-
-`access denied`
-
-The `fruit` column was explicitly named in the query.  
-  
-The column-level security applies.  
-  
-Access is denied.
-
-`SELECT color FROM my_dataset.my_table`
-
-  
-(1) row is returned.
-
-Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row:  
-  
-`rank: 3, color: green` .  
-  
-Alice does not see the fruit column because it is restricted by a column-level security policy.  
-  
-A message is displayed to Alice that says her results may be filtered by the row access policy.
-
-`SELECT rank, fruit FROM my_dataset.my_table`
-
-  
-
-`access denied`
-
-The `fruit` column was explicitly named in the query.  
-  
-The column-level security applies, before the row-level access policy on data in the `rank` column is engaged.  
-  
-Access is denied.
-
-`SELECT rank, color FROM my_dataset.my_table`
-
-  
-(1) row is returned.
-
-Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row:  
-  
-`rank: 3, color: green` .  
-  
-Alice does not see the fruit column because it is restricted by a column-level security policy.  
-  
-A message is displayed to Alice that says her results may be filtered by the row access policy.
-
-`SELECT fruit, color FROM my_dataset.my_table`
-
-  
-
-`access denied`
-
-The `fruit` column was explicitly named in the query.  
-  
-The column-level security on the `fruit` column applies, before the row-level access policy on data in the `color` column is engaged.  
-  
-Access is denied.
-
-`SELECT * FROM my_dataset.my_table`
-
-  
-(1) row is returned.
-
-Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row:  
-  
-`rank: 3, color: green` .  
-  
-Alice does not see the fruit column because it is restricted by a column-level security policy.  
-  
-A message is displayed to Alice that says her results may be filtered by the row access policy.
+| **Query**                                      | **`my_dataset.my_table`**                                               | **Comments**                                          |                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|------------------------------------------------|-------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                                                | **`rank`** (Some data is affected by the row access policy `only_odd` ) | **`fruit`** (All data is secured by a CLS policy tag) | **`color`** (All data is secured by a CLS policy tag, *and* some data is affected by the row access policy `only_green` ) |                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `SELECT rank FROM my_dataset.my_table`         | \(1\) row is returned.                                                  |                                                       |                                                                                                                           | Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row: `rank: 3, color: green` . Alice does not see the fruit column because it is restricted by a column-level security policy. A message is displayed to Alice that says her results may be filtered by the row access policy. |
+| `SELECT fruit FROM my_dataset.my_table`        |                                                                         | `access denied`                                       |                                                                                                                           | The `fruit` column was explicitly named in the query. The column-level security applies. Access is denied.                                                                                                                                                                                                                                                                                                                                   |
+| `SELECT color FROM my_dataset.my_table`        |                                                                         |                                                       | \(1\) row is returned.                                                                                                    | Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row: `rank: 3, color: green` . Alice does not see the fruit column because it is restricted by a column-level security policy. A message is displayed to Alice that says her results may be filtered by the row access policy. |
+| `SELECT rank, fruit FROM my_dataset.my_table`  |                                                                         | `access denied`                                       |                                                                                                                           | The `fruit` column was explicitly named in the query. The column-level security applies, before the row-level access policy on data in the `rank` column is engaged. Access is denied.                                                                                                                                                                                                                                                       |
+| `SELECT rank, color FROM my_dataset.my_table`  |                                                                         |                                                       | \(1\) row is returned.                                                                                                    | Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row: `rank: 3, color: green` . Alice does not see the fruit column because it is restricted by a column-level security policy. A message is displayed to Alice that says her results may be filtered by the row access policy. |
+| `SELECT fruit, color FROM my_dataset.my_table` |                                                                         | `access denied`                                       |                                                                                                                           | The `fruit` column was explicitly named in the query. The column-level security on the `fruit` column applies, before the row-level access policy on data in the `color` column is engaged. Access is denied.                                                                                                                                                                                                                                |
+| `SELECT * FROM my_dataset.my_table`            | \(1\) row is returned.                                                  |                                                       |                                                                                                                           | Alice is on the grantee list for the `only_odd` and the `only_green` row-level access policies. Therefore, Alice sees only ranks that are odd, and colors that are green. Therefore, Alice sees the following row: `rank: 3, color: green` . Alice does not see the fruit column because it is restricted by a column-level security policy. A message is displayed to Alice that says her results may be filtered by the row access policy. |
 
 #### `TRUE` filter access
 
@@ -337,4 +226,4 @@ You can also authorize a logical or materialized view, which means sharing the v
 
 ## What's next
 
-  - For information about best practices for row-level access policies, see [Best practices for row-level security in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security) .
+- For information about best practices for row-level access policies, see [Best practices for row-level security in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security) .

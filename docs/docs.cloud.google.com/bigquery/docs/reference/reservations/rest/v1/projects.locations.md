@@ -6,27 +6,16 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [Resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations#RESOURCE_REPRESENTATION)
-  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations#METHODS_SUMMARY)
+- [Resource](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations#RESOURCE_REPRESENTATION)
+- [Methods](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations#METHODS_SUMMARY)
 
 ## Resource
 
 There is no persistent data associated with this resource.
 
-## Methods
-
-### `            getBiReservation           `
-
-Retrieves a BI reservation.
-
-### `            searchAllAssignments           `
-
-Looks up assignments for a specified resource for a particular region.
-
-### `            searchAssignments             (deprecated)  `
-
-Deprecated: Looks up assignments for a specified resource for a particular region.
-
-### `            updateBiReservation           `
-
-Updates a BI reservation.
+| Methods                                                                                                                                               |                                                                                    |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| [`getBiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/getBiReservation)                  | Retrieves a BI reservation.                                                        |
+| [`searchAllAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAllAssignments)          | Looks up assignments for a specified resource for a particular region.             |
+| [`searchAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAssignments)` (deprecated)` | Deprecated: Looks up assignments for a specified resource for a particular region. |
+| [`updateBiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/updateBiReservation)            | Updates a BI reservation.                                                          |

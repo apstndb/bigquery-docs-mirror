@@ -21,15 +21,23 @@ To see the last metadata index refresh time of a table, query the `LAST_METADATA
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT  project_id,  project_number,  table_name,  last_metadata_index_refresh_timeFROM  [PROJECT_ID.]region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE;
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-      - `  REGION  ` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) where the project is located—for example, `region-us` .
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      project_id,
+      project_number,
+      table_name,
+      last_metadata_index_refresh_time
+    FROM
+      [PROJECT_ID.]region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE;
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
+    - `REGION` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) where the project is located—for example, `region-us` .
+
+3.  Click play_circle **Run** .
 
 ## View column metadata index usage
 
@@ -39,21 +47,25 @@ You can also view column metadata index usage with the `metadata_cache_statistic
 
 For example, the following displays column metadata index usage for the `my-job` job:
 
-    SELECT metadata_cache_statistics
-    FROM `region-US`.INFORMATION_SCHEMA.JOBS
-    WHERE job_id = 'my-job';
+```
+SELECT metadata_cache_statistics
+FROM `region-US`.INFORMATION_SCHEMA.JOBS
+WHERE job_id = 'my-job';
+```
 
 As another example, the following displays the number of jobs that used column metadata index for the `my-table` table:
 
-    SELECT COUNT(*)
-    FROM
-      `region-US`.INFORMATION_SCHEMA.JOBS,
-      UNNEST(metadata_cache_statistics.table_metadata_cache_usage) AS stats
-    WHERE
-      stats.table_reference.table_id='my-table' AND
-      stats.table_reference.dataset_id='my-dataset' AND
-      stats.table_reference.project_id='my-project' AND
-      stats.unusedReason IS NULL;
+```
+SELECT COUNT(*)
+FROM
+  `region-US`.INFORMATION_SCHEMA.JOBS,
+  UNNEST(metadata_cache_statistics.table_metadata_cache_usage) AS stats
+WHERE
+  stats.table_reference.table_id='my-table' AND
+  stats.table_reference.dataset_id='my-dataset' AND
+  stats.table_reference.project_id='my-project' AND
+  stats.unusedReason IS NULL;
+```
 
 ## Set up dedicated indexing resources
 
@@ -68,7 +80,7 @@ After setting up your reservation, select one of the following methods to assign
 
 1.  In the Google Cloud console, go to the **Workload management** page.
 
-2.  Click more\_vert **Reservation actions \> Create assignment** .
+2.  Click more_vert **Reservation actions \> Create assignment** .
 
 3.  Select your reservation project.
 
@@ -80,21 +92,23 @@ After setting up your reservation, select one of the following methods to assign
 
 Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) .
 
-    bq mk \
-      --project_id=ADMIN_PROJECT_ID \
-      --location=LOCATION \
-      --reservation_assignment \
-      --reservation_id=RESERVATION_NAME \
-      --assignee_id=PROJECT_ID \
-      --job_type=BACKGROUND \
-      --assignee_type=PROJECT
+```
+bq mk \
+  --project_id=ADMIN_PROJECT_ID \
+  --location=LOCATION \
+  --reservation_assignment \
+  --reservation_id=RESERVATION_NAME \
+  --assignee_id=PROJECT_ID \
+  --job_type=BACKGROUND \
+  --assignee_type=PROJECT
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
-  - `  RESERVATION_NAME  ` : the name of the reservation.
-  - `  PROJECT_ID  ` : the project ID to assign to this reservation.
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+- `RESERVATION_NAME` : the name of the reservation.
+- `PROJECT_ID` : the project ID to assign to this reservation.
 
 ### SQL
 
@@ -103,38 +117,42 @@ To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE ASSIGNMENT
-        ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
-        OPTIONS (
-          assignee = 'projects/PROJECT_ID',
-          job_type = 'BACKGROUND');
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
-      - `  RESERVATION_NAME  ` : the name of the reservation.
-      - `  ASSIGNMENT_ID  ` : the ID of the assignment. The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
-      - `  PROJECT_ID  ` : the project ID containing the tables. This project is assigned to the reservation.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE ASSIGNMENT
+    ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
+    OPTIONS (
+      assignee = 'projects/PROJECT_ID',
+      job_type = 'BACKGROUND');
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+    - `RESERVATION_NAME` : the name of the reservation.
+    - `ASSIGNMENT_ID` : the ID of the assignment. The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
+    - `PROJECT_ID` : the project ID containing the tables. This project is assigned to the reservation.
+
+3.  Click play_circle **Run** .
 
 ## View indexing job information
 
-After you set up your dedicated indexing jobs, you can view information about the indexing jobs with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following SQL sample shows the five most recent refresh jobs in PROJECT\_NAME .
+After you set up your dedicated indexing jobs, you can view information about the indexing jobs with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following SQL sample shows the five most recent refresh jobs in ` PROJECT_NAME ` .
 
-    SELECT *
-    FROM
-      region-us.INFORMATION_SCHEMA.JOBS
-    WHERE
-      project_id = 'PROJECT_NAME'
-      AND SEARCH(job_id, '`metadata_cache_refresh`')
-    ORDER BY
-      creation_time DESC
-    LIMIT 5;
+```
+SELECT *
+FROM
+  region-us.INFORMATION_SCHEMA.JOBS
+WHERE
+  project_id = 'PROJECT_NAME'
+  AND SEARCH(job_id, '`metadata_cache_refresh`')
+ORDER BY
+  creation_time DESC
+LIMIT 5;
+```
 
-Replace `  PROJECT_NAME  ` with the name of the project containing your metadata indexing jobs.
+Replace `PROJECT_NAME` with the name of the project containing your metadata indexing jobs.
 
 ## Configure metadata indexing alerts
 
@@ -190,5 +208,5 @@ Metadata query performance enhancements only apply to `SELECT` , `INSERT` , and 
 
 ## What's next
 
-  - Learn how to see all jobs in your project with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
-  - Learn how to [view slot capacity and utilization](https://docs.cloud.google.com/bigquery/docs/slot-estimator#view_slot_capacity_and_utilization) .
+- Learn how to see all jobs in your project with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+- Learn how to [view slot capacity and utilization](https://docs.cloud.google.com/bigquery/docs/slot-estimator#view_slot_capacity_and_utilization) .

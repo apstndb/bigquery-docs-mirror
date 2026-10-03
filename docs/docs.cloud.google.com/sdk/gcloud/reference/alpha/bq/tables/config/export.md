@@ -12,7 +12,7 @@ gcloud alpha bq tables config export - export the configuration for a Google Big
 
 SYNOPSIS
 
-`gcloud alpha bq tables config export` (\[ `  TABLE  ` : `  --dataset  ` = `  DATASET  ` \] `  --all  ` ) \[ `  --path  ` = `  PATH  ` ; default="-"\] \[ `  --resource-format  ` = `  RESOURCE_FORMAT  ` \] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables config export` (\[ [`TABLE`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#TABLE) : [`--dataset`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#--dataset) = `DATASET` \] [`--all`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#--all) ) \[ [`--path`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#--path) = `PATH` ; default="-"\] \[ [`--resource-format`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#--resource-format) = `RESOURCE_FORMAT` \] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -28,19 +28,27 @@ EXAMPLES
 
 To export the configuration for a table, run:
 
-    gcloud alpha bq tables config export my-table
+```
+gcloud alpha bq tables config export my-table
+```
 
 To export the configuration for a table to a file, run:
 
-    gcloud alpha bq tables config export my-table --path=/path/to/dir/
+```
+gcloud alpha bq tables config export my-table --path=/path/to/dir/
+```
 
 To export the configuration for a table in Terraform HCL format, run:
 
-    gcloud alpha bq tables config export my-table --resource-format=terraform
+```
+gcloud alpha bq tables config export my-table --resource-format=terraform
+```
 
 To export the configurations for all tables within a project, run:
 
-    gcloud alpha bq tables config export --all
+```
+gcloud alpha bq tables config export --all
+```
 
 POSITIONAL ARGUMENTS
 
@@ -50,29 +58,27 @@ Table resource - Table to export the configuration for. The arguments in this gr
 
 To set the `project` attribute:
 
-  - provide the argument `table` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
-<!-- end list -->
+`TABLE`  
+ID of the table or fully qualified identifier for the table.
 
-  - `  TABLE  `  
-    ID of the table or fully qualified identifier for the table.
-    
-    To set the `table` attribute:
-    
-    provide the argument `table` on the command line.
+To set the `table` attribute:
+
+provide the argument `table` on the command line.
 
 This positional argument must be specified if any of the other arguments in this group are specified.
 
-  - `--dataset` = `  DATASET  `  
-    The id of the BigQuery dataset.
-    
-    To set the `dataset` attribute:
-    
-    provide the argument `table` on the command line with a fully specified name;
-    
-    provide the argument `--dataset` on the command line.
+`--dataset` = `DATASET`  
+The id of the BigQuery dataset.
+
+To set the `dataset` attribute:
+
+provide the argument `table` on the command line with a fully specified name;
+
+provide the argument `--dataset` on the command line.
 
 `--all`
 
@@ -80,16 +86,17 @@ Retrieve all resources within the project. If `--path` is specified and is a val
 
 FLAGS
 
-  - `--path` = `  PATH  ` ; default="-"  
-    Path of the directory or file to output configuration(s). To output configurations to stdout, specify "--path=-".
-  - `--resource-format` = `  RESOURCE_FORMAT  `  
-    Format of the configuration to export. Available configuration formats are Kubernetes Resource Model YAML (krm) or Terraform HCL (terraform). Command defaults to "krm". `  RESOURCE_FORMAT  ` must be one of: `krm` , `terraform` .
+`--path` = `PATH` ; default="-"  
+Path of the directory or file to output configuration(s). To output configurations to stdout, specify "--path=-".
+
+`--resource-format` = `RESOURCE_FORMAT`  
+Format of the configuration to export. Available configuration formats are Kubernetes Resource Model YAML (krm) or Terraform HCL (terraform). Command defaults to "krm". `RESOURCE_FORMAT` must be one of: `krm` , `terraform` .
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 NOTES
 

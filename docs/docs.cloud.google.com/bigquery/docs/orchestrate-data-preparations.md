@@ -20,9 +20,9 @@ Before you begin, [create a data preparation](https://docs.cloud.google.com/bigq
 
 If you use VPC Service Controls to protect your data preparations, you should be aware that scheduled runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
 
-  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
-  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
-  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+- You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+- Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+- To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
 
 For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
 
@@ -32,8 +32,8 @@ To authorize a data preparation with a service account when [manually running th
 
 To schedule data preparations, do the following:
 
-  - Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account.
-  - Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) to the default Dataform service agent on the custom service account.
+- Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account.
+- Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) to the default Dataform service agent on the custom service account.
 
 To enhance security for scheduling, see [Implement enhanced scheduling permissions](https://docs.cloud.google.com/dataform/docs/access-control#enhanced-scheduling-permissions) .
 
@@ -48,10 +48,10 @@ To test your data preparation steps and validate the results in your destination
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Data preparations** .
 
@@ -60,15 +60,15 @@ To test your data preparation steps and validate the results in your destination
 5.  In the data preparation editor toolbar, click **More \> Configure run now experience** .
 
 6.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** . This is the default option.
-        
-        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
-        
-          - **Google Drive** : Allows read-only access to Google Drive files.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account. If the service account needs additional permissions, grant it the required roles by clicking **Grant all** .
-    
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** . This is the default option.
+
+      Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+
+      - **Google Drive** : Allows read-only access to Google Drive files.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account. If the service account needs additional permissions, grant it the required roles by clicking **Grant all** .
+
     > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 7.  Click **Save** .
@@ -78,9 +78,9 @@ To test your data preparation steps and validate the results in your destination
 9.  From the data preparation editor toolbar, click **Run** .
 
 10. In the **Run now** dialog, click **Confirm** to acknowledge that this manual run writes data to a destination table, which you might also be using for scheduled runs.
-    
+
     If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) .
-    
+
     The run then executes your steps and loads the output to the destination.
 
 11. Optional: After the run is complete, you can view the details about the execution in the **Executions** pane.
@@ -94,13 +94,13 @@ To deploy a data preparation, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data preparations** .
 
 4.  Click the name of the chosen data preparation.
-    
+
     The data preparation editor opens.
 
 5.  In the data preparation editor toolbar, click **Deploy** .
@@ -118,7 +118,7 @@ To create a data preparation schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data preparations** .
@@ -130,15 +130,15 @@ To create a data preparation schedule, follow these steps:
 6.  Enter a schedule name.
 
 7.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
-        
-          - **Google Drive** : Allows read-only access to Google Drive files.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
-    
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+
+      - **Google Drive** : Allows read-only access to Google Drive files.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
+
     > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 8.  Schedule a frequency.
@@ -156,19 +156,19 @@ To create a data preparation schedule, follow these steps:
 4.  In the **Schedule name** field, enter a name for the schedule.
 
 5.  In the **Authentication** section, authorize the data preparation with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
-        
-          - **Google Drive** : Allows read-only access to Google Drive files.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
-    
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your data preparation requires:
+
+      - **Google Drive** : Allows read-only access to Google Drive files.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
+
     > **Note:** To authenticate a data preparation that uses Google Drive as a data source with Google Account user credentials, select the **Google Drive** service in the **Extended access options** section. To authenticate the data preparation with a service account, share the Google Drive file with that service account.
 
 6.  In the **Schedule frequency** section, do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of data preparation runs.
     2.  In the **At time** field, enter the time for scheduled data preparation runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -258,9 +258,9 @@ To permanently delete a schedule for a selected data preparation, follow these s
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  In the row that contains the schedule, click more\_vert **Actions \> Delete** .
+2.  In the row that contains the schedule, click more_vert **Actions \> Delete** .
 
 ## What's next
 
-  - Learn how to [create data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
-  - Learn more about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .
+- Learn how to [create data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
+- Learn more about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .

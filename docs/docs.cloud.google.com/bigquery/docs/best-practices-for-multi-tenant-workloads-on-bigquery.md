@@ -14,13 +14,13 @@ Commercial enterprises, software as a service (SaaS) vendors, and government org
 
 Multi-tenant platform builders often need to balance considerations for the following:
 
-  - **Data isolation** : Implement strong controls to prevent data leakage across tenants.
-  - **Consistent performance** : Configure and apportion [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) to maintain consistent performance across tenants.
-  - **Resource management** : Plan for the impact of quotas and limits.
-  - **Geographic distribution** : Locate data in designated and required [geographic locations](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . For compliance-related concerns, see Google Cloud's [compliance offerings](https://cloud.google.com/security/compliance/offerings) .
-  - **Auditing and security** : Safeguard tenant data from inappropriate access and exfiltration.
-  - **Cost management** : Ensure consistent BigQuery costs to host each tenant.
-  - **Operational Complexity** : Minimize the amount of system variability that is required to host new tenants.
+- **Data isolation** : Implement strong controls to prevent data leakage across tenants.
+- **Consistent performance** : Configure and apportion [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) to maintain consistent performance across tenants.
+- **Resource management** : Plan for the impact of quotas and limits.
+- **Geographic distribution** : Locate data in designated and required [geographic locations](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . For compliance-related concerns, see Google Cloud's [compliance offerings](https://cloud.google.com/security/compliance/offerings) .
+- **Auditing and security** : Safeguard tenant data from inappropriate access and exfiltration.
+- **Cost management** : Ensure consistent BigQuery costs to host each tenant.
+- **Operational Complexity** : Minimize the amount of system variability that is required to host new tenants.
 
 ## SaaS vendor with shared tenant infrastructure
 
@@ -28,9 +28,9 @@ SaaS vendors who host third-party data need to ensure the reliability and isolat
 
 A dataset-per-tenant design helps to mitigate the following concerns that an organization experiences when it scales to thousands of tenants:
 
-  - **Administrative complexity** : the total number of new projects and cloud resources on a per customer basis
-  - **End-to-end latency** : how up to date the datastore is for both the tenants and cross-customer analytics solutions
-  - **Performance expectations** : ensuring that tenant performance stays within acceptable limits
+- **Administrative complexity** : the total number of new projects and cloud resources on a per customer basis
+- **End-to-end latency** : how up to date the datastore is for both the tenants and cross-customer analytics solutions
+- **Performance expectations** : ensuring that tenant performance stays within acceptable limits
 
 ### Configure datasets for each tenant
 
@@ -44,11 +44,11 @@ BigQuery's separation of storage and [compute](https://docs.cloud.google.com/big
 
 The project configuration in figure 1 includes the following projects:
 
-  - **Data pipeline project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
-  - **Combined tenant data project** : the core data project that maintains a dataset per customer. Tenant data is expected to be accessed through compute tier projects.
-  - **Internal development projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
-  - **End-user application projects** : projects that contain resources that are designed to interact with end users. We recommend that you use tenant-scoped service accounts to access tenant datasets and use a robust and secure [build pipeline](https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build) to deploy applications.
-  - **Reservation compute tier projects** : the projects that map tenant query activity to BigQuery reservations.
+- **Data pipeline project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
+- **Combined tenant data project** : the core data project that maintains a dataset per customer. Tenant data is expected to be accessed through compute tier projects.
+- **Internal development projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
+- **End-user application projects** : projects that contain resources that are designed to interact with end users. We recommend that you use tenant-scoped service accounts to access tenant datasets and use a robust and secure [build pipeline](https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build) to deploy applications.
+- **Reservation compute tier projects** : the projects that map tenant query activity to BigQuery reservations.
 
 ### Share reservations
 
@@ -62,19 +62,19 @@ In this configuration, we recommend VPC Service Controls perimeters to prevent a
 
 In this configuration, we recommend that you create the following [service perimeters](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters) :
 
-  - **Data pipeline** : a perimeter around the data pipeline projects should enforce all services that don't need to receive tenant data.
-  - **Tenant data** : a perimeter around the tenant dataset project and around the tenant BigQuery compute projects. Enforce all services to prevent access from outside of the organization.
-  - **Internal applications** : enforce all services and use [access levels](https://docs.cloud.google.com/vpc-service-controls/docs/use-access-levels#using_access_levels) to grant resource access to department teams.
-  - **External applications** : a perimeter around your SaaS applications. Enforce all services that aren't necessary for the applications to function.
+- **Data pipeline** : a perimeter around the data pipeline projects should enforce all services that don't need to receive tenant data.
+- **Tenant data** : a perimeter around the tenant dataset project and around the tenant BigQuery compute projects. Enforce all services to prevent access from outside of the organization.
+- **Internal applications** : enforce all services and use [access levels](https://docs.cloud.google.com/vpc-service-controls/docs/use-access-levels#using_access_levels) to grant resource access to department teams.
+- **External applications** : a perimeter around your SaaS applications. Enforce all services that aren't necessary for the applications to function.
 
 #### Perimeter bridges
 
 In this configuration, we recommend that you create the following [perimeter bridges](https://docs.cloud.google.com/vpc-service-controls/docs/create-perimeter-bridges) :
 
-  - **Data pipeline and tenant data** : allow the pipeline to write data into tenant datasets.
-  - **Data pipeline and internal applications** : allow the pipeline to write data into the cross-customer dataset.
-  - **External applications and tenant data** : allow the external-facing applications to query tenant data.
-  - **External applications and internal applications** : allow external-facing applications to process data using models that the internal applications develop and deploy.
+- **Data pipeline and tenant data** : allow the pipeline to write data into tenant datasets.
+- **Data pipeline and internal applications** : allow the pipeline to write data into the cross-customer dataset.
+- **External applications and tenant data** : allow the external-facing applications to query tenant data.
+- **External applications and internal applications** : allow external-facing applications to process data using models that the internal applications develop and deploy.
 
 ### SaaS vendor with dedicated tenant infrastructure
 
@@ -82,9 +82,9 @@ In more complex scenarios, SaaS vendors might deploy dedicated compute infrastru
 
 A dedicated tenant infrastructure design addresses the following common concerns when deploying infrastructure for each tenant alongside BigQuery:
 
-  - **Billing accountability** : tracking infrastructure costs associated with each onboarded tenant.
-  - **End-to-end latency** : how up to date the datastore is for both the tenants and cross-customer analytics solutions.
-  - **Performance expectations** : ensuring tenant performance stays within acceptable limits.
+- **Billing accountability** : tracking infrastructure costs associated with each onboarded tenant.
+- **End-to-end latency** : how up to date the datastore is for both the tenants and cross-customer analytics solutions.
+- **Performance expectations** : ensuring tenant performance stays within acceptable limits.
 
 #### Colocate datasets with dedicated resources
 
@@ -98,10 +98,10 @@ This design handles upstream data processing and distribution, similar to the pr
 
 The project configuration in figure 2 includes the following projects:
 
-  - **Data pipelines project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
-  - **Dedicated tenant projects** : projects that contain all cloud resources that are dedicated to a single tenant, including BigQuery datasets. We recommend that you use [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam) to greatly limit the scope of which accounts and service accounts can access the customer datasets.
-  - **Internal analytics projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
-  - **External networking project** : project that handles and routes tenant requests to their dedicated backends.
+- **Data pipelines project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
+- **Dedicated tenant projects** : projects that contain all cloud resources that are dedicated to a single tenant, including BigQuery datasets. We recommend that you use [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam) to greatly limit the scope of which accounts and service accounts can access the customer datasets.
+- **Internal analytics projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
+- **External networking project** : project that handles and routes tenant requests to their dedicated backends.
 
 #### Share reservations
 
@@ -117,9 +117,9 @@ Data marts are a common design theme in which core analytics data is stored in a
 
 A data mart design in BigQuery addresses the following needs:
 
-  - **Secure data collaboration** : sharing data with technical controls to minimize inappropriate access across teams.
-  - **Central data governance** : ensuring core data assets used for critical business reports are standardized and validated.
-  - **Business unit cost attribution** : tracking and adjusting computation usage by business units.
+- **Secure data collaboration** : sharing data with technical controls to minimize inappropriate access across teams.
+- **Central data governance** : ensuring core data assets used for critical business reports are standardized and validated.
+- **Business unit cost attribution** : tracking and adjusting computation usage by business units.
 
 ### Use a centrally administered repository
 
@@ -133,9 +133,9 @@ Teams in tenant projects can access centrally governed datasets based on their a
 
 The project configuration in figure 3 includes the following projects:
 
-  - **Core data project** : the governance perimeter for managing access to core data and the data mart views. You maintain authorized views within datasets inside this project and grant authorized views to your analytics teams based on group membership.
-  - **[Extract, transform, load (ETL)](https://wikipedia.org/wiki/Extract,_transform,_load) infrastructure** : infrastructure for processing upstream data sources into the core data. Depending on administrative separation needs, you might choose to deploy the ETL infrastructure as its own project or as a part of the core data project.
-  - **Analytics team projects** : consumers of the data mart use these projects, and use their own provisioned infrastructure access to process data within the data mart. Analytics team projects are expected to be able to build derived datasets for local use.
+- **Core data project** : the governance perimeter for managing access to core data and the data mart views. You maintain authorized views within datasets inside this project and grant authorized views to your analytics teams based on group membership.
+- **[Extract, transform, load (ETL)](https://wikipedia.org/wiki/Extract,_transform,_load) infrastructure** : infrastructure for processing upstream data sources into the core data. Depending on administrative separation needs, you might choose to deploy the ETL infrastructure as its own project or as a part of the core data project.
+- **Analytics team projects** : consumers of the data mart use these projects, and use their own provisioned infrastructure access to process data within the data mart. Analytics team projects are expected to be able to build derived datasets for local use.
 
 ### Use a two-tier reservation design
 
@@ -149,16 +149,16 @@ In this configuration, we recommend VPC Service Controls perimeters to prevent a
 
 In this configuration, we recommend that you create the following service perimeters:
 
-  - **Core data** : a perimeter to protect the data warehouse and data mart datasets.
-  - **Data pipelines** : a perimeter for the ETL infrastructure project. If the data pipelines need to make requests outside of your Google Cloud organization, we recommend that you separate this perimeter from the core data perimeter.
-  - **Analytics** : a perimeter to build and deploy analytics assets that are internal to your organization. This perimeter is expected to have a more permissive access policy than the core data perimeter that it is bridged with.
+- **Core data** : a perimeter to protect the data warehouse and data mart datasets.
+- **Data pipelines** : a perimeter for the ETL infrastructure project. If the data pipelines need to make requests outside of your Google Cloud organization, we recommend that you separate this perimeter from the core data perimeter.
+- **Analytics** : a perimeter to build and deploy analytics assets that are internal to your organization. This perimeter is expected to have a more permissive access policy than the core data perimeter that it is bridged with.
 
 #### Perimeter bridges
 
 In this configuration, we recommend that you create the following perimeter bridges:
 
-  - **Data pipelines and core data** : allow data pipelines to write into the core data project.
-  - **Core data and analytics** : allow users in the analytics projects to query the authorized views.
+- **Data pipelines and core data** : allow data pipelines to write into the core data project.
+- **Core data and analytics** : allow users in the analytics projects to query the authorized views.
 
 ### Copy datasets for multiregional configurations
 
@@ -170,16 +170,16 @@ Because BigQuery disallows cross-regional queries, you can't use the strategy of
 
 The project configuration in figure 4 includes the following projects.
 
-  - **Core data project** : the governance perimeter for managing access to core data and the data mart views. Data is copied and maintained into regional datasets that can serve teams globally.
-  - **ETL infrastructure** : infrastructure for processing upstream data sources into the core data. Depending on administrative separation needs, you might choose to deploy the ETL infrastructure as its own project or as a part of the core data project.
-  - **Analytics team projects** : consumers of the data mart use these projects, and use their own provisioned infrastructure to process data within regional datasets of the data mart. Analytics team projects are expected to be able to build derived datasets for local use.
+- **Core data project** : the governance perimeter for managing access to core data and the data mart views. Data is copied and maintained into regional datasets that can serve teams globally.
+- **ETL infrastructure** : infrastructure for processing upstream data sources into the core data. Depending on administrative separation needs, you might choose to deploy the ETL infrastructure as its own project or as a part of the core data project.
+- **Analytics team projects** : consumers of the data mart use these projects, and use their own provisioned infrastructure to process data within regional datasets of the data mart. Analytics team projects are expected to be able to build derived datasets for local use.
 
 [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) is an additional scheduled component with some limitations. The built-in service scheduler is limited to a minimum interval time of 15 minutes and it must copy all the tables from the source dataset. There is no way to embed additional scripts to create region-specific data subsets into the BigQuery Data Transfer Service scheduler.
 
 If your organization needs more flexibility, the following options are available:
 
-  - **Managed Service for Apache Airflow jobs** : you can schedule [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
-  - **ETL infrastructure** : ETL infrastructure, such as Dataflow, can dual-write regional subsets into target regions. If your organization requires minimal data latency between regions, we recommend this option.
+- **Managed Service for Apache Airflow jobs** : you can schedule [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
+- **ETL infrastructure** : ETL infrastructure, such as Dataflow, can dual-write regional subsets into target regions. If your organization requires minimal data latency between regions, we recommend this option.
 
 ## Data marts with decentralized authority
 
@@ -187,9 +187,9 @@ Use decentralized authority when you need administrative separation by system ow
 
 A decentralized data mart has the following different concerns compared to a standard data mart:
 
-  - **Secure data collaboration** : sharing data with technical controls to minimize inappropriate access across teams.
-  - **Data discoverability** : teams need to be able to discover and request access to datasets.
-  - **Data provenance** : without a central curator team, teams need to be able to trust the origin of data that goes into their analytics products.
+- **Secure data collaboration** : sharing data with technical controls to minimize inappropriate access across teams.
+- **Data discoverability** : teams need to be able to discover and request access to datasets.
+- **Data provenance** : without a central curator team, teams need to be able to trust the origin of data that goes into their analytics products.
 
 ### Delegate core data administration
 
@@ -201,9 +201,9 @@ This design is different from a conventional data mart approach because decentra
 
 The project configuration in figure 5 includes the following projects:
 
-  - **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations admininistration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
-  - **Organizational unit data projects** : the owners of self-managed data marts within the broader organization. The core governance project manages restricted scope for the organizational unit data projects.
-  - **Analytics team projects** : the projects that are used by consumers of the data marts. These projects use their own provisioned infrastructure and slots to access and process data within the data mart.
+- **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations admininistration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
+- **Organizational unit data projects** : the owners of self-managed data marts within the broader organization. The core governance project manages restricted scope for the organizational unit data projects.
+- **Analytics team projects** : the projects that are used by consumers of the data marts. These projects use their own provisioned infrastructure and slots to access and process data within the data mart.
 
 ### Use a two-tier reservation design
 
@@ -221,14 +221,14 @@ In this configuration, we recommend VPC Service Controls perimeters to prevent a
 
 In this configuration, we recommend that you create the following service perimeters:
 
-  - **Core data** : a perimeter to protect the data warehouse and data mart datasets. This perimeter should include all organizational unit projects and the data governance project.
-  - **Analytics** : a perimeter to build and deploy analytics assets internal to the organization. This perimeter is expected to have a more permissive access policy than the core data perimeter that it's bridged with.
+- **Core data** : a perimeter to protect the data warehouse and data mart datasets. This perimeter should include all organizational unit projects and the data governance project.
+- **Analytics** : a perimeter to build and deploy analytics assets internal to the organization. This perimeter is expected to have a more permissive access policy than the core data perimeter that it's bridged with.
 
 #### Perimeter bridges
 
 In this configuration, we recommend that you create the following perimeter bridges:
 
-  - **Core data and analytics** : allow users in the analytics projects to query the authorized views.
+- **Core data and analytics** : allow users in the analytics projects to query the authorized views.
 
 ## Multi-organization data sharing
 
@@ -236,9 +236,9 @@ Multi-organization sharing is a special design consideration for a data mart des
 
 Multi-organization data sharing addresses the following concerns for the data sharer:
 
-  - **Sharing confidentiality** : only the intended party can access shared data.
-  - **Protection from inappropriate access** : only resources that are intended to be accessed can be accessed externally.
-  - **Compute separation** : external parties are billed for queries that they initiate.
+- **Sharing confidentiality** : only the intended party can access shared data.
+- **Protection from inappropriate access** : only resources that are intended to be accessed can be accessed externally.
+- **Compute separation** : external parties are billed for queries that they initiate.
 
 > **Note:** In some cases, queries that originate from the outside organization can fail unexpectedly. [Cloud Customer Care](https://cloud.google.com/support-hub/) can help you initiate a configuration change to fix the issue.
 
@@ -254,8 +254,8 @@ Queries that initiate from the external project use the invoking project's compu
 
 The project configuration in figure 6 includes the following projects:
 
-  - **Organization internal project** : the project that contains sensitive internal data. The internal project can share data externally by copying sanitized data into the datasets of the shared data project. The internal project should own the service account that is responsible for updating the shared data.
-  - **Shared data project** : the project that contains the sanitized information that is copied from the internal project. Use external users [groups](https://docs.cloud.google.com/iam/docs/groups-in-cloud-console) to manage access by external parties. In this scenario, you manage group membership as an administrative function and you give external accounts the viewer permission so that they can access the dataset through these groups.
+- **Organization internal project** : the project that contains sensitive internal data. The internal project can share data externally by copying sanitized data into the datasets of the shared data project. The internal project should own the service account that is responsible for updating the shared data.
+- **Shared data project** : the project that contains the sanitized information that is copied from the internal project. Use external users [groups](https://docs.cloud.google.com/iam/docs/groups-in-cloud-console) to manage access by external parties. In this scenario, you manage group membership as an administrative function and you give external accounts the viewer permission so that they can access the dataset through these groups.
 
 ### Configure VPC Service Controls perimeters
 
@@ -265,14 +265,14 @@ In this configuration, we recommend VPC Service Controls perimeters to share dat
 
 In this configuration, we recommend that you create the following service perimeters:
 
-  - **Internal data** : a perimeter to protect core data assets. VPC Service Controls enforces access to BigQuery.
-  - **Externally shared data** : a perimeter to host datasets that can be shared with outside organizations. This perimeter disables enforcement of access to BigQuery.
+- **Internal data** : a perimeter to protect core data assets. VPC Service Controls enforces access to BigQuery.
+- **Externally shared data** : a perimeter to host datasets that can be shared with outside organizations. This perimeter disables enforcement of access to BigQuery.
 
 #### Perimeter bridges
 
 In this configuration, we recommend that you create the following perimeter bridge:
 
-  - **Internal to external data** : a perimeter bridge allows the more protected internal data projects to egress data into external data share projects.
+- **Internal to external data** : a perimeter bridge allows the more protected internal data projects to egress data into external data share projects.
 
 ## Additional considerations in multi-tenant systems
 
@@ -280,62 +280,23 @@ This section provides a deeper look at special cases that you can consider along
 
 ### Google Cloud resource limits and quotas
 
-  - Service accounts are limited to a soft quota of 100 service accounts per project. You can request quota through [the Google Cloud console](https://console.cloud.google.com/iam-admin/quotas) for projects that maintain tenant service accounts.
-  - BigQuery concurrency has a default concurrency of 100 queries per project that issues queries (projects that hold datasets have no such limits). To increase this soft quota, contact your sales representative.
-  - VPC Service Controls has a limit of 10,000 projects within service perimeters organization-wide. If your project-per-tenant designs have high scale up, we recommend using a dataset-per-tenant design instead.
-  - VPC Service Controls has a limit of 100 perimeters, including bridges, per organization.
+- Service accounts are limited to a soft quota of 100 service accounts per project. You can request quota through [the Google Cloud console](https://console.cloud.google.com/iam-admin/quotas) for projects that maintain tenant service accounts.
+- BigQuery concurrency has a default concurrency of 100 queries per project that issues queries (projects that hold datasets have no such limits). To increase this soft quota, contact your sales representative.
+- VPC Service Controls has a limit of 10,000 projects within service perimeters organization-wide. If your project-per-tenant designs have high scale up, we recommend using a dataset-per-tenant design instead.
+- VPC Service Controls has a limit of 100 perimeters, including bridges, per organization.
 
 ### Using authorized views or materialized subset tables
 
 To manage tenant access to subsets of large fact tables, you can use tenant-specific authorized views or create tenant-specific subset tables. The following table provides a comparison of these approaches:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Authorized views</th>
-<th>Subset tables</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Number of tenants supported</td>
-<td>There is a hard limit of <a href="https://docs.cloud.google.com/bigquery/quotas#dataset_limits">2500 authorized resources</a> per dataset.</td>
-<td>Authorized resources include authorized views, authorized datasets, and authorized functions.There are no limits on the number of datasets in a project or tables in a dataset.</td>
-</tr>
-<tr class="even">
-<td>Partitioning and clustering</td>
-<td><p>Authorized views must share the common partitioning and cluster scheme of the base table.</p>
-<p>To improve the performance of tenant segmentation, we recommend that you cluster the parent table on the tenant ID.</p></td>
-<td>You can partition the subset table and cluster it to the needs of the tenant.</td>
-</tr>
-<tr class="odd">
-<td>Regionalization</td>
-<td>Authorized views cannot cross regions and must be in the Google Cloud region of the base table. Regionalization affects geographically remote tenants.</td>
-<td>Subset tables can exist in the region that's most appropriate for the tenant. Additional <a href="https://docs.cloud.google.com/bigquery/docs/copying-datasets#pricing">costs</a> might apply.</td>
-</tr>
-<tr class="even">
-<td>Column policy enforcement</td>
-<td>Column policies applied to a base table are applied to all authorized views regardless of the permissions on those views.</td>
-<td>Each subset table must apply the column policy for it to take effect.</td>
-</tr>
-<tr class="odd">
-<td>Data access logging</td>
-<td>Data access logs are reflected in the logging of the base table.</td>
-<td>Access to each subset table is logged separately.</td>
-</tr>
-<tr class="even">
-<td>Transformation flexibility</td>
-<td>Authorized views allow for instant redesign of the object that tenants are accessing.</td>
-<td>Complex schema changes are required to change subset tables.</td>
-</tr>
-</tbody>
-</table>
+| Feature                     | Authorized views                                                                                                                                                                                              | Subset tables                                                                                                                                                                       |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Number of tenants supported | There is a hard limit of [2500 authorized resources](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) per dataset.                                                                               | Authorized resources include authorized views, authorized datasets, and authorized functions.There are no limits on the number of datasets in a project or tables in a dataset.     |
+| Partitioning and clustering | Authorized views must share the common partitioning and cluster scheme of the base table. To improve the performance of tenant segmentation, we recommend that you cluster the parent table on the tenant ID. | You can partition the subset table and cluster it to the needs of the tenant.                                                                                                       |
+| Regionalization             | Authorized views cannot cross regions and must be in the Google Cloud region of the base table. Regionalization affects geographically remote tenants.                                                        | Subset tables can exist in the region that's most appropriate for the tenant. Additional [costs](https://docs.cloud.google.com/bigquery/docs/copying-datasets#pricing) might apply. |
+| Column policy enforcement   | Column policies applied to a base table are applied to all authorized views regardless of the permissions on those views.                                                                                     | Each subset table must apply the column policy for it to take effect.                                                                                                               |
+| Data access logging         | Data access logs are reflected in the logging of the base table.                                                                                                                                              | Access to each subset table is logged separately.                                                                                                                                   |
+| Transformation flexibility  | Authorized views allow for instant redesign of the object that tenants are accessing.                                                                                                                         | Complex schema changes are required to change subset tables.                                                                                                                        |
 
 ### Controlling for sensitive data
 
@@ -375,10 +336,10 @@ If [ELT data processing](https://wikipedia.org/wiki/Extract,_transform,_load#Vs.
 
 Following is an example of how to configure reservations as tenant compute tiers:
 
-  - **Data processing** : 2000 slots, ignore idle. This reservation is configured to meet data processing SLOs.
-  - **Internal projects** : 1000 slots, allow idle. This reservation is applied to the projects that are used for internal analytics.Slots are reused if they're left over from data processing or compute tiers.
-  - **Low compute tier** : 2000 slots, ignore idle. This reservation is applied to tenants given low resources. Unlike the high tier, this reservation ignores idle slots.
-  - **High compute tier** : 3000 slots, allow idle. This reservation is applied to tenants given high resources. To speed queries, idle slots from other reservations are automatically applied.
+- **Data processing** : 2000 slots, ignore idle. This reservation is configured to meet data processing SLOs.
+- **Internal projects** : 1000 slots, allow idle. This reservation is applied to the projects that are used for internal analytics.Slots are reused if they're left over from data processing or compute tiers.
+- **Low compute tier** : 2000 slots, ignore idle. This reservation is applied to tenants given low resources. Unlike the high tier, this reservation ignores idle slots.
+- **High compute tier** : 3000 slots, allow idle. This reservation is applied to tenants given high resources. To speed queries, idle slots from other reservations are automatically applied.
 
 If your tenants operate on dedicated infrastructure, we recommend that you assign the designated folder or project to the appropriate shared reservation.
 
@@ -388,10 +349,10 @@ When you work with teams in a data mart setting, we recommend that you create a 
 
 Following is an example of how to configure reservations per team:
 
-  - **Organization level reservation** : 500 slots, allow idle. This reservation is assigned to the top-level organization, and it gives slots to any BigQuery user who isn't using a project that has a dedicated reservation
-  - **Data processing** : 1000 slots, ignore idle. This reservation is configured to meet minimum data processing SLOs.
-  - **Core data administration** : 500 slots, allow idle. This reservation is applied to the projects that are used for internal administration. Slots are reused if they're left over from data processing or compute tiers.
-  - **Analytics processing reservations** : 500 slots, allow idle. This is a dedicated reservation that's given to an analytics team.
+- **Organization level reservation** : 500 slots, allow idle. This reservation is assigned to the top-level organization, and it gives slots to any BigQuery user who isn't using a project that has a dedicated reservation
+- **Data processing** : 1000 slots, ignore idle. This reservation is configured to meet minimum data processing SLOs.
+- **Core data administration** : 500 slots, allow idle. This reservation is applied to the projects that are used for internal administration. Slots are reused if they're left over from data processing or compute tiers.
+- **Analytics processing reservations** : 500 slots, allow idle. This is a dedicated reservation that's given to an analytics team.
 
 ### Multi-regional hosting requirements
 
@@ -403,4 +364,4 @@ For guidance on adhering to regulatory requirements, consult with your sales rep
 
 ## What's next
 
-  - Learn about [IAM best practices](https://docs.cloud.google.com/iam/docs/recommender-best-practices) .
+- Learn about [IAM best practices](https://docs.cloud.google.com/iam/docs/recommender-best-practices) .

@@ -24,12 +24,12 @@ To list views in a dataset, you need the `bigquery.tables.list` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to list views in a dataset:
 
-  - `roles/bigquery.user`
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.user`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -40,10 +40,10 @@ To list the views in a dataset:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -56,45 +56,55 @@ Use the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT table_name
-        FROM DATASET_ID.INFORMATION_SCHEMA.VIEWS;
-    
-    Replace `  DATASET_ID  ` with the name of the dataset.
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT table_name
+    FROM DATASET_ID.INFORMATION_SCHEMA.VIEWS;
+    ```
+
+    Replace `DATASET_ID` with the name of the dataset.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing views in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
+Issue the `bq ls` command. The `--format` flag can be used to control the output. If you are listing views in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
 
-    bq ls --format=pretty project_id:dataset
+```
+bq ls --format=pretty project_id:dataset
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the name of the dataset.
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the dataset.
 
 When you run the command, the `Type` field displays either `TABLE` or `VIEW` . For example:
 
-    +-------------------------+-------+----------------------+-------------------+
-    |         tableId         | Type  |        Labels        | Time Partitioning |
-    +-------------------------+-------+----------------------+-------------------+
-    | mytable                 | TABLE | department:shipping  |                   |
-    | myview                  | VIEW  |                      |                   |
-    +-------------------------+-------+----------------------+-------------------+
+```
++-------------------------+-------+----------------------+-------------------+
+|         tableId         | Type  |        Labels        | Time Partitioning |
++-------------------------+-------+----------------------+-------------------+
+| mytable                 | TABLE | department:shipping  |                   |
+| myview                  | VIEW  |                      |                   |
++-------------------------+-------+----------------------+-------------------+
+```
 
 Examples:
 
 Enter the following command to list views in dataset `mydataset` in your default project.
 
-    bq ls --format=pretty mydataset
+```
+bq ls --format=pretty mydataset
+```
 
 Enter the following command to list views in dataset `mydataset` in `myotherproject` .
 
-    bq ls --format=pretty myotherproject:mydataset
+```
+bq ls --format=pretty myotherproject:mydataset
+```
 
 ### API
 
@@ -106,40 +116,42 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // listTables demonstrates iterating through the collection of tables in a given dataset.
-    func listTables(w io.Writer, projectID, datasetID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     ts := client.Dataset(datasetID).Tables(ctx)
-     for {
-         t, err := ts.Next()
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintf(w, "Table: %q\n", t.TableID)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// listTables demonstrates iterating through the collection of tables in a given dataset.
+func listTables(w io.Writer, projectID, datasetID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    ts := client.Dataset(datasetID).Tables(ctx)
+    for {
+        t, err := ts.Next()
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintf(w, "Table: %q\n", t.TableID)
+    }
+    return nil
+}
+```
 
 ### Python
 
@@ -147,20 +159,22 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set dataset_id to the ID of the dataset that contains
-    #                  the tables you are listing.
-    # dataset_id = 'your-project.your_dataset'
-    
-    tables = client.list_tables(dataset_id)  # Make an API request.
-    
-    print("Tables contained in '{}':".format(dataset_id))
-    for table in tables:
-        print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set dataset_id to the ID of the dataset that contains
+#                  the tables you are listing.
+# dataset_id = 'your-project.your_dataset'
+
+tables = client.list_tables(dataset_id)  # Make an API request.
+
+print("Tables contained in '{}':".format(dataset_id))
+for table in tables:
+    print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
+```
 
 ## Get information about views
 
@@ -172,11 +186,11 @@ To get information about a view, you need the `bigquery.tables.get` IAM permissi
 
 Each of the following predefined IAM roles includes the permissions that you need in order to get information about a view:
 
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can get information about views in the datasets that you create.
 
@@ -187,7 +201,7 @@ To get information about views:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -198,23 +212,22 @@ To get information about views:
 
 ### SQL
 
-Query the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) . The following example retrieves all columns except for `check_option` , which is reserved for future use. The metadata returned is for all views in DATASET\_ID in your default project:
+Query the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) . The following example retrieves all columns except for `check_option` , which is reserved for future use. The metadata returned is for all views in ` DATASET_ID ` in your default project:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-    ``` 
-      SELECT
+
+    ```
+    SELECT
         * EXCEPT (check_option)
       FROM
         DATASET_ID.INFORMATION_SCHEMA.VIEWS;
-      
     ```
-    
-    Replace `  DATASET_ID  ` with the name of the dataset.
 
-3.  Click play\_circle **Run** .
+    Replace `DATASET_ID` with the name of the dataset.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -222,25 +235,31 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq show` command. The `--format` flag can be used to control the output. If you are getting information about a view in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
-    bq show \
-    --format=prettyjson \
-    project_id:dataset.view
+```
+bq show \
+--format=prettyjson \
+project_id:dataset.view
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the name of the dataset.
-  - view is the name of the view.
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the dataset.
+- ` view ` is the name of the view.
 
 Examples:
 
 Enter the following command to display information about `myview` in dataset `mydataset` in your default project.
 
-    bq show --format=prettyjson mydataset.myview
+```
+bq show --format=prettyjson mydataset.myview
+```
 
 Enter the following command to display information about `myview` in dataset `mydataset` in `myotherproject` .
 
-    bq show --format=prettyjson myotherproject:mydataset.myview
+```
+bq show --format=prettyjson myotherproject:mydataset.myview
+```
 
 ### API
 
@@ -252,34 +271,36 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // getView demonstrates fetching the metadata from a BigQuery logical view and printing it to an io.Writer.
-    func getView(w io.Writer, projectID, datasetID, viewID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // viewID := "myview"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     view := client.Dataset(datasetID).Table(viewID)
-     meta, err := view.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     fmt.Fprintf(w, "View %s, query: %s\n", view.FullyQualifiedName(), meta.ViewQuery)
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// getView demonstrates fetching the metadata from a BigQuery logical view and printing it to an io.Writer.
+func getView(w io.Writer, projectID, datasetID, viewID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // viewID := "myview"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    view := client.Dataset(datasetID).Table(viewID)
+    meta, err := view.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    fmt.Fprintf(w, "View %s, query: %s\n", view.FullyQualifiedName(), meta.ViewQuery)
+    return nil
+}
+```
 
 ### Java
 
@@ -287,36 +308,38 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    import com.google.cloud.bigquery.TableId;
-    
-    // Sample to get a view
-    public class GetView {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String viewName = "MY_VIEW_NAME";
-        getView(datasetName, viewName);
-      }
-    
-      public static void getView(String datasetName, String viewName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId tableId = TableId.of(datasetName, viewName);
-          Table view = bigquery.getTable(tableId);
-          System.out.println("View retrieved successfully" + view.getDescription());
-        } catch (BigQueryException e) {
-          System.out.println("View not retrieved. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+import com.google.cloud.bigquery.TableId;
+
+// Sample to get a view
+public class GetView {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String viewName = "MY_VIEW_NAME";
+    getView(datasetName, viewName);
+  }
+
+  public static void getView(String datasetName, String viewName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId tableId = TableId.of(datasetName, viewName);
+      Table view = bigquery.getTable(tableId);
+      System.out.println("View retrieved successfully" + view.getDescription());
+    } catch (BigQueryException e) {
+      System.out.println("View not retrieved. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -324,31 +347,33 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function getView() {
-      // Retrieves view properties.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_view";
-    
-      // Retrieve view
-      const dataset = bigquery.dataset(datasetId);
-      const [view] = await dataset.table(tableId).get();
-    
-      const fullTableId = view.metadata.id;
-      const viewQuery = view.metadata.view.query;
-    
-      // Display view properties
-      console.log(`View at ${fullTableId}`);
-      console.log(`View query: ${viewQuery}`);
-    }
-    getView();
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function getView() {
+  // Retrieves view properties.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_view";
+
+  // Retrieve view
+  const dataset = bigquery.dataset(datasetId);
+  const [view] = await dataset.table(tableId).get();
+
+  const fullTableId = view.metadata.id;
+  const viewQuery = view.metadata.view.query;
+
+  // Display view properties
+  console.log(`View at ${fullTableId}`);
+  console.log(`View query: ${viewQuery}`);
+}
+getView();
+```
 
 ### Python
 
@@ -356,17 +381,19 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    
-    view_id = "my-project.my_dataset.my_view"
-    # Make an API request to get the table resource.
-    view = client.get_table(view_id)
-    
-    # Display view properties
-    print(f"Retrieved {view.table_type}: {str(view.reference)}")
-    print(f"View Query:\n{view.view_query}")
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+view_id = "my-project.my_dataset.my_view"
+# Make an API request to get the table resource.
+view = client.get_table(view_id)
+
+# Display view properties
+print(f"Retrieved {view.table_type}: {str(view.reference)}")
+print(f"View Query:\n{view.view_query}")
+```
 
 ## View security
 
@@ -374,7 +401,7 @@ To control access to views in BigQuery, see [Authorized views](https://docs.clou
 
 ## What's next
 
-  - For information on creating views, see [Creating views](https://docs.cloud.google.com/bigquery/docs/views) .
-  - For information on creating an authorized view, see [Creating authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
-  - For more information on managing views, see [Managing views](https://docs.cloud.google.com/bigquery/docs/managing-views) .
-  - To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+- For information on creating views, see [Creating views](https://docs.cloud.google.com/bigquery/docs/views) .
+- For information on creating an authorized view, see [Creating authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
+- For more information on managing views, see [Managing views](https://docs.cloud.google.com/bigquery/docs/managing-views) .
+- To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

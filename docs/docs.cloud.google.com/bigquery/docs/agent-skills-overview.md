@@ -20,18 +20,20 @@ The BigQuery basics skill, [`bigquery-basics`](https://github.com/google/skills/
 
 To install the `bigquery-basics` skill, run the following command in your agentic client or terminal:
 
-    npx skills add google/skills --skill bigquery-basics
+```
+npx skills add google/skills --skill bigquery-basics
+```
 
 ### BigQuery basics reference files
 
 The BigQuery basics agent skill includes several reference files that provide technical depth. These references let the skill execute functions or commands accurately by providing specific context to the underlying model. By default, the BigQuery basics skill includes the following reference files:
 
-  - [bq command-line tool usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/cli-usage.md)
-  - [Cloud Client Libraries usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/client-library-usage.md)
-  - [Core concepts](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/core-concepts.md)
-  - [Infrastructure as code (IAC) usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/iac-usage.md)
-  - [Identity and Access Management (IAM) security](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/iam-security.md)
-  - [Model Context Protocol (MCP) usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/mcp-usage.md)
+- [bq command-line tool usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/cli-usage.md)
+- [Cloud Client Libraries usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/client-library-usage.md)
+- [Core concepts](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/core-concepts.md)
+- [Infrastructure as code (IAC) usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/iac-usage.md)
+- [Identity and Access Management (IAM) security](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/iam-security.md)
+- [Model Context Protocol (MCP) usage](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/references/mcp-usage.md)
 
 ## The BigQuery AI & ML skill
 
@@ -41,19 +43,21 @@ The BigQuery AI & ML skill, [`bigquery-ai-ml`](https://github.com/google/skills/
 
 To install the `bigquery-ai-ml` skill, run the following command in your agentic client or terminal:
 
-    npx skills add google/skills --skill bigquery-ai-ml
+```
+npx skills add google/skills --skill bigquery-ai-ml
+```
 
 ### BigQuery AI & ML reference files
 
 The BigQuery AI & ML agent skill includes reference files that provide technical depth. By default, the BigQuery AI & ML skill includes the following reference files:
 
-  - [`AI.DETECT_ANOMALIES`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_detect_anomalies.md)
-  - [`AI.FORECAST`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_forecast.md)
-  - [`AI.GENERATE`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_generate.md)
+- [`AI.DETECT_ANOMALIES`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_detect_anomalies.md)
+- [`AI.FORECAST`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_forecast.md)
+- [`AI.GENERATE`](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/references/ai_generate.md)
 
 ## What's next
 
-  - To view the BigQuery basics `SKILL.md` file, see [`SKILL.md` (basics)](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/SKILL.md) .
-  - To view the BigQuery AI & ML `SKILL.md` file, see [`SKILL.md` (AI & ML)](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/SKILL.md) .
-  - To learn more about agent skills, see [Agent Skills Overview](https://agentskills.io/home) .
-  - To view `SKILL.md` files for other Google Cloud products, see [`google/skills`](https://github.com/google/skills#agent-skills) .
+- To view the BigQuery basics `SKILL.md` file, see [`SKILL.md` (basics)](https://github.com/google/skills/blob/main/skills/cloud/bigquery-basics/SKILL.md) .
+- To view the BigQuery AI & ML `SKILL.md` file, see [`SKILL.md` (AI & ML)](https://github.com/google/skills/blob/main/skills/cloud/bigquery-ai-ml/SKILL.md) .
+- To learn more about agent skills, see [Agent Skills Overview](https://agentskills.io/home) .
+- To view `SKILL.md` files for other Google Cloud products, see [`google/skills`](https://github.com/google/skills#agent-skills) .

@@ -16,11 +16,11 @@ The `INFORMATION_SCHEMA.ASSIGNMENTS` view contains a near real-time list of all 
 
 To query the `INFORMATION_SCHEMA.ASSIGNMENTS` view, you need the `bigquery.reservationAssignments.list` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
-  - `roles/bigquery.resourceAdmin`
-  - `roles/bigquery.resourceEditor`
-  - `roles/bigquery.resourceViewer`
-  - `roles/bigquery.user`
-  - `roles/bigquery.admin`
+- `roles/bigquery.resourceAdmin`
+- `roles/bigquery.resourceEditor`
+- `roles/bigquery.resourceViewer`
+- `roles/bigquery.user`
+- `roles/bigquery.admin`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -29,7 +29,7 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 The `INFORMATION_SCHEMA.ASSIGNMENTS` view has the following schema:
 
 | Column name        | Data type | Value                                                                                                                        |
-| ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
 | `ddl`              | `STRING`  | The DDL statement used to create this assignment.                                                                            |
 | `project_id`       | `STRING`  | ID of the administration project.                                                                                            |
 | `project_number`   | `INTEGER` | Number of the administration project.                                                                                        |
@@ -46,65 +46,50 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.ASSIGNMENTS[_BY_PROJECT]</code><br />
-</td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">        REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                          | Resource scope | Region scope |
+|----------------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.ASSIGNMENTS[_BY_PROJECT] `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.ASSIGNMENTS
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.ASSIGNMENTS
+```
 
 .
 
 Replace the following:
 
-  - PROJECT\_ID : the ID of the project to which you have assigned reservations.
-  - REGION\_NAME : the name of the region.
+- ` PROJECT_ID ` : the ID of the project to which you have assigned reservations.
+- ` REGION_NAME ` : the name of the region.
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.ASSIGNMENTS `` .
 
 The following example gets a project's currently assigned reservation and its slot capacity. This information is useful for debugging job performance by comparing the project's slot usage with the slot capacity of the reservation assigned to that project.
 
-    SELECT
-      reservation.reservation_name,
-      reservation.slot_capacity
-    FROM
-      `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
-      INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT assignment
-    INNER JOIN
-      `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
-      INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT AS reservation
-    ON
-      (assignment.reservation_name = reservation.reservation_name)
-    WHERE
-       assignment.assignee_id = "PROJECT_ID"
-      AND job_type = "QUERY";
+```
+SELECT
+  reservation.reservation_name,
+  reservation.slot_capacity
+FROM
+  `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
+  INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT assignment
+INNER JOIN
+  `RESERVATION_ADMIN_PROJECT.region-REGION_NAME`.
+  INFORMATION_SCHEMA.RESERVATIONS_BY_PROJECT AS reservation
+ON
+  (assignment.reservation_name = reservation.reservation_name)
+WHERE
+   assignment.assignee_id = "PROJECT_ID"
+  AND job_type = "QUERY";
+```

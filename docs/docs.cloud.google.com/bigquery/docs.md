@@ -12,87 +12,87 @@ BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective ana
 
 [Go to the BigQuery product page for more.](https://cloud.google.com/bigquery)
 
-format\_list\_numbered
+format_list_numbered
 
 ### Guides
 
-  - Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) , or [BigQuery DataFrames (Python)](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart)
+- Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) , or [BigQuery DataFrames (Python)](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart)
 
-  - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
+- [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
 
-  - [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables)
+- [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables)
 
-  - [Introduction to BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction)
+- [Introduction to BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction)
 
-  - [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control)
+- [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control)
 
-  - [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data)
+- [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data)
 
-  - [Loading CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+- [Loading CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
 
-  - [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data)
+- [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data)
 
-  - [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model)
+- [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model)
 
-  - [Querying external data sources](https://docs.cloud.google.com/bigquery/external-data-sources)
+- [Querying external data sources](https://docs.cloud.google.com/bigquery/external-data-sources)
 
-  - [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)
+- [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)
 
-  - [What is the BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
+- [What is the BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
 
-  - [Introduction to BigQuery migration](https://docs.cloud.google.com/bigquery/docs/migration-intro)
+- [Introduction to BigQuery migration](https://docs.cloud.google.com/bigquery/docs/migration-intro)
 
-find\_in\_page
+find_in_page
 
 ### Reference
 
-  - [Functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all)
+- [Functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all)
 
-  - [Operators in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators)
+- [Operators in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators)
 
-  - [Conditional expressions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions)
+- [Conditional expressions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions)
 
-  - [Date functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions)
+- [Date functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions)
 
-  - [Query syntax in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+- [Query syntax in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
 
-  - [String functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions)
+- [String functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions)
 
-  - [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool)
+- [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool)
 
-  - [End-to-end journey for machine learning models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
+- [End-to-end journey for machine learning models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
 
-  - [BigQuery DataFrames (Python)](https://dataframes.bigquery.dev/reference/index.html)
+- [BigQuery DataFrames (Python)](https://dataframes.bigquery.dev/reference/index.html)
 
-  - [BigQuery API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
+- [BigQuery API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
 
-  - [Creating and training models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create)
+- [Creating and training models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create)
 
-  - [Public datasets](https://docs.cloud.google.com/bigquery/public-data)
+- [Public datasets](https://docs.cloud.google.com/bigquery/public-data)
 
-  - [Feature preprocessing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-preprocess-overview)
+- [Feature preprocessing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-preprocess-overview)
 
 info
 
 ### Resources
 
-  - [Pricing](https://cloud.google.com/bigquery/pricing)
+- [Pricing](https://cloud.google.com/bigquery/pricing)
 
-  - [Release notes](https://docs.cloud.google.com/bigquery/docs/release-notes)
+- [Release notes](https://docs.cloud.google.com/bigquery/docs/release-notes)
 
-  - [Locations](https://docs.cloud.google.com/bigquery/docs/locations)
+- [Locations](https://docs.cloud.google.com/bigquery/docs/locations)
 
-  - [Getting support](https://docs.cloud.google.com/bigquery/docs/getting-support)
+- [Getting support](https://docs.cloud.google.com/bigquery/docs/getting-support)
 
-  - [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas)
+- [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas)
 
-  - [Controlling costs](https://docs.cloud.google.com/bigquery/docs/controlling-costs)
+- [Controlling costs](https://docs.cloud.google.com/bigquery/docs/controlling-costs)
 
-  - [Creating custom cost controls](https://docs.cloud.google.com/bigquery/docs/custom-quotas)
+- [Creating custom cost controls](https://docs.cloud.google.com/bigquery/docs/custom-quotas)
 
-  - [Troubleshooting BigQuery quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas)
+- [Troubleshooting BigQuery quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas)
 
-  - [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
+- [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
 
 Solution
 
@@ -204,9 +204,9 @@ Code sample
 
 Code Samples
 
-### [C\# simple sample](https://github.com/GoogleCloudPlatform/dotnet-docs-samples/tree/master/bigquery/api)
+### [C# simple sample](https://github.com/GoogleCloudPlatform/dotnet-docs-samples/tree/master/bigquery/api)
 
-A simple C\# program and code snippets for interacting with BigQuery
+A simple C# program and code snippets for interacting with BigQuery
 
 Code sample
 

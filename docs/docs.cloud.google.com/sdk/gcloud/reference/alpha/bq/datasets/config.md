@@ -12,7 +12,7 @@ gcloud alpha bq datasets config - manage Google BigQuery dataset configurations
 
 SYNOPSIS
 
-`gcloud alpha bq datasets config` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq datasets config` [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/config#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/config#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,16 +20,16 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  export  `  
-    `(ALPHA)` Export the configuration for a Google BigQuery dataset.
+[`export`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/config/export)  
+`(ALPHA)` Export the configuration for a Google BigQuery dataset.
 
 NOTES
 

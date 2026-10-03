@@ -12,9 +12,9 @@ This document provides high-level guidance on how to migrate from IBM Netezza to
 
 This document is for enterprise architects, DBAs, application developers, and IT security professionals who want to migrate from Netezza to BigQuery and solve technical challenges in the migration process. This document provides details about the following phases of the migration process:
 
-  - Exporting data
-  - Ingesting data
-  - Leveraging third-party tools
+- Exporting data
+- Ingesting data
+- Leveraging third-party tools
 
 You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
 
@@ -24,8 +24,8 @@ Netezza is a powerful system that can help you store and analyze vast amounts of
 
 With BigQuery, you don't have to manage infrastructure, and you don't need a database administrator. BigQuery is a fully managed, petabyte-scale, serverless data warehouse that can scan billions of rows, without an index, in tens of seconds. Because BigQuery shares Google's infrastructure, it can parallelize each query and run it on tens of thousands of servers simultaneously. The following core technologies differentiate BigQuery:
 
-  - **Columnar storage.** Data is stored in columns rather than rows, which makes it possible to achieve a very high compression ratio and scan throughput.
-  - **Tree architecture.** Queries are dispatched and results are aggregated across thousands of machines in a few seconds.
+- **Columnar storage.** Data is stored in columns rather than rows, which makes it possible to achieve a very high compression ratio and scan throughput.
+- **Tree architecture.** Queries are dispatched and results are aggregated across thousands of machines in a few seconds.
 
 ### Netezza architecture
 
@@ -39,10 +39,10 @@ The following diagram illustrates the data abstraction layers within Netezza:
 
 The diagram shows the following data abstraction layers:
 
-  - **Disk enclosure.** The physical space inside of the appliance where the disks are mounted.
-  - **Disks.** Physical drives within the disk enclosures store the databases and tables.
-  - **Data slices.** Logical representation of the data that is saved on a disk. Data is distributed across the data slices using a distribution key. You can monitor the status of data slices by using `nzds` commands.
-  - **Data partitions.** Logical representation of a data slice that is managed by a specific [Snippet Processing Units (SPUs)](https://www.ibm.com/support/knowledgecenter/en/SSULQD_7.2.1/com.ibm.nz.adm.doc/r_sysadm_nz_hardware_components.html) . Each SPU owns one or more data partition containing the user data that the SPU is responsible for processing during queries.
+- **Disk enclosure.** The physical space inside of the appliance where the disks are mounted.
+- **Disks.** Physical drives within the disk enclosures store the databases and tables.
+- **Data slices.** Logical representation of the data that is saved on a disk. Data is distributed across the data slices using a distribution key. You can monitor the status of data slices by using `nzds` commands.
+- **Data partitions.** Logical representation of a data slice that is managed by a specific [Snippet Processing Units (SPUs)](https://www.ibm.com/support/knowledgecenter/en/SSULQD_7.2.1/com.ibm.nz.adm.doc/r_sysadm_nz_hardware_components.html) . Each SPU owns one or more data partition containing the user data that the SPU is responsible for processing during queries.
 
 All of the system components are connected by network fabric. The Netezza appliance runs a customized protocol based on IP addresses.
 
@@ -64,10 +64,10 @@ Analytics throughput in BigQuery is measured in [slots](https://docs.cloud.googl
 
 To run queries in BigQuery, select one of the following pricing models:
 
-  - **[On-demand](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .** The default pricing model, where you are charged for the number of bytes processed by each query.
-  - **[Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .** You purchase slots, which are virtual CPUs. When you buy slots, you are buying dedicated processing capacity that you can use to run queries. Slots are available in the following commitment plans:
-      - **Annual.** You commit to 365 days.
-      - **Three-year.** You commit to 365\*3 days.
+- **[On-demand](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .** The default pricing model, where you are charged for the number of bytes processed by each query.
+- **[Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .** You purchase slots, which are virtual CPUs. When you buy slots, you are buying dedicated processing capacity that you can use to run queries. Slots are available in the following commitment plans:
+  - **Annual.** You commit to 365 days.
+  - **Three-year.** You commit to 365\*3 days.
 
 A BigQuery slot shares some similarities with Netezza SPUs, such as, CPU, memory, and processing of data; however, they don't represent the same unit of measurement. Netezza SPUs have a fixed mapping to the underlying hardware components, whereas the BigQuery slot represents a virtual CPU used to execute queries. To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . To visualize BigQuery slot utilization, you can also use tools like [Data Studio](https://datastudio.google.com/c/) or [Looker](https://docs.cloud.google.com/looker) . Regularly monitoring and analyzing your slot utilization helps you estimate how many total slots your organization needs as you grow on Google Cloud.
 
@@ -91,9 +91,9 @@ To grant access to a resource, you assign one or more roles to a user, group, or
 
 IAM provides the following types of roles:
 
-  - **[Predefined roles](https://docs.cloud.google.com/iam/docs/choose-predefined-roles) .** To support common use cases and access control patterns.
-  - **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-primitive-roles) .** Include the Owner, Editor, and Viewer roles. Basic roles provide granular access for a specific service and are managed by Google Cloud.
-  - **[Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) .** Provide granular access according to a user-specified list of permissions.
+- **[Predefined roles](https://docs.cloud.google.com/iam/docs/choose-predefined-roles) .** To support common use cases and access control patterns.
+- **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-primitive-roles) .** Include the Owner, Editor, and Viewer roles. Basic roles provide granular access for a specific service and are managed by Google Cloud.
+- **[Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) .** Provide granular access according to a user-specified list of permissions.
 
 When you assign both predefined and basic roles to a user, the permissions granted are a union of the permissions of each individual role.
 
@@ -111,8 +111,10 @@ In secure erase mode, you don't need an authentication key or password to decryp
 
 Netezza uses symmetric encryption; if your data is field-level encrypted, the following decrypt function can help you to read and export data:
 
-    varchar = decrypt(varchar text, varchar key [, int algorithm [, varchar IV]]);
-    nvarchar = decrypt(nvarchar text, nvarchar key [, int algorithm[, varchar IV]]);
+```
+varchar = decrypt(varchar text, varchar key [, int algorithm [, varchar IV]]);
+nvarchar = decrypt(nvarchar text, nvarchar key [, int algorithm[, varchar IV]]);
+```
 
 All data stored within BigQuery is encrypted at rest. If you want to control encryption yourself, you can use customer-managed encryption keys (CMEK) for BigQuery. With CMEK, instead of Google managing the key encryption keys that protect your data, you control and manage key encryption keys in [Cloud Key Management Service](https://docs.cloud.google.com/kms/docs) . For more information, see [Encryption at rest](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .
 
@@ -121,7 +123,7 @@ All data stored within BigQuery is encrypted at rest. If you want to control enc
 To track progress and improvement throughout the migration process, it's important to establish a baseline performance for the current-state Netezza environment. To establish the baseline, select a set of representational queries, which are captured from the consuming applications (such as Tableau or Cognos).
 
 | **Environment**                   | **Netezza** | **BigQuery** |
-| --------------------------------- | ----------- | ------------ |
+|-----------------------------------|-------------|--------------|
 | Data size                         | *size* TB   | \-           |
 | Query 1: *name* (full table scan) | *mm:ss.ms*  | \-           |
 | Query 2: *name*                   | *mm:ss.ms*  | \-           |
@@ -132,9 +134,9 @@ To track progress and improvement throughout the migration process, it's importa
 
 Before you provision storage resources for migration of data, you need to complete your project setup.
 
-  - To set up projects and enable IAM at the project level, see [Google Cloud Well-Architected Framework](https://docs.cloud.google.com/architecture/framework) .
-  - To design foundational resources to make your cloud deployment enterprise-ready, see [Landing zone design in Google Cloud](https://docs.cloud.google.com/architecture/landing-zones) .
-  - To learn about data governance and the controls that you need when you migrate your on-premises data warehouse to BigQuery, see [Overview of data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance) .
+- To set up projects and enable IAM at the project level, see [Google Cloud Well-Architected Framework](https://docs.cloud.google.com/architecture/framework) .
+- To design foundational resources to make your cloud deployment enterprise-ready, see [Landing zone design in Google Cloud](https://docs.cloud.google.com/architecture/landing-zones) .
+- To learn about data governance and the controls that you need when you migrate your on-premises data warehouse to BigQuery, see [Overview of data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance) .
 
 ### Network connectivity
 
@@ -206,24 +208,26 @@ For more information, see [Authorizing API requests](https://docs.cloud.google.c
 
 GoogleSQL supports compliance with the SQL 2011 standard and has extensions that support querying [nested and repeated data](https://docs.cloud.google.com/bigquery/docs/arrays#querying_nested_arrays) . [Optimizing queries for BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) is critical in improving performance and response time.
 
-#### Replacing the Months\_Between function in BigQuery with UDF
+#### Replacing the Months_Between function in BigQuery with UDF
 
 Netezza treats the days in a month as 31. The following custom UDF recreates the Netezza function with close accuracy, which you can call from your queries:
 
-    CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
-    AS (
-      CASE
-        WHEN date_1 = date_2
-          THEN 0
-        WHEN EXTRACT(DAY FROM DATE_ADD(date_1, INTERVAL 1 DAY)) = 1
-          AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-          THEN date_diff(date_1,date_2, MONTH)
-        WHEN EXTRACT(DAY FROM date_1) = 1
-          AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
-          THEN date_diff(DATE_ADD(date_1, INTERVAL -1 DAY), date_2, MONTH) + 1/31
-        ELSE date_diff(date_1, date_2, MONTH) - 1 + ((EXTRACT(DAY FROM date_1) + (31 - EXTRACT(DAY FROM date_2))) / 31)
-        END
-    );
+```
+CREATE TEMP FUNCTION months_between(date_1 DATE, date_2 DATE)
+AS (
+  CASE
+    WHEN date_1 = date_2
+      THEN 0
+    WHEN EXTRACT(DAY FROM DATE_ADD(date_1, INTERVAL 1 DAY)) = 1
+      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
+      THEN date_diff(date_1,date_2, MONTH)
+    WHEN EXTRACT(DAY FROM date_1) = 1
+      AND EXTRACT(DAY FROM DATE_ADD(date_2, INTERVAL 1 DAY)) = 1
+      THEN date_diff(DATE_ADD(date_1, INTERVAL -1 DAY), date_2, MONTH) + 1/31
+    ELSE date_diff(date_1, date_2, MONTH) - 1 + ((EXTRACT(DAY FROM date_1) + (31 - EXTRACT(DAY FROM date_2))) / 31)
+    END
+);
+```
 
 #### Migrate Netezza stored procedures
 
@@ -233,11 +237,13 @@ If you use Netezza stored procedures in ETL workloads to construct fact tables, 
 
 The following custom UDF for BigQuery corrects encoding errors in columns:
 
-    CREATE TEMP FUNCTION ascii(X STRING)
-    AS (TO_CODE_POINTS(x)[ OFFSET (0)]);
+```
+CREATE TEMP FUNCTION ascii(X STRING)
+AS (TO_CODE_POINTS(x)[ OFFSET (0)]);
+```
 
 ## What's next
 
-  - Learn how to [Optimize workloads](https://docs.cloud.google.com/bigquery/docs/admin-intro#optimize_workloads) for overall performance optimization and cost reduction.
-  - Learn about how to [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
-  - Reference the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .
+- Learn how to [Optimize workloads](https://docs.cloud.google.com/bigquery/docs/admin-intro#optimize_workloads) for overall performance optimization and cost reduction.
+- Learn about how to [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
+- Reference the [IBM Netezza SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql) .

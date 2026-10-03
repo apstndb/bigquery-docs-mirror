@@ -12,8 +12,8 @@ This document describes the `CREATE MODEL` statement for fine-tuning Gemini mode
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
-  - [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
-  - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+- [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
+- [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
 
 ## Supervised tuning
 
@@ -58,14 +58,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -73,21 +73,23 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
+`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
 
 BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
-  - `PROJECT_ID` : the project ID of the project that contains the connection.
+- `PROJECT_ID` : the project ID of the project that contains the connection.
 
-  - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
-  - `CONNECTION_ID` : the connection ID—for example, `myconnection` .
-    
-    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-    
-    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+- `CONNECTION_ID` : the connection ID—for example, `myconnection` .
+
+  To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
+
+  To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing ` PROJECT_ID ` . ` LOCATION ` . ` CONNECTION_ID ` .
 
 If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
@@ -95,13 +97,17 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Example**
 
-    `myproject.us.my_connection`
+```
+`myproject.us.my_connection`
+```
 
 ### `ENDPOINT`
 
 **Syntax**
 
-    ENDPOINT = 'vertex_ai_gemini_endpoint'
+```
+ENDPOINT = 'vertex_ai_gemini_endpoint'
+```
 
 **Description**
 
@@ -115,7 +121,9 @@ A `STRING` value that contains the model name of an Agent Platform Gemini model 
 
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
-    https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.0-flash-001
+```
+https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.0-flash-001
+```
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead.
 
@@ -131,7 +139,9 @@ For more information on retired Agent Platform models, see [Retired models](http
 
 **Syntax**
 
-    PROMPT_COL = 'prompt_col'
+```
+PROMPT_COL = 'prompt_col'
+```
 
 **Description**
 
@@ -145,7 +155,9 @@ A `STRING` value. The default value is `prompt` .
 
 **Syntax**
 
-    INPUT_LABEL_COLS = input_label_cols
+```
+INPUT_LABEL_COLS = input_label_cols
+```
 
 **Description**
 
@@ -159,7 +171,9 @@ A one-element `ARRAY<STRING>` value. The default value is an empty array.
 
 **Syntax**
 
-    MAX_ITERATIONS = max_iterations
+```
+MAX_ITERATIONS = max_iterations
+```
 
 **Description**
 
@@ -179,7 +193,9 @@ An `INT64` value between `1` and ∞. Typically, 100 steps takes about an hour t
 
 **Syntax**
 
-    LEARNING_RATE_MULTIPLIER = learning_rate_multiplier
+```
+LEARNING_RATE_MULTIPLIER = learning_rate_multiplier
+```
 
 **Description**
 
@@ -193,7 +209,9 @@ A positive `FLOAT64` value. The default value is `1.0` .
 
 **Syntax**
 
-    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
+DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
 
 **Description**
 
@@ -205,52 +223,52 @@ The percentage sizes of the data sets produced by the various arguments for this
 
 You can see the model's data split information in the following ways:
 
-  - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+- The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console.
+- Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
 This option accepts the following values:
 
-  - `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
-    
-      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-    
-      - If there are more than 500 rows in the input data, then data is randomized and split as follows:
-        
-          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
+- `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
 
-  - `RANDOM` : Data is randomized before being split into sets. To customize the data split, you can use this option with the [`DATA_SPLIT_EVAL_FRACTION` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . If you don't specify that option, data is split in the same way as for the `AUTO_SPLIT` option.
-    
-    A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
-    
-    > **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
+  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
 
-  - `CUSTOM` : Split data using the value provided in the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) . The `DATA_SPLIT_COL` value must be the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, and rows with a value of `FALSE` are used as training data.
+  - If there are more than 500 rows in the input data, then data is randomized and split as follows:
 
-  - `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
-    
-      - `NUMERIC`
-      - `BIGNUMERIC`
-      - `STRING`
-      - `TIMESTAMP`
-    
-    The data is sorted smallest to largest based on the specified column.
-    
-    The first n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
-    
-    All rows with split values smaller than the threshold are used as training data. The remaining rows, including those with `NULL` values, are used as evaluation data.
-    
-    Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) option to identify the column that contains the data split information.
+    - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+    - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
 
-  - `NO_SPLIT` : No data split; all input data is used as training data.
+- `RANDOM` : Data is randomized before being split into sets. To customize the data split, you can use this option with the [`DATA_SPLIT_EVAL_FRACTION` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . If you don't specify that option, data is split in the same way as for the `AUTO_SPLIT` option.
+
+  A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
+
+  > **Note:** A random split is based on the [FARM_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
+
+- `CUSTOM` : Split data using the value provided in the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) . The `DATA_SPLIT_COL` value must be the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, and rows with a value of `FALSE` are used as training data.
+
+- `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
+
+  - `NUMERIC`
+  - `BIGNUMERIC`
+  - `STRING`
+  - `TIMESTAMP`
+
+  The data is sorted smallest to largest based on the specified column.
+
+  The first ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
+
+  All rows with split values smaller than the threshold are used as training data. The remaining rows, including those with `NULL` values, are used as evaluation data.
+
+  Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) option to identify the column that contains the data split information.
+
+- `NO_SPLIT` : No data split; all input data is used as training data.
 
 ### `DATA_SPLIT_EVAL_FRACTION`
 
 **Syntax**
 
-` DATA_SPLIT_EVAL_FRACTION = data_split_eval_fraction  `
+`DATA_SPLIT_EVAL_FRACTION = `` data_split_eval_fraction`
 
 **Description**
 
@@ -264,13 +282,13 @@ A `FLOAT64` value in the range `[0, 1.0]` . The default is `0.2` . The service m
 
 **Syntax**
 
-`DATA_SPLIT_COL = ' data_split_col '`
+`DATA_SPLIT_COL = ' `` data_split_col `` '`
 
 **Description**
 
 The name of the column to use to sort input data into the training or evaluation set when performing supervised tuning. Use when you are specifying `CUSTOM` or `SEQ` as the value for `DATA_SPLIT_METHOD` .
 
-If you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
+If you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
 
 If you are specifying `CUSTOM` as the value for `DATA_SPLIT_COL` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
 
@@ -284,7 +302,9 @@ A `STRING` value.
 
 **Syntax**
 
-    EVALUATION_TASK = 'evaluation_task'
+```
+EVALUATION_TASK = 'evaluation_task'
+```
 
 **Description**
 
@@ -294,11 +314,11 @@ When performing supervised tuning, the type of task that you want to tune the mo
 
 A `STRING` value. The valid options are the following:
 
-  - `TEXT_GENERATION`
-  - `CLASSIFICATION`
-  - `SUMMARIZATION`
-  - `QUESTION_ANSWERING`
-  - `UNSPECIFIED`
+- `TEXT_GENERATION`
+- `CLASSIFICATION`
+- `SUMMARIZATION`
+- `QUESTION_ANSWERING`
+- `UNSPECIFIED`
 
 The default value is `UNSPECIFIED` .
 
@@ -306,8 +326,10 @@ The default value is `UNSPECIFIED` .
 
 **Syntax**
 
-    AS SELECT prompt_column, label_column FROM
-      `project_id.dataset.table_name`
+```
+AS SELECT prompt_column, label_column FROM
+  `project_id.dataset.table_name`
+```
 
 **Description**
 
@@ -315,18 +337,18 @@ Provides the training data to use when performing supervised tuning.
 
 **Arguments**
 
-  - `prompt_column` : The name of the column in the training data table that contains the prompt for evaluating the content in the `label_column` column. This column must be of `STRING` type or be cast to `STRING` . If you specify a value for the `PROMPT_COL` option, you must specify the same value for `prompt_column` . Otherwise this value must be `prompt` . If your table does not have a `prompt` column, use an alias to specify an existing table column. For example, `SELECT AS hint AS prompt, label FROM mydataset.mytable` .
-  - `label_column` : The name of the column in the training data table that contains the examples to train the model with. This column must be of `STRING` type or be cast to `STRING` . If you specify a value for the `INPUT_LABEL_COLS` option, you must specify the same value for `label_column` . Otherwise this value must be `label` . If your table does not have a `label` column, use an alias to specify an existing table column. For example, `SELECT AS prompt, feature AS label FROM mydataset.mytable` .
-  - `project_id` : The project ID of the project that contains the training data table.
-  - `dataset` : The dataset name of the dataset that contains the training data table. After optional data splitting, the number of rows in the training dataset has to be greater or equal to 10.
-  - `table_name` : The name of the training data table.
+- `prompt_column` : The name of the column in the training data table that contains the prompt for evaluating the content in the `label_column` column. This column must be of `STRING` type or be cast to `STRING` . If you specify a value for the `PROMPT_COL` option, you must specify the same value for `prompt_column` . Otherwise this value must be `prompt` . If your table does not have a `prompt` column, use an alias to specify an existing table column. For example, `SELECT AS hint AS prompt, label FROM mydataset.mytable` .
+- `label_column` : The name of the column in the training data table that contains the examples to train the model with. This column must be of `STRING` type or be cast to `STRING` . If you specify a value for the `INPUT_LABEL_COLS` option, you must specify the same value for `label_column` . Otherwise this value must be `label` . If your table does not have a `label` column, use an alias to specify an existing table column. For example, `SELECT AS prompt, feature AS label FROM mydataset.mytable` .
+- `project_id` : The project ID of the project that contains the training data table.
+- `dataset` : The dataset name of the dataset that contains the training data table. After optional data splitting, the number of rows in the training dataset has to be greater or equal to 10.
+- `table_name` : The name of the training data table.
 
 ### Costs
 
 When using supervised tuning with remote models over Agent Platform LLMs, costs are calculated based on the following:
 
-  - The bytes processed from the training data table specified in the [`AS SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) . These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - The number of tokens processed to tune the LLM. These charges are billed from Agent Platform to your project. For more information, see [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models) .
+- The bytes processed from the training data table specified in the [`AS SELECT` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) . These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+- The number of tokens processed to tune the LLM. These charges are billed from Agent Platform to your project. For more information, see [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models) .
 
 ## Locations
 
@@ -340,22 +362,24 @@ The following examples create BigQuery ML remote models.
 
 The following example creates a BigQuery ML remote model over a tuned version of an Agent Platform Gemini model:
 
-    CREATE OR REPLACE MODEL `mydataset.tuned_model`
-      REMOTE WITH CONNECTION `myproject.us.test_connection`
-      OPTIONS (
-        endpoint = 'gemini-2.0-flash-001',
-        max_iterations = 500,
-        prompt_col = 'prompt',
-        input_label_cols = ['label'])
-    AS
-    SELECT
-      CONCAT(
-        'Please do sentiment analysis on the following text and only output a number from 0 to 5 where 0 means sadness, 1 means joy, 2 means love, 3 means anger, 4 means fear, and 5 means surprise. Text: ',
-        sentiment_column) AS prompt,
-      text_column AS label
-    FROM `mydataset.emotion_classification_train`;
+```
+CREATE OR REPLACE MODEL `mydataset.tuned_model`
+  REMOTE WITH CONNECTION `myproject.us.test_connection`
+  OPTIONS (
+    endpoint = 'gemini-2.0-flash-001',
+    max_iterations = 500,
+    prompt_col = 'prompt',
+    input_label_cols = ['label'])
+AS
+SELECT
+  CONCAT(
+    'Please do sentiment analysis on the following text and only output a number from 0 to 5 where 0 means sadness, 1 means joy, 2 means love, 3 means anger, 4 means fear, and 5 means surprise. Text: ',
+    sentiment_column) AS prompt,
+  text_column AS label
+FROM `mydataset.emotion_classification_train`;
+```
 
 ## What's next
 
-  - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
+- For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .

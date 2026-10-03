@@ -20,8 +20,8 @@ Before working with Data 360 data, you must be a Data 360 user. If you have VPC 
 
 The following roles and permissions are required:
 
-  - Analytics Hub Subscriber ( `roles/analyticshub.subscriber` )
-  - BigQuery Admin ( `roles/bigquery.admin` )
+- Analytics Hub Subscriber ( `roles/analyticshub.subscriber` )
+- BigQuery Admin ( `roles/bigquery.admin` )
 
 ## Share Data From Data 360
 
@@ -34,15 +34,17 @@ To access a Data 360 dataset in BigQuery, you must first link the dataset to Big
 1.  In the Google Cloud console, go to the BigQuery page.
 
 2.  Click **Salesforce Data Cloud**
-    
+
     Data 360 datasets are displayed. You can find the dataset by name using the following naming pattern:
-    
-        listing_DATA_SHARE_NAME_TARGET_NAME
-    
+
+    ```
+    listing_DATA_SHARE_NAME_TARGET_NAME
+    ```
+
     Replace the following:
-    
-      - `  DATA_SHARE_NAME  ` : the name of the data share in the Data 360.
-      - `  TARGET_NAME  ` : the name of the BigQuery target in the Data 360.
+
+    - `DATA_SHARE_NAME` : the name of the data share in the Data 360.
+    - `TARGET_NAME` : the name of the BigQuery target in the Data 360.
 
 3.  Click the dataset you want to add to BigQuery.
 
@@ -52,9 +54,9 @@ To access a Data 360 dataset in BigQuery, you must first link the dataset to Big
 
 Once the linked dataset is created, you can explore the dataset and the tables in it. All of the tables' metadata is retrieved from Data 360 dynamically. All the objects inside the dataset are views that map to the Data 360 objects. BigQuery supports three types of Data 360 objects:
 
-  - Data Lake Objects (DLO)
-  - Data Model Objects (DMO)
-  - Calculated Insights Objects (CIO)
+- Data Lake Objects (DLO)
+- Data Model Objects (DMO)
+- Calculated Insights Objects (CIO)
 
 All of these objects are represented as views in BigQuery. These views point to hidden tables that are stored in Amazon S3.
 
@@ -64,51 +66,57 @@ All of these objects are represented as views in BigQuery. These views point to 
 
 The following examples use a dataset called Northwest Trail Outfitters (NTO) that is hosted in Data 360. This dataset consists of three tables that represent the online sales data of the NTO organization:
 
-  - `linked_nto_john.nto_customers__dll`
-  - `linked_nto_john.nto_products__dll`
-  - `linked_nto_john.nto_orders__dll`
+- `linked_nto_john.nto_customers__dll`
+- `linked_nto_john.nto_products__dll`
+- `linked_nto_john.nto_orders__dll`
 
 The other dataset used in these examples is offline Point of Sale data. This covers the offline sales, and consists of three tables:
 
-  - `nto_pos.customers`
-  - `nto_pos.products`
-  - `nto_pos.orders`
+- `nto_pos.customers`
+- `nto_pos.products`
+- `nto_pos.orders`
 
 The following datasets store additional objects:
 
-  - `aws_data`
-  - `us_data`
+- `aws_data`
+- `us_data`
 
 ### Run ad-hoc queries
 
 Using BigQuery Omni, you can run ad-hoc queries to analyze the Data 360 data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data 360.
 
-    SELECT name__c, age__c
-      FROM `listing_nto_john.nto_customers__dll`
-      WHERE age > 40
-      LIMIT 1000;
+```
+SELECT name__c, age__c
+  FROM `listing_nto_john.nto_customers__dll`
+  WHERE age > 40
+  LIMIT 1000;
+```
 
 ### Run BigQuery Omni queries
 
 BigQuery Omni queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about BigQuery Omni queries, see this [blog post](https://cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `john` .
 
-    -- Get combined sales for a customer from both offline and online sales
-    USING (
-      SELECT total_price FROM `listing_nto_john.nto_orders__dll`
-           WHERE customer_name = 'john'
-      UNION ALL
-      SELECT total_price FROM `listing_nto_john.nto_orders__dll`
-           WHERE customer_name = 'john'
-    ) a SELECT SUM(total_price);
+```
+-- Get combined sales for a customer from both offline and online sales
+USING (
+  SELECT total_price FROM `listing_nto_john.nto_orders__dll`
+       WHERE customer_name = 'john'
+  UNION ALL
+  SELECT total_price FROM `listing_nto_john.nto_orders__dll`
+       WHERE customer_name = 'john'
+) a SELECT SUM(total_price);
+```
 
 ### BigQuery Omni Data Transfer through CTAS
 
 You can use Create Table As Select (CTAS) to move data from Data 360 tables in the BigQuery Omni region to the `US` region.
 
-    -- Move all the orders for March to the US region
-    CREATE OR REPLACE TABLE us_data.online_orders_march
-      AS SELECT * FROM listing_nto_john.nto_orders__dll
-        WHERE EXTRACT(MONTH FROM order_time) = 3
+```
+-- Move all the orders for March to the US region
+CREATE OR REPLACE TABLE us_data.online_orders_march
+  AS SELECT * FROM listing_nto_john.nto_orders__dll
+    WHERE EXTRACT(MONTH FROM order_time) = 3
+```
 
 The destination table is a BigQuery managed table in the `US` region. This table can be joined with other tables. This operation incurs AWS egress costs based on how much data is transferred.
 
@@ -124,13 +132,15 @@ You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data.
 
 To create a local materialized view:
 
-    -- Create a local materialized view that keeps track of total sales by day
-    
-    CREATE MATERIALIZED VIEW `aws_data.total_sales`
-      OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
-      AS SELECT EXTRACT(DAY FROM order_time) AS date, SUM(order_total) as sales
-        FROM `listing_nto_john.nto_orders__dll`
-        GROUP BY 1;
+```
+-- Create a local materialized view that keeps track of total sales by day
+
+CREATE MATERIALIZED VIEW `aws_data.total_sales`
+  OPTIONS (enable_refresh = true, refresh_interval_minutes = 60)
+  AS SELECT EXTRACT(DAY FROM order_time) AS date, SUM(order_total) as sales
+    FROM `listing_nto_john.nto_orders__dll`
+    GROUP BY 1;
+```
 
 #### Authorize the materialized view
 
@@ -148,20 +158,24 @@ You must authorize materialized views to create a CCMV. You can either authorize
 
 Create a new replica materialized view in the `US` region. The materialized view periodically replicates whenever there is a source data change to keep the replica up to date.
 
-    -- Create a replica MV in the us region.
-    CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
-      AS REPLICA OF `aws_data.total_sales`;
+```
+-- Create a replica MV in the us region.
+CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
+  AS REPLICA OF `aws_data.total_sales`;
+```
 
 #### Run a query on a replica materialized view
 
 The following example runs a query on a replica materialized view:
 
-    -- Find total sales for the current month for the dashboard
-    
-    SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
-      FROM us_data.total_sales_replica
-      WHERE month = EXTRACT(MONTH FROM date)
-      GROUP BY 1
+```
+-- Find total sales for the current month for the dashboard
+
+SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
+  FROM us_data.total_sales_replica
+  WHERE month = EXTRACT(MONTH FROM date)
+  GROUP BY 1
+```
 
 ## Using Data 360 data with `INFORMATION_SCHEMA`
 
@@ -173,8 +187,8 @@ Data 360 datasets are subject to the same [limitations](https://docs.cloud.googl
 
 ## What's next
 
-  - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
+- Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
-  - Learn about [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
+- Learn about [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
 
-  - Learn about [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+- Learn about [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .

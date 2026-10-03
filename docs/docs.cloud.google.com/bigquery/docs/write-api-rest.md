@@ -20,60 +20,64 @@ For new projects, we recommend using the [BigQuery Storage Write API (gRPC)](htt
 
 3.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-4.  Grant Identity and Access Management (IAM) roles that give users the necessary permissions to perform each task in this document.
+Streaming is not available through the [free tier](https://cloud.google.com/bigquery/pricing#free-tier) . If you attempt to use streaming without enabling billing, you receive the following error: `BigQuery: Streaming insert is not allowed in the free tier.`
+
+1.  Grant Identity and Access Management (IAM) roles that give users the necessary permissions to perform each task in this document.
 
 ### Required permissions
 
 To stream data into BigQuery, you need the following IAM permissions:
 
-  - `bigquery.tables.updateData` (lets you insert data into the table)
-  - `bigquery.tables.get` (lets you obtain table metadata)
-  - `bigquery.datasets.get` (lets you obtain dataset metadata)
-  - `bigquery.tables.create` (required if you use a [template table](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template-tables) to create the table automatically)
+- `bigquery.tables.updateData` (lets you insert data into the table)
+- `bigquery.tables.get` (lets you obtain table metadata)
+- `bigquery.datasets.get` (lets you obtain dataset metadata)
+- `bigquery.tables.create` (required if you use a [template table](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template-tables) to create the table automatically)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to stream data into BigQuery:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Stream data into BigQuery
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    
-    public class BigQueryTableInsertRows
+```csharp
+using Google.Cloud.BigQuery.V2;
+
+public class BigQueryTableInsertRows
+{
+    public void TableInsertRows(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id",
+        string tableId = "your_table_id"
+    )
     {
-        public void TableInsertRows(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id",
-            string tableId = "your_table_id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        BigQueryInsertRow[] rows = new BigQueryInsertRow[]
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            BigQueryInsertRow[] rows = new BigQueryInsertRow[]
-            {
-                // The insert ID is optional, but can avoid duplicate data
-                // when retrying inserts.
-                new BigQueryInsertRow(insertId: "row1") {
-                    { "name", "Washington" },
-                    { "post_abbr", "WA" }
-                },
-                new BigQueryInsertRow(insertId: "row2") {
-                    { "name", "Colorado" },
-                    { "post_abbr", "CO" }
-                }
-            };
-            client.InsertRows(datasetId, tableId, rows);
-        }
+            // The insert ID is optional, but can avoid duplicate data
+            // when retrying inserts.
+            new BigQueryInsertRow(insertId: "row1") {
+                { "name", "Washington" },
+                { "post_abbr", "WA" }
+            },
+            new BigQueryInsertRow(insertId: "row2") {
+                { "name", "Colorado" },
+                { "post_abbr", "CO" }
+            }
+        };
+        client.InsertRows(datasetId, tableId, rows);
     }
+}
+```
 
 ### Go
 
@@ -81,51 +85,53 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // Item represents a row item.
-    type Item struct {
-     Name string
-     Age  int
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// Item represents a row item.
+type Item struct {
+    Name string
+    Age  int
+}
+
+// Save implements the ValueSaver interface.
+// This example disables best-effort de-duplication, which allows for higher throughput.
+func (i *Item) Save() (map[string]bigquery.Value, string, error) {
+    return map[string]bigquery.Value{
+        "full_name": i.Name,
+        "age":       i.Age,
+    }, bigquery.NoDedupeID, nil
+}
+
+// insertRows demonstrates inserting data into a table using the streaming insert mechanism.
+func insertRows(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %w", err)
     }
-    
-    // Save implements the ValueSaver interface.
-    // This example disables best-effort de-duplication, which allows for higher throughput.
-    func (i *Item) Save() (map[string]bigquery.Value, string, error) {
-     return map[string]bigquery.Value{
-         "full_name": i.Name,
-         "age":       i.Age,
-     }, bigquery.NoDedupeID, nil
+    defer client.Close()
+
+    inserter := client.Dataset(datasetID).Table(tableID).Inserter()
+    items := []*Item{
+        // Item implements the ValueSaver interface.
+        {Name: "Phred Phlyntstone", Age: 32},
+        {Name: "Wylma Phlyntstone", Age: 29},
     }
-    
-    // insertRows demonstrates inserting data into a table using the streaming insert mechanism.
-    func insertRows(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %w", err)
-     }
-     defer client.Close()
-    
-     inserter := client.Dataset(datasetID).Table(tableID).Inserter()
-     items := []*Item{
-         // Item implements the ValueSaver interface.
-         {Name: "Phred Phlyntstone", Age: 32},
-         {Name: "Wylma Phlyntstone", Age: 29},
-     }
-     if err := inserter.Put(ctx, items); err != nil {
-         return err
-     }
-     return nil
+    if err := inserter.Put(ctx, items); err != nil {
+        return err
     }
+    return nil
+}
+```
 
 ### Java
 
@@ -133,64 +139,66 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryError;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.InsertAllRequest;
-    import com.google.cloud.bigquery.InsertAllResponse;
-    import com.google.cloud.bigquery.TableId;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
-    
-    // Sample to inserting rows into a table without running a load job.
-    public class TableInsertRows {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        // Create a row to insert
-        Map<String, Object> rowContent = new HashMap<>();
-        rowContent.put("booleanField", true);
-        rowContent.put("numericField", "3.14");
-        // TODO(developer): Replace the row id with a unique value for each row.
-        String rowId = "ROW_ID";
-        tableInsertRows(datasetName, tableName, rowId, rowContent);
-      }
-    
-      public static void tableInsertRows(
-          String datasetName, String tableName, String rowId, Map<String, Object> rowContent) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Get table
-          TableId tableId = TableId.of(datasetName, tableName);
-    
-          // Inserts rowContent into datasetName:tableId.
-          InsertAllResponse response =
-              bigquery.insertAll(
-                  InsertAllRequest.newBuilder(tableId)
-                      // More rows can be added in the same RPC by invoking .addRow() on the builder.
-                      // You can omit the unique row ids to disable de-duplication.
-                      .addRow(rowId, rowContent)
-                      .build());
-    
-          if (response.hasErrors()) {
-            // If any of the insertions failed, this lets you inspect the errors
-            for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
-              System.out.println("Response error: \n" + entry.getValue());
-            }
-          }
-          System.out.println("Rows successfully inserted into table");
-        } catch (BigQueryException e) {
-          System.out.println("Insert operation not performed \n" + e.toString());
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryError;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.InsertAllRequest;
+import com.google.cloud.bigquery.InsertAllResponse;
+import com.google.cloud.bigquery.TableId;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+// Sample to inserting rows into a table without running a load job.
+public class TableInsertRows {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    // Create a row to insert
+    Map<String, Object> rowContent = new HashMap<>();
+    rowContent.put("booleanField", true);
+    rowContent.put("numericField", "3.14");
+    // TODO(developer): Replace the row id with a unique value for each row.
+    String rowId = "ROW_ID";
+    tableInsertRows(datasetName, tableName, rowId, rowContent);
+  }
+
+  public static void tableInsertRows(
+      String datasetName, String tableName, String rowId, Map<String, Object> rowContent) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Get table
+      TableId tableId = TableId.of(datasetName, tableName);
+
+      // Inserts rowContent into datasetName:tableId.
+      InsertAllResponse response =
+          bigquery.insertAll(
+              InsertAllRequest.newBuilder(tableId)
+                  // More rows can be added in the same RPC by invoking .addRow() on the builder.
+                  // You can omit the unique row ids to disable de-duplication.
+                  .addRow(rowId, rowContent)
+                  .build());
+
+      if (response.hasErrors()) {
+        // If any of the insertions failed, this lets you inspect the errors
+        for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
+          System.out.println("Response error: \n" + entry.getValue());
         }
       }
+      System.out.println("Rows successfully inserted into table");
+    } catch (BigQueryException e) {
+      System.out.println("Insert operation not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -198,27 +206,29 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function insertRowsAsStream() {
-      // Inserts the JSON objects into my_dataset:my_table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset';
-      // const tableId = 'my_table';
-      const rows = [
-        {name: 'Tom', age: 30},
-        {name: 'Jane', age: 32},
-      ];
-    
-      // Insert data into a table
-      await bigquery.dataset(datasetId).table(tableId).insert(rows);
-      console.log(`Inserted ${rows.length} rows`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function insertRowsAsStream() {
+  // Inserts the JSON objects into my_dataset:my_table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset';
+  // const tableId = 'my_table';
+  const rows = [
+    {name: 'Tom', age: 30},
+    {name: 'Jane', age: 32},
+  ];
+
+  // Insert data into a table
+  await bigquery.dataset(datasetId).table(tableId).insert(rows);
+  console.log(`Inserted ${rows.length} rows`);
+}
+```
 
 ### PHP
 
@@ -226,48 +236,50 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /**
-     * Stream data into bigquery
-     *
-     * @param string $projectId The project Id of your Google Cloud Project.
-     * @param string $datasetId The BigQuery dataset ID.
-     * @param string $tableId The BigQuery table ID.
-     * @param string $data Json encoded data For eg,
-     *    $data = json_encode([
-     *       "field1" => "value1",
-     *       "field2" => "value2",
-     *    ]);
-     */
-    function stream_row(
-        string $projectId,
-        string $datasetId,
-        string $tableId,
-        string $data
-    ): void {
-        // instantiate the bigquery table service
-        $bigQuery = new BigQueryClient([
-          'projectId' => $projectId,
-        ]);
-        $dataset = $bigQuery->dataset($datasetId);
-        $table = $dataset->table($tableId);
-    
-        $data = json_decode($data, true);
-        $insertResponse = $table->insertRows([
-          ['data' => $data],
-          // additional rows can go here
-        ]);
-        if ($insertResponse->isSuccessful()) {
-            print('Data streamed into BigQuery successfully' . PHP_EOL);
-        } else {
-            foreach ($insertResponse->failedRows() as $row) {
-                foreach ($row['errors'] as $error) {
-                    printf('%s: %s' . PHP_EOL, $error['reason'], $error['message']);
-                }
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/**
+ * Stream data into bigquery
+ *
+ * @param string $projectId The project Id of your Google Cloud Project.
+ * @param string $datasetId The BigQuery dataset ID.
+ * @param string $tableId The BigQuery table ID.
+ * @param string $data Json encoded data For eg,
+ *    $data = json_encode([
+ *       "field1" => "value1",
+ *       "field2" => "value2",
+ *    ]);
+ */
+function stream_row(
+    string $projectId,
+    string $datasetId,
+    string $tableId,
+    string $data
+): void {
+    // instantiate the bigquery table service
+    $bigQuery = new BigQueryClient([
+      'projectId' => $projectId,
+    ]);
+    $dataset = $bigQuery->dataset($datasetId);
+    $table = $dataset->table($tableId);
+
+    $data = json_decode($data, true);
+    $insertResponse = $table->insertRows([
+      ['data' => $data],
+      // additional rows can go here
+    ]);
+    if ($insertResponse->isSuccessful()) {
+        print('Data streamed into BigQuery successfully' . PHP_EOL);
+    } else {
+        foreach ($insertResponse->failedRows() as $row) {
+            foreach ($row['errors'] as $error) {
+                printf('%s: %s' . PHP_EOL, $error['reason'], $error['message']);
             }
         }
     }
+}
+```
 
 ### Python
 
@@ -275,24 +287,26 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of table to append to.
-    # table_id = "your-project.your_dataset.your_table"
-    
-    rows_to_insert = [
-        {"full_name": "Phred Phlyntstone", "age": 32},
-        {"full_name": "Wylma Phlyntstone", "age": 29},
-    ]
-    
-    errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
-    if errors == []:
-        print("New rows have been added.")
-    else:
-        print("Encountered errors while inserting rows: {}".format(errors))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of table to append to.
+# table_id = "your-project.your_dataset.your_table"
+
+rows_to_insert = [
+    {"full_name": "Phred Phlyntstone", "age": 32},
+    {"full_name": "Wylma Phlyntstone", "age": 29},
+]
+
+errors = client.insert_rows_json(table_id, rows_to_insert)  # Make an API request.
+if errors == []:
+    print("New rows have been added.")
+else:
+    print("Encountered errors while inserting rows: {}".format(errors))
+```
 
 ### Ruby
 
@@ -300,25 +314,27 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def table_insert_rows dataset_id = "your_dataset_id", table_id = "your_table_id"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-      table    = dataset.table table_id
-    
-      row_data = [
-        { name: "Alice", value: 5  },
-        { name: "Bob",   value: 10 }
-      ]
-      response = table.insert row_data
-    
-      if response.success?
-        puts "Inserted rows successfully"
-      else
-        puts "Failed to insert #{response.error_rows.count} rows"
-      end
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def table_insert_rows dataset_id = "your_dataset_id", table_id = "your_table_id"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+  table    = dataset.table table_id
+
+  row_data = [
+    { name: "Alice", value: 5  },
+    { name: "Bob",   value: 10 }
+  ]
+  response = table.insert row_data
+
+  if response.success?
+    puts "Inserted rows successfully"
+  else
+    puts "Failed to insert #{response.error_rows.count} rows"
+  end
+end
+```
 
 > **Note:** To specify a `NUMERIC` or `BIGNUMERIC` value in a row, you must surround the value with double quotation marks, such as `"big_numeric_col":"0.123456789123"` .
 
@@ -330,63 +346,65 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryError;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.InsertAllRequest;
-    import com.google.cloud.bigquery.InsertAllResponse;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.common.collect.ImmutableList;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
-    
-    // Sample to insert rows without row ids in a table
-    public class TableInsertRowsWithoutRowIds {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        tableInsertRowsWithoutRowIds(datasetName, tableName);
-      }
-    
-      public static void tableInsertRowsWithoutRowIds(String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          final BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-          // Create rows to insert
-          Map<String, Object> rowContent1 = new HashMap<>();
-          rowContent1.put("stringField", "Phred Phlyntstone");
-          rowContent1.put("numericField", 32);
-          Map<String, Object> rowContent2 = new HashMap<>();
-          rowContent2.put("stringField", "Wylma Phlyntstone");
-          rowContent2.put("numericField", 29);
-          InsertAllResponse response =
-              bigquery.insertAll(
-                  InsertAllRequest.newBuilder(TableId.of(datasetName, tableName))
-                      // No row ids disable de-duplication, and also disable the retries in the Java
-                      // library.
-                      .setRows(
-                          ImmutableList.of(
-                              InsertAllRequest.RowToInsert.of(rowContent1),
-                              InsertAllRequest.RowToInsert.of(rowContent2)))
-                      .build());
-    
-          if (response.hasErrors()) {
-            // If any of the insertions failed, this lets you inspect the errors
-            for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
-              System.out.println("Response error: \n" + entry.getValue());
-            }
-          }
-          System.out.println("Rows successfully inserted into table without row ids");
-        } catch (BigQueryException e) {
-          System.out.println("Insert operation not performed \n" + e.toString());
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryError;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.InsertAllRequest;
+import com.google.cloud.bigquery.InsertAllResponse;
+import com.google.cloud.bigquery.TableId;
+import com.google.common.collect.ImmutableList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+// Sample to insert rows without row ids in a table
+public class TableInsertRowsWithoutRowIds {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    tableInsertRowsWithoutRowIds(datasetName, tableName);
+  }
+
+  public static void tableInsertRowsWithoutRowIds(String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      final BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // Create rows to insert
+      Map<String, Object> rowContent1 = new HashMap<>();
+      rowContent1.put("stringField", "Phred Phlyntstone");
+      rowContent1.put("numericField", 32);
+      Map<String, Object> rowContent2 = new HashMap<>();
+      rowContent2.put("stringField", "Wylma Phlyntstone");
+      rowContent2.put("numericField", 29);
+      InsertAllResponse response =
+          bigquery.insertAll(
+              InsertAllRequest.newBuilder(TableId.of(datasetName, tableName))
+                  // No row ids disable de-duplication, and also disable the retries in the Java
+                  // library.
+                  .setRows(
+                      ImmutableList.of(
+                          InsertAllRequest.RowToInsert.of(rowContent1),
+                          InsertAllRequest.RowToInsert.of(rowContent2)))
+                  .build());
+
+      if (response.hasErrors()) {
+        // If any of the insertions failed, this lets you inspect the errors
+        for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
+          System.out.println("Response error: \n" + entry.getValue());
         }
       }
+      System.out.println("Rows successfully inserted into table without row ids");
+    } catch (BigQueryException e) {
+      System.out.println("Insert operation not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Python
 
@@ -394,33 +412,35 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of table to append to.
-    # table_id = "your-project.your_dataset.your_table"
-    
-    rows_to_insert = [
-        {"full_name": "Phred Phlyntstone", "age": 32},
-        {"full_name": "Wylma Phlyntstone", "age": 29},
-    ]
-    
-    errors = client.insert_rows_json(
-        table_id, rows_to_insert, row_ids=[None] * len(rows_to_insert)
-    )  # Make an API request.
-    if errors == []:
-        print("New rows have been added.")
-    else:
-        print("Encountered errors while inserting rows: {}".format(errors))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of table to append to.
+# table_id = "your-project.your_dataset.your_table"
+
+rows_to_insert = [
+    {"full_name": "Phred Phlyntstone", "age": 32},
+    {"full_name": "Wylma Phlyntstone", "age": 29},
+]
+
+errors = client.insert_rows_json(
+    table_id, rows_to_insert, row_ids=[None] * len(rows_to_insert)
+)  # Make an API request.
+if errors == []:
+    print("New rows have been added.")
+else:
+    print("Encountered errors while inserting rows: {}".format(errors))
+```
 
 ### Send date and time data
 
 For date and time fields, format the data in the Storage Write API (REST) as follows:
 
 | Type        | Format                                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------------------------- |
+|-------------|------------------------------------------------------------------------------------------------------------|
 | `DATE`      | A string in the form `"YYYY-MM-DD"`                                                                        |
 | `DATETIME`  | A string in the form `"YYYY-MM-DD [HH:MM:SS]"`                                                             |
 | `TIME`      | A string in the form `"HH:MM:SS"`                                                                          |
@@ -432,12 +452,14 @@ For fields with type `RANGE<T>` , format the data in the Storage Write API (REST
 
 In the following example, the `f_range_date` field represents a `RANGE<DATE>` column in a table. A row is inserted into this column using the Storage Write API (REST).
 
-    {
-        "f_range_date": {
-            "start": "1970-01-02",
-            "end": null
-        }
+```
+{
+    "f_range_date": {
+        "start": "1970-01-02",
+        "end": null
     }
+}
+```
 
 ## Stream data availability
 
@@ -474,40 +496,44 @@ To ensure that no duplicate rows exist after you are done streaming, use the fol
 1.  Add the `insertId` as a column in your table schema and include the `insertId` value in the data for each row.
 
 2.  After streaming has stopped, perform the following query to check for duplicates:
-    
-        #standardSQL
-        SELECT
-          MAX(count) FROM(
-          SELECT
-            ID_COLUMN,
-            count(*) as count
-          FROM
-            `TABLE_NAME`
-          GROUP BY
-            ID_COLUMN)
-    
+
+    ```
+    #standardSQL
+    SELECT
+      MAX(count) FROM(
+      SELECT
+        ID_COLUMN,
+        count(*) as count
+      FROM
+        `TABLE_NAME`
+      GROUP BY
+        ID_COLUMN)
+    ```
+
     If the result is greater than 1, duplicates exist.
 
 3.  To remove duplicates, run the following query. Specify a destination table, allow large results, and disable result flattening.
-    
-        #standardSQL
-        SELECT
-          * EXCEPT(row_number)
-        FROM (
-          SELECT
-            *,
-            ROW_NUMBER()
-                  OVER (PARTITION BY ID_COLUMN) row_number
-          FROM
-            `TABLE_NAME`)
-        WHERE
-          row_number = 1
+
+    ```
+    #standardSQL
+    SELECT
+      * EXCEPT(row_number)
+    FROM (
+      SELECT
+        *,
+        ROW_NUMBER()
+              OVER (PARTITION BY ID_COLUMN) row_number
+      FROM
+        `TABLE_NAME`)
+    WHERE
+      row_number = 1
+    ```
 
 Notes about the duplicate removal query:
 
-  - The safer strategy for the duplicate removal query is to target a new table. Alternatively, you can target the source table with write disposition `WRITE_TRUNCATE` .
-  - The duplicate removal query adds a `row_number` column with the value `1` to the end of the table schema. The query uses a [`SELECT * EXCEPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) statement from [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) to exclude the `row_number` column from the destination table. The `#standardSQL` prefix [enables](https://docs.cloud.google.com/bigquery/docs/introduction-sql) GoogleSQL for this query. Alternatively, you can select by specific column names to omit this column.
-  - For querying live data with duplicates removed, you can also create a view over your table using the duplicate removal query. Be aware that query costs against the view are calculated based on the columns selected in your view, which can result in large bytes scanned sizes.
+- The safer strategy for the duplicate removal query is to target a new table. Alternatively, you can target the source table with write disposition `WRITE_TRUNCATE` .
+- The duplicate removal query adds a `row_number` column with the value `1` to the end of the table schema. The query uses a [`SELECT * EXCEPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except) statement from [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) to exclude the `row_number` column from the destination table. The `#standardSQL` prefix [enables](https://docs.cloud.google.com/bigquery/docs/introduction-sql) GoogleSQL for this query. Alternatively, you can select by specific column names to omit this column.
+- For querying live data with duplicates removed, you can also create a view over your table using the duplicate removal query. Be aware that query costs against the view are calculated based on the columns selected in your view, which can result in large bytes scanned sizes.
 
 ## Stream into time-partitioned tables
 
@@ -521,7 +547,9 @@ Newly arriving data is temporarily placed in the `__UNPARTITIONED__` partition w
 
 If you are streaming data into a daily partitioned table, then you can override the date inference by supplying a partition decorator as part of the Storage Write API (REST). Include the decorator in the `tableId` parameter. For example, you can stream to the partition corresponding to 2021-03-01 for table `table1` using the partition decorator:
 
-    table1$20210301
+```
+table1$20210301
+```
 
 When streaming using a partition decorator, you can stream to partitions within the last 31 days in the past and 16 days in the future relative to the current date, based on current UTC time. To write to partitions for dates outside these allowed bounds, use a load or query job instead, as described in [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
@@ -529,7 +557,9 @@ Streaming using a partition decorator is only supported for daily partitioned ta
 
 For testing, you can use the bq command-line tool [`bq insert`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_insert) CLI command. For example, the following command streams a single row to a partition for the date January 1, 2017 ( `$20170101` ) into a partitioned table named `mydataset.mytable` :
 
-    echo '{"a":1, "b":2}' | bq insert 'mydataset.mytable$20170101'
+```
+echo '{"a":1, "b":2}' | bq insert 'mydataset.mytable$20170101'
+```
 
 > **Caution:** The `bq insert` command is intended for testing only.
 
@@ -539,7 +569,7 @@ You can stream data into a table partitioned on a `DATE` , `DATETIME` , or `TIME
 
 When the data is streamed, it is initially placed in the `__UNPARTITIONED__` partition. When there's enough unpartitioned data, BigQuery automatically repartitions the data, placing it into the appropriate partition. However, there is no SLA for how long it takes for data to move out of the `__UNPARTITIONED__` partition.
 
-  - Note: Daily partitions are processed differently than hourly, monthly and yearly partitions. Only data outside of the date range (last 7 days to future 3 days) is extracted to the UNPARTITIONED partition, waiting to be repartitioned. On the other hand, for hourly partitioned table, data is always extracted to the UNPARTITIONED partition, and later repartitioned.
+- Note: Daily partitions are processed differently than hourly, monthly and yearly partitions. Only data outside of the date range (last 7 days to future 3 days) is extracted to the UNPARTITIONED partition, waiting to be repartitioned. On the other hand, for hourly partitioned table, data is always extracted to the UNPARTITIONED partition, and later repartitioned.
 
 ## Create tables automatically using template tables
 
@@ -547,7 +577,9 @@ When the data is streamed, it is initially placed in the `__UNPARTITIONED__` par
 
 To use a template table through the BigQuery API, add a `templateSuffix` parameter to your Storage Write API (REST) request. For the bq command-line tool, add the `template_suffix` flag to your `insert` command. If BigQuery detects a `templateSuffix` parameter or the `template_suffix` flag, it treats the targeted table as a base template. It creates a new table that shares the same schema as the targeted table and has a name that includes the specified suffix:
 
-    <targeted_table_name> + <templateSuffix>
+```
+<targeted_table_name> + <templateSuffix>
+```
 
 By using a template table, you avoid the overhead of creating each table individually and specifying the schema for each table. You need only create a single template, and supply different suffixes so that BigQuery can create the new tables for you. BigQuery places the tables in the same project and dataset.
 
@@ -567,22 +599,22 @@ If you want to change a generated table's schema, don't change the schema until 
 
 ### Template table details
 
-  - Template suffix value  
-    The `templateSuffix` (or `--template_suffix` ) value must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum combined length of the table name and the table suffix is 1024 characters.
+Template suffix value  
+The `templateSuffix` (or `--template_suffix` ) value must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_). The maximum combined length of the table name and the table suffix is 1024 characters.
 
-  - Quota  
-    Template tables are subject to [streaming quota](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) limitations. Your project can make up to 10 tables per second with template tables, similar to the [`tables.insert`](https://docs.cloud.google.com/bigquery/quotas#tables.insert_calls_per_second) API. This quota only applies to tables being created, not to tables being modified.
-    
-    If your application needs to create more than 10 tables per second, we recommend using [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . For example, you can put the high cardinality table ID into the key column of a single clustering table.
+Quota  
+Template tables are subject to [streaming quota](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) limitations. Your project can make up to 10 tables per second with template tables, similar to the [`tables.insert`](https://docs.cloud.google.com/bigquery/quotas#tables.insert_calls_per_second) API. This quota only applies to tables being created, not to tables being modified.
 
-  - Time to live  
-    The generated table inherits its expiration time from the dataset. As with normal streaming data, generated tables cannot be copied immediately.
+If your application needs to create more than 10 tables per second, we recommend using [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . For example, you can put the high cardinality table ID into the key column of a single clustering table.
 
-  - Deduplication  
-    Deduplication only happens between uniform references to a destination table. For example, if you simultaneously stream to a generated table using both template tables and a regular Storage Write API (REST) command, no deduplication occurs between rows inserted by template tables and a regular Storage Write API (REST) command.
+Time to live  
+The generated table inherits its expiration time from the dataset. As with normal streaming data, generated tables cannot be copied immediately.
 
-  - Views  
-    The template table and the generated tables shouldn't be views.
+Deduplication  
+Deduplication only happens between uniform references to a destination table. For example, if you simultaneously stream to a generated table using both template tables and a regular Storage Write API (REST) command, no deduplication occurs between rows inserted by template tables and a regular Storage Write API (REST) command.
+
+Views  
+The template table and the generated tables shouldn't be views.
 
 ## Troubleshoot streaming inserts
 
@@ -598,9 +630,9 @@ If you receive a permission error, an invalid table name error, or an exceeded q
 
 Even if you receive a [success HTTP response code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#response-body) , you must check the `insertErrors` property of the response to determine whether the row insertions were successful, because BigQuery might be only partially successful at inserting the rows. You might encounter one of the following scenarios:
 
-  - **All rows inserted successfully:** If the `insertErrors` property is an empty list, all of the rows were inserted successfully.
-  - **Some rows inserted successfully:** Except in cases where there's a schema mismatch in any of the rows, rows indicated in the `insertErrors` property aren't inserted, and all other rows are inserted successfully. The `errors` property contains detailed information about why each unsuccessful row failed. The `index` property indicates the 0-based row index of the request that the error applies to.
-  - **No rows inserted successfully:** If BigQuery encounters a schema mismatch on individual rows in the request, none of the rows are inserted and an `insertErrors` entry is returned for each row, even for rows that didn't have a schema mismatch. Rows that didn't have a schema mismatch have an error with the `reason` property set to `stopped` , and you can resend them as-is. Rows that failed include detailed information about the schema mismatch. To learn about the supported protocol buffer types for each BigQuery data type, see [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types) .
+- **All rows inserted successfully:** If the `insertErrors` property is an empty list, all of the rows were inserted successfully.
+- **Some rows inserted successfully:** Except in cases where there's a schema mismatch in any of the rows, rows indicated in the `insertErrors` property aren't inserted, and all other rows are inserted successfully. The `errors` property contains detailed information about why each unsuccessful row failed. The `index` property indicates the 0-based row index of the request that the error applies to.
+- **No rows inserted successfully:** If BigQuery encounters a schema mismatch on individual rows in the request, none of the rows are inserted and an `insertErrors` entry is returned for each row, even for rows that didn't have a schema mismatch. Rows that didn't have a schema mismatch have an error with the `reason` property set to `stopped` , and you can resend them as-is. Rows that failed include detailed information about the schema mismatch. To learn about the supported protocol buffer types for each BigQuery data type, see [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types) .
 
 ### Metadata errors for streaming inserts
 
@@ -608,15 +640,13 @@ Because the BigQuery streaming API is designed for high insertion rates, modific
 
 Some scenarios include the following:
 
-  - **Schema changes:** Modifying the schema of a table that recently received streaming inserts can cause responses with schema mismatch errors because the streaming system might not immediately detect the schema change.
-  - **Table creation or deletion:** Streaming to a nonexistent table returns a variation of a `notFound` response. A table created in response might not immediately be recognized by subsequent streaming inserts. Similarly, deleting or recreating a table can create a period of time where streaming inserts are delivered to the old table. The streaming inserts might not be present in the new table.
-  - **Table truncation:** Truncating a table's data (by using a query job that uses a `writeDisposition` value of `WRITE_TRUNCATE` ) can similarly cause subsequent inserts during the consistency period to be dropped.
+- **Schema changes:** Modifying the schema of a table that recently received streaming inserts can cause responses with schema mismatch errors because the streaming system might not immediately detect the schema change.
+- **Table creation or deletion:** Streaming to a nonexistent table returns a variation of a `notFound` response. A table created in response might not immediately be recognized by subsequent streaming inserts. Similarly, deleting or recreating a table can create a period of time where streaming inserts are delivered to the old table. The streaming inserts might not be present in the new table.
+- **Table truncation:** Truncating a table's data (by using a query job that uses a `writeDisposition` value of `WRITE_TRUNCATE` ) can similarly cause subsequent inserts during the consistency period to be dropped.
 
 ### Missing or unavailable data
 
 Streaming inserts reside temporarily in write-optimized storage, which has different availability characteristics than managed storage. Certain operations in BigQuery don't interact with write-optimized storage, such as table copy jobs and API methods like `tabledata.list` . Recent streaming data isn't present in the destination table or output.
-
-<span id="ts-streaming-insert-quota"></span>
 
 ### Streaming insert quota errors
 
@@ -628,17 +658,17 @@ In certain regions, streaming inserts have a higher quota if you don't populate 
 
 If the `insertId` field is empty, the following quota error is possible:
 
-| Quota limit                  | Error message                                                                                                            |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Bytes per second per project | Your entity with gaia\_id: GAIA\_ID , project: PROJECT\_ID in region: REGION exceeded quota for insert bytes per second. |
+| Quota limit                  | Error message                                                                                                                     |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Bytes per second per project | Your entity with gaia_id: ` GAIA_ID ` , project: ` PROJECT_ID ` in region: ` REGION ` exceeded quota for insert bytes per second. |
 
 If the `insertId` field is populated, the following quota errors are possible:
 
-| Quota limit                 | Error message                                                                            |
-| --------------------------- | ---------------------------------------------------------------------------------------- |
-| Rows per second per project | Your project: PROJECT\_ID in REGION exceeded quota for streaming insert rows per second. |
-| Rows per second per table   | Your table: TABLE\_ID exceeded quota for streaming insert rows per second.               |
-| Bytes per second per table  | Your table: TABLE\_ID exceeded quota for streaming insert bytes per second.              |
+| Quota limit                 | Error message                                                                                   |
+|-----------------------------|-------------------------------------------------------------------------------------------------|
+| Rows per second per project | Your project: ` PROJECT_ID ` in ` REGION ` exceeded quota for streaming insert rows per second. |
+| Rows per second per table   | Your table: ` TABLE_ID ` exceeded quota for streaming insert rows per second.                   |
+| Bytes per second per table  | Your table: ` TABLE_ID ` exceeded quota for streaming insert bytes per second.                  |
 
 The purpose of the `insertId` field is to deduplicate inserted rows. If multiple inserts with the same `insertId` arrive within a few minutes' window, BigQuery writes a single version of the record. However, this automatic deduplication is not guaranteed. For maximum streaming throughput, we recommend that you don't include `insertId` and instead use [manual deduplication](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) . For more information, see [Ensuring data consistency](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataconsistency) .
 
@@ -652,33 +682,35 @@ Depending on the specific quota limit that was reached, look at `total_rows` or 
 
 For example, the following query shows total bytes ingested per minute, and the total number of quota errors:
 
-    SELECT
-     start_timestamp,
-     error_code,
-     SUM(total_input_bytes) as sum_input_bytes,
-     SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
-         total_requests, 0)) AS quota_error
-    FROM
-     `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
-    WHERE
-      start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
-    GROUP BY
-     start_timestamp,
-     error_code
-    ORDER BY 1 DESC
+```
+SELECT
+ start_timestamp,
+ error_code,
+ SUM(total_input_bytes) as sum_input_bytes,
+ SUM(IF(error_code IN ('QUOTA_EXCEEDED', 'RATE_LIMIT_EXCEEDED'),
+     total_requests, 0)) AS quota_error
+FROM
+ `region-REGION_NAME`.INFORMATION_SCHEMA.STREAMING_TIMELINE_BY_PROJECT
+WHERE
+  start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY)
+GROUP BY
+ start_timestamp,
+ error_code
+ORDER BY 1 DESC
+```
 
 #### Resolution
 
 To resolve this quota error, do the following:
 
-  - If you are using the `insertId` field for deduplication, and your project is in a region that supports the higher streaming quota, we recommend removing the `insertId` field. This solution might require some additional steps to manually deduplicate the data. For more information, see [Manually removing duplicates](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) .
+- If you are using the `insertId` field for deduplication, and your project is in a region that supports the higher streaming quota, we recommend removing the `insertId` field. This solution might require some additional steps to manually deduplicate the data. For more information, see [Manually removing duplicates](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#manually_removing_duplicates) .
 
-  - If you are not using `insertId` , or if it's not feasible to remove it, monitor your streaming traffic over a 24-hour period and analyze the quota errors:
-    
-      - If you see mostly `RATE_LIMIT_EXCEEDED` errors rather than `QUOTA_EXCEEDED` errors, and your overall traffic is less than 80% of quota, the errors probably indicate temporary spikes. You can address these errors by retrying the operation using exponential backoff between retries.
-    
-      - If you are using a Dataflow job to insert data, consider using load jobs instead of streaming inserts. For more information, see [Setting the insertion method](https://beam.apache.org/documentation/io/built-in/google-bigquery/#setting-the-insertion-method) . If you are using Dataflow with a custom I/O connector, consider using a built-in I/O connector instead. For more information, see [Custom I/O patterns](https://beam.apache.org/documentation/patterns/custom-io/) .
-    
-      - If you see `QUOTA_EXCEEDED` errors or the overall traffic consistently exceeds 80% of the quota, submit a request for a quota increase. For more information, see [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
-    
-      - You might also want to consider replacing streaming inserts with the newer [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which has higher throughput, lower price, and many useful features.
+- If you are not using `insertId` , or if it's not feasible to remove it, monitor your streaming traffic over a 24-hour period and analyze the quota errors:
+
+  - If you see mostly `RATE_LIMIT_EXCEEDED` errors rather than `QUOTA_EXCEEDED` errors, and your overall traffic is less than 80% of quota, the errors probably indicate temporary spikes. You can address these errors by retrying the operation using exponential backoff between retries.
+
+  - If you are using a Dataflow job to insert data, consider using load jobs instead of streaming inserts. For more information, see [Setting the insertion method](https://beam.apache.org/documentation/io/built-in/google-bigquery/#setting-the-insertion-method) . If you are using Dataflow with a custom I/O connector, consider using a built-in I/O connector instead. For more information, see [Custom I/O patterns](https://beam.apache.org/documentation/patterns/custom-io/) .
+
+  - If you see `QUOTA_EXCEEDED` errors or the overall traffic consistently exceeds 80% of the quota, submit a request for a quota increase. For more information, see [Request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) .
+
+  - You might also want to consider replacing streaming inserts with the newer [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which has higher throughput, lower price, and many useful features.

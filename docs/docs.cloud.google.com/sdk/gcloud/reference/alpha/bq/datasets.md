@@ -12,7 +12,7 @@ gcloud alpha bq datasets - manage Google BigQuery datasets
 
 SYNOPSIS
 
-`gcloud alpha bq datasets` `  GROUP  ` | `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq datasets` [`GROUP`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets#GROUP) \| [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,31 +20,35 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 GROUPS
 
-`  GROUP  ` is one of the following:
+`GROUP` is one of the following:
 
-  - `  config  `  
-    `(ALPHA)` Manage Google BigQuery dataset configurations.
+[`config`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/config)  
+`(ALPHA)` Manage Google BigQuery dataset configurations.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  create  `  
-    `(ALPHA)` Create a new BigQuery dataset.
-  - `  delete  `  
-    `(ALPHA)` Delete a BigQuery dataset.
-  - `  describe  `  
-    `(ALPHA)` Describe a BigQuery dataset.
-  - `  list  `  
-    `(ALPHA)` List all BigQuery datasets in a project.
-  - `  update  `  
-    `(ALPHA)` Update a BigQuery dataset.
+[`create`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create)  
+`(ALPHA)` Create a new BigQuery dataset.
+
+[`delete`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/delete)  
+`(ALPHA)` Delete a BigQuery dataset.
+
+[`describe`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/describe)  
+`(ALPHA)` Describe a BigQuery dataset.
+
+[`list`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/list)  
+`(ALPHA)` List all BigQuery datasets in a project.
+
+[`update`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/update)  
+`(ALPHA)` Update a BigQuery dataset.
 
 NOTES
 

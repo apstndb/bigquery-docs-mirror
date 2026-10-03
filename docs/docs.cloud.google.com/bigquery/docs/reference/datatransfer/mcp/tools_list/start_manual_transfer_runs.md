@@ -20,34 +20,24 @@ If the location isn't explicitly specified, and it can't be determined from the 
 
 The following code sample shows how to use `curl` to call the `start_manual_transfer_runs` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;start_manual_transfer_runs&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerydatatransfer.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "start_manual_transfer_runs",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -55,125 +45,98 @@ A request to start manual transfer runs.
 
 ### StartManualTransferRunsRequest
 
+**JSON representation**
+
+```
+{
+  "parent": string,
+
+  // Union field time can be only one of the following:
+  "requestedTimeRange": {
+    object (TimeRange)
+  },
+  "requestedRunTime": string
+  // End of list of possible types for union field time.
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;parent&quot;: string,// Union field time can be only one of the following:&quot;requestedTimeRange&quot;: {object (TimeRange)},&quot;requestedRunTime&quot;: string// End of list of possible types for union field time.}</code></pre></td>
+<td><code>parent</code></td>
+<td><p><code>string</code></p>
+<p>Required. Transfer configuration name. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/transferConfigs/{config_id}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}</code></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Union field <code>time</code> . The requested time specification - this can be a time range or a specific run_time. <code>time</code> can be only one of the following:</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>requestedTimeRange</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs#Input.Schema.TimeRange"><code>TimeRange</code></a><code> )</code></p>
+<p>A time_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested_time_range must be a past time and cannot include future time values.</p></td>
+</tr>
+<tr class="even">
+<td><code>requestedRunTime</code></td>
+<td><p><code>string ( </code><a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp"><code>Timestamp</code></a><code> format)</code></p>
+<p>A run_time timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested_run_time must be a past time and cannot include future time values.</p>
+<p>Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: <code>"2014-10-02T15:01:23Z"</code> , <code>"2014-10-02T15:01:23.045123456Z"</code> or <code>"2014-10-02T15:01:23+05:30"</code> .</p></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`parent`
-
-`string`
-
-Required. Transfer configuration name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{project_id}/transferConfigs/{config_id}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
-
-Union field `time` . The requested time specification - this can be a time range or a specific run\_time. `time` can be only one of the following:
-
-`requestedTimeRange`
-
-` object ( TimeRange  ` )
-
-A time\_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested\_time\_range must be a past time and cannot include future time values.
-
-`requestedRunTime`
-
-` string ( Timestamp  ` format)
-
-A run\_time timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested\_run\_time must be a past time and cannot include future time values.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
 
 ### TimeRange
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;startTime&quot;: string,
-  &quot;endTime&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "startTime": string,
+  "endTime": string
+}
+```
 
-`startTime`
-
-` string ( Timestamp  ` format)
-
-Start time of the range of transfer runs. For example, `"2017-05-25T00:00:00+00:00"` . The start\_time must be strictly less than the end\_time. Creates transfer runs where run\_time is in the range between start\_time (inclusive) and end\_time (exclusive).
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`endTime`
-
-` string ( Timestamp  ` format)
-
-End time of the range of transfer runs. For example, `"2017-05-30T00:00:00+00:00"` . The end\_time must not be in the future. Creates transfer runs where run\_time is in the range between start\_time (inclusive) and end\_time (exclusive).
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
+| Fields      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `startTime` | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Start time of the range of transfer runs. For example, `"2017-05-25T00:00:00+00:00"` . The start_time must be strictly less than the end_time. Creates transfer runs where run_time is in the range between start_time (inclusive) and end_time (exclusive). Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` . |
+| `endTime`   | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` End time of the range of transfer runs. For example, `"2017-05-30T00:00:00+00:00"` . The end_time must not be in the future. Creates transfer runs where run_time is in the range between start_time (inclusive) and end_time (exclusive). Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                   |
 
 ### Timestamp
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;seconds&quot;: string,
-  &quot;nanos&quot;: integer
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "seconds": string,
+  "nanos": integer
+}
+```
 
-`seconds`
-
-`string ( int64 format)`
-
-Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
-
-`nanos`
-
-`integer`
-
-Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive.
+| Fields    |                                                                                                                                                                                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `seconds` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).                            |
+| `nanos`   | `integer` Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive. |
 
 ## Output Schema
 
@@ -181,501 +144,244 @@ A response to start manual transfer runs.
 
 ### StartManualTransferRunsResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;runs&quot;: [{object (TransferRun)}]}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "runs": [
+    {
+      object (TransferRun)
+    }
+  ]
+}
+```
 
-`runs[]`
-
-` object ( TransferRun  ` )
-
-The transfer runs that were created.
+| Fields   |                                                                                                                                                                                                             |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `runs[]` | `object ( `[`TransferRun`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs#Output.Schema.TransferRun)` )` The transfer runs that were created. |
 
 ### TransferRun
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;scheduleTime&quot;: string,&quot;runTime&quot;: string,&quot;errorStatus&quot;: {object (Status)},&quot;startTime&quot;: string,&quot;endTime&quot;: string,&quot;updateTime&quot;: string,&quot;params&quot;: {object},&quot;dataSourceId&quot;: string,&quot;state&quot;: enum (TransferState),&quot;userId&quot;: string,&quot;schedule&quot;: string,&quot;notificationPubsubTopic&quot;: string,&quot;emailPreferences&quot;: {object (EmailPreferences)},&quot;parameterConfig&quot;: {object (ParameterConfig)},// Union field destination can be only one of the following:&quot;destinationDatasetId&quot;: string// End of list of possible types for union field destination.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "name": string,
+  "scheduleTime": string,
+  "runTime": string,
+  "errorStatus": {
+    object (Status)
+  },
+  "startTime": string,
+  "endTime": string,
+  "updateTime": string,
+  "params": {
+    object
+  },
+  "dataSourceId": string,
+  "state": enum (TransferState),
+  "userId": string,
+  "schedule": string,
+  "notificationPubsubTopic": string,
+  "emailPreferences": {
+    object (EmailPreferences)
+  },
+  "parameterConfig": {
+    object (ParameterConfig)
+  },
 
-`name`
+  // Union field destination can be only one of the following:
+  "destinationDatasetId": string
+  // End of list of possible types for union field destination.
+}
+```
 
-`string`
-
-Identifier. The resource name of the transfer run. Transfer run names have the form `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}` . The name is ignored when creating a transfer run.
-
-`scheduleTime`
-
-` string ( Timestamp  ` format)
-
-Minimum time after which a transfer run can be started.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`runTime`
-
-` string ( Timestamp  ` format)
-
-For batch transfer runs, specifies the date and time of the data should be ingested.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`errorStatus`
-
-` object ( Status  ` )
-
-Status of the transfer run.
-
-`startTime`
-
-` string ( Timestamp  ` format)
-
-Output only. Time when transfer run was started. Parameter ignored by server for input requests.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`endTime`
-
-` string ( Timestamp  ` format)
-
-Output only. Time when transfer run ended. Parameter ignored by server for input requests.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`updateTime`
-
-` string ( Timestamp  ` format)
-
-Output only. Last time the data transfer run state was updated.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`params`
-
-` object ( Struct  ` format)
-
-Output only. Parameters specific to each data source. For more information see the bq tab in the 'Setting up a data transfer' section for each data source. For example the parameters for Cloud Storage transfers are listed here: <https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq>
-
-`dataSourceId`
-
-`string`
-
-Output only. Data source id.
-
-`state`
-
-` enum ( TransferState  ` )
-
-Data transfer run state. Ignored for input requests.
-
-`userId`
-
-`string ( int64 format)`
-
-Deprecated. Unique ID of the user on whose behalf transfer is done.
-
-`schedule`
-
-`string`
-
-Output only. Describes the schedule of this transfer run if it was created as part of a regular schedule. For batch transfer runs that are scheduled manually, this is empty. NOTE: the system might choose to delay the schedule depending on the current load, so `schedule_time` doesn't always match this.
-
-`notificationPubsubTopic`
-
-`string`
-
-Output only. Pub/Sub topic where a notification will be sent after this transfer run finishes.
-
-The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topic_id}`
-
-`emailPreferences`
-
-` object ( EmailPreferences  ` )
-
-Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.
-
-`parameterConfig`
-
-` object ( ParameterConfig  ` )
-
-Output only. The parameter config of the transfer run.
-
-Union field `destination` . Data transfer destination. `destination` can be only one of the following:
-
-`destinationDatasetId`
-
-`string`
-
-Output only. The BigQuery target dataset id.
+| Fields                                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`                                                                                                 | `string` Identifier. The resource name of the transfer run. Transfer run names have the form `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}` . The name is ignored when creating a transfer run.                                                                                                                                                                                                                                |
+| `scheduleTime`                                                                                         | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Minimum time after which a transfer run can be started. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                                          |
+| `runTime`                                                                                              | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` For batch transfer runs, specifies the date and time of the data should be ingested. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .             |
+| `errorStatus`                                                                                          | `object ( `[`Status`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config#Output.Schema.Status)` )` Status of the transfer run.                                                                                                                                                                                                                                                                                   |
+| `startTime`                                                                                            | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. Time when transfer run was started. Parameter ignored by server for input requests. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` . |
+| `endTime`                                                                                              | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. Time when transfer run ended. Parameter ignored by server for input requests. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .       |
+| `updateTime`                                                                                           | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Output only. Last time the data transfer run state was updated. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .                                  |
+| `params`                                                                                               | `object ( `[`Struct`](https://protobuf.dev/reference/protobuf/google.protobuf/#struct)` format)` Output only. Parameters specific to each data source. For more information see the bq tab in the 'Setting up a data transfer' section for each data source. For example the parameters for Cloud Storage transfers are listed here: <https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq>                                                       |
+| `dataSourceId`                                                                                         | `string` Output only. Data source id.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `state`                                                                                                | `enum ( `[`TransferState`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config#Output.Schema.TransferState)` )` Data transfer run state. Ignored for input requests.                                                                                                                                                                                                                                              |
+| `userId`                                                                                               | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Deprecated. Unique ID of the user on whose behalf transfer is done.                                                                                                                                                                                                                                                                                                             |
+| `schedule`                                                                                             | `string` Output only. Describes the schedule of this transfer run if it was created as part of a regular schedule. For batch transfer runs that are scheduled manually, this is empty. NOTE: the system might choose to delay the schedule depending on the current load, so `schedule_time` doesn't always match this.                                                                                                                                                |
+| `notificationPubsubTopic`                                                                              | `string` Output only. Pub/Sub topic where a notification will be sent after this transfer run finishes. The format for specifying a pubsub topic is: `projects/{project_id}/topics/{topic_id}`                                                                                                                                                                                                                                                                         |
+| `emailPreferences`                                                                                     | `object ( `[`EmailPreferences`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config#Input.Schema.EmailPreferences)` )` Output only. Email notifications will be sent according to these preferences to the email address of the user who owns the transfer config this run was derived from.                                                                                                                      |
+| `parameterConfig`                                                                                      | `object ( `[`ParameterConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config#Input.Schema.ParameterConfig)` )` Output only. The parameter config of the transfer run.                                                                                                                                                                                                                                       |
+| Union field `destination` . Data transfer destination. `destination` can be only one of the following: |                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `destinationDatasetId`                                                                                 | `string` Output only. The BigQuery target dataset id.                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
 ### Timestamp
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;seconds&quot;: string,
-  &quot;nanos&quot;: integer
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "seconds": string,
+  "nanos": integer
+}
+```
 
-`seconds`
-
-`string ( int64 format)`
-
-Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
-
-`nanos`
-
-`integer`
-
-Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive.
+| Fields    |                                                                                                                                                                                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `seconds` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).                            |
+| `nanos`   | `integer` Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive. |
 
 ### Status
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;code&quot;: integer,
-  &quot;message&quot;: string,
-  &quot;details&quot;: [
+**JSON representation**
+
+```
+{
+  "code": integer,
+  "message": string,
+  "details": [
     {
-      &quot;@type&quot;: string,
+      "@type": string,
       field1: ...,
       ...
     }
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`code`
-
-`integer`
-
-The status code, which should be an enum value of `google.rpc.Code` .
-
-`message`
-
-`string`
-
-A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the `google.rpc.Status.details` field, or localized by the client.
-
-`details[]`
-
-`object`
-
-A list of messages that carry the error details. There is a common set of message types for APIs to use.
-
-An object containing fields of an arbitrary type. An additional field `"@type"` contains a URI identifying the type. Example: `{ "id": 1234, "@type": "types.example.com/standard/id" }` .
+| Fields      |                                                                                                                                                                                                                                                                                                              |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `code`      | `integer` The status code, which should be an enum value of `google.rpc.Code` .                                                                                                                                                                                                                              |
+| `message`   | `string` A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the `google.rpc.Status.details` field, or localized by the client.                                                                                                      |
+| `details[]` | `object` A list of messages that carry the error details. There is a common set of message types for APIs to use. An object containing fields of an arbitrary type. An additional field `"@type"` contains a URI identifying the type. Example: `{ "id": 1234, "@type": "types.example.com/standard/id" }` . |
 
 ### Any
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;typeUrl&quot;: string,
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "typeUrl": string,
+  "value": string
+}
+```
 
-`typeUrl`
-
-`string`
-
-Identifies the type of the serialized Protobuf message with a URI reference consisting of a prefix ending in a slash and the fully-qualified type name.
-
-Example: type.googleapis.com/google.protobuf.StringValue
-
-This string must contain at least one `/` character, and the content after the last `/` must be the fully-qualified name of the type in canonical form, without a leading dot. Do not write a scheme on these URI references so that clients do not attempt to contact them.
-
-The prefix is arbitrary and Protobuf implementations are expected to simply strip off everything up to and including the last `/` to identify the type. `type.googleapis.com/` is a common default prefix that some legacy implementations require. This prefix does not indicate the origin of the type, and URIs containing it are not expected to respond to any requests.
-
-All type URL strings must be legal URI references with the additional restriction (for the text format) that the content of the reference must consist only of alphanumeric characters, percent-encoded escapes, and characters in the following set (not including the outer backticks): `/-.~_!$&()*+,;=` . Despite our allowing percent encodings, implementations should not unescape them to prevent confusion with existing parsers. For example, `type.googleapis.com%2FFoo` should be rejected.
-
-In the original design of `Any` , the possibility of launching a type resolution service at these type URLs was considered but Protobuf never implemented one and considers contacting these URLs to be problematic and a potential security issue. Do not attempt to contact type URLs.
-
-`value`
-
-`string ( bytes format)`
-
-Holds a Protobuf serialization of the type described by type\_url.
-
-A base64-encoded string.
+| Fields    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `typeUrl` | `string` Identifies the type of the serialized Protobuf message with a URI reference consisting of a prefix ending in a slash and the fully-qualified type name. Example: type.googleapis.com/google.protobuf.StringValue This string must contain at least one `/` character, and the content after the last `/` must be the fully-qualified name of the type in canonical form, without a leading dot. Do not write a scheme on these URI references so that clients do not attempt to contact them. The prefix is arbitrary and Protobuf implementations are expected to simply strip off everything up to and including the last `/` to identify the type. `type.googleapis.com/` is a common default prefix that some legacy implementations require. This prefix does not indicate the origin of the type, and URIs containing it are not expected to respond to any requests. All type URL strings must be legal URI references with the additional restriction (for the text format) that the content of the reference must consist only of alphanumeric characters, percent-encoded escapes, and characters in the following set (not including the outer backticks): `/-.~_!$&()*+,;=` . Despite our allowing percent encodings, implementations should not unescape them to prevent confusion with existing parsers. For example, `type.googleapis.com%2FFoo` should be rejected. In the original design of `Any` , the possibility of launching a type resolution service at these type URLs was considered but Protobuf never implemented one and considers contacting these URLs to be problematic and a potential security issue. Do not attempt to contact type URLs. |
+| `value`   | `string ( `[`bytes`](https://developers.google.com/discovery/v1/type-format)` format)` Holds a Protobuf serialization of the type described by type_url. A base64-encoded string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Struct
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;fields&quot;: {
+**JSON representation**
+
+```
+{
+  "fields": {
     string: value,
     ...
   }
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`fields`
-
-` map (key: string, value: value ( Value  ` format))
-
-Unordered map of dynamically typed values.
-
-An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+| Fields   |                                                                                                                                                                                                                                                                                          |
+|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields` | `map (key: string, value: value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format))` Unordered map of dynamically typed values. An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` . |
 
 ### FieldsEntry
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;key&quot;: string,
-  &quot;value&quot;: value
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "key": string,
+  "value": value
+}
+```
 
-`key`
-
-`string`
-
-`value`
-
-` value ( Value  ` format)
+| Fields  |                                                                                               |
+|---------|-----------------------------------------------------------------------------------------------|
+| `key`   | `string`                                                                                      |
+| `value` | `value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format)` |
 
 ### Value
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field kind can be only one of the following:&quot;nullValue&quot;: null,&quot;numberValue&quot;: number,&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;structValue&quot;: {object},&quot;listValue&quot;: array// End of list of possible types for union field kind.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-Union field `kind` . The kind of value. `kind` can be only one of the following:
+  // Union field kind can be only one of the following:
+  "nullValue": null,
+  "numberValue": number,
+  "stringValue": string,
+  "boolValue": boolean,
+  "structValue": {
+    object
+  },
+  "listValue": array
+  // End of list of possible types for union field kind.
+}
+```
 
-`nullValue`
-
-`null`
-
-Represents a JSON `null` .
-
-`numberValue`
-
-`number`
-
-Represents a JSON number. Must not be `NaN` , `Infinity` or `-Infinity` , since those are not supported in JSON. This also cannot represent large Int64 values, since JSON format generally does not support them in its number type.
-
-`stringValue`
-
-`string`
-
-Represents a JSON string.
-
-`boolValue`
-
-`boolean`
-
-Represents a JSON boolean ( `true` or `false` literal in JSON).
-
-`structValue`
-
-` object ( Struct  ` format)
-
-Represents a JSON object.
-
-`listValue`
-
-` array ( ListValue  ` format)
-
-Represents a JSON array.
+| Fields                                                                           |                                                                                                                                                                                                                                                |
+|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Union field `kind` . The kind of value. `kind` can be only one of the following: |                                                                                                                                                                                                                                                |
+| `nullValue`                                                                      | `null` Represents a JSON `null` .                                                                                                                                                                                                              |
+| `numberValue`                                                                    | `number` Represents a JSON number. Must not be `NaN` , `Infinity` or `-Infinity` , since those are not supported in JSON. This also cannot represent large Int64 values, since JSON format generally does not support them in its number type. |
+| `stringValue`                                                                    | `string` Represents a JSON string.                                                                                                                                                                                                             |
+| `boolValue`                                                                      | `boolean` Represents a JSON boolean ( `true` or `false` literal in JSON).                                                                                                                                                                      |
+| `structValue`                                                                    | `object ( `[`Struct`](https://protobuf.dev/reference/protobuf/google.protobuf/#struct)` format)` Represents a JSON object.                                                                                                                     |
+| `listValue`                                                                      | `array ( `[`ListValue`](https://protobuf.dev/reference/protobuf/google.protobuf/#list-value)` format)` Represents a JSON array.                                                                                                                |
+|                                                                                  |                                                                                                                                                                                                                                                |
 
 ### ListValue
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;values&quot;: [
+**JSON representation**
+
+```
+{
+  "values": [
     value
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`values[]`
-
-` value ( Value  ` format)
-
-Repeated field of dynamically typed values.
+| Fields     |                                                                                                                                           |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `values[]` | `value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format)` Repeated field of dynamically typed values. |
 
 ### EmailPreferences
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;enableFailureEmail&quot;: boolean
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "enableFailureEmail": boolean
+}
+```
 
-`enableFailureEmail`
-
-`boolean`
-
-If true, email notifications will be sent on transfer run failures.
+| Fields               |                                                                               |
+|----------------------|-------------------------------------------------------------------------------|
+| `enableFailureEmail` | `boolean` If true, email notifications will be sent on transfer run failures. |
 
 ### ParameterConfig
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;secretManagerManagedParams&quot;: [
+**JSON representation**
+
+```
+{
+  "secretManagerManagedParams": [
     string
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`secretManagerManagedParams[]`
-
-`string`
-
-Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution.
+| Fields                         |                                                                                                                                                                                                                                                                                           |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `secretManagerManagedParams[]` | `string` Optional. The list of parameters that are stored in Secret Manager. The value of a parameter included in this list will be interpreted as a Secret Manager key version resource name instead of a raw value. The raw value will be retrieved from Secret Manager upon execution. |
 
 ### NullValue
 
@@ -685,41 +391,22 @@ Represents a JSON `null` .
 
 A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
 
-Enums
-
-`NULL_VALUE`
-
-Null value.
+| Enums        |             |
+|--------------|-------------|
+| `NULL_VALUE` | Null value. |
 
 ### TransferState
 
 Represents data transfer run state.
 
-Enums
-
-`TRANSFER_STATE_UNSPECIFIED`
-
-State placeholder (0).
-
-`PENDING`
-
-Data transfer is scheduled and is waiting to be picked up by data transfer backend (2).
-
-`RUNNING`
-
-Data transfer is in progress (3).
-
-`SUCCEEDED`
-
-Data transfer completed successfully (4).
-
-`FAILED`
-
-Data transfer failed (5).
-
-`CANCELLED`
-
-Data transfer is cancelled (6).
+| Enums                        |                                                                                         |
+|------------------------------|-----------------------------------------------------------------------------------------|
+| `TRANSFER_STATE_UNSPECIFIED` | State placeholder (0).                                                                  |
+| `PENDING`                    | Data transfer is scheduled and is waiting to be picked up by data transfer backend (2). |
+| `RUNNING`                    | Data transfer is in progress (3).                                                       |
+| `SUCCEEDED`                  | Data transfer completed successfully (4).                                               |
+| `FAILED`                     | Data transfer failed (5).                                                               |
+| `CANCELLED`                  | Data transfer is cancelled (6).                                                         |
 
 ### Tool Annotations
 
@@ -727,9 +414,9 @@ Data transfer is cancelled (6).
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ❌ \| Read Only Hint: ❌ \| Open World Hint: ❌

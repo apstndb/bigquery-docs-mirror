@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# INFORMATION\_SCHEMA.BI\_CAPACITY\_CHANGES view
+# INFORMATION_SCHEMA.BI_CAPACITY_CHANGES view
 
 The `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view contains history of changes to the BI Engine capacity. If you want to view the current state of BI Engine reservation, see the [`INFORMATION_SCHEMA.BI_CAPACITIES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities) .
 
@@ -23,7 +23,7 @@ When you query the `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view, the query resu
 The `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view has the following schema:
 
 | Column name        | Data type         | Value                                                                                                                                                                                                                                                |
-| ------------------ | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `change_timestamp` | `TIMESTAMP`       | Timestamp when the current update to BI Engine capacity was made.                                                                                                                                                                                    |
 | `project_id`       | `STRING`          | The project ID of the project that contains BI Engine capacity.                                                                                                                                                                                      |
 | `project_number`   | `INTEGER`         | The project number of the project that contains BI Engine capacity.                                                                                                                                                                                  |
@@ -38,38 +38,40 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . A project ID is optional. If no project ID is specified, the project that the query runs in is used.
 
-| View name                                                                                                 | Resource scope | Region scope              |
-| --------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES`` | Project level  | `         REGION        ` |
+| View name                                                                                     | Resource scope | Region scope |
+|-----------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
 
-<!-- end list -->
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
-    -- Returns the history of BI Engine capacity.
-    SELECT * FROM myproject.`region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES;
+```
+-- Returns the history of BI Engine capacity.
+SELECT * FROM myproject.`region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES;
+```
 
 ## Examples
 
 The following example retrieves the current BI Engine capacity changes from the `INFORMATION_SCHEMA.BI_CAPACITY_CHANGES` view.
 
-To run the query against a project other than the project that the query is running in, add the project ID to the region in the following format: `` ` project_id `.` region_id `.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES `` .
+To run the query against a project other than the project that the query is running in, add the project ID to the region in the following format: `` `  ``` project_id ```  `.`  ``` region_id ```  `.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES `` .
 
 The following example gets all changes made to BI Engine capacity by a user with email `email@mycompanymail.com` :
 
-    SELECT *
-    FROM `my-project-id.region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES
-    WHERE user_email = "email@mycompanymail.com"
+```
+SELECT *
+FROM `my-project-id.region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES
+WHERE user_email = "email@mycompanymail.com"
+```
 
 The result looks similar to the following:
 
-``` 
+```
   +---------------------+---------------+----------------+------------------+--------------+---------------------+----------------------------------------------------------------------------------------+
   |  change_timestamp   |  project_id   | project_number | bi_capacity_name |     size     |     user_email      |                                               preferred_tables                         |
   +---------------------+---------------+----------------+------------------+--------------+---------------------+----------------------------------------------------------------------------------------+
@@ -82,17 +84,19 @@ The result looks similar to the following:
 
 The following example gets BI Engine capacity changes for the last seven days:
 
-    SELECT
-      change_timestamp,
-      size,
-      user_email,
-      preferred_tables
-    FROM `my-project-id.region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES
-    WHERE change_timestamp > TIMESTAMP_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+```
+SELECT
+  change_timestamp,
+  size,
+  user_email,
+  preferred_tables
+FROM `my-project-id.region-us`.INFORMATION_SCHEMA.BI_CAPACITY_CHANGES
+WHERE change_timestamp > TIMESTAMP_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+```
 
 The result looks similar to the following:
 
-``` 
+```
   +---------------------+--------------+----------------------+-------------------+
   |  change_timestamp   |     size     |     user_email       |  preferred_tables |                                                                                    |
   +---------------------+--------------+----------------------+-------------------+

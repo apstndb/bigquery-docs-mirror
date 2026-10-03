@@ -20,10 +20,10 @@ To use Gemini in BigQuery, you must enable required APIs and grant required Iden
 
 1.  In the the Google Cloud console, with your project selected, go to the **BigQuery Studio** page.
 
-2.  View a Gemini in BigQuery feature in the the Google Cloud console. For example, in BigQuery Studio hover over the pen\_spark arrow\_drop\_down **Gemini** icon.
-    
+2.  View a Gemini in BigQuery feature in the the Google Cloud console. For example, in BigQuery Studio hover over the pen_spark arrow_drop_down **Gemini** icon.
+
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/gemini/images/gemini-assistant-link-disabled.png)
-    
+
     The console prompts you to enable additional Google Cloud APIs.
 
 3.  Click **Continue** to start enabling required Google Cloud APIs. A side panel lists the APIs required to use Gemini in BigQuery.
@@ -31,18 +31,18 @@ To use Gemini in BigQuery, you must enable required APIs and grant required Iden
 4.  For each required API, click **Enable** to enable the API for the current project, and then click **Next** .
 
 5.  To grant principals the IAM roles required to use Gemini in BigQuery, enter the user names of the principals. The following roles grant the permissions required to use Gemini:
-    
-      - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser)
-      - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin)
-    
+
+    - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser)
+    - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin)
+
     Gemini in BigQuery requires the following permissions:
-    
-      - **cloudaicompanion.entitlements.get**
-      - **cloudaicompanion.instances.completeCode**
-      - **cloudaicompanion.instances.completeTask**
-      - **cloudaicompanion.instances.generateCode**
-      - **cloudaicompanion.operations.get**
-      - **cloudaicompanion.topics.create**
+
+    - **cloudaicompanion.entitlements.get**
+    - **cloudaicompanion.instances.completeCode**
+    - **cloudaicompanion.instances.completeTask**
+    - **cloudaicompanion.instances.generateCode**
+    - **cloudaicompanion.operations.get**
+    - **cloudaicompanion.topics.create**
 
 6.  Click **Done** .
 
@@ -60,8 +60,8 @@ Certain Gemini in BigQuery features in [Preview](https://cloud.google.com/produc
 
 Preview features that require Gemini in BigQuery sign-up include the following:
 
-  - Automated metadata generation for data insights (Preview)
-  - Dataset insights with BigQuery knowledge engine (Preview)
+- Automated metadata generation for data insights (Preview)
+- Dataset insights with BigQuery knowledge engine (Preview)
 
 ## Turn off Gemini in BigQuery
 
@@ -71,7 +71,7 @@ To turn off specific Gemini in BigQuery features:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the toolbar, click pen\_spark **Gemini settings** .
+2.  In the toolbar, click pen_spark **Gemini settings** .
 
 3.  Clear the Gemini features that you want to turn off.
 
@@ -79,7 +79,7 @@ To turn off all Gemini for Google Cloud products including BigQuery, see [Turn o
 
 ## What's next
 
-  - Learn more about the [types of generative AI assistance available in Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/overview) .
-  - Learn [where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
-  - Learn [how to access and manage Gemini administrator controls](https://docs.cloud.google.com/gemini/docs/admin) .
-  - Learn about [security, privacy, and compliance for Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/security-privacy-compliance) .
+- Learn more about the [types of generative AI assistance available in Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/overview) .
+- Learn [where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
+- Learn [how to access and manage Gemini administrator controls](https://docs.cloud.google.com/gemini/docs/admin) .
+- Learn about [security, privacy, and compliance for Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/security-privacy-compliance) .

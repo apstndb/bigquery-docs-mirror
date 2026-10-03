@@ -12,10 +12,10 @@ When querying BigQuery data using GoogleSQL syntax, you can use parameters to pr
 
 You pass query parameters for various data types, including the following:
 
-  - Arrays
-  - Timestamps
-  - Structs
-  - Ranges
+- Arrays
+- Timestamps
+- Structs
+- Ranges
 
 ## Pass a parameter in a query
 
@@ -27,10 +27,10 @@ To specify a named parameter, use the `@` character followed by an [identifier](
 
 You can run a parameterized query in BigQuery in the following ways:
 
-  - The BigQuery Studio query editor in the Google Cloud console
-  - The bq command-line tool's `bq query` command
-  - The API
-  - The client libraries
+- The BigQuery Studio query editor in the Google Cloud console
+- The bq command-line tool's `bq query` command
+- The API
+- The client libraries
 
 The following examples show how to pass parameter values to a parameterized query:
 
@@ -49,33 +49,35 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 3.  In the **Query settings** pane, locate the **Query parameters** section and click **Add parameter** .
 
 4.  For each parameter in your query, provide the following:
-    
-      - **Name** : Enter the parameter name (don't include the `@` character).
-      - **Type** : Select the data type for the parameter.
-      - **Value** : Enter the value you want to use for this execution.
+
+    - **Name** : Enter the parameter name (don't include the `@` character).
+    - **Type** : Select the data type for the parameter.
+    - **Value** : Enter the value you want to use for this execution.
 
 5.  Click **Save** .
 
 ## Pass parameter values to a query in the Google Cloud console
 
 1.  In the query editor, enter a SQL query using the parameters you configured in the previous step. Reference them by prefixing their names with the `@` character, as shown in the example.
-    
+
     **Example** :
-    
-        SELECT
-            word,
-            word_count
-          FROM
-            `bigquery-public-data.samples.shakespeare`
-          WHERE
-            corpus = @corpus
-          AND
-            word_count >= @min_word_count
-          ORDER BY
-            word_count DESC;
-    
+
+    ```
+    SELECT
+        word,
+        word_count
+      FROM
+        `bigquery-public-data.samples.shakespeare`
+      WHERE
+        corpus = @corpus
+      AND
+        word_count >= @min_word_count
+      ORDER BY
+        word_count DESC;
+    ```
+
     For this example, you would add the `corpus` parameter as a `STRING` with value `romeoandjuliet` , and the `min_word_count` parameter as an `INT64` with value `250` .
-    
+
     If the query contains a missing or invalid parameter, an error message is displayed. Click **Set parameter** in the error message to adjust the parameter settings.
 
 2.  To run the parameterized query in the query editor, click **Run** .
@@ -83,30 +85,32 @@ To run a parameterized query in the Google Cloud console, configure parameters i
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use `--parameter` to provide values for parameters in the form `name:type:value` . An empty name produces a positional parameter. The type may be omitted to assume `STRING` .
-    
+
     The `--parameter` flag must be used in conjunction with the flag `--use_legacy_sql=false` to specify GoogleSQL syntax.
-    
+
     (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/locations) using the `--location` flag.
-    
-        bq query \
-           --use_legacy_sql=false \
-           --parameter=corpus::romeoandjuliet \
-           --parameter=min_word_count:INT64:250 \
-           'SELECT
-             word,
-             word_count
-           FROM
-             `bigquery-public-data.samples.shakespeare`
-           WHERE
-             corpus = @corpus
-           AND
-             word_count >= @min_word_count
-           ORDER BY
-             word_count DESC;'
+
+    ```
+    bq query \
+       --use_legacy_sql=false \
+       --parameter=corpus::romeoandjuliet \
+       --parameter=min_word_count:INT64:250 \
+       'SELECT
+         word,
+         word_count
+       FROM
+         `bigquery-public-data.samples.shakespeare`
+       WHERE
+         corpus = @corpus
+       AND
+         word_count >= @min_word_count
+       ORDER BY
+         word_count DESC;'
+    ```
 
 ### API
 
@@ -116,137 +120,143 @@ Populate `queryParameters` with the list of parameters in the `query` job config
 
 [Enable GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/introduction-sql) by setting `useLegacySql` to `false` .
 
+```
+{
+  "query": "SELECT word, word_count FROM `bigquery-public-data.samples.shakespeare` WHERE corpus = @corpus AND word_count >= @min_word_count ORDER BY word_count DESC;",
+  "queryParameters": [
     {
-      "query": "SELECT word, word_count FROM `bigquery-public-data.samples.shakespeare` WHERE corpus = @corpus AND word_count >= @min_word_count ORDER BY word_count DESC;",
-      "queryParameters": [
-        {
-          "parameterType": {
-            "type": "STRING"
-          },
-          "parameterValue": {
-            "value": "romeoandjuliet"
-          },
-          "name": "corpus"
-        },
-        {
-          "parameterType": {
-            "type": "INT64"
-          },
-          "parameterValue": {
-            "value": "250"
-          },
-          "name": "min_word_count"
-        }
-      ],
-      "useLegacySql": false,
-      "parameterMode": "NAMED"
+      "parameterType": {
+        "type": "STRING"
+      },
+      "parameterValue": {
+        "value": "romeoandjuliet"
+      },
+      "name": "corpus"
+    },
+    {
+      "parameterType": {
+        "type": "INT64"
+      },
+      "parameterValue": {
+        "value": "250"
+      },
+      "name": "min_word_count"
     }
+  ],
+  "useLegacySql": false,
+  "parameterMode": "NAMED"
+}
+```
 
 [Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+word%252C+word_count%255CnFROM+%2560bigquery-public-data.samples.shakespeare%2560%255CnWHERE+corpus+%253D+%2540corpus%255CnAND+word_count+%253E%253D+%2540min_word_count%255CnORDER+BY+word_count+DESC%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522romeoandjuliet%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522corpus%2522%250A++++%257D%252C%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522INT64%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522250%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522min_word_count%2522%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
 
 To use positional parameters, set the `parameterMode` to `POSITIONAL` in the `query` job configuration.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 To use named parameters:
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryQueryWithNamedParameters
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryQueryWithNamedParameters
+{
+    public void QueryWithNamedParameters(string projectId = "your-project-id")
     {
-        public void QueryWithNamedParameters(string projectId = "your-project-id")
+        var corpus = "romeoandjuliet";
+        var minWordCount = 250;
+
+        // Note: Standard SQL is required to use query parameters.
+        var query = @"
+            SELECT word, word_count
+            FROM `bigquery-public-data.samples.shakespeare`
+            WHERE corpus = @corpus
+            AND word_count >= @min_word_count
+            ORDER BY word_count DESC";
+
+        // Initialize client that will be used to send requests.
+        var client = BigQueryClient.Create(projectId);
+
+        var parameters = new BigQueryParameter[]
         {
-            var corpus = "romeoandjuliet";
-            var minWordCount = 250;
-    
-            // Note: Standard SQL is required to use query parameters.
-            var query = @"
-                SELECT word, word_count
-                FROM `bigquery-public-data.samples.shakespeare`
-                WHERE corpus = @corpus
-                AND word_count >= @min_word_count
-                ORDER BY word_count DESC";
-    
-            // Initialize client that will be used to send requests.
-            var client = BigQueryClient.Create(projectId);
-    
-            var parameters = new BigQueryParameter[]
-            {
-                new BigQueryParameter("corpus", BigQueryDbType.String, corpus),
-                new BigQueryParameter("min_word_count", BigQueryDbType.Int64, minWordCount)
-            };
-    
-            var job = client.CreateQueryJob(
-                sql: query,
-                parameters: parameters,
-                options: new QueryOptions { UseQueryCache = false });
-            // Wait for the job to complete.
-            job = job.PollUntilCompleted().ThrowOnAnyError();
-            // Display the results
-            foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            {
-                Console.WriteLine($"{row["word"]}: {row["word_count"]}");
-            }
+            new BigQueryParameter("corpus", BigQueryDbType.String, corpus),
+            new BigQueryParameter("min_word_count", BigQueryDbType.Int64, minWordCount)
+        };
+
+        var job = client.CreateQueryJob(
+            sql: query,
+            parameters: parameters,
+            options: new QueryOptions { UseQueryCache = false });
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        {
+            Console.WriteLine($"{row["word"]}: {row["word_count"]}");
         }
     }
+}
+```
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 To use positional parameters:
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryQueryWithPositionalParameters
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryQueryWithPositionalParameters
+{
+    public void QueryWithPositionalParameters(string projectId = "project-id")
     {
-        public void QueryWithPositionalParameters(string projectId = "project-id")
+        var corpus = "romeoandjuliet";
+        var minWordCount = 250;
+
+        // Note: Standard SQL is required to use query parameters.
+        var query = @"
+                SELECT word, word_count
+                FROM `bigquery-public-data.samples.shakespeare`
+                WHERE corpus = ?
+                AND word_count >= ?
+                ORDER BY word_count DESC;";
+
+        // Initialize client that will be used to send requests.
+        var client = BigQueryClient.Create(projectId);
+
+        // Set the name to None to use positional parameters.
+        // Note that you cannot mix named and positional parameters.
+        var parameters = new BigQueryParameter[]
         {
-            var corpus = "romeoandjuliet";
-            var minWordCount = 250;
-    
-            // Note: Standard SQL is required to use query parameters.
-            var query = @"
-                    SELECT word, word_count
-                    FROM `bigquery-public-data.samples.shakespeare`
-                    WHERE corpus = ?
-                    AND word_count >= ?
-                    ORDER BY word_count DESC;";
-    
-            // Initialize client that will be used to send requests.
-            var client = BigQueryClient.Create(projectId);
-    
-            // Set the name to None to use positional parameters.
-            // Note that you cannot mix named and positional parameters.
-            var parameters = new BigQueryParameter[]
+            new BigQueryParameter(null, BigQueryDbType.String, corpus),
+            new BigQueryParameter(null, BigQueryDbType.Int64, minWordCount)
+        };
+
+        var job = client.CreateQueryJob(
+            sql: query,
+            parameters: parameters,
+            options: new QueryOptions
             {
-                new BigQueryParameter(null, BigQueryDbType.String, corpus),
-                new BigQueryParameter(null, BigQueryDbType.Int64, minWordCount)
-            };
-    
-            var job = client.CreateQueryJob(
-                sql: query,
-                parameters: parameters,
-                options: new QueryOptions
-                {
-                    UseQueryCache = false,
-                    ParameterMode = BigQueryParameterMode.Positional
-                });
-            // Wait for the job to complete.
-            job = job.PollUntilCompleted().ThrowOnAnyError();
-            // Display the results
-            foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            {
-                Console.WriteLine($"{row["word"]}: {row["word_count"]}");
-            }
+                UseQueryCache = false,
+                ParameterMode = BigQueryParameterMode.Positional
+            });
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        {
+            Console.WriteLine($"{row["word"]}: {row["word_count"]}");
         }
     }
+}
+```
 
 ### Go
 
@@ -256,129 +266,133 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To use named parameters:
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithNamedParams demonstrate issuing a query using named query parameters.
-    func queryWithNamedParams(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(
-         `SELECT word, word_count
-            FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
-            WHERE corpus = @corpus
-            AND word_count >= @min_word_count
-            ORDER BY word_count DESC;`)
-     q.Parameters = []bigquery.QueryParameter{
-         {
-             Name:  "corpus",
-             Value: "romeoandjuliet",
-         },
-         {
-             Name:  "min_word_count",
-             Value: 250,
-         },
-     }
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithNamedParams demonstrate issuing a query using named query parameters.
+func queryWithNamedParams(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(
+        `SELECT word, word_count
+        FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
+        WHERE corpus = @corpus
+        AND word_count >= @min_word_count
+        ORDER BY word_count DESC;`)
+    q.Parameters = []bigquery.QueryParameter{
+        {
+            Name:  "corpus",
+            Value: "romeoandjuliet",
+        },
+        {
+            Name:  "min_word_count",
+            Value: 250,
+        },
+    }
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 To use positional parameters:
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithPostionalParams demonstrate issuing a query using positional query parameters.
-    func queryWithPositionalParams(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(
-         `SELECT word, word_count
-            FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
-            WHERE corpus = ?
-            AND word_count >= ?
-            ORDER BY word_count DESC;`)
-     q.Parameters = []bigquery.QueryParameter{
-         {
-             Value: "romeoandjuliet",
-         },
-         {
-             Value: 250,
-         },
-     }
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithPostionalParams demonstrate issuing a query using positional query parameters.
+func queryWithPositionalParams(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(
+        `SELECT word, word_count
+        FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
+        WHERE corpus = ?
+        AND word_count >= ?
+        ORDER BY word_count DESC;`)
+    q.Parameters = []bigquery.QueryParameter{
+        {
+            Value: "romeoandjuliet",
+        },
+        {
+            Value: 250,
+        },
+    }
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -388,94 +402,98 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To use named parameters:
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryParameterValue;
-    import com.google.cloud.bigquery.TableResult;
-    
-    public class QueryWithNamedParameters {
-    
-      public static void queryWithNamedParameters() {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          String corpus = "romeoandjuliet";
-          long minWordCount = 250;
-          String query =
-              "SELECT word, word_count\n"
-                  + "FROM `bigquery-public-data.samples.shakespeare`\n"
-                  + "WHERE corpus = @corpus\n"
-                  + "AND word_count >= @min_word_count\n"
-                  + "ORDER BY word_count DESC";
-    
-          // Note: Standard SQL is required to use query parameters.
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  .addNamedParameter("corpus", QueryParameterValue.string(corpus))
-                  .addNamedParameter("min_word_count", QueryParameterValue.int64(minWordCount))
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-    
-          System.out.println("Query with named parameters performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
+import com.google.cloud.bigquery.TableResult;
+
+public class QueryWithNamedParameters {
+
+  public static void queryWithNamedParameters() {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      String corpus = "romeoandjuliet";
+      long minWordCount = 250;
+      String query =
+          "SELECT word, word_count\n"
+              + "FROM `bigquery-public-data.samples.shakespeare`\n"
+              + "WHERE corpus = @corpus\n"
+              + "AND word_count >= @min_word_count\n"
+              + "ORDER BY word_count DESC";
+
+      // Note: Standard SQL is required to use query parameters.
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              .addNamedParameter("corpus", QueryParameterValue.string(corpus))
+              .addNamedParameter("min_word_count", QueryParameterValue.int64(minWordCount))
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+
+      System.out.println("Query with named parameters performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 To use positional parameters:
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryParameterValue;
-    import com.google.cloud.bigquery.TableResult;
-    
-    public class QueryWithPositionalParameters {
-      public static void queryWithPositionalParameters() {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          String corpus = "romeoandjuliet";
-          long minWordCount = 250;
-          String query =
-              "SELECT word, word_count\n"
-                  + "FROM `bigquery-public-data.samples.shakespeare`\n"
-                  + "WHERE corpus = ?\n"
-                  + "AND word_count >= ?\n"
-                  + "ORDER BY word_count DESC";
-    
-          // Note: Standard SQL is required to use query parameters.
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  .addPositionalParameter(QueryParameterValue.string(corpus))
-                  .addPositionalParameter(QueryParameterValue.int64(minWordCount))
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-    
-          System.out.println("Query with positional parameters performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
+import com.google.cloud.bigquery.TableResult;
+
+public class QueryWithPositionalParameters {
+  public static void queryWithPositionalParameters() {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      String corpus = "romeoandjuliet";
+      long minWordCount = 250;
+      String query =
+          "SELECT word, word_count\n"
+              + "FROM `bigquery-public-data.samples.shakespeare`\n"
+              + "WHERE corpus = ?\n"
+              + "AND word_count >= ?\n"
+              + "ORDER BY word_count DESC";
+
+      // Note: Standard SQL is required to use query parameters.
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              .addPositionalParameter(QueryParameterValue.string(corpus))
+              .addPositionalParameter(QueryParameterValue.int64(minWordCount))
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+
+      System.out.println("Query with positional parameters performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -485,63 +503,67 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To use named parameters:
 
-    // Run a query using named query parameters
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryParamsNamed() {
-      // The SQL query to run
-      const sqlQuery = `SELECT word, word_count
-            FROM \`bigquery-public-data.samples.shakespeare\`
-            WHERE corpus = @corpus
-            AND word_count >= @min_word_count
-            ORDER BY word_count DESC`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        params: {corpus: 'romeoandjuliet', min_word_count: 250},
-      };
-    
-      // Run the query
-      const [rows] = await bigquery.query(options);
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Run a query using named query parameters
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryParamsNamed() {
+  // The SQL query to run
+  const sqlQuery = `SELECT word, word_count
+        FROM \`bigquery-public-data.samples.shakespeare\`
+        WHERE corpus = @corpus
+        AND word_count >= @min_word_count
+        ORDER BY word_count DESC`;
+
+  const options = {
+    query: sqlQuery,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    params: {corpus: 'romeoandjuliet', min_word_count: 250},
+  };
+
+  // Run the query
+  const [rows] = await bigquery.query(options);
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 To use positional parameters:
 
-    // Run a query using positional query parameters
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryParamsPositional() {
-      // The SQL query to run
-      const sqlQuery = `SELECT word, word_count
-            FROM \`bigquery-public-data.samples.shakespeare\`
-            WHERE corpus = ?
-            AND word_count >= ?
-            ORDER BY word_count DESC`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        params: ['romeoandjuliet', 250],
-      };
-    
-      // Run the query
-      const [rows] = await bigquery.query(options);
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Run a query using positional query parameters
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryParamsPositional() {
+  // The SQL query to run
+  const sqlQuery = `SELECT word, word_count
+        FROM \`bigquery-public-data.samples.shakespeare\`
+        WHERE corpus = ?
+        AND word_count >= ?
+        ORDER BY word_count DESC`;
+
+  const options = {
+    query: sqlQuery,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    params: ['romeoandjuliet', 250],
+  };
+
+  // Run the query
+  const [rows] = await bigquery.query(options);
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 ### Python
 
@@ -551,59 +573,63 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To use named parameters:
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = """
-        SELECT word, word_count
-        FROM `bigquery-public-data.samples.shakespeare`
-        WHERE corpus = @corpus
-        AND word_count >= @min_word_count
-        ORDER BY word_count DESC;
-    """
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter("corpus", "STRING", "romeoandjuliet"),
-            bigquery.ScalarQueryParameter("min_word_count", "INT64", 250),
-        ]
-    )
-    results = client.query_and_wait(
-        query, job_config=job_config
-    )  # Make an API request.
-    
-    for row in results:
-        print("{}: \t{}".format(row.word, row.word_count))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT word, word_count
+    FROM `bigquery-public-data.samples.shakespeare`
+    WHERE corpus = @corpus
+    AND word_count >= @min_word_count
+    ORDER BY word_count DESC;
+"""
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("corpus", "STRING", "romeoandjuliet"),
+        bigquery.ScalarQueryParameter("min_word_count", "INT64", 250),
+    ]
+)
+results = client.query_and_wait(
+    query, job_config=job_config
+)  # Make an API request.
+
+for row in results:
+    print("{}: \t{}".format(row.word, row.word_count))
+```
 
 To use positional parameters:
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = """
-        SELECT word, word_count
-        FROM `bigquery-public-data.samples.shakespeare`
-        WHERE corpus = ?
-        AND word_count >= ?
-        ORDER BY word_count DESC;
-    """
-    # Set the name to None to use positional parameters.
-    # Note that you cannot mix named and positional parameters.
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter(None, "STRING", "romeoandjuliet"),
-            bigquery.ScalarQueryParameter(None, "INT64", 250),
-        ]
-    )
-    results = client.query_and_wait(
-        query, job_config=job_config
-    )  # Make an API request.
-    
-    for row in results:
-        print("{}: \t{}".format(row.word, row.word_count))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT word, word_count
+    FROM `bigquery-public-data.samples.shakespeare`
+    WHERE corpus = ?
+    AND word_count >= ?
+    ORDER BY word_count DESC;
+"""
+# Set the name to None to use positional parameters.
+# Note that you cannot mix named and positional parameters.
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter(None, "STRING", "romeoandjuliet"),
+        bigquery.ScalarQueryParameter(None, "INT64", 250),
+    ]
+)
+results = client.query_and_wait(
+    query, job_config=job_config
+)  # Make an API request.
+
+for row in results:
+    print("{}: \t{}".format(row.word, row.word_count))
+```
 
 ## Use arrays in parameterized queries
 
@@ -618,32 +644,34 @@ Arrays in parameterized queries aren't supported by the Google Cloud console.
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This query selects the most popular names for baby boys born in US states starting with the letter W:
-    
+
     > **Note:** This example queries a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
-    
-        bq query \
-           --use_legacy_sql=false \
-           --parameter='gender::M' \
-           --parameter='states:ARRAY<STRING>:["WA", "WI", "WV", "WY"]' \
-           'SELECT
-             name,
-             SUM(number) AS count
-           FROM
-             `bigquery-public-data.usa_names.usa_1910_2013`
-           WHERE
-             gender = @gender
-             AND state IN UNNEST(@states)
-           GROUP BY
-             name
-           ORDER BY
-             count DESC
-           LIMIT
-             10;'
-    
+
+    ```
+    bq query \
+       --use_legacy_sql=false \
+       --parameter='gender::M' \
+       --parameter='states:ARRAY<STRING>:["WA", "WI", "WV", "WY"]' \
+       'SELECT
+         name,
+         SUM(number) AS count
+       FROM
+         `bigquery-public-data.usa_names.usa_1910_2013`
+       WHERE
+         gender = @gender
+         AND state IN UNNEST(@states)
+       GROUP BY
+         name
+       ORDER BY
+         count DESC
+       LIMIT
+         10;'
+    ```
+
     Be careful to enclose the array type declaration in single quotes so that the command output is not accidentally redirected to a file by the `>` character.
 
 ### API
@@ -654,98 +682,102 @@ If the array values are scalars set the [`parameterType`](https://docs.cloud.goo
 
 For example, this query selects the most popular names for baby boys born in US states starting with the letter W.
 
-    {
-     "query": "SELECT name, sum(number) as count\nFROM `bigquery-public-data.usa_names.usa_1910_2013`\nWHERE gender = @gender\nAND state IN UNNEST(@states)\nGROUP BY name\nORDER BY count DESC\nLIMIT 10;",
-     "queryParameters": [
-      {
-       "parameterType": {
-        "type": "STRING"
-       },
-       "parameterValue": {
-        "value": "M"
-       },
-       "name": "gender"
-      },
-      {
-       "parameterType": {
-        "type": "ARRAY",
-        "arrayType": {
-         "type": "STRING"
-        }
-       },
-       "parameterValue": {
-        "arrayValues": [
-         {
-          "value": "WA"
-         },
-         {
-          "value": "WI"
-         },
-         {
-          "value": "WV"
-         },
-         {
-          "value": "WY"
-         }
-        ]
-       },
-       "name": "states"
-      }
-     ],
-     "useLegacySql": false,
-     "parameterMode": "NAMED"
+```
+{
+ "query": "SELECT name, sum(number) as count\nFROM `bigquery-public-data.usa_names.usa_1910_2013`\nWHERE gender = @gender\nAND state IN UNNEST(@states)\nGROUP BY name\nORDER BY count DESC\nLIMIT 10;",
+ "queryParameters": [
+  {
+   "parameterType": {
+    "type": "STRING"
+   },
+   "parameterValue": {
+    "value": "M"
+   },
+   "name": "gender"
+  },
+  {
+   "parameterType": {
+    "type": "ARRAY",
+    "arrayType": {
+     "type": "STRING"
     }
+   },
+   "parameterValue": {
+    "arrayValues": [
+     {
+      "value": "WA"
+     },
+     {
+      "value": "WI"
+     },
+     {
+      "value": "WV"
+     },
+     {
+      "value": "WY"
+     }
+    ]
+   },
+   "name": "states"
+  }
+ ],
+ "useLegacySql": false,
+ "parameterMode": "NAMED"
+}
+```
 
-[Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+name%252C+sum\(number\)+as+count%255CnFROM+%2560bigquery-public-data.usa_names.usa_1910_2013%2560%255CnWHERE+gender+%253D+%2540gender%255CnAND+state+IN+UNNEST\(%2540states\)%255CnGROUP+BY+name%255CnORDER+BY+count+DESC%255CnLIMIT+10%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522M%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522gender%2522%250A++++%257D%252C%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522ARRAY%2522%252C%250A++++++++%2522arrayType%2522%253A+%250A++++++++%257B%250A++++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++++%257D%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522arrayValues%2522%253A+%250A++++++++%255B%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WA%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WI%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WV%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WY%2522%250A++++++++++%257D%250A++++++++%255D%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522states%2522%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
+[Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+name%252C+sum(number)+as+count%255CnFROM+%2560bigquery-public-data.usa_names.usa_1910_2013%2560%255CnWHERE+gender+%253D+%2540gender%255CnAND+state+IN+UNNEST(%2540states)%255CnGROUP+BY+name%255CnORDER+BY+count+DESC%255CnLIMIT+10%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%2522M%2522%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522gender%2522%250A++++%257D%252C%250A++++%257B%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522ARRAY%2522%252C%250A++++++++%2522arrayType%2522%253A+%250A++++++++%257B%250A++++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++++%257D%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522arrayValues%2522%253A+%250A++++++++%255B%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WA%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WI%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WV%2522%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522WY%2522%250A++++++++++%257D%250A++++++++%255D%250A++++++%257D%252C%250A++++++%2522name%2522%253A+%2522states%2522%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryQueryWithArrayParameters
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryQueryWithArrayParameters
+{
+    public void QueryWithArrayParameters(string projectId = "your-project-id")
     {
-        public void QueryWithArrayParameters(string projectId = "your-project-id")
+        var gender = "M";
+        string[] states = { "WA", "WI", "WV", "WY" };
+
+        // Note: Standard SQL is required to use query parameters.
+        var query = @"
+            SELECT name, sum(number) as count
+            FROM `bigquery-public-data.usa_names.usa_1910_2013`
+            WHERE gender = @gender
+            AND state IN UNNEST(@states)
+            GROUP BY name
+            ORDER BY count DESC
+            LIMIT 10;";
+
+        // Initialize client that will be used to send requests.
+        var client = BigQueryClient.Create(projectId);
+
+        var parameters = new BigQueryParameter[]
         {
-            var gender = "M";
-            string[] states = { "WA", "WI", "WV", "WY" };
-    
-            // Note: Standard SQL is required to use query parameters.
-            var query = @"
-                SELECT name, sum(number) as count
-                FROM `bigquery-public-data.usa_names.usa_1910_2013`
-                WHERE gender = @gender
-                AND state IN UNNEST(@states)
-                GROUP BY name
-                ORDER BY count DESC
-                LIMIT 10;";
-    
-            // Initialize client that will be used to send requests.
-            var client = BigQueryClient.Create(projectId);
-    
-            var parameters = new BigQueryParameter[]
-            {
-                new BigQueryParameter("gender", BigQueryDbType.String, gender),
-                new BigQueryParameter("states", BigQueryDbType.Array, states)
-            };
-    
-            var job = client.CreateQueryJob(
-                sql: query,
-                parameters: parameters,
-                options: new QueryOptions { UseQueryCache = false });
-            // Wait for the job to complete.
-            job = job.PollUntilCompleted().ThrowOnAnyError();
-            // Display the results
-            foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            {
-                Console.WriteLine($"{row["name"]}: {row["count"]}");
-            }
+            new BigQueryParameter("gender", BigQueryDbType.String, gender),
+            new BigQueryParameter("states", BigQueryDbType.Array, states)
+        };
+
+        var job = client.CreateQueryJob(
+            sql: query,
+            parameters: parameters,
+            options: new QueryOptions { UseQueryCache = false });
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        {
+            Console.WriteLine($"{row["name"]}: {row["count"]}");
         }
     }
+}
+```
 
 ### Go
 
@@ -753,75 +785,77 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithArrayParams demonstrates issuing a query and specifying query parameters that include an
-    // array of strings.
-    func queryWithArrayParams(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(
-         `SELECT
-             name,
-             sum(number) as count 
-            FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
-         WHERE
-             gender = @gender
-             AND state IN UNNEST(@states)
-         GROUP BY
-             name
-         ORDER BY
-             count DESC
-         LIMIT 10;`)
-     q.Parameters = []bigquery.QueryParameter{
-         {
-             Name:  "gender",
-             Value: "M",
-         },
-         {
-             Name:  "states",
-             Value: []string{"WA", "WI", "WV", "WY"},
-         },
-     }
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithArrayParams demonstrates issuing a query and specifying query parameters that include an
+// array of strings.
+func queryWithArrayParams(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(
+        `SELECT
+            name,
+            sum(number) as count 
+        FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
+        WHERE
+            gender = @gender
+            AND state IN UNNEST(@states)
+        GROUP BY
+            name
+        ORDER BY
+            count DESC
+        LIMIT 10;`)
+    q.Parameters = []bigquery.QueryParameter{
+        {
+            Name:  "gender",
+            Value: "M",
+        },
+        {
+            Name:  "states",
+            Value: []string{"WA", "WI", "WV", "WY"},
+        },
+    }
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -829,55 +863,57 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryParameterValue;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample to running a query with array query parameters.
-    public class QueryWithArrayParameters {
-    
-      public static void runQueryWithArrayParameters() {
-        String gender = "M";
-        String[] states = {"WA", "WI", "WV", "WY"};
-        String query =
-            "SELECT name, sum(number) as count\n"
-                + "FROM `bigquery-public-data.usa_names.usa_1910_2013`\n"
-                + "WHERE gender = @gender\n"
-                + "AND state IN UNNEST(@states)\n"
-                + "GROUP BY name\n"
-                + "ORDER BY count DESC\n"
-                + "LIMIT 10;";
-        queryWithArrayParameters(query, gender, states);
-      }
-    
-      public static void queryWithArrayParameters(String query, String gender, String[] states) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Note: Standard SQL is required to use query parameters.
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  .addNamedParameter("gender", QueryParameterValue.string(gender))
-                  .addNamedParameter("states", QueryParameterValue.array(states, String.class))
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          // Print the results.
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-          System.out.println("Query with arrays parameters performed successfully");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample to running a query with array query parameters.
+public class QueryWithArrayParameters {
+
+  public static void runQueryWithArrayParameters() {
+    String gender = "M";
+    String[] states = {"WA", "WI", "WV", "WY"};
+    String query =
+        "SELECT name, sum(number) as count\n"
+            + "FROM `bigquery-public-data.usa_names.usa_1910_2013`\n"
+            + "WHERE gender = @gender\n"
+            + "AND state IN UNNEST(@states)\n"
+            + "GROUP BY name\n"
+            + "ORDER BY count DESC\n"
+            + "LIMIT 10;";
+    queryWithArrayParameters(query, gender, states);
+  }
+
+  public static void queryWithArrayParameters(String query, String gender, String[] states) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Note: Standard SQL is required to use query parameters.
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              .addNamedParameter("gender", QueryParameterValue.string(gender))
+              .addNamedParameter("states", QueryParameterValue.array(states, String.class))
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      // Print the results.
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+      System.out.println("Query with arrays parameters performed successfully");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -885,35 +921,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Run a query using array query parameters
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryParamsArrays() {
-      // The SQL query to run
-      const sqlQuery = `SELECT name, sum(number) as count
-      FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-      WHERE gender = @gender
-      AND state IN UNNEST(@states)
-      GROUP BY name
-      ORDER BY count DESC
-      LIMIT 10;`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        params: {gender: 'M', states: ['WA', 'WI', 'WV', 'WY']},
-      };
-    
-      // Run the query
-      const [rows] = await bigquery.query(options);
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Run a query using array query parameters
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryParamsArrays() {
+  // The SQL query to run
+  const sqlQuery = `SELECT name, sum(number) as count
+  FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+  WHERE gender = @gender
+  AND state IN UNNEST(@states)
+  GROUP BY name
+  ORDER BY count DESC
+  LIMIT 10;`;
+
+  const options = {
+    query: sqlQuery,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    params: {gender: 'M', states: ['WA', 'WI', 'WV', 'WY']},
+  };
+
+  // Run the query
+  const [rows] = await bigquery.query(options);
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 ### Python
 
@@ -921,30 +959,32 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = """
-        SELECT name, sum(number) as count
-        FROM `bigquery-public-data.usa_names.usa_1910_2013`
-        WHERE gender = @gender
-        AND state IN UNNEST(@states)
-        GROUP BY name
-        ORDER BY count DESC
-        LIMIT 10;
-    """
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter("gender", "STRING", "M"),
-            bigquery.ArrayQueryParameter("states", "STRING", ["WA", "WI", "WV", "WY"]),
-        ]
-    )
-    rows = client.query_and_wait(query, job_config=job_config)  # Make an API request.
-    
-    for row in rows:
-        print("{}: \t{}".format(row.name, row.count))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT name, sum(number) as count
+    FROM `bigquery-public-data.usa_names.usa_1910_2013`
+    WHERE gender = @gender
+    AND state IN UNNEST(@states)
+    GROUP BY name
+    ORDER BY count DESC
+    LIMIT 10;
+"""
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("gender", "STRING", "M"),
+        bigquery.ArrayQueryParameter("states", "STRING", ["WA", "WI", "WV", "WY"]),
+    ]
+)
+rows = client.query_and_wait(query, job_config=job_config)  # Make an API request.
+
+for row in rows:
+    print("{}: \t{}".format(row.name, row.count))
+```
 
 ## Use timestamps in parameterized queries
 
@@ -959,16 +999,18 @@ Follow the steps for [adding parameters in the Google Cloud console](https://doc
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This query adds an hour to the timestamp parameter value:
-    
-        bq query \
-           --use_legacy_sql=false \
-           --parameter='ts_value:TIMESTAMP:2016-12-07 08:00:00' \
-           'SELECT
-             TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);'
+
+    ```
+    bq query \
+       --use_legacy_sql=false \
+       --parameter='ts_value:TIMESTAMP:2016-12-07 08:00:00' \
+       'SELECT
+         TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);'
+    ```
 
 ### API
 
@@ -976,64 +1018,68 @@ To use a timestamp parameter, set the [`parameterType`](https://docs.cloud.googl
 
 This query adds an hour to the timestamp parameter value.
 
+```
+{
+  "query": "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);",
+  "queryParameters": [
     {
-      "query": "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);",
-      "queryParameters": [
-        {
-          "name": "ts_value",
-          "parameterType": {
-            "type": "TIMESTAMP"
-          },
-          "parameterValue": {
-            "value": "2016-12-07 08:00:00"
-          }
-        }
-      ],
-      "useLegacySql": false,
-      "parameterMode": "NAMED"
+      "name": "ts_value",
+      "parameterType": {
+        "type": "TIMESTAMP"
+      },
+      "parameterValue": {
+        "value": "2016-12-07 08:00:00"
+      }
     }
+  ],
+  "useLegacySql": false,
+  "parameterMode": "NAMED"
+}
+```
 
-[Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+TIMESTAMP_ADD\(%2540ts_value%252C+INTERVAL+1+HOUR\)%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522name%2522%253A+%2522ts_value%2522%252C%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522TIMESTAMP%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%25222016-12-07+08%253A00%253A00%2522%250A++++++%257D%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
+[Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+TIMESTAMP_ADD(%2540ts_value%252C+INTERVAL+1+HOUR)%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522name%2522%253A+%2522ts_value%2522%252C%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522TIMESTAMP%2522%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522value%2522%253A+%25222016-12-07+08%253A00%253A00%2522%250A++++++%257D%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryQueryWithTimestampParameters
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryQueryWithTimestampParameters
+{
+    public void QueryWithTimestampParameters(string projectId = "project-id")
     {
-        public void QueryWithTimestampParameters(string projectId = "project-id")
+        var timestamp = new DateTime(2016, 12, 7, 8, 0, 0, DateTimeKind.Utc);
+
+        // Note: Standard SQL is required to use query parameters.
+        var query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);";
+
+        // Initialize client that will be used to send requests.
+        var client = BigQueryClient.Create(projectId);
+
+        var parameters = new BigQueryParameter[]
         {
-            var timestamp = new DateTime(2016, 12, 7, 8, 0, 0, DateTimeKind.Utc);
-    
-            // Note: Standard SQL is required to use query parameters.
-            var query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);";
-    
-            // Initialize client that will be used to send requests.
-            var client = BigQueryClient.Create(projectId);
-    
-            var parameters = new BigQueryParameter[]
-            {
-                new BigQueryParameter("ts_value", BigQueryDbType.Timestamp, timestamp),
-            };
-    
-            var job = client.CreateQueryJob(
-                sql: query,
-                parameters: parameters,
-                options: new QueryOptions { UseQueryCache = false });
-            // Wait for the job to complete.
-            job = job.PollUntilCompleted().ThrowOnAnyError();
-            // Display the results
-            foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            {
-                Console.WriteLine(row[0]);
-            }
+            new BigQueryParameter("ts_value", BigQueryDbType.Timestamp, timestamp),
+        };
+
+        var job = client.CreateQueryJob(
+            sql: query,
+            parameters: parameters,
+            options: new QueryOptions { UseQueryCache = false });
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        {
+            Console.WriteLine(row[0]);
         }
     }
+}
+```
 
 ### Go
 
@@ -1041,60 +1087,62 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-     "time"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithTimestampParam demonstrates issuing a query and supplying a timestamp query parameter.
-    func queryWithTimestampParam(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(
-         `SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);`)
-     q.Parameters = []bigquery.QueryParameter{
-         {
-             Name:  "ts_value",
-             Value: time.Date(2016, 12, 7, 8, 0, 0, 0, time.UTC),
-         },
-     }
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+    "time"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithTimestampParam demonstrates issuing a query and supplying a timestamp query parameter.
+func queryWithTimestampParam(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(
+        `SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);`)
+    q.Parameters = []bigquery.QueryParameter{
+        {
+            Name:  "ts_value",
+            Value: time.Date(2016, 12, 7, 8, 0, 0, 0, time.UTC),
+        },
+    }
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -1102,53 +1150,55 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryParameterValue;
-    import com.google.cloud.bigquery.TableResult;
-    import org.threeten.bp.LocalDateTime;
-    import org.threeten.bp.ZoneOffset;
-    import org.threeten.bp.ZonedDateTime;
-    
-    // Sample to running a query with timestamp query parameters.
-    public class QueryWithTimestampParameters {
-    
-      public static void runQueryWithTimestampParameters() {
-        queryWithTimestampParameters();
-      }
-    
-      public static void queryWithTimestampParameters() {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          ZonedDateTime timestamp = LocalDateTime.of(2016, 12, 7, 8, 0, 0).atZone(ZoneOffset.UTC);
-          String query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);";
-          // Note: Standard SQL is required to use query parameters.
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  .addNamedParameter(
-                      "ts_value",
-                      QueryParameterValue.timestamp(
-                          // Timestamp takes microseconds since 1970-01-01T00:00:00 UTC
-                          timestamp.toInstant().toEpochMilli() * 1000))
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s", val.toString())));
-    
-          System.out.println("Query with timestamp parameter performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
+import com.google.cloud.bigquery.TableResult;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.ZonedDateTime;
+
+// Sample to running a query with timestamp query parameters.
+public class QueryWithTimestampParameters {
+
+  public static void runQueryWithTimestampParameters() {
+    queryWithTimestampParameters();
+  }
+
+  public static void queryWithTimestampParameters() {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      ZonedDateTime timestamp = LocalDateTime.of(2016, 12, 7, 8, 0, 0).atZone(ZoneOffset.UTC);
+      String query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);";
+      // Note: Standard SQL is required to use query parameters.
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              .addNamedParameter(
+                  "ts_value",
+                  QueryParameterValue.timestamp(
+                      // Timestamp takes microseconds since 1970-01-01T00:00:00 UTC
+                      timestamp.toInstant().toEpochMilli() * 1000))
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s", val.toString())));
+
+      System.out.println("Query with timestamp parameter performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1156,29 +1206,31 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Run a query using timestamp parameters
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryParamsTimestamps() {
-      // The SQL query to run
-      const sqlQuery = `SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        params: {ts_value: new Date()},
-      };
-    
-      // Run the query
-      const [rows] = await bigquery.query(options);
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row.f0_));
-    }
+```javascript
+// Run a query using timestamp parameters
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryParamsTimestamps() {
+  // The SQL query to run
+  const sqlQuery = `SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);`;
+
+  const options = {
+    query: sqlQuery,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    params: {ts_value: new Date()},
+  };
+
+  // Run the query
+  const [rows] = await bigquery.query(options);
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row.f0_));
+}
+```
 
 ### Python
 
@@ -1186,29 +1238,31 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import datetime
-    
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);"
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter(
-                "ts_value",
-                "TIMESTAMP",
-                datetime.datetime(2016, 12, 7, 8, 0, tzinfo=datetime.timezone.utc),
-            )
-        ]
-    )
-    results = client.query_and_wait(
-        query, job_config=job_config
-    )  # Make an API request.
-    
-    for row in results:
-        print(row)
+```python
+import datetime
+
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = "SELECT TIMESTAMP_ADD(@ts_value, INTERVAL 1 HOUR);"
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter(
+            "ts_value",
+            "TIMESTAMP",
+            datetime.datetime(2016, 12, 7, 8, 0, tzinfo=datetime.timezone.utc),
+        )
+    ]
+)
+results = client.query_and_wait(
+    query, job_config=job_config
+)  # Make an API request.
+
+for row in results:
+    print(row)
+```
 
 ## Use structs in parameterized queries
 
@@ -1223,16 +1277,18 @@ Structs in parameterized queries aren't supported by the Google Cloud console.
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This trivial query demonstrates the use of structured types by returning the parameter value:
-    
-        bq query \
-           --use_legacy_sql=false \
-           --parameter='struct_value:STRUCT<x INT64, y STRING>:{"x": 1, "y": "foo"}' \
-           'SELECT
-             @struct_value AS s;'
+
+    ```
+    bq query \
+       --use_legacy_sql=false \
+       --parameter='struct_value:STRUCT<x INT64, y STRING>:{"x": 1, "y": "foo"}' \
+       'SELECT
+         @struct_value AS s;'
+    ```
 
 ### API
 
@@ -1242,47 +1298,49 @@ Add an object for each field of the struct to [`structTypes`](https://docs.cloud
 
 This trivial query demonstrates the use of structured types by returning the parameter value.
 
+```
+{
+  "query": "SELECT @struct_value AS s;",
+  "queryParameters": [
     {
-      "query": "SELECT @struct_value AS s;",
-      "queryParameters": [
-        {
-          "name": "struct_value",
-          "parameterType": {
-            "type": "STRUCT",
-            "structTypes": [
-              {
-                "name": "x",
-                "type": {
-                  "type": "INT64"
-                }
-              },
-              {
-                "name": "y",
-                "type": {
-                  "type": "STRING"
-                }
-              }
-            ]
+      "name": "struct_value",
+      "parameterType": {
+        "type": "STRUCT",
+        "structTypes": [
+          {
+            "name": "x",
+            "type": {
+              "type": "INT64"
+            }
           },
-          "parameterValue": {
-            "structValues": {
-              "x": {
-                "value": "1"
-              },
-              "y": {
-                "value": "foo"
-              }
+          {
+            "name": "y",
+            "type": {
+              "type": "STRING"
             }
           }
+        ]
+      },
+      "parameterValue": {
+        "structValues": {
+          "x": {
+            "value": "1"
+          },
+          "y": {
+            "value": "foo"
+          }
         }
-      ],
-      "useLegacySql": false,
-      "parameterMode": "NAMED"
+      }
     }
+  ],
+  "useLegacySql": false,
+  "parameterMode": "NAMED"
+}
+```
 
 [Try it in the Google APIs Explorer](https://developers.google.com/apis-explorer/#p/bigquery/v2/bigquery.jobs.query?projectId=my-project-id&_h=1&resource=%257B%250A++%2522query%2522%253A+%2522SELECT+%2540struct_value+AS+s%253B%2522%252C%250A++%2522queryParameters%2522%253A+%250A++%255B%250A++++%257B%250A++++++%2522name%2522%253A+%2522struct_value%2522%252C%250A++++++%2522parameterType%2522%253A+%250A++++++%257B%250A++++++++%2522type%2522%253A+%2522STRUCT%2522%252C%250A++++++++%2522structTypes%2522%253A+%250A++++++++%255B%250A++++++++++%257B%250A++++++++++++%2522name%2522%253A+%2522x%2522%252C%250A++++++++++++%2522type%2522%253A+%250A++++++++++++%257B%250A++++++++++++++%2522type%2522%253A+%2522INT64%2522%250A++++++++++++%257D%250A++++++++++%257D%252C%250A++++++++++%257B%250A++++++++++++%2522name%2522%253A+%2522y%2522%252C%250A++++++++++++%2522type%2522%253A+%250A++++++++++++%257B%250A++++++++++++++%2522type%2522%253A+%2522STRING%2522%250A++++++++++++%257D%250A++++++++++%257D%250A++++++++%255D%250A++++++%257D%252C%250A++++++%2522parameterValue%2522%253A+%250A++++++%257B%250A++++++++%2522structValues%2522%253A+%250A++++++++%257B%250A++++++++++%2522x%2522%253A+%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%25221%2522%250A++++++++++%257D%252C%250A++++++++++%2522y%2522%253A+%250A++++++++++%257B%250A++++++++++++%2522value%2522%253A+%2522foo%2522%250A++++++++++%257D%250A++++++++%257D%250A++++++%257D%250A++++%257D%250A++%255D%252C%250A++%2522useLegacySql%2522%253A+false%252C%250A++%2522parameterMode%2522%253A+%2522NAMED%2522%250A%257D&) .
 
-### C\#
+### C#
 
 The [BigQuery client library for .NET](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) does not support [struct parameters](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.BigQueryParameter) .
 
@@ -1292,64 +1350,66 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithStructParam demonstrates running a query and providing query parameters that include struct
-    // types.
-    func queryWithStructParam(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     type MyStruct struct {
-         X int64
-         Y string
-     }
-     q := client.Query(
-         `SELECT @struct_value as s;`)
-     q.Parameters = []bigquery.QueryParameter{
-         {
-             Name:  "struct_value",
-             Value: MyStruct{X: 1, Y: "foo"},
-         },
-     }
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithStructParam demonstrates running a query and providing query parameters that include struct
+// types.
+func queryWithStructParam(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    type MyStruct struct {
+        X int64
+        Y string
+    }
+    q := client.Query(
+        `SELECT @struct_value as s;`)
+    q.Parameters = []bigquery.QueryParameter{
+        {
+            Name:  "struct_value",
+            Value: MyStruct{X: 1, Y: "foo"},
+        },
+    }
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -1357,49 +1417,51 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryParameterValue;
-    import com.google.cloud.bigquery.TableResult;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    public class QueryWithStructsParameters {
-    
-      public static void queryWithStructsParameters() {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Create struct
-          Map<String, QueryParameterValue> struct = new HashMap<>();
-          struct.put("booleanField", QueryParameterValue.bool(true));
-          struct.put("integerField", QueryParameterValue.string("test-stringField"));
-          struct.put("stringField", QueryParameterValue.int64(10));
-          QueryParameterValue recordValue = QueryParameterValue.struct(struct);
-    
-          String query = "SELECT STRUCT(@recordField) AS record";
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  .setUseLegacySql(false)
-                  .addNamedParameter("recordField", recordValue)
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s", val.toString())));
-    
-          System.out.println("Query with struct parameter performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryParameterValue;
+import com.google.cloud.bigquery.TableResult;
+import java.util.HashMap;
+import java.util.Map;
+
+public class QueryWithStructsParameters {
+
+  public static void queryWithStructsParameters() {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Create struct
+      Map<String, QueryParameterValue> struct = new HashMap<>();
+      struct.put("booleanField", QueryParameterValue.bool(true));
+      struct.put("integerField", QueryParameterValue.string("test-stringField"));
+      struct.put("stringField", QueryParameterValue.int64(10));
+      QueryParameterValue recordValue = QueryParameterValue.struct(struct);
+
+      String query = "SELECT STRUCT(@recordField) AS record";
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              .setUseLegacySql(false)
+              .addNamedParameter("recordField", recordValue)
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s", val.toString())));
+
+      System.out.println("Query with struct parameter performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1407,29 +1469,31 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Run a query using struct query parameters
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryParamsStructs() {
-      // The SQL query to run
-      const sqlQuery = `SELECT @struct_value AS struct_obj;`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        params: {struct_value: {x: 1, y: 'foo'}},
-      };
-    
-      // Run the query
-      const [rows] = await bigquery.query(options);
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row.struct_obj.y));
-    }
+```javascript
+// Run a query using struct query parameters
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryParamsStructs() {
+  // The SQL query to run
+  const sqlQuery = `SELECT @struct_value AS struct_obj;`;
+
+  const options = {
+    query: sqlQuery,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    params: {struct_value: {x: 1, y: 'foo'}},
+  };
+
+  // Run the query
+  const [rows] = await bigquery.query(options);
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row.struct_obj.y));
+}
+```
 
 ### Python
 
@@ -1437,27 +1501,29 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = "SELECT @struct_value AS s;"
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.StructQueryParameter(
-                "struct_value",
-                bigquery.ScalarQueryParameter("x", "INT64", 1),
-                bigquery.ScalarQueryParameter("y", "STRING", "foo"),
-            )
-        ]
-    )
-    results = client.query_and_wait(
-        query, job_config=job_config
-    )  # Make an API request and waits for results.
-    
-    for row in results:
-        print(row.s)
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = "SELECT @struct_value AS s;"
+job_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.StructQueryParameter(
+            "struct_value",
+            bigquery.ScalarQueryParameter("x", "INT64", 1),
+            bigquery.ScalarQueryParameter("y", "STRING", "foo"),
+        )
+    ]
+)
+results = client.query_and_wait(
+    query, job_config=job_config
+)  # Make an API request and waits for results.
+
+for row in results:
+    print(row.s)
+```
 
 ## Use ranges in parameterized queries
 
@@ -1472,15 +1538,17 @@ Ranges in parameterized queries aren't supported by the Google Cloud console.
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  This query demonstrates the use of range types by returning the parameter value:
-    
-        bq query \
-           --use_legacy_sql=false \
-           --parameter='my_param:RANGE<DATE>:[2020-01-01, 2020-12-31)' \
-           'SELECT @my_param AS foo;'
+
+    ```
+    bq query \
+       --use_legacy_sql=false \
+       --parameter='my_param:RANGE<DATE>:[2020-01-01, 2020-12-31)' \
+       'SELECT @my_param AS foo;'
+    ```
 
 ### API
 
@@ -1488,33 +1556,35 @@ To use a range parameter, in the [`parameterType`](https://docs.cloud.google.com
 
 This query shows how to use the `RANGE` parameter type by returning the parameter value.
 
+```
+{
+  "query": "SELECT @my_param AS value_of_range_parameter;",
+  "queryParameters": [
     {
-      "query": "SELECT @my_param AS value_of_range_parameter;",
-      "queryParameters": [
-        {
-          "name": "range_param",
-          "parameterType": {
-            "type": "RANGE",
-            "rangeElementTYpe": {
-              "type": "DATE"
-            }
+      "name": "range_param",
+      "parameterType": {
+        "type": "RANGE",
+        "rangeElementTYpe": {
+          "type": "DATE"
+        }
+      },
+      "parameterValue": {
+        "rangeValue": {
+          "start": {
+            "value": "2020-01-01"
           },
-          "parameterValue": {
-            "rangeValue": {
-              "start": {
-                "value": "2020-01-01"
-              },
-              "end": {
-                "value": "2020-12-31"
-              }
-            }
+          "end": {
+            "value": "2020-12-31"
           }
         }
-      ],
-      "useLegacySql": false,
-      "parameterMode": "NAMED"
+      }
     }
+  ],
+  "useLegacySql": false,
+  "parameterMode": "NAMED"
+}
+```
 
 ## What's next
 
-  - Learn about [verified parameterized queries](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) in BigQuery conversational analytics.
+- Learn about [verified parameterized queries](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) in BigQuery conversational analytics.

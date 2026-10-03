@@ -12,8 +12,8 @@ You can optimize your BigQuery slot usage with the BigQuery slot recommender. It
 
 You can use the slot recommender for both reservations billing and on-demand billing:
 
-  - For reservations billing, get cost-optimized recommendations for Enterprise or Enterprise Plus edition workloads. You also receive performance-based recommendations for your reservations.
-  - For on-demand billing, receive cost-optimized recommendations for on-demand workloads across your organization or for specific projects. This includes recommendations if you convert projects to the Enterprise edition.
+- For reservations billing, get cost-optimized recommendations for Enterprise or Enterprise Plus edition workloads. You also receive performance-based recommendations for your reservations.
+- For on-demand billing, receive cost-optimized recommendations for on-demand workloads across your organization or for specific projects. This includes recommendations if you convert projects to the Enterprise edition.
 
 For more information about the recommender service, see the [Recommender overview](https://docs.cloud.google.com/recommender/docs/overview) .
 
@@ -31,12 +31,12 @@ The slot recommender models autoscaler usage with a one-minute minimum duration 
 
 The recommendation includes the following details:
 
-  - Baseline commitment slots: The number of commitment slots to achieve optimal cost without affecting performance. You can also view the optimal commitments in the preceding usage chart by selecting **View optimal commitments** .
-  - Baseline commitment monthly cost: The monthly cost of the optimal commitment slots, calculated using the custom edition commitment price. A month is defined as 730 hours.
-  - Autoscale slots: The maximum number of autoscale slots used at a time. This represents the additional slots beyond the optimal commitment slots that are covered by autoscaling. This value does not include the commitment or baseline slots.
-  - Expected autoscale utilization: The expected monthly utilization of autoscale slots, calculated as the expected autoscale slots used divided by the maximum autoscale slots.
-  - Autoscale monthly cost: The monthly cost of using the expected amount of autoscale slots, calculated using the custom autoscale price.
-  - Total monthly cost: The total monthly cost, which includes the commitment monthly cost and the autoscale monthly cost.
+- Baseline commitment slots: The number of commitment slots to achieve optimal cost without affecting performance. You can also view the optimal commitments in the preceding usage chart by selecting **View optimal commitments** .
+- Baseline commitment monthly cost: The monthly cost of the optimal commitment slots, calculated using the custom edition commitment price. A month is defined as 730 hours.
+- Autoscale slots: The maximum number of autoscale slots used at a time. This represents the additional slots beyond the optimal commitment slots that are covered by autoscaling. This value does not include the commitment or baseline slots.
+- Expected autoscale utilization: The expected monthly utilization of autoscale slots, calculated as the expected autoscale slots used divided by the maximum autoscale slots.
+- Autoscale monthly cost: The monthly cost of using the expected amount of autoscale slots, calculated using the custom autoscale price.
+- Total monthly cost: The total monthly cost, which includes the commitment monthly cost and the autoscale monthly cost.
 
 ### Best practices when applying recommendations
 
@@ -52,14 +52,14 @@ You might see the message `Slot Estimator doesn't have any recommendations that 
 
 To view cost-optimal commitment slots recommendations, you need the following Identity and Access Management (IAM) permissions:
 
-  - `recommender.bigqueryCapacityCommitmentsRecommendations.get`
-  - `recommender.bigqueryCapacityCommitmentsRecommendations.list`
+- `recommender.bigqueryCapacityCommitmentsRecommendations.get`
+- `recommender.bigqueryCapacityCommitmentsRecommendations.list`
 
 Each of the following predefined IAM roles includes these permissions:
 
-  - `BigQuery Resource Admin`
-  - `BigQuery Slot Recommender Viewer`
-  - `BigQuery Slot Recommender Admin`
+- `BigQuery Resource Admin`
+- `BigQuery Slot Recommender Viewer`
+- `BigQuery Slot Recommender Admin`
 
 To view recommendations for your edition workloads, you must have the listed permission for the administration project.
 
@@ -71,12 +71,12 @@ To view organization level recommendations for your on-demand workloads, you mus
 
 In the recommendations settings, rows such as **Baseline commitment slots** and **Total monthly cost** are visible, but the values of the monthly cost details are hidden. To view the hidden values, you also need the following permission:
 
-  - `billing.accounts.getPricing`
+- `billing.accounts.getPricing`
 
 Each of the following predefined IAM roles includes these permissions:
 
-  - `Billing Account Viewer`
-  - `Billing Account Administrator`
+- `Billing Account Viewer`
+- `Billing Account Administrator`
 
 For edition workloads, you need the previously listed permissions at the billing account associated with the administrator project. For project-level on-demand workloads, you need the permissions at the billing account associated with the project or at the organization level for organization-level recommendations.
 
@@ -102,13 +102,13 @@ Before you can view the recommendations, you must [enable the Recommender API](h
 
 The slot recommender for reservations performance improvement recommendations requires that you have the following IAM permissions on the administration project:
 
-  - `bigquery.reservations.list`
-  - `bigquery.reservationAssignments.list`
-  - `bigquery.capacityCommitments.list`
+- `bigquery.reservations.list`
+- `bigquery.reservationAssignments.list`
+- `bigquery.capacityCommitments.list`
 
 To apply the recommended updates to the reservation, you must also have the following IAM permissions on the administration project:
 
-  - `bigquery.reservations.update`
+- `bigquery.reservations.update`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -131,6 +131,6 @@ To view slot recommendations using the Google Cloud console, perform the followi
 5.  Click the **Slot estimator** tab.
 
 6.  In the **Source** pane, select an on-demand workload or an edition (Enterprise or Enterprise Plus) workload.
-    
-      - If you select an edition workload, detailed recommendations appear under the graph of historical usage.
-      - If you select an on-demand workload, the organization administrator is able to switch between organization level and project level (for one or more projects).
+
+    - If you select an edition workload, detailed recommendations appear under the graph of historical usage.
+    - If you select an on-demand workload, the organization administrator is able to switch between organization level and project level (for one or more projects).

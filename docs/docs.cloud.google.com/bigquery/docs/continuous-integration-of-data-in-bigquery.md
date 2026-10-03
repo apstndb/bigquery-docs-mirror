@@ -18,9 +18,9 @@ However, when you're working with a DWH like BigQuery, there are differences in 
 
 This document provides the following information:
 
-  - Techniques for implementing a continuous integration (CI) strategy in BigQuery.
-  - Guidance and methods that help you avoid pitfalls.
-  - Suggestions for BigQuery features that help with CI in BigQuery.
+- Techniques for implementing a continuous integration (CI) strategy in BigQuery.
+- Guidance and methods that help you avoid pitfalls.
+- Suggestions for BigQuery features that help with CI in BigQuery.
 
 This document focuses on CI, because integration has more data-specific considerations for a data warehousing team than continuous delivery (CD) does.
 
@@ -32,9 +32,9 @@ Integrating new data into the DWH is a task similar to integrating a new feature
 
 CI for DWH is useful when you want to do the following:
 
-  - Describe key points in CI for a DWH system.
-  - Design and implement a CI strategy for your BigQuery environment.
-  - Learn how to use BigQuery features for implementing CI.
+- Describe key points in CI for a DWH system.
+- Design and implement a CI strategy for your BigQuery environment.
+- Learn how to use BigQuery features for implementing CI.
 
 This guide doesn't describe how to manage CI for non-DWH products, including data products like Dataflow and Bigtable.
 
@@ -58,8 +58,8 @@ These principles also apply when an organization must integrate data into a DWH,
 
 Although this document focuses on isolating development changes from the production environment, the document doesn't cover the following aspects of data integration:
 
-  - **Data testing:** Are you able to verify that the data you have conforms to business requirements? Is the data reliable to serve as the source of truth? To increase your confidence level in the data that you're serving from your DWH, it's important to test the data. To test, you can run a set of queries, asserting that the data isn't missing values or asserting that it contains "bad" values.
-  - **Data lineage:** Are you able to see any table in its context? For example, can you see where the data was gathered from, and which datasets were pre-computed in order to generate the table? In modern DWH architectures, data is split into many systems that use different, specialized data structures. These include relational databases, NoSQL databases, and external data sources. To fully understand the data that you have, you must keep track of that data. You must also understand how the data was generated and from where it was generated.
+- **Data testing:** Are you able to verify that the data you have conforms to business requirements? Is the data reliable to serve as the source of truth? To increase your confidence level in the data that you're serving from your DWH, it's important to test the data. To test, you can run a set of queries, asserting that the data isn't missing values or asserting that it contains "bad" values.
+- **Data lineage:** Are you able to see any table in its context? For example, can you see where the data was gathered from, and which datasets were pre-computed in order to generate the table? In modern DWH architectures, data is split into many systems that use different, specialized data structures. These include relational databases, NoSQL databases, and external data sources. To fully understand the data that you have, you must keep track of that data. You must also understand how the data was generated and from where it was generated.
 
 These topics are out of scope for this guide. However, it will benefit your data strategy to plan for these topics when you're designing a workflow for your team.
 
@@ -81,10 +81,10 @@ These tables don't serve data directly to consumers. Instead, the data is served
 
 The consumers of the data can connect to and read data from the DWH access layer. These data consumers might include systems like the following:
 
-  - Business intelligence (BI) dashboards
-  - Data science notebooks
-  - Operational systems that rely on data calculated in the DWH
-  - Human users for ad-hoc queries
+- Business intelligence (BI) dashboards
+- Data science notebooks
+- Operational systems that rely on data calculated in the DWH
+- Human users for ad-hoc queries
 
 The data consumers rely heavily on the DWH for providing consistent schemas and on the business logic that the DWH encapsulates. These schemas and business logic can be considered as the service level agreements (SLAs) of the DWH platform. Any change to the business logic, to the schema, or to the completeness of data might have large implications downstream. Given the ever-changing nature of modern data platforms, the DWH team might be required to make those changes while nevertheless strictly adhering to the SLAs. In order for the team to meet these SLAs and also keep the DWH up to date, they need a workflow that allows data integration while minimizing the friction that these changes might create.
 
@@ -92,13 +92,13 @@ The data consumers rely heavily on the DWH for providing consistent schemas and 
 
 As with any other development or IT team, the DWH team must maintain assets that are essential to their responsibilities. These assets can typically be divided into the following categories:
 
-  - **The codebase for data pipelines** : These assets usually consist of source code in a high-level programming language like Python or Java. For those types of assets, the CI/CD processes are built by using tools like Git and Jenkins, or by using Google Cloud solutions like Cloud Source Repositories and Cloud Build.
+- **The codebase for data pipelines** : These assets usually consist of source code in a high-level programming language like Python or Java. For those types of assets, the CI/CD processes are built by using tools like Git and Jenkins, or by using Google Cloud solutions like Cloud Source Repositories and Cloud Build.
 
-  - **SQL scripts** : These assets describe the structure and the business logic that's encapsulated inside the DWH. Within this category, the assets can be further divided into the following subcategories:
-    
-      - **Data definition language (DDL)** : These assets are used for defining the schema of tables and views.
-      - **Data manipulation language (DML)** : These assets are used for manipulating data inside a table. DML commands are also used to create new tables based on existing tables.
-      - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`bq`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
+- **SQL scripts** : These assets describe the structure and the business logic that's encapsulated inside the DWH. Within this category, the assets can be further divided into the following subcategories:
+
+  - **Data definition language (DDL)** : These assets are used for defining the schema of tables and views.
+  - **Data manipulation language (DML)** : These assets are used for manipulating data inside a table. DML commands are also used to create new tables based on existing tables.
+  - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`bq`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
 
 These assets, and others like Terraform scripts that are used to build components, are maintained inside code repositories. Tools like [Dataform](https://dataform.co/) can help you construct a CI/CD pipeline that validates your SQL scripts and checks predefined validation rules on tables that are created by DDL scripts. These tools let you apply compilation and testing processes for SQL, which in most contexts doesn't have a natural testing environment.
 
@@ -111,7 +111,7 @@ Because of the potential complexity of table relationships inside a DWH (for exa
 The following table summarizes the differences between the practices for integrating code and the practices for integrating data.
 
 |                   | Integrating code                                                                                                                                                                                                                  | Integrating data                                                                                                                                                                                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Local development | Source code is easily cloneable due to its relatively small size. Generally the code fits most end-user machines (excluding cases of monorepos, which have other solutions).                                                      | Most tables in a DWH cannot fit on a development machine due to their size.                                                                                                                                                                          |
 | Central testing   | Different states of the source code are cloned into a central system (a CI server) to undergo automated testing. Having different states of the code lets you compare results between a stable version and a development version. | Creating different states of the data in an isolated environment isn't straightforward. Moving data outside the DWH is a resource-intensive and time-consuming operation. It isn't practical to do as frequently as needed for testing.              |
 | Past versions     | During the process of releasing new versions of software, you can track past versions. If you detect a problem in a new release, you can roll back to a safe version.                                                             | Taking backups of tables inside the DWH is a standard practice in case you must roll back. However, you must make sure that all affected tables are rolled back to the same point in time. That way, related tables are consistent with one another. |
@@ -135,22 +135,22 @@ To illustrate the integration workflow for CI in a DWH, imagine the following sc
 2.  You [create a new BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to contain the assets for this change. This dataset helps isolate the changes and separates this task from other tasks that other team members work on. The dataset must be in the same region as the source dataset. However, the project can be separated from the production project to help with your organization's security and billing requirements.
 
 3.  For each of the tables, you create both a [clone](https://docs.cloud.google.com/bigquery/docs/table-clones-create) and a [snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create) in the new dataset, potentially for the same point in time. This approach offers the following benefits:
-    
-      - The table clone can act as a working copy where you can make changes freely without affecting the production table. You can create multiple table clones of the same base table in order to test different integration paths at the same time, with minimal overhead.
-      - The snapshot can act as a restore and reference point, a point where the data is known to have worked before any change took place. Having this snapshot lets you perform a rollback in case an issue is detected later in the process.
+
+    - The table clone can act as a working copy where you can make changes freely without affecting the production table. You can create multiple table clones of the same base table in order to test different integration paths at the same time, with minimal overhead.
+    - The snapshot can act as a restore and reference point, a point where the data is known to have worked before any change took place. Having this snapshot lets you perform a rollback in case an issue is detected later in the process.
 
 4.  You use the table clones to implement the changes that are required for the tables. This action results in an updated version of the table clones, which you can test in an isolated dataset.
 
 5.  Optionally, at the end of the implementation phase, you can present a dataset that can be used for the following tasks:
-    
-      - Unit testing with a validation tool like [Dataform](https://dataform.co/) . Unit tests are self-contained, which means that the asset is tested in isolation. In this case, the asset is the table in BigQuery. Unit tests can check for null values, can verify that all strings meet length requirements, and can make sure that certain aggregates produce useful results. Unit tests can include any confidence test that makes sure that the table maintains the organization's business rules.
-      - Integration testing with downstream consumers.
-      - Peer review.
-    
+
+    - Unit testing with a validation tool like [Dataform](https://dataform.co/) . Unit tests are self-contained, which means that the asset is tested in isolation. In this case, the asset is the table in BigQuery. Unit tests can check for null values, can verify that all strings meet length requirements, and can make sure that certain aggregates produce useful results. Unit tests can include any confidence test that makes sure that the table maintains the organization's business rules.
+    - Integration testing with downstream consumers.
+    - Peer review.
+
     This workflow lets you test with production data, without affecting the downstream consumers.
 
 6.  Before you merge the new data into BigQuery, you can create another snapshot. This snapshot is useful as another rollback option in case the data in the base table has changed.
-    
+
     The process of merging the changes depends on the process that your organization wants to adopt and on what changes are required. For example, for a change in the SQL scripts, the new dataset might be accompanied by a pull request to the standard codebase. If the change is limited to a change in the data within a given table, you could just copy data using standard methods of BigQuery.
 
 You can use a script of stored procedures to encapsulate and automate the steps for creating a dataset and creating the clones and snapshots. Automating these tasks reduces risk of human error. For an example of a script that can help automate the processes, see the [CI for Data in BigQuery CLI utility](https://github.com/GoogleCloudPlatform/ci-for-data-in-bigquery/) GitHub repository.
@@ -192,13 +192,13 @@ Another alternative method is to move the data through Cloud Storage. This metho
 The following table summarizes the differences, advantages, and potential disadvantages between the options for DWH continuous integration. (Sharing offers a different feature set, and is therefore not measurable using the parameters listed in the table.)
 
 |                                  | Costs                                                                                                                                                               | Rollbacks                                                                                                                 | Risks                                                                                                                                                |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Table snapshots and table clones | Minimal. You pay only for the difference between the snapshot or clone and the base table.                                                                          | The snapshot acts as a backup to roll back to if necessary.                                                               | You control the amount of risk. Snapshots can be taken at a point in time for all tables, which reduces inconsistencies even if there is a rollback. |
 | Table copy                       | Higher costs than using table snapshots and table clones. The entirety of the data is duplicated. To support rollbacks, you need multiple copies of the same table. | Possible, but requires two copies of the table—one copy to serve as backup and one copy to work with and make changes to. | Cloning is harder to do for a point in time. If a rollback is necessary, not all tables are taken from the same point in time.                       |
 | Export and import                | Higher costs than using table snapshots and table clones. The data is duplicated. To support rollback, you need multiple copies of the same table.                  | The exported data serves as a backup.                                                                                     | Exported data is not a point-in-time export for multiple tables.                                                                                     |
 
 ## What's next
 
-  - Read about BigQuery table snapshots in [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
-  - Learn more about continuous integration for software development in [DevOps tech: Continuous integration](https://docs.cloud.google.com/architecture/devops/devops-tech-continuous-integration) .
-  - For more reference architectures, diagrams, and best practices, explore the [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .
+- Read about BigQuery table snapshots in [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+- Learn more about continuous integration for software development in [DevOps tech: Continuous integration](https://docs.cloud.google.com/architecture/devops/devops-tech-continuous-integration) .
+- For more reference architectures, diagrams, and best practices, explore the [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .

@@ -11,12 +11,14 @@ GoogleSQL for BigQuery supports the following security functions.
 ## Function list
 
 | Name                                                                                                                 | Summary                                                                             |
-| -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+|----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | [`SESSION_USER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#session_user) | Get the email address or principal identifier of the user that's running the query. |
 
 ## `SESSION_USER`
 
-    SESSION_USER()
+```
+SESSION_USER()
+```
 
 **Description**
 
@@ -28,10 +30,12 @@ For first-party users, returns the email address of the user that's running the 
 
 **Example**
 
-    SELECT SESSION_USER() as user;
-    
-    /*----------------------+
-     | user                 |
-     +----------------------+
-     | jdoe@example.com     |
-     +----------------------*/
+```
+SELECT SESSION_USER() as user;
+
+/*----------------------+
+ | user                 |
+ +----------------------+
+ | jdoe@example.com     |
+ +----------------------*/
+```

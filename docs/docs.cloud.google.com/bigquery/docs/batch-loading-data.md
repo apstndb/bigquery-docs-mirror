@@ -10,13 +10,13 @@ data_source: docs.cloud.google.com
 
 You can load data into BigQuery from Cloud Storage or from a local file as a batch operation. The source data can be in any of the following formats:
 
-  - Avro
-  - Comma-separated values (CSV)
-  - JSON (newline-delimited)
-  - ORC
-  - Parquet
-  - [Datastore](https://docs.cloud.google.com/datastore) exports stored in Cloud Storage
-  - [Firestore](https://docs.cloud.google.com/firestore) exports stored in Cloud Storage
+- Avro
+- Comma-separated values (CSV)
+- JSON (newline-delimited)
+- ORC
+- Parquet
+- [Datastore](https://docs.cloud.google.com/datastore) exports stored in Cloud Storage
+- [Firestore](https://docs.cloud.google.com/firestore) exports stored in Cloud Storage
 
 You can also use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) to set up recurring loads from Cloud Storage into BigQuery.
 
@@ -32,18 +32,18 @@ To load data into BigQuery, you need IAM permissions to run a load job and load 
 
 To load data into a new BigQuery table or partition or to append or overwrite an existing table or partition, you need the following IAM permissions:
 
-  - `bigquery.tables.create`
-  - `bigquery.tables.updateData`
-  - `bigquery.tables.update`
-  - `bigquery.jobs.create`
+- `bigquery.tables.create`
+- `bigquery.tables.updateData`
+- `bigquery.tables.update`
+- `bigquery.jobs.create`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to load data into a BigQuery table or partition:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
-  - `bigquery.user` (includes the `bigquery.jobs.create` permission)
-  - `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin` (includes the `bigquery.jobs.create` permission)
+- `bigquery.user` (includes the `bigquery.jobs.create` permission)
+- `bigquery.jobUser` (includes the `bigquery.jobs.create` permission)
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can create and update tables using a load job in the datasets that you create.
 
@@ -59,9 +59,9 @@ This predefined role contains the permissions required to load data from a Cloud
 
 The following permissions are required to load data from a Cloud Storage bucket:
 
-  - `storage.buckets.get`
-  - `storage.objects.get`
-  - `storage.objects.list (required if you are using a URI wildcard )`
+- `storage.buckets.get`
+- `storage.objects.get`
+- `storage.objects.list (required if you are using a URI `[`wildcard`](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards)` )`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -73,20 +73,20 @@ Create a [BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets
 
 BigQuery supports loading data from any of the following Cloud Storage [storage classes](https://docs.cloud.google.com/storage/docs/storage-classes) :
 
-  - Standard
-  - Nearline
-  - Coldline
-  - Archive
+- Standard
+- Nearline
+- Coldline
+- Archive
 
 To learn how to load data into BigQuery, see the page for your data format:
 
-  - [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
-  - [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
-  - [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
-  - [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
-  - [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
-  - [Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
-  - [Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
+- [CSV](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+- [JSON](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
+- [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
+- [Parquet](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
+- [ORC](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+- [Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
+- [Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
 
 To learn how to configure a recurring load from Cloud Storage into BigQuery, see [Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
 
@@ -94,8 +94,8 @@ To learn how to configure a recurring load from Cloud Storage into BigQuery, see
 
 You cannot change the location of a dataset after it is created, but you can make a copy of the dataset or manually move it. For more information, see:
 
-  - [Copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
-  - [Moving a dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset)
+- [Copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
+- [Moving a dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset)
 
 ### Retrieving the Cloud Storage URI
 
@@ -103,7 +103,7 @@ To load data from a Cloud Storage data source, you must provide the Cloud Storag
 
 The Cloud Storage resource path contains your bucket name and your object (filename). For example, if the Cloud Storage bucket is named `mybucket` and the data file is named `myfile.csv` , the resource path would be `gs://mybucket/myfile.csv` .
 
-BigQuery does not support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, does not work in BigQuery: `gs:// bucket /my//object//name` .
+BigQuery does not support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, does not work in BigQuery: `gs:// `` bucket `` /my//object//name` .
 
 To retrieve the Cloud Storage resource path:
 
@@ -112,7 +112,7 @@ To retrieve the Cloud Storage resource path:
 2.  Browse to the location of the object (file) that contains the source data.
 
 3.  Click on the name of the object.
-    
+
     The **Object details** page opens.
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `gs://` .
@@ -125,23 +125,29 @@ For Google Datastore exports, only one URI can be specified, and it must end wit
 
 If your data is separated into multiple files, you can use an asterisk (\*) wildcard to select multiple files. Use of the asterisk wildcard must follow these rules:
 
-  - The asterisk can appear inside the object name or at the end of the object name.
-  - Using multiple asterisks is unsupported. For example, the path `gs://mybucket/fed-*/temp/*.csv` is invalid.
-  - Using an asterisk with the bucket name is unsupported.
+- The asterisk can appear inside the object name or at the end of the object name.
+- Using multiple asterisks is unsupported. For example, the path `gs://mybucket/fed-*/temp/*.csv` is invalid.
+- Using an asterisk with the bucket name is unsupported.
 
 Examples:
 
-  - The following example shows how to select all of the files in all the folders which start with the prefix `gs://mybucket/fed-samples/fed-sample` :
-    
-        gs://mybucket/fed-samples/fed-sample*
+- The following example shows how to select all of the files in all the folders which start with the prefix `gs://mybucket/fed-samples/fed-sample` :
 
-  - The following example shows how to select only files with a `.csv` extension in the folder named `fed-samples` and any subfolders of `fed-samples` :
-    
-        gs://mybucket/fed-samples/*.csv
+  ```
+  gs://mybucket/fed-samples/fed-sample*
+  ```
 
-  - The following example shows how to select files with a naming pattern of `fed-sample*.csv` in the folder named `fed-samples` . This example doesn't select files in subfolders of `fed-samples` .
-    
-        gs://mybucket/fed-samples/fed-sample*.csv
+- The following example shows how to select only files with a `.csv` extension in the folder named `fed-samples` and any subfolders of `fed-samples` :
+
+  ```
+  gs://mybucket/fed-samples/*.csv
+  ```
+
+- The following example shows how to select files with a naming pattern of `fed-sample*.csv` in the folder named `fed-samples` . This example doesn't select files in subfolders of `fed-samples` .
+
+  ```
+  gs://mybucket/fed-samples/fed-sample*.csv
+  ```
 
 When using the bq command-line tool, you might need to escape the asterisk on some platforms.
 
@@ -151,25 +157,25 @@ You can't use an asterisk wildcard when you load Datastore or Firestore export d
 
 You are subject to the following limitations when you load data into BigQuery from a Cloud Storage bucket:
 
-  - BigQuery does not guarantee data consistency for external data sources. Changes to the underlying data while a query is running can result in unexpected behavior.
-  - BigQuery doesn't support [Cloud Storage object versioning](https://docs.cloud.google.com/storage/docs/object-versioning) . If you include a generation number in the Cloud Storage URI, then the load job fails.
+- BigQuery does not guarantee data consistency for external data sources. Changes to the underlying data while a query is running can result in unexpected behavior.
+- BigQuery doesn't support [Cloud Storage object versioning](https://docs.cloud.google.com/storage/docs/object-versioning) . If you include a generation number in the Cloud Storage URI, then the load job fails.
 
 Depending on the format of your Cloud Storage source data, there may be additional limitations. For more information, see:
 
-  - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
-  - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
-  - [Datastore export limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore#limitations)
-  - [Firestore export limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#limitations)
-  - [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
+- [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
+- [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
+- [Datastore export limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore#limitations)
+- [Firestore export limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#limitations)
+- [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
 
 ## Loading data from local files
 
 You can load data from a readable data source (such as your local machine) by using one of the following:
 
-  - The Google Cloud console
-  - The bq command-line tool's `bq load` command
-  - The API
-  - The client libraries
+- The Google Cloud console
+- The bq command-line tool's `bq load` command
+- The API
+- The client libraries
 
 When you load data using the Google Cloud console or the bq command-line tool, a load job is automatically created.
 
@@ -180,48 +186,48 @@ To load data from a local data source:
 1.  Open the BigQuery page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the details pane, click add\_box **Create table** .
+4.  In the details pane, click add_box **Create table** .
 
 5.  On the **Create table** page, in the **Source** section:
-    
-      - For **Create table from** , select **Upload** .
-      - For **Select file** , click **Browse** .
-      - Browse to the file, and click **Open** . Note that wildcards and comma-separated lists are not supported for local files.
-      - For **File format** , select **CSV** , **JSON (newline delimited)** , **Avro** , **Parquet** , or **ORC** .
+
+    - For **Create table from** , select **Upload** .
+    - For **Select file** , click **Browse** .
+    - Browse to the file, and click **Open** . Note that wildcards and comma-separated lists are not supported for local files.
+    - For **File format** , select **CSV** , **JSON (newline delimited)** , **Avro** , **Parquet** , or **ORC** .
 
 6.  On the **Create table** page, in the **Destination** section:
-    
-      - For **Project** , choose the appropriate project.
-      - For **Dataset** , choose the appropriate dataset.
-      - In the **Table** field, enter the name of the table you're creating in BigQuery.
-      - Verify that **Table type** is set to **Native table** .
+
+    - For **Project** , choose the appropriate project.
+    - For **Dataset** , choose the appropriate dataset.
+    - In the **Table** field, enter the name of the table you're creating in BigQuery.
+    - Verify that **Table type** is set to **Native table** .
 
 7.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition.
-    
-      - For CSV and JSON files, you can check the **Auto-detect** option to enable schema [auto-detect](https://docs.cloud.google.com/bigquery/docs/schema-detect) . Schema information is self-described in the source data for other supported file types.
-    
-      - You can also enter schema information manually by:
-        
-          - Clicking **Edit as text** and entering the table schema as a JSON array:
-            
-            > **Note:** You can view the schema of an existing table in JSON format by entering the following command: ` bq show --format=prettyjson dataset.table  ` .
-        
-          - Using **Add Field** to manually input the schema.
+
+    - For CSV and JSON files, you can check the **Auto-detect** option to enable schema [auto-detect](https://docs.cloud.google.com/bigquery/docs/schema-detect) . Schema information is self-described in the source data for other supported file types.
+
+    - You can also enter schema information manually by:
+
+      - Clicking **Edit as text** and entering the table schema as a JSON array:
+
+        > **Note:** You can view the schema of an existing table in JSON format by entering the following command: `bq show --format=prettyjson `` dataset.table` .
+
+      - Using **Add Field** to manually input the schema.
 
 8.  Select applicable items in the **Advanced options** section. For information on the available options, see [CSV options](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) and [JSON options](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#json-options) .
 
 9.  Optional: In the **Advanced options** choose the write disposition:
-    
-      - **Write if empty** : Write the data only if the table is empty.
-      - **Append to table** : Append the data to the end of the table. This setting is the default.
-      - **Overwrite table** : Erase all existing data in the table before writing the new data.
+
+    - **Write if empty** : Write the data only if the table is empty.
+    - **Append to table** : Append the data to the end of the table. This setting is the default.
+    - **Overwrite table** : Erase all existing data in the table before writing the new data.
 
 10. Click **Create Table** .
 
@@ -231,23 +237,25 @@ Use the `bq load` command, specify the `source_format` , and include the path to
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-If you are loading data in a project other than your default project, add the project ID to the dataset in the following format: `  PROJECT_ID:DATASET  ` .
+If you are loading data in a project other than your default project, add the project ID to the dataset in the following format: `PROJECT_ID:DATASET` .
 
-    bq --location=LOCATION load \
-    --source_format=FORMAT \
-    PROJECT_ID:DATASET.TABLE \
-    PATH_TO_SOURCE \
-    SCHEMA
+```
+bq --location=LOCATION load \
+--source_format=FORMAT \
+PROJECT_ID:DATASET.TABLE \
+PATH_TO_SOURCE \
+SCHEMA
+```
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  FORMAT  ` : `CSV` , `AVRO` , `PARQUET` , `ORC` , or `NEWLINE_DELIMITED_JSON` .
-  - `  project_id  ` : your project ID.
-  - `  dataset  ` : an existing dataset.
-  - `  table  ` : the name of the table into which you're loading data.
-  - `  path_to_source  ` : the path to the local file.
-  - `  schema  ` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. You can also use the `--autodetect` flag instead of supplying a schema definition.
+- `LOCATION` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `FORMAT` : `CSV` , `AVRO` , `PARQUET` , `ORC` , or `NEWLINE_DELIMITED_JSON` .
+- `project_id` : your project ID.
+- `dataset` : an existing dataset.
+- `table` : the name of the table into which you're loading data.
+- `path_to_source` : the path to the local file.
+- `schema` : a valid schema. The schema can be a local JSON file, or it can be typed inline as part of the command. You can also use the `--autodetect` flag instead of supplying a schema definition.
 
 In addition, you can add flags for options that let you control how BigQuery parses your data. For example, you can use the `--skip_leading_rows` flag to ignore header rows in a CSV file. For more information, see [CSV options](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) and [JSON options](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#json-options) .
 
@@ -255,7 +263,7 @@ Examples:
 
 The following command loads a local newline-delimited JSON file ( `mydata.json` ) into a table named `mytable` in `mydataset` in your default project. The schema is defined in a local schema file named `myschema.json` .
 
-``` 
+```
     bq load \
     --source_format=NEWLINE_DELIMITED_JSON \
     mydataset.mytable \
@@ -263,9 +271,9 @@ The following command loads a local newline-delimited JSON file ( `mydata.json` 
     ./myschema.json
 ```
 
-The following command loads a local CSV file ( `mydata.csv` ) into a table named `mytable` in `mydataset` in `myotherproject` . The schema is defined inline in the format `  FIELD:DATA_TYPE , FIELD:DATA_TYPE  ` .
+The following command loads a local CSV file ( `mydata.csv` ) into a table named `mytable` in `mydataset` in `myotherproject` . The schema is defined inline in the format `FIELD:DATA_TYPE `` , `` FIELD:DATA_TYPE` .
 
-``` 
+```
     bq load \
     --source_format=CSV \
     myotherproject:mydataset.mytable \
@@ -277,7 +285,7 @@ The following command loads a local CSV file ( `mydata.csv` ) into a table named
 
 The following command loads a local CSV file ( `mydata.csv` ) into a table named `mytable` in `mydataset` in your default project. The schema is defined using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 
-``` 
+```
     bq load \
     --autodetect \
     --source_format=CSV \
@@ -285,49 +293,51 @@ The following command loads a local CSV file ( `mydata.csv` ) into a table named
     ./mydata.csv
 ```
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, use the update options class for the appropriate format from the [JobCreationOptions](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest/Google.Cloud.BigQuery.V2.JobCreationOptions) base class instead of `UploadCsvOptions` .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    using System.IO;
-    
-    public class BigQueryLoadFromFile
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+using System.IO;
+
+public class BigQueryLoadFromFile
+{
+    public void LoadFromFile(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id",
+        string tableId = "your_table_id",
+        string filePath = "path/to/file.csv"
+    )
     {
-        public void LoadFromFile(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id",
-            string tableId = "your_table_id",
-            string filePath = "path/to/file.csv"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        // Create job configuration
+        var uploadCsvOptions = new UploadCsvOptions()
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            // Create job configuration
-            var uploadCsvOptions = new UploadCsvOptions()
-            {
-                SkipLeadingRows = 1,  // Skips the file headers
-                Autodetect = true
-            };
-            using (FileStream stream = File.Open(filePath, FileMode.Open))
-            {
-                // Create and run job
-                // Note that there are methods available for formats other than CSV
-                BigQueryJob job = client.UploadCsv(
-                    datasetId, tableId, null, stream, uploadCsvOptions);
-                job = job.PollUntilCompleted().ThrowOnAnyError();  // Waits for the job to complete.
-    
-                // Display the number of rows uploaded
-                BigQueryTable table = client.GetTable(datasetId, tableId);
-                Console.WriteLine(
-                    $"Loaded {table.Resource.NumRows} rows to {table.FullyQualifiedId}");
-            }
+            SkipLeadingRows = 1,  // Skips the file headers
+            Autodetect = true
+        };
+        using (FileStream stream = File.Open(filePath, FileMode.Open))
+        {
+            // Create and run job
+            // Note that there are methods available for formats other than CSV
+            BigQueryJob job = client.UploadCsv(
+                datasetId, tableId, null, stream, uploadCsvOptions);
+            job = job.PollUntilCompleted().ThrowOnAnyError();  // Waits for the job to complete.
+
+            // Display the number of rows uploaded
+            BigQueryTable table = client.GetTable(datasetId, tableId);
+            Console.WriteLine(
+                $"Loaded {table.Resource.NumRows} rows to {table.FullyQualifiedId}");
         }
     }
+}
+```
 
 ### Go
 
@@ -337,49 +347,51 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the [DataFormat](https://godoc.org/cloud.google.com/go/bigquery#DataFormat) property of the `NewReaderSource` to the appropriate format.
 
-    import (
-     "context"
-     "fmt"
-     "os"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // importCSVFromFile demonstrates loading data into a BigQuery table using a file on the local filesystem.
-    func importCSVFromFile(projectID, datasetID, tableID, filename string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     f, err := os.Open(filename)
-     if err != nil {
-         return err
-     }
-     source := bigquery.NewReaderSource(f)
-     source.AutoDetect = true   // Allow BigQuery to determine schema.
-     source.SkipLeadingRows = 1 // CSV has a single header line.
-    
-     loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(source)
-    
-     job, err := loader.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "os"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// importCSVFromFile demonstrates loading data into a BigQuery table using a file on the local filesystem.
+func importCSVFromFile(projectID, datasetID, tableID, filename string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    f, err := os.Open(filename)
+    if err != nil {
+        return err
+    }
+    source := bigquery.NewReaderSource(f)
+    source.AutoDetect = true   // Allow BigQuery to determine schema.
+    source.SkipLeadingRows = 1 // CSV has a single header line.
+
+    loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(source)
+
+    job, err := loader.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -389,21 +401,23 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the [FormatOptions](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.FormatOptions) to the appropriate format.
 
-    TableId tableId = TableId.of(datasetName, tableName);
-    WriteChannelConfiguration writeChannelConfiguration =
-        WriteChannelConfiguration.newBuilder(tableId).setFormatOptions(FormatOptions.csv()).build();
-    // The location must be specified; other fields can be auto-detected.
-    JobId jobId = JobId.newBuilder().setLocation(location).build();
-    TableDataWriteChannel writer = bigquery.writer(jobId, writeChannelConfiguration);
-    // Write data to writer
-    try (OutputStream stream = Channels.newOutputStream(writer)) {
-      Files.copy(csvPath, stream);
-    }
-    // Get load job
-    Job job = writer.getJob();
-    job = job.waitFor();
-    LoadStatistics stats = job.getStatistics();
-    return stats.getOutputRows();
+```java
+TableId tableId = TableId.of(datasetName, tableName);
+WriteChannelConfiguration writeChannelConfiguration =
+    WriteChannelConfiguration.newBuilder(tableId).setFormatOptions(FormatOptions.csv()).build();
+// The location must be specified; other fields can be auto-detected.
+JobId jobId = JobId.newBuilder().setLocation(location).build();
+TableDataWriteChannel writer = bigquery.writer(jobId, writeChannelConfiguration);
+// Write data to writer
+try (OutputStream stream = Channels.newOutputStream(writer)) {
+  Files.copy(csvPath, stream);
+}
+// Get load job
+Job job = writer.getJob();
+job = job.waitFor();
+LoadStatistics stats = job.getStatistics();
+return stats.getOutputRows();
+```
 
 ### Node.js
 
@@ -413,34 +427,36 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the `metadata` parameter of the [load](https://googleapis.dev/nodejs/bigquery/latest/Table.html#load) function to the appropriate format.
 
-    // Imports the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function loadLocalFile() {
-      // Imports a local file into a table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const filename = '/path/to/file.csv';
-      // const datasetId = 'my_dataset';
-      // const tableId = 'my_table';
-    
-      // Load data from a local file into the table
-      const [job] = await bigquery
-        .dataset(datasetId)
-        .table(tableId)
-        .load(filename);
-    
-      console.log(`Job ${job.id} completed.`);
-    
-      // Check the job's status for errors
-      const errors = job.status.errors;
-      if (errors && errors.length > 0) {
-        throw errors;
-      }
-    }
+```javascript
+// Imports the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function loadLocalFile() {
+  // Imports a local file into a table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const filename = '/path/to/file.csv';
+  // const datasetId = 'my_dataset';
+  // const tableId = 'my_table';
+
+  // Load data from a local file into the table
+  const [job] = await bigquery
+    .dataset(datasetId)
+    .table(tableId)
+    .load(filename);
+
+  console.log(`Job ${job.id} completed.`);
+
+  // Check the job's status for errors
+  const errors = job.status.errors;
+  if (errors && errors.length > 0) {
+    throw errors;
+  }
+}
+```
 
 ### PHP
 
@@ -450,41 +466,43 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the [sourceFormat](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/LoadJobConfiguration#_Google_Cloud_BigQuery_LoadJobConfiguration__sourceFormat__) to the appropriate format.
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    use Google\Cloud\Core\ExponentialBackoff;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId  = 'The Google project ID';
-    // $datasetId  = 'The BigQuery dataset ID';
-    // $tableId    = 'The BigQuery table ID';
-    // $source     = 'The path to the CSV source file to import';
-    
-    // instantiate the bigquery table service
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    // create the import job
-    $loadConfig = $table->load(fopen($source, 'r'))->sourceFormat('CSV');
-    
-    $job = $table->runJob($loadConfig);
-    // poll the job until it is complete
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        printf('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
-            throw new Exception('Job has not yet completed', 500);
-        }
-    });
-    // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
-        printf('Error running job: %s' . PHP_EOL, $error);
-    } else {
-        print('Data imported successfully' . PHP_EOL);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+use Google\Cloud\Core\ExponentialBackoff;
+
+/** Uncomment and populate these variables in your code */
+// $projectId  = 'The Google project ID';
+// $datasetId  = 'The BigQuery dataset ID';
+// $tableId    = 'The BigQuery table ID';
+// $source     = 'The path to the CSV source file to import';
+
+// instantiate the bigquery table service
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+// create the import job
+$loadConfig = $table->load(fopen($source, 'r'))->sourceFormat('CSV');
+
+$job = $table->runJob($loadConfig);
+// poll the job until it is complete
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    printf('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
+        throw new Exception('Job has not yet completed', 500);
     }
+});
+// check if the job has errors
+if (isset($job->info()['status']['errorResult'])) {
+    $error = $job->info()['status']['errorResult']['message'];
+    printf('Error running job: %s' . PHP_EOL, $error);
+} else {
+    print('Data imported successfully' . PHP_EOL);
+}
+```
 
 ### Python
 
@@ -492,31 +510,33 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the [LoadJobConfig.source\_format property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the appropriate format.
+The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the [LoadJobConfig.source_format property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the appropriate format.
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to create.
-    # table_id = "your-project.your_dataset.your_table_name"
-    
-    job_config = bigquery.LoadJobConfig(
-        source_format=bigquery.SourceFormat.CSV, skip_leading_rows=1, autodetect=True,
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to create.
+# table_id = "your-project.your_dataset.your_table_name"
+
+job_config = bigquery.LoadJobConfig(
+    source_format=bigquery.SourceFormat.CSV, skip_leading_rows=1, autodetect=True,
+)
+
+with open(file_path, "rb") as source_file:
+    job = client.load_table_from_file(source_file, table_id, job_config=job_config)
+
+job.result()  # Waits for the job to complete.
+
+table = client.get_table(table_id)  # Make an API request.
+print(
+    "Loaded {} rows and {} columns to {}".format(
+        table.num_rows, len(table.schema), table_id
     )
-    
-    with open(file_path, "rb") as source_file:
-        job = client.load_table_from_file(source_file, table_id, job_config=job_config)
-    
-    job.result()  # Waits for the job to complete.
-    
-    table = client.get_table(table_id)  # Make an API request.
-    print(
-        "Loaded {} rows and {} columns to {}".format(
-            table.num_rows, len(table.schema), table_id
-        )
-    )
+)
+```
 
 ### Ruby
 
@@ -524,33 +544,35 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the `format` parameter of the [Table\#load\_job](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Table.html#load_job-instance_method) method to the appropriate format.
+The following code demonstrates how to load a local CSV file to a new BigQuery table. To load a local file of another format, set the `format` parameter of the [Table#load_job](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery/Table.html#load_job-instance_method) method to the appropriate format.
 
-    require "google/cloud/bigquery"
-    
-    def load_from_file dataset_id = "your_dataset_id",
-                       file_path  = "path/to/file.csv"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-      table_id = "new_table_id"
-    
-      # Infer the config.location based on the location of the referenced dataset.
-      load_job = dataset.load_job table_id, file_path do |config|
-        config.skip_leading = 1
-        config.autodetect   = true
-      end
-      load_job.wait_until_done! # Waits for table load to complete.
-    
-      table = dataset.table table_id
-      puts "Loaded #{table.rows_count} rows into #{table.id}"
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def load_from_file dataset_id = "your_dataset_id",
+                   file_path  = "path/to/file.csv"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+  table_id = "new_table_id"
+
+  # Infer the config.location based on the location of the referenced dataset.
+  load_job = dataset.load_job table_id, file_path do |config|
+    config.skip_leading = 1
+    config.autodetect   = true
+  end
+  load_job.wait_until_done! # Waits for table load to complete.
+
+  table = dataset.table table_id
+  puts "Loaded #{table.rows_count} rows into #{table.id}"
+end
+```
 
 ### Limitations
 
 Loading data from a local data source is subject to the following limitations:
 
-  - Wildcards and comma-separated lists are not supported when you load files from a local data source. Files must be loaded individually.
-  - When using the Google Cloud console, files loaded from a local data source cannot exceed 100 MB. For larger files, load the file from Cloud Storage.
+- Wildcards and comma-separated lists are not supported when you load files from a local data source. Files must be loaded individually.
+- When using the Google Cloud console, files loaded from a local data source cannot exceed 100 MB. For larger files, load the file from Cloud Storage.
 
 ## Load job capacity
 
@@ -578,18 +600,18 @@ You can load additional data into a table either from source files or by appendi
 
 If you update the schema when appending data, BigQuery allows you to:
 
-  - Add new fields
-  - Relax `REQUIRED` fields to `NULLABLE`
+- Add new fields
+- Relax `REQUIRED` fields to `NULLABLE`
 
 If you are overwriting a table, the schema is always overwritten. Schema updates are not restricted when you overwrite a table.
 
 In the Google Cloud console, use the **Write preference** option to specify what action to take when you load data from a source file or from a query result. The bq command-line tool and the API include the following options:
 
 | Console option  | bq tool flag                                                                              | BigQuery API property | Description                                                      |
-| --------------- | ----------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------------- |
-| Write if empty  | None                                                                                      | WRITE\_EMPTY          | Writes the data only if the table is empty.                      |
-| Append to table | `--noreplace` or `--replace=false` ; if `--replace` is unspecified, the default is append | WRITE\_APPEND         | (Default) Appends the data to the end of the table.              |
-| Overwrite table | `--replace` or `--replace=true`                                                           | WRITE\_TRUNCATE       | Erases all existing data in a table before writing the new data. |
+|-----------------|-------------------------------------------------------------------------------------------|-----------------------|------------------------------------------------------------------|
+| Write if empty  | None                                                                                      | WRITE_EMPTY           | Writes the data only if the table is empty.                      |
+| Append to table | `--noreplace` or `--replace=false` ; if `--replace` is unspecified, the default is append | WRITE_APPEND          | (Default) Appends the data to the end of the table.              |
+| Overwrite table | `--replace` or `--replace=true`                                                           | WRITE_TRUNCATE        | Erases all existing data in a table before writing the new data. |
 
 ## Quota policy
 
@@ -599,13 +621,15 @@ For information about the quota policy for batch loading data, see [Load jobs](h
 
 You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
-    SELECT
-      sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-      sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-      sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
-      sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
-    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE date(creation_time)= CURRENT_DATE()
+```
+SELECT
+  sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
+  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
+  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
+  sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
+FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE date(creation_time)= CURRENT_DATE()
+```
 
 ## Pricing
 

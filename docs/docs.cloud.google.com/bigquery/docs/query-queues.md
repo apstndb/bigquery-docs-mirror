@@ -68,7 +68,7 @@ Select one of the following options:
 
 4.  Select your [reservation settings](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
 
-5.  To expand the **Advanced settings** section, click the expand\_more expander arrow.
+5.  To expand the **Advanced settings** section, click the expand_more expander arrow.
 
 6.  To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -81,19 +81,21 @@ To set the maximum concurrency target for a new reservation, use the [`CREATE RE
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
-          OPTIONS (
-            target_job_concurrency = CONCURRENCY);
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-      - `  LOCATION  ` : the location of the reservation, such as `region-us`
-      - `  RESERVATION_NAME  ` : the name of the reservation
-      - `  CONCURRENCY  ` : the maximum concurrency target
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
+      OPTIONS (
+        target_job_concurrency = CONCURRENCY);
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project that owns the reservation
+    - `LOCATION` : the location of the reservation, such as `region-us`
+    - `RESERVATION_NAME` : the name of the reservation
+    - `CONCURRENCY` : the maximum concurrency target
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -101,19 +103,21 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To set the maximum concurrency target for a new reservation, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) :
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --target_job_concurrency=CONCURRENCY \
-        --reservation \
-        RESERVATION_NAME
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --target_job_concurrency=CONCURRENCY \
+    --reservation \
+    RESERVATION_NAME
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-  - `  LOCATION  ` : the location of the reservation
-  - `  CONCURRENCY  ` : the maximum concurrency target
-  - `  RESERVATION_NAME  ` : the name of the reservation
+- `ADMIN_PROJECT_ID` : the project that owns the reservation
+- `LOCATION` : the location of the reservation
+- `CONCURRENCY` : the maximum concurrency target
+- `RESERVATION_NAME` : the name of the reservation
 
 ### API
 
@@ -149,11 +153,11 @@ Select one of the following options:
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more\_vert **Actions** option.
+5.  Expand the more_vert **Actions** option.
 
 6.  Click **Edit** .
 
-7.  To expand the **Advanced settings** section, click the expand\_more expander arrow.
+7.  To expand the **Advanced settings** section, click the expand_more expander arrow.
 
 8.  To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -166,19 +170,21 @@ To update the maximum concurrency target for an existing reservation, use the [`
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
-        SET OPTIONS (
-          target_job_concurrency = CONCURRENCY);
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-      - `  LOCATION  ` : the location of the reservation, such as `region-us`
-      - `  RESERVATION_NAME  ` : the name of the reservation
-      - `  CONCURRENCY  ` : the maximum concurrency target
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER RESERVATION `ADMIN_PROJECT_ID.LOCATION.RESERVATION_NAME`
+    SET OPTIONS (
+      target_job_concurrency = CONCURRENCY);
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project that owns the reservation
+    - `LOCATION` : the location of the reservation, such as `region-us`
+    - `RESERVATION_NAME` : the name of the reservation
+    - `CONCURRENCY` : the maximum concurrency target
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -186,19 +192,21 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update the maximum concurrency target for an existing reservation, run the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) :
 
-    bq update \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --target_job_concurrency=CONCURRENCY \
-        --reservation \
-        RESERVATION_NAME
+```
+bq update \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --target_job_concurrency=CONCURRENCY \
+    --reservation \
+    RESERVATION_NAME
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project that owns the reservation
-  - `  LOCATION  ` : the location of the reservation
-  - `  CONCURRENCY  ` : the maximum concurrency target
-  - `  RESERVATION_NAME  ` : the name of the reservation
+- `ADMIN_PROJECT_ID` : the project that owns the reservation
+- `LOCATION` : the location of the reservation
+- `CONCURRENCY` : the maximum concurrency target
+- `RESERVATION_NAME` : the name of the reservation
 
 ### API
 
@@ -210,50 +218,52 @@ To find out which queries are running and which are queued, look at the [`INFORM
 
 To view how many concurrent queries ran when the dynamic concurrency threshold was reached for each second over the last day, run the following query:
 
-    SELECT
-      t1.period_start,
-      t1.job_count AS dynamic_concurrency_threshold
-    FROM (
-      SELECT
-        period_start,
-        state,
-        COUNT(DISTINCT job_id) AS job_count
-      FROM
-        `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
-      WHERE
-        period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-        AND CURRENT_TIMESTAMP()
-        AND reservation_id = "RESERVATION_ID"
-      GROUP BY
-        period_start,
-        state) AS t1
-    JOIN (
-      SELECT
-        period_start,
-        state,
-        COUNT(DISTINCT job_id) AS job_count
-      FROM
-        `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
-      WHERE
-        state = "PENDING"
-        AND period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-        AND CURRENT_TIMESTAMP()
-        AND reservation_id = "RESERVATION_ID"
-      GROUP BY
-        period_start,
-        state
-      HAVING
-        COUNT(DISTINCT job_id) > 0 ) AS t2
-    ON
-      t1.period_start = t2.period_start
-    WHERE
-      t1.state = "RUNNING";
+```
+SELECT
+  t1.period_start,
+  t1.job_count AS dynamic_concurrency_threshold
+FROM (
+  SELECT
+    period_start,
+    state,
+    COUNT(DISTINCT job_id) AS job_count
+  FROM
+    `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
+  WHERE
+    period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+    AND CURRENT_TIMESTAMP()
+    AND reservation_id = "RESERVATION_ID"
+  GROUP BY
+    period_start,
+    state) AS t1
+JOIN (
+  SELECT
+    period_start,
+    state,
+    COUNT(DISTINCT job_id) AS job_count
+  FROM
+    `PROJECT_ID.REGION_ID`.INFORMATION_SCHEMA.JOBS_TIMELINE
+  WHERE
+    state = "PENDING"
+    AND period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+    AND CURRENT_TIMESTAMP()
+    AND reservation_id = "RESERVATION_ID"
+  GROUP BY
+    period_start,
+    state
+  HAVING
+    COUNT(DISTINCT job_id) > 0 ) AS t2
+ON
+  t1.period_start = t2.period_start
+WHERE
+  t1.state = "RUNNING";
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the name of the project in which you ran the queries
-  - `  REGION_ID  ` : the location where the queries were processed
-  - `  RESERVATION_ID  ` : the name of the reservation the queries are running in
+- `PROJECT_ID` : the name of the project in which you ran the queries
+- `REGION_ID` : the location where the queries were processed
+- `RESERVATION_ID` : the name of the reservation the queries are running in
 
 > **Note:** To view the dynamic concurrency for on-demand projects, remove the reservation filtering.
 
@@ -273,41 +283,41 @@ A query job might appear slow because it spends a significant amount of time wai
 
 You can identify long queue times using the following methods:
 
-  - **`INFORMATION_SCHEMA`** : The [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) can provide insights into query queue times. For example, you can calculate the queue time for specific jobs by subtracting `creation_time` from `start_time` , or identify jobs that have `state="PENDING"` for an extended duration. The [sample query](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) can serve as a starting point to observe your query load and identify when the dynamic concurrency threshold is reached.
-  - **Monitoring** : Use the [`bigquery.googleapis.com/job/num_in_flight`](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#bigquery/job/num_in_flight) metric in Monitoring, filtered by `state=pending` , to monitor the queue length over time.
-  - You can also use [BigQuery administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) , as described in the [Monitoring](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) section.
+- **`INFORMATION_SCHEMA`** : The [`INFORMATION_SCHEMA.JOBS*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) can provide insights into query queue times. For example, you can calculate the queue time for specific jobs by subtracting `creation_time` from `start_time` , or identify jobs that have `state="PENDING"` for an extended duration. The [sample query](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) can serve as a starting point to observe your query load and identify when the dynamic concurrency threshold is reached.
+- **Monitoring** : Use the [`bigquery.googleapis.com/job/num_in_flight`](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#bigquery/job/num_in_flight) metric in Monitoring, filtered by `state=pending` , to monitor the queue length over time.
+- You can also use [BigQuery administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) , as described in the [Monitoring](https://docs.cloud.google.com/bigquery/docs/query-queues#monitoring) section.
 
 ### Common causes
 
 The following list describes several common causes of long queue times:
 
-  - **Concurrency limits** : The project or reservation has reached the maximum number of allowed concurrent queries, which is either dynamically determined or [manually configured](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) . Once this limit is reached, new queries are forced to wait.
-  - **Slot contention** : There are insufficient slots available to handle the workload. This causes actively running queries to execute more slowly, occupying their concurrent query slots for longer periods and increasing the queue times for other queries.
-  - **Workload spikes** : There is a sudden increase in the number of submitted queries.
-  - **Inefficient queries** : Individual queries are not optimized. Even when the query volume is low, these inefficient queries can continue consuming excessive slots for extended periods, reducing the turnover rate of active queries. This prevents new queries from starting and forces them to wait in the queue.
+- **Concurrency limits** : The project or reservation has reached the maximum number of allowed concurrent queries, which is either dynamically determined or [manually configured](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) . Once this limit is reached, new queries are forced to wait.
+- **Slot contention** : There are insufficient slots available to handle the workload. This causes actively running queries to execute more slowly, occupying their concurrent query slots for longer periods and increasing the queue times for other queries.
+- **Workload spikes** : There is a sudden increase in the number of submitted queries.
+- **Inefficient queries** : Individual queries are not optimized. Even when the query volume is low, these inefficient queries can continue consuming excessive slots for extended periods, reducing the turnover rate of active queries. This prevents new queries from starting and forces them to wait in the queue.
 
 ### Resolve long queue times
 
 To resolve long queue times, consider the following actions:
 
-  - **Assess your workload** : Determine if your query volume or complexity has increased recently.
-  - **Check reservation utilization** : Use [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to verify if the reservation is frequently at peak slot usage.
-  - **Review concurrency** : Compare the number of running queries to the number of pending queries.
-  - **Optimize and adjust** :
-      - Use [batch query priority](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) for less time-sensitive workloads, which have a higher queue limit.
-      - [Optimize long-running queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
-      - [Increase reservation slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#update_reservations) if you are consistently hitting capacity.
-      - Smooth out query submission spikes.
-      - Adjust the [maximum concurrency target](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) for your reservation, if applicable.
+- **Assess your workload** : Determine if your query volume or complexity has increased recently.
+- **Check reservation utilization** : Use [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to verify if the reservation is frequently at peak slot usage.
+- **Review concurrency** : Compare the number of running queries to the number of pending queries.
+- **Optimize and adjust** :
+  - Use [batch query priority](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) for less time-sensitive workloads, which have a higher queue limit.
+  - [Optimize long-running queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
+  - [Increase reservation slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#update_reservations) if you are consistently hitting capacity.
+  - Smooth out query submission spikes.
+  - Adjust the [maximum concurrency target](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) for your reservation, if applicable.
 
 ## Limitations
 
-  - Each on-demand project can queue up to 1,000 interactive queries and 20,000 batch queries at one time. Queries that exceed this limit return a quota error. You cannot request an increase in these limits.
-  - Within a reservation, each project assigned to that reservation can queue up to 1,000 interactive queries and 20,000 batch queries at one time. Queries that exceed this limit return a quota error. You cannot request an increase in these limits.
-  - By default, query jobs that haven't started execution time out after 6 hours for interactive queries and 24 hours for batch queries.
-  - You cannot set the maximum concurrency target for queries running in an on-demand project.
-  - You cannot set the maximum concurrency target for queries running with a Standard edition reservation. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Each on-demand project can queue up to 1,000 interactive queries and 20,000 batch queries at one time. Queries that exceed this limit return a quota error. You cannot request an increase in these limits.
+- Within a reservation, each project assigned to that reservation can queue up to 1,000 interactive queries and 20,000 batch queries at one time. Queries that exceed this limit return a quota error. You cannot request an increase in these limits.
+- By default, query jobs that haven't started execution time out after 6 hours for interactive queries and 24 hours for batch queries.
+- You cannot set the maximum concurrency target for queries running in an on-demand project.
+- You cannot set the maximum concurrency target for queries running with a Standard edition reservation. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 ## What's next
 
-  - Learn more about diagnosing and resolving [query queue limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-query-queue-limit) .
+- Learn more about diagnosing and resolving [query queue limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-query-queue-limit) .

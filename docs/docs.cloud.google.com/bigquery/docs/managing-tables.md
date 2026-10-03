@@ -20,12 +20,12 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 You can update the following elements of a table:
 
-  - [Description](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_description)
-  - [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time)
-  - [Schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas)
-  - [Labels](https://docs.cloud.google.com/bigquery/docs/labels#creating_or_updating_a_table_or_view_label)
-  - [Table name](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table)
-  - [Tags](https://docs.cloud.google.com/bigquery/docs/tags)
+- [Description](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_description)
+- [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time)
+- [Schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas)
+- [Labels](https://docs.cloud.google.com/bigquery/docs/labels#creating_or_updating_a_table_or_view_label)
+- [Table name](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table)
+- [Tags](https://docs.cloud.google.com/bigquery/docs/tags)
 
 ### Required permissions
 
@@ -37,8 +37,8 @@ This predefined role contains the permissions required to update table propertie
 
 The following permissions are required to update table properties:
 
-  - `bigquery.tables.update`
-  - `bigquery.tables.get`
+- `bigquery.tables.update`
+- `bigquery.tables.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -48,12 +48,12 @@ Additionally, if you have the `bigquery.datasets.create` permission, you can upd
 
 You can update a table's description in the following ways:
 
-  - Using the Google Cloud console.
-  - Using a data definition language (DDL) `ALTER TABLE` statement.
-  - Using the bq command-line tool's `bq update` command.
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
-  - Using the client libraries.
-  - Generating a description with Gemini in BigQuery.
+- Using the Google Cloud console.
+- Using a data definition language (DDL) `ALTER TABLE` statement.
+- Using the bq command-line tool's `bq update` command.
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
+- Using the client libraries.
+- Generating a description with Gemini in BigQuery.
 
 To update a table's description:
 
@@ -62,10 +62,10 @@ To update a table's description:
 You can't add a description when you create a table using the Google Cloud console. After the table is created, you can add a description on the **Details** page.
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -84,44 +84,48 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER TABLE mydataset.mytable
-          SET OPTIONS (
-            description = 'Description of mytable');
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER TABLE mydataset.mytable
+      SET OPTIONS (
+        description = 'Description of mytable');
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `bq update` command with the `--description` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
-    
-        bq update \
-        --description "description" \
-        project_id:dataset.table
-    
+2.  Issue the `bq update` command with the `--description` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `project_id `` : `` dataset` .
+
+    ```
+    bq update \
+    --description "description" \
+    project_id:dataset.table
+    ```
+
     Replace the following:
-    
-      - `  description  ` : the text describing the table in quotes
-      - `  project_id  ` : your project ID
-      - `  dataset  ` : the name of the dataset that contains the table you're updating
-      - `  table  ` : the name of the table you're updating
-    
+
+    - `description` : the text describing the table in quotes
+    - `project_id` : your project ID
+    - `dataset` : the name of the dataset that contains the table you're updating
+    - `table` : the name of the table you're updating
+
     Examples:
-    
+
     To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in your default project.
-    
+
     ```sh
     bq update --description "Description of mytable" mydataset.mytable
     ```
-    
+
     To change the description of the `mytable` table in the `mydataset` dataset to "Description of mytable", enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
-    
+
     ```sh
     bq update \
     --description "Description of mytable" \
@@ -138,38 +142,40 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // updateTableDescription demonstrates how to fetch a table's metadata and updates the Description metadata.
-    func updateTableDescription(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     tableRef := client.Dataset(datasetID).Table(tableID)
-     meta, err := tableRef.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     update := bigquery.TableMetadataToUpdate{
-         Description: "Updated description.",
-     }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// updateTableDescription demonstrates how to fetch a table's metadata and updates the Description metadata.
+func updateTableDescription(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    tableRef := client.Dataset(datasetID).Table(tableID)
+    meta, err := tableRef.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    update := bigquery.TableMetadataToUpdate{
+        Description: "Updated description.",
+    }
+    if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -177,36 +183,38 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    
-    public class UpdateTableDescription {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        String newDescription = "this is the new table description";
-        updateTableDescription(datasetName, tableName, newDescription);
-      }
-    
-      public static void updateTableDescription(
-          String datasetName, String tableName, String newDescription) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Table table = bigquery.getTable(datasetName, tableName);
-          bigquery.update(table.toBuilder().setDescription(newDescription).build());
-          System.out.println("Table description updated successfully to " + newDescription);
-        } catch (BigQueryException e) {
-          System.out.println("Table description was not updated \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+
+public class UpdateTableDescription {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    String newDescription = "this is the new table description";
+    updateTableDescription(datasetName, tableName, newDescription);
+  }
+
+  public static void updateTableDescription(
+      String datasetName, String tableName, String newDescription) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Table table = bigquery.getTable(datasetName, tableName);
+      bigquery.update(table.toBuilder().setDescription(newDescription).build());
+      System.out.println("Table description updated successfully to " + newDescription);
+    } catch (BigQueryException e) {
+      System.out.println("Table description was not updated \n" + e.toString());
     }
+  }
+}
+```
 
 ### Python
 
@@ -214,21 +222,23 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Configure the [Table.description](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_description) property and call [Client.update\_table()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_table) to send the update to the API.
+Configure the [Table.description](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_description) property and call [Client.update_table()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_table) to send the update to the API.
 
-    # from google.cloud import bigquery
-    # client = bigquery.Client()
-    # project = client.project
-    # dataset_ref = bigquery.DatasetReference(project, dataset_id)
-    # table_ref = dataset_ref.table('my_table')
-    # table = client.get_table(table_ref)  # API request
-    
-    assert table.description == "Original description."
-    table.description = "Updated description."
-    
-    table = client.update_table(table, ["description"])  # API request
-    
-    assert table.description == "Updated description."
+```python
+# from google.cloud import bigquery
+# client = bigquery.Client()
+# project = client.project
+# dataset_ref = bigquery.DatasetReference(project, dataset_id)
+# table_ref = dataset_ref.table('my_table')
+# table = client.get_table(table_ref)  # API request
+
+assert table.description == "Original description."
+table.description = "Updated description."
+
+table = client.update_table(table, ["description"])  # API request
+
+assert table.description == "Updated description."
+```
 
 ### Gemini
 
@@ -239,7 +249,7 @@ For more information about data insights, including setup steps, required IAM ro
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and dataset, then select the table.
@@ -247,25 +257,25 @@ For more information about data insights, including setup steps, required IAM ro
 4.  In the details panel, click the **Schema** tab.
 
 5.  Click **Generate** .
-    
+
     > **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
-    
+
     Gemini generates a table description and insights about the table. It takes a few minutes for the information to be populated. You can view the generated insights on the table's **Insights** tab.
 
 6.  To edit and save the generated table description, do the following:
-    
+
     1.  Click **View column descriptions** .
-        
+
         The current table description and the generated description are displayed.
-    
+
     2.  In the **Table description** section, click **Save to details** .
-    
+
     3.  To replace the current description with the generated description, click **Copy suggested description** .
-    
+
     4.  Edit the table description as necessary, and then click **Save to details** .
-        
+
         The table description is updated immediately.
-    
+
     5.  To close the **Preview descriptions** panel, click close **Close** .
 
 ### Update a table's expiration time
@@ -278,11 +288,11 @@ If you set the expiration when the table is created, the dataset's default table
 
 At any point after the table is created, you can update the table's expiration time in the following ways:
 
-  - Using the Google Cloud console.
-  - Using a data definition language (DDL) `ALTER TABLE` statement.
-  - Using the bq command-line tool's `bq update` command.
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
-  - Using the client libraries.
+- Using the Google Cloud console.
+- Using a data definition language (DDL) `ALTER TABLE` statement.
+- Using the bq command-line tool's `bq update` command.
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method.
+- Using the client libraries.
 
 > **Note:** If you set an expiration time that has already passed, the table is deleted immediately.
 
@@ -293,7 +303,7 @@ To update a table's expiration time:
 You can't add an expiration time when you create a table using the Google Cloud console. After a table is created, you can add or update a table expiration on the **Table Details** page.
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -313,44 +323,49 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER TABLE mydataset.mytable
-          SET OPTIONS (
-            -- Sets table expiration to timestamp 2025-02-03 12:34:56
-            expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER TABLE mydataset.mytable
+      SET OPTIONS (
+        -- Sets table expiration to timestamp 2025-02-03 12:34:56
+        expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the `bq update` command with the `--expiration` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
-    
-        bq update \
-        --expiration integer \project_id:dataset.table
-    
+2.  Issue the `bq update` command with the `--expiration` flag. If you are updating a table in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
+
+    ```
+    bq update \
+    --expiration integer \
+    project_id:dataset.table
+    ```
+
     Replace the following:
-    
-      - `  integer  ` : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value. If you specify `0` , the table expiration is removed, and the table never expires. Tables with no expiration must be manually deleted.
-      - `  project_id  ` : your project ID.
-      - `  dataset  ` : the name of the dataset that contains the table you're updating.
-      - `  table  ` : the name of the table you're updating.
-    
+
+    - `integer` : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value. If you specify `0` , the table expiration is removed, and the table never expires. Tables with no expiration must be manually deleted.
+    - `project_id` : your project ID.
+    - `dataset` : the name of the dataset that contains the table you're updating.
+    - `table` : the name of the table you're updating.
+
     Examples:
-    
+
     To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in your default project.
-    
+
     ```sh
     bq update --expiration 432000 mydataset.mytable
     ```
-    
+
     To update the expiration time of the `mytable` table in the `mydataset` dataset to 5 days (432000 seconds), enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
-    
+
     ```sh
     bq update --expiration 432000 myotherproject:mydataset.mytable
     ```
@@ -365,40 +380,42 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "time"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // updateTableExpiration demonstrates setting the table expiration of a table to a specific point in time
-    // in the future, at which time it will be deleted.
-    func updateTableExpiration(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     tableRef := client.Dataset(datasetID).Table(tableID)
-     meta, err := tableRef.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     update := bigquery.TableMetadataToUpdate{
-         ExpirationTime: time.Now().Add(time.Duration(5*24) * time.Hour), // table expiration in 5 days.
-     }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "time"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// updateTableExpiration demonstrates setting the table expiration of a table to a specific point in time
+// in the future, at which time it will be deleted.
+func updateTableExpiration(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    tableRef := client.Dataset(datasetID).Table(tableID)
+    meta, err := tableRef.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    update := bigquery.TableMetadataToUpdate{
+        ExpirationTime: time.Now().Add(time.Duration(5*24) * time.Hour), // table expiration in 5 days.
+    }
+    if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -406,40 +423,42 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    import java.util.concurrent.TimeUnit;
-    
-    public class UpdateTableExpiration {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        // Update table expiration to one day.
-        Long newExpiration =
-            TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) + System.currentTimeMillis();
-        updateTableExpiration(datasetName, tableName, newExpiration);
-      }
-    
-      public static void updateTableExpiration(
-          String datasetName, String tableName, Long newExpiration) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Table table = bigquery.getTable(datasetName, tableName);
-          bigquery.update(table.toBuilder().setExpirationTime(newExpiration).build());
-    
-          System.out.println("Table expiration updated successfully to " + newExpiration);
-        } catch (BigQueryException e) {
-          System.out.println("Table expiration was not updated \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+import java.util.concurrent.TimeUnit;
+
+public class UpdateTableExpiration {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    // Update table expiration to one day.
+    Long newExpiration =
+        TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) + System.currentTimeMillis();
+    updateTableExpiration(datasetName, tableName, newExpiration);
+  }
+
+  public static void updateTableExpiration(
+      String datasetName, String tableName, Long newExpiration) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Table table = bigquery.getTable(datasetName, tableName);
+      bigquery.update(table.toBuilder().setExpirationTime(newExpiration).build());
+
+      System.out.println("Table expiration updated successfully to " + newExpiration);
+    } catch (BigQueryException e) {
+      System.out.println("Table expiration was not updated \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -447,31 +466,33 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function updateTableExpiration() {
-      // Updates a table's expiration.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset', // Existing dataset
-      // const tableId = 'my_table', // Existing table
-      // const expirationTime = Date.now() + 1000 * 60 * 60 * 24 * 5 // 5 days from current time in ms
-    
-      // Retreive current table metadata
-      const table = bigquery.dataset(datasetId).table(tableId);
-      const [metadata] = await table.getMetadata();
-    
-      // Set new table expiration to 5 days from current time
-      metadata.expirationTime = expirationTime.toString();
-      const [apiResponse] = await table.setMetadata(metadata);
-    
-      const newExpirationTime = apiResponse.expirationTime;
-      console.log(`${tableId} expiration: ${newExpirationTime}`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function updateTableExpiration() {
+  // Updates a table's expiration.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset', // Existing dataset
+  // const tableId = 'my_table', // Existing table
+  // const expirationTime = Date.now() + 1000 * 60 * 60 * 24 * 5 // 5 days from current time in ms
+
+  // Retreive current table metadata
+  const table = bigquery.dataset(datasetId).table(tableId);
+  const [metadata] = await table.getMetadata();
+
+  // Set new table expiration to 5 days from current time
+  metadata.expirationTime = expirationTime.toString();
+  const [apiResponse] = await table.setMetadata(metadata);
+
+  const newExpirationTime = apiResponse.expirationTime;
+  console.log(`${tableId} expiration: ${newExpirationTime}`);
+}
+```
 
 ### Python
 
@@ -479,49 +500,51 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Configure [Table.expires](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_expires) property and call [Client.update\_table()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_table) to send the update to the API.
+Configure [Table.expires](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_expires) property and call [Client.update_table()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_update_table) to send the update to the API.
 
-    # Copyright 2022 Google LLC
-    #
-    # Licensed under the Apache License, Version 2.0 (the "License");
-    # you may not use this file except in compliance with the License.
-    # You may obtain a copy of the License at
-    #
-    #     https://www.apache.org/licenses/LICENSE-2.0
-    #
-    # Unless required by applicable law or agreed to in writing, software
-    # distributed under the License is distributed on an "AS IS" BASIS,
-    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    # See the License for the specific language governing permissions and
-    # limitations under the License.
-    
-    import datetime
-    
-    
-    def update_table_expiration(table_id, expiration):
-        orig_table_id = table_id
-        orig_expiration = expiration
-    
-        from google.cloud import bigquery
-    
-        client = bigquery.Client()
-    
-        # TODO(dev): Change table_id to the full name of the table you want to update.
-        table_id = "your-project.your_dataset.your_table_name"
-    
-        # TODO(dev): Set table to expire for desired days days from now.
-        expiration = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
-            days=5
-        )
-    
-        table_id = orig_table_id
-        expiration = orig_expiration
-    
-        table = client.get_table(table_id)  # Make an API request.
-        table.expires = expiration
-        table = client.update_table(table, ["expires"])  # API request
-    
-        print(f"Updated {table_id}, expires {table.expires}.")
+```python
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import datetime
+
+
+def update_table_expiration(table_id, expiration):
+    orig_table_id = table_id
+    orig_expiration = expiration
+
+    from google.cloud import bigquery
+
+    client = bigquery.Client()
+
+    # TODO(dev): Change table_id to the full name of the table you want to update.
+    table_id = "your-project.your_dataset.your_table_name"
+
+    # TODO(dev): Set table to expire for desired days days from now.
+    expiration = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
+        days=5
+    )
+
+    table_id = orig_table_id
+    expiration = orig_expiration
+
+    table = client.get_table(table_id)  # Make an API request.
+    table.expires = expiration
+    table = client.update_table(table, ["expires"])  # API request
+
+    print(f"Updated {table_id}, expires {table.expires}.")
+```
 
 To update the default dataset partition expiration time:
 
@@ -531,39 +554,41 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Dataset;
-    import java.util.concurrent.TimeUnit;
-    
-    // Sample to update partition expiration on a dataset.
-    public class UpdateDatasetPartitionExpiration {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        // Set the default partition expiration (applies to new tables, only) in
-        // milliseconds. This example sets the default expiration to 90 days.
-        Long newExpiration = TimeUnit.MILLISECONDS.convert(90, TimeUnit.DAYS);
-        updateDatasetPartitionExpiration(datasetName, newExpiration);
-      }
-    
-      public static void updateDatasetPartitionExpiration(String datasetName, Long newExpiration) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Dataset dataset = bigquery.getDataset(datasetName);
-          bigquery.update(dataset.toBuilder().setDefaultPartitionExpirationMs(newExpiration).build());
-          System.out.println(
-              "Dataset default partition expiration updated successfully to " + newExpiration);
-        } catch (BigQueryException e) {
-          System.out.println("Dataset partition expiration was not updated \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Dataset;
+import java.util.concurrent.TimeUnit;
+
+// Sample to update partition expiration on a dataset.
+public class UpdateDatasetPartitionExpiration {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    // Set the default partition expiration (applies to new tables, only) in
+    // milliseconds. This example sets the default expiration to 90 days.
+    Long newExpiration = TimeUnit.MILLISECONDS.convert(90, TimeUnit.DAYS);
+    updateDatasetPartitionExpiration(datasetName, newExpiration);
+  }
+
+  public static void updateDatasetPartitionExpiration(String datasetName, Long newExpiration) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Dataset dataset = bigquery.getDataset(datasetName);
+      bigquery.update(dataset.toBuilder().setDefaultPartitionExpirationMs(newExpiration).build());
+      System.out.println(
+          "Dataset default partition expiration updated successfully to " + newExpiration);
+    } catch (BigQueryException e) {
+      System.out.println("Dataset partition expiration was not updated \n" + e.toString());
     }
+  }
+}
+```
 
 ### Python
 
@@ -571,54 +596,58 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    # Copyright 2019 Google LLC
-    #
-    # Licensed under the Apache License, Version 2.0 (the "License");
-    # you may not use this file except in compliance with the License.
-    # You may obtain a copy of the License at
-    #
-    #     https://www.apache.org/licenses/LICENSE-2.0
-    #
-    # Unless required by applicable law or agreed to in writing, software
-    # distributed under the License is distributed on an "AS IS" BASIS,
-    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    # See the License for the specific language governing permissions and
-    # limitations under the License.
-    
-    
-    def update_dataset_default_partition_expiration(dataset_id: str) -> None:
-    
-        from google.cloud import bigquery
-    
-        # Construct a BigQuery client object.
-        client = bigquery.Client()
-    
-        # TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-        # dataset_id = 'your-project.your_dataset'
-    
-        dataset = client.get_dataset(dataset_id)  # Make an API request.
-    
-        # Set the default partition expiration (applies to new tables, only) in
-        # milliseconds. This example sets the default expiration to 90 days.
-        dataset.default_partition_expiration_ms = 90 * 24 * 60 * 60 * 1000
-    
-        dataset = client.update_dataset(
-            dataset, ["default_partition_expiration_ms"]
-        )  # Make an API request.
-    
-        print(
-            "Updated dataset {}.{} with new default partition expiration {}".format(
-                dataset.project, dataset.dataset_id, dataset.default_partition_expiration_ms
-            )
+```python
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+def update_dataset_default_partition_expiration(dataset_id: str) -> None:
+
+    from google.cloud import bigquery
+
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+
+    # TODO(developer): Set dataset_id to the ID of the dataset to fetch.
+    # dataset_id = 'your-project.your_dataset'
+
+    dataset = client.get_dataset(dataset_id)  # Make an API request.
+
+    # Set the default partition expiration (applies to new tables, only) in
+    # milliseconds. This example sets the default expiration to 90 days.
+    dataset.default_partition_expiration_ms = 90 * 24 * 60 * 60 * 1000
+
+    dataset = client.update_dataset(
+        dataset, ["default_partition_expiration_ms"]
+    )  # Make an API request.
+
+    print(
+        "Updated dataset {}.{} with new default partition expiration {}".format(
+            dataset.project, dataset.dataset_id, dataset.default_partition_expiration_ms
         )
+    )
+```
 
 ### Update a table's rounding mode
 
 You can update a table's [default rounding mode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode) by using the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) . The following example updates the default rounding mode for `mytable` to `ROUND_HALF_EVEN` :
 
-    ALTER TABLE mydataset.mytable
-    SET OPTIONS (
-      default_rounding_mode = "ROUND_HALF_EVEN");
+```
+ALTER TABLE mydataset.mytable
+SET OPTIONS (
+  default_rounding_mode = "ROUND_HALF_EVEN");
+```
 
 When you add a `NUMERIC` or `BIGNUMERIC` field to a table and do not specify a [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) , then the rounding mode is automatically set to the table's default rounding mode. Changing a table's default rounding mode doesn't alter the rounding mode of existing fields.
 
@@ -630,20 +659,22 @@ For more information about updating a table's schema definition, see [Modifying 
 
 You can rename a table after it has been created by using the [`ALTER TABLE RENAME TO` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . The following example renames `mytable` to `mynewtable` :
 
-    ALTER TABLE mydataset.mytable
-    RENAME TO mynewtable;
+```
+ALTER TABLE mydataset.mytable
+RENAME TO mynewtable;
+```
 
 The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
 #### Limitations on renaming tables
 
-  - If you want to rename a table that has data streaming into it, you must stop the streaming, commit any pending streams, and wait for BigQuery to indicate that streaming is not in use.
-  - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer. In some cases, the wait time can be up to 8 days.
-  - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
-  - You can't concurrently rename a table and run a DML statement on that table.
-  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) on the table.
-  - Any search index or vector index created on the table is dropped when the table is renamed.
-  - You can't rename external tables.
+- If you want to rename a table that has data streaming into it, you must stop the streaming, commit any pending streams, and wait for BigQuery to indicate that streaming is not in use.
+- While a table can usually be renamed 5 hours after the last streaming operation, it might take longer. In some cases, the wait time can be up to 8 days.
+- Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
+- You can't concurrently rename a table and run a DML statement on that table.
+- Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) on the table.
+- Any search index or vector index created on the table is dropped when the table is renamed.
+- You can't rename external tables.
 
 ## Copy a table
 
@@ -651,39 +682,39 @@ This section describes how to create a full copy of a table. For information abo
 
 You can copy a table in the following ways:
 
-  - Use the Google Cloud console.
-  - Use the [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
-  - Use a data definition language (DDL) [`CREATE TABLE COPY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
-  - Call the [jobs.insert](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method and configure a `copy` job.
-  - Use the client libraries.
+- Use the Google Cloud console.
+- Use the [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
+- Use a data definition language (DDL) [`CREATE TABLE COPY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
+- Call the [jobs.insert](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method and configure a `copy` job.
+- Use the client libraries.
 
 ### Limitations on copying tables
 
 Table copy jobs are subject to the following limitations:
 
-  - You can't stop a table copy operation after you start it. A table copy operation runs asynchronously and doesn't stop even when you cancel the job. You are also charged for data transfer for a cross-region table copy and for storage in the destination region.
+- You can't stop a table copy operation after you start it. A table copy operation runs asynchronously and doesn't stop even when you cancel the job. You are also charged for data transfer for a cross-region table copy and for storage in the destination region.
 
-  - When you copy a table, the name of the destination table must adhere to the same naming conventions as when you [create a table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
+- When you copy a table, the name of the destination table must adhere to the same naming conventions as when you [create a table](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
 
-  - Table copies are subject to BigQuery [limits](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) on copy jobs.
+- Table copies are subject to BigQuery [limits](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) on copy jobs.
 
-  - The Google Cloud console supports copying only one table at a time. You can't overwrite an existing table in the destination dataset. The table must have a unique name in the destination dataset.
+- The Google Cloud console supports copying only one table at a time. You can't overwrite an existing table in the destination dataset. The table must have a unique name in the destination dataset.
 
-  - Copying multiple source tables into a destination table is not supported by the Google Cloud console.
+- Copying multiple source tables into a destination table is not supported by the Google Cloud console.
 
-  - When copying multiple source tables to a destination table using the API, bq command-line tool, or the client libraries, all source tables must have identical schemas, including any partitioning or clustering.
-    
-    Certain table schema updates, such as dropping or renaming columns, can cause tables to have apparently identical schemas but different internal representations. This might cause a table copy job to fail with the error `Maximum limit on diverging physical schemas reached` . In this case, you can use the [`CREATE TABLE LIKE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like) to ensure that your source table's schema matches the destination table's schema exactly.
+- When copying multiple source tables to a destination table using the API, bq command-line tool, or the client libraries, all source tables must have identical schemas, including any partitioning or clustering.
 
-  - The time that BigQuery takes to copy tables might vary significantly across different runs because the underlying storage is managed dynamically.
+  Certain table schema updates, such as dropping or renaming columns, can cause tables to have apparently identical schemas but different internal representations. This might cause a table copy job to fail with the error `Maximum limit on diverging physical schemas reached` . In this case, you can use the [`CREATE TABLE LIKE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like) to ensure that your source table's schema matches the destination table's schema exactly.
 
-  - You can't copy and append a source table to a destination table that has more columns than the source table, and the additional columns have [default values](https://docs.cloud.google.com/bigquery/docs/default-values) . Instead, you can run `INSERT destination_table SELECT * FROM source_table` to copy over the data.
+- The time that BigQuery takes to copy tables might vary significantly across different runs because the underlying storage is managed dynamically.
 
-  - If the copy operation overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the overwritten table, while tags on the existing table are retained. However, when you copy tables across regions, tags on the existing table are removed.
+- You can't copy and append a source table to a destination table that has more columns than the source table, and the additional columns have [default values](https://docs.cloud.google.com/bigquery/docs/default-values) . Instead, you can run `INSERT destination_table SELECT * FROM source_table` to copy over the data.
 
-  - If the copy operation creates a new table, then the table-level access for the new table is determined by the access policies of the dataset in which the new table is created. Additionally, [tags](https://docs.cloud.google.com/bigquery/docs/tags) are copied from the source table to the new table.
+- If the copy operation overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) from the source table aren't copied to the overwritten table, while tags on the existing table are retained. However, when you copy tables across regions, tags on the existing table are removed.
 
-  - When you copy multiple source tables to a destination table, all source tables must have identical tags.
+- If the copy operation creates a new table, then the table-level access for the new table is determined by the access policies of the dataset in which the new table is created. Additionally, [tags](https://docs.cloud.google.com/bigquery/docs/tags) are copied from the source table to the new table.
+
+- When you copy multiple source tables to a destination table, all source tables must have identical tags.
 
 ### Required roles
 
@@ -699,10 +730,10 @@ This predefined role contains the permissions required to copy tables and partit
 
 The following permissions are required to copy tables and partitions:
 
-  - `bigquery.tables.getData` on the source and destination datasets
-  - `bigquery.tables.get` on the source and destination datasets
-  - `bigquery.tables.create` on the destination dataset
-  - `bigquery.tables.update` on the destination dataset
+- `bigquery.tables.getData` on the source and destination datasets
+- `bigquery.tables.get` on the source and destination datasets
+- `bigquery.tables.create` on the destination dataset
+- `bigquery.tables.update` on the destination dataset
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -718,11 +749,11 @@ You might also be able to get this permission with [custom roles](https://docs.c
 
 You can copy a single table in the following ways:
 
-  - Using the Google Cloud console.
-  - Using the bq command-line tool's `bq cp` command.
-  - Using a data definition language (DDL) `CREATE TABLE COPY` statement.
-  - Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method, configuring a `copy` job, and specifying the `sourceTable` property.
-  - Using the client libraries.
+- Using the Google Cloud console.
+- Using the bq command-line tool's `bq cp` command.
+- Using a data definition language (DDL) `CREATE TABLE COPY` statement.
+- Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method, configuring a `copy` job, and specifying the `sourceTable` property.
+- Using the client libraries.
 
 The Google Cloud console and the `CREATE TABLE COPY` statement support only one source table and one destination table in a copy job. To [copy multiple source files](https://docs.cloud.google.com/bigquery/docs/managing-tables#copying_multiple_source_tables) to a destination table, you must use the bq command-line tool or the API.
 
@@ -731,7 +762,7 @@ To copy a single source table:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -741,10 +772,10 @@ To copy a single source table:
 4.  In the details pane, click **Copy** .
 
 5.  In the **Copy table** dialog, under **Destination** :
-    
-      - For **Project** , choose the project that will store the copied table.
-      - For **Dataset** , select the dataset where you want to store the copied table. The source and destination datasets must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-      - For **Table** , enter a name for the new table. The name must be unique in the destination dataset. You can't overwrite an existing table in the destination dataset using the Google Cloud console. For more information about table name requirements, see [Table naming](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
+
+    - For **Project** , choose the project that will store the copied table.
+    - For **Dataset** , select the dataset where you want to store the copied table. The source and destination datasets must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    - For **Table** , enter a name for the new table. The name must be unique in the destination dataset. You can't overwrite an existing table in the destination dataset using the Google Cloud console. For more information about table name requirements, see [Table naming](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
 
 6.  Click **Copy** to start the copy job.
 
@@ -755,65 +786,76 @@ Use the [`CREATE TABLE COPY` statement](https://docs.cloud.google.com/bigquery/d
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE TABLE myproject.mydataset.table1copyCOPY myproject.mydataset.table1;
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE TABLE myproject.mydataset.table1copy
+    COPY myproject.mydataset.table1;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Issue the `bq cp` command. Optional flags can be used to control the write disposition of the destination table:
-    
-      - `-a` or `--append_table` appends the data from the source table to an existing table in the destination dataset.
-      - `-f` or `--force` overwrites an existing table in the destination dataset and doesn't prompt you for confirmation.
-      - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' project_id:dataset.table ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
-      - `--destination_kms_key` is the customer-managed Cloud KMS key used to encrypt the destination table.
-    
+
+    - `-a` or `--append_table` appends the data from the source table to an existing table in the destination dataset.
+    - `-f` or `--force` overwrites an existing table in the destination dataset and doesn't prompt you for confirmation.
+    - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' `` project_id:dataset.table `` ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
+    - `--destination_kms_key` is the customer-managed Cloud KMS key used to encrypt the destination table.
+
     `--destination_kms_key` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
-    
-    If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  project_id : dataset  ` .
-    
+
+    If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `project_id `` : `` dataset` .
+
     (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-    
-        bq --location=location cp \
-        -a -f -n \project_id:dataset.source_table \project_id:dataset.destination_table
-    
+
+    ```
+    bq --location=location cp \
+    -a -f -n \
+    project_id:dataset.source_table \
+    project_id:dataset.destination_table
+    ```
+
     Replace the following:
-    
-      - `  location  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-      - `  project_id  ` : your project ID.
-      - `  dataset  ` : the name of the source or destination dataset.
-      - `  source_table  ` : the table you're copying.
-      - `  destination_table  ` : the name of the table in the destination dataset.
-    
+
+    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    - `project_id` : your project ID.
+    - `dataset` : the name of the source or destination dataset.
+    - `source_table` : the table you're copying.
+    - `destination_table` : the name of the table in the destination dataset.
+
     Examples:
-    
+
     To copy the `mydataset.mytable` table to the `mydataset2.mytable2` table, enter the following command. Both datasets are in your default project.
-    
+
     ```sh
     bq cp mydataset.mytable mydataset2.mytable2
     ```
-    
+
     To copy the `mydataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-f` shortcut is used to overwrite the destination table without a prompt.
-    
-        bq cp -f \
-        mydataset.mytable \
-        myotherproject:myotherdataset.mytable
-    
+
+    ```
+    bq cp -f \
+    mydataset.mytable \
+    myotherproject:myotherdataset.mytable
+    ```
+
     To copy the `mydataset.mytable` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
-    
-        bq cp -n \
-        mydataset.mytable \
-        myotherproject:myotherdataset.mytable
-    
+
+    ```
+    bq cp -n \
+    mydataset.mytable \
+    myotherproject:myotherdataset.mytable
+    ```
+
     To copy the `mydataset.mytable` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `- a` shortcut is used to append to the destination table.
-    
+
     ```sh
     bq cp -a mydataset.mytable myotherproject:myotherdataset.mytable
     ```
@@ -824,63 +866,67 @@ You can copy an existing table through the API by calling the [`bigquery.jobs.in
 
 You must specify the following values in your job configuration:
 
-    "copy": {
-          "sourceTable": {       // Required
-            "projectId": string, // Required
-            "datasetId": string, // Required
-            "tableId": string    // Required
-          },
-          "destinationTable": {  // Required
-            "projectId": string, // Required
-            "datasetId": string, // Required
-            "tableId": string    // Required
-          },
-          "createDisposition": string,  // Optional
-          "writeDisposition": string,   // Optional
-        },
+```
+"copy": {
+      "sourceTable": {       // Required
+        "projectId": string, // Required
+        "datasetId": string, // Required
+        "tableId": string    // Required
+      },
+      "destinationTable": {  // Required
+        "projectId": string, // Required
+        "datasetId": string, // Required
+        "tableId": string    // Required
+      },
+      "createDisposition": string,  // Optional
+      "writeDisposition": string,   // Optional
+    },
+```
 
 Where `sourceTable` provides information about the table to be copied, `destinationTable` provides information about the new table, `createDisposition` specifies whether to create the table if it doesn't exist, and `writeDisposition` specifies whether to overwrite or append to an existing table.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Apis.Bigquery.v2.Data;
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryCopyTable
+```csharp
+using Google.Apis.Bigquery.v2.Data;
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryCopyTable
+{
+    public void CopyTable(
+        string projectId = "your-project-id",
+        string destinationDatasetId = "your_dataset_id"
+    )
     {
-        public void CopyTable(
-            string projectId = "your-project-id",
-            string destinationDatasetId = "your_dataset_id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        TableReference sourceTableRef = new TableReference()
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            TableReference sourceTableRef = new TableReference()
-            {
-                TableId = "shakespeare",
-                DatasetId = "samples",
-                ProjectId = "bigquery-public-data"
-            };
-            TableReference destinationTableRef = client.GetTableReference(
-                destinationDatasetId, "destination_table");
-            BigQueryJob job = client.CreateCopyJob(
-                sourceTableRef, destinationTableRef)
-                .PollUntilCompleted() // Wait for the job to complete.
-                .ThrowOnAnyError();
-    
-            // Retrieve destination table
-            BigQueryTable destinationTable = client.GetTable(destinationTableRef);
-            Console.WriteLine(
-                $"Copied {destinationTable.Resource.NumRows} rows from table "
-                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
-                + $"to {destinationTable.FullyQualifiedId}."
-            );
-        }
+            TableId = "shakespeare",
+            DatasetId = "samples",
+            ProjectId = "bigquery-public-data"
+        };
+        TableReference destinationTableRef = client.GetTableReference(
+            destinationDatasetId, "destination_table");
+        BigQueryJob job = client.CreateCopyJob(
+            sourceTableRef, destinationTableRef)
+            .PollUntilCompleted() // Wait for the job to complete.
+            .ThrowOnAnyError();
+
+        // Retrieve destination table
+        BigQueryTable destinationTable = client.GetTable(destinationTableRef);
+        Console.WriteLine(
+            $"Copied {destinationTable.Resource.NumRows} rows from table "
+            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
+            + $"to {destinationTable.FullyQualifiedId}."
+        );
     }
+}
+```
 
 ### Go
 
@@ -888,43 +934,45 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // copyTable demonstrates copying a table from a source to a destination, and
-    // allowing the copy to overwrite existing data by using truncation.
-    func copyTable(projectID, datasetID, srcID, dstID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // srcID := "sourcetable"
-     // dstID := "destinationtable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     dataset := client.Dataset(datasetID)
-     copier := dataset.Table(dstID).CopierFrom(dataset.Table(srcID))
-     copier.WriteDisposition = bigquery.WriteTruncate
-     job, err := copier.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// copyTable demonstrates copying a table from a source to a destination, and
+// allowing the copy to overwrite existing data by using truncation.
+func copyTable(projectID, datasetID, srcID, dstID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // srcID := "sourcetable"
+    // dstID := "destinationtable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    dataset := client.Dataset(datasetID)
+    copier := dataset.Table(dstID).CopierFrom(dataset.Table(srcID))
+    copier.WriteDisposition = bigquery.WriteTruncate
+    job, err := copier.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -932,64 +980,66 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.CopyJobConfiguration;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.TableId;
-    
-    public class CopyTable {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
-        String destinationTableId = "MY_DESTINATION_TABLE_NAME";
-        String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
-        String sourceTableId = "MY_SOURCE_TABLE_NAME";
-    
-        copyTable(sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.CopyJobConfiguration;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.TableId;
+
+public class CopyTable {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
+    String destinationTableId = "MY_DESTINATION_TABLE_NAME";
+    String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
+    String sourceTableId = "MY_SOURCE_TABLE_NAME";
+
+    copyTable(sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId);
+  }
+
+  public static void copyTable(
+      String sourceDatasetName,
+      String sourceTableId,
+      String destinationDatasetName,
+      String destinationTableId) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
+      TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
+
+      // For more information on CopyJobConfiguration see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
+      CopyJobConfiguration configuration =
+          CopyJobConfiguration.newBuilder(destinationTable, sourceTable).build();
+
+      // For more information on Job see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+      Job job = bigquery.create(JobInfo.of(configuration));
+
+      // Blocks until this job completes its execution, either failing or succeeding.
+      Job completedJob = job.waitFor();
+      if (completedJob == null) {
+        System.out.println("Job not executed since it no longer exists.");
+        return;
+      } else if (completedJob.getStatus().getError() != null) {
+        System.out.println(
+            "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
+        return;
       }
-    
-      public static void copyTable(
-          String sourceDatasetName,
-          String sourceTableId,
-          String destinationDatasetName,
-          String destinationTableId) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
-          TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
-    
-          // For more information on CopyJobConfiguration see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
-          CopyJobConfiguration configuration =
-              CopyJobConfiguration.newBuilder(destinationTable, sourceTable).build();
-    
-          // For more information on Job see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-          Job job = bigquery.create(JobInfo.of(configuration));
-    
-          // Blocks until this job completes its execution, either failing or succeeding.
-          Job completedJob = job.waitFor();
-          if (completedJob == null) {
-            System.out.println("Job not executed since it no longer exists.");
-            return;
-          } else if (completedJob.getStatus().getError() != null) {
-            System.out.println(
-                "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
-            return;
-          }
-          System.out.println("Table copied successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
+      System.out.println("Table copied successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -997,35 +1047,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function copyTable() {
-      // Copies src_dataset:src_table to dest_dataset:dest_table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample
-       */
-      // const srcDatasetId = "my_src_dataset";
-      // const srcTableId = "my_src_table";
-      // const destDatasetId = "my_dest_dataset";
-      // const destTableId = "my_dest_table";
-    
-      // Copy the table contents into another table
-      const [job] = await bigquery
-        .dataset(srcDatasetId)
-        .table(srcTableId)
-        .copy(bigquery.dataset(destDatasetId).table(destTableId));
-    
-      console.log(`Job ${job.id} completed.`);
-    
-      // Check the job's status for errors
-      const errors = job.status.errors;
-      if (errors && errors.length > 0) {
-        throw errors;
-      }
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function copyTable() {
+  // Copies src_dataset:src_table to dest_dataset:dest_table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample
+   */
+  // const srcDatasetId = "my_src_dataset";
+  // const srcTableId = "my_src_table";
+  // const destDatasetId = "my_dest_dataset";
+  // const destTableId = "my_dest_table";
+
+  // Copy the table contents into another table
+  const [job] = await bigquery
+    .dataset(srcDatasetId)
+    .table(srcTableId)
+    .copy(bigquery.dataset(destDatasetId).table(destTableId));
+
+  console.log(`Job ${job.id} completed.`);
+
+  // Check the job's status for errors
+  const errors = job.status.errors;
+  if (errors && errors.length > 0) {
+    throw errors;
+  }
+}
+```
 
 ### PHP
 
@@ -1033,40 +1085,42 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    use Google\Cloud\Core\ExponentialBackoff;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $sourceTableId   = 'The BigQuery table ID to copy from';
-    // $destinationTableId = 'The BigQuery table ID to copy to';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $sourceTable = $dataset->table($sourceTableId);
-    $destinationTable = $dataset->table($destinationTableId);
-    $copyConfig = $sourceTable->copy($destinationTable);
-    $job = $sourceTable->runJob($copyConfig);
-    
-    // poll the job until it is complete
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        print('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
-            throw new Exception('Job has not yet completed', 500);
-        }
-    });
-    // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
-        printf('Error running job: %s' . PHP_EOL, $error);
-    } else {
-        print('Table copied successfully' . PHP_EOL);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+use Google\Cloud\Core\ExponentialBackoff;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $sourceTableId   = 'The BigQuery table ID to copy from';
+// $destinationTableId = 'The BigQuery table ID to copy to';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$sourceTable = $dataset->table($sourceTableId);
+$destinationTable = $dataset->table($destinationTableId);
+$copyConfig = $sourceTable->copy($destinationTable);
+$job = $sourceTable->runJob($copyConfig);
+
+// poll the job until it is complete
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    print('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
+        throw new Exception('Job has not yet completed', 500);
     }
+});
+// check if the job has errors
+if (isset($job->info()['status']['errorResult'])) {
+    $error = $job->info()['status']['errorResult']['message'];
+    printf('Error running job: %s' . PHP_EOL, $error);
+} else {
+    print('Table copied successfully' . PHP_EOL);
+}
+```
 
 ### Python
 
@@ -1074,29 +1128,31 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set source_table_id to the ID of the original table.
-    # source_table_id = "your-project.source_dataset.source_table"
-    
-    # TODO(developer): Set destination_table_id to the ID of the destination table.
-    # destination_table_id = "your-project.destination_dataset.destination_table"
-    
-    job = client.copy_table(source_table_id, destination_table_id)
-    job.result()  # Wait for the job to complete.
-    
-    print("A copy of the table created.")
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set source_table_id to the ID of the original table.
+# source_table_id = "your-project.source_dataset.source_table"
+
+# TODO(developer): Set destination_table_id to the ID of the destination table.
+# destination_table_id = "your-project.destination_dataset.destination_table"
+
+job = client.copy_table(source_table_id, destination_table_id)
+job.result()  # Wait for the job to complete.
+
+print("A copy of the table created.")
+```
 
 ### Copy multiple source tables
 
 You can copy multiple source tables to a destination table in the following ways:
 
-  - Using the bq command-line tool's `bq cp` command.
-  - Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configuring a `copy` job, and specifying the `sourceTables` property.
-  - Using the client libraries.
+- Using the bq command-line tool's `bq cp` command.
+- Calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, configuring a `copy` job, and specifying the `sourceTables` property.
+- Using the client libraries.
 
 All source tables must have identical schemas and [tags](https://docs.cloud.google.com/bigquery/docs/tags) , and only one destination table is allowed.
 
@@ -1107,58 +1163,70 @@ To copy multiple source tables, select one of the following choices:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Issue the `bq cp` command and include multiple source tables as a comma-separated list. Optional flags can be used to control the write disposition of the destination table:
-    
-      - `-a` or `--append_table` appends the data from the source tables to an existing table in the destination dataset.
-      - `-f` or `--force` overwrites an existing destination table in the destination dataset and doesn't prompt you for confirmation.
-      - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' project_id : dataset . table ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
-      - `--destination_kms_key` is the customer-managed Cloud Key Management Service key used to encrypt the destination table.
-    
+
+    - `-a` or `--append_table` appends the data from the source tables to an existing table in the destination dataset.
+    - `-f` or `--force` overwrites an existing destination table in the destination dataset and doesn't prompt you for confirmation.
+    - `-n` or `--no_clobber` returns the following error message if the table exists in the destination dataset: `Table ' `` project_id `` : `` dataset `` . `` table `` ' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table.
+    - `--destination_kms_key` is the customer-managed Cloud Key Management Service key used to encrypt the destination table.
+
     `--destination_kms_key` is not demonstrated here. See [Protecting data with Cloud Key Management Service keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
-    
-    If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  project_id : dataset  ` .
-    
+
+    If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `project_id `` : `` dataset` .
+
     (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-    
-        bq --location=location cp \
-        -a -f -n \project_id:dataset.source_table,project_id:dataset.source_table \project_id:dataset.destination_table
-    
+
+    ```
+    bq --location=location cp \
+    -a -f -n \
+    project_id:dataset.source_table,project_id:dataset.source_table \
+    project_id:dataset.destination_table
+    ```
+
     Replace the following:
-    
-      - `  location  ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-      - `  project_id  ` : your project ID.
-      - `  dataset  ` : the name of the source or destination dataset.
-      - `  source_table  ` : the table that you're copying.
-      - `  destination_table  ` : the name of the table in the destination dataset.
-    
+
+    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    - `project_id` : your project ID.
+    - `dataset` : the name of the source or destination dataset.
+    - `source_table` : the table that you're copying.
+    - `destination_table` : the name of the table in the destination dataset.
+
     Examples:
-    
+
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `mydataset2.tablecopy` table, enter the following command . All datasets are in your default project.
-    
-        bq cp \
-        mydataset.mytable,mydataset.mytable2 \
-        mydataset2.tablecopy
-    
+
+    ```
+    bq cp \
+    mydataset.mytable,mydataset.mytable2 \
+    mydataset2.tablecopy
+    ```
+
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table to `myotherdataset.mytable` table and to overwrite a destination table with the same name, enter the following command. The destination dataset is in the `myotherproject` project, not your default project. The `-f` shortcut is used to overwrite the destination table without a prompt.
-    
-        bq cp -f \
-        mydataset.mytable,mydataset.mytable2 \
-        myotherproject:myotherdataset.mytable
-    
+
+    ```
+    bq cp -f \
+    mydataset.mytable,mydataset.mytable2 \
+    myotherproject:myotherdataset.mytable
+    ```
+
     To copy the `myproject:mydataset.mytable` table and the `myproject:mydataset.mytable2` table and to return an error if the destination dataset contains a table with the same name, enter the following command. The destination dataset is in the `myotherproject` project. The `-n` shortcut is used to prevent overwriting a table with the same name.
-    
-        bq cp -n \
-        myproject:mydataset.mytable,myproject:mydataset.mytable2 \
-        myotherproject:myotherdataset.mytable
-    
+
+    ```
+    bq cp -n \
+    myproject:mydataset.mytable,myproject:mydataset.mytable2 \
+    myotherproject:myotherdataset.mytable
+    ```
+
     To copy the `mydataset.mytable` table and the `mydataset.mytable2` table and to append the data to a destination table with the same name, enter the following command. The source dataset is in your default project. The destination dataset is in the `myotherproject` project. The `-a` shortcut is used to append to the destination table.
-    
-        bq cp -a \
-        mydataset.mytable,mydataset.mytable2 \
-        myotherproject:myotherdataset.mytable
+
+    ```
+    bq cp -a \
+    mydataset.mytable,mydataset.mytable2 \
+    myotherproject:myotherdataset.mytable
+    ```
 
 ### API
 
@@ -1172,48 +1240,50 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // copyMultiTable demonstrates using a copy job to copy multiple source tables into a single destination table.
-    func copyMultiTable(projectID, srcDatasetID string, srcTableIDs []string, dstDatasetID, dstTableID string) error {
-     // projectID := "my-project-id"
-     // srcDatasetID := "sourcedataset"
-     // srcTableIDs := []string{"table1","table2"}
-     // dstDatasetID = "destinationdataset"
-     // dstTableID = "destinationtable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     srcDataset := client.Dataset(srcDatasetID)
-     dstDataset := client.Dataset(dstDatasetID)
-     var tableRefs []*bigquery.Table
-     for _, v := range srcTableIDs {
-         tableRefs = append(tableRefs, srcDataset.Table(v))
-     }
-     copier := dstDataset.Table(dstTableID).CopierFrom(tableRefs...)
-     copier.WriteDisposition = bigquery.WriteTruncate
-     job, err := copier.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// copyMultiTable demonstrates using a copy job to copy multiple source tables into a single destination table.
+func copyMultiTable(projectID, srcDatasetID string, srcTableIDs []string, dstDatasetID, dstTableID string) error {
+    // projectID := "my-project-id"
+    // srcDatasetID := "sourcedataset"
+    // srcTableIDs := []string{"table1","table2"}
+    // dstDatasetID = "destinationdataset"
+    // dstTableID = "destinationtable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    srcDataset := client.Dataset(srcDatasetID)
+    dstDataset := client.Dataset(dstDatasetID)
+    var tableRefs []*bigquery.Table
+    for _, v := range srcTableIDs {
+        tableRefs = append(tableRefs, srcDataset.Table(v))
+    }
+    copier := dstDataset.Table(dstTableID).CopierFrom(tableRefs...)
+    copier.WriteDisposition = bigquery.WriteTruncate
+    job, err := copier.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -1221,67 +1291,69 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.CopyJobConfiguration;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.TableId;
-    import java.util.Arrays;
-    
-    public class CopyMultipleTables {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String destinationDatasetName = "MY_DATASET_NAME";
-        String destinationTableId = "MY_TABLE_NAME";
-        String sourceTable1Id = "MY_SOURCE_TABLE_1";
-        String sourceTable2Id = "MY_SOURCE_TABLE_2";
-        copyMultipleTables(destinationDatasetName, destinationTableId, sourceTable1Id, sourceTable2Id);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.CopyJobConfiguration;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.TableId;
+import java.util.Arrays;
+
+public class CopyMultipleTables {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String destinationDatasetName = "MY_DATASET_NAME";
+    String destinationTableId = "MY_TABLE_NAME";
+    String sourceTable1Id = "MY_SOURCE_TABLE_1";
+    String sourceTable2Id = "MY_SOURCE_TABLE_2";
+    copyMultipleTables(destinationDatasetName, destinationTableId, sourceTable1Id, sourceTable2Id);
+  }
+
+  public static void copyMultipleTables(
+      String destinationDatasetName,
+      String destinationTableId,
+      String sourceTable1Id,
+      String sourceTable2Id) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
+      TableId sourceTable1 = TableId.of(destinationDatasetName, sourceTable1Id);
+      TableId sourceTable2 = TableId.of(destinationDatasetName, sourceTable2Id);
+
+      // For more information on CopyJobConfiguration see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
+      CopyJobConfiguration configuration =
+          CopyJobConfiguration.newBuilder(
+                  destinationTable, Arrays.asList(sourceTable1, sourceTable2))
+              .build();
+
+      // For more information on Job see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+      Job job = bigquery.create(JobInfo.of(configuration));
+
+      // Blocks until this job completes its execution, either failing or succeeding.
+      Job completedJob = job.waitFor();
+      if (completedJob == null) {
+        System.out.println("Job not executed since it no longer exists.");
+        return;
+      } else if (completedJob.getStatus().getError() != null) {
+        System.out.println(
+            "BigQuery was unable to copy tables due to an error: \n" + job.getStatus().getError());
+        return;
       }
-    
-      public static void copyMultipleTables(
-          String destinationDatasetName,
-          String destinationTableId,
-          String sourceTable1Id,
-          String sourceTable2Id) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
-          TableId sourceTable1 = TableId.of(destinationDatasetName, sourceTable1Id);
-          TableId sourceTable2 = TableId.of(destinationDatasetName, sourceTable2Id);
-    
-          // For more information on CopyJobConfiguration see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
-          CopyJobConfiguration configuration =
-              CopyJobConfiguration.newBuilder(
-                      destinationTable, Arrays.asList(sourceTable1, sourceTable2))
-                  .build();
-    
-          // For more information on Job see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-          Job job = bigquery.create(JobInfo.of(configuration));
-    
-          // Blocks until this job completes its execution, either failing or succeeding.
-          Job completedJob = job.waitFor();
-          if (completedJob == null) {
-            System.out.println("Job not executed since it no longer exists.");
-            return;
-          } else if (completedJob.getStatus().getError() != null) {
-            System.out.println(
-                "BigQuery was unable to copy tables due to an error: \n" + job.getStatus().getError());
-            return;
-          }
-          System.out.println("Table copied successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
+      System.out.println("Table copied successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1289,36 +1361,38 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function copyTableMultipleSource() {
-      // Copy multiple source tables to a given destination.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-      // sourceTable = 'my_table';
-      // destinationTable = 'testing';
-    
-      // Create a client
-      const dataset = bigquery.dataset(datasetId);
-    
-      const metadata = {
-        createDisposition: 'CREATE_NEVER',
-        writeDisposition: 'WRITE_TRUNCATE',
-      };
-    
-      // Create table references
-      const table = dataset.table(sourceTable);
-      const yourTable = dataset.table(destinationTable);
-    
-      // Copy table
-      const [apiResponse] = await table.copy(yourTable, metadata);
-      console.log(apiResponse.configuration.copy);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function copyTableMultipleSource() {
+  // Copy multiple source tables to a given destination.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+  // sourceTable = 'my_table';
+  // destinationTable = 'testing';
+
+  // Create a client
+  const dataset = bigquery.dataset(datasetId);
+
+  const metadata = {
+    createDisposition: 'CREATE_NEVER',
+    writeDisposition: 'WRITE_TRUNCATE',
+  };
+
+  // Create table references
+  const table = dataset.table(sourceTable);
+  const yourTable = dataset.table(destinationTable);
+
+  // Copy table
+  const [apiResponse] = await table.copy(yourTable, metadata);
+  console.log(apiResponse.configuration.copy);
+}
+```
 
 ### Python
 
@@ -1326,26 +1400,28 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set dest_table_id to the ID of the destination table.
-    # dest_table_id = "your-project.your_dataset.your_table_name"
-    
-    # TODO(developer): Set table_ids to the list of the IDs of the original tables.
-    # table_ids = ["your-project.your_dataset.your_table_name", ...]
-    
-    job = client.copy_table(table_ids, dest_table_id)  # Make an API request.
-    job.result()  # Wait for the job to complete.
-    
-    print("The tables {} have been appended to {}".format(table_ids, dest_table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set dest_table_id to the ID of the destination table.
+# dest_table_id = "your-project.your_dataset.your_table_name"
+
+# TODO(developer): Set table_ids to the list of the IDs of the original tables.
+# table_ids = ["your-project.your_dataset.your_table_name", ...]
+
+job = client.copy_table(table_ids, dest_table_id)  # Make an API request.
+job.result()  # Wait for the job to complete.
+
+print("The tables {} have been appended to {}".format(table_ids, dest_table_id))
+```
 
 ### Copy tables across regions
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can copy a table, [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) from one [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations) or multi-region to another. This includes any tables that have customer-managed Cloud KMS (CMEK) applied.
@@ -1357,30 +1433,31 @@ To copy a table across regions, select one of the following options:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Run the [`bq cp` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) :
 
-<!-- end list -->
-
-``` 
-   bq cp \   -f -n \   SOURCE_PROJECT:SOURCE_DATASET.SOURCE_TABLE \   DESTINATION_PROJECT:DESTINATION_DATASET.DESTINATION_TABLE   
+```
+bq cp \
+   -f -n \
+   SOURCE_PROJECT:SOURCE_DATASET.SOURCE_TABLE \
+   DESTINATION_PROJECT:DESTINATION_DATASET.DESTINATION_TABLE
 ```
 
 Replace the following:
 
-  - `  SOURCE_PROJECT  ` : source project ID. If the source dataset is in a project other than your default project, add the project ID to the source dataset name.
+- `SOURCE_PROJECT` : source project ID. If the source dataset is in a project other than your default project, add the project ID to the source dataset name.
 
-  - `  DESTINATION_PROJECT  ` : destination project ID. If the destination dataset is in a project other than your default project, add the project ID to the destination dataset name.
+- `DESTINATION_PROJECT` : destination project ID. If the destination dataset is in a project other than your default project, add the project ID to the destination dataset name.
 
-  - `  SOURCE_DATASET  ` : the name of the source dataset.
+- `SOURCE_DATASET` : the name of the source dataset.
 
-  - `  DESTINATION_DATASET  ` : the name of the destination dataset.
+- `DESTINATION_DATASET` : the name of the destination dataset.
 
-  - `  SOURCE_TABLE  ` : the table that you are copying.
+- `SOURCE_TABLE` : the table that you are copying.
 
-  - `  DESTINATION_TABLE  ` : the name of the table in the destination dataset.
+- `DESTINATION_TABLE` : the name of the table in the destination dataset.
 
 The following example is a command that copies the `mydataset_us.mytable` table from the `us` multi-region to the `mydataset_eu.mytable2` table in the `eu` multi-region. Both datasets are in the default project.
 
@@ -1406,46 +1483,48 @@ To copy a table across regions using the API, call the [`jobs.insert`](https://d
 
 Specify your region in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Apis.Bigquery.v2.Data;
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryCopyTable
+```csharp
+using Google.Apis.Bigquery.v2.Data;
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryCopyTable
+{
+    public void CopyTable(
+        string projectId = "your-project-id",
+        string destinationDatasetId = "your_dataset_id"
+    )
     {
-        public void CopyTable(
-            string projectId = "your-project-id",
-            string destinationDatasetId = "your_dataset_id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        TableReference sourceTableRef = new TableReference()
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            TableReference sourceTableRef = new TableReference()
-            {
-                TableId = "shakespeare",
-                DatasetId = "samples",
-                ProjectId = "bigquery-public-data"
-            };
-            TableReference destinationTableRef = client.GetTableReference(
-                destinationDatasetId, "destination_table");
-            BigQueryJob job = client.CreateCopyJob(
-                sourceTableRef, destinationTableRef)
-                .PollUntilCompleted() // Wait for the job to complete.
-                .ThrowOnAnyError();
-    
-            // Retrieve destination table
-            BigQueryTable destinationTable = client.GetTable(destinationTableRef);
-            Console.WriteLine(
-                $"Copied {destinationTable.Resource.NumRows} rows from table "
-                + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
-                + $"to {destinationTable.FullyQualifiedId}."
-            );
-        }
+            TableId = "shakespeare",
+            DatasetId = "samples",
+            ProjectId = "bigquery-public-data"
+        };
+        TableReference destinationTableRef = client.GetTableReference(
+            destinationDatasetId, "destination_table");
+        BigQueryJob job = client.CreateCopyJob(
+            sourceTableRef, destinationTableRef)
+            .PollUntilCompleted() // Wait for the job to complete.
+            .ThrowOnAnyError();
+
+        // Retrieve destination table
+        BigQueryTable destinationTable = client.GetTable(destinationTableRef);
+        Console.WriteLine(
+            $"Copied {destinationTable.Resource.NumRows} rows from table "
+            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
+            + $"to {destinationTable.FullyQualifiedId}."
+        );
     }
+}
+```
 
 ### Go
 
@@ -1453,43 +1532,45 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // copyTable demonstrates copying a table from a source to a destination, and
-    // allowing the copy to overwrite existing data by using truncation.
-    func copyTable(projectID, datasetID, srcID, dstID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // srcID := "sourcetable"
-     // dstID := "destinationtable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     dataset := client.Dataset(datasetID)
-     copier := dataset.Table(dstID).CopierFrom(dataset.Table(srcID))
-     copier.WriteDisposition = bigquery.WriteTruncate
-     job, err := copier.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// copyTable demonstrates copying a table from a source to a destination, and
+// allowing the copy to overwrite existing data by using truncation.
+func copyTable(projectID, datasetID, srcID, dstID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // srcID := "sourcetable"
+    // dstID := "destinationtable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    dataset := client.Dataset(datasetID)
+    copier := dataset.Table(dstID).CopierFrom(dataset.Table(srcID))
+    copier.WriteDisposition = bigquery.WriteTruncate
+    job, err := copier.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -1497,64 +1578,66 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.CopyJobConfiguration;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.TableId;
-    
-    public class CopyTable {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
-        String destinationTableId = "MY_DESTINATION_TABLE_NAME";
-        String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
-        String sourceTableId = "MY_SOURCE_TABLE_NAME";
-    
-        copyTable(sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.CopyJobConfiguration;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.TableId;
+
+public class CopyTable {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
+    String destinationTableId = "MY_DESTINATION_TABLE_NAME";
+    String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
+    String sourceTableId = "MY_SOURCE_TABLE_NAME";
+
+    copyTable(sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId);
+  }
+
+  public static void copyTable(
+      String sourceDatasetName,
+      String sourceTableId,
+      String destinationDatasetName,
+      String destinationTableId) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
+      TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
+
+      // For more information on CopyJobConfiguration see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
+      CopyJobConfiguration configuration =
+          CopyJobConfiguration.newBuilder(destinationTable, sourceTable).build();
+
+      // For more information on Job see:
+      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+      Job job = bigquery.create(JobInfo.of(configuration));
+
+      // Blocks until this job completes its execution, either failing or succeeding.
+      Job completedJob = job.waitFor();
+      if (completedJob == null) {
+        System.out.println("Job not executed since it no longer exists.");
+        return;
+      } else if (completedJob.getStatus().getError() != null) {
+        System.out.println(
+            "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
+        return;
       }
-    
-      public static void copyTable(
-          String sourceDatasetName,
-          String sourceTableId,
-          String destinationDatasetName,
-          String destinationTableId) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
-          TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
-    
-          // For more information on CopyJobConfiguration see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
-          CopyJobConfiguration configuration =
-              CopyJobConfiguration.newBuilder(destinationTable, sourceTable).build();
-    
-          // For more information on Job see:
-          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-          Job job = bigquery.create(JobInfo.of(configuration));
-    
-          // Blocks until this job completes its execution, either failing or succeeding.
-          Job completedJob = job.waitFor();
-          if (completedJob == null) {
-            System.out.println("Job not executed since it no longer exists.");
-            return;
-          } else if (completedJob.getStatus().getError() != null) {
-            System.out.println(
-                "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
-            return;
-          }
-          System.out.println("Table copied successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Table copying job was interrupted. \n" + e.toString());
-        }
-      }
+      System.out.println("Table copied successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1562,35 +1645,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function copyTable() {
-      // Copies src_dataset:src_table to dest_dataset:dest_table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample
-       */
-      // const srcDatasetId = "my_src_dataset";
-      // const srcTableId = "my_src_table";
-      // const destDatasetId = "my_dest_dataset";
-      // const destTableId = "my_dest_table";
-    
-      // Copy the table contents into another table
-      const [job] = await bigquery
-        .dataset(srcDatasetId)
-        .table(srcTableId)
-        .copy(bigquery.dataset(destDatasetId).table(destTableId));
-    
-      console.log(`Job ${job.id} completed.`);
-    
-      // Check the job's status for errors
-      const errors = job.status.errors;
-      if (errors && errors.length > 0) {
-        throw errors;
-      }
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function copyTable() {
+  // Copies src_dataset:src_table to dest_dataset:dest_table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample
+   */
+  // const srcDatasetId = "my_src_dataset";
+  // const srcTableId = "my_src_table";
+  // const destDatasetId = "my_dest_dataset";
+  // const destTableId = "my_dest_table";
+
+  // Copy the table contents into another table
+  const [job] = await bigquery
+    .dataset(srcDatasetId)
+    .table(srcTableId)
+    .copy(bigquery.dataset(destDatasetId).table(destTableId));
+
+  console.log(`Job ${job.id} completed.`);
+
+  // Check the job's status for errors
+  const errors = job.status.errors;
+  if (errors && errors.length > 0) {
+    throw errors;
+  }
+}
+```
 
 ### PHP
 
@@ -1598,40 +1683,42 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    use Google\Cloud\Core\ExponentialBackoff;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $sourceTableId   = 'The BigQuery table ID to copy from';
-    // $destinationTableId = 'The BigQuery table ID to copy to';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $sourceTable = $dataset->table($sourceTableId);
-    $destinationTable = $dataset->table($destinationTableId);
-    $copyConfig = $sourceTable->copy($destinationTable);
-    $job = $sourceTable->runJob($copyConfig);
-    
-    // poll the job until it is complete
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        print('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
-            throw new Exception('Job has not yet completed', 500);
-        }
-    });
-    // check if the job has errors
-    if (isset($job->info()['status']['errorResult'])) {
-        $error = $job->info()['status']['errorResult']['message'];
-        printf('Error running job: %s' . PHP_EOL, $error);
-    } else {
-        print('Table copied successfully' . PHP_EOL);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+use Google\Cloud\Core\ExponentialBackoff;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $sourceTableId   = 'The BigQuery table ID to copy from';
+// $destinationTableId = 'The BigQuery table ID to copy to';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$sourceTable = $dataset->table($sourceTableId);
+$destinationTable = $dataset->table($destinationTableId);
+$copyConfig = $sourceTable->copy($destinationTable);
+$job = $sourceTable->runJob($copyConfig);
+
+// poll the job until it is complete
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    print('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
+        throw new Exception('Job has not yet completed', 500);
     }
+});
+// check if the job has errors
+if (isset($job->info()['status']['errorResult'])) {
+    $error = $job->info()['status']['errorResult']['message'];
+    printf('Error running job: %s' . PHP_EOL, $error);
+} else {
+    print('Table copied successfully' . PHP_EOL);
+}
+```
 
 ### Python
 
@@ -1639,48 +1726,52 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set source_table_id to the ID of the original table.
-    # source_table_id = "your-project.source_dataset.source_table"
-    
-    # TODO(developer): Set destination_table_id to the ID of the destination table.
-    # destination_table_id = "your-project.destination_dataset.destination_table"
-    
-    job = client.copy_table(source_table_id, destination_table_id)
-    job.result()  # Wait for the job to complete.
-    
-    print("A copy of the table created.")
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set source_table_id to the ID of the original table.
+# source_table_id = "your-project.source_dataset.source_table"
+
+# TODO(developer): Set destination_table_id to the ID of the destination table.
+# destination_table_id = "your-project.destination_dataset.destination_table"
+
+job = client.copy_table(source_table_id, destination_table_id)
+job.result()  # Wait for the job to complete.
+
+print("A copy of the table created.")
+```
 
 #### Limitations
 
 Copying a table across regions is subject to the following limitations:
 
-  - You can't copy a table using the Google Cloud console or the [`TABLE COPY DDL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
-  - You can't copy a table if there are any policy tags on the source table.
-  - You can't copy a table if the source table is larger than 20 physical TiB. See [get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) for the source table physical size. Additionally, copying source tables that are larger than 1 physical TiB across regions may need multiple retries to successfully copy them.
-  - You can't copy IAM policies associated with the tables. You can apply the same policies to the destination after the copy is completed.
-  - If the copy operation overwrites an existing table, [tags](https://docs.cloud.google.com/bigquery/docs/tags) on the existing table are removed.
-  - You can't copy multiple source tables into a single destination table.
-  - You can't copy tables in append mode. If you use `write_empty` mode, the destination table must not exist.
-  - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) information is not copied to the destination region.
-  - When you copy a table clone or snapshot to a new region, a full copy of the table is created. This incurs additional storage costs.
-  - Expiration time from the source table is copied to the destination table.
+- You can't copy a table using the Google Cloud console or the [`TABLE COPY DDL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
+- You can't copy a table if there are any policy tags on the source table.
+- You can't copy a table if the source table is larger than 20 physical TiB. See [get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) for the source table physical size. Additionally, copying source tables that are larger than 1 physical TiB across regions may need multiple retries to successfully copy them.
+- You can't copy IAM policies associated with the tables. You can apply the same policies to the destination after the copy is completed.
+- If the copy operation overwrites an existing table, [tags](https://docs.cloud.google.com/bigquery/docs/tags) on the existing table are removed.
+- You can't copy multiple source tables into a single destination table.
+- You can't copy tables in append mode. If you use `write_empty` mode, the destination table must not exist.
+- [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) information is not copied to the destination region.
+- When you copy a table clone or snapshot to a new region, a full copy of the table is created. This incurs additional storage costs.
+- Expiration time from the source table is copied to the destination table.
 
 ### View current quota usage
 
 You can view your current usage of query, load, extract, or copy jobs by running an `INFORMATION_SCHEMA` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `INFORMATION_SCHEMA.JOBS` view to list the number of query, load, extract, and copy jobs by project:
 
-    SELECT
-      sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
-      sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
-      sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
-      sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
-    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE date(creation_time)= CURRENT_DATE()
+```
+SELECT
+  sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
+  sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
+  sum(case  when job_type="EXTRACT" then 1 else 0 end) as EXT_CNT,
+  sum(case  when job_type="COPY" then 1 else 0 end) as CPY_CNT
+FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE date(creation_time)= CURRENT_DATE()
+```
 
 > **Note:** The `INFORMATION_SCHEMA` view does not display cross-region copy jobs.
 
@@ -1690,44 +1781,50 @@ BigQuery returns this error when the number of copy jobs running in a project ha
 
 **Error message**
 
-    Your project exceeded quota for copies per project
+```
+Your project exceeded quota for copies per project
+```
 
 #### Diagnosis
 
 If you'd like to gather more data about where the copy jobs are coming from, you can try the following:
 
-  - If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
-    
-        SELECT
-        creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
-        FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-        WHERE
-        creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
-        AND job_type = "COPY"
-        order by creation_time DESC
-    
-    You can also adjust the time interval depending on the time range you're interested in.
+- If your copy jobs are located in a single or only a few regions, you can try querying the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) table for specific regions. For example:
 
-  - To see all copy jobs in all regions, you can use the following filter in Cloud Logging:
-    
-        resource.type="bigquery_resource"
-        protoPayload.methodName="jobservice.insert"
-        protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.tableCopy:*
+  ```
+  SELECT
+  creation_time, job_id, user_email, destination_table.project_id, destination_table.dataset_id, destination_table.table_id
+  FROM `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+  WHERE
+  creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY) AND CURRENT_TIMESTAMP()
+  AND job_type = "COPY"
+  order by creation_time DESC
+  ```
+
+  You can also adjust the time interval depending on the time range you're interested in.
+
+- To see all copy jobs in all regions, you can use the following filter in Cloud Logging:
+
+  ```
+  resource.type="bigquery_resource"
+  protoPayload.methodName="jobservice.insert"
+  protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.tableCopy:*
+  ```
 
 #### Resolution
 
-  - If the goal of the frequent copy operations is to create a snapshot of data, consider using [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) instead. Table snapshots are a cheaper and faster alternative to copying full tables.
-  - You can request a quota increase by contacting [support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [sales](https://cloud.google.com/contact) . It might take several days to review and process the request. We recommend stating the priority, use case, and the project ID in the request.
+- If the goal of the frequent copy operations is to create a snapshot of data, consider using [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) instead. Table snapshots are a cheaper and faster alternative to copying full tables.
+- You can request a quota increase by contacting [support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [sales](https://cloud.google.com/contact) . It might take several days to review and process the request. We recommend stating the priority, use case, and the project ID in the request.
 
 ## Delete tables
 
 You can delete a table in the following ways:
 
-  - Using the Google Cloud console.
-  - Using a data definition language (DDL) `DROP TABLE` statement.
-  - Using the bq command-line tool `bq rm` command.
-  - Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method.
-  - Using the client libraries.
+- Using the Google Cloud console.
+- Using a data definition language (DDL) `DROP TABLE` statement.
+- Using the bq command-line tool `bq rm` command.
+- Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method.
+- Using the client libraries.
 
 To delete all of the tables in the dataset, [delete the dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
@@ -1745,8 +1842,8 @@ This predefined role contains the permissions required to delete a table. To see
 
 The following permissions are required to delete a table:
 
-  - `bigquery.tables.delete`
-  - `bigquery.tables.get`
+- `bigquery.tables.delete`
+- `bigquery.tables.get`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -1757,7 +1854,7 @@ To delete a table:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -1775,82 +1872,88 @@ Use the [`DROP TABLE` statement](https://docs.cloud.google.com/bigquery/docs/ref
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        DROP TABLE mydataset.mytable;
 
-3.  Click play\_circle **Run** .
+    ```
+    DROP TABLE mydataset.mytable;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the `bq rm` command with the `--table` flag (or `-t` shortcut) to delete a table. When you use the bq command-line tool to remove a table, you must confirm the action. You can use the `--force` flag (or `-f` shortcut) to skip confirmation.
-    
-    If the table is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
-    
-        bq rm \
-        -f \
-        -t \
-        project_id:dataset.table
-    
+
+    If the table is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `project_id `` : `` dataset` .
+
+    ```
+    bq rm \
+    -f \
+    -t \
+    project_id:dataset.table
+    ```
+
     Replace the following:
-    
-      - `  project_id  ` : your project ID
-      - `  dataset  ` : the name of the dataset that contains the table
-      - `  table  ` : the name of the table that you're deleting
-    
+
+    - `project_id` : your project ID
+    - `dataset` : the name of the dataset that contains the table
+    - `table` : the name of the table that you're deleting
+
     Examples:
-    
+
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project.
-    
+
     ```sh
     bq rm -t mydataset.mytable
     ```
-    
+
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in the `myotherproject` project, not your default project.
-    
+
     ```sh
     bq rm -t myotherproject:mydataset.mytable
     ```
-    
+
     To delete the `mytable` table from the `mydataset` dataset, enter the following command. The `mydataset` dataset is in your default project. The command uses the `-f` shortcut to bypass confirmation.
-    
+
     ```sh
     bq rm -f -t mydataset.mytable
     ```
-    
-    > **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
+
+    > **Note:** You can enter the [`bq ls `` dataset`](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) command in the bq command-line tool to confirm that a table was removed from a dataset.
 
 ### API
 
 Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) API method and specify the table to delete using the `tableId` parameter.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryDeleteTable
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryDeleteTable
+{
+    public void DeleteTable(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id",
+        string tableId = "your_table_id"
+    )
     {
-        public void DeleteTable(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id",
-            string tableId = "your_table_id"
-        )
-        {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            client.DeleteTable(datasetId, tableId);
-            Console.WriteLine($"Table {tableId} deleted.");
-        }
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        client.DeleteTable(datasetId, tableId);
+        Console.WriteLine($"Table {tableId} deleted.");
     }
+}
+```
 
 ### Go
 
@@ -1858,31 +1961,33 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // deleteTable demonstrates deletion of a BigQuery table.
-    func deleteTable(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     table := client.Dataset(datasetID).Table(tableID)
-     if err := table.Delete(ctx); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// deleteTable demonstrates deletion of a BigQuery table.
+func deleteTable(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    table := client.Dataset(datasetID).Table(tableID)
+    if err := table.Delete(ctx); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -1890,36 +1995,38 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.TableId;
-    
-    public class DeleteTable {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        deleteTable(datasetName, tableName);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.TableId;
+
+public class DeleteTable {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    deleteTable(datasetName, tableName);
+  }
+
+  public static void deleteTable(String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      boolean success = bigquery.delete(TableId.of(datasetName, tableName));
+      if (success) {
+        System.out.println("Table deleted successfully");
+      } else {
+        System.out.println("Table was not found");
       }
-    
-      public static void deleteTable(String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-          boolean success = bigquery.delete(TableId.of(datasetName, tableName));
-          if (success) {
-            System.out.println("Table deleted successfully");
-          } else {
-            System.out.println("Table was not found");
-          }
-        } catch (BigQueryException e) {
-          System.out.println("Table was not deleted. \n" + e.toString());
-        }
-      }
+    } catch (BigQueryException e) {
+      System.out.println("Table was not deleted. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1927,27 +2034,29 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function deleteTable() {
-      // Deletes "my_table" from "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_table";
-    
-      // Delete the table
-      await bigquery
-        .dataset(datasetId)
-        .table(tableId)
-        .delete();
-    
-      console.log(`Table ${tableId} deleted.`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function deleteTable() {
+  // Deletes "my_table" from "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_table";
+
+  // Delete the table
+  await bigquery
+    .dataset(datasetId)
+    .table(tableId)
+    .delete();
+
+  console.log(`Table ${tableId} deleted.`);
+}
+```
 
 ### PHP
 
@@ -1955,20 +2064,22 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $tableId = 'The BigQuery table ID';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $table->delete();
-    printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $tableId = 'The BigQuery table ID';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+$table->delete();
+printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
+```
 
 ### Python
 
@@ -1976,18 +2087,20 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to fetch.
-    # table_id = 'your-project.your_dataset.your_table'
-    
-    # If the table does not exist, delete_table raises
-    # google.api_core.exceptions.NotFound unless not_found_ok is True.
-    client.delete_table(table_id, not_found_ok=True)  # Make an API request.
-    print("Deleted table '{}'.".format(table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to fetch.
+# table_id = 'your-project.your_dataset.your_table'
+
+# If the table does not exist, delete_table raises
+# google.api_core.exceptions.NotFound unless not_found_ok is True.
+client.delete_table(table_id, not_found_ok=True)  # Make an API request.
+print("Deleted table '{}'.".format(table_id))
+```
 
 ### Ruby
 
@@ -1995,17 +2108,19 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-      table    = dataset.table table_id
-    
-      table.delete
-    
-      puts "Table #{table_id} deleted."
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+  table    = dataset.table table_id
+
+  table.delete
+
+  puts "Table #{table_id} deleted."
+end
+```
 
 ## Troubleshoot deleted tables
 
@@ -2020,19 +2135,21 @@ Check Cloud Audit Logs for a `google.cloud.bigquery.v2.TableService.DeleteTable`
 1.  In the Google Cloud console, go to the **Logs Explorer** page.
 
 2.  In the **Filter** section, use the following Cloud Logging Filter and **Run Query** ,
-    
-        resource.type="bigquery_dataset"
-        protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable"
-        protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+
+    ```
+    resource.type="bigquery_dataset"
+    protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable"
+    protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+    ```
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the `gcloud logging read` command with the following filters:
-    
+
     ```sh
     gcloud logging read '
     resource.type="bigquery_dataset"
@@ -2040,12 +2157,12 @@ Check Cloud Audit Logs for a `google.cloud.bigquery.v2.TableService.DeleteTable`
     protoPayload.resourceName=~"projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
     '
     ```
-    
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID
-      - `  DATASET_ID  ` : the name of the dataset that contains the table
-      - `  TABLE_ID  ` : the name of the table that was deleted
+
+    - `PROJECT_ID` : your project ID
+    - `DATASET_ID` : the name of the dataset that contains the table
+    - `TABLE_ID` : the name of the table that was deleted
 
 ### Table expiration
 
@@ -2056,30 +2173,32 @@ Tables can be created with an expiration time. Once this time is reached, BigQue
 1.  In the Google Cloud console, go to the **Logs Explorer** page.
 
 2.  In the **Filter** section, use the following Cloud Logging Filter and click **Run Query** .
-    
-        protoPayload.methodName="InternalTableExpired"
-          protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+
+    ```
+    protoPayload.methodName="InternalTableExpired"
+      protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+    ```
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the `gcloud logging read` command with the following filters:
-    
+
     ```sh
     gcloud logging read '
         protoPayload.methodName="InternalTableExpired"
         protoPayload.resourceName=~"projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
         '
     ```
-    
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID
-      - `  DATASET_ID  ` : the name of the dataset that contains the table
-      - `  TABLE_ID  ` : the name of the table that was deleted
+
+    - `PROJECT_ID` : your project ID
+    - `DATASET_ID` : the name of the dataset that contains the table
+    - `TABLE_ID` : the name of the table that was deleted
 
 You can query the [`INFORMATION_SCHEMA.TABLE_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) view to check the `expiration_timestamp` column for existing tables.
 
@@ -2092,19 +2211,21 @@ If the dataset containing the table was deleted, the table will also be deleted.
 1.  In the Google Cloud console, go to the **Logs Explorer** page.
 
 2.  In the **Filter** section, use the following Cloud Logging Filter and **Run Query** .
-    
-        resource.type="bigquery_dataset"
-        protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset"
-        protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID"
+
+    ```
+    resource.type="bigquery_dataset"
+    protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset"
+    protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID"
+    ```
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the `gcloud logging read` command with the following filters:
-    
+
     ```sh
     gcloud logging read '
     resource.type="bigquery_dataset"
@@ -2112,11 +2233,11 @@ If the dataset containing the table was deleted, the table will also be deleted.
     protoPayload.resourceName=~"projects/PROJECT_ID/datasets/DATASET_ID"
     '
     ```
-    
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID
-      - `  DATASET_ID  ` : the name of the dataset that contains the table
+
+    - `PROJECT_ID` : your project ID
+    - `DATASET_ID` : the name of the dataset that contains the table
 
 ## Restore deleted tables
 
@@ -2128,9 +2249,9 @@ To control access to tables in BigQuery, see [Control access to resources with I
 
 ## What's next
 
-  - For more information about creating and using tables, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
-  - For more information about handling data, see [Working With table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) .
-  - For more information about specifying table schemas, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
-  - For more information about modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
-  - For more information about datasets, see [Introduction to datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) .
-  - For more information about views, see [Introduction to views](https://docs.cloud.google.com/bigquery/docs/views-intro) .
+- For more information about creating and using tables, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
+- For more information about handling data, see [Working With table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) .
+- For more information about specifying table schemas, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+- For more information about modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+- For more information about datasets, see [Introduction to datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) .
+- For more information about views, see [Introduction to views](https://docs.cloud.google.com/bigquery/docs/views-intro) .

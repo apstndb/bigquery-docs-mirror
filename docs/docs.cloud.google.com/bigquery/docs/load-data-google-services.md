@@ -68,12 +68,12 @@ To configure exports of conversations from Dialogflow CX, see [Interaction loggi
 
 [Firebase](https://firebase.google.com/) contains a number of analytics exports you can send to BigQuery. These include:
 
-  - Analytics
-  - Cloud messaging
-  - Crashlytics
-  - Performance monitoring
-  - A/B testing
-  - Remote configuration personalization
+- Analytics
+- Cloud messaging
+- Crashlytics
+- Performance monitoring
+- A/B testing
+- Remote configuration personalization
 
 To configure exports of Firebase data, see [Export project data to BigQuery](https://firebase.google.com/docs/projects/bigquery-export) .
 
@@ -123,5 +123,5 @@ To configure model prediction integration with BigQuery, see [Online prediction 
 
 ## What's next
 
-  - Learn about other integrations you can initiate in BigQuery using [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
-  - Learn about connections to other [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
+- Learn about other integrations you can initiate in BigQuery using [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- Learn about connections to other [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .

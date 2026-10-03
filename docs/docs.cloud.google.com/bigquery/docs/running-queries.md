@@ -14,18 +14,18 @@ This document shows you how to run a query in BigQuery and understand how much d
 
 You can [query BigQuery data](https://docs.cloud.google.com/bigquery/docs/running-queries) by using one of the following query job types:
 
-  - **[Interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#queries)** . By default, BigQuery runs queries as interactive query jobs, which are intended to start executing as quickly as possible.
+- **[Interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#queries)** . By default, BigQuery runs queries as interactive query jobs, which are intended to start executing as quickly as possible.
 
-  - **[Batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#batch)** . Batch queries have lower priority than interactive queries. When a project or reservation is using all of its available compute resources, batch queries are more likely to be queued and remain in the queue. After a batch query starts running, the batch query runs the same as an interactive query. For more information, see [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
+- **[Batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#batch)** . Batch queries have lower priority than interactive queries. When a project or reservation is using all of its available compute resources, batch queries are more likely to be queued and remain in the queue. After a batch query starts running, the batch query runs the same as an interactive query. For more information, see [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
 
-  - **[Continuous query jobs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction)** . With these jobs, the query runs continuously, letting you analyze incoming data in BigQuery in real time and then write the results to a BigQuery table, or export the results to Bigtable or Pub/Sub. You can use this capability to perform time sensitive tasks, such as creating and immediately acting on insights, applying real time machine learning (ML) inference, and building event-driven data pipelines.
+- **[Continuous query jobs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction)** . With these jobs, the query runs continuously, letting you analyze incoming data in BigQuery in real time and then write the results to a BigQuery table, or export the results to Bigtable or Pub/Sub. You can use this capability to perform time sensitive tasks, such as creating and immediately acting on insights, applying real time machine learning (ML) inference, and building event-driven data pipelines.
 
 You can run query jobs by using the following methods:
 
-  - Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
-  - Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
-  - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
-  - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
+- Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
+- Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+- Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
+- Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 BigQuery saves query results to either a [temporary table (default) or permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you specify a permanent table as the destination table for the results, you can choose whether to append or overwrite an existing table, or create a new table with a unique name.
 
@@ -35,8 +35,8 @@ BigQuery saves query results to either a [temporary table (default) or permanent
 
 To get the permissions that you need to run a query job, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project.
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on all tables and views that your query references. To query views, you also need this role on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+- [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project.
+- [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on all tables and views that your query references. To query views, you also need this role on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -46,15 +46,17 @@ These predefined roles contain the permissions required to run a query job. To s
 
 The following permissions are required to run a query job:
 
-  - `bigquery.jobs.create` on the project from which the query is being run, regardless of where the data is stored.
-  - `bigquery.tables.getData` on all tables and views that your query references. To query views, you also need this permission on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+- `bigquery.jobs.create` on the project from which the query is being run, regardless of where the data is stored.
+- `bigquery.tables.getData` on all tables and views that your query references. To query views, you also need this permission on all underlying tables and views. If you're using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Troubleshooting
 
-    Access Denied: Project [project_id]: User does not have bigquery.jobs.create
-    permission in project [project_id].
+```
+Access Denied: Project [project_id]: User does not have bigquery.jobs.create
+permission in project [project_id].
+```
 
 This error occurs when a principal lacks permission to create a query jobs in the project.
 
@@ -70,13 +72,70 @@ To run an interactive query, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
-    
+
     For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        SELECT
+
+    ```
+    SELECT
+      name, gender,
+      SUM(number) AS total
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY
+      name, gender
+    ORDER BY
+      total DESC
+    LIMIT
+      10;
+    ```
+
+    Alternatively, you can use the [**Reference** panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) to construct new queries.
+
+4.  Optional: To automatically display code suggestions when you type a query, click **Tools** \> **Parser-based auto-completion** . If you don't need autocomplete suggestions, deselect **Parser-based auto-completion** . This also turns off the project name autofill suggestions.
+
+5.  Optional: To select additional [query settings](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Edit** \> **Query settings** .
+
+6.  Click play_circle **Run** .
+
+    If you don't specify a destination table, the query job writes the output to a temporary (cache) table.
+
+    You can now explore the query results in the **Results** tab of the **Query results** pane.
+
+7.  Optional: To sort the query results by column, click arrow_drop_down **Open sort menu** next to the column name and select a sort order. If the estimated bytes processed for the sort is more than zero, then the number of bytes is displayed at the top of the menu.
+
+8.  Optional: To see visualization of your query results, go to the **Visualization** tab. You can zoom in or zoom out of the chart, download the chart as a PNG file, or toggle the legend visibility.
+
+    In the **Visualization configuration** pane, you can change the visualization type and configure the measures and dimensions of the visualization. Fields in this pane are prefilled with the initial configuration inferred from the destination table schema of the query. The configuration is preserved between following query runs in the same query editor.
+
+    For **Line** , **Bar** , or **Scatter** visualizations, the supported dimensions are `INT64` , `FLOAT64` , `NUMERIC` , `BIGNUMERIC` , `TIMESTAMP` , `DATE` , `DATETIME` , `TIME` , and `STRING` data types, while the supported measures are `INT64` , `FLOAT64` , `NUMERIC` , and `BIGNUMERIC` data types.
+
+    If your query results include the `GEOGRAPHY` type, then **Map** is the default visualization type, which lets you visualize your results on an [interactive map](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio) .
+
+9.  Optional: In the **JSON** tab, you can explore the query results in the JSON format, where the key is the column name and the value is the result for that column.
+
+### bq
+
+1.  In the Google Cloud console, activate Cloud Shell.
+
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) . In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
+
+    ```
+    bq query \
+        --use_legacy_sql=false \
+        'QUERY'
+    ```
+
+    Replace ` QUERY ` with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+
+    ```
+    bq query \
+        --use_legacy_sql=false \
+        'SELECT
           name, gender,
           SUM(number) AS total
         FROM
@@ -86,83 +145,34 @@ To run an interactive query, select one of the following options:
         ORDER BY
           total DESC
         LIMIT
-          10;
-    
-    Alternatively, you can use the [**Reference** panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) to construct new queries.
+          10;'
+    ```
 
-4.  Optional: To automatically display code suggestions when you type a query, click **Tools** \> **Parser-based auto-completion** . If you don't need autocomplete suggestions, deselect **Parser-based auto-completion** . This also turns off the project name autofill suggestions.
-
-5.  Optional: To select additional [query settings](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Edit** \> **Query settings** .
-
-6.  Click play\_circle **Run** .
-    
-    If you don't specify a destination table, the query job writes the output to a temporary (cache) table.
-    
-    You can now explore the query results in the **Results** tab of the **Query results** pane.
-
-7.  Optional: To sort the query results by column, click arrow\_drop\_down **Open sort menu** next to the column name and select a sort order. If the estimated bytes processed for the sort is more than zero, then the number of bytes is displayed at the top of the menu.
-
-8.  Optional: To see visualization of your query results, go to the **Visualization** tab. You can zoom in or zoom out of the chart, download the chart as a PNG file, or toggle the legend visibility.
-    
-    In the **Visualization configuration** pane, you can change the visualization type and configure the measures and dimensions of the visualization. Fields in this pane are prefilled with the initial configuration inferred from the destination table schema of the query. The configuration is preserved between following query runs in the same query editor.
-    
-    For **Line** , **Bar** , or **Scatter** visualizations, the supported dimensions are `INT64` , `FLOAT64` , `NUMERIC` , `BIGNUMERIC` , `TIMESTAMP` , `DATE` , `DATETIME` , `TIME` , and `STRING` data types, while the supported measures are `INT64` , `FLOAT64` , `NUMERIC` , and `BIGNUMERIC` data types.
-    
-    If your query results include the `GEOGRAPHY` type, then **Map** is the default visualization type, which lets you visualize your results on an [interactive map](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio) .
-
-9.  Optional: In the **JSON** tab, you can explore the query results in the JSON format, where the key is the column name and the value is the result for that column.
-
-### bq
-
-1.  In the Google Cloud console, activate Cloud Shell.
-    
-    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
-
-2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) . In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
-    
-        bq query \
-            --use_legacy_sql=false \
-            'QUERY'
-    
-    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        bq query \
-            --use_legacy_sql=false \
-            'SELECT
-              name, gender,
-              SUM(number) AS total
-            FROM
-              `bigquery-public-data.usa_names.usa_1910_2013`
-            GROUP BY
-              name, gender
-            ORDER BY
-              total DESC
-            LIMIT
-              10;'
-    
     The query job writes the output to a temporary (cache) table.
-    
+
     Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
-    
-        bq query \
-            --location=LOCATION \
-            --destination_table=TABLE \
-            --use_legacy_sql=false \
-            'QUERY'
-    
+
+    ```
+    bq query \
+        --location=LOCATION \
+        --destination_table=TABLE \
+        --use_legacy_sql=false \
+        'QUERY'
+    ```
+
     Replace the following:
-    
-      - LOCATION : the region or multi-region for the destination table—for example, `US`
-        
-        In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
-        
-        You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-    
-      - TABLE : a name for the destination table—for example, `myDataset.myTable`
-        
-        If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
-        
-        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
+
+    - ` LOCATION ` : the region or multi-region for the destination table—for example, `US`
+
+      In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
+
+      You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+
+    - ` TABLE ` : a name for the destination table—for example, `myDataset.myTable`
+
+      If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
+
+      If the table isn't in your current project, then add the Google Cloud project ID using the format `PROJECT_ID:DATASET.TABLE` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
 
 ### Terraform
 
@@ -203,11 +213,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -215,13 +227,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -229,26 +243,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -260,39 +282,41 @@ To run a query using the API, [insert a new job](https://docs.cloud.google.com/b
 
 Poll for results by calling [`getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) . Poll until `jobComplete` equals `true` . Check for errors and warnings in the `errors` list.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryQuery
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryQuery
+{
+    public void Query(
+        string projectId = "your-project-id"
+    )
     {
-        public void Query(
-            string projectId = "your-project-id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        string query = @"
+            SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
+            WHERE state = 'TX'
+            LIMIT 100";
+        BigQueryJob job = client.CreateQueryJob(
+            sql: query,
+            parameters: null,
+            options: new QueryOptions { UseQueryCache = false });
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            string query = @"
-                SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
-                WHERE state = 'TX'
-                LIMIT 100";
-            BigQueryJob job = client.CreateQueryJob(
-                sql: query,
-                parameters: null,
-                options: new QueryOptions { UseQueryCache = false });
-            // Wait for the job to complete.
-            job = job.PollUntilCompleted().ThrowOnAnyError();
-            // Display the results
-            foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            {
-                Console.WriteLine($"{row["name"]}");
-            }
+            Console.WriteLine($"{row["name"]}");
         }
     }
+}
+```
 
 ### Go
 
@@ -300,57 +324,59 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryBasic demonstrates issuing a query and reading results.
-    func queryBasic(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(
-         "SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` " +
-             "WHERE state = \"TX\" " +
-             "LIMIT 100")
-     // Location must match that of the dataset(s) referenced in the query.
-     q.Location = "US"
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryBasic demonstrates issuing a query and reading results.
+func queryBasic(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(
+        "SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` " +
+            "WHERE state = \"TX\" " +
+            "LIMIT 100")
+    // Location must match that of the dataset(s) referenced in the query.
+    q.Location = "US"
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -358,54 +384,56 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableResult;
-    
-    public class SimpleQuery {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace this query before running the sample.
-        String query =
-            "SELECT name, SUM(number) as total_people "
-                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-                + "WHERE state = 'TX' "
-                + "GROUP BY name, state "
-                + "ORDER BY total_people DESC "
-                + "LIMIT 100;";
-        simpleQuery(query);
-      }
-    
-      public static void simpleQuery(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Create the query job.
-          QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
-    
-          // Execute the query.
-          TableResult result = bigquery.query(queryConfig);
-    
-          // Print the results.
-          result
-              .iterateAll()
-              .forEach(
-                  row -> {
-                    System.out.print("name:" + row.get("name").getStringValue());
-                    System.out.print(", count:" + row.get("total_people").getLongValue());
-                    System.out.println();
-                  });
-    
-          System.out.println("Query ran successfully");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query did not run \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableResult;
+
+public class SimpleQuery {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace this query before running the sample.
+    String query =
+        "SELECT name, SUM(number) as total_people "
+            + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+            + "WHERE state = 'TX' "
+            + "GROUP BY name, state "
+            + "ORDER BY total_people DESC "
+            + "LIMIT 100;";
+    simpleQuery(query);
+  }
+
+  public static void simpleQuery(String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Create the query job.
+      QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
+
+      // Execute the query.
+      TableResult result = bigquery.query(queryConfig);
+
+      // Print the results.
+      result
+          .iterateAll()
+          .forEach(
+              row -> {
+                System.out.print("name:" + row.get("name").getStringValue());
+                System.out.print(", count:" + row.get("total_people").getLongValue());
+                System.out.println();
+              });
+
+      System.out.println("Query ran successfully");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query did not run \n" + e.toString());
     }
+  }
+}
+```
 
 To run a query with a proxy, see [Configuring a proxy](https://github.com/googleapis/google-cloud-java#configuring-a-proxy) .
 
@@ -415,35 +443,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library using default credentials
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    async function query() {
-      // Queries the U.S. given names dataset for the state of Texas.
-    
-      const query = `SELECT name
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        WHERE state = 'TX'
-        LIMIT 100`;
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-      const options = {
-        query: query,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(options);
-      console.log(`Job ${job.id} started.`);
-    
-      // Wait for the query to finish
-      const [rows] = await job.getQueryResults();
-    
-      // Print the results
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Import the Google Cloud client library using default credentials
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+async function query() {
+  // Queries the U.S. given names dataset for the state of Texas.
+
+  const query = `SELECT name
+    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+    WHERE state = 'TX'
+    LIMIT 100`;
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+  const options = {
+    query: query,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+  };
+
+  // Run the query as a job
+  const [job] = await bigquery.createQueryJob(options);
+  console.log(`Job ${job.id} started.`);
+
+  // Wait for the query to finish
+  const [rows] = await job.getQueryResults();
+
+  // Print the results
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 ### PHP
 
@@ -451,37 +481,39 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    use Google\Cloud\Core\ExponentialBackoff;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $jobConfig = $bigQuery->query($query);
-    $job = $bigQuery->startQuery($jobConfig);
-    
-    $backoff = new ExponentialBackoff(10);
-    $backoff->execute(function () use ($job) {
-        print('Waiting for job to complete' . PHP_EOL);
-        $job->reload();
-        if (!$job->isComplete()) {
-            throw new Exception('Job has not yet completed', 500);
-        }
-    });
-    $queryResults = $job->queryResults();
-    
-    $i = 0;
-    foreach ($queryResults as $row) {
-        printf('--- Row %s ---' . PHP_EOL, ++$i);
-        foreach ($row as $column => $value) {
-            printf('%s: %s' . PHP_EOL, $column, json_encode($value));
-        }
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+use Google\Cloud\Core\ExponentialBackoff;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$jobConfig = $bigQuery->query($query);
+$job = $bigQuery->startQuery($jobConfig);
+
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    print('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
+        throw new Exception('Job has not yet completed', 500);
     }
-    printf('Found %s row(s)' . PHP_EOL, $i);
+});
+$queryResults = $job->queryResults();
+
+$i = 0;
+foreach ($queryResults as $row) {
+    printf('--- Row %s ---' . PHP_EOL, ++$i);
+    foreach ($row as $column => $value) {
+        printf('%s: %s' . PHP_EOL, $column, json_encode($value));
+    }
+}
+printf('Found %s row(s)' . PHP_EOL, $i);
+```
 
 ### Python
 
@@ -489,25 +521,27 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = """
-        SELECT name, SUM(number) as total_people
-        FROM `bigquery-public-data.usa_names.usa_1910_2013`
-        WHERE state = 'TX'
-        GROUP BY name, state
-        ORDER BY total_people DESC
-        LIMIT 20
-    """
-    rows = client.query_and_wait(query)  # Make an API request.
-    
-    print("The query data:")
-    for row in rows:
-        # Row values can be accessed by field name or index.
-        print("name={}, count={}".format(row[0], row["total_people"]))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT name, SUM(number) as total_people
+    FROM `bigquery-public-data.usa_names.usa_1910_2013`
+    WHERE state = 'TX'
+    GROUP BY name, state
+    ORDER BY total_people DESC
+    LIMIT 20
+"""
+rows = client.query_and_wait(query)  # Make an API request.
+
+print("The query data:")
+for row in rows:
+    # Row values can be accessed by field name or index.
+    print("name={}, count={}".format(row[0], row["total_people"]))
+```
 
 ### Ruby
 
@@ -515,31 +549,33 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def query
-      bigquery = Google::Cloud::Bigquery.new
-      sql = "SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` " \
-            "WHERE state = 'TX' " \
-            "LIMIT 100"
-    
-      # Location must match that of the dataset(s) referenced in the query.
-      results = bigquery.query sql do |config|
-        config.location = "US"
-      end
-    
-      results.each do |row|
-        puts row.inspect
-      end
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def query
+  bigquery = Google::Cloud::Bigquery.new
+  sql = "SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013` " \
+        "WHERE state = 'TX' " \
+        "LIMIT 100"
+
+  # Location must match that of the dataset(s) referenced in the query.
+  results = bigquery.query sql do |config|
+    config.location = "US"
+  end
+
+  results.each do |row|
+    puts row.inspect
+  end
+end
+```
 
 ## Dry run
 
 A dry run in BigQuery provides the following information:
 
-  - estimate of charges in [on-demand mode](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
-  - validation of your query
-  - approximate bytes processed by your query in [capacity mode](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
+- estimate of charges in [on-demand mode](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
+- validation of your query
+- approximate bytes processed by your query in [capacity mode](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
 
 Dry runs don't use query slots, and you are not charged for performing a dry run. You can use the estimate returned by a dry run to calculate query costs in the [pricing calculator](https://cloud.google.com/products/calculator) .
 
@@ -556,14 +592,14 @@ To perform a dry run, do the following:
 1.  Go to the BigQuery page.
 
 2.  Enter your query in the query editor.
-    
+
     If the query is valid, then a check mark automatically appears along with the amount of data that the query will process. If the query is invalid, then an exclamation point appears along with an error message.
 
 ### bq
 
 Enter a query like the following using the `--dry_run` flag.
 
-``` 
+```
 bq query \
 --use_legacy_sql=false \
 --dry_run \
@@ -575,13 +611,14 @@ bq query \
    `project_id`.dataset.airports
  LIMIT
    1000'
- 
 ```
 
 For a valid query, the command produces the following response:
 
-    Query successfully validated. Assuming the tables are not modified,
-    running this query will process 10918 bytes of data.
+```
+Query successfully validated. Assuming the tables are not modified,
+running this query will process 10918 bytes of data.
+```
 
 > **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
 
@@ -595,48 +632,50 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // queryDryRun demonstrates issuing a dry run query to validate query structure and
-    // provide an estimate of the bytes scanned.
-    func queryDryRun(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(`
-     SELECT
-         name,
-         COUNT(*) as name_count
-     FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
-     WHERE state = 'WA'
-     GROUP BY name`)
-     q.DryRun = true
-     // Location must match that of the dataset(s) referenced in the query.
-     q.Location = "US"
-    
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     // Dry run is not asynchronous, so get the latest status and statistics.
-     status := job.LastStatus()
-     if err := status.Err(); err != nil {
-         return err
-     }
-     fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// queryDryRun demonstrates issuing a dry run query to validate query structure and
+// provide an estimate of the bytes scanned.
+func queryDryRun(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(`
+    SELECT
+        name,
+        COUNT(*) as name_count
+    FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
+    WHERE state = 'WA'
+    GROUP BY name`)
+    q.DryRun = true
+    // Location must match that of the dataset(s) referenced in the query.
+    q.Location = "US"
+
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    // Dry run is not asynchronous, so get the latest status and statistics.
+    status := job.LastStatus()
+    if err := status.Err(); err != nil {
+        return err
+    }
+    fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
+    return nil
+}
+```
 
 ### Java
 
@@ -644,45 +683,47 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.JobStatistics;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    
-    // Sample to run dry query on the table
-    public class QueryDryRun {
-    
-      public static void runQueryDryRun() {
-        String query =
-            "SELECT name, COUNT(*) as name_count "
-                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-                + "WHERE state = 'WA' "
-                + "GROUP BY name";
-        queryDryRun(query);
-      }
-    
-      public static void queryDryRun(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
-    
-          Job job = bigquery.create(JobInfo.of(queryConfig));
-          JobStatistics.QueryStatistics statistics = job.getStatistics();
-    
-          System.out.println(
-              "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
-        } catch (BigQueryException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.JobStatistics;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+
+// Sample to run dry query on the table
+public class QueryDryRun {
+
+  public static void runQueryDryRun() {
+    String query =
+        "SELECT name, COUNT(*) as name_count "
+            + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+            + "WHERE state = 'WA' "
+            + "GROUP BY name";
+    queryDryRun(query);
+  }
+
+  public static void queryDryRun(String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
+
+      Job job = bigquery.create(JobInfo.of(queryConfig));
+      JobStatistics.QueryStatistics statistics = job.getStatistics();
+
+      System.out.println(
+          "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
+    } catch (BigQueryException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -690,35 +731,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryDryRun() {
-      // Runs a dry query of the U.S. given names dataset for the state of Texas.
-    
-      const query = `SELECT name
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        WHERE state = 'TX'
-        LIMIT 100`;
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-      const options = {
-        query: query,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        dryRun: true,
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(options);
-    
-      // Print the status and statistics
-      console.log('Status:');
-      console.log(job.metadata.status);
-      console.log('\nJob Statistics:');
-      console.log(job.metadata.statistics);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryDryRun() {
+  // Runs a dry query of the U.S. given names dataset for the state of Texas.
+
+  const query = `SELECT name
+    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+    WHERE state = 'TX'
+    LIMIT 100`;
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+  const options = {
+    query: query,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    dryRun: true,
+  };
+
+  // Run the query as a job
+  const [job] = await bigquery.createQueryJob(options);
+
+  // Print the status and statistics
+  console.log('Status:');
+  console.log(job.metadata.status);
+  console.log('\nJob Statistics:');
+  console.log(job.metadata.statistics);
+}
+```
 
 ### PHP
 
@@ -726,56 +769,60 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
-    
-    // Construct a BigQuery client object.
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    
-    // Set job configs
-    $jobConfig = $bigQuery->query($query);
-    $jobConfig->useQueryCache(false);
-    $jobConfig->dryRun(true);
-    
-    // Extract query results
-    $queryJob = $bigQuery->startJob($jobConfig);
-    $info = $queryJob->info();
-    
-    printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
+
+// Construct a BigQuery client object.
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+
+// Set job configs
+$jobConfig = $bigQuery->query($query);
+$jobConfig->useQueryCache(false);
+$jobConfig->dryRun(true);
+
+// Extract query results
+$queryJob = $bigQuery->startJob($jobConfig);
+$info = $queryJob->info();
+
+printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+```
 
 ### Python
 
-Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
+Set the [QueryJobConfig.dry_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
 
 Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
-    
-    # Start the query, passing in the extra configuration.
-    query_job = client.query(
-        (
-            "SELECT name, COUNT(*) as name_count "
-            "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-            "WHERE state = 'WA' "
-            "GROUP BY name"
-        ),
-        job_config=job_config,
-    )  # Make an API request.
-    
-    # A dry run query completes immediately.
-    print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
+
+# Start the query, passing in the extra configuration.
+query_job = client.query(
+    (
+        "SELECT name, COUNT(*) as name_count "
+        "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+        "WHERE state = 'WA' "
+        "GROUP BY name"
+    ),
+    job_config=job_config,
+)  # Make an API request.
+
+# A dry run query completes immediately.
+print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+```
 
 ## Troubleshoot query issues
 
@@ -789,23 +836,25 @@ To run a batch query, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
-    
+
     For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        SELECT
-          name, gender,
-          SUM(number) AS total
-        FROM
-          `bigquery-public-data.usa_names.usa_1910_2013`
-        GROUP BY
-          name, gender
-        ORDER BY
-          total DESC
-        LIMIT
-          10;
+
+    ```
+    SELECT
+      name, gender,
+      SUM(number) AS total
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY
+      name, gender
+    ORDER BY
+      total DESC
+    LIMIT
+      10;
+    ```
 
 4.  Click **Edit** \> **Query settings** .
 
@@ -815,64 +864,70 @@ To run a batch query, select one of the following options:
 
 7.  Click **Save** .
 
-8.  Click play\_circle **Run** .
-    
+8.  Click play_circle **Run** .
+
     If you don't specify a destination table, the query job writes the output to a temporary (cache) table.
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--batch` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
-    
-        bq query \
-            --batch \
-            --use_legacy_sql=false \
-            'QUERY'
-    
-    Replace QUERY with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        bq query \
-            --batch \
-            --use_legacy_sql=false \
-            'SELECT
-              name, gender,
-              SUM(number) AS total
-            FROM
-              `bigquery-public-data.usa_names.usa_1910_2013`
-            GROUP BY
-              name, gender
-            ORDER BY
-              total DESC
-            LIMIT
-              10;'
-    
+
+    ```
+    bq query \
+        --batch \
+        --use_legacy_sql=false \
+        'QUERY'
+    ```
+
+    Replace ` QUERY ` with a valid GoogleSQL query. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+
+    ```
+    bq query \
+        --batch \
+        --use_legacy_sql=false \
+        'SELECT
+          name, gender,
+          SUM(number) AS total
+        FROM
+          `bigquery-public-data.usa_names.usa_1910_2013`
+        GROUP BY
+          name, gender
+        ORDER BY
+          total DESC
+        LIMIT
+          10;'
+    ```
+
     The query job writes the output to a temporary (cache) table.
-    
+
     Optionally, you can specify the destination table and [location](https://docs.cloud.google.com/bigquery/docs/locations) for the query results. To write the results to an existing table, include the appropriate flag to append ( `--append_table=true` ) or overwrite ( `--replace=true` ) the table.
-    
-        bq query \
-            --batch \
-            --location=LOCATION \
-            --destination_table=TABLE \
-            --use_legacy_sql=false \
-            'QUERY'
-    
+
+    ```
+    bq query \
+        --batch \
+        --location=LOCATION \
+        --destination_table=TABLE \
+        --use_legacy_sql=false \
+        'QUERY'
+    ```
+
     Replace the following:
-    
-      - LOCATION : the region or multi-region for the destination table—for example, `US`
-        
-        In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
-        
-        You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-    
-      - TABLE : a name for the destination table—for example, `myDataset.myTable`
-        
-        If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
-        
-        If the table isn't in your current project, then add the Google Cloud project ID using the format `  PROJECT_ID:DATASET.TABLE  ` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
+
+    - ` LOCATION ` : the region or multi-region for the destination table—for example, `US`
+
+      In this example, the `usa_names` dataset is stored in the US multi-region location. If you specify a destination table for this query, the dataset that contains the destination table must also be in the US multi-region. You cannot query a dataset in one location and write the results to a table in another location.
+
+      You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+
+    - ` TABLE ` : a name for the destination table—for example, `myDataset.myTable`
+
+      If the destination table is a new table, then BigQuery creates the table when you run your query. However, you must specify an existing dataset.
+
+      If the table isn't in your current project, then add the Google Cloud project ID using the format `PROJECT_ID:DATASET.TABLE` —for example, `myProject:myDataset.myTable` . If `--destination_table` is unspecified, a query job is generated that writes the output to a temporary table.
 
 ### API
 
@@ -888,68 +943,70 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-     "time"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // queryBatch demonstrates issuing a query job using batch priority.
-    func queryBatch(w io.Writer, projectID, dstDatasetID, dstTableID string) error {
-     // projectID := "my-project-id"
-     // dstDatasetID := "mydataset"
-     // dstTableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     // Build an aggregate table.
-     q := client.Query(`
-         SELECT
-                 corpus,
-                 SUM(word_count) as total_words,
-                 COUNT(1) as unique_words
-         FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
-         GROUP BY corpus;`)
-     q.Priority = bigquery.BatchPriority
-     q.QueryConfig.Dst = client.Dataset(dstDatasetID).Table(dstTableID)
-    
-     // Start the job.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     // Job is started and will progress without interaction.
-     // To simulate other work being done, sleep a few seconds.
-     time.Sleep(5 * time.Second)
-     status, err := job.Status(ctx)
-     if err != nil {
-         return err
-     }
-    
-     state := "Unknown"
-     switch status.State {
-     case bigquery.Pending:
-         state = "Pending"
-     case bigquery.Running:
-         state = "Running"
-     case bigquery.Done:
-         state = "Done"
-     }
-     // You can continue to monitor job progress until it reaches
-     // the Done state by polling periodically.  In this example,
-     // we print the latest status.
-     fmt.Fprintf(w, "Job %s in Location %s currently in state: %s\n", job.ID(), job.Location(), state)
-    
-     return nil
-    
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+    "time"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// queryBatch demonstrates issuing a query job using batch priority.
+func queryBatch(w io.Writer, projectID, dstDatasetID, dstTableID string) error {
+    // projectID := "my-project-id"
+    // dstDatasetID := "mydataset"
+    // dstTableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    // Build an aggregate table.
+    q := client.Query(`
+        SELECT
+            corpus,
+            SUM(word_count) as total_words,
+            COUNT(1) as unique_words
+        FROM ` + "`bigquery-public-data.samples.shakespeare`" + `
+        GROUP BY corpus;`)
+    q.Priority = bigquery.BatchPriority
+    q.QueryConfig.Dst = client.Dataset(dstDatasetID).Table(dstTableID)
+
+    // Start the job.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    // Job is started and will progress without interaction.
+    // To simulate other work being done, sleep a few seconds.
+    time.Sleep(5 * time.Second)
+    status, err := job.Status(ctx)
+    if err != nil {
+        return err
+    }
+
+    state := "Unknown"
+    switch status.State {
+    case bigquery.Pending:
+        state = "Pending"
+    case bigquery.Running:
+        state = "Running"
+    case bigquery.Done:
+        state = "Done"
+    }
+    // You can continue to monitor job progress until it reaches
+    // the Done state by polling periodically.  In this example,
+    // we print the latest status.
+    fmt.Fprintf(w, "Job %s in Location %s currently in state: %s\n", job.ID(), job.Location(), state)
+
+    return nil
+
+}
+```
 
 ### Java
 
@@ -959,56 +1016,58 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample to query batch in a table
-    public class QueryBatch {
-    
-      public static void runQueryBatch() {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "MY_PROJECT_ID";
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        String query =
-            "SELECT corpus"
-                + " FROM `"
-                + projectId
-                + "."
-                + datasetName
-                + "."
-                + tableName
-                + " GROUP BY corpus;";
-        queryBatch(query);
-      }
-    
-      public static void queryBatch(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  // Run at batch priority, which won't count toward concurrent rate limit.
-                  .setPriority(QueryJobConfiguration.Priority.BATCH)
-                  .build();
-    
-          TableResult results = bigquery.query(queryConfig);
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-    
-          System.out.println("Query batch performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query batch not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample to query batch in a table
+public class QueryBatch {
+
+  public static void runQueryBatch() {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "MY_PROJECT_ID";
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    String query =
+        "SELECT corpus"
+            + " FROM `"
+            + projectId
+            + "."
+            + datasetName
+            + "."
+            + tableName
+            + " GROUP BY corpus;";
+    queryBatch(query);
+  }
+
+  public static void queryBatch(String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              // Run at batch priority, which won't count toward concurrent rate limit.
+              .setPriority(QueryJobConfiguration.Priority.BATCH)
+              .build();
+
+      TableResult results = bigquery.query(queryConfig);
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+
+      System.out.println("Query batch performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query batch not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1016,39 +1075,41 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryBatch() {
-      // Runs a query at batch priority.
-    
-      // Create query job configuration. For all options, see
-      // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
-      const queryJobConfig = {
-        query: `SELECT corpus
-                FROM \`bigquery-public-data.samples.shakespeare\` 
-                LIMIT 10`,
-        useLegacySql: false,
-        priority: 'BATCH',
-      };
-    
-      // Create job configuration. For all options, see
-      // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration
-      const jobConfig = {
-        // Specify a job configuration to set optional job resource properties.
-        configuration: {
-          query: queryJobConfig,
-        },
-      };
-    
-      // Make API request.
-      const [job] = await bigquery.createJob(jobConfig);
-    
-      const jobId = job.metadata.id;
-      const state = job.metadata.status.state;
-      console.log(`Job ${jobId} is currently in state ${state}`);
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryBatch() {
+  // Runs a query at batch priority.
+
+  // Create query job configuration. For all options, see
+  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
+  const queryJobConfig = {
+    query: `SELECT corpus
+            FROM \`bigquery-public-data.samples.shakespeare\` 
+            LIMIT 10`,
+    useLegacySql: false,
+    priority: 'BATCH',
+  };
+
+  // Create job configuration. For all options, see
+  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration
+  const jobConfig = {
+    // Specify a job configuration to set optional job resource properties.
+    configuration: {
+      query: queryJobConfig,
+    },
+  };
+
+  // Make API request.
+  const [job] = await bigquery.createJob(jobConfig);
+
+  const jobId = job.metadata.id;
+  const state = job.metadata.status.state;
+  console.log(`Job ${jobId} is currently in state ${state}`);
+}
+```
 
 ### Python
 
@@ -1056,32 +1117,34 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    job_config = bigquery.QueryJobConfig(
-        # Run at batch priority, which won't count toward concurrent rate limit.
-        priority=bigquery.QueryPriority.BATCH
-    )
-    
-    sql = """
-        SELECT corpus
-        FROM `bigquery-public-data.samples.shakespeare`
-        GROUP BY corpus;
-    """
-    
-    # Start the query, passing in the extra configuration.
-    query_job = client.query(sql, job_config=job_config)  # Make an API request.
-    
-    # Check on the progress by getting the job's updated state. Once the state
-    # is `DONE`, the results are ready.
-    query_job = client.get_job(
-        query_job.job_id, location=query_job.location
-    )  # Make an API request.
-    
-    print("Job {} is currently in state {}".format(query_job.job_id, query_job.state))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+job_config = bigquery.QueryJobConfig(
+    # Run at batch priority, which won't count toward concurrent rate limit.
+    priority=bigquery.QueryPriority.BATCH
+)
+
+sql = """
+    SELECT corpus
+    FROM `bigquery-public-data.samples.shakespeare`
+    GROUP BY corpus;
+"""
+
+# Start the query, passing in the extra configuration.
+query_job = client.query(sql, job_config=job_config)  # Make an API request.
+
+# Check on the progress by getting the job's updated state. Once the state
+# is `DONE`, the results are ready.
+query_job = client.get_job(
+    query_job.job_id, location=query_job.location
+)  # Make an API request.
+
+print("Job {} is currently in state {}".format(query_job.job_id, query_job.state))
+```
 
 ## Run a continuous query
 
@@ -1095,14 +1158,14 @@ To construct a new query using the **Reference** panel, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
-3.  Click quick\_reference\_all **Reference** .
+3.  Click quick_reference_all **Reference** .
 
 4.  Click a recent or starred table or view. You can also use the search bar to find tables and views.
 
-5.  Click more\_vert **View actions** , and then click **Insert query snippet** .
-    
+5.  Click more_vert **View actions** , and then click **Insert query snippet** .
+
     ![Reference panel in query editor](https://docs.cloud.google.com/static/bigquery/images/reference-panel.png)
 
 6.  Optional: You can preview the schema details of the table or view, or open them in a new tab.
@@ -1113,25 +1176,25 @@ To construct a new query using the **Reference** panel, follow these steps:
 
 When you run a query, you can specify the following settings:
 
-  - A [destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) for the query results.
+- A [destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) for the query results.
 
-  - The priority of the job.
+- The priority of the job.
 
-  - Whether to use [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
+- Whether to use [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
 
-  - The job timeout in milliseconds.
+- The job timeout in milliseconds.
 
-  - Whether to use [session mode](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
+- Whether to use [session mode](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
 
-  - The type of [encryption](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) to use.
+- The type of [encryption](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) to use.
 
-  - The maximum number of bytes billed for the query.
+- The maximum number of bytes billed for the query.
 
-  - The [dialect of SQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql) to use.
+- The [dialect of SQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql) to use.
 
-  - The [location](https://docs.cloud.google.com/bigquery/docs/locations) in which to run the query. The query must run in the same location as any tables referenced in the query.
+- The [location](https://docs.cloud.google.com/bigquery/docs/locations) in which to run the query. The query must run in the same location as any tables referenced in the query.
 
-  - The [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) to run your query in.
+- The [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) to run your query in.
 
 ## Optional job creation mode
 
@@ -1153,13 +1216,56 @@ To run a query using optional job creation mode, select one of the following opt
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
-    
+
     For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        SELECT
+
+    ```
+    SELECT
+      name, gender,
+      SUM(number) AS total
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY
+      name, gender
+    ORDER BY
+      total DESC
+    LIMIT
+      10;
+    ```
+
+4.  Click **Edit** \> **Query mode** \> **Optional job creation** . To confirm this choice, click **Confirm** .
+
+5.  Click play_circle **Run** .
+
+### bq
+
+1.  In the Google Cloud console, activate Cloud Shell.
+
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--job_creation_mode=JOB_CREATION_OPTIONAL` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
+
+    ```
+    bq query \
+        --rpc=true \
+        --use_legacy_sql=false \
+        --job_creation_mode=JOB_CREATION_OPTIONAL \
+        --location=LOCATION \
+        'QUERY'
+    ```
+
+    Replace ` QUERY ` with a valid GoogleSQL query, and replace ` LOCATION ` with a valid region where the dataset is located. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
+
+    ```
+    bq query \
+        --rpc=true \
+        --use_legacy_sql=false \
+        --job_creation_mode=JOB_CREATION_OPTIONAL \
+        --location=us \
+        'SELECT
           name, gender,
           SUM(number) AS total
         FROM
@@ -1169,48 +1275,11 @@ To run a query using optional job creation mode, select one of the following opt
         ORDER BY
           total DESC
         LIMIT
-          10;
+          10;'
+    ```
 
-4.  Click **Edit** \> **Query mode** \> **Optional job creation** . To confirm this choice, click **Confirm** .
-
-5.  Click play\_circle **Run** .
-
-### bq
-
-1.  In the Google Cloud console, activate Cloud Shell.
-    
-    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
-
-2.  Use the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) and specify the `--job_creation_mode=JOB_CREATION_OPTIONAL` flag. In the following example, the `--use_legacy_sql=false` flag lets you use GoogleSQL syntax.
-    
-        bq query \
-            --rpc=true \
-            --use_legacy_sql=false \
-            --job_creation_mode=JOB_CREATION_OPTIONAL \
-            --location=LOCATION \
-            'QUERY'
-    
-    Replace QUERY with a valid GoogleSQL query, and replace LOCATION with a valid region where the dataset is located. For example, query the [BigQuery public dataset `usa_names`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) to determine the most common names in the United States between the years 1910 and 2013:
-    
-        bq query \
-            --rpc=true \
-            --use_legacy_sql=false \
-            --job_creation_mode=JOB_CREATION_OPTIONAL \
-            --location=us \
-            'SELECT
-              name, gender,
-              SUM(number) AS total
-            FROM
-              `bigquery-public-data.usa_names.usa_1910_2013`
-            GROUP BY
-              name, gender
-            ORDER BY
-              total DESC
-            LIMIT
-              10;'
-    
     The query job returns the output inline in the response.
-    
+
     > **Note:** you may use `--apilog=stdout` to log API requests and responses to extract the `queryId` if needed.
 
 ### API
@@ -1229,64 +1298,66 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.JobId;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.QueryJobConfiguration.JobCreationMode;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample demonstrating short mode query execution.
-    //
-    // This feature is controlled by setting the defaultJobCreationMode
-    // field in the BigQueryOptions used for the client. JOB_CREATION_OPTIONAL
-    // allows for the execution of queries without creating a job.
-    public class QueryJobOptional {
-    
-      public static void main(String[] args) {
-        String query =
-            "SELECT name, gender, SUM(number) AS total FROM "
-                + "bigquery-public-data.usa_names.usa_1910_2013 GROUP BY "
-                + "name, gender ORDER BY total DESC LIMIT 10";
-        queryJobOptional(query);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.JobId;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.QueryJobConfiguration.JobCreationMode;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample demonstrating short mode query execution.
+//
+// This feature is controlled by setting the defaultJobCreationMode
+// field in the BigQueryOptions used for the client. JOB_CREATION_OPTIONAL
+// allows for the execution of queries without creating a job.
+public class QueryJobOptional {
+
+  public static void main(String[] args) {
+    String query =
+        "SELECT name, gender, SUM(number) AS total FROM "
+            + "bigquery-public-data.usa_names.usa_1910_2013 GROUP BY "
+            + "name, gender ORDER BY total DESC LIMIT 10";
+    queryJobOptional(query);
+  }
+
+  public static void queryJobOptional(String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs
+      // to be created once, and can be reused for multiple requests.
+      BigQueryOptions options = BigQueryOptions.getDefaultInstance();
+      options.setDefaultJobCreationMode(JobCreationMode.JOB_CREATION_OPTIONAL);
+      BigQuery bigquery = options.getService();
+
+      // Execute the query. The returned TableResult provides access information
+      // about the query execution as well as query results.
+      TableResult results = bigquery.query(QueryJobConfiguration.of(query));
+
+      JobId jobId = results.getJobId();
+      if (jobId != null) {
+        System.out.println("Query was run with job state.  Job ID: " + jobId.toString());
+      } else {
+        System.out.println("Query was run in short mode.  Query ID: " + results.getQueryId());
       }
-    
-      public static void queryJobOptional(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs
-          // to be created once, and can be reused for multiple requests.
-          BigQueryOptions options = BigQueryOptions.getDefaultInstance();
-          options.setDefaultJobCreationMode(JobCreationMode.JOB_CREATION_OPTIONAL);
-          BigQuery bigquery = options.getService();
-    
-          // Execute the query. The returned TableResult provides access information
-          // about the query execution as well as query results.
-          TableResult results = bigquery.query(QueryJobConfiguration.of(query));
-    
-          JobId jobId = results.getJobId();
-          if (jobId != null) {
-            System.out.println("Query was run with job state.  Job ID: " + jobId.toString());
-          } else {
-            System.out.println("Query was run in short mode.  Query ID: " + results.getQueryId());
-          }
-    
-          // Print the results.
-          results
-              .iterateAll()
-              .forEach(
-                  row -> {
-                    System.out.print("name:" + row.get("name").getStringValue());
-                    System.out.print(", gender: " + row.get("gender").getStringValue());
-                    System.out.print(", total: " + row.get("total").getLongValue());
-                    System.out.println();
-                  });
-    
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+
+      // Print the results.
+      results
+          .iterateAll()
+          .forEach(
+              row -> {
+                System.out.print("name:" + row.get("name").getStringValue());
+                System.out.print(", gender: " + row.get("gender").getStringValue());
+                System.out.print(", total: " + row.get("total").getLongValue());
+                System.out.println();
+              });
+
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 To run a query with a proxy, see [Configuring a proxy](https://github.com/googleapis/google-cloud-java#configuring-a-proxy) .
 
@@ -1298,45 +1369,47 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    # This example demonstrates executing a query without requiring an associated
-    # job.
-    from google.cloud import bigquery
-    from google.cloud.bigquery.enums import JobCreationMode
-    
-    # Construct a BigQuery client object, specifying that the library should
-    # avoid creating jobs when possible.
-    client = bigquery.Client(
-        default_job_creation_mode=JobCreationMode.JOB_CREATION_OPTIONAL
+```python
+# This example demonstrates executing a query without requiring an associated
+# job.
+from google.cloud import bigquery
+from google.cloud.bigquery.enums import JobCreationMode
+
+# Construct a BigQuery client object, specifying that the library should
+# avoid creating jobs when possible.
+client = bigquery.Client(
+    default_job_creation_mode=JobCreationMode.JOB_CREATION_OPTIONAL
+)
+
+query = """
+    SELECT
+        name,
+        gender,
+        SUM(number) AS total
+    FROM
+        bigquery-public-data.usa_names.usa_1910_2013
+    GROUP BY
+        name, gender
+    ORDER BY
+        total DESC
+    LIMIT 10
+"""
+# Run the query.  The returned `rows` iterator can return information about
+# how the query was executed as well as the result data.
+rows = client.query_and_wait(query)
+
+if rows.job_id is not None:
+    print("Query was run with job state.  Job ID: {}".format(rows.job_id))
+else:
+    print(
+        "Query was run without creating a job.  Query ID: {}".format(rows.query_id)
     )
-    
-    query = """
-        SELECT
-            name,
-            gender,
-            SUM(number) AS total
-        FROM
-            bigquery-public-data.usa_names.usa_1910_2013
-        GROUP BY
-            name, gender
-        ORDER BY
-            total DESC
-        LIMIT 10
-    """
-    # Run the query.  The returned `rows` iterator can return information about
-    # how the query was executed as well as the result data.
-    rows = client.query_and_wait(query)
-    
-    if rows.job_id is not None:
-        print("Query was run with job state.  Job ID: {}".format(rows.job_id))
-    else:
-        print(
-            "Query was run without creating a job.  Query ID: {}".format(rows.query_id)
-        )
-    
-    print("The query data:")
-    for row in rows:
-        # Row values can be accessed by field name or index.
-        print("name={}, gender={}, total={}".format(row[0], row[1], row["total"]))
+
+print("The query data:")
+for row in rows:
+    # Row values can be accessed by field name or index.
+    print("name={}, gender={}, total={}".format(row[0], row[1], row["total"]))
+```
 
 ### Node
 
@@ -1346,45 +1419,47 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Demonstrates issuing a query that may be run in short query mode.
-    
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery({
-      // default behavior is to create jobs when using the jobs.query API
-      defaultJobCreationMode: 'JOB_CREATION_REQUIRED',
-    });
-    
-    async function queryJobOptional() {
-      // SQL query to run.
-    
-      const sqlQuery = `
-        SELECT name, gender, SUM(number) AS total
-        FROM bigquery-public-data.usa_names.usa_1910_2013
-        GROUP BY name, gender
-        ORDER BY total DESC
-        LIMIT 10`;
-    
-      // Run the query
-      const [rows, , res] = await bigquery.query({
-        query: sqlQuery,
-        // Skip job creation to enable short mode.
-        jobCreationMode: 'JOB_CREATION_OPTIONAL',
-      });
-    
-      if (!res.jobReference) {
-        console.log(`Query was run in short mode. Query ID: ${res.queryId}`);
-      } else {
-        const jobRef = res.jobReference;
-        const qualifiedId = `${jobRef.projectId}.${jobRef.location}.${jobRef.jobId}`;
-        console.log(
-          `Query was run with job state. Job ID: ${qualifiedId}, Query ID: ${res.queryId}`,
-        );
-      }
-      // Print the results
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Demonstrates issuing a query that may be run in short query mode.
+
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery({
+  // default behavior is to create jobs when using the jobs.query API
+  defaultJobCreationMode: 'JOB_CREATION_REQUIRED',
+});
+
+async function queryJobOptional() {
+  // SQL query to run.
+
+  const sqlQuery = `
+    SELECT name, gender, SUM(number) AS total
+    FROM bigquery-public-data.usa_names.usa_1910_2013
+    GROUP BY name, gender
+    ORDER BY total DESC
+    LIMIT 10`;
+
+  // Run the query
+  const [rows, , res] = await bigquery.query({
+    query: sqlQuery,
+    // Skip job creation to enable short mode.
+    jobCreationMode: 'JOB_CREATION_OPTIONAL',
+  });
+
+  if (!res.jobReference) {
+    console.log(`Query was run in short mode. Query ID: ${res.queryId}`);
+  } else {
+    const jobRef = res.jobReference;
+    const qualifiedId = `${jobRef.projectId}.${jobRef.location}.${jobRef.jobId}`;
+    console.log(
+      `Query was run with job state. Job ID: ${qualifiedId}, Query ID: ${res.queryId}`,
+    );
+  }
+  // Print the results
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 ### Go
 
@@ -1394,72 +1469,74 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryJobOptional demonstrates issuing a query that doesn't require a
+// corresponding job.
+func queryJobOptional(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID,
+        bigquery.WithDefaultJobCreationMode(bigquery.JobCreationModeOptional),
     )
-    
-    // queryJobOptional demonstrates issuing a query that doesn't require a
-    // corresponding job.
-    func queryJobOptional(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID,
-         bigquery.WithDefaultJobCreationMode(bigquery.JobCreationModeOptional),
-     )
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %w", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(`
-         SELECT
-                 name, gender,
-                 SUM(number) AS total
-         FROM
-             bigquery-public-data.usa_names.usa_1910_2013
-         GROUP BY 
-             name, gender
-         ORDER BY
-             total DESC
-         LIMIT 10
-         `)
-     // Run the query and process the returned row iterator.
-     it, err := q.Read(ctx)
-     if err != nil {
-         return fmt.Errorf("query.Read(): %w", err)
-     }
-    
-     // The iterator provides information about the query execution.
-     // Queries that were run in short query mode will not have the source job
-     // populated.
-     if it.SourceJob() == nil {
-         fmt.Fprintf(w, "Query was run in optional job mode.  Query ID: %q\n", it.QueryID())
-     } else {
-         j := it.SourceJob()
-         qualifiedJobID := fmt.Sprintf("%s:%s.%s", j.ProjectID(), j.Location(), j.ID())
-         fmt.Fprintf(w, "Query was run with job state.  Job ID: %q, Query ID: %q\n",
-             qualifiedJobID, it.QueryID())
-     }
-    
-     // Print row data.
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %w", err)
     }
+    defer client.Close()
+
+    q := client.Query(`
+        SELECT
+            name, gender,
+            SUM(number) AS total
+        FROM
+            bigquery-public-data.usa_names.usa_1910_2013
+        GROUP BY 
+            name, gender
+        ORDER BY
+            total DESC
+        LIMIT 10
+        `)
+    // Run the query and process the returned row iterator.
+    it, err := q.Read(ctx)
+    if err != nil {
+        return fmt.Errorf("query.Read(): %w", err)
+    }
+
+    // The iterator provides information about the query execution.
+    // Queries that were run in short query mode will not have the source job
+    // populated.
+    if it.SourceJob() == nil {
+        fmt.Fprintf(w, "Query was run in optional job mode.  Query ID: %q\n", it.QueryID())
+    } else {
+        j := it.SourceJob()
+        qualifiedJobID := fmt.Sprintf("%s:%s.%s", j.ProjectID(), j.Location(), j.ID())
+        fmt.Fprintf(w, "Query was run with job state.  Job ID: %q, Query ID: %q\n",
+            qualifiedJobID, it.QueryID())
+    }
+
+    // Print row data.
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### JDBC Driver
 
@@ -1467,9 +1544,8 @@ Available version: JDBC v1.6.1 and up
 
 Requires setting `JobCreationMode=2` in the connection string.
 
-``` 
-    jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;JobCreationMode=2;Location=US;
-  
+```
+jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;JobCreationMode=2;Location=US;
 ```
 
 > **Note:** you may append `LogLevel=6;LogPath=log.txt` to the connection string to enable `TRACE` level logging and extract troubleshooting information, including `queryId` , if needed.
@@ -1480,12 +1556,11 @@ Available version: ODBC v3.0.7.1016 and up
 
 Requires setting `JobCreationMode=2` in the `.ini` file.
 
-``` 
-    [ODBC Data Sources]
+```
+[ODBC Data Sources]
     Sample DSN=Simba Google BigQuery ODBC Connector 64-bit
     [Sample DSN]
     JobCreationMode=2
-  
 ```
 
 > **Note:** you may append `LogLevel=6` and `LogPath=log.txt` to the `.ini` file to enable detailed level logging and extract troubleshooting information, including `queryId` , if needed.
@@ -1502,8 +1577,8 @@ For information about quotas related to interactive and batch queries, see [Quer
 
 To troubleshoot quota errors related to queries, see the [BigQuery Troubleshooting page](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) . The following quota errors and their troubleshooting information are directly related to queries:
 
-  - [Query queue limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-query-queue-limit)
-  - [Table imports or query appends quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-table-import-quota)
+- [Query queue limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-query-queue-limit)
+- [Table imports or query appends quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-table-import-quota)
 
 ## Monitor queries
 
@@ -1517,9 +1592,9 @@ BigQuery advanced runtime is a set of performance enhancements designed to autom
 
 Vectorized execution is a query processing model that operates on columns of data in blocks that align with CPU cache size and uses single instruction, multiple data (SIMD) instructions. Enhanced vectorization extends the vectorized query execution in BigQuery to the following aspects of query processing:
 
-  - By leveraging specialized data encodings within the Capacitor storage format, filter evaluation operations can be executed on the encoded data.
-  - Specialized encodings are propagated through the query plan, which allows more data to be processed while it's still encoded.
-  - By implementing expression folding to evaluate deterministic functions and constant expressions, BigQuery can simplify complex predicates into constant values.
+- By leveraging specialized data encodings within the Capacitor storage format, filter evaluation operations can be executed on the encoded data.
+- Specialized encodings are propagated through the query plan, which allows more data to be processed while it's still encoded.
+- By implementing expression folding to evaluate deterministic functions and constant expressions, BigQuery can simplify complex predicates into constant values.
 
 ### Short query optimizations
 
@@ -1527,75 +1602,79 @@ BigQuery typically executes queries in a distributed environment using a shuffle
 
 Eligibility for short query optimizations is dynamic and influenced by the following factors:
 
-  - The predicted size of the data scan.
-  - The amount of data movement required.
-  - The selectivity of query filters.
-  - The type and physical layout of the data in storage.
-  - The overall query structure.
-  - The [historical statistics](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) of past query executions.
+- The predicted size of the data scan.
+- The amount of data movement required.
+- The selectivity of query filters.
+- The type and physical layout of the data in storage.
+- The overall query structure.
+- The [historical statistics](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) of past query executions.
 
 ### Estimate the impact of the advanced runtime
 
 To estimate the impact of the advanced runtime, you can use the following SQL query to identify project queries with the greatest estimated improvement to execution time:
 
-    WITH
-      jobs AS (
-        SELECT
-          *,
-          query_info.query_hashes.normalized_literals AS query_hash,
-          TIMESTAMP_DIFF(end_time, start_time, MILLISECOND) AS elapsed_ms,
-          EXISTS(
-            SELECT 1
-            FROM UNNEST(JSON_QUERY_ARRAY(query_info.optimization_details.optimizations)) AS o
-            WHERE JSON_VALUE(o, '$.enhanced_vectorization') = 'applied'
-          ) AS has_advanced_runtime
-        FROM region-LOCATION.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-        WHERE EXTRACT(DATE FROM creation_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
-      ),
-      most_recent_jobs_without_advanced_runtime AS (
-        SELECT *
-        FROM jobs
-        WHERE NOT has_advanced_runtime
-        QUALIFY ROW_NUMBER() OVER (PARTITION BY query_hash ORDER BY end_time DESC) = 1
-      )
+```
+WITH
+  jobs AS (
     SELECT
-      job.job_id,
-      100 * SAFE_DIVIDE(
-        original_job.elapsed_ms - job.elapsed_ms,
-        original_job.elapsed_ms) AS percent_execution_time_saved,
-      job.elapsed_ms AS new_elapsed_ms,
-      original_job.elapsed_ms AS original_elapsed_ms,
-    FROM jobs AS job
-    INNER JOIN most_recent_jobs_without_advanced_runtime AS original_job
-      USING (query_hash)
-    WHERE
-      job.has_advanced_runtime
-      AND original_job.end_time < job.start_time
-    ORDER BY percent_execution_time_saved DESC
-    LIMIT 10;
+      *,
+      query_info.query_hashes.normalized_literals AS query_hash,
+      TIMESTAMP_DIFF(end_time, start_time, MILLISECOND) AS elapsed_ms,
+      EXISTS(
+        SELECT 1
+        FROM UNNEST(JSON_QUERY_ARRAY(query_info.optimization_details.optimizations)) AS o
+        WHERE JSON_VALUE(o, '$.enhanced_vectorization') = 'applied'
+      ) AS has_advanced_runtime
+    FROM region-LOCATION.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE EXTRACT(DATE FROM creation_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+  ),
+  most_recent_jobs_without_advanced_runtime AS (
+    SELECT *
+    FROM jobs
+    WHERE NOT has_advanced_runtime
+    QUALIFY ROW_NUMBER() OVER (PARTITION BY query_hash ORDER BY end_time DESC) = 1
+  )
+SELECT
+  job.job_id,
+  100 * SAFE_DIVIDE(
+    original_job.elapsed_ms - job.elapsed_ms,
+    original_job.elapsed_ms) AS percent_execution_time_saved,
+  job.elapsed_ms AS new_elapsed_ms,
+  original_job.elapsed_ms AS original_elapsed_ms,
+FROM jobs AS job
+INNER JOIN most_recent_jobs_without_advanced_runtime AS original_job
+  USING (query_hash)
+WHERE
+  job.has_advanced_runtime
+  AND original_job.end_time < job.start_time
+ORDER BY percent_execution_time_saved DESC
+LIMIT 10;
+```
 
 > **Note:** You can only compare queries created on or after January 30, 2026, which is when the advanced runtime optimization indicators ( `enhanced_vectorization` and `short_query_optimization` ) became consistently available in the `INFORMATION_SCHEMA.JOBS` view.
 
 Replace the following:
 
-  - `  LOCATION  ` : the location in which job performance should be measured
+- `LOCATION` : the location in which job performance should be measured
 
 If the advanced runtime was applied, the results of this query may be similar to the following:
 
-    /*--------------+----------------------------+----------------+---------------------*
-     |    job_id    | percent_elapsed_time_saved | new_elapsed_ms | original_elapsed_ms |
-     +--------------+----------------------------+----------------+---------------------+
-     | sample_job1  |         45.38834951456311  |            225 |                 412 |
-     | sample_job2  |         45.19480519480519  |            211 |                 385 |
-     | sample_job3  |         33.246753246753244 |            257 |                 385 |
-     | sample_job4  |         29.28802588996764  |           1311 |                1854 |
-     | sample_job5  |         28.18181818181818  |           1027 |                1430 |
-     | sample_job6  |         25.804195804195807 |           1061 |                1430 |
-     | sample_job7  |         25.734265734265733 |           1062 |                1430 |
-     | sample_job8  |         25.454545454545453 |           1066 |                1430 |
-     | sample_job9  |         25.384615384615383 |           1067 |                1430 |
-     | sample_job10 |         25.034965034965033 |           1072 |                1430 |
-     *--------------+----------------------------+----------------+---------------------*/
+```
+/*--------------+----------------------------+----------------+---------------------*
+ |    job_id    | percent_elapsed_time_saved | new_elapsed_ms | original_elapsed_ms |
+ +--------------+----------------------------+----------------+---------------------+
+ | sample_job1  |         45.38834951456311  |            225 |                 412 |
+ | sample_job2  |         45.19480519480519  |            211 |                 385 |
+ | sample_job3  |         33.246753246753244 |            257 |                 385 |
+ | sample_job4  |         29.28802588996764  |           1311 |                1854 |
+ | sample_job5  |         28.18181818181818  |           1027 |                1430 |
+ | sample_job6  |         25.804195804195807 |           1061 |                1430 |
+ | sample_job7  |         25.734265734265733 |           1062 |                1430 |
+ | sample_job8  |         25.454545454545453 |           1066 |                1430 |
+ | sample_job9  |         25.384615384615383 |           1067 |                1430 |
+ | sample_job10 |         25.034965034965033 |           1072 |                1430 |
+ *--------------+----------------------------+----------------+---------------------*/
+```
 
 The results of this query are only an estimate of the advanced runtime's impact. Many factors can influence query performance, including but not limited to slot availability, change in data over time, view or UDF definitions, and differences in query parameter values.
 
@@ -1605,8 +1684,8 @@ This query can be applied to other query performance metrics such as `total_slot
 
 ## What's next
 
-  - Learn how to [manage query jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .
-  - Learn how to [view query history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) .
-  - Learn how to [save and share queries](https://docs.cloud.google.com/bigquery/docs/saving-sharing-queries) .
-  - Learn about [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
-  - Learn how to [write query results](https://docs.cloud.google.com/bigquery/docs/writing-results) .
+- Learn how to [manage query jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .
+- Learn how to [view query history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) .
+- Learn how to [save and share queries](https://docs.cloud.google.com/bigquery/docs/saving-sharing-queries) .
+- Learn about [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
+- Learn how to [write query results](https://docs.cloud.google.com/bigquery/docs/writing-results) .

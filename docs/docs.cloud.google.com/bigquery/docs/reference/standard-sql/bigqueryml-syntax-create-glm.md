@@ -70,14 +70,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -85,7 +85,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'LINEAR_REG' | 'LOGISTIC_REG'}
+```
+MODEL_TYPE = { 'LINEAR_REG' | 'LOGISTIC_REG'}
+```
 
 **Description**
 
@@ -95,20 +97,22 @@ Specify the model type. This option is required.
 
 This option accepts the following values:
 
-  - `LINEAR_REG` : The model performs linear regression for forecasting; for example, the sales of an item on a given day. Labels are real-valued. They can't be +/- infinity or `NaN` .
+- `LINEAR_REG` : The model performs linear regression for forecasting; for example, the sales of an item on a given day. Labels are real-valued. They can't be +/- infinity or `NaN` .
 
-  - `LOGISTIC_REG` : The model performs logistic regression for classification; for example, determining whether a customer will make a purchase.
-    
-    Logistic models can be one of two types:
-    
-      - Binary logistic regression for classification; for example, determining whether a customer will make a purchase. Labels must only have two possible values, one for the [positive class](https://developers.google.com/machine-learning/glossary/?&_ga=2.199267948.315885954.1628494155-266466322.1625885991#positive-class) and another for the [negative class](https://developers.google.com/machine-learning/glossary/?&_ga=2.199267948.315885954.1628494155-266466322.1625885991#negative-class) . BigQuery ML treats the higher label value as the positive class, and lower label value as the negative class. This holds for both numeric and string label values.
-      - Multiclass logistic regression for classification; for example, predicting multiple possible values such as whether an input is `low-value` , `medium-value` , or `high-value` . Labels can have up to 50 unique values. In BigQuery ML, multiclass logistic regression training uses a [multinomial classifier](https://en.wikipedia.org/wiki/Multinomial_logistic_regression) with a [cross entropy loss function](https://developers.google.com/machine-learning/glossary/#cross-entropy) .
+- `LOGISTIC_REG` : The model performs logistic regression for classification; for example, determining whether a customer will make a purchase.
+
+  Logistic models can be one of two types:
+
+  - Binary logistic regression for classification; for example, determining whether a customer will make a purchase. Labels must only have two possible values, one for the [positive class](https://developers.google.com/machine-learning/glossary/?&_ga=2.199267948.315885954.1628494155-266466322.1625885991#positive-class) and another for the [negative class](https://developers.google.com/machine-learning/glossary/?&_ga=2.199267948.315885954.1628494155-266466322.1625885991#negative-class) . BigQuery ML treats the higher label value as the positive class, and lower label value as the negative class. This holds for both numeric and string label values.
+  - Multiclass logistic regression for classification; for example, predicting multiple possible values such as whether an input is `low-value` , `medium-value` , or `high-value` . Labels can have up to 50 unique values. In BigQuery ML, multiclass logistic regression training uses a [multinomial classifier](https://en.wikipedia.org/wiki/Multinomial_logistic_regression) with a [cross entropy loss function](https://developers.google.com/machine-learning/glossary/#cross-entropy) .
 
 ### `OPTIMIZE_STRATEGY`
 
 **Syntax**
 
-    OPTIMIZE_STRATEGY = { 'AUTO_STRATEGY' | 'BATCH_GRADIENT_DESCENT' | 'NORMAL_EQUATION' }
+```
+OPTIMIZE_STRATEGY = { 'AUTO_STRATEGY' | 'BATCH_GRADIENT_DESCENT' | 'NORMAL_EQUATION' }
+```
 
 **Description**
 
@@ -118,26 +122,28 @@ The strategy to train linear regression models.
 
 This option accepts the following values:
 
-  - `AUTO_STRATEGY` : This is the default. Determines the training strategy as follows:
-    
-      - If you specified a value for `L1_REG` or set `WARM_START` to `TRUE` , the `BATCH_GRADIENT_DESCENT` strategy is used.
-      - If the total cardinality of training features is more than 10,000, the `BATCH_GRADIENT_DESCENT` strategy is used.
-      - If there is an over-fitting issue, where the number of training examples is less than 10 *x* and *x* is the total cardinality, the `BATCH_GRADIENT_DESCENT` strategy is used.
-      - The `NORMAL_EQUATION` strategy is used for all other cases.
+- `AUTO_STRATEGY` : This is the default. Determines the training strategy as follows:
 
-  - `BATCH_GRADIENT_DESCENT` : Train the model using the [batch gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) method, which optimizes the loss function using the gradient function.
+  - If you specified a value for `L1_REG` or set `WARM_START` to `TRUE` , the `BATCH_GRADIENT_DESCENT` strategy is used.
+  - If the total cardinality of training features is more than 10,000, the `BATCH_GRADIENT_DESCENT` strategy is used.
+  - If there is an over-fitting issue, where the number of training examples is less than 10 *x* and *x* is the total cardinality, the `BATCH_GRADIENT_DESCENT` strategy is used.
+  - The `NORMAL_EQUATION` strategy is used for all other cases.
 
-  - `NORMAL_EQUATION` : Directly compute the [least square solution](http://mathworld.wolfram.com/NormalEquation.html) of the linear regression problem with the analytical formula. You can't use `NORMAL_EQUATION` in the following cases:
-    
-      - You specified a value for `L1_REG` .
-      - You set `WARM_START` to `TRUE` .
-      - The total cardinality of training features is greater than 10,000.
+- `BATCH_GRADIENT_DESCENT` : Train the model using the [batch gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) method, which optimizes the loss function using the gradient function.
+
+- `NORMAL_EQUATION` : Directly compute the [least square solution](http://mathworld.wolfram.com/NormalEquation.html) of the linear regression problem with the analytical formula. You can't use `NORMAL_EQUATION` in the following cases:
+
+  - You specified a value for `L1_REG` .
+  - You set `WARM_START` to `TRUE` .
+  - The total cardinality of training features is greater than 10,000.
 
 ### `LEARN_RATE_STRATEGY`
 
 **Syntax**
 
-    LEARN_RATE_STRATEGY = { 'LINE_SEARCH' | 'CONSTANT' }
+```
+LEARN_RATE_STRATEGY = { 'LINE_SEARCH' | 'CONSTANT' }
+```
 
 **Description**
 
@@ -147,17 +153,17 @@ The strategy for specifying the [learning rate](https://developers.google.com/ma
 
 This option accepts the following values:
 
-  - `LINE_SEARCH` : This is the default. Use the [line search](https://en.wikipedia.org/wiki/Line_search) method to calculate the learning rate. You specify the line search initial learn rate in [`LS_INIT_LEARN_RATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#ls_init_learn_rate) .
-    
-    Line search slows down training and increases the number of bytes processed, but it generally converges even with a larger initial specified learning rate.
+- `LINE_SEARCH` : This is the default. Use the [line search](https://en.wikipedia.org/wiki/Line_search) method to calculate the learning rate. You specify the line search initial learn rate in [`LS_INIT_LEARN_RATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#ls_init_learn_rate) .
 
-  - `CONSTANT` : Set the learning rate to the value you specify in [`LEARN_RATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#learn_rate) .
+  Line search slows down training and increases the number of bytes processed, but it generally converges even with a larger initial specified learning rate.
+
+- `CONSTANT` : Set the learning rate to the value you specify in [`LEARN_RATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#learn_rate) .
 
 ### `LEARN_RATE`
 
 **Syntax**
 
-` LEARN_RATE = float64_value  `
+`LEARN_RATE = `` float64_value`
 
 **Description**
 
@@ -171,7 +177,7 @@ A `FLOAT64` value. The default value is `0.1` .
 
 **Syntax**
 
-` LS_INIT_LEARN_RATE = float64_value  `
+`LS_INIT_LEARN_RATE = `` float64_value`
 
 **Description**
 
@@ -203,7 +209,9 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-    FIT_INTERCEPT = { TRUE | FALSE }
+```
+FIT_INTERCEPT = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -217,7 +225,9 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-    CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'DUMMY_ENCODING' }
+```
+CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'DUMMY_ENCODING' }
+```
 
 **Description**
 
@@ -227,14 +237,16 @@ Specifies which encoding method to use on non-numeric features. For more informa
 
 This option accepts the following values:
 
-  - `ONE_HOT_ENCODING` . This is the default.
-  - `DUMMY_ENCODING`
+- `ONE_HOT_ENCODING` . This is the default.
+- `DUMMY_ENCODING`
 
 ### `AUTO_CLASS_WEIGHTS`
 
 **Syntax**
 
-    AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
+```
+AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -246,7 +258,9 @@ By default, the training data used to create the model is unweighted. If the lab
 
 To balance every class, set this option to `TRUE` . Balance is accomplished using the following formula:
 
-    total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
+```
+total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
+```
 
 **Arguments**
 
@@ -256,7 +270,7 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-` CLASS_WEIGHTS = struct_array  `
+`CLASS_WEIGHTS = `` struct_array`
 
 **Description**
 
@@ -268,13 +282,17 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a `STRING` value that spec
 
 A `CLASS_WEIGHTS` value might look like the following example:
 
-    CLASS_WEIGHTS = [STRUCT('example_label', .2)]
+```
+CLASS_WEIGHTS = [STRUCT('example_label', .2)]
+```
 
 ### `ENABLE_GLOBAL_EXPLAIN`
 
 **Syntax**
 
-    ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE }
+```
+ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -290,7 +308,7 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-` INPUT_LABEL_COLS = string_array  `
+`INPUT_LABEL_COLS = `` string_array`
 
 **Description**
 
@@ -304,7 +322,7 @@ A one-element `ARRAY` of string values. Defaults to `label` .
 
 **Syntax**
 
-`L1_REG = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`L1_REG = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -316,8 +334,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you can use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L1_REG = HPARAM_RANGE(0, 5.0)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L1_REG = HPARAM_RANGE(0, 5.0)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `(0, 10.0]` , and the scale type is `LOG` .
 
@@ -325,7 +343,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`L2_REG = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`L2_REG = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -337,8 +355,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you can use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L2_REG = HPARAM_RANGE(1.5, 5.0)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L2_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L2_REG = HPARAM_RANGE(1.5, 5.0)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L2_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `(0, 10.0]` , and the scale type is `LOG` .
 
@@ -346,7 +364,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-` MAX_ITERATIONS = int64_value  `
+`MAX_ITERATIONS = `` int64_value`
 
 **Description**
 
@@ -360,7 +378,9 @@ An `INT64` value. The default value is `20` .
 
 **Syntax**
 
-    WARM_START = { TRUE | FALSE }
+```
+WARM_START = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -378,7 +398,9 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-    EARLY_STOP = { TRUE | FALSE }
+```
+EARLY_STOP = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -392,7 +414,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-` MIN_REL_PROGRESS = float64_value  `
+`MIN_REL_PROGRESS = `` float64_value`
 
 **Description**
 
@@ -406,7 +428,9 @@ A `FLOAT64` value. The default value is `0.01` .
 
 **Syntax**
 
-    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
+DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
 
 **Description**
 
@@ -416,73 +440,73 @@ The percentage sizes of the data sets produced by the various arguments for this
 
 You can see the model's data split information in the following ways:
 
-  - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+- The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
+- Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
 This option accepts the following values:
 
-  - `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
-    
-      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-    
-      - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
-        
-          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
-    
-      - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
-        
-          - 10% of the data is used as evaluation data
-          - 10% is used as test data
-          - 80% is used as training data
-        
-        For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
+- `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
 
-  - `RANDOM` : Data is randomized before being split into sets. You can use this option with the [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) and [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `AUTO_SPLIT` option.
-    
-    A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
-    
-    > **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
 
-  - `CUSTOM` : Split data using the value in a specified column:
-    
-      - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
-      - If you are running hyperparameter tuning, then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
-    
-    Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col) to identify the column that contains the data split information.
+  - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
 
-  - `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
-    
-      - `NUMERIC`
-      - `BIGNUMERIC`
-      - `STRING`
-      - `TIMESTAMP`
-    
-    The data is sorted smallest to largest based on the specified column.
-    
-    When you aren't running hyperparameter tuning, the last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
-    
-    When you are running hyperparameter tuning, the last m rows are used as test data, where m is the value specified for `DATA_SPLIT_TEST_FRACTION` . The second last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
-    
-    All rows with split values smaller than the threshold, including `NULL` s, are used as training data. The remaining rows are used as evaluation data.
-    
-    Use the `DATA_SPLIT_COL` option to identify the column that contains the data split information.
+    - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+    - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
 
-  - `NO_SPLIT` : No data split; all input data is used as training data.
+  - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+
+    - 10% of the data is used as evaluation data
+    - 10% is used as test data
+    - 80% is used as training data
+
+    For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
+
+- `RANDOM` : Data is randomized before being split into sets. You can use this option with the [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) and [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `AUTO_SPLIT` option.
+
+  A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
+
+  > **Note:** A random split is based on the [FARM_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+
+- `CUSTOM` : Split data using the value in a specified column:
+
+  - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
+  - If you are running hyperparameter tuning, then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
+
+  Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col) to identify the column that contains the data split information.
+
+- `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
+
+  - `NUMERIC`
+  - `BIGNUMERIC`
+  - `STRING`
+  - `TIMESTAMP`
+
+  The data is sorted smallest to largest based on the specified column.
+
+  When you aren't running hyperparameter tuning, the last ` n ` rows are used as evaluation data, where ` n ` is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
+
+  When you are running hyperparameter tuning, the last ` m ` rows are used as test data, where ` m ` is the value specified for `DATA_SPLIT_TEST_FRACTION` . The second last ` n ` rows are used as evaluation data, where ` n ` is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
+
+  All rows with split values smaller than the threshold, including `NULL` s, are used as training data. The remaining rows are used as evaluation data.
+
+  Use the `DATA_SPLIT_COL` option to identify the column that contains the data split information.
+
+- `NO_SPLIT` : No data split; all input data is used as training data.
 
 ### `DATA_SPLIT_EVAL_FRACTION`
 
 **Syntax**
 
-` DATA_SPLIT_EVAL_FRACTION = float64_value  `
+`DATA_SPLIT_EVAL_FRACTION = `` float64_value`
 
 **Description**
 
 The fraction of the data to use as evaluation data. Use when you are specifying `RANDOM` or `SEQ` as the value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method) .
 
-If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) . In this case, the training dataset is ` 1 - eval_fraction - test_fraction  ` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
+If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) . In this case, the training dataset is `1 - `` eval_fraction `` - `` test_fraction` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -492,13 +516,13 @@ A `FLOAT64` value. The default is `0.2` . The service maintains the accuracy of 
 
 **Syntax**
 
-` DATA_SPLIT_TEST_FRACTION = float64_value  `
+`DATA_SPLIT_TEST_FRACTION = `` float64_value`
 
 **Description**
 
 The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `RANDOM` or `SEQ` as value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method) .
 
-If you specify a value for this option, you must also specify a value for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . In this case, the training dataset is ` 1 - eval_fraction - test_fraction  ` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
+If you specify a value for this option, you must also specify a value for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . In this case, the training dataset is `1 - `` eval_fraction `` - `` test_fraction` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -508,16 +532,16 @@ A `FLOAT64` value. The default is `0` . The service maintains the accuracy of th
 
 **Syntax**
 
-` DATA_SPLIT_COL = string_value  `
+`DATA_SPLIT_COL = `` string_value`
 
 **Description**
 
 The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `CUSTOM` or `SEQ` as the value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_method) :
 
-  - If you aren't running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . The remaining rows are used as training data.
-  - If you aren't running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last m rows are used as test data, where m is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) . The second last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . The remaining rows are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
+- If you aren't running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . The remaining rows are used as training data.
+- If you aren't running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
+- If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last ` m ` rows are used as test data, where ` m ` is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_test_fraction) . The second last ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_eval_fraction) . The remaining rows are used as training data.
+- If you are running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
 
 The column you specify for `DATA_SPLIT_COL` can't be used as a feature or label, and is excluded from features automatically.
 
@@ -529,7 +553,7 @@ A `STRING` value.
 
 **Syntax**
 
-` NUM_TRIALS = int64_value  `
+`NUM_TRIALS = `` int64_value`
 
 **Description**
 
@@ -539,13 +563,13 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( `` number_of_hyperparameters `` * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
 **Syntax**
 
-` MAX_PARALLEL_TRIALS = int64_value  `
+`MAX_PARALLEL_TRIALS = `` int64_value`
 
 **Description**
 
@@ -561,7 +585,9 @@ An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
 **Syntax**
 
-    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
+HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
 
 **Description**
 
@@ -571,11 +597,11 @@ The algorithm used to tune the hyperparameters. If you specify a value for this 
 
 Specify one of the following values:
 
-  - `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+- `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
-  - `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
+- `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
-  - `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
+- `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
 
 ### `HPARAM_TUNING_OBJECTIVES`
 
@@ -583,11 +609,15 @@ Specify one of the following values:
 
 For `LINEAR_REG` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'R2_SCORE' | 'EXPLAINED_VARIANCE' | 'MEDIAN_ABSOLUTE_ERROR' | 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'R2_SCORE' | 'EXPLAINED_VARIANCE' | 'MEDIAN_ABSOLUTE_ERROR' | 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
+```
 
 For `LOGISTIC_REG` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'ROC_AUC' | 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'ROC_AUC' | 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' }
+```
 
 **Description**
 
@@ -619,7 +649,7 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the `MODEL_RE
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -629,11 +659,13 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ### `query_statement`
 
-The ` AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
+The `AS `` query_statement` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
 
 All columns referenced by the `query_statement` are used as input [features](https://developers.google.com/machine-learning/glossary#feature) to the model except for the columns included in [`INPUT_LABEL_COLS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols) and [`DATA_SPLIT_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#data_split_col) .
 
@@ -653,8 +685,8 @@ For information about supported locations, see [Locations for non-remote models]
 
 `CREATE MODEL` statements must comply with the following rules:
 
-  - For linear regression models, the `label` column must be real-valued (the column values cannot be +/- infinity or `NaN` ).
-  - For logistic regression models, the `label` column can contain up to 50 unique values; that is, the number of classes is less than or equal to 50. If you need to classify into more than 50 labels, contact <bqml-feedback@google.com> .
+- For linear regression models, the `label` column must be real-valued (the column values cannot be +/- infinity or `NaN` ).
+- For logistic regression models, the `label` column can contain up to 50 unique values; that is, the number of classes is less than or equal to 50. If you need to classify into more than 50 labels, contact <bqml-feedback@google.com> .
 
 ## Examples
 
@@ -664,162 +696,180 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 The following example creates and trains a linear regression model. The learn rate is set to `0.15` , the L1 regularization is set to `1` , and the maximum number of training iterations is set to `5` .
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LINEAR_REG',
-        LS_INIT_LEARN_RATE=0.15,
-        L1_REG=1,
-        MAX_ITERATIONS=5 ) AS
-    SELECT
-      column1,
-      column2,
-      column3,
-      label
-    FROM
-      `mydataset.mytable`
-    WHERE
-      column4 < 10
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LINEAR_REG',
+    LS_INIT_LEARN_RATE=0.15,
+    L1_REG=1,
+    MAX_ITERATIONS=5 ) AS
+SELECT
+  column1,
+  column2,
+  column3,
+  label
+FROM
+  `mydataset.mytable`
+WHERE
+  column4 < 10
+```
 
 ### Train a linear regression model with a sequential data split
 
 The following example creates a linear regression model with a sequential data split. The split fraction is `0.3` and the split uses the `timestamp` column as the basis for the split.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LINEAR_REG',
-        LS_INIT_LEARN_RATE=0.15,
-        L1_REG=1,
-        MAX_ITERATIONS=5,
-        DATA_SPLIT_METHOD='SEQ',
-        DATA_SPLIT_EVAL_FRACTION=0.3,
-        DATA_SPLIT_COL='timestamp' ) AS
-    SELECT
-      column1,
-      column2,
-      column3,
-      timestamp,
-      label
-    FROM
-      `mydataset.mytable`
-    WHERE
-      column4 < 10
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LINEAR_REG',
+    LS_INIT_LEARN_RATE=0.15,
+    L1_REG=1,
+    MAX_ITERATIONS=5,
+    DATA_SPLIT_METHOD='SEQ',
+    DATA_SPLIT_EVAL_FRACTION=0.3,
+    DATA_SPLIT_COL='timestamp' ) AS
+SELECT
+  column1,
+  column2,
+  column3,
+  timestamp,
+  label
+FROM
+  `mydataset.mytable`
+WHERE
+  column4 < 10
+```
 
 ### Train a linear regression model with a custom data split
 
 The following example creates a linear regression model using a custom data split method and trains the model by joining the data from the evaluation and training tables. All the columns in the training table and in the evaluation table are either features or the label. The query uses `SELECT *` and `UNION ALL` to append all of the data in the `split_col` column to the existing data.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LINEAR_REG',
-        DATA_SPLIT_METHOD='CUSTOM',
-        DATA_SPLIT_COL='SPLIT_COL' ) AS
-    SELECT
-      *,
-      false AS split_col
-    FROM
-      `mydataset.training_table`
-    UNION ALL
-    SELECT
-      *,
-      true AS split_col
-    FROM
-      `mydataset.evaluation_table`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LINEAR_REG',
+    DATA_SPLIT_METHOD='CUSTOM',
+    DATA_SPLIT_COL='SPLIT_COL' ) AS
+SELECT
+  *,
+  false AS split_col
+FROM
+  `mydataset.training_table`
+UNION ALL
+SELECT
+  *,
+  true AS split_col
+FROM
+  `mydataset.evaluation_table`
+```
 
 ### Train a linear regression model with hyperparameter tuning
 
 The following example creates and trains a linear regression model. It uses hyperparameter tuning to improve model performance.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LINEAR_REG',
-        num_trials=10,
-        max_parallel_trials=2,
-        HPARAM_TUNING_OBJECTIVES=['R2_SCORE']) AS
-    SELECT
-      column1,
-      column2,
-      column3,
-      label
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LINEAR_REG',
+    num_trials=10,
+    max_parallel_trials=2,
+    HPARAM_TUNING_OBJECTIVES=['R2_SCORE']) AS
+SELECT
+  column1,
+  column2,
+  column3,
+  label
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a multiclass logistic regression model with automatically calculated weights
 
 The following example creates a multiclass logistic regression model using the `auto_class_weights` option.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LOGISTIC_REG',
-        AUTO_CLASS_WEIGHTS=TRUE ) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LOGISTIC_REG',
+    AUTO_CLASS_WEIGHTS=TRUE ) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a multiclass logistic regression model with specified weights
 
 The following example creates a multiclass logistic regression model using the `class_weights` option. The label columns are `label1` , `label2` , and `label3` .
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LOGISTIC_REG',
-        CLASS_WEIGHTS=[('label1', 0.5), ('label2', 0.3), ('label3', 0.2)]) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LOGISTIC_REG',
+    CLASS_WEIGHTS=[('label1', 0.5), ('label2', 0.3), ('label3', 0.2)]) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a logistic regression model with specified weights
 
 The following example creates a logistic regression model using the `class_weights` option.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LOGISTIC_REG',
-        CLASS_WEIGHTS=[('0', 0.9), ('1', 0.1)]) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LOGISTIC_REG',
+    CLASS_WEIGHTS=[('0', 0.9), ('1', 0.1)]) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a logistic regression model with hyperparameter tuning
 
 The following example creates and trains a logistic regression model. It uses hyperparameter tuning to improve model performance.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='LOGISTIC_REG',
-        num_trials=10,
-        max_parallel_trials=2,
-        HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
-    SELECT
-      column1,
-      column2,
-      column3,
-      label
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='LOGISTIC_REG',
+    num_trials=10,
+    max_parallel_trials=2,
+    HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
+SELECT
+  column1,
+  column2,
+  column3,
+  label
+FROM
+  `mydataset.mytable`
+```
 
 ### Model creation with `TRANSFORM` , while excluding original columns
 
 The following example trains a model after adding the columns `f1` and `f2` from the `SELECT` statement to form a new column `c` ; the columns `f1` and `f2` are omitted from the training data. Model training uses columns `f3` and `label_col` as they appear in the data source `t` .
 
-    CREATE MODEL `mydataset.mymodel`
-      TRANSFORM(f1 + f2 as c, * EXCEPT(f1, f2))
-      OPTIONS(model_type='linear_reg', input_label_cols=['label_col'])
-    AS SELECT f1, f2, f3, label_col FROM t;
+```
+CREATE MODEL `mydataset.mymodel`
+  TRANSFORM(f1 + f2 as c, * EXCEPT(f1, f2))
+  OPTIONS(model_type='linear_reg', input_label_cols=['label_col'])
+AS SELECT f1, f2, f3, label_col FROM t;
+```
 
 ## What's next
 
-  - [Create a regression model](https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial) .
-  - [Create a classification model](https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction) .
-  - [Learn more about hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) .
-  - [Use hyperparameter tuning to improve model performance](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
+- [Create a regression model](https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial) .
+- [Create a classification model](https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction) .
+- [Learn more about hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) .
+- [Use hyperparameter tuning to improve model performance](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .

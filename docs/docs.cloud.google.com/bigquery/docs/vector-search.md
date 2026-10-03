@@ -14,48 +14,48 @@ Vector search is built on embeddings. Embeddings are high-dimensional numerical 
 
 ## Objectives
 
-  - Perform a similarity search on embeddings stored in BigQuery tables by using the `VECTOR_SEARCH` function.
-  - Use a vector index to improve vector search performance.
-  - Perform a search that uses a vector index and a search that doesn't use an index.
-  - Evaluate recall by comparing the results of searches with an index and searches without an index.
+- Perform a similarity search on embeddings stored in BigQuery tables by using the `VECTOR_SEARCH` function.
+- Use a vector index to improve vector search performance.
+- Perform a search that uses a vector index and a search that doesn't use an index.
+- Evaluate recall by comparing the results of searches with an index and searches without an index.
 
 ## Costs
 
 The `VECTOR_SEARCH` function uses [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) . You are charged for similarity search, using on-demand or editions pricing.
 
-  - On-demand: you are charged for the amount of bytes scanned in the base table, the index, and the search query.
+- On-demand: you are charged for the amount of bytes scanned in the base table, the index, and the search query.
 
-  - Editions pricing: you are charged for the slots required to complete the job within your reservation edition. Larger, more complex similarity calculations incur more charges.
-    
-    > **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Editions pricing: you are charged for the slots required to complete the job within your reservation edition. Larger, more complex similarity calculations incur more charges.
+
+  > **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ### Required roles
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles on the project:
 
-  - Create datasets, tables, and vector indexes: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
-  - Run BigQuery jobs: [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- Create datasets, tables, and vector indexes: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+- Run BigQuery jobs: [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -70,21 +70,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -94,25 +94,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create tables to store data and embeddings
 
@@ -120,22 +126,26 @@ In this section, you create the `patents` table that contains patents embeddings
 
 To create the tables, follow these steps:
 
-1.  To create the `patents` table, paste the following in the query editor, and then click play\_circle **Run** :
-    
-        CREATE TABLE bqml_tutorial.patents AS
-        SELECT * FROM `patents-public-data.google_patents_research.publications`
-        WHERE ARRAY_LENGTH(embedding_v1) > 0
-         AND publication_number NOT IN ('KR-20180122872-A')
-        LIMIT 1000000;
-    
+1.  To create the `patents` table, paste the following in the query editor, and then click play_circle **Run** :
+
+    ```
+    CREATE TABLE bqml_tutorial.patents AS
+    SELECT * FROM `patents-public-data.google_patents_research.publications`
+    WHERE ARRAY_LENGTH(embedding_v1) > 0
+     AND publication_number NOT IN ('KR-20180122872-A')
+    LIMIT 1000000;
+    ```
+
     You receive a confirmation message like the following: `This statement created a new table named patents.`
 
-2.  To create the `patents2` table that contains a patent embedding to find nearest neighbors, paste the following in the query editor, and then click play\_circle **Run** :
-    
-        CREATE TABLE bqml_tutorial.patents2 AS
-        SELECT * FROM `patents-public-data.google_patents_research.publications`
-        WHERE publication_number = 'KR-20180122872-A';
-    
+2.  To create the `patents2` table that contains a patent embedding to find nearest neighbors, paste the following in the query editor, and then click play_circle **Run** :
+
+    ```
+    CREATE TABLE bqml_tutorial.patents2 AS
+    SELECT * FROM `patents-public-data.google_patents_research.publications`
+    WHERE publication_number = 'KR-20180122872-A';
+    ```
+
     You receive a confirmation message like the following: `This statement created a new table named patents2.`
 
 ## Create a vector index
@@ -146,18 +156,22 @@ In this section, you create the `my_index` vector index on the `embedding_v1` co
 
 To create the vector index, follow these steps:
 
-1.  To create the `my_index` vector index on the `embedding_v1` column of the `patents` table, paste the following in the query editor, and then click play\_circle **Run** :
-    
-        CREATE OR REPLACE VECTOR INDEX my_index ON bqml_tutorial.patents(embedding_v1)
-        STORING(publication_number, title)
-        OPTIONS(distance_type='COSINE', index_type='IVF');
-    
+1.  To create the `my_index` vector index on the `embedding_v1` column of the `patents` table, paste the following in the query editor, and then click play_circle **Run** :
+
+    ```
+    CREATE OR REPLACE VECTOR INDEX my_index ON bqml_tutorial.patents(embedding_v1)
+    STORING(publication_number, title)
+    OPTIONS(distance_type='COSINE', index_type='IVF');
+    ```
+
     You receive a confirmation message like the following: `The vector index creation on table bqml_tutorial.patents was initiated. Please query bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES to check the progress of the index.`
 
-2.  To confirm that the vector index is ready, paste the following in the query editor, and then click play\_circle **Run** :
-    
-        SELECT * FROM bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES;
-    
+2.  To confirm that the vector index is ready, paste the following in the query editor, and then click play_circle **Run** :
+
+    ```
+    SELECT * FROM bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES;
+    ```
+
     In the query results, verify that the `index_status` is `ACTIVE` , and that the `coverage_percentage` value is `100` . It may take several minutes for `coverage_percentage` to reach `100` .
 
 ## Use the `VECTOR_SEARCH` function with an index
@@ -166,21 +180,23 @@ After the vector index is created and populated, use the `VECTOR_SEARCH` functio
 
 > **Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `vector_search.patents` table](https://docs.cloud.google.com/bigquery/docs/vector-search#create_test_tables_to_store_data_and_embeddings) without the `LIMIT 1000000` clause, [recreate the vector index](https://docs.cloud.google.com/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
 
-To use the `VECTOR_SEARCH` function with an index, paste the following in the query editor, and then click play\_circle **Run** :
+To use the `VECTOR_SEARCH` function with an index, paste the following in the query editor, and then click play_circle **Run** :
 
-    SELECT query.publication_number AS query_publication_number,
-      query.title AS query_title,
-      base.publication_number AS base_publication_number,
-      base.title AS base_title,
-      distance
-    FROM
-      VECTOR_SEARCH(
-        TABLE bqml_tutorial.patents,
-        'embedding_v1',
-        TABLE bqml_tutorial.patents2,
-        top_k => 5,
-        distance_type => 'COSINE',
-        options => '{"fraction_lists_to_search": 0.005}');
+```
+SELECT query.publication_number AS query_publication_number,
+  query.title AS query_title,
+  base.publication_number AS base_publication_number,
+  base.title AS base_title,
+  distance
+FROM
+  VECTOR_SEARCH(
+    TABLE bqml_tutorial.patents,
+    'embedding_v1',
+    TABLE bqml_tutorial.patents2,
+    top_k => 5,
+    distance_type => 'COSINE',
+    options => '{"fraction_lists_to_search": 0.005}');
+```
 
 The results look similar to the following:
 
@@ -200,21 +216,23 @@ The results look similar to the following:
 
 In this section, you use the `VECTOR_SEARCH` function to find the nearest neighbor for the embedding in the `embedding_v1` column in the `patents2` table. This query doesn't use the vector index in the search, so `VECTOR_SEARCH` finds the embedding's exact nearest neighbor.
 
-To use `VECTOR_SEARCH` with brute force, paste the following in the query editor, and then click play\_circle **Run** :
+To use `VECTOR_SEARCH` with brute force, paste the following in the query editor, and then click play_circle **Run** :
 
-    SELECT query.publication_number AS query_publication_number,
-      query.title AS query_title,
-      base.publication_number AS base_publication_number,
-      base.title AS base_title,
-      distance
-    FROM
-      VECTOR_SEARCH(
-        TABLE bqml_tutorial.patents,
-        'embedding_v1',
-        TABLE bqml_tutorial.patents2,
-        top_k => 5,
-        distance_type => 'COSINE',
-        options => '{"use_brute_force":true}');
+```
+SELECT query.publication_number AS query_publication_number,
+  query.title AS query_title,
+  base.publication_number AS base_publication_number,
+  base.title AS base_title,
+  distance
+FROM
+  VECTOR_SEARCH(
+    TABLE bqml_tutorial.patents,
+    'embedding_v1',
+    TABLE bqml_tutorial.patents2,
+    top_k => 5,
+    distance_type => 'COSINE',
+    options => '{"use_brute_force":true}');
+```
 
 The results look similar to the following:
 
@@ -234,39 +252,41 @@ The results look similar to the following:
 
 When you perform a vector search with an index, it returns approximate results, but it reduces [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) . You can compute recall by comparing the results returned by vector search with an index, and the results returned by vector search with brute force. The `publication_number` value uniquely identifies a patent, so it is used for comparison in the following query.
 
-To evaluate recall, paste the following in the query editor, and then click play\_circle **Run** :
+To evaluate recall, paste the following in the query editor, and then click play_circle **Run** :
 
-    WITH approx_results AS (
-      SELECT query.publication_number AS query_publication_number,
-        base.publication_number AS base_publication_number
-      FROM
-        VECTOR_SEARCH(
-          TABLE bqml_tutorial.patents,
-          'embedding_v1',
-          TABLE bqml_tutorial.patents2,
-          top_k => 5,
-          distance_type => 'COSINE',
-          options => '{"fraction_lists_to_search": 0.005}')
-    ),
-      exact_results AS (
-      SELECT query.publication_number AS query_publication_number,
-        base.publication_number AS base_publication_number
-      FROM
-        VECTOR_SEARCH(
-          TABLE bqml_tutorial.patents,
-          'embedding_v1',
-          TABLE bqml_tutorial.patents2,
-          top_k => 5,
-          distance_type => 'COSINE',
-          options => '{"use_brute_force":true}')
-    )
-    
-    SELECT
-      a.query_publication_number,
-      SUM(CASE WHEN a.base_publication_number = e.base_publication_number THEN 1 ELSE 0 END) / 5 AS recall
-    FROM exact_results e LEFT JOIN approx_results a
-      ON e.query_publication_number = a.query_publication_number
-    GROUP BY a.query_publication_number;
+```
+WITH approx_results AS (
+  SELECT query.publication_number AS query_publication_number,
+    base.publication_number AS base_publication_number
+  FROM
+    VECTOR_SEARCH(
+      TABLE bqml_tutorial.patents,
+      'embedding_v1',
+      TABLE bqml_tutorial.patents2,
+      top_k => 5,
+      distance_type => 'COSINE',
+      options => '{"fraction_lists_to_search": 0.005}')
+),
+  exact_results AS (
+  SELECT query.publication_number AS query_publication_number,
+    base.publication_number AS base_publication_number
+  FROM
+    VECTOR_SEARCH(
+      TABLE bqml_tutorial.patents,
+      'embedding_v1',
+      TABLE bqml_tutorial.patents2,
+      top_k => 5,
+      distance_type => 'COSINE',
+      options => '{"use_brute_force":true}')
+)
+
+SELECT
+  a.query_publication_number,
+  SUM(CASE WHEN a.base_publication_number = e.base_publication_number THEN 1 ELSE 0 END) / 5 AS recall
+FROM exact_results e LEFT JOIN approx_results a
+  ON e.query_publication_number = a.query_publication_number
+GROUP BY a.query_publication_number;
+```
 
 The results look like the following:
 
@@ -285,17 +305,15 @@ If the recall is lower than you would like, you can increase the `fraction_lists
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 Alternatively, to keep the project and delete the resources used in this tutorial, follow these steps:
 
@@ -303,7 +321,7 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
 2.  In the left pane, expand your project, and then click **Datasets** .
 
-3.  For the `bqml_tutorial` dataset, click more\_vert **Open actions \> Delete** .
+3.  For the `bqml_tutorial` dataset, click more_vert **Open actions \> Delete** .
 
 4.  In the **Delete dataset** dialog, click **Delete** to confirm.
 

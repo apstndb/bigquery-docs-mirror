@@ -20,23 +20,23 @@ In a partitioned table, data is stored in physical blocks, each of which holds o
 
 Consider partitioning a table in the following scenarios:
 
-  - You want to improve the query performance by only scanning a portion of a table.
-  - Your table operation exceeds a [standard table quota](https://docs.cloud.google.com/bigquery/quotas#standard_tables) and you can scope the table operations to specific partition column values allowing higher [partitioned table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
-  - You want to determine query costs before a query runs. BigQuery provides query cost estimates before the query is run on a partitioned table. Calculate a query cost estimate by [pruning](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) a partitioned table, then issuing a query dry run to estimate query costs.
-  - You want any of the following partition-level management features:
-      - [Set a partition expiration time](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to automatically delete entire partitions after a specified period of time.
-      - [Write data to a specific partition](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables#write-to-partition) using load jobs without affecting other partitions in the table.
-      - [Delete specific partitions](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) without scanning the entire table.
+- You want to improve the query performance by only scanning a portion of a table.
+- Your table operation exceeds a [standard table quota](https://docs.cloud.google.com/bigquery/quotas#standard_tables) and you can scope the table operations to specific partition column values allowing higher [partitioned table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
+- You want to determine query costs before a query runs. BigQuery provides query cost estimates before the query is run on a partitioned table. Calculate a query cost estimate by [pruning](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) a partitioned table, then issuing a query dry run to estimate query costs.
+- You want any of the following partition-level management features:
+  - [Set a partition expiration time](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to automatically delete entire partitions after a specified period of time.
+  - [Write data to a specific partition](https://docs.cloud.google.com/bigquery/docs/load-data-partitioned-tables#write-to-partition) using load jobs without affecting other partitions in the table.
+  - [Delete specific partitions](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) without scanning the entire table.
 
 Consider [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) a table instead of partitioning a table in the following circumstances:
 
-  - You need more granularity than partitioning allows.
-  - Your queries commonly use filters or aggregation against multiple columns.
-  - The cardinality of the number of values in a column or group of columns is large.
-  - You don't need strict cost estimates before query execution.
-  - Partitioning results in a small amount of data per partition (approximately less than 10 GB). Creating many small partitions increases the table's metadata, and can affect metadata access times when querying the table.
-  - Partitioning results in a large number of partitions, exceeding the [limits on partitioned tables](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
-  - Your DML operations frequently modify (for example, every few minutes) most partitions in the table.
+- You need more granularity than partitioning allows.
+- Your queries commonly use filters or aggregation against multiple columns.
+- The cardinality of the number of values in a column or group of columns is large.
+- You don't need strict cost estimates before query execution.
+- Partitioning results in a small amount of data per partition (approximately less than 10 GB). Creating many small partitions increases the table's metadata, and can affect metadata access times when querying the table.
+- Partitioning results in a large number of partitions, exceeding the [limits on partitioned tables](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
+- Your DML operations frequently modify (for example, every few minutes) most partitions in the table.
 
 In such cases, table clustering lets you accelerate queries by clustering data in specific columns based on user-defined sort properties.
 
@@ -50,15 +50,15 @@ This section describes the different ways to partition a table.
 
 You can partition a table based on ranges of values in a specific `INTEGER` column. To create an integer-range partitioned table, you provide:
 
-  - The partitioning column.
-  - The starting value for range partitioning (inclusive).
-  - The ending value for range partitioning (exclusive).
-  - The interval of each range within the partition.
+- The partitioning column.
+- The starting value for range partitioning (inclusive).
+- The ending value for range partitioning (exclusive).
+- The interval of each range within the partition.
 
 For example, suppose you create an integer range partition with the following specification:
 
 | Argument    | Value         |
-| ----------- | ------------- |
+|-------------|---------------|
 | column name | `customer_id` |
 | start       | 0             |
 | end         | 100           |
@@ -77,15 +77,15 @@ For `TIMESTAMP` and `DATETIME` columns, the partitions can have either hourly, d
 For example, suppose that you partition a table on a `DATETIME` column with monthly partitioning. If you insert the following values into the table, the rows are written to the following partitions:
 
 | Column value             | Partition (monthly) |
-| ------------------------ | ------------------- |
+|--------------------------|---------------------|
 | `DATETIME("2019-01-01")` | `201901`            |
 | `DATETIME("2019-01-15")` | `201901`            |
 | `DATETIME("2019-04-30")` | `201904`            |
 
 In addition, two special partitions are created:
 
-  - `__NULL__` : Contains rows with `NULL` values in the partitioning column.
-  - `__UNPARTITIONED__` : Contains rows where the value of the partitioning column is earlier than 1960-01-01 or later than 2159-12-31.
+- `__NULL__` : Contains rows with `NULL` values in the partitioning column.
+- `__UNPARTITIONED__` : Contains rows where the value of the partitioning column is earlier than 1960-01-01 or later than 2159-12-31.
 
 For information about time-unit column-partitioned tables, see [Create a time-unit column-partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_a_time-unit_column-partitioned_table) .
 
@@ -98,7 +98,7 @@ If your data might reach the maximum number of partitions per table when using a
 An ingestion-time partitioned table has a pseudocolumn named `_PARTITIONTIME` . The value of this column is the ingestion time for each row, truncated to the partition boundary (such as hourly or daily). For example, suppose that you create an ingestion-time partitioned table with hourly partitioning and send data at the following times:
 
 | Ingestion time      | `_PARTITIONTIME`    | Partition (hourly) |
-| ------------------- | ------------------- | ------------------ |
+|---------------------|---------------------|--------------------|
 | 2021-05-07 17:22:00 | 2021-05-07 17:00:00 | `2021050717`       |
 | 2021-05-07 17:40:00 | 2021-05-07 17:00:00 | `2021050717`       |
 | 2021-05-07 18:31:00 | 2021-05-07 18:00:00 | `2021050718`       |
@@ -113,11 +113,11 @@ Instead of using `_PARTITIONTIME` , you can also use [`_PARTITIONDATE`](https://
 
 When you partition a table by time-unit column or ingestion time, you choose whether the partitions have daily, hourly, monthly, or yearly granularity.
 
-  - **Daily partitioning** is the default partitioning type. Daily partitioning is a good choice when your data is spread out over a wide range of dates, or if data is continuously added over time.
+- **Daily partitioning** is the default partitioning type. Daily partitioning is a good choice when your data is spread out over a wide range of dates, or if data is continuously added over time.
 
-  - Choose **hourly partitioning** if your tables have a high volume of data that spans a short date range — typically less than six months of timestamp values. If you choose hourly partitioning, make sure the partition count stays within the [partition limits](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
+- Choose **hourly partitioning** if your tables have a high volume of data that spans a short date range — typically less than six months of timestamp values. If you choose hourly partitioning, make sure the partition count stays within the [partition limits](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
 
-  - Choose **monthly or yearly partitioning** if your tables have a relatively small amount of data for each day, but span a wide date range. This option is also recommended if your workflow requires frequently updating or adding rows that span a wide date range (for example, more than 500 dates). In these scenarios, use monthly or yearly partitioning along with clustering on the partitioning column to achieve the best performance. For more information, see [Combining clustered and partitioning tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#combining_clustered_and_partitioned_tables) in this document.
+- Choose **monthly or yearly partitioning** if your tables have a relatively small amount of data for each day, but span a wide date range. This option is also recommended if your workflow requires frequently updating or adding rows that span a wide date range (for example, more than 500 dates). In these scenarios, use monthly or yearly partitioning along with clustering on the partitioning column to achieve the best performance. For more information, see [Combining clustered and partitioning tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#combining_clustered_and_partitioned_tables) in this document.
 
 ## Combining clustered and partitioned tables
 
@@ -144,7 +144,7 @@ Partition decorators enable you to reference a partition in a table. For example
 A partition decorator has the form `table_name$partition_id` where the format of the `partition_id` segment depends on the type of partitioning:
 
 | Partitioning type | Format        | Example               |
-| ----------------- | ------------- | --------------------- |
+|-------------------|---------------|-----------------------|
 | Hourly            | `yyyymmddhh`  | `my_table$2021071205` |
 | Daily             | `yyyymmdd`    | `my_table$20210712`   |
 | Monthly           | `yyyymm`      | `my_table$202107`     |
@@ -157,7 +157,7 @@ To browse the data in a specified partition, use the [`bq head`](https://docs.cl
 
 For example, the following command lists all fields in the first 10 rows of `my_dataset.my_table` in the `2018-02-24` partition:
 
-``` 
+```
     bq head --max_rows=10 'my_dataset.my_table$20180224'
 ```
 
@@ -171,25 +171,25 @@ To export data from an individual partition, use the `bq extract` command and ap
 
 Partitioned tables have the following limitations:
 
-  - You cannot use legacy SQL to query partitioned tables or to write query results to partitioned tables.
+- You cannot use legacy SQL to query partitioned tables or to write query results to partitioned tables.
 
-  - BigQuery does not support partitioning by multiple columns. Only one column can be used to partition a table.
+- BigQuery does not support partitioning by multiple columns. Only one column can be used to partition a table.
 
-  - You cannot directly convert an existing non-partitioned table to a partitioned table. The partitioning strategy is defined when the table is created. Instead, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement to create a new partitioned table by querying the data in the existing table.
+- You cannot directly convert an existing non-partitioned table to a partitioned table. The partitioning strategy is defined when the table is created. Instead, use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement to create a new partitioned table by querying the data in the existing table.
 
-  - Time-unit column-partitioned tables are subject to the following limitations:
-    
-      - The partitioning column must be either a scalar `DATE` , `TIMESTAMP` , or `DATETIME` column. While the mode of the column can be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
-      - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
-    
-    For information about time-unit column-partitioned tables, see [Create a time-unit column-partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_a_time-unit_column-partitioned_table) .
+- Time-unit column-partitioned tables are subject to the following limitations:
 
-  - Integer-range partitioned tables are subject to the following limitations:
-    
-      - The partitioning column must be an `INTEGER` column. While the mode of the column may be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
-      - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
-    
-    For information about integer-range partitioned tables, see [Create an integer-range partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_an_integer-range_partitioned_table) .
+  - The partitioning column must be either a scalar `DATE` , `TIMESTAMP` , or `DATETIME` column. While the mode of the column can be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
+  - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
+
+  For information about time-unit column-partitioned tables, see [Create a time-unit column-partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_a_time-unit_column-partitioned_table) .
+
+- Integer-range partitioned tables are subject to the following limitations:
+
+  - The partitioning column must be an `INTEGER` column. While the mode of the column may be `REQUIRED` or `NULLABLE` , it cannot be `REPEATED` (array-based).
+  - The partitioning column must be a top-level field. You cannot use a leaf field from a `RECORD` ( `STRUCT` ) as the partitioning column.
+
+  For information about integer-range partitioned tables, see [Create an integer-range partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#create_an_integer-range_partitioned_table) .
 
 ## Quotas and limits
 
@@ -199,10 +199,10 @@ Partitioned tables have defined [limits](https://docs.cloud.google.com/bigquery/
 
 Quotas and limits also apply to the different types of jobs you can run against partitioned tables, including:
 
-  - [Loading data](https://docs.cloud.google.com/bigquery/quotas#load_jobs) (load jobs)
-  - [Exporting data](https://docs.cloud.google.com/bigquery/quotas#export_jobs) (extract jobs)
-  - [Querying data](https://docs.cloud.google.com/bigquery/quotas#query_jobs) (query jobs)
-  - [Copying tables](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) (copy jobs)
+- [Loading data](https://docs.cloud.google.com/bigquery/quotas#load_jobs) (load jobs)
+- [Exporting data](https://docs.cloud.google.com/bigquery/quotas#export_jobs) (extract jobs)
+- [Querying data](https://docs.cloud.google.com/bigquery/quotas#query_jobs) (query jobs)
+- [Copying tables](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) (copy jobs)
 
 ### Number of partition modifications for column-partitioned tables quota errors
 
@@ -212,35 +212,37 @@ To see the value of the **Number of partition modifications per column-partition
 
 **Error message**
 
-    Quota exceeded: Your table exceeded quota for
-    Number of partition modifications to a column partitioned table
+```
+Quota exceeded: Your table exceeded quota for
+Number of partition modifications to a column partitioned table
+```
 
 #### Resolution
 
 This quota cannot be increased. To resolve this quota error, do the following:
 
-  - Change the partitioning on the table to have more data in each partition, in order to decrease the total number of partitions. For example, change from [partitioning by day to partitioning by month](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#select_daily_hourly_monthly_or_yearly_partitioning) or change [how you partition the table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
+- Change the partitioning on the table to have more data in each partition, in order to decrease the total number of partitions. For example, change from [partitioning by day to partitioning by month](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#select_daily_hourly_monthly_or_yearly_partitioning) or change [how you partition the table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-  - Use [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#when_to_use_clustering) instead of partitioning.
+- Use [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#when_to_use_clustering) instead of partitioning.
 
-  - If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
-    
-    For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
+- If you frequently load data from multiple small files stored in Cloud Storage that uses a job per file, then combine multiple load jobs into a single job. You can load from multiple Cloud Storage URIs with a comma-separated list (for example, `gs://my_path/file_1,gs://my_path/file_2` ), or by using wildcards (for example, `gs://my_path/*` ).
 
-  - If you use load, select or copy jobs to append single rows of data to a table, for example, then you should consider batching multiple jobs into one job. BigQuery doesn't perform well when used as a relational database. As a best practice, avoid running frequent, single-row append actions.
+  For more information, see [Batch loading data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#permissions-load-data-from-cloud-storage) .
 
-  - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
+- If you use load, select or copy jobs to append single rows of data to a table, for example, then you should consider batching multiple jobs into one job. BigQuery doesn't perform well when used as a relational database. As a best practice, avoid running frequent, single-row append actions.
 
-  - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+- To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-  - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
+- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+
+- For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
 ## Table pricing
 
 When you create and use partitioned tables in BigQuery, your charges are based on how much data is stored in the partitions and on the queries you run against the data:
 
-  - For information on storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
-  - For information on query pricing, see [Query pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .
+- For information on storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
+- For information on query pricing, see [Query pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .
 
 Many partitioned table operations are free, including loading data into partitions, copying partitions, and exporting data from partitions. Though free, these operations are subject to BigQuery's [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) . For information on all free operations, see [Free operations](https://cloud.google.com/bigquery/pricing#free) on the pricing page.
 
@@ -252,6 +254,6 @@ Access control for partitioned tables is the same as access control for standard
 
 ## What's next
 
-  - To learn how to create partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
-  - To learn how to manage and update partitioned tables, see [Managing partitioned tables](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables) .
-  - For information on querying partitioned tables, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+- To learn how to create partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+- To learn how to manage and update partitioned tables, see [Managing partitioned tables](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables) .
+- For information on querying partitioned tables, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .

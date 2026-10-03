@@ -12,9 +12,9 @@ This document describes the BigQuery features that you can use to create and ana
 
 BigQuery's multimodal data features let you perform the following tasks:
 
-  - Integrate unstructured data stored in Cloud Storage as another column alongside structured data in standard BigQuery tables by representing unstructured data as [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectref_values) values.
-  - Generate annotations, embeddings, and scalar values from multimodal data by using BigQuery ML [generative AI functions](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#generative_ai_functions) with Gemini models.
-  - Generate annotations, embeddings, and scalar values from multimodal data by [creating multimodal DataFrames](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#multimodal_dataframes) in BigQuery DataFrames and using Python libraries.
+- Integrate unstructured data stored in Cloud Storage as another column alongside structured data in standard BigQuery tables by representing unstructured data as [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectref_values) values.
+- Generate annotations, embeddings, and scalar values from multimodal data by using BigQuery ML [generative AI functions](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#generative_ai_functions) with Gemini models.
+- Generate annotations, embeddings, and scalar values from multimodal data by [creating multimodal DataFrames](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#multimodal_dataframes) in BigQuery DataFrames and using Python libraries.
 
 For a step-by-step tutorial that uses the Google Cloud console, see [Analyze multimodal data with SQL and Python](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
 
@@ -22,9 +22,9 @@ For a step-by-step tutorial that uses the Google Cloud console, see [Analyze mul
 
 BigQuery's multimodal data features offer the following benefits:
 
-  - **Composability** : you can store and manage structured and unstructured data in the same standard table row by using `ObjectRef` values. For example, you could store images for a product in the same row as the rest of the product information. You can use standard SQL functions to create and update columns that contain `ObjectRef` values, and you can create `ObjectRef` values as the output of a transformation action on an object.
-  - **Add multiple pieces of unstructured data in generative AI prompts** : add multiple `ObjectRef` values as input to generative AI functions. For example, you can generate embeddings of image and text data from the same table. For text and scalar value generation, you can also refer to multiple objects within the prompt that you send to a model. For example, you could create a prompt that asks the model to generate a product description based on images and attributes of the product.
-  - **Persisting chunk ordering** : you can chunk objects and then store the chunks as an array of `ObjectRef` values in a standard table column, in order to persist their order. For example, you could parse images from a video, and then store these images as an array of `ObjectRef` values, so that the images stay in the same order that they appear in the original video.
+- **Composability** : you can store and manage structured and unstructured data in the same standard table row by using `ObjectRef` values. For example, you could store images for a product in the same row as the rest of the product information. You can use standard SQL functions to create and update columns that contain `ObjectRef` values, and you can create `ObjectRef` values as the output of a transformation action on an object.
+- **Add multiple pieces of unstructured data in generative AI prompts** : add multiple `ObjectRef` values as input to generative AI functions. For example, you can generate embeddings of image and text data from the same table. For text and scalar value generation, you can also refer to multiple objects within the prompt that you send to a model. For example, you could create a prompt that asks the model to generate a product description based on images and attributes of the product.
+- **Persisting chunk ordering** : you can chunk objects and then store the chunks as an array of `ObjectRef` values in a standard table column, in order to persist their order. For example, you could parse images from a video, and then store these images as an array of `ObjectRef` values, so that the images stay in the same order that they appear in the original video.
 
 ## `ObjectRef` values
 
@@ -34,9 +34,9 @@ Use `ObjectRef` values when you need to integrate unstructured data into a stand
 
 Create and update `ObjectRef` values by using the following GoogleSQL functions:
 
-  - [`OBJ.MAKE_REF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) : create an `ObjectRef` value that contains metadata for a Cloud Storage object.
-  - [`OBJ.FETCH_METADATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) : fetch Cloud Storage metadata for an `ObjectRef` value that is partially populated with `uri` and `authorizer` values.
-  - [`OBJ.LIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) : returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage.
+- [`OBJ.MAKE_REF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) : create an `ObjectRef` value that contains metadata for a Cloud Storage object.
+- [`OBJ.FETCH_METADATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objfetch_metadata) : fetch Cloud Storage metadata for an `ObjectRef` value that is partially populated with `uri` and `authorizer` values.
+- [`OBJ.LIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objlist) : returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage.
 
 For more information, see [Work with ObjectRef values](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) .
 
@@ -52,18 +52,18 @@ Create `ObjectRefRuntime` values by using the [`OBJ.GET_ACCESS_URL` function](ht
 
 Generate text, embeddings, and scalar values based on `ObjectRef` input by using the following generative AI functions with Gemini models:
 
-  - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
-  - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
-  - [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
-  - [`AI.GENERATE_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool)
-  - [`AI.GENERATE_DOUBLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
-  - [`AI.GENERATE_INT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int)
-  - [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
-  - [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed)
-  - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
-  - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
-  - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
-  - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
+- [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
+- [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+- [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
+- [`AI.GENERATE_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool)
+- [`AI.GENERATE_DOUBLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
+- [`AI.GENERATE_INT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int)
+- [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
+- [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed)
+- [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+- [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+- [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+- [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
 
 ## Work with multimodal data in Python
 
@@ -79,8 +79,8 @@ To try it out, see the [Multimodal Dataframes tutorial](https://github.com/googl
 
 Use the following methods to perform generative AI tasks on multimodal data:
 
-  - [`predict` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.GeminiTextGenerator.html#bigframes.ml.llm.GeminiTextGenerator.predict) of the [`GeminiTextGenerator` class](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.GeminiTextGenerator.html#bigframes.ml.llm.GeminiTextGenerator) : generate text based on multimodal data.
-  - [`predict` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.MultimodalEmbeddingGenerator.html#bigframes.ml.llm.MultimodalEmbeddingGenerator.predict) of the [`MultimodalEmbeddingGenerator` class](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.MultimodalEmbeddingGenerator.html#bigframes.ml.llm.MultimodalEmbeddingGenerator) : generate embeddings based on multimodal data.
+- [`predict` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.GeminiTextGenerator.html#bigframes.ml.llm.GeminiTextGenerator.predict) of the [`GeminiTextGenerator` class](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.GeminiTextGenerator.html#bigframes.ml.llm.GeminiTextGenerator) : generate text based on multimodal data.
+- [`predict` method](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.MultimodalEmbeddingGenerator.html#bigframes.ml.llm.MultimodalEmbeddingGenerator.predict) of the [`MultimodalEmbeddingGenerator` class](https://dataframes.bigquery.dev/reference/api/bigframes.ml.llm.MultimodalEmbeddingGenerator.html#bigframes.ml.llm.MultimodalEmbeddingGenerator) : generate embeddings based on multimodal data.
 
 ## Object tables
 
@@ -94,32 +94,32 @@ A [Storage Insights dataset](https://docs.cloud.google.com/storage/docs/insights
 
 The following limitations apply to BigQuery multimodal data features:
 
-  - If you don't explicitly specify the name of the project that contains the connection in the `authorizer` field of an `ObjectRef` value, then the connection must exist either in the project that contains the object table that stores it, or in the project in which the query that references the `ObjectRef` value is run.
-  - You can't have more than 20 Cloud resource connections in the project and region where your query accesses object data as `ObjectRef` values.
-  - You can reference `ObjectRef` values from at most five projects besides the project in which you run the query.
+- If you don't explicitly specify the name of the project that contains the connection in the `authorizer` field of an `ObjectRef` value, then the connection must exist either in the project that contains the object table that stores it, or in the project in which the query that references the `ObjectRef` value is run.
+- You can't have more than 20 Cloud resource connections in the project and region where your query accesses object data as `ObjectRef` values.
+- You can reference `ObjectRef` values from at most five projects besides the project in which you run the query.
 
 ## Pricing
 
 The following costs are incurred when you use multimodal data:
 
-  - Storage of object metadata as `ObjectRef` values in standard tables contributes to the BigQuery storage cost for the table.
-  - Queries run on `ObjectRef` values incur BigQuery compute costs.
-  - New objects that you create from object transformations incur Cloud Storage costs.
-  - New data that you create and persist in BigQuery incurs BigQuery storage costs.
-  - When you use generative AI functions, you incur Gemini Enterprise Agent Platform costs.
-  - When you use BigQuery Python UDFs and multimodal DataFrames and object transformation methods in BigQuery DataFrames, you incur Python UDF costs.
-  - `OBJ` functions such as `OBJ.LIST` and `OBJ.GET_READ_URL` only process metadata, not the underlying file bytes. You incur costs when you pass the returned object reference to a downstream AI function that reads the file contents; for example, `AI.GENERATE` or `AI.IF` .
+- Storage of object metadata as `ObjectRef` values in standard tables contributes to the BigQuery storage cost for the table.
+- Queries run on `ObjectRef` values incur BigQuery compute costs.
+- New objects that you create from object transformations incur Cloud Storage costs.
+- New data that you create and persist in BigQuery incurs BigQuery storage costs.
+- When you use generative AI functions, you incur Gemini Enterprise Agent Platform costs.
+- When you use BigQuery Python UDFs and multimodal DataFrames and object transformation methods in BigQuery DataFrames, you incur Python UDF costs.
+- `OBJ` functions such as `OBJ.LIST` and `OBJ.GET_READ_URL` only process metadata, not the underlying file bytes. You incur costs when you pass the returned object reference to a downstream AI function that reads the file contents; for example, `AI.GENERATE` or `AI.IF` .
 
 For more information, see the following pricing pages:
 
-  - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
-  - [BigQuery Python UDFs pricing](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#pricing)
-  - [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
-  - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
+- [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
+- [BigQuery Python UDFs pricing](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#pricing)
+- [Agent Platform pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
+- [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
 
 ## What's next
 
-  - [Specify `ObjectRef` columns in table schemas](https://docs.cloud.google.com/bigquery/docs/objectref-columns) .
-  - [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
-  - Learn more about [Generative AI in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Learn more about [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
+- [Specify `ObjectRef` columns in table schemas](https://docs.cloud.google.com/bigquery/docs/objectref-columns) .
+- [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
+- Learn more about [Generative AI in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Learn more about [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .

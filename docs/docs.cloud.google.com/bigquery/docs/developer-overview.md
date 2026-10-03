@@ -18,18 +18,18 @@ BigQuery APIs and client libraries are the core developer tools for making BigQu
 
 BigQuery offers [REST and gRPC APIs](https://docs.cloud.google.com/bigquery/docs/reference/libraries-overview) to programmatically interface with its various services. The following APIs are available:
 
-  - [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest)
-  - [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
-  - [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
-  - [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest)
-  - [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc)
-  - [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest)
-  - [BigQuery Analytics Hub API](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest)
-  - [BigQuery Data Transfer Service API](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest)
+- [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest)
+- [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
+- [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest)
+- [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest)
+- [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc)
+- [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest)
+- [BigQuery Analytics Hub API](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest)
+- [BigQuery Data Transfer Service API](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest)
 
 ### Client libraries
 
-While you can use the BigQuery APIs directly by making requests to the server, using the [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) can significantly reduce the amount of code that you need to write by providing simplifications in your BigQuery API calls. The supported languages for BigQuery are C\#, Go, Java, Node.js, PHP, Python, and Ruby. To try a quickstart for the BigQuery client libraries, see [Query a public dataset with the BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) .
+While you can use the BigQuery APIs directly by making requests to the server, using the [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) can significantly reduce the amount of code that you need to write by providing simplifications in your BigQuery API calls. The supported languages for BigQuery are C#, Go, Java, Node.js, PHP, Python, and Ruby. To try a quickstart for the BigQuery client libraries, see [Query a public dataset with the BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) .
 
 ### Authentication
 
@@ -55,10 +55,6 @@ Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers 
 
 ### Data Agent Kit
 
-> **Preview**
-> 
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 [Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-agent-kit) provides an extension for agent coding tools, such as VS Code, Antigravity, and Cursor, that let you interact with BigQuery resources directly in your agent environment. You can use Data Agent Kit to browse datasets, manage pipelines, run queries, and prompt your agent to perform other BigQuery tasks directly in your preferred IDE.
 
 Data Agent Kit also provides a set of plugins that you can use with various command-line tools, including Antigravity CLI, Gemini CLI, Claude Code, and Codex CLI.
@@ -74,7 +70,7 @@ As you build complex solutions with BigQuery, Google offers many pathways to ass
 ### Repositories and workspaces
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use [repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) to version control the files that you use in BigQuery, and you can use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) within those repositories to edit code. BigQuery uses Git to record changes and manage file versions. You can use the Git capabilities that are built into BigQuery, or you can connect to a third-party Git repository.
@@ -83,17 +79,17 @@ You can use [repositories](https://docs.cloud.google.com/bigquery/docs/repositor
 
 The following Google services and tools integrate with BigQuery and offer additional capabilities for building solutions:
 
-  - [**Managed Service for Apache Spark**](https://docs.cloud.google.com/dataproc/docs/concepts/overview) . A fully managed service for running Apache Hadoop and Apache Spark jobs. Managed Service for Apache Spark provides the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) , which lets Hadoop and Spark directly process data from BigQuery.
-  - [**Dataflow**](https://docs.cloud.google.com/dataflow/docs/about-dataflow) . A fully managed service for running Apache Beam jobs at scale. The [BigQuery I/O connector for Beam](https://beam.apache.org/documentation/io/built-in/google-bigquery/) lets Beam pipelines read and write data to and from BigQuery.
-  - [**Managed Service for Apache Airflow**](https://docs.cloud.google.com/composer/docs/concepts/overview) . A fully managed workflow scheduling service built on Apache Airflow. [BigQuery operators](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html) let Airflow workflows manage datasets and tables, run queries, and validate data.
-  - [**Pub/Sub**](https://docs.cloud.google.com/pubsub/docs/overview) . An asynchronous and scalable messaging service. Pub/Sub provides [BigQuery subscriptions](https://docs.cloud.google.com/pubsub/docs/bigquery) , which you can use for writing messages to an existing BigQuery table as they are received.
-  - [**Dataform**](https://docs.cloud.google.com/dataform/docs/overview) . A service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery.
-  - [**BigQuery Terraform module**](https://github.com/terraform-google-modules/terraform-google-bigquery/blob/master/README.md) . A module to automate the instantiation and deployment of your BigQuery datasets and tables.
-  - [**bq command-line tool**](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) . A Python-based command-line tool for BigQuery.
+- [**Managed Service for Apache Spark**](https://docs.cloud.google.com/dataproc/docs/concepts/overview) . A fully managed service for running Apache Hadoop and Apache Spark jobs. Managed Service for Apache Spark provides the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) , which lets Hadoop and Spark directly process data from BigQuery.
+- [**Dataflow**](https://docs.cloud.google.com/dataflow/docs/about-dataflow) . A fully managed service for running Apache Beam jobs at scale. The [BigQuery I/O connector for Beam](https://beam.apache.org/documentation/io/built-in/google-bigquery/) lets Beam pipelines read and write data to and from BigQuery.
+- [**Managed Service for Apache Airflow**](https://docs.cloud.google.com/composer/docs/concepts/overview) . A fully managed workflow scheduling service built on Apache Airflow. [BigQuery operators](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/operators/cloud/bigquery.html) let Airflow workflows manage datasets and tables, run queries, and validate data.
+- [**Pub/Sub**](https://docs.cloud.google.com/pubsub/docs/overview) . An asynchronous and scalable messaging service. Pub/Sub provides [BigQuery subscriptions](https://docs.cloud.google.com/pubsub/docs/bigquery) , which you can use for writing messages to an existing BigQuery table as they are received.
+- [**Dataform**](https://docs.cloud.google.com/dataform/docs/overview) . A service for data analysts to develop, test, version control, and schedule complex SQL workflows for data transformation in BigQuery.
+- [**BigQuery Terraform module**](https://github.com/terraform-google-modules/terraform-google-bigquery/blob/master/README.md) . A module to automate the instantiation and deployment of your BigQuery datasets and tables.
+- [**bq command-line tool**](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) . A Python-based command-line tool for BigQuery.
 
 Google also validates dozens of partner solutions and integrations for BigQuery through the [Google Cloud Ready - BigQuery](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) program. These recognized partners have met a core set of requirements to ensure compatibility with BigQuery.
 
 ## What's next
 
-  - For information about resources and upcoming events for Google Cloud developers, visit the [developer center](https://cloud.google.com/developers) .
-  - For information about how other companies use Google Cloud, see [Data Cloud for ISVs](https://cloud.google.com/solutions/data-cloud-isvs) .
+- For information about resources and upcoming events for Google Cloud developers, visit the [developer center](https://cloud.google.com/developers) .
+- For information about how other companies use Google Cloud, see [Data Cloud for ISVs](https://cloud.google.com/solutions/data-cloud-isvs) .

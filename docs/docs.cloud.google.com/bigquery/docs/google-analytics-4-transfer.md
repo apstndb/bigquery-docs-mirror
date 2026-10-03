@@ -14,50 +14,17 @@ You can load data from Google Analytics 4 to BigQuery using the [BigQuery Data T
 
 The BigQuery Data Transfer Service for the Google Analytics connector supports the following options for your data transfer.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data transfer options</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Supported reports</td>
-<td>The Google Analytics connector supports the transfer of reporting data from <a href="https://developers.google.com/analytics/devguides/reporting/data/v1">Google Analytics Data API v1</a> .
-<p>For information about how Google Analytics reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation">Google Analytics report transformation</a> .</p></td>
-</tr>
-<tr class="even">
-<td>Repeat frequency</td>
-<td>The Google Analytics connector supports daily data transfers.<br />
-<br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer">set up your data transfer</a> .</td>
-</tr>
-<tr class="odd">
-<td>Refresh window</td>
-<td>You can schedule your data transfers to retrieve Google Analytics data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you <a href="https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer">set up your data transfer</a> .<br />
-<br />
-By default, the Google Analytics connector has a refresh window of 4 days.<br />
-<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#refresh">Refresh windows</a> .</td>
-</tr>
-<tr class="even">
-<td>Backfill data availability</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
-<br />
-For information about the data retention policy for Google Analytics, see <a href="https://support.google.com/analytics/answer/7667196">Google Analytics Data Retention Policy</a> .</td>
-</tr>
-</tbody>
-</table>
+| Data transfer options      | Support                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Supported reports          | The Google Analytics connector supports the transfer of reporting data from [Google Analytics Data API v1](https://developers.google.com/analytics/devguides/reporting/data/v1) . For information about how Google Analytics reports are transformed into BigQuery tables and views, see [Google Analytics report transformation](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation) .                                                                                                                 |
+| Repeat frequency           | The Google Analytics connector supports daily data transfers. By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer) .                                                                                                                                                                                              |
+| Refresh window             | You can schedule your data transfers to retrieve Google Analytics data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer) . By default, the Google Analytics connector has a refresh window of 4 days. For more information, see [Refresh windows](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#refresh) . |
+| Backfill data availability | [Run a data backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows. For information about the data retention policy for Google Analytics, see [Google Analytics Data Retention Policy](https://support.google.com/analytics/answer/7667196) .                                                                               |
 
 ## Limitations
 
-  - Aggregated totals for distinct users and session metrics might not be accurate and might not match the values in Google Analytics.
-  - The Google Analytics 4 connector doesn't support the transfer of custom properties.
+- Aggregated totals for distinct users and session metrics might not be accurate and might not match the values in Google Analytics.
+- The Google Analytics 4 connector doesn't support the transfer of custom properties.
 
 ## Data ingestion from Google Analytics 4 transfers
 
@@ -77,10 +44,10 @@ Review the following prerequisites and information before you create a Google An
 
 ### Prerequisites
 
-  - In Google Analytics 4, the user account or the service account must have viewer access to the [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) that is used in the transfer configuration.
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your Google Analytics 4 data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- In Google Analytics 4, the user account or the service account must have viewer access to the [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) that is used in the transfer configuration.
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your Google Analytics 4 data.
+- If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
@@ -92,15 +59,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -114,10 +81,10 @@ You can specify a custom report when you [create a Google Analytics transfer](ht
 
 ### Custom reports limitations
 
-  - Only one custom report is supported per transfer configuration.
-  - A maximum of 9 dimensions and 10 metrics are supported per custom report.
-  - Not all dimensions and metrics are compatible with each other. Use the [GA4 Dimensions & Metrics Explorer](https://ga-dev-tools.google/ga4/dimensions-metrics-explorer/) tool to validate your custom report dimensions and metrics before creating the transfer.
-  - [Custom dimensions and metrics](https://support.google.com/analytics/answer/14240153) are not supported.
+- Only one custom report is supported per transfer configuration.
+- A maximum of 9 dimensions and 10 metrics are supported per custom report.
+- Not all dimensions and metrics are compatible with each other. Use the [GA4 Dimensions & Metrics Explorer](https://ga-dev-tools.google/ga4/dimensions-metrics-explorer/) tool to validate your custom report dimensions and metrics before creating the transfer.
+- [Custom dimensions and metrics](https://support.google.com/analytics/answer/14240153) are not supported.
 
 ## Set up a Google Analytics 4 data transfer
 
@@ -130,36 +97,36 @@ Select one of the following options:
 2.  Click add **Create transfer** .
 
 3.  On the **Create transfer** page, do the following:
-    
-      - In the **Source type** section, for **Source** , choose **Google Analytics 4** .
+
+    - In the **Source type** section, for **Source** , choose **Google Analytics 4** .
 
 4.  In the **Data source details** section:
-    
-      - In the **Property ID** field, enter a [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) .
-      - Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example, `Audiences, Events` . Prefix this list with the `-` character to exclude certain tables, for example `-Audiences, Events` . All tables are included by default.
-      - Optional: To ingest custom reports instead of the standard reports, do the following:
-          - In the **Custom Report Table Name** field, enter the output table name for the custom report. For more information about valid table names, see [Table naming](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
-          - In the **Custom Report Dimensions** field, enter the dimensions for the custom report. For more information, see [Custom reports](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#custom_reports) .
-          - In the **Custom Report Metrics** field, enter the metrics for the custom report. For more information, see [Custom reports](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#custom_reports) .
-      - Optional: In the **Refresh window** field, enter a duration for your [refresh window](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#refresh) in days. The refresh window has a default value of four days, and can be a value up to 30 days.
+
+    - In the **Property ID** field, enter a [property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id) .
+    - Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example, `Audiences, Events` . Prefix this list with the `-` character to exclude certain tables, for example `-Audiences, Events` . All tables are included by default.
+    - Optional: To ingest custom reports instead of the standard reports, do the following:
+      - In the **Custom Report Table Name** field, enter the output table name for the custom report. For more information about valid table names, see [Table naming](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
+      - In the **Custom Report Dimensions** field, enter the dimensions for the custom report. For more information, see [Custom reports](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#custom_reports) .
+      - In the **Custom Report Metrics** field, enter the metrics for the custom report. For more information, see [Custom reports](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#custom_reports) .
+    - Optional: In the **Refresh window** field, enter a duration for your [refresh window](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#refresh) in days. The refresh window has a default value of four days, and can be a value up to 30 days.
 
 5.  In the **Destination settings** section, in the **Destination dataset** menu, select the dataset that you created to store your data.
 
 6.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
 7.  In the **Schedule options** section:
-    
-      - Select either **Start now** or **Start at set time** , then provide a start date and run time.
-      - For **Repeats** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
+
+    - Select either **Start now** or **Start at set time** , then provide a start date and run time.
+    - For **Repeats** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
 
 8.  Optional: In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts that are associated with your Google Cloud project. The selected service account must have the [required roles](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#bq-roles) to run this data transfer.
-    
+
     If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a data transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the data transfer is optional. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
 
 9.  Optional: In the **Notification options** section:
-    
-      - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub [run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
+
+    - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+    - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub [run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 10. Optional: If you use [CMEKs](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) , in the **Advanced options** section, select **Customer-managed key** . A list of your available CMEKs appears for you to choose from. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#CMEK) .
 
@@ -169,15 +136,13 @@ Select one of the following options:
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are required:
 
-  - `--data_source`
-  - `--target_dataset`
-  - `--display_name`
-  - `--params`
+- `--data_source`
+- `--target_dataset`
+- `--display_name`
+- `--params`
 
-<!-- end list -->
-
-``` 
-  bq mk --transfer_config \
+```
+bq mk --transfer_config \
   --project_id=PROJECT_ID \
   --target_dataset=DATASET \
   --display_name=NAME \
@@ -187,18 +152,18 @@ Enter the `bq mk` command and supply the transfer creation flag — `--transfer_
 
 Where:
 
-  - PROJECT\_ID : your project ID. If `--project_id` isn't specified, the default project is used.
-  - DATASET : the target dataset for the data transfer configuration.
-  - NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - PARAMETERS : the parameters for the created data transfer configuration in JSON format, for example, `--params='{"param":"param_value"}'` . For Google Analytics 4 transfers, the `property_id` parameter is required.
-  - DATA\_SOURCE : the data source — `ga4` .
+- ` PROJECT_ID ` : your project ID. If `--project_id` isn't specified, the default project is used.
+- ` DATASET ` : the target dataset for the data transfer configuration.
+- ` NAME ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` PARAMETERS ` : the parameters for the created data transfer configuration in JSON format, for example, `--params='{"param":"param_value"}'` . For Google Analytics 4 transfers, the `property_id` parameter is required.
+- ` DATA_SOURCE ` : the data source — `ga4` .
 
 For example, the following command creates a Google Analytics 4 data transfer named `My Transfer` using property ID `468039345` , with the target dataset `mydataset` .
 
 The data transfer is created in the default project:
 
-``` 
-  bq mk --transfer_config
+```
+bq mk --transfer_config
   --project_id=your_project
   --target_dataset=mydataset
   --display_name=My Transfer

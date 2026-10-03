@@ -14,13 +14,13 @@ If you use the Gemini CLI, you can use BigQuery extensions. To learn how, see [D
 
 This guide demonstrates the connection process for the following IDEs:
 
-  - Cursor
-  - Windsurf (formerly Codeium)
-  - Visual Studio Code (Copilot)
-  - Cline (VS Code extension)
-  - Claude desktop
-  - Claude code
-  - Antigravity
+- Cursor
+- Windsurf (formerly Codeium)
+- Visual Studio Code (Copilot)
+- Cline (VS Code extension)
+- Claude desktop
+- Claude code
+- Antigravity
 
 ## Before you begin
 
@@ -38,8 +38,8 @@ This guide demonstrates the connection process for the following IDEs:
 
 You can connect BigQuery to Antigravity in the following ways:
 
-  - Using the MCP Store
-  - Using a custom configuration
+- Using the MCP Store
+- Using a custom configuration
 
 **Note:** You don't need to download the MCP Toolbox binary to use these methods.
 
@@ -59,22 +59,22 @@ After you install BigQuery in the MCP Store, resources and tools from the server
 To connect to a custom MCP server, follow these steps:
 
 1.  Open [Antigravity](https://antigravity.google/docs/mcp) and navigate to the MCP store using the **"..."** drop-down at the top of the editor's agent panel.
-2.  To open the **mcp\_config.json** file, click **MCP Servers** and then click **Manage MCP Servers \> View raw config** .
+2.  To open the **mcp_config.json** file, click **MCP Servers** and then click **Manage MCP Servers \> View raw config** .
 3.  Add the following configuration, replace the environment variable with your values, and save.
 
-<!-- end list -->
-
-    {
-      "mcpServers": {
-        "bigquery": {
-          "command": "npx",
-          "args": ["-y","@toolbox-sdk/server","--prebuilt","bigquery","--stdio"],
-          "env": {
-              "BIGQUERY_PROJECT": "PROJECT_ID"
-          }
-        }
+```
+{
+  "mcpServers": {
+    "bigquery": {
+      "command": "npx",
+      "args": ["-y","@toolbox-sdk/server","--prebuilt","bigquery","--stdio"],
+      "env": {
+          "BIGQUERY_PROJECT": "PROJECT_ID"
       }
     }
+  }
+}
+```
 
 ## Install the MCP Toolbox
 
@@ -83,38 +83,50 @@ You don't need to install MCP Toolbox if you only plan to use the BigQuery Gemin
 The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server that sits between your IDE and BigQuery, providing a secure and efficient control plane for your AI tools.
 
 1.  Download the latest version of the MCP Toolbox as a binary. Select the [binary](https://github.com/googleapis/mcp-toolbox/releases) corresponding to your operating system (OS) and CPU architecture. You must use MCP Toolbox version V0.7.0 or later:
-    
+
     ### linux/amd64
-    
-        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/linux/amd64/toolbox
-    
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
-    
+
+    ```
+    curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/linux/amd64/toolbox
+    ```
+
+    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+
     ### macOS darwin/arm64
-    
-        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/arm64/toolbox
-    
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
-    
+
+    ```
+    curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/arm64/toolbox
+    ```
+
+    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+
     ### macOS darwin/amd64
-    
-        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/amd64/toolbox
-    
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
-    
+
+    ```
+    curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/amd64/toolbox
+    ```
+
+    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+
     ### windows/amd64
-    
-        curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/windows/amd64/toolbox
-    
-    Replace `  VERSION  ` with the MCP Toolbox version—for example `v0.7.0` .
+
+    ```
+    curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/windows/amd64/toolbox
+    ```
+
+    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
 
 2.  Make the binary executable:
-    
-        chmod +x toolbox
+
+    ```
+    chmod +x toolbox
+    ```
 
 3.  Verify the installation:
-    
-        ./toolbox --version
+
+    ```
+    ./toolbox --version
+    ```
 
 ## Set up clients and connections
 
@@ -131,8 +143,8 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](ht
 2.  Create a `.mcp.json` file in your project root, if it doesn't exist.
 
 3.  Add the configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "mcpServers": {
                 "bigquery": {
@@ -156,8 +168,8 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](ht
 2.  In the **Developer** tab, click **Edit Config** to open the configuration file.
 
 3.  Add the configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "mcpServers": {
                 "bigquery": {
@@ -183,8 +195,8 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](ht
 2.  Tap **Configure MCP Servers** to open the configuration file.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "mcpServers": {
                 "bigquery": {
@@ -208,8 +220,8 @@ A green active status appears after the server connects successfully.
 2.  Create the `.cursor/mcp.json` file if it doesn't exist and open it.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "mcpServers": {
                 "bigquery": {
@@ -233,8 +245,8 @@ A green active status appears after the server connects successfully.
 2.  Create the `.vscode/mcp.json` file if it doesn't exist, and open it.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "servers": {
                 "bigquery": {
@@ -258,8 +270,8 @@ A green active status appears after the server connects successfully.
 2.  Click the MCP icon, then click **Configure** to open the configuration file.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
-    
-    ``` 
+
+    ```
             {
               "mcpServers": {
                 "bigquery": {
@@ -282,12 +294,12 @@ Your AI tool is now connected to BigQuery using MCP. Try asking your AI assistan
 
 The following tools are available to the LLM:
 
-  - **analyze\_contribution** : perform contribution analysis, also called key driver analysis.
-  - **ask\_data\_insights** : perform data analysis, get insights, or answer complex questions about the contents of BigQuery tables.
-  - **execute\_sql** : execute SQL statement.
-  - **forecast** : forecast time series data.
-  - **get\_dataset\_info** : get dataset metadata.
-  - **get\_table\_info** : get table metadata.
-  - **list\_dataset\_ids** : list datasets.
-  - **list\_table\_ids** : list tables.
-  - **search\_catalog** : search for a table using natural language.
+- **analyze_contribution** : perform contribution analysis, also called key driver analysis.
+- **ask_data_insights** : perform data analysis, get insights, or answer complex questions about the contents of BigQuery tables.
+- **execute_sql** : execute SQL statement.
+- **forecast** : forecast time series data.
+- **get_dataset_info** : get dataset metadata.
+- **get_table_info** : get table metadata.
+- **list_dataset_ids** : list datasets.
+- **list_table_ids** : list tables.
+- **search_catalog** : search for a table using natural language.

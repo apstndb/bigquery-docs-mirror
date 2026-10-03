@@ -6,13 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.PATH_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.request_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.request_body.SCHEMA_REPRESENTATION)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.response_body)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.PATH_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.request_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.request_body.SCHEMA_REPRESENTATION)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.response_body)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects/enrollDataSources#try-it)
 
 **Full name** : projects.enrollDataSources
 
@@ -31,49 +31,47 @@ The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`name`
-
-`string`
-
-Required. The name of the project resource in the form: `projects/{projectId}`
-
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `name` :
-
-  - `resourcemanager.projects.update`
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameters</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>name</code></td>
+<td><p><code>string</code></p>
+<p>Required. The name of the project resource in the form: <code>projects/{projectId}</code></p>
+<p>Authorization requires the following <a href="https://cloud.google.com/iam/docs/">IAM</a> permission on the specified resource <code>name</code> :</p>
+<ul>
+<li><code>resourcemanager.projects.update</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 ### Request body
 
 The request body contains data with the following structure:
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataSourceIds&quot;: [
+**JSON representation**
+
+```
+{
+  "dataSourceIds": [
     string
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`dataSourceIds[]`
-
-`string`
-
-Data sources that are enrolled. It is required to provide at least one data source id.
+| Fields            |                                                                                                 |
+|-------------------|-------------------------------------------------------------------------------------------------|
+| `dataSourceIds[]` | `string` Data sources that are enrolled. It is required to provide at least one data source id. |
 
 ### Response body
 
@@ -83,6 +81,6 @@ If successful, the response body is an empty JSON object.
 
 Requires the following OAuth scope:
 
-  - `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

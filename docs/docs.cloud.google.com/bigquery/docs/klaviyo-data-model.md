@@ -14,12 +14,12 @@ This page lists the data that's transferred to BigQuery when you [run a Klaviyo 
 
 Klaviyo account information and metadata.
 
-  - Table name: Accounts
-  - Endpoint: `/accounts`
-  - Klaviyo API reference: [Get Accounts](https://developers.klaviyo.com/en/reference/get_accounts)
+- Table name: Accounts
+- Endpoint: `/accounts`
+- Klaviyo API reference: [Get Accounts](https://developers.klaviyo.com/en/reference/get_accounts)
 
 | Field Name             | Type   | JSON Path                                                  | Description                                            |
-| ---------------------- | ------ | ---------------------------------------------------------- | ------------------------------------------------------ |
+|------------------------|--------|------------------------------------------------------------|--------------------------------------------------------|
 | `type`                 | STRING | `$.type`                                                   | Resource type (always `account` ).                     |
 | `id`                   | STRING | `$.id`                                                     | Unique identifier for the account.                     |
 | `test_account`         | STRING | `$.attributes.test_account`                                | Indicates if this is a test account.                   |
@@ -43,12 +43,12 @@ Klaviyo account information and metadata.
 
 Coupons for discounts and promotions.
 
-  - Table name: Coupons
-  - Endpoint: `/coupons`
-  - Klaviyo API reference: [Get Coupons](https://developers.klaviyo.com/en/reference/get_coupons)
+- Table name: Coupons
+- Endpoint: `/coupons`
+- Klaviyo API reference: [Get Coupons](https://developers.klaviyo.com/en/reference/get_coupons)
 
 | Field Name              | Type   | JSON Path                                                  | Description                                      |
-| ----------------------- | ------ | ---------------------------------------------------------- | ------------------------------------------------ |
+|-------------------------|--------|------------------------------------------------------------|--------------------------------------------------|
 | `type`                  | STRING | `$.type`                                                   | Resource type (always `coupon` ).                |
 | `id`                    | STRING | `$.id`                                                     | Unique internal identifier for the coupon.       |
 | `external_id`           | STRING | `$.attributes.external_id`                                 | External identifier (often the same as name/id). |
@@ -59,12 +59,12 @@ Coupons for discounts and promotions.
 
 Individual unique codes generated for specific coupons.
 
-  - Table name: CouponCode
-  - Endpoint: `/coupon-codes`
-  - Klaviyo API reference: [Get Coupon Codes](https://developers.klaviyo.com/en/reference/get_coupon_codes)
+- Table name: CouponCode
+- Endpoint: `/coupon-codes`
+- Klaviyo API reference: [Get Coupon Codes](https://developers.klaviyo.com/en/reference/get_coupon_codes)
 
 | Field Name    | Type      | JSON Path                        | Description                                        |
-| ------------- | --------- | -------------------------------- | -------------------------------------------------- |
+|---------------|-----------|----------------------------------|----------------------------------------------------|
 | `type`        | STRING    | `$.type`                         | Resource type (always `coupon-code` ).             |
 | `id`          | STRING    | `$.id`                           | Unique identifier for this specific code instance. |
 | `unique_code` | STRING    | `$.attributes.unique_code`       | The actual alphanumeric code string.               |
@@ -76,12 +76,12 @@ Individual unique codes generated for specific coupons.
 
 Activity events tracked for profiles (e.g., Placed Order, Viewed Product).
 
-  - Table name: Events
-  - Endpoint: `/events`
-  - Klaviyo API reference: [Get Events](https://developers.klaviyo.com/en/reference/get_events)
+- Table name: Events
+- Endpoint: `/events`
+- Klaviyo API reference: [Get Events](https://developers.klaviyo.com/en/reference/get_events)
 
 | Field Name         | Type            | JSON Path                                 | Description                                                               |
-| ------------------ | --------------- | ----------------------------------------- | ------------------------------------------------------------------------- |
+|--------------------|-----------------|-------------------------------------------|---------------------------------------------------------------------------|
 | `type`             | STRING          | `$.type`                                  | Resource type (always `event` ).                                          |
 | `id`               | STRING          | `$.id`                                    | Unique identifier for the event.                                          |
 | `timestamp`        | FLOAT           | `$.attributes.timestamp`                  | Unix timestamp of when the event occurred.                                |
@@ -96,12 +96,12 @@ Activity events tracked for profiles (e.g., Placed Order, Viewed Product).
 
 Automated marketing flows triggered by specific events or conditions.
 
-  - Table name: Flows
-  - Endpoint: `/flows`
-  - Klaviyo API reference: [Get Flows](https://developers.klaviyo.com/en/reference/get_flows)
+- Table name: Flows
+- Endpoint: `/flows`
+- Klaviyo API reference: [Get Flows](https://developers.klaviyo.com/en/reference/get_flows)
 
 | Field Name         | Type            | JSON Path                                 | Description                                                      |
-| ------------------ | --------------- | ----------------------------------------- | ---------------------------------------------------------------- |
+|--------------------|-----------------|-------------------------------------------|------------------------------------------------------------------|
 | `type`             | STRING          | `$.type`                                  | Resource type (always `flow` ).                                  |
 | `id`               | STRING          | `$.id`                                    | Unique identifier for the flow.                                  |
 | `name`             | STRING          | `$.attributes.name`                       | Name of the flow.                                                |
@@ -117,12 +117,12 @@ Automated marketing flows triggered by specific events or conditions.
 
 Signup forms for collecting subscriber information.
 
-  - Table name: Forms
-  - Endpoint: `/forms`
-  - Klaviyo API reference: [Get Forms](https://developers.klaviyo.com/en/reference/get_forms)
+- Table name: Forms
+- Endpoint: `/forms`
+- Klaviyo API reference: [Get Forms](https://developers.klaviyo.com/en/reference/get_forms)
 
 | Field Name   | Type      | JSON Path                 | Description                              |
-| ------------ | --------- | ------------------------- | ---------------------------------------- |
+|--------------|-----------|---------------------------|------------------------------------------|
 | `type`       | STRING    | `$.type`                  | Resource type (always `form` ).          |
 | `id`         | STRING    | `$.id`                    | Unique identifier for the form.          |
 | `name`       | STRING    | `$.attributes.name`       | Name of the form.                        |
@@ -135,12 +135,12 @@ Signup forms for collecting subscriber information.
 
 Images uploaded to Klaviyo for use in campaigns and templates.
 
-  - Table name: Images
-  - Endpoint: `/images`
-  - Klaviyo API reference: [Get Images](https://developers.klaviyo.com/en/reference/get_images)
+- Table name: Images
+- Endpoint: `/images`
+- Klaviyo API reference: [Get Images](https://developers.klaviyo.com/en/reference/get_images)
 
 | Field Name   | Type      | JSON Path                 | Description                            |
-| ------------ | --------- | ------------------------- | -------------------------------------- |
+|--------------|-----------|---------------------------|----------------------------------------|
 | `type`       | STRING    | `$.type`                  | Resource type (always `image` ).       |
 | `id`         | STRING    | `$.id`                    | Unique identifier.                     |
 | `name`       | STRING    | `$.attributes.name`       | Filename or name of the image.         |
@@ -154,31 +154,31 @@ Images uploaded to Klaviyo for use in campaigns and templates.
 
 Static lists of contacts/profiles.
 
-  - Table name: Lists
-  - Endpoint: `/lists`
-  - Klaviyo API reference: [Get Lists](https://developers.klaviyo.com/en/reference/get_lists)
+- Table name: Lists
+- Endpoint: `/lists`
+- Klaviyo API reference: [Get Lists](https://developers.klaviyo.com/en/reference/get_lists)
 
-| Field Name          | Type            | JSON Path                                  | Description                                                    |
-| ------------------- | --------------- | ------------------------------------------ | -------------------------------------------------------------- |
-| `type`              | STRING          | `$.type`                                   | Resource type (always `list` ).                                |
-| `id`                | STRING          | `$.id`                                     | Unique identifier for the list.                                |
-| `name`              | STRING          | `$.attributes.name`                        | Name of the contact list.                                      |
-| `created`           | TIMESTAMP       | `$.attributes.created`                     | Creation timestamp.                                            |
-| `updated`           | TIMESTAMP       | `$.attributes.updated`                     | Last modification timestamp.                                   |
-| `opt_in_process`    | STRING          | `$.attributes.opt_in_process`              | Opt-in setting (e.g., 'single\_opt\_in' or 'double\_opt\_in'). |
-| `tag_ids`           | REPEATED STRING | `$.relationships.tags.data[*].id`          | IDs of tags assigned to this list.                             |
-| `flow_triggers_ids` | REPEATED STRING | `$.relationships.flow-triggers.data[*].id` | IDs of flows triggered by adding profiles to this list.        |
+| Field Name          | Type            | JSON Path                                  | Description                                                |
+|---------------------|-----------------|--------------------------------------------|------------------------------------------------------------|
+| `type`              | STRING          | `$.type`                                   | Resource type (always `list` ).                            |
+| `id`                | STRING          | `$.id`                                     | Unique identifier for the list.                            |
+| `name`              | STRING          | `$.attributes.name`                        | Name of the contact list.                                  |
+| `created`           | TIMESTAMP       | `$.attributes.created`                     | Creation timestamp.                                        |
+| `updated`           | TIMESTAMP       | `$.attributes.updated`                     | Last modification timestamp.                               |
+| `opt_in_process`    | STRING          | `$.attributes.opt_in_process`              | Opt-in setting (e.g., 'single_opt_in' or 'double_opt_in'). |
+| `tag_ids`           | REPEATED STRING | `$.relationships.tags.data[*].id`          | IDs of tags assigned to this list.                         |
+| `flow_triggers_ids` | REPEATED STRING | `$.relationships.flow-triggers.data[*].id` | IDs of flows triggered by adding profiles to this list.    |
 
 ## Metrics
 
 Types of events that can be tracked (e.g., "Received Email").
 
-  - Table name: Metrics
-  - Endpoint: `/metrics`
-  - Klaviyo API reference: [Get Metrics](https://developers.klaviyo.com/en/reference/get_metrics)
+- Table name: Metrics
+- Endpoint: `/metrics`
+- Klaviyo API reference: [Get Metrics](https://developers.klaviyo.com/en/reference/get_metrics)
 
 | Field Name          | Type            | JSON Path                                  | Description                                                                     |
-| ------------------- | --------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
+|---------------------|-----------------|--------------------------------------------|---------------------------------------------------------------------------------|
 | `type`              | STRING          | `$.type`                                   | Resource type (always `metric` ).                                               |
 | `id`                | STRING          | `$.id`                                     | Unique identifier (e.g., 6-char code for generic, long UUID for custom).        |
 | `name`              | STRING          | `$.attributes.name`                        | Human-readable name (e.g., "Placed Order").                                     |
@@ -191,12 +191,12 @@ Types of events that can be tracked (e.g., "Received Email").
 
 Comprehensive customer profiles containing attributes and activity history.
 
-  - Table name: Profiles
-  - Endpoint: `/profiles`
-  - Klaviyo API reference: [Get Profiles](https://developers.klaviyo.com/en/reference/get_profiles)
+- Table name: Profiles
+- Endpoint: `/profiles`
+- Klaviyo API reference: [Get Profiles](https://developers.klaviyo.com/en/reference/get_profiles)
 
 | Field Name                                         | Type            | JSON Path                                                                     | Description                                      |
-| -------------------------------------------------- | --------------- | ----------------------------------------------------------------------------- | ------------------------------------------------ |
+|----------------------------------------------------|-----------------|-------------------------------------------------------------------------------|--------------------------------------------------|
 | `type`                                             | STRING          | `$.type`                                                                      | Resource type (always `profile` ).               |
 | `id`                                               | STRING          | `$.id`                                                                        | Unique Klaviyo ID for the profile.               |
 | `email`                                            | STRING          | `$.attributes.email`                                                          | Primary email address.                           |
@@ -262,12 +262,12 @@ Comprehensive customer profiles containing attributes and activity history.
 
 Product reviews submitted by customers.
 
-  - Table name: Reviews
-  - Endpoint: `/reviews`
-  - Klaviyo API reference: [Get Reviews](https://developers.klaviyo.com/en/reference/get_reviews)
+- Table name: Reviews
+- Endpoint: `/reviews`
+- Klaviyo API reference: [Get Reviews](https://developers.klaviyo.com/en/reference/get_reviews)
 
 | Field Name             | Type            | JSON Path                                                 | Description                               |
-| ---------------------- | --------------- | --------------------------------------------------------- | ----------------------------------------- |
+|------------------------|-----------------|-----------------------------------------------------------|-------------------------------------------|
 | `type`                 | STRING          | `$.type`                                                  | Resource type (always `review` ).         |
 | `id`                   | STRING          | `$.id`                                                    | Unique identifier for the review.         |
 | `email`                | STRING          | `$.attributes.email`                                      | Email of the reviewer.                    |
@@ -297,12 +297,12 @@ Product reviews submitted by customers.
 
 Dynamic groups of profiles based on specific criteria.
 
-  - Table name: Segments
-  - Endpoint: `/segments`
-  - Klaviyo API reference: [Get Segments](https://developers.klaviyo.com/en/reference/get_segments)
+- Table name: Segments
+- Endpoint: `/segments`
+- Klaviyo API reference: [Get Segments](https://developers.klaviyo.com/en/reference/get_segments)
 
 | Field Name          | Type            | JSON Path                                       | Description                                      |
-| ------------------- | --------------- | ----------------------------------------------- | ------------------------------------------------ |
+|---------------------|-----------------|-------------------------------------------------|--------------------------------------------------|
 | `type`              | STRING          | `$.type`                                        | Resource type (always `segment` ).               |
 | `id`                | STRING          | `$.id`                                          | Unique identifier for the segment.               |
 | `name`              | STRING          | `$.attributes.name`                             | Segment name.                                    |
@@ -318,13 +318,13 @@ Dynamic groups of profiles based on specific criteria.
 ### ConditionGroup
 
 | Field Name   | Type               | JSON Path         | Description                                     |
-| ------------ | ------------------ | ----------------- | ----------------------------------------------- |
+|--------------|--------------------|-------------------|-------------------------------------------------|
 | `conditions` | REPEATED Condition | `conditions[*` \] | List of individual conditions within the group. |
 
 #### Condition
 
 | Field Name | Type   | JSON Path | Description                                 |
-| ---------- | ------ | --------- | ------------------------------------------- |
+|------------|--------|-----------|---------------------------------------------|
 | `type`     | STRING | `type`    | Type of condition (e.g., profile-property). |
 | `value`    | JSON   | `N/A`     | Condition value/configuration.              |
 
@@ -332,12 +332,12 @@ Dynamic groups of profiles based on specific criteria.
 
 Tags used to organize campaigns, flows, and lists.
 
-  - Table name: Tags
-  - Endpoint: `/tags`
-  - Klaviyo API reference: [Get Tags](https://developers.klaviyo.com/en/reference/get_tags)
+- Table name: Tags
+- Endpoint: `/tags`
+- Klaviyo API reference: [Get Tags](https://developers.klaviyo.com/en/reference/get_tags)
 
 | Field Name     | Type   | JSON Path                           | Description                              |
-| -------------- | ------ | ----------------------------------- | ---------------------------------------- |
+|----------------|--------|-------------------------------------|------------------------------------------|
 | `type`         | STRING | `$.type`                            | Resource type (always `tag` ).           |
 | `id`           | STRING | `$.id`                              | Unique tag identifier.                   |
 | `name`         | STRING | `$.attributes.name`                 | Name of the tag.                         |
@@ -347,12 +347,12 @@ Tags used to organize campaigns, flows, and lists.
 
 Email and message templates.
 
-  - Table name: Templates
-  - Endpoint: `/templates`
-  - Klaviyo API reference: [Get Templates](https://developers.klaviyo.com/en/reference/get_templates)
+- Table name: Templates
+- Endpoint: `/templates`
+- Klaviyo API reference: [Get Templates](https://developers.klaviyo.com/en/reference/get_templates)
 
 | Field Name    | Type      | JSON Path                  | Description                         |
-| ------------- | --------- | -------------------------- | ----------------------------------- |
+|---------------|-----------|----------------------------|-------------------------------------|
 | `type`        | STRING    | `$.type`                   | Resource type (always `template` ). |
 | `id`          | STRING    | `$.id`                     | Unique identifier.                  |
 | `name`        | STRING    | `$.attributes.name`        | Template name.                      |
@@ -367,12 +367,12 @@ Email and message templates.
 
 Web feeds used to populate content in messages.
 
-  - Table name: WebFeeds
-  - Endpoint: `/web-feeds`
-  - Klaviyo API reference: [Get Web Feeds](https://developers.klaviyo.com/en/reference/get_web_feeds)
+- Table name: WebFeeds
+- Endpoint: `/web-feeds`
+- Klaviyo API reference: [Get Web Feeds](https://developers.klaviyo.com/en/reference/get_web_feeds)
 
 | Field Name       | Type      | JSON Path                     | Description                         |
-| ---------------- | --------- | ----------------------------- | ----------------------------------- |
+|------------------|-----------|-------------------------------|-------------------------------------|
 | `type`           | STRING    | `$.type`                      | Resource type (always `web-feed` ). |
 | `id`             | STRING    | `$.id`                        | Unique identifier.                  |
 | `name`           | STRING    | `$.attributes.name`           | Feed name.                          |
@@ -387,12 +387,12 @@ Web feeds used to populate content in messages.
 
 Sources of data integrated into Klaviyo.
 
-  - Table name: DataSources
-  - Endpoint: `/data-sources`
-  - Klaviyo API reference: [Get Data Sources](https://developers.klaviyo.com/en/reference/get_data_sources)
+- Table name: DataSources
+- Endpoint: `/data-sources`
+- Klaviyo API reference: [Get Data Sources](https://developers.klaviyo.com/en/reference/get_data_sources)
 
 | Field Name    | Type   | JSON Path                  | Description                            |
-| ------------- | ------ | -------------------------- | -------------------------------------- |
+|---------------|--------|----------------------------|----------------------------------------|
 | `type`        | STRING | `$.type`                   | Resource type (always `data-source` ). |
 | `id`          | STRING | `$.id`                     | Unique identifier.                     |
 | `title`       | STRING | `$.attributes.title`       | Title of the data source.              |
@@ -403,12 +403,12 @@ Sources of data integrated into Klaviyo.
 
 Marketing campaigns sent to lists or segments.
 
-  - Table name: Campaigns
-  - Endpoint: `/campaigns`
-  - Klaviyo API reference: [Get Campaigns](https://developers.klaviyo.com/en/reference/get_campaigns)
+- Table name: Campaigns
+- Endpoint: `/campaigns`
+- Klaviyo API reference: [Get Campaigns](https://developers.klaviyo.com/en/reference/get_campaigns)
 
 | Field Name             | Type            | JSON Path                                      | Description                                      |
-| ---------------------- | --------------- | ---------------------------------------------- | ------------------------------------------------ |
+|------------------------|-----------------|------------------------------------------------|--------------------------------------------------|
 | `type`                 | STRING          | `$.type`                                       | Resource type (always `campaign` ).              |
 | `id`                   | STRING          | `$.id`                                         | Unique identifier.                               |
 | `name`                 | STRING          | `$.attributes.name`                            | Campaign name.                                   |
@@ -430,12 +430,12 @@ Marketing campaigns sent to lists or segments.
 
 Individual messages (email/SMS) within a campaign.
 
-  - Table name: CampaignMessages
-  - Endpoint: `/campaign-messages`
-  - Klaviyo API reference: [Get Campaign Message](https://developers.klaviyo.com/en/reference/get_campaign_message)
+- Table name: CampaignMessages
+- Endpoint: `/campaign-messages`
+- Klaviyo API reference: [Get Campaign Message](https://developers.klaviyo.com/en/reference/get_campaign_message)
 
 | Field Name    | Type          | JSON Path                          | Description                                 |
-| ------------- | ------------- | ---------------------------------- | ------------------------------------------- |
+|---------------|---------------|------------------------------------|---------------------------------------------|
 | `type`        | STRING        | `$.type`                           | Resource type (always `campaign-message` ). |
 | `id`          | STRING        | `$.id`                             | Unique identifier.                          |
 | `definition`  | JSON          | `$.attributes.definition`          | Message content and configuration.          |
@@ -450,12 +450,12 @@ Individual messages (email/SMS) within a campaign.
 
 Product categories from your catalog.
 
-  - Table name: Categories
-  - Endpoint: `/catalog-categories`
-  - Klaviyo API reference: [Get Catalog Categories](https://developers.klaviyo.com/en/reference/get_catalog_categories)
+- Table name: Categories
+- Endpoint: `/catalog-categories`
+- Klaviyo API reference: [Get Catalog Categories](https://developers.klaviyo.com/en/reference/get_catalog_categories)
 
 | Field Name    | Type      | JSON Path                  | Description            |
-| ------------- | --------- | -------------------------- | ---------------------- |
+|---------------|-----------|----------------------------|------------------------|
 | `type`        | STRING    | `$.type`                   | Resource type.         |
 | `id`          | STRING    | `$.id`                     | Unique identifier.     |
 | `name`        | STRING    | `$.attributes.name`        | Category name.         |
@@ -466,12 +466,12 @@ Product categories from your catalog.
 
 Individual products or items in your catalog.
 
-  - Table name: Items
-  - Endpoint: `/catalog-items`
-  - Klaviyo API reference: [Get Catalog Items](https://developers.klaviyo.com/en/reference/get_catalog_items)
+- Table name: Items
+- Endpoint: `/catalog-items`
+- Klaviyo API reference: [Get Catalog Items](https://developers.klaviyo.com/en/reference/get_catalog_items)
 
 | Field Name            | Type            | JSON Path                             | Description                    |
-| --------------------- | --------------- | ------------------------------------- | ------------------------------ |
+|-----------------------|-----------------|---------------------------------------|--------------------------------|
 | `type`                | STRING          | `$.type`                              | Resource type.                 |
 | `id`                  | STRING          | `$.id`                                | Unique identifier.             |
 | `external_id`         | STRING          | `$.attributes.external_id`            | External system ID.            |
@@ -492,12 +492,12 @@ Individual products or items in your catalog.
 
 Specific variants of catalog items (e.g., sizes, colors).
 
-  - Table name: Variants
-  - Endpoint: `/catalog-variants`
-  - Klaviyo API reference: [Get Catalog Variants](https://developers.klaviyo.com/en/reference/get_catalog_variants)
+- Table name: Variants
+- Endpoint: `/catalog-variants`
+- Klaviyo API reference: [Get Catalog Variants](https://developers.klaviyo.com/en/reference/get_catalog_variants)
 
 | Field Name            | Type            | JSON Path                          | Description                         |
-| --------------------- | --------------- | ---------------------------------- | ----------------------------------- |
+|-----------------------|-----------------|------------------------------------|-------------------------------------|
 | `type`                | STRING          | `$.type`                           | Resource type.                      |
 | `id`                  | STRING          | `$.id`                             | Unique identifier.                  |
 | `external_id`         | STRING          | `$.attributes.external_id`         | External system ID.                 |

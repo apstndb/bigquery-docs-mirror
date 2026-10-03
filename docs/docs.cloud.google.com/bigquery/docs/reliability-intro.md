@@ -12,9 +12,9 @@ This document provides an understanding of BigQuery reliability features, such a
 
 This introduction helps you address three primary considerations:
 
-  - Determine whether BigQuery is the right tool for your job.
-  - Understand the dimensions of BigQuery reliability.
-  - Identify specific reliability requirements for specific use cases.
+- Determine whether BigQuery is the right tool for your job.
+- Understand the dimensions of BigQuery reliability.
+- Identify specific reliability requirements for specific use cases.
 
 ## Select BigQuery
 
@@ -28,8 +28,8 @@ Generally, BigQuery is very well suited for workloads where large amounts of dat
 
 Availability defines the user's ability to read data from BigQuery or write data to it. BigQuery is built to make both of these highly available with a 99.99% [SLA](https://cloud.google.com/bigquery/sla) . There are two components involved in both operations:
 
-  - The BigQuery service
-  - Compute resources required to execute the specific query
+- The BigQuery service
+- Compute resources required to execute the specific query
 
 Reliability of the service is a function of the specific BigQuery API being used to retrieve the data. The availability of compute resources depends on the capacity available to the user at the time when the query is run. See [Understand slots](https://docs.cloud.google.com/bigquery/docs/slots) for more information about the fundamental unit of compute for BigQuery and the resulting [slot resource economy](https://docs.cloud.google.com/bigquery/docs/slots#slot_resource_economy) .
 
@@ -49,8 +49,8 @@ In general, performance can be expressed in two dimensions. *Latency* is a measu
 
 Two ways to measure the ability to recover data after an outage are:
 
-  - *Recovery Time Objective* (RTO). How long data can be unavailable after an incident.
-  - *Recovery Point Objective* (RPO). How much of the data collected prior to the incident can acceptably be lost.
+- *Recovery Time Objective* (RTO). How long data can be unavailable after an incident.
+- *Recovery Point Objective* (RPO). How much of the data collected prior to the incident can acceptably be lost.
 
 These considerations are specifically relevant in the unlikely case that a zone or region experiences a multi-day or destructive outage.
 
@@ -89,8 +89,8 @@ There are two types of failures, soft failures and hard failures.
 
 When you create a BigQuery dataset, you select a location in which to store your data. This location is one of the following:
 
-  - A region: a specific geographical location, such as Iowa ( `us-central1` ) or Montréal ( `northamerica-northeast1` ).
-  - A multi-region: a large geographic area that contains two or more geographic places, such as the United States ( `US` ) or Europe ( `EU` ).
+- A region: a specific geographical location, such as Iowa ( `us-central1` ) or Montréal ( `northamerica-northeast1` ).
+- A multi-region: a large geographic area that contains two or more geographic places, such as the United States ( `US` ) or Europe ( `EU` ).
 
 In either case, BigQuery automatically stores copies of your data in two different Google Cloud [zones](https://docs.cloud.google.com/docs/geography-and-regions#regions_and_zones) within a single region in the selected location.
 
@@ -150,11 +150,11 @@ Exponential backoff logic retries a query or request by increasing the wait time
 
 1.  Make a request to BigQuery.
 
-2.  If the request fails, wait 1 + random\_number\_milliseconds seconds and retry the request.
+2.  If the request fails, wait 1 + random_number_milliseconds seconds and retry the request.
 
-3.  If the request fails, wait 2 + random\_number\_milliseconds seconds and retry the request.
+3.  If the request fails, wait 2 + random_number_milliseconds seconds and retry the request.
 
-4.  If the request fails, wait 4 + random\_number\_milliseconds seconds and retry the request.
+4.  If the request fails, wait 4 + random_number_milliseconds seconds and retry the request.
 
 5.  And so on, up to a ( `maximum_backoff` ) time.
 
@@ -162,11 +162,11 @@ Exponential backoff logic retries a query or request by increasing the wait time
 
 Note the following:
 
-  - The wait time is `min(((2^n)+random_number_milliseconds), maximum_backoff)` , with `n` incremented by 1 for each iteration (request).
+- The wait time is `min(((2^n)+random_number_milliseconds), maximum_backoff)` , with `n` incremented by 1 for each iteration (request).
 
-  - `random_number_milliseconds` is a random number of milliseconds less than or equal to 1000. This randomization helps to avoid situations where many clients are synchronized and all retry simultaneously, sending requests in synchronized waves. The value of `random_number_milliseconds` is recalculated after each retry request.
+- `random_number_milliseconds` is a random number of milliseconds less than or equal to 1000. This randomization helps to avoid situations where many clients are synchronized and all retry simultaneously, sending requests in synchronized waves. The value of `random_number_milliseconds` is recalculated after each retry request.
 
-  - The maximum backoff interval ( `maximum_backoff` ) is typically 32 or 64 seconds. The appropriate value for `maximum_backoff` depends on the use case.
+- The maximum backoff interval ( `maximum_backoff` ) is typically 32 or 64 seconds. The appropriate value for `maximum_backoff` depends on the use case.
 
 The client can continue retrying after it reaches the maximum backoff time. Retries after this point don't need to continue increasing backoff time. For example, if the client uses a maximum backoff time of 64 seconds, then after reaching this value the client can continue to retry every 64 seconds. At some point, clients should be prevented from retrying indefinitely.
 

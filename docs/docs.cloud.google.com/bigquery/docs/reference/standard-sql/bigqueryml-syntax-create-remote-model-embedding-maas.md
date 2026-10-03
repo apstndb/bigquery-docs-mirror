@@ -14,7 +14,7 @@ Alternatively, you can use the Google Cloud console user interface to [create a 
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
-  - [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
+- [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
 
 ## `CREATE MODEL` syntax
 
@@ -41,14 +41,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -56,21 +56,23 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
+`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
 
 BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
-  - `PROJECT_ID` : the project ID of the project that contains the connection.
+- `PROJECT_ID` : the project ID of the project that contains the connection.
 
-  - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
-  - `CONNECTION_ID` : the connection ID—for example, `myconnection` .
-    
-    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-    
-    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+- `CONNECTION_ID` : the connection ID—for example, `myconnection` .
+
+  To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
+
+  To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing ` PROJECT_ID ` . ` LOCATION ` . ` CONNECTION_ID ` .
 
 If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
@@ -78,13 +80,17 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Example**
 
-    `myproject.us.my_connection`
+```
+`myproject.us.my_connection`
+```
 
 ### `ENDPOINT`
 
 **Syntax**
 
-    ENDPOINT = 'vertex_ai_embedding_endpoint'
+```
+ENDPOINT = 'vertex_ai_embedding_endpoint'
+```
 
 **Description**
 
@@ -98,10 +104,10 @@ A `STRING` value that contains the model name of the target Agent Platform embed
 
 The following [text embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models) are supported:
 
-  - `gemini-embedding-001` , which supports both English and multilingual input.
-  - `text-embedding-004`
-  - `text-embedding-005`
-  - `text-multilingual-embedding-002`
+- `gemini-embedding-001` , which supports both English and multilingual input.
+- `text-embedding-004`
+- `text-embedding-005`
+- `text-multilingual-embedding-002`
 
 After you create a remote model based on an embedding model, you can use the model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table.
 
@@ -125,12 +131,14 @@ The following examples create BigQuery ML remote models.
 
 The following example creates a BigQuery ML remote model over the `text-embedding-005` model and uses the default connection:
 
-    CREATE OR REPLACE MODEL mydataset.embedding_005
-    REMOTE WITH CONNECTION DEFAULT
-    OPTIONS(ENDPOINT = 'text-embedding-005');
+```
+CREATE OR REPLACE MODEL mydataset.embedding_005
+REMOTE WITH CONNECTION DEFAULT
+OPTIONS(ENDPOINT = 'text-embedding-005');
+```
 
 ## What's next
 
-  - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Try [generating embeddings from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
-  - Try [generating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) .
+- For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Try [generating embeddings from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
+- Try [generating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) .

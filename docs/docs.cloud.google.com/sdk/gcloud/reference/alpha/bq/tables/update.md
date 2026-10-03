@@ -12,7 +12,7 @@ gcloud alpha bq tables update - update a new BigQuery table
 
 SYNOPSIS
 
-`gcloud alpha bq tables update` ( `  TABLE  ` : `  --dataset  ` = `  DATASET  ` ) \[ `  --description  ` = `  DESCRIPTION  ` \] \[ `  --expiration  ` = `  EXPIRATION  ` \] \[ `  --relax-columns  ` =\[ `  FIELD_NAME  ` , …\]\] \[ `  --add-columns  ` =\[ `  FIELD_NAME  ` = `  FIELD_TYPE  ` , …\] | `  --add-columns-file  ` = `  PATH_TO_FILE  ` \] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables update` ( [`TABLE`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#TABLE) : [`--dataset`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--dataset) = `DATASET` ) \[ [`--description`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--description) = `DESCRIPTION` \] \[ [`--expiration`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--expiration) = `EXPIRATION` \] \[ [`--relax-columns`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--relax-columns) =\[ `FIELD_NAME` , …\]\] \[ [`--add-columns`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--add-columns) =\[ `FIELD_NAME` = `FIELD_TYPE` , …\] \| [`--add-columns-file`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#--add-columns-file) = `PATH_TO_FILE` \] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/update#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,11 +22,15 @@ EXAMPLES
 
 The following command updates the description on a table with ID `my-table` in `my-dataset` :
 
-    gcloud alpha bq tables update /projects/myproject/datasets/my-dataset/tables/my-table --description 'My New Table'
+```
+gcloud alpha bq tables update /projects/myproject/datasets/my-dataset/tables/my-table --description 'My New Table'
+```
 
 The following command changes the schema mode from `REQUIRED` to `NULLABLE` on the `value` and `tags` columns in a table with ID `my-other-table` in dataset `my-other-dataset` :
 
-    gcloud alpha bq tables update my-other-table --dataset my-other-dataset --relax-columns name,tags
+```
+gcloud alpha bq tables update my-other-table --dataset my-other-dataset --relax-columns name,tags
+```
 
 POSITIONAL ARGUMENTS
 
@@ -34,42 +38,42 @@ Table resource - The BigQuery table you want to update. The arguments in this gr
 
 To set the `project` attribute:
 
-  - provide the argument `table` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
 This must be specified.
 
-  - `  TABLE  `  
-    ID of the table or fully qualified identifier for the table.
-    
-    To set the `table` attribute:
-    
-      - provide the argument `table` on the command line.
-    
-    This positional argument must be specified if any of the other arguments in this group are specified.
+`TABLE`  
+ID of the table or fully qualified identifier for the table.
 
-  - `--dataset` = `  DATASET  `  
-    The id of the BigQuery dataset.
-    
-    To set the `dataset` attribute:
-    
-      - provide the argument `table` on the command line with a fully specified name;
-      - provide the argument `--dataset` on the command line.
+To set the `table` attribute:
+
+- provide the argument `table` on the command line.
+
+This positional argument must be specified if any of the other arguments in this group are specified.
+
+`--dataset` = `DATASET`  
+The id of the BigQuery dataset.
+
+To set the `dataset` attribute:
+
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--dataset` on the command line.
 
 FLAGS
 
-`--description` = `  DESCRIPTION  `
+`--description` = `DESCRIPTION`
 
 Description of the table.
 
-`--expiration` = `  EXPIRATION  `
+`--expiration` = `EXPIRATION`
 
 How long after creation should this table or view expire e.g. 1d, 2w etc.
 
-See $ [gcloud topic datetimes](https://docs.cloud.google.com/sdk/gcloud/reference/topic/datetimes) for information on duration formats
+See \$ [gcloud topic datetimes](https://docs.cloud.google.com/sdk/gcloud/reference/topic/datetimes) for information on duration formats
 
-`--relax-columns` =\[ `  FIELD_NAME  ` ,…\]
+`--relax-columns` =\[ `FIELD_NAME` ,…\]
 
 A comma-separated list of field names in the current schema that should have their mode changed from REQUIRED to NULLABLE.
 
@@ -79,25 +83,25 @@ Specify changes to the table schema.
 
 At most one of these can be specified:
 
-  - `--add-columns` =\[ `  FIELD_NAME  ` = `  FIELD_TYPE  ` ,…\]  
-    A comma-separated list of entries of the form FIELD\_NAME\[=FIELD\_TYPE\] specifying field names and types for the columns being added to the table. FIELD\_TYPE defaults to string if not present. Possible FIELD\_TYPES are `string` , `integer` , `float` , `boolean` , `record` , and `timestamp` .
-    
-    For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
+`--add-columns` =\[ `FIELD_NAME` = `FIELD_TYPE` ,…\]  
+A comma-separated list of entries of the form FIELD_NAME\[=FIELD_TYPE\] specifying field names and types for the columns being added to the table. FIELD_TYPE defaults to string if not present. Possible FIELD_TYPES are `string` , `integer` , `float` , `boolean` , `record` , and `timestamp` .
 
-  - `--add-columns-file` = `  PATH_TO_FILE  `  
-    The name of a JSON file containing a single object containing an array each element of which is an object with properties name, type, and, optionally a mode (one of: `NULLABLE` or `REPEATED` ), specifying the columns to be added to the table. If mode is omitted the default is 'NULLABLE'.
-    
-    For example: { 'schema': \[ { 'name': 'field1', 'type': 'string', 'mode': 'REQUIRED' }, { 'name': 'field2', 'type': 'integer', 'mode': 'REPEATED' }, \[ { 'name': 'fieldN', 'type': TYPE, \['mode': MODE\] } … \] \] }
-    
-    For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
-    
-    Use a full or relative path to a local file containing the value of add\_columns\_file.
+For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
+
+`--add-columns-file` = `PATH_TO_FILE`  
+The name of a JSON file containing a single object containing an array each element of which is an object with properties name, type, and, optionally a mode (one of: `NULLABLE` or `REPEATED` ), specifying the columns to be added to the table. If mode is omitted the default is 'NULLABLE'.
+
+For example: { 'schema': \[ { 'name': 'field1', 'type': 'string', 'mode': 'REQUIRED' }, { 'name': 'field2', 'type': 'integer', 'mode': 'REPEATED' }, \[ { 'name': 'fieldN', 'type': TYPE, \['mode': MODE\] } … \] \] }
+
+For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
+
+Use a full or relative path to a local file containing the value of add_columns_file.
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 

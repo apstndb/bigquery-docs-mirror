@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# SCHEMATA\_OPTIONS view
+# SCHEMATA_OPTIONS view
 
 The `INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view contains one row for each option that is set in each dataset in a project.
 
@@ -16,10 +16,10 @@ To query the `SCHEMATA_OPTIONS` view for dataset metadata, you need the `bigquer
 
 Each of the following predefined IAM roles includes the permissions that you need in order to get the `SCHEMATA_OPTIONS` view:
 
-  - `roles/bigquery.admin`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataViewer`
+- `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataViewer`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -29,48 +29,13 @@ When you query the `INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view, the query results
 
 The `INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view has the following schema:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">catalog_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the project that contains the dataset</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">schema_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset, also referred to as the <code dir="ltr" translate="no">datasetId</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">option_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the option. For a list of supported options, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list">schema options list</a> .
-<p>The <code dir="ltr" translate="no">storage_billing_model</code> option is only displayed for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is <code dir="ltr" translate="no">LOGICAL</code> .</p></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">option_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The data type of the option</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">option_value</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value of the option</td>
-</tr>
-</tbody>
-</table>
+| Column name    | Data type | Value                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|----------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `catalog_name` | `STRING`  | The name of the project that contains the dataset                                                                                                                                                                                                                                                                                                                                                                        |
+| `schema_name`  | `STRING`  | The name of the dataset, also referred to as the `datasetId`                                                                                                                                                                                                                                                                                                                                                             |
+| `option_name`  | `STRING`  | The name of the option. For a list of supported options, see the [schema options list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) . The `storage_billing_model` option is only displayed for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is `LOGICAL` . |
+| `option_type`  | `STRING`  | The data type of the option                                                                                                                                                                                                                                                                                                                                                                                              |
+| `option_value` | `STRING`  | The value of the option                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -78,23 +43,25 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from the US region. The following table explains the region scope for this view:
 
-| View Name                                                                                              | Resource scope | Region scope              |
-| ------------------------------------------------------------------------------------------------------ | -------------- | ------------------------- |
-| `[         PROJECT_ID        .]INFORMATION_SCHEMA.SCHEMATA_OPTIONS`                                    | Project level  | US region                 |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.SCHEMATA_OPTIONS`` | Project level  | `         REGION        ` |
+| View Name                                                                                  | Resource scope | Region scope |
+|--------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID `` .]INFORMATION_SCHEMA.SCHEMATA_OPTIONS`                                 | Project level  | US region    |
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.SCHEMATA_OPTIONS `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
-    -- Returns metadata for datasets in a region.
-    SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
+```
+-- Returns metadata for datasets in a region.
+SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
+```
 
 ## Examples
 
@@ -102,22 +69,26 @@ Replace the following:
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format:
 
-    `PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+```
+`PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+```
 
 for example, `` `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS `` .
 
-    SELECT
-      *
-    FROM
-      INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-    WHERE
-      option_name = 'default_table_expiration_days';
+```
+SELECT
+  *
+FROM
+  INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+WHERE
+  option_name = 'default_table_expiration_days';
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-``` 
+```
   +----------------+---------------+-------------------------------+-------------+---------------------+
   |  catalog_name  |  schema_name  |          option_name          | option_type |    option_value     |
   +----------------+---------------+-------------------------------+-------------+---------------------+
@@ -134,22 +105,26 @@ The result is similar to the following:
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format:
 
-    `PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+```
+`PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+```
 
 ; for example, `` `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS `` .
 
-    SELECT
-      *
-    FROM
-      INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-    WHERE
-      option_name = 'labels';
+```
+SELECT
+  *
+FROM
+  INFORMATION_SCHEMA.SCHEMATA_OPTIONS
+WHERE
+  option_name = 'labels';
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-``` 
+```
   +----------------+---------------+-------------+---------------------------------+------------------------+
   |  catalog_name  |  schema_name  | option_name |          option_type            |      option_value      |
   +----------------+---------------+-------------+---------------------------------+------------------------+

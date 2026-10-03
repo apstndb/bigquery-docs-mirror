@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.TRAINING\_INFO function
+# The ML.TRAINING_INFO function
 
 This document describes the `ML.TRAINING_INFO` function, which lets you see information about the training iterations of a model.
 
@@ -24,37 +24,37 @@ ML.TRAINING_INFO(
 
 `ML.TRAINING_INFO` takes the following arguments:
 
-  - `  PROJECT_ID  ` : your project ID.
-  - `  DATASET  ` : the BigQuery dataset that contains the model.
-  - `  MODEL_NAME  ` : the name of the model. For more information about which models are supported, see [Model creation user journeys](https://docs.cloud.google.com/bigquery/docs/e2e-journey#model_creation_phase) .
+- `PROJECT_ID` : your project ID.
+- `DATASET` : the BigQuery dataset that contains the model.
+- `MODEL_NAME` : the name of the model. For more information about which models are supported, see [Model creation user journeys](https://docs.cloud.google.com/bigquery/docs/e2e-journey#model_creation_phase) .
 
 ## Output
 
 `ML.TRAINING_INFO` returns the following columns:
 
-  - `training_run` : an `INT64` value that contains the training run identifier for the model. The value in this column is `0` for a newly created model. If you retrain the model using the `warm_start` argument of the `CREATE MODEL` statement, this value is incremented.
+- `training_run` : an `INT64` value that contains the training run identifier for the model. The value in this column is `0` for a newly created model. If you retrain the model using the `warm_start` argument of the `CREATE MODEL` statement, this value is incremented.
 
-  - `iteration` : an `INT64` value that contains the iteration number of the training run. The value for the first iteration is `0` . This value is incremented for each additional training run.
+- `iteration` : an `INT64` value that contains the iteration number of the training run. The value for the first iteration is `0` . This value is incremented for each additional training run.
 
-  - `loss` : a `FLOAT64` value that contains the loss metric calculated after an iteration on the training data:
-    
-      - For logistic regression models, this is [log loss](https://developers.google.com/machine-learning/glossary/#Log_Loss) .
-      - For linear regression models, this is [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) .
-      - For multiclass logistic regressions, this is [cross-entropy log loss](https://developers.google.com/machine-learning/glossary/#cross-entropy) .
-      - For explicit matrix factorization models this is mean squared error calculated over the seen input ratings.
-      - For implicit matrix factorization models, the loss is calculated using the following formula:
-    
-    $$ Loss = \\sum\_{u, i} c\_{ui}(p\_{ui} - x^T\_uy\_i)^2 + \\lambda(\\sum\_u||x\_u||^2 + \\sum\_i||y\_i||^2) $$
-    
-    For more information about what the variables mean, see [Feedback types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#feedback-info) .
+- `loss` : a `FLOAT64` value that contains the loss metric calculated after an iteration on the training data:
 
-  - `eval_loss` : a `FLOAT64` value that contains the loss metric calculated on the holdout data. For k-means models, `ML.TRAINING_INFO` doesn't return an `eval_loss` column. If the [`DATA_SPLIT_METHOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#data_split_method) argument is `NO_SPLIT` , then all entries in the `eval_loss` column are `NULL` .
+  - For logistic regression models, this is [log loss](https://developers.google.com/machine-learning/glossary/#Log_Loss) .
+  - For linear regression models, this is [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) .
+  - For multiclass logistic regressions, this is [cross-entropy log loss](https://developers.google.com/machine-learning/glossary/#cross-entropy) .
+  - For explicit matrix factorization models this is mean squared error calculated over the seen input ratings.
+  - For implicit matrix factorization models, the loss is calculated using the following formula:
 
-  - `learning_rate` : a `FLOAT64` value that contains the [learning rate](https://developers.google.com/machine-learning/glossary/#learning_rate) in this iteration.
+  \$\$ Loss = \sum\_{u, i} c\_{ui}(p\_{ui} - x^T_uy_i)^2 + \lambda(\sum_u\|\|x_u\|\|^2 + \sum_i\|\|y_i\|\|^2) \$\$
 
-  - `duration_ms` : an `INT64` value that contains how long the iteration took, in milliseconds.
+  For more information about what the variables mean, see [Feedback types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#feedback-info) .
 
-  - `cluster_info` : an `ARRAY<STRUCT>` value that contains the fields `centroid_id` , `cluster_radius` , and `cluster_size` . `ML.TRAINING_INFO` computes `cluster_radius` and `cluster_size` with standardized features. Only returned for k-means models.
+- `eval_loss` : a `FLOAT64` value that contains the loss metric calculated on the holdout data. For k-means models, `ML.TRAINING_INFO` doesn't return an `eval_loss` column. If the [`DATA_SPLIT_METHOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#data_split_method) argument is `NO_SPLIT` , then all entries in the `eval_loss` column are `NULL` .
+
+- `learning_rate` : a `FLOAT64` value that contains the [learning rate](https://developers.google.com/machine-learning/glossary/#learning_rate) in this iteration.
+
+- `duration_ms` : an `INT64` value that contains how long the iteration took, in milliseconds.
+
+- `cluster_info` : an `ARRAY<STRUCT>` value that contains the fields `centroid_id` , `cluster_radius` , and `cluster_size` . `ML.TRAINING_INFO` computes `cluster_radius` and `cluster_size` with standardized features. Only returned for k-means models.
 
 > **Note:** For linear and logistic regression models, the `learning_rate` value can increase over the course of training if the [`LEARN_RATE_STRATEGY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#learn_rate_strategy) argument isn't set to `CONSTANT` . This increase is due to the fact that when the `LEARN_RATE_STRATEGY` is set to `LINE_SEARCH` , four learning rates are generated from [`LS_INIT_LEARN_RATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#ls_init_learn_rate) . For example, if `LS_INIT_LEARN_RATE` is `0.1` , then the first iteration of training compares the respective loss from a set of four different models trained from setting the learn rate to `0.2` , `0.1` , `0.05` , and `0.025` . If `LEARN_RATE=0.2` generates the model with the smallest loss, then the next iteration generates four models with the learning rate set to `0.4` , `0.2` , `0.1` , `0.05` from the previous best fit model, and this process continues until the model converges.
 
@@ -66,28 +66,32 @@ You must have the `bigquery.models.create` and `bigquery.models.getData` [Identi
 
 `ML.TRAINING_INFO` is subject to the following limitations:
 
-  - `ML.TRAINING_INFO` doesn't support [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
-  - For [time series models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) , `ML.TRAINING_INFO` only returns three columns: `training_run` , `iteration` , and `duration_ms` . It doesn't expose the training information per iteration, or per time series if multiple time series are forecasted at once. The `duration_ms` is the total time cost for the entire process.
+- `ML.TRAINING_INFO` doesn't support [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
+- For [time series models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) , `ML.TRAINING_INFO` only returns three columns: `training_run` , `iteration` , and `duration_ms` . It doesn't expose the training information per iteration, or per time series if multiple time series are forecasted at once. The `duration_ms` is the total time cost for the entire process.
 
 ## Example
 
 The following example retrieves training information from the model `mydataset.linear_regression` in your default project:
 
-    SELECT
-      *
-    FROM
-      ML.TRAINING_INFO(MODEL `mydataset.linear_regression`)
+```
+SELECT
+  *
+FROM
+  ML.TRAINING_INFO(MODEL `mydataset.linear_regression`)
+```
 
 The result is similar to the following:
 
-    +--------------+-----------+----------+-----------+---------------+-------------+
-    | training_run | iteration | loss     | eval_loss | learning_rate | duration_ms |
-    +--------------+-----------+----------+-----------+---------------+-------------+
-    | 0            | 1         | 16637.8  | 269004.9  | 0.6           | 2720        |
-    | 0            | 0         | 145701.3 | 368150.2  | 0.3           | 6313        |
-    +--------------+-----------+----------+-----------+---------------+-------------+
+```
++--------------+-----------+----------+-----------+---------------+-------------+
+| training_run | iteration | loss     | eval_loss | learning_rate | duration_ms |
++--------------+-----------+----------+-----------+---------------+-------------+
+| 0            | 1         | 16637.8  | 269004.9  | 0.6           | 2720        |
+| 0            | 0         | 145701.3 | 368150.2  | 0.3           | 6313        |
++--------------+-----------+----------+-----------+---------------+-------------+
+```
 
 ## What's next
 
-  - For more information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
+- For more information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
+- For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

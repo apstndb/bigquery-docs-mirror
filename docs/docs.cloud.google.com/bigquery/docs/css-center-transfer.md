@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Load CSS Center data into BigQuery
 
 > **Preview**
-> 
+>
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for Comparison Shopping Service (CSS) Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
@@ -54,7 +54,7 @@ The `Products_` table contains nested and repeated fields. For information on ha
 
 You can use the following CSS Center sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Data Studio](https://www.google.com/analytics/data-studio/) .
 
-In each of the following queries, replace dataset with your dataset name. Replace css\_id with your CSS domain ID.
+In each of the following queries, replace ` dataset ` with your dataset name. Replace ` css_id ` with your CSS domain ID.
 
 ### Products and product issues sample queries
 
@@ -64,57 +64,63 @@ The following queries analyze data from the products and product issues report.
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-    SELECT
-      _PARTITIONDATE AS date,
-      COUNT(*) AS num_products,
-      COUNTIF(ARRAY_LENGTH(item_issues) > 0) AS num_products_with_issues,
-      SUM(ARRAY_LENGTH(item_issues)) AS num_issues
-    FROM
-      dataset.Products_css_id
-    WHERE
-      _PARTITIONDATE >= 'YYYY-MM-DD'
-    GROUP BY
-      date
-    ORDER BY
-      date DESC;
+```
+SELECT
+  _PARTITIONDATE AS date,
+  COUNT(*) AS num_products,
+  COUNTIF(ARRAY_LENGTH(item_issues) > 0) AS num_products_with_issues,
+  SUM(ARRAY_LENGTH(item_issues)) AS num_issues
+FROM
+  dataset.Products_css_id
+WHERE
+  _PARTITIONDATE >= 'YYYY-MM-DD'
+GROUP BY
+  date
+ORDER BY
+  date DESC;
+```
 
 #### Disapproved products
 
 The following SQL sample query provides the number of products that are not approved for display, separated by region and reporting context. Disapproval can result from the reporting context being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-    SELECT
-      _PARTITIONDATE AS date,
-      statuses.region as disapproved_region,
-      reporting_context_status.reporting_context as reporting_context,
-      COUNT(*) AS num_products
-    FROM
-      dataset.Products_css_id,
-      UNNEST(reporting_context_statuses) AS reporting_context_status,
-      UNNEST(reporting_context_status.region_and_status) AS statuses
-    WHERE
-      _PARTITIONDATE >= 'YYYY-MM-DD' AND statuses.status = 'DISAPPROVED'
-    GROUP BY
-      date, disapproved_region, reporting_context
-    ORDER BY
-      date DESC;
+```
+SELECT
+  _PARTITIONDATE AS date,
+  statuses.region as disapproved_region,
+  reporting_context_status.reporting_context as reporting_context,
+  COUNT(*) AS num_products
+FROM
+  dataset.Products_css_id,
+  UNNEST(reporting_context_statuses) AS reporting_context_status,
+  UNNEST(reporting_context_status.region_and_status) AS statuses
+WHERE
+  _PARTITIONDATE >= 'YYYY-MM-DD' AND statuses.status = 'DISAPPROVED'
+GROUP BY
+  date, disapproved_region, reporting_context
+ORDER BY
+  date DESC;
+```
 
 #### Products with disapproved issues
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by region.
 
-    SELECT
-      _PARTITIONDATE AS date,
-      disapproved_region,
-      COUNT(DISTINCT CONCAT(CAST(css_id AS STRING), ':', product_id))
-          AS num_distinct_products
-    FROM
-      dataset.Products_css_id,
-      UNNEST(item_issues) AS issue,
-      UNNEST(issue.severity.severity_per_reporting_context) as severity_per_rc,
-      UNNEST(severity_per_rc.disapproved_regions) as disapproved_region
-    WHERE
-      _PARTITIONDATE >= 'YYYY-MM-DD'
-    GROUP BY
-      date, disapproved_region
-    ORDER BY
-      date DESC;
+```
+SELECT
+  _PARTITIONDATE AS date,
+  disapproved_region,
+  COUNT(DISTINCT CONCAT(CAST(css_id AS STRING), ':', product_id))
+      AS num_distinct_products
+FROM
+  dataset.Products_css_id,
+  UNNEST(item_issues) AS issue,
+  UNNEST(issue.severity.severity_per_reporting_context) as severity_per_rc,
+  UNNEST(severity_per_rc.disapproved_regions) as disapproved_region
+WHERE
+  _PARTITIONDATE >= 'YYYY-MM-DD'
+GROUP BY
+  date, disapproved_region
+ORDER BY
+  date DESC;
+```

@@ -69,14 +69,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -84,7 +84,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'DNN_CLASSIFIER' | 'DNN_REGRESSOR' }
+```
+MODEL_TYPE = { 'DNN_CLASSIFIER' | 'DNN_REGRESSOR' }
+```
 
 **Description**
 
@@ -94,7 +96,7 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-`LEARN_RATE = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`LEARN_RATE = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -106,8 +108,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - Use the `HPARAM_RANGE` keyword and specify two `FLOAT64` values that define the range to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_RANGE(0.001, 0.005)` .
-  - Use the `HPARAM_CANDIDATES` keyword and specify an array of `FLOAT64` values to provide discrete values to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1])` .
+- Use the `HPARAM_RANGE` keyword and specify two `FLOAT64` values that define the range to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_RANGE(0.001, 0.005)` .
+- Use the `HPARAM_CANDIDATES` keyword and specify an array of `FLOAT64` values to provide discrete values to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]` , the default range is `[0, 1.0]` , and the scale type is `LINEAR` .
 
@@ -115,7 +117,7 @@ When running hyperparameter tuning, the valid range is `[0, 1.0]` , the default 
 
 **Syntax**
 
-`OPTIMIZER = { { 'ADAGRAD' | 'ADAM' | 'FTRL' | 'RMSPROP' | 'SGD' } | HPARAM_CANDIDATES( [candidates] ) }`
+`OPTIMIZER = { { 'ADAGRAD' | 'ADAM' | 'FTRL' | 'RMSPROP' | 'SGD' } | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -125,11 +127,11 @@ The optimizer for training the model.
 
 This option accepts the following values:
 
-  - `ADAM` — [Implements the Adam algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdamOptimizer) . This is the default.
-  - `ADAGRAD` — [Implements the Adagrad algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdagradOptimizer)
-  - `FTRL` — [Implements the FTRL algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
-  - `RMSPROP` — [Implements the RMSProp algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/RMSPropOptimizer)
-  - `SGD` — [Implements the gradient descent algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/GradientDescentOptimizer)
+- `ADAM` — [Implements the Adam algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdamOptimizer) . This is the default.
+- `ADAGRAD` — [Implements the Adagrad algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdagradOptimizer)
+- `FTRL` — [Implements the FTRL algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
+- `RMSPROP` — [Implements the RMSProp algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/RMSPropOptimizer)
+- `SGD` — [Implements the gradient descent algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/GradientDescentOptimizer)
 
 If you are running hyperparameter training, you can provide more than one value for this option by using `HPARAM_CANDIDATES` and specifying an array. For example, `OPTIMIZER = HPARAM_CANDIDATES(['ADAM', 'FTRL', 'SGD'])` .
 
@@ -137,15 +139,15 @@ If you are running hyperparameter training, you can provide more than one value 
 
 **Syntax**
 
-`L1_REG = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`L1_REG = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
 The L1 regularization strength of the `OPTIMIZER` . You can only use this option when `OPTIMIZER` is set to one of the following values:
 
-  - `ADAGRAD` — [Implements the ProximalAdagradOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalAdagradOptimizer)
-  - `FTRL` — [Implements the FtrlOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
-  - `SGD` — [Implements the ProximalGradientDescentOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalGradientDescentOptimizer)
+- `ADAGRAD` — [Implements the ProximalAdagradOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalAdagradOptimizer)
+- `FTRL` — [Implements the FtrlOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
+- `SGD` — [Implements the ProximalGradientDescentOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalGradientDescentOptimizer)
 
 **Arguments**
 
@@ -153,8 +155,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you can use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L1_REG = HPARAM_RANGE(0, 5.0)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L1_REG = HPARAM_RANGE(0, 5.0)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `(0, 10.0]` , and the scale type is `LOG` .
 
@@ -162,15 +164,15 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`L2_REG = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`L2_REG = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
 The L2 regularization strength of the `OPTIMIZER` . You can only use this option when `OPTIMIZER` is set to one of the following values:
 
-  - `ADAGRAD` — [Implements the ProximalAdagradOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalAdagradOptimizer)
-  - `FTRL` — [Implements the FtrlOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
-  - `SGD` — [Implements the ProximalGradientDescentOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalGradientDescentOptimizer)
+- `ADAGRAD` — [Implements the ProximalAdagradOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalAdagradOptimizer)
+- `FTRL` — [Implements the FtrlOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
+- `SGD` — [Implements the ProximalGradientDescentOptimizer algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/ProximalGradientDescentOptimizer)
 
 **Arguments**
 
@@ -178,8 +180,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you can use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L2_REG = HPARAM_RANGE(1.5, 5.0)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L2_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `L2_REG = HPARAM_RANGE(1.5, 5.0)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L2_REG = HPARAM_CANDIDATES([0, 1.0, 3.0, 5.0])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `(0, 10.0]` , and the scale type is `LOG` .
 
@@ -187,7 +189,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`ACTIVATION_FN = { { 'RELU' | 'RELU6' | 'CRELU' | 'ELU' | 'SELU' | 'SIGMOID' | 'TANH' } | HPARAM_CANDIDATES( [candidates] ) }`
+`ACTIVATION_FN = { { 'RELU' | 'RELU6' | 'CRELU' | 'ELU' | 'SELU' | 'SIGMOID' | 'TANH' } | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -197,13 +199,13 @@ The activation function of the neural network.
 
 This option accepts the following values:
 
-  - `RELU` — [Rectified linear](https://www.tensorflow.org/api_docs/python/tf/nn/relu) . This is the default.
-  - `RELU6` — [Rectified linear 6](https://www.tensorflow.org/api_docs/python/tf/nn/relu6)
-  - `CRELU` — [Concatenated ReLU](https://www.tensorflow.org/api_docs/python/tf/nn/crelu)
-  - `ELU` — [Exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/elu)
-  - `SELU` — [Scaled exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/selu)
-  - `SIGMOID` — [Sigmoid activation](https://www.tensorflow.org/api_docs/python/tf/math/sigmoid)
-  - `TANH` — [Tanh activation](https://www.tensorflow.org/api_docs/python/tf/math/tanh)
+- `RELU` — [Rectified linear](https://www.tensorflow.org/api_docs/python/tf/nn/relu) . This is the default.
+- `RELU6` — [Rectified linear 6](https://www.tensorflow.org/api_docs/python/tf/nn/relu6)
+- `CRELU` — [Concatenated ReLU](https://www.tensorflow.org/api_docs/python/tf/nn/crelu)
+- `ELU` — [Exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/elu)
+- `SELU` — [Scaled exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/selu)
+- `SIGMOID` — [Sigmoid activation](https://www.tensorflow.org/api_docs/python/tf/math/sigmoid)
+- `TANH` — [Tanh activation](https://www.tensorflow.org/api_docs/python/tf/math/tanh)
 
 If you are running hyperparameter training, then you can provide more than one value for this option by using `HPARAM_CANDIDATES` and specifying an array. For example, `ACTIVATION_FN = HPARAM_CANDIDATES(['RELU', 'RELU6', 'TANH'])` .
 
@@ -211,7 +213,7 @@ If you are running hyperparameter training, then you can provide more than one v
 
 **Syntax**
 
-`BATCH_SIZE = { int64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`BATCH_SIZE = { `` int64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -223,8 +225,8 @@ If you aren't running hyperparameter tuning, specify an `INT64` value that is po
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_RANGE(16, 64)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_CANDIDATES([32, 64, 256, 1024])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_RANGE(16, 64)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_CANDIDATES([32, 64, 256, 1024])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `[16, 1024]` , and the scale type is `LOG` .
 
@@ -232,7 +234,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`DROPOUT = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`DROPOUT = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -244,8 +246,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you must use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `DROPOUT = HPARAM_RANGE(0, 0.6)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `DROPOUT = HPARAM_CANDIDATES([0.1, 0.3, 0.6])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `DROPOUT = HPARAM_RANGE(0, 0.6)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `DROPOUT = HPARAM_CANDIDATES([0.1, 0.3, 0.6])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0)` , the default range is `[0, 0.8]` , and the scale type is `LINEAR` .
 
@@ -253,7 +255,7 @@ When running hyperparameter tuning, the valid range is `[0, 1.0)` , the default 
 
 **Syntax**
 
-`HIDDEN_UNITS = { int_array | HPARAM_CANDIDATES( [candidates] ) }`
+`HIDDEN_UNITS = { `` int_array `` | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -269,13 +271,17 @@ The number of layers in `hidden_units` must be odd, and we recommend that the se
 
 The following example defines a model architecture that uses three hidden layers with 256, 128, and 64 nodes, respectively.
 
-    HIDDEN_UNITS = [256, 128, 64]
+```
+HIDDEN_UNITS = [256, 128, 64]
+```
 
 If you are running hyperparameter tuning, then you must use the `HPARAM_CANDIDATES` keyword and specify an array in the form `ARRAY<STRUCT<ARRAY<INT64>>>` to provide discrete values to use for the hyperparameter. Each struct value in the outer array represents a candidate neural architecture. The array of `INT64` values in each struct represents a hidden layer.
 
 The following example represents a neural architecture search with three candidates, which include a single layer of 8 neurons, two layers of neurons with 8 and 16 in sequence, and three layers of neurons with 16, 32 and 64 in sequence, respectively.
 
-    hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
+```
+hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
+```
 
 The valid range for the `INT64` arrays is `[1, ∞)` .
 
@@ -283,7 +289,9 @@ The valid range for the `INT64` arrays is `[1, ∞)` .
 
 **Syntax**
 
-    TF_VERSION = { '1.15' | '2.17.0' }
+```
+TF_VERSION = { '1.15' | '2.17.0' }
+```
 
 **Description**
 
@@ -295,7 +303,9 @@ Set `TF_VERSION` to `2.17.0` to use TensorFlow2 with the Keras API.
 
 **Syntax**
 
-    AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
+```
+AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -307,7 +317,9 @@ By default, the training data used to create the model is unweighted. If the lab
 
 To balance every class, set this option to `TRUE` . Balance is accomplished using the following formula:
 
-    total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
+```
+total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
+```
 
 **Arguments**
 
@@ -317,7 +329,7 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-` CLASS_WEIGHTS = struct_array  `
+`CLASS_WEIGHTS = `` struct_array`
 
 **Description**
 
@@ -329,13 +341,17 @@ An `ARRAY` of `STRUCT` values. Each `STRUCT` contains a `STRING` value that spec
 
 A `CLASS_WEIGHTS` value might look like the following example:
 
-    CLASS_WEIGHTS = [STRUCT('example_label', .2)]
+```
+CLASS_WEIGHTS = [STRUCT('example_label', .2)]
+```
 
 ### `EARLY_STOP`
 
 **Syntax**
 
-    EARLY_STOP = { TRUE | FALSE }
+```
+EARLY_STOP = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -349,7 +365,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-` MIN_REL_PROGRESS = float64_value  `
+`MIN_REL_PROGRESS = `` float64_value`
 
 **Description**
 
@@ -363,7 +379,7 @@ A `FLOAT64` value. The default value is `0.01` .
 
 **Syntax**
 
-` INPUT_LABEL_COLS = string_array  `
+`INPUT_LABEL_COLS = `` string_array`
 
 **Description**
 
@@ -377,7 +393,7 @@ A one-element `ARRAY` of string values. Defaults to `label` .
 
 **Syntax**
 
-` MAX_ITERATIONS = int64_value  `
+`MAX_ITERATIONS = `` int64_value`
 
 **Description**
 
@@ -391,7 +407,9 @@ An `INT64` value. The default value is `20` .
 
 **Syntax**
 
-    WARM_START = { TRUE | FALSE }
+```
+WARM_START = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -409,7 +427,9 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
+DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
+```
 
 **Description**
 
@@ -419,73 +439,73 @@ The percentage sizes of the data sets produced by the various arguments for this
 
 You can see the model's data split information in the following ways:
 
-  - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+- The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
+- Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`DataSplitResult` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
 This option accepts the following values:
 
-  - `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
-    
-      - If there are fewer than 500 rows in the input data, then all rows are used as training data.
-    
-      - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
-        
-          - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
-          - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
-    
-      - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
-        
-          - 10% of the data is used as evaluation data
-          - 10% is used as test data
-          - 80% is used as training data
-        
-        For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
+- `AUTO_SPLIT` : This is the default value. This option splits the data as follows:
 
-  - `RANDOM` : Data is randomized before being split into sets. You can use this option with the [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) and [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `AUTO_SPLIT` option.
-    
-    A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
-    
-    > **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+  - If there are fewer than 500 rows in the input data, then all rows are used as training data.
 
-  - `CUSTOM` : Split data using the value in a specified column:
-    
-      - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
-      - If you are running hyperparameter tuning, then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
-    
-    Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_col) to identify the column that contains the data split information.
+  - If you aren't running hyperparameter tuning, then data is randomized and split as follows:
 
-  - `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
-    
-      - `NUMERIC`
-      - `BIGNUMERIC`
-      - `STRING`
-      - `TIMESTAMP`
-    
-    The data is sorted smallest to largest based on the specified column.
-    
-    When you aren't running hyperparameter tuning, the last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
-    
-    When you are running hyperparameter tuning, the last m rows are used as test data, where m is the value specified for `DATA_SPLIT_TEST_FRACTION` . The second last n rows are used as evaluation data, where n is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
-    
-    All rows with split values smaller than the threshold, including `NULL` s, are used as training data. The remaining rows are used as evaluation data.
-    
-    Use the `DATA_SPLIT_COL` option to identify the column that contains the data split information.
+    - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
+    - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
 
-  - `NO_SPLIT` : No data split; all input data is used as training data.
+  - If you are running hyperparameter tuning and there are more than 500 rows in the input data, then the data is randomized and split as follows:
+
+    - 10% of the data is used as evaluation data
+    - 10% is used as test data
+    - 80% is used as training data
+
+    For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
+
+- `RANDOM` : Data is randomized before being split into sets. You can use this option with the [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) and [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `AUTO_SPLIT` option.
+
+  A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
+
+  > **Note:** A random split is based on the [FARM_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+
+- `CUSTOM` : Split data using the value in a specified column:
+
+  - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
+  - If you are running hyperparameter tuning, then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
+
+  Use the [`DATA_SPLIT_COL` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_col) to identify the column that contains the data split information.
+
+- `SEQ` : Split data sequentially by using the value in a specified column of one of the following types:
+
+  - `NUMERIC`
+  - `BIGNUMERIC`
+  - `STRING`
+  - `TIMESTAMP`
+
+  The data is sorted smallest to largest based on the specified column.
+
+  When you aren't running hyperparameter tuning, the last ` n ` rows are used as evaluation data, where ` n ` is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
+
+  When you are running hyperparameter tuning, the last ` m ` rows are used as test data, where ` m ` is the value specified for `DATA_SPLIT_TEST_FRACTION` . The second last ` n ` rows are used as evaluation data, where ` n ` is the value specified for `DATA_SPLIT_EVAL_FRACTION` . The remaining rows are used as training data.
+
+  All rows with split values smaller than the threshold, including `NULL` s, are used as training data. The remaining rows are used as evaluation data.
+
+  Use the `DATA_SPLIT_COL` option to identify the column that contains the data split information.
+
+- `NO_SPLIT` : No data split; all input data is used as training data.
 
 ### `DATA_SPLIT_EVAL_FRACTION`
 
 **Syntax**
 
-` DATA_SPLIT_EVAL_FRACTION = float64_value  `
+`DATA_SPLIT_EVAL_FRACTION = `` float64_value`
 
 **Description**
 
 The fraction of the data to use as evaluation data. Use when you are specifying `RANDOM` or `SEQ` as the value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_method) .
 
-If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) . In this case, the training dataset is ` 1 - eval_fraction - test_fraction  ` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
+If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) . In this case, the training dataset is `1 - `` eval_fraction `` - `` test_fraction` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -495,13 +515,13 @@ A `FLOAT64` value. The default is `0.2` . The service maintains the accuracy of 
 
 **Syntax**
 
-` DATA_SPLIT_TEST_FRACTION = float64_value  `
+`DATA_SPLIT_TEST_FRACTION = `` float64_value`
 
 **Description**
 
 The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `RANDOM` or `SEQ` as value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_method) .
 
-If you specify a value for this option, you must also specify a value for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . In this case, the training dataset is ` 1 - eval_fraction - test_fraction  ` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
+If you specify a value for this option, you must also specify a value for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . In this case, the training dataset is `1 - `` eval_fraction `` - `` test_fraction` . For example, if you specify `20.00` for `DATA_SPLIT_EVAL_FRACTION` and `8.0` for `DATA_SPLIT_TEST_FRACTION` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -511,16 +531,16 @@ A `FLOAT64` value. The default is `0` . The service maintains the accuracy of th
 
 **Syntax**
 
-` DATA_SPLIT_COL = string_value  `
+`DATA_SPLIT_COL = `` string_value`
 
 **Description**
 
 The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `CUSTOM` or `SEQ` as the value for the [`DATA_SPLIT_METHOD` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_method) :
 
-  - If you aren't running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . The remaining rows are used as training data.
-  - If you aren't running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last m rows are used as test data, where m is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) . The second last n rows are used as evaluation data, where n is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . The remaining rows are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
+- If you aren't running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . The remaining rows are used as training data.
+- If you aren't running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `BOOL` . Rows with a value of `TRUE` or `NULL` are used as evaluation data, rows with a value of `FALSE` are used as training data.
+- If you are running hyperparameter tuning and you are specifying `SEQ` as the value for `DATA_SPLIT_METHOD` , then the data is first sorted smallest to largest based on the specified column. The last ` m ` rows are used as test data, where ` m ` is the value specified for [`DATA_SPLIT_TEST_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_test_fraction) . The second last ` n ` rows are used as evaluation data, where ` n ` is the value specified for [`DATA_SPLIT_EVAL_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_eval_fraction) . The remaining rows are used as training data.
+- If you are running hyperparameter tuning and you are specifying `CUSTOM` as the value for `DATA_SPLIT_METHOD` , then you must provide the name of a column of type `STRING` . Rows with a value of `TRAIN` are used as training data, rows with a value of `EVAL` are used as evaluation data, and rows with a value of `TEST` are used as test data.
 
 The column you specify for `DATA_SPLIT_COL` can't be used as a feature or label, and is excluded from features automatically.
 
@@ -532,7 +552,7 @@ A `STRING` value.
 
 **Syntax**
 
-` NUM_TRIALS = int64_value  `
+`NUM_TRIALS = `` int64_value`
 
 **Description**
 
@@ -542,13 +562,13 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( `` number_of_hyperparameters `` * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
 **Syntax**
 
-` MAX_PARALLEL_TRIALS = int64_value  `
+`MAX_PARALLEL_TRIALS = `` int64_value`
 
 **Description**
 
@@ -564,7 +584,9 @@ An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
 **Syntax**
 
-    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
+HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
 
 **Description**
 
@@ -574,11 +596,11 @@ The algorithm used to tune the hyperparameters. If you specify a value for this 
 
 Specify one of the following values:
 
-  - `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+- `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
-  - `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
+- `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
-  - `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
+- `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
 
 ### `HPARAM_TUNING_OBJECTIVES`
 
@@ -586,11 +608,15 @@ Specify one of the following values:
 
 For `DNN_CLASSIFIER` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
+```
 
 For `DNN_REGRESSOR` models:
 
-    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
+```
 
 **Description**
 
@@ -622,7 +648,7 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the `MODEL_RE
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -632,19 +658,23 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ### Internal parameter defaults
 
 BigQuery ML uses the following default values when building models:
 
-    loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
-    
-    batch_norm = False
+```
+loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
+
+batch_norm = False
+```
 
 ### `query_statement`
 
-The ` AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
+The `AS `` query_statement` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
 
 All columns referenced by the `query_statement` are used as input [features](https://developers.google.com/machine-learning/glossary#feature) to the model except for the columns included in [`INPUT_LABEL_COLS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#input_label_cols) and [`DATA_SPLIT_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models#data_split_col) .
 
@@ -664,43 +694,47 @@ For information about supported locations, see [Locations for non-remote models]
 
 `CREATE MODEL` statements must comply with the following rules:
 
-  - For `DNN_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
+- For `DNN_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
 
 ## Example
 
 The following example trains a DNN classifier model against `'mytable'` with `'mylabel'` as the label column.
 
-    CREATE MODEL `project_id.mydataset.mymodel`
-    OPTIONS(MODEL_TYPE='DNN_CLASSIFIER',
-            ACTIVATION_FN = 'RELU',
-            BATCH_SIZE = 16,
-            DROPOUT = 0.1,
-            EARLY_STOP = FALSE,
-            HIDDEN_UNITS = [128, 128, 128],
-            INPUT_LABEL_COLS = ['mylabel'],
-            LEARN_RATE=0.001,
-            MAX_ITERATIONS = 50,
-            OPTIMIZER = 'ADAGRAD')
-    AS SELECT * FROM `project_id.mydataset.mytable`;
+```
+CREATE MODEL `project_id.mydataset.mymodel`
+OPTIONS(MODEL_TYPE='DNN_CLASSIFIER',
+        ACTIVATION_FN = 'RELU',
+        BATCH_SIZE = 16,
+        DROPOUT = 0.1,
+        EARLY_STOP = FALSE,
+        HIDDEN_UNITS = [128, 128, 128],
+        INPUT_LABEL_COLS = ['mylabel'],
+        LEARN_RATE=0.001,
+        MAX_ITERATIONS = 50,
+        OPTIMIZER = 'ADAGRAD')
+AS SELECT * FROM `project_id.mydataset.mytable`;
+```
 
 ### Train a DNN classifier model with hyperparameter tuning
 
 The following example creates and trains a DNN classifier model. It uses hyperparameter tuning to improve model performance.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='DNN_CLASSIFIER',
-        num_trials=10,
-        max_parallel_trials=2,
-        HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
-    SELECT
-      column1,
-      column2,
-      column3,
-      label
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='DNN_CLASSIFIER',
+    num_trials=10,
+    max_parallel_trials=2,
+    HPARAM_TUNING_OBJECTIVES=['ROC_AUC'] ) AS
+SELECT
+  column1,
+  column2,
+  column3,
+  label
+FROM
+  `mydataset.mytable`
+```
 
 ## Supported regions
 

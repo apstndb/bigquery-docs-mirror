@@ -20,7 +20,7 @@ An MCP service endpoint is the network address and communication interface (usua
 
 The BigQuery Data Transfer API MCP server has the following global MCP endpoint:
 
-  - https://bigquerydatatransfer.googleapis.com/mcp
+- https://bigquerydatatransfer.googleapis.com/mcp
 
 ## MCP Tools
 
@@ -30,158 +30,131 @@ An [MCP tool](https://modelcontextprotocol.io/legacy/concepts/tools) is a functi
 
 The bigquerydatatransfer.googleapis.com MCP server has the following tools:
 
-MCP Tools
-
-`  list_data_sources  `
-
-List all the data sources that the project has access to.
-
-The following example shows a MCP call to list all data sources in the project `myproject` in the location `myregion` .
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`list_data_sources(project_id="myproject", location="myregion")`
-
-`  get_data_source  `
-
-Get details about a data source.
-
-`  create_transfer_config  `
-
-Create a transfer configuration.
-
-To create a transfer configuration, do the following:
-
-  - Provide the `required_fields` . Parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.
-  - Specify how often you want your transfer to run by specifying `schedule_options`
-  - Provide the `optional_fields` .
-  - If you want to use a service account to create this transfer, provide a `service_account_name` .
-
-If the request fails due to missing valid credentials, do the following: \* Find your `client_id` and `data_source_scopes` from your data source definition. \* Authorize your data source by navigating to the following link:
-
-    https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=CLIENT_ID&scope=DATA_SOURCE_1%20DATA_SOURCE_2
-
-  - Provide the `version_info` .
-
-`  update_transfer_config  `
-
-Update a transfer configuration.
-
-  - When updating params, parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.
-
-The following example shows a MCP call to update a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
-
-`update_transfer_config(data_source=GOOGLE_ADS, project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", display_name="Updated Name")`
-
-`  delete_transfer_config  `
-
-Delete a transfer configuration.
-
-The following example shows a MCP call to delete a transfer configuration by its resource name.
-
-`delete_transfer_config(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig")`
-
-`  get_transfer_config  `
-
-Get details about a transfer config.
-
-The following example shows a MCP call to get details about a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`get_transfer_config(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")`
-
-`  list_transfer_configs  `
-
-List all transfer configurations for a project.
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`list_transfer_configs(project_id="myproject", location="myregion")`
-
-`  start_manual_transfer_runs  `
-
-Start manual transfer runs for a transfer config.
-
-The following example shows a MCP call to start manual transfer runs for a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
-
-If the transfer configuration was a manual transfer without a schedule, then request for a single run date. Otherwise ask for either a run date or run date range.
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`start_manual_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", run_date="2024-01-01", run_date_range=("2024-01-01", "2024-01-02"))`
-
-`  list_transfer_runs  `
-
-List all the transfer runs for a transfer config.
-
-The following example shows a MCP call to list all transfer runs for a transfer configuration named `transfer_config_id` in the project `myproject` in the location `myregion` .
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`list_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")`
-
-`  get_transfer_run  `
-
-Get details about a transfer run.
-
-The following example shows a MCP call to get details about a transfer run named `transfer_run_id` in the project `myproject` in the location `myregion` .
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-`get_transfer_run(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", transfer_run_id="mytransferrun")`
-
-`  delete_transfer_run  `
-
-Delete a transfer run.
-
-The following example shows an MCP call to delete a transfer run by its resource name.
-
-`delete_transfer_run(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")`
-
-`  list_transfer_logs  `
-
-List transfer logs for a transfer run by its resource name.
-
-The following example shows a MCP call to list transfer logs for a transfer run.
-
-`list_transfer_logs(parent="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")`
-
-`  check_valid_creds  `
-
-Check for valid credentials for a data source.
-
-The following example shows a MCP call to check for valid credentials for a data source with the ID `data_source_id` in the project `myproject` in the location `myregion` .
-
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `US` multi-region.
-
-If `has_valid_creds` is true, then the credentials are valid. Otherwise, the credentials are not valid.
-
-`check_valid_creds(project_id="myproject", location="myregion", data_source_id="mydatasource")`
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>MCP Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_data_sources"><code>list_data_sources</code></a></td>
+<td><p>List all the data sources that the project has access to.</p>
+<p>The following example shows a MCP call to list all data sources in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>list_data_sources(project_id="myproject", location="myregion")</code></p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_data_source"><code>get_data_source</code></a></td>
+<td>Get details about a data source.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config"><code>create_transfer_config</code></a></td>
+<td><p>Create a transfer configuration.</p>
+<p>To create a transfer configuration, do the following:</p>
+<ul>
+<li>Provide the <code>required_fields</code> . Parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.</li>
+<li>Specify how often you want your transfer to run by specifying <code>schedule_options</code></li>
+<li>Provide the <code>optional_fields</code> .</li>
+<li>If you want to use a service account to create this transfer, provide a <code>service_account_name</code> .</li>
+</ul>
+<p>If the request fails due to missing valid credentials, do the following: * Find your <code>client_id</code> and <code>data_source_scopes</code> from your data source definition. * Authorize your data source by navigating to the following link:</p>
+<pre data-fenced=""><code>https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&amp;response_type=version_info&amp;client_id=CLIENT_ID&amp;scope=DATA_SOURCE_1%20DATA_SOURCE_2</code></pre>
+<ul>
+<li>Provide the <code>version_info</code> .</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/update_transfer_config"><code>update_transfer_config</code></a></td>
+<td><p>Update a transfer configuration.</p>
+<ul>
+<li>When updating params, parameters allowed for Secret Manager must be set with Secret Manager. Plaintext is strictly disallowed in requests.</li>
+</ul>
+<p>The following example shows a MCP call to update a transfer configuration named <code>transfer_config_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p><code>update_transfer_config(data_source=GOOGLE_ADS, project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", display_name="Updated Name")</code></p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_config"><code>delete_transfer_config</code></a></td>
+<td><p>Delete a transfer configuration.</p>
+<p>The following example shows a MCP call to delete a transfer configuration by its resource name.</p>
+<p><code>delete_transfer_config(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig")</code></p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_transfer_config"><code>get_transfer_config</code></a></td>
+<td><p>Get details about a transfer config.</p>
+<p>The following example shows a MCP call to get details about a transfer configuration named <code>transfer_config_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>get_transfer_config(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")</code></p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_configs"><code>list_transfer_configs</code></a></td>
+<td><p>List all transfer configurations for a project.</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>list_transfer_configs(project_id="myproject", location="myregion")</code></p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/start_manual_transfer_runs"><code>start_manual_transfer_runs</code></a></td>
+<td><p>Start manual transfer runs for a transfer config.</p>
+<p>The following example shows a MCP call to start manual transfer runs for a transfer configuration named <code>transfer_config_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the transfer configuration was a manual transfer without a schedule, then request for a single run date. Otherwise ask for either a run date or run date range.</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>start_manual_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", run_date="2024-01-01", run_date_range=("2024-01-01", "2024-01-02"))</code></p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_runs"><code>list_transfer_runs</code></a></td>
+<td><p>List all the transfer runs for a transfer config.</p>
+<p>The following example shows a MCP call to list all transfer runs for a transfer configuration named <code>transfer_config_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>list_transfer_runs(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig")</code></p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_transfer_run"><code>get_transfer_run</code></a></td>
+<td><p>Get details about a transfer run.</p>
+<p>The following example shows a MCP call to get details about a transfer run named <code>transfer_run_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p><code>get_transfer_run(project_id="myproject", location="myregion", transfer_config_id="mytransferconfig", transfer_run_id="mytransferrun")</code></p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_run"><code>delete_transfer_run</code></a></td>
+<td><p>Delete a transfer run.</p>
+<p>The following example shows an MCP call to delete a transfer run by its resource name.</p>
+<p><code>delete_transfer_run(name="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")</code></p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_logs"><code>list_transfer_logs</code></a></td>
+<td><p>List transfer logs for a transfer run by its resource name.</p>
+<p>The following example shows a MCP call to list transfer logs for a transfer run.</p>
+<p><code>list_transfer_logs(parent="projects/myproject/locations/myregion/transferConfigs/mytransferconfig/runs/mytransferrun")</code></p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/check_valid_creds"><code>check_valid_creds</code></a></td>
+<td><p>Check for valid credentials for a data source.</p>
+<p>The following example shows a MCP call to check for valid credentials for a data source with the ID <code>data_source_id</code> in the project <code>myproject</code> in the location <code>myregion</code> .</p>
+<p>If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the <a href="https://docs.cloud.google.com/bigquery/docs/locations#default_location">default location</a> is used. If the default location isn't set, then the job runs in the <code>US</code> multi-region.</p>
+<p>If <code>has_valid_creds</code> is true, then the credentials are valid. Otherwise, the credentials are not valid.</p>
+<p><code>check_valid_creds(project_id="myproject", location="myregion", data_source_id="mydatasource")</code></p></td>
+</tr>
+</tbody>
+</table>
 
 ### Get MCP tool specifications
 
 To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-    &quot;method&quot;: &quot;tools/list&quot;,
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+**Curl Request**
+
+```
+curl --location 'https://bigquerydatatransfer.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+    "method": "tools/list",
+    "jsonrpc": "2.0",
+    "id": 1
+}'
+```

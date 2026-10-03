@@ -18,8 +18,8 @@ As a BigQuery administrator, you can enforce row- and column-level access contro
 
 Depending on where your data is stored, we recommend the following alternatives for accessing Iceberg tables whose metadata aren't managed by Google Cloud:
 
-  - **Cloud Storage or Amazon Simple Storage Service (Amazon S3) data managed by remote catalogs such as AWS Glue, Databricks Unity Catalog, and Snowflake Horizon Catalog** . Use [Lakehouse runtime catalog with cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) . The cross-cloud data access feature of Lakehouse runtime catalog lets you query data in other cloud providers directly from Google Cloud without migrating files or building complex ETL pipelines.
-  - **Azure Blob Storage or Apache Iceberg tables not managed by a supported remote catalog for Lakehouse runtime catalog with cross-cloud data access** . Continue with [Apache Iceberg external tables using Iceberg JSON metadata files](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#create-using-metadata-file) .
+- **Cloud Storage or Amazon Simple Storage Service (Amazon S3) data managed by remote catalogs such as AWS Glue, Databricks Unity Catalog, and Snowflake Horizon Catalog** . Use [Lakehouse runtime catalog with cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) . The cross-cloud data access feature of Lakehouse runtime catalog lets you query data in other cloud providers directly from Google Cloud without migrating files or building complex ETL pipelines.
+- **Azure Blob Storage or Apache Iceberg tables not managed by a supported remote catalog for Lakehouse runtime catalog with cross-cloud data access** . Continue with [Apache Iceberg external tables using Iceberg JSON metadata files](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#create-using-metadata-file) .
 
 ## Before you begin
 
@@ -29,22 +29,22 @@ Enable the BigQuery Connection and BigQuery Reservation APIs, if any are not alr
 
 To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-  - If you use a stored procedure for Spark in BigQuery to create Iceberg external tables, you must follow these steps:
-    
-    1.  [Create a Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#create-spark-connection) .
-    2.  [Set up access control for that connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#grant-access) .
+- If you use a stored procedure for Spark in BigQuery to create Iceberg external tables, you must follow these steps:
 
-  - To store the Iceberg external table metadata and data files in Cloud Storage, [create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) . You need to connect to your Cloud Storage bucket to access metadata files. To do so, follow these steps:
-    
-    1.  [Create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) .
-    2.  [Set up access for that connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#access-storage) .
+  1.  [Create a Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#create-spark-connection) .
+  2.  [Set up access control for that connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#grant-access) .
+
+- To store the Iceberg external table metadata and data files in Cloud Storage, [create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) . You need to connect to your Cloud Storage bucket to access metadata files. To do so, follow these steps:
+
+  1.  [Create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) .
+  2.  [Set up access for that connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#access-storage) .
 
 ### Required roles
 
 To get the permissions that you need to create an Iceberg external table, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
-  - [Storage Object Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectAdmin) ( `roles/storage.objectAdmin` )
+- [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+- [Storage Object Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectAdmin) ( `roles/storage.objectAdmin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -54,9 +54,9 @@ These predefined roles contain the permissions required to create an Iceberg ext
 
 The following permissions are required to create an Iceberg external table:
 
-  - `bigquery.tables.create`
-  - `bigquery.connections.delegate`
-  - `bigquery.jobs.create`
+- `bigquery.tables.create`
+- `bigquery.connections.delegate`
+- `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -89,44 +89,46 @@ You can enable the *require partition filter* by setting the `require_partition_
 
 In a command-line environment, use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `@connection` decorator to specify the connection to use at the end of the `--external_table_definition` parameter. To enable the require partition filter, use `--require_partition_filter` .
 
-    bq mk 
-    
-        --table 
-    
-        --external_table_definition=TABLE_FORMAT=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID 
-    
-        PROJECT_ID:DATASET.EXTERNAL_TABLE
+```
+bq mk 
+
+    --table 
+
+    --external_table_definition=TABLE_FORMAT=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID 
+
+    PROJECT_ID:DATASET.EXTERNAL_TABLE
+```
 
 Replace the following:
 
-  - `  TABLE_FORMAT  ` : the format of the table that you want to create
-    
-    In this case, `ICEBERG` .
+- `TABLE_FORMAT` : the format of the table that you want to create
 
-  - `  URI  ` : the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) for a specific table snapshot.
-    
-    For example, `gs://mybucket/mydata/mytable/metadata/iceberg.metadata.json` .
-    
-    The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
-    
-      - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
-      - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
+  In this case, `ICEBERG` .
 
-  - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to create the Iceberg external table—for example, `myproject`
+- `URI` : the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) for a specific table snapshot.
 
-  - `  CONNECTION_REGION  ` : the region that contains the connection to create the Iceberg external table—for example, `us`
+  For example, `gs://mybucket/mydata/mytable/metadata/iceberg.metadata.json` .
 
-  - `  CONNECTION_ID  ` : the table connection ID—for example, `myconnection`
-    
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
+  The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
 
-  - `  DATASET  ` : the name of the BigQuery dataset that you want to create a table in
-    
-    For example, `mydataset` .
+  - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
+  - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
 
-  - `  EXTERNAL_TABLE  ` : the name of the table that you want to create
-    
-    For example, `mytable` .
+- `CONNECTION_PROJECT_ID` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to create the Iceberg external table—for example, `myproject`
+
+- `CONNECTION_REGION` : the region that contains the connection to create the Iceberg external table—for example, `us`
+
+- `CONNECTION_ID` : the table connection ID—for example, `myconnection`
+
+  When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`*
+
+- `DATASET` : the name of the BigQuery dataset that you want to create a table in
+
+  For example, `mydataset` .
+
+- `EXTERNAL_TABLE` : the name of the table that you want to create
+
+  For example, `mytable` .
 
 ### Update table metadata
 
@@ -135,44 +137,46 @@ If you use a JSON metadata file to create an Iceberg external table, update the 
 ### bq
 
 1.  Create a table definition file:
-    
+
     ```sh
     bq mkdef --source_format=ICEBERG \
     "URI" > TABLE_DEFINITION_FILE
     ```
 
 2.  Use the [`bq update` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `--autodetect_schema` flag:
-    
+
     ```sh
     bq update --autodetect_schema --external_table_definition=TABLE_DEFINITION_FILE
     PROJECT_ID:DATASET.TABLE
     ```
-    
+
     Replace the following:
-    
-      - `  URI  ` : your Cloud Storage URI with the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata)
-        
-        For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
-    
-      - `  TABLE_DEFINITION_FILE  ` : the name of the file containing the table schema
-    
-      - `  PROJECT_ID  ` : the project ID containing the table that you want to update
-    
-      - `  DATASET  ` : the dataset containing the table that you want to update
-    
-      - `  TABLE  ` : the table that you want to update
+
+    - `URI` : your Cloud Storage URI with the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata)
+
+      For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
+
+    - `TABLE_DEFINITION_FILE` : the name of the file containing the table schema
+
+    - `PROJECT_ID` : the project ID containing the table that you want to update
+
+    - `DATASET` : the dataset containing the table that you want to update
+
+    - `TABLE` : the table that you want to update
 
 ### API
 
 Use the [`tables.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) with the `autodetect_schema` property set to `true` :
 
-    PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET/tables/TABLE?autodetect_schema=true
+```
+PATCH https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/datasets/DATASET/tables/TABLE?autodetect_schema=true
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID that contains the table that you want to update
-  - `  DATASET  ` : the dataset containing the table that you want to update
-  - `  TABLE  ` : the table that you want to update
+- `PROJECT_ID` : the project ID that contains the table that you want to update
+- `DATASET` : the dataset containing the table that you want to update
+- `TABLE` : the table that you want to update
 
 In the body of the request, specify the updated values for the following fields:
 
@@ -188,7 +192,7 @@ In the body of the request, specify the updated values for the following fields:
   }'
 ```
 
-Replace `  URI  ` with the latest Iceberg metadata file. For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
+Replace `URI` with the latest Iceberg metadata file. For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
 
 ## Set up access control policies
 
@@ -209,7 +213,7 @@ You can access snapshots of Iceberg external tables that are retained in your Ic
 BigQuery converts Iceberg data types to BigQuery data types as shown in the following table:
 
 | **Iceberg data type**     | **BigQuery data type**                          |
-| ------------------------- | ----------------------------------------------- |
+|---------------------------|-------------------------------------------------|
 | `boolean`                 | `BOOL`                                          |
 | `int`                     | `INT64`                                         |
 | `long`                    | `INT64`                                         |
@@ -232,38 +236,40 @@ BigQuery converts Iceberg data types to BigQuery data types as shown in the foll
 
 In addition to [external table limitations](https://docs.cloud.google.com/bigquery/docs/biglake-intro#limitations) , Iceberg external tables have the following limitations:
 
-  - Queries that use VPC Service Controls are unsupported and result in an error such as `NO_MATCHING_ACCESS_LEVEL` .
+- Queries that use VPC Service Controls are unsupported and result in an error such as `NO_MATCHING_ACCESS_LEVEL` .
 
-  - Tables using merge-on-read have the following limitations:
-    
-      - A query can process up to 100,000 total deletion vector entries across the table. For Iceberg version 3 tables that use binary deletion vectors, each data file associated with a deletion vector counts as one deletion entry toward this limit.
-      - Each data file can be associated with up to 10,000 delete files.
-      - No more than 100,000 equality deletes can be applied to a data file.
-      - You can work around these limitations by compacting delete files and deletion vectors frequently, creating a view on top of the Iceberg table that avoids frequently mutated partitions, or filtering queries on partitioned columns to reduce the number of scanned data files and deletion vectors.
+- Tables using merge-on-read have the following limitations:
 
-  - BigQuery supports manifest pruning using all [Iceberg partition transformation functions](https://iceberg.apache.org/spec/#partition-transforms) . For information about how to prune partitions, see [Query partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . Queries referencing Iceberg external tables must contain literals in predicates compared to columns that are partitioned.
+  - A query can process up to 100,000 total deletion vector entries across the table. For Iceberg version 3 tables that use binary deletion vectors, each data file associated with a deletion vector counts as one deletion entry toward this limit.
+  - Each data file can be associated with up to 10,000 delete files.
+  - No more than 100,000 equality deletes can be applied to a data file.
+  - You can work around these limitations by compacting delete files and deletion vectors frequently, creating a view on top of the Iceberg table that avoids frequently mutated partitions, or filtering queries on partitioned columns to reduce the number of scanned data files and deletion vectors.
 
-  - Only Apache Parquet data files are supported.
+- BigQuery supports manifest pruning using all [Iceberg partition transformation functions](https://iceberg.apache.org/spec/#partition-transforms) . For information about how to prune partitions, see [Query partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . Queries referencing Iceberg external tables must contain literals in predicates compared to columns that are partitioned.
 
-  - The following [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) features aren't supported:
-    
-      - New data types: nanosecond timestamp(tz), unknown, variant, geometry, geography
-      - Initial default values
-      - Table encryption keys
+- Only Apache Parquet data files are supported.
+
+- The following [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) features aren't supported:
+
+  - New data types: nanosecond timestamp(tz), unknown, variant, geometry, geography
+  - Initial default values
+  - Table encryption keys
 
 ## Merge-on-read costs
 
 On-demand billing for merge-on-read data is the sum of scans of the following data:
 
-  - All logical bytes read in the data file (including rows that are marked as deleted by position and equality deletes).
-  - Logical bytes read loading the equality delete, position delete, and deletion vector files to find the deleted rows in a data file.
+- All logical bytes read in the data file (including rows that are marked as deleted by position and equality deletes).
+- Logical bytes read loading the equality delete, position delete, and deletion vector files to find the deleted rows in a data file.
 
 ## Require partition filter
 
 You can require the use of predicate filters by enabling the *require partition filter* option for your Iceberg table. If you enable this option, attempts to query the table without specifying a `WHERE` clause that aligns with each manifest file will produce the following error:
 
-    Cannot query over table project_id.dataset.table without a
-    filter that can be used for partition elimination.
+```
+Cannot query over table project_id.dataset.table without a
+filter that can be used for partition elimination.
+```
 
 Each manifest file requires at least one predicate suitable for partition elimination.
 
@@ -271,7 +277,7 @@ You can enable the `require_partition_filter` in the following ways while creati
 
 ### SQL
 
-Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) .The following example creates an Iceberg external table named `  TABLE  ` with require partition filter enabled:
+Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) .The following example creates an Iceberg external table named `TABLE` with require partition filter enabled:
 
 ```googlesql
   CREATE EXTERNAL TABLE TABLE
@@ -285,59 +291,61 @@ Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigque
 
 Replace the following:
 
-  - `  TABLE  ` : the table name that you want to create.
+- `TABLE` : the table name that you want to create.
 
-  - `  PROJECT_ID  ` : the project ID containing the table that you want to create.
+- `PROJECT_ID` : the project ID containing the table that you want to create.
 
-  - `  REGION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) where you want to create the Iceberg table.
+- `REGION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) where you want to create the Iceberg table.
 
-  - `  CONNECTION_ID  ` : the [connection ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . For example, `myconnection` .
+- `CONNECTION_ID` : the [connection ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . For example, `myconnection` .
 
-  - `  URI  ` : the Cloud Storage URI with the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) .
-    
-    For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
-    
-    The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
-    
-      - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
-      - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
+- `URI` : the Cloud Storage URI with the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) .
+
+  For example, `gs://mybucket/us/iceberg/mytable/metadata/1234.metadata.json` .
+
+  The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
+
+  - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
+  - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
 
 ### bq
 
-Use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `@connection` decorator to specify the connection to use at the end of the `--external_table_definition` parameter. Use `--require_partition_filter` to enable the require partition filter. The following example creates an Iceberg external table named `  TABLE  ` with require partition filter enabled:
+Use the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) with the `@connection` decorator to specify the connection to use at the end of the `--external_table_definition` parameter. Use `--require_partition_filter` to enable the require partition filter. The following example creates an Iceberg external table named `TABLE` with require partition filter enabled:
 
-    bq mk \
-        --table \
-        --external_table_definition=ICEBERG=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID \
-        PROJECT_ID:DATASET.EXTERNAL_TABLE \
-        --require_partition_filter
+```
+bq mk \
+    --table \
+    --external_table_definition=ICEBERG=URI@projects/CONNECTION_PROJECT_ID/locations/CONNECTION_REGION/connections/CONNECTION_ID \
+    PROJECT_ID:DATASET.EXTERNAL_TABLE \
+    --require_partition_filter
+```
 
 Replace the following:
 
-  - `  URI  ` : the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) for a specific table snapshot
-    
-    For example, `gs://mybucket/mydata/mytable/metadata/iceberg.metadata.json` .
-    
-    The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
-    
-      - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
-      - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
+- `URI` : the latest [JSON metadata file](https://iceberg.apache.org/spec/#table-metadata) for a specific table snapshot
 
-  - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to create the Iceberg external table—for example, `myproject`
+  For example, `gs://mybucket/mydata/mytable/metadata/iceberg.metadata.json` .
 
-  - `  CONNECTION_REGION  ` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) that contains the connection to create the Iceberg external table. For example, `us` .
+  The URI can point to an external cloud location as well; such as Amazon S3 or Azure Blob Storage.
 
-  - `  CONNECTION_ID  ` : the [connection ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . For example, `myconnection` .
-    
-    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  `
+  - Example for AWS: `s3://mybucket/iceberg/metadata/1234.metadata.json` .
+  - Example for Azure: `azure://mystorageaccount.blob.core.windows.net/mycontainer/iceberg/metadata/1234.metadata.json` .
 
-  - `  DATASET  ` : the name of the BigQuery
-    
-    dataset that contains the table that you want to update. For example, `mydataset` .
+- `CONNECTION_PROJECT_ID` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to create the Iceberg external table—for example, `myproject`
 
-  - `  EXTERNAL_TABLE  ` : the name of the table that you want to create
-    
-    For example, `mytable` .
+- `CONNECTION_REGION` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) that contains the connection to create the Iceberg external table. For example, `us` .
+
+- `CONNECTION_ID` : the [connection ID](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) . For example, `myconnection` .
+
+  When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`*
+
+- `DATASET` : the name of the BigQuery
+
+  dataset that contains the table that you want to update. For example, `mydataset` .
+
+- `EXTERNAL_TABLE` : the name of the table that you want to create
+
+  For example, `mytable` .
 
 You can also update your Iceberg table to enable the require partition filter.
 
@@ -351,11 +359,13 @@ For example:
 
 To update `mypartitionedtable` in `mydataset` in your default project, enter:
 
-    bq update --require_partition_filter PROJECT_ID:DATASET.TABLE
+```
+bq update --require_partition_filter PROJECT_ID:DATASET.TABLE
+```
 
 ## What's next
 
-  - Learn about [stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) .
-  - Learn about [access control policies](https://docs.cloud.google.com/bigquery/docs/access-control) .
-  - Learn about [running queries in BigQuery](https://docs.cloud.google.com/bigquery/docs/running-queries) .
-  - Learn about the [supported statements and SQL dialects in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .
+- Learn about [stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) .
+- Learn about [access control policies](https://docs.cloud.google.com/bigquery/docs/access-control) .
+- Learn about [running queries in BigQuery](https://docs.cloud.google.com/bigquery/docs/running-queries) .
+- Learn about the [supported statements and SQL dialects in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .

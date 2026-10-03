@@ -6,7 +6,7 @@ description: Use BigQuery INFORMATION_SCHEMA views to get metadata about objects
 data_source: docs.cloud.google.com
 ---
 
-# Introduction to INFORMATION\_SCHEMA
+# Introduction to INFORMATION_SCHEMA
 
 BigQuery `INFORMATION_SCHEMA` views let you retrieve metadata about your BigQuery objects. You can query these read-only, system-defined views to analyze resources like datasets, jobs, and access control.
 
@@ -14,138 +14,25 @@ In BigQuery, you query `INFORMATION_SCHEMA` views using GoogleSQL by specifying 
 
 The following table lists the available views:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Resource type</th>
-<th>INFORMATION_SCHEMA View</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Access control</td>
-<td><code dir="ltr" translate="no">        OBJECT_PRIVILEGES                science       </code></td>
-</tr>
-<tr class="even">
-<td>BI Engine</td>
-<td><code dir="ltr" translate="no">        BI_CAPACITIES       </code><br />
-<code dir="ltr" translate="no">        BI_CAPACITY_CHANGES       </code></td>
-</tr>
-<tr class="odd">
-<td>Configurations</td>
-<td><code dir="ltr" translate="no">        EFFECTIVE_PROJECT_OPTIONS       </code><br />
-<code dir="ltr" translate="no">        ORGANIZATION_OPTIONS       </code><br />
-<code dir="ltr" translate="no">        ORGANIZATION_OPTIONS_CHANGES       </code><br />
-<code dir="ltr" translate="no">        PROJECT_OPTIONS       </code><br />
-<code dir="ltr" translate="no">        PROJECT_OPTIONS_CHANGES       </code><br />
-</td>
-</tr>
-<tr class="even">
-<td>Datasets</td>
-<td><code dir="ltr" translate="no">        SCHEMATA                 SCHEMATA_LINKS                 SCHEMATA_OPTIONS                 SHARED_DATASET_USAGE                 SCHEMATA_REPLICAS                 SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION       </code></td>
-</tr>
-<tr class="odd">
-<td>Graphs</td>
-<td><code dir="ltr" translate="no">        PROPERTY_GRAPHS       </code><br />
-</td>
-</tr>
-<tr class="even">
-<td>Jobs</td>
-<td><code dir="ltr" translate="no">        JOBS_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        JOBS_BY_USER       </code><br />
-<code dir="ltr" translate="no">        JOBS_BY_FOLDER       </code><br />
-<code dir="ltr" translate="no">        JOBS_BY_ORGANIZATION       </code></td>
-</tr>
-<tr class="odd">
-<td>Jobs by timeslice</td>
-<td><code dir="ltr" translate="no">        JOBS_TIMELINE_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        JOBS_TIMELINE_BY_USER       </code><br />
-<code dir="ltr" translate="no">        JOBS_TIMELINE_BY_FOLDER       </code><br />
-<code dir="ltr" translate="no">        JOBS_TIMELINE_BY_ORGANIZATION       </code></td>
-</tr>
-<tr class="even">
-<td>Recommendations and insights</td>
-<td><code dir="ltr" translate="no">        INSIGHTS                science       </code><br />
-<code dir="ltr" translate="no">        RECOMMENDATIONS                science       </code><br />
-<code dir="ltr" translate="no">        RECOMMENDATIONS_BY_ORGANIZATION                science       </code></td>
-</tr>
-<tr class="odd">
-<td>Reservations</td>
-<td><code dir="ltr" translate="no">        ASSIGNMENTS_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        ASSIGNMENT_CHANGES_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        CAPACITY_COMMITMENTS_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        CAPACITY_COMMITMENT_CHANGES_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        FAILOVER_HISTORY_BY_PROJECT                 †                  science       </code><br />
-<code dir="ltr" translate="no">        RESERVATIONS_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        RESERVATION_CHANGES_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        RESERVATIONS_TIMELINE_BY_PROJECT                 †        </code></td>
-</tr>
-<tr class="even">
-<td>Routines</td>
-<td><code dir="ltr" translate="no">        PARAMETERS       </code><br />
-<code dir="ltr" translate="no">        ROUTINES       </code><br />
-<code dir="ltr" translate="no">        ROUTINE_OPTIONS       </code></td>
-</tr>
-<tr class="odd">
-<td>Search indexes</td>
-<td><code dir="ltr" translate="no">        SEARCH_INDEXES       </code><br />
-<code dir="ltr" translate="no">        SEARCH_INDEX_COLUMNS       </code><br />
-<code dir="ltr" translate="no">        SEARCH_INDEX_COLUMN_OPTIONS                science       </code><br />
-<code dir="ltr" translate="no">        SEARCH_INDEX_OPTIONS       </code><br />
-<code dir="ltr" translate="no">        SEARCH_INDEXES_BY_ORGANIZATION       </code></td>
-</tr>
-<tr class="even">
-<td>Sessions</td>
-<td><code dir="ltr" translate="no">        SESSIONS_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        SESSIONS_BY_USER       </code></td>
-</tr>
-<tr class="odd">
-<td>Streaming</td>
-<td><code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_FOLDER       </code><br />
-<code dir="ltr" translate="no">        STREAMING_TIMELINE_BY_ORGANIZATION       </code></td>
-</tr>
-<tr class="even">
-<td>Tables</td>
-<td><code dir="ltr" translate="no">        COLUMNS       </code><br />
-<code dir="ltr" translate="no">        COLUMN_FIELD_PATHS       </code><br />
-<code dir="ltr" translate="no">        CONSTRAINT_COLUMN_USAGE       </code><br />
-<code dir="ltr" translate="no">        KEY_COLUMN_USAGE       </code><br />
-<code dir="ltr" translate="no">        PARTITIONS                science       </code><br />
-<code dir="ltr" translate="no">        TABLES       </code><br />
-<code dir="ltr" translate="no">        TABLE_OPTIONS       </code><br />
-<code dir="ltr" translate="no">        TABLE_CONSTRAINTS       </code><br />
-<code dir="ltr" translate="no">        TABLE_SNAPSHOTS       </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_BY_FOLDER       </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_BY_ORGANIZATION       </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_USAGE_TIMELINE                science       </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER                science       </code><br />
-<code dir="ltr" translate="no">        TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION                science       </code></td>
-</tr>
-<tr class="odd">
-<td>Vector indexes</td>
-<td><code dir="ltr" translate="no">        VECTOR_INDEXES       </code><br />
-<code dir="ltr" translate="no">        VECTOR_INDEX_COLUMNS       </code><br />
-<code dir="ltr" translate="no">        VECTOR_INDEX_OPTIONS       </code></td>
-</tr>
-<tr class="even">
-<td>Views</td>
-<td><code dir="ltr" translate="no">        VIEWS       </code><br />
-<code dir="ltr" translate="no">        MATERIALIZED_VIEWS       </code></td>
-</tr>
-<tr class="odd">
-<td>Write API</td>
-<td><code dir="ltr" translate="no">        WRITE_API_TIMELINE_BY_PROJECT                 †        </code><br />
-<code dir="ltr" translate="no">        WRITE_API_TIMELINE_BY_FOLDER       </code><br />
-<code dir="ltr" translate="no">        WRITE_API_TIMELINE_BY_ORGANIZATION       </code></td>
-</tr>
-</tbody>
-</table>
+| Resource type                | INFORMATION_SCHEMA View                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Access control               | [`OBJECT_PRIVILEGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)` science`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| BI Engine                    | [`BI_CAPACITIES`](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacities) [`BI_CAPACITY_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-bi-capacity-changes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Configurations               | [`EFFECTIVE_PROJECT_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-effective-project-options) [`ORGANIZATION_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options) [`ORGANIZATION_OPTIONS_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options-changes) [`PROJECT_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-project-options) [`PROJECT_OPTIONS_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-project-options-changes)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Datasets                     | [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata)` `[`SCHEMATA_LINKS`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-links)` `[`SCHEMATA_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata-options)` `[`SHARED_DATASET_USAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage)` `[`SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas)` `[`SCHEMATA_REPLICAS_BY_FAILOVER_RESERVATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas-by-failover-reservation)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Graphs                       | [`PROPERTY_GRAPHS`](https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Jobs                         | [`JOBS_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) [`JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user) [`JOBS_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder) [`JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Jobs by timeslice            | [`JOBS_TIMELINE_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) [`JOBS_TIMELINE_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline-by-user) [`JOBS_TIMELINE_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline-by-folder) [`JOBS_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline-by-organization)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Recommendations and insights | [`INSIGHTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)` science` [`RECOMMENDATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)` science` [`RECOMMENDATIONS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)` science`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Reservations                 | [`ASSIGNMENTS_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) [`ASSIGNMENT_CHANGES_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments-changes) [`CAPACITY_COMMITMENTS_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments) [`CAPACITY_COMMITMENT_CHANGES_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes) [`FAILOVER_HISTORY_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history)` science` [`RESERVATIONS_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) [`RESERVATION_CHANGES_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes) [`RESERVATIONS_TIMELINE_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Routines                     | [`PARAMETERS`](https://docs.cloud.google.com/bigquery/docs/information-schema-parameters) [`ROUTINES`](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) [`ROUTINE_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-routine-options)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Search indexes               | [`SEARCH_INDEXES`](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes) [`SEARCH_INDEX_COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-columns) [`SEARCH_INDEX_COLUMN_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-column-options)` science` [`SEARCH_INDEX_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-options) [`SEARCH_INDEXES_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes-by-organization)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Sessions                     | [`SESSIONS_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-project) [`SESSIONS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-sessions-by-user)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Streaming                    | [`STREAMING_TIMELINE_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) [`STREAMING_TIMELINE_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming-by-folder) [`STREAMING_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming-by-organization)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Tables                       | [`COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-columns) [`COLUMN_FIELD_PATHS`](https://docs.cloud.google.com/bigquery/docs/information-schema-column-field-paths) [`CONSTRAINT_COLUMN_USAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-constraint-column-usage) [`KEY_COLUMN_USAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage) [`PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions)` science` [`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) [`TABLE_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) [`TABLE_CONSTRAINTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) [`TABLE_SNAPSHOTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) [`TABLE_STORAGE_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) [`TABLE_STORAGE_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-folder) [`TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization) [`TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage)` science` [`TABLE_STORAGE_USAGE_TIMELINE_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-folder)` science` [`TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization)` science` |
+| Vector indexes               | [`VECTOR_INDEXES`](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) [`VECTOR_INDEX_COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-index-columns) [`VECTOR_INDEX_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-index-options)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Views                        | [`VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) [`MATERIALIZED_VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Write API                    | [`WRITE_API_TIMELINE_BY_PROJECT `<sup>`†`</sup>](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) [`WRITE_API_TIMELINE_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api-by-folder) [`WRITE_API_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api-by-organization)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 <sup>†</sup> For `*BY_PROJECT` views, the `BY_PROJECT` suffix is optional. For example, querying `INFORMATION_SCHEMA.JOBS_BY_PROJECT` and `INFORMATION_SCHEMA.JOBS` return the same results.
 
@@ -166,48 +53,54 @@ You are not charged storage fees for the `INFORMATION_SCHEMA` views.
 An `INFORMATION_SCHEMA` view needs to be qualified with a dataset or region.
 
 > **Note:** You must [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) to query an `INFORMATION_SCHEMA` view. Querying an `INFORMATION_SCHEMA` view fails with the following error if the location of the query execution doesn't match the location of the dataset or regional qualifier used:  
-> 
->     Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
+>
+> ```
+> Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
+> ```
 
 ### Dataset qualifier
 
 When present, a dataset qualifier restricts results to the specified dataset. For example:
 
-    -- Returns metadata for tables in a single dataset.
-    SELECT * FROM myDataset.INFORMATION_SCHEMA.TABLES;
+```
+-- Returns metadata for tables in a single dataset.
+SELECT * FROM myDataset.INFORMATION_SCHEMA.TABLES;
+```
 
 The following `INFORMATION_SCHEMA` views support dataset qualifiers:
 
-  - `COLUMNS`
-  - `COLUMN_FIELD_PATHS`
-  - `MATERIALIZED_VIEWS`
-  - `PARAMETERS`
-  - `PARTITIONS`
-  - `ROUTINES`
-  - `ROUTINE_OPTIONS`
-  - `TABLES`
-  - `TABLE_OPTIONS`
-  - `VIEWS`
+- `COLUMNS`
+- `COLUMN_FIELD_PATHS`
+- `MATERIALIZED_VIEWS`
+- `PARAMETERS`
+- `PARTITIONS`
+- `ROUTINES`
+- `ROUTINE_OPTIONS`
+- `TABLES`
+- `TABLE_OPTIONS`
+- `VIEWS`
 
 ### Region qualifier
 
-Region qualifiers are represented using a ` region- REGION  ` syntax. Any [dataset location name](https://docs.cloud.google.com/bigquery/docs/locations) can be used for `  REGION  ` . For example, the following region qualifiers are valid:
+Region qualifiers are represented using a `region- `` REGION` syntax. Any [dataset location name](https://docs.cloud.google.com/bigquery/docs/locations) can be used for `REGION` . For example, the following region qualifiers are valid:
 
-  - `region-us`
-  - `region-asia-east2`
-  - `region-europe-north1`
+- `region-us`
+- `region-asia-east2`
+- `region-europe-north1`
 
 When present, a region qualifier restricts results to the specified location. [Region qualifiers](https://docs.cloud.google.com/bigquery/docs/locations#locations_and_regions) aren't hierarchical, which means the EU multi-region does not include `europe-*` regions nor does the US multi-region include the `us-*` regions. For example, the following query returns metadata for all datasets in the `US` multi-region for the project in which the query is executing, but doesn't include datasets in the `us-west1` region:
 
-    -- Returns metadata for all datasets in the US multi-region.
-    SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA;
+```
+-- Returns metadata for all datasets in the US multi-region.
+SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA;
+```
 
 The following `INFORMATION_SCHEMA` views don't support region qualifiers:
 
-  - [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions#scope_and_syntax)
-  - [`INFORMATION_SCHEMA.SEARCH_INDEXES`](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes#scope_and_syntax)
-  - [`INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-columns)
-  - [`INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-options)
+- [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions#scope_and_syntax)
+- [`INFORMATION_SCHEMA.SEARCH_INDEXES`](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes#scope_and_syntax)
+- [`INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-columns)
+- [`INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-index-options)
 
 If neither a region qualifier nor a dataset qualifier is specified, you will receive an error.
 
@@ -217,11 +110,13 @@ Queries against a region-qualified `INFORMATION_SCHEMA` view run in the region t
 
 When present, a project qualifier restricts results to the specified project. For example:
 
-    -- Returns metadata for the specified project and region.
-    SELECT * FROM myProject.`region-us`.INFORMATION_SCHEMA.TABLES;
-    
-    -- Returns metadata for the specified project and dataset.
-    SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
+```
+-- Returns metadata for the specified project and region.
+SELECT * FROM myProject.`region-us`.INFORMATION_SCHEMA.TABLES;
+
+-- Returns metadata for the specified project and dataset.
+SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
+```
 
 All `INFORMATION_SCHEMA` views support project qualifiers. If a project qualifier is not specified, the view will default to the project in which the query is executing.
 
@@ -229,17 +124,17 @@ Specifying a project qualifier for organization-level views (for example, `STREA
 
 ## Limitations
 
-  - BigQuery `INFORMATION_SCHEMA` queries must be in GoogleSQL syntax. `INFORMATION_SCHEMA` does not support legacy SQL.
-  - `INFORMATION_SCHEMA` query results are not cached.
-  - `INFORMATION_SCHEMA` views cannot be used in DDL statements.
-  - `INFORMATION_SCHEMA` views don't contain information about [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) .
-  - `INFORMATION_SCHEMA` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .
-  - When you list resources from an `INFORMATION_SCHEMA` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.
+- BigQuery `INFORMATION_SCHEMA` queries must be in GoogleSQL syntax. `INFORMATION_SCHEMA` does not support legacy SQL.
+- `INFORMATION_SCHEMA` query results are not cached.
+- `INFORMATION_SCHEMA` views cannot be used in DDL statements.
+- `INFORMATION_SCHEMA` views don't contain information about [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) .
+- `INFORMATION_SCHEMA` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .
+- When you list resources from an `INFORMATION_SCHEMA` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.
 
 ## What's next
 
-  - [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information_using_information_schema) .
-  - [View Iceberg-managed table metadata](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#view-iceberg-table-metadata-snapshot) .
-  - [View graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#view_graph_schemas) .
-  - [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
-  - [Troubleshoot with information schema](https://docs.cloud.google.com/bigquery/docs/info-schema-troubleshoot) .
+- [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information_using_information_schema) .
+- [View Iceberg-managed table metadata](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#view-iceberg-table-metadata-snapshot) .
+- [View graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#view_graph_schemas) .
+- [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
+- [Troubleshoot with information schema](https://docs.cloud.google.com/bigquery/docs/info-schema-troubleshoot) .

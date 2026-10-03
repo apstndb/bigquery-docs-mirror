@@ -26,8 +26,8 @@ This predefined role contains the permissions required to query a materialized v
 
 The following permissions are required to query a materialized view:
 
-  - `bigquery.tables.get`
-  - `bigquery.tables.getData`
+- `bigquery.tables.get`
+- `bigquery.tables.getData`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -41,14 +41,14 @@ Incremental updates occur when BigQuery combines the cached view's data with new
 
 If the base table had updates or deletions since the last refresh, or if the materialized view's base tables on the right side of the `JOIN` have changed, then BigQuery doesn't use incremental updates and instead automatically reverts to the original query. For more information about joins and materialized views, see [Joins](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#joins) . The following are examples of Google Cloud console, bq command-line tool, and API actions that can cause an update or deletion:
 
-  - Data manipulation language (DML) `UPDATE` , `MERGE` , or `DELETE` statements
-  - Truncation
-  - Partition expiration
+- Data manipulation language (DML) `UPDATE` , `MERGE` , or `DELETE` statements
+- Truncation
+- Partition expiration
 
 The following metadata operations also prevent a materialized view from being incrementally updated:
 
-  - Changing partition expiration
-  - Updating or dropping a column
+- Changing partition expiration
+- Updating or dropping a column
 
 If a materialized view can't be incrementally updated, then its cached data is not used by queries until the view is automatically or manually refreshed. For details about why a job didn't use materialized view data, see [Understand why materialized views were rejected](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#understand-rejected) . Additionally, materialized views cannot be incrementally updated if its base table has accumulated unprocessed changes for a time period greater than the table's [time travel interval](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) .
 
@@ -66,126 +66,46 @@ For partitioned incremental materialized views that use `UNION ALL` , all base t
 
 BigQuery automatically rewrites queries to use materialized views whenever possible. Automatic rewriting improves query performance and reduces costs without changing query results. Querying does not automatically trigger a materialized refresh. For a query to be rewritten using smart-tuning, the materialized view must meet the following conditions:
 
-  - Belong to the same project as one of its base tables or the project that the query is running in.
-  - Use the same set of base tables as the query.
-  - Include all columns being read.
-  - Include all rows being read.
+- Belong to the same project as one of its base tables or the project that the query is running in.
+- Use the same set of base tables as the query.
+- Include all columns being read.
+- Include all rows being read.
 
 Smart tuning isn't supported for the following:
 
-  - Materialized views that [reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) .
-  - Materialized views with [union all or left outer join](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) .
-  - [Non-incremental materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#limitations_specific_to_non-incremental_materialized_views) .
-  - Materialized views that reference [change data capture-enabled](https://docs.cloud.google.com/bigquery/docs/change-data-capture) tables.
+- Materialized views that [reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) .
+- Materialized views with [union all or left outer join](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) .
+- [Non-incremental materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#limitations_specific_to_non-incremental_materialized_views) .
+- Materialized views that reference [change data capture-enabled](https://docs.cloud.google.com/bigquery/docs/change-data-capture) tables.
 
 ### Smart tuning examples
 
 Consider the following materialized view query example:
 
-    SELECT
-      store_id,
-      CAST(sold_datetime AS DATE) AS sold_date
-      SUM(net_profit) AS sum_profit
-    FROM dataset.store_sales
-    WHERE
-      CAST(sold_datetime AS DATE) >= '2021-01-01' AND
-      promo_id IS NOT NULL
-    GROUP BY 1, 2
+```
+SELECT
+  store_id,
+  CAST(sold_datetime AS DATE) AS sold_date
+  SUM(net_profit) AS sum_profit
+FROM dataset.store_sales
+WHERE
+  CAST(sold_datetime AS DATE) >= '2021-01-01' AND
+  promo_id IS NOT NULL
+GROUP BY 1, 2
+```
 
 The following examples show queries and why those queries are or aren't automatically rewritten using this view:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Query</th>
-<th>Rewrite?</th>
-<th>Reason</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>SELECT<br />
-<strong>SUM(net_paid) AS sum_paid</strong> ,<br />
-SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2021-01-01' AND<br />
-promo_id IS NOT NULL</td>
-<td>No</td>
-<td>The view must include all columns being read. The view does not include 'SUM(net_paid)'.</td>
-</tr>
-<tr class="even">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2021-01-01' AND<br />
-promo_id IS NOT NULL</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2021-01-01' AND<br />
-promo_id IS NOT NULL AND<br />
-<strong>customer_id = 12345</strong></td>
-<td>No</td>
-<td>The view must include all columns being read. The view does not include 'customer'.</td>
-</tr>
-<tr class="even">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-<strong>sold_datetime</strong> = '2021-01-01' AND<br />
-promo_id IS NOT NULL<br />
-</td>
-<td>No</td>
-<td>The view must include all columns being read. 'sold_datetime' is not an output (but 'CAST(sold_datetime AS DATE)' is).</td>
-</tr>
-<tr class="odd">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2021-01-01' AND<br />
-promo_id IS NOT NULL AND<br />
-store_id = 12345</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2021-01-01' AND<br />
-<strong>promo_id = 12345</strong></td>
-<td>No</td>
-<td>The view must include all rows being read. 'promo_id' is not an output so the more restrictive filter can't be applied to the view.</td>
-</tr>
-<tr class="odd">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE <strong>CAST(sold_datetime AS DATE) &gt;= '2020-01-01'</strong><br />
-</td>
-<td>No</td>
-<td>The view must include all rows being read. The view filter for dates in 2021 and after, but the query reads dates from 2020.</td>
-</tr>
-<tr class="even">
-<td>SELECT SUM(net_profit) AS sum_profit<br />
-FROM dataset.store_sales<br />
-WHERE<br />
-CAST(sold_datetime AS DATE) &gt;= '2022-01-01' AND<br />
-promo_id IS NOT NULL</td>
-<td>Yes</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Query                                                                                                                                                                     | Rewrite? | Reason                                                                                                                              |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------|
+| SELECT **SUM(net_paid) AS sum_paid** , SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2021-01-01' AND promo_id IS NOT NULL | No       | The view must include all columns being read. The view does not include 'SUM(net_paid)'.                                            |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2021-01-01' AND promo_id IS NOT NULL                                 | Yes      |                                                                                                                                     |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2021-01-01' AND promo_id IS NOT NULL AND **customer_id = 12345**     | No       | The view must include all columns being read. The view does not include 'customer'.                                                 |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE **sold_datetime** = '2021-01-01' AND promo_id IS NOT NULL                                             | No       | The view must include all columns being read. 'sold_datetime' is not an output (but 'CAST(sold_datetime AS DATE)' is).              |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2021-01-01' AND promo_id IS NOT NULL AND store_id = 12345            | Yes      |                                                                                                                                     |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2021-01-01' AND **promo_id = 12345**                                 | No       | The view must include all rows being read. 'promo_id' is not an output so the more restrictive filter can't be applied to the view. |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE **CAST(sold_datetime AS DATE) \>= '2020-01-01'**                                                      | No       | The view must include all rows being read. The view filter for dates in 2021 and after, but the query reads dates from 2020.        |
+| SELECT SUM(net_profit) AS sum_profit FROM dataset.store_sales WHERE CAST(sold_datetime AS DATE) \>= '2022-01-01' AND promo_id IS NOT NULL                                 | Yes      |                                                                                                                                     |
 
 ### Understand whether a query was rewritten
 
@@ -197,8 +117,8 @@ If you have disabled automatic refresh for your materialized view and the table 
 
 The steps to understand why a materialized view was rejected depend on the type of query that you used:
 
-  - Direct query of the materialized view
-  - Indirect query in which [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) might choose to use the materialized view
+- Direct query of the materialized view
+- Indirect query in which [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) might choose to use the materialized view
 
 The following sections provide steps to help you understand why a materialized view was rejected.
 
@@ -233,38 +153,40 @@ In general, a query over a materialized view isn't always as performant as a que
 
 Consider this scenario:
 
-    CREATE MATERIALIZED VIEW my_dataset.my_mv AS
-    SELECT date, customer_id, region, SUM(net_paid) as total_paid
-    FROM my_dataset.sales
-    GROUP BY 1, 2, 3;
-    
-    CREATE TABLE my_dataset.my_materialized_table AS
-    SELECT date, customer_id, region, SUM(net_paid) as total_paid
-    FROM my_dataset.sales
-    GROUP BY 1, 2, 3;
+```
+CREATE MATERIALIZED VIEW my_dataset.my_mv AS
+SELECT date, customer_id, region, SUM(net_paid) as total_paid
+FROM my_dataset.sales
+GROUP BY 1, 2, 3;
+
+CREATE TABLE my_dataset.my_materialized_table AS
+SELECT date, customer_id, region, SUM(net_paid) as total_paid
+FROM my_dataset.sales
+GROUP BY 1, 2, 3;
+```
 
 For example, this query:
 
-``` 
-  SELECT * FROM my_dataset.my_mv LIMIT 10
+```
+SELECT * FROM my_dataset.my_mv LIMIT 10
 ```
 
 typically runs much more slowly than this query:
 
-``` 
-  SELECT * FROM my_dataset.my_materialized_table LIMIT 10
+```
+SELECT * FROM my_dataset.my_materialized_table LIMIT 10
 ```
 
 In order to provide consistently up-to-date results, BigQuery must query new rows in the base table and merge them into the materialized view before applying the 'LIMIT 10' predicate. As a result, slowness remains, even if the materialized view is fully up-to-date.
 
 On the other hand, aggregations over materialized views are typically as fast as queries against the materialized table. For example, the following:
 
-``` 
-  SELECT SUM(total_paid) FROM my_dataset.my_mv WHERE date > '2020-12-01'
+```
+SELECT SUM(total_paid) FROM my_dataset.my_mv WHERE date > '2020-12-01'
 ```
 
 Should be as fast as this:
 
-``` 
-  SELECT SUM(total_paid) FROM my_dataset.my_materialized_table WHERE date > '2020-12-01'
+```
+SELECT SUM(total_paid) FROM my_dataset.my_materialized_table WHERE date > '2020-12-01'
 ```

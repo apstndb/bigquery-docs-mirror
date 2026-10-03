@@ -49,14 +49,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -64,7 +64,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'AUTOML_REGRESSOR' | 'AUTOML_CLASSIFIER' }
+```
+MODEL_TYPE = { 'AUTOML_REGRESSOR' | 'AUTOML_CLASSIFIER' }
+```
 
 **Description**
 
@@ -74,14 +76,14 @@ Specifies the model type. This option is required.
 
 This option accepts the following values:
 
-  - `AUTOML_REGRESSOR` : This creates a regression model that uses a label column with a numeric data type.
-  - `AUTOML_CLASSIFIER` : This creates a classification model that uses a label column with either a string or a numeric data type.
+- `AUTOML_REGRESSOR` : This creates a regression model that uses a label column with a numeric data type.
+- `AUTOML_CLASSIFIER` : This creates a classification model that uses a label column with either a string or a numeric data type.
 
 ### `BUDGET_HOURS`
 
 **Syntax**
 
-` BUDGET_HOURS = float64_value  `
+`BUDGET_HOURS = `` float64_value`
 
 **Description**
 
@@ -97,7 +99,7 @@ A `FLOAT64` value between `1.0` and `72.0` . The default value is `1.0` .
 
 **Syntax**
 
-`OPTIMIZATION_OBJECTIVE = { string_value | struct_value }`
+`OPTIMIZATION_OBJECTIVE = { `` string_value `` | `` struct_value `` }`
 
 **Description**
 
@@ -111,38 +113,42 @@ This option can be specified as a `STRING` or `STRUCT` value.
 
 This option accepts the following string values for optimization objective functions:
 
-  - For regression:
-      - `MINIMIZE_RMSE` (default)
-      - `MINIMIZE_MAE`
-      - `MINIMIZE_RMSLE`
-  - For binary classification:
-      - `MAXIMIZE_AU_ROC` (default)
-      - `MINIMIZE_LOG_LOSS`
-      - `MAXIMIZE_AU_PRC`
-      - `MAXIMIZE_PRECISION_AT_RECALL`
-      - `MAXIMIZE_RECALL_AT_PRECISION`
-  - For multiclass classification:
-      - `MINIMIZE_LOG_LOSS`
+- For regression:
+  - `MINIMIZE_RMSE` (default)
+  - `MINIMIZE_MAE`
+  - `MINIMIZE_RMSLE`
+- For binary classification:
+  - `MAXIMIZE_AU_ROC` (default)
+  - `MINIMIZE_LOG_LOSS`
+  - `MAXIMIZE_AU_PRC`
+  - `MAXIMIZE_PRECISION_AT_RECALL`
+  - `MAXIMIZE_RECALL_AT_PRECISION`
+- For multiclass classification:
+  - `MINIMIZE_LOG_LOSS`
 
 For example:
 
-    OPTIMIZATION_OBJECTIVE = 'MAXIMIZE_AU_ROC'
+```
+OPTIMIZATION_OBJECTIVE = 'MAXIMIZE_AU_ROC'
+```
 
 For binary classification models, you can alternatively specify a struct value for this option. The struct must contain a `STRING` value and a `FLOAT64` value in one of the following combinations:
 
-  - The string value is `MAXIMIZE_PRECISION_AT_RECALL` and the float value specifies the fixed recall value, which must be in the range of `[0,1]` .
+- The string value is `MAXIMIZE_PRECISION_AT_RECALL` and the float value specifies the fixed recall value, which must be in the range of `[0,1]` .
 
-  - The string value is `MAXIMIZE_RECALL_AT_PRECISION` and the float value specifies the fixed precision value, which must be in the range of `[0,1]` .
+- The string value is `MAXIMIZE_RECALL_AT_PRECISION` and the float value specifies the fixed precision value, which must be in the range of `[0,1]` .
 
 For example:
 
-    OPTIMIZATION_OBJECTIVE = STRUCT('MAXIMIZE_PRECISION_AT_RECALL', 0.3)
+```
+OPTIMIZATION_OBJECTIVE = STRUCT('MAXIMIZE_PRECISION_AT_RECALL', 0.3)
+```
 
 ### `INPUT_LABEL_COLS`
 
 **Syntax**
 
-` INPUT_LABEL_COLS = string_array  `
+`INPUT_LABEL_COLS = `` string_array`
 
 **Description**
 
@@ -154,37 +160,16 @@ A one-element `ARRAY` of string values. Defaults to `label` .
 
 Supported data types for `input_label_cols` include the following:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">Model type</code></th>
-<th><code dir="ltr" translate="no">Supported label types</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">automl_regressor</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">automl_classifier</code></td>
-<td>Any <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
-</tr>
-</tbody>
-</table>
+| `Model type`        | `Supported label types`                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `automl_regressor`  | [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) [`NUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type) [`BIGNUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) |
+| `automl_classifier` | Any [groupable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties) data type                                                                                                                                                                                                                                                                                                                |
 
 ### `DATA_SPLIT_COL`
 
 **Syntax**
 
-` DATA_SPLIT_COL = string_value  `
+`DATA_SPLIT_COL = `` string_value`
 
 **Description**
 
@@ -196,10 +181,10 @@ The string value must be the name of one of the columns in the training data. Th
 
 If you use a string column, rows are assigned to the appropriate dataset based on the column's value, which must be one of the following options:
 
-  - `TRAIN`
-  - `VALIDATE`
-  - `TEST`
-  - `UNASSIGNED`
+- `TRAIN`
+- `VALIDATE`
+- `TEST`
+- `UNASSIGNED`
 
 For more information about how to use these values, see [Manual split](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/data-splits#classification-manual) .
 
@@ -209,7 +194,7 @@ Timestamp columns are used to perform a [chronological split](https://docs.cloud
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -219,50 +204,20 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ## Supported data types for input columns
 
 For columns other than the label column, any [groupable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties) data type is supported. The BigQuery column type is used to determine the feature column type in AutoML.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">BigQuery type</code></th>
-<th><code dir="ltr" translate="no">AutoML type</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">INT64</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">NUMERIC</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">BIGNUMERIC</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">FLOAT64</code></a></td>
-<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#numeric-transf"><code dir="ltr" translate="no">NUMERIC</code></a> or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> if AutoML determines that it is a UNIX timestamp</td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">BOOL</code></a></td>
-<td><a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">STRING</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type"><code dir="ltr" translate="no">BYTES</code></a></td>
-<td>Either <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type"><code dir="ltr" translate="no">TIMESTAMP</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type"><code dir="ltr" translate="no">DATETIME</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type"><code dir="ltr" translate="no">TIME</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type"><code dir="ltr" translate="no">DATE</code></a><br />
-</td>
-<td>Either <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp"><code dir="ltr" translate="no">TIMESTAMP</code></a> , <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf"><code dir="ltr" translate="no">CATEGORICAL</code></a> , or <a href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf"><code dir="ltr" translate="no">TEXT</code></a> , auto-selected by AutoML.</td>
-</tr>
-</tbody>
-</table>
+| `BigQuery type`                                                                                                                                                                                                                                                                                                                                                                                                                              | `AutoML type`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) [`NUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type) [`BIGNUMERIC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) | [`NUMERIC`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#numeric-transf) or [`TIMESTAMP`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp) if AutoML determines that it is a UNIX timestamp                                                                                                                                |
+| [`BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type)                                                                                                                                                                                                                                                                                                                                         | [`CATEGORICAL`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf)                                                                                                                                                                                                                                                                                                                 |
+| [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type) [`BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type)                                                                                                                                                                                                                                    | Either [`CATEGORICAL`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf) or [`TEXT`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf) , auto-selected by AutoML.                                                                                                                                          |
+| [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type) [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)                    | Either [`TIMESTAMP`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#timestamp) , [`CATEGORICAL`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#categorical-transf) , or [`TEXT`](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/datasets/data-types-tabular#text-transf) , auto-selected by AutoML. |
 
 To force a numeric column to be treated as categorical, use the [`CAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) to cast it to a BigQuery string. Arrays of supported types are allowed and remain arrays during AutoML training.
 
@@ -274,12 +229,12 @@ For information about supported locations, see [Locations for non-remote models]
 
 AutoML models have the following limitations:
 
-  - The input data to AutoML must be between 1,000 and 200,000,000 rows, and must be less than 100 GB.
-  - `Global` region customer-managed encryption keys (CMEKs) and multi-region CMEKs, for example `eu` or `us` , are not supported.
-  - BigQuery ML AutoML models aren't visible in the AutoML user interface, and aren't available for batch or online predictions in AutoML.
-  - The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/quotas) is 5. Raising the Gemini Enterprise Agent Platform quota does not modify this quota. If you receive the error `Too many AutoML training queries have been issued within a short period of time` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
-  - Column names for feature columns must be 125 characters or fewer.
-  - For `AUTOML_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
+- The input data to AutoML must be between 1,000 and 200,000,000 rows, and must be less than 100 GB.
+- `Global` region customer-managed encryption keys (CMEKs) and multi-region CMEKs, for example `eu` or `us` , are not supported.
+- BigQuery ML AutoML models aren't visible in the AutoML user interface, and aren't available for batch or online predictions in AutoML.
+- The [default maximum number of concurrent training jobs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/quotas) is 5. Raising the Gemini Enterprise Agent Platform quota does not modify this quota. If you receive the error `Too many AutoML training queries have been issued within a short period of time` , you can submit a request to raise the maximum number of concurrent training jobs. To request an increase, email bqml-feedback@google.com with your project ID and the details of your request.
+- Column names for feature columns must be 125 characters or fewer.
+- For `AUTOML_CLASSIFIER` models, the `label` column can contain up to 1,000 unique values; that is, the number of classes is less than or equal to 1,000. If you need to classify into more than 1,000 labels, contact <bqml-feedback@google.com> .
 
 ## `CREATE MODEL` example
 
@@ -287,33 +242,37 @@ The following example creates a model named `mymodel` in `mydataset` in your def
 
 Create the model:
 
-    CREATE OR REPLACE MODEL `project_id.mydataset.mymodel`
-           OPTIONS(model_type='AUTOML_REGRESSOR',
-                   input_label_cols=['fare_amount'],
-                   budget_hours=1.0)
-    AS SELECT
-      (tolls_amount + fare_amount) AS fare_amount,
-      pickup_longitude,
-      pickup_latitude,
-      dropoff_longitude,
-      dropoff_latitude,
-      passenger_count
-    FROM `nyc-tlc.yellow.trips`
-    WHERE ABS(MOD(FARM_FINGERPRINT(CAST(pickup_datetime AS STRING)), 100000)) = 1
-    AND
-      trip_distance > 0
-      AND fare_amount >= 2.5 AND fare_amount <= 100.0
-      AND pickup_longitude > -78
-      AND pickup_longitude < -70
-      AND dropoff_longitude > -78
-      AND dropoff_longitude < -70
-      AND pickup_latitude > 37
-      AND pickup_latitude < 45
-      AND dropoff_latitude > 37
-      AND dropoff_latitude < 45
-      AND passenger_count > 0
+```
+CREATE OR REPLACE MODEL `project_id.mydataset.mymodel`
+       OPTIONS(model_type='AUTOML_REGRESSOR',
+               input_label_cols=['fare_amount'],
+               budget_hours=1.0)
+AS SELECT
+  (tolls_amount + fare_amount) AS fare_amount,
+  pickup_longitude,
+  pickup_latitude,
+  dropoff_longitude,
+  dropoff_latitude,
+  passenger_count
+FROM `nyc-tlc.yellow.trips`
+WHERE ABS(MOD(FARM_FINGERPRINT(CAST(pickup_datetime AS STRING)), 100000)) = 1
+AND
+  trip_distance > 0
+  AND fare_amount >= 2.5 AND fare_amount <= 100.0
+  AND pickup_longitude > -78
+  AND pickup_longitude < -70
+  AND dropoff_longitude > -78
+  AND dropoff_longitude < -70
+  AND pickup_latitude > 37
+  AND pickup_latitude < 45
+  AND dropoff_latitude > 37
+  AND dropoff_latitude < 45
+  AND passenger_count > 0
+```
 
 Run predictions:
 
-    SELECT * FROM ML.PREDICT(MODEL `project_id.mydataset.mymodel`, (
-        SELECT * FROM `nyc-tlc.yellow.trips` LIMIT 100))
+```
+SELECT * FROM ML.PREDICT(MODEL `project_id.mydataset.mymodel`, (
+    SELECT * FROM `nyc-tlc.yellow.trips` LIMIT 100))
+```

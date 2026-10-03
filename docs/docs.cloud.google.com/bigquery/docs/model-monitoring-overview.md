@@ -14,16 +14,16 @@ Understanding the data used by your models is a critical aspect of ML, because t
 
 BigQuery ML provides functions to help you analyze your training and serving data for *data skew* and *data drift* :
 
-  - *Data skew* occurs when the distribution of feature values for training data is significantly different from serving data in production. Training statistics for the model are saved during model training, so the original training data isn't required for you to use skew detection.
-  - *Data drift* occurs when feature data distribution in production changes significantly over time. Drift detection is supported for consecutive spans of data, for example, between different days of serving data. This lets you get notified if the serving data is changing over time, before the data sets diverge too much to retrain the model.
+- *Data skew* occurs when the distribution of feature values for training data is significantly different from serving data in production. Training statistics for the model are saved during model training, so the original training data isn't required for you to use skew detection.
+- *Data drift* occurs when feature data distribution in production changes significantly over time. Drift detection is supported for consecutive spans of data, for example, between different days of serving data. This lets you get notified if the serving data is changing over time, before the data sets diverge too much to retrain the model.
 
 Use the following functions to monitor models in BigQuery ML:
 
-  - [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data) : compute descriptive statistics for a set of training or serving data.
-  - [`ML.VALIDATE_DATA_SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew) : compute the statistics for a set of serving data, and then compare them to the training data statistics that were computed when a BigQuery ML model was trained, in order to identify anomalous differences between the two data sets. Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost.
-  - [`ML.VALIDATE_DATA_DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift) : compute and compare the statistics for two sets of serving data in order to identify anomalous differences between the two data sets.
-  - [`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe) : compute fine-grained descriptive statistics for a set of training or serving data. This function provides the same behavior as the [TensorFlow `tfdv.generate_statistics_from_csv` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_csv) .
-  - [`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate) : compare the statistics for training and serving data statistics, or two sets of serving data statistics, in order to identify anomalous differences between the two data sets. This function provides the same behavior as the [TensorFlow `validate_statistics` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/validate_statistics) .
+- [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data) : compute descriptive statistics for a set of training or serving data.
+- [`ML.VALIDATE_DATA_SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew) : compute the statistics for a set of serving data, and then compare them to the training data statistics that were computed when a BigQuery ML model was trained, in order to identify anomalous differences between the two data sets. Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost.
+- [`ML.VALIDATE_DATA_DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift) : compute and compare the statistics for two sets of serving data in order to identify anomalous differences between the two data sets.
+- [`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe) : compute fine-grained descriptive statistics for a set of training or serving data. This function provides the same behavior as the [TensorFlow `tfdv.generate_statistics_from_csv` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_csv) .
+- [`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate) : compare the statistics for training and serving data statistics, or two sets of serving data statistics, in order to identify anomalous differences between the two data sets. This function provides the same behavior as the [TensorFlow `validate_statistics` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/validate_statistics) .
 
 ## Monitoring use cases
 
@@ -60,22 +60,24 @@ Typical steps for this use case are as follows:
 1.  Run the `ML.TFDV_DESCRIBE` function on your training and serving data at intervals appropriate to your monitoring solution, and [save the query results](https://docs.cloud.google.com/bigquery/docs/writing-results) . This step lets you compare future serving data to training and serving data from past points in time.
 
 2.  Run the `ML.TFDV_VALIDATE` function on your training and serving data statistics, or on two sets of serving data statistics, to evaluate data skew or feature drift, respectively. The training and serving data must be provided as a TensorFlow [`DatasetFeatureStatisticsList` protocol buffer](https://www.tensorflow.org/tfx/tf_metadata/api_docs/python/tfmd/proto/statistics_pb2/DatasetFeatureStatisticsList) in JSON format. You can generate a protocol buffer in the correct format by running the `ML.TFDV_DESCRIBE` function, or you can load it from outside of BigQuery. The following example shows how to evaluate feature skew:
-    
-        DECLARE stats1 JSON;
-        DECLARE stats2 JSON;
-        
-        SET stats1 = (
-          SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`)
-        );
-        SET stats2 = (
-          SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)
-        );
-        
-        SELECT ML.TFDV_VALIDATE(stats1, stats2, 'SKEW');
-        
-        INSERT `myproject.mydataset.serve_stats`
-          (t, dataset_feature_statistics_list)
-        SELECT CURRENT_TIMESTAMP() AS t, stats1;
+
+    ```
+    DECLARE stats1 JSON;
+    DECLARE stats2 JSON;
+
+    SET stats1 = (
+      SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.training`)
+    );
+    SET stats2 = (
+      SELECT * FROM ML.TFDV_DESCRIBE(TABLE `myproject.mydataset.serving`)
+    );
+
+    SELECT ML.TFDV_VALIDATE(stats1, stats2, 'SKEW');
+
+    INSERT `myproject.mydataset.serve_stats`
+      (t, dataset_feature_statistics_list)
+    SELECT CURRENT_TIMESTAMP() AS t, stats1;
+    ```
 
 3.  If there is data skew or data drift, investigate the root cause, adjust the training data appropriately, and then retrain the model.
 
@@ -85,9 +87,9 @@ Some monitoring functions offer integration with [Gemini Enterprise Agent Platfo
 
 Using Agent Platform visualizations offers the following benefits:
 
-  - **Interactive visualizations** : explore data distributions, skew metrics, and drift metrics by using charts and graphs in the Agent Platform console.
-  - **Historical analysis** : track model monitoring results over time by using Agent Platform visualizations. This lets you identify trends and patterns in data changes so that you can proactively update and maintain models.
-  - **Centralized management** : manage monitoring for all BigQuery ML and Agent Platform models in the unified Agent Platform dashboard.
+- **Interactive visualizations** : explore data distributions, skew metrics, and drift metrics by using charts and graphs in the Agent Platform console.
+- **Historical analysis** : track model monitoring results over time by using Agent Platform visualizations. This lets you identify trends and patterns in data changes so that you can proactively update and maintain models.
+- **Centralized management** : manage monitoring for all BigQuery ML and Agent Platform models in the unified Agent Platform dashboard.
 
 You can enable visualization of the `ML.VALIDATE_DATA_DRIFT` function output by using that function's `MODEL` argument. You can enable visualization of the `ML.VALIDATE_DATA_SKEW` function output by using that function's `enable_visualization_link` argument.
 

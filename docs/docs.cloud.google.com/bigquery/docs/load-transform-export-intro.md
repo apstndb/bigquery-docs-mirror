@@ -30,16 +30,16 @@ It's common to transform your data before or after loading it into BigQuery. The
 
 With the extract-load-transform (ELT) approach, you perform data integration in two discrete steps:
 
-  - Extract and load data
-  - Transform data
+- Extract and load data
+- Transform data
 
 For example, you can extract and load data from a JSON file source into a BigQuery table. Then, you can use pipelines to extract and transform fields into target tables.
 
 The ELT approach can simplify your data integration workflow in the following ways:
 
-  - Eliminates the need for other data processing tools
-  - Splits the often complex data integration process into two manageable parts
-  - Fully utilizes BigQuery's capabilities to prepare, transform, and optimize your data at scale
+- Eliminates the need for other data processing tools
+- Splits the often complex data integration process into two manageable parts
+- Fully utilizes BigQuery's capabilities to prepare, transform, and optimize your data at scale
 
 #### Extracting and loading data
 
@@ -49,9 +49,9 @@ In the ELT data integration approach, you extract data from a data source and lo
 
 After loading the data into BigQuery, you can prepare and transform the data with the following tools:
 
-  - To collaboratively build, test, document, and schedule advanced SQL data transformation pipelines, use [Dataform](https://docs.cloud.google.com/dataform/docs) .
-  - For smaller data transformation workflows executing SQL code, Python notebooks, or data preparations on a schedule, use [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
-  - To clean your data for analysis, use AI-augmented [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) .
+- To collaboratively build, test, document, and schedule advanced SQL data transformation pipelines, use [Dataform](https://docs.cloud.google.com/dataform/docs) .
+- For smaller data transformation workflows executing SQL code, Python notebooks, or data preparations on a schedule, use [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
+- To clean your data for analysis, use AI-augmented [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) .
 
 Each of these tools is powered by the [Dataform API](https://docs.cloud.google.com/dataform/reference/rest) .
 
@@ -67,8 +67,8 @@ In the extract-transform-load (ETL) approach, you extract and transform data bef
 
 After you process and analyze data in BigQuery, you can export the results to apply them in other systems. BigQuery supports the following exports:
 
-  - Exporting query results to a local file, Google Drive, Google Sheets
-  - Exporting tables or query results to Cloud Storage, Bigtable, Spanner, AlloyDB for PostgreSQL, and Pub/Sub
+- Exporting query results to a local file, Google Drive, Google Sheets
+- Exporting tables or query results to Cloud Storage, Bigtable, Spanner, AlloyDB for PostgreSQL, and Pub/Sub
 
 This process is referred to as reverse ETL.
 
@@ -76,6 +76,6 @@ For more information, see [Introduction to data export in BigQuery](https://docs
 
 ## What's next
 
-  - Learn more about [loading data in BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) .
-  - Learn more about [transforming data in BigQuery](https://docs.cloud.google.com/bigquery/docs/transform-intro) .
-  - Learn more about [exporting data in BigQuery](https://docs.cloud.google.com/bigquery/docs/export-intro) .
+- Learn more about [loading data in BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) .
+- Learn more about [transforming data in BigQuery](https://docs.cloud.google.com/bigquery/docs/transform-intro) .
+- Learn more about [exporting data in BigQuery](https://docs.cloud.google.com/bigquery/docs/export-intro) .

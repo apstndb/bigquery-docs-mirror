@@ -18,9 +18,9 @@ Similarly, while spreadsheets are widely used, other programming environments li
 
 You can use [Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) in BigQuery to complete analysis and machine learning (ML) workflows by using SQL, Python, and other common packages and APIs. Notebooks offer improved collaboration and management with the following options:
 
-  - Share notebooks with specific users and groups by using Identity and Access Management (IAM).
-  - Review the notebook version history.
-  - Revert to or branch from previous versions of the notebook.
+- Share notebooks with specific users and groups by using Identity and Access Management (IAM).
+- Review the notebook version history.
+- Revert to or branch from previous versions of the notebook.
 
 Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets that are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) , although notebooks aren't visible in Dataform. [Saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#supported_regions) . Updating the default region changes the region for all code assets that are created after that point.
 
@@ -28,11 +28,11 @@ Notebook capabilities are available only in the Google Cloud console.
 
 Notebooks in BigQuery offer the following benefits:
 
-  - **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
-  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) for assistive code development.
-  - **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
-  - **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
-  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in cells that reference Python variables.
+- **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
+- **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) for assistive code development.
+- **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
+- **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
+- **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in cells that reference Python variables.
 
 You can get started with notebooks by using notebook gallery templates. For more information, see [Create a notebook using the notebook gallery](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
@@ -42,10 +42,10 @@ You can get started with notebooks by using notebook gallery templates. For more
 
 BigQuery DataFrames offers the following benefits:
 
-  - More than 750 pandas and scikit-learn APIs implemented through transparent SQL conversion to BigQuery and BigQuery ML APIs.
-  - Deferred execution of queries for enhanced performance.
-  - Extending data transformations with user-defined Python functions to let you process data in the cloud. These functions are automatically deployed as BigQuery [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
-  - Integration with Gemini Enterprise Agent Platform to let you use Gemini models for text generation.
+- More than 750 pandas and scikit-learn APIs implemented through transparent SQL conversion to BigQuery and BigQuery ML APIs.
+- Deferred execution of queries for enhanced performance.
+- Extending data transformations with user-defined Python functions to let you process data in the cloud. These functions are automatically deployed as BigQuery [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
+- Integration with Gemini Enterprise Agent Platform to let you use Gemini models for text generation.
 
 ## Other programmatic analysis solutions
 
@@ -65,8 +65,8 @@ Jupyter Notebooks are built on top of the [IPython](https://ipython.org/) kernel
 
 You can deploy Jupyter notebooks and JupyterLab environments on Google Cloud by using one of the following products:
 
-  - [Vertex AI Workbench instances](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction) , a service that offers an integrated JupyterLab environment in which machine learning developers and data scientists can use some of the latest data science and machine learning frameworks. Vertex AI Workbench is integrated with other Google Cloud data products such as BigQuery, making it easy to go from data ingestion to preprocessing and exploration, and eventually model training and deployment. To learn more, see [Introduction to Vertex AI Workbench instances](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction) .
-  - [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) , a fast, easy-to-use, fully managed service for running [Apache Spark](https://spark.apache.org/) and [Apache Hadoop](https://hadoop.apache.org/) clusters in a simple, cost-efficient way. You can install Jupyter notebooks and JupyterLab on a Managed Service for Apache Spark cluster by using the [Jupyter optional component](https://docs.cloud.google.com/dataproc/docs/concepts/components/jupyter) . The component provides a Python kernel to run [PySpark](https://pypi.org/project/pyspark/) code. By default, Managed Service for Apache Spark automatically configures notebooks to be [saved in Cloud Storage](https://github.com/src-d/jgscm) , making the same notebook files accessible to other clusters. When you migrate your existing notebooks to Managed Service for Apache Spark, check that your notebooks' dependencies are covered by the supported [Managed Service for Apache Spark versions](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) . If you need to install custom software, consider [creating your own Managed Service for Apache Spark image](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images) , writing your own [initialization actions](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions) , or [specifying custom Python package requirements](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration) . To get started, see the tutorial on [Installing and running a Jupyter notebook on a Managed Service for Apache Spark cluster](https://docs.cloud.google.com/dataproc/docs/tutorials/jupyter-notebook) .
+- [Vertex AI Workbench instances](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction) , a service that offers an integrated JupyterLab environment in which machine learning developers and data scientists can use some of the latest data science and machine learning frameworks. Vertex AI Workbench is integrated with other Google Cloud data products such as BigQuery, making it easy to go from data ingestion to preprocessing and exploration, and eventually model training and deployment. To learn more, see [Introduction to Vertex AI Workbench instances](https://docs.cloud.google.com/gemini-enterprise-agent-platform/notebooks/workbench/introduction) .
+- [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) , a fast, easy-to-use, fully managed service for running [Apache Spark](https://spark.apache.org/) and [Apache Hadoop](https://hadoop.apache.org/) clusters in a simple, cost-efficient way. You can install Jupyter notebooks and JupyterLab on a Managed Service for Apache Spark cluster by using the [Jupyter optional component](https://docs.cloud.google.com/dataproc/docs/concepts/components/jupyter) . The component provides a Python kernel to run [PySpark](https://pypi.org/project/pyspark/) code. By default, Managed Service for Apache Spark automatically configures notebooks to be [saved in Cloud Storage](https://github.com/src-d/jgscm) , making the same notebook files accessible to other clusters. When you migrate your existing notebooks to Managed Service for Apache Spark, check that your notebooks' dependencies are covered by the supported [Managed Service for Apache Spark versions](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) . If you need to install custom software, consider [creating your own Managed Service for Apache Spark image](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images) , writing your own [initialization actions](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions) , or [specifying custom Python package requirements](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration) . To get started, see the tutorial on [Installing and running a Jupyter notebook on a Managed Service for Apache Spark cluster](https://docs.cloud.google.com/dataproc/docs/tutorials/jupyter-notebook) .
 
 ### Apache Zeppelin
 

@@ -40,188 +40,35 @@ The new Search Ads 360 reports are based on resources and have a different struc
 
 The following table lists the tables supported by the BigQuery Data Transfer Service along with the resources queried to generate the tables.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Old Search Ads Report</th>
-<th>New Search Ads Resource</th>
-<th>New BigQuery Table Name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroup">adGroup</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group">ad_group</a></td>
-<td>p_sa_AdGroupStats_customer_id<br />
-p_sa_AdGroup_customer_id<br />
-p_sa_AdGroupDeviceStats_customer_id<br />
-p_sa_AdGroupConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/ad">ad</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_ad">ad_group_ad</a></td>
-<td>p_sa_AdConversionActionAndDeviceStats_customer_id<br />
-p_sa_AdDeviceStats_customer_id<br />
-p_sa_Ad_customer_id</td>
-</tr>
-<tr class="odd">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset">ad_group_asset</a></td>
-<td>p_sa_AdGroupAssetStats_customer_id<br />
-p_sa_AdGroupConversionActionAndAssetStats_customer_id</td>
-</tr>
-<tr class="even">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset_set">ad_group_asset_set</a></td>
-<td>p_sa_AdGroupAssetSet_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_audience_view">ad_group_audience_view</a></td>
-<td>p_sa_AdGroupAudienceDeviceStats_customer_id<br />
-p_sa_AdGroupAudienceConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_criterion">ad_group_criterion</a></td>
-<td>p_sa_NegativeAdGroupCriterion_customer_id<br />
-p_sa_NegativeAdGroupKeyword_customer_id<br />
-p_sa_AdGroupCriterion_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/age_range_view">age_range_view</a></td>
-<td>p_sa_AgeRangeDeviceStats_customer_id<br />
-p_sa_AgeRangeConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/asset">asset</a></td>
-<td>p_sa_Asset_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/bidStrategy">bidStrategy</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/bidding_strategy">bidding_strategy</a></td>
-<td>p_sa_BidStrategy_customer_id<br />
-p_sa_BidStrategyStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/campaign">campaign</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign">campaign</a></td>
-<td>p_sa_CampaignConversionActionAndDeviceStats_customer_id<br />
-p_sa_Campaign_customer_id<br />
-p_sa_CampaignDeviceStats_customer_id<br />
-p_sa_CampaignStats_customer_id</td>
-</tr>
-<tr class="odd">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset">campaign_asset</a></td>
-<td>p_sa_CampaignAssetStats_customer_id<br />
-p_sa_CampaignConversionActionAndAssetStats_customer_id</td>
-</tr>
-<tr class="even">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset_set">campaign_asset_set</a></td>
-<td>p_sa_CampaignAssetSet_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/campaignTarget">campaignTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_audience_view">campaign_audience_view</a></td>
-<td>p_sa_CampaignAudienceConversionActionAndDeviceStats_customer_id<br />
-p_sa_CampaignAudienceDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/campaignTarget">campaignTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_criterion">campaign_criterion</a></td>
-<td>p_sa_CampaignCriterion_customer_id<br />
-p_sa_NegativeCampaignKeyword_customer_id<br />
-p_sa_NegativeCampaignCriterion_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/productLeadAndCrossSell">productLeadAndCrossSell</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view">cart_data_sales_view</a></td>
-<td>p_sa_CartDataSalesStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/conversion">conversion</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion">conversion</a></td>
-<td>p_sa_Conversion_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/floodlightActivity">floodlightActivity</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion_action">conversion_action</a></td>
-<td>p_sa_ConversionAction_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/account">account</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer">customer</a></td>
-<td>p_sa_Account_customer_id<br />
-p_sa_AccountDeviceStats_customer_id<br />
-p_sa_AccountConversionActionAndDeviceStats_customer_id<br />
-p_sa_AccountStats_customer_id</td>
-</tr>
-<tr class="odd">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer_asset">customer_asset</a></td>
-<td>p_sa_CustomerAssetStats_customer_id<br />
-p_sa_CustomerConversionActionAndAssetStats_customer_id</td>
-</tr>
-<tr class="even">
-<td>N/A</td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer_asset_set">customer_asset_set</a></td>
-<td>p_sa_CustomerAssetSet_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/gender_view">gender_view</a></td>
-<td>p_sa_GenderDeviceStats_customer_id<br />
-p_sa_GenderConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/keyword">keyword</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view">keyword_view</a></td>
-<td>p_sa_Keyword_customer_id<br />
-p_sa_KeywordDeviceStats_customer_id<br />
-p_sa_KeywordStats_customer_id<br />
-p_sa_KeywordConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/location_view">location_view</a></td>
-<td>p_sa_LocationDeviceStats_customer_id<br />
-p_sa_LocationConversionActionAndDeviceStats_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/productAdvertised">productAdvertised</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/shopping_performance_view">shopping_performance_view</a></td>
-<td>p_sa_ProductAdvertised_customer_id<br />
-p_sa_ProductAdvertisedConversionActionAndDeviceStats_customer_id<br />
-p_sa_ProductAdvertisedDeviceStats_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/productGroup">productGroup</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/product_group_view">product_group_view</a></td>
-<td>p_sa_ProductGroupStats_customer_id<br />
-p_sa_ProductGroup_customer_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/visit">visit</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/visit">visit</a></td>
-<td>p_sa_Visit_customer_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/search-ads/v2/report-types/adGroupTarget">adGroupTarget</a></td>
-<td><a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/webpage_view">webpage_view</a></td>
-<td>p_sa_WebpageDeviceStats_customer_id<br />
-p_sa_WebpageConversionActionAndDeviceStats_customer_id</td>
-</tr>
-</tbody>
-</table>
+| Old Search Ads Report                                                                                       | New Search Ads Resource                                                                                                           | New BigQuery Table Name                                                                                                                               |
+|-------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [adGroup](https://developers.google.com/search-ads/v2/report-types/adGroup)                                 | [ad_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group)                                   | p_sa_AdGroupStats_customer_id p_sa_AdGroup_customer_id p_sa_AdGroupDeviceStats_customer_id p_sa_AdGroupConversionActionAndDeviceStats_customer_id     |
+| [ad](https://developers.google.com/search-ads/v2/report-types/ad)                                           | [ad_group_ad](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_ad)                             | p_sa_AdConversionActionAndDeviceStats_customer_id p_sa_AdDeviceStats_customer_id p_sa_Ad_customer_id                                                  |
+| N/A                                                                                                         | [ad_group_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset)                       | p_sa_AdGroupAssetStats_customer_id p_sa_AdGroupConversionActionAndAssetStats_customer_id                                                              |
+| N/A                                                                                                         | [ad_group_asset_set](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset_set)               | p_sa_AdGroupAssetSet_customer_id                                                                                                                      |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [ad_group_audience_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_audience_view)       | p_sa_AdGroupAudienceDeviceStats_customer_id p_sa_AdGroupAudienceConversionActionAndDeviceStats_customer_id                                            |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [ad_group_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_criterion)               | p_sa_NegativeAdGroupCriterion_customer_id p_sa_NegativeAdGroupKeyword_customer_id p_sa_AdGroupCriterion_customer_id                                   |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [age_range_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/age_range_view)                       | p_sa_AgeRangeDeviceStats_customer_id p_sa_AgeRangeConversionActionAndDeviceStats_customer_id                                                          |
+| N/A                                                                                                         | [asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/asset)                                         | p_sa_Asset_customer_id                                                                                                                                |
+| [bidStrategy](https://developers.google.com/search-ads/v2/report-types/bidStrategy)                         | [bidding_strategy](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/bidding_strategy)                   | p_sa_BidStrategy_customer_id p_sa_BidStrategyStats_customer_id                                                                                        |
+| [campaign](https://developers.google.com/search-ads/v2/report-types/campaign)                               | [campaign](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign)                                   | p_sa_CampaignConversionActionAndDeviceStats_customer_id p_sa_Campaign_customer_id p_sa_CampaignDeviceStats_customer_id p_sa_CampaignStats_customer_id |
+| N/A                                                                                                         | [campaign_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset)                       | p_sa_CampaignAssetStats_customer_id p_sa_CampaignConversionActionAndAssetStats_customer_id                                                            |
+| N/A                                                                                                         | [campaign_asset_set](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset_set)               | p_sa_CampaignAssetSet_customer_id                                                                                                                     |
+| [campaignTarget](https://developers.google.com/search-ads/v2/report-types/campaignTarget)                   | [campaign_audience_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_audience_view)       | p_sa_CampaignAudienceConversionActionAndDeviceStats_customer_id p_sa_CampaignAudienceDeviceStats_customer_id                                          |
+| [campaignTarget](https://developers.google.com/search-ads/v2/report-types/campaignTarget)                   | [campaign_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_criterion)               | p_sa_CampaignCriterion_customer_id p_sa_NegativeCampaignKeyword_customer_id p_sa_NegativeCampaignCriterion_customer_id                                |
+| [productLeadAndCrossSell](https://developers.google.com/search-ads/v2/report-types/productLeadAndCrossSell) | [cart_data_sales_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view)           | p_sa_CartDataSalesStats_customer_id                                                                                                                   |
+| [conversion](https://developers.google.com/search-ads/v2/report-types/conversion)                           | [conversion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion)                               | p_sa_Conversion_customer_id                                                                                                                           |
+| [floodlightActivity](https://developers.google.com/search-ads/v2/report-types/floodlightActivity)           | [conversion_action](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion_action)                 | p_sa_ConversionAction_customer_id                                                                                                                     |
+| [account](https://developers.google.com/search-ads/v2/report-types/account)                                 | [customer](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer)                                   | p_sa_Account_customer_id p_sa_AccountDeviceStats_customer_id p_sa_AccountConversionActionAndDeviceStats_customer_id p_sa_AccountStats_customer_id     |
+| N/A                                                                                                         | [customer_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer_asset)                       | p_sa_CustomerAssetStats_customer_id p_sa_CustomerConversionActionAndAssetStats_customer_id                                                            |
+| N/A                                                                                                         | [customer_asset_set](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer_asset_set)               | p_sa_CustomerAssetSet_customer_id                                                                                                                     |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [gender_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/gender_view)                             | p_sa_GenderDeviceStats_customer_id p_sa_GenderConversionActionAndDeviceStats_customer_id                                                              |
+| [keyword](https://developers.google.com/search-ads/v2/report-types/keyword)                                 | [keyword_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view)                           | p_sa_Keyword_customer_id p_sa_KeywordDeviceStats_customer_id p_sa_KeywordStats_customer_id p_sa_KeywordConversionActionAndDeviceStats_customer_id     |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [location_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/location_view)                         | p_sa_LocationDeviceStats_customer_id p_sa_LocationConversionActionAndDeviceStats_customer_id                                                          |
+| [productAdvertised](https://developers.google.com/search-ads/v2/report-types/productAdvertised)             | [shopping_performance_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/shopping_performance_view) | p_sa_ProductAdvertised_customer_id p_sa_ProductAdvertisedConversionActionAndDeviceStats_customer_id p_sa_ProductAdvertisedDeviceStats_customer_id     |
+| [productGroup](https://developers.google.com/search-ads/v2/report-types/productGroup)                       | [product_group_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/product_group_view)               | p_sa_ProductGroupStats_customer_id p_sa_ProductGroup_customer_id                                                                                      |
+| [visit](https://developers.google.com/search-ads/v2/report-types/visit)                                     | [visit](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/visit)                                         | p_sa_Visit_customer_id                                                                                                                                |
+| [adGroupTarget](https://developers.google.com/search-ads/v2/report-types/adGroupTarget)                     | [webpage_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/webpage_view)                           | p_sa_WebpageDeviceStats_customer_id p_sa_WebpageConversionActionAndDeviceStats_customer_id                                                            |
 
 ### Field mapping
 
@@ -237,55 +84,59 @@ The following examples demonstrate how a BigQuery query might look before and af
 
 Consider the following example query that analyzes Search Ads campaign performance from the past 30 days using the old Search Ads 360 reporting API.
 
-    SELECT
-      c.accountId,
-      c.campaign,
-      C.status,
-      SUM(cs.impr) AS Impressions,
-      SUM(cs.clicks) AS Clicks,
-      (SUM(cs.cost) / 1000000) AS Cost
-    FROM
-      `previous_dataset.Campaign_advertiser_id` c
-    LEFT JOIN
-      `previous_dataset.CampaignStats_advertiser_id` cs
-    ON
-      (c.campaignId = cs.campaignId
-      AND cs._DATA_DATE BETWEEN
-      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-    WHERE
-      c._DATA_DATE = c._LATEST_DATE
-    GROUP BY
-      1, 2, 3
-    ORDER BY
-      Impressions DESC
+```
+SELECT
+  c.accountId,
+  c.campaign,
+  C.status,
+  SUM(cs.impr) AS Impressions,
+  SUM(cs.clicks) AS Clicks,
+  (SUM(cs.cost) / 1000000) AS Cost
+FROM
+  `previous_dataset.Campaign_advertiser_id` c
+LEFT JOIN
+  `previous_dataset.CampaignStats_advertiser_id` cs
+ON
+  (c.campaignId = cs.campaignId
+  AND cs._DATA_DATE BETWEEN
+  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+WHERE
+  c._DATA_DATE = c._LATEST_DATE
+GROUP BY
+  1, 2, 3
+ORDER BY
+  Impressions DESC
+```
 
 When mapped to be compatible with the new Search Ads 360 reporting API, the same query is converted to the following:
 
-    SELECT
-      c.customer_id,
-      c.campaign_name,
-      C.campaign_status,
-      SUM(cs.metrics_impressions) AS Impressions,
-      SUM(cs.metrics_clicks) AS Clicks,
-      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
-    FROM
-      `new_dataset.sa_Campaign_customer_id` c
-    LEFT JOIN
-      `new_dataset.sa_CampaignStats_customer_id` cs
-    ON
-      (c.campaign_id = cs.campaign_id
-      AND cs._DATA_DATE BETWEEN
-      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-    WHERE
-      c._DATA_DATE = c._LATEST_DATE
-    GROUP BY
-      1, 2, 3
-    ORDER BY
-      Impressions DESC
+```
+SELECT
+  c.customer_id,
+  c.campaign_name,
+  C.campaign_status,
+  SUM(cs.metrics_impressions) AS Impressions,
+  SUM(cs.metrics_clicks) AS Clicks,
+  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
+FROM
+  `new_dataset.sa_Campaign_customer_id` c
+LEFT JOIN
+  `new_dataset.sa_CampaignStats_customer_id` cs
+ON
+  (c.campaign_id = cs.campaign_id
+  AND cs._DATA_DATE BETWEEN
+  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+WHERE
+  c._DATA_DATE = c._LATEST_DATE
+GROUP BY
+  1, 2, 3
+ORDER BY
+  Impressions DESC
+```
 
 For more examples of queries that are compatible with the new Search Ads 360, see [Example queries](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#example_queries) .
 
 ## What's next
 
-  - To learn how to schedule and manage recurring load jobs from Search Ads 360, see [Search Ads 360 transfers](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) .
-  - To see how you can transform your Search Ads 360 reports, see [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) .
+- To learn how to schedule and manage recurring load jobs from Search Ads 360, see [Search Ads 360 transfers](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) .
+- To see how you can transform your Search Ads 360 reports, see [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) .

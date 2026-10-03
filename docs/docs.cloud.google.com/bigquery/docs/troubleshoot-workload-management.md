@@ -20,8 +20,8 @@ Use the following information to troubleshoot common issues with reservations, s
 
 If you encounter errors like `Failed to allocate slots for reservation in the current system state` or `Failed to update reservation: Failed to allocate slots for reservation` while trying to add more slots to your reservation, this is usually a transient issue. To mitigate the issue, do the following:
 
-  - Retry with a smaller number of slots.
-  - If trying with a smaller number of slots fails, wait 15 minutes and retry the operation.
+- Retry with a smaller number of slots.
+- If trying with a smaller number of slots fails, wait 15 minutes and retry the operation.
 
 If after retrying multiple times and waiting for 30 minutes you still receive the same error, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
@@ -31,8 +31,8 @@ If the error message states `There is insufficient quota to complete this reques
 
 To resolve this error, do one of the following:
 
-  - Add a smaller number of slots to the reservation so that the request doesn't exceed the quota limit.
-  - Request a quota increase in the corresponding region. For more information, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
+- Add a smaller number of slots to the reservation so that the request doesn't exceed the quota limit.
+- Request a quota increase in the corresponding region. For more information, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
 ### Reservation not used by BigQuery to run a job
 
@@ -94,8 +94,8 @@ You might encounter the following errors when creating or updating a reservation
 
 **Error message**
 
-  - `Max reservation size can only be configured in multiples of 50, except when covered by excess commitments.`
-  - `Baseline slots can only be configured in multiples of 50, except when covered by excess commitments.`
+- `Max reservation size can only be configured in multiples of 50, except when covered by excess commitments.`
+- `Baseline slots can only be configured in multiples of 50, except when covered by excess commitments.`
 
 **Cause**
 
@@ -107,8 +107,8 @@ If `baseline slots` or `max reservation size - baseline slots` isn't a multiple 
 
 Do one of the following:
 
-  - Purchase more capacity commitments to cover the slot increases.
-  - Choose baseline and maximum slots that are increments of 50.
+- Purchase more capacity commitments to cover the slot increases.
+- Choose baseline and maximum slots that are increments of 50.
 
 ## Troubleshoot capacity commitments
 
@@ -153,7 +153,7 @@ If jobs are taking significantly longer to complete, check the [detailed view](h
 
 ### Slot contention messages
 
-The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were NUMBER jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
+The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were `` NUMBER `` jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
 
 **Best practice:** Optimize the identified queries or adjust your reservation's slot allocation.
 
@@ -165,8 +165,8 @@ The following sections describe how to resolve common issues when monitoring Big
 
 If you encounter discrepancies between slot usage metrics in resource charts and `INFORMATION_SCHEMA` data, try the following:
 
-  - **Reduce granularity.** Change the chart granularity to 1-second intervals instead of 1-hour intervals.
-  - **Align aggregation.** Make sure that you're using aggregation methods that align between resource charts and `INFORMATION_SCHEMA` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
+- **Reduce granularity.** Change the chart granularity to 1-second intervals instead of 1-hour intervals.
+- **Align aggregation.** Make sure that you're using aggregation methods that align between resource charts and `INFORMATION_SCHEMA` data. For example, to better reflect peak usage in resource charts, change the metric aggregation to p99 or p90 consistently.
 
 ### Borrowed slots appear when idle slots are disabled
 
@@ -174,11 +174,11 @@ Your monitoring charts might show a non-zero value for `borrowed_slots` even if 
 
 These borrowed slots appear in the following cases:
 
-  - **Lending to other reservations.** A reservation with `ignore_idle_slots=true` can lend its unused baseline slots to other reservations in the same administration project, region, and edition that *do* allow idle slot borrowing ( `ignore_idle_slots=false` ). If all reservations in an administration project, region, and edition have `ignore_idle_slots=true` , then idle slots aren't shared between them.
-    
-    For example, assume Reservation A has 100 slots, 0 usage, and is configured with `ignore_idle_slots=true` . Reservation B is in the same administration project, region, and edition, has 100 slots, needs 150 slots for its workload, and is configured with `ignore_idle_slots=false` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `lent_slots` for Reservation A and 50 `borrowed_slots` for Reservation B.
+- **Lending to other reservations.** A reservation with `ignore_idle_slots=true` can lend its unused baseline slots to other reservations in the same administration project, region, and edition that *do* allow idle slot borrowing ( `ignore_idle_slots=false` ). If all reservations in an administration project, region, and edition have `ignore_idle_slots=true` , then idle slots aren't shared between them.
 
-  - **Usage exceeding capacity.** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `borrowed_slots` . This behavior can occur even for reservations with `ignore_idle_slots=true` .
+  For example, assume Reservation A has 100 slots, 0 usage, and is configured with `ignore_idle_slots=true` . Reservation B is in the same administration project, region, and edition, has 100 slots, needs 150 slots for its workload, and is configured with `ignore_idle_slots=false` . Reservation B can borrow 50 idle slots from Reservation A to meet its needs. When this occurs, monitoring charts report 50 `lent_slots` for Reservation A and 50 `borrowed_slots` for Reservation B.
+
+- **Usage exceeding capacity.** If a reservation's slot usage temporarily exceeds its capacity (baseline + autoscaled slots), monitoring charts show this difference as `borrowed_slots` . This behavior can occur even for reservations with `ignore_idle_slots=true` .
 
 Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
 
@@ -190,8 +190,8 @@ For a more accurate analysis of slot usage, query columns related to idle slots,
 
 ## What's next
 
-  - Learn more about [workload management using reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
-  - Learn how to [manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
-  - Learn about [purchasing and managing slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
-  - Learn how to [monitor reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) and [use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
-  - Explore other [BigQuery troubleshooting resources](https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro) .
+- Learn more about [workload management using reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
+- Learn how to [manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
+- Learn about [purchasing and managing slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
+- Learn how to [monitor reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) and [use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
+- Explore other [BigQuery troubleshooting resources](https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro) .

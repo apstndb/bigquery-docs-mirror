@@ -50,23 +50,23 @@ The following diagram shows an example of the resource hierarchy. In this exampl
 
 When choosing how to organize your BigQuery resources, consider the following points:
 
-  - **Quotas.** Many BigQuery [quotas](https://docs.cloud.google.com/bigquery/quotas) are applied at the project level. A few apply at the dataset level. Project-level quotas that involve compute resources, such as queries and load jobs, are counted against the project that creates the job, rather than the storage project.
+- **Quotas.** Many BigQuery [quotas](https://docs.cloud.google.com/bigquery/quotas) are applied at the project level. A few apply at the dataset level. Project-level quotas that involve compute resources, such as queries and load jobs, are counted against the project that creates the job, rather than the storage project.
 
-  - **Billing.** If you want different departments in your organization to use different Cloud Billing accounts, then create different projects for each team. Create the Cloud Billing accounts at the organization level and associate the projects to them.
+- **Billing.** If you want different departments in your organization to use different Cloud Billing accounts, then create different projects for each team. Create the Cloud Billing accounts at the organization level and associate the projects to them.
 
-  - **Slot reservations.** Reserved [slots](https://docs.cloud.google.com/bigquery/docs/slots) are scoped to the Organization resource. After you purchase reserved slot capacity, you can assign a pool of slots to any project or folder within the organization, or assign slots to the entire Organization resource. Projects inherit slot reservations from their parent folder or Organization. Reserved slots are associated with an [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , which is used to manage the slots. For more information, see [Workload management using Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
+- **Slot reservations.** Reserved [slots](https://docs.cloud.google.com/bigquery/docs/slots) are scoped to the Organization resource. After you purchase reserved slot capacity, you can assign a pool of slots to any project or folder within the organization, or assign slots to the entire Organization resource. Projects inherit slot reservations from their parent folder or Organization. Reserved slots are associated with an [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , which is used to manage the slots. For more information, see [Workload management using Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
-  - **Permissions.** Consider how your permissions hierarchy affects the people in your organization who need to access the data. For example, if you want to give an entire team access to specific data, you might store that data in a single project to simplify access management.
-    
-    Tables and other entities inherit the permissions of their parent dataset. Datasets inherit permissions from their parent entities in the resource hierarchy (projects, folders, organizations). To perform an operation on a resource, a user needs both the relevant permissions on the resource, and also permission to create a BigQuery job. The permission to create a job is associated with the project that is used for that job.
+- **Permissions.** Consider how your permissions hierarchy affects the people in your organization who need to access the data. For example, if you want to give an entire team access to specific data, you might store that data in a single project to simplify access management.
+
+  Tables and other entities inherit the permissions of their parent dataset. Datasets inherit permissions from their parent entities in the resource hierarchy (projects, folders, organizations). To perform an operation on a resource, a user needs both the relevant permissions on the resource, and also permission to create a BigQuery job. The permission to create a job is associated with the project that is used for that job.
 
 ## Patterns
 
 This section presents two common patterns for organizing BigQuery resources.
 
-  - **Central data lake, department data marts** . The organization creates a unified storage project to hold its raw data. Departments within the organization create their own data mart projects for analysis.
+- **Central data lake, department data marts** . The organization creates a unified storage project to hold its raw data. Departments within the organization create their own data mart projects for analysis.
 
-  - **Department data lakes, central data warehouse** . Each department creates and manages its own storage project to hold that department's raw data. The organization then creates a central data warehouse project for analysis.
+- **Department data lakes, central data warehouse** . Each department creates and manages its own storage project to hold that department's raw data. The organization then creates a central data warehouse project for analysis.
 
 There are advantages and tradeoffs to each approach. Many organizations combine elements of both patterns.
 
@@ -80,17 +80,17 @@ Each department has its own dedicated project, which it uses to query the data, 
 
 Advantages of this structure include:
 
-  - A centralized data engineering team can manage the ingestion pipeline in a single place.
-  - The raw data is isolated from the department-level projects.
-  - With on-demand pricing, billing for running queries is charged to the department that runs the query.
-  - With capacity-based pricing, you can assign slots to each department based on their projected compute requirements.
-  - Each department is isolated from the others in terms of project-level quotas.
+- A centralized data engineering team can manage the ingestion pipeline in a single place.
+- The raw data is isolated from the department-level projects.
+- With on-demand pricing, billing for running queries is charged to the department that runs the query.
+- With capacity-based pricing, you can assign slots to each department based on their projected compute requirements.
+- Each department is isolated from the others in terms of project-level quotas.
 
 When using this structure, the following permissions are typical:
 
-  - The central data engineering team is granted the BigQuery Data Editor and BigQuery Job User roles for the storage project. These allow them to ingest and edit data in the storage project.
-  - Department analysts are granted the BigQuery Data Viewer role for specific datasets in the central data lake project. This allows them to query the data, but not to update or delete the raw data.
-  - Department analysts are also granted the BigQuery Data Editor role and Job User role for their department's data mart project. This allows them to create and update tables in their project and run query jobs, in order to transform and aggregate the data for department-specific usage.
+- The central data engineering team is granted the BigQuery Data Editor and BigQuery Job User roles for the storage project. These allow them to ingest and edit data in the storage project.
+- Department analysts are granted the BigQuery Data Viewer role for specific datasets in the central data lake project. This allows them to query the data, but not to update or delete the raw data.
+- Department analysts are also granted the BigQuery Data Editor role and Job User role for their department's data mart project. This allows them to create and update tables in their project and run query jobs, in order to transform and aggregate the data for department-specific usage.
 
 For more information, see [Basic roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
 
@@ -104,16 +104,16 @@ Analysts can query and read the aggregated data from the data warehouse project.
 
 Advantages of this structure include:
 
-  - It is simpler to manage data access at the department level, by using separate projects for each department.
-  - A central analytics team has a single project for running analytics jobs, which makes it easier to monitor queries.
-  - Users can access data from a centralized BI tool, which is kept isolated from the raw data.
-  - Slots can be assigned to the data warehouse project to handle all queries from analysts and external tools.
+- It is simpler to manage data access at the department level, by using separate projects for each department.
+- A central analytics team has a single project for running analytics jobs, which makes it easier to monitor queries.
+- Users can access data from a centralized BI tool, which is kept isolated from the raw data.
+- Slots can be assigned to the data warehouse project to handle all queries from analysts and external tools.
 
 When using this structure, the following permissions are typical:
 
-  - Data engineers are granted BigQuery Data Editor and BigQuery Job User roles in their department's data mart. These roles allow them to ingest and transform data into their data mart.
-  - Analysts are granted BigQuery Data Editor and BigQuery Job User roles in the data warehouse project. These roles allow them to create aggregate views in the data warehouse and run query jobs.
-  - Service accounts that connect BigQuery to BI tools are granted the BigQuery Data Viewer role for specific datasets, which can hold either raw data from the data lake or transformed data in the data warehouse project.
+- Data engineers are granted BigQuery Data Editor and BigQuery Job User roles in their department's data mart. These roles allow them to ingest and transform data into their data mart.
+- Analysts are granted BigQuery Data Editor and BigQuery Job User roles in the data warehouse project. These roles allow them to create aggregate views in the data warehouse and run query jobs.
+- Service accounts that connect BigQuery to BI tools are granted the BigQuery Data Viewer role for specific datasets, which can hold either raw data from the data lake or transformed data in the data warehouse project.
 
 For more information, see [Basic roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) .
 

@@ -12,16 +12,16 @@ This tutorial shows you how to gain insights from unstructured image data by int
 
 ## Objectives
 
-  - Create a [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over image data in a Cloud Storage bucket.
-  - Create a BigQuery ML remote model that targets the Gemini Enterprise Agent Platform `gemini-2.5-flash` model.
-  - Use the remote model with the `AI.GENERATE_TEXT` function to identify the movies associated with a set of movie posters.
+- Create a [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over image data in a Cloud Storage bucket.
+- Create a BigQuery ML remote model that targets the Gemini Enterprise Agent Platform `gemini-2.5-flash` model.
+- Use the remote model with the `AI.GENERATE_TEXT` function to identify the movies associated with a set of movie posters.
 
 ## Costs
 
 This tutorial uses the following billable components of Google Cloud:
 
-  - [BigQuery ML](https://cloud.google.com/bigquery/pricing)
-  - [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
+- [BigQuery ML](https://cloud.google.com/bigquery/pricing)
+- [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://cloud.google.com/products/calculator) .
 
@@ -30,44 +30,44 @@ When you finish the tasks that are described in this document, you can avoid con
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs, if any are not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ### Required roles
 
 To run this tutorial, you need the following Identity and Access Management (IAM) roles:
 
-  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` ).
-  - Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ).
+- Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `roles/bigquery.admin` ).
+- Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ).
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-  - Create a dataset: `bigquery.datasets.create`
-  - Create, delegate, and use a connection: `bigquery.connections.*`
-  - Set the default connection: `bigquery.config.*`
-  - Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
-  - Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
-  - Create a model and run inference:
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
-      - `bigquery.models.updateMetadata`
+- Create a dataset: `bigquery.datasets.create`
+- Create, delegate, and use a connection: `bigquery.connections.*`
+- Set the default connection: `bigquery.config.*`
+- Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
+- Create an object table: `bigquery.tables.create` and `bigquery.tables.update`
+- Create a model and run inference:
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+  - `bigquery.models.updateMetadata`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -84,7 +84,7 @@ To perform BigQuery ML inference on object tables using [gemini-2.5-flash](https
 3.  Click **Create reservation** .
 
 4.  On the **Create reservation** page, do the following:
-    
+
     1.  For **Reservation name** , enter `bqml-tutorial-reservation` .
     2.  For **Location** , select **us (multiple regions in United States)** .
     3.  Leave the remaining default settings as they are, and click **Save** .
@@ -97,7 +97,7 @@ To perform BigQuery ML inference on object tables using [gemini-2.5-flash](https
 
 3.  In the **Slot reservations** table, find the reservation that you want to assign to your project.
 
-4.  Click more\_vert **View actions \> Create assignment** .
+4.  Click more_vert **View actions \> Create assignment** .
 
 5.  In **Create an assignment** , click **Browse** and select your project.
 
@@ -114,21 +114,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -138,25 +138,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create the object table
 
@@ -165,13 +171,15 @@ Create an object table over the movie poster images in the public Cloud Storage 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query to create the object table:
-    
-        CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.movie_posters`
-          WITH CONNECTION DEFAULT
-          OPTIONS (
-            object_metadata = 'SIMPLE',
-            uris =
-              ['gs://cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters/*']);
+
+    ```
+    CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.movie_posters`
+      WITH CONNECTION DEFAULT
+      OPTIONS (
+        object_metadata = 'SIMPLE',
+        uris =
+          ['gs://cloud-samples-data/vertex-ai/dataset-management/datasets/classic-movie-posters/*']);
+    ```
 
 ## Create the remote model
 
@@ -180,11 +188,13 @@ Create a remote model that represents an Agent Platform `gemini-2.5-flash` model
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query to create the remote model:
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.gemini-vision`
-          REMOTE WITH CONNECTION DEFAULT
-          OPTIONS (ENDPOINT = 'gemini-2.5-flash');
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.gemini-vision`
+      REMOTE WITH CONNECTION DEFAULT
+      OPTIONS (ENDPOINT = 'gemini-2.5-flash');
+    ```
+
     The query might take a few minutes to complete, after which the `gemini-vision` model appears in the `bqml_tutorial` dataset in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Analyze the movie posters
@@ -194,8 +204,8 @@ Use the remote model to analyze the movie posters and determine what movie each 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query to analyze the movie poster images:
-    
-    ``` 
+
+    ```
     CREATE OR REPLACE TABLE
       `bqml_tutorial.movie_posters_results` AS (
       SELECT
@@ -206,15 +216,16 @@ Use the remote model to analyze the movie posters and determine what movie each 
           TABLE `bqml_tutorial.movie_posters`,
           STRUCT( 0.2 AS temperature,
             'For the movie represented by this poster, what is the movie title and year of release? Answer in JSON format with two keys: title, year. title should be string, year should be integer.' AS PROMPT)));
-        
     ```
 
 3.  In the query editor, run the following statement to view the table data:
-    
-        SELECT * FROM `bqml_tutorial.movie_posters_results`;
-    
+
+    ```
+    SELECT * FROM `bqml_tutorial.movie_posters_results`;
+    ```
+
     The output is similar to the following:
-    
+
     ```console
     +--------------------------------------------+----------------------------------+
     | uri                                        | result                           |
@@ -249,22 +260,26 @@ To make the movie title and year data easier to read, format the data returned b
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query to format the data:
-    
-        CREATE OR REPLACE TABLE
-          `bqml_tutorial.movie_posters_results_formatted` AS (
-          SELECT
-            uri,
-            JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.title") AS title,
-            JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.year") AS year
-          FROM
-            `bqml_tutorial.movie_posters_results` results );
+
+    ```
+    CREATE OR REPLACE TABLE
+      `bqml_tutorial.movie_posters_results_formatted` AS (
+      SELECT
+        uri,
+        JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.title") AS title,
+        JSON_QUERY(RTRIM(LTRIM(results.result, " ```json"), "```"), "$.year") AS year
+      FROM
+        `bqml_tutorial.movie_posters_results` results );
+    ```
 
 3.  In the query editor, run the following statement to view the table data:
-    
-        SELECT * FROM `bqml_tutorial.movie_posters_results_formatted`;
-    
+
+    ```
+    SELECT * FROM `bqml_tutorial.movie_posters_results_formatted`;
+    ```
+
     The output is similar to the following:
-    
+
     ```console
     +--------------------------------------------+----------------------------+------+
     | uri                                        | title                      | year |
@@ -286,17 +301,15 @@ To make the movie title and year data easier to read, format the data returned b
 ### Delete the project
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete individual resources
 
@@ -308,13 +321,17 @@ If you want to reuse the project, then delete the resources that you created for
 
 Delete the entire `bqml_tutorial` dataset and all its contents by running the following SQL command:
 
-    DROP SCHEMA IF EXISTS `bqml_tutorial` CASCADE;
+```
+DROP SCHEMA IF EXISTS `bqml_tutorial` CASCADE;
+```
 
 ### bq
 
 Delete the entire `bqml_tutorial` dataset and all its contents:
 
-    bq rm -r bqml_tutorial
+```
+bq rm -r bqml_tutorial
+```
 
 #### Delete the reservation
 
@@ -328,13 +345,15 @@ If you created a BigQuery reservation as part of this tutorial, you should remov
 
 3.  In the **Slot reservations** table, find **`bqml-tutorial-reservation`** .
 
-4.  Click more\_vert **View actions** \> **Delete** .
+4.  Click more_vert **View actions** \> **Delete** .
 
 ### bq
 
 If you created a BigQuery reservation named `bqml-tutorial-reservation` in the `us` location, use the following command to remove it:
 
-    bq rm --reservation --location=us bqml-tutorial-reservation
+```
+bq rm --reservation --location=us bqml-tutorial-reservation
+```
 
 #### Delete the connection
 
@@ -346,18 +365,20 @@ If you created a BigQuery reservation named `bqml-tutorial-reservation` in the `
 
 3.  In the table, find your connection.
 
-4.  Click more\_vert **View actions \> Delete** .
+4.  Click more_vert **View actions \> Delete** .
 
 ### bq
 
 Delete the connection:
 
-    bq rm --connection --location=us CONNECTION_ID
+```
+bq rm --connection --location=us CONNECTION_ID
+```
 
-Replace CONNECTION\_ID with the actual ID of your connection.
+Replace ` CONNECTION_ID ` with the actual ID of your connection.
 
 ## What's next
 
-  - Learn more about [generative AI functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Learn how to [tune and evaluate a model](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
-  - Explore reference architectures, diagrams, and best practices about Google Cloud. Take a look at our [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .
+- Learn more about [generative AI functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Learn how to [tune and evaluate a model](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) .
+- Explore reference architectures, diagrams, and best practices about Google Cloud. Take a look at our [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .

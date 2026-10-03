@@ -20,7 +20,7 @@ An MCP service endpoint is the network address and communication interface (usua
 
 The BigQuery Migration API MCP server has the following global MCP endpoint:
 
-  - https://bigquerymigration.googleapis.com/mcp
+- https://bigquerymigration.googleapis.com/mcp
 
 ## MCP Tools
 
@@ -30,71 +30,32 @@ An [MCP tool](https://modelcontextprotocol.io/legacy/concepts/tools) is a functi
 
 The bigquerymigration.googleapis.com MCP server has the following tools:
 
-MCP Tools
-
-`  translate_query  `
-
-Translates a single query into BigQuery SQL syntax.
-
-`  get_translation  `
-
-Gets the SQL translation for a given translation ID.
-
-`  explain_translation  `
-
-Explains the SQL translation for a given translation ID.
-
-`  generate_ddl_suggestion  `
-
-Suggests Data Definition Language (DDL) statements for an input query. For example, `CREATE TABLE` or `CREATE VIEW` . The generated DDL provides schema definitions for tables and views that are used in the query. To get DDL suggestions, call this tool, and then use the `fetch_ddl_suggestion` tool with the returned suggestion ID to retrieve the DDL. You can then prepend the retrieved DDL to the original input query and translate it again to improve translation quality.
-
-`  fetch_ddl_suggestion  `
-
-Fetches DDL suggestion for a given suggestion ID.
-
-`  translate_batch_queries  `
-
-Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
-
-`  fetch_batch_translation  `
-
-Retrieves the status and logs of a batch translation workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
-
-`  generate_batch_ddl_suggestion  `
-
-Generates Data Definition Language (DDL) suggestions for a batch translation. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
-
-`  fetch_batch_ddl_suggestion  `
-
-Retrieves the status and logs of a batch DDL suggestion workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
-
-`  translate_metadata  `
-
-Translates a metadata zip file into Data Definition Language (DDL) statements and table mappings. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+| MCP Tools                                                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|-------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`translate_query`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query)                             | Translates a single query into BigQuery SQL syntax.                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [`get_translation`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/get_translation)                             | Gets the SQL translation for a given translation ID.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [`explain_translation`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation)                     | Explains the SQL translation for a given translation ID.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [`generate_ddl_suggestion`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/generate_ddl_suggestion)             | Suggests Data Definition Language (DDL) statements for an input query. For example, `CREATE TABLE` or `CREATE VIEW` . The generated DDL provides schema definitions for tables and views that are used in the query. To get DDL suggestions, call this tool, and then use the `fetch_ddl_suggestion` tool with the returned suggestion ID to retrieve the DDL. You can then prepend the retrieved DDL to the original input query and translate it again to improve translation quality. |
+| [`fetch_ddl_suggestion`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion)                   | Fetches DDL suggestion for a given suggestion ID.                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [`translate_batch_queries`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_batch_queries)             | Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**                                                                                                                                                                                                                                                                                           |
+| [`fetch_batch_translation`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_translation)             | Retrieves the status and logs of a batch translation workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**                                                                                                                                                                                                                                                                                              |
+| [`generate_batch_ddl_suggestion`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/generate_batch_ddl_suggestion) | Generates Data Definition Language (DDL) suggestions for a batch translation. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**                                                                                                                                                                                                                                                                               |
+| [`fetch_batch_ddl_suggestion`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_ddl_suggestion)       | Retrieves the status and logs of a batch DDL suggestion workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**                                                                                                                                                                                                                                                                                           |
+| [`translate_metadata`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_metadata)                       | Translates a metadata zip file into Data Definition Language (DDL) statements and table mappings. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**                                                                                                                                                                                                                                                           |
 
 ### Get MCP tool specifications
 
 To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-    &quot;method&quot;: &quot;tools/list&quot;,
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+**Curl Request**
+
+```
+curl --location 'https://bigquerymigration.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+    "method": "tools/list",
+    "jsonrpc": "2.0",
+    "id": 1
+}'
+```

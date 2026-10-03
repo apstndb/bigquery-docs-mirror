@@ -11,7 +11,7 @@ data_source: docs.cloud.google.com
 You can choose from among three Python libraries in BigQuery, based on your use case.
 
 |                       | Use case                                                                   | Maximum data size                                          | Description                                                                                                                                                                                                                                              |
-| --------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|----------------------------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | bigquery-dataframes   | Python based data processing and ML operations with server-side processing | Scalable to multi-terabyte datasets (server-side pushdown) | Pandas and scikit-learn APIs implemented with server-side pushdown. For more information, see [Introduction to BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .                                      |
 | pandas-gbq            | Python based data processing using client side data copy                   | Limited by client memory                                   | Lets you move data to and from Python DataFrames on the client side. For more information, see the [documentation](https://googleapis.dev/python/pandas-gbq/latest/index.html) and [source code](https://github.com/googleapis/python-bigquery-pandas) . |
 | google-cloud-bigquery | BigQuery deployment, administration, and SQL-based querying                | Limited by client memory                                   | Python package that wraps all the BigQuery APIs. For more information, see the [documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) and [source code](https://github.com/googleapis/python-bigquery) .                   |
@@ -24,14 +24,16 @@ The BigQuery DataFrames ( `bigframes` ) library provides a pythonic DataFrame an
 
 To use the code samples in this guide, install the `bigframes` , `pandas-gbq` , and `google-cloud-bigquery` packages:
 
-    pip install --upgrade bigframes pandas-gbq 'google-cloud-bigquery[bqstorage,pandas]'
+```
+pip install --upgrade bigframes pandas-gbq 'google-cloud-bigquery[bqstorage,pandas]'
+```
 
 ### Running Queries
 
 All three libraries support querying data stored in BigQuery. Key differences between the libraries include:
 
 |                      | bigquery-dataframes                                                | pandas-gbq                                                                                                                                     | google-cloud-bigquery                                                                                                                                                                                                |
-| -------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Default SQL syntax   | GoogleSQL                                                          | GoogleSQL (configurable with `pandas_gbq.context.dialect` )                                                                                    | GoogleSQL                                                                                                                                                                                                            |
 | Query configurations | Configurable using `bpd.options.bigquery` or `read_gbq` parameters | Sent as dictionary in the format of a [query request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) . | Use the [`QueryJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig) class, which contains properties for the various API configuration options. |
 
@@ -43,71 +45,77 @@ The following sample shows how to run a GoogleSQL query with and without explici
 
 ### bigquery-dataframes
 
-    import bigframes.pandas as bpd
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def query_standard_sql(project_id: str = "your-project-id") -> bpd.DataFrame:
-        """Runs a standard SQL query using BigQuery DataFrames."""
-        sql = """
-        SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = 'TX'
-        LIMIT 100
-        """
-    
-        # Run a query alongside existing SQL. The project will be determined from
-        # default credentials.
-        df = bpd.read_gbq(sql)
-    
-        # Run a query after explicitly specifying a project.
-        bpd.close_session()
-        bpd.options.bigquery.project = project_id
-        df = bpd.read_gbq(sql)
-        return df
-    
-    
-    # Run the sample:
-    # df = query_standard_sql("your-project-id")
-    # print(df.head())
+```python
+import bigframes.pandas as bpd
+
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
+
+
+def query_standard_sql(project_id: str = "your-project-id") -> bpd.DataFrame:
+    """Runs a standard SQL query using BigQuery DataFrames."""
+    sql = """
+    SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = 'TX'
+    LIMIT 100
+    """
+
+    # Run a query alongside existing SQL. The project will be determined from
+    # default credentials.
+    df = bpd.read_gbq(sql)
+
+    # Run a query after explicitly specifying a project.
+    bpd.close_session()
+    bpd.options.bigquery.project = project_id
+    df = bpd.read_gbq(sql)
+    return df
+
+
+# Run the sample:
+# df = query_standard_sql("your-project-id")
+# print(df.head())
+```
 
 ### pandas-gbq
 
-    import pandas
-    
-    sql = """
-        SELECT name
-        FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = 'TX'
-        LIMIT 100
-    """
-    
-    # Run a Standard SQL query using the environment's default project
-    df = pandas.read_gbq(sql, dialect="standard")
-    
-    # Run a Standard SQL query with the project set explicitly
-    project_id = "your-project-id"
-    df = pandas.read_gbq(sql, project_id=project_id, dialect="standard")
+```python
+import pandas
+
+sql = """
+    SELECT name
+    FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = 'TX'
+    LIMIT 100
+"""
+
+# Run a Standard SQL query using the environment's default project
+df = pandas.read_gbq(sql, dialect="standard")
+
+# Run a Standard SQL query with the project set explicitly
+project_id = "your-project-id"
+df = pandas.read_gbq(sql, project_id=project_id, dialect="standard")
+```
 
 ### google-cloud-bigquery
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    sql = """
-        SELECT name
-        FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = 'TX'
-        LIMIT 100
-    """
-    
-    # Run a Standard SQL query using the environment's default project
-    df = client.query(sql).to_dataframe()
-    
-    # Run a Standard SQL query with the project set explicitly
-    project_id = "your-project-id"
-    df = client.query(sql, project=project_id).to_dataframe()
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+sql = """
+    SELECT name
+    FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = 'TX'
+    LIMIT 100
+"""
+
+# Run a Standard SQL query using the environment's default project
+df = client.query(sql).to_dataframe()
+
+# Run a Standard SQL query with the project set explicitly
+project_id = "your-project-id"
+df = client.query(sql, project=project_id).to_dataframe()
+```
 
 #### Querying data with the legacy SQL syntax
 
@@ -119,31 +127,35 @@ BigQuery DataFrames does not support legacy SQL syntax. Use [GoogleSQL](https://
 
 ### pandas-gbq
 
-    import pandas
-    
-    sql = """
-        SELECT name
-        FROM [bigquery-public-data:usa_names.usa_1910_current]
-        WHERE state = 'TX'
-        LIMIT 100
-    """
-    
-    df = pandas.read_gbq(sql, dialect="legacy")
+```python
+import pandas
+
+sql = """
+    SELECT name
+    FROM [bigquery-public-data:usa_names.usa_1910_current]
+    WHERE state = 'TX'
+    LIMIT 100
+"""
+
+df = pandas.read_gbq(sql, dialect="legacy")
+```
 
 ### google-cloud-bigquery
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    sql = """
-        SELECT name
-        FROM [bigquery-public-data:usa_names.usa_1910_current]
-        WHERE state = 'TX'
-        LIMIT 100
-    """
-    query_config = bigquery.QueryJobConfig(use_legacy_sql=True)
-    
-    df = client.query(sql, job_config=query_config).to_dataframe()
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+sql = """
+    SELECT name
+    FROM [bigquery-public-data:usa_names.usa_1910_current]
+    WHERE state = 'TX'
+    LIMIT 100
+"""
+query_config = bigquery.QueryJobConfig(use_legacy_sql=True)
+
+df = client.query(sql, job_config=query_config).to_dataframe()
+```
 
 #### Using the BigQuery Storage API to download large results
 
@@ -151,56 +163,62 @@ Use the [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/refer
 
 ### bigquery-dataframes
 
-    import bigframes.pandas as bpd
-    import pandas as pd
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def query_bqstorage() -> pd.DataFrame:
-        """Queries BigQuery and downloads results using the BigQuery Storage API."""
-        sql = """
-        SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = 'TX'
-        LIMIT 100
-        """
-    
-        # Read query results into a server-side DataFrame without downloading data.
-        df = bpd.read_gbq(sql)
-    
-        # When downloading results to an in-memory pandas DataFrame,
-        # bigquery-dataframes automatically uses the BigQuery Storage API if
-        # installed.
-        pandas_df = df.to_pandas()
-        return pandas_df
-    
-    
-    # Run the sample:
-    # pandas_df = query_bqstorage()
-    # print(pandas_df.head())
+```python
+import bigframes.pandas as bpd
+import pandas as pd
+
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
+
+
+def query_bqstorage() -> pd.DataFrame:
+    """Queries BigQuery and downloads results using the BigQuery Storage API."""
+    sql = """
+    SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = 'TX'
+    LIMIT 100
+    """
+
+    # Read query results into a server-side DataFrame without downloading data.
+    df = bpd.read_gbq(sql)
+
+    # When downloading results to an in-memory pandas DataFrame,
+    # bigquery-dataframes automatically uses the BigQuery Storage API if
+    # installed.
+    pandas_df = df.to_pandas()
+    return pandas_df
+
+
+# Run the sample:
+# pandas_df = query_bqstorage()
+# print(pandas_df.head())
+```
 
 ### pandas-gbq
 
-    import pandas
-    
-    sql = "SELECT * FROM `bigquery-public-data.irs_990.irs_990_2012`"
-    
-    # Use the BigQuery Storage API to download results more quickly.
-    df = pandas.read_gbq(sql, dialect="standard", use_bqstorage_api=True)
+```python
+import pandas
+
+sql = "SELECT * FROM `bigquery-public-data.irs_990.irs_990_2012`"
+
+# Use the BigQuery Storage API to download results more quickly.
+df = pandas.read_gbq(sql, dialect="standard", use_bqstorage_api=True)
+```
 
 ### google-cloud-bigquery
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    sql = "SELECT * FROM `bigquery-public-data.irs_990.irs_990_2012`"
-    
-    # The client library uses the BigQuery Storage API to download results to a
-    # pandas dataframe if the API is enabled on the project, the
-    # `google-cloud-bigquery-storage` package is installed, and the `pyarrow`
-    # package is installed.
-    df = client.query(sql).to_dataframe()
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+sql = "SELECT * FROM `bigquery-public-data.irs_990.irs_990_2012`"
+
+# The client library uses the BigQuery Storage API to download results to a
+# pandas dataframe if the API is enabled on the project, the
+# `google-cloud-bigquery-storage` package is installed, and the `pyarrow`
+# package is installed.
+df = client.query(sql).to_dataframe()
+```
 
 #### Running a query with a configuration
 
@@ -210,51 +228,21 @@ The following sample shows how to run a query with named parameters.
 
 ### bigquery-dataframes
 
-    import bigframes.pandas as bpd
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def query_parameters() -> bpd.DataFrame:
-        """Queries BigQuery using BigQuery DataFrames with query parameters."""
-        sql = """
-        SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = @state
-        LIMIT 100
-        """
-    
-        query_config = {
-            "query": {
-                "parameterMode": "NAMED",
-                "queryParameters": [
-                    {
-                        "name": "state",
-                        "parameterType": {"type": "STRING"},
-                        "parameterValue": {"value": "TX"},
-                    }
-                ],
-            }
-        }
-    
-        df = bpd.read_gbq(sql, configuration=query_config)
-        return df
-    
-    
-    # Run the sample:
-    # df = query_parameters()
-    # print(df.head())
+```python
+import bigframes.pandas as bpd
 
-### pandas-gbq
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
 
-    import pandas
-    
+
+def query_parameters() -> bpd.DataFrame:
+    """Queries BigQuery using BigQuery DataFrames with query parameters."""
     sql = """
-        SELECT name
-        FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = @state
-        LIMIT @limit
+    SELECT name FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = @state
+    LIMIT 100
     """
+
     query_config = {
         "query": {
             "parameterMode": "NAMED",
@@ -263,100 +251,140 @@ The following sample shows how to run a query with named parameters.
                     "name": "state",
                     "parameterType": {"type": "STRING"},
                     "parameterValue": {"value": "TX"},
-                },
-                {
-                    "name": "limit",
-                    "parameterType": {"type": "INTEGER"},
-                    "parameterValue": {"value": 100},
-                },
+                }
             ],
         }
     }
-    
-    df = pandas.read_gbq(sql, configuration=query_config)
+
+    df = bpd.read_gbq(sql, configuration=query_config)
+    return df
+
+
+# Run the sample:
+# df = query_parameters()
+# print(df.head())
+```
+
+### pandas-gbq
+
+```python
+import pandas
+
+sql = """
+    SELECT name
+    FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = @state
+    LIMIT @limit
+"""
+query_config = {
+    "query": {
+        "parameterMode": "NAMED",
+        "queryParameters": [
+            {
+                "name": "state",
+                "parameterType": {"type": "STRING"},
+                "parameterValue": {"value": "TX"},
+            },
+            {
+                "name": "limit",
+                "parameterType": {"type": "INTEGER"},
+                "parameterValue": {"value": 100},
+            },
+        ],
+    }
+}
+
+df = pandas.read_gbq(sql, configuration=query_config)
+```
 
 ### google-cloud-bigquery
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    sql = """
-        SELECT name
-        FROM `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE state = @state
-        LIMIT @limit
-    """
-    query_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter("state", "STRING", "TX"),
-            bigquery.ScalarQueryParameter("limit", "INTEGER", 100),
-        ]
-    )
-    
-    df = client.query(sql, job_config=query_config).to_dataframe()
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+sql = """
+    SELECT name
+    FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE state = @state
+    LIMIT @limit
+"""
+query_config = bigquery.QueryJobConfig(
+    query_parameters=[
+        bigquery.ScalarQueryParameter("state", "STRING", "TX"),
+        bigquery.ScalarQueryParameter("limit", "INTEGER", 100),
+    ]
+)
+
+df = client.query(sql, job_config=query_config).to_dataframe()
+```
 
 ### Loading a pandas DataFrame to a BigQuery table
 
 All three libraries support uploading data from a pandas DataFrame to a new table in BigQuery. Key differences include the following:
 
 |                     | bigquery-dataframes                                                                  | pandas-gbq                                                                                                                      | google-cloud-bigquery                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|---------------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Type support        | Converts the DataFrame using `read_pandas` and writes it to a table using `to_gbq` . | Converts the DataFrame to CSV format before sending to the API, which doesn't support nested or array values.                   | Converts the DataFrame to Parquet or CSV format before sending to the API, which supports nested and array values. Choose Parquet for struct and array values and CSV for date and time serialization flexibility. Parquet is the default choice. Note that `pyarrow` , which is the parquet engine used to send the DataFrame data to the BigQuery API, must be installed to load the DataFrame to a table. |
 | Load configurations | Configure behavior with `to_gbq` parameters, such as `if_exists` .                   | You can optionally specify a [table schema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema) . | Use the [`LoadJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig) class, which contains properties for the various API configuration options.                                                                                                                                                                                           |
 
 ### bigquery-dataframes
 
-    import bigframes.pandas as bpd
-    import pandas as pd
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    
-    def upload_from_dataframe(
-        table_id: str = "your-project.your_dataset.your_table_name",
-    ) -> bpd.DataFrame:
-        """Uploads an in-memory pandas DataFrame to a BigQuery table using BigQuery DataFrames."""
-        # Create a local pandas DataFrame.
-        df = pd.DataFrame(
-            {
-                "my_string": ["a", "b", "c"],
-                "my_int64": [1, 2, 3],
-                "my_float64": [4.0, 5.0, 6.0],
-            }
-        )
-    
-        # Convert the local pandas DataFrame to a BigQuery DataFrame.
-        bq_df = bpd.read_pandas(df)
-    
-        # Write the DataFrame to a BigQuery table.
-        bq_df.to_gbq(table_id, if_exists="replace")
-        return bq_df
-    
-    
-    # Run the sample:
-    # bq_df = upload_from_dataframe("your-project.your_dataset.your_table_name")
-    # print(bq_df.head())
+```python
+import bigframes.pandas as bpd
+import pandas as pd
 
-### pandas-gbq
+# Set partial ordering mode for BigQuery DataFrames.
+bpd.options.bigquery.ordering_mode = "partial"
 
-    import pandas
-    
-    df = pandas.DataFrame(
+
+def upload_from_dataframe(
+    table_id: str = "your-project.your_dataset.your_table_name",
+) -> bpd.DataFrame:
+    """Uploads an in-memory pandas DataFrame to a BigQuery table using BigQuery DataFrames."""
+    # Create a local pandas DataFrame.
+    df = pd.DataFrame(
         {
             "my_string": ["a", "b", "c"],
             "my_int64": [1, 2, 3],
             "my_float64": [4.0, 5.0, 6.0],
-            "my_timestamp": [
-                pandas.Timestamp("1998-09-04T16:03:14"),
-                pandas.Timestamp("2010-09-13T12:03:45"),
-                pandas.Timestamp("2015-10-02T16:00:00"),
-            ],
         }
     )
-    table_id = "my_dataset.new_table"
-    
-    df.to_gbq(table_id)
+
+    # Convert the local pandas DataFrame to a BigQuery DataFrame.
+    bq_df = bpd.read_pandas(df)
+
+    # Write the DataFrame to a BigQuery table.
+    bq_df.to_gbq(table_id, if_exists="replace")
+    return bq_df
+
+
+# Run the sample:
+# bq_df = upload_from_dataframe("your-project.your_dataset.your_table_name")
+# print(bq_df.head())
+```
+
+### pandas-gbq
+
+```python
+import pandas
+
+df = pandas.DataFrame(
+    {
+        "my_string": ["a", "b", "c"],
+        "my_int64": [1, 2, 3],
+        "my_float64": [4.0, 5.0, 6.0],
+        "my_timestamp": [
+            pandas.Timestamp("1998-09-04T16:03:14"),
+            pandas.Timestamp("2010-09-13T12:03:45"),
+            pandas.Timestamp("2015-10-02T16:00:00"),
+        ],
+    }
+)
+table_id = "my_dataset.new_table"
+
+df.to_gbq(table_id)
+```
 
 ### google-cloud-bigquery
 
@@ -364,46 +392,50 @@ The `google-cloud-bigquery` package requires the `pyarrow` library to serialize 
 
 Install the `pyarrow` package:
 
-    pip install pyarrow
+```
+pip install pyarrow
+```
 
-    from google.cloud import bigquery
-    import pandas
-    
-    df = pandas.DataFrame(
-        {
-            "my_string": ["a", "b", "c"],
-            "my_int64": [1, 2, 3],
-            "my_float64": [4.0, 5.0, 6.0],
-            "my_timestamp": [
-                pandas.Timestamp("1998-09-04T16:03:14"),
-                pandas.Timestamp("2010-09-13T12:03:45"),
-                pandas.Timestamp("2015-10-02T16:00:00"),
-            ],
-        }
-    )
-    client = bigquery.Client()
-    table_id = "my_dataset.new_table"
-    # Since string columns use the "object" dtype, pass in a (partial) schema
-    # to ensure the correct BigQuery data type.
-    job_config = bigquery.LoadJobConfig(
-        schema=[
-            bigquery.SchemaField("my_string", "STRING"),
-        ]
-    )
-    
-    job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
-    
-    # Wait for the load job to complete.
-    job.result()
+```python
+from google.cloud import bigquery
+import pandas
+
+df = pandas.DataFrame(
+    {
+        "my_string": ["a", "b", "c"],
+        "my_int64": [1, 2, 3],
+        "my_float64": [4.0, 5.0, 6.0],
+        "my_timestamp": [
+            pandas.Timestamp("1998-09-04T16:03:14"),
+            pandas.Timestamp("2010-09-13T12:03:45"),
+            pandas.Timestamp("2015-10-02T16:00:00"),
+        ],
+    }
+)
+client = bigquery.Client()
+table_id = "my_dataset.new_table"
+# Since string columns use the "object" dtype, pass in a (partial) schema
+# to ensure the correct BigQuery data type.
+job_config = bigquery.LoadJobConfig(
+    schema=[
+        bigquery.SchemaField("my_string", "STRING"),
+    ]
+)
+
+job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
+
+# Wait for the load job to complete.
+job.result()
+```
 
 ### Features not supported by pandas-gbq and bigquery-dataframes
 
 While the `pandas-gbq` and `bigquery-dataframes` libraries provide useful interfaces for querying data and writing data to tables, it does not cover many of the BigQuery API features, including but not limited to:
 
-  - [Managing datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , including [creating new datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , [updating dataset properties](https://docs.cloud.google.com/bigquery/docs/updating-datasets) , and [deleting datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets)
-  - [Loading data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) from formats other than pandas DataFrames or from pandas DataFrames with JSON columns
-  - [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) , including [listing tables in a dataset](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) , [copying table data](https://docs.cloud.google.com/bigquery/docs/managing-tables#copying_a_single_source_table) , and [deleting tables](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_a_table)
-  - [Exporting BigQuery data](https://docs.cloud.google.com/bigquery/docs/exporting-data) directly to Cloud Storage
+- [Managing datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , including [creating new datasets](https://docs.cloud.google.com/bigquery/docs/datasets) , [updating dataset properties](https://docs.cloud.google.com/bigquery/docs/updating-datasets) , and [deleting datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets)
+- [Loading data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) from formats other than pandas DataFrames or from pandas DataFrames with JSON columns
+- [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) , including [listing tables in a dataset](https://docs.cloud.google.com/bigquery/docs/tables#list_tables_in_a_dataset) , [copying table data](https://docs.cloud.google.com/bigquery/docs/managing-tables#copying_a_single_source_table) , and [deleting tables](https://docs.cloud.google.com/bigquery/docs/managing-tables#deleting_a_table)
+- [Exporting BigQuery data](https://docs.cloud.google.com/bigquery/docs/exporting-data) directly to Cloud Storage
 
 ## Troubleshooting connection pool errors
 
@@ -411,9 +443,11 @@ Error string: `Connection pool is full, discarding connection: bigquery.googleap
 
 If you use the default BigQuery client object in Python, you are limited to a maximum of 10 threads because the default pool size for the [Python HTTPAdapter](https://docs.python-requests.org/en/latest/api/#requests.adapters.HTTPAdapter) is 10. To use more than 10 connections, create a custom `requests.adapters.HTTPAdapter` object. For example:
 
-    client = bigquery.Client()
-    adapter = requests.adapters.HTTPAdapter(pool_connections=128,
-    pool_maxsize=128,max_retries=3)
-    client._http.mount("https://",adapter)
-    client._http._auth_request.session.mount("https://",adapter)
-    query_job = client.query(QUERY)
+```
+client = bigquery.Client()
+adapter = requests.adapters.HTTPAdapter(pool_connections=128,
+pool_maxsize=128,max_retries=3)
+client._http.mount("https://",adapter)
+client._http._auth_request.session.mount("https://",adapter)
+query_job = client.query(QUERY)
+```

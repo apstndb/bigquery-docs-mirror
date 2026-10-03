@@ -28,7 +28,7 @@ The `hadoop-migration-assessment` query logs extraction logging hook writes debu
 
 #### Handle the `ClassNotFoundException` error
 
-This error might be caused by misplacement of the logging hook JAR file. Ensure that you added the JAR file to the `auxlib` folder on the Hive cluster. Alternatively, you can specify the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// AUXLIB_PATH /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
+This error might be caused by misplacement of the logging hook JAR file. Ensure that you added the JAR file to the `auxlib` folder on the Hive cluster. Alternatively, you can specify the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// `` AUXLIB_PATH `` /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
 
 #### Subfolders don't appear in the configured folder
 
@@ -36,12 +36,18 @@ This issue might be caused by a misconfiguration or problems during logging hook
 
 Search your `hive-server2` debug logs for the following logging hook messages:
 
-    Unable to initialize logger, logging disabled
+```
+Unable to initialize logger, logging disabled
+```
 
-    Log dir configuration key 'dwhassessment.hook.base-directory' is not set,
-    logging disabled.
+```
+Log dir configuration key 'dwhassessment.hook.base-directory' is not set,
+logging disabled.
+```
 
-    Error while trying to set permission
+```
+Error while trying to set permission
+```
 
 Review the issue details and see if there is anything that you need to correct to fix the problem.
 
@@ -51,11 +57,17 @@ This issue might be caused by problems encountered during event processing or wh
 
 Search your `hive-server2` debug logs for the following logging hook messages:
 
-    Failed to close writer for file
+```
+Failed to close writer for file
+```
 
-    Got exception while processing event
+```
+Got exception while processing event
+```
 
-    Error writing record for query
+```
+Error writing record for query
+```
 
 Review the issue details and see if there is anything that you need to correct to fix the problem.
 
@@ -65,7 +77,9 @@ This issue might be caused by a logging hook thread queue overflow.
 
 Search your `hive-server2` debug logs for the following logging hook message:
 
-    Writer queue is full. Ignoring event
+```
+Writer queue is full. Ignoring event
+```
 
 If you find this message, consider increasing the `dwhassessment.hook.queue.capacity` parameter.
 
@@ -81,17 +95,19 @@ You can find failed translations by going to the **Translation details** page in
 
 To ensure the most accurate translation, you can enter the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;` , enter the following SQL statements into the interactive SQL translator:
 
-    create table schema1.table1 (id int, field1 int, field2 varchar(16));
-    create table schema1.table2 (id int, field1 varchar(30), field2 date);
-    
-    select table1.field1, table2.field1
-    from table1, table2
-    where table1.id = table2.id;
+```
+create table schema1.table1 (id int, field1 int, field2 varchar(16));
+create table schema1.table2 (id int, field1 varchar(30), field2 date);
+
+select table1.field1, table2.field1
+from table1, table2
+where table1.id = table2.id;
+```
 
 #### Fix translation issues with Gemini
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
@@ -121,7 +137,7 @@ For more information, see [Generate metadata for translation and assessment](htt
 #### Fix translation issues with Gemini
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
@@ -133,15 +149,15 @@ To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound
 2.  Click the query that has the message `RelationNotFound` or `AttributeNotFound` in the **Category** column.
 
 3.  To go to the file and line containing the error in the code tab, click the
-    
+
     error message.
 
 4.  In the **Action** column, click **Suggested fix** .
 
 5.  Select one of the following options, **Apply** or **Apply and rerun** :
-    
-      - To copy the generated schema file from the output directory to the input directory, click **Apply** .
-      - To copy the generated schema file from the output directory to the input directory and open a rerun window, click **Apply and rerun** .
+
+    - To copy the generated schema file from the output directory to the input directory, click **Apply** .
+    - To copy the generated schema file from the output directory to the input directory and open a rerun window, click **Apply and rerun** .
 
 ## Generate metadata for translation and assessment
 
@@ -155,15 +171,21 @@ You can increase maximum memory by exporting the `JAVA_OPTS` environment variabl
 
 ### Linux
 
-    export JAVA_OPTS="-Xmx4G"
+```
+export JAVA_OPTS="-Xmx4G"
+```
 
 ### Windows
 
-    set JAVA_OPTS="-Xmx4G"
+```
+set JAVA_OPTS="-Xmx4G"
+```
 
 You can reduce the number of processing threads (the default is 32) by including the `--thread-pool-size` flag value. This option is supported for `hiveql` and `redshift*` connectors only:
 
-    dwh-migration-dumper --thread-pool-size=1
+```
+dwh-migration-dumper --thread-pool-size=1
+```
 
 ### Handling a `WARN...Task failed` error
 
@@ -175,18 +197,22 @@ To validate the `dwh-migration-dumper` tool ZIP file, download the [`SHA256SUMS.
 
 ### Bash
 
-    sha256sum --check SHA256SUMS.txt
+```
+sha256sum --check SHA256SUMS.txt
+```
 
 The `OK` result confirms successful checksum verification. Any other message indicates a verification error:
 
-  - `FAILED: computed checksum did NOT match` : the ZIP file is corrupted and must be downloaded again.
-  - `FAILED: listed file could not be read` : the ZIP file version can't be located. Download the checksum and ZIP files from the same release version and place them in the same directory.
+- `FAILED: computed checksum did NOT match` : the ZIP file is corrupted and must be downloaded again.
+- `FAILED: listed file could not be read` : the ZIP file version can't be located. Download the checksum and ZIP files from the same release version and place them in the same directory.
 
 ### Windows PowerShell
 
-    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+```
+(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+```
 
-Replace `  RELEASE_ZIP_FILENAME  ` with the downloaded ZIP filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip` .
+Replace `RELEASE_ZIP_FILENAME` with the downloaded ZIP filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip` .
 
 The `True` result confirms successful checksum verification.
 
@@ -200,56 +226,70 @@ The following example shows how to use the `-Dteradata-logs.log-date-column` fla
 
 ### Bash
 
-    dwh-migration-dumper \
-      -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
-      -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
-      -Dteradata-logs.log-date-column=ArchiveLogDate
+```
+dwh-migration-dumper \
+  -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
+  -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
+  -Dteradata-logs.log-date-column=ArchiveLogDate
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
-      "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
-      "-Dteradata-logs.log-date-column=ArchiveLogDate"
+```
+dwh-migration-dumper `
+  "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
+  "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
+  "-Dteradata-logs.log-date-column=ArchiveLogDate"
+```
 
 ### Teradata row size limit exceeded
 
 Teradata version 15 has a 64 KB row size limit. If the limit is exceeded, the extraction tool fails with the following message:
 
-    [Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
+```
+[Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
+```
 
 To resolve this error, either extend the row limit to 1 MB or split the rows into multiple rows:
 
-  - Install and enable the 1 MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804) .
-  - Split the long query text into multiple rows by using the `-Dteradata.metadata.max-text-length` and `-Dteradata-logs.max-sql-length` flags.
+- Install and enable the 1 MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804) .
+- Split the long query text into multiple rows by using the `-Dteradata.metadata.max-text-length` and `-Dteradata-logs.max-sql-length` flags.
 
 The following command shows how to use the `-Dteradata.metadata.max-text-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
-    dwh-migration-dumper \
-      --connector teradata \
-      -Dteradata.metadata.max-text-length=10000
+```
+dwh-migration-dumper \
+  --connector teradata \
+  -Dteradata.metadata.max-text-length=10000
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      --connector teradata `
-      "-Dteradata.metadata.max-text-length=10000"
+```
+dwh-migration-dumper `
+  --connector teradata `
+  "-Dteradata.metadata.max-text-length=10000"
+```
 
 The following command shows how to use the `-Dteradata-logs.max-sql-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
-    dwh-migration-dumper \
-      --connector teradata-logs \
-      -Dteradata-logs.max-sql-length=10000
+```
+dwh-migration-dumper \
+  --connector teradata-logs \
+  -Dteradata-logs.max-sql-length=10000
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      --connector teradata-logs `
-      "-Dteradata-logs.max-sql-length=10000"
+```
+dwh-migration-dumper `
+  --connector teradata-logs `
+  "-Dteradata-logs.max-sql-length=10000"
+```
 
 ### Oracle connection issue
 
@@ -257,28 +297,32 @@ In common cases such as an invalid password or hostname, `dwh-migration-dumper` 
 
 One of these issues is `IO Error: Got minus one from a read call` . This error indicates that the connection to the Oracle server was established, but the server didn't accept the client and closed the connection. This issue typically occurs when the server accepts `TCPS` connections only. By default, `dwh-migration-dumper` tool uses the `TCP` protocol. To solve this issue, you must override the Oracle JDBC connection URL.
 
-Instead of providing the `oracle-service` , `host` , and `port` flags, you can resolve this issue by providing the `url` flag in the following format: ` jdbc:oracle:thin:@tcps:// HOST_NAME : PORT / ORACLE_SERVICE  ` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
+Instead of providing the `oracle-service` , `host` , and `port` flags, you can resolve this issue by providing the `url` flag in the following format: `jdbc:oracle:thin:@tcps:// `` HOST_NAME `` : `` PORT `` / `` ORACLE_SERVICE` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
 
 The following example shows how to specify the connection URL in the command:
 
-    dwh-migration-dumper \
-      --connector oracle-stats \
-      --url "jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE" \
-      --assessment \
-      --driver "JDBC_DRIVER_PATH" \
-      --user "USER" \
-      --password
+```
+dwh-migration-dumper \
+  --connector oracle-stats \
+  --url "jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE" \
+  --assessment \
+  --driver "JDBC_DRIVER_PATH" \
+  --user "USER" \
+  --password
+```
 
 In addition to changing the connection protocol to `TCPS` , you might need to provide the trustStore SSL configuration that is required to verify the Oracle server certificate. A missing SSL configuration results in an `Unable to find valid certification path` error message. To resolve this issue, set the `JAVA_OPTS` environment variable:
 
-    set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
+```
+set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
+```
 
 Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) .
 
 ## What's next
 
-  - Learn more about the [migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview) .
-  - Learn how to run a [migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) .
-  - Learn how to [translate queries with the interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) .
-  - Learn how to [migrate code with the batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
-  - Learn how to [generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+- Learn more about the [migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview) .
+- Learn how to run a [migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) .
+- Learn how to [translate queries with the interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) .
+- Learn how to [migrate code with the batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
+- Learn how to [generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .

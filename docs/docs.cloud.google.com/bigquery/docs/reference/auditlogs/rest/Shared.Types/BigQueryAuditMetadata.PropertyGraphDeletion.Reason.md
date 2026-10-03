@@ -8,16 +8,8 @@ data_source: docs.cloud.google.com
 
 Describes how the property graph was deleted.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`QUERY`
-
-Property graph was deleted using a `DROP PROPERTY GRAPH` DDL query.
-
-`PROPERTY_GRAPH_DELETE_REQUEST`
-
-Property graph was deleted using the propertyGraphs.delete API.
+| Enums                           |                                                                     |
+|---------------------------------|---------------------------------------------------------------------|
+| `REASON_UNSPECIFIED`            | Unknown.                                                            |
+| `QUERY`                         | Property graph was deleted using a `DROP PROPERTY GRAPH` DDL query. |
+| `PROPERTY_GRAPH_DELETE_REQUEST` | Property graph was deleted using the propertyGraphs.delete API.     |

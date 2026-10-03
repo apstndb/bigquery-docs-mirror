@@ -24,36 +24,40 @@ Before you begin, [create a pipeline](https://docs.cloud.google.com/bigquery/doc
 
 To schedule pipelines, you must grant the following role to the custom service accounts that you plan to use for pipeline schedules:
 
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
-    Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
+[Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
+Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
 
 If your pipeline contains SQL queries, you must grant the following roles to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Job User role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Viewer role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
-  - [BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Editor role to the custom service accounts or Google Accounts on projects to which your pipelines write data.
+[BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Job User role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
+
+[BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Viewer role to the custom service accounts or Google Accounts on projects from which your pipelines read data.
+
+[BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the BigQuery Data Editor role to the custom service accounts or Google Accounts on projects to which your pipelines write data.
 
 If your pipeline contains notebooks, you must grant the following roles to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
-  - [Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to the custom service accounts or Google Accounts on the selected project.
-  - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
-    Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add the custom service accounts or Google Accounts as principals to the Cloud Storage bucket that you plan to use for storing the output of notebooks executed in scheduled pipeline runs, and then grant the Storage Admin role to these principals.
+[Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to the custom service accounts or Google Accounts on the selected project.
+
+[Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
+Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add the custom service accounts or Google Accounts as principals to the Cloud Storage bucket that you plan to use for storing the output of notebooks executed in scheduled pipeline runs, and then grant the Storage Admin role to these principals.
 
 Additionally, you must grant the following roles to the default Dataform service agent:
 
-  - [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `roles/iam.serviceAccountTokenCreator` )  
-    Follow [Grant token creation access to a service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
-    Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
+[Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `roles/iam.serviceAccountTokenCreator` )  
+Follow [Grant token creation access to a service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
+
+[Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
+Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
 
 To enable metadata enrichment in Knowledge Catalog, you must enable the [Dataplex API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com) . Additionally, you must grant the following role on the project or on the `@bigquery` entry group to the custom service accounts or Google Accounts that you plan to use for pipeline schedules:
 
-  - [Dataplex Catalog Editor role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Dataplex Catalog Editor role to the custom service accounts or Google Accounts on the project or `@bigquery` entry group.
+[Dataplex Catalog Editor role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Dataplex Catalog Editor role to the custom service accounts or Google Accounts on the project or `@bigquery` entry group.
 
 To learn more about service accounts in Dataform, see [About service accounts in Dataform](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) .
 
@@ -61,9 +65,9 @@ To learn more about service accounts in Dataform, see [About service accounts in
 
 If you use VPC Service Controls to protect your pipelines, you should be aware that scheduled runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
 
-  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
-  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
-  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+- You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+- Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+- To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
 
 For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
 
@@ -71,22 +75,22 @@ For detailed configuration steps and security considerations, see [Configure VPC
 
 To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
 
-  - View and manage schedules:
-      - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` ) on the pipeline
-      - [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
-  - View and run pipelines:
-      - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.viewer) ( `roles/dataform.viewer` ) on the project
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
-  - Run a pipeline schedule with user credentials for a Google Account: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
-  - Run a pipeline schedule with a custom service account: [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
-  - Manage pipeline schedules in user folders:
-      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
-      - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
-  - Manage pipeline schedules in team folders:
-      - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
-      - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
-  - Manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
-  - Enable metadata enrichment: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
+- View and manage schedules:
+  - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` ) on the pipeline
+  - [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
+- View and run pipelines:
+  - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.viewer) ( `roles/dataform.viewer` ) on the project
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+- Run a pipeline schedule with user credentials for a Google Account: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+- Run a pipeline schedule with a custom service account: [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
+- Manage pipeline schedules in user folders:
+  - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
+  - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
+- Manage pipeline schedules in team folders:
+  - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
+  - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
+- Manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
+- Enable metadata enrichment: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -115,8 +119,8 @@ To create a pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -125,31 +129,31 @@ To create a pipeline schedule, follow these steps:
 5.  In the **Schedule pipeline** pane, in the **Schedule name** field, enter a name for the schedule.
 
 6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
-        
-          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
-          - **Google Drive** : Allows read-only access to Google Drive files.
-          - **Bigtable** : Allows read-only access to Google Bigtable data.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+    - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+
+      - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive** : Allows read-only access to Google Drive files.
+      - **Bigtable** : Allows read-only access to Google Bigtable data.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the pipeline.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
-    
+
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
 9.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
 
 10. Under **Schedule frequency** , do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
     2.  In the **At time** field, enter the time for scheduled pipeline runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -169,10 +173,10 @@ The latest deployed version of the pipeline runs at the selected time and freque
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -181,31 +185,31 @@ The latest deployed version of the pipeline runs at the selected time and freque
 5.  In the **Schedule pipeline** pane, in the **Schedule name** field, enter a name for the schedule.
 
 6.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
-        
-          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
-          - **Google Drive** : Allows read-only access to Google Drive files.
-          - **Bigtable** : Allows read-only access to Google Bigtable data.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+
+      - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive** : Allows read-only access to Google Drive files.
+      - **Bigtable** : Allows read-only access to Google Bigtable data.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the pipeline.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 8.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
-    
+
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
 9.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
 
 10. Under **Schedule frequency** , do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
     2.  In the **At time** field, enter the time for scheduled pipeline runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -231,31 +235,31 @@ The latest deployed version of the pipeline runs at the selected time and freque
 4.  In the **Schedule name** field, enter a name for the schedule.
 
 5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
-        
-          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
-          - **Google Drive** : Allows read-only access to Google Drive files.
-          - **Bigtable** : Allows read-only access to Google Bigtable data.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+
+      - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive** : Allows read-only access to Google Drive files.
+      - **Bigtable** : Allows read-only access to Google Bigtable data.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the pipeline.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 7.  If your pipeline contains a notebook, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
-    
+
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
 8.  Under **Configuration Type** , select **Schedule (time-based recurrence)** .
 
 9.  Under **Schedule frequency** , do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of scheduled pipeline runs.
     2.  In the **At time** field, enter the time for scheduled pipeline runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -289,7 +293,7 @@ If your pipeline contains a notebook, you must also manually grant permission fo
 ## Trigger-based scheduling
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this feature, contact <bigquery-event-based-triggers@google.com> .
@@ -304,8 +308,8 @@ You can also adjust the optional settings of your trigger-based schedules to con
 
 Trigger-based schedules are subject to the following limitations:
 
-  - Trigger-based schedules aren't instantaneous. When you configure a trigger-based schedule, the pipeline checks the status of the BigQuery table approximately once every 3 minutes. This time period is called the polling interval and can result in a delay between a table modification and the trigger activation.
-  - Each monitored table results in API calls to BigQuery during every polling interval. Monitoring a very large number of tables can contribute to [BigQuery API quota consumption](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-api-request-limit) .
+- Trigger-based schedules aren't instantaneous. When you configure a trigger-based schedule, the pipeline checks the status of the BigQuery table approximately once every 3 minutes. This time period is called the polling interval and can result in a delay between a table modification and the trigger activation.
+- Each monitored table results in API calls to BigQuery during every polling interval. Monitoring a very large number of tables can contribute to [BigQuery API quota consumption](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-api-request-limit) .
 
 ### Create a trigger
 
@@ -314,34 +318,34 @@ To create a trigger, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  Open your pipeline in the Pipeline Viewer by doing one of the following:
-    
-      - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
-      - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
+
+    - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+    - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
 3.  In the Pipeline Viewer toolbar, click **Trigger** .
 
 4.  In the **Trigger** field, enter a name for the trigger.
 
 5.  In the **Authentication** section, authorize the pipeline with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
-        
-          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
-          - **Google Drive** : Allows read-only access to Google Drive files.
-          - **Bigtable** : Allows read-only access to Google Bigtable data.
-    
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+
+      - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive** : Allows read-only access to Google Drive files.
+      - **Bigtable** : Allows read-only access to Google Bigtable data.
+
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the pipeline.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) for using Colab notebook runtime templates, you can still run and schedule pipelines with the default runtime specifications.
 
 7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
-    
+
     Your selected service account must be granted the Storage Admin IAM role on the selected bucket. For more information, see [Enable pipeline scheduling](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#enable-scheduling) .
 
 8.  Under **Configuration Type** , select **Trigger (event-based execution)** .
@@ -349,9 +353,9 @@ To create a trigger, follow these steps:
 9.  In the **Search tables** field, add a table or tables to be monitored for the trigger.
 
 10. Under **Trigger Condition** , select one of the following options:
-    
-      - **Wait for ALL tables to update** : trigger the workflow only when all listed tables have been updated since the last check.
-      - **Trigger if ANY table updates** : trigger this workflow if any of the listed tables are updated since the last check.
+
+    - **Wait for ALL tables to update** : trigger the workflow only when all listed tables have been updated since the last check.
+    - **Trigger if ANY table updates** : trigger this workflow if any of the listed tables are updated since the last check.
 
 11. (Optional) For **Max Wait Duration** , enter a duration to force the activation of a trigger if no table updates are detected within this duration. Supports values between 1 second to 7 days. If not specified, then the workflow will only run if the monitored table is updated, and the minimum execution duration is satisfied.
 
@@ -363,16 +367,18 @@ To create a trigger, follow these steps:
 
 This section describes common issues with trigger-based schedules and how to resolve them.
 
-  - Issue: The trigger isn't activating  
-    **Resolution:** Try one of the following steps:
-      - Verify that the user credentials or the service account has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) .
-      - Verify that the specified BigQuery table is being modified.
-      - Check that the trigger isn't being affected by the [polling interval](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#limitations) .
-      - Check if the minimum execution duration, or the **Min Execution Duration** value, is preventing more frequent runs. You can decrease this value to increase the frequency of the trigger activation.
-      - Check if the trigger condition option ( **ALL** or **ANY** ) is affecting the trigger activation.
-      - Examine the [audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) to check for errors when Dataform attempts to call the BigQuery API to check the status of the monitored table.
-  - Issue: The trigger is activating too often  
-    **Resolution:** Adjust the minimum execution duration, or the **Min Execution Duration** value. You can increase this value to decrease the frequency of the trigger activation.
+Issue: The trigger isn't activating  
+**Resolution:** Try one of the following steps:
+
+- Verify that the user credentials or the service account has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#required_roles) .
+- Verify that the specified BigQuery table is being modified.
+- Check that the trigger isn't being affected by the [polling interval](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#limitations) .
+- Check if the minimum execution duration, or the **Min Execution Duration** value, is preventing more frequent runs. You can decrease this value to increase the frequency of the trigger activation.
+- Check if the trigger condition option ( **ALL** or **ANY** ) is affecting the trigger activation.
+- Examine the [audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) to check for errors when Dataform attempts to call the BigQuery API to check the status of the monitored table.
+
+Issue: The trigger is activating too often  
+**Resolution:** Adjust the minimum execution duration, or the **Min Execution Duration** value. You can increase this value to decrease the frequency of the trigger activation.
 
 ## Deploy a pipeline
 
@@ -385,9 +391,9 @@ To deploy standalone pipelines and pipelines stored in folders, follow these ste
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  Open your pipeline in the **Pipeline Viewer** by doing one of the following:
-    
-      - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
-      - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
+
+    - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+    - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
 3.  In the **Pipeline Viewer** toolbar, click **Deploy** .
 
@@ -396,7 +402,7 @@ The corresponding schedule is updated with the current version of the pipeline. 
 ### Deploy pipelines stored in Git repositories
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Pipelines stored in Git Folders use Dataform [deployments](https://docs.cloud.google.com/dataform/docs/deployments) for orchestration and scheduling. Deployments let you configure release configurations, workflow configurations, compilation overrides, and multi-environment orchestration.
@@ -440,7 +446,7 @@ To disable a schedule for a selected pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -478,7 +484,7 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -513,7 +519,7 @@ To view all pipeline schedules in your Google Cloud project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  Optional: To display additional columns with pipeline schedule details, click view\_column **Column display options** , and then select columns and click **OK** .
+2.  Optional: To display additional columns with pipeline schedule details, click view_column **Column display options** , and then select columns and click **OK** .
 
 ## View pipeline schedule details
 
@@ -534,7 +540,7 @@ To view details for a selected pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -568,7 +574,7 @@ To view past runs of a selected pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -608,7 +614,7 @@ To edit a pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -636,18 +642,18 @@ To permanently delete a pipeline schedule, follow these steps:
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
 2.  Do either of the following:
-    
-      - Click the name of the selected pipeline schedule, and then on the **Schedule details** page, click **Delete** .
-    
-      - In the row that contains the selected pipeline schedule, click more\_vert **View actions** in the **Actions** column, and then click **Delete** .
+
+    - Click the name of the selected pipeline schedule, and then on the **Schedule details** page, click **Delete** .
+
+    - In the row that contains the selected pipeline schedule, click more_vert **View actions** in the **Actions** column, and then click **Delete** .
 
 3.  In the dialog that appears, click **Delete** .
 
 ## What's next
 
-  - Learn more about [pipelines in BigQuery](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
-  - Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
-  - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
-  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
-  - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
-  - Learn more about [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .
+- Learn more about [pipelines in BigQuery](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
+- Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
+- Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
+- Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
+- Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+- Learn more about [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .

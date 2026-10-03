@@ -77,17 +77,17 @@ To retrieve data outside the refresh window, such as historical data, or to reco
 
 ## Limitations
 
-  - The minimum frequency that you can schedule a data transfer for is once every 24 hours. By default, a data transfer starts at the time that you create the data transfer. However, you can configure the transfer start time when you [set up your transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer) .
-  - The BigQuery Data Transfer Service does not support incremental data transfers during a YouTube Content Owner transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
+- The minimum frequency that you can schedule a data transfer for is once every 24 hours. By default, a data transfer starts at the time that you create the data transfer. However, you can configure the transfer start time when you [set up your transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer) .
+- The BigQuery Data Transfer Service does not support incremental data transfers during a YouTube Content Owner transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
 
 ## Before you begin
 
 Before you create a YouTube Content Owner data transfer:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store YouTube data.
-  - Verify that you have a [YouTube Content Owner](https://support.google.com/youtube/answer/6301188) account. A YouTube Content Owner is not the same as a YouTube channel. Typically, you only have a YouTube Content Owner account if you manage many different channels.
-  - If you intend to set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store YouTube data.
+- Verify that you have a [YouTube Content Owner](https://support.google.com/youtube/answer/6301188) account. A YouTube Content Owner is not the same as a YouTube channel. Typically, you only have a YouTube Content Owner account if you manage many different channels.
+- If you intend to set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -103,15 +103,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -119,22 +119,22 @@ For more information, see [Grant `bigquery.admin` access](https://docs.cloud.goo
 
 ### Required YouTube roles
 
-  - YouTube Content Manager or YouTube Content Owner.
-    
-    A Content Manager is granted rights to administer YouTube content for a Content Owner. A Content Owner is an umbrella account that owns one or more YouTube channels and the videos on those channels.
+- YouTube Content Manager or YouTube Content Owner.
 
-  - `Hide revenue data` is unchecked in YouTube Content Owner report settings.
-    
-    For revenue-related reports to transfer, the YouTube reports permission setting `Hide revenue data` should be unchecked for the user creating the transfer.
-    
-    ![youtube-content-owner-reports-uncheck-hide-revenue](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-reports-uncheck-hide-revenue.png)
+  A Content Manager is granted rights to administer YouTube content for a Content Owner. A Content Owner is an umbrella account that owns one or more YouTube channels and the videos on those channels.
+
+- `Hide revenue data` is unchecked in YouTube Content Owner report settings.
+
+  For revenue-related reports to transfer, the YouTube reports permission setting `Hide revenue data` should be unchecked for the user creating the transfer.
+
+  ![youtube-content-owner-reports-uncheck-hide-revenue](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-reports-uncheck-hide-revenue.png)
 
 ## Set up a YouTube Content Owner transfer
 
 Setting up a YouTube Content Owner data transfer requires a:
 
-  - **Content Owner ID** : Provided by YouTube. When you sign in to YouTube as a Content Owner or Manager, your ID appears in the URL after `o=` . For example, if the URL is `https://studio.youtube.com/owner/AbCDE_8FghIjK?o=AbCDE_8FghIjK` , the Content Owner ID is `AbCDE_8FghIjK` . To select a different Content Manager account, see [Sign in to a Content Manager account](https://support.google.com/youtube/answer/6301172) or [YouTube Channel Switcher](https://www.youtube.com/channel_switcher) . For more information on creating and managing your Content Manager account, see [Configure Content Manager account settings](https://support.google.com/youtube/topic/6032636) .
-  - **Table Suffix** : A user-friendly name for the channel provided by you when you set up the transfer. The suffix is appended to the job ID to create the table name, for example reportTypeId\_suffix . The suffix is used to prevent separate data transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
+- **Content Owner ID** : Provided by YouTube. When you sign in to YouTube as a Content Owner or Manager, your ID appears in the URL after `o=` . For example, if the URL is `https://studio.youtube.com/owner/AbCDE_8FghIjK?o=AbCDE_8FghIjK` , the Content Owner ID is `AbCDE_8FghIjK` . To select a different Content Manager account, see [Sign in to a Content Manager account](https://support.google.com/youtube/answer/6301172) or [YouTube Channel Switcher](https://www.youtube.com/channel_switcher) . For more information on creating and managing your Content Manager account, see [Configure Content Manager account settings](https://support.google.com/youtube/topic/6032636) .
+- **Table Suffix** : A user-friendly name for the channel provided by you when you set up the transfer. The suffix is appended to the job ID to create the table name, for example ` reportTypeId_suffix ` . The suffix is used to prevent separate data transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
 
 If you use the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/) and have existing reporting jobs, the BigQuery Data Transfer Service loads your report data. If you don't have existing reporting jobs, setting up the data transfer automatically enables YouTube reporting jobs.
 
@@ -149,39 +149,39 @@ To set up a YouTube Content Owner data transfer:
 3.  Click **Create Transfer** .
 
 4.  On the **Create Transfer** page:
-    
-      - In the **Source type** section, for **Source** , choose **YouTube Content Owner** .
-        
-        ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-transfer-source.png)
-    
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-        
-        ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
-    
-      - In the **Schedule options** section:
-        
-          - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
-          - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
-    
-      - In the **Destination settings** section, for **Destination dataset** , choose the dataset that you created to store your data.
-        
-        ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
-    
-      - In the **Data source details** section:
-        
-          - For **Content owner ID** , enter your Content Owner ID.
-          - For **Table suffix** , enter a suffix, such as `MT` .
-        
-        ![YouTube Content Owner source details](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-source-details-console.png)
-    
-      - In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts that are associated with your Google Cloud project. You can associate a service account with your data transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
-        
-        If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a data transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the data transfer is optional. The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#required_permissions) .
-    
-      - (Optional) In the **Notification options** section:
-        
-          - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a data transfer run fails.
-          - For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
+
+    - In the **Source type** section, for **Source** , choose **YouTube Content Owner** .
+
+      ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-transfer-source.png)
+
+    - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+
+      ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
+
+    - In the **Schedule options** section:
+
+      - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
+      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - In the **Destination settings** section, for **Destination dataset** , choose the dataset that you created to store your data.
+
+      ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
+
+    - In the **Data source details** section:
+
+      - For **Content owner ID** , enter your Content Owner ID.
+      - For **Table suffix** , enter a suffix, such as `MT` .
+
+      ![YouTube Content Owner source details](https://docs.cloud.google.com/static/bigquery/images/youtube-content-owner-source-details-console.png)
+
+    - In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts that are associated with your Google Cloud project. You can associate a service account with your data transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
+
+      If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a data transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the data transfer is optional. The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#required_permissions) .
+
+    - (Optional) In the **Notification options** section:
+
+      - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a data transfer run fails.
+      - For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 5.  Click **Save** .
 
@@ -191,34 +191,34 @@ To set up a YouTube Content Owner data transfer:
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `--data_source`
-  - `--target_dataset`
-  - `--display_name`
-  - `--params`
+- `--data_source`
+- `--target_dataset`
+- `--display_name`
+- `--params`
 
 Optional flags:
 
-  - `--service_account_name` - Specifies a service account to use for Content Owner transfer authentication instead of your user account.
+- `--service_account_name` - Specifies a service account to use for Content Owner transfer authentication instead of your user account.
 
-<!-- end list -->
-
-    bq mk \
-    --transfer_config \
-    --project_id=project_id \
-    --target_dataset=dataset \
-    --display_name=name \
-    --params='parameters' \
-    --data_source=data_source \
-    --service_account_name=service_account_name
+```
+bq mk \
+--transfer_config \
+--project_id=project_id \
+--target_dataset=dataset \
+--display_name=name \
+--params='parameters' \
+--data_source=data_source \
+--service_account_name=service_account_name
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the target dataset for the transfer configuration.
-  - name is the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For YouTube Content Owner data transfers, you must supply the `content_owner_id` and `table_suffix` parameters. You may optionally set the `configure_jobs` parameter to `true` to allow the BigQuery Data Transfer Service to manage YouTube reporting jobs for you. If there are YouTube reports that don't exist for your account, new reporting jobs are created to enable them.
-  - data\_source is the data source — `youtube_content_owner` .
-  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#required_permissions) .
+- ` project_id ` is your project ID.
+- ` dataset ` is the target dataset for the transfer configuration.
+- ` name ` is the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` parameters ` contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For YouTube Content Owner data transfers, you must supply the `content_owner_id` and `table_suffix` parameters. You may optionally set the `configure_jobs` parameter to `true` to allow the BigQuery Data Transfer Service to manage YouTube reporting jobs for you. If there are YouTube reports that don't exist for your account, new reporting jobs are created to enable them.
+- ` data_source ` is the data source — `youtube_content_owner` .
+- ` service_account_name ` is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#required_permissions) .
 
 > **Caution:** You cannot configure notifications using the command-line tool.
 
@@ -226,12 +226,14 @@ You can also supply the `--project_id` flag to specify a particular project. If 
 
 For example, the following command creates a YouTube Content Owner data transfer named `My Transfer` using content owner ID `AbCDE_8FghIjK` , table suffix `MT` , and target dataset `mydataset` . The data transfer is created in the default project:
 
-    bq mk \
-    --transfer_config \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --params='{"content_owner_id":"abCDE_8FghIjK","table_suffix":"MT","configure_jobs":"true"}' \
-    --data_source=youtube_content_owner
+```
+bq mk \
+--transfer_config \
+--target_dataset=mydataset \
+--display_name='My Transfer' \
+--params='{"content_owner_id":"abCDE_8FghIjK","table_suffix":"MT","configure_jobs":"true"}' \
+--data_source=youtube_content_owner
+```
 
 > **Caution:** When you create a YouTube Content Owner data transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#connector_overview) for **Schedule** .
 
@@ -245,56 +247,58 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.rpc.ApiException;
-    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-    import com.google.protobuf.Struct;
-    import com.google.protobuf.Value;
-    import java.io.IOException;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    // Sample to create youtube content owner channel transfer config
-    public class CreateYoutubeContentOwnerTransfer {
-    
-      public static void main(String[] args) throws IOException {
-        // TODO(developer): Replace these variables before running the sample.
-        final String projectId = "MY_PROJECT_ID";
-        String datasetId = "MY_DATASET_ID";
-        String contentOwnerId = "MY_CONTENT_OWNER_ID";
-        String tableSuffix = "_test";
-        Map<String, Value> params = new HashMap<>();
-        params.put("content_owner_id", Value.newBuilder().setStringValue(contentOwnerId).build());
-        params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
-        TransferConfig transferConfig =
-            TransferConfig.newBuilder()
-                .setDestinationDatasetId(datasetId)
-                .setDisplayName("Your Youtube Owner Channel Config Name")
-                .setDataSourceId("youtube_content_owner")
-                .setParams(Struct.newBuilder().putAllFields(params).build())
-                .build();
-        createYoutubeContentOwnerTransfer(projectId, transferConfig);
-      }
-    
-      public static void createYoutubeContentOwnerTransfer(
-          String projectId, TransferConfig transferConfig) throws IOException {
-        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-          ProjectName parent = ProjectName.of(projectId);
-          CreateTransferConfigRequest request =
-              CreateTransferConfigRequest.newBuilder()
-                  .setParent(parent.toString())
-                  .setTransferConfig(transferConfig)
-                  .build();
-          TransferConfig config = client.createTransferConfig(request);
-          System.out.println(
-              "Youtube content owner channel transfer created successfully :" + config.getName());
-        } catch (ApiException ex) {
-          System.out.print("Youtube content owner channel transfer was not created." + ex.toString());
-        }
-      }
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+// Sample to create youtube content owner channel transfer config
+public class CreateYoutubeContentOwnerTransfer {
+
+  public static void main(String[] args) throws IOException {
+    // TODO(developer): Replace these variables before running the sample.
+    final String projectId = "MY_PROJECT_ID";
+    String datasetId = "MY_DATASET_ID";
+    String contentOwnerId = "MY_CONTENT_OWNER_ID";
+    String tableSuffix = "_test";
+    Map<String, Value> params = new HashMap<>();
+    params.put("content_owner_id", Value.newBuilder().setStringValue(contentOwnerId).build());
+    params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
+    TransferConfig transferConfig =
+        TransferConfig.newBuilder()
+            .setDestinationDatasetId(datasetId)
+            .setDisplayName("Your Youtube Owner Channel Config Name")
+            .setDataSourceId("youtube_content_owner")
+            .setParams(Struct.newBuilder().putAllFields(params).build())
+            .build();
+    createYoutubeContentOwnerTransfer(projectId, transferConfig);
+  }
+
+  public static void createYoutubeContentOwnerTransfer(
+      String projectId, TransferConfig transferConfig) throws IOException {
+    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+      ProjectName parent = ProjectName.of(projectId);
+      CreateTransferConfigRequest request =
+          CreateTransferConfigRequest.newBuilder()
+              .setParent(parent.toString())
+              .setTransferConfig(transferConfig)
+              .build();
+      TransferConfig config = client.createTransferConfig(request);
+      System.out.println(
+          "Youtube content owner channel transfer created successfully :" + config.getName());
+    } catch (ApiException ex) {
+      System.out.print("Youtube content owner channel transfer was not created." + ex.toString());
     }
+  }
+}
+```
 
 > **Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
 

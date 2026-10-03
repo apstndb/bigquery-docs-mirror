@@ -12,34 +12,24 @@ Translates a metadata zip file into Data Definition Language (DDL) statements an
 
 The following code sample shows how to use `curl` to call the `translate_metadata` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;translate_metadata&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerymigration.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "translate_metadata",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -47,66 +37,27 @@ Request message for TranslateMetadata.
 
 ### TranslateMetadataRequest
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;projectNumber&quot;: string,
-  &quot;location&quot;: string,
-  &quot;sourceDialect&quot;: string,
-  &quot;targetDialect&quot;: string,
-  &quot;metadataFileUri&quot;: string,
-  &quot;targetBaseUri&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "projectNumber": string,
+  "location": string,
+  "sourceDialect": string,
+  "targetDialect": string,
+  "metadataFileUri": string,
+  "targetBaseUri": string
+}
+```
 
-`projectNumber`
-
-`string`
-
-Required. The Google Cloud project number.
-
-`location`
-
-`string`
-
-Required. The location.
-
-`sourceDialect`
-
-`string`
-
-Required. The dialect of the source metadata.
-
-`targetDialect`
-
-`string`
-
-Required. The dialect of the target queries.
-
-`metadataFileUri`
-
-`string`
-
-Required. The Cloud Storage path of the metadata zip file for this batch translation. This must be a valid Cloud Storage URI starting with `gs://` and must be a zip file ending with ".zip".
-
-`targetBaseUri`
-
-`string`
-
-Required. The base URI for all writes to persistent storage in Cloud Storage. The generated DDL will be written to this URI.
+| Fields            |                                                                                                                                                                                                        |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `projectNumber`   | `string` Required. The Google Cloud project number.                                                                                                                                                    |
+| `location`        | `string` Required. The location.                                                                                                                                                                       |
+| `sourceDialect`   | `string` Required. The dialect of the source metadata.                                                                                                                                                 |
+| `targetDialect`   | `string` Required. The dialect of the target queries.                                                                                                                                                  |
+| `metadataFileUri` | `string` Required. The Cloud Storage path of the metadata zip file for this batch translation. This must be a valid Cloud Storage URI starting with `gs://` and must be a zip file ending with ".zip". |
+| `targetBaseUri`   | `string` Required. The base URI for all writes to persistent storage in Cloud Storage. The generated DDL will be written to this URI.                                                                  |
 
 ## Output Schema
 
@@ -114,38 +65,19 @@ Response message for TranslateMetadata.
 
 ### TranslateMetadataResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;state&quot;: string,
-  &quot;translation&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "state": string,
+  "translation": string
+}
+```
 
-`state`
-
-`string`
-
-The state of the batch translation workflow.
-
-`translation`
-
-`string`
-
-The ID of the batch translation workflow.
+| Fields        |                                                       |
+|---------------|-------------------------------------------------------|
+| `state`       | `string` The state of the batch translation workflow. |
+| `translation` | `string` The ID of the batch translation workflow.    |
 
 ### Tool Annotations
 
@@ -153,9 +85,9 @@ The ID of the batch translation workflow.
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ✅
+Destructive Hint: ❌ \| Idempotent Hint: ❌ \| Read Only Hint: ❌ \| Open World Hint: ✅

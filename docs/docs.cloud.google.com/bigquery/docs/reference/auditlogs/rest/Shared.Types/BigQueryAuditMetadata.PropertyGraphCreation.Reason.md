@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the property graph was created.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`QUERY`
-
-Property graph was created using a DDL query.
+| Enums                |                                               |
+|----------------------|-----------------------------------------------|
+| `REASON_UNSPECIFIED` | Unknown.                                      |
+| `QUERY`              | Property graph was created using a DDL query. |

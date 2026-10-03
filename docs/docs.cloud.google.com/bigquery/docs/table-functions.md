@@ -14,26 +14,30 @@ A table function, also called a table-valued function (TVF), is a user-defined f
 
 To create a table function, use the [`CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `INT64` parameter and uses this value inside a `WHERE` clause in a query over a [public dataset](https://docs.cloud.google.com/bigquery/public-data) called `bigquery-public-data.usa_names.usa_1910_current` :
 
-    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
-    AS (
-      SELECT year, name, SUM(number) AS total
-      FROM `bigquery-public-data.usa_names.usa_1910_current`
-      WHERE year = y
-      GROUP BY year, name
-    );
+```
+CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
+AS (
+  SELECT year, name, SUM(number) AS total
+  FROM `bigquery-public-data.usa_names.usa_1910_current`
+  WHERE year = y
+  GROUP BY year, name
+);
+```
 
 To filter in other ways, you can pass multiple parameters to a table function. The following table function filters the data by year and name prefix:
 
-    CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
-      y INT64, z STRING)
-    AS (
-      SELECT year, name, SUM(number) AS total
-      FROM `bigquery-public-data.usa_names.usa_1910_current`
-      WHERE
-        year = y
-        AND STARTS_WITH(name, z)
-      GROUP BY year, name
-    );
+```
+CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
+  y INT64, z STRING)
+AS (
+  SELECT year, name, SUM(number) AS total
+  FROM `bigquery-public-data.usa_names.usa_1910_current`
+  WHERE
+    year = y
+    AND STARTS_WITH(name, z)
+  GROUP BY year, name
+);
+```
 
 ### Table parameters
 
@@ -41,27 +45,31 @@ You can set TVF parameters to be tables. Following the table parameter name, you
 
 The following table function returns a table that contains total sales for `item_name` from the `orders` table:
 
-    CREATE TABLE FUNCTION mydataset.compute_sales (
-      orders TABLE<sales INT64, item STRING>, item_name STRING)
-    AS (
-      SELECT SUM(sales) AS total_sales, item
-      FROM orders
-      WHERE item = item_name
-      GROUP BY item
-    );
+```
+CREATE TABLE FUNCTION mydataset.compute_sales (
+  orders TABLE<sales INT64, item STRING>, item_name STRING)
+AS (
+  SELECT SUM(sales) AS total_sales, item
+  FROM orders
+  WHERE item = item_name
+  GROUP BY item
+);
+```
 
 Using the `ANY TABLE` type in a TVF lets you create generic functions that accept tables of any structure. Unlike fixed tables—where you must define every column and data type—the `ANY TABLE` type acts as a placeholder, making the function reusable with different datasets. However, the table you pass in must still contain the specific columns used inside the function. For example, if your function filters by `created_date` , your input table must have that column, or the query will fail.
 
-    -- Simple pass-through (accepts any table, as used in your devstack)
-    CREATE OR REPLACE TABLE FUNCTION dataset_test.MyTVF(input_table ANY TABLE)
-    AS
-    SELECT * FROM input_table;
-    
-    -- Generic filter (accepts any table, but implicitly requires a 'status' column)
-    CREATE TEMP TABLE FUNCTION FilterByStatus(input_table ANY TABLE, status_val STRING)
-    AS
-    SELECT * FROM input_table
-    WHERE status = status_val;
+```
+-- Simple pass-through (accepts any table, as used in your devstack)
+CREATE OR REPLACE TABLE FUNCTION dataset_test.MyTVF(input_table ANY TABLE)
+AS
+SELECT * FROM input_table;
+
+-- Generic filter (accepts any table, but implicitly requires a 'status' column)
+CREATE TEMP TABLE FUNCTION FilterByStatus(input_table ANY TABLE, status_val STRING)
+AS
+SELECT * FROM input_table
+WHERE status = status_val;
+```
 
 ### Parameter names
 
@@ -71,61 +79,71 @@ If a table function parameter matches the name of a table column, it can create 
 
 You can call a table function in any context where a table is valid. The following example calls the `mydataset.names_by_year` function in the `FROM` clause of a `SELECT` statement:
 
-    SELECT * FROM mydataset.names_by_year(1950)
-      ORDER BY total DESC
-      LIMIT 5
+```
+SELECT * FROM mydataset.names_by_year(1950)
+  ORDER BY total DESC
+  LIMIT 5
+```
 
 The results look like the following:
 
-    +------+--------+-------+
-    | year |  name  | total |
-    +------+--------+-------+
-    | 1950 | James  | 86447 |
-    | 1950 | Robert | 83717 |
-    | 1950 | Linda  | 80498 |
-    | 1950 | John   | 79561 |
-    | 1950 | Mary   | 65546 |
-    +------+--------+-------+
+```
++------+--------+-------+
+| year |  name  | total |
++------+--------+-------+
+| 1950 | James  | 86447 |
+| 1950 | Robert | 83717 |
+| 1950 | Linda  | 80498 |
+| 1950 | John   | 79561 |
+| 1950 | Mary   | 65546 |
++------+--------+-------+
+```
 
 You can join the output from a table function with another table:
 
-    SELECT *
-      FROM `bigquery-public-data.samples.shakespeare` AS s
-      JOIN mydataset.names_by_year(1950) AS n
-      ON n.name = s.word
+```
+SELECT *
+  FROM `bigquery-public-data.samples.shakespeare` AS s
+  JOIN mydataset.names_by_year(1950) AS n
+  ON n.name = s.word
+```
 
 You can also use a table function in a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#array_subquery_concepts) :
 
-    SELECT ARRAY(
-      SELECT name FROM mydataset.names_by_year(1950)
-      ORDER BY total DESC
-      LIMIT 5)
+```
+SELECT ARRAY(
+  SELECT name FROM mydataset.names_by_year(1950)
+  ORDER BY total DESC
+  LIMIT 5)
+```
 
 When you call a table function that has a table parameter, you must use the `TABLE` keyword before the name of the table argument. The table argument can have columns not listed in the table parameter schema:
 
-    CREATE TABLE FUNCTION mydataset.compute_sales (
-      orders TABLE<sales INT64, item STRING>, item_name STRING)
-    AS (
-      SELECT SUM(sales) AS total_sales, item
-      FROM orders
-      WHERE item = item_name
-      GROUP BY item
-    );
-    
-    WITH my_orders AS (
-        SELECT 1 AS sales, "apple" AS item, 0.99 AS price
-        UNION ALL
-        SELECT 2, "banana", 0.49
-        UNION ALL
-        SELECT 5, "apple", 0.99)
-    SELECT *
-    FROM mydataset.compute_sales(TABLE my_orders, "apple");
-    
-    /*-------------+-------+
-     | total_sales | item  |
-     +-------------+-------+
-     | 6           | apple |
-     +-------------+-------*/
+```
+CREATE TABLE FUNCTION mydataset.compute_sales (
+  orders TABLE<sales INT64, item STRING>, item_name STRING)
+AS (
+  SELECT SUM(sales) AS total_sales, item
+  FROM orders
+  WHERE item = item_name
+  GROUP BY item
+);
+
+WITH my_orders AS (
+    SELECT 1 AS sales, "apple" AS item, 0.99 AS price
+    UNION ALL
+    SELECT 2, "banana", 0.49
+    UNION ALL
+    SELECT 5, "apple", 0.99)
+SELECT *
+FROM mydataset.compute_sales(TABLE my_orders, "apple");
+
+/*-------------+-------+
+ | total_sales | item  |
+ +-------------+-------+
+ | 6           | apple |
+ +-------------+-------*/
+```
 
 ### Use system variables with TVFs
 
@@ -139,7 +157,9 @@ Table functions are a type of routine. To list all of the routines in a dataset,
 
 To delete a table function, use the [`DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function) statement:
 
-    DROP TABLE FUNCTION mydataset.names_by_year
+```
+DROP TABLE FUNCTION mydataset.names_by_year
+```
 
 ## Authorize routines
 
@@ -147,9 +167,9 @@ You can authorize table functions as *routines* . Authorized routines let you sh
 
 ## Limitations
 
-  - The query body must be a `SELECT` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
+- The query body must be a `SELECT` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
 
-  - Table functions must be stored in the same location as the tables they reference.
+- Table functions must be stored in the same location as the tables they reference.
 
 ## Quotas
 

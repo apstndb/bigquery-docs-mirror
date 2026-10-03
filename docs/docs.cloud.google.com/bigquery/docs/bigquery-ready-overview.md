@@ -16,11 +16,11 @@ Google Cloud Ready - BigQuery recognizes partner solutions that have met a core 
 
 Our BigQuery Validation Program lets partners validate their integrations with BigQuery to ensure the best possible customer experience. Our BigQuery Validation Program has three phases:
 
-  - **Evaluate:** A Google team runs a series of data integration tests in a sandboxed production environment and compares results against best practices and performance benchmarks.
+- **Evaluate:** A Google team runs a series of data integration tests in a sandboxed production environment and compares results against best practices and performance benchmarks.
 
-  - **Enhance:** We take the results of the Evaluate phase and work with our partners to fill in the gaps, if any.
+- **Enhance:** We take the results of the Evaluate phase and work with our partners to fill in the gaps, if any.
 
-  - **Enable:** Together with our partners, we refine existing documentation to make sure our mutual customers have everything they need to successfully implement a solution using our integrated products.
+- **Enable:** Together with our partners, we refine existing documentation to make sure our mutual customers have everything they need to successfully implement a solution using our integrated products.
 
 ## Scope of the program and partner benefits
 
@@ -41,9 +41,9 @@ The following is a list of the benefits offered to participating ISVs :
 
 Partners that are interested in program participation need to meet the following minimum criteria:
 
-  - Partner product includes a production-quality BigQuery integration.
-  - At least 5 customers using partner product in production with BigQuery.
-  - 1 public customer case study.
+- Partner product includes a production-quality BigQuery integration.
+- At least 5 customers using partner product in production with BigQuery.
+- 1 public customer case study.
 
 Based on validation resource availability, the Google Cloud Partner team will coordinate with you to schedule your validation.
 
@@ -51,11 +51,11 @@ Based on validation resource availability, the Google Cloud Partner team will co
 
 Eligible Google Cloud partners can participate in the Google Cloud Ready - BigQuery initiative to qualify and promote their solutions by meeting the [requirements](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview#requirements) based on how the partner product is categorized. Categories include:
 
-  - [BI, ML, & Advanced Analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#bi-ml-analytics)
-  - [Connectors & Developer Tools](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#connectors-developer-tools)
-  - [Data Governance, Security, & MDM](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-governance-mdm)
-  - [Data Quality, Observability, & FinOps](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-quality-observability)
-  - [ETL & Data Integration](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration)
+- [BI, ML, & Advanced Analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#bi-ml-analytics)
+- [Connectors & Developer Tools](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#connectors-developer-tools)
+- [Data Governance, Security, & MDM](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-governance-mdm)
+- [Data Quality, Observability, & FinOps](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-quality-observability)
+- [ETL & Data Integration](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration)
 
 Each category requires successful completion of category-specific integration and interoperability testing.
 
@@ -66,7 +66,7 @@ If you are already a Google Cloud Partner and are interested in participating in
 Many BigQuery partners in Google Cloud Ready appear in BigQuery. To see a listing of Google Cloud Ready partners, do the following:
 
 1.  In the Google Cloud console, go to the **Partner Center** page.
-    
+
     A list of partners is displayed in their respective categories.
 
 2.  To find a specific partner listing, enter a name into the **Search** box and press **Enter** .
@@ -77,5 +77,5 @@ Many BigQuery partners in Google Cloud Ready appear in BigQuery. To see a listin
 
 ## What's next
 
-  - See the list of [Google Cloud Ready - BigQuery Partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) .
-  - View the [BigQuery Partner page](https://docs.cloud.google.com/bigquery#section-13) .
+- See the list of [Google Cloud Ready - BigQuery Partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) .
+- View the [BigQuery Partner page](https://docs.cloud.google.com/bigquery#section-13) .

@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.CONVERT\_IMAGE\_TYPE function
+# The ML.CONVERT_IMAGE_TYPE function
 
 This document describes the `ML.CONVERT_IMAGE_TYPE` scalar function, which lets you convert the data type of pixel values in an image to `INT64` with a range of `[0, 255)` . You can use `ML.CONVERT_IMAGE_TYPE` with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
 
@@ -20,13 +20,13 @@ ML.CONVERT_IMAGE_TYPE(image)
 
 `ML.CONVERT_IMAGE_TYPE` takes the following argument:
 
-  - `image` : a `STRUCT<ARRAY<INT64>, ARRAY<FLOAT64>>` value that represents an image.
-    
-    The first array in the struct must contain the dimensions of the image. It must contain three `INT64` values, which represent the image height (H), width (W), and number of channels (C).
-    
-    The second array in the struct must contain the image data. The length of the array must be equivalent to H x W x C from the preceding array. Each value in the array must be between `[0, 1)` .
-    
-    The struct value must be \<= 60 MB.
+- `image` : a `STRUCT<ARRAY<INT64>, ARRAY<FLOAT64>>` value that represents an image.
+
+  The first array in the struct must contain the dimensions of the image. It must contain three `INT64` values, which represent the image height (H), width (W), and number of channels (C).
+
+  The second array in the struct must contain the image data. The length of the array must be equivalent to H x W x C from the preceding array. Each value in the array must be between `[0, 1)` .
+
+  The struct value must be \<= 60 MB.
 
 ## Output
 
@@ -40,27 +40,29 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The [SSD Mobilenet V2 Object detection model](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/2) model requires input to be in `tf.uint8` . The following example changes the pixel values for the input images from floating point numbers to integers so that they work with this model:
 
-    CREATE OR REPLACE TABLE mydataset.detections
-    AS (
-      SELECT uri, detection_scores
-      FROM
-        ML.PREDICT(
-          MODEL `mydataset.mobilenet`,
-          SELECT
-            ML.CONVERT_IMAGE_TYPE(ML.DECODE_IMAGE(data))
-              AS image,
-            uri
-          FROM `mydataset.images`)
-    );
+```
+CREATE OR REPLACE TABLE mydataset.detections
+AS (
+  SELECT uri, detection_scores
+  FROM
+    ML.PREDICT(
+      MODEL `mydataset.mobilenet`,
+      SELECT
+        ML.CONVERT_IMAGE_TYPE(ML.DECODE_IMAGE(data))
+          AS image,
+        uri
+      FROM `mydataset.images`)
+);
+```
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
-  - For more information about supported SQL statements and functions for each model type, see the following documents:
-    
-      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- For more information about supported SQL statements and functions for each model type, see the following documents:
+
+  - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+  - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

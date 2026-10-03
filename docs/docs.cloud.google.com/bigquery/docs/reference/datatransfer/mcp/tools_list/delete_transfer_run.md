@@ -16,34 +16,24 @@ The following example shows an MCP call to delete a transfer run by its resource
 
 The following code sample shows how to use `curl` to call the `delete_transfer_run` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;delete_transfer_run&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerydatatransfer.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "delete_transfer_run",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -51,45 +41,50 @@ A request to delete data transfer run information.
 
 ### DeleteTransferRunRequest
 
+**JSON representation**
+
+```
+{
+  "name": string
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string
-}</code></pre></td>
+<td><code>name</code></td>
+<td><p><code>string</code></p>
+<p>Required. The name of the resource requested. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}</code></li>
+</ul></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`name`
-
-`string`
-
-Required. The name of the resource requested. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
 
 ## Output Schema
 
 A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
 
-    service Foo {
-      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-    }
+```
+service Foo {
+  rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+```
 
 ### Tool Annotations
 
@@ -97,9 +92,9 @@ A generic empty message that you can re-use to avoid defining duplicated empty m
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ✅ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌
+Destructive Hint: ✅ \| Idempotent Hint: ❌ \| Read Only Hint: ❌ \| Open World Hint: ❌

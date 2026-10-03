@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# JOBS\_TIMELINE view
+# JOBS_TIMELINE view
 
 The `INFORMATION_SCHEMA.JOBS_TIMELINE` view contains near real-time BigQuery metadata by timeslice for all jobs submitted in the current project. This view contains currently running and completed jobs.
 
@@ -16,8 +16,8 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE` view contains near real-time BigQuery met
 
 To query the `INFORMATION_SCHEMA.JOBS_TIMELINE` view, you need the `bigquery.jobs.listAll` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
-  - Project Owner
-  - BigQuery Admin
+- Project Owner
+- BigQuery Admin
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -30,7 +30,7 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*` view has the following schema:
 > **Note:** The underlying data is partitioned by the `job_creation_time` column and clustered by `project_id` and `user_email` .
 
 | Column name                       | Data type       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `period_start`                    | `TIMESTAMP`     | Start time of this period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `period_slot_ms`                  | `INTEGER`       | Slot milliseconds consumed in this period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `project_id`                      | `STRING`        | *(Clustering column)* ID of the project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -52,7 +52,7 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*` view has the following schema:
 | `edition`                         | `STRING`        | The edition associated with the reservation assigned to this job. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                                                                                                                                                                                                                                                     |
 | `total_bytes_billed`              | `INTEGER`       | If the project is configured to use [on-demand pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) , then this field contains the total bytes billed for the job. If the project is configured to use [flat-rate pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) , then you are not billed for bytes and this field is informational only. This field is only populated for completed jobs and contains the total number of bytes billed for the entire duration of the job. |
 | `total_bytes_processed`           | `INTEGER`       | Total bytes processed by the job. This field is only populated for completed jobs and contains the total number of bytes processed over the entire duration of the job.                                                                                                                                                                                                                                                                                                                                                          |
-| `error_result`                    | `RECORD`        | Details of error (if any) as an `         ErrorProto        . `                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `error_result`                    | `RECORD`        | Details of error (if any) as an [`ErrorProto`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto)` .`                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `cache_hit`                       | `BOOLEAN`       | Whether the query results of this job were from a cache.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `period_shuffle_ram_usage_ratio`  | `FLOAT`         | Shuffle usage ratio in the selected time period. The value is `0.0` if the job ran with a reservation that uses autoscaling and has zero baseline slots.                                                                                                                                                                                                                                                                                                                                                                         |
 | `period_estimated_runnable_units` | `INTEGER`       | Units of work that can be scheduled immediately in this period. Additional slots for these units of work accelerate your query, provided no other query in the reservation needs additional slots.                                                                                                                                                                                                                                                                                                                               |
@@ -68,52 +68,58 @@ This view displays running jobs along with job history for the past 180 days. If
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                        | Resource scope | Region scope              |
-| ---------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.JOBS_TIMELINE[_BY_PROJECT]`` | Project level  | `         REGION        ` |
+| View name                                                                                            | Resource scope | Region scope |
+|------------------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.JOBS_TIMELINE[_BY_PROJECT] `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Examples
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE `` .
 
 The following example calculates the slot utilization for every second in the last day:
 
-    SELECT
-      period_start,
-      SUM(period_slot_ms) AS total_slot_ms,
-    FROM
-      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-    WHERE
-      period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
-    GROUP BY
-      period_start
-    ORDER BY
-      period_start DESC;
+```
+SELECT
+  period_start,
+  SUM(period_slot_ms) AS total_slot_ms,
+FROM
+  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+WHERE
+  period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
+GROUP BY
+  period_start
+ORDER BY
+  period_start DESC;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------+---------------+
-    |    period_start     | total_slot_ms |
-    +---------------------+---------------+
-    | 2020-07-29 03:52:14 |     122415176 |
-    | 2020-07-29 03:52:15 |     141107048 |
-    | 2020-07-29 03:52:16 |     173335142 |
-    | 2020-07-28 03:52:17 |     131107048 |
-    +---------------------+---------------+
+```
++---------------------+---------------+
+|    period_start     | total_slot_ms |
++---------------------+---------------+
+| 2020-07-29 03:52:14 |     122415176 |
+| 2020-07-29 03:52:15 |     141107048 |
+| 2020-07-29 03:52:16 |     173335142 |
+| 2020-07-28 03:52:17 |     131107048 |
++---------------------+---------------+
+```
 
 You can check usage for a particular reservation with `WHERE reservation_id = "â€¦"` . For script jobs, the parent job also reports the total slot usage from its children jobs. To avoid double counting, use `WHERE statement_type != "SCRIPT"` to exclude the parent job.
 
@@ -121,144 +127,160 @@ You can check usage for a particular reservation with `WHERE reservation_id = "â
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE `` .
 
 The following example computes the number of `RUNNING` and `PENDING` jobs at every second in the last day:
 
-    SELECT
-      period_start,
-      SUM(IF(state = "PENDING", 1, 0)) as PENDING,
-      SUM(IF(state = "RUNNING", 1, 0)) as RUNNING
-    FROM
-      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-    WHERE
-      period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
-    GROUP BY
-      period_start;
+```
+SELECT
+  period_start,
+  SUM(IF(state = "PENDING", 1, 0)) as PENDING,
+  SUM(IF(state = "RUNNING", 1, 0)) as RUNNING
+FROM
+  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+WHERE
+  period_start BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY) AND CURRENT_TIMESTAMP()
+GROUP BY
+  period_start;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------+---------+---------+
-    |    period_start     | PENDING | RUNNING |
-    +---------------------+---------+---------+
-    | 2020-07-29 03:52:14 |       7 |      27 |
-    | 2020-07-29 03:52:15 |       1 |      21 |
-    | 2020-07-29 03:52:16 |       5 |      21 |
-    | 2020-07-29 03:52:17 |       4 |      22 |
-    +---------------------+---------+---------+
+```
++---------------------+---------+---------+
+|    period_start     | PENDING | RUNNING |
++---------------------+---------+---------+
+| 2020-07-29 03:52:14 |       7 |      27 |
+| 2020-07-29 03:52:15 |       1 |      21 |
+| 2020-07-29 03:52:16 |       5 |      21 |
+| 2020-07-29 03:52:17 |       4 |      22 |
++---------------------+---------+---------+
+```
 
 ### Resource usage by jobs at a specific point in time
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS `` .
 
 The following example returns the `job_id` of all jobs running at a specific point in time together with their resource usage during that one-second period:
 
-    SELECT
-      job_id,
-      period_slot_ms
-    FROM
-      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
-    WHERE
-      period_start = '2020-07-29 03:52:14'
-      AND (statement_type != 'SCRIPT' OR statement_type IS NULL);
+```
+SELECT
+  job_id,
+  period_slot_ms
+FROM
+  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+WHERE
+  period_start = '2020-07-29 03:52:14'
+  AND (statement_type != 'SCRIPT' OR statement_type IS NULL);
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +------------------+
-    | job_id | slot_ms |
-    +------------------+
-    | job_1  | 2415176 |
-    | job_2  | 4417245 |
-    | job_3  |  427416 |
-    | job_4  | 1458122 |
-    +------------------+
+```
++------------------+
+| job_id | slot_ms |
++------------------+
+| job_1  | 2415176 |
+| job_2  | 4417245 |
+| job_3  |  427416 |
+| job_4  | 1458122 |
++------------------+
+```
 
 ### Match slot usage behavior from administrative resource charts
 
 You can use [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to monitor your organization's health, slot usage, and BigQuery jobs performance over time. The following example queries the `INFORMATION_SCHEMA.JOBS_TIMELINE` view for a slot usage timeline at one-hour intervals, similar to the information that is available in administrative resource charts.
 
-    DECLARE
-      start_time timestamp DEFAULT TIMESTAMP(START_TIME);
-    DECLARE
-      end_time timestamp DEFAULT TIMESTAMP(END_TIME);
-    
-    WITH
-      snapshot_data AS (
-      SELECT
-        UNIX_MILLIS(period_start) AS period_start,
-        IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
-        DIV(UNIX_MILLIS(period_start), 3600000 * 1) * 3600000 * 1 AS time_ms
-      FROM (
-        SELECT
-          *
-        FROM
-          `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
-        WHERE
-          ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE)
-              AND job_creation_time < TIMESTAMP(end_time))
-            AND period_start >= TIMESTAMP(start_time)
-            AND period_start < TIMESTAMP(end_time))
-          AND (statement_type != "SCRIPT"
-            OR statement_type IS NULL)
-          AND REGEXP_CONTAINS(reservation_id, "^PROJECT_ID:") )
-      GROUP BY
-        period_start,
-        time_ms ),
-      converted_percentiles_data AS (
-      SELECT
-        time_ms,
-        100 - CAST(SAFE_DIVIDE(3600000 * 1 * 1 / 1000, COUNT(*)) AS INT64) AS converted_percentiles,
-      FROM
-        snapshot_data
-      GROUP BY
-        time_ms ),
-      data_by_time AS (
-      SELECT
-        time_ms,
-      IF
-        (converted_percentiles <= 0, 0, APPROX_QUANTILES(period_slot_ms, 100)[SAFE_OFFSET(converted_percentiles)] / 1000) AS p99_slots,
-        SUM(period_slot_ms) / (3600000 * 1) AS avg_slots
-      FROM
-        snapshot_data
-      JOIN
-        converted_percentiles_data AS c
-      USING
-        (time_ms)
-      GROUP BY
-        time_ms,
-        converted_percentiles )
+```
+DECLARE
+  start_time timestamp DEFAULT TIMESTAMP(START_TIME);
+DECLARE
+  end_time timestamp DEFAULT TIMESTAMP(END_TIME);
+
+WITH
+  snapshot_data AS (
+  SELECT
+    UNIX_MILLIS(period_start) AS period_start,
+    IFNULL(SUM(period_slot_ms), 0) AS period_slot_ms,
+    DIV(UNIX_MILLIS(period_start), 3600000 * 1) * 3600000 * 1 AS time_ms
+  FROM (
     SELECT
-      time_ms,
-      TIMESTAMP_MILLIS(time_ms) AS time_stamp,
-      IFNULL(avg_slots, 0) AS avg_slots,
-      IFNULL(p99_slots, 0) AS p99_slots,
-    FROM (
-      SELECT
-        time_ms * 3600000 * 1 AS time_ms
-      FROM
-        UNNEST(GENERATE_ARRAY(DIV(UNIX_MILLIS(start_time), 3600000 * 1), DIV(UNIX_MILLIS(end_time), 3600000 * 1) - 1, 1)) AS time_ms )
-    LEFT JOIN
-      data_by_time
-    USING
-      (time_ms)
-    ORDER BY
-      time_ms DESC;
+      *
+    FROM
+      `PROJECT_ID.region-US`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_PROJECT
+    WHERE
+      ((job_creation_time >= TIMESTAMP_SUB(start_time, INTERVAL 1200 MINUTE)
+          AND job_creation_time < TIMESTAMP(end_time))
+        AND period_start >= TIMESTAMP(start_time)
+        AND period_start < TIMESTAMP(end_time))
+      AND (statement_type != "SCRIPT"
+        OR statement_type IS NULL)
+      AND REGEXP_CONTAINS(reservation_id, "^PROJECT_ID:") )
+  GROUP BY
+    period_start,
+    time_ms ),
+  converted_percentiles_data AS (
+  SELECT
+    time_ms,
+    100 - CAST(SAFE_DIVIDE(3600000 * 1 * 1 / 1000, COUNT(*)) AS INT64) AS converted_percentiles,
+  FROM
+    snapshot_data
+  GROUP BY
+    time_ms ),
+  data_by_time AS (
+  SELECT
+    time_ms,
+  IF
+    (converted_percentiles <= 0, 0, APPROX_QUANTILES(period_slot_ms, 100)[SAFE_OFFSET(converted_percentiles)] / 1000) AS p99_slots,
+    SUM(period_slot_ms) / (3600000 * 1) AS avg_slots
+  FROM
+    snapshot_data
+  JOIN
+    converted_percentiles_data AS c
+  USING
+    (time_ms)
+  GROUP BY
+    time_ms,
+    converted_percentiles )
+SELECT
+  time_ms,
+  TIMESTAMP_MILLIS(time_ms) AS time_stamp,
+  IFNULL(avg_slots, 0) AS avg_slots,
+  IFNULL(p99_slots, 0) AS p99_slots,
+FROM (
+  SELECT
+    time_ms * 3600000 * 1 AS time_ms
+  FROM
+    UNNEST(GENERATE_ARRAY(DIV(UNIX_MILLIS(start_time), 3600000 * 1), DIV(UNIX_MILLIS(end_time), 3600000 * 1) - 1, 1)) AS time_ms )
+LEFT JOIN
+  data_by_time
+USING
+  (time_ms)
+ORDER BY
+  time_ms DESC;
+```
 
 ### Calculate the percentage of execution time that had pending work
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
+```
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS `` .
 
@@ -266,10 +288,12 @@ The following example returns a float value that represents the percentage of th
 
 If the resulting value is large, you can try adding more slots to see the impact and understand whether slot contention is the only bottleneck.
 
-    SELECT ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) as execution_duration_percentage
-    FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
-    WHERE job_id = 'my_job_id'
-    GROUP BY job_id
+```
+SELECT ROUND(COUNTIF(period_estimated_runnable_units > 0) / COUNT(*) * 100, 1) as execution_duration_percentage
+FROM `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE
+WHERE job_id = 'my_job_id'
+GROUP BY job_id
+```
 
 If you know the date of the query execution, add a `DATE(period_start) = 'YYYY-MM-DD'` clause to the query to reduce the amount of bytes processed and speed up the execution. For example, `DATE(period_start) = '2025-08-22'` .
 
@@ -277,8 +301,10 @@ If you know the date of the query execution, add a `DATE(period_start) = 'YYYY-M
 
 The result is similar to the following:
 
-    +-------------------------------+
-    | execution_duration_percentage |
-    +-------------------------------+
-    |                          96.7 |
-    +-------------------------------+
+```
++-------------------------------+
+| execution_duration_percentage |
++-------------------------------+
+|                          96.7 |
++-------------------------------+
+```

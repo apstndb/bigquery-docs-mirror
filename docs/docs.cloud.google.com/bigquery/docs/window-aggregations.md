@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Understand window aggregation in continuous queries
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, send an email to <bq-continuous-queries-feedback@google.com> .
@@ -26,54 +26,54 @@ Windowing TVFs are distinct from [window function calls](https://docs.cloud.goog
 
 The following aggregation functions are supported:
 
-  - [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)
-  - [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct)
-  - [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)
-  - [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
-  - [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
-  - [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) with the following requirements:
-      - A `LIMIT` clause is required, with a maximum value of 10,000.
-      - An `ORDER BY` clause is optional.
-  - [`ARRAY_CONCAT_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
-  - [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)
-  - [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and)
-  - [`BIT_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or)
-  - [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)
-  - [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)
-  - [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)
-  - [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif)
-  - [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)
-  - [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)
-  - [`LOGICAL_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and)
-  - [`LOGICAL_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or)
-  - [`MAX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)
-  - [`MAX_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by)
-  - [`MIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)
-  - [`MIN_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by)
-  - [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)
-  - [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)
-  - [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp)
-  - [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg) with the following requirements:
-      - A `LIMIT` clause is required, with a maximum value of 100.
-      - An `ORDER BY` clause is optional.
-  - [`SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum)
-  - [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)
-  - [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)
-  - [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)
+- [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)
+- [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct)
+- [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)
+- [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
+- [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
+- [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg) with the following requirements:
+  - A `LIMIT` clause is required, with a maximum value of 10,000.
+  - An `ORDER BY` clause is optional.
+- [`ARRAY_CONCAT_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
+- [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)
+- [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and)
+- [`BIT_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or)
+- [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)
+- [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)
+- [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)
+- [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif)
+- [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)
+- [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)
+- [`LOGICAL_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and)
+- [`LOGICAL_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or)
+- [`MAX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)
+- [`MAX_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by)
+- [`MIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)
+- [`MIN_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by)
+- [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)
+- [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)
+- [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp)
+- [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg) with the following requirements:
+  - A `LIMIT` clause is required, with a maximum value of 100.
+  - An `ORDER BY` clause is optional.
+- [`SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum)
+- [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)
+- [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)
+- [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)
 
 ## Unsupported aggregation functions
 
 The following aggregation functions are unsupported:
 
-  - [`AVG` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg)
-  - [`COUNT` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count)
-  - Functions containing `DISTINCT` expressions.
-  - [`GROUPING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping)
-  - [`PERCENTILE_CONT` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont)
-  - [`ST_CENTROID_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg)
-  - [`ST_EXTENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_extent)
-  - [`ST_UNION_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_union_agg)
-  - [`SUM` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum)
+- [`AVG` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_avg)
+- [`COUNT` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_count)
+- Functions containing `DISTINCT` expressions.
+- [`GROUPING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping)
+- [`PERCENTILE_CONT` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont)
+- [`ST_CENTROID_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg)
+- [`ST_EXTENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_extent)
+- [`ST_UNION_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_union_agg)
+- [`SUM` (Differential Privacy)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum)
 
 ## The TUMBLE function
 
@@ -87,25 +87,27 @@ You can use this function in real-time event processing to group events by time 
 
 ### Syntax
 
-    TUMBLE(TABLE table, "timestamp_column", window_size)
+```
+TUMBLE(TABLE table, "timestamp_column", window_size)
+```
 
 ### Definitions
 
-  - `table` : The BigQuery table name. This must be a [standard BigQuery table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) wrapped within the `APPENDS` function. The word `TABLE` must precede this argument.
+- `table` : The BigQuery table name. This must be a [standard BigQuery table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) wrapped within the `APPENDS` function. The word `TABLE` must precede this argument.
 
-  - `timestamp_column` : A `STRING` literal that specifies the name of the column in the input table that contains the event time. The values in this column assign each row to a window. The `_CHANGE_TIMESTAMP` column, which defines the BigQuery system time, is the only supported `timestamp_column` . User-defined columns aren't supported.
+- `timestamp_column` : A `STRING` literal that specifies the name of the column in the input table that contains the event time. The values in this column assign each row to a window. The `_CHANGE_TIMESTAMP` column, which defines the BigQuery system time, is the only supported `timestamp_column` . User-defined columns aren't supported.
 
-  - `window_size` : An `INTERVAL` value that defines the duration of each tumbling window. Window sizes can be a maximum of 24 hours. For example: `INTERVAL 30 SECOND` .
+- `window_size` : An `INTERVAL` value that defines the duration of each tumbling window. Window sizes can be a maximum of 24 hours. For example: `INTERVAL 30 SECOND` .
 
 ### Output
 
 The `TUMBLE` function returns an output with the following columns:
 
-  - All columns of the input table at the time the query runs.
+- All columns of the input table at the time the query runs.
 
-  - `window_start` : A `TIMESTAMP` value that indicates the inclusive start time of the window to which the record belongs.
+- `window_start` : A `TIMESTAMP` value that indicates the inclusive start time of the window to which the record belongs.
 
-  - `window_end` : A `TIMESTAMP` value that indicates the exclusive end time of the window to which the record belongs.
+- `window_end` : A `TIMESTAMP` value that indicates the exclusive end time of the window to which the record belongs.
 
 ### Output materialization
 
@@ -117,12 +119,12 @@ While a window remains open, BigQuery must preserve the intermediate aggregation
 
 ### Limitations
 
-  - The `TUMBLE` function is supported only in BigQuery continuous queries.
-  - When starting a continuous query with the `TUMBLE` function, you can use only the `APPENDS` function. The `CHANGES` function isn't supported.
-  - The BigQuery system time column defined by `_CHANGE_TIMESTAMP` is the only supported `timestamp_column` . User-defined columns aren't supported.
-  - Window sizes can be a maximum of 24 hours.
-  - When the `TUMBLE` windowing function runs, it produces two additional output columns: `window_start` and `window_end` . You must include at least one of these columns in the `GROUP BY` statement within the `SELECT` statement that performs the window aggregation.
-  - When you use the `TUMBLE` function with continuous query joins, you must follow all continuous query join [limitations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#limitations) .
+- The `TUMBLE` function is supported only in BigQuery continuous queries.
+- When starting a continuous query with the `TUMBLE` function, you can use only the `APPENDS` function. The `CHANGES` function isn't supported.
+- The BigQuery system time column defined by `_CHANGE_TIMESTAMP` is the only supported `timestamp_column` . User-defined columns aren't supported.
+- Window sizes can be a maximum of 24 hours.
+- When the `TUMBLE` windowing function runs, it produces two additional output columns: `window_start` and `window_end` . You must include at least one of these columns in the `GROUP BY` statement within the `SELECT` statement that performs the window aggregation.
+- When you use the `TUMBLE` function with continuous query joins, you must follow all continuous query join [limitations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#limitations) .
 
 ### Pricing considerations
 
@@ -132,38 +134,40 @@ BigQuery continuous queries bill you based on the [compute capacity (slots) cons
 
 The following query shows you how to query a taxi rides table to get a streaming average number of rides, number of passengers, and average fare per taxi every 30 minutes, and export this data into a table in BigQuery:
 
-    INSERT INTO
-     `real_time_taxi_streaming.driver_stats`
-    
-    WITH ride_completions AS (
-     SELECT
-       _CHANGE_TIMESTAMP as bq_changed_ts,
-       CAST(timestamp AS DATE) AS ride_date,
-       taxi_id,
-       meter_reading,
-       passenger_count
-     FROM
-       APPENDS(TABLE `real_time_taxi_streaming.taxirides`,
-         CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
-     WHERE
-       ride_status = 'dropoff')
-    
-     SELECT
-       ride_date,
-       window_end,
-       taxi_id,
-       COUNT(taxi_id) AS total_rides_per_half_hour,
-       ROUND(AVG(meter_reading),2) AS avg_fare_per_half_hour,
-       SUM(passenger_count) AS total_passengers_per_half_hour
-    FROM
-      tumble(TABLE ride_completions,"bq_changed_ts",INTERVAL 30 MINUTE)
-    GROUP BY
-      window_end,
-      ride_date,
-      taxi_id
+```
+INSERT INTO
+ `real_time_taxi_streaming.driver_stats`
+
+WITH ride_completions AS (
+ SELECT
+   _CHANGE_TIMESTAMP as bq_changed_ts,
+   CAST(timestamp AS DATE) AS ride_date,
+   taxi_id,
+   meter_reading,
+   passenger_count
+ FROM
+   APPENDS(TABLE `real_time_taxi_streaming.taxirides`,
+     CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)
+ WHERE
+   ride_status = 'dropoff')
+
+ SELECT
+   ride_date,
+   window_end,
+   taxi_id,
+   COUNT(taxi_id) AS total_rides_per_half_hour,
+   ROUND(AVG(meter_reading),2) AS avg_fare_per_half_hour,
+   SUM(passenger_count) AS total_passengers_per_half_hour
+FROM
+  tumble(TABLE ride_completions,"bq_changed_ts",INTERVAL 30 MINUTE)
+GROUP BY
+  window_end,
+  ride_date,
+  taxi_id
+```
 
 ## What's next
 
-  - Learn how to [perform JOINs, aggregations, and windowing](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) .
-  - Learn more about [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) .
-  - Learn how to [join data from multiple streams](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins) .
+- Learn how to [perform JOINs, aggregations, and windowing](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) .
+- Learn more about [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) .
+- Learn how to [join data from multiple streams](https://docs.cloud.google.com/bigquery/docs/continuous-query-joins) .

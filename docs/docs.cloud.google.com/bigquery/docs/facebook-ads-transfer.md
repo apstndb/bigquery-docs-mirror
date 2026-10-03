@@ -16,25 +16,25 @@ To learn about how a Facebook Ads transfer works, see [Introduction to Facebook 
 
 Facebook Ads data transfers are subject to the following limitations:
 
-  - Starting July 06, 2026, support for the `AdInsightsMMM` report is temporarily disabled. For more information, see [July 06, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads) .
+- Starting July 06, 2026, support for the `AdInsightsMMM` report is temporarily disabled. For more information, see [July 06, 2026](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads) .
 
-  - The minimum interval time between recurring Facebook Ads data transfers is 24 hours. The default interval for a recurring data transfer is 24 hours.
+- The minimum interval time between recurring Facebook Ads data transfers is 24 hours. The default interval for a recurring data transfer is 24 hours.
 
-  - The BigQuery Data Transfer Service for Facebook Ads only supports a fixed set of tables. Custom reports aren't supported.
+- The BigQuery Data Transfer Service for Facebook Ads only supports a fixed set of tables. Custom reports aren't supported.
 
-  - Facebook Ads data transfers have a maximum duration of six hours. A transfer fails if it takes longer than this maximum duration.
+- Facebook Ads data transfers have a maximum duration of six hours. A transfer fails if it takes longer than this maximum duration.
 
-  - Incremental transfers aren't supported for `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. When you create a data transfer that includes `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
+- Incremental transfers aren't supported for `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. When you create a data transfer that includes `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables, and you specified a date in **Schedule options** , all data that is available for that date is transferred.
 
-  - The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
+- The BigQuery Data Transfer Service supports a refresh window of up to 30 days to the `AdInsights` , `AdInsightsActions` , `Ads` , `Campaigns` , and `AdSets` tables. The refresh window refers to the number of days that a data transfer will retrieve source data from. When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window.
 
-  - The long-lived user access token that is required for Facebook Ads transfers expires after 60 days.
-    
-    If your long-lived user access token is expired, you can obtain the new one by navigating to your data transfer details and clicking **Edit** . In the edit transfer page, follow the same steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) to generate a new long-lived user access token.
+- The long-lived user access token that is required for Facebook Ads transfers expires after 60 days.
 
-  - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
+  If your long-lived user access token is expired, you can obtain the new one by navigating to your data transfer details and clicking **Edit** . In the edit transfer page, follow the same steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) to generate a new long-lived user access token.
 
-  - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Facebook Ads.
+- To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
+
+- If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Facebook Ads.
 
 ## Before you begin
 
@@ -45,7 +45,7 @@ The following sections describe the steps that you need to take before you creat
 Ensure that you have the following Facebook Ads information when creating a Facebook Ads data transfer.
 
 | Facebook Ads parameters | Description                                                        |
-| ----------------------- | ------------------------------------------------------------------ |
+|-------------------------|--------------------------------------------------------------------|
 | `clientID`              | The app ID name for the OAuth 2.0 client.                          |
 | `clientSecret`          | The app secret for the OAuth 2.0 client.                           |
 | `refreshToken`          | The long-lived user access token, also known as a *refresh* token. |
@@ -62,13 +62,13 @@ To obtain a long-lived user access token, also known as a *refresh* token, perfo
 2.  In the **Data Source Details** section, copy the redirect URI listed after the **Refresh Token** field.
 
 3.  Click the [Facebook App dashboard](https://developers.facebook.com/apps) , then click **Set up** in the **Facebook login for Business** section.
-    
+
     ![Configure the settings for Facebook Login for Business](https://docs.cloud.google.com/static/bigquery/images/facebook-ads-refresh-token.png)
 
 4.  In the **Settings** page, enter the redirect URL in the **Valid OAuth Redirect URIs** field and click **Save** .
 
 5.  Return to the Google Cloud console. In the **Data Source Details** section, click **Authorize** . You will be redirected to a Facebook authentication page.
-    
+
     ![Generate a long-lived user access token](https://docs.cloud.google.com/static/bigquery/images/facebook-ads-authorize.png)
 
 6.  Select the Facebook developer app to authorize the account that connects with the BigQuery Data Transfer Service.
@@ -81,14 +81,14 @@ Long-lived user access tokens expire after 60 days. For information on how to ob
 
 Alternatively, you can provide a refresh token when you [create a data transfer](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_transfer_setup) if you have obtained one using one of the following methods:
 
-  - [Generate a long-lived user access token using the Graph API](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived) . The `ads_management` , `ads_read` , and `business_management` permissions are required for a valid token for the data transfer.
-  - [Generate a system user token](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) . A system user token lets you manually add assets, such as ad accounts, to be included in the data transfer. If a system user token is expired, you must manually update the transfer configuration with new credentials. You also have the option to create a token that doesn't expire when you create a system user token. For more information, see [Supported access tokens](https://developers.facebook.com/docs/facebook-login/facebook-login-for-business#supported-access-tokens) .
+- [Generate a long-lived user access token using the Graph API](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived) . The `ads_management` , `ads_read` , and `business_management` permissions are required for a valid token for the data transfer.
+- [Generate a system user token](https://developers.facebook.com/docs/facebook-login/guides/access-tokens) . A system user token lets you manually add assets, such as ad accounts, to be included in the data transfer. If a system user token is expired, you must manually update the transfer configuration with new credentials. You also have the option to create a token that doesn't expire when you create a system user token. For more information, see [Supported access tokens](https://developers.facebook.com/docs/facebook-login/facebook-login-for-business#supported-access-tokens) .
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+- If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. If you only set up email notifications, Pub/Sub permissions aren't required. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
@@ -100,15 +100,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -127,31 +127,31 @@ Select one of the following options:
 3.  In the **Source type** section, for **Source** , select **Facebook Ads** .
 
 4.  In the **Data source details** section, do the following:
-    
-      - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
-      - For **Client ID** , enter the app ID.
-      - For **Client secret** , enter the app secret.
-      - For **Refresh token** , enter the long-lived user access token ID by clicking **Authorize** . Alternatively, if you [already have a refresh token or a system user token](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh_token_alternatives) , you can enter the refresh token directly in this field. For information about retrieving a long-lived user access token, see [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .
-      - For **Facebook Ads objects to transfer** : specify Facebook Ads reports or objects to include in this transfer.
-      - Select **Fetch Data for Authorized Ad Accounts Only** to fetch data only from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advertising accounts** section.
-      - For **ActionsCollections** , specify one or more [action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
-      - For **Generic Breakdowns** , select the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns)
-      - For **Action Breakdowns** , select the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsightsActions` table. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
-      - For **Refresh window** , specify a [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro#refresh) duration.
+
+    - For **Network attachment** , select a network attachment from the menu. Before you can use a network attachment with this data transfer, you must [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
+    - For **Client ID** , enter the app ID.
+    - For **Client secret** , enter the app secret.
+    - For **Refresh token** , enter the long-lived user access token ID by clicking **Authorize** . Alternatively, if you [already have a refresh token or a system user token](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#refresh_token_alternatives) , you can enter the refresh token directly in this field. For information about retrieving a long-lived user access token, see [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .
+    - For **Facebook Ads objects to transfer** : specify Facebook Ads reports or objects to include in this transfer.
+    - Select **Fetch Data for Authorized Ad Accounts Only** to fetch data only from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advertising accounts** section.
+    - For **ActionsCollections** , specify one or more [action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
+    - For **Generic Breakdowns** , select the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns)
+    - For **Action Breakdowns** , select the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsightsActions` table. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
+    - For **Refresh window** , specify a [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro#refresh) duration.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
 6.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer.
 
 7.  In the **Schedule options** section, do the following:
-    
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
-      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+    - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
-    
-      - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this data transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview#about-topics) name, or you can click **Create a topic** to create one.
+
+    - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+    - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this data transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview#about-topics) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
@@ -170,19 +170,19 @@ When this data transfer runs, the BigQuery Data Transfer Service automatically p
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">AdAccounts</code></td>
+<td><code>AdAccounts</code></td>
 <td>The ad accounts available for a user.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">AdInsights</code></td>
+<td><code>AdInsights</code></td>
 <td>Ad insights report for all ad accounts.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">AdInsightsActions</code></td>
+<td><code>AdInsightsActions</code></td>
 <td>Ad insights actions report for all ad accounts.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">AdInsightsMMM</code><br />
+<td><code>AdInsightsMMM</code><br />
 
 <blockquote>
 <strong>Note:</strong> Support for this report is temporarily disabled. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads">July 06, 2026</a>
@@ -190,35 +190,35 @@ When this data transfer runs, the BigQuery Data Transfer Service automatically p
 <td>Ad insights marketing mix modeling (MMM) report for all ad accounts.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Ads</code></td>
+<td><code>Ads</code></td>
 <td>Ad reports for all ad accounts.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">AdCreatives</code></td>
+<td><code>AdCreatives</code></td>
 <td>Ad creative reports for all ad accounts.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">AdSets</code></td>
+<td><code>AdSets</code></td>
 <td>Ad set reports for all ad accounts.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">Campaigns</code></td>
+<td><code>Campaigns</code></td>
 <td>Campaign reports for all ad accounts.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">AdImages</code></td>
+<td><code>AdImages</code></td>
 <td>Ad images reports for all ad accounts.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">AdLabels</code></td>
+<td><code>AdLabels</code></td>
 <td>Ad labels reports for all ad accounts.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Businesses</code></td>
+<td><code>Businesses</code></td>
 <td>Meta business accounts associated with the user.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">CustomAudiences</code></td>
+<td><code>CustomAudiences</code></td>
 <td>Custom audience reports for all ad accounts.</td>
 </tr>
 </tbody>
@@ -228,47 +228,51 @@ When this data transfer runs, the BigQuery Data Transfer Service automatically p
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-    bq mk
-        --transfer_config
-        --project_id=PROJECT_ID
-        --data_source=DATA_SOURCE
-        --display_name=DISPLAY_NAME
-        --target_dataset=DATASET
-        --params='PARAMETERS'
+```
+bq mk
+    --transfer_config
+    --project_id=PROJECT_ID
+    --data_source=DATA_SOURCE
+    --display_name=DISPLAY_NAME
+    --target_dataset=DATASET
+    --params='PARAMETERS'
+```
 
 Where:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
-  - DATA\_SOURCE : the data source (for example, `facebook-ads` ).
-  - DISPLAY\_NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - DATASET : the target dataset for the data transfer configuration.
-  - PARAMETERS : the parameters for the created data transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Facebook Ads transfer:
-      - `connector.authentication.oauth.clientId` : The app ID name for the OAuth 2.0 client.
-      - `connector.authentication.oauth.clientSecret` : The app secret for the OAuth 2.0 client.
-      - `connector.authentication.oauth.refreshToken` : The long-lived token ID.
-      - `connector.authorizedAdAccountsOnly` : If set to `true` , the connector only retrieves data from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advanced accounts** section.
-      - `connector.actionCollections` : Action collections are objects that specify the different types of actions people have taken in response to your ad. For a full list of `actionCollections` values, see [Action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
-          - For more information, see [Ad Insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) .
-      - `connector.genericBreakdowns` : Specify the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
-      - `actionBreakdowns` : Specify the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
-      - `connector.insightsLevel` : Aggregation level for fetching insights data (e.g., Ad, Adset, Campaign, Account).
-      - `connector.insightsTimeIncrement` : Number of days over which to group aggregated insights data (between 1 and 7).
-      - **Note:** The chosen window range applies not only to the insights tables ( `AdInsights` and `AdInsightsActions` ), but also filters the `Ads` , `Campaigns` , and `AdSets` tables using Facebook's `time_range` parameter.
+- ` PROJECT_ID ` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+- ` DATA_SOURCE ` : the data source (for example, `facebook-ads` ).
+- ` DISPLAY_NAME ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` DATASET ` : the target dataset for the data transfer configuration.
+- ` PARAMETERS ` : the parameters for the created data transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Facebook Ads transfer:
+  - `connector.authentication.oauth.clientId` : The app ID name for the OAuth 2.0 client.
+  - `connector.authentication.oauth.clientSecret` : The app secret for the OAuth 2.0 client.
+  - `connector.authentication.oauth.refreshToken` : The long-lived token ID.
+  - `connector.authorizedAdAccountsOnly` : If set to `true` , the connector only retrieves data from advertising accounts that are authorized to your Facebook App. You can find your authorized advertising accounts under **App Settings** \> **Advanced** , and in the **Advanced accounts** section.
+  - `connector.actionCollections` : Action collections are objects that specify the different types of actions people have taken in response to your ad. For a full list of `actionCollections` values, see [Action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
+    - For more information, see [Ad Insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights) .
+  - `connector.genericBreakdowns` : Specify the generic breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. Facebook Ads only permits certain combinations of breakdowns. For more information about permitted breakdown combinations, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
+  - `actionBreakdowns` : Specify the action breakdowns for your insights data. These breakdowns determine how your transferred data is organized in the `AdInsights` and `AdInsightsActions` tables. For information about combining breakdowns, see [Combining breakdowns](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns) .
+  - `connector.insightsLevel` : Aggregation level for fetching insights data (e.g., Ad, Adset, Campaign, Account).
+  - `connector.insightsTimeIncrement` : Number of days over which to group aggregated insights data (between 1 and 7).
+  - **Note:** The chosen window range applies not only to the insights tables ( `AdInsights` and `AdInsightsActions` ), but also filters the `Ads` , `Campaigns` , and `AdSets` tables using Facebook's `time_range` parameter.
 
 For example, the following command creates a Facebook Ads data transfer in the default project with all the required parameters:
 
-    bq mk
-    --transfer_config
-    --target_dataset=mydataset
-    --data_source=facebook_ads
-    --display_name='My Transfer'
-    --params='{"connector.authentication.oauth.clientId": "1650000000",
-        "connector.authentication.oauth.clientSecret":"TBA99550",
-        "connector.authentication.oauth.refreshToken":"abcdef",
-        "connector.authorizedAdAccountsOnly":true,
-        "connector.actionCollections":["Actions", "Conversions"],
-        "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
-        "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
+```
+bq mk
+--transfer_config
+--target_dataset=mydataset
+--data_source=facebook_ads
+--display_name='My Transfer'
+--params='{"connector.authentication.oauth.clientId": "1650000000",
+    "connector.authentication.oauth.clientSecret":"TBA99550",
+    "connector.authentication.oauth.refreshToken":"abcdef",
+    "connector.authorizedAdAccountsOnly":true,
+    "connector.actionCollections":["Actions", "Conversions"],
+    "connector.genericBreakdowns":["PublisherPlatform", "PlatformPosition"],
+    "connector.actionBreakdowns":["ActionDevice", "ActionType"]}'
+```
 
 ### API
 
@@ -292,55 +296,55 @@ When a transfer completes, these action collections are populated in the [`AdIns
 
 The following is a list of action collections supported in a Facebook Ads data transfer:
 
-  - `ActionValues`
-  - `Actions`
-  - `AdClickActions`
-  - `AdImpressionActions`
-  - `CatalogSegmentActions`
-  - `CatalogSegmentValue`
-  - `CatalogSegmentValueMobilePurchaseRoas`
-  - `CatalogSegmentValueOmniPurchaseRoas`
-  - `CatalogSegmentValueWebsitePurchaseRoas`
-  - `ConversionValues`
-  - `Conversions`
-  - `ConvertedProductQuantity`
-  - `ConvertedProductValue`
-  - `CostPer15_secVideoView`
-  - `CostPer2SecContinuousVideoView`
-  - `CostPerActionType`
-  - `CostPerAdClick`
-  - `CostPerConversion`
-  - `CostPerOneThousandAdImpression`
-  - `CostPerOutboundClick`
-  - `CostPerThruplay`
-  - `CostPerUniqueActionType`
-  - `CostPerUniqueConversion`
-  - `CostPerUniqueOutboundClick`
-  - `InteractiveComponentTap`
-  - `MobileAppPurchaseRoas`
-  - `OutboundClicks`
-  - `OutboundClicksCtr`
-  - `PurchaseRoas`
-  - `UniqueActions`
-  - `UniqueConversions`
-  - `UniqueOutboundClicks`
-  - `UniqueOutboundClicksCtr`
-  - `UniqueVideoView15_sec`
-  - `Video15_secWatchedActions`
-  - `Video30_secWatchedActions`
-  - `VideoAvgTimeWatchedActions`
-  - `VideoContinuous2SecWatchedActions`
-  - `VideoP100_watchedActions`
-  - `VideoP25WatchedActions`
-  - `VideoP50WatchedActions`
-  - `VideoP75WatchedActions`
-  - `VideoP95WatchedActions`
-  - `VideoPlayActions`
-  - `VideoPlayCurveActions`
-  - `VideoPlayRetentionGraphActions`
-  - `VideoTimeWatchedActions`
-  - `WebsiteCtr`
-  - `WebsitePurchaseRoas`
+- `ActionValues`
+- `Actions`
+- `AdClickActions`
+- `AdImpressionActions`
+- `CatalogSegmentActions`
+- `CatalogSegmentValue`
+- `CatalogSegmentValueMobilePurchaseRoas`
+- `CatalogSegmentValueOmniPurchaseRoas`
+- `CatalogSegmentValueWebsitePurchaseRoas`
+- `ConversionValues`
+- `Conversions`
+- `ConvertedProductQuantity`
+- `ConvertedProductValue`
+- `CostPer15_secVideoView`
+- `CostPer2SecContinuousVideoView`
+- `CostPerActionType`
+- `CostPerAdClick`
+- `CostPerConversion`
+- `CostPerOneThousandAdImpression`
+- `CostPerOutboundClick`
+- `CostPerThruplay`
+- `CostPerUniqueActionType`
+- `CostPerUniqueConversion`
+- `CostPerUniqueOutboundClick`
+- `InteractiveComponentTap`
+- `MobileAppPurchaseRoas`
+- `OutboundClicks`
+- `OutboundClicksCtr`
+- `PurchaseRoas`
+- `UniqueActions`
+- `UniqueConversions`
+- `UniqueOutboundClicks`
+- `UniqueOutboundClicksCtr`
+- `UniqueVideoView15_sec`
+- `Video15_secWatchedActions`
+- `Video30_secWatchedActions`
+- `VideoAvgTimeWatchedActions`
+- `VideoContinuous2SecWatchedActions`
+- `VideoP100_watchedActions`
+- `VideoP25WatchedActions`
+- `VideoP50WatchedActions`
+- `VideoP75WatchedActions`
+- `VideoP95WatchedActions`
+- `VideoPlayActions`
+- `VideoPlayCurveActions`
+- `VideoPlayRetentionGraphActions`
+- `VideoTimeWatchedActions`
+- `WebsiteCtr`
+- `WebsitePurchaseRoas`
 
 ## Combining breakdowns
 
@@ -352,22 +356,24 @@ For more information about what breakdowns can be combined, see [Combining Break
 
 If you are having issues setting up a Facebook Ads data transfer, try the following troubleshooting steps:
 
-  - Check if your user access token has expired using the [Facebook Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken/) . Long-lived user access tokens expire after 60 days. If your long-lived user access token has expired, navigate to your transfer details then click **Edit** to modify your transfer configuration. In the edit transfer page, follow the same steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) to generate a new one.
+- Check if your user access token has expired using the [Facebook Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken/) . Long-lived user access tokens expire after 60 days. If your long-lived user access token has expired, navigate to your transfer details then click **Edit** to modify your transfer configuration. In the edit transfer page, follow the same steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) to generate a new one.
 
-  - Check that the long-lived user access token is generated with the required permissions - `ads_management` , `ads_read` , and `business_management` . You can check the permissions on your long-lived user access token by entering the following link into your browser:
-    
-        https://graph.facebook.com/me/permissions?access_token=TOKEN
-    
-    Where TOKEN is the value of the long-lived user access token.
-    
-    If you don't have the required permissions, generate a new long-lived user access token by following the steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .
+- Check that the long-lived user access token is generated with the required permissions - `ads_management` , `ads_read` , and `business_management` . You can check the permissions on your long-lived user access token by entering the following link into your browser:
 
-  - Check the **Required Actions** tab on the [Facebook App dashboard](https://developers.facebook.com/apps) for any items that require attention.
+  ```
+  https://graph.facebook.com/me/permissions?access_token=TOKEN
+  ```
+
+  Where ` TOKEN ` is the value of the long-lived user access token.
+
+  If you don't have the required permissions, generate a new long-lived user access token by following the steps in [Facebook Ads prerequisites](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#fb_ads_prereqs) .
+
+- Check the **Required Actions** tab on the [Facebook App dashboard](https://developers.facebook.com/apps) for any items that require attention.
 
 You might encounter the following error messages related to Meta API rate limit errors:
 
-  - Error: `There have been too many calls from this ad-account. Wait a bit and try again.`  
-    **Resolution** : Check that there are no parallel workflows using the same apps or credentials. If these errors persist, try upgrading your permissions to **Advanced Access** to get more rate limiting quota. For more information, see [Marketing API Rate Limiting](https://developers.facebook.com/docs/marketing-apis/rate-limiting/) .
+Error: `There have been too many calls from this ad-account. Wait a bit and try again.`  
+**Resolution** : Check that there are no parallel workflows using the same apps or credentials. If these errors persist, try upgrading your permissions to **Advanced Access** to get more rate limiting quota. For more information, see [Marketing API Rate Limiting](https://developers.facebook.com/docs/marketing-apis/rate-limiting/) .
 
 ### Common monitoring metrics messages
 
@@ -386,36 +392,36 @@ You can also check the [BigQuery Data Transfer Service monitoring metrics](https
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">INVALID_ARGUMENT</code></td>
-<td>The supplied configuration is invalid. You might also encounter this error with the message <code dir="ltr" translate="no">This combination of action and generic breakdowns is not allowed.</code> For information about valid breakdown combinations, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns">Combining breakdowns</a> .</td>
+<td><code>INVALID_ARGUMENT</code></td>
+<td>The supplied configuration is invalid. You might also encounter this error with the message <code>This combination of action and generic breakdowns is not allowed.</code> For information about valid breakdown combinations, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#combining_breakdowns">Combining breakdowns</a> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">PERMISSION_DENIED</code></td>
+<td><code>PERMISSION_DENIED</code></td>
 <td>The credentials are invalid</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">UNAUTHENTICATED</code></td>
+<td><code>UNAUTHENTICATED</code></td>
 <td>Authentication is required</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">SERVICE_UNAVAILABLE</code></td>
+<td><code>SERVICE_UNAVAILABLE</code></td>
 <td>The service is temporarily unable to handle this data transfer</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">DEADLINE_EXCEEDED</code></td>
+<td><code>DEADLINE_EXCEEDED</code></td>
 <td>The data transfer did not finish within the maximum duration of six hours</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">NOT_FOUND</code></td>
+<td><code>NOT_FOUND</code></td>
 <td>A requested resource is not found</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">INTERNAL</code></td>
+<td><code>INTERNAL</code></td>
 <td>Something else caused the connector to fail</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">FAILED_PRECONDITION</code></td>
-<td>This error can appear with the message <code dir="ltr" translate="no">There was an issue connecting to Facebook Ads API.</code> This error can occur when you include a network attachment with your transfer but have not configured your public network address translation (NAT) correctly. To resolve this error, follow the steps <a href="https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment">to create your network attachment by defining a static IP address</a> .<br />
+<td><code>FAILED_PRECONDITION</code></td>
+<td>This error can appear with the message <code>There was an issue connecting to Facebook Ads API.</code> This error can occur when you include a network attachment with your transfer but have not configured your public network address translation (NAT) correctly. To resolve this error, follow the steps <a href="https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment#create_a_network_attachment">to create your network attachment by defining a static IP address</a> .<br />
 <br />
 This error can also appear due to rate limit throttling. In these cases, do the following:
 <ul>
@@ -425,7 +431,7 @@ This error can also appear due to rate limit throttling. In these cases, do the 
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">RESOURCE_EXHAUSTED</code></td>
+<td><code>RESOURCE_EXHAUSTED</code></td>
 <td>A data source quota or limit was exhausted</td>
 </tr>
 </tbody>
@@ -433,6 +439,6 @@ This error can also appear due to rate limit throttling. In these cases, do the 
 
 ## What's next
 
-  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
-  - Learn more about [working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) , such as viewing configurations and run history.
-  - Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+- Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- Learn more about [working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) , such as viewing configurations and run history.
+- Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

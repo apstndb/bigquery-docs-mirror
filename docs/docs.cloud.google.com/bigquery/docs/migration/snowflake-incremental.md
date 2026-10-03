@@ -14,12 +14,12 @@ This guide shows you how to configure incremental data transfers from Snowflake 
 
 Incremental Snowflake transfers are subject to the following limitations:
 
-  - You must provide primary key columns to use the upsert write mode. For more information, see [Defining primary keys for incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#custom_schema_file) .
-  - Primary keys must be unique in the source table. If duplicates exist, the results of the merge operation in BigQuery might be inconsistent and not match the source data.
-  - The automatic handling of schema changes with incremental transfers is not supported. If the schema of a source table changes, you must manually update the BigQuery table schema.
-  - Incremental transfers work best when changes in your source data are concentrated within a small number of partitions. Incremental transfer performance can degrade significantly if updates are scattered across the source table, as this requires scanning many partitions. If you have many rows that are changed between data transfers, then we recommend that you use a full transfer instead.
-  - Some operations in Snowflake, such as `CREATE OR REPLACE TABLE` or `CLONE` , can overwrite the original table object and its associated change tracking history. This makes existing data transfers stale and requires a new full sync to resume incremental transfers.
-  - Incremental transfers must be run frequently enough to stay within [Snowflake's data retention period](https://docs.snowflake.com/en/user-guide/data-time-travel#data-retention-period) for change tracking. If the last successful transfer is run outside of this window, then the next transfer will be a full transfer.
+- You must provide primary key columns to use the upsert write mode. For more information, see [Defining primary keys for incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#custom_schema_file) .
+- Primary keys must be unique in the source table. If duplicates exist, the results of the merge operation in BigQuery might be inconsistent and not match the source data.
+- The automatic handling of schema changes with incremental transfers is not supported. If the schema of a source table changes, you must manually update the BigQuery table schema.
+- Incremental transfers work best when changes in your source data are concentrated within a small number of partitions. Incremental transfer performance can degrade significantly if updates are scattered across the source table, as this requires scanning many partitions. If you have many rows that are changed between data transfers, then we recommend that you use a full transfer instead.
+- Some operations in Snowflake, such as `CREATE OR REPLACE TABLE` or `CLONE` , can overwrite the original table object and its associated change tracking history. This makes existing data transfers stale and requires a new full sync to resume incremental transfers.
+- Incremental transfers must be run frequently enough to stay within [Snowflake's data retention period](https://docs.snowflake.com/en/user-guide/data-time-travel#data-retention-period) for change tracking. If the last successful transfer is run outside of this window, then the next transfer will be a full transfer.
 
 ## Configure incremental transfers
 
@@ -37,11 +37,11 @@ The upsert write mode lets you update, insert or delete records in your destinat
 
 To use the upsert write mode with your incremental data transfer, you must [define primary keys in your custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental#custom_schema_file) . Note the following while choosing a primary key:
 
-  - The primary key can be one or more columns on your table that are required for the connector to identify records to update.
+- The primary key can be one or more columns on your table that are required for the connector to identify records to update.
 
-  - Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
+- Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
 
-  - To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode or full ingestion instead.
+- To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode or full ingestion instead.
 
 ## Schema changes behavior
 
@@ -55,42 +55,46 @@ For incremental transfers in **Upsert** mode, you must identify one or more colu
 
 The following example shows a custom schema file that defines `O_ORDERKEY` and `O_ORDERDATE` as primary keys for the `orders` table:
 
+```
+{
+  "databases": [
     {
-      "databases": [
+      "name": "my_db",
+      "originalName": "my_db",
+      "tables": [
         {
-          "name": "my_db",
-          "originalName": "my_db",
-          "tables": [
+          "name": "orders",
+          "originalName": "orders",
+          "columns": [
             {
-              "name": "orders",
-              "originalName": "orders",
-              "columns": [
-                {
-                  "name": "O_ORDERKEY",
-                  "originalName": "O_ORDERKEY",
-                  "usageType": [
-                    "PRIMARY_KEY"
-                  ]
-                },
-                {
-                  "name": "O_ORDERDATE",
-                  "originalName": "O_ORDERDATE",
-                  "usageType": [
-                    "PRIMARY_KEY"
-                  ]
-                }
+              "name": "O_ORDERKEY",
+              "originalName": "O_ORDERKEY",
+              "usageType": [
+                "PRIMARY_KEY"
+              ]
+            },
+            {
+              "name": "O_ORDERDATE",
+              "originalName": "O_ORDERDATE",
+              "usageType": [
+                "PRIMARY_KEY"
               ]
             }
           ]
         }
       ]
     }
+  ]
+}
+```
 
 ## Enable change tracking
 
 Before you can set up an incremental Snowflake transfer, you must enable change tracking on each source table with the following command:
 
-    ALTER TABLE DATABASE_NAME.SCHEMA_NAME.TABLE_NAME SET CHANGE_TRACKING = TRUE;
+```
+ALTER TABLE DATABASE_NAME.SCHEMA_NAME.TABLE_NAME SET CHANGE_TRACKING = TRUE;
+```
 
 If change tracking is not enabled for a table, then the Snowflake connector defaults to a full data transfer for that table.
 

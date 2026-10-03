@@ -22,13 +22,13 @@ During migration of public or project classic saved queries to BigQuery Studio s
 
 To get the permissions that you need to manage saved queries, ask your administrator to grant you the following IAM roles on the project that you want to manage saved queries for:
 
-  - To manage BigQuery Studio saved queries in the Google Cloud console:
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-      - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
-      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
-  - To manage BigQuery Studio saved queries by using the BigQuery API: [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
-  - To migrate project classic saved queries to BigQuery Studio saved queries: [BigQuery Studio Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
-  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` )
+- To manage BigQuery Studio saved queries in the Google Cloud console:
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+  - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
+- To manage BigQuery Studio saved queries by using the BigQuery API: [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` )
+- To migrate project classic saved queries to BigQuery Studio saved queries: [BigQuery Studio Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
+- To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -38,10 +38,10 @@ These predefined roles contain the permissions required to manage saved queries.
 
 The following permissions are required to manage saved queries:
 
-  - To manage BigQuery Studio saved queries in the Google Cloud console: `bigquery.config.get, bigquery.jobs.create, dataform.locations.*, resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions.*, dataform.repositories.*, dataform.workspaces.*`
-  - To manage BigQuery Studio saved queries by using the BigQuery API: `dataform.locations.*, dataform.repositories.*, dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list`
-  - To migrate project classic saved queries to BigQuery Studio saved queries: `bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create`
-  - To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : `dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind, dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list`
+- To manage BigQuery Studio saved queries in the Google Cloud console: `bigquery.config.get, bigquery.jobs.create, dataform.locations.*, resourcemanager.projects.get, resourcemanager.projects.list, bigquery.readsessions.*, dataform.repositories.*, dataform.workspaces.*`
+- To manage BigQuery Studio saved queries by using the BigQuery API: `dataform.locations.*, dataform.repositories.*, dataform.workspaces.*, resourcemanager.projects.get, resourcemanager.projects.list`
+- To migrate project classic saved queries to BigQuery Studio saved queries: `bigquery.savedqueries.get, bigquery.savedqueries.list, bigquery.savedqueries.update, bigquery.savedqueries.delete, bigquery.savedqueries.create`
+- To let [authenticated users](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) view [public access queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) : `dataform.locations.*, dataform.repositories.computeAccessTokenStatus, dataform.repositories.fetchHistory, dataform.repositories.fetchRemoteBranches, dataform.repositories.get, dataform.repositories.getIamPolicy, dataform.repositories.list, dataform.repositories.queryDirectoryContents, dataform.repositories.readFile, dataform.workspaces.fetchFileDiff, dataform.workspaces.fetchFileGitStatuses, dataform.workspaces.fetchGitAheadBehind, dataform.workspaces.get, dataform.workspaces.getIamPolicy, dataform.workspaces.list, dataform.workspaces.queryDirectoryContents, dataform.workspaces.readFile, dataform.workspaces.searchFiles, resourcemanager.projects.get, resourcemanager.projects.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -60,23 +60,23 @@ To share a saved query, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to share.
 
-4.  Click more\_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
 6.  In the **New principals** field, enter a principal.
 
 7.  In the **Role** list, select one of the following roles:
-    
-      - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : can perform any action on the saved query, including deleting or sharing it.
-      - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
-      - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
-    
+
+    - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : can perform any action on the saved query, including deleting or sharing it.
+    - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
+    - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
+
     > **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
 8.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
@@ -85,8 +85,8 @@ To share a saved query, follow these steps:
 
 10. To return to the saved query details, click **Close** .
 
-11. To generate a link to the saved query, click more\_vert **View actions** \> **Share** \> **Copy link** .
-    
+11. To generate a link to the saved query, click more_vert **View actions** \> **Share** \> **Copy link** .
+
     The link is copied to your clipboard.
 
 ## Grant public access to a saved query
@@ -104,12 +104,12 @@ To grant public access to a BigQuery Studio saved query, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to grant public access to.
 
-4.  Click more\_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
@@ -142,10 +142,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -166,16 +166,14 @@ To view a list of all saved queries in your project, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, click more\_vert **View actions** next to **Queries** , and then do one of the following:
+3.  In the **Explorer** pane, click more_vert **View actions** next to **Queries** , and then do one of the following:
 
-<!-- end list -->
-
-  - To open the list in the current tab, click **Show all** .
-  - To open the list in a new tab, click **Show all in** \> **New tab** .
-  - To open the list in a split tab, click **Show all in** \> **Split tab** .
+- To open the list in the current tab, click **Show all** .
+- To open the list in a new tab, click **Show all in** \> **New tab** .
+- To open the list in a split tab, click **Show all in** \> **Split tab** .
 
 ## View saved query metadata
 
@@ -184,8 +182,8 @@ To view saved query metadata, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to view metadata for.
 
@@ -210,8 +208,8 @@ To view saved query versions, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to view version history for.
 
@@ -224,14 +222,14 @@ To compare saved query versions, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to compare version history for.
 
 4.  Click the saved query, and then click history **Version history** .
 
-5.  Click more\_vert **View actions** next to a saved query version and then click **Compare** . The comparison pane opens, comparing the saved query version that you selected with the current query.
+5.  Click more_vert **View actions** next to a saved query version and then click **Compare** . The comparison pane opens, comparing the saved query version that you selected with the current query.
 
 6.  Optional: The current query also shows autosaved changes. To explicitly save these changes, click **Overwrite** .
 
@@ -244,14 +242,14 @@ Restoring from the comparison pane lets you compare the previous version of the 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to restore a previous version of.
 
 4.  Click the saved query, and then click history **Version history** .
 
-5.  Click more\_vert **View actions** next to the version of the saved query that you want to restore, and then click **Compare** . The comparison pane opens, comparing the saved query version you selected with the most recent query version, including any autosaved changes.
+5.  Click more_vert **View actions** next to the version of the saved query that you want to restore, and then click **Compare** . The comparison pane opens, comparing the saved query version you selected with the most recent query version, including any autosaved changes.
 
 6.  To restore the previous saved query version after comparison, click **Restore** .
 
@@ -264,12 +262,12 @@ To open a saved query in Connected Sheets, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to open in Connected Sheets.
 
-4.  Click more\_vert **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
+4.  Click more_vert **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
 
 ## Download saved queries
 
@@ -278,8 +276,8 @@ To download a saved query, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to download.
 
@@ -292,12 +290,12 @@ To delete a saved query, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to delete.
 
-4.  Click more\_vert **Open actions** next to the saved query and then click **Delete** .
+4.  Click more_vert **Open actions** next to the saved query and then click **Delete** .
 
 5.  To confirm deletion, type `delete` in the dialog.
 
@@ -309,7 +307,7 @@ To delete a saved query, do the following:
 
 Use the following sections to learn how to manage [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) .
 
-> **Note:** If you have not enabled BigQuery Studio, then classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, then classic saved queries appear in the **Saved queries ( ` NUMBER ` )** folder in the **Classic Explorer** pane instead of the **(Classic) Queries** folder.
 
 ### Share classic saved queries
 
@@ -324,14 +322,14 @@ If you are planning to share a classic saved query, consider including a comment
 To share a classic saved query, follow these steps:
 
 1.  In the left pane, click explore **Explorer** .
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 3.  Find and click the classic saved query that you want to grant access to. You can use the search feature or filters to find your query.
 
-4.  Click more\_vert **View actions** next to the query and then click **Copy link** .
+4.  Click more_vert **View actions** next to the query and then click **Copy link** .
 
 5.  Share the link with the users you want to grant access to the query.
 
@@ -340,10 +338,10 @@ To share a classic saved query, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
@@ -361,31 +359,31 @@ To batch migrate classic saved queries, you must be granted the [required roles]
 
 You can batch migrate the following classic saved queries:
 
-  - Personal classic saved queries  
-    Personal classic saved queries are visible only to the user who creates them. They are identified by the person icon. Personal classic saved queries can only be migrated by their owners.
+Personal classic saved queries  
+Personal classic saved queries are visible only to the user who creates them. They are identified by the person icon. Personal classic saved queries can only be migrated by their owners.
 
-  - Public classic saved queries  
-    Public classic saved queries are visible to anyone with a link to the query. They are identified by the share icon. Public classic saved queries can only be migrated by their owners.
-    
-    IAM permissions on public classic saved queries don't map to permissions on BigQuery Studio saved queries. This means that BigQuery Studio saved queries migrated from public classic saved queries are not publicly available by default. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during or after migration.
-    
-    To set IAM permissions for the migrated BigQuery Studio saved queries during migration, you can select an existing BigQuery Studio saved query that has permissions which you want to apply to the migrated saved queries. BigQuery will copy permissions granted on the selected BigQuery Studio saved query, and apply them to the migrated saved queries. You can also manually add users or groups with whom you want to share the migrated saved queries.
-    
-    If you don't set IAM permissions during migration, only you will have access to the migrated BigQuery Studio saved queries.
+Public classic saved queries  
+Public classic saved queries are visible to anyone with a link to the query. They are identified by the share icon. Public classic saved queries can only be migrated by their owners.
 
-  - Project classic saved queries  
-    Project-level saved queries are visible to principals that have the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified by the people icon. You can batch-migrate all project classic saved queries in your project.
-    
-    IAM permissions on project classic saved queries don't directly map to permissions on BigQuery Studio saved queries. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during, or after migration.
-    
-    To set IAM permissions for the migrated BigQuery Studio saved queries during migration, you can select an existing BigQuery Studio saved query that has permissions which you want to apply to the migrated saved queries. BigQuery will copy permissions granted on the selected BigQuery Studio saved query, and apply them to the migrated saved queries. You can also manually add users or groups with whom you want to share the migrated saved queries.
-    
-    If you don't set IAM permissions during migration, only you will have access to the migrated BigQuery Studio saved queries.
+IAM permissions on public classic saved queries don't map to permissions on BigQuery Studio saved queries. This means that BigQuery Studio saved queries migrated from public classic saved queries are not publicly available by default. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during or after migration.
+
+To set IAM permissions for the migrated BigQuery Studio saved queries during migration, you can select an existing BigQuery Studio saved query that has permissions which you want to apply to the migrated saved queries. BigQuery will copy permissions granted on the selected BigQuery Studio saved query, and apply them to the migrated saved queries. You can also manually add users or groups with whom you want to share the migrated saved queries.
+
+If you don't set IAM permissions during migration, only you will have access to the migrated BigQuery Studio saved queries.
+
+Project classic saved queries  
+Project-level saved queries are visible to principals that have the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified by the people icon. You can batch-migrate all project classic saved queries in your project.
+
+IAM permissions on project classic saved queries don't directly map to permissions on BigQuery Studio saved queries. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during, or after migration.
+
+To set IAM permissions for the migrated BigQuery Studio saved queries during migration, you can select an existing BigQuery Studio saved query that has permissions which you want to apply to the migrated saved queries. BigQuery will copy permissions granted on the selected BigQuery Studio saved query, and apply them to the migrated saved queries. You can also manually add users or groups with whom you want to share the migrated saved queries.
+
+If you don't set IAM permissions during migration, only you will have access to the migrated BigQuery Studio saved queries.
 
 During batch migration of classic saved queries, BigQuery does the following:
 
-  - Saves all of the migrating classic saved queries as BigQuery Studio saved queries, stored in the selected region.
-  - Converts all of the migrating classic saved queries to read-only classic saved queries.
+- Saves all of the migrating classic saved queries as BigQuery Studio saved queries, stored in the selected region.
+- Converts all of the migrating classic saved queries to read-only classic saved queries.
 
 After migration, you can access your personal, public, and project classic saved queries both as BigQuery Studio saved queries and as read-only classic saved queries.
 
@@ -404,44 +402,44 @@ To batch migrate classic saved queries in your project to BigQuery Studio saved 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project and click more\_vert **View actions** next to **(Classic) Queries** , and then click **Migrate classic saved queries** .
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+
+3.  In the **Explorer** pane, expand your project and click more_vert **View actions** next to **(Classic) Queries** , and then click **Migrate classic saved queries** .
 
 4.  In the **Classic saved queries migration** pane, in the **Check migration readiness** section, click **Next** to confirm that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#required_roles) .
-    
+
     Your IAM permissions determine which type of classic saved queries you can migrate and which sections of the **Classic saved queries migration** pane are visible to you.
 
 5.  In the **Region** section, in the **Region** drop-down, select a region where BigQuery will store the migrated saved queries.
-    
+
     We recommend selecting your default region for BigQuery Studio code assets. For more information, see [Set the default region](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#set-default-region) .
 
 6.  To migrate all your personal classic saved queries, In the **Migrate personal queries** section, select the **Migrate all personal queries** checkbox, and then click **Next** .
 
 7.  To migrate all public classic saved queries in your project, in the **Migrate public queries** section, do the following:
-    
+
     1.  Select the **Migrate all public queries** checkbox.
-    
+
     2.  In the **SQL** drop-down, select a BigQuery Studio saved query that has the IAM policies which you want apply to the migrated saved queries.
-    
+
     3.  Optional: To add a user or group with whom you want to share the migrated saved queries, click **Add User/Group** .
-        
+
         To share the migrated saved queries publicly, set `allAuthenticatedUsers` as the principal, and grant it the Code Viewer role. For more information, see [Grant public access](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) .
-    
+
     4.  Click **Next** .
 
 8.  To migrate project-level classic saved queries, in the **Migrate project queries** section, do the following:
-    
+
     1.  Select the **Migrate all project queries** checkbox.
     2.  In the **SQL** drop-down, select a BigQuery Studio saved query that has the IAM policies which you want apply to the migrated saved queries.
     3.  Optional: To add a user or group with whom you want to share the migrated saved queries, click **Add User/Group** .
     4.  Click **Next** .
 
 9.  To confirm that you understand the [migration risks](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migration-risks) and that you want to batch migrate classic saved queries, in the **Confirm** section, in the **Confirm** field, enter `confirm` , and then click **Next** .
-    
+
     > **Warning:** Migration cannot be stopped or canceled once started.
 
 10. Click **Submit** .
@@ -453,16 +451,16 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 4.  Find the classic saved query you want to delete.
 
-5.  Click more\_vert **View actions** next to the query and then click **Delete** .
+5.  Click more_vert **View actions** next to the query and then click **Delete** .
 
 6.  To confirm deletion, type `delete` in the dialog.
 
@@ -476,26 +474,29 @@ You can use Knowledge Catalog to manage saved queries in all [saved query locati
 
 Knowledge Catalog automatically retrieves the following metadata from saved queries:
 
-  - Data asset name
-  - Data asset parent
-  - Data asset location
-  - Data asset type
-  - Corresponding Google Cloud project
+- Data asset name
+- Data asset parent
+- Data asset location
+- Data asset type
+- Corresponding Google Cloud project
 
 Knowledge Catalog logs saved queries as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
-  - System entry group  
-    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
-  - System entry type  
-    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
-  - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
-  - Type  
-    The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
+System entry group  
+The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for saved queries is `@dataform` . To view details of saved query entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+
+System entry type  
+The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for saved queries is `dataform-code-asset` . To view details of saved queries, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected saved query. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+
+System aspect type  
+The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for saved queries is `dataform-code-asset` . To provide additional context to saved queries in Knowledge Catalog by annotating data saved query entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `SQL_QUERY`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+
+Type  
+The type for saved queries is `SQL_QUERY` . This type lets you filter saved queries in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=SQL_QUERY` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
 ## What's next
 
-  - To learn more about BigQuery Studio saved queries, see [Introduction to saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
-  - To learn how to create saved queries, see [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) .
+- To learn more about BigQuery Studio saved queries, see [Introduction to saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
+- To learn how to create saved queries, see [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) .

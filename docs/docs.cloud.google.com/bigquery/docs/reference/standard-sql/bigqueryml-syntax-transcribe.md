@@ -26,30 +26,30 @@ ML.TRANSCRIBE(
 
 `ML.TRANSCRIBE` takes the following arguments:
 
-  - `  PROJECT_ID  ` : the project that contains the resource.
+- `PROJECT_ID` : the project that contains the resource.
 
-  - `  DATASET  ` : the BigQuery dataset that contains the resource.
+- `DATASET` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_SPEECH_TO_TEXT_V2` .
+- `MODEL_NAME` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_SPEECH_TO_TEXT_V2` .
 
-  - `  OBJECT_TABLE  ` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains URIs of the audio files.
-    
-    The audio files in the object table must be of a [supported type](https://docs.cloud.google.com/speech-to-text/docs/encoding#audio-encodings) . An error is returned for any row that contains an audio files of an unsupported type.
+- `OBJECT_TABLE` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains URIs of the audio files.
 
-  - `  RECOGNITION_CONFIG  ` : a `STRING` value that contains a [`RecognitionConfig` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
-    
-    If a recognizer has been specified for the remote model by using the [`SPEECH_RECOGNIZER` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `RECOGNITION_CONFIG` value.
-    
-    If no recognizer has been specified for the remote model by using the `SPEECH_RECOGNIZER` option, you must specify a `RECOGNITION_CONFIG` value. This value is used to provide a configuration for the default recognizer. You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `RECOGNITION_CONFIG` value that you provide.
+  The audio files in the object table must be of a [supported type](https://docs.cloud.google.com/speech-to-text/docs/encoding#audio-encodings) . An error is returned for any row that contains an audio files of an unsupported type.
+
+- `RECOGNITION_CONFIG` : a `STRING` value that contains a [`RecognitionConfig` resource](https://docs.cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers#recognitionconfig) in JSON format.
+
+  If a recognizer has been specified for the remote model by using the [`SPEECH_RECOGNIZER` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#speech_recognizer) , you can't specify a `RECOGNITION_CONFIG` value.
+
+  If no recognizer has been specified for the remote model by using the `SPEECH_RECOGNIZER` option, you must specify a `RECOGNITION_CONFIG` value. This value is used to provide a configuration for the default recognizer. You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `RECOGNITION_CONFIG` value that you provide.
 
 ## Output
 
 `ML.TRANSCRIBE` returns the following columns:
 
-  - `transcripts` : a `STRING` value that contains the transcripts from processing the audio files.
-  - `ml_transcribe_result` : a `JSON` value that contains the result from the Speech-to-Text API.
-  - `ml_transcribe_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
-  - The object table columns.
+- `transcripts` : a `STRING` value that contains the transcripts from processing the audio files.
+- `ml_transcribe_result` : a `JSON` value that contains the result from the Speech-to-Text API.
+- `ml_transcribe_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
+- The object table columns.
 
 ## Quotas
 
@@ -63,7 +63,9 @@ This section contains information about known issues.
 
 Sometimes after a query job that uses this function finishes successfully, some returned rows contain the following error message:
 
-    A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
+```
+A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
+```
 
 This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `resource exhausted` error message is returned.
 
@@ -73,7 +75,9 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 Sometimes after a query job that uses this function finishes successfully, some returned rows contain the following error message:
 
-    INVALID_ARGUMENT: The audio file cannot be processed in time.
+```
+INVALID_ARGUMENT: The audio file cannot be processed in time.
+```
 
 This issue occurs because one of the audio files being processed is too long. Check your input audio files to make sure they are all 30 minutes or less.
 
@@ -81,11 +85,11 @@ This issue occurs because one of the audio files being processed is too long. Ch
 
 You can run the `ML.TRANSCRIBE` function in the following [locations](https://docs.cloud.google.com/bigquery/docs/locations) :
 
-  - `asia-southeast1`
-  - `europe-west4`
-  - `us-central1`
-  - `US`
-  - `EU`
+- `asia-southeast1`
+- `europe-west4`
+- `us-central1`
+- `US`
+- `EU`
 
 `ML.TRANSCRIBE` must run in the same region as the remote model that the function references.
 
@@ -99,38 +103,46 @@ The following example transcribes the audio files represented by the `audio` tab
 
 Create the model:
 
-    # Create model
-    CREATE OR REPLACE MODEL
-    `myproject.mydataset.transcribe_model`
-    REMOTE WITH CONNECTION `myproject.myregion.myconnection`
-    OPTIONS (remote_service_type = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
-    speech_recognizer = 'projects/project_number/locations/recognizer_location/recognizer/recognizer_id');
+```
+# Create model
+CREATE OR REPLACE MODEL
+`myproject.mydataset.transcribe_model`
+REMOTE WITH CONNECTION `myproject.myregion.myconnection`
+OPTIONS (remote_service_type = 'CLOUD_AI_SPEECH_TO_TEXT_V2',
+speech_recognizer = 'projects/project_number/locations/recognizer_location/recognizer/recognizer_id');
+```
 
 Transcribe the audio files without overriding the recognizer's default configuration:
 
-    SELECT *
-    FROM ML.TRANSCRIBE(
-      MODEL `myproject.mydataset.transcribe_model`,
-      TABLE `myproject.mydataset.audio`
-    );
+```
+SELECT *
+FROM ML.TRANSCRIBE(
+  MODEL `myproject.mydataset.transcribe_model`,
+  TABLE `myproject.mydataset.audio`
+);
+```
 
 Transcribe the audio files and override the recognizer's default configuration:
 
-    SELECT *
-    FROM ML.TRANSCRIBE(
-      MODEL `myproject.mydataset.transcribe_model`,
-      TABLE `myproject.mydataset.audio`,
-      recognition_config => ( JSON '{"language_codes": ["en-US" ],"model": "chirp","auto_decoding_config": {}}')
-    );
+```
+SELECT *
+FROM ML.TRANSCRIBE(
+  MODEL `myproject.mydataset.transcribe_model`,
+  TABLE `myproject.mydataset.audio`,
+  recognition_config => ( JSON '{"language_codes": ["en-US" ],"model": "chirp","auto_decoding_config": {}}')
+);
+```
 
 The result is similar to the following:
 
-    transcripts | ml_transcribe_result | ml_transcribe_status | uri | ... |
-    ------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | --------
-    OK Google stream stranger things from Netflix to my TV. Okay, stranger things from Netflix playing on t v smart home and it's just... | {"metadata":{"total_billed_duration":{"seconds":56}},"results":[{"alternatives":[{"confidence":0.738729,"transcript"... | | gs://mybucket/audio_files |
+```
+transcripts | ml_transcribe_result | ml_transcribe_status | uri | ... |
+------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | --------
+OK Google stream stranger things from Netflix to my TV. Okay, stranger things from Netflix playing on t v smart home and it's just... | {"metadata":{"total_billed_duration":{"seconds":56}},"results":[{"alternatives":[{"confidence":0.738729,"transcript"... | | gs://mybucket/audio_files |
+```
 
 ## What's next
 
-  - Get step-by-step instructions on how to [transcribe audio files from an object table](https://docs.cloud.google.com/bigquery/docs/transcribe) using the `ML.TRANSCRIBE` function.
-  - To learn more about model inference, including other functions you can use to analyze BigQuery data, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
+- Get step-by-step instructions on how to [transcribe audio files from an object table](https://docs.cloud.google.com/bigquery/docs/transcribe) using the `ML.TRANSCRIBE` function.
+- To learn more about model inference, including other functions you can use to analyze BigQuery data, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+- For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

@@ -23,18 +23,18 @@ Projects use the single most specific reservation in the resource hierarchy to w
 1.  **Resource hierarchy priority:** BigQuery evaluates assignments based on the assignee resource ancestry (project \> folder \> organization). Folder and organization assignments aren't available to [standard edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) reservations.
 
 2.  **User-specific assignments using the `principal` property ( [Preview](https://cloud.google.com/products#product-launch-stages) ):** BigQuery reservation assignments support an optional `principal` property, which lets administrators route queries to specific reservations based on the identity of the user or service account executing the job. Within a specific assignee resource, an assignment with a matching principal takes priority over a generic assignment where the principal is unset.
-    
+
     The default per-project limit of user-specific assignments is 100. For help changing the default limit, contact <bigquery-wlm-feedback@google.com> .
-    
+
     > **Tip:** To ensure that a specific user is routed correctly despite a project-level generic assignment, create another user-specific assignment at that same project level.
 
 To create an assignment on a reservation, the reservation must fulfill at least one of the following criteria:
 
-  - It is configured with a non-zero amount of assigned baseline slots.
+- It is configured with a non-zero amount of assigned baseline slots.
 
-  - It is configured with a non-zero amount of autoscaling slots.
+- It is configured with a non-zero amount of autoscaling slots.
 
-  - It is configured to use idle slots, and there are available idle slots within the project.
+- It is configured to use idle slots, and there are available idle slots within the project.
 
 If you attempt to assign a resource to a reservation that doesn't meet at least one of these criteria, you receive the following message: `Assignment is pending, your project will be executed as on-demand.`
 
@@ -44,13 +44,13 @@ You can assign a resource to a [failover reservation](https://docs.cloud.google.
 
 To create a reservation assignment, you need the following Identity and Access Management (IAM) permission:
 
-  - `bigquery.reservationAssignments.create` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) and the assignee.
+- `bigquery.reservationAssignments.create` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) and the assignee.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `BigQuery Admin`
-  - `BigQuery Resource Admin`
-  - `BigQuery Resource Editor`
+- `BigQuery Admin`
+- `BigQuery Resource Admin`
+- `BigQuery Resource Editor`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -66,7 +66,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 4.  Find the reservation in the table of reservations.
 
-5.  Expand the more\_vert **Actions** option.
+5.  Expand the more_vert **Actions** option.
 
 6.  Click **Create assignment** .
 
@@ -75,15 +75,15 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 8.  Browse or search for the organization and select it.
 
 9.  In the **Job Type** section, select a job type to assign for this reservation. Options include the following:
-    
-      - `QUERY`
-      - `CONTINUOUS`
-      - `PIPELINE`
-      - `BACKGROUND`
-      - `ML_EXTERNAL`
-    
+
+    - `QUERY`
+    - `CONTINUOUS`
+    - `PIPELINE`
+    - `BACKGROUND`
+    - `ML_EXTERNAL`
+
     For more information about job types, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) . This default value is `QUERY` .
-    
+
     To learn more about allowing users to use Gemini in BigQuery with Enterprise Plus edition assignments, see [Setup Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 10. Optional: In the **User** field, enter the email address of the user, service account, or third-party identity.
@@ -97,40 +97,42 @@ To assign an organization to a reservation, use the [`CREATE ASSIGNMENT` DDL sta
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE ASSIGNMENT
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-        OPTIONS (
-          assignee = 'organizations/ORGANIZATION_ID',
-          job_type = 'JOB_TYPE',
-          principal = 'PRINCIPAL');
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-    
-      - `  RESERVATION_NAME  ` : the name of the reservation
-    
-      - `  ASSIGNMENT_ID  ` : the ID of the assignment
-        
-        The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
-    
-      - `  ORGANIZATION_ID  ` : the [organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id)
-    
-      - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
-    
-      - Optional: `  PRINCIPAL  ` : the identity format specifying the user, service account, or third-party identity
-        
-        The `principal` field supports only the following [IAM Principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
-        
-          - Google Account
-          - Service account
-          - Single identity in a workforce identity pool
-          - Single identity in a workload identity pool
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+    OPTIONS (
+      assignee = 'organizations/ORGANIZATION_ID',
+      job_type = 'JOB_TYPE',
+      principal = 'PRINCIPAL');
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+
+    - `RESERVATION_NAME` : the name of the reservation
+
+    - `ASSIGNMENT_ID` : the ID of the assignment
+
+      The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
+
+    - `ORGANIZATION_ID` : the [organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id)
+
+    - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+
+    - Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity
+
+      The `principal` field supports only the following [IAM Principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
+
+      - Google Account
+      - Service account
+      - Single identity in a workforce identity pool
+      - Single identity in a workload identity pool
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -138,43 +140,45 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign an organization's jobs to a reservation, use the `bq mk` command with the `--reservation_assignment` flag:
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --reservation_id=RESERVATION_NAME \
-        --assignee_type=ORGANIZATION \
-        --assignee_id=ORGANIZATION_ID \
-        --job_type=JOB_TYPE \
-        --principal=PRINCIPAL
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_type=ORGANIZATION \
+    --assignee_id=ORGANIZATION_ID \
+    --job_type=JOB_TYPE \
+    --principal=PRINCIPAL
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
 
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
 
-  - `  RESERVATION_NAME  ` : the name of the reservation
+- `RESERVATION_NAME` : the name of the reservation
 
-  - `  ORGANIZATION_ID  ` : the [organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id)
+- `ORGANIZATION_ID` : the [organization ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id)
 
-  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
-  - Optional: `  PRINCIPAL  ` : the identity format specifying the user, service account, or third-party identity.
-    
-    The `--principal` flag supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
-    
-      - Google Account
-      - Service account
-      - Single identity in a workforce identity pool
-      - Single identity in a workload identity pool
+- Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity.
+
+  The `--principal` flag supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
+
+  - Google Account
+  - Service account
+  - Single identity in a workforce identity pool
+  - Single identity in a workload identity pool
 
 When you create a reservation assignment, wait at least 5 minutes before running a query. Otherwise the query might be billed using on-demand pricing.
 
 ### Configure project caps and scheduling policy overrides
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
@@ -185,10 +189,10 @@ Unlike other kinds of reservation assignments that determine which reservation a
 
 When you create a project cap, the following limitations apply:
 
-  - The *assignee* must be a Google Cloud project. Folders and organizations aren't supported.
-  - The *job type* must be unset or explicitly set to `JOB_TYPE_UNSPECIFIED` .
-  - Changes to the `max_slots` policy value require a new query to start before the update takes effect.
-  - Project-level slot consumption caps aren't enforced on the training phase of `ML_EXTERNAL` jobs. See [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) for more details.
+- The *assignee* must be a Google Cloud project. Folders and organizations aren't supported.
+- The *job type* must be unset or explicitly set to `JOB_TYPE_UNSPECIFIED` .
+- Changes to the `max_slots` policy value require a new query to start before the update takes effect.
+- Project-level slot consumption caps aren't enforced on the training phase of `ML_EXTERNAL` jobs. See [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) for more details.
 
 To create project caps through these scheduling policy assignments, select one of the following options:
 
@@ -216,49 +220,53 @@ To create project caps through these scheduling policy assignments, select one o
 
 To create a project scheduling policy assignment, use the `CREATE ASSIGNMENT` DDL statement with the `scheduling_policy_max_slots` and `scheduling_policy_concurrency` options.
 
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS (
-      assignee = 'projects/PROJECT_ID',
-      scheduling_policy_max_slots = MAX_SLOTS,
-      scheduling_policy_concurrency = MAX_CONCURRENCY);
+```
+CREATE ASSIGNMENT
+  `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+OPTIONS (
+  assignee = 'projects/PROJECT_ID',
+  scheduling_policy_max_slots = MAX_SLOTS,
+  scheduling_policy_concurrency = MAX_CONCURRENCY);
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-  - `  RESERVATION_NAME  ` : the name of the reservation
-  - `  ASSIGNMENT_ID  ` : the ID of the assignment
-  - `  PROJECT_ID  ` : the Google Cloud project identifier being assigned
-  - `  MAX_SLOTS  ` : the maximum limit on the slot consumption of queries running in the project
-  - `  MAX_CONCURRENCY  ` : the upper bound on the number of simultaneous queries admitted for the project
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `RESERVATION_NAME` : the name of the reservation
+- `ASSIGNMENT_ID` : the ID of the assignment
+- `PROJECT_ID` : the Google Cloud project identifier being assigned
+- `MAX_SLOTS` : the maximum limit on the slot consumption of queries running in the project
+- `MAX_CONCURRENCY` : the upper bound on the number of simultaneous queries admitted for the project
 
 ### bq
 
 To create a scheduling policy assignment using the `bq` command-line tool, use the `bq mk` command with the `--scheduling_policy_max_slots` and `--scheduling_policy_concurrency` flags.
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --reservation_id=RESERVATION_NAME \
-        --assignee_id=PROJECT_ID \
-        --assignee_type=PROJECT \
-        --scheduling_policy_max_slots=MAX_SLOTS \
-        --scheduling_policy_concurrency=MAX_CONCURRENCY
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --scheduling_policy_max_slots=MAX_SLOTS \
+    --scheduling_policy_concurrency=MAX_CONCURRENCY
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-  - `  RESERVATION_NAME  ` : the name of the reservation
-  - `  PROJECT_ID  ` : the Google Cloud project identifier being assigned
-  - `  MAX_SLOTS  ` : the maximum limit on the slot consumption of queries running in the project
-  - `  MAX_CONCURRENCY  ` : the upper bound on the number of simultaneous queries admitted for the project
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `RESERVATION_NAME` : the name of the reservation
+- `PROJECT_ID` : the Google Cloud project identifier being assigned
+- `MAX_SLOTS` : the maximum limit on the slot consumption of queries running in the project
+- `MAX_CONCURRENCY` : the upper bound on the number of simultaneous queries admitted for the project
 
 To modify or remove an existing scheduling policy assignment, use the `ALTER ASSIGNMENT` DDL statement:
 
-``` 
+```
 ALTER ASSIGNMENT
   `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
 SET OPTIONS (
@@ -266,17 +274,16 @@ SET OPTIONS (
   scheduling_policy_concurrency = NEW_MAX_CONCURRENCY);
 -- To remove a scheduling policy setting, set its values to null. To all
    settings, delete the assignment.
-   
 ```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-  - `  RESERVATION_NAME  ` : the name of the reservation
-  - `  ASSIGNMENT_ID  ` : the ID of the assignment
-  - `  NEW_MAX_SLOTS  ` : the maximum limit on the slot consumption of queries running in the project
-  - `  NEW_MAX_CONCURRENCY  ` : the upper bound on the number of simultaneous queries admitted for the project
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `RESERVATION_NAME` : the name of the reservation
+- `ASSIGNMENT_ID` : the ID of the assignment
+- `NEW_MAX_SLOTS` : the maximum limit on the slot consumption of queries running in the project
+- `NEW_MAX_CONCURRENCY` : the upper bound on the number of simultaneous queries admitted for the project
 
 To view active scheduling policy overrides, check the `scheduling_policy` and `assignment_type` columns in the `INFORMATION_SCHEMA.ASSIGNMENTS` view.
 
@@ -292,7 +299,7 @@ To view active scheduling policy overrides, check the `scheduling_policy` and `a
 
 4.  Find the reservation in the table of reservations.
 
-5.  Expand the more\_vert **Actions** option.
+5.  Expand the more_vert **Actions** option.
 
 6.  Click **Create assignment** .
 
@@ -301,15 +308,15 @@ To view active scheduling policy overrides, check the `scheduling_policy` and `a
 8.  Browse or search for the project or folder and select it.
 
 9.  In the **Job Type** section, select a job type to assign for this reservation. Options include the following:
-    
-      - `QUERY`
-      - `CONTINUOUS`
-      - `PIPELINE`
-      - `BACKGROUND`
-      - `ML_EXTERNAL`
-    
+
+    - `QUERY`
+    - `CONTINUOUS`
+    - `PIPELINE`
+    - `BACKGROUND`
+    - `ML_EXTERNAL`
+
     Creation and modification of more granular background job types such as `BACKGROUND_COLUMN_METADATA_INDEX` are not yet supported through the console.
-    
+
     For more information about job types, see [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) . This default value is `QUERY` .
 
 10. Optional: In the **User** field, enter the email address of the user, service account, or third-party identity.
@@ -323,38 +330,40 @@ To assign a project to a reservation, use the [`CREATE ASSIGNMENT` DDL statement
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE ASSIGNMENT
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-        OPTIONS(
-          assignee="projects/PROJECT_ID",
-          job_type="JOB_TYPE",
-          principal="PRINCIPAL");
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-    
-      - `  RESERVATION_NAME  ` : the name of the reservation
-    
-      - `  ASSIGNMENT_ID  ` : the ID of the assignment
-        
-        The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
-    
-      - `  PROJECT_ID  ` : the ID of the project to assign to the reservation
-    
-      - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
-    
-      - Optional: `  PRINCIPAL  ` : the identity format specifying the user, service account, or third-party identity. The `principal` field supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
-        
-          - Google Account
-          - Service account
-          - Single identity in a workforce identity pool
-          - Single identity in a workload identity pool
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+    OPTIONS(
+      assignee="projects/PROJECT_ID",
+      job_type="JOB_TYPE",
+      principal="PRINCIPAL");
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+
+    - `RESERVATION_NAME` : the name of the reservation
+
+    - `ASSIGNMENT_ID` : the ID of the assignment
+
+      The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
+
+    - `PROJECT_ID` : the ID of the project to assign to the reservation
+
+    - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
+
+    - Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity. The `principal` field supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
+
+      - Google Account
+      - Service account
+      - Single identity in a workforce identity pool
+      - Single identity in a workload identity pool
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -362,36 +371,38 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign jobs to a reservation, use the `bq mk` command with the `--reservation_assignment` flag:
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --reservation_id=RESERVATION_NAME \
-        --assignee_type=PROJECT \
-        --assignee_id=PROJECT_ID \
-        --job_type=JOB_TYPE \
-        --principal=PRINCIPAL
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_type=PROJECT \
+    --assignee_id=PROJECT_ID \
+    --job_type=JOB_TYPE \
+    --principal=PRINCIPAL
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
 
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
 
-  - `  RESERVATION_NAME  ` : the name of the reservation
+- `RESERVATION_NAME` : the name of the reservation
 
-  - `  PROJECT_ID  ` : the ID of the project to assign to this reservation
+- `PROJECT_ID` : the ID of the project to assign to this reservation
 
-  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
 
-  - Optional: `  PRINCIPAL  ` : the identity format specifying the user, service account, or third-party identity.
-    
-    The `--principal` flag supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
-    
-      - Google Account
-      - Service account
-      - Single identity in a workforce identity pool
-      - Single identity in a workload identity pool
+- Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity.
+
+  The `--principal` flag supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
+
+  - Google Account
+  - Service account
+  - Single identity in a workforce identity pool
+  - Single identity in a workload identity pool
 
 ### Terraform
 
@@ -432,11 +443,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -444,13 +457,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -458,26 +473,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -492,7 +515,7 @@ To make a project that only uses [idle slots](https://docs.cloud.google.com/bigq
 ### User-specific assignments
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can assign a reservation to a specific principal such as a user or service account within a project, folder, or organization. This is useful for routing specific users' workloads to dedicated reservations.
@@ -510,12 +533,12 @@ A project-level assignment without a principal overrides a folder-level assignme
 
 The `principal` option supports the following [IAM v2 principal](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
 
-| Identity type                      | Principal format                                                                                                                                                               |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Users                              | ` principal://goog/subject/         EMAIL_ADDRESS        `                                                                                                                     |
-| Service accounts                   | ` principal://iam.googleapis.com/projects/-/serviceAccounts/         EMAIL_ADDRESS        `                                                                                    |
-| Workforce identity pool identities | ` principal://iam.googleapis.com/locations/global/workforcePools/         POOL_ID        /subject/         SUBJECT_ID        `                                                 |
-| Workload identity pool identities  | ` principal://iam.googleapis.com/projects/         PROJECT_NUMBER        /locations/global/workloadIdentityPools/         POOL_ID        /subject/         SUBJECT_ID        ` |
+| Identity type                      | Principal format                                                                                                                               |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| Users                              | `principal://goog/subject/ `` EMAIL_ADDRESS`                                                                                                   |
+| Service accounts                   | `principal://iam.googleapis.com/projects/-/serviceAccounts/ `` EMAIL_ADDRESS`                                                                  |
+| Workforce identity pool identities | `principal://iam.googleapis.com/locations/global/workforcePools/ `` POOL_ID `` /subject/ `` SUBJECT_ID`                                        |
+| Workload identity pool identities  | `principal://iam.googleapis.com/projects/ `` PROJECT_NUMBER `` /locations/global/workloadIdentityPools/ `` POOL_ID `` /subject/ `` SUBJECT_ID` |
 
 > **Note:** The value `unknown_or_deleted_user` is a sentinel value used by the system to represent a deleted or disabled user account. You can't assign reservations using this value.
 
@@ -525,46 +548,50 @@ The `principal` option supports the following [IAM v2 principal](https://docs.cl
 
 To create a user-specific assignment, use the `CREATE ASSIGNMENT` DDL statement with the `principal` option.
 
-    CREATE ASSIGNMENT
-      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
-    OPTIONS (
-      assignee = 'projects/PROJECT_ID',
-      principal = 'principal://goog/subject/EMAIL_ADDRESS',
-      job_type = 'QUERY');
+```
+CREATE ASSIGNMENT
+  `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`
+OPTIONS (
+  assignee = 'projects/PROJECT_ID',
+  principal = 'principal://goog/subject/EMAIL_ADDRESS',
+  job_type = 'QUERY');
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-  - `  RESERVATION_NAME  ` : the name of the reservation
-  - `  ASSIGNMENT_ID  ` : the assignment ID
-  - `  PROJECT_ID  ` : the project ID
-  - \` EMAIL\_ADDRESS : the user's email address
-  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `RESERVATION_NAME` : the name of the reservation
+- `ASSIGNMENT_ID` : the assignment ID
+- `PROJECT_ID` : the project ID
+- \` ` EMAIL_ADDRESS ` : the user's email address
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
 ### bq
 
 To create a user-specific assignment, use the `bq mk` command with the `--principal` flag:
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --reservation_id=RESERVATION_NAME \
-        --assignee_id=PROJECT_ID \
-        --assignee_type=PROJECT \
-        --principal=PRINCIPAL \
-        --job_type=JOB_TYPE
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=RESERVATION_NAME \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --principal=PRINCIPAL \
+    --job_type=JOB_TYPE
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-  - `  RESERVATION_NAME  ` : the name of the reservation
-  - `  ASSIGNMENT_ID  ` : the assignment ID
-  - `  PROJECT_ID  ` : the project ID
-  - `  PRINCIPAL: the principal identifier, for example,  ` principal://goog/subject/ EMAIL\_ADDRESS \`
-  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `RESERVATION_NAME` : the name of the reservation
+- `ASSIGNMENT_ID` : the assignment ID
+- `PROJECT_ID` : the project ID
+- `PRINCIPAL: the principal identifier, for example,` principal://goog/subject/ ` EMAIL_ADDRESS ` \`
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
 ### Assign a project to `none`
 
@@ -579,24 +606,26 @@ To assign a project to `none` , use the [`CREATE ASSIGNMENT` DDL statement](http
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE ASSIGNMENT
-          `ADMIN_PROJECT_ID.region-LOCATION.none.ASSIGNMENT_ID`
-        OPTIONS(
-          assignee="projects/PROJECT_ID",
-          job_type="QUERY");
-    
-    Replace the following:
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
-    
-      - `  ASSIGNMENT_ID  ` : the ID of the assignment
-        
-        The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
-    
-      - `  PROJECT_ID  ` : the ID of the project to assign to the reservation
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-LOCATION.none.ASSIGNMENT_ID`
+    OPTIONS(
+      assignee="projects/PROJECT_ID",
+      job_type="QUERY");
+    ```
+
+    Replace the following:
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
+
+    - `ASSIGNMENT_ID` : the ID of the assignment
+
+      The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
+
+    - `PROJECT_ID` : the ID of the project to assign to the reservation
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -604,20 +633,22 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To assign a project to `none` , use the `bq mk` command with the `--reservation_assignment` flag:
 
-    bq mk \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --reservation_id=none \
-        --job_type=QUERY \
-        --assignee_id=PROJECT_ID \
-        --assignee_type=PROJECT
+```
+bq mk \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --reservation_id=none \
+    --job_type=QUERY \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
-  - `  PROJECT_ID  ` : the ID of the project to assign to `none`
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
+- `PROJECT_ID` : the ID of the project to assign to `none`
 
 ### Terraform
 
@@ -629,17 +660,19 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The following example assigns a project to `none` :
 
-    resource "google_bigquery_reservation_assignment" "default" {
-      assignee    = "projects/PROJECT_ID"
-      job_type    = "QUERY"
-      reservation = "projects/ADMIN_PROJECT_ID/locations/LOCATION/reservations/none"
-    }
+```
+resource "google_bigquery_reservation_assignment" "default" {
+  assignee    = "projects/PROJECT_ID"
+  job_type    = "QUERY"
+  reservation = "projects/ADMIN_PROJECT_ID/locations/LOCATION/reservations/none"
+}
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
-  - `  PROJECT_ID  ` : the ID of the project to assign to `none`
+- `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of jobs that should use on-demand pricing
+- `PROJECT_ID` : the ID of the project to assign to `none`
 
 To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
 
@@ -648,11 +681,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -660,13 +695,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -674,26 +711,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -705,7 +750,7 @@ If there are no reservations in the administration project, then you must use th
 
 To use a specific reservation in a query, you need the following Identity and Access Management (IAM) permission:
 
-  - `bigquery.reservations.use` on the reservation or its [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) .
+- `bigquery.reservations.use` on the reservation or its [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) .
 
 To assign a query to run in a specific reservation, do one of the following:
 
@@ -713,7 +758,7 @@ To assign a query to run in a specific reservation, do one of the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
@@ -734,45 +779,53 @@ Set the `@@reservation` system variable in the session to assign the reservation
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SET @@reservation='RESERVATION';
-        SELECT QUERY;
-    
-    Replace the following:
-    
-      - `  RESERVATION  ` : the reservation you want the query to run in.
-    
-      - `  QUERY  ` : the query you want to run.
 
-3.  Click play\_circle **Run** .
+    ```
+    SET @@reservation='RESERVATION';
+    SELECT QUERY;
+    ```
+
+    Replace the following:
+
+    - `RESERVATION` : the reservation you want the query to run in.
+
+    - `QUERY` : the query you want to run.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 For example, the following query uses the [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set) statement to set the reservation to the `test-reservation` in the `US` multi-region, then calls a basic query:
 
-    SET @@reservation='projects/project1/locations/US/reservations/test-reservation';
-    SELECT 42;
+```
+SET @@reservation='projects/project1/locations/US/reservations/test-reservation';
+SELECT 42;
+```
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  In Cloud Shell, run the query by using the [`bq query` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the `--reservation_id` flag:
-    
-        bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
-        'QUERY'
-    
+
+    ```
+    bq query --use_legacy_sql=false --reservation_id=RESERVATION_ID
+    'QUERY'
+    ```
+
     Replace the following:
-    
-      - `  RESERVATION_ID  ` : the reservation you want to run the query in.
-    
-      - `  QUERY  ` : the SQL statement for the query.
-    
+
+    - `RESERVATION_ID` : the reservation you want to run the query in.
+
+    - `QUERY` : the SQL statement for the query.
+
     For example, the following query runs in the `test-reservation` reservation in the `US` multi-region:
-    
-        bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
+
+    ```
+    bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
+    ```
 
 ### API
 
@@ -788,12 +841,12 @@ The following sections provide information on reservation assignment requirement
 
 The following BigQuery ML model types use external services:
 
-  - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
-  - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
-  - [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Deep Neural Network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [Wide-and-Deep Network](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+- [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+- [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+- [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+- [Deep Neural Network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+- [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+- [Wide-and-Deep Network](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
 
 You can assign reserved slots to queries using these services by creating a reservation assignment that uses the `ML_EXTERNAL` job type. If no reservation assignment with an `ML_EXTERNAL` job type is found, the query job runs using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
 
@@ -813,15 +866,15 @@ For BigQuery ML models that aren't external models or matrix factorization model
 
 To search for a reservation assignment for a given project, folder, or organization, you need the following Identity and Access Management (IAM) permission:
 
-  - `bigquery.reservationAssignments.list` on the administration project.
+- `bigquery.reservationAssignments.list` on the administration project.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `BigQuery Admin`
-  - `BigQuery Resource Admin`
-  - `BigQuery Resource Editor`
-  - `BigQuery Resource Viewer`
-  - `BigQuery User`
+- `BigQuery Admin`
+- `BigQuery Resource Admin`
+- `BigQuery Resource Editor`
+- `BigQuery Resource Viewer`
+- `BigQuery User`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -846,24 +899,24 @@ To find which reservation your project's query jobs are assigned to, query the [
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-    ``` 
-      SELECT
+
+    ```
+    SELECT
         assignment_id
       FROM `region-LOCATION`.INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT
       WHERE
         assignee_id = 'PROJECT_ID'
         AND job_type = 'JOB_TYPE';
     ```
-    
-    Replace the following:
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of reservations to view
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-      - `  PROJECT_ID  ` : the ID of the project to assign to the reservation
-      - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
-3.  Click play\_circle **Run** .
+    Replace the following:
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of reservations to view
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+    - `PROJECT_ID` : the ID of the project to assign to the reservation
+    - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -873,32 +926,36 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To find which reservation your project's query jobs are assigned to, use the `bq show` command with the `--reservation_assignment` flag:
 
-    bq show \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --job_type=JOB_TYPE \
-        --assignee_id=PROJECT_ID \
-        --assignee_type=PROJECT
+```
+bq show \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --job_type=JOB_TYPE \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT
+```
 
 To find a user-specific assignment, include the `--principal` flag:
 
-    bq show \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --job_type=JOB_TYPE \
-        --assignee_id=PROJECT_ID \
-        --assignee_type=PROJECT \
-        --principal=PRINCIPAL
+```
+bq show \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --job_type=JOB_TYPE \
+    --assignee_id=PROJECT_ID \
+    --assignee_type=PROJECT \
+    --principal=PRINCIPAL
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the ID of the project that owns the reservation resource
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of reservations to view
-  - `  JOB_TYPE  ` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
-  - `  PROJECT_ID  ` : the ID of the project
-  - `  PRINCIPAL  ` : the principal identifier, for example, ` principal://goog/subject/ EMAIL_ADDRESS  `
+- `ADMIN_PROJECT_ID` : the ID of the project that owns the reservation resource
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of reservations to view
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
+- `PROJECT_ID` : the ID of the project
+- `PRINCIPAL` : the principal identifier, for example, `principal://goog/subject/ `` EMAIL_ADDRESS`
 
 To view active user-specific assignment rules, check the `principal` column in the `INFORMATION_SCHEMA.ASSIGNMENTS` view or execute `bq ls --reservation_assignment` . Additionally, you can verify which reservation executed a specific job by querying the `INFORMATION_SCHEMA.JOBS` view. When using the `bq show --reservation_assignment` command, you can include the optional `--principal` flag to filter for a specific user assignment.
 
@@ -910,39 +967,41 @@ You can move an assignment from one reservation to another reservation.
 
 To move a reservation assignment, you need the following Identity and Access Management (IAM) permissions on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) and the assignee.
 
-  - `bigquery.reservationAssignments.create`
-  - `bigquery.reservationAssignments.delete`
+- `bigquery.reservationAssignments.create`
+- `bigquery.reservationAssignments.delete`
 
 Each of the following predefined IAM roles includes these permissions:
 
-  - `BigQuery Admin`
-  - `BigQuery Resource Admin`
-  - `BigQuery Resource Editor`
+- `BigQuery Admin`
+- `BigQuery Resource Admin`
+- `BigQuery Resource Editor`
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 To move an assignment, use the `bq update` command:
 
-    bq update \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment \
-        --destination_reservation_id=DESTINATION_RESERVATION \
-        ADMIN_PROJECT_ID:LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
+```
+bq update \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment \
+    --destination_reservation_id=DESTINATION_RESERVATION \
+    ADMIN_PROJECT_ID:LOCATION.RESERVATION_NAME.ASSIGNMENT_ID
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the ID of the project that owns the reservation resource
+- `ADMIN_PROJECT_ID` : the ID of the project that owns the reservation resource
 
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the new reservation
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the new reservation
 
-  - `  RESERVATION_NAME  ` : the reservation to move the assignment from
+- `RESERVATION_NAME` : the reservation to move the assignment from
 
-  - `  DESTINATION_RESERVATION  ` : the reservation to move the assignment to
+- `DESTINATION_RESERVATION` : the reservation to move the assignment to
 
-  - `  ASSIGNMENT_ID  ` : the ID of the assignment
-    
-    To get the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
+- `ASSIGNMENT_ID` : the ID of the assignment
+
+  To get the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
 
 > **Note:** Updated reservation assignments only apply to new jobs. Existing jobs continue to use their original reservation assignment.
 
@@ -956,13 +1015,13 @@ When you delete a reservation assignment, the jobs executing with slots from tha
 
 To delete a reservation assignment, you need the following Identity and Access Management (IAM) permission:
 
-  - `bigquery.reservationAssignments.delete` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) and the assignee.
+- `bigquery.reservationAssignments.delete` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) and the assignee.
 
 Each of the following predefined IAM roles includes this permission:
 
-  - `BigQuery Admin`
-  - `BigQuery Resource Admin`
-  - `BigQuery Resource Editor`
+- `BigQuery Admin`
+- `BigQuery Resource Admin`
+- `BigQuery Resource Editor`
 
 ### Remove a project from a reservation
 
@@ -978,7 +1037,7 @@ To remove a project from a reservation:
 
 4.  In the table of reservations, expand the reservation to find the project.
 
-5.  Expand the more\_vert **Actions** option.
+5.  Expand the more_vert **Actions** option.
 
 6.  Click **Delete** .
 
@@ -989,23 +1048,25 @@ Use the [`DROP ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        DROP ASSIGNMENT
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`;
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-    
-      - `  RESERVATION_NAME  ` : the name of the reservation
-    
-      - `  ASSIGNMENT_ID  ` : the ID of the assignment
-        
-        To find the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
 
-3.  Click play\_circle **Run** .
+    ```
+    DROP ASSIGNMENT
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME.ASSIGNMENT_ID`;
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+
+    - `RESERVATION_NAME` : the name of the reservation
+
+    - `ASSIGNMENT_ID` : the ID of the assignment
+
+      To find the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1013,19 +1074,21 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To remove a project from a reservation, use the `bq rm` command with the `--reservation_assignment` flag:
 
-    bq rm \
-        --project_id=ADMIN_PROJECT_ID \
-        --location=LOCATION \
-        --reservation_assignment RESERVATION_NAME.ASSIGNMENT_ID
+```
+bq rm \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_assignment RESERVATION_NAME.ASSIGNMENT_ID
+```
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the ID of the project that owns the reservation resource
+- `ADMIN_PROJECT_ID` : the ID of the project that owns the reservation resource
 
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
 
-  - `  RESERVATION_NAME  ` : the name of the reservation
+- `RESERVATION_NAME` : the name of the reservation
 
-  - `  ASSIGNMENT_ID  ` : the ID of the assignment
-    
-    To get the assignment ID, see [Find a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
+- `ASSIGNMENT_ID` : the ID of the assignment
+
+  To get the assignment ID, see [Find a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .

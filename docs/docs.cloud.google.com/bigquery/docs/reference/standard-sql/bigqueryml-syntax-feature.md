@@ -6,7 +6,7 @@ description: Get information about the input features that are used to train a B
 data_source: docs.cloud.google.com
 ---
 
-# The ML.FEATURE\_INFO function
+# The ML.FEATURE_INFO function
 
 This document describes the `ML.FEATURE_INFO` function, which lets you see information about the input features that are used to train a model.
 
@@ -22,23 +22,23 @@ ML.FEATURE_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
 
 `ML.FEATURE_INFO` takes the following arguments:
 
-  - `  PROJECT_ID  ` : Your project ID.
-  - `  DATASET  ` : The BigQuery dataset that contains the model.
-  - `  MODEL_NAME  ` : The name of the model.
+- `PROJECT_ID` : Your project ID.
+- `DATASET` : The BigQuery dataset that contains the model.
+- `MODEL_NAME` : The name of the model.
 
 ## Output
 
 `ML.FEATURE_INFO` returns the following columns:
 
-  - `input` : a `STRING` value that contains the name of the column in the input training data.
-  - `min` : a `FLOAT64` value that contains the minimum value in the `input` column. `min` is `NULL` for non-numeric inputs.
-  - `max` : a `FLOAT64` value that contains the maximum value in the `input` column. `max` is `NULL` for non-numeric inputs.
-  - `mean` : a `FLOAT64` value that contains the average value for the `input` column. `mean` is `NULL` for non-numeric inputs.
-  - `median` : a `FLOAT64` value that contains the median value for the `input` column. `median` is `NULL` for non-numeric inputs.
-  - `stddev` : a `FLOAT64` value that contains the standard deviation value for the `input` column. `stddev` is `NULL` for non-numeric inputs.
-  - `category_count` : an `INT64` value that contains the number of categories in the `input` column. `category_count` is `NULL` for non-categorical columns.
-  - `null_count` : an `INT64` value that contains the number of `NULL` values in the `input` column.
-  - `dimension` : an `INT64` value that contains the dimension of the `input` column if the `input` column has a `ARRAY<STRUCT>` type. `dimension` is `NULL` for non- `ARRAY<STRUCT>` columns.
+- `input` : a `STRING` value that contains the name of the column in the input training data.
+- `min` : a `FLOAT64` value that contains the minimum value in the `input` column. `min` is `NULL` for non-numeric inputs.
+- `max` : a `FLOAT64` value that contains the maximum value in the `input` column. `max` is `NULL` for non-numeric inputs.
+- `mean` : a `FLOAT64` value that contains the average value for the `input` column. `mean` is `NULL` for non-numeric inputs.
+- `median` : a `FLOAT64` value that contains the median value for the `input` column. `median` is `NULL` for non-numeric inputs.
+- `stddev` : a `FLOAT64` value that contains the standard deviation value for the `input` column. `stddev` is `NULL` for non-numeric inputs.
+- `category_count` : an `INT64` value that contains the number of categories in the `input` column. `category_count` is `NULL` for non-categorical columns.
+- `null_count` : an `INT64` value that contains the number of `NULL` values in the `input` column.
+- `dimension` : an `INT64` value that contains the dimension of the `input` column if the `input` column has a `ARRAY<STRUCT>` type. `dimension` is `NULL` for non- `ARRAY<STRUCT>` columns.
 
 For [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models, only `category_count` is calculated for the `user` and `item` columns.
 
@@ -56,11 +56,13 @@ You must have the `bigquery.models.create` and `bigquery.models.getData` [Identi
 
 The following example retrieves feature information from the model `mydataset.mymodel` in your default project:
 
-    SELECT
-      *
-    FROM
-      ML.FEATURE_INFO(MODEL `mydataset.mymodel`)
+```
+SELECT
+  *
+FROM
+  ML.FEATURE_INFO(MODEL `mydataset.mymodel`)
+```
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

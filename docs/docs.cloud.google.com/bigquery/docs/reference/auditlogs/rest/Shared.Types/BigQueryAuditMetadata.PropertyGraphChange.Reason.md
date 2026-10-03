@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the property graph was updated.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`QUERY`
-
-Property graph was updated using a DDL query.
+| Enums                |                                               |
+|----------------------|-----------------------------------------------|
+| `REASON_UNSPECIFIED` | Unknown.                                      |
+| `QUERY`              | Property graph was updated using a DDL query. |

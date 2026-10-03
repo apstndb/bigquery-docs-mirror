@@ -14,8 +14,8 @@ An external data source is a data source that you can query directly from BigQue
 
 Use cases for external data sources include the following:
 
-  - For extract-load-transform (ELT) workloads, loading and cleaning your data in one pass and writing the cleaned result into BigQuery storage, by using a `CREATE TABLE ... AS SELECT` query.
-  - Joining BigQuery tables with frequently changing data from an external data source. By querying the external data source directly, you don't need to reload the data into BigQuery storage every time it changes.
+- For extract-load-transform (ELT) workloads, loading and cleaning your data in one pass and writing the cleaned result into BigQuery storage, by using a `CREATE TABLE ... AS SELECT` query.
+- Joining BigQuery tables with frequently changing data from an external data source. By querying the external data source directly, you don't need to reload the data into BigQuery storage every time it changes.
 
 ## External data source tables
 
@@ -25,9 +25,9 @@ External data source tables are contained inside a dataset, and you manage them 
 
 There are three kinds of external data source tables:
 
-  - BigLake tables
-  - Object tables
-  - External tables
+- BigLake tables
+- Object tables
+- External tables
 
 ### BigLake tables
 
@@ -47,10 +47,10 @@ For more information, see [Introduction to object tables](https://docs.cloud.goo
 
 External tables let you query structured data in external data stores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
 
-  - `bigquery.tables.getData`
-  - `bigquery.jobs.create`
-  - `storage.buckets.get`
-  - `storage.objects.get`
+- `bigquery.tables.getData`
+- `bigquery.jobs.create`
+- `storage.buckets.get`
+- `storage.objects.get`
 
 For more information, see [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
@@ -65,7 +65,7 @@ For more information, see [Introduction to federated queries](https://docs.cloud
 The following table compares the behavior of external data sources:
 
 |                                                                   | **BigLake tables**                                                                   | **Object tables**                                                | **External tables**                                                            | **Federated queries**                                                          |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+|-------------------------------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | **Uses access delegation**                                        | Yes, through a service account                                                       | Yes, through a service account                                   | No                                                                             | Yes, through a database user account (Cloud SQL only)                          |
 | **Can be based on multiple source URIs**                          | Yes                                                                                  | Yes                                                              | Yes (Cloud Storage only)                                                       | Not applicable                                                                 |
 | **Row mapping**                                                   | Rows represent file content                                                          | Rows represent file metadata                                     | Rows represent file content                                                    | Not applicable                                                                 |
@@ -82,8 +82,8 @@ The following table compares the behavior of external data sources:
 
 ## What's next
 
-  - Learn more about [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
-  - Learn more about [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction)
-  - Learn more about [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
-  - Learn more about [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
-  - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
+- Learn more about [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
+- Learn more about [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction)
+- Learn more about [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+- Learn more about [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
+- Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .

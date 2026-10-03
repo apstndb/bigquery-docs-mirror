@@ -11,7 +11,7 @@ Graph Query Language (GQL) supports all GoogleSQL [operators](https://docs.cloud
 ## Graph operators list
 
 | Name                                                                                                                                      | Summary                                                                                            |
-| ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | [Graph logical operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#graph_logical_operators)     | Tests for the truth of a condition in a graph label and produces either `TRUE` or `FALSE` .        |
 | [Graph predicates](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#graph_predicates)                   | Tests for the truth of a condition for a graph element and produces `TRUE` , `FALSE` , or `NULL` . |
 | [`ALL_DIFFERENT` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#all_different_predicate)   | In a graph, checks to see if the elements in a list are all different.                             |
@@ -23,24 +23,26 @@ Graph Query Language (GQL) supports all GoogleSQL [operators](https://docs.cloud
 
 GoogleSQL supports the following logical operators in [element pattern label expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-patterns#element_pattern_definition) :
 
-| Name  | Syntax   | Description                                                                   |
-| ----- | -------- | ----------------------------------------------------------------------------- |
-| `NOT` | `!X`     | Returns `TRUE` if `X` isn't included, otherwise, returns `FALSE` .            |
-| `OR`  | `X \| Y` | Returns `TRUE` if either `X` or `Y` is included, otherwise, returns `FALSE` . |
-| `AND` | `X & Y`  | Returns `TRUE` if both `X` and `Y` are included, otherwise, returns `FALSE` . |
+| Name  | Syntax  | Description                                                                   |
+|-------|---------|-------------------------------------------------------------------------------|
+| `NOT` | `!X`    | Returns `TRUE` if `X` isn't included, otherwise, returns `FALSE` .            |
+| `OR`  | `X | Y` | Returns `TRUE` if either `X` or `Y` is included, otherwise, returns `FALSE` . |
+| `AND` | `X & Y` | Returns `TRUE` if both `X` and `Y` are included, otherwise, returns `FALSE` . |
 
 ## Graph predicates
 
 GoogleSQL supports the following graph-specific predicates in graph expressions. A predicate can produce `TRUE` , `FALSE` , or `NULL` .
 
-  - [`ALL_DIFFERENT` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#all_different_predicate)
-  - [`IS SOURCE` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#is_source_predicate)
-  - [`IS DESTINATION` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#is_destination_predicate)
-  - [`SAME` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#same_predicate)
+- [`ALL_DIFFERENT` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#all_different_predicate)
+- [`IS SOURCE` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#is_source_predicate)
+- [`IS DESTINATION` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#is_destination_predicate)
+- [`SAME` predicate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-operators#same_predicate)
 
 ## `ALL_DIFFERENT` predicate
 
-    ALL_DIFFERENT(element, element[, ...])
+```
+ALL_DIFFERENT(element, element[, ...])
+```
 
 **Description**
 
@@ -48,7 +50,7 @@ In a graph, checks to see if the elements in a list are all different. Returns `
 
 **Definitions**
 
-  - `element` : The graph pattern variable for a node or edge element.
+- `element` : The graph pattern variable for a node or edge element.
 
 **Details**
 
@@ -60,25 +62,29 @@ Produces an error if `element` is `NULL` .
 
 **Examples**
 
-    GRAPH graph_db.FinGraph
-    MATCH
-      (a1:Account)-[t1:Transfers]->(a2:Account)-[t2:Transfers]->
-      (a3:Account)-[t3:Transfers]->(a4:Account)
-    WHERE a1.id < a4.id
-    RETURN
-      ALL_DIFFERENT(t1, t2, t3) AS results
-    
-    /*---------+
-     | results |
-     +---------+
-     | FALSE   |
-     | TRUE    |
-     | TRUE    |
-     +---------*/
+```
+GRAPH graph_db.FinGraph
+MATCH
+  (a1:Account)-[t1:Transfers]->(a2:Account)-[t2:Transfers]->
+  (a3:Account)-[t3:Transfers]->(a4:Account)
+WHERE a1.id < a4.id
+RETURN
+  ALL_DIFFERENT(t1, t2, t3) AS results
+
+/*---------+
+ | results |
+ +---------+
+ | FALSE   |
+ | TRUE    |
+ | TRUE    |
+ +---------*/
+```
 
 ## `IS DESTINATION` predicate
 
-    node IS [ NOT ] DESTINATION [ OF ] edge
+```
+node IS [ NOT ] DESTINATION [ OF ] edge
+```
 
 **Description**
 
@@ -86,44 +92,50 @@ In a graph, checks to see if a node is or isn't the destination of an edge. Can 
 
 Arguments:
 
-  - `node` : The graph pattern variable for the node element.
-  - `edge` : The graph pattern variable for the edge element.
+- `node` : The graph pattern variable for the node element.
+- `edge` : The graph pattern variable for the edge element.
 
 **Examples**
 
-    GRAPH graph_db.FinGraph
-    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
-    WHERE a IS DESTINATION of transfer
-    RETURN a.id AS a_id, b.id AS b_id
-    
-    /*-------------+
-     | a_id | b_id |
-     +-------------+
-     | 16   | 7    |
-     | 16   | 7    |
-     | 20   | 16   |
-     | 7    | 20   |
-     | 16   | 20   |
-     +-------------*/
+```
+GRAPH graph_db.FinGraph
+MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+WHERE a IS DESTINATION of transfer
+RETURN a.id AS a_id, b.id AS b_id
 
-    GRAPH graph_db.FinGraph
-    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
-    WHERE b IS DESTINATION of transfer
-    RETURN a.id AS a_id, b.id AS b_id
-    
-    /*-------------+
-     | a_id | b_id |
-     +-------------+
-     | 7    | 16   |
-     | 7    | 16   |
-     | 16   | 20   |
-     | 20   | 7    |
-     | 20   | 16   |
-     +-------------*/
+/*-------------+
+ | a_id | b_id |
+ +-------------+
+ | 16   | 7    |
+ | 16   | 7    |
+ | 20   | 16   |
+ | 7    | 20   |
+ | 16   | 20   |
+ +-------------*/
+```
+
+```
+GRAPH graph_db.FinGraph
+MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+WHERE b IS DESTINATION of transfer
+RETURN a.id AS a_id, b.id AS b_id
+
+/*-------------+
+ | a_id | b_id |
+ +-------------+
+ | 7    | 16   |
+ | 7    | 16   |
+ | 16   | 20   |
+ | 20   | 7    |
+ | 20   | 16   |
+ +-------------*/
+```
 
 ## `IS SOURCE` predicate
 
-    node IS [ NOT ] SOURCE [ OF ] edge
+```
+node IS [ NOT ] SOURCE [ OF ] edge
+```
 
 **Description**
 
@@ -131,44 +143,50 @@ In a graph, checks to see if a node is or isn't the source of an edge. Can produ
 
 Arguments:
 
-  - `node` : The graph pattern variable for the node element.
-  - `edge` : The graph pattern variable for the edge element.
+- `node` : The graph pattern variable for the node element.
+- `edge` : The graph pattern variable for the edge element.
 
 **Examples**
 
-    GRAPH graph_db.FinGraph
-    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
-    WHERE a IS SOURCE of transfer
-    RETURN a.id AS a_id, b.id AS b_id
-    
-    /*-------------+
-     | a_id | b_id |
-     +-------------+
-     | 20   | 7    |
-     | 7    | 16   |
-     | 7    | 16   |
-     | 20   | 16   |
-     | 16   | 20   |
-     +-------------*/
+```
+GRAPH graph_db.FinGraph
+MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+WHERE a IS SOURCE of transfer
+RETURN a.id AS a_id, b.id AS b_id
 
-    GRAPH graph_db.FinGraph
-    MATCH (a:Account)-[transfer:Transfers]-(b:Account)
-    WHERE b IS SOURCE of transfer
-    RETURN a.id AS a_id, b.id AS b_id
-    
-    /*-------------+
-     | a_id | b_id |
-     +-------------+
-     | 7    | 20   |
-     | 16   | 7    |
-     | 16   | 7    |
-     | 16   | 20   |
-     | 20   | 16   |
-     +-------------*/
+/*-------------+
+ | a_id | b_id |
+ +-------------+
+ | 20   | 7    |
+ | 7    | 16   |
+ | 7    | 16   |
+ | 20   | 16   |
+ | 16   | 20   |
+ +-------------*/
+```
+
+```
+GRAPH graph_db.FinGraph
+MATCH (a:Account)-[transfer:Transfers]-(b:Account)
+WHERE b IS SOURCE of transfer
+RETURN a.id AS a_id, b.id AS b_id
+
+/*-------------+
+ | a_id | b_id |
+ +-------------+
+ | 7    | 20   |
+ | 16   | 7    |
+ | 16   | 7    |
+ | 16   | 20   |
+ | 20   | 16   |
+ +-------------*/
+```
 
 ## `SAME` predicate
 
-    SAME (element, element[, ...])
+```
+SAME (element, element[, ...])
+```
 
 **Description**
 
@@ -176,7 +194,7 @@ In a graph, checks if all graph elements in a list bind to the same node or edge
 
 Arguments:
 
-  - `element` : The graph pattern variable for a node or edge element.
+- `element` : The graph pattern variable for a node or edge element.
 
 **Details**
 
@@ -186,17 +204,19 @@ Produces an error if `element` is `NULL` .
 
 The following query returns the source and destination IDs for transfers between different accounts:
 
-    GRAPH graph_db.FinGraph
-    MATCH (src:Account)<-[transfer:Transfers]-(dest:Account)
-    WHERE NOT SAME(src, dest)
-    RETURN src.id AS source_id, dest.id AS destination_id
-    
-    /*----------------------------+
-     | source_id | destination_id |
-     +----------------------------+
-     | 7         | 20             |
-     | 16        | 7              |
-     | 16        | 7              |
-     | 16        | 20             |
-     | 20        | 16             |
-     +----------------------------*/
+```
+GRAPH graph_db.FinGraph
+MATCH (src:Account)<-[transfer:Transfers]-(dest:Account)
+WHERE NOT SAME(src, dest)
+RETURN src.id AS source_id, dest.id AS destination_id
+
+/*----------------------------+
+ | source_id | destination_id |
+ +----------------------------+
+ | 7         | 20             |
+ | 16        | 7              |
+ | 16        | 7              |
+ | 16        | 20             |
+ | 20        | 16             |
+ +----------------------------*/
+```

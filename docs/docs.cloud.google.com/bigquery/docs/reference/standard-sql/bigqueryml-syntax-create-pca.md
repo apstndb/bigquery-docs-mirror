@@ -51,14 +51,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -66,7 +66,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'PCA' }
+```
+MODEL_TYPE = { 'PCA' }
+```
 
 **Description**
 
@@ -82,7 +84,7 @@ PCA is an unsupervised learning technique, so model training doesn't require eit
 
 **Syntax**
 
-` NUM_PRINCIPAL_COMPONENTS = int64_value  `
+`NUM_PRINCIPAL_COMPONENTS = `` int64_value`
 
 **Description**
 
@@ -98,7 +100,7 @@ An `INT64` value. This value can't be larger than the total number of rows or th
 
 **Syntax**
 
-` PCA_EXPLAINED_VARIANCE_RATIO = float64_value  `
+`PCA_EXPLAINED_VARIANCE_RATIO = `` float64_value`
 
 **Description**
 
@@ -114,7 +116,9 @@ A `FLOAT64` value in the range `(0, 1)` .
 
 **Syntax**
 
-    SCALE_FEATURES = { TRUE | FALSE }
+```
+SCALE_FEATURES = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -128,7 +132,9 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-    PCA_SOLVER = { 'FULL' | 'RANDOMIZED' | 'AUTO' }
+```
+PCA_SOLVER = { 'FULL' | 'RANDOMIZED' | 'AUTO' }
+```
 
 **Description**
 
@@ -138,14 +144,14 @@ The solver to use to calculate the principal components.
 
 This option accepts the following values:
 
-  - `FULL` : Run a full [eigendecomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix) algorithm. In this case, the maximum allowed feature cardinality after one-hot encoding the categoricals is dynamically estimated. The primary factor that determines the feature cardinality value is the lengths of the feature names, and this value isn't affected by the values of the [`NUM_PRINCIPAL_COMPONENTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) or [`PCA_EXPLAINED_VARIANCE_RATIO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) options. As a guideline, the maximum allowed feature cardinality typically falls between 1,000 and 1,500. If the total feature cardinality of the input data violates the estimated maximum value, then an invalid query error is returned.
+- `FULL` : Run a full [eigendecomposition](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix) algorithm. In this case, the maximum allowed feature cardinality after one-hot encoding the categoricals is dynamically estimated. The primary factor that determines the feature cardinality value is the lengths of the feature names, and this value isn't affected by the values of the [`NUM_PRINCIPAL_COMPONENTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) or [`PCA_EXPLAINED_VARIANCE_RATIO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) options. As a guideline, the maximum allowed feature cardinality typically falls between 1,000 and 1,500. If the total feature cardinality of the input data violates the estimated maximum value, then an invalid query error is returned.
 
-  - `RANDOMIZED` : Run a randomized PCA algorithm. In this case, the maximum allowed feature cardinality is 10,000. If the feature cardinality of the input data is less than 10,000, then the cap on the number of principal components to compute is dynamically determined based on resource constraints.
-    
-      - If you specify [`NUM_PRINCIPAL_COMPONENTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) , then the value for `NUM_PRINCIPAL_COMPONENTS` must be less than or equal to 10,000. Larger values result in invalid query errors.
-      - If you specify [`PCA_EXPLAINED_VARIANCE_RATIO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) , then all principal components under the 10,000 cap are computed. If their total explained variance ratio is less than the `PCA_EXPLAINED_VARIANCE_RATIO` value, then they are all returned; otherwise a subset is returned.
+- `RANDOMIZED` : Run a randomized PCA algorithm. In this case, the maximum allowed feature cardinality is 10,000. If the feature cardinality of the input data is less than 10,000, then the cap on the number of principal components to compute is dynamically determined based on resource constraints.
 
-  - `AUTO` : This is the default. In this case, the solver is selected by a default policy based on the input data. Typically, when the feature cardinality after one-hot encoding all the categoricals is less than a dynamically determined threshold, the exact full eigendecomposition is computed. Otherwise, randomized PCA is performed. The dynamically determined threshold typically falls between 1,000 and 1,500. The number of rows in the input data is not considered when choosing the solver.
+  - If you specify [`NUM_PRINCIPAL_COMPONENTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) , then the value for `NUM_PRINCIPAL_COMPONENTS` must be less than or equal to 10,000. Larger values result in invalid query errors.
+  - If you specify [`PCA_EXPLAINED_VARIANCE_RATIO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) , then all principal components under the 10,000 cap are computed. If their total explained variance ratio is less than the `PCA_EXPLAINED_VARIANCE_RATIO` value, then they are all returned; otherwise a subset is returned.
+
+- `AUTO` : This is the default. In this case, the solver is selected by a default policy based on the input data. Typically, when the feature cardinality after one-hot encoding all the categoricals is less than a dynamically determined threshold, the exact full eigendecomposition is computed. Otherwise, randomized PCA is performed. The dynamically determined threshold typically falls between 1,000 and 1,500. The number of rows in the input data is not considered when choosing the solver.
 
 ### `MODEL_REGISTRY`
 
@@ -169,7 +175,7 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the `MODEL_RE
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -179,11 +185,13 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ### `query_statement`
 
-The ` AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
+The `AS `` query_statement` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
 
 ## Locations
 
@@ -199,65 +207,73 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 This example creates a PCA model with four principal components.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='PCA',
-        NUM_PRINCIPAL_COMPONENTS=4 ) AS
-    SELECT
-      *
-    FROM `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='PCA',
+    NUM_PRINCIPAL_COMPONENTS=4 ) AS
+SELECT
+  *
+FROM `mydataset.mytable`
+```
 
 **Example 2**
 
 This example performs dimensionality reduction with the `mydataset.iris_pca` PCA model with input features.
 
-    CREATE MODEL
-      `mydataset.iris_pca`
-    OPTIONS
-      ( MODEL_TYPE='PCA',
-        NUM_PRINCIPAL_COMPONENTS=2,
-        SCALE_FEATURES=FALSE ) AS
-    SELECT
-      sepal_length,
-      sepal_width,
-      petal_length,
-      petal_width
-    FROM `bigquery-public-data.ml_datasets.iris`;
+```
+CREATE MODEL
+  `mydataset.iris_pca`
+OPTIONS
+  ( MODEL_TYPE='PCA',
+    NUM_PRINCIPAL_COMPONENTS=2,
+    SCALE_FEATURES=FALSE ) AS
+SELECT
+  sepal_length,
+  sepal_width,
+  petal_length,
+  petal_width
+FROM `bigquery-public-data.ml_datasets.iris`;
+```
 
 The following sample transforms the input features using the `mydataset.iris_pca` model into a lower dimensional space, which is then used to train the `mydataset.iris_logistic` model. `mydataset.iris_logistic` will be a better ML model if the original input features are afflicted by the curse of dimensionality.
 
-    CREATE MODEL
-      `mydataset.iris_logistic`
-    OPTIONS
-      ( MODEL_TYPE='LOGISTIC_REG',
-        INPUT_LABEL_COLS=['species'] ) AS
-    SELECT
-      *
-    FROM
-      ML.PREDICT(
-        MODEL `mydataset.iris_pca`,
-        (
-          SELECT
-            sepal_length,
-            sepal_width,
-            petal_length,
-            petal_width,
-            species
-          FROM `bigquery-public-data.ml_datasets.iris`
-        )
-      );
+```
+CREATE MODEL
+  `mydataset.iris_logistic`
+OPTIONS
+  ( MODEL_TYPE='LOGISTIC_REG',
+    INPUT_LABEL_COLS=['species'] ) AS
+SELECT
+  *
+FROM
+  ML.PREDICT(
+    MODEL `mydataset.iris_pca`,
+    (
+      SELECT
+        sepal_length,
+        sepal_width,
+        petal_length,
+        petal_width,
+        species
+      FROM `bigquery-public-data.ml_datasets.iris`
+    )
+  );
+```
 
 ### Use the `PCA_EXPLAINED_VARIANCE_RATIO` option
 
 This example creates a PCA model, where the number of principal components is selected such that the percentage of variance explained by them is greater than 0.8.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='PCA',
-        PCA_EXPLAINED_VARIANCE_RATIO=0.8 ) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='PCA',
+    PCA_EXPLAINED_VARIANCE_RATIO=0.8 ) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```

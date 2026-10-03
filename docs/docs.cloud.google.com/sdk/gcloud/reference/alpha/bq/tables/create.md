@@ -12,7 +12,7 @@ gcloud alpha bq tables create - create a new BigQuery table
 
 SYNOPSIS
 
-`gcloud alpha bq tables create` ( `  TABLE  ` : `  --dataset  ` = `  DATASET  ` ) \[ `  --description  ` = `  DESCRIPTION  ` \] \[ `  --expiration  ` = `  EXPIRATION  ` \] \[ `  --overwrite  ` \] \[ `  --schema  ` =\[ `  FIELD_NAME  ` = `  FIELD_TYPE  ` , …\] | `  --schema-file  ` = `  PATH_TO_FILE  ` | \[ `  --view  ` = `  VIEW  ` : `  --use-legacy-sql  ` \]\] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables create` ( [`TABLE`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#TABLE) : [`--dataset`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--dataset) = `DATASET` ) \[ [`--description`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--description) = `DESCRIPTION` \] \[ [`--expiration`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--expiration) = `EXPIRATION` \] \[ [`--overwrite`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--overwrite) \] \[ [`--schema`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--schema) =\[ `FIELD_NAME` = `FIELD_TYPE` , …\] \| [`--schema-file`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--schema-file) = `PATH_TO_FILE` \| \[ [`--view`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--view) = `VIEW` : [`--use-legacy-sql`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#--use-legacy-sql) \]\] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/create#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,11 +22,16 @@ EXAMPLES
 
 The following command creates a table with ID `my-table` in `my-dataset` :
 
-    gcloud alpha bq tables create /projects/myproject/datasets/my-dataset/tables/my-table --description 'My New Table'
+```
+gcloud alpha bq tables create /projects/myproject/datasets/my-dataset/tables/my-table --description 'My New Table'
+```
 
 The following command creates a view with ID `my-view` in dataset `my-other-dataset` :
 
-    gcloud alpha bq tables create my-view --dataset my-other-dataset --view 'SELECT field1, field3 FROM `my-project.my-other-dataset.my-table`'
+```
+gcloud alpha bq tables create my-view --dataset my-other-dataset --view 'SELECT field1, field3 FROM
+ `my-project.my-other-dataset.my-table`'
+```
 
 POSITIONAL ARGUMENTS
 
@@ -34,40 +39,40 @@ Table resource - The BigQuery table you want to create. The arguments in this gr
 
 To set the `project` attribute:
 
-  - provide the argument `table` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
 This must be specified.
 
-  - `  TABLE  `  
-    ID of the table or fully qualified identifier for the table.
-    
-    To set the `table` attribute:
-    
-      - provide the argument `table` on the command line.
-    
-    This positional argument must be specified if any of the other arguments in this group are specified.
+`TABLE`  
+ID of the table or fully qualified identifier for the table.
 
-  - `--dataset` = `  DATASET  `  
-    The id of the BigQuery dataset.
-    
-    To set the `dataset` attribute:
-    
-      - provide the argument `table` on the command line with a fully specified name;
-      - provide the argument `--dataset` on the command line.
+To set the `table` attribute:
+
+- provide the argument `table` on the command line.
+
+This positional argument must be specified if any of the other arguments in this group are specified.
+
+`--dataset` = `DATASET`  
+The id of the BigQuery dataset.
+
+To set the `dataset` attribute:
+
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--dataset` on the command line.
 
 FLAGS
 
-`--description` = `  DESCRIPTION  `
+`--description` = `DESCRIPTION`
 
 Description of the table.
 
-`--expiration` = `  EXPIRATION  `
+`--expiration` = `EXPIRATION`
 
 How long after creation should this table or view expire e.g. 1d, 2w etc.
 
-See $ [gcloud topic datetimes](https://docs.cloud.google.com/sdk/gcloud/reference/topic/datetimes) for information on duration formats
+See \$ [gcloud topic datetimes](https://docs.cloud.google.com/sdk/gcloud/reference/topic/datetimes) for information on duration formats
 
 `--overwrite`
 
@@ -77,13 +82,13 @@ Specify the table schema.
 
 At most one of these can be specified:
 
-`--schema` =\[ `  FIELD_NAME  ` = `  FIELD_TYPE  ` ,…\]
+`--schema` =\[ `FIELD_NAME` = `FIELD_TYPE` ,…\]
 
-A comma-separated list of entries of the form FIELD\_NAME\[=FIELD\_TYPE\] specifying field names and types for the table being created. FIELD\_TYPE defaults to string if not present. Possible FIELD\_TYPES are `string` , `integer` , `float` , `boolean` , `record` , and `timestamp` .
+A comma-separated list of entries of the form FIELD_NAME\[=FIELD_TYPE\] specifying field names and types for the table being created. FIELD_TYPE defaults to string if not present. Possible FIELD_TYPES are `string` , `integer` , `float` , `boolean` , `record` , and `timestamp` .
 
 For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
 
-`--schema-file` = `  PATH_TO_FILE  `
+`--schema-file` = `PATH_TO_FILE`
 
 The name of a JSON file containing a single object containing an array each element of which is an object with properties name, type, and, optionally a mode (one of: `NULLABLE` , `REQUIRED` or `REPEATED` ), specifying a schema for the table being created. If mode is omitted the default is 'NULLABLE'.
 
@@ -91,24 +96,24 @@ For example: { 'schema': \[ { 'name': 'field1', 'type': 'string', 'mode': 'REQUI
 
 For more details on BigQuery schemas see: <https://cloud.google.com/bigquery/docs/schemas> .
 
-Use a full or relative path to a local file containing the value of schema\_file.
+Use a full or relative path to a local file containing the value of schema_file.
 
 Or at least one of these can be specified:
 
-  - Create a view instead of regular table.  
-    `--view` = `  VIEW  `  
-    Create a view with this SQL query. (If this flag is not specified, a table is created.)
-    
-    This flag argument must be specified if any of the other arguments in this group are specified.
+Create a view instead of regular table.  
+`--view` = `VIEW`  
+Create a view with this SQL query. (If this flag is not specified, a table is created.)
 
-  - `--use-legacy-sql`  
-    If specified, query will use BigQuery's legacy SQL syntax. If not specified, query will use BigQuery's standard SQL dialect by default (https://cloud.google.com/bigquery/sql-reference/).
+This flag argument must be specified if any of the other arguments in this group are specified.
+
+`--use-legacy-sql`  
+If specified, query will use BigQuery's legacy SQL syntax. If not specified, query will use BigQuery's standard SQL dialect by default (https://cloud.google.com/bigquery/sql-reference/).
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 

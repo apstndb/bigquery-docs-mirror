@@ -10,9 +10,9 @@ data_source: docs.cloud.google.com
 
 [Colab Enterprise notebooks](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery let you perform end-to-end data science and machine learning workflows within a single, integrated interface. Unlike standard SQL editors, notebooks let you combine SQL queries with Python code, rich text, and visualizations to tell a comprehensive story with your data. Notebooks are ideal for the following use cases:
 
-  - **End-to-end ML workflows** : build, evaluate, and deploy a BigQuery ML model within a single notebook interface.
-  - **Data exploration** : clean and analyze large datasets using BigQuery DataFrames.
-  - **Collaborative research** : share notebooks with colleagues using IAM and track version history.
+- **End-to-end ML workflows** : build, evaluate, and deploy a BigQuery ML model within a single notebook interface.
+- **Data exploration** : clean and analyze large datasets using BigQuery DataFrames.
+- **Collaborative research** : share notebooks with colleagues using IAM and track version history.
 
 Notebooks are code assets in BigQuery Studio, alongside saved queries, and are powered by Dataform. These capabilities are available only in the Google Cloud console.
 
@@ -20,11 +20,11 @@ Notebooks are code assets in BigQuery Studio, alongside saved queries, and are p
 
 Notebooks in BigQuery offer the following benefits:
 
-  - **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
-  - **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) for assistive code development.
-  - **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
-  - **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
-  - **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in cells that reference Python variables.
+- **Seamless Python integration** : use the BigQuery DataFrames API without any additional setup.
+- **AI-powered development** : use [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) for assistive code development.
+- **Familiar editor features** : use SQL auto-completion, similar to the BigQuery SQL editor.
+- **Integrated visualizations** : use interactive [DataFrame visualizations](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) , or libraries like [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) , to visualize data directly in your workflow.
+- **SQL-Python interoperability** : [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in cells that reference Python variables.
 
 ## Notebook gallery
 
@@ -60,177 +60,45 @@ To detect vulnerabilities in Python packages that you use in your notebooks, ins
 
 BigQuery Studio lets you save, share, and manage versions of notebooks. The following table lists the regions where BigQuery Studio is available:
 
-Region description
-
-Region name
-
-Details
-
-**Africa**
-
-Johannesburg
-
-`africa-south1`
-
-**Americas**
-
-Columbus
-
-`us-east5`
-
-Dallas
-
-`us-south1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Iowa
-
-`us-central1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Los Angeles
-
-`us-west2`
-
-Las Vegas
-
-`us-west4`
-
-Montréal
-
-`northamerica-northeast1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-N. Virginia
-
-`us-east4`
-
-Oregon
-
-`us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-São Paulo
-
-`southamerica-east1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-South Carolina
-
-`us-east1`
-
-**Asia Pacific**
-
-Hong Kong
-
-`asia-east2`
-
-Jakarta
-
-`asia-southeast2`
-
-Mumbai
-
-`asia-south1`
-
-Seoul
-
-`asia-northeast3`
-
-Singapore
-
-`asia-southeast1`
-
-Sydney
-
-`australia-southeast1`
-
-Taiwan
-
-`asia-east1`
-
-Tokyo
-
-`asia-northeast1`
-
-**Europe**
-
-Belgium
-
-`europe-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Finland
-
-`europe-north1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Frankfurt
-
-`europe-west3`
-
-London
-
-`europe-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Madrid
-
-`europe-southwest1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Milan
-
-`europe-west8`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Netherlands
-
-`europe-west4`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Turin
-
-`europe-west12`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Warsaw
-
-`europe-central2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Zürich
-
-`europe-west6`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-**Middle East**
-
-Dammam
-
-`me-central2`
-
-Doha
-
-`me-central1`
-
-Tel Aviv
-
-`me-west1`
+|                  | Region description | Region name               | Details                                                                                                                                                                  |
+|------------------|--------------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Africa**       |                    |                           |                                                                                                                                                                          |
+|                  | Johannesburg       | `africa-south1`           |                                                                                                                                                                          |
+| **Americas**     |                    |                           |                                                                                                                                                                          |
+|                  | Columbus           | `us-east5`                |                                                                                                                                                                          |
+|                  | Dallas             | `us-south1`               | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Iowa               | `us-central1`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Los Angeles        | `us-west2`                |                                                                                                                                                                          |
+|                  | Las Vegas          | `us-west4`                |                                                                                                                                                                          |
+|                  | Montréal           | `northamerica-northeast1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | N. Virginia        | `us-east4`                |                                                                                                                                                                          |
+|                  | Oregon             | `us-west1`                | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | São Paulo          | `southamerica-east1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | South Carolina     | `us-east1`                |                                                                                                                                                                          |
+| **Asia Pacific** |                    |                           |                                                                                                                                                                          |
+|                  | Hong Kong          | `asia-east2`              |                                                                                                                                                                          |
+|                  | Jakarta            | `asia-southeast2`         |                                                                                                                                                                          |
+|                  | Mumbai             | `asia-south1`             |                                                                                                                                                                          |
+|                  | Seoul              | `asia-northeast3`         |                                                                                                                                                                          |
+|                  | Singapore          | `asia-southeast1`         |                                                                                                                                                                          |
+|                  | Sydney             | `australia-southeast1`    |                                                                                                                                                                          |
+|                  | Taiwan             | `asia-east1`              |                                                                                                                                                                          |
+|                  | Tokyo              | `asia-northeast1`         |                                                                                                                                                                          |
+| **Europe**       |                    |                           |                                                                                                                                                                          |
+|                  | Belgium            | `europe-west1`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Finland            | `europe-north1`           | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Frankfurt          | `europe-west3`            |                                                                                                                                                                          |
+|                  | London             | `europe-west2`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Madrid             | `europe-southwest1`       | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Milan              | `europe-west8`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Netherlands        | `europe-west4`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Turin              | `europe-west12`           | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Warsaw             | `europe-central2`         | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Zürich             | `europe-west6`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| **Middle East**  |                    |                           |                                                                                                                                                                          |
+|                  | Dammam             | `me-central2`             |                                                                                                                                                                          |
+|                  | Doha               | `me-central1`             |                                                                                                                                                                          |
+|                  | Tel Aviv           | `me-west1`                |                                                                                                                                                                          |
 
 > **Note:** All code assets are stored in a default region. Updating the default region changes the region for all code assets created after that point.
 
@@ -240,7 +108,7 @@ For pricing information about BigQuery Studio notebooks, see [Notebook runtime p
 
 ## Monitor slot usage
 
-You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](https://docs.cloud.google.com/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ\_STUDIO\_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebooks.
+You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](https://docs.cloud.google.com/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ_STUDIO_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebooks.
 
 ![BigQuery Studio notebook slot usage report.](https://docs.cloud.google.com/static/bigquery/images/studio-notebook-slot-usage.png)
 
@@ -250,5 +118,5 @@ For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.goo
 
 ## What's next
 
-  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
-  - Learn how to [manage notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks) .
+- Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+- Learn how to [manage notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks) .

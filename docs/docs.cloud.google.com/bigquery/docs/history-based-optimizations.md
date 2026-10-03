@@ -17,7 +17,7 @@ History-based optimizations automatically use information from already-completed
 The following is an example of how history-based optimizations work with BigQuery:
 
 | Execution count | Query slot time consumed | Notes                                               |
-| --------------- | ------------------------ | --------------------------------------------------- |
+|-----------------|--------------------------|-----------------------------------------------------|
 | 1               | 60                       | Original execution.                                 |
 | 2               | 30                       | First history-based optimization applied.           |
 | 3               | 20                       | Second history-based optimization applied.          |
@@ -37,39 +37,43 @@ You can use a query to get the history-based optimizations for a job. The query 
 
 In the following example, the optimization details are returned for a job called `sample_job` . If no history-based optimizations were applied, `NULL` is produced for `optimization_details` :
 
-    SELECT
-      job_id,
-      query_info.optimization_details
-    FROM `PROJECT_NAME.region-LOCATION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-    WHERE job_id = 'sample_job'
-    LIMIT 1;
+```
+SELECT
+  job_id,
+  query_info.optimization_details
+FROM `PROJECT_NAME.region-LOCATION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE job_id = 'sample_job'
+LIMIT 1;
+```
 
 The results look similar to the following:
 
-    -- The JSON in optimization_details has been formatted for readability.
-    /*------------+-----------------------------------------------------------------*
-     | job_id     | optimization_details                                            |
-     +------------+-----------------------------------------------------------------+
-     | sample_job | {                                                               |
-     |            |   "optimizations": [                                            |
-     |            |     {                                                           |
-     |            |       "semi_join_reduction": "web_sales.web_date,RIGHT"         |
-     |            |     },                                                          |
-     |            |     {                                                           |
-     |            |       "semi_join_reduction": "catalog_sales.catalog_date,RIGHT" |
-     |            |     },                                                          |
-     |            |     {                                                           |
-     |            |       "semi_join_reduction": "store_sales.store_date,RIGHT"     |
-     |            |     },
-     |            |     {                                                           |
-     |            |       "join_commutation": "web_returns.web_item"                |
-     |            |     },
-     |            |     {                                                           |
-     |            |       "parallelism_adjustment": "applied"                       |
-     |            |     },
-     |            |   ]                                                             |
-     |            | }                                                               |
-     *------------+-----------------------------------------------------------------*/
+```
+-- The JSON in optimization_details has been formatted for readability.
+/*------------+-----------------------------------------------------------------*
+ | job_id     | optimization_details                                            |
+ +------------+-----------------------------------------------------------------+
+ | sample_job | {                                                               |
+ |            |   "optimizations": [                                            |
+ |            |     {                                                           |
+ |            |       "semi_join_reduction": "web_sales.web_date,RIGHT"         |
+ |            |     },                                                          |
+ |            |     {                                                           |
+ |            |       "semi_join_reduction": "catalog_sales.catalog_date,RIGHT" |
+ |            |     },                                                          |
+ |            |     {                                                           |
+ |            |       "semi_join_reduction": "store_sales.store_date,RIGHT"     |
+ |            |     },
+ |            |     {                                                           |
+ |            |       "join_commutation": "web_returns.web_item"                |
+ |            |     },
+ |            |     {                                                           |
+ |            |       "parallelism_adjustment": "applied"                       |
+ |            |     },
+ |            |   ]                                                             |
+ |            | }                                                               |
+ *------------+-----------------------------------------------------------------*/
+```
 
 ### API
 
@@ -77,54 +81,58 @@ To get the optimization details for a job, you can call the [`jobs.get` method](
 
 In the following example, the `jobs.get` method returns the optimization details ( [`optimizationDetails`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#queryinfo) ) in the full response:
 
-    {
-      "jobReference": {
-        "projectId": "myProject",
-        "jobId": "sample_job"
-      }
-    }
+```
+{
+  "jobReference": {
+    "projectId": "myProject",
+    "jobId": "sample_job"
+  }
+}
+```
 
 The results look similar to the following:
 
-    -- The unrelated parts in the full response have been removed.
-    {
-      "jobReference": {
-        "projectId": "myProject",
-        "jobId": "sample_job",
-        "location": "US"
-      },
-      "statistics": {
-        "query": {
-          "queryInfo": {
-            "optimizationDetails": {
-              "optimizations": [
-                {
-                  "semi_join_reduction": "web_sales.web_date,RIGHT"
-                },
-                {
-                  "semi_join_reduction": "catalog_sales.catalog_date,RIGHT"
-                },
-                {
-                  "semi_join_reduction": "store_sales.store_date,RIGHT"
-                },
-                {
-                  "join_commutation": "web_returns.web_item"
-                },
-                {
-                  "parallelism_adjustment": "applied"
-                }
-              ]
+```
+-- The unrelated parts in the full response have been removed.
+{
+  "jobReference": {
+    "projectId": "myProject",
+    "jobId": "sample_job",
+    "location": "US"
+  },
+  "statistics": {
+    "query": {
+      "queryInfo": {
+        "optimizationDetails": {
+          "optimizations": [
+            {
+              "semi_join_reduction": "web_sales.web_date,RIGHT"
+            },
+            {
+              "semi_join_reduction": "catalog_sales.catalog_date,RIGHT"
+            },
+            {
+              "semi_join_reduction": "store_sales.store_date,RIGHT"
+            },
+            {
+              "join_commutation": "web_returns.web_item"
+            },
+            {
+              "parallelism_adjustment": "applied"
             }
-          }
+          ]
         }
       }
     }
+  }
+}
+```
 
 ## Estimate impact of history-based optimizations
 
 To estimate the impact of history-based optimizations, you can use the following sample SQL query to identify project queries with the greatest estimated improvement to execution time.
 
-``` 
+```
   WITH
     jobs AS (
       SELECT
@@ -163,7 +171,7 @@ To estimate the impact of history-based optimizations, you can use the following
 
 The result of the preceding query is similar to the following if history-based optimizations were applied:
 
-``` 
+```
   /*--------------+------------------------------+------------------+-----------------------*
    |    job_id    | percent_execution_time_saved | new_execution_ms | original_execution_ms |
    +--------------+------------------------------+------------------+-----------------------+

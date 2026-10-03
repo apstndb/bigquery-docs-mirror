@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Recommendations overview
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 BigQuery works with Active Assist to provide various recommendations that you can use to optimize your BigQuery resources.
@@ -24,9 +24,9 @@ To view your BigQuery recommendations along with other recommendations across th
 
 BigQuery offers the following recommenders:
 
-  - [Partitioning and clustering recommender](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) , which analyzes your query behavior to find opportunities for partitioning and clustering to optimize your BigQuery tables.
-  - [Materialized view recommender](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) , which finds opportunities to use materialized views to optimize your workflows.
-  - [IAM recommender](https://docs.cloud.google.com/policy-intelligence/docs/role-recommendations-overview) , which analyzes permissions on your BigQuery datasets and suggests Identity and Access Management (IAM) role updates for principals that have excess permissions.
+- [Partitioning and clustering recommender](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) , which analyzes your query behavior to find opportunities for partitioning and clustering to optimize your BigQuery tables.
+- [Materialized view recommender](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) , which finds opportunities to use materialized views to optimize your workflows.
+- [IAM recommender](https://docs.cloud.google.com/policy-intelligence/docs/role-recommendations-overview) , which analyzes permissions on your BigQuery datasets and suggests Identity and Access Management (IAM) role updates for principals that have excess permissions.
 
 ## View recommendations
 
@@ -35,7 +35,7 @@ To view your recommendations using the Google Cloud console, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the navigation menu, click **Recommendations** .
-    
+
     The **Recommendations** page opens, showing all recommendations that are generated for the current project or organization, depending on the selected scope.
 
 3.  To see more information about a specific recommendation or insight, click a recommendation.
@@ -44,43 +44,47 @@ To view your recommendations using the Google Cloud console, do the following:
 
 You can also view your recommendations and insights using `INFORMATION_SCHEMA` views. For example, you can use the `INFORMATION_SCHEMA.RECOMMENDATIONS` view to view your top three recommendations based on slots savings, as seen in the following example:
 
-    SELECT
-       recommender,
-       target_resources,
-       LAX_INT64(additional_details.overview.bytesSavedMonthly) / POW(1024, 3) as est_gb_saved_monthly,
-       LAX_INT64(additional_details.overview.slotMsSavedMonthly) / (1000 * 3600) as slot_hours_saved_monthly,
-      last_updated_time
-    FROM
-      `region-us`.INFORMATION_SCHEMA.RECOMMENDATIONS
-    WHERE
-       primary_impact.category = 'COST'
-    AND
-       state = 'ACTIVE'
-    ORDER by
-       slot_hours_saved_monthly DESC
-    LIMIT 3;
+```
+SELECT
+   recommender,
+   target_resources,
+   LAX_INT64(additional_details.overview.bytesSavedMonthly) / POW(1024, 3) as est_gb_saved_monthly,
+   LAX_INT64(additional_details.overview.slotMsSavedMonthly) / (1000 * 3600) as slot_hours_saved_monthly,
+  last_updated_time
+FROM
+  `region-us`.INFORMATION_SCHEMA.RECOMMENDATIONS
+WHERE
+   primary_impact.category = 'COST'
+AND
+   state = 'ACTIVE'
+ORDER by
+   slot_hours_saved_monthly DESC
+LIMIT 3;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case sensitive.
 
 The result is similar to the following:
 
-    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
-    |                    recommender                    |   target_resources      | est_gb_saved_monthly | slot_hours_saved_monthly |  last_updated_time
-    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
-    | google.bigquery.materializedview.Recommender      | ["project_resource"]    | 140805.38289248943   |        9613.139166666666 |  2024-07-01 13:00:00
-    | google.bigquery.table.PartitionClusterRecommender | ["table_resource_1"]    | 4393.7416711859405   |        56.61476777777777 |  2024-07-01 13:00:00
-    | google.bigquery.table.PartitionClusterRecommender | ["table_resource_2"]    |   3934.07264107652   |       10.499466666666667 |  2024-07-01 13:00:00
-    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+```
++---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+|                    recommender                    |   target_resources      | est_gb_saved_monthly | slot_hours_saved_monthly |  last_updated_time
++---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+| google.bigquery.materializedview.Recommender      | ["project_resource"]    | 140805.38289248943   |        9613.139166666666 |  2024-07-01 13:00:00
+| google.bigquery.table.PartitionClusterRecommender | ["table_resource_1"]    | 4393.7416711859405   |        56.61476777777777 |  2024-07-01 13:00:00
+| google.bigquery.table.PartitionClusterRecommender | ["table_resource_2"]    |   3934.07264107652   |       10.499466666666667 |  2024-07-01 13:00:00
++---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+```
 
 For more information, see the following resources:
 
-  - [`INFORMATION_SCHEMA.RECOMMENDATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)
-  - [`INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)
-  - [`INFORMATION_SCHEMA.INSIGHTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)
+- [`INFORMATION_SCHEMA.RECOMMENDATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)
+- [`INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)
+- [`INFORMATION_SCHEMA.INSIGHTS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)
 
 ## What's next
 
-  - Learn how to [view partition and cluster recommendations](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) .
-  - Learn how to [apply partition and cluster recommendations](https://docs.cloud.google.com/bigquery/docs/apply-partition-cluster-recommendations) .
-  - Learn how to [manage materialized view recommendations](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) .
-  - Learn how to [use the IAM recommender](https://docs.cloud.google.com/policy-intelligence/docs/role-recommendations-overview) .
+- Learn how to [view partition and cluster recommendations](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) .
+- Learn how to [apply partition and cluster recommendations](https://docs.cloud.google.com/bigquery/docs/apply-partition-cluster-recommendations) .
+- Learn how to [manage materialized view recommendations](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) .
+- Learn how to [use the IAM recommender](https://docs.cloud.google.com/policy-intelligence/docs/role-recommendations-overview) .

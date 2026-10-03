@@ -16,16 +16,16 @@ Using indirect customer preference information, like user session duration, to t
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a matrix factorization model by using the `CREATE MODEL` statement.
-  - Evaluating the model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Generating content recommendations for users by using the model with the [`ML.RECOMMEND` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
+- Creating a matrix factorization model by using the `CREATE MODEL` statement.
+- Evaluating the model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+- Generating content recommendations for users by using the model with the [`ML.RECOMMEND` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -34,28 +34,28 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Required Permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
+- To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
-  - To create the model, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+- To create the model, you need the following permissions:
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.models.getData`
-      - `bigquery.jobs.create`
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.models.getData`
+  - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -68,21 +68,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -92,25 +92,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Prepare the sample data
 
@@ -121,59 +127,63 @@ Follow these steps to create the training data table:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  Create the training data table. In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
-        AS
-        WITH
-          visitor_page_content AS (
-            SELECT
-              fullVisitorID,
-              (
-                SELECT
-                  MAX(
-                    IF(
-                      index = 10,
-                      value,
-                      NULL))
-                FROM
-                  UNNEST(hits.customDimensions)
-              ) AS latestContentId,
-              (LEAD(hits.time, 1) OVER (PARTITION BY fullVisitorId ORDER BY hits.time ASC) - hits.time)
-                AS session_duration
-            FROM
-              `cloud-training-demos.GA360_test.ga_sessions_sample`,
-              UNNEST(hits) AS hits
-            WHERE
-              # only include hits on pages
-              hits.type = 'PAGE'
-            GROUP BY
-              fullVisitorId,
-              latestContentId,
-              hits.time
-          )
-        # aggregate web stats
+
+    ```
+    CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
+    AS
+    WITH
+      visitor_page_content AS (
         SELECT
-          fullVisitorID AS visitorId,
-          latestContentId AS contentId,
-          SUM(session_duration) AS session_duration
-        FROM
-          visitor_page_content
-        WHERE
-          latestContentId IS NOT NULL
-        GROUP BY
           fullVisitorID,
-          latestContentId
-        HAVING
-          session_duration > 0
-        ORDER BY
-          latestContentId;
+          (
+            SELECT
+              MAX(
+                IF(
+                  index = 10,
+                  value,
+                  NULL))
+            FROM
+              UNNEST(hits.customDimensions)
+          ) AS latestContentId,
+          (LEAD(hits.time, 1) OVER (PARTITION BY fullVisitorId ORDER BY hits.time ASC) - hits.time)
+            AS session_duration
+        FROM
+          `cloud-training-demos.GA360_test.ga_sessions_sample`,
+          UNNEST(hits) AS hits
+        WHERE
+          # only include hits on pages
+          hits.type = 'PAGE'
+        GROUP BY
+          fullVisitorId,
+          latestContentId,
+          hits.time
+      )
+    # aggregate web stats
+    SELECT
+      fullVisitorID AS visitorId,
+      latestContentId AS contentId,
+      SUM(session_duration) AS session_duration
+    FROM
+      visitor_page_content
+    WHERE
+      latestContentId IS NOT NULL
+    GROUP BY
+      fullVisitorID,
+      latestContentId
+    HAVING
+      session_duration > 0
+    ORDER BY
+      latestContentId;
+    ```
 
 3.  View a subset of the training data. In the query editor, paste in the following query and click **Run** :
-    
-        SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
-    
+
+    ```
+    SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
+    ```
+
     The results should look similar to the following:
-    
+
     ```console
     +---------------------+-----------+------------------+
     | visitorId           | contentId | session_duration |
@@ -196,33 +206,33 @@ Create a matrix factorization model and train it on the data in the `analytics_s
 
 The following `CREATE MODEL` statement uses these columns to generate recommendations:
 
-  - `visitorId` —The visitor ID.
-  - `contentId` —The content ID.
-  - `rating` —The implicit rating from 0 to 1 calculated for each visitor-content pair, centered and scaled.
-
-<!-- end list -->
+- `visitorId` —The visitor ID.
+- `contentId` —The content ID.
+- `rating` —The implicit rating from 0 to 1 calculated for each visitor-content pair, centered and scaled.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
-          OPTIONS (
-            MODEL_TYPE = 'matrix_factorization',
-            FEEDBACK_TYPE = 'implicit',
-            USER_COL = 'visitorId',
-            ITEM_COL = 'contentId',
-            RATING_COL = 'rating',
-            L2_REG = 30,
-            NUM_FACTORS = 15)
-        AS
-        SELECT
-          visitorId,
-          contentId,
-          0.3 * (1 + (session_duration - 57937) / 57937) AS rating
-        FROM `bqml_tutorial.analytics_session_data`
-        WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
+      OPTIONS (
+        MODEL_TYPE = 'matrix_factorization',
+        FEEDBACK_TYPE = 'implicit',
+        USER_COL = 'visitorId',
+        ITEM_COL = 'contentId',
+        RATING_COL = 'rating',
+        L2_REG = 30,
+        NUM_FACTORS = 15)
+    AS
+    SELECT
+      visitorId,
+      contentId,
+      0.3 * (1 + (session_duration - 57937) / 57937) AS rating
+    FROM `bqml_tutorial.analytics_session_data`
+    WHERE 0.3 * (1 + (session_duration - 57937) / 57937) < 1;
+    ```
+
     The query takes about 10 minutes to complete, after which the `mf_implicit` model appears in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
 ## Get training statistics
@@ -236,10 +246,10 @@ Follow these steps to view the model's training statistics:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -250,7 +260,7 @@ Follow these steps to view the model's training statistics:
 6.  Click the `mf_implicit` model and then click the **Training** tab
 
 7.  In the **View as** section, click **Table** . The results should look similar to the following:
-    
+
     ```console
     +-----------+--------------------+--------------------+
     | Iteration | Training Data Loss | Duration (seconds) |
@@ -264,7 +274,7 @@ Follow these steps to view the model's training statistics:
     |  ...      | ...                | ...                |
     +-----------+--------------------+--------------------+
     ```
-    
+
     The **Training Data Loss** column represents the loss metric calculated after the model is trained. Because this is a matrix factorization model, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) .
 
 ## Evaluate the model
@@ -276,14 +286,16 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.mf_implicit`);
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.mf_implicit`);
+    ```
+
     The results should look similar to the following:
-    
+
     ```console
     +------------------------+-----------------------+---------------------------------------+---------------------+
     | mean_average_precision |  mean_squared_error   | normalized_discounted_cumulative_gain |    average_rank     |
@@ -291,7 +303,7 @@ Follow these steps to evaluate the model:
     |     0.4434341257478137 | 0.0013381759837648962 |                    0.9433280547112802 | 0.24031636088594222 |
     +------------------------+-----------------------+---------------------------------------+---------------------+
     ```
-    
+
     For more information about the `ML.EVALUATE` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
 
 ## Get the predicted ratings for a subset of visitor-content pairs
@@ -303,22 +315,24 @@ Follow these steps to get predicted ratings:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.RECOMMEND(
-            MODEL `bqml_tutorial.mf_implicit`,
-            (
-              SELECT
-                visitorId
-              FROM
-                `bqml_tutorial.analytics_session_data`
-              LIMIT 5
-            ));
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.RECOMMEND(
+        MODEL `bqml_tutorial.mf_implicit`,
+        (
+          SELECT
+            visitorId
+          FROM
+            `bqml_tutorial.analytics_session_data`
+          LIMIT 5
+        ));
+    ```
+
     The results should look similar to the following:
-    
+
     ```console
     +-------------------------------+---------------------+-----------+
     | predicted_rating_confidence   | visitorId           | contentId |
@@ -342,29 +356,33 @@ Follow these steps to generate recommendations:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  Write the predicted ratings to a table. In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
-        AS
-        SELECT
-          *
-        FROM
-          ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
+
+    ```
+    CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
+    AS
+    SELECT
+      *
+    FROM
+      ML.RECOMMEND(MODEL `bqml_tutorial.mf_implicit`);
+    ```
 
 3.  Select the top five results per visitor. In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          visitorId,
-          ARRAY_AGG(
-            STRUCT(contentId, predicted_rating_confidence)
-            ORDER BY predicted_rating_confidence DESC
-            LIMIT 5) AS rec
-        FROM
-          `bqml_tutorial.recommend_content`
-        GROUP BY
-          visitorId;
-    
+
+    ```
+    SELECT
+      visitorId,
+      ARRAY_AGG(
+        STRUCT(contentId, predicted_rating_confidence)
+        ORDER BY predicted_rating_confidence DESC
+        LIMIT 5) AS rec
+    FROM
+      `bqml_tutorial.recommend_content`
+    GROUP BY
+      visitorId;
+    ```
+
     The results should look similar to the following:
-    
+
     ```console
     +---------------------+-----------------+---------------------------------+
     | visitorId           | rec:contentId   | rec:predicted_rating_confidence |
@@ -389,8 +407,8 @@ Follow these steps to generate recommendations:
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -398,7 +416,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation, click the **bqml_tutorial** dataset you created.
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
@@ -409,20 +427,18 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Try [creating a matrix factorization model based on explicit feedback](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
+- Try [creating a matrix factorization model based on explicit feedback](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial) .
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .

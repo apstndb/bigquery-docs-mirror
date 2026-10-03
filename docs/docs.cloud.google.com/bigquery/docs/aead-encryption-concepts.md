@@ -28,36 +28,38 @@ The representation of a keyset in GoogleSQL is as a serialized [google.crypto.ti
 
 The following is an example of an AEAD keyset, represented as a JSON string, with three keys.
 
+```
+{
+  "primaryKeyId": 569259624,
+  "key": [
     {
-      "primaryKeyId": 569259624,
-      "key": [
-        {
-          "keyData": {
-            "typeUrl": "type.googleapis.com/google.crypto.tink.AesGcmKey",
-            "value": "GiDPhTp5gIhfnDb6jfKOT4SmNoriIJc7ah8uRvrCpdNihA==",
-            "keyMaterialType": "SYMMETRIC"
-          },
-          "status": "ENABLED",
-          "keyId": 569259624,
-          "outputPrefixType": "TINK"
-        },
-        {
-          "keyData": {
-            "typeUrl": "type.googleapis.com/google.crypto.tink.AesGcmKey",
-            "value": "GiBp6aU2cFbVfTh9dTQ1F0fqM+sGHXc56RDPryjAnzTe2A==",
-            "keyMaterialType": "SYMMETRIC"
-          },
-          "status": "DISABLED",
-          "keyId": 852264701,
-          "outputPrefixType": "TINK"
-        },
-        {
-          "status": "DESTROYED",
-          "keyId": 237910588,
-          "outputPrefixType": "TINK"
-        }
-      ]
+      "keyData": {
+        "typeUrl": "type.googleapis.com/google.crypto.tink.AesGcmKey",
+        "value": "GiDPhTp5gIhfnDb6jfKOT4SmNoriIJc7ah8uRvrCpdNihA==",
+        "keyMaterialType": "SYMMETRIC"
+      },
+      "status": "ENABLED",
+      "keyId": 569259624,
+      "outputPrefixType": "TINK"
+    },
+    {
+      "keyData": {
+        "typeUrl": "type.googleapis.com/google.crypto.tink.AesGcmKey",
+        "value": "GiBp6aU2cFbVfTh9dTQ1F0fqM+sGHXc56RDPryjAnzTe2A==",
+        "keyMaterialType": "SYMMETRIC"
+      },
+      "status": "DISABLED",
+      "keyId": 852264701,
+      "outputPrefixType": "TINK"
+    },
+    {
+      "status": "DESTROYED",
+      "keyId": 237910588,
+      "outputPrefixType": "TINK"
     }
+  ]
+}
+```
 
 In the above example, the primary cryptographic key has an ID of `569259624` and is the first key listed in the JSON string. There are two secondary cryptographic keys, one with ID `852264701` in a disabled state, and another with ID `237910588` in a destroyed state. When an AEAD encryption function uses this keyset for encryption, the resulting ciphertext encodes the primary cryptographic key's ID of `569259624` .
 
@@ -79,10 +81,10 @@ As with [keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-co
 
 Here are some functions with wrapped keyset examples:
 
-  - [`KEYS.NEW_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_wrapped_keyset) : Create a new wrapped keyset.
-  - [`KEYS.ROTATE_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) : Rotate a wrapped keyset.
-  - [`KEYS.REWRAP_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrewrap_keyset) : Rewrap a wrapped keyset with new data.
-  - [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) : Get a [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) keyset that is encrypted with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) .
+- [`KEYS.NEW_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysnew_wrapped_keyset) : Create a new wrapped keyset.
+- [`KEYS.ROTATE_WRAPPED_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrotate_wrapped_keyset) : Rotate a wrapped keyset.
+- [`KEYS.REWRAP_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keysrewrap_keyset) : Rewrap a wrapped keyset with new data.
+- [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) : Get a [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) keyset that is encrypted with a [Cloud KMS key](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#cloud_kms_protection) .
 
 ### Advanced Encryption Standard (AES)
 

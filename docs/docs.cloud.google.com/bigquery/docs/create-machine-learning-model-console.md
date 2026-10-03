@@ -12,48 +12,48 @@ This document shows you how to use the Google Cloud console to create a BigQuery
 
 ## Required roles
 
-  - To create a model and run inference, you must be granted the following roles:
-    
-      - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
-      - BigQuery User ( `roles/bigquery.user` )
+- To create a model and run inference, you must be granted the following roles:
+
+  - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+  - BigQuery User ( `roles/bigquery.user` )
 
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery and BigQuery Connection APIs, if any are not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Model-specific prerequisites
 
 Before you create a model, make sure that you have addressed any prerequisites for the type of model that you are creating:
 
-  - If you want to use a query to select training data for a model, you must have that query available as a [saved query](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
+- If you want to use a query to select training data for a model, you must have that query available as a [saved query](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
 
-  - Matrix factorization models require reservations. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .
+- Matrix factorization models require reservations. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .
 
-  - The following remote models require a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) :
-    
-      - [Remote models over Gemini Enterprise Agent Platform and partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
-      - [Remote models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
-      - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
-      - [Remote models over custom models in Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
-    
-    The connection's service account must also be granted certain roles, depending on the type of remote model.
+- The following remote models require a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) :
 
-  - To import a model, you must have that model uploaded to a Cloud Storage bucket.
+  - [Remote models over Gemini Enterprise Agent Platform and partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+  - [Remote models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
+  - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
+  - [Remote models over custom models in Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+
+  The connection's service account must also be granted certain roles, depending on the type of remote model.
+
+- To import a model, you must have that model uploaded to a Cloud Storage bucket.
 
 ## Create a dataset
 
@@ -64,78 +64,82 @@ Create a BigQuery dataset to contain your resources:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more\_vert **View actions \> Create dataset** .
+4.  Click more_vert **View actions \> Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
-    
+
     1.  For **Dataset ID** , type a name for the dataset.
-    
+
     2.  For **Location type** , select **Region** or **Multi-region** .
-        
-          - If you selected **Region** , then select a location from the **Region** list.
-          - If you selected **Multi-region** , then select **US** or **Europe** from the **Multi-region** list.
-    
+
+        - If you selected **Region** , then select a location from the **Region** list.
+        - If you selected **Multi-region** , then select **US** or **Europe** from the **Multi-region** list.
+
     3.  Click **Create dataset** .
 
 ### bq
 
 1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
-    
-        bq --location=LOCATION mk -d DATASET_ID
-    
+
+    ```
+    bq --location=LOCATION mk -d DATASET_ID
+    ```
+
     Replace the following:
-    
-      - `  LOCATION  ` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-      - `  DATASET_ID  ` : the ID of the dataset that you're creating.
+
+    - `LOCATION` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+    - `DATASET_ID` : the ID of the dataset that you're creating.
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ## Create an internally or externally trained model
 
 Use this procedure to create the following types of models:
 
-  - Time series models:
-    
-      - [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - [`ARIMA_PLUS_XREG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+- Time series models:
 
-  - Contribution analysis: [Contribution analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis)
+  - [`ARIMA_PLUS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+  - [`ARIMA_PLUS_XREG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
 
-  - Classification:
-    
-      - [Logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-      - [Boosted tree classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Random forest classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Deep Neural network (DNN) classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Wide-and-deep classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [AutoML classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+- Contribution analysis: [Contribution analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis)
 
-  - Regression:
-    
-      - [Linear regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-      - [Boosted tree regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Random forest regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Deep Neural network (DNN) regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [Wide-and-deep regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-      - [AutoML regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+- Classification:
 
-  - Clustering: [K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+  - [Logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+  - [Boosted tree classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Random forest classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Deep Neural network (DNN) classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Wide-and-deep classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [AutoML classification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
-  - Recommendation: [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+- Regression:
 
-  - Dimensionality reduction:
-    
-      - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-      - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+  - [Linear regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+  - [Boosted tree regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Random forest regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Deep Neural network (DNN) regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Wide-and-deep regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [AutoML regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+
+- Clustering: [K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+
+- Recommendation: [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+
+- Dimensionality reduction:
+
+  - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+  - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
 These models have different sets of options according to their type. While BigQuery ML automatic tuning works well in most cases, you can choose to manually tune your model as part of the procedure. If you want to do so, refer to the documentation for the given type of model to learn more about the model options.
 
@@ -144,21 +148,21 @@ To create a model:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more\_vert **View actions** next to the dataset, and then click **Create BQML Model** .
-    
+4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+
     The **Create new model** pane opens.
 
 5.  For **Model name** , type a name for the model.
 
 6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
-    
+
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
 
@@ -173,30 +177,30 @@ To create a model:
 11. On the **Model options** page, select a model type. The type of model you can select varies based on the modeling objective you chose.
 
 12. In the **Training data** section, do one of the following:
-    
-      - Select **Table/View** to get training data from a table or view, and then select the project, dataset, and view or table name.
-      - Select **Query** to get training data from a saved query, and then select the saved query.
+
+    - Select **Table/View** to get training data from a table or view, and then select the project, dataset, and view or table name.
+    - Select **Query** to get training data from a saved query, and then select the saved query.
 
 13. In **Selected input label columns** , choose the columns from the table, view, or query that you want to use as input to the model.
 
 14. If there is a **Required options** section, specify the requested column information:
-    
-      - For classification and regression models, for **INPUT\_LABEL\_COLS** , select the column that contains the label data.
-    
-      - For matrix factorization models, select the following:
-        
-          - For **RATING\_COL** , select the column that contains the rating data.
-          - For **USER\_COL** , select the column that contains the user data.
-          - For **ITEM\_COL** , select the column that contains the item data.
-    
-      - For time series forecasting models, select the following:
-        
-          - For **TIME\_SERIES\_TIMESTAMP\_COL** , select the column that contains the time points to use when training the model.
-          - For **TIME\_SERIES\_DATA\_COL** , select the column that contains the data to forecast.
+
+    - For classification and regression models, for **INPUT_LABEL_COLS** , select the column that contains the label data.
+
+    - For matrix factorization models, select the following:
+
+      - For **RATING_COL** , select the column that contains the rating data.
+      - For **USER_COL** , select the column that contains the user data.
+      - For **ITEM_COL** , select the column that contains the item data.
+
+    - For time series forecasting models, select the following:
+
+      - For **TIME_SERIES_TIMESTAMP_COL** , select the column that contains the time points to use when training the model.
+      - For **TIME_SERIES_DATA_COL** , select the column that contains the data to forecast.
 
 15. Optional: In the **Optional** section, specify values for additional model tuning arguments. The arguments that are available vary based on the type of model that you are creating.
 
-16. Optional: If there's a **Hyperparameter tuning** section, you can specify the **NUM\_TRIALS** option to enable \[hyperparameter tuning\](/bigquery/docs/hyperparameter-tuning-tutorial for your model. The arguments that are available for hyperparameter tuning vary based on the type of model that you're creating.
+16. Optional: If there's a **Hyperparameter tuning** section, you can specify the **NUM_TRIALS** option to enable \[hyperparameter tuning\](/bigquery/docs/hyperparameter-tuning-tutorial for your model. The arguments that are available for hyperparameter tuning vary based on the type of model that you're creating.
 
 17. Click **Create model** .
 
@@ -206,27 +210,27 @@ To create a model:
 
 Use this procedure to create the following types of remote models:
 
-  - [Models over Agent Platform or partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
-  - [Models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
+- [Models over Agent Platform or partner models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+- [Models over open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open)
 
 To create a model:
 
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more\_vert **View actions** next to the dataset, and then click **Create BQML Model** .
-    
+4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+
     The **Create new model** pane opens.
 
 5.  For **Model name** , type a name for the model.
 
 6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
-    
+
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
 
@@ -237,23 +241,23 @@ To create a model:
 9.  On the **Model options** page, select **Google and Partner Models** or **Open Models** for the model type, as appropriate for your use case.
 
 10. In the **Remote connection** section, do one of the following:
-    
-      - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
-    
-      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
-        
-        1.  For **Project** , select the project that contains the connection that you want to use.
-        
-        2.  For **Location** , select the location used by the connection.
-        
-        3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
-            
-            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+
+    - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
+
+    - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+
+      1.  For **Project** , select the project that contains the connection that you want to use.
+
+      2.  For **Location** , select the location used by the connection.
+
+      3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
+
+          > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
 11. In the **Required options** section, do one of the following:
-    
-      - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-2.0-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
-      - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
+
+    - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-2.0-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+    - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format `https:// `` location `` -aiplatform.googleapis.com/v1/projects/ `` project `` /locations/ `` location `` /endpoints/ `` endpoint_id` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
 
 12. Click **Create model** .
 
@@ -268,19 +272,19 @@ To create a model:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more\_vert **View actions** next to the dataset, and then click **Create BQML Model** .
-    
+4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+
     The **Create new model** pane opens.
 
 5.  For **Model name** , type a name for the model.
 
 6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
-    
+
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
 
@@ -289,20 +293,20 @@ To create a model:
 8.  In the **Creation method** section, select **Connect to user managed Vertex AI endpoints** .
 
 9.  In the **Remote connection** section of the **Model options** page, do one of the following:
-    
-      - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
-    
-      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
-        
-        1.  For **Project** , select the project that contains the connection that you want to use.
-        
-        2.  For **Location** , select the location used by the connection.
-        
-        3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
-            
-            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
-10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format ` https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
+    - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
+
+    - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+
+      1.  For **Project** , select the project that contains the connection that you want to use.
+
+      2.  For **Location** , select the location used by the connection.
+
+      3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
+
+          > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+
+10. In the **Required options** section, specify the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format `https:// `` location `` -aiplatform.googleapis.com/v1/projects/ `` project `` /locations/ `` location `` /endpoints/ `` endpoint_id` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https#endpoint) .
 
 11. Click **Create model** .
 
@@ -317,19 +321,19 @@ To create a model:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more\_vert **View actions** next to the dataset, and then click **Create BQML Model** .
-    
+4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+
     The **Create new model** pane opens.
 
 5.  For **Model name** , type a name for the model.
 
 6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
-    
+
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
 
@@ -340,18 +344,18 @@ To create a model:
 9.  On the **Model options** page, select **Cloud AI Services** .
 
 10. In the **Remote connection** section, do one of the following:
-    
-      - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
-    
-      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
-        
-        1.  For **Project** , select the project that contains the connection that you want to use.
-        
-        2.  For **Location** , select the location used by the connection.
-        
-        3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
-            
-            > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
+
+    - If you have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
+
+    - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+
+      1.  For **Project** , select the project that contains the connection that you want to use.
+
+      2.  For **Location** , select the location used by the connection.
+
+      3.  For **Connection** , select the connection to use for the remote model, or select **Create new connection** to create a new connection.
+
+          > **Important:** If you create a new connection, you must grant appropriate roles to the connection's service account before continuing. For more information about what roles to grant, see the reference documentation for the type of remote model that you are creating.
 
 11. In the **Required options** section, select the Cloud AI service type to use.
 
@@ -365,29 +369,29 @@ To create a model:
 
 Use this procedure to create BigQuery ML models by importing the following types of models:
 
-  - [ONNX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
-  - [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-  - [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
-  - [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
+- [ONNX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
+- [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+- [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
+- [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
 
 To create a model:
 
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more\_vert **View actions** next to the dataset, and then click **Create BQML Model** .
-    
+4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+
     The **Create new model** pane opens.
 
 5.  For **Model name** , type a name for the model.
 
 6.  If you want to create a saved query that contains the `CREATE MODEL` statement for the model, select **Save Query** .
-    
+
     1.  For **Query name** , type a name for the saved query.
     2.  For **Region** , choose a region for the saved query.
 

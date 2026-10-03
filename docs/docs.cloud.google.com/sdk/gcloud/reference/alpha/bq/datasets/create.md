@@ -12,7 +12,7 @@ gcloud alpha bq datasets create - create a new BigQuery dataset
 
 SYNOPSIS
 
-`gcloud alpha bq datasets create` `  DATASET  ` \[ `  --description  ` = `  DESCRIPTION  ` \] \[ `  --overwrite  ` \] \[ `  --permissions-file  ` =\[ `  PERMISSIONS_FILE  ` , …\]\] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq datasets create` [`DATASET`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create#DATASET) \[ [`--description`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create#--description) = `DESCRIPTION` \] \[ [`--overwrite`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create#--overwrite) \] \[ [`--permissions-file`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create#--permissions-file) =\[ `PERMISSIONS_FILE` , …\]\] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/datasets/create#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,11 +22,15 @@ EXAMPLES
 
 The following command creates a dataset with ID `my-dataset`
 
-    gcloud alpha bq datasets create my-dataset --description 'My New Dataset'
+```
+gcloud alpha bq datasets create my-dataset --description 'My New Dataset'
+```
 
 The following command creates a dataset with ID `my-other-dataset` , overwritting destination if it exists:
 
-    gcloud alpha bq datasets create my-other-dataset --description 'My Other Dataset' --overwrite
+```
+gcloud alpha bq datasets create my-other-dataset --description 'My Other Dataset' --overwrite
+```
 
 POSITIONAL ARGUMENTS
 
@@ -34,53 +38,53 @@ Dataset resource - ID of the the dataset being created. The ID must contain only
 
 To set the `project` attribute:
 
-  - provide the argument `dataset` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `dataset` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
 This must be specified.
 
-  - `  DATASET  `  
-    ID of the dataset or fully qualified identifier for the dataset.
-    
-    To set the `dataset` attribute:
-    
-      - provide the argument `dataset` on the command line.
+`DATASET`  
+ID of the dataset or fully qualified identifier for the dataset.
+
+To set the `dataset` attribute:
+
+- provide the argument `dataset` on the command line.
 
 FLAGS
 
-  - `--description` = `  DESCRIPTION  `  
-    Description of the dataset.
+`--description` = `DESCRIPTION`  
+Description of the dataset.
 
-  - `--overwrite`  
-    Overwrite if the resource already exists.
+`--overwrite`  
+Overwrite if the resource already exists.
 
-  - `--permissions-file` =\[ `  PERMISSIONS_FILE  ` ,…\]  
-    A local yaml or JSON file containing the access permissions specifying who is allowed to access the data.
-    
-    YamlfFile should be specified the form:\\ access:
-    
-      - role: ROLE \[access type\]: ACCESS\_VALUE
-      - …
-    
-    and JSON file should be specified in the form: {"access": \[ { "role": "ROLE", "\[access type\]": "ACCESS\_VALUE" }, … \]}
-    
-    Where `access type` is one of: `domain` , `userByEmail` , `specialGroup` or `view` .
-    
-    If this field is not specified, BigQuery adds these default dataset access permissions at creation time in :
-    
-      - specialGroup=projectReaders, role=READER
-      - specialGroup=projectWriters, role=WRITER
-      - specialGroup=projectOwners, role=OWNER
-      - userByEmail=\[dataset creator email\], role=OWNER
-    
-    For more information on BigQuery permissions see: <https://cloud.google.com/bigquery/docs/access-control>
+`--permissions-file` =\[ `PERMISSIONS_FILE` ,…\]  
+A local yaml or JSON file containing the access permissions specifying who is allowed to access the data.
+
+YamlfFile should be specified the form:\\ access:
+
+- role: ROLE \[access type\]: ACCESS_VALUE
+- …
+
+and JSON file should be specified in the form: {"access": \[ { "role": "ROLE", "\[access type\]": "ACCESS_VALUE" }, … \]}
+
+Where `access type` is one of: `domain` , `userByEmail` , `specialGroup` or `view` .
+
+If this field is not specified, BigQuery adds these default dataset access permissions at creation time in :
+
+- specialGroup=projectReaders, role=READER
+- specialGroup=projectWriters, role=WRITER
+- specialGroup=projectOwners, role=OWNER
+- userByEmail=\[dataset creator email\], role=OWNER
+
+For more information on BigQuery permissions see: <https://cloud.google.com/bigquery/docs/access-control>
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 

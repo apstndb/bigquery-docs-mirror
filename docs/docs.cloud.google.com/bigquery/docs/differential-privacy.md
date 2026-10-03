@@ -52,17 +52,17 @@ The final result is a dataset where each group has noisy aggregate results and s
 
 For additional context on what differential privacy is and its use cases, see the following articles:
 
-  - [A friendly, non-technical introduction to differential privacy](https://desfontain.es/privacy/friendly-intro-to-differential-privacy.html)
-  - [Differentially private SQL with bounded user contribution](https://arxiv.org/abs/1909.01917)
-  - [Differential privacy on Wikipedia](https://en.wikipedia.org/wiki/Differential_privacy)
+- [A friendly, non-technical introduction to differential privacy](https://desfontain.es/privacy/friendly-intro-to-differential-privacy.html)
+- [Differentially private SQL with bounded user contribution](https://arxiv.org/abs/1909.01917)
+- [Differential privacy on Wikipedia](https://en.wikipedia.org/wiki/Differential_privacy)
 
 ## Produce a valid differentially private query
 
 The following rules must be met for the differentially private query to be valid:
 
-  - A [privacy unit column](https://docs.cloud.google.com/bigquery/docs/differential-privacy#dp_define_privacy_unit_id) is defined.
-  - The `SELECT` list contains a [differentially private clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
-  - Only [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) are in the `SELECT` list with the differentially private clause.
+- A [privacy unit column](https://docs.cloud.google.com/bigquery/docs/differential-privacy#dp_define_privacy_unit_id) is defined.
+- The `SELECT` list contains a [differentially private clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+- Only [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) are in the `SELECT` list with the differentially private clause.
 
 ## Define a privacy unit column
 
@@ -74,17 +74,21 @@ You can define a privacy unit column in the `OPTIONS` clause of a differential p
 
 In the following examples, a privacy unit column is added to a differential privacy clause. `id` represents a column that originates from a table called `students` .
 
-    SELECT WITH DIFFERENTIAL_PRIVACY
-      OPTIONS (epsilon=10, delta=.01, privacy_unit_column=id)
-      item,
-      COUNT(*, contribution_bounds_per_group=>(0, 100))
-    FROM students;
+```
+SELECT WITH DIFFERENTIAL_PRIVACY
+  OPTIONS (epsilon=10, delta=.01, privacy_unit_column=id)
+  item,
+  COUNT(*, contribution_bounds_per_group=>(0, 100))
+FROM students;
+```
 
-    SELECT WITH DIFFERENTIAL_PRIVACY
-      OPTIONS (epsilon=10, delta=.01, privacy_unit_column=members.id)
-      item,
-      COUNT(*, contribution_bounds_per_group=>(0, 100))
-    FROM (SELECT * FROM students) AS members;
+```
+SELECT WITH DIFFERENTIAL_PRIVACY
+  OPTIONS (epsilon=10, delta=.01, privacy_unit_column=members.id)
+  item,
+  COUNT(*, contribution_bounds_per_group=>(0, 100))
+FROM (SELECT * FROM students) AS members;
+```
 
 ## Remove noise from a differentially private query
 
@@ -108,29 +112,37 @@ Differentially private queries execute more slowly than standard queries because
 
 The performance profiles of the following queries aren't similar:
 
-    SELECT
-      WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=1, delta=1e-10, privacy_unit_column=id)
-      column_a, COUNT(column_b)
-    FROM table_a
-    GROUP BY column_a;
+```
+SELECT
+  WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=1, delta=1e-10, privacy_unit_column=id)
+  column_a, COUNT(column_b)
+FROM table_a
+GROUP BY column_a;
+```
 
-    SELECT column_a, COUNT(column_b)
-    FROM table_a
-    GROUP BY column_a;
+```
+SELECT column_a, COUNT(column_b)
+FROM table_a
+GROUP BY column_a;
+```
 
 The reason for the performance difference is that an additional finer-granularity level of grouping is performed for differentially private queries, because per-entity aggregation must also be performed.
 
 The performance profiles of the following queries should be similar, although the differentially private query is slightly slower:
 
-    SELECT
-      WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=1, delta=1e-10, privacy_unit_column=id)
-      column_a, COUNT(column_b)
-    FROM table_a
-    GROUP BY column_a;
+```
+SELECT
+  WITH DIFFERENTIAL_PRIVACY OPTIONS(epsilon=1, delta=1e-10, privacy_unit_column=id)
+  column_a, COUNT(column_b)
+FROM table_a
+GROUP BY column_a;
+```
 
-    SELECT column_a, id, COUNT(column_b)
-    FROM table_a
-    GROUP BY column_a, id;
+```
+SELECT column_a, id, COUNT(column_b)
+FROM table_a
+GROUP BY column_a, id;
+```
 
 The differentially private query performs more slowly because it has a high number of distinct values for the privacy unit column.
 
@@ -166,8 +178,8 @@ Creating a differential privacy query assumes that your data is in a well-known 
 
 If you need help understanding your data, consider using services and tools such as the following:
 
-  - [BigQuery Data Profiler](https://docs.cloud.google.com/dlp/docs/data-profiles)
-  - [Re-identification risk analysis](https://docs.cloud.google.com/dlp/docs/concepts-risk-analysis)
+- [BigQuery Data Profiler](https://docs.cloud.google.com/dlp/docs/data-profiles)
+- [Re-identification risk analysis](https://docs.cloud.google.com/dlp/docs/concepts-risk-analysis)
 
 ## Pricing
 

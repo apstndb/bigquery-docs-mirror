@@ -6,14 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.PATH_PARAMETERS)
-  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.QUERY_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.request_body)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.response_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.ListRowAccessPoliciesResponse.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.PATH_PARAMETERS)
+- [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.QUERY_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.request_body)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.response_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.ListRowAccessPoliciesResponse.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list#try-it)
 
 Lists all row access policies on the specified table.
 
@@ -29,41 +29,18 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`projectId`
-
-`string`
-
-Required. Project ID of the row access policies to list.
-
-`datasetId`
-
-`string`
-
-Required. Dataset ID of row access policies to list.
-
-`tableId`
-
-`string`
-
-Required. Table ID of the table to list row access policies.
+| Parameters  |                                                                       |
+|-------------|-----------------------------------------------------------------------|
+| `projectId` | `string` Required. Project ID of the row access policies to list.     |
+| `datasetId` | `string` Required. Dataset ID of row access policies to list.         |
+| `tableId`   | `string` Required. Table ID of the table to list row access policies. |
 
 ### Query parameters
 
-Parameters
-
-`pageToken`
-
-`string`
-
-Page token, returned by a previous call, to request the next page of results.
-
-`pageSize`
-
-`integer`
-
-The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
+| Parameters  |                                                                                                                                                 |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pageToken` | `string` Page token, returned by a previous call, to request the next page of results.                                                          |
+| `pageSize`  | `integer` The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection. |
 
 ### Request body
 
@@ -75,43 +52,31 @@ Response message for the rowAccessPolicies.list method.
 
 If successful, the response body contains data with the following structure:
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;rowAccessPolicies&quot;: [{object (RowAccessPolicy)}],&quot;nextPageToken&quot;: string}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "rowAccessPolicies": [
+    {
+      object (RowAccessPolicy)
+    }
+  ],
+  "nextPageToken": string
+}
+```
 
-`rowAccessPolicies[]`
-
-` object ( RowAccessPolicy  ` )
-
-Row access policies on the requested table.
-
-`nextPageToken`
-
-`string`
-
-A token to request the next page of results.
+| Fields                |                                                                                                                                                                                 |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `rowAccessPolicies[]` | `object ( `[`RowAccessPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicy)` )` Row access policies on the requested table. |
+| `nextPageToken`       | `string` A token to request the next page of results.                                                                                                                           |
 
 ### Authorization scopes
 
 Requires one of the following OAuth scopes:
 
-  - `https://www.googleapis.com/auth/bigquery`
-  - `https://www.googleapis.com/auth/cloud-platform`
-  - `https://www.googleapis.com/auth/bigquery.readonly`
-  - `https://www.googleapis.com/auth/cloud-platform.read-only`
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/bigquery.readonly`
+- `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

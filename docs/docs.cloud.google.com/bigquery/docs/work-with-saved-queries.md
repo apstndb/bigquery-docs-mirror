@@ -24,16 +24,16 @@ For more information about BigQuery Identity and Access Management (IAM), see [A
 
 To create and run saved queries, you need the following IAM permissions:
 
-  - `dataform.locations.get`
-  - `dataform.locations.list`
-  - `dataform.repositories.list`
-  - `dataform.repositories.create`
+- `dataform.locations.get`
+- `dataform.locations.list`
+- `dataform.repositories.list`
+- `dataform.repositories.create`
 
 You can get these permissions from the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
-  - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `roles/dataform.codeCreator` )
+- [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+- [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
 > **Note:** Users assigned the Code Creator role in a project can list the names of code assets in that project by using the Dataform API or the Dataform command-line interface (CLI).
 
@@ -43,24 +43,24 @@ You can get these permissions from the following IAM roles:
 
 To edit and run saved queries, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
-  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `roles/dataform.codeEditor` )
+- [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+- [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `roles/dataform.codeEditor` )
 
 ### Permissions to view saved queries
 
 To view and run saved queries, you need the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
-  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `roles/dataform.codeViewer` )
+- [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+- [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `roles/dataform.codeViewer` )
 
 ### Security considerations for saved queries
 
 Because code assets in BigQuery are powered by Dataform, you should consider the following security implications for users with access to these assets:
 
-  - Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
-  - Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
+- Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
+- Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
 
 For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
 
@@ -75,10 +75,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -98,38 +98,40 @@ To create a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
-    
-        SELECT
-          name,
-          SUM(number) AS total
-        FROM
-          `bigquery-public-data.usa_names.usa_1910_2013`
-        GROUP BY
-          name
-        ORDER BY
-          total DESC
-        LIMIT
-          10;
-    
+
+    ```
+    SELECT
+      name,
+      SUM(number) AS total
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY
+      name
+    ORDER BY
+      total DESC
+    LIMIT
+      10;
+    ```
+
     Alternatively, you can use the [**Reference** panel](https://docs.cloud.google.com/bigquery/docs/running-queries#use-reference-panel) to construct new queries.
 
-4.  Click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save \> Save query** or press Control+S (or Command+S on macOS).
+4.  Click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save \> Save query** or press <span class="kbd"> Control+S </span> (or <span class="kbd"> Command+S </span> on macOS).
 
 5.  In the **Save query** dialog, type a name for the saved query.
 
 6.  Optional: To change the region used by this saved query and all other code assets in the future, select a new region in the **Region** field.
 
 7.  Click **Save** .
-    
+
     The first version of the saved query is created.
 
 8.  Optional: After you save the query, use the following toolbar to view the query details or the [version history](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#open_a_saved_query_version_as_a_new_query) , add new comments, or reply to or get a link to an existing comment:
-    
+
     ![Toolbar adjacent to the query editor.](https://docs.cloud.google.com/static/bigquery/images/editor-toolbar.png)
-    
+
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 ## Share saved queries
@@ -143,23 +145,23 @@ To share a saved query, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to share.
 
-4.  Click more\_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
 6.  In the **New principals** field, enter a principal.
 
 7.  In the **Role** list, select one of the following roles:
-    
-      - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : can perform any action on the saved query, including deleting or sharing it.
-      - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
-      - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
-    
+
+    - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : can perform any action on the saved query, including deleting or sharing it.
+    - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : can edit the query.
+    - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : can view the query.
+
     > **Note:** The principal must also have the [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) role to run the saved query.
 
 8.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
@@ -168,8 +170,8 @@ To share a saved query, follow these steps:
 
 10. To return to the saved query details, click **Close** .
 
-11. To generate a link to the saved query, click more\_vert **View actions** \> **Share** \> **Copy link** .
-    
+11. To generate a link to the saved query, click more_vert **View actions** \> **Share** \> **Copy link** .
+
     The link is copied to your clipboard.
 
 ## Open a saved query version as a new query
@@ -179,16 +181,16 @@ To open any version of an existing saved query as a new query, follow these step
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to open.
 
 4.  Click the saved query, and then click history **Version history** .
 
-5.  Click more\_vert **View actions** next to a saved query version and then click **Open as new query** .
+5.  Click more_vert **View actions** next to a saved query version and then click **Open as new query** .
 
 ## Update saved queries
 
@@ -197,10 +199,10 @@ Changes that you make to the text of a saved query are automatically saved two s
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to update.
 
@@ -208,8 +210,8 @@ Changes that you make to the text of a saved query are automatically saved two s
 
 5.  Modify the query.
 
-6.  To save the modified query, click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save query \> Save query** or press Control+S (or Command+S on macOS).
-    
+6.  To save the modified query, click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save query \> Save query** or press <span class="kbd"> Control+S </span> (or <span class="kbd"> Command+S </span> on macOS).
+
     A new version of the query is created.
 
 ## Upload saved queries
@@ -221,12 +223,12 @@ To upload a saved query, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
-    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Files** pane, click more\_vert **View actions** next to the folder that you want to upload the query to, and then click **Upload** \> **Query** .
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+
+3.  In the **Files** pane, click more_vert **View actions** next to the folder that you want to upload the query to, and then click **Upload** \> **Query** .
 
 4.  In the **Upload SQL** dialog, in the **SQL** field, click **Browse** , and then select the query that you want to upload.
 
@@ -265,21 +267,21 @@ To resolve this issue, ensure that the region selected for the saved query match
 
 Use the following sections to learn how to create and update [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) . For more information on sharing, migrating, and deleting classic saved queries, see [Classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#classic_saved_queries) .
 
-> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Explorer** pane instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( ` NUMBER ` )** folder in the **Explorer** pane instead of the **(Classic) Queries** folder.
 
 ### Required permissions for classic saved queries
 
 The following IAM permissions are required to create, view, update, and delete classic saved queries:
 
-  - **Private** classic saved queries:
-      - Creating private classic saved queries requires no special permissions. You can save a private query in any project, but only you can view, update, or delete the query.
-  - **Project-level** classic saved queries:
-      - **Creating** a project-level classic saved query requires `bigquery.savedqueries.create` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.create` permissions.
-      - **Viewing** a project-level classic saved query requires `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions. The `bigquery.admin` and `bigquery.user` predefined roles include `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions.
-      - **Updating** a project-level classic saved query requires `bigquery.savedqueries.update` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.update` permissions.
-      - **Deleting** a project-level classic saved query requires `bigquery.savedqueries.delete` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.delete` permissions.
-  - **Public** classic saved queries:
-      - Creating public classic saved queries requires no special permissions. You can save a public classic saved query in any project, but only you can update or delete the query. Anyone with the link can view a public classic saved query.
+- **Private** classic saved queries:
+  - Creating private classic saved queries requires no special permissions. You can save a private query in any project, but only you can view, update, or delete the query.
+- **Project-level** classic saved queries:
+  - **Creating** a project-level classic saved query requires `bigquery.savedqueries.create` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.create` permissions.
+  - **Viewing** a project-level classic saved query requires `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions. The `bigquery.admin` and `bigquery.user` predefined roles include `bigquery.savedqueries.get` and `bigquery.savedqueries.list` permissions.
+  - **Updating** a project-level classic saved query requires `bigquery.savedqueries.update` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.update` permissions.
+  - **Deleting** a project-level classic saved query requires `bigquery.savedqueries.delete` permissions. The `bigquery.admin` predefined role includes `bigquery.savedqueries.delete` permissions.
+- **Public** classic saved queries:
+  - Creating public classic saved queries requires no special permissions. You can save a public classic saved query in any project, but only you can update or delete the query. Anyone with the link can view a public classic saved query.
 
 For more information on IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -287,29 +289,31 @@ For more information on IAM roles in BigQuery, see [Predefined roles and permiss
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
-    
-        SELECT
-          name,
-          SUM(number) AS total
-        FROM
-          `bigquery-public-data.usa_names.usa_1910_2013`
-        GROUP BY
-          name
-        ORDER BY
-          total DESC
-        LIMIT
-          10;
+
+    ```
+    SELECT
+      name,
+      SUM(number) AS total
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY
+      name
+    ORDER BY
+      total DESC
+    LIMIT
+      10;
+    ```
 
 4.  Click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save Query (Classic) \> Save query (Classic)** .
 
 5.  In the **Save query** dialog, enter a name for your query, and then set **Visibility** to one of the following options:
-    
-      - **Personal (editable only by you)** for a private classic saved query.
-      - **Project (editable by principals with appropriate permissions)** for a project-level classic saved query.
-      - **Public** for a public classic saved query.
+
+    - **Personal (editable only by you)** for a private classic saved query.
+    - **Project (editable by principals with appropriate permissions)** for a project-level classic saved query.
+    - **Public** for a public classic saved query.
 
 6.  Click **Save** .
 
@@ -326,14 +330,14 @@ If you are planning to share a classic saved query, consider including a comment
 To share a classic saved query, follow these steps:
 
 1.  In the left pane, click explore **Explorer** .
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 3.  Find and click the classic saved query that you want to grant access to. You can use the search feature or filters to find your query.
 
-4.  Click more\_vert **View actions** next to the query and then click **Copy link** .
+4.  Click more_vert **View actions** next to the query and then click **Copy link** .
 
 5.  Share the link with the users you want to grant access to the query.
 
@@ -342,10 +346,10 @@ To share a classic saved query, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and the **(Classic) Queries** folder, and if necessary, the **Project queries** folder.
 
@@ -378,4 +382,4 @@ To prevent this issue, save business-critical or team-shared queries with **Proj
 
 ## What's next
 
-  - Learn how to [manage saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries) .
+- Learn how to [manage saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries) .

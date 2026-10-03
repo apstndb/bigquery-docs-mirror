@@ -10,11 +10,13 @@ data_source: docs.cloud.google.com
 
 BigQuery supports the following system procedures, which can be used similarly to user-created [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
-## BQ.ABORT\_SESSION
+## BQ.ABORT_SESSION
 
 **Syntax**
 
-    CALL BQ.ABORT_SESSION([session_id]);
+```
+CALL BQ.ABORT_SESSION([session_id]);
+```
 
 **Description**
 
@@ -28,7 +30,9 @@ For more information, see [Terminating sessions](https://docs.cloud.google.com/b
 
 **Syntax**
 
-    CALL BQ.JOBS.CANCEL(job);
+```
+CALL BQ.JOBS.CANCEL(job);
+```
 
 **Description**
 
@@ -38,15 +42,17 @@ Specify the job as a string with the format `'[project_id.]job_id'` . If you run
 
 For more information, see [Canceling a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) .
 
-## BQ.CANCEL\_INDEX\_ALTERATION
+## BQ.CANCEL_INDEX_ALTERATION
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Syntax**
 
-    CALL BQ.CANCEL_INDEX_ALTERATION(table_name, index_name);
+```
+CALL BQ.CANCEL_INDEX_ALTERATION(table_name, index_name);
+```
 
 **Description**
 
@@ -58,13 +64,17 @@ You must run this procedure in the same location as the indexed table. To set th
 
 **Example**
 
-    CALL BQ.CANCEL_INDEX_ALTERATION('my_project.my_dataset.indexed_table', 'my_index');
+```
+CALL BQ.CANCEL_INDEX_ALTERATION('my_project.my_dataset.indexed_table', 'my_index');
+```
 
-## BQ.REFRESH\_EXTERNAL\_METADATA\_CACHE
+## BQ.REFRESH_EXTERNAL_METADATA_CACHE
 
 **Syntax**
 
-    CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE(table_name [, [subdirectory_uri, …]]);
+```
+CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE(table_name [, [subdirectory_uri, …]]);
+```
 
 **Description**
 
@@ -80,22 +90,28 @@ For BigLake tables, you can optionally specify one or more subdirectories of the
 
 To refresh all of the metadata for a table:
 
-    CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
+```
+CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table')
+```
 
 To selectively refresh the metadata for a BigLake table:
 
-    CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
+```
+CALL BQ.REFRESH_EXTERNAL_METADATA_CACHE('myproject.test_db.test_table', ['gs://source/uri/sub/path/d1/*', 'gs://source/uri/sub/path/d2/*'])
+```
 
 **Limitation**
 
-  - Metadata cache refresh is not supported for tables referenced by linked datasets over external datasets.
-  - Metadata cache refresh shouldn't be used in a [Multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) .
+- Metadata cache refresh is not supported for tables referenced by linked datasets over external datasets.
+- Metadata cache refresh shouldn't be used in a [Multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) .
 
-## BQ.REFRESH\_MATERIALIZED\_VIEW
+## BQ.REFRESH_MATERIALIZED_VIEW
 
 **Syntax**
 
-    CALL BQ.REFRESH_MATERIALIZED_VIEW(view_name);
+```
+CALL BQ.REFRESH_MATERIALIZED_VIEW(view_name);
+```
 
 **Description**
 
@@ -105,11 +121,13 @@ Specify the name of the materialized view as a string with the format `'[project
 
 For more information, see [Manual refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views#manual_refresh) .
 
-## BQ.SHOW\_GRAPH\_EXPAND\_SCHEMA
+## BQ.SHOW_GRAPH_EXPAND_SCHEMA
 
 **Syntax**
 
-    CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(graph_name, output_schema);
+```
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(graph_name, output_schema);
+```
 
 **Description**
 
@@ -119,32 +137,36 @@ Specify the name of the [graph](https://docs.cloud.google.com/bigquery/docs/grap
 
 **Examples**
 
-    DECLARE schema STRING;
-    CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('my_project.my_dataset.my_graph', schema);
-    SELECT schema;
+```
+DECLARE schema STRING;
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('my_project.my_dataset.my_graph', schema);
+SELECT schema;
+```
 
 The output looks similar to the following:
 
+```
+{
+  "fields":[
     {
-      "fields":[
-        {
-          "name":"Department_dept_name",
-          "type":"STRING",
-          "mode":"NULLABLE",
-          "description":
-            "{\"description\":\"The name of the academic department\",
-              \"synonyms\":[\"division\"]}"
-        },
-        {
-          "name":"Department_budget",
-          "type":"FLOAT",
-          "mode":"NULLABLE"
-        },
-        {
-          "name":"Department_total_budget",
-          "type":"FLOAT",
-          "mode":"NULLABLE",
-          "is_measure":true
-        }
-      ]
+      "name":"Department_dept_name",
+      "type":"STRING",
+      "mode":"NULLABLE",
+      "description":
+        "{\"description\":\"The name of the academic department\",
+          \"synonyms\":[\"division\"]}"
+    },
+    {
+      "name":"Department_budget",
+      "type":"FLOAT",
+      "mode":"NULLABLE"
+    },
+    {
+      "name":"Department_total_budget",
+      "type":"FLOAT",
+      "mode":"NULLABLE",
+      "is_measure":true
     }
+  ]
+}
+```

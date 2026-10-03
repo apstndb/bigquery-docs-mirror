@@ -20,10 +20,10 @@ The BigQuery Data Transfer Service automates data transfers from various data so
 
 The control plane represents the stage in the authorization process where an authenticated user is able to control and manage transfer configurations and runs. A user in the control plane must have the appropriate Identity and Access Management (IAM) permissions to control and manage their transfer configurations and runs:
 
-  - The `bigquery.transfers.update` permission, which lets users do the following:
-      - Set up data transfer configurations.
-      - Administer the existing transfers, such as updating, disabling or deleting a transfer.
-  - The `bigquery.transfers.get` permission, which lets users monitor transfer runs, such as checking transfer run status or viewing transfer run history and logs.
+- The `bigquery.transfers.update` permission, which lets users do the following:
+  - Set up data transfer configurations.
+  - Administer the existing transfers, such as updating, disabling or deleting a transfer.
+- The `bigquery.transfers.get` permission, which lets users monitor transfer runs, such as checking transfer run status or viewing transfer run history and logs.
 
 If you are using the Google Cloud console or the bq command-line tool to create a transfer, you must also have the `bigquery.transfers.get` permission.
 
@@ -35,9 +35,9 @@ The data plane represents the stage outside of a user's direct control. In the d
 
 For more details on required permissions, refer to the following sections in this guide:
 
-  - [Read-access authorization for external data sources](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#read-access-external-data)
-  - [Authorization to start BigQuery jobs](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#start-bq-jobs)
-  - [Authorization to execute BigQuery jobs and write data to the destination dataset](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#execute-bq-jobs)
+- [Read-access authorization for external data sources](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#read-access-external-data)
+- [Authorization to start BigQuery jobs](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#start-bq-jobs)
+- [Authorization to execute BigQuery jobs and write data to the destination dataset](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#execute-bq-jobs)
 
 ### Transfer creator versus transfer owner
 
@@ -47,8 +47,8 @@ A transfer owner refers to the user identity that the BigQuery Data Transfer Ser
 
 The transfer owner and transfer creator can have the same user identity, but it is not a requirement. There are multiple ways of setting the transfer owner to be a different user than the transfer creator:
 
-  - When creating a transfer, you can set the owner to a service account if the data source supports service accounts.
-  - Once a transfer has been created, you can transfer ownership to a new user account (or to a service account if the data source supports service accounts) that has the `bigquery.transfers.update` and `bigquery.transfers.get` permissions. You must be logged in to the new account when you [update the credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) .
+- When creating a transfer, you can set the owner to a service account if the data source supports service accounts.
+- Once a transfer has been created, you can transfer ownership to a new user account (or to a service account if the data source supports service accounts) that has the `bigquery.transfers.update` and `bigquery.transfers.get` permissions. You must be logged in to the new account when you [update the credentials](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_credentials) .
 
 ## Read-access authorization for external data sources
 

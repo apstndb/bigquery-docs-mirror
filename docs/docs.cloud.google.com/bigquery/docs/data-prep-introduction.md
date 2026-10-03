@@ -12,9 +12,9 @@ You can significantly reduce the time and effort required for manual data tasks 
 
 ## Benefits
 
-  - You can reduce the time spent on data pipeline development with context-aware, Gemini-generated transformation suggestions.
-  - You can validate the generated results in a preview and receive data quality cleanup and enrichment suggestions with automated schema mapping.
-  - [Dataform](https://docs.cloud.google.com/dataform/docs/overview) lets you use a continuous integration, continuous development (CI/CD) process, supporting cross-team collaboration for code reviews and source control.
+- You can reduce the time spent on data pipeline development with context-aware, Gemini-generated transformation suggestions.
+- You can validate the generated results in a preview and receive data quality cleanup and enrichment suggestions with automated schema mapping.
+- [Dataform](https://docs.cloud.google.com/dataform/docs/overview) lets you use a continuous integration, continuous development (CI/CD) process, supporting cross-team collaboration for code reviews and source control.
 
 ## Data preparation entry points
 
@@ -34,9 +34,9 @@ When you create a new data preparation, a data preparation editor tab opens, dis
 
 The data view lets you do the following:
 
-  - Interact with your data to form data preparation steps.
-  - Apply suggestions from Gemini.
-  - Improve the quality of the Gemini suggestions by entering example values in the cells.
+- Interact with your data to form data preparation steps.
+- Apply suggestions from Gemini.
+- Improve the quality of the Gemini suggestions by entering example values in the cells.
 
 Over each column in your table, a statistical profile (a histogram) shows the count for each column's top values in the preview rows.
 
@@ -60,15 +60,15 @@ In the schema view, you can perform dedicated schema operations, such as removin
 
 Gemini provides context-aware suggestions to assist with the following data preparation tasks:
 
-  - Applying transformations and data quality rules
-  - Standardizing and enriching data
-  - Automating schema mapping
+- Applying transformations and data quality rules
+- Standardizing and enriching data
+- Automating schema mapping
 
 Each suggestion appears in a card in the suggestions list of the data preparation editor. The card contains the following information:
 
-  - The high-level category of the step, such as **Keep rows** or **Transformation**
-  - A description of the step, such as **Keep rows if `  COLUMN_NAME  ` is not `NULL`**
-  - The corresponding SQL expression used to execute the step
+- The high-level category of the step, such as **Keep rows** or **Transformation**
+- A description of the step, such as **Keep rows if `COLUMN_NAME` is not `NULL`**
+- The corresponding SQL expression used to execute the step
 
 You can preview, edit, or apply the suggestion card, or fine-tune the suggestion. You can also add steps manually. For more information, see [Prepare data with Gemini](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
 
@@ -93,7 +93,7 @@ To configure the way your data preparation is written into a destination table, 
 The following write modes are supported:
 
 | Write mode option | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Full refresh      | Performs the data preparation steps on all source data, and then rebuilds the destination table in full. The table is recreated, not truncated. Full refresh is the default mode when writing to a destination table.                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Append            | Inserts all the data from the data preparation as additional rows in the destination table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Incremental       | Inserts only the new or, depending on your incremental column choice, changed data in the destination table. Based on your incremental column choice, data preparation will select the optimal change record detection mechanism. It picks Maximum values for numeric and datetime data types and Unique for categorical data. Maximum inserts only records where the specified column value is greater than the max value for this same column in the destination table. Unique inserts only records where the specified column values aren't present in the existing values for the same column in the destination table. |
@@ -124,40 +124,40 @@ BigQuery supports the following types of data preparation steps:
 <td>Cleans and transforms data using a SQL expression. You receive suggestion cards for the following expressions:<br />
 
 <ul>
-<li>Typecasting functions, such as <code dir="ltr" translate="no">CAST</code></li>
-<li>String functions, such as <code dir="ltr" translate="no">SUBSTR</code> , <code dir="ltr" translate="no">CONCAT</code> , <code dir="ltr" translate="no">REPLACE</code> , <code dir="ltr" translate="no">UPPER</code> , <code dir="ltr" translate="no">LOWER</code> , and <code dir="ltr" translate="no">TRIM</code></li>
-<li>Datetime functions, such as <code dir="ltr" translate="no">PARSE_DATE</code> , <code dir="ltr" translate="no">TIMESTAMP</code> , <code dir="ltr" translate="no">EXTRACT</code> , and <code dir="ltr" translate="no">DATE_ADD</code></li>
-<li>JSON functions, such as <code dir="ltr" translate="no">JSON_VALUE</code> or <code dir="ltr" translate="no">JSON_QUERY</code></li>
+<li>Typecasting functions, such as <code>CAST</code></li>
+<li>String functions, such as <code>SUBSTR</code> , <code>CONCAT</code> , <code>REPLACE</code> , <code>UPPER</code> , <code>LOWER</code> , and <code>TRIM</code></li>
+<li>Datetime functions, such as <code>PARSE_DATE</code> , <code>TIMESTAMP</code> , <code>EXTRACT</code> , and <code>DATE_ADD</code></li>
+<li>JSON functions, such as <code>JSON_VALUE</code> or <code>JSON_QUERY</code></li>
 </ul>
 <br />
 You can also use any valid BigQuery SQL expressions in manual transformation steps. For example:<br />
 
 <ul>
 <li>Math with numbers, such as converting watt-hours to kilowatt-hours</li>
-<li>Array functions, such as <code dir="ltr" translate="no">ARRAY_AGG</code> , <code dir="ltr" translate="no">ARRAY_CONCAT</code> , and <code dir="ltr" translate="no">UNNEST</code></li>
-<li>Window functions, such as <code dir="ltr" translate="no">ROW_NUMBER</code> , <code dir="ltr" translate="no">LAG</code> , <code dir="ltr" translate="no">LEAD</code> , <code dir="ltr" translate="no">RANK</code> , and <code dir="ltr" translate="no">NTILE</code></li>
+<li>Array functions, such as <code>ARRAY_AGG</code> , <code>ARRAY_CONCAT</code> , and <code>UNNEST</code></li>
+<li>Window functions, such as <code>ROW_NUMBER</code> , <code>LAG</code> , <code>LEAD</code> , <code>RANK</code> , and <code>NTILE</code></li>
 </ul>
 <br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-transformation" class="internal">Add a transformation</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-transformation">Add a transformation</a> .</td>
 </tr>
 <tr class="odd">
 <td>Filter</td>
-<td>Removes rows through the <code dir="ltr" translate="no">WHERE</code> clause syntax. When you add a filter step, you can choose to make it into a validation step.<br />
+<td>Removes rows through the <code>WHERE</code> clause syntax. When you add a filter step, you can choose to make it into a validation step.<br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#filter-rows" class="internal">Filter rows</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#filter-rows">Filter rows</a> .</td>
 </tr>
 <tr class="even">
 <td>Deduplicate</td>
 <td>Removes duplicate rows from the data based on selected keys and ordering.<br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#deduplicate" class="internal">Deduplicate data</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#deduplicate">Deduplicate data</a> .</td>
 </tr>
 <tr class="odd">
 <td>Validation</td>
 <td>Sends rows that don't meet the validation rule criteria to an error table. If data fails the validation rule and no error table is configured, the data preparation fails during execution.<br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#configure-validation" class="internal">Configure the error table and add a validation rule</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#configure-validation">Configure the error table and add a validation rule</a> .</td>
 </tr>
 <tr class="even">
 <td>Join</td>
@@ -172,19 +172,19 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/d
 </ul>
 <br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-join" class="internal">Add a join operation</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-join">Add a join operation</a> .</td>
 </tr>
 <tr class="odd">
 <td>Destination</td>
 <td>Defines a destination for outputting data preparation steps. If you enter a destination table that doesn't exist, the data preparation creates a new table using the current schema information.<br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-or-change-destination" class="internal">Add or change a destination table</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-or-change-destination">Add or change a destination table</a> .</td>
 </tr>
 <tr class="even">
 <td>Delete columns</td>
 <td>Deletes columns from the schema. You perform this step from the schema view.<br />
 <br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-column" class="internal">Delete a column</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-column">Delete a column</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -223,12 +223,12 @@ When you create a data preparation, BigQuery grants you the [Dataform Admin role
 
 Data preparation is available with the following limitations:
 
-  - All BigQuery data preparation source and destination datasets of a given data preparation must be in the same location. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction#supported-locations) .
-  - During pipeline editing, data and interactions are sent to a Gemini data center for processing. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction#supported-locations) .
-  - Gemini in BigQuery isn't supported by Assured Workloads.
-  - BigQuery data preparations don't support viewing, comparing, or restoring data preparation versions.
-  - Responses from Gemini are based on a sample of the dataset you provide when you develop your data preparation pipeline. For more information, see [how Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) and the terms in the [Gemini for Google Cloud Trusted Tester Program](https://cloud.google.com/trusted-tester/gemini-for-google-cloud-preview) .
-  - BigQuery data preparation doesn't have its own API. For necessary APIs, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
+- All BigQuery data preparation source and destination datasets of a given data preparation must be in the same location. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction#supported-locations) .
+- During pipeline editing, data and interactions are sent to a Gemini data center for processing. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction#supported-locations) .
+- Gemini in BigQuery isn't supported by Assured Workloads.
+- BigQuery data preparations don't support viewing, comparing, or restoring data preparation versions.
+- Responses from Gemini are based on a sample of the dataset you provide when you develop your data preparation pipeline. For more information, see [how Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) and the terms in the [Gemini for Google Cloud Trusted Tester Program](https://cloud.google.com/trusted-tester/gemini-for-google-cloud-preview) .
+- BigQuery data preparation doesn't have its own API. For necessary APIs, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 ## Locations
 
@@ -245,10 +245,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -266,5 +266,5 @@ Data preparation is included in the [Gemini in BigQuery pricing](https://cloud.g
 
 ## What's next
 
-  - Learn how to [prepare data with Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
-  - Learn how to [run data preparations manually or with a schedule](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) .
+- Learn how to [prepare data with Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
+- Learn how to [run data preparations manually or with a schedule](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) .

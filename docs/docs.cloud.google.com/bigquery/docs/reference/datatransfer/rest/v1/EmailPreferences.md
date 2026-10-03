@@ -6,32 +6,18 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/EmailPreferences#SCHEMA_REPRESENTATION)
+- [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/EmailPreferences#SCHEMA_REPRESENTATION)
 
 Represents preferences for sending email notifications for transfer run events.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;enableFailureEmail&quot;: boolean
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "enableFailureEmail": boolean
+}
+```
 
-`enableFailureEmail`
-
-`boolean`
-
-If true, email notifications will be sent on transfer run failures.
+| Fields               |                                                                               |
+|----------------------|-------------------------------------------------------------------------------|
+| `enableFailureEmail` | `boolean` If true, email notifications will be sent on transfer run failures. |

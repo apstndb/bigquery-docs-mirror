@@ -19,44 +19,23 @@ This section describes the [Identity and Access Management (IAM) permission](htt
 To view a table snapshot's metadata, you need the following permission:
 
 | **Permission**        | **Resource**       |
-| --------------------- | ------------------ |
+|-----------------------|--------------------|
 | `bigquery.tables.get` | The table snapshot |
 
 ### Roles
 
 The predefined BigQuery roles that provide the required permission are as follows:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Role</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Any of the following:<br />
-<br />
-<code dir="ltr" translate="no">bigquery.metadataViewer</code><br />
-<code dir="ltr" translate="no">bigquery.dataViewer</code><br />
-<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
-<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
-<code dir="ltr" translate="no">bigquery.admin</code></td>
-<td>The table snapshot</td>
-</tr>
-</tbody>
-</table>
+| **Role**                                                                                                                          | **Resource**       |
+|-----------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| Any of the following: `bigquery.metadataViewer` `bigquery.dataViewer` `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The table snapshot |
 
 ## Get a table snapshot's metadata
 
 The metadata for a table snapshot is similar to the metadata for a standard table, with the following differences:
 
-  - An additional `baseTableReference` field identifies the base table that the snapshot was taken from.
-  - The `type` field has the value `SNAPSHOT` .
+- An additional `baseTableReference` field identifies the base table that the snapshot was taken from.
+- The `type` field has the value `SNAPSHOT` .
 
 You can view the metadata for a table snapshot by using one of the following options:
 
@@ -65,20 +44,20 @@ You can view the metadata for a table snapshot by using one of the following opt
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
 5.  In the snapshot pane that appears, you can do the following:
-    
-      - Click the **Schema** tab to view the table snapshot's schema and policy tags.
-    
-      - Click the **Details** table to view the table snapshot's size, expiration, base table, snapshot time, and other information.
+
+    - Click the **Schema** tab to view the table snapshot's schema and policy tags.
+
+    - Click the **Details** table to view the table snapshot's size, expiration, base table, snapshot time, and other information.
 
 ### SQL
 
@@ -87,21 +66,23 @@ To see metadata for a table snapshot, query the [`INFORMATION_SCHEMA.TABLE_SNAPS
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT
-          *
-        FROM
-          PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS
-        WHERE
-          table_name = 'SNAPSHOT_NAME';
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-      - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-      - `  SNAPSHOT_NAME  ` : the name of the snapshot.
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      *
+    FROM
+      PROJECT_ID.DATASET_NAME.INFORMATION_SCHEMA.TABLE_SNAPSHOTS
+    WHERE
+      table_name = 'SNAPSHOT_NAME';
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : the project ID of the project that contains the snapshot.
+    - `DATASET_NAME` : the name of the dataset that contains the snapshot.
+    - `SNAPSHOT_NAME` : the name of the snapshot.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -109,43 +90,47 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Enter the following command in the Cloud Shell:
 
-    bq show \
-    --format=prettyjson \
-    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
+bq show \
+--format=prettyjson \
+PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-  - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-  - `  SNAPSHOT_NAME  ` : the name of the snapshot.
+- `PROJECT_ID` : the project ID of the project that contains the snapshot.
+- `DATASET_NAME` : the name of the dataset that contains the snapshot.
+- `SNAPSHOT_NAME` : the name of the snapshot.
 
 The output is similar to the following:
 
-    {
-      "creationTime": "1593194331936",
-       ...
-      "snapshotDefinition": {
-        "baseTableReference": {
-          "datasetId": "myDataset",
-          "projectId": "myProject",
-          "tableId": "mytable"
-        },
-        "snapshotTime": "2020-06-26T17:58:50.815Z"
-      },
-      "tableReference": {
-        "datasetId": "otherDataset",
-        "projectId": "myProject",
-        "tableId": "mySnapshot"
-      },
-      "type": "SNAPSHOT"
-    }
+```
+{
+  "creationTime": "1593194331936",
+   ...
+  "snapshotDefinition": {
+    "baseTableReference": {
+      "datasetId": "myDataset",
+      "projectId": "myProject",
+      "tableId": "mytable"
+    },
+    "snapshotTime": "2020-06-26T17:58:50.815Z"
+  },
+  "tableReference": {
+    "datasetId": "otherDataset",
+    "projectId": "myProject",
+    "tableId": "mySnapshot"
+  },
+  "type": "SNAPSHOT"
+}
+```
 
 ### API
 
 Call the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method with the following parameters:
 
 | **Parameter** | **Value**                                                 |
-| ------------- | --------------------------------------------------------- |
+|---------------|-----------------------------------------------------------|
 | `projectId`   | The project ID of the project that contains the snapshot. |
 | `datasetId`   | The name of the dataset that contains the snapshot.       |
 | `tableId`     | The name of the snapshot.                                 |
@@ -189,5 +174,5 @@ The response body is similar to the following:
 
 ## What's next
 
-  - [Update a table snapshot's description, expiration date, or access policy](https://docs.cloud.google.com/bigquery/docs/table-snapshots-update) .
-  - [Delete a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete) .
+- [Update a table snapshot's description, expiration date, or access policy](https://docs.cloud.google.com/bigquery/docs/table-snapshots-update) .
+- [Delete a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete) .

@@ -14,50 +14,13 @@ You can load data from Search Ads 360 to BigQuery using the [BigQuery Data Trans
 
 The BigQuery Data Transfer Service for the Search Ads 360 connector supports the following options for your data transfer.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data transfer options</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Supported reports</td>
-<td>The Search Ads 360 connector supports the transfer of data from the reports in <a href="https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview">Search Ads 360 v0 reports</a> .
-<p>For information about how Search Ads 360 reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/search-ads-transformation">Search Ads 360 report transformation</a> .</p></td>
-</tr>
-<tr class="even">
-<td>Repeat frequency</td>
-<td>The Search Ads 360 connector supports daily data transfers.<br />
-<br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#setup-data-transfer">set up your data transfer</a> .</td>
-</tr>
-<tr class="odd">
-<td>Refresh window</td>
-<td>You can schedule your data transfers to retrieve Search Ads 360 data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer">set up your data transfer</a> .<br />
-<br />
-By default, the Search Ads 360 connector has a refresh window of 7 days.<br />
-<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#refresh">Refresh windows</a> .
-<p>Snapshots of <a href="https://docs.cloud.google.com/bigquery/docs/search-ads-transformation#search_ads_match_tables">Match Tables</a> are taken once a day and stored in the partition for the last run date. Match Table snapshots are not updated for backfills or for days loaded using the refresh window.</p></td>
-</tr>
-<tr class="even">
-<td>Backfill data availability</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
-<br />
-For information about the data retention policy for Search Ads 360, see <a href="https://support.google.com/sa360/answer/13292701">Reporting data retention policy</a> .</td>
-</tr>
-<tr class="odd">
-<td>Number of Customer IDs per manager account</td>
-<td>The BigQuery Data Transfer Service supports a maximum of <strong>8000 Customer IDs</strong> for each Search Ads 360 <a href="https://support.google.com/sa360/answer/9158072">manager account</a> .</td>
-</tr>
-</tbody>
-</table>
+| Data transfer options                      | Support                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Supported reports                          | The Search Ads 360 connector supports the transfer of data from the reports in [Search Ads 360 v0 reports](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview) . For information about how Search Ads 360 reports are transformed into BigQuery tables and views, see [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) .                                                                                                                                                                                                                                                                                                                                                                                             |
+| Repeat frequency                           | The Search Ads 360 connector supports daily data transfers. By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#setup-data-transfer) .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Refresh window                             | You can schedule your data transfers to retrieve Search Ads 360 data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) . By default, the Search Ads 360 connector has a refresh window of 7 days. For more information, see [Refresh windows](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#refresh) . Snapshots of [Match Tables](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation#search_ads_match_tables) are taken once a day and stored in the partition for the last run date. Match Table snapshots are not updated for backfills or for days loaded using the refresh window. |
+| Backfill data availability                 | [Run a data backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows. For information about the data retention policy for Search Ads 360, see [Reporting data retention policy](https://support.google.com/sa360/answer/13292701) .                                                                                                                                                                                                                                                                                                                                                                           |
+| Number of Customer IDs per manager account | The BigQuery Data Transfer Service supports a maximum of **8000 Customer IDs** for each Search Ads 360 [manager account](https://support.google.com/sa360/answer/9158072) .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
 To see the Search Ads 360 transfer guide that uses the old Search Ads 360 reporting API, see [Search Ads 360 transfers (Deprecated)](https://docs.cloud.google.com/bigquery/docs/sa360-transfer) .
 
@@ -75,17 +38,17 @@ To retrieve data outside the refresh window, such as historical data, or to reco
 
 ## Limitations
 
-  - The maximum frequency that you can configure a Search Ads 360 data transfer for is once every 24 hours. By default, a transfer starts at the time that you create the transfer. However, you can configure the data transfer start time when you [create your transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#setup-data-transfer) .
-  - The BigQuery Data Transfer Service does not support incremental data transfers during a Search Ads 360 transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
+- The maximum frequency that you can configure a Search Ads 360 data transfer for is once every 24 hours. By default, a transfer starts at the time that you create the transfer. However, you can configure the data transfer start time when you [create your transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#setup-data-transfer) .
+- The BigQuery Data Transfer Service does not support incremental data transfers during a Search Ads 360 transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
 
 ## Before you begin
 
 Before you create a Search Ads 360 data transfer:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery Data Transfer Service dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Search Ads 360 reporting data.
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
-  - [Enable access](https://console.developers.google.com/apis/api/searchads360.googleapis.com/) to the Search Ads 360 reporting API in your project.
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery Data Transfer Service dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Search Ads 360 reporting data.
+- If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- [Enable access](https://console.developers.google.com/apis/api/searchads360.googleapis.com/) to the Search Ads 360 reporting API in your project.
 
 ## Required permissions
 
@@ -101,15 +64,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -138,81 +101,84 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
 4.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
 5.  In the **Schedule options** section:
-    
-      - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
-      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
+    - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 6.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
 7.  In the **Data source details** section:
-    
+
     1.  For **Customer ID** , enter your Search Ads 360 customer ID.
-    
+
     2.  Optional: Enter both an **Agency ID** and **Advertiser ID** to retrieve [ID mapping tables](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#id-mapping) .
-    
+
     3.  Optional: For **Custom Floodlight Variables** , enter any [custom Floodlight variables](https://support.google.com/sa360/answer/13567857) to include in the data transfer. The custom Floodlight variables must be owned by the Search Ads 360 account that is specified by the Customer ID in the transfer config. This parameter takes string inputs in JSON array format and can support multiple custom Floodlight variables. In each item of the JSON array, the following parameters are required:
-        
-          - `id` : the numeric ID of the custom Floodlight variable. This ID is assigned when [a custom Floodlight variable is created in Search Ads 360](https://support.google.com/sa360/answer/14316155) . If you have specified an `id` , then a `name` isn't required.
-          - `name` : the user-defined name of the custom Floodlight variables in Search Ads 360. If you have specified a `name` , then an `id` isn't required.
-          - `cfv_field_name` : the exact custom Floodlight variable field name based on your use case. The supported values are `conversion_custom_metrics` , `conversion_custom_dimensions` , `raw_event_conversion_metrics` , and `raw_event_conversion_dimensions` .
-          - `destination_table_name` : a list of BigQuery tables to include the custom Floodlight variables in. When the BigQuery Data Transfer Service retrieves data for these tables, the transfer includes the custom Floodlight variables in the query.
-          - `bigquery_column_name_suffix` : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
-        
-        |             | Custom Floodlight variables as metrics and segments                                                 | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                         |
-        | ----------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-        | `metrics`   | ` metrics_conversion_custom_metrics_                bigquery_column_name_suffix               `     | ` metrics_raw_event_conversion_metrics_                bigquery_column_name_suffix               `     |
-        | `dimension` | ` segments_conversion_custom_dimensions_                bigquery_column_name_suffix               ` | ` segments_raw_event_conversion_dimensions_                bigquery_column_name_suffix               ` |
-        
+
+        - `id` : the numeric ID of the custom Floodlight variable. This ID is assigned when [a custom Floodlight variable is created in Search Ads 360](https://support.google.com/sa360/answer/14316155) . If you have specified an `id` , then a `name` isn't required.
+        - `name` : the user-defined name of the custom Floodlight variables in Search Ads 360. If you have specified a `name` , then an `id` isn't required.
+        - `cfv_field_name` : the exact custom Floodlight variable field name based on your use case. The supported values are `conversion_custom_metrics` , `conversion_custom_dimensions` , `raw_event_conversion_metrics` , and `raw_event_conversion_dimensions` .
+        - `destination_table_name` : a list of BigQuery tables to include the custom Floodlight variables in. When the BigQuery Data Transfer Service retrieves data for these tables, the transfer includes the custom Floodlight variables in the query.
+        - `bigquery_column_name_suffix` : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
+
+        |             | Custom Floodlight variables as metrics and segments                     | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource |
+        |-------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+        | `metrics`   | `metrics_conversion_custom_metrics_ `` bigquery_column_name_suffix`     | `metrics_raw_event_conversion_metrics_ `` bigquery_column_name_suffix`         |
+        | `dimension` | `segments_conversion_custom_dimensions_ `` bigquery_column_name_suffix` | `segments_raw_event_conversion_dimensions_ `` bigquery_column_name_suffix`     |
 
         The following is an example **Custom Floodlight Variable** entry that specifies two custom Floodlight variables:
-        
-            [{
-            "id": "1234",
-            "cfv_field_name": "raw_event_conversion_metrics",
-            "destination_table_name": ["Conversion"],
-            "bigquery_column_name_suffix": "suffix1"
-            },{
-            "name": "example name",
-            "cfv_field_name": "conversion_custom_metrics",
-            "destination_table_name": ["AdGroupConversionActionAndDeviceStats","CampaignConversionActionAndDeviceStats"],
-            "bigquery_column_name_suffix": "suffix2"
-            }]
-    
+
+        ```
+        [{
+        "id": "1234",
+        "cfv_field_name": "raw_event_conversion_metrics",
+        "destination_table_name": ["Conversion"],
+        "bigquery_column_name_suffix": "suffix1"
+        },{
+        "name": "example name",
+        "cfv_field_name": "conversion_custom_metrics",
+        "destination_table_name": ["AdGroupConversionActionAndDeviceStats","CampaignConversionActionAndDeviceStats"],
+        "bigquery_column_name_suffix": "suffix2"
+        }]
+        ```
+
     4.  Optional: In the **Custom Columns** field, enter any [custom columns](https://developers.google.com/search-ads/reporting/concepts/custom-columns) to include in the data transfer. The custom columns must be owned by the Search Ads 360 account that is specified by the Customer ID in the transfer config. This field takes string inputs in JSON array format and can support multiple columns. In each item of the JSON array, the following parameters are required:
-        
-          - `id` : the numeric ID of the custom column. This ID is assigned when a [custom column is created](https://support.google.com/sa360/answer/9633916?&ref_topic=14138984&sjid=5858325799664893372-NC) . If you have specified an `id` , then a `name` isn't required.
-          - `name` : the user-defined name of the custom column in Search Ads 360. If you have specified a `name` , then an `id` isn't required.
-          - `destination_table_name` : a list of BigQuery tables to include the custom column in. When the BigQuery Data Transfer Service retrieves data for these tables, the transfer includes the custom column field in the query.
-          - `bigquery_column_name` : the user-defined friendly column name. This is the field name of the custom column in the destination tables specified in `destination_table_name` . The column name must [follow the format requirements for BigQuery column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) and must be unique to other fields in the [table's standard schema](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) or other custom columns.
-        
+
+        - `id` : the numeric ID of the custom column. This ID is assigned when a [custom column is created](https://support.google.com/sa360/answer/9633916?&ref_topic=14138984&sjid=5858325799664893372-NC) . If you have specified an `id` , then a `name` isn't required.
+        - `name` : the user-defined name of the custom column in Search Ads 360. If you have specified a `name` , then an `id` isn't required.
+        - `destination_table_name` : a list of BigQuery tables to include the custom column in. When the BigQuery Data Transfer Service retrieves data for these tables, the transfer includes the custom column field in the query.
+        - `bigquery_column_name` : the user-defined friendly column name. This is the field name of the custom column in the destination tables specified in `destination_table_name` . The column name must [follow the format requirements for BigQuery column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) and must be unique to other fields in the [table's standard schema](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) or other custom columns.
+
         The following is an example **Custom Columns** entry that specifies two custom columns:
-        
-            [{
-              "id": "1234",
-              "destination_table_name": ["Conversion"],
-              "bigquery_column_name": "column1"
-            },{
-              "name": "example name",
-              "destination_table_name": ["AdGroupStats","CampaignStats"],
-              "bigquery_column_name": "column2"
-            }]
-    
+
+        ```
+        [{
+          "id": "1234",
+          "destination_table_name": ["Conversion"],
+          "bigquery_column_name": "column1"
+        },{
+          "name": "example name",
+          "destination_table_name": ["AdGroupStats","CampaignStats"],
+          "bigquery_column_name": "column2"
+        }]
+        ```
+
     5.  Optional: In the **Table Filter** field, enter a comma-separated list of tables to include, for example `Campaign, AdGroup` . Prefix this list with the `-` character to exclude certain tables, for example `-Campaign, AdGroup` . All tables are included by default.
-    
+
     6.  Optional: Select **Include PMax Campaign Data** to include PMax campaign data and excludes `ad_group` fields from certain tables. For more information, see [Performance Max (PMax) campaigns](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#pmax-support)
-    
+
     7.  Optional: Select **Use Client Account Currency** to use the currency of the client's account to load cost data, instead of the currency of the account used in this data transfer.
-    
+
     8.  Optional: For **Refresh window** , enter a value between 1 and 30. If not set, the refresh window defaults to 7 days. For more information, see [Refresh windows](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#refresh)
 
 8.  In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts that are associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
-    
+
     If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional. The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#required_permissions) .
 
 9.  Optional: In the **Notification options** section:
-    
-      - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
+
+    - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+    - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 10. Click **Save** .
 
@@ -220,69 +186,70 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `--data_source`
-  - `--target_dataset`
-  - `--display_name`
-  - `--params`
+- `--data_source`
+- `--target_dataset`
+- `--display_name`
+- `--params`
 
 The following flags are optional:
 
-  - `--project_id` : Specifies which project to use. If the flag is not specified, the default project is used.
-  - `--service_account_name` : Specifies a service account to use for Search Ads 360 transfer authentication instead of your user account.
+- `--project_id` : Specifies which project to use. If the flag is not specified, the default project is used.
+- `--service_account_name` : Specifies a service account to use for Search Ads 360 transfer authentication instead of your user account.
 
-<!-- end list -->
-
-    bq mk \
-    --transfer_config \
-    --project_id=PROJECT_ID \
-    --target_dataset=DATASET \
-    --display_name=NAME \
-    --data_source=DATA_SOURCE \
-    --service_account_name=SERVICE_ACCOUNT_NAME \
-    --params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variables":"[{\"id\": \"CFV_ID\",\"cfv_field_name\": [\"CFV_FIELD_NAME\"],\"destination_table_name\": [\"CFV_DESTINATION_TABLE\"],\"bigquery_column_name_suffix\": \"CFV_COLUMN_SUFFIX\"}]"}'
+```
+bq mk \
+--transfer_config \
+--project_id=PROJECT_ID \
+--target_dataset=DATASET \
+--display_name=NAME \
+--data_source=DATA_SOURCE \
+--service_account_name=SERVICE_ACCOUNT_NAME \
+--params='{PARAMETERS,"custom_columns":"[{\"id\": \"CC_ID\",\"destination_table_name\": [\"CC_DESTINATION_TABLE\"],\"bigquery_column_name\": \"CC_COLUMN\"}]","custom_floodlight_variables":"[{\"id\": \"CFV_ID\",\"cfv_field_name\": [\"CFV_FIELD_NAME\"],\"destination_table_name\": [\"CFV_DESTINATION_TABLE\"],\"bigquery_column_name_suffix\": \"CFV_COLUMN_SUFFIX\"}]"}'
+```
 
 Where:
 
-  - PROJECT\_ID (Optional): specifies which project to use. If the flag is not specified, the default project is used.
+- ` PROJECT_ID ` (Optional): specifies which project to use. If the flag is not specified, the default project is used.
 
-  - DATASET : the target dataset for the transfer configuration.
+- ` DATASET ` : the target dataset for the transfer configuration.
 
-  - NAME : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` NAME ` : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - DATA\_SOURCE : the data source — `search_ads` .
+- ` DATA_SOURCE ` : the data source — `search_ads` .
 
-  - SERVICE\_ACCOUNT\_NAME (Optional): the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#required_permissions) .
+- ` SERVICE_ACCOUNT_NAME ` (Optional): the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#required_permissions) .
 
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . You must supply the `customer_id` parameter.
-    
-      - `table_filter` : Specifies which tables to include in the data transfer. If the flag is not specified, all tables are included. To include only specific tables, use a comma-separated list of values (for example, `Ad, Campaign, AdGroup` ). To exclude specific tables, prefix the excluded values with a hyphen ( `-` ) (for example, using `-Ad, Campaign, AdGroup` excludes all three values.)
-      - `custom_columns` : specifies custom columns to your reports. This parameter takes string inputs in JSON array format and can support multiple columns. In each item of the JSON array, the following parameters are required:
-          - CC\_ID : the numeric ID of the custom column. This ID is assigned when a [custom column is created](https://support.google.com/sa360/answer/9633916?&ref_topic=14138984&sjid=5858325799664893372-NC) .
-          - CC\_DESTINATION\_TABLE : a list of BigQuery tables to include the custom column in. When the BigQuery Data Transfer Service retrieves data for these tables, the data transfer includes the custom column field in the query.
-          - CC\_COLUMN : the user-defined friendly column name. This is the field name of the custom column in the destination tables specified in `destination_table_name` . The column name has to [follow the format requirements for BigQuery column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) and must be unique to other fields in the [table's standard schema](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) or other custom columns.
-      - `custom_floodlight_variables` : specifies [custom Floodlight variables](https://support.google.com/campaignmanager/answer/2823222?sjid=11547437748727448706-NA) in your transfer. This parameter takes string inputs in JSON array format and can support multiple custom Floodlight variables. In each item of the JSON array, the following parameters are required:
-          - CFV\_ID : the numeric ID of the custom Floodlight variable. This ID is assigned when [a custom Floodlight variable is created in Search Ads 360](https://support.google.com/searchads/answer/6024747#set-up) .
-          - CFV\_FIELD\_NAME : the exact custom Floodlight variable field name based on your use case. The supported values are `conversion_custom_metrics` , `conversion_custom_dimensions` , `raw_event_conversion_metrics` and `raw_event_conversion_dimensions` . For more information, see [Custom Floodlight metrics](https://developers.google.com/search-ads/reporting/concepts/custom-floodlight-variables) .
-          - CFV\_DESTINATION\_TABLE : a list of BigQuery tables to include the custom floodlight variables in. When the BigQuery Data Transfer Service retrieves data for these tables, the data transfer includes the custom Floodlight variables in the query.
-          - CFV\_COLUMN\_SUFFIX : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
-      - `use_client_account_currency` : specify `TRUE` to use the currency of the client's account to load cost data, instead of the currency of the account used in this data transfer.
-    
-    |             | Custom Floodlight variables as metrics and segments                                             | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource                     |
-    | ----------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-    | `metrics`   | ` metrics_conversion_custom_metrics_              bigquery_column_name_suffix             `     | ` metrics_raw_event_conversion_metrics_              bigquery_column_name_suffix             `     |
-    | `dimension` | ` segments_conversion_custom_dimensions_              bigquery_column_name_suffix             ` | ` segments_raw_event_conversion_dimensions_              bigquery_column_name_suffix             ` |
-    
+- ` PARAMETERS ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . You must supply the `customer_id` parameter.
+
+  - `table_filter` : Specifies which tables to include in the data transfer. If the flag is not specified, all tables are included. To include only specific tables, use a comma-separated list of values (for example, `Ad, Campaign, AdGroup` ). To exclude specific tables, prefix the excluded values with a hyphen ( `-` ) (for example, using `-Ad, Campaign, AdGroup` excludes all three values.)
+  - `custom_columns` : specifies custom columns to your reports. This parameter takes string inputs in JSON array format and can support multiple columns. In each item of the JSON array, the following parameters are required:
+    - ` CC_ID ` : the numeric ID of the custom column. This ID is assigned when a [custom column is created](https://support.google.com/sa360/answer/9633916?&ref_topic=14138984&sjid=5858325799664893372-NC) .
+    - ` CC_DESTINATION_TABLE ` : a list of BigQuery tables to include the custom column in. When the BigQuery Data Transfer Service retrieves data for these tables, the data transfer includes the custom column field in the query.
+    - ` CC_COLUMN ` : the user-defined friendly column name. This is the field name of the custom column in the destination tables specified in `destination_table_name` . The column name has to [follow the format requirements for BigQuery column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) and must be unique to other fields in the [table's standard schema](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) or other custom columns.
+  - `custom_floodlight_variables` : specifies [custom Floodlight variables](https://support.google.com/campaignmanager/answer/2823222?sjid=11547437748727448706-NA) in your transfer. This parameter takes string inputs in JSON array format and can support multiple custom Floodlight variables. In each item of the JSON array, the following parameters are required:
+    - ` CFV_ID ` : the numeric ID of the custom Floodlight variable. This ID is assigned when [a custom Floodlight variable is created in Search Ads 360](https://support.google.com/searchads/answer/6024747#set-up) .
+    - ` CFV_FIELD_NAME ` : the exact custom Floodlight variable field name based on your use case. The supported values are `conversion_custom_metrics` , `conversion_custom_dimensions` , `raw_event_conversion_metrics` and `raw_event_conversion_dimensions` . For more information, see [Custom Floodlight metrics](https://developers.google.com/search-ads/reporting/concepts/custom-floodlight-variables) .
+    - ` CFV_DESTINATION_TABLE ` : a list of BigQuery tables to include the custom floodlight variables in. When the BigQuery Data Transfer Service retrieves data for these tables, the data transfer includes the custom Floodlight variables in the query.
+    - ` CFV_COLUMN_SUFFIX ` : the user-defined friendly column name. The BigQuery Data Transfer Service appends the suffix after the standard field name to differentiate different custom Floodlight variables. Depending on the use case, the BigQuery Data Transfer Service generates a BigQuery column name as follows:
+  - `use_client_account_currency` : specify `TRUE` to use the currency of the client's account to load cost data, instead of the currency of the account used in this data transfer.
+
+  |             | Custom Floodlight variables as metrics and segments                     | Custom Floodlight variables as Raw Event Attributes in the Conversion Resource |
+  |-------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+  | `metrics`   | `metrics_conversion_custom_metrics_ `` bigquery_column_name_suffix`     | `metrics_raw_event_conversion_metrics_ `` bigquery_column_name_suffix`         |
+  | `dimension` | `segments_conversion_custom_dimensions_ `` bigquery_column_name_suffix` | `segments_raw_event_conversion_dimensions_ `` bigquery_column_name_suffix`     |
 
 > **Caution:** You cannot configure notifications using the command-line tool.
 
 For example, the following command creates a Search Ads 360 data transfer named `My Transfer` using Customer ID `6828088731` and target dataset `mydataset` . The transfer also specifies a custom floodlight variable. The data transfer is created in the default project:
 
-    bq mk \
-    --transfer_config \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --data_source=search_ads \
-    --params='{"customer_id":"6828088731", "custom_floodlight_variables":"[{\"id\": \"9876\", \"cfv_field_name\": \"raw_event_conversion_metrics\", \"destination_table_name\": [\"Conversion\"],\"bigquery_column_name_suffix\": \"suffix1\" }]"}'
+```
+bq mk \
+--transfer_config \
+--target_dataset=mydataset \
+--display_name='My Transfer' \
+--data_source=search_ads \
+--params='{"customer_id":"6828088731", "custom_floodlight_variables":"[{\"id\": \"9876\", \"cfv_field_name\": \"raw_event_conversion_metrics\", \"destination_table_name\": [\"Conversion\"],\"bigquery_column_name_suffix\": \"suffix1\" }]"}'
+```
 
 The first time you run the command, you receive a message like the following:
 
@@ -300,22 +267,22 @@ Use the [`projects.locations.transferConfigs.create`](https://docs.cloud.google.
 
 When you [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) for Search Ads 360, snapshots of match tables are taken once a day and stored in the partition for the last run date. When you trigger a manual transfer, Match Table snapshots for the following tables are not updated:
 
-  - Account
-  - Ad
-  - AdGroup
-  - AdGroupCriterion
-  - Any [ID mapping table](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#id-mapping)
-  - Asset
-  - BidStrategy
-  - Campaign
-  - CampaignCriterion
-  - ConversionAction
-  - Keyword
-  - NegativeAdGroupKeyword
-  - NegativeAdGroupCriterion
-  - NegativeCampaignKeyword
-  - NegativeCampaignCriterion
-  - ProductGroup
+- Account
+- Ad
+- AdGroup
+- AdGroupCriterion
+- Any [ID mapping table](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#id-mapping)
+- Asset
+- BidStrategy
+- Campaign
+- CampaignCriterion
+- ConversionAction
+- Keyword
+- NegativeAdGroupKeyword
+- NegativeAdGroupCriterion
+- NegativeCampaignKeyword
+- NegativeCampaignCriterion
+- ProductGroup
 
 ## Performance Max (PMax) campaigns
 
@@ -325,18 +292,18 @@ Including PMax data removes `ad_group` fields from certain tables and includes n
 
 The following tables exclude `ad_group` related columns when the **Include PMax Campaign Tables** checkbox is selected:
 
-  - CartDataSalesStats
-  - ProductAdvertised
-  - ProductAdvertisedDeviceStats
-  - ProductAdvertisedConversionActionAndDeviceStats
+- CartDataSalesStats
+- ProductAdvertised
+- ProductAdvertisedDeviceStats
+- ProductAdvertisedConversionActionAndDeviceStats
 
 ## Support for Search Ads 360 manager accounts
 
 Using Search Ads 360 manager accounts provides several benefits over using individual Customer IDs:
 
-  - You don't need to manage multiple data transfers to report on multiple Customer IDs.
-  - Cross-customer queries are simpler to write because all Customer IDs are stored in the same table.
-  - Using manager accounts alleviates BigQuery Data Transfer Service load quota issues because multiple Customer IDs are loaded in the same job.
+- You don't need to manage multiple data transfers to report on multiple Customer IDs.
+- Cross-customer queries are simpler to write because all Customer IDs are stored in the same table.
+- Using manager accounts alleviates BigQuery Data Transfer Service load quota issues because multiple Customer IDs are loaded in the same job.
 
 For existing customers who have multiple Customer ID-specific Search Ads 360 data transfers, we recommend that you switch to a Search Ads 360 manager account instead. You can do this with the following steps:
 
@@ -352,20 +319,20 @@ For more information about Search Ads 360 manager accounts, see [About manager a
 
 The following list shows the Customer IDs linked to particular Search Ads 360 manager accounts:
 
-  - 1234567890 — root manager account
-      - 1234 — sub-manager account
-          - 1111 — Customer ID
-          - 2222 — Customer ID
-          - 3333 — Customer ID
-          - 4444 — Customer ID
-          - 567 — sub-manager account
-              - 5555 — Customer ID
-              - 6666 — Customer ID
-              - 7777 — Customer ID
-      - 89 — sub-manager account
-          - 8888 — Customer ID
-          - 9999 — Customer ID
-      - 0000 — Customer ID
+- 1234567890 — root manager account
+  - 1234 — sub-manager account
+    - 1111 — Customer ID
+    - 2222 — Customer ID
+    - 3333 — Customer ID
+    - 4444 — Customer ID
+    - 567 — sub-manager account
+      - 5555 — Customer ID
+      - 6666 — Customer ID
+      - 7777 — Customer ID
+  - 89 — sub-manager account
+    - 8888 — Customer ID
+    - 9999 — Customer ID
+  - 0000 — Customer ID
 
 Each Customer ID is linked to a manager account appears in each report. For more information about the Search Ads 360 reporting structure in BigQuery Data Transfer Service, see [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) .
 
@@ -373,49 +340,49 @@ Each Customer ID is linked to a manager account appears in each report. For more
 
 A transfer configuration for the root manager account (Customer ID 1234567890) generates data transfer runs that include the following Customer IDs:
 
-  - 1111 (via sub-manager account 1234)
-  - 2222 (via sub-manager account 1234)
-  - 3333 (via sub-manager account 1234)
-  - 4444 (via sub-manager account 1234)
-  - 5555 (via sub-manager account 567 and sub-manager account 1234)
-  - 6666 (via sub-manager account 567 and sub-manager account 1234)
-  - 7777 (via sub-manager account 567 and sub-manager account 1234)
-  - 8888 (via sub-manager account 89)
-  - 9999 (via sub-manager account 89)
-  - 0000 (individual Customer ID)
+- 1111 (via sub-manager account 1234)
+- 2222 (via sub-manager account 1234)
+- 3333 (via sub-manager account 1234)
+- 4444 (via sub-manager account 1234)
+- 5555 (via sub-manager account 567 and sub-manager account 1234)
+- 6666 (via sub-manager account 567 and sub-manager account 1234)
+- 7777 (via sub-manager account 567 and sub-manager account 1234)
+- 8888 (via sub-manager account 89)
+- 9999 (via sub-manager account 89)
+- 0000 (individual Customer ID)
 
 #### Transfer configuration for Customer ID 1234
 
 A transfer configuration for sub-manager account 123 (Customer ID 1234) generates data transfer runs that include the following Customer IDs:
 
-  - 1111
-  - 2222
-  - 3333
-  - 4444
-  - 5555 (via sub-manager account 567)
-  - 6666 (via sub-manager account 567)
-  - 7777 (via sub-manager account 567)
+- 1111
+- 2222
+- 3333
+- 4444
+- 5555 (via sub-manager account 567)
+- 6666 (via sub-manager account 567)
+- 7777 (via sub-manager account 567)
 
 #### Transfer configuration for Customer ID 567
 
 A transfer configuration for sub-manager account 567 (Customer ID 567) generates data transfer runs that include the following Customer IDs:
 
-  - 5555
-  - 6666
-  - 7777
+- 5555
+- 6666
+- 7777
 
 #### Transfer configuration for Customer ID 89
 
 A transfer configuration for sub-manager account 89 (Customer ID 89) generates data transfer runs that include the following Customer IDs:
 
-  - 8888
-  - 9999
+- 8888
+- 9999
 
 #### Transfer configuration for Customer ID 0000
 
 A transfer configuration for Customer ID 0000 generates data transfer runs that include only the individual Customer ID:
 
-  - 0000
+- 0000
 
 ## Query your data
 
@@ -435,39 +402,41 @@ If you query your tables directly instead of using the auto-generated views, you
 
 The following sample query analyzes Search Ads 360 campaign performance for the past 30 days.
 
-    SELECT
-      c.customer_id,
-      c.campaign_name,
-      c.campaign_status,
-      SUM(cs.metrics_clicks) AS Clicks,
-      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost,
-      SUM(cs.metrics_impressions) AS Impressions
-    FROM
-      `DATASET.sa_Campaign_CUSTOMER_ID` c
-    LEFT JOIN
-      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-    ON
-      (c.campaign_id = cs.campaign_id
-      AND cs._DATA_DATE BETWEEN
-      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-    WHERE
-      c._DATA_DATE = c._LATEST_DATE
-    GROUP BY
-      1, 2, 3
-    ORDER BY
-      Impressions DESC
+```
+SELECT
+  c.customer_id,
+  c.campaign_name,
+  c.campaign_status,
+  SUM(cs.metrics_clicks) AS Clicks,
+  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost,
+  SUM(cs.metrics_impressions) AS Impressions
+FROM
+  `DATASET.sa_Campaign_CUSTOMER_ID` c
+LEFT JOIN
+  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+ON
+  (c.campaign_id = cs.campaign_id
+  AND cs._DATA_DATE BETWEEN
+  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+WHERE
+  c._DATA_DATE = c._LATEST_DATE
+GROUP BY
+  1, 2, 3
+ORDER BY
+  Impressions DESC
+```
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset
-  - `  CUSTOMER_ID  ` : the Search Ads 360 customer ID
+- `DATASET` : the name of the dataset
+- `CUSTOMER_ID` : the Search Ads 360 customer ID
 
 ### Count of keywords
 
 The following sample query analyzes keywords by campaign, ad group, and keyword status.
 
-``` 
-  SELECT
+```
+SELECT
     c.campaign_status AS CampaignStatus,
     a.ad_group_status AS AdGroupStatus,
     k.ad_group_criterion_status AS KeywordStatus,
@@ -491,25 +460,25 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset
-  - `  CUSTOMER_ID  ` : the Search Ads 360 customer ID
+- `DATASET` : the name of the dataset
+- `CUSTOMER_ID` : the Search Ads 360 customer ID
 
 ## ID mapping tables
 
 Entities in the new Search Ads 360, such as customers, campaigns, and ad groups, have a different [ID space](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) than the old Search Ads 360. For existing Search Ads 360 transfer users who want to combine data from the old Search Ads 360 with the new Search Ads 360 API, you can use the BigQuery Data Transfer Service to transfer ID mapping tables if you provide a valid agency ID and advertiser ID in the transfer configuration.
 
-[Supported entities](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) contain two columns, `legacy_id` and `new_id` , which specifies the ID mapping for entities in old and new versions of Search Ads 360 respectively. For the AD, CAMPAIGN\_CRITERION, and CRITERION entities, a `new_secondary_id` is also provided as these entities [don't have globally unique ids in the new Search Ads 360](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping#object-id-uniqueness) . The following is a list of ID mapping tables.
+[Supported entities](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) contain two columns, `legacy_id` and `new_id` , which specifies the ID mapping for entities in old and new versions of Search Ads 360 respectively. For the AD, CAMPAIGN_CRITERION, and CRITERION entities, a `new_secondary_id` is also provided as these entities [don't have globally unique ids in the new Search Ads 360](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping#object-id-uniqueness) . The following is a list of ID mapping tables.
 
-  - IdMapping\_AD
-  - IdMapping\_AD\_GROUP
-  - IdMapping\_CAMPAIGN
-  - IdMapping\_CAMPAIGN\_CRITERION
-  - IdMapping\_CAMPAIGN\_GROUP
-  - IdMapping\_CAMPAIGN\_GROUP\_PERFORMANCE\_TARGET
-  - IdMapping\_CRITERION
-  - IdMapping\_CUSTOMER
-  - IdMapping\_FEED\_ITEM
-  - IdMapping\_FEED\_TABLE
+- IdMapping_AD
+- IdMapping_AD_GROUP
+- IdMapping_CAMPAIGN
+- IdMapping_CAMPAIGN_CRITERION
+- IdMapping_CAMPAIGN_GROUP
+- IdMapping_CAMPAIGN_GROUP_PERFORMANCE_TARGET
+- IdMapping_CRITERION
+- IdMapping_CUSTOMER
+- IdMapping_FEED_ITEM
+- IdMapping_FEED_TABLE
 
 > **Note:** Similar to match tables, snapshots of ID mapping tables are taken once a day and stored in the partition for the latest run date. ID mapping table snapshots are not updated for backfills or for days loaded using the refresh window.
 
@@ -517,81 +486,85 @@ Entities in the new Search Ads 360, such as customers, campaigns, and ad groups,
 
 The following query makes use of ID mapping tables to aggregate per-campaign metrics across tables from previous and new Search Ads 360 data transfers in the new ID space.
 
-    SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
-    (SELECT
-      cs.customer_id AS CustomerID,
-      cs.campaign_id AS CampaignID,
-      cs.metrics_clicks AS Clicks,
-      cs.metrics_cost_micros / 1000000 AS Cost
-    FROM
-      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-    WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
-    UNION ALL
-    SELECT
-      customer_id_mapping.new_id AS CustomerID,
-      campaign_id_mapping.new_id AS CampaignID,
-      cs.clicks AS Clicks,
-      cs.cost AS Cost
-    FROM
-      `DATASET.CampaignStats_ADVERTISER_ID` cs
-    LEFT JOIN
-      `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
-    ON cs.accountId = customer_id_mapping.legacy_id
-    LEFT JOIN
-      `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
-    ON cs.campaignId = campaign_id_mapping.legacy_id
-    WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
-    GROUP BY
-    1, 2
-    ORDER BY
-    1, 2
+```
+SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
+(SELECT
+  cs.customer_id AS CustomerID,
+  cs.campaign_id AS CampaignID,
+  cs.metrics_clicks AS Clicks,
+  cs.metrics_cost_micros / 1000000 AS Cost
+FROM
+  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
+UNION ALL
+SELECT
+  customer_id_mapping.new_id AS CustomerID,
+  campaign_id_mapping.new_id AS CampaignID,
+  cs.clicks AS Clicks,
+  cs.cost AS Cost
+FROM
+  `DATASET.CampaignStats_ADVERTISER_ID` cs
+LEFT JOIN
+  `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
+ON cs.accountId = customer_id_mapping.legacy_id
+LEFT JOIN
+  `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
+ON cs.campaignId = campaign_id_mapping.legacy_id
+WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
+GROUP BY
+1, 2
+ORDER BY
+1, 2
+```
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset
-  - `  CUSTOMER_ID  ` : the Search Ads 360 customer ID
-  - `  ADVERTISER_ID  ` : the Search Ads 360 advertiser ID
-  - `  NEW_DATA_DATE  ` : the data date for the new Search Ads 360 table
-  - `  OLD_DATA_DATE  ` : the data date for the previous Search Ads 360 table
+- `DATASET` : the name of the dataset
+- `CUSTOMER_ID` : the Search Ads 360 customer ID
+- `ADVERTISER_ID` : the Search Ads 360 advertiser ID
+- `NEW_DATA_DATE` : the data date for the new Search Ads 360 table
+- `OLD_DATA_DATE` : the data date for the previous Search Ads 360 table
 
 The following query makes use of ID mapping tables to aggregate per-campaign metrics across tables from previous and new Search Ads 360 data transfers in the old ID space.
 
-    SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
-    (SELECT
-      customer_id_mapping.legacy_id AS CustomerID,
-      campaign_id_mapping.legacy_id AS CampaignID,
-      cs.metrics_clicks AS Clicks,
-      cs.metrics_cost_micros / 1000000 AS Cost
-    FROM
-      `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
-    LEFT JOIN
-      `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
-    ON cs.customer_id = customer_id_mapping.new_id
-    LEFT JOIN
-      `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
-    ON cs.campaign_id = campaign_id_mapping.new_id
-    WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
-    UNION ALL
-    SELECT
-      CAST(accountId AS INT) AS CustomerID,
-      CAST(campaignId AS INT) AS CampaignID,
-      cs.clicks AS Clicks,
-      cs.cost AS Cost
-    FROM
-      `DATASET.CampaignStats_ADVERTISER_ID` cs
-    WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
-    GROUP BY
-    1, 2
-    ORDER BY
-    1, 2
+```
+SELECT CustomerID, CampaignID, Sum(Clicks), Sum(Cost) FROM
+(SELECT
+  customer_id_mapping.legacy_id AS CustomerID,
+  campaign_id_mapping.legacy_id AS CampaignID,
+  cs.metrics_clicks AS Clicks,
+  cs.metrics_cost_micros / 1000000 AS Cost
+FROM
+  `DATASET.sa_CampaignStats_CUSTOMER_ID` cs
+LEFT JOIN
+  `DATASET.IdMapping_CUSTOMER_ADVERTISER_ID` customer_id_mapping
+ON cs.customer_id = customer_id_mapping.new_id
+LEFT JOIN
+  `DATASET.IdMapping_CAMPAIGN_ADVERTISER_ID` campaign_id_mapping
+ON cs.campaign_id = campaign_id_mapping.new_id
+WHERE cs._DATA_DATE = 'NEW_DATA_DATE'
+UNION ALL
+SELECT
+  CAST(accountId AS INT) AS CustomerID,
+  CAST(campaignId AS INT) AS CampaignID,
+  cs.clicks AS Clicks,
+  cs.cost AS Cost
+FROM
+  `DATASET.CampaignStats_ADVERTISER_ID` cs
+WHERE cs._DATA_DATE = 'OLD_DATA_DATE')
+GROUP BY
+1, 2
+ORDER BY
+1, 2
+```
 
 Replace the following:
 
-  - `  DATASET  ` : the name of the dataset
-  - `  CUSTOMER_ID  ` : the Search Ads 360 customer ID
-  - `  ADVERTISER_ID  ` : the Search Ads 360 advertiser ID
-  - `  NEW_DATA_DATE  ` : the data date for the new Search Ads 360 table
-  - `  OLD_DATA_DATE  ` : the data date for the previous Search Ads 360 table
+- `DATASET` : the name of the dataset
+- `CUSTOMER_ID` : the Search Ads 360 customer ID
+- `ADVERTISER_ID` : the Search Ads 360 advertiser ID
+- `NEW_DATA_DATE` : the data date for the new Search Ads 360 table
+- `OLD_DATA_DATE` : the data date for the previous Search Ads 360 table
 
 ## Potential quota issues
 
@@ -599,12 +572,17 @@ The Search Ads 360 reporting API assigns a [quota](https://developers.google.com
 
 To prevent this potential issue without affecting existing workflows, consider these options:
 
-  - Use the `table_filter` parameter to load only the tables that are needed.
+- Use the `table_filter` parameter to load only the tables that are needed.
 
-  - Set up a separate project for the BigQuery Data Transfer Service. A cross project table join might look like the following:
-    
-    ``` 
-      #standardSQL  select count(a.item1)  from (select item1, item2 from project-A.data_set_a.table_name_a) a  inner join  (select item3, item4 from project-B.data_set_b.table_name_b) b  on a.item1 = b.item3
-    ```
+- Set up a separate project for the BigQuery Data Transfer Service. A cross project table join might look like the following:
 
-  - Contact [Search Ads 360 support](https://support.google.com/searchads/answer/9026876) and request additional quota.
+  ```
+  #standardSQL
+    select count(a.item1)
+    from (select item1, item2 from project-A.data_set_a.table_name_a) a
+    inner join
+    (select item3, item4 from project-B.data_set_b.table_name_b) b
+    on a.item1 = b.item3
+  ```
+
+- Contact [Search Ads 360 support](https://support.google.com/searchads/answer/9026876) and request additional quota.

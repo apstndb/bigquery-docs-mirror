@@ -16,5 +16,5 @@ This automated validation respects data privacy. BigQuery re-runs the queries in
 
 ## What's next
 
-  - Learn how to [run queries](https://docs.cloud.google.com/bigquery/docs/running-queries) .
-  - Learn about [SQL in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .
+- Learn how to [run queries](https://docs.cloud.google.com/bigquery/docs/running-queries) .
+- Learn about [SQL in BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .

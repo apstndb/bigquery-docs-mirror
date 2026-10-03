@@ -17,28 +17,28 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery, Gemini Data Analytics, Gemini for Google Cloud, and Knowledge Catalog APIs, if any are not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ### Required roles
 
 To work with data agents, you must have Identity and Access Management (IAM) permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents across various surfaces. For more information, see [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
 
-  - **Create, edit, publish, share, and delete agents:**
-      - To create data agents in a project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
-      - To edit, share, or delete a data agent: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the agent or project.
-      - To edit a data agent in a project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) on the project.
-      - To view data agents in a project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ) on the project.
-  - **Provision agents in Gemini Enterprise:**
-      - To make a published agent available to users in Gemini Enterprise, you need permissions to [register and manage custom agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) and configure an [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) in the Gemini Enterprise administration console.
-  - **Discover and use agents:**
-      - To chat with data agents: Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ).
-      - To view all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
-      - To interact with the Gemini-powered chat interface in Data Studio: BigQuery Studio User ( `roles/bigquery.studioUser` ) or Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ), each of which provide the `cloudaicompanion.topics.create` permission. Grant these roles at the project level. Users also require the Data Studio Asset Viewer ( `roles/datastudio.viewer` ) role.
-  - **Add knowledge sources to an agent:**
-      - Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
+- **Create, edit, publish, share, and delete agents:**
+  - To create data agents in a project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
+  - To edit, share, or delete a data agent: Gemini Data Analytics Data Agent Owner ( `roles/geminidataanalytics.dataAgentOwner` ) on the agent or project.
+  - To edit a data agent in a project: Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ) on the project.
+  - To view data agents in a project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ) on the project.
+- **Provision agents in Gemini Enterprise:**
+  - To make a published agent available to users in Gemini Enterprise, you need permissions to [register and manage custom agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent) and configure an [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) in the Gemini Enterprise administration console.
+- **Discover and use agents:**
+  - To chat with data agents: Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ).
+  - To view all data agents in the project: Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ).
+  - To interact with the Gemini-powered chat interface in Data Studio: BigQuery Studio User ( `roles/bigquery.studioUser` ) or Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ), each of which provide the `cloudaicompanion.topics.create` permission. Grant these roles at the project level. Users also require the Data Studio Asset Viewer ( `roles/datastudio.viewer` ) role.
+- **Add knowledge sources to an agent:**
+  - Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
 
 To have conversations, see the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
@@ -48,9 +48,9 @@ Agents act on your behalf and uses your permissions. Agents can only access data
 
 Conversational analytics automatically runs queries on your behalf to answer your questions. Consider the following factors that might increase query cost:
 
-  - Large table sizes
-  - Use of data joins in queries
-  - Frequent calls to AI functions within queries
+- Large table sizes
+- Use of data joins in queries
+- Frequent calls to AI functions within queries
 
 ### Generate insights
 
@@ -96,12 +96,12 @@ After you create an agent, you can [edit its settings](https://docs.cloud.google
 
 7.  In the **Recents** section, select any tables, views, graphs, or UDFs that you want to use as knowledge sources. UDFs are prefixed with an 'fx' indicator in the Google Cloud console.
 
-8.  To view additional knowledge sources, select keyboard\_arrow\_down **Show more** .
+8.  To view additional knowledge sources, select keyboard_arrow_down **Show more** .
 
 9.  Optional: Add a knowledge source that isn't listed in the **Recents** section:
-    
+
     1.  In the **Search** section, type the source name into the **Search for tables** field, and then press **Enter** . The source name doesn't need to be exact.
-    
+
     2.  In the **Search results** section, select one or more sources.
 
 10. Click **Add** . The new agent page reopens.
@@ -112,9 +112,9 @@ To improve data agent accuracy, you can optionally provide additional table meta
 
 Follow these best practices when you create a table and field descriptions:
 
-  - Use these descriptions as a guide to understand how the data agent understands the schema. If the descriptions suggested by the agent are correct, you can accept them.
+- Use these descriptions as a guide to understand how the data agent understands the schema. If the descriptions suggested by the agent are correct, you can accept them.
 
-  - If the data agent doesn't show an understanding of the schema after you configure these descriptions, then manually adjust the descriptions to provide the correct information.
+- If the data agent doesn't show an understanding of the schema after you configure these descriptions, then manually adjust the descriptions to provide the correct information.
 
 Follow these steps to configure table and field descriptions:
 
@@ -127,7 +127,7 @@ Follow these steps to configure table and field descriptions:
 4.  Select any field descriptions that you want to accept and click **Accept suggestions** . Select any descriptions that you want to reject and click **Reject suggestions** .
 
 5.  Manually edit any field description by clicking **Edit** next to the field. The **Edit field** pane opens.
-    
+
     1.  In the **Description** field, type a field description.
     2.  To save the field description, click **Update** .
 
@@ -191,9 +191,9 @@ For even more examples of instructions, click **Show examples** .
 <td>How two or more tables are related to each other, and which columns are used to join them. The agent must use standard SQL JOINs on column pairs to combine data. See the example column.</td>
 <td><strong>Customer Activity</strong>
 <ul>
-<li><code dir="ltr" translate="no">order_items.user_id</code> = <code dir="ltr" translate="no">users.id</code><br />
+<li><code>order_items.user_id</code> = <code>users.id</code><br />
 (to link sales to customers)</li>
-<li><code dir="ltr" translate="no">events.user_id</code> = <code dir="ltr" translate="no">users.id</code><br />
+<li><code>events.user_id</code> = <code>users.id</code><br />
 (to link website activity to logged-in customers)</li>
 </ul></td>
 </tr>
@@ -204,8 +204,8 @@ For even more examples of instructions, click **Show examples** .
 
 An agent uses verified queries in two ways:
 
-  - If an agent can use a verified query to answer a question that you ask it, to ensure a trustworthy answer, the agent invokes the query exactly as written.
-  - If the agent can't use the verified query to answer a question, it still uses the query as a reference to understand the data and the best practices for querying it.
+- If an agent can use a verified query to answer a question that you ask it, to ensure a trustworthy answer, the agent invokes the query exactly as written.
+- If the agent can't use the verified query to answer a question, it still uses the query as a reference to understand the data and the best practices for querying it.
 
 You can select verified queries from a list generated by the system, or create your own.
 
@@ -214,13 +214,13 @@ You can select verified queries from a list generated by the system, or create y
 To create a verified query for the data agent, formerly known as a *golden query* , do the following:
 
 1.  Select one or more Gemini-suggested verified queries:
-    
+
     1.  In the **Verified Queries** section, click **Review suggestions** . The **Review suggested verified queries** page opens.
     2.  Review the suggested verified queries. Select any that apply to your use case.
     3.  Click **Add** . The new agent page reopens.
 
 2.  To create your own verified query, click **Add query** . The **Add verified query** page opens.
-    
+
     1.  In the **Question** field, type the user question that the verified query answers.
     2.  Click **Generate SQL** to have Gemini generate a verified query that corresponds to the user question that you specified.
     3.  Modify the verified query if you choose.
@@ -243,7 +243,9 @@ Parameterized verified queries significantly enhance the power and flexibility o
 
 An expert, such as a data analyst, defines a verified query by using a template question—for example, "What were the sales for `@product` in `@region` ?" Then, the expert creates or modifies the verified query using SQL parameters, as the following example shows:
 
-    SELECT * FROM sales WHERE region = @region AND product = @product
+```
+SELECT * FROM sales WHERE region = @region AND product = @product
+```
 
 After the verified query is saved, a user can ask the conversational analytics agent a question in natural language; for example, "What were the sales for laptops in North America?"
 
@@ -256,11 +258,11 @@ To answer the user's question, the agent performs the following steps:
 
 #### Tips for creating effective parameterized queries
 
-  - **Use clear parameter names** . Use descriptive names for parameters—for example, `@start_date` instead of `@d1` .
-  - **Create detailed parameter descriptions** . The large language model (LLM) for conversational analytics uses parameter descriptions to identify the parameters and their values from user questions. For example, `num_enrollments` is an effective parameter name, but `number of student enrollments from ages 5-14` is a parameter description that gives more context about the query.
-  - **Ensure consistent data typing** . Ensure that the data types expected by the SQL query match the data types likely to be extracted from the user's question.
-  - **Provide a well-defined scope** . Create templates for common and important question patterns where the query construction is complex, or the logic is unintuitive. Doing so helps the LLM return optimal results.
-  - **Test thoroughly** . Test with various natural language phrasings to ensure that parameters are extracted correctly.
+- **Use clear parameter names** . Use descriptive names for parameters—for example, `@start_date` instead of `@d1` .
+- **Create detailed parameter descriptions** . The large language model (LLM) for conversational analytics uses parameter descriptions to identify the parameters and their values from user questions. For example, `num_enrollments` is an effective parameter name, but `number of student enrollments from ages 5-14` is a parameter description that gives more context about the query.
+- **Ensure consistent data typing** . Ensure that the data types expected by the SQL query match the data types likely to be extracted from the user's question.
+- **Provide a well-defined scope** . Create templates for common and important question patterns where the query construction is complex, or the logic is unintuitive. Doing so helps the LLM return optimal results.
+- **Test thoroughly** . Test with various natural language phrasings to ensure that parameters are extracted correctly.
 
 #### Create a parameterized verified query
 
@@ -276,7 +278,7 @@ The following instructions use a sample verified query to configure with paramet
 
 1.  In the **Verified Queries** section of a new or existing agent, click **Review suggestions** . The **Review suggested verified queries** page opens.
 2.  Select the checkbox next to a suggested verified query.
-3.  In the query window, click keyboard\_arrow\_down **Show more** to expand the query description.
+3.  In the query window, click keyboard_arrow_down **Show more** to expand the query description.
 4.  To open the existing query, click **Edit** .
 5.  To finish configuring the query, see [Configure the parameters for the verified query](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure-query-parameters) .
 
@@ -293,8 +295,8 @@ The following instructions use a sample verified query to configure with paramet
 2.  To specify parameters, use the `@` symbol followed by a parameter name. This syntax identifies a placeholder that ingests a value from the user question. Use a natural language question that shows how the parameters will be used in user questions. For example: "What is the total stock for @product in the @region warehouse?"
 
 3.  Click **Generate SQL** . The SQL looks like the following example:
-    
-    ``` 
+
+    ```
        SELECT
            SUM(stock) AS total_stock
        FROM
@@ -307,18 +309,18 @@ The following instructions use a sample verified query to configure with paramet
 4.  To add default values to the placeholders in the query, click **Manage query parameters** , and then click **Add query parameter** .
 
 5.  For the first parameter, four fields appear for **Name** , **Type,** **Value** , and **Description** .
-    
-      - For **Name** , copy `@product` from your question and paste it into this field.
-      - For **Type** , select **STRING** .
-      - For **Value** , enter `organic bananas` .
-      - For **Description** , enter as specific a description as possible. For example, a product located in a regional warehouse.
+
+    - For **Name** , copy `@product` from your question and paste it into this field.
+    - For **Type** , select **STRING** .
+    - For **Value** , enter `organic bananas` .
+    - For **Description** , enter as specific a description as possible. For example, a product located in a regional warehouse.
 
 6.  For the second parameter, click **Add query parameter** .
-    
-      - For **Name** , copy `@region` from your question and paste it into this field.
-      - For **Type** , select **STRING** .
-      - For **Value** , enter `US-EAST` .
-      - For **Description** , enter as specific a description as possible—for example, `a regional warehouse where products are located.`
+
+    - For **Name** , copy `@region` from your question and paste it into this field.
+    - For **Type** , select **STRING** .
+    - For **Value** , enter `US-EAST` .
+    - For **Description** , enter as specific a description as possible—for example, `a regional warehouse where products are located.`
 
 7.  When you have filled out fields for both parameters, click **Save** .
 
@@ -344,10 +346,10 @@ Now that you have saved the query, a user can ask the question "Do we know the t
 
 You can create BigQuery custom glossary terms local to an agent, or review business glossary terms imported from Knowledge Catalog that apply to the knowledge sources that you selected for an agent.
 
-  - Because business glossary terms from Knowledge Catalog apply globally to BigQuery resources, if you use Knowledge Catalog, [create and manage](https://docs.cloud.google.com/knowledge-catalog/docs/manage-glossaries) business glossary terms in Knowledge Catalog instead of for individual agents.
-  - If you need to modify business glossary terms imported from Knowledge Catalog, you must edit them in Knowledge Catalog and return to BigQuery to see them.
-  - BigQuery custom glossary terms stay in BigQuery. They don't appear in Knowledge Catalog.
-  - If you're not using Knowledge Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
+- Because business glossary terms from Knowledge Catalog apply globally to BigQuery resources, if you use Knowledge Catalog, [create and manage](https://docs.cloud.google.com/knowledge-catalog/docs/manage-glossaries) business glossary terms in Knowledge Catalog instead of for individual agents.
+- If you need to modify business glossary terms imported from Knowledge Catalog, you must edit them in Knowledge Catalog and return to BigQuery to see them.
+- BigQuery custom glossary terms stay in BigQuery. They don't appear in Knowledge Catalog.
+- If you're not using Knowledge Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
 
 Follow these steps to create custom glossary terms for an agent:
 
@@ -373,7 +375,7 @@ In the **Settings** section, you can configure the following optional settings:
 1.  In the **Model** section, choose which types of models are available to users in a conversation with the agent. Both Preview and Generally Available models are available by default. Models that are in Preview might use the global endpoint.
 
 2.  Create [labels](https://docs.cloud.google.com/bigquery/docs/labels-intro) to help you organize your Google Cloud resources. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
-    
+
     1.  In the **Settings** section, click **Manage labels** .
     2.  Click **Add label** .
     3.  In the **key** and **value** fields, enter your key-value pair for the label.
@@ -383,12 +385,12 @@ In the **Settings** section, you can configure the following optional settings:
 
 3.  Set a size limit for the queries processed by the data agent. In the **Settings** section, type a value in the **Maximum bytes billed** field. You must set this limit to `10485760` or higher, otherwise you receive the following error message:
 
-<!-- end list -->
-
-    Value error. In BigQuery on-demand pricing charges are
-    rounded up to the nearest MB, with a minimum of 10 MB of data processed
-    per query. So, max bytes billed must be set to greater or equal to
-    10485760.
+```
+Value error. In BigQuery on-demand pricing charges are
+rounded up to the nearest MB, with a minimum of 10 MB of data processed
+per query. So, max bytes billed must be set to greater or equal to
+10485760.
+```
 
 If you don't specify a value, `maximum bytes billed` defaults to the project's [query usage per day quota](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . The usage per day quota is unlimited unless you have specified a [custom quota](https://docs.cloud.google.com/bigquery/docs/custom-quotas) .
 
@@ -400,25 +402,25 @@ Continue to the next section to place the agent in draft mode or publish the age
 
 2.  Click **Save** .
 
-3.  To place the data agent in draft mode, which you can re-edit later, click arrow\_back **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My draft agents** section on the **Agent Catalog** tab.
-    
+3.  To place the data agent in draft mode, which you can re-edit later, click arrow_back **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My draft agents** section on the **Agent Catalog** tab.
+
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
 4.  Click **Publish** to open the **Publishing channels** pane and publish the data agent, making it available for use in the project.
 
 5.  Optional: In the **Your agent has been published** dialog, click **Share** to share the data agent with other users.
-    
+
     1.  In the **Share permissions** pane, click **Add principal** .
-    
+
     2.  In the **New principals** field, enter one or more principals.
-    
+
     3.  Click the **Select a role** list.
-    
+
     4.  In the **Role** list, select one of the following roles:
-        
-          - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): grants permission to chat with the data agent.
-          - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): grants permission to edit the data agent.
-          - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): grants permission to view the data agent.
+
+        - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): grants permission to chat with the data agent.
+        - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): grants permission to edit the data agent.
+        - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): grants permission to view the data agent.
 
 6.  Click **Save** .
 
@@ -430,9 +432,9 @@ You can create conversations with the data agent by using BigQuery Studio or [Da
 
 You can find existing agents in the **Agent Catalog** tab, which consists of three sections:
 
-  - **My agents** : a list of all agents that you create and publish. You can modify and share published agents with others.
-  - **My draft agents** : agents that you haven't published yet. You can't share draft agents.
-  - **Shared by others in your organization** : Agents that others create and share with you. If others grant you permissions, you can edit these shared agents.
+- **My agents** : a list of all agents that you create and publish. You can modify and share published agents with others.
+- **My draft agents** : agents that you haven't published yet. You can't share draft agents.
+- **Shared by others in your organization** : Agents that others create and share with you. If others grant you permissions, you can edit these shared agents.
 
 ### Edit a data agent
 
@@ -444,7 +446,7 @@ Follow these steps to edit a data agent:
 
 3.  Locate the agent card of the data agent that you want to modify.
 
-4.  To open the data agent in the agent editor, click more\_vert **Open actions** \> click **Edit** on the agent card.
+4.  To open the data agent in the agent editor, click more_vert **Open actions** \> click **Edit** on the agent card.
 
 5.  Edit the data agent's configuration as needed.
 
@@ -452,8 +454,8 @@ Follow these steps to edit a data agent:
 
 7.  To publish your changes, click **Publish** . In the **Share** dialog, you can either [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with others, or click **Cancel** .
 
-8.  To return to the **Agents** pane, click arrow\_back **Go back** .
-    
+8.  To return to the **Agents** pane, click arrow_back **Go back** .
+
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
 ### Share a data agent
@@ -466,7 +468,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 3.  Locate the agent card of the data agent that you want to modify.
 
-4.  To open the data agent in the agent editor, click more\_vert **Open actions** \> click **Edit** on the agent card.
+4.  To open the data agent in the agent editor, click more_vert **Open actions** \> click **Edit** on the agent card.
 
 5.  To share the data agent with other users, click **Share** .
 
@@ -477,17 +479,17 @@ Follow these steps to share a published data agent. You can't share draft agents
 8.  Click the **Select a role** list.
 
 9.  In the **Role** list, select one of the following roles:
-    
-      - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): gives permission to chat with the data agent.
-      - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): gives permission to edit the data agent.
-      - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): gives permission to view the data agent.
+
+    - Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ): gives permission to chat with the data agent.
+    - Gemini Data Analytics Data Agent Editor ( `roles/geminidataanalytics.dataAgentEditor` ): gives permission to edit the data agent.
+    - Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` ): gives permission to view the data agent.
 
 10. Click **Save** .
 
 11. To return to the agent editing page, click **Close** .
 
-12. To return to the **Agents** pane, click arrow\_back **Go back** .
-    
+12. To return to the **Agents** pane, click arrow_back **Go back** .
+
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
 ### Delete a data agent
@@ -498,7 +500,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 3.  In either the **My agents** or **My draft agents** section of the **Agent Catalog** tab, locate the agent card of the data agent that you want to delete.
 
-4.  Click more\_vert **Open actions** \> **Delete** .
+4.  Click more_vert **Open actions** \> **Delete** .
 
 5.  In the **Delete agent?** dialog, click **Delete** .
 
@@ -520,10 +522,10 @@ You can share agents with Data Studio users directly by copying a link that open
 
 To share a direct link to the agent, you can copy the agent's dedicated URL in these ways:
 
-  - From the agent catalog: Select more\_vert **Open actions** \> select **Copy link** \> select **Data Studio** .
-  - From the agent details view: Select content\_copy **Copy agent link** \> select **Data Studio** .
-  - From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
-  - After clicking **Save** from the **Share permissions** panel: Select **Copy link** .
+- From the agent catalog: Select more_vert **Open actions** \> select **Copy link** \> select **Data Studio** .
+- From the agent details view: Select content_copy **Copy agent link** \> select **Data Studio** .
+- From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
+- After clicking **Save** from the **Share permissions** panel: Select **Copy link** .
 
 To send an email notification that informs recipients of their access to an agent, select **Send email** from the **Share permissions** panel. Email notifications are sent only to the users or groups with whom you have just shared the agent in that editing session. All members of a group receive the email notification, even if a given user already has agent-level permission for the agent. The email includes the name of the user who shared the agent, the name of the agent, and a link to open the agent in Data Studio.
 
@@ -532,7 +534,7 @@ To send an email notification that informs recipients of their access to an agen
 ## Publish a data agent in Gemini Enterprise
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
@@ -553,8 +555,8 @@ Before you publish a data agent, review the requirements based on your project s
 
 There are two different workflows for publishing a data agent, depending on whether the BigQuery data agent and Gemini Enterprise application are in the same Google Cloud project.
 
-  - If BigQuery and Gemini Enterprise are in the same Google Cloud project, you can register the agent with Agent Registry during publishing, and import the agent into Gemini Enterprise using Google-managed credentials. You don't need to copy JSON data or configure OAuth client credentials manually.
-  - If BigQuery and Gemini Enterprise are in different Google Cloud projects, you must copy the Agent-to-Agent (A2A) JSON card from BigQuery and paste it into Gemini Enterprise. However, you can still select **Default Google-managed credentials** , so you don't need to create or enter an OAuth client ID and client secret.
+- If BigQuery and Gemini Enterprise are in the same Google Cloud project, you can register the agent with Agent Registry during publishing, and import the agent into Gemini Enterprise using Google-managed credentials. You don't need to copy JSON data or configure OAuth client credentials manually.
+- If BigQuery and Gemini Enterprise are in different Google Cloud projects, you must copy the Agent-to-Agent (A2A) JSON card from BigQuery and paste it into Gemini Enterprise. However, you can still select **Default Google-managed credentials** , so you don't need to create or enter an OAuth client ID and client secret.
 
 If you use Agent Registry, the storage region for the BigQuery data agent and the [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) registry binding in Gemini Enterprise must match.
 
@@ -572,9 +574,9 @@ As a data analyst, you create, configure, and publish an agent in BigQuery by co
 2.  In the **Region** section, verify that the storage region matches your data sources and your Agent Gateway configuration. Options include **US** , **EU** , or **Global** .
 3.  Click **Publish** , or **Publish updates** if the agent was previously published.
 4.  In the **Publishing channels** pane, under **Additional channels** , choose your publishing method:
-      - If your BigQuery and Gemini Enterprise are in the same project, in the **Agent Registry** section, select the **Register this agent** checkbox.
-          - If you want to remove the agent from the registry, click **Unregister** .
-      - If your BigQuery and Gemini Enterprise are in different projects, in the **Integrate via A2A (Agent2Agent)** section, click **Copy JSON** to copy the A2A endpoint JSON data, and then share the JSON data with your Gemini Enterprise administrator.
+    - If your BigQuery and Gemini Enterprise are in the same project, in the **Agent Registry** section, select the **Register this agent** checkbox.
+      - If you want to remove the agent from the registry, click **Unregister** .
+    - If your BigQuery and Gemini Enterprise are in different projects, in the **Integrate via A2A (Agent2Agent)** section, click **Copy JSON** to copy the A2A endpoint JSON data, and then share the JSON data with your Gemini Enterprise administrator.
 5.  Click **Publish** or **Publish updates** .
 6.  [Share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with the users and groups who need access, granting them the Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ) role.
 
@@ -600,8 +602,8 @@ If BigQuery and Gemini Enterprise are in the same project, follow these steps to
 5.  On the agent card, click **Add agent** .
 6.  In the **Review agent details** step, review the agent metadata populated from the agent's A2A card including name, description, agent URL, capabilities, and skills, and then click **Next** .
 7.  In the **Authenticate agent** step, select how Gemini Enterprise authenticates against the agent provider:
-      - **Default Google-managed credentials** : Google manages the OAuth credentials automatically. You don't need to manually configure or enter client credentials.
-      - **Custom OAuth** : Select this option only if your organization requires custom OAuth client credentials, and enter the Client ID, Client secret, Authorization URL, and Token URL.
+    - **Default Google-managed credentials** : Google manages the OAuth credentials automatically. You don't need to manually configure or enter client credentials.
+    - **Custom OAuth** : Select this option only if your organization requires custom OAuth client credentials, and enter the Client ID, Client secret, Authorization URL, and Token URL.
 8.  Click **Finish** .
 9.  The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
 10. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
@@ -616,8 +618,8 @@ If BigQuery and Gemini Enterprise are in different projects, follow these steps 
 4.  In the **Agent card JSON** field, enter the agent card JSON received from the data analyst.
 5.  Click **Preview agent details** \> click **Next** .
 6.  In the **Agent authorization** step, select your authentication method:
-      - **Default Google-managed credentials** : Google manages the OAuth credentials automatically without requiring you to manually enter or generate a client ID and client secret.
-      - **Custom OAuth** : Select this option if you want to manually provide custom OAuth credentials, following the steps in [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) .
+    - **Default Google-managed credentials** : Google manages the OAuth credentials automatically without requiring you to manually enter or generate a client ID and client secret.
+    - **Custom OAuth** : Select this option if you want to manually provide custom OAuth credentials, following the steps in [Register and manage A2A agents](https://docs.cloud.google.com/gemini/enterprise/docs/register-and-manage-an-a2a-agent#authorize-your-agent) .
 7.  In the **Tool authorizations** step, click **Finish** .
 8.  The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
 9.  [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
@@ -626,36 +628,36 @@ If BigQuery and Gemini Enterprise are in different projects, follow these steps 
 
 You can discover and use a data agent in Gemini Enterprise using any of these methods:
 
-  - **Manual discovery** : Locate a data agent in the [Agent Gallery](https://docs.cloud.google.com/gemini/enterprise/docs/agent-gallery) and use it with any of these methods:
-      - **Browse the gallery** : Select the agent and start a dedicated chat.
-      - **Direct link** : Use the agent's dedicated URL to open Gemini Enterprise directly into a session with that specific BigQuery data agent.
-      - **Directed intent** : Invoke the agent by `@mention` (for example, `@sales_pipeline_agent` ) in the Gemini Enterprise core chat.
-      - **Seamless orchestration** : Ask a general analytical question (for example, "How is our sales pipeline trending in the last 3 months?") and Gemini Enterprise automatically routes the query to the relevant data agent.
+- **Manual discovery** : Locate a data agent in the [Agent Gallery](https://docs.cloud.google.com/gemini/enterprise/docs/agent-gallery) and use it with any of these methods:
+  - **Browse the gallery** : Select the agent and start a dedicated chat.
+  - **Direct link** : Use the agent's dedicated URL to open Gemini Enterprise directly into a session with that specific BigQuery data agent.
+  - **Directed intent** : Invoke the agent by `@mention` (for example, `@sales_pipeline_agent` ) in the Gemini Enterprise core chat.
+  - **Seamless orchestration** : Ask a general analytical question (for example, "How is our sales pipeline trending in the last 3 months?") and Gemini Enterprise automatically routes the query to the relevant data agent.
 
 After you've discovered the agent, you can interact with it by performing the following steps:
 
-  - **Authenticate** : Complete the one-time OAuth sign-in to securely authenticate to BigQuery.
-  - **Chat** : Ask natural language questions to the agent. The requests are processed by the agent, and the response is streamed back to Gemini Enterprise as text, Markdown, charts, or tables.
-  - **View conversation history** : Conversations are automatically saved in the history pane.
+- **Authenticate** : Complete the one-time OAuth sign-in to securely authenticate to BigQuery.
+- **Chat** : Ask natural language questions to the agent. The requests are processed by the agent, and the response is streamed back to Gemini Enterprise as text, Markdown, charts, or tables.
+- **View conversation history** : Conversations are automatically saved in the history pane.
 
 ## Monitor agents and conversations
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 You can monitor the performance, adoption, latency, and costs of your data agents and their conversations by using Google Cloud Observability in BigQuery. When you enable agent observability, you can view metrics such as the following:
 
-  - The number of agents used in conversations
-  - The number of users who have asked questions
-  - The number of conversations created
-  - The agents that have answered the most questions
-  - The most commonly used knowledge sources
-  - User engagement
-  - Projected token usage
-  - Hourly answer latency
+- The number of agents used in conversations
+- The number of users who have asked questions
+- The number of conversations created
+- The agents that have answered the most questions
+- The most commonly used knowledge sources
+- User engagement
+- Projected token usage
+- Hourly answer latency
 
 ### Before you begin
 
@@ -669,23 +671,23 @@ To enable APIs, you need the `serviceusage.services.enable` permission. If you c
 
 To enable agent observability, you must have the following permissions on your project:
 
-  - `cloudaicompanion.gibqObservabilitySettings.create`
-  - `cloudaicompanion.gibqObservabilitySettings.list`
-  - `cloudaicompanion.gibqObservabilitySettings.update`
-  - `geminidataanalytics.dataAgents.create`
-  - `geminidataanalytics.operations.get`
-  - `observability.traceScopes.create`
-  - `resourcemanager.projects.update`
-  - `serviceusage.services.enable`
-  - `serviceusage.values.test`
+- `cloudaicompanion.gibqObservabilitySettings.create`
+- `cloudaicompanion.gibqObservabilitySettings.list`
+- `cloudaicompanion.gibqObservabilitySettings.update`
+- `geminidataanalytics.dataAgents.create`
+- `geminidataanalytics.operations.get`
+- `observability.traceScopes.create`
+- `resourcemanager.projects.update`
+- `serviceusage.services.enable`
+- `serviceusage.values.test`
 
 To get the permissions that you need to monitor your agents by using metrics, traces, and logs, ask your administrator to grant you the following IAM roles on your project:
 
-  - View monitoring data and configurations: [Monitoring Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/monitoring#monitoring.viewer) ( `roles/monitoring.viewer` )
-  - View traces: [Cloud Trace User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.user) ( `roles/cloudtrace.user` )
-  - View logs: [Logs Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/logging#logging.viewer) ( `roles/logging.viewer` )
-  - View datasets and their contents: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
-  - View administrator settings: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
+- View monitoring data and configurations: [Monitoring Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/monitoring#monitoring.viewer) ( `roles/monitoring.viewer` )
+- View traces: [Cloud Trace User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.user) ( `roles/cloudtrace.user` )
+- View logs: [Logs Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/logging#logging.viewer) ( `roles/logging.viewer` )
+- View datasets and their contents: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+- View administrator settings: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -706,59 +708,67 @@ Agent observability is disabled by default. An administrator can enable it for y
 ### Google Cloud CLI
 
 1.  Create an observability setting:
-    
-        gcloud gemini gibq-observability-settings create SETTING_NAME \
-          --conversational-analytics-setting-metrics-enabled \
-          --conversational-analytics-setting-traces-enabled \
-          --project=PROJECT_ID \
-          --location=global
-    
+
+    ```
+    gcloud gemini gibq-observability-settings create SETTING_NAME \
+      --conversational-analytics-setting-metrics-enabled \
+      --conversational-analytics-setting-traces-enabled \
+      --project=PROJECT_ID \
+      --location=global
+    ```
+
     Replace the following:
-    
-      - `  SETTING_NAME  ` : A name for the observability setting.
-      - `  PROJECT_ID  ` : Your project ID.
+
+    - `SETTING_NAME` : A name for the observability setting.
+    - `PROJECT_ID` : Your project ID.
 
 2.  Bind the observability setting to your project:
-    
-        gcloud gemini gibq-observability-settings setting-bindings create BINDING_NAME \
-          --gibq-observability-setting=SETTING_NAME \
-          --target=projects/PROJECT_ID \
-          --location=global \
-          --project=PROJECT_ID
-    
-    Replace `  BINDING_NAME  ` with a name for the setting binding. We recommend that you use ` binding- PROJECT_ID  ` for your binding name.
+
+    ```
+    gcloud gemini gibq-observability-settings setting-bindings create BINDING_NAME \
+      --gibq-observability-setting=SETTING_NAME \
+      --target=projects/PROJECT_ID \
+      --location=global \
+      --project=PROJECT_ID
+    ```
+
+    Replace `BINDING_NAME` with a name for the setting binding. We recommend that you use `binding- `` PROJECT_ID` for your binding name.
 
 ### API
 
 1.  Create an observability setting:
-    
-        curl -X POST \
-            -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d '{
-                  "conversational_analytics_setting": {
-                    "metrics_enabled": true
-                  }
-                }' \
-            "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings?gibq_observability_setting_id=SETTING_NAME"
-    
+
+    ```
+    curl -X POST \
+        -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "Content-Type: application/json; charset=utf-8" \
+        -d '{
+              "conversational_analytics_setting": {
+                "metrics_enabled": true
+              }
+            }' \
+        "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings?gibq_observability_setting_id=SETTING_NAME"
+    ```
+
     Replace the following:
-    
-      - `  SETTING_NAME  ` : A name for the observability setting.
-      - `  PROJECT_ID  ` : Your project ID.
+
+    - `SETTING_NAME` : A name for the observability setting.
+    - `PROJECT_ID` : Your project ID.
 
 2.  Bind the observability setting to your project:
-    
-        curl -X POST \
-            -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d '{
-                  "target": "projects/PROJECT_ID",
-                  "product": "GEMINI_IN_BIGQUERY"
-                }' \
-            "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings/SETTING_NAME/settingBindings?setting_binding_id=BINDING_NAME"
-    
-    Replace `  BINDING_NAME  ` with a name for the setting binding. We recommend that you use ` binding- PROJECT_ID  ` for your binding name.
+
+    ```
+    curl -X POST \
+        -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "Content-Type: application/json; charset=utf-8" \
+        -d '{
+              "target": "projects/PROJECT_ID",
+              "product": "GEMINI_IN_BIGQUERY"
+            }' \
+        "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings/SETTING_NAME/settingBindings?setting_binding_id=BINDING_NAME"
+    ```
+
+    Replace `BINDING_NAME` with a name for the setting binding. We recommend that you use `binding- `` PROJECT_ID` for your binding name.
 
 ### View metrics
 
@@ -781,7 +791,7 @@ Metrics are collected after you enable observability. Data isn't backfilled. To 
 4.  Optional: Create a [custom dashboard](https://docs.cloud.google.com/monitoring/charts/dashboards) .
 
 5.  Optional: To view metrics individually, go to the **Metrics explorer** page.
-    
+
     Agent metrics include agent usage, model calls, tool usage, health, latency, and token usage.
 
 ### Debug model calls
@@ -804,9 +814,9 @@ Your Cloud Trace data is stored in an observability dataset for 30 days. To stor
 
 To get the permissions that you need to expose live traces to BigQuery by creating a linked dataset, ask your administrator to grant you the following IAM roles on your project:
 
-  - [Cloud Trace Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.admin) ( `roles/cloudtrace.admin` )
-  - [Observability Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/observability#observability.editor) ( `roles/observability.editor` )
-  - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+- [Cloud Trace Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudtrace#cloudtrace.admin) ( `roles/cloudtrace.admin` )
+- [Observability Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/observability#observability.editor) ( `roles/observability.editor` )
+- [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -819,55 +829,65 @@ To retain your trace data, do the following:
 1.  Open [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) .
 
 2.  Find the location of your `_Trace` bucket:
-    
-        gcloud beta observability buckets list --location=-
-    
+
+    ```
+    gcloud beta observability buckets list --location=-
+    ```
+
     Note the location of your `_Trace` bucket for the next step.
 
 3.  Create a [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) in your BigQuery project that points to your `_Trace` bucket:
-    
-        gcloud beta observability buckets datasets links create \
-            projects/PROJECT_ID/locations/LOCATION/buckets/_Trace/datasets/Spans/links/LINK_NAME \
-            --dataset=Spans \
-            --bucket=_Trace \
-            --location=LOCATION \
-            --project=PROJECT_ID
-    
+
+    ```
+    gcloud beta observability buckets datasets links create \
+        projects/PROJECT_ID/locations/LOCATION/buckets/_Trace/datasets/Spans/links/LINK_NAME \
+        --dataset=Spans \
+        --bucket=_Trace \
+        --location=LOCATION \
+        --project=PROJECT_ID
+    ```
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID
-      - `  LOCATION  ` : the location of your `_Trace` bucket from the previous step
-      - `  LINK_NAME  ` : a name for the linked dataset
+
+    - `PROJECT_ID` : your project ID
+    - `LOCATION` : the location of your `_Trace` bucket from the previous step
+    - `LINK_NAME` : a name for the linked dataset
 
 4.  Create a [standard dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) in which to store your historical traces. The following command sets the [default partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to 90 days (7,776,000 seconds):
-    
-        bq --location=LOCATION mk \
-            --dataset \
-            --default_partition_expiration=7776000 \
-            --description="Archive storage for historical traces" \
-            PROJECT_ID:STORAGE_DATASET
-    
-    Replace `  STORAGE_DATASET  ` with a name for the dataset.
+
+    ```
+    bq --location=LOCATION mk \
+        --dataset \
+        --default_partition_expiration=7776000 \
+        --description="Archive storage for historical traces" \
+        PROJECT_ID:STORAGE_DATASET
+    ```
+
+    Replace `STORAGE_DATASET` with a name for the dataset.
 
 5.  Create an empty partitioned table in your storage dataset with the same schema as the linked dataset. Partitioning by date helps you manage data retention and query costs. To create the table, run the following query in the SQL editor:
-    
-        CREATE TABLE `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
-        PARTITION BY DATE(start_time)
-        AS
-        SELECT *
-        FROM `PROJECT_ID.LINK_NAME._AllSpans`
-        WHERE FALSE;
-    
-    Replace `  TABLE_NAME  ` with a name for the table.
+
+    ```
+    CREATE TABLE `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
+    PARTITION BY DATE(start_time)
+    AS
+    SELECT *
+    FROM `PROJECT_ID.LINK_NAME._AllSpans`
+    WHERE FALSE;
+    ```
+
+    Replace `TABLE_NAME` with a name for the table.
 
 6.  Create a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) to copy daily trace data from the linked dataset to your archive table. The following query copies data from the previous day:
-    
-        INSERT INTO `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
-        SELECT *
-        FROM `PROJECT_ID.LINK_NAME._AllSpans`
-        WHERE start_time >=
-          TIMESTAMP_SUB(TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY), INTERVAL 1 DAY)
-          AND start_time < TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY);
+
+    ```
+    INSERT INTO `PROJECT_ID.STORAGE_DATASET.TABLE_NAME`
+    SELECT *
+    FROM `PROJECT_ID.LINK_NAME._AllSpans`
+    WHERE start_time >=
+      TIMESTAMP_SUB(TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY), INTERVAL 1 DAY)
+      AND start_time < TIMESTAMP_TRUNC(CURRENT_TIMESTAMP(), DAY);
+    ```
 
 For more information, read about how to [find and explore traces](https://docs.cloud.google.com/trace/docs/finding-traces) .
 
@@ -875,20 +895,22 @@ For more information, read about how to [find and explore traces](https://docs.c
 
 To turn off observability for your data agents, update your observability setting:
 
-    gcloud gemini gibq-observability-settings update SETTING_NAME \
-        --no-conversational-analytics-setting-metrics-enabled \
-        --no-conversational-analytics-setting-traces-enabled \
-        --project=PROJECT_ID \
-        --location=global
+```
+gcloud gemini gibq-observability-settings update SETTING_NAME \
+    --no-conversational-analytics-setting-metrics-enabled \
+    --no-conversational-analytics-setting-traces-enabled \
+    --project=PROJECT_ID \
+    --location=global
+```
 
 Replace the following:
 
-  - `  SETTING_NAME  ` : The name of the observability setting that you created to enable observability. If you enabled observability by using the Google Cloud console, then the setting name is `default` .
-  - `  PROJECT_ID  ` : Your project ID.
+- `SETTING_NAME` : The name of the observability setting that you created to enable observability. If you enabled observability by using the Google Cloud console, then the setting name is `default` .
+- `PROJECT_ID` : Your project ID.
 
 ## What's next
 
-  - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
-  - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
-  - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
-  - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.
+- Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
+- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+- [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
+- Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.

@@ -6,15 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [Resource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges#RESOURCE_REPRESENTATION)
-  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges#METHODS_SUMMARY)
+- [Resource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges#RESOURCE_REPRESENTATION)
+- [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges#METHODS_SUMMARY)
 
 ## Resource
 
 There is no persistent data associated with this resource.
 
-## Methods
-
-### `            list           `
-
-Lists all data exchanges from projects in a given organization and location.
+| Methods                                                                                                                               |                                                                              |
+|---------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [`list`](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges/list) | Lists all data exchanges from projects in a given organization and location. |

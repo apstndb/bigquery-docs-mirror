@@ -16,17 +16,17 @@ The format of local inventories data corresponds primarily to the format of the 
 
 Depending on the type of Merchant account that you use, the data is written to one of the following tables:
 
-  - If you are using an individual Merchant ID, then the data is written to the ` LocalInventories_ MERCHANT_ID  ` table.
-  - If you are using an MCA account, then the data is written to the ` LocalInventories_ AGGREGATOR_ID  ` table.
+- If you are using an individual Merchant ID, then the data is written to the `LocalInventories_ `` MERCHANT_ID` table.
+- If you are using an MCA account, then the data is written to the `LocalInventories_ `` AGGREGATOR_ID` table.
 
 ## Schema
 
 The `LocalInventories_` tables have the following schema:
 
 | **Column**                        | **BigQuery data type** | **Description**                                                                                                                 | **Example data**        |
-| --------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `         product_id        `     | `STRING`               | Content API's REST ID of the product in the form: `channel:content_language:feed_label:offer_id` . This field is a primary key. | online:en:AU:666840730  |
-| `         merchant_id        `    | `INTEGER`              | Merchant account ID. This field is a primary key.                                                                               |                         |
+|-----------------------------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| **`product_id`**                  | `STRING`               | Content API's REST ID of the product in the form: `channel:content_language:feed_label:offer_id` . This field is a primary key. | online:en:AU:666840730  |
+| **`merchant_id`**                 | `INTEGER`              | Merchant account ID. This field is a primary key.                                                                               |                         |
 | `aggregator_id`                   | `INTEGER`              | ID of the [Multi Client Account (MCA)](https://support.google.com/merchants/answer/188487) .                                    |                         |
 | `store_code`                      | `STRING`               | Store code of this local inventory resource.                                                                                    |                         |
 | `price`                           | `RECORD`               | Local price of the item.                                                                                                        |                         |

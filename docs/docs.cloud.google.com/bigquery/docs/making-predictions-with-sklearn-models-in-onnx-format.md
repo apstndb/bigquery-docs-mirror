@@ -10,24 +10,24 @@ This tutorial shows you how to import an [Open Neural Network Exchange](https://
 
 ONNX provides a uniform format that is designed to represent any machine learning (ML) framework. BigQuery ML support for ONNX lets you do the following:
 
-  - Train a model using your favorite framework.
-  - Convert the model into the ONNX model format.
-  - Import the ONNX model into BigQuery and make predictions using BigQuery ML.
+- Train a model using your favorite framework.
+- Convert the model into the ONNX model format.
+- Import the ONNX model into BigQuery and make predictions using BigQuery ML.
 
 ## Objectives
 
-  - Create and train a model using [scikit-learn](https://scikit-learn.org/stable/index.html) .
-  - [Convert the model to ONNX format](https://github.com/onnx/tutorials#converting-to-onnx-format) using [sklearn-onnx](https://onnx.ai/sklearn-onnx/) .
-  - Use the `CREATE MODEL` statement to import the ONNX model into BigQuery.
-  - Use the `ML.PREDICT` function to make predictions with the imported ONNX model.
+- Create and train a model using [scikit-learn](https://scikit-learn.org/stable/index.html) .
+- [Convert the model to ONNX format](https://github.com/onnx/tutorials#converting-to-onnx-format) using [sklearn-onnx](https://onnx.ai/sklearn-onnx/) .
+- Use the `CREATE MODEL` statement to import the ONNX model into BigQuery.
+- Use the `ML.PREDICT` function to make predictions with the imported ONNX model.
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - [BigQuery](https://cloud.google.com/bigquery/pricing)
-  - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
-  - [Cloud Storage](https://docs.cloud.google.com/storage/pricing)
+- [BigQuery](https://cloud.google.com/bigquery/pricing)
+- [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
+- [Cloud Storage](https://docs.cloud.google.com/storage/pricing)
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -40,12 +40,14 @@ When you finish the tasks that are described in this document, you can avoid con
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery and Cloud Storage APIs, if any are not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format#required_permissions) to perform the tasks in this document.
+<!-- -->
+
+1.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 
@@ -55,8 +57,8 @@ If you're using an existing project, do the following.
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioAdmin` )
-  - [Storage Object Creator](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#standard-roles) ( `roles/storage.objectCreator` )
+- [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioAdmin` )
+- [Storage Object Creator](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#standard-roles) ( `roles/storage.objectCreator` )
 
 #### Check for the roles
 
@@ -74,7 +76,7 @@ Make sure that you have the following role or roles on the project:
 
 2.  Select the project.
 
-3.  Click person\_add **Grant access** .
+3.  Click person_add **Grant access** .
 
 4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
 
@@ -94,24 +96,26 @@ The following code samples show you how to train a classification model with sci
 
 Use the following sample code to create and train a scikit-learn [pipeline](https://scikit-learn.org/stable/modules/compose.html#pipeline) on the [Iris](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html) dataset. For instructions about installing and using scikit-learn, see the [scikit-learn installation guide](https://scikit-learn.org/stable/install.html) .
 
-    import numpy
-    from sklearn.datasets import load_iris
-    from sklearn.pipeline import Pipeline
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.ensemble import RandomForestClassifier
-    
-    data = load_iris()
-    X = data.data[:, :4]
-    y = data.target
-    
-    ind = numpy.arange(X.shape[0])
-    numpy.random.shuffle(ind)
-    X = X[ind, :].copy()
-    y = y[ind].copy()
-    
-    pipe = Pipeline([('scaler', StandardScaler()),
-                    ('clr', RandomForestClassifier())])
-    pipe.fit(X, y)
+```
+import numpy
+from sklearn.datasets import load_iris
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+data = load_iris()
+X = data.data[:, :4]
+y = data.target
+
+ind = numpy.arange(X.shape[0])
+numpy.random.shuffle(ind)
+X = X[ind, :].copy()
+y = y[ind].copy()
+
+pipe = Pipeline([('scaler', StandardScaler()),
+                ('clr', RandomForestClassifier())])
+pipe.fit(X, y)
+```
 
 > **Note:** The scikit-learn pipeline lets you include models from other libraries such as [LightGBM](https://lightgbm.readthedocs.io/en/latest/) and [XGBoost](https://xgboost.readthedocs.io/en/latest/) , which can be converted to ONNX by sklearn-onnx. For more information, see [Convert a pipeline](https://onnx.ai/sklearn-onnx/pipeline.html#convert-a-pipeline) and [Using converters from other libraries](https://onnx.ai/sklearn-onnx/tutorial_1-5_external.html#using-converters-from-other-libraries) .
 
@@ -119,37 +123,39 @@ Use the following sample code to create and train a scikit-learn [pipeline](http
 
 Use the following sample code in [sklearn-onnx](https://onnx.ai/sklearn-onnx/) to convert the scikit-learn pipeline into an ONNX model that's named `pipeline_rf.onnx` .
 
-    from skl2onnx import convert_sklearn
-    from skl2onnx.common.data_types import FloatTensorType
-    
-    # Disable zipmap as it is not supported in BigQuery ML.
-    options = {id(pipe): {'zipmap': False}}
-    
-    # Define input features. scikit-learn does not store information about the
-    # training dataset. It is not always possible to retrieve the number of features
-    # or their types. That's why the function needs another argument called initial_types.
-    initial_types = [
-       ('sepal_length', FloatTensorType([None, 1])),
-       ('sepal_width', FloatTensorType([None, 1])),
-       ('petal_length', FloatTensorType([None, 1])),
-       ('petal_width', FloatTensorType([None, 1])),
-    ]
-    
-    # Convert the model.
-    model_onnx = convert_sklearn(
-       pipe, 'pipeline_rf', initial_types=initial_types, options=options
-    )
-    
-    # And save.
-    with open('pipeline_rf.onnx', 'wb') as f:
-     f.write(model_onnx.SerializeToString())
+```
+from skl2onnx import convert_sklearn
+from skl2onnx.common.data_types import FloatTensorType
+
+# Disable zipmap as it is not supported in BigQuery ML.
+options = {id(pipe): {'zipmap': False}}
+
+# Define input features. scikit-learn does not store information about the
+# training dataset. It is not always possible to retrieve the number of features
+# or their types. That's why the function needs another argument called initial_types.
+initial_types = [
+   ('sepal_length', FloatTensorType([None, 1])),
+   ('sepal_width', FloatTensorType([None, 1])),
+   ('petal_length', FloatTensorType([None, 1])),
+   ('petal_width', FloatTensorType([None, 1])),
+]
+
+# Convert the model.
+model_onnx = convert_sklearn(
+   pipe, 'pipeline_rf', initial_types=initial_types, options=options
+)
+
+# And save.
+with open('pipeline_rf.onnx', 'wb') as f:
+ f.write(model_onnx.SerializeToString())
+```
 
 ### Upload the ONNX model to Cloud Storage
 
 After you save your model, do the following:
 
-  - [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) to store the model.
-  - [Upload the ONNX model to your Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+- [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) to store the model.
+- [Upload the ONNX model to your Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ## Create a dataset
 
@@ -160,21 +166,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -184,25 +190,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ### BigQuery DataFrames
 
@@ -210,10 +222,12 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import google.cloud.bigquery
-    
-    bqclient = google.cloud.bigquery.Client()
-    bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```python
+import google.cloud.bigquery
+
+bqclient = google.cloud.bigquery.Client()
+bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```
 
 ## Import the ONNX model into BigQuery
 
@@ -226,45 +240,51 @@ To import the ONNX model into your dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
 2.  In the query editor, enter the following `CREATE MODEL` statement.
-    
-    ``` 
-     CREATE OR REPLACE MODEL `bqml_tutorial.imported_onnx_model`
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.imported_onnx_model`
       OPTIONS (MODEL_TYPE='ONNX',
        MODEL_PATH='BUCKET_PATH')
     ```
-    
-    Replace `  BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx` .
-    
+
+    Replace `BUCKET_PATH` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `BUCKET_PATH` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx` .
+
     When the operation is complete, you see a message similar to the following: `Successfully created model named imported_onnx_model` .
-    
+
     Your new model appears in the **Resources** panel. Models are indicated by the model icon: ![The model icon in the Resources panel](https://docs.cloud.google.com/static/bigquery/images/model-icon.png) If you select the new model in the **Resources** panel, information about the model appears adjacent to the **Query editor** .
-    
-    ![The information panel for \`imported\_onnx\_model\`](https://docs.cloud.google.com/static/bigquery/images/onnx-model-info.png)
+
+    ![The information panel for \`imported_onnx_model\`](https://docs.cloud.google.com/static/bigquery/images/onnx-model-info.png)
 
 ### bq
 
 1.  Import the ONNX model from Cloud Storage by entering the following `CREATE MODEL` statement.
-    
-        bq query --use_legacy_sql=false \
-        "CREATE OR REPLACE MODEL
-        `bqml_tutorial.imported_onnx_model`
-        OPTIONS
-        (MODEL_TYPE='ONNX',
-          MODEL_PATH='BUCKET_PATH')"
-    
-    Replace `  BUCKET_PATH  ` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `  BUCKET_PATH  ` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx` .
-    
+
+    ```
+    bq query --use_legacy_sql=false \
+    "CREATE OR REPLACE MODEL
+    `bqml_tutorial.imported_onnx_model`
+    OPTIONS
+    (MODEL_TYPE='ONNX',
+      MODEL_PATH='BUCKET_PATH')"
+    ```
+
+    Replace `BUCKET_PATH` with the path to the model that you uploaded to Cloud Storage. If you're using the sample model, replace `BUCKET_PATH` with the following value: `gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx` .
+
     When the operation is complete, you see a message similar to the following: `Successfully created model named imported_onnx_model` .
 
 2.  After you import the model, verify that the model appears in the dataset.
-    
-        bq ls -m bqml_tutorial
-    
+
+    ```
+    bq ls -m bqml_tutorial
+    ```
+
     The output is similar to the following:
-    
-        tableId               Type
-        --------------------- -------
-        imported_onnx_model  MODEL
+
+    ```
+    tableId               Type
+    --------------------- -------
+    imported_onnx_model  MODEL
+    ```
 
 ### BigQuery DataFrames
 
@@ -274,31 +294,33 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Create the model by using the [`bigframes.bigquery.ml.create_model`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model) function.
 
-    import bigframes
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    bigframes.options.bigquery.project = PROJECT_ID
-    # You can change the location to one of the valid locations: https://cloud.google.com/bigquery/docs/locations#supported_locations
-    bigframes.options.bigquery.location = "US"
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # Use ml.create_model to create and import the model in BigQuery.
-    # The options parameter specifies the model type and the Cloud Storage path.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
-    ml.create_model(
-        your_model_id,  # For example: "bqml_tutorial.imported_onnx_model"
-        options={
-            "model_type": "ONNX",
-            "model_path": "gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx",
-        },
-        replace=True,
-    )
+```python
+import bigframes
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+bigframes.options.bigquery.project = PROJECT_ID
+# You can change the location to one of the valid locations: https://cloud.google.com/bigquery/docs/locations#supported_locations
+bigframes.options.bigquery.location = "US"
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Use ml.create_model to create and import the model in BigQuery.
+# The options parameter specifies the model type and the Cloud Storage path.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.imported_onnx_model"
+    options={
+        "model_type": "ONNX",
+        "model_path": "gs://cloud-samples-data/bigquery/ml/onnx/pipeline_rf.onnx",
+    },
+    replace=True,
+)
+```
 
 For more information about importing ONNX models into BigQuery, including format and storage requirements, see [The `CREATE MODEL` statement for importing ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
 
@@ -308,10 +330,10 @@ After importing the ONNX model, you use the [`ML.PREDICT` function](https://docs
 
 The query in the following steps uses `imported_onnx_model` to make predictions using input data from the `iris` table in the `ml_datasets` public dataset. The ONNX model expects four `FLOAT` values as input:
 
-  - `sepal_length`
-  - `sepal_width`
-  - `petal_length`
-  - `petal_width`
+- `sepal_length`
+- `sepal_width`
+- `petal_length`
+- `petal_width`
 
 These inputs match the `initial_types` that were defined when you [converted the model into ONNX format](https://github.com/onnx/tutorials#converting-to-onnx-format) .
 
@@ -324,27 +346,31 @@ To make predictions with the imported ONNX model, choose one of the following op
 1.  Go to the **BigQuery Studio** page.
 
 2.  In the query editor, enter this query that uses the `ML.PREDICT` function.
-    
-        SELECT *
-          FROM ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
-            (
-            SELECT * FROM `bigquery-public-data.ml_datasets.iris`
-            )
+
+    ```
+    SELECT *
+      FROM ML.PREDICT(MODEL `bqml_tutorial.imported_onnx_model`,
+        (
+        SELECT * FROM `bigquery-public-data.ml_datasets.iris`
         )
-    
+    )
+    ```
+
     The query results are similar to the following:
-    
+
     ![The output of the ML.PREDICT query](https://docs.cloud.google.com/static/bigquery/images/ml-predict-onnx.png)
 
 ### bq
 
 Run the query that uses `ML.PREDICT` .
 
-    bq query --use_legacy_sql=false \
-    'SELECT *
-    FROM ML.PREDICT(
-    MODEL `example_dataset.imported_onnx_model`,
-    (SELECT * FROM `bigquery-public-data.ml_datasets.iris`))'
+```
+bq query --use_legacy_sql=false \
+'SELECT *
+FROM ML.PREDICT(
+MODEL `example_dataset.imported_onnx_model`,
+(SELECT * FROM `bigquery-public-data.ml_datasets.iris`))'
+```
 
 ### BigQuery DataFrames
 
@@ -354,24 +380,26 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Use the [`bigframes.bigquery.ml.predict`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict) function to run the ONNX model.
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    df = bpd.read_gbq("bigquery-public-data.ml_datasets.iris")
-    
-    # Use the ml.predict method to predict results using your model.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
-    predictions = ml.predict(
-        your_model_id,  # For example: "bqml_tutorial.imported_onnx_model"
-        input_=df,
-    )
-    predictions.peek(5)
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+df = bpd.read_gbq("bigquery-public-data.ml_datasets.iris")
+
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+predictions = ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.imported_onnx_model"
+    input_=df,
+)
+predictions.peek(5)
+```
 
 The result is similar to the following:
 
@@ -386,30 +414,30 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 ### Console
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### gcloud
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 
-    gcloud projects delete PROJECT_ID
+```
+gcloud projects delete PROJECT_ID
+```
 
 ### Delete individual resources
 
@@ -421,7 +449,7 @@ Alternatively, to remove the individual resources used in this tutorial, do the 
 
 ## What's next
 
-  - For more information about importing ONNX models, see [The `CREATE MODEL` statement for ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
-  - For more information about available ONNX converters and tutorials, see [Converting to ONNX format](https://github.com/onnx/tutorials#converting-to-onnx-format) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .
+- For more information about importing ONNX models, see [The `CREATE MODEL` statement for ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
+- For more information about available ONNX converters and tutorials, see [Converting to ONNX format](https://github.com/onnx/tutorials#converting-to-onnx-format) .
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .

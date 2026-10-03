@@ -14,27 +14,27 @@ You can use the slot estimator for your edition, reservation and on-demand workl
 
 For the selected [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) workloads:
 
-  - View slot capacity and utilization data for the past 30 days and identify periods of peak utilization when the most slots are used.
-  - View cost-optimal recommendations for commitment and autoscaling slots with similar performance.
-  - View your current reservation settings for a specific edition.
+- View slot capacity and utilization data for the past 30 days and identify periods of peak utilization when the most slots are used.
+- View cost-optimal recommendations for commitment and autoscaling slots with similar performance.
+- View your current reservation settings for a specific edition.
 
 For specific reservation workloads:
 
-  - View slot capacity and utilization data for the past 30 days and identify periods of peak utilization when the most slots are used.
-  - View job latency percentiles (P90, P95, etc.) to understand query performance.
-  - Model how increasing or reducing max reservation slots might affect performance.
+- View slot capacity and utilization data for the past 30 days and identify periods of peak utilization when the most slots are used.
+- View job latency percentiles (P90, P95, etc.) to understand query performance.
+- Model how increasing or reducing max reservation slots might affect performance.
 
 For on-demand billing workloads:
 
-  - View on-demand slot usage data of the entire organization or an individual project for the past 30 days.
-  - View cost-optimal recommendations for commitment and autoscaling slots with similar performance if you move to the Enterprise edition.
+- View on-demand slot usage data of the entire organization or an individual project for the past 30 days.
+- View cost-optimal recommendations for commitment and autoscaling slots with similar performance if you move to the Enterprise edition.
 
 Customers who use Enterprise edition, Enterprise Plus edition, or on-demand billing can use BigQuery slot recommender to view slot usage, optimize commitments, and improve performance. For more information, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
 
 ## Limitations
 
-  - Data is limited to the past 30 days.
-  - The models do not include [`ML_EXTERNAL`](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `ML_EXTERNAL` assignments, then the modeled results are less accurate.
+- Data is limited to the past 30 days.
+- The models do not include [`ML_EXTERNAL`](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `ML_EXTERNAL` assignments, then the modeled results are less accurate.
 
 ## Before you begin
 
@@ -44,29 +44,29 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To use the slot estimator for reservations data, you need the following IAM permissions on the administration project:
 
-  - `bigquery.reservations.list`
-  - `bigquery.reservationAssignments.list`
-  - `bigquery.capacityCommitments.list`
+- `bigquery.reservations.list`
+- `bigquery.reservationAssignments.list`
+- `bigquery.capacityCommitments.list`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to use the slot estimator:
 
-  - `roles/bigquery.admin`
-  - `roles/bigquery.resourceAdmin`
-  - `roles/bigquery.resourceEditor`
-  - `roles/bigquery.resourceViewer`
-  - `roles/bigquery.user`
+- `roles/bigquery.admin`
+- `roles/bigquery.resourceAdmin`
+- `roles/bigquery.resourceEditor`
+- `roles/bigquery.resourceViewer`
+- `roles/bigquery.user`
 
 To use the slot estimator for on-demand usage data, you need to [enable the Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) on a project you intend to use as the administration project to manage reservations. Other than the permissions above, you also need one of the following IAM permissions on your organization to see organization-level data or the project to see project-level data:
 
-  - `bigquery.jobs.listExecutionMetadata` (can only be applied on organization level)
-  - `bigquery.jobs.listAll` (can be applied on both organization or project level)
+- `bigquery.jobs.listExecutionMetadata` (can only be applied on organization level)
+- `bigquery.jobs.listAll` (can be applied on both organization or project level)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to use the slot estimator:
 
-  - `roles/bigquery.admin`
-  - `roles/bigquery.resourceAdmin`
-  - `roles/bigquery.resourceEditor`
-  - `roles/bigquery.resourceViewer`
+- `roles/bigquery.admin`
+- `roles/bigquery.resourceAdmin`
+- `roles/bigquery.resourceEditor`
+- `roles/bigquery.resourceViewer`
 
 To view the commitment slots recommendations, you also need the permissions described in [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender#required_permissions) .
 
@@ -79,7 +79,7 @@ To view slot capacity and utilization over time, navigate to the slot estimator:
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  Select your administration project.
-    
+
     1.  Click the **Select from** drop-down list at the top of the page.
     2.  In the **Select from window** that appears, select your project.
 
@@ -105,9 +105,9 @@ For on-demand options, you can choose either an individual project or the entire
 
 The statistics for **Usage and utilization by capacity** tab may vary slightly based on different scope:
 
-  - For edition source, it shows max slots available for the entire edition, commitment slots, sum of baseline slots, average slot usage, P99 slot usage and P50 slot usage.
-  - For specific reservation, it shows max reservation slots, baseline slots, average slot usage, P99 slot usage and P50 slot usage.
-  - For on-demand source, it shows average slot usage, P99 slot usage and P50 slot usage.
+- For edition source, it shows max slots available for the entire edition, commitment slots, sum of baseline slots, average slot usage, P99 slot usage and P50 slot usage.
+- For specific reservation, it shows max reservation slots, baseline slots, average slot usage, P99 slot usage and P50 slot usage.
+- For on-demand source, it shows average slot usage, P99 slot usage and P50 slot usage.
 
 ## Model slot performance
 
@@ -124,7 +124,7 @@ To model slot performance, perform the following steps:
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  Select your administration project.
-    
+
     1.  Click the **Select from** drop-down list at the top of the page.
     2.  In the **Select from window** that appears, select your project.
 
@@ -144,10 +144,10 @@ The performance data is broken down by percentile. The table splits the data int
 
 For each percentile bucket, the table shows the following information:
 
-  - Job duration percentile: The percentile bucket for this row.
-  - Average job duration: The average time that jobs in that percentile bucket took to run.
-  - Number of jobs: The number of jobs in that percentile bucket.
-  - For each model, the estimated average duration for jobs in that percentile.
+- Job duration percentile: The percentile bucket for this row.
+- Average job duration: The average time that jobs in that percentile bucket took to run.
+- Number of jobs: The number of jobs in that percentile bucket.
+- For each model, the estimated average duration for jobs in that percentile.
 
 The table also lists an estimated "30-day change" statistic for each model. This value is the estimated change in total hours spent processing the jobs in the 30-day history at different slot capacities.
 

@@ -41,28 +41,30 @@ Create and populate an `ObjectRef` column based on output from the `OBJ.MAKE_REF
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
-        AS
-        SELECT TABLE_NAME.*,
-          OBJ.MAKE_REF(uri, 'CONNECTION_ID') AS objectrefcolumn
-        FROM DATASET_ID.TABLE_NAME;
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID. You can skip this argument if you are creating the table in your current project.
-    
-      - `  DATASET_ID  ` : the ID of the dataset that you are creating.
-    
-      - `  TABLE_NAME  ` : the name of the standard table that you are recreating.
-    
-      - `  CONNECTION_ID  ` : A `STRING` value that contains a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that the service can use to access the objects in Cloud Storage, in the format `location.connection_id` . For example, `us-west1.myconnection` . You can get the connection ID by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-        
-        You must grant the Storage Object User ( `roles/storage.objectUser` ) role to the connection's service account on any Cloud Storage bucket where you are using it to access objects.
-        
-        The connection must be in the same project and region as the query where you are calling the function.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
+    AS
+    SELECT TABLE_NAME.*,
+      OBJ.MAKE_REF(uri, 'CONNECTION_ID') AS objectrefcolumn
+    FROM DATASET_ID.TABLE_NAME;
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : your project ID. You can skip this argument if you are creating the table in your current project.
+
+    - `DATASET_ID` : the ID of the dataset that you are creating.
+
+    - `TABLE_NAME` : the name of the standard table that you are recreating.
+
+    - `CONNECTION_ID` : A `STRING` value that contains a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that the service can use to access the objects in Cloud Storage, in the format `location.connection_id` . For example, `us-west1.myconnection` . You can get the connection ID by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
+
+      You must grant the Storage Object User ( `roles/storage.objectUser` ) role to the connection's service account on any Cloud Storage bucket where you are using it to access objects.
+
+      The connection must be in the same project and region as the query where you are calling the function.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -73,22 +75,24 @@ Create and populate an `ObjectRef` column based on data from an object table `re
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
-        AS
-        SELECT TABLE_NAME.*, OBJECT_TABLE.ref AS objectrefcolumn
-        FROM DATASET_ID.TABLE_NAME
-        INNER JOIN DATASET_ID.OBJECT_TABLE
-        ON OBJECT_TABLE.uri = TABLE_NAME.uri;
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID. You can skip this argument if you are creating the table in your current project.
-      - `  DATASET_ID  ` : the ID of the dataset that you are creating.
-      - `  TABLE_NAME  ` : the name of the standard table that you are recreating.
-      - `  OBJECT_TABLE  ` : the name of the object table that contains the object data that you want to integrate into the standard table.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE OR REPLACE TABLE PROJECT_ID.DATASET_ID.TABLE_NAME
+    AS
+    SELECT TABLE_NAME.*, OBJECT_TABLE.ref AS objectrefcolumn
+    FROM DATASET_ID.TABLE_NAME
+    INNER JOIN DATASET_ID.OBJECT_TABLE
+    ON OBJECT_TABLE.uri = TABLE_NAME.uri;
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : your project ID. You can skip this argument if you are creating the table in your current project.
+    - `DATASET_ID` : the ID of the dataset that you are creating.
+    - `TABLE_NAME` : the name of the standard table that you are recreating.
+    - `OBJECT_TABLE` : the name of the object table that contains the object data that you want to integrate into the standard table.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -111,19 +115,21 @@ Update an `ObjectRef` column by using data from an object table `ref` column:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
-        SET objectrefcolumn = (SELECT ref FROM DATASET_ID.OBJECT_TABLE WHERE OBJECT_TABLE.uri = TABLE_NAME.uri)
-        WHERE uri != "";
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID. You can skip this argument if you are creating the table in your current project.
-      - `  DATASET_ID  ` : the ID of the dataset that you are creating.
-      - `  TABLE_NAME  ` : the name of the standard table that you are recreating.
-      - `  OBJECT_TABLE  ` : the name of the object table that contains the same object data as the standard table `ObjectRef` column.
 
-3.  Click play\_circle **Run** .
+    ```
+    UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
+    SET objectrefcolumn = (SELECT ref FROM DATASET_ID.OBJECT_TABLE WHERE OBJECT_TABLE.uri = TABLE_NAME.uri)
+    WHERE uri != "";
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : your project ID. You can skip this argument if you are creating the table in your current project.
+    - `DATASET_ID` : the ID of the dataset that you are creating.
+    - `TABLE_NAME` : the name of the standard table that you are recreating.
+    - `OBJECT_TABLE` : the name of the object table that contains the same object data as the standard table `ObjectRef` column.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -134,30 +140,32 @@ Update an `ObjectRef` column by using output from the `OBJ.FETCH_METADATA` and `
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
-        SET objectrefcolumn = (SELECT OBJ.MAKE_REF(uri, 'CONNECTION_ID'))
-        WHERE uri != "";
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID. You can skip this argument if you are creating the table in your current project.
-    
-      - `  DATASET_ID  ` : the ID of the dataset that you are creating.
-    
-      - `  TABLE_NAME  ` : the name of the standard table that you are recreating.
-    
-      - `  CONNECTION_ID  ` : A `STRING` value that contains a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that the service can use to access the objects in Cloud Storage, in the format `location.connection_id` . For example, `us-west1.myconnection` . You can get the connection ID by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-        
-        You must grant the Storage Object User ( `roles/storage.objectUser` ) role to the connection's service account on any Cloud Storage bucket where you are using it to access objects.
-        
-        The connection must be in the same project and region as the query where you are calling the function.
 
-3.  Click play\_circle **Run** .
+    ```
+    UPDATE PROJECT_ID.DATASET_ID.TABLE_NAME
+    SET objectrefcolumn = (SELECT OBJ.MAKE_REF(uri, 'CONNECTION_ID'))
+    WHERE uri != "";
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : your project ID. You can skip this argument if you are creating the table in your current project.
+
+    - `DATASET_ID` : the ID of the dataset that you are creating.
+
+    - `TABLE_NAME` : the name of the standard table that you are recreating.
+
+    - `CONNECTION_ID` : A `STRING` value that contains a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that the service can use to access the objects in Cloud Storage, in the format `location.connection_id` . For example, `us-west1.myconnection` . You can get the connection ID by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
+
+      You must grant the Storage Object User ( `roles/storage.objectUser` ) role to the connection's service account on any Cloud Storage bucket where you are using it to access objects.
+
+      The connection must be in the same project and region as the query where you are calling the function.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ## What's next
 
-  - [Analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) .
-  - [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
+- [Analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) .
+- [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .

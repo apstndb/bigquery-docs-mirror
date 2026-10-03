@@ -10,33 +10,33 @@ data_source: docs.cloud.google.com
 
 In this tutorial, you use a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model to analyze the contribution of the cost of sales ratio in the Iowa liquor sales dataset. This tutorial guides you through performing the following tasks:
 
-  - Create an input table based on publicly available Iowa liquor data.
-  - Create a [contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) that uses a [summable ratio metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) . This type of model summarizes the values of two numeric columns and determines the ratio differences across the control and test dataset for each segment of the data.
-  - Get the metric insights from the model by using the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) .
+- Create an input table based on publicly available Iowa liquor data.
+- Create a [contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) that uses a [summable ratio metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) . This type of model summarizes the values of two numeric columns and determines the ratio differences across the control and test dataset for each segment of the data.
+- Get the metric insights from the model by using the [`ML.GET_INSIGHTS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) .
 
 Before starting this tutorial, you should be familiar with the [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) use case.
 
 ## Required permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` Identity and Access Management (IAM) permission.
+- To create the dataset, you need the `bigquery.datasets.create` Identity and Access Management (IAM) permission.
 
-  - To create the model, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+- To create the model, you need the following permissions:
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.models.getData`
-      - `bigquery.jobs.create`
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.models.getData`
+  - `bigquery.jobs.create`
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
+- **BigQuery ML** : You incur costs for the data that you process in BigQuery.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -47,20 +47,20 @@ For more information about BigQuery pricing, see [BigQuery pricing](https://clou
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Create a dataset
@@ -72,21 +72,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -96,25 +96,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a table of input data
 
@@ -123,33 +129,35 @@ Create a table that contains test and control data to analyze. The following que
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        CREATE OR REPLACE TABLE bqml_tutorial.iowa_liquor_sales_data AS
-        (SELECT
-          store_name,
-          city,
-          vendor_name,
-          category_name,
-          item_description,
-          SUM(sale_dollars) AS total_sales,
-          SUM(state_bottle_cost) AS total_bottle_cost,
-          FALSE AS is_test
-        FROM `bigquery-public-data.iowa_liquor_sales.sales`
-        WHERE EXTRACT(YEAR FROM date) = 2020
-        GROUP BY store_name, city, vendor_name, category_name, item_description, is_test)
-        UNION ALL
-        (SELECT
-          store_name,
-          city,
-          vendor_name,
-          category_name,
-          item_description,
-          SUM(sale_dollars) AS total_sales,
-          SUM(state_bottle_cost) AS total_bottle_cost,
-          TRUE AS is_test
-        FROM `bigquery-public-data.iowa_liquor_sales.sales`
-        WHERE EXTRACT(YEAR FROM date) = 2021
-        GROUP BY store_name, city, vendor_name, category_name, item_description, is_test);
+
+    ```
+    CREATE OR REPLACE TABLE bqml_tutorial.iowa_liquor_sales_data AS
+    (SELECT
+      store_name,
+      city,
+      vendor_name,
+      category_name,
+      item_description,
+      SUM(sale_dollars) AS total_sales,
+      SUM(state_bottle_cost) AS total_bottle_cost,
+      FALSE AS is_test
+    FROM `bigquery-public-data.iowa_liquor_sales.sales`
+    WHERE EXTRACT(YEAR FROM date) = 2020
+    GROUP BY store_name, city, vendor_name, category_name, item_description, is_test)
+    UNION ALL
+    (SELECT
+      store_name,
+      city,
+      vendor_name,
+      category_name,
+      item_description,
+      SUM(sale_dollars) AS total_sales,
+      SUM(state_bottle_cost) AS total_bottle_cost,
+      TRUE AS is_test
+    FROM `bigquery-public-data.iowa_liquor_sales.sales`
+    WHERE EXTRACT(YEAR FROM date) = 2021
+    GROUP BY store_name, city, vendor_name, category_name, item_description, is_test);
+    ```
 
 ## Create the model
 
@@ -158,16 +166,18 @@ Create a contribution analysis model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        CREATE OR REPLACE MODEL bqml_tutorial.liquor_sales_model
-        OPTIONS(
-          model_type = 'CONTRIBUTION_ANALYSIS',
-          contribution_metric = 'sum(total_bottle_cost)/sum(total_sales)',
-          dimension_id_cols = ['store_name', 'city', 'vendor_name', 'category_name', 'item_description'],
-          is_test_col = 'is_test',
-          min_apriori_support = 0.05
-        ) AS
-        SELECT * FROM bqml_tutorial.iowa_liquor_sales_data;
+
+    ```
+    CREATE OR REPLACE MODEL bqml_tutorial.liquor_sales_model
+    OPTIONS(
+      model_type = 'CONTRIBUTION_ANALYSIS',
+      contribution_metric = 'sum(total_bottle_cost)/sum(total_sales)',
+      dimension_id_cols = ['store_name', 'city', 'vendor_name', 'category_name', 'item_description'],
+      is_test_col = 'is_test',
+      min_apriori_support = 0.05
+    ) AS
+    SELECT * FROM bqml_tutorial.iowa_liquor_sales_data;
+    ```
 
 The query takes approximately 35 seconds to complete, after which the model `liquor_sales_model` appears in the `bqml_tutorial` dataset. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
@@ -178,45 +188,45 @@ Get insights generated by the contribution analysis model by using the `ML.GET_I
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement to select columns from the [output for a summable ratio metric contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_ratio_metric_contribution_analysis_models) :
-    
-        SELECT
-        contributors,
-        metric_test,
-        metric_control,
-        metric_test_over_metric_control,
-        metric_test_over_complement,
-        metric_control_over_complement,
-        aumann_shapley_attribution,
-        apriori_support
-        contribution
-        FROM
-          ML.GET_INSIGHTS(
-            MODEL `bqml_tutorial.liquor_sales_model`)
-        ORDER BY aumann_shapley_attribution DESC;
+
+    ```
+    SELECT
+    contributors,
+    metric_test,
+    metric_control,
+    metric_test_over_metric_control,
+    metric_test_over_complement,
+    metric_control_over_complement,
+    aumann_shapley_attribution,
+    apriori_support
+    contribution
+    FROM
+      ML.GET_INSIGHTS(
+        MODEL `bqml_tutorial.liquor_sales_model`)
+    ORDER BY aumann_shapley_attribution DESC;
+    ```
 
 The first several rows of the output should look similar to the following. The values are truncated to improve readability.
 
-| contributors                   | metric\_test | metric\_control | metric\_test\_over\_metric\_control | metric\_test\_over\_complement | metric\_control\_over\_complement | aumann\_shapley\_attribution | apriori\_support | contribution |
-| ------------------------------ | ------------ | --------------- | ----------------------------------- | ------------------------------ | --------------------------------- | ---------------------------- | ---------------- | ------------ |
-| all                            | 0.069        | 0.071           | 0.969                               | null                           | null                              | \-0.00219                    | 1.0              | 0.00219      |
-| city=DES MOINES                | 0.048        | 0.054           | 0.88                                | 0.67                           | 0.747                             | \-0.00108                    | 0.08             | 0.00108      |
-| vendor\_name=DIAGEO AMERICAS   | 0.064        | 0.068           | 0.937                               | 0.917                          | 0.956                             | \-0.0009                     | 0.184            | 0.0009       |
-| vendor\_name=BACARDI USA INC   | 0.071        | 0.082           | 0.857                               | 1.025                          | 1.167                             | \-0.00054                    | 0.057            | 0.00054      |
-| vendor\_name=PERNOD RICARD USA | 0.068        | 0.077           | 0.89                                | 0.988                          | 1.082                             | \-0.0005                     | 0.061            | 0.0005       |
+| contributors                  | metric_test | metric_control | metric_test_over_metric_control | metric_test_over_complement | metric_control_over_complement | aumann_shapley_attribution | apriori_support | contribution |
+|-------------------------------|-------------|----------------|---------------------------------|-----------------------------|--------------------------------|----------------------------|-----------------|--------------|
+| all                           | 0.069       | 0.071          | 0.969                           | null                        | null                           | -0.00219                   | 1.0             | 0.00219      |
+| city=DES MOINES               | 0.048       | 0.054          | 0.88                            | 0.67                        | 0.747                          | -0.00108                   | 0.08            | 0.00108      |
+| vendor_name=DIAGEO AMERICAS   | 0.064       | 0.068          | 0.937                           | 0.917                       | 0.956                          | -0.0009                    | 0.184           | 0.0009       |
+| vendor_name=BACARDI USA INC   | 0.071       | 0.082          | 0.857                           | 1.025                       | 1.167                          | -0.00054                   | 0.057           | 0.00054      |
+| vendor_name=PERNOD RICARD USA | 0.068       | 0.077          | 0.89                            | 0.988                       | 1.082                          | -0.0005                    | 0.061           | 0.0005       |
 
 In the output, you can see that the data segment `city=DES MOINES` has the highest contribution of change in the sales ratio. You can also see this difference in the `metric_test` and `metric_control` columns, which show that the ratio decreased in the test data compared to the control data. Other metrics, such as `metric_test_over_metric_control` , `metric_test_over_complement` , and `metric_control_over_complement` , compute additional statistics that describe the relationship between the control and test ratios and how they relate to the overall population. For more information, see [Output for summable ratio metric contribution analysis models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_ratio_metric_contribution_analysis_models) .
 
 ## Clean up
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.

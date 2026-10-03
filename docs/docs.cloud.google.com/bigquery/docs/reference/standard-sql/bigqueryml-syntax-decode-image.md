@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.DECODE\_IMAGE function
+# The ML.DECODE_IMAGE function
 
 This document describes the `ML.DECODE_IMAGE` scalar function, which lets you convert image bytes to a multi-dimensional `ARRAY` representation. This conversion lets you do inference using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) on vision models that require images to be in `ARRAY` format.
 
@@ -20,19 +20,19 @@ ML.DECODE_IMAGE(data) AS input_field
 
 `ML.DECODE_IMAGE` takes the following argument:
 
-  - `data` : this argument must be a reference to one of the following:
-    
-      - A `BYTES` value that represents an image in one of the following formats:
-        
-          - JPEG
-          - PNG
-          - BMP
-    
-      - The `data` pseudocolumn of an object table.
-        
-        If you are referencing only the object table in the [`query_statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `ML.PREDICT` function, you can specify `data` as the value. If you are joining the object table with other tables in the `query_statement` of the `ML.PREDICT` function, then you should fully qualify the `data` value as `  dataset_name  ` . `  object_table_name  ` . `data` . This lets you avoid ambiguity if the tables share any column names.
-    
-    The `data` argument value must be \<= 10 MB (10,000,000 bytes).
+- `data` : this argument must be a reference to one of the following:
+
+  - A `BYTES` value that represents an image in one of the following formats:
+
+    - JPEG
+    - PNG
+    - BMP
+
+  - The `data` pseudocolumn of an object table.
+
+    If you are referencing only the object table in the [`query_statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `ML.PREDICT` function, you can specify `data` as the value. If you are joining the object table with other tables in the `query_statement` of the `ML.PREDICT` function, then you should fully qualify the `data` value as `dataset_name` . `object_table_name` . `data` . This lets you avoid ambiguity if the tables share any column names.
+
+  The `data` argument value must be \<= 10 MB (10,000,000 bytes).
 
 ## Output
 
@@ -60,24 +60,28 @@ The following examples show different ways you can use the `ML.DECODE_IMAGE` fun
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. It returns the inference results for all images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-    SELECT * FROM
-    ML.PREDICT(
-      MODEL `my_dataset.vision_model`,
-      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
-      FROM `my_dataset.object_table`)
-    );
+```
+SELECT * FROM
+ML.PREDICT(
+  MODEL `my_dataset.vision_model`,
+  (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 480, 480, FALSE) AS input
+  FROM `my_dataset.object_table`)
+);
+```
 
 **Example 2**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function, and uses the `ML.CONVERT_COLOR_SPACE` function in the `ML.PREDICT` function to convert the image color space from `RBG` to `YIQ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `input` and an output field of `feature` :
 
-    SELECT * FROM
-      ML.PREDICT(
-        MODEL `my_dataset.vision_model`,
-        (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
-        FROM `my_dataset.object_table`
-        WHERE content_type = 'image/jpeg')
-      );
+```
+SELECT * FROM
+  ML.PREDICT(
+    MODEL `my_dataset.vision_model`,
+    (SELECT uri, ML.CONVERT_COLOR_SPACE(ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 280, TRUE), 'YIQ') AS input
+    FROM `my_dataset.object_table`
+    WHERE content_type = 'image/jpeg')
+  );
+```
 
 **Example 3**
 
@@ -85,18 +89,22 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the decoded images table:
 
-    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-      AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
-      FROM `my_dataset.object_table`);
+```
+CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+  AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
+  FROM `my_dataset.object_table`);
+```
 
 Run inference on the decoded images table:
 
-    SELECT * FROM
-    ML.PREDICT(
-      MODEL`my_dataset.vision_model`,
-      (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
-      FROM `my_dataset.decoded_images`)
-    );
+```
+SELECT * FROM
+ML.PREDICT(
+  MODEL`my_dataset.vision_model`,
+  (SELECT uri, ML.CONVERT_IMAGE_TYPE(ML.RESIZE_IMAGE(decoded_image, 480, 480, FALSE)) AS input
+  FROM `my_dataset.decoded_images`)
+);
+```
 
 **Example 4**
 
@@ -104,41 +112,47 @@ The following example uses results from `ML.DECODE_IMAGE` that have been written
 
 Create the table:
 
-    CREATE OR REPLACE TABLE `my_dataset.decoded_images`
-      AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
-      FROM `my_dataset.object_table`);
+```
+CREATE OR REPLACE TABLE `my_dataset.decoded_images`
+  AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
+  FROM `my_dataset.object_table`);
+```
 
 Run inference on the decoded images table:
 
-    SELECT * FROM
-    ML.PREDICT(
-      MODEL `my_dataset.vision_model`,
-      (SELECT uri, decoded_image AS input
-      FROM `my_dataset.decoded_images`)
-    );
+```
+SELECT * FROM
+ML.PREDICT(
+  MODEL `my_dataset.vision_model`,
+  (SELECT uri, decoded_image AS input
+  FROM `my_dataset.decoded_images`)
+);
+```
 
 **Example 5**
 
 The following example uses the `ML.DECODE_IMAGE` function directly in the `ML.PREDICT` function. In this example, the model has an output field of `embeddings` and two input fields: one that expects an image, `f_img` , and one that expects a string, `f_txt` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `uri` column.
 
-    SELECT * FROM
-      ML.PREDICT(
-        MODEL `my_dataset.mixed_model`,
-        (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
-          my_dataset.image_description.description AS f_txt
-        FROM `my_dataset.object_table`
-        JOIN `my_dataset.image_description`
-        ON object_table.uri = image_description.uri)
-      );
+```
+SELECT * FROM
+  ML.PREDICT(
+    MODEL `my_dataset.mixed_model`,
+    (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(my_dataset.my_object_table.data), 224, 224, FALSE) AS f_img,
+      my_dataset.image_description.description AS f_txt
+    FROM `my_dataset.object_table`
+    JOIN `my_dataset.image_description`
+    ON object_table.uri = image_description.uri)
+  );
+```
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
-  - For more information about supported SQL statements and functions for each model type, see the following documents:
-    
-      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- For more information about supported SQL statements and functions for each model type, see the following documents:
+
+  - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+  - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

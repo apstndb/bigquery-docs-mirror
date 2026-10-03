@@ -30,42 +30,42 @@ The following diagram shows the architecture of managed disaster recovery:
 
 The following limitations apply to BigQuery disaster recovery:
 
-  - BigQuery disaster recovery is subject to the same limitations as [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#limitations) .
+- BigQuery disaster recovery is subject to the same limitations as [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#limitations) .
 
-  - A failover reservation can have a maximum of 1,000 attached datasets.
+- A failover reservation can have a maximum of 1,000 attached datasets.
 
-  - You can't convert an existing reservation to a failover reservation if the reservation has more than 1,000 [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
+- You can't convert an existing reservation to a failover reservation if the reservation has more than 1,000 [reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
 
-  - If queries reference datasets attached to multiple failover reservations within the same administration project, all of those reservations must use the same secondary location.
+- If queries reference datasets attached to multiple failover reservations within the same administration project, all of those reservations must use the same secondary location.
 
-  - Once a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from attached datasets using any capacity model.
+- Once a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from attached datasets using any capacity model.
 
-  - For datasets using disaster recovery, load and extract jobs can't use the free shared slot pool. You must create a `PIPELINE` type reservation assignment because only the Enterprise Plus edition supports writing to disaster recovery-configured datasets.
+- For datasets using disaster recovery, load and extract jobs can't use the free shared slot pool. You must create a `PIPELINE` type reservation assignment because only the Enterprise Plus edition supports writing to disaster recovery-configured datasets.
 
-  - After a failover, autoscaling depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
+- After a failover, autoscaling depends on compute capacity availability in the secondary region. Only the reservation baseline is available in the secondary region.
 
-  - If replication fails during the initial creation of resources, the reservation isn't created in the secondary region, and neither hard nor soft failover is available.
+- If replication fails during the initial creation of resources, the reservation isn't created in the secondary region, and neither hard nor soft failover is available.
 
-  - Soft failover requires both the primary and secondary regions to be available.
+- Soft failover requires both the primary and secondary regions to be available.
 
-  - You can't initiate a soft failover if reservation configuration changes have not replicated to the secondary region. Any replication errors, such as insufficient slot quota in the secondary region or transient issues, prevent soft failover from starting.
+- You can't initiate a soft failover if reservation configuration changes have not replicated to the secondary region. Any replication errors, such as insufficient slot quota in the secondary region or transient issues, prevent soft failover from starting.
 
-  - During an active soft failover, you can't update the reservation or attached datasets, but you can still read from them.
+- During an active soft failover, you can't update the reservation or attached datasets, but you can still read from them.
 
-  - Jobs running on a failover reservation during an active soft failover might not use reservation slots due to transient routing changes during the failover operation. These jobs use reservation slots before the soft failover starts and once it completes.
+- Jobs running on a failover reservation during an active soft failover might not use reservation slots due to transient routing changes during the failover operation. These jobs use reservation slots before the soft failover starts and once it completes.
 
-  - After a failover, [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location because they are bound to the location specified during creation. To resume scheduled queries, you must recreate them in the new primary location.
+- After a failover, [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location because they are bound to the location specified during creation. To resume scheduled queries, you must recreate them in the new primary location.
 
-  - The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't include failover details. To list failover events for reservations, query the [`INFORMATION_SCHEMA.FAILOVER_HISTORY` view](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) .
+- The [`INFORMATION_SCHEMA.RESERVATIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) doesn't include failover details. To list failover events for reservations, query the [`INFORMATION_SCHEMA.FAILOVER_HISTORY` view](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) .
 
-  - The [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) contains job history only for the region where jobs executed. Primary region job history isn't replicated to the secondary region. After a failover, job history from the primary region isn't visible in the secondary region.
+- The [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) contains job history only for the region where jobs executed. Primary region job history isn't replicated to the secondary region. After a failover, job history from the primary region isn't visible in the secondary region.
 
 ## Locations
 
 The following regions are available when creating a failover reservation:
 
 | Location code | Region Name               | Region Description |
-| ------------- | ------------------------- | ------------------ |
+|---------------|---------------------------|--------------------|
 | `AU`          |                           |                    |
 |               | `AUSTRALIA-SOUTHEAST1`    | Sydney             |
 |               | `AUSTRALIA-SOUTHEAST2`    | Melbourne          |
@@ -104,10 +104,10 @@ Region pairs must be selected within `AU` , `CA` , `DE` , `EU` , `IN` or the `US
 
 If your BigQuery dataset is in a multi-region location, you can't use the following region pairs. This limitation is required to make sure that your failover reservation and data are geographically separated after replication. For more information about regions that are contained within multi-regions, see [Multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) .
 
-  - `us-central1` - `us` multi-region
-  - `us-west1` - `us` multi-region
-  - `eu-west1` - `eu` multi-region
-  - `eu-west4` - `eu` multi-region
+- `us-central1` - `us` multi-region
+- `us-west1` - `us` multi-region
+- `eu-west1` - `eu` multi-region
+- `eu-west4` - `eu` multi-region
 
 ## Before you begin
 
@@ -142,11 +142,11 @@ Turbo replication bandwidth has quota. For more information, see [Quotas and lim
 
 Configuring managed disaster recovery requires the following pricing plans:
 
-  - Compute capacity: You must purchase the [Enterprise Plus edition](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+- Compute capacity: You must purchase the [Enterprise Plus edition](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
-  - Turbo replication: Disaster recovery relies on turbo replication during replication. You are charged based on physical bytes and on a per physical GiB replicated basis. For more information, see [Data replication data transfer pricing for Turbo replication](https://cloud.google.com/bigquery/pricing#data_replication) .
+- Turbo replication: Disaster recovery relies on turbo replication during replication. You are charged based on physical bytes and on a per physical GiB replicated basis. For more information, see [Data replication data transfer pricing for Turbo replication](https://cloud.google.com/bigquery/pricing#data_replication) .
 
-  - Storage: Storage bytes in the secondary region are billed at the same price as storage bytes in the primary region. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
+- Storage: Storage bytes in the secondary region are billed at the same price as storage bytes in the primary region. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 Customers are only required to pay for compute capacity in the primary region. Secondary compute capacity (based on the reservation baseline) is available in the secondary region at no additional cost. [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) can't use the secondary compute capacity unless the reservation has failed over.
 
@@ -181,14 +181,14 @@ Select one of the following:
 7.  In the **Max reservation size selector** list, select the maximum reservation size.
 
 8.  Optional: In the **Baseline slots** field, enter the number of baseline slots for the reservation.
-    
+
     The number of available autoscaling slots is determined by subtracting the **Baseline slots** value from the **Max reservation size** value. For example, if you create a reservation with 100 baseline slots and a max reservation size of 400, your reservation has 300 autoscaling slots. For more information about baseline slots, see [Using reservations with baseline and autoscaling slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots) .
 
 9.  In the **Secondary location** list, select the secondary location.
 
 10. To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-11. To expand the **Advanced settings** section, click the expand\_more expander arrow.
+11. To expand the **Advanced settings** section, click the expand_more expander arrow.
 
 12. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** . The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 
@@ -203,29 +203,31 @@ To create a reservation, use the [`CREATE RESERVATION` data definition language 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE RESERVATION
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-        OPTIONS (
-          slot_capacity = NUMBER_OF_BASELINE_SLOTS,
-          edition = ENTERPRISE_PLUS,
-          secondary_location = SECONDARY_LOCATION);
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-    
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. If you select a [BigQuery Omni location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) , your edition option is limited to the Enterprise edition.
-    
-      - `  RESERVATION_NAME  ` : the name of the reservation.
-        
-        The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
-    
-      - `  NUMBER_OF_BASELINE_SLOTS  ` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `edition` option in the same reservation.
-    
-      - `  SECONDARY_LOCATION  ` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE RESERVATION
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+    OPTIONS (
+      slot_capacity = NUMBER_OF_BASELINE_SLOTS,
+      edition = ENTERPRISE_PLUS,
+      secondary_location = SECONDARY_LOCATION);
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. If you select a [BigQuery Omni location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) , your edition option is limited to the Enterprise edition.
+
+    - `RESERVATION_NAME` : the name of the reservation.
+
+      The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
+
+    - `NUMBER_OF_BASELINE_SLOTS` : the number of baseline slots to allocate to the reservation. You cannot set the `slot_capacity` option and the `edition` option in the same reservation.
+
+    - `SECONDARY_LOCATION` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -243,7 +245,7 @@ Select one of the following:
 
 4.  Find the reservation that you want to update.
 
-5.  Click more\_vert **Reservations actions** , and then click **Edit** .
+5.  Click more_vert **Reservations actions** , and then click **Edit** .
 
 6.  In the **Secondary location** field, enter the secondary location.
 
@@ -256,20 +258,22 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER RESERVATION
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-        SET OPTIONS (
-          secondary_location = SECONDARY_LOCATION);
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
-      - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
-      - `  SECONDARY_LOCATION  ` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER RESERVATION
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+    SET OPTIONS (
+      secondary_location = SECONDARY_LOCATION);
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, for example `europe-west9` .
+    - `RESERVATION_NAME` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
+    - `SECONDARY_LOCATION` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -304,18 +308,20 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER SCHEMA
-          `DATASET_NAME`
-        SET OPTIONS (
-          failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
-    
-    Replace the following:
-    
-      - `  DATASET_NAME  ` : the name of the dataset.
-      - `  ADMIN_PROJECT_ID . RESERVATION_NAME  ` : the name of the reservation you want to associate the dataset to.
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER SCHEMA
+      `DATASET_NAME`
+    SET OPTIONS (
+      failover_reservation = ADMIN_PROJECT_ID.RESERVATION_NAME);
+    ```
+
+    Replace the following:
+
+    - `DATASET_NAME` : the name of the dataset.
+    - `ADMIN_PROJECT_ID `` . `` RESERVATION_NAME` : the name of the reservation you want to associate the dataset to.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -333,7 +339,7 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 
 4.  Click the **Disaster recovery** tab.
 
-5.  Expand the more\_vert **Actions** option for the primary replica of the dataset.
+5.  Expand the more_vert **Actions** option for the primary replica of the dataset.
 
 6.  Click **Remove** .
 
@@ -344,17 +350,19 @@ To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER SCHEMA
-          `DATASET_NAME`
-        SET OPTIONS (
-          failover_reservation = NULL);
-    
-    Replace the following:
-    
-      - `  DATASET_NAME  ` : the name of the dataset.
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER SCHEMA
+      `DATASET_NAME`
+    SET OPTIONS (
+      failover_reservation = NULL);
+    ```
+
+    Replace the following:
+
+    - `DATASET_NAME` : the name of the dataset.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -381,21 +389,23 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER RESERVATION
-          `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
-        SET OPTIONS (
-          is_primary = TRUE, failover_mode=FAILOVER_MODE);
-    
-    Replace the following:
-    
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
-      - `  LOCATION  ` : the new primary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, that is the current secondary location before the failover - for example, `europe-west9` .
-      - `  RESERVATION_NAME  ` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
-      - `  PRIMARY_STATUS  ` : a boolean status that declares whether the reservation is the primary replica.
-      - `  FAILOVER_MODE  ` : an optional parameter used to describe the failover mode. This can be set to either `HARD` or `SOFT` . If this parameter is not specified, `HARD` is used by default.
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER RESERVATION
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+    SET OPTIONS (
+      is_primary = TRUE, failover_mode=FAILOVER_MODE);
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+    - `LOCATION` : the new primary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation, that is the current secondary location before the failover - for example, `europe-west9` .
+    - `RESERVATION_NAME` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
+    - `PRIMARY_STATUS` : a boolean status that declares whether the reservation is the primary replica.
+    - `FAILOVER_MODE` : an optional parameter used to describe the failover mode. This can be set to either `HARD` or `SOFT` . If this parameter is not specified, `HARD` is used by default.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -423,8 +433,8 @@ To view the replication status and latency for a dataset in the Google Cloud con
 
 BigQuery provides the following metrics in Monitoring to help you monitor replication status:
 
-  - **Replication latency** : The staleness of data in the secondary region replicated as part of cross-region replication or managed disaster recovery. This metric serves as a proxy for your recovery point objective (RPO).
-  - **Network egress bytes** : The billed volume of data (in bytes) replicated from the primary region to the secondary region. This metric helps you monitor bandwidth quota utilization.
+- **Replication latency** : The staleness of data in the secondary region replicated as part of cross-region replication or managed disaster recovery. This metric serves as a proxy for your recovery point objective (RPO).
+- **Network egress bytes** : The billed volume of data (in bytes) replicated from the primary region to the secondary region. This metric helps you monitor bandwidth quota utilization.
 
 To view these metrics in Monitoring, do the following:
 
@@ -440,72 +450,76 @@ To view these metrics in Monitoring, do the following:
 
 6.  In the **Aggregation** section, select an aggregation method. For the replication latency metric, we recommend selecting **99th percentile** . This aggregation better shows the worst-case performance compared to the average or other aggregations.
 
-7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset\_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
+7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
 
 ### View replication status with `INFORMATION_SCHEMA`
 
 To determine the state of your replicas, query the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) . For example:
 
-    SELECT
-      schema_name,
-      replica_name,
-      creation_complete,
-      replica_primary_assigned,
-      replica_primary_assignment_complete
-    FROM
-      `region-LOCATION`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
-    WHERE
-      schema_name="my_dataset"
+```
+SELECT
+  schema_name,
+  replica_name,
+  creation_complete,
+  replica_primary_assigned,
+  replica_primary_assignment_complete
+FROM
+  `region-LOCATION`.INFORMATION_SCHEMA.SCHEMATA_REPLICAS
+WHERE
+  schema_name="my_dataset"
+```
 
 The following query returns the jobs from the last seven days that would fail if their datasets were failover datasets:
 
-    WITH
-      non_epe_reservations AS (
-        SELECT project_id, reservation_name
-        FROM `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS
-        WHERE edition != 'ENTERPRISE_PLUS'
-      )
-    SELECT *
+```
+WITH
+  non_epe_reservations AS (
+    SELECT project_id, reservation_name
+    FROM `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.RESERVATIONS
+    WHERE edition != 'ENTERPRISE_PLUS'
+  )
+SELECT *
+FROM
+  (
+    SELECT job_id
     FROM
       (
-        SELECT job_id
+        SELECT
+          job_id,
+          reservation_id,
+          ARRAY_CONCAT(referenced_tables, [destination_table]) AS all_referenced_tables,
+          query
         FROM
-          (
-            SELECT
-              job_id,
-              reservation_id,
-              ARRAY_CONCAT(referenced_tables, [destination_table]) AS all_referenced_tables,
-              query
-            FROM
-              `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.JOBS
-            WHERE
-              creation_time
-              BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-              AND CURRENT_TIMESTAMP()
-          ) A,
-          UNNEST(all_referenced_tables) AS referenced_table
-      ) jobs
-    LEFT OUTER JOIN non_epe_reservations
-      ON (
-        jobs.reservation_id = CONCAT(
-          non_epe_reservations.project_id, ':', 'LOCATION', '.', non_epe_reservations.reservation_name))
-    WHERE
-      CONCAT(jobs.project_id, ':', jobs.dataset_id)
-      IN UNNEST(
-        [
-          'PROJECT_ID:DATASET_ID',
-          'PROJECT_ID:DATASET_ID']);
+          `PROJECT_ID.region-LOCATION`.INFORMATION_SCHEMA.JOBS
+        WHERE
+          creation_time
+          BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+          AND CURRENT_TIMESTAMP()
+      ) A,
+      UNNEST(all_referenced_tables) AS referenced_table
+  ) jobs
+LEFT OUTER JOIN non_epe_reservations
+  ON (
+    jobs.reservation_id = CONCAT(
+      non_epe_reservations.project_id, ':', 'LOCATION', '.', non_epe_reservations.reservation_name))
+WHERE
+  CONCAT(jobs.project_id, ':', jobs.dataset_id)
+  IN UNNEST(
+    [
+      'PROJECT_ID:DATASET_ID',
+      'PROJECT_ID:DATASET_ID']);
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID.
-  - `  DATASET_ID  ` : the dataset ID.
-  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+- `PROJECT_ID` : the project ID.
+- `DATASET_ID` : the dataset ID.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## What's next
 
-  - Query [`INFORMATION_SCHEMA.FAILOVER_HISTORY`](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) to view failover events for your reservations.
+- Query [`INFORMATION_SCHEMA.FAILOVER_HISTORY`](https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history) to view failover events for your reservations.
 
-  - Learn more about [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) .
+- Learn more about [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) .
 
-  - Learn more about [reliability](https://docs.cloud.google.com/bigquery/docs/reliability-intro) .
+- Learn more about [reliability](https://docs.cloud.google.com/bigquery/docs/reliability-intro) .

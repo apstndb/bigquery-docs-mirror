@@ -11,7 +11,7 @@ GoogleSQL for BigQuery supports the following AEAD encryption functions. For a d
 ## Function list
 
 | Name                                                                                                                                                        | Summary                                                                                                                  |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | [`AEAD.DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_bytes)                      | Uses the matching key from a keyset to decrypt a `BYTES` ciphertext.                                                     |
 | [`AEAD.DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string)                    | Uses the matching key from a keyset to decrypt a `BYTES` ciphertext into a `STRING` plaintext.                           |
 | [`AEAD.ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeadencrypt)                                  | Encrypts `STRING` plaintext, using the primary cryptographic key in a keyset.                                            |
@@ -31,7 +31,9 @@ GoogleSQL for BigQuery supports the following AEAD encryption functions. For a d
 
 ## `AEAD.DECRYPT_BYTES`
 
-    AEAD.DECRYPT_BYTES(keyset, ciphertext, additional_data)
+```
+AEAD.DECRYPT_BYTES(keyset, ciphertext, additional_data)
+```
 
 **Description**
 
@@ -55,48 +57,56 @@ This example creates a table of unique IDs with associated plaintext values and 
 
 The following statement creates a table `CustomerKeysets` containing a column of unique IDs, a column of `AEAD_AES_GCM_256` keysets, and a column of favorite animals.
 
-    CREATE TABLE aead.CustomerKeysets AS
-    SELECT
-      1 AS customer_id,
-      KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
-      b'jaguar' AS favorite_animal
-    UNION ALL
-    SELECT
-      2 AS customer_id,
-      KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
-      b'zebra' AS favorite_animal
-    UNION ALL
-    SELECT
-      3 AS customer_id,
-      KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
-      b'nautilus' AS favorite_animal;
+```
+CREATE TABLE aead.CustomerKeysets AS
+SELECT
+  1 AS customer_id,
+  KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
+  b'jaguar' AS favorite_animal
+UNION ALL
+SELECT
+  2 AS customer_id,
+  KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
+  b'zebra' AS favorite_animal
+UNION ALL
+SELECT
+  3 AS customer_id,
+  KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset,
+  b'nautilus' AS favorite_animal;
+```
 
 The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the keyset value from `CustomerKeysets` corresponding to each unique ID.
 
-    CREATE TABLE aead.EncryptedCustomerData AS
-    SELECT
-      customer_id,
-      AEAD.ENCRYPT(keyset, favorite_animal, CAST(CAST(customer_id AS STRING) AS BYTES))
-       AS encrypted_animal
-    FROM
-      aead.CustomerKeysets AS ck;
+```
+CREATE TABLE aead.EncryptedCustomerData AS
+SELECT
+  customer_id,
+  AEAD.ENCRYPT(keyset, favorite_animal, CAST(CAST(customer_id AS STRING) AS BYTES))
+   AS encrypted_animal
+FROM
+  aead.CustomerKeysets AS ck;
+```
 
 The following query uses the keysets in the `CustomerKeysets` table to decrypt data in the `EncryptedCustomerData` table.
 
-    SELECT
-      ecd.customer_id,
-      AEAD.DECRYPT_BYTES(
-        (SELECT ck.keyset
-         FROM aead.CustomerKeysets AS ck
-         WHERE ecd.customer_id = ck.customer_id),
-        ecd.encrypted_animal,
-        CAST(CAST(customer_id AS STRING) AS BYTES)
-      ) AS favorite_animal
-    FROM aead.EncryptedCustomerData AS ecd;
+```
+SELECT
+  ecd.customer_id,
+  AEAD.DECRYPT_BYTES(
+    (SELECT ck.keyset
+     FROM aead.CustomerKeysets AS ck
+     WHERE ecd.customer_id = ck.customer_id),
+    ecd.encrypted_animal,
+    CAST(CAST(customer_id AS STRING) AS BYTES)
+  ) AS favorite_animal
+FROM aead.EncryptedCustomerData AS ecd;
+```
 
 ## `AEAD.DECRYPT_STRING`
 
-    AEAD.DECRYPT_STRING(keyset, ciphertext, additional_data)
+```
+AEAD.DECRYPT_STRING(keyset, ciphertext, additional_data)
+```
 
 **Description**
 
@@ -108,7 +118,9 @@ Like [`AEAD.DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/referenc
 
 ## `AEAD.ENCRYPT`
 
-    AEAD.ENCRYPT(keyset, plaintext, additional_data)
+```
+AEAD.ENCRYPT(keyset, plaintext, additional_data)
+```
 
 **Description**
 
@@ -130,29 +142,33 @@ The output is ciphertext `BYTES` . The ciphertext contains a [Tink-specific](htt
 
 The following query uses the keysets for each `customer_id` in the `CustomerKeysets` table to encrypt the value of the plaintext `favorite_animal` in the `PlaintextCustomerData` table corresponding to that `customer_id` . The output contains a column of `customer_id` values and a column of corresponding ciphertext output as `BYTES` .
 
-    WITH CustomerKeysets AS (
-      SELECT 1 AS customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset UNION ALL
-      SELECT 2, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') UNION ALL
-      SELECT 3, KEYS.NEW_KEYSET('AEAD_AES_GCM_256')
-    ), PlaintextCustomerData AS (
-      SELECT 1 AS customer_id, 'elephant' AS favorite_animal UNION ALL
-      SELECT 2, 'walrus' UNION ALL
-      SELECT 3, 'leopard'
-    )
-    SELECT
-      pcd.customer_id,
-      AEAD.ENCRYPT(
-        (SELECT keyset
-         FROM CustomerKeysets AS ck
-         WHERE ck.customer_id = pcd.customer_id),
-        pcd.favorite_animal,
-        CAST(pcd.customer_id AS STRING)
-      ) AS encrypted_animal
-    FROM PlaintextCustomerData AS pcd;
+```
+WITH CustomerKeysets AS (
+  SELECT 1 AS customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset UNION ALL
+  SELECT 2, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') UNION ALL
+  SELECT 3, KEYS.NEW_KEYSET('AEAD_AES_GCM_256')
+), PlaintextCustomerData AS (
+  SELECT 1 AS customer_id, 'elephant' AS favorite_animal UNION ALL
+  SELECT 2, 'walrus' UNION ALL
+  SELECT 3, 'leopard'
+)
+SELECT
+  pcd.customer_id,
+  AEAD.ENCRYPT(
+    (SELECT keyset
+     FROM CustomerKeysets AS ck
+     WHERE ck.customer_id = pcd.customer_id),
+    pcd.favorite_animal,
+    CAST(pcd.customer_id AS STRING)
+  ) AS encrypted_animal
+FROM PlaintextCustomerData AS pcd;
+```
 
 ## `DETERMINISTIC_DECRYPT_BYTES`
 
-    DETERMINISTIC_DECRYPT_BYTES(keyset, ciphertext, additional_data)
+```
+DETERMINISTIC_DECRYPT_BYTES(keyset, ciphertext, additional_data)
+```
 
 **Description**
 
@@ -176,48 +192,56 @@ This example creates a table of unique IDs with associated plaintext values and 
 
 The following statement creates a table `CustomerKeysets` containing a column of unique IDs, a column of `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` keysets, and a column of favorite animals.
 
-    CREATE TABLE deterministic.CustomerKeysets AS
-    SELECT
-      1 AS customer_id,
-      KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
-      b'jaguar' AS favorite_animal
-    UNION ALL
-    SELECT
-      2 AS customer_id,
-      KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
-      b'zebra' AS favorite_animal
-    UNION ALL
-    SELECT
-      3 AS customer_id,
-      KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
-      b'nautilus' AS favorite_animal;
+```
+CREATE TABLE deterministic.CustomerKeysets AS
+SELECT
+  1 AS customer_id,
+  KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
+  b'jaguar' AS favorite_animal
+UNION ALL
+SELECT
+  2 AS customer_id,
+  KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
+  b'zebra' AS favorite_animal
+UNION ALL
+SELECT
+  3 AS customer_id,
+  KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset,
+  b'nautilus' AS favorite_animal;
+```
 
 The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the keyset value from `CustomerKeysets` corresponding to each unique ID.
 
-    CREATE TABLE deterministic.EncryptedCustomerData AS
-    SELECT
-      customer_id,
-      DETERMINISTIC_ENCRYPT(ck.keyset, favorite_animal, CAST(CAST(customer_id AS STRING) AS BYTES))
-       AS encrypted_animal
-    FROM
-      deterministic.CustomerKeysets AS ck;
+```
+CREATE TABLE deterministic.EncryptedCustomerData AS
+SELECT
+  customer_id,
+  DETERMINISTIC_ENCRYPT(ck.keyset, favorite_animal, CAST(CAST(customer_id AS STRING) AS BYTES))
+   AS encrypted_animal
+FROM
+  deterministic.CustomerKeysets AS ck;
+```
 
 The following query uses the keysets in the `CustomerKeysets` table to decrypt data in the `EncryptedCustomerData` table.
 
-    SELECT
-      ecd.customer_id,
-      DETERMINISTIC_DECRYPT_BYTES(
-        (SELECT ck.keyset
-         FROM deterministic.CustomerKeysets AS ck
-         WHERE ecd.customer_id = ck.customer_id),
-        ecd.encrypted_animal,
-        CAST(CAST(ecd.customer_id AS STRING) AS BYTES)
-      ) AS favorite_animal
-    FROM deterministic.EncryptedCustomerData AS ecd;
+```
+SELECT
+  ecd.customer_id,
+  DETERMINISTIC_DECRYPT_BYTES(
+    (SELECT ck.keyset
+     FROM deterministic.CustomerKeysets AS ck
+     WHERE ecd.customer_id = ck.customer_id),
+    ecd.encrypted_animal,
+    CAST(CAST(ecd.customer_id AS STRING) AS BYTES)
+  ) AS favorite_animal
+FROM deterministic.EncryptedCustomerData AS ecd;
+```
 
 ## `DETERMINISTIC_DECRYPT_STRING`
 
-    DETERMINISTIC_DECRYPT_STRING(keyset, ciphertext, additional_data)
+```
+DETERMINISTIC_DECRYPT_STRING(keyset, ciphertext, additional_data)
+```
 
 **Description**
 
@@ -229,7 +253,9 @@ Like [`DETERMINISTIC_DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs
 
 ## `DETERMINISTIC_ENCRYPT`
 
-    DETERMINISTIC_ENCRYPT(keyset, plaintext, additional_data)
+```
+DETERMINISTIC_ENCRYPT(keyset, plaintext, additional_data)
+```
 
 **Description**
 
@@ -251,30 +277,34 @@ The output is ciphertext `BYTES` . The ciphertext contains a [Tink-specific](htt
 
 The following query uses the keysets for each `customer_id` in the `CustomerKeysets` table to encrypt the value of the plaintext `favorite_animal` in the `PlaintextCustomerData` table corresponding to that `customer_id` . The output contains a column of `customer_id` values and a column of corresponding ciphertext output as `BYTES` .
 
-    WITH CustomerKeysets AS (
-      SELECT 1 AS customer_id,
-      KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset UNION ALL
-      SELECT 2, KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') UNION ALL
-      SELECT 3, KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
-    ), PlaintextCustomerData AS (
-      SELECT 1 AS customer_id, 'elephant' AS favorite_animal UNION ALL
-      SELECT 2, 'walrus' UNION ALL
-      SELECT 3, 'leopard'
-    )
-    SELECT
-      pcd.customer_id,
-      DETERMINISTIC_ENCRYPT(
-        (SELECT keyset
-         FROM CustomerKeysets AS ck
-         WHERE ck.customer_id = pcd.customer_id),
-        pcd.favorite_animal,
-        CAST(pcd.customer_id AS STRING)
-      ) AS encrypted_animal
-    FROM PlaintextCustomerData AS pcd;
+```
+WITH CustomerKeysets AS (
+  SELECT 1 AS customer_id,
+  KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') AS keyset UNION ALL
+  SELECT 2, KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256') UNION ALL
+  SELECT 3, KEYS.NEW_KEYSET('DETERMINISTIC_AEAD_AES_SIV_CMAC_256')
+), PlaintextCustomerData AS (
+  SELECT 1 AS customer_id, 'elephant' AS favorite_animal UNION ALL
+  SELECT 2, 'walrus' UNION ALL
+  SELECT 3, 'leopard'
+)
+SELECT
+  pcd.customer_id,
+  DETERMINISTIC_ENCRYPT(
+    (SELECT keyset
+     FROM CustomerKeysets AS ck
+     WHERE ck.customer_id = pcd.customer_id),
+    pcd.favorite_animal,
+    CAST(pcd.customer_id AS STRING)
+  ) AS encrypted_animal
+FROM PlaintextCustomerData AS pcd;
+```
 
 ## `KEYS.ADD_KEY_FROM_RAW_BYTES`
 
-    KEYS.ADD_KEY_FROM_RAW_BYTES(keyset, key_type, raw_key_bytes)
+```
+KEYS.ADD_KEY_FROM_RAW_BYTES(keyset, key_type, raw_key_bytes)
+```
 
 **Description**
 
@@ -282,8 +312,8 @@ Returns a serialized keyset as `BYTES` with the addition of a key to `keyset` ba
 
 The primary cryptographic key remains the same as in `keyset` . The expected length of `raw_key_bytes` depends on the value of `key_type` . The following are supported `key_types` :
 
-  - `'AES_CBC_PKCS'` : Creates a key for AES decryption using cipher block chaining and PKCS padding. `raw_key_bytes` is expected to be a raw key `BYTES` value of length 16, 24, or 32; these lengths have sizes of 128, 192, and 256 bits, respectively. GoogleSQL AEAD functions don't support keys of these types for encryption; instead, prefer `'AEAD_AES_GCM_256'` or `'AES_GCM'` keys.
-  - `'AES_GCM'` : Creates a key for AES decryption or encryption using [Galois/Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode) . `raw_key_bytes` must be a raw key `BYTES` value of length 16 or 32; these lengths have sizes of 128 and 256 bits, respectively. When keys of this type are inputs to `AEAD.ENCRYPT` , the output ciphertext doesn't have a Tink-specific prefix indicating which key was used as input.
+- `'AES_CBC_PKCS'` : Creates a key for AES decryption using cipher block chaining and PKCS padding. `raw_key_bytes` is expected to be a raw key `BYTES` value of length 16, 24, or 32; these lengths have sizes of 128, 192, and 256 bits, respectively. GoogleSQL AEAD functions don't support keys of these types for encryption; instead, prefer `'AEAD_AES_GCM_256'` or `'AES_GCM'` keys.
+- `'AES_GCM'` : Creates a key for AES decryption or encryption using [Galois/Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode) . `raw_key_bytes` must be a raw key `BYTES` value of length 16 or 32; these lengths have sizes of 128 and 256 bits, respectively. When keys of this type are inputs to `AEAD.ENCRYPT` , the output ciphertext doesn't have a Tink-specific prefix indicating which key was used as input.
 
 **Return Data Type**
 
@@ -291,32 +321,36 @@ The primary cryptographic key remains the same as in `keyset` . The expected len
 
 **Example**
 
-The following query creates a table of customer IDs along with raw key bytes, called `CustomerRawKeys` , and a table of unique IDs, called `CustomerIds` . It creates a new `'AEAD_AES_GCM_256'` keyset for each `customer_id` ; then it adds a new key to each keyset, using the `raw_key_bytes` value corresponding to that `customer_id` . The output is a table where each row contains a `customer_id` and a keyset in `BYTES` , which contains the raw key added using KEYS.ADD\_KEY\_FROM\_RAW\_BYTES.
+The following query creates a table of customer IDs along with raw key bytes, called `CustomerRawKeys` , and a table of unique IDs, called `CustomerIds` . It creates a new `'AEAD_AES_GCM_256'` keyset for each `customer_id` ; then it adds a new key to each keyset, using the `raw_key_bytes` value corresponding to that `customer_id` . The output is a table where each row contains a `customer_id` and a keyset in `BYTES` , which contains the raw key added using KEYS.ADD_KEY_FROM_RAW_BYTES.
 
-    WITH CustomerRawKeys AS (
-      SELECT 1 AS customer_id, b'0123456789012345' AS raw_key_bytes UNION ALL
-      SELECT 2, b'9876543210543210' UNION ALL
-      SELECT 3, b'0123012301230123'
-    ), CustomerIds AS (
-      SELECT 1 AS customer_id UNION ALL
-      SELECT 2 UNION ALL
-      SELECT 3
-    )
-    SELECT
-      ci.customer_id,
-      KEYS.ADD_KEY_FROM_RAW_BYTES(
-        KEYS.NEW_KEYSET('AEAD_AES_GCM_256'),
-        'AES_CBC_PKCS',
-        (SELECT raw_key_bytes FROM CustomerRawKeys AS crk
-         WHERE crk.customer_id = ci.customer_id)
-      ) AS keyset
-    FROM CustomerIds AS ci;
+```
+WITH CustomerRawKeys AS (
+  SELECT 1 AS customer_id, b'0123456789012345' AS raw_key_bytes UNION ALL
+  SELECT 2, b'9876543210543210' UNION ALL
+  SELECT 3, b'0123012301230123'
+), CustomerIds AS (
+  SELECT 1 AS customer_id UNION ALL
+  SELECT 2 UNION ALL
+  SELECT 3
+)
+SELECT
+  ci.customer_id,
+  KEYS.ADD_KEY_FROM_RAW_BYTES(
+    KEYS.NEW_KEYSET('AEAD_AES_GCM_256'),
+    'AES_CBC_PKCS',
+    (SELECT raw_key_bytes FROM CustomerRawKeys AS crk
+     WHERE crk.customer_id = ci.customer_id)
+  ) AS keyset
+FROM CustomerIds AS ci;
+```
 
 The output keysets each contain two things: the primary cryptographic key created using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')` , and the raw key added using `KEYS.ADD_KEY_FROM_RAW_BYTES` . If a keyset in the output is used with `AEAD.ENCRYPT` , GoogleSQL uses the primary cryptographic key created using `KEYS.NEW_KEYSET('AEAD_AES_GCM_256')` to encrypt the input plaintext. If the keyset is used with `AEAD.DECRYPT_STRING` or `AEAD.DECRYPT_BYTES` , GoogleSQL returns the resulting plaintext if either key succeeds in decrypting the ciphertext.
 
 ## `KEYS.KEYSET_CHAIN`
 
-    KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset)
+```
+KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset)
+```
 
 **Description**
 
@@ -324,11 +358,13 @@ Can be used in place of the `keyset` argument to the AEAD and deterministic encr
 
 This function takes the following arguments:
 
-  - `kms_resource_name` : A `STRING` literal that contains the resource path to the Cloud KMS key that's used to decrypt `first_level_keyset` . This key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
-    
-        gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+- `kms_resource_name` : A `STRING` literal that contains the resource path to the Cloud KMS key that's used to decrypt `first_level_keyset` . This key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
 
-  - `first_level_keyset` : A `BYTES` literal that represents a [keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#keysets) or [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) .
+  ```
+  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+  ```
+
+- `first_level_keyset` : A `BYTES` literal that represents a [keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#keysets) or [wrapped keyset](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) .
 
 **Return Data Type**
 
@@ -340,93 +376,105 @@ This example creates a table of example data, then shows how to encrypt that dat
 
 The following statement creates a table `RawCustomerData` containing a column of customer ids and a column of favorite animals.
 
-    CREATE TABLE aead.RawCustomerData AS
-    SELECT
-      1 AS customer_id,
-      b'jaguar' AS favorite_animal
-    UNION ALL
-    SELECT
-      2 AS customer_id,
-      b'zebra' AS favorite_animal
-    UNION ALL
-    SELECT
-      3 AS customer_id,
-      b'zebra' AS favorite_animal;
+```
+CREATE TABLE aead.RawCustomerData AS
+SELECT
+  1 AS customer_id,
+  b'jaguar' AS favorite_animal
+UNION ALL
+SELECT
+  2 AS customer_id,
+  b'zebra' AS favorite_animal
+UNION ALL
+SELECT
+  3 AS customer_id,
+  b'zebra' AS favorite_animal;
+```
 
-The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the first\_level\_keyset provided.
+The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the first_level_keyset provided.
 
-    DECLARE kms_resource_name STRING;
-    DECLARE first_level_keyset BYTES;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
-    
-    CREATE TABLE aead.EncryptedCustomerData AS
-    SELECT
-      customer_id,
-      AEAD.ENCRYPT(
-        KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
-        favorite_animal,
-        CAST(CAST(customer_id AS STRING) AS BYTES)
-      ) AS encrypted_animal
-    FROM
-      aead.RawCustomerData;
+```
+DECLARE kms_resource_name STRING;
+DECLARE first_level_keyset BYTES;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
 
-The following query uses the first\_level\_keyset to decrypt data in the `EncryptedCustomerData` table.
+CREATE TABLE aead.EncryptedCustomerData AS
+SELECT
+  customer_id,
+  AEAD.ENCRYPT(
+    KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
+    favorite_animal,
+    CAST(CAST(customer_id AS STRING) AS BYTES)
+  ) AS encrypted_animal
+FROM
+  aead.RawCustomerData;
+```
 
-    DECLARE kms_resource_name STRING;
-    DECLARE first_level_keyset BYTES;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
-    
-    SELECT
-      customer_id,
-      AEAD.DECRYPT_BYTES(
-        KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
-        encrypted_animal,
-        CAST(CAST(customer_id AS STRING) AS BYTES)
-      ) AS favorite_animal
-    FROM
-      aead.EncryptedCustomerData;
+The following query uses the first_level_keyset to decrypt data in the `EncryptedCustomerData` table.
+
+```
+DECLARE kms_resource_name STRING;
+DECLARE first_level_keyset BYTES;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+
+SELECT
+  customer_id,
+  AEAD.DECRYPT_BYTES(
+    KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
+    encrypted_animal,
+    CAST(CAST(customer_id AS STRING) AS BYTES)
+  ) AS favorite_animal
+FROM
+  aead.EncryptedCustomerData;
+```
 
 The previous two steps also work with the `DETERMINISTIC_ENCRYPT` and `DETERMINISTIC_DECRYPT_BYTES` functions. The wrapped keyset must be created using the `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` type.
 
-The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the first\_level\_keyset provided. You can see that the ciphertext for `favorite_animal` is the same for customers 2 and 3 since their plaintext `favorite_animal` is the same.
+The following statement creates a table `EncryptedCustomerData` containing a column of unique IDs and a column of ciphertext. The statement encrypts the plaintext `favorite_animal` using the first_level_keyset provided. You can see that the ciphertext for `favorite_animal` is the same for customers 2 and 3 since their plaintext `favorite_animal` is the same.
 
-    DECLARE kms_resource_name STRING;
-    DECLARE first_level_keyset BYTES;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
-    
-    CREATE TABLE daead.EncryptedCustomerData AS
-    SELECT
-      customer_id,
-      DETERMINISTC_ENCRYPT(
-        KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
-        favorite_animal,
-        CAST(CAST(customer_id AS STRING) AS BYTES)
-      ) AS encrypted_animal
-    FROM
-      daead.RawCustomerData;
+```
+DECLARE kms_resource_name STRING;
+DECLARE first_level_keyset BYTES;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
 
-The following query uses the first\_level\_keyset to decrypt data in the `EncryptedCustomerData` table.
+CREATE TABLE daead.EncryptedCustomerData AS
+SELECT
+  customer_id,
+  DETERMINISTC_ENCRYPT(
+    KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
+    favorite_animal,
+    CAST(CAST(customer_id AS STRING) AS BYTES)
+  ) AS encrypted_animal
+FROM
+  daead.RawCustomerData;
+```
 
-    DECLARE kms_resource_name STRING;
-    DECLARE first_level_keyset BYTES;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
-    
-    SELECT
-      customer_id,
-      DETERMINISTIC_DECRYPT_BYTES(
-        KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
-        encrypted_animal,
-        CAST(CAST(customer_id AS STRING) AS BYTES)
-      ) AS favorite_animal
-    FROM dead.EncryptedCustomerData;
+The following query uses the first_level_keyset to decrypt data in the `EncryptedCustomerData` table.
+
+```
+DECLARE kms_resource_name STRING;
+DECLARE first_level_keyset BYTES;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET first_level_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+
+SELECT
+  customer_id,
+  DETERMINISTIC_DECRYPT_BYTES(
+    KEYS.KEYSET_CHAIN(kms_resource_name, first_level_keyset),
+    encrypted_animal,
+    CAST(CAST(customer_id AS STRING) AS BYTES)
+  ) AS favorite_animal
+FROM dead.EncryptedCustomerData;
+```
 
 ## `KEYS.KEYSET_FROM_JSON`
 
-    KEYS.KEYSET_FROM_JSON(json_keyset)
+```
+KEYS.KEYSET_FROM_JSON(json_keyset)
+```
 
 **Description**
 
@@ -440,36 +488,44 @@ Returns the input `json_keyset` `STRING` as serialized `BYTES` , which is a vali
 
 `KEYS.KEYSET_FROM_JSON` takes JSON-formatted `STRING` values like the following:
 
-    {
-      "key":[
-          {
-            "keyData":{
-              "keyMaterialType":"SYMMETRIC",
-              "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
-              "value":"GiD80Z8kL6AP3iSNHhqseZGAIvq7TVQzClT7FQy8YwK3OQ=="
-            },
-            "keyId":3101427138,
-            "outputPrefixType":"TINK",
-            "status":"ENABLED"
-          }
-        ],
-      "primaryKeyId":3101427138
-    }
+```
+{
+  "key":[
+      {
+        "keyData":{
+          "keyMaterialType":"SYMMETRIC",
+          "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
+          "value":"GiD80Z8kL6AP3iSNHhqseZGAIvq7TVQzClT7FQy8YwK3OQ=="
+        },
+        "keyId":3101427138,
+        "outputPrefixType":"TINK",
+        "status":"ENABLED"
+      }
+    ],
+  "primaryKeyId":3101427138
+}
+```
 
 The following query creates a new keyset from a JSON-formatted `STRING` `json_keyset` :
 
-    SELECT KEYS.KEYSET_FROM_JSON(json_keyset);
+```
+SELECT KEYS.KEYSET_FROM_JSON(json_keyset);
+```
 
 This returns the `json_keyset` serialized as `BYTES` , like the following:
 
-    \x08\x9d\x8e\x85\x82\x09\x12d\x0aX\x0a0
-    type.googleapis.com/google.crypto.tink.AesGcmKey\x12\"\x1a qX\xe4IG\x87\x1f\xde
-    \xe3)+e\x98\x0a\x1c}\xfe\x88<\x12\xeb\xc1t\xb8\x83\x1a\xcd\xa8\x97\x84g\x18\x01
-    \x10\x01\x18\x9d\x8e\x85\x82\x09 \x01
+```
+\x08\x9d\x8e\x85\x82\x09\x12d\x0aX\x0a0
+type.googleapis.com/google.crypto.tink.AesGcmKey\x12\"\x1a qX\xe4IG\x87\x1f\xde
+\xe3)+e\x98\x0a\x1c}\xfe\x88<\x12\xeb\xc1t\xb8\x83\x1a\xcd\xa8\x97\x84g\x18\x01
+\x10\x01\x18\x9d\x8e\x85\x82\x09 \x01
+```
 
 ## `KEYS.KEYSET_LENGTH`
 
-    KEYS.KEYSET_LENGTH(keyset)
+```
+KEYS.KEYSET_LENGTH(keyset)
+```
 
 **Description**
 
@@ -483,47 +539,53 @@ Returns the number of keys in the provided keyset.
 
 This example references a JSON-formatted STRING called `json_keyset` that contains two keys:
 
-    {
-       "primaryKeyId":1354994251,
-       "key":[
-          {
-             "keyData":{
-                "keyMaterialType":"SYMMETRIC",
-                "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
-                "value":"GiD9sxQRgFj4aYN78vaIlxInjZkG/uvyWSY9a8GN+ELV2Q=="
-             },
-             "keyId":1354994251,
-             "outputPrefixType":"TINK",
-             "status":"ENABLED"
-          }
-       ],
-       "key":[
-          {
-             "keyData":{
-                "keyMaterialType":"SYMMETRIC",
-                "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
-                "value":"PRn76sxQRgFj4aYN00vaIlxInjZkG/uvyWSY9a2bLRm"
-             },
-             "keyId":852264701,
-             "outputPrefixType":"TINK",
-             "status":"DISABLED"
-          }
-       ]
-    }
+```
+{
+   "primaryKeyId":1354994251,
+   "key":[
+      {
+         "keyData":{
+            "keyMaterialType":"SYMMETRIC",
+            "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
+            "value":"GiD9sxQRgFj4aYN78vaIlxInjZkG/uvyWSY9a8GN+ELV2Q=="
+         },
+         "keyId":1354994251,
+         "outputPrefixType":"TINK",
+         "status":"ENABLED"
+      }
+   ],
+   "key":[
+      {
+         "keyData":{
+            "keyMaterialType":"SYMMETRIC",
+            "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
+            "value":"PRn76sxQRgFj4aYN00vaIlxInjZkG/uvyWSY9a2bLRm"
+         },
+         "keyId":852264701,
+         "outputPrefixType":"TINK",
+         "status":"DISABLED"
+      }
+   ]
+}
+```
 
 The following query converts `json_keyset` to a keyset and then returns the number of keys in the keyset:
 
-    SELECT KEYS.KEYSET_LENGTH(KEYS.KEYSET_FROM_JSON(json_keyset)) as key_count;
-    
-    /*-----------+
-     | key_count |
-     +-----------+
-     | 2         |
-     +-----------*/
+```
+SELECT KEYS.KEYSET_LENGTH(KEYS.KEYSET_FROM_JSON(json_keyset)) as key_count;
+
+/*-----------+
+ | key_count |
+ +-----------+
+ | 2         |
+ +-----------*/
+```
 
 ## `KEYS.KEYSET_TO_JSON`
 
-    KEYS.KEYSET_TO_JSON(keyset)
+```
+KEYS.KEYSET_TO_JSON(keyset)
+```
 
 **Description**
 
@@ -537,29 +599,35 @@ Returns a JSON `STRING` representation of the input `keyset` . The returned JSON
 
 The following query returns a new `'AEAD_AES_GCM_256'` keyset as a JSON-formatted `STRING` .
 
-    SELECT KEYS.KEYSET_TO_JSON(KEYS.NEW_KEYSET('AEAD_AES_GCM_256'));
+```
+SELECT KEYS.KEYSET_TO_JSON(KEYS.NEW_KEYSET('AEAD_AES_GCM_256'));
+```
 
 The result is a `STRING` like the following.
 
-    {
-      "key":[
-          {
-            "keyData":{
-              "keyMaterialType":"SYMMETRIC",
-              "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
-              "value":"GiD80Z8kL6AP3iSNHhqseZGAIvq7TVQzClT7FQy8YwK3OQ=="
-            },
-            "keyId":3101427138,
-            "outputPrefixType":"TINK",
-            "status":"ENABLED"
-          }
-        ],
-      "primaryKeyId":3101427138
-    }
+```
+{
+  "key":[
+      {
+        "keyData":{
+          "keyMaterialType":"SYMMETRIC",
+          "typeUrl":"type.googleapis.com/google.crypto.tink.AesGcmKey",
+          "value":"GiD80Z8kL6AP3iSNHhqseZGAIvq7TVQzClT7FQy8YwK3OQ=="
+        },
+        "keyId":3101427138,
+        "outputPrefixType":"TINK",
+        "status":"ENABLED"
+      }
+    ],
+  "primaryKeyId":3101427138
+}
+```
 
 ## `KEYS.NEW_KEYSET`
 
-    KEYS.NEW_KEYSET(key_type)
+```
+KEYS.NEW_KEYSET(key_type)
+```
 
 **Description**
 
@@ -567,8 +635,8 @@ Returns a serialized keyset containing a new key based on `key_type` . The retur
 
 `key_type` is a `STRING` literal representation of the type of key to create. `key_type` can't be `NULL` . `key_type` can be:
 
-  - `AEAD_AES_GCM_256` : Creates a 256-bit key with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-GCM for encryption and decryption operations.
-  - `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` : Creates a 512-bit `AES-SIV-CMAC` key, which contains a 256-bit `AES-CTR` key and 256-bit `AES-CMAC` key. The `AES-SIV-CMAC` key is created with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-SIV for encryption and decryption operations.
+- `AEAD_AES_GCM_256` : Creates a 256-bit key with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-GCM for encryption and decryption operations.
+- `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` : Creates a 512-bit `AES-SIV-CMAC` key, which contains a 256-bit `AES-CTR` key and 256-bit `AES-CMAC` key. The `AES-SIV-CMAC` key is created with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-SIV for encryption and decryption operations.
 
 **Return Data Type**
 
@@ -578,16 +646,20 @@ Returns a serialized keyset containing a new key based on `key_type` . The retur
 
 The following query creates a keyset for each row in `CustomerIds` , which can subsequently be used to encrypt data. Each keyset contains a single encryption key with randomly-generated key data. Each row in the output contains a `customer_id` and an `'AEAD_AES_GCM_256'` key in `BYTES` .
 
-    SELECT customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset
-    FROM (
-      SELECT 1 AS customer_id UNION ALL
-      SELECT 2 UNION ALL
-      SELECT 3
-    ) AS CustomerIds;
+```
+SELECT customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset
+FROM (
+  SELECT 1 AS customer_id UNION ALL
+  SELECT 2 UNION ALL
+  SELECT 3
+) AS CustomerIds;
+```
 
 ## `KEYS.NEW_WRAPPED_KEYSET`
 
-    KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, key_type)
+```
+KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, key_type)
+```
 
 **Description**
 
@@ -595,15 +667,17 @@ Creates a new keyset and encrypts it with a [Cloud KMS key](https://cloud.google
 
 This function takes the following arguments:
 
-  - `kms_resource_name` : A `STRING` literal representation of the Cloud KMS key. `kms_resource_name` can't be `NULL` . The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
-    
-        gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+- `kms_resource_name` : A `STRING` literal representation of the Cloud KMS key. `kms_resource_name` can't be `NULL` . The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
 
-  - `key_type` : A `STRING` literal representation of the keyset type. `key_type` can't be `NULL` but can be one of the following values:
-    
-      - `AEAD_AES_GCM_256` : Creates a 256-bit key with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-GCM for encryption and decryption operations.
-    
-      - `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` : Creates a 512-bit `AES-SIV-CMAC` key, which contains a 256-bit `AES-CTR` key and 256-bit `AES-CMAC` key. The `AES-SIV-CMAC` key is created with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-SIV for encryption and decryption operations.
+  ```
+  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+  ```
+
+- `key_type` : A `STRING` literal representation of the keyset type. `key_type` can't be `NULL` but can be one of the following values:
+
+  - `AEAD_AES_GCM_256` : Creates a 256-bit key with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-GCM for encryption and decryption operations.
+
+  - `DETERMINISTIC_AEAD_AES_SIV_CMAC_256` : Creates a 512-bit `AES-SIV-CMAC` key, which contains a 256-bit `AES-CTR` key and 256-bit `AES-CMAC` key. The `AES-SIV-CMAC` key is created with the pseudo-random number generator provided by [boringSSL](https://boringssl.googlesource.com/boringssl/) . The key uses AES-SIV for encryption and decryption operations.
 
 **Return Data Type**
 
@@ -613,23 +687,31 @@ This function takes the following arguments:
 
 Put the following variables above each example query that you run:
 
-    DECLARE kms_resource_name STRING;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+```
+DECLARE kms_resource_name STRING;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+```
 
 The following query creates a wrapped keyset, which contains the ciphertext produced by encrypting a [Tink](https://github.com/google/tink/blob/master/proto/tink.proto) keyset with the specified Cloud KMS key. If you run the query multiple times, it generates multiple wrapped keysets, and each wrapped keyset is unique to each query that's run.
 
-    SELECT KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, 'AEAD_AES_GCM_256');
+```
+SELECT KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, 'AEAD_AES_GCM_256');
+```
 
 Multiple calls to this function with the same arguments in one query returns the same value. For example, the following query only creates one wrapped keyset and returns it for each row in a table called `my_table` .
 
-    SELECT
-      *,
-      KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, 'AEAD_AES_GCM_256')
-    FROM my_table
+```
+SELECT
+  *,
+  KEYS.NEW_WRAPPED_KEYSET(kms_resource_name, 'AEAD_AES_GCM_256')
+FROM my_table
+```
 
 ## `KEYS.REWRAP_KEYSET`
 
-    KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset)
+```
+KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset)
+```
 
 **Description**
 
@@ -639,13 +721,15 @@ When this function is used, a wrapped keyset is decrypted by `source_kms_resourc
 
 This function takes the following arguments:
 
-  - `source_kms_resource_name` : A `STRING` literal representation of the Cloud KMS key you want to replace. This key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
-    
-        gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+- `source_kms_resource_name` : A `STRING` literal representation of the Cloud KMS key you want to replace. This key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
 
-  - `target_kms_resource_name` : A `STRING` literal representation of the new Cloud KMS key that you want to use.
+  ```
+  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+  ```
 
-  - `wrapped_keyset` : A `BYTES` literal representation of the keyset that you want to re-encrypt.
+- `target_kms_resource_name` : A `STRING` literal representation of the new Cloud KMS key that you want to use.
+
+- `wrapped_keyset` : A `BYTES` literal representation of the keyset that you want to re-encrypt.
 
 **Return Data Type**
 
@@ -655,27 +739,35 @@ This function takes the following arguments:
 
 Put the following variables above each example query that you run:
 
-    DECLARE source_kms_resource_name STRING;
-    DECLARE target_kms_resource_name STRING;
-    DECLARE wrapped_keyset BYTES;
-    SET source_kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET target_kms_resource_name = 'gcp-kms://projects/my-project/locations/another-location/keyRings/my-key-ring/cryptoKeys/my-other-crypto-key';
-    SET wrapped_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+```
+DECLARE source_kms_resource_name STRING;
+DECLARE target_kms_resource_name STRING;
+DECLARE wrapped_keyset BYTES;
+SET source_kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET target_kms_resource_name = 'gcp-kms://projects/my-project/locations/another-location/keyRings/my-key-ring/cryptoKeys/my-other-crypto-key';
+SET wrapped_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+```
 
 The following query rewraps a wrapped keyset. If you run the query multiple times, it generates multiple wrapped keysets, and each wrapped keyset is unique to each query that's run.
 
-    SELECT KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset);
+```
+SELECT KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset);
+```
 
 Multiple calls to this function with the same arguments in one query returns the same value. For example, the following query only creates one wrapped keyset and returns it for each row in a table called `my_table` .
 
-    SELECT
-      *,
-      KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset)
-    FROM my_table
+```
+SELECT
+  *,
+  KEYS.REWRAP_KEYSET(source_kms_resource_name, target_kms_resource_name, wrapped_keyset)
+FROM my_table
+```
 
 ## `KEYS.ROTATE_KEYSET`
 
-    KEYS.ROTATE_KEYSET(keyset, key_type)
+```
+KEYS.ROTATE_KEYSET(keyset, key_type)
+```
 
 **Description**
 
@@ -693,18 +785,22 @@ The new `key_type` must match the key type of existing keys in the `keyset` .
 
 The following statement creates a table containing a column of unique `customer_id` values and `'AEAD_AES_GCM_256'` keysets. Then, it creates a new primary cryptographic key within each keyset in the source table using `KEYS.ROTATE_KEYSET` . Each row in the output contains a `customer_id` and an `'AEAD_AES_GCM_256'` keyset in `BYTES` .
 
-    WITH ExistingKeysets AS (
-    SELECT 1 AS customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset
-        UNION ALL
-      SELECT 2, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') UNION ALL
-      SELECT 3, KEYS.NEW_KEYSET('AEAD_AES_GCM_256')
-    )
-    SELECT customer_id, KEYS.ROTATE_KEYSET(keyset, 'AEAD_AES_GCM_256') AS keyset
-    FROM ExistingKeysets;
+```
+WITH ExistingKeysets AS (
+SELECT 1 AS customer_id, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') AS keyset
+    UNION ALL
+  SELECT 2, KEYS.NEW_KEYSET('AEAD_AES_GCM_256') UNION ALL
+  SELECT 3, KEYS.NEW_KEYSET('AEAD_AES_GCM_256')
+)
+SELECT customer_id, KEYS.ROTATE_KEYSET(keyset, 'AEAD_AES_GCM_256') AS keyset
+FROM ExistingKeysets;
+```
 
 ## `KEYS.ROTATE_WRAPPED_KEYSET`
 
-    KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, key_type)
+```
+KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, key_type)
+```
 
 **Description**
 
@@ -714,13 +810,15 @@ When this function is used, the wrapped keyset is decrypted, the new key is adde
 
 This function takes the following arguments:
 
-  - `kms_resource_name` : A `STRING` literal representation of the [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) that was used to wrap the wrapped keyset. The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
-    
-        gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+- `kms_resource_name` : A `STRING` literal representation of the [Cloud KMS key](https://cloud.google.com/kms/docs/resource-hierarchy) that was used to wrap the wrapped keyset. The Cloud KMS key must reside in the same Cloud region where this function is executed. A Cloud KMS key looks like this:
 
-  - `wrapped_keyset` : A `BYTES` literal representation of the existing keyset that you want to work with.
+  ```
+  gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key
+  ```
 
-  - `key_type` : A `STRING` literal representation of the keyset type. This must match the key type of existing keys in `wrapped_keyset` .
+- `wrapped_keyset` : A `BYTES` literal representation of the existing keyset that you want to work with.
+
+- `key_type` : A `STRING` literal representation of the keyset type. This must match the key type of existing keys in `wrapped_keyset` .
 
 **Return Data Type**
 
@@ -730,18 +828,24 @@ This function takes the following arguments:
 
 Put the following variables above each example query that you run:
 
-    DECLARE kms_resource_name STRING;
-    DECLARE wrapped_keyset BYTES;
-    SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
-    SET wrapped_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+```
+DECLARE kms_resource_name STRING;
+DECLARE wrapped_keyset BYTES;
+SET kms_resource_name = 'gcp-kms://projects/my-project/locations/us/keyRings/my-key-ring/cryptoKeys/my-crypto-key';
+SET wrapped_keyset = b'\012\044\000\107\275\360\176\264\206\332\235\215\304...';
+```
 
 The following query rotates a wrapped keyset. If you run the query multiple times, it generates multiple wrapped keysets, and each wrapped keyset is unique to each query that's run.
 
-    SELECT KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, 'AEAD_AES_GCM_256');
+```
+SELECT KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, 'AEAD_AES_GCM_256');
+```
 
 Multiple calls to this function with the same arguments in one query returns the same value. For example, the following query only creates one wrapped keyset and returns it for each row in a table called `my_table` .
 
-    SELECT
-      *,
-      KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, 'AEAD_AES_GCM_256')
-    FROM my_table
+```
+SELECT
+  *,
+  KEYS.ROTATE_WRAPPED_KEYSET(kms_resource_name, wrapped_keyset, 'AEAD_AES_GCM_256')
+FROM my_table
+```

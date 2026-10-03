@@ -20,133 +20,21 @@ Don't use edition tiers to restrict access to specific features, because the fea
 
 ### Administration features
 
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Standard</strong></th>
-<th><strong>Enterprise</strong></th>
-<th><strong>Enterprise Plus</strong></th>
-<th><strong>On-demand pricing</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong><a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">Pricing model</a></strong></td>
-<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
-<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
-<td>Slot-hours (1 minute minimum by default; opt in to <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list">BigQuery fluid scaling</a> for no minimum duration)</td>
-<td>Pay per query with free tier</td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://cloud.google.com/bigquery/sla">Monthly Service Level Objective (SLO)</a></strong><br />
-</td>
-<td>&gt;=99.9%</td>
-<td>&gt;=99.99%</td>
-<td>&gt;=99.99%</td>
-<td>&gt;=99.99%</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/assured-workloads/docs/supported-products">Compliance controls</a></strong></td>
-<td>No access to compliance controls through Assured Workloads</td>
-<td>No access to compliance controls through Assured Workloads</td>
-<td><a href="https://docs.cloud.google.com/assured-workloads/docs/supported-products">Compliance controls through Assured Workloads</a></td>
-<td><a href="https://docs.cloud.google.com/assured-workloads/docs/supported-products">Compliance controls through Assured Workloads</a></td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-intro">Business Intelligence acceleration</a></strong></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity">query acceleration through BI Engine</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity">Query acceleration through BI Engine</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity">Query acceleration through BI Engine</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity">Query acceleration through BI Engine</a></td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro">Workload management</a></strong></td>
-<td>Users cannot set the <a href="https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target">maximum concurrency target</a></td>
-<td>Advanced workload management ( <a href="https://docs.cloud.google.com/bigquery/docs/slots#idle_slots">idle capacity sharing</a> , <a href="https://docs.cloud.google.com/bigquery/docs/query-queues">target concurrency</a> )</td>
-<td>Advanced workload management ( <a href="https://docs.cloud.google.com/bigquery/docs/slots#idle_slots">idle capacity sharing</a> , <a href="https://docs.cloud.google.com/bigquery/docs/query-queues">target concurrency</a> )</td>
-<td><p>On-demand users don't have access to Advanced workload management</p></td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro">Compute model</a></strong></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro">Autoscaling</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro">Autoscaling + Baseline</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro">Autoscaling + Baseline</a></td>
-<td>On-demand</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management">Maximum reservation size</a></strong></td>
-<td>1,600 slots</td>
-<td><a href="https://docs.cloud.google.com/bigquery/quotas#reservations">Quota</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/quotas#reservations">Quota</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/quotas#reservations">Quota</a></td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project">Maximum reservations per administration project</a></strong></td>
-<td>10 reservations per administration project, up to 16,000 slots per organization</td>
-<td>200</td>
-<td>200</td>
-<td>No access to reservations</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-details">Commitment plans</a></strong></td>
-<td>No access to capacity commitments</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reservations-details#annual_commitments">1-year commitment at 20% discount or 3-year commitment at 40% discount</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reservations-details#annual_commitments">1-year commitment at 20% discount or 3-year commitment at 40% discount</a></td>
-<td>No access to capacity commitments</td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Assignments</a></strong></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Project assignments</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Project, folder, or organization assignments</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Project, folder, or organization assignments</a></td>
-<td>No assignments</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code> ,<br />
-<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code> ,<br />
-<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
-<td>On-demand pricing doesn't support assignments</td>
-</tr>
-<tr class="even">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">Managed disaster recovery</a></strong></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">managed disaster recovery</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">managed disaster recovery</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">Managed disaster recovery</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">managed disaster recovery</a></td>
-</tr>
-<tr class="odd">
-<td><strong><a href="https://docs.cloud.google.com/bigquery/docs/export-intro">Data export</a></strong></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">Exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
-<td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/export-to-bigtable">exporting data to Bigtable</a> , <a href="https://docs.cloud.google.com/bigquery/docs/export-to-spanner">Spanner</a> or <a href="https://docs.cloud.google.com/bigquery/docs/export-to-alloydb">AlloyDB</a></td>
-</tr>
-</tbody>
-</table>
+|                                                                                                                                                   | **Standard**                                                                                                                                                                                                                                                       | **Enterprise**                                                                                                                                                                                                                                      | **Enterprise Plus**                                                                                                                                                                                                                                 | **On-demand pricing**                                                                                                                                                                                                                                            |
+|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Pricing model](https://cloud.google.com/bigquery/pricing#analysis_pricing_models)**                                                            | Slot-hours (1 minute minimum by default; opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) for no minimum duration)                                          | Slot-hours (1 minute minimum by default; opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) for no minimum duration)                           | Slot-hours (1 minute minimum by default; opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) for no minimum duration)                           | Pay per query with free tier                                                                                                                                                                                                                                     |
+| **[Monthly Service Level Objective (SLO)](https://cloud.google.com/bigquery/sla)**                                                                | \>=99.9%                                                                                                                                                                                                                                                           | \>=99.99%                                                                                                                                                                                                                                           | \>=99.99%                                                                                                                                                                                                                                           | \>=99.99%                                                                                                                                                                                                                                                        |
+| **[Compliance controls](https://docs.cloud.google.com/assured-workloads/docs/supported-products)**                                                | No access to compliance controls through Assured Workloads                                                                                                                                                                                                         | No access to compliance controls through Assured Workloads                                                                                                                                                                                          | [Compliance controls through Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/supported-products)                                                                                                                            | [Compliance controls through Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/supported-products)                                                                                                                                         |
+| **[Business Intelligence acceleration](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro)**                                             | No access to [query acceleration through BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity)                                                                                                                                        | [Query acceleration through BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity)                                                                                                                                      | [Query acceleration through BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity)                                                                                                                                      | [Query acceleration through BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity)                                                                                                                                                   |
+| **[Workload management](https://docs.cloud.google.com/bigquery/docs/reservations-intro)**                                                         | Users cannot set the [maximum concurrency target](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target)                                                                                                                     | Advanced workload management ( [idle capacity sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) , [target concurrency](https://docs.cloud.google.com/bigquery/docs/query-queues) )                                             | Advanced workload management ( [idle capacity sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) , [target concurrency](https://docs.cloud.google.com/bigquery/docs/query-queues) )                                             | On-demand users don't have access to Advanced workload management                                                                                                                                                                                                |
+| **[Compute model](https://docs.cloud.google.com/bigquery/docs/reservations-intro)**                                                               | [Autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro)                                                                                                                                                                                 | [Autoscaling + Baseline](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro)                                                                                                                                                       | [Autoscaling + Baseline](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro)                                                                                                                                                       | On-demand                                                                                                                                                                                                                                                        |
+| **[Maximum reservation size](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management)**                                      | 1,600 slots                                                                                                                                                                                                                                                        | [Quota](https://docs.cloud.google.com/bigquery/quotas#reservations)                                                                                                                                                                                 | [Quota](https://docs.cloud.google.com/bigquery/quotas#reservations)                                                                                                                                                                                 | [Quota](https://docs.cloud.google.com/bigquery/quotas#reservations)                                                                                                                                                                                              |
+| **[Maximum reservations per administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project)** | 10 reservations per administration project, up to 16,000 slots per organization                                                                                                                                                                                    | 200                                                                                                                                                                                                                                                 | 200                                                                                                                                                                                                                                                 | No access to reservations                                                                                                                                                                                                                                        |
+| **[Commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-details)**                                                          | No access to capacity commitments                                                                                                                                                                                                                                  | [1-year commitment at 20% discount or 3-year commitment at 40% discount](https://docs.cloud.google.com/bigquery/docs/reservations-details#annual_commitments)                                                                                       | [1-year commitment at 20% discount or 3-year commitment at 40% discount](https://docs.cloud.google.com/bigquery/docs/reservations-details#annual_commitments)                                                                                       | No access to capacity commitments                                                                                                                                                                                                                                |
+| **[Assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments)**                                                           | [Project assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments)                                                                                                                                                                        | [Project, folder, or organization assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments)                                                                                                                                | [Project, folder, or organization assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments)                                                                                                                                | No assignments                                                                                                                                                                                                                                                   |
+| **[Supported assignment types](https://docs.cloud.google.com/bigquery/docs/reservations-assignments)**                                            | `QUERY` , `PIPELINE`                                                                                                                                                                                                                                               | `QUERY` , `CONTINUOUS` , `PIPELINE` , `ML_EXTERNAL` , `BACKGROUND` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_SEARCH_INDEX_REFRESH`                                                                      | `QUERY` , `CONTINUOUS` , `PIPELINE` , `ML_EXTERNAL` , `BACKGROUND` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_SEARCH_INDEX_REFRESH`                                                                      | On-demand pricing doesn't support assignments                                                                                                                                                                                                                    |
+| **[Managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)**                                            | No access to [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)                                                                                                                                                    | No access to [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)                                                                                                                                     | [Managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)                                                                                                                                                  | No access to [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)                                                                                                                                                  |
+| **[Data export](https://docs.cloud.google.com/bigquery/docs/export-intro)**                                                                       | No access to [exporting data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) , [Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) , or [AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) | [Exporting data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) , [Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) or [AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) | [Exporting data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) , [Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) or [AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) | No access to [exporting data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) , [Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) or [AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) |
 
 > **Note:** BigQuery Enterprise Plus edition supports [Assured Workloads platform controls](https://docs.cloud.google.com/assured-workloads/docs/supported-products) for regulatory compliance regimes, including FedRAMP, CJIS, IL4, and ITAR.
 
@@ -224,14 +112,14 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Search</a></strong></td>
-<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search"><code dir="ltr" translate="no">SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/search-index">search indexes</a></td>
+<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search"><code>SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/search-index">search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/search-index">Query acceleration with search indexes</a></td>
 </tr>
 <tr class="even">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/vector-search-intro">Vector search</a></strong></td>
-<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">VECTOR_SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/vector-index">vector indexes</a></td>
+<td>Access to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code>VECTOR_SEARCH</code> function</a> without access to <a href="https://docs.cloud.google.com/bigquery/docs/vector-index">vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Query acceleration with vector indexes</a></td>
@@ -281,24 +169,24 @@ Don't use edition tiers to restrict access to specific features, because the fea
 </tr>
 <tr class="odd">
 <td><strong><a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code> ,<br />
-<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
-<td><code dir="ltr" translate="no">QUERY</code> ,<br />
-<code dir="ltr" translate="no">CONTINUOUS</code> ,<br />
-<code dir="ltr" translate="no">PIPELINE</code> ,<br />
-<code dir="ltr" translate="no">ML_EXTERNAL</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
-<code dir="ltr" translate="no">BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
+<td><code>QUERY</code> ,<br />
+<code>PIPELINE</code></td>
+<td><code>QUERY</code> ,<br />
+<code>CONTINUOUS</code> ,<br />
+<code>PIPELINE</code> ,<br />
+<code>ML_EXTERNAL</code> ,<br />
+<code>BACKGROUND</code> ,<br />
+<code>BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code>BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code>BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
+<td><code>QUERY</code> ,<br />
+<code>CONTINUOUS</code> ,<br />
+<code>PIPELINE</code> ,<br />
+<code>ML_EXTERNAL</code> ,<br />
+<code>BACKGROUND</code> ,<br />
+<code>BACKGROUND_COLUMN_METADATA_INDEX</code> ,<br />
+<code>BACKGROUND_CHANGE_DATA_CAPTURE</code> ,<br />
+<code>BACKGROUND_SEARCH_INDEX_REFRESH</code></td>
 <td>On-demand pricing doesn't support assignments</td>
 </tr>
 <tr class="even">
@@ -346,7 +234,7 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td>No access to <a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/graph-overview">BigQuery Graph</a></td>
-<td>Create graphs, call <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand"><code dir="ltr" translate="no">GRAPH_EXPAND</code></a> , and <a href="https://docs.cloud.google.com/bigquery/docs/graph-measures">use measures</a> . No support for GQL queries.</td>
+<td>Create graphs, call <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand"><code>GRAPH_EXPAND</code></a> , and <a href="https://docs.cloud.google.com/bigquery/docs/graph-measures">use measures</a> . No support for GQL queries.</td>
 </tr>
 </tbody>
 </table>
@@ -355,5 +243,5 @@ Don't use edition tiers to restrict access to specific features, because the fea
 
 ## What's next
 
-  - For more information on slots autoscaling, see [Introduction to slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
-  - For more information on reservations, see [Introduction to Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- For more information on slots autoscaling, see [Introduction to slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
+- For more information on reservations, see [Introduction to Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .

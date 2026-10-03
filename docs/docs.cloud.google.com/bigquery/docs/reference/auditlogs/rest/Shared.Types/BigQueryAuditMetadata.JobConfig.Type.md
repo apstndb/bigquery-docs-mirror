@@ -8,24 +8,10 @@ data_source: docs.cloud.google.com
 
 Job type.
 
-Enums
-
-`TYPE_UNSPECIFIED`
-
-Unknown.
-
-`QUERY`
-
-Query job.
-
-`COPY`
-
-Table copy job.
-
-`EXPORT`
-
-Export (extract) job.
-
-`IMPORT`
-
-Import (load) job.
+| Enums              |                       |
+|--------------------|-----------------------|
+| `TYPE_UNSPECIFIED` | Unknown.              |
+| `QUERY`            | Query job.            |
+| `COPY`             | Table copy job.       |
+| `EXPORT`           | Export (extract) job. |
+| `IMPORT`           | Import (load) job.    |

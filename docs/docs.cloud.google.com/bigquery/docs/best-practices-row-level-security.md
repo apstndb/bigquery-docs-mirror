@@ -16,8 +16,8 @@ Before you read this document, familiarize yourself with row-level security by r
 
 When you set up row access policies on a table, you'll need at least two row access policies:
 
-  - A policy that grants access to the table. The first row access policy should grant access to users and groups that require full access to the data in the table for data maintenance or support. For example, your BigQuery administrators and service accounts that use DML statements to transform table data.
-  - A second policy that uses filters based on business logic and are granted to specific groups.
+- A policy that grants access to the table. The first row access policy should grant access to users and groups that require full access to the data in the table for data maintenance or support. For example, your BigQuery administrators and service accounts that use DML statements to transform table data.
+- A second policy that uses filters based on business logic and are granted to specific groups.
 
 For more information on setting up row access policies, see [Create or update a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create_or_update_a_row-level_access_policy) .
 
@@ -40,16 +40,16 @@ To mitigate such opportunities, BigQuery hides sensitive statistics on all queri
 *We recommend that admins should refrain from granting the following permissions to users who should only see filtered data, to avoid giving access to sensitive data.*
 
 | **Permissions**                            | **Sensitive data**                                                                                                                                                                                                               |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Project Owner                              | Project owners can view bytes processed and related data only in audit logs. The billing metadata cannot be viewed from the job details. There's no specific permission or role to grant viewer access to this billing metadata. |
 | BigQuery Data Edit, Owner, or Viewer roles | View error messages on queries.                                                                                                                                                                                                  |
 | Cloud Billing viewer permissions           | View BigQuery billing.                                                                                                                                                                                                           |
 
 **Examples**
 
-  - Through repeated **observation** of query duration when querying tables with row-level access policies, a user could infer the values of rows that otherwise might be protected by row-level access policies. This type of attack requires many repeated attempts over a range of key values in partitioning or clustering columns. Even though there is inherent noise when observing or measuring query duration, with repeated attempts, an attacker could obtain a reliable estimate. *If you are sensitive to this level of protection, we recommend using separate tables to isolate rows with different access control requirements, instead.*
-  - An attacker could **search** for the bytes processed by a query by monitoring the errors that occur when the query job limits (such as maximum bytes billed or custom cost controls) are exceeded. However, this attack requires a high volume of queries.
-  - Through repeated queries and **observing** the BigQuery billing amount in Cloud Billing, a user could infer the values of rows that otherwise might be protected by row-level access policies. This type of attack requires many repeated attempts over a range of key values in partitioning or clustering columns. *If you are sensitive to this level of protection, we recommend that you limit access to billing data for queries.*
+- Through repeated **observation** of query duration when querying tables with row-level access policies, a user could infer the values of rows that otherwise might be protected by row-level access policies. This type of attack requires many repeated attempts over a range of key values in partitioning or clustering columns. Even though there is inherent noise when observing or measuring query duration, with repeated attempts, an attacker could obtain a reliable estimate. *If you are sensitive to this level of protection, we recommend using separate tables to isolate rows with different access control requirements, instead.*
+- An attacker could **search** for the bytes processed by a query by monitoring the errors that occur when the query job limits (such as maximum bytes billed or custom cost controls) are exceeded. However, this attack requires a high volume of queries.
+- Through repeated queries and **observing** the BigQuery billing amount in Cloud Billing, a user could infer the values of rows that otherwise might be protected by row-level access policies. This type of attack requires many repeated attempts over a range of key values in partitioning or clustering columns. *If you are sensitive to this level of protection, we recommend that you limit access to billing data for queries.*
 
 *We also recommend that admins monitor Cloud Audit Logs(/bigquery/docs/reference/auditlogs) for suspicious activity on tables with row-level security, such as unexpected additions, modifications, and deletions of row-level access policies.*
 

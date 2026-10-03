@@ -10,11 +10,11 @@ data_source: docs.cloud.google.com
 
 Geospatial analytics lets you visualize geographic location data by using the following:
 
-  - [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio)
-  - [Data Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#data_studio)
-  - [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#geo_viz)
-  - [Colab notebooks](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#colab)
-  - [Google Earth Engine](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#google_earth)
+- [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio)
+- [Data Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#data_studio)
+- [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#geo_viz)
+- [Colab notebooks](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#colab)
+- [Google Earth Engine](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#google_earth)
 
 ## BigQuery Studio
 
@@ -28,8 +28,8 @@ To see an example of how to use the integrated geography viewer, see [Get starte
 
 ### BigQuery Studio limitations
 
-  - You can only visualize one `GEOGRAPHY` column at a time.
-  - Performance is subject to browser capabilities and isn't intended for rendering extremely large or complex datasets. BigQuery renders up to approximately one million vertices, 20,000 rows, or 128 MB of results.
+- You can only visualize one `GEOGRAPHY` column at a time.
+- Performance is subject to browser capabilities and isn't intended for rendering extremely large or complex datasets. BigQuery renders up to approximately one million vertices, 20,000 rows, or 128 MB of results.
 
 ## Data Studio
 
@@ -51,11 +51,11 @@ To explore Geo Viz, go to the Geo Viz web tool:
 
 ### Geo Viz limitations
 
-  - Geo Viz supports geometry inputs (points, lines, and polygons) that are retrieved as a `GEOGRAPHY` column. You can use BigQuery's geography functions to convert latitude and longitude to `GEOGRAPHY` .
-  - The number of results that Geo Viz can display on a map is limited by browser memory. You can lower the resolution and reduce size of geospatial data returned from the query by using `ST_Simplify` function.
-  - Real-time, interactive analysis is handled locally by your browser and is subject to your browser's capabilities.
-  - Geo Viz supports sharing visualizations only with users authorized to execute queries in the same BigQuery project.
-  - Geo Viz does not support downloading a visualization for offline editing.
+- Geo Viz supports geometry inputs (points, lines, and polygons) that are retrieved as a `GEOGRAPHY` column. You can use BigQuery's geography functions to convert latitude and longitude to `GEOGRAPHY` .
+- The number of results that Geo Viz can display on a map is limited by browser memory. You can lower the resolution and reduce size of geospatial data returned from the query by using `ST_Simplify` function.
+- Real-time, interactive analysis is handled locally by your browser and is subject to your browser's capabilities.
+- Geo Viz supports sharing visualizations only with users authorized to execute queries in the same BigQuery project.
+- Geo Viz does not support downloading a visualization for offline editing.
 
 ## Colab notebooks
 
@@ -69,5 +69,5 @@ You can also visualize geospatial data using Google Earth Engine. To use Google 
 
 For more information on using Google Earth Engine, see the:
 
-  - [Google Earth Engine developer's guide](https://developers.google.com/earth-engine/)
-  - [Google Earth Engine API tutorials](https://developers.google.com/earth-engine/tutorials)
+- [Google Earth Engine developer's guide](https://developers.google.com/earth-engine/)
+- [Google Earth Engine API tutorials](https://developers.google.com/earth-engine/tutorials)

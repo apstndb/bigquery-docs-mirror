@@ -6,10 +6,10 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# OBJECT\_PRIVILEGES view
+# OBJECT_PRIVILEGES view
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view contains metadata about access control bindings that are explicitly set on BigQuery objects. This view does not contain metadata about the inherited access control bindings.
@@ -18,8 +18,8 @@ The `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view contains metadata about access c
 
 To query the `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view, you need following Identity and Access Management (IAM) permissions:
 
-  - `bigquery.datasets.get` for datasets.
-  - `bigquery.tables.getIamPolicy` for tables and views.
+- `bigquery.datasets.get` for datasets.
+- `bigquery.tables.getIamPolicy` for tables and views.
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -30,7 +30,7 @@ When you query the `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view, the query result
 The `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view has the following schema:
 
 | Column name      | Data type | Value                                                                                                   |
-| ---------------- | --------- | ------------------------------------------------------------------------------------------------------- |
+|------------------|-----------|---------------------------------------------------------------------------------------------------------|
 | `object_catalog` | `STRING`  | The project ID of the project that contains the resource.                                               |
 | `object_schema`  | `STRING`  | The name of the dataset that contains the resource. This is `NULL` if the resource itself is a dataset. |
 | `object_name`    | `STRING`  | The name of the table, view, or dataset the policy applies to.                                          |
@@ -44,45 +44,49 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . A project ID is optional. If no project ID is specified, then the project that the query runs in is used. The following table explains the region scope for this view:
 
-| View name                                                                                               | Resource scope | Region scope              |
-| ------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.OBJECT_PRIVILEGES`` | Project level  | `         REGION        ` |
+| View name                                                                                   | Resource scope | Region scope |
+|---------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.OBJECT_PRIVILEGES `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
-    -- Returns metadata for the access control bindings for mydataset.
-    SELECT * FROM myproject.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-    WHERE object_name = "mydataset";
+```
+-- Returns metadata for the access control bindings for mydataset.
+SELECT * FROM myproject.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+WHERE object_name = "mydataset";
+```
 
 ## Limitations
 
-  - `OBJECT_PRIVILEGES` queries must contain a `WHERE` clause limiting queries to a single dataset, table, or view.
-  - Queries to retrieve access control metadata for a dataset must specify the `object_name` .
-  - Queries to retrieve access control metadata for a table or view must specify both `object_name` AND `object_schema` .
+- `OBJECT_PRIVILEGES` queries must contain a `WHERE` clause limiting queries to a single dataset, table, or view.
+- Queries to retrieve access control metadata for a dataset must specify the `object_name` .
+- Queries to retrieve access control metadata for a table or view must specify both `object_name` AND `object_schema` .
 
 ## Examples
 
 The following example retrieves all columns from the `INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view.
 
-To run the query against a project other than the project that the query is running in, add the project ID to the region in the following format: `` ` project_id `.` region_id `.INFORMATION_SCHEMA.OBJECT_PRIVILEGES `` .
+To run the query against a project other than the project that the query is running in, add the project ID to the region in the following format: `` `  ``` project_id ```  `.`  ``` region_id ```  `.INFORMATION_SCHEMA.OBJECT_PRIVILEGES `` .
 
 The following example gets all access control metadata for the `mydataset` dataset in the `mycompany` project:
 
-    SELECT *
-    FROM mycompany.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-    WHERE object_name = "mydataset"
+```
+SELECT *
+FROM mycompany.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+WHERE object_name = "mydataset"
+```
 
 The results should look like the following:
 
-``` 
+```
   +----------------+---------------+-------------+-------------+---------------------------+-----------------------------------+
   | object_catalog | object_schema | object_name | object_type |  privilege_type           | grantee                           |
   +----------------+---------------+-------------+-------------+---------------------------+-----------------------------------+
@@ -99,13 +103,15 @@ The results should look like the following:
 
 The following example gets all access control information for the `testdata` table in the `mydataset` dataset:
 
-    SELECT *
-    FROM mycompany.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
-    WHERE object_schema = "mydataset" AND object_name = "testdata"
+```
+SELECT *
+FROM mycompany.`region-us`.INFORMATION_SCHEMA.OBJECT_PRIVILEGES
+WHERE object_schema = "mydataset" AND object_name = "testdata"
+```
 
 The results should look like the following:
 
-``` 
+```
   +----------------+---------------+--------------+-------------+----------------------+------------------------------------+
   | object_catalog | object_schema |  object_name | object_type |  privilege_type      | grantee                            |
   +----------------+---------------+--------------+-------------+----------------------+------------------------------------+

@@ -38,14 +38,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -53,7 +53,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = 'TENSORFLOW'
+```
+MODEL_TYPE = 'TENSORFLOW'
+```
 
 **Description**
 
@@ -63,7 +65,9 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-    MODEL_PATH = string_value
+```
+MODEL_PATH = string_value
+```
 
 **Description**
 
@@ -77,13 +81,15 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Example**
 
-    MODEL_PATH = 'gs://bucket/path/to/saved_model/*'
+```
+MODEL_PATH = 'gs://bucket/path/to/saved_model/*'
+```
 
 ### `KMS_KEY_NAME`
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -93,14 +99,16 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ## Supported data types for input and output columns
 
 BigQuery ML converts some TensorFlow model input and output columns to BigQuery ML types, and some [TensorFlow types](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType) aren't supported. Supported data types for input and output columns include the following:
 
 | TensorFlow types                                                                                                                   | Supported   | BigQuery ML type                                                                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------------------------------------------------------------------------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `tf.int8, tf.int16, tf.int32, tf.int64, tf.uint8, tf.uint16, tf.uint32, tf.uint64`                                                 | Supported   | [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)                                                                                    |
 | `tf.float16, tf.float32, tf.float64, tf.bfloat16`                                                                                  | Supported   | [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types)                                                                           |
 | `tf.complex64, tf.complex128`                                                                                                      | Unsupported | N/a                                                                                                                                                                                       |
@@ -124,24 +132,24 @@ For information about supported locations, see [Locations for non-remote models]
 
 Imported TensorFlow models have the following limitations:
 
-  - The TensorFlow model must already exist before you can import it into BigQuery ML.
-  - Models must be stored in Cloud Storage.
-  - Models are frozen at the time of model creation.
-  - TensorFlow models must be in [SavedModel format](https://www.tensorflow.org/api_docs/python/tf/saved_model) .
-  - The following functions don't support TensorFlow models:
-      - `ML.CONFUSION`
-      - `ML.EVALUATE`
-      - `ML.FEATURE`
-      - `ML.ROC_CURVE`
-      - `ML.TRAINING_INFO`
-      - `ML.WEIGHTS`
-  - Models are limited to 450 MB in size.
-  - Models trained using a version of GraphDef earlier than version 20 aren't supported.
-  - Models trained using an unreleased version of TensorFlow aren't supported.
-  - Only core TensorFlow operations are supported; models that use custom or `tf.contrib` operations aren't supported.
-  - RaggedTensors aren't supported.
-  - You can only use an imported TensorFlow model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
-  - When you load TensorFlow models into RAM for predictions, they have a memory limit (typically 250 MB).
+- The TensorFlow model must already exist before you can import it into BigQuery ML.
+- Models must be stored in Cloud Storage.
+- Models are frozen at the time of model creation.
+- TensorFlow models must be in [SavedModel format](https://www.tensorflow.org/api_docs/python/tf/saved_model) .
+- The following functions don't support TensorFlow models:
+  - `ML.CONFUSION`
+  - `ML.EVALUATE`
+  - `ML.FEATURE`
+  - `ML.ROC_CURVE`
+  - `ML.TRAINING_INFO`
+  - `ML.WEIGHTS`
+- Models are limited to 450 MB in size.
+- Models trained using a version of GraphDef earlier than version 20 aren't supported.
+- Models trained using an unreleased version of TensorFlow aren't supported.
+- Only core TensorFlow operations are supported; models that use custom or `tf.contrib` operations aren't supported.
+- RaggedTensors aren't supported.
+- You can only use an imported TensorFlow model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
+- When you load TensorFlow models into RAM for predictions, they have a memory limit (typically 250 MB).
 
 > **Note:** Models that exceed the memory limits—particularly when using resource-intensive functions like `ML.EXPLAIN_PREDICT` —may trigger the error: `Resources exceeded during query execution: TensorFlow worker out of memory` . For more information and resolution steps, see [TensorFlow worker out of memory](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#tensorflow_worker_oom) .
 
@@ -149,6 +157,8 @@ Imported TensorFlow models have the following limitations:
 
 The following example imports a TensorFlow model into BigQuery ML as a BigQuery ML model. The example assumes that there is an existing TensorFlow model located at `gs://bucket/path/to/saved_model/*` .
 
-    CREATE MODEL `project_id.mydataset.mymodel`
-     OPTIONS(MODEL_TYPE='TENSORFLOW',
-             MODEL_PATH="gs://bucket/path/to/saved_model/*")
+```
+CREATE MODEL `project_id.mydataset.mymodel`
+ OPTIONS(MODEL_TYPE='TENSORFLOW',
+         MODEL_PATH="gs://bucket/path/to/saved_model/*")
+```

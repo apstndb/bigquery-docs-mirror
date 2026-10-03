@@ -58,14 +58,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -73,7 +73,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'AUTOENCODER' }
+```
+MODEL_TYPE = { 'AUTOENCODER' }
+```
 
 **Description**
 
@@ -83,7 +85,7 @@ The model type. This option is required.
 
 **Syntax**
 
-`L1_REG_ACTIVATION = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) } ]`
+`L1_REG_ACTIVATION = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) } ]`
 
 **Description**
 
@@ -95,8 +97,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `L1_REG_ACTIVATION = HPARAM_RANGE(0.01, 1.0)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG_ACTIVATION = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1, 1.0])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range of the hyperparameter. For example, `L1_REG_ACTIVATION = HPARAM_RANGE(0.01, 1.0)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `L1_REG_ACTIVATION = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1, 1.0])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `(0, 10.0]` , and the scale type is `LOG` .
 
@@ -104,7 +106,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`LEARN_RATE = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`LEARN_RATE = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -116,8 +118,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - Use the `HPARAM_RANGE` keyword and specify two `FLOAT64` values that define the range to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_RANGE(0.001, 0.005)` .
-  - Use the `HPARAM_CANDIDATES` keyword and specify an array of `FLOAT64` values to provide discrete values to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1])` .
+- Use the `HPARAM_RANGE` keyword and specify two `FLOAT64` values that define the range to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_RANGE(0.001, 0.005)` .
+- Use the `HPARAM_CANDIDATES` keyword and specify an array of `FLOAT64` values to provide discrete values to use for the hyperparameter. For example, `LEARN_RATE = HPARAM_CANDIDATES([0, 0.001, 0.01, 0.1])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0]` , the default range is `[0, 1.0]` , and the scale type is `LOG` .
 
@@ -125,7 +127,7 @@ When running hyperparameter tuning, the valid range is `[0, 1.0]` , the default 
 
 **Syntax**
 
-`OPTIMIZER = { { 'ADAGRAD' | 'ADAM' | 'FTRL' | 'RMSPROP' | 'SGD' } | HPARAM_CANDIDATES( [candidates] ) }`
+`OPTIMIZER = { { 'ADAGRAD' | 'ADAM' | 'FTRL' | 'RMSPROP' | 'SGD' } | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -135,11 +137,11 @@ The optimizer for training the model.
 
 This option accepts the following values:
 
-  - `ADAM` — [Implements the Adam algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdamOptimizer) . This is the default.
-  - `ADAGRAD` — [Implements the Adagrad algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdagradOptimizer)
-  - `FTRL` — [Implements the FTRL algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
-  - `RMSPROP` — [Implements the RMSProp algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/RMSPropOptimizer)
-  - `SGD` — [Implements the gradient descent algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/GradientDescentOptimizer)
+- `ADAM` — [Implements the Adam algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdamOptimizer) . This is the default.
+- `ADAGRAD` — [Implements the Adagrad algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/AdagradOptimizer)
+- `FTRL` — [Implements the FTRL algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/FtrlOptimizer)
+- `RMSPROP` — [Implements the RMSProp algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/RMSPropOptimizer)
+- `SGD` — [Implements the gradient descent algorithm](https://www.tensorflow.org/api_docs/python/tf/compat/v1/train/GradientDescentOptimizer)
 
 If you are running hyperparameter training, you can provide more than one value for this option by using `HPARAM_CANDIDATES` and specifying an array. For example, `OPTIMIZER = HPARAM_CANDIDATES(['ADAM', 'FTRL', 'SGD'])` .
 
@@ -147,7 +149,7 @@ If you are running hyperparameter training, you can provide more than one value 
 
 **Syntax**
 
-`ACTIVATION_FN = { { 'RELU' | 'RELU6' | 'ELU' | 'SELU' | 'SIGMOID' | 'TANH' } | HPARAM_CANDIDATES( [candidates] ) }`
+`ACTIVATION_FN = { { 'RELU' | 'RELU6' | 'ELU' | 'SELU' | 'SIGMOID' | 'TANH' } | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -157,12 +159,12 @@ The activation function of the neural network.
 
 This option accepts the following values:
 
-  - `RELU` — [Rectified linear](https://www.tensorflow.org/api_docs/python/tf/nn/relu) . This is the default.
-  - `RELU6` — [Rectified linear 6](https://www.tensorflow.org/api_docs/python/tf/nn/relu6)
-  - `ELU` — [Exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/elu)
-  - `SELU` — [Scaled exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/selu)
-  - `SIGMOID` — [Sigmoid activation](https://www.tensorflow.org/api_docs/python/tf/math/sigmoid)
-  - `TANH` — [Tanh activation](https://www.tensorflow.org/api_docs/python/tf/math/tanh)
+- `RELU` — [Rectified linear](https://www.tensorflow.org/api_docs/python/tf/nn/relu) . This is the default.
+- `RELU6` — [Rectified linear 6](https://www.tensorflow.org/api_docs/python/tf/nn/relu6)
+- `ELU` — [Exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/elu)
+- `SELU` — [Scaled exponential linear](https://www.tensorflow.org/api_docs/python/tf/nn/selu)
+- `SIGMOID` — [Sigmoid activation](https://www.tensorflow.org/api_docs/python/tf/math/sigmoid)
+- `TANH` — [Tanh activation](https://www.tensorflow.org/api_docs/python/tf/math/tanh)
 
 If you are running hyperparameter training, then you can provide more than one value for this option by using `HPARAM_CANDIDATES` and specifying an array. For example, `ACTIVATION_FN = HPARAM_CANDIDATES(['RELU', 'RELU6', 'TANH'])` .
 
@@ -170,7 +172,7 @@ If you are running hyperparameter training, then you can provide more than one v
 
 **Syntax**
 
-`BATCH_SIZE = { int64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`BATCH_SIZE = { `` int64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -182,8 +184,8 @@ If you aren't running hyperparameter tuning, specify an `INT64` value that is po
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_RANGE(16, 64)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_CANDIDATES([32, 64, 256, 1024])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_RANGE(16, 64)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `BATCH_SIZE = HPARAM_CANDIDATES([32, 64, 256, 1024])` .
 
 When running hyperparameter tuning, the valid range is `(0, ∞)` , the default range is `[16, 1024]` , and the scale type is `LOG` .
 
@@ -191,7 +193,7 @@ When running hyperparameter tuning, the valid range is `(0, ∞)` , the default 
 
 **Syntax**
 
-`DROPOUT = { float64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`DROPOUT = { `` float64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -203,8 +205,8 @@ If you aren't running hyperparameter tuning, then you can specify a `FLOAT64` va
 
 If you are running hyperparameter tuning, then you must use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `DROPOUT = HPARAM_RANGE(0, 0.6)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `DROPOUT = HPARAM_CANDIDATES([0.1, 0.3, 0.6])` .
+- The `HPARAM_RANGE` keyword and two `FLOAT64` values that define the range to use for the hyperparameter. For example, `DROPOUT = HPARAM_RANGE(0, 0.6)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `FLOAT64` values that provide discrete values to use for the hyperparameter. For example, `DROPOUT = HPARAM_CANDIDATES([0.1, 0.3, 0.6])` .
 
 When running hyperparameter tuning, the valid range is `[0, 1.0)` , the default range is `[0, 0.8]` , and the scale type is `LINEAR` .
 
@@ -212,7 +214,7 @@ When running hyperparameter tuning, the valid range is `[0, 1.0)` , the default 
 
 **Syntax**
 
-`HIDDEN_UNITS = { int_array | HPARAM_CANDIDATES( [candidates] ) }`
+`HIDDEN_UNITS = { `` int_array `` | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -228,13 +230,17 @@ The number of layers in `hidden_units` must be odd, and we recommend that the se
 
 The following example defines a model architecture that uses three hidden layers with 256, 128, and 64 nodes, respectively.
 
-    HIDDEN_UNITS = [256, 128, 64]
+```
+HIDDEN_UNITS = [256, 128, 64]
+```
 
 If you are running hyperparameter tuning, then you must use the `HPARAM_CANDIDATES` keyword and specify an array in the form `ARRAY<STRUCT<ARRAY<INT64>>>` to provide discrete values to use for the hyperparameter. Each struct value in the outer array represents a candidate neural architecture. The array of `INT64` values in each struct represents a hidden layer.
 
 The following example represents a neural architecture search with three candidates, which include a single layer of 8 neurons, two layers of neurons with 8 and 16 in sequence, and three layers of neurons with 16, 32 and 64 in sequence, respectively.
 
-    hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
+```
+hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
+```
 
 The valid range for the `INT64` arrays is `[1, ∞)` .
 
@@ -242,7 +248,9 @@ The valid range for the `INT64` arrays is `[1, ∞)` .
 
 **Syntax**
 
-    TF_VERSION = { '1.15' | '2.17.0' }
+```
+TF_VERSION = { '1.15' | '2.17.0' }
+```
 
 **Description**
 
@@ -254,7 +262,9 @@ Set `TF_VERSION` to `2.17.0` to use TensorFlow2 with the Keras API.
 
 **Syntax**
 
-    EARLY_STOP = { TRUE | FALSE }
+```
+EARLY_STOP = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -268,7 +278,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-` MIN_REL_PROGRESS = float64_value  `
+`MIN_REL_PROGRESS = `` float64_value`
 
 **Description**
 
@@ -282,7 +292,7 @@ A `FLOAT64` value. The default value is `0.01` .
 
 **Syntax**
 
-` MAX_ITERATIONS = int64_value  `
+`MAX_ITERATIONS = `` int64_value`
 
 **Description**
 
@@ -296,7 +306,9 @@ An `INT64` value. The default value is `20` .
 
 **Syntax**
 
-    WARM_START = { TRUE | FALSE }
+```
+WARM_START = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -314,7 +326,7 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-` NUM_TRIALS = int64_value  `
+`NUM_TRIALS = `` int64_value`
 
 **Description**
 
@@ -324,13 +336,13 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( `` number_of_hyperparameters `` * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
 **Syntax**
 
-` MAX_PARALLEL_TRIALS = int64_value  `
+`MAX_PARALLEL_TRIALS = `` int64_value`
 
 **Description**
 
@@ -346,7 +358,9 @@ An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
 **Syntax**
 
-    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
+HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
 
 **Description**
 
@@ -356,17 +370,19 @@ The algorithm used to tune the hyperparameters. If you specify a value for this 
 
 Specify one of the following values:
 
-  - `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+- `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
-  - `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
+- `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
-  - `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
+- `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
 
 ### `HPARAM_TUNING_OBJECTIVES`
 
 **Syntax**
 
-    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
+```
 
 **Description**
 
@@ -380,7 +396,7 @@ The possible objectives are a subset of the [model evaluation metrics](https://d
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -390,19 +406,23 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ### Internal parameter defaults
 
 BigQuery ML uses the following default values when building models:
 
-    loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
-    
-    batch_norm = False
+```
+loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
+
+batch_norm = False
+```
 
 ### `query_statement`
 
-The ` AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
+The `AS `` query_statement` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
 
 ## Hyperparameter tuning
 
@@ -416,15 +436,15 @@ For more information about the training objectives and hyperparameters supported
 
 The following machine learning functions are supported for the Autoencoder model, including:
 
-  - `  ML.EVALUATE  ` for evaluating model metrics.
+- [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) for evaluating model metrics.
 
-  - `  ML.FEATURE_INFO  ` for reviewing information about the input features used to train a model.
+- [`ML.FEATURE_INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) for reviewing information about the input features used to train a model.
 
-  - `  ML.PREDICT  ` for dimensionality reduction.
+- [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) for dimensionality reduction.
 
-  - `  ML.RECONSTRUCTION_LOSS  ` for anomaly detection and data sanitation purposes.
+- [`ML.RECONSTRUCTION_LOSS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-reconstruction-loss) for anomaly detection and data sanitation purposes.
 
-  - `  ML.TRAINING_INFO  ` for tracking information about the training iterations of a model.
+- [`ML.TRAINING_INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) for tracking information about the training iterations of a model.
 
 ## Locations
 
@@ -434,17 +454,19 @@ For information about supported locations, see [Locations for non-remote models]
 
 The following example trains an autoencoder model against the table `mytable` .
 
-    CREATE MODEL `project_id.mydataset.mymodel`
-    OPTIONS(MODEL_TYPE='AUTOENCODER',
-            ACTIVATION_FN = 'RELU',
-            BATCH_SIZE = 16,
-            DROPOUT = 0.1,
-            EARLY_STOP = FALSE,
-            HIDDEN_UNITS = [128, 64, 8, 64, 128],
-            LEARN_RATE=0.001,
-            MAX_ITERATIONS = 50,
-            OPTIMIZER = 'ADAGRAD')
-    AS SELECT * FROM `project_id.mydataset.mytable`;
+```
+CREATE MODEL `project_id.mydataset.mymodel`
+OPTIONS(MODEL_TYPE='AUTOENCODER',
+        ACTIVATION_FN = 'RELU',
+        BATCH_SIZE = 16,
+        DROPOUT = 0.1,
+        EARLY_STOP = FALSE,
+        HIDDEN_UNITS = [128, 64, 8, 64, 128],
+        LEARN_RATE=0.001,
+        MAX_ITERATIONS = 50,
+        OPTIMIZER = 'ADAGRAD')
+AS SELECT * FROM `project_id.mydataset.mytable`;
+```
 
 ## Pricing
 

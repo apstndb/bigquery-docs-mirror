@@ -22,22 +22,24 @@ You can query the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigq
 
 The following example queries `INFORMATION_SCHEMA.JOBS` to retrieve error details for failed load jobs over the past 24 hours:
 
-    SELECT
-      job_id,
-      creation_time,
-      user_email,
-      error_result.reason AS error_reason,
-      error_result.message AS error_message,
-      errors
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.JOBS
-    WHERE
-      job_type = 'LOAD'
-      AND state = 'DONE'
-      AND error_result IS NOT NULL
-      AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-    ORDER BY
-      creation_time DESC;
+```
+SELECT
+  job_id,
+  creation_time,
+  user_email,
+  error_result.reason AS error_reason,
+  error_result.message AS error_message,
+  errors
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.JOBS
+WHERE
+  job_type = 'LOAD'
+  AND state = 'DONE'
+  AND error_result IS NOT NULL
+  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+ORDER BY
+  creation_time DESC;
+```
 
 Replace `<var>REGION</var>` with the dataset region name, such as `us` or `europe-west1` .
 
@@ -49,10 +51,10 @@ When you transfer data from external cloud providers or private database instanc
 
 If you're having issues setting up your network attachment, do the following:
 
-  - Ensure that the VPN connections are up and running in both the AWS console and the Google Cloud console.
-  - Check the VPN logs for errors or dropped packets.
-  - Verify that the routing tables in both AWS and Google Cloud are correctly configured.
-  - Ensure that the necessary ports are open in both the AWS security groups and the Google Cloud firewall rules.
+- Ensure that the VPN connections are up and running in both the AWS console and the Google Cloud console.
+- Check the VPN logs for errors or dropped packets.
+- Verify that the routing tables in both AWS and Google Cloud are correctly configured.
+- Ensure that the necessary ports are open in both the AWS security groups and the Google Cloud firewall rules.
 
 For more information about configuring VPN attachments, see [Create an AWS-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment) .
 
@@ -60,10 +62,10 @@ For more information about configuring VPN attachments, see [Create an AWS-Googl
 
 If you're having issues setting up your network configuration, do the following:
 
-  - Ensure that VPC peering is established and that routes are correctly configured.
-  - Verify that the firewall rules allow for traffic on the required ports.
-  - Check the Cloud SQL proxy logs for errors and ensure that it's running correctly.
-  - Ensure that the network attachment is correctly configured and connected.
+- Ensure that VPC peering is established and that routes are correctly configured.
+- Verify that the firewall rules allow for traffic on the required ports.
+- Check the Cloud SQL proxy logs for errors and ensure that it's running correctly.
+- Ensure that the network attachment is correctly configured and connected.
 
 For more information about configuring private database access, see [Connect to a Cloud SQL instance](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access) .
 
@@ -138,8 +140,6 @@ The output is similar to the following:
 16,Abraham Lincoln,"March 4, 1861","April 15, "1865,Republican
 ```
 
-<span id="ts-load-csv-files-quota"></span>
-
 ### Troubleshoot quota errors
 
 Use the information in this section to troubleshoot quota or limit errors related to loading CSV files into BigQuery.
@@ -148,15 +148,17 @@ If you load a large CSV file using the `bq load` command with the [`--allow_quot
 
 **Error message**
 
-    Input CSV files are not splittable and at least one of the files is larger than
-    the maximum allowed size. Size is: ...
+```
+Input CSV files are not splittable and at least one of the files is larger than
+the maximum allowed size. Size is: ...
+```
 
 #### Resolution
 
 To resolve this quota error, do the following:
 
-  - Set the `--allow_quoted_newlines` flag to `false` .
-  - Split the CSV file into smaller chunks that are each less than 4 GB.
+- Set the `--allow_quoted_newlines` flag to `false` .
+- Split the CSV file into smaller chunks that are each less than 4 GB.
 
 For more information about limits that apply when you load data into BigQuery, see [Load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) .
 

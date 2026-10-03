@@ -20,15 +20,15 @@ To run BigQuery analytics on your external data, you first need to [connect to A
 
 You can use the following BigQuery Omni tools to run BigQuery analytics on your external data:
 
-  - [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) : Run a query directly from a BigQuery region that can join data from a BigQuery Omni region.
-  - [BigQuery Omni materialized views](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) : Use [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) to continuously replicate data from BigQuery Omni regions. Supports data filtering.
-  - [BigQuery Omni transfer using `SELECT`](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) : Run a query using either the `CREATE TABLE AS SELECT` or `INSERT INTO SELECT` statement in a BigQuery Omni region and move the result to a BigQuery region.
-  - [BigQuery Omni transfer using `LOAD`](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) : Use [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) to load data directly from Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage into BigQuery
+- [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) : Run a query directly from a BigQuery region that can join data from a BigQuery Omni region.
+- [BigQuery Omni materialized views](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) : Use [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) to continuously replicate data from BigQuery Omni regions. Supports data filtering.
+- [BigQuery Omni transfer using `SELECT`](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) : Run a query using either the `CREATE TABLE AS SELECT` or `INSERT INTO SELECT` statement in a BigQuery Omni region and move the result to a BigQuery region.
+- [BigQuery Omni transfer using `LOAD`](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) : Use [`LOAD DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) to load data directly from Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage into BigQuery
 
 The following table outlines the key features and capabilities of each BigQuery Omni tool:
 
 |                                       | BigQuery Omni joins                                                                                                                                                                                                                                                                   | BigQuery Omni materialized view                                                                                                                                           | BigQuery Omni transfer using `SELECT`                                                                                                                                                                                                                                                        | BigQuery Omni transfer using `LOAD`                                                                   |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
 | Suggested usage                       | Query external data for one-time use, where you can join with local tables or join data between two different BigQuery Omni regions—for example, between AWS and Azure Blob Storage regions. Use BigQuery Omni joins if the data isn't large, and if caching is not a key requirement | Set up repeated or scheduled queries to continuously transfer external data incrementally, where caching is a key requirement. For example, to maintain a dashboard       | Query external data for one-time use, from a BigQuery Omni region to a BigQuery region, where manual controls like caching and query optimization is a key requirement, and if you're using complex queries that aren't supported by BigQuery Omni joins or BigQuery Omni materialized views | Migrate large datasets as-is without the need for filtering, using scheduled queries to move raw data |
 | Supports filtering before moving data | Yes. Limits apply on certain query operators. For more information, see [BigQuery Omni join limitations](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_limitations)                                                                                      | Yes. Limits apply on certain query operators, such as aggregate functions and the `UNION` operator                                                                        | Yes. No limits on query operators                                                                                                                                                                                                                                                            | No                                                                                                    |
 | Transfer size limitations             | [60 GB per transfer](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_limitations) (each subquery to a remote region produces one transfer)                                                                                                                 | No limit                                                                                                                                                                  | [60 GB per transfer](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#limitations_2) (each subquery to a remote region produces one transfer)                                                                                                                | No limit                                                                                              |
@@ -41,8 +41,8 @@ The following table outlines the key features and capabilities of each BigQuery 
 
 You can also consider the following alternatives to transfer data from Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage to Google Cloud:
 
-  - [Storage Transfer Service](https://docs.cloud.google.com/storage-transfer) : Transfer data between object and file storage across Google Cloud and Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage.
-  - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) : Set up automated data transfer into BigQuery on a scheduled, managed basis. Supports a [variety of sources](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) and is suitable for data migration. BigQuery Data Transfer Service doesn't support filtering.
+- [Storage Transfer Service](https://docs.cloud.google.com/storage-transfer) : Transfer data between object and file storage across Google Cloud and Amazon Simple Storage Service (Amazon S3) or Azure Blob Storage.
+- [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) : Set up automated data transfer into BigQuery on a scheduled, managed basis. Supports a [variety of sources](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) and is suitable for data migration. BigQuery Data Transfer Service doesn't support filtering.
 
 ## Architecture
 
@@ -60,8 +60,8 @@ BigQuery Omni uses standard AWS IAM roles or Azure Active Directory principals t
 
 The following image describes how the data moves between Google Cloud and AWS or Azure for the following queries:
 
-  - `SELECT` statement
-  - `CREATE EXTERNAL TABLE` statement
+- `SELECT` statement
+- `CREATE EXTERNAL TABLE` statement
 
 ![**Figure 1:** Data movement between Google Cloud and AWS or Azure for queries.](https://docs.cloud.google.com/static/bigquery/images/omni-data-movement-query.svg)
 
@@ -119,18 +119,18 @@ Metadata caching also integrates with Cloud Storage object versioning. When the 
 
 There are two properties that control this feature:
 
-  - **Maximum staleness** specifies when queries use cached metadata.
-  - **Metadata cache mode** specifies how the metadata is collected.
+- **Maximum staleness** specifies when queries use cached metadata.
+- **Metadata cache mode** specifies how the metadata is collected.
 
 When you have metadata caching enabled, you specify the maximum interval of metadata staleness that is acceptable for operations against the table. For example, if you specify an interval of 1 hour, then operations against the table use cached metadata if it has been refreshed within the past hour. If the cached metadata is older than that, the operation falls back to retrieving metadata from Amazon S3 instead. You can specify a staleness interval between 30 minutes and 7 days.
 
 When you enable metadata caching for BigLake or object tables, BigQuery triggers metadata generation refresh jobs. You can choose to refresh the cache either automatically or manually:
 
-  - For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in Amazon S3 are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
+- For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in Amazon S3 are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
 
-  - For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. Refreshing the cache manually is a good approach if the files in Amazon S3 are added, deleted, or modified at known intervals, for example as the output of a pipeline.
-    
-    If you issue multiple concurrent manual refreshes, only one will succeed.
+- For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. Refreshing the cache manually is a good approach if the files in Amazon S3 are added, deleted, or modified at known intervals, for example as the output of a pipeline.
+
+  If you issue multiple concurrent manual refreshes, only one will succeed.
 
 The metadata cache expires after 7 days if it isn't refreshed.
 
@@ -144,17 +144,19 @@ While using a shared slot pool incurs no extra cost, using `BACKGROUND` reservat
 
 You should consider how the staleness interval and metadata caching mode values will interact before you set them. Consider the following examples:
 
-  - If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
-  - If you are automatically refreshing the metadata cache for a table, and you set the staleness interval to 30 minutes, it is possible that some of your operations against the table might read from Amazon S3 if the metadata cache refresh takes on the longer side of the usual 30 to 60 minute window.
+- If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
+- If you are automatically refreshing the metadata cache for a table, and you set the staleness interval to 30 minutes, it is possible that some of your operations against the table might read from Amazon S3 if the metadata cache refresh takes on the longer side of the usual 30 to 60 minute window.
 
 To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-    SELECT *
-    FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-    WHERE job_id LIKE '%metadata_cache_refresh%'
-    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-    ORDER BY start_time DESC
-    LIMIT 10;
+```
+SELECT *
+FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+WHERE job_id LIKE '%metadata_cache_refresh%'
+AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+ORDER BY start_time DESC
+LIMIT 10;
+```
 
 For more information, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
 
@@ -168,31 +170,31 @@ To make Amazon S3 data in a materialized view available in a [supported BigQuery
 
 In addition to the [limitations for BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#limitations) , the following limitations apply to BigQuery Omni, which includes BigLake tables based on Amazon S3 and Blob Storage data:
 
-  - Working with data in any of the [BigQuery Omni regions](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) is not supported by the Standard and Enterprise Plus editions. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Working with data in any of the [BigQuery Omni regions](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) is not supported by the Standard and Enterprise Plus editions. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-  - The `OBJECT_PRIVILEGES` , `STREAMING_TIMELINE_BY_*` , `TABLE_SNAPSHOTS` , `TABLE_STORAGE` , `TABLE_CONSTRAINTS` , `KEY_COLUMN_USAGE` , `CONSTRAINT_COLUMN_USAGE` , and `PARTITIONS` [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) are not available for BigLake tables based on Amazon S3 and Blob Storage data.
+- The `OBJECT_PRIVILEGES` , `STREAMING_TIMELINE_BY_*` , `TABLE_SNAPSHOTS` , `TABLE_STORAGE` , `TABLE_CONSTRAINTS` , `KEY_COLUMN_USAGE` , `CONSTRAINT_COLUMN_USAGE` , and `PARTITIONS` [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) are not available for BigLake tables based on Amazon S3 and Blob Storage data.
 
-  - Materialized views are not supported for Blob Storage.
+- Materialized views are not supported for Blob Storage.
 
-  - JavaScript UDFs are not supported.
+- JavaScript UDFs are not supported.
 
-  - The following SQL statements are not supported:
-    
-      - [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) statements.
-      - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) that require data managed in BigQuery. For example, `CREATE EXTERNAL TABLE` , `CREATE SCHEMA` , or `CREATE RESERVATION` are supported, but `CREATE TABLE` is not.
-      - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
+- The following SQL statements are not supported:
 
-  - The following limitations apply on querying and reading destination temporary tables:
-    
-      - Querying destination temporary tables with the `SELECT` statement is not supported.
+  - [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) statements.
+  - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) that require data managed in BigQuery. For example, `CREATE EXTERNAL TABLE` , `CREATE SCHEMA` , or `CREATE RESERVATION` are supported, but `CREATE TABLE` is not.
+  - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
 
-  - [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) are only supported through the API or CLI method. The [destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) option is disabled for queries. Only [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) queries are allowed.
+- The following limitations apply on querying and reading destination temporary tables:
 
-  - [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries) is not available in the [BigQuery Omni regions](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) .
+  - Querying destination temporary tables with the `SELECT` statement is not supported.
 
-  - If your query uses the `ORDER BY` clause and has a result size larger than 256 MB, then your query fails. To resolve this, either reduce the result size or remove the `ORDER BY` clause from the query. For more information about BigQuery Omni quotas, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/omni-introduction#quotas_and_limits) .
+- [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) are only supported through the API or CLI method. The [destination table](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#destination_table) option is disabled for queries. Only [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) queries are allowed.
 
-  - Using customer-managed encryption keys (CMEK) with datasets and external tables is not supported.
+- [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries) is not available in the [BigQuery Omni regions](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) .
+
+- If your query uses the `ORDER BY` clause and has a result size larger than 256 MB, then your query fails. To resolve this, either reduce the result size or remove the `ORDER BY` clause from the query. For more information about BigQuery Omni quotas, see [Quotas and limits](https://docs.cloud.google.com/bigquery/docs/omni-introduction#quotas_and_limits) .
+
+- Using customer-managed encryption keys (CMEK) with datasets and external tables is not supported.
 
 ## Pricing
 
@@ -208,65 +210,25 @@ If your query result is larger than 20 GiB, consider exporting the results to [A
 
 BigQuery Omni processes queries in the same location as the dataset that contains the tables you're querying. After you create the dataset, the location cannot be changed. Your data resides within your AWS or Azure account. BigQuery Omni regions support Enterprise edition reservations and on-demand compute (analysis) pricing. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-Region description
-
-Region name
-
-Colocated BigQuery region
-
-**AWS**
-
-AWS - US East (N. Virginia)
-
-`aws-us-east-1`
-
-`us-east4`
-
-AWS - US West (Oregon)
-
-`aws-us-west-2`
-
-`us-west1`
-
-AWS - Asia Pacific (Seoul)
-
-`aws-ap-northeast-2`
-
-`asia-northeast3`
-
-AWS - Asia Pacific (Sydney)
-
-`aws-ap-southeast-2`
-
-`australia-southeast1`
-
-AWS - Europe (Ireland)
-
-`aws-eu-west-1`
-
-`europe-west1`
-
-AWS - Europe (Frankfurt)
-
-`aws-eu-central-1`
-
-`europe-west3`
-
-**Azure**
-
-Azure - East US 2
-
-`azure-eastus2`
-
-`us-east4`
+|           | Region description          | Region name          | Colocated BigQuery region |
+|-----------|-----------------------------|----------------------|---------------------------|
+| **AWS**   |                             |                      |                           |
+|           | AWS - US East (N. Virginia) | `aws-us-east-1`      | `us-east4`                |
+|           | AWS - US West (Oregon)      | `aws-us-west-2`      | `us-west1`                |
+|           | AWS - Asia Pacific (Seoul)  | `aws-ap-northeast-2` | `asia-northeast3`         |
+|           | AWS - Asia Pacific (Sydney) | `aws-ap-southeast-2` | `australia-southeast1`    |
+|           | AWS - Europe (Ireland)      | `aws-eu-west-1`      | `europe-west1`            |
+|           | AWS - Europe (Frankfurt)    | `aws-eu-central-1`   | `europe-west3`            |
+| **Azure** |                             |                      |                           |
+|           | Azure - East US 2           | `azure-eastus2`      | `us-east4`                |
 
 ## What's next
 
-  - Learn how to [connect to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) .
-  - Learn how to create [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) BigLake tables.
-  - Learn how to query [Amazon S3](https://docs.cloud.google.com/bigquery/docs/query-aws-data) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/query-azure-data) BigLake tables.
-  - Learn how to join [Amazon S3](https://docs.cloud.google.com/bigquery/docs/query-aws-data) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/query-azure-data) BigLake tables with Google Cloud tables using [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
-  - Learn how to [export query results to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) .
-  - Learn how to [transfer data from Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-cross-cloud-transfer) and [Blob Storage to BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-azure-cross-cloud-transfer) .
-  - Learn about [setting up VPC Service Controls perimeter](https://docs.cloud.google.com/bigquery/docs/omni-vpc-sc) .
-  - Learn how to [specify your location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations)
+- Learn how to [connect to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) .
+- Learn how to create [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) BigLake tables.
+- Learn how to query [Amazon S3](https://docs.cloud.google.com/bigquery/docs/query-aws-data) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/query-azure-data) BigLake tables.
+- Learn how to join [Amazon S3](https://docs.cloud.google.com/bigquery/docs/query-aws-data) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/query-azure-data) BigLake tables with Google Cloud tables using [BigQuery Omni joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
+- Learn how to [export query results to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) and [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) .
+- Learn how to [transfer data from Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-cross-cloud-transfer) and [Blob Storage to BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-azure-cross-cloud-transfer) .
+- Learn about [setting up VPC Service Controls perimeter](https://docs.cloud.google.com/bigquery/docs/omni-vpc-sc) .
+- Learn how to [specify your location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations)

@@ -22,11 +22,11 @@ Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google
 
 You can generate data insights at the table or dataset level:
 
-  - **For tables:** Gemini generates natural language questions and their SQL equivalents to help you understand data within a single table. Through table insights, you can detect data patterns, anomalies, outliers, or quality issues within a table. Gemini also generates table and column descriptions.
+- **For tables:** Gemini generates natural language questions and their SQL equivalents to help you understand data within a single table. Through table insights, you can detect data patterns, anomalies, outliers, or quality issues within a table. Gemini also generates table and column descriptions.
 
-  - **For datasets and Apache Iceberg namespaces:** Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
-    
-    Because Iceberg namespaces are natively represented as datasets in BigQuery, you can generate the same dataset-level insights directly on Iceberg namespaces.
+- **For datasets and Apache Iceberg namespaces:** Gemini generates an interactive relationship graph showing cross-table relationships and cross-table SQL queries to help you understand how tables are related in a dataset. Through relationship graphs, you can discover how data is derived, which can help with quality, consistency, or redundancy issues. Through cross-table queries, you can find broader relationships. For example, you can calculate revenue by customer segment by leveraging data in a sales table and a customer table.
+
+  Because Iceberg namespaces are natively represented as datasets in BigQuery, you can generate the same dataset-level insights directly on Iceberg namespaces.
 
 To investigate further, you can ask follow-up questions in [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
 
@@ -34,24 +34,24 @@ To investigate further, you can ask follow-up questions in [data canvas](https:/
 
 Table insights help you understand the content, quality, and patterns within a single BigQuery table. For example, by generating queries that perform statistical analysis, you can use table insights to detect data patterns, anomalies, and outliers. Table insights can also help you detect quality issues, especially when [data profile scans](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) are available for a table. When you generate insights for a table, Gemini provides table description, column descriptions, and profile scan output based on the table's metadata. The following options are available:
 
-  - **Generate queries:** suggests natural language questions and provides the corresponding SQL queries to answer them. This helps you uncover patterns, assess data quality, and perform statistical analysis without writing SQL from scratch.
-  - **Generate descriptions:** generates descriptions for the table and its columns. Gemini uses profile scan output (if available) to ground the generated descriptions. You can review, edit, and publish these descriptions to Knowledge Catalog to improve data discoverability and documentation.
+- **Generate queries:** suggests natural language questions and provides the corresponding SQL queries to answer them. This helps you uncover patterns, assess data quality, and perform statistical analysis without writing SQL from scratch.
+- **Generate descriptions:** generates descriptions for the table and its columns. Gemini uses profile scan output (if available) to ground the generated descriptions. You can review, edit, and publish these descriptions to Knowledge Catalog to improve data discoverability and documentation.
 
 ### Dataset insights
 
 Dataset insights help you understand the relationships and join paths across multiple tables within a BigQuery dataset (or an Iceberg namespace represented as a dataset), which provides a holistic view of the contents. When you generate insights for a dataset or namespace, Gemini provides the following:
 
-  - **Dataset description:** provides an AI-generated summary of the dataset.
-  - **Relationships:** displays a visual, interactive map showing relationships between tables within the dataset. You can hover over connections to see relationship details, such as join keys.
-  - **Relationship table:** presents a tabular view of relationships between tables, including foreign keys and inferred joins. Relationships can be schema-defined (from primary and foreign key constraints), usage-based (from query logs), or Gemini infers them based on table and column names and descriptions.
-  - **Query recommendations:** offers sample SQL queries that demonstrate how to join data across different tables, based on the identified relationships.
+- **Dataset description:** provides an AI-generated summary of the dataset.
+- **Relationships:** displays a visual, interactive map showing relationships between tables within the dataset. You can hover over connections to see relationship details, such as join keys.
+- **Relationship table:** presents a tabular view of relationships between tables, including foreign keys and inferred joins. Relationships can be schema-defined (from primary and foreign key constraints), usage-based (from query logs), or Gemini infers them based on table and column names and descriptions.
+- **Query recommendations:** offers sample SQL queries that demonstrate how to join data across different tables, based on the identified relationships.
 
 ## Example of table data insights
 
 Consider a table called `telco_churn` with columns such as `CustomerID` , `Tenure` , `InternetService` , `Contract` , `MonthlyCharges` , and `Churn` . The following table describes the table's schema.
 
 | Field name        | Type      |
-| ----------------- | --------- |
+|-------------------|-----------|
 | `CustomerID`      | `STRING`  |
 | `Gender`          | `STRING`  |
 | `Tenure`          | `INT64`   |
@@ -66,34 +66,38 @@ Consider a table called `telco_churn` with columns such as `CustomerID` , `Tenur
 
 Data insights generates the following sample queries for this table:
 
-  - Identify customers who have subscribed to all premium services and have been customers for more than 50 months.
-    
-        SELECT
-          CustomerID,
-          Contract,
-          Tenure
-        FROM
-          agentville_datasets.telco_churn
-        WHERE
-          OnlineBackup = 'Yes'
-          AND TechSupport = 'Yes'
-          AND StreamingTV = 'Yes'
-          AND Tenure > 50;
+- Identify customers who have subscribed to all premium services and have been customers for more than 50 months.
 
-  - Identify which internet service has the most churned customers.
-    
-        SELECT
-          InternetService,
-          COUNT(DISTINCT CustomerID) AS customers
-        FROM
-          agentville_datasets.telco_churn
-        WHERE
-          Churn = TRUE
-        GROUP BY
-          InternetService
-        ORDER BY
-          customers DESC
-        LIMIT 1;
+  ```
+  SELECT
+    CustomerID,
+    Contract,
+    Tenure
+  FROM
+    agentville_datasets.telco_churn
+  WHERE
+    OnlineBackup = 'Yes'
+    AND TechSupport = 'Yes'
+    AND StreamingTV = 'Yes'
+    AND Tenure > 50;
+  ```
+
+- Identify which internet service has the most churned customers.
+
+  ```
+  SELECT
+    InternetService,
+    COUNT(DISTINCT CustomerID) AS customers
+  FROM
+    agentville_datasets.telco_churn
+  WHERE
+    Churn = TRUE
+  GROUP BY
+    InternetService
+  ORDER BY
+    customers DESC
+  LIMIT 1;
+  ```
 
 ## Example of dataset data insights
 
@@ -103,20 +107,22 @@ Based on these relationships, Gemini might generate the following cross-table qu
 
 Identify the top 5 product categories with the highest average sale price and their corresponding average cost.
 
-    SELECT
-      ii.product_category,
-      AVG(oi.sale_price) AS avg_sale_price,
-      AVG(ii.cost) AS avg_cost
-    FROM
-      `ecommerce_data.order_items` AS oi
-    JOIN
-      `ecommerce_data.inventory_items` AS ii
-    ON oi.inventory_item_id = ii.id
-    GROUP BY
-      ii.product_category
-    ORDER BY
-      avg_sale_price DESC
-    LIMIT 5;
+```
+SELECT
+  ii.product_category,
+  AVG(oi.sale_price) AS avg_sale_price,
+  AVG(ii.cost) AS avg_cost
+FROM
+  `ecommerce_data.order_items` AS oi
+JOIN
+  `ecommerce_data.inventory_items` AS ii
+ON oi.inventory_item_id = ii.id
+GROUP BY
+  ii.product_category
+ORDER BY
+  avg_sale_price DESC
+LIMIT 5;
+```
 
 ## Data insights workflows
 
@@ -126,61 +132,61 @@ This section outlines key workflows that different user roles can perform using 
 
 These workflows focus on tasks for data analysts, business analysts, and other users who need to find, understand, and analyze data.
 
-  - **Understand a BigQuery table:** quickly grasp the schema, content, and potential uses of a specific table. You can perform the following tasks after selecting a table in BigQuery Studio:
-    
-      - Review auto-generated table and column descriptions.
-    
-      - Examine suggested natural language questions and equivalent SQL queries to understand data nuances.
-    
-      - Adapt and run suggested queries to start analysis.
-    
-    For more information about generating and viewing table insights, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+- **Understand a BigQuery table:** quickly grasp the schema, content, and potential uses of a specific table. You can perform the following tasks after selecting a table in BigQuery Studio:
 
-  - **Explore an entire dataset or namespace:** discover the relationships between tables within a dataset (or an Iceberg namespace represented as a dataset) and understand its overall structure. You can perform the following tasks after selecting a dataset in BigQuery Studio:
-    
-      - Generate and view dataset insights.
-    
-      - Use the interactive relationship graph to visualize table connections.
-    
-      - Analyze the relationship table for join keys and connection types (schema-defined, usage-based, LLM inferred).
-    
-      - Use suggested cross-table SQL queries to query multiple tables effectively.
-    
-    For more information about generating and viewing dataset insights, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
+  - Review auto-generated table and column descriptions.
+
+  - Examine suggested natural language questions and equivalent SQL queries to understand data nuances.
+
+  - Adapt and run suggested queries to start analysis.
+
+  For more information about generating and viewing table insights, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+
+- **Explore an entire dataset or namespace:** discover the relationships between tables within a dataset (or an Iceberg namespace represented as a dataset) and understand its overall structure. You can perform the following tasks after selecting a dataset in BigQuery Studio:
+
+  - Generate and view dataset insights.
+
+  - Use the interactive relationship graph to visualize table connections.
+
+  - Analyze the relationship table for join keys and connection types (schema-defined, usage-based, LLM inferred).
+
+  - Use suggested cross-table SQL queries to query multiple tables effectively.
+
+  For more information about generating and viewing dataset insights, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
 
 ### Workflows for data producers
 
 These workflows are for data engineers, analytics engineers, and others who build and manage data assets.
 
-  - **Generate baseline data documentation:** automatically create and maintain essential metadata descriptions. You can perform the following tasks:
-    
-      - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Knowledge Catalog automated metadata generation API](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#add-aspects) .
-    
-      - Review and refine the AI-generated text to ensure technical accuracy and business relevance.
-    
-    For more information about generating table and column descriptions, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+- **Generate baseline data documentation:** automatically create and maintain essential metadata descriptions. You can perform the following tasks:
 
-  - **Enhance dataset comprehension for users** : Make it easier for consumers to understand and use the datasets provided. You can perform the following tasks:
-    
-      - Generate dataset insights for key datasets, especially those with complex relationships.
-    
-      - Ensure data profile scans run on tables to provide rich context for more accurate and useful insights.
-    
-    For more information, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
+  - After table creation or modification, trigger data insights to generate table and column descriptions. You can also generate these descriptions at scale by using the [Knowledge Catalog automated metadata generation API](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#add-aspects) .
+
+  - Review and refine the AI-generated text to ensure technical accuracy and business relevance.
+
+  For more information about generating table and column descriptions, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+
+- **Enhance dataset comprehension for users** : Make it easier for consumers to understand and use the datasets provided. You can perform the following tasks:
+
+  - Generate dataset insights for key datasets, especially those with complex relationships.
+
+  - Ensure data profile scans run on tables to provide rich context for more accurate and useful insights.
+
+  For more information, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
 
 ### Workflows for data stewards
 
 These workflows support data stewards and governance teams in maintaining data integrity and trust.
 
-  - **Validate and audit AI-generated metadata:** ensure the accuracy and reliability of the metadata produced by data insights. You can perform the following tasks:
-    
-      - Routinely review descriptions and relationships generated by the insights feature.
-    
-      - Cross-reference inferred relationships in the relationship graph with established data models and business logic.
-    
-      - Review and fix inaccuracies in the AI-generated metadata.
-    
-    For more information, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) and [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
+- **Validate and audit AI-generated metadata:** ensure the accuracy and reliability of the metadata produced by data insights. You can perform the following tasks:
+
+  - Routinely review descriptions and relationships generated by the insights feature.
+
+  - Cross-reference inferred relationships in the relationship graph with established data models and business logic.
+
+  - Review and fix inaccuracies in the AI-generated metadata.
+
+  For more information, see [Generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) and [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
 
 ## Pricing
 
@@ -194,23 +200,23 @@ For information about quotas and limits for this feature, see [Quotas for Gemini
 
 Data insights have the following limitations:
 
-  - Data insights are available for BigQuery tables, BigLake tables, external tables, views, and Iceberg namespaces.
+- Data insights are available for BigQuery tables, BigLake tables, external tables, views, and Iceberg namespaces.
 
-  - For multi-cloud customers, data from other clouds is not available.
+- For multi-cloud customers, data from other clouds is not available.
 
-  - Data insights doesn't support `GEO` or `JSON` column types.
+- Data insights doesn't support `GEO` or `JSON` column types.
 
-  - Insights runs don't guarantee the presentation of queries every time. To increase the likelihood of generating more engaging queries, re-initiate the insights pipeline.
+- Insights runs don't guarantee the presentation of queries every time. To increase the likelihood of generating more engaging queries, re-initiate the insights pipeline.
 
-  - For tables with column-level access control and restricted user permissions, you can generate insights if you have read access to all columns of the table. To run the generated queries, you must have sufficient [permissions](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#roles) .
+- For tables with column-level access control and restricted user permissions, you can generate insights if you have read access to all columns of the table. To run the generated queries, you must have sufficient [permissions](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#roles) .
 
-  - Gemini generates column descriptions for a maximum of 350 columns in a table.
+- Gemini generates column descriptions for a maximum of 350 columns in a table.
 
-  - For dataset insights, you can't edit relationships in the relationship graph.
+- For dataset insights, you can't edit relationships in the relationship graph.
 
-  - Generating new dataset insights overwrites the previous insights for that dataset.
+- Generating new dataset insights overwrites the previous insights for that dataset.
 
-  - Dataset insights don't support linked datasets.
+- Dataset insights don't support linked datasets.
 
 ## Locations
 
@@ -218,14 +224,14 @@ You can use data insights in all [BigQuery locations](https://docs.cloud.google.
 
 ## What's next
 
-  - Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+- Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
 
-  - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
+- Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
 
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
+- Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
 
-  - Learn how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
+- Learn how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
 
-  - Learn more about [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) .
+- Learn more about [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) .
 
-  - Learn how to iterate on query results with natural language questions by using [Data Canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
+- Learn how to iterate on query results with natural language questions by using [Data Canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .

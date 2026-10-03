@@ -12,7 +12,7 @@ gcloud alpha bq migration-workflows - manage Migration Workflow resources
 
 SYNOPSIS
 
-`gcloud alpha bq migration-workflows` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq migration-workflows` [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,27 +20,34 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  create  `  
-    `(ALPHA)` create migration workflows.
-  - `  delete  `  
-    `(ALPHA)` Delete migration workflows.
-  - `  describe  `  
-    `(ALPHA)` Describe migration workflows.
-  - `  list  `  
-    `(ALPHA)` List migration workflows.
+[`create`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows/create)  
+`(ALPHA)` create migration workflows.
+
+[`delete`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows/delete)  
+`(ALPHA)` Delete migration workflows.
+
+[`describe`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows/describe)  
+`(ALPHA)` Describe migration workflows.
+
+[`list`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows/list)  
+`(ALPHA)` List migration workflows.
 
 NOTES
 
 This command is currently in alpha and might change without notice. If this command fails with API permission errors despite specifying the correct project, you might be trying to access an API with an invitation-only early access allowlist. These variants are also available:
 
-    gcloud bq migration-workflows
+```
+gcloud bq migration-workflows
+```
 
-    gcloud beta bq migration-workflows
+```
+gcloud beta bq migration-workflows
+```

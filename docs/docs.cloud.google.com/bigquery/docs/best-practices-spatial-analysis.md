@@ -22,31 +22,35 @@ Many complex shapes with large numbers of points can be simplified without much 
 
 Simplifying shapes is most useful for improving the cost and performance of a dataset in the following use cases:
 
-  - You need to maintain a high degree of similarity to the true shape.
-  - You must perform high-precision, high-accuracy operations.
-  - You want to speed up visualizations without visible loss in shape detail.
+- You need to maintain a high degree of similarity to the true shape.
+- You must perform high-precision, high-accuracy operations.
+- You want to speed up visualizations without visible loss in shape detail.
 
 The following code sample shows how to use the `ST_SIMPLIFY` function on a base table that has a `GEOGRAPHY` column named `geom` . The code simplifies shapes and removes points without disturbing any edge of a shape by more than the given tolerance of 1.0 meters.
 
-    CREATE MATERIALIZED VIEW project.dataset.base_mv
-      CLUSTER BY geom
-    AS (
-      SELECT
-        * EXCEPT (geom),
-        ST_SIMPLIFY(geom, 1.0) AS geom
-      FROM base_table
-    )
+```
+CREATE MATERIALIZED VIEW project.dataset.base_mv
+  CLUSTER BY geom
+AS (
+  SELECT
+    * EXCEPT (geom),
+    ST_SIMPLIFY(geom, 1.0) AS geom
+  FROM base_table
+)
+```
 
 The following code sample shows how to use the `ST_SNAPTOGRID` function to snap the points to a grid with a resolution of 0.00001 degrees:
 
-    CREATE MATERIALIZED VIEW project.dataset.base_mv
-      CLUSTER BY geom
-    AS (
-      SELECT
-        * EXCEPT (geom),
-        ST_SNAPTOGRID(geom, -5) AS geom
-      FROM base_table
-    )
+```
+CREATE MATERIALIZED VIEW project.dataset.base_mv
+  CLUSTER BY geom
+AS (
+  SELECT
+    * EXCEPT (geom),
+    ST_SNAPTOGRID(geom, -5) AS geom
+  FROM base_table
+)
+```
 
 The `grid_size` argument in this function serves as the exponent, which means 10e-5 = 0.00001. This resolution is equivalent to around 1 meter in the worst case, which occurs at the equator.
 
@@ -104,44 +108,50 @@ For example, consider finding the ten buildings nearest to a particular anchor b
 
 For this example, you can also use Overture Maps data in BigQuery to create a separate table of building shapes corresponding to an area of interest and a vector called `geom_vector` . The area of interest in this example is the city of Norfolk, VA, United States, represented by [FIPS code](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) 51710, as shown in the following code sample:
 
-    CREATE TABLE vector_search.norfolk_buildings
-    AS (
-      SELECT
-        *,
-        [
-          ST_X(ST_CENTROID(building.geometry)),
-          ST_Y(ST_CENTROID(building.geometry))] AS geom_vector
-      FROM `bigquery-public-data.overture_maps.building` AS building
-      INNER JOIN `bigquery-public-data.geo_us_boundaries.counties` AS county
-        ON (st_intersects(county.county_geom, building.geometry))
-      WHERE county.county_fips_code = '51710'
-    )
+```
+CREATE TABLE vector_search.norfolk_buildings
+AS (
+  SELECT
+    *,
+    [
+      ST_X(ST_CENTROID(building.geometry)),
+      ST_Y(ST_CENTROID(building.geometry))] AS geom_vector
+  FROM `bigquery-public-data.overture_maps.building` AS building
+  INNER JOIN `bigquery-public-data.geo_us_boundaries.counties` AS county
+    ON (st_intersects(county.county_geom, building.geometry))
+  WHERE county.county_fips_code = '51710'
+)
+```
 
 The following code sample shows how to create a vector index on the table:
 
-    CREATE
-      vector index building_vector_index
-    ON
-      vector_search.norfolk_buildings(geom_vector)
-      OPTIONS (index_type = 'IVF')
+```
+CREATE
+  vector index building_vector_index
+ON
+  vector_search.norfolk_buildings(geom_vector)
+  OPTIONS (index_type = 'IVF')
+```
 
 This query identifies the 10 buildings nearest to a particular anchor building:
 
-    SELECT base.*
-    FROM
-      VECTOR_SEARCH(
-        TABLE vector_search.norfolk_buildings,
-        'geom_vector',
-        (
-          SELECT
-            geom_vector
-          FROM
-            vector_search.norfolk_buildings
-          WHERE id = '56873794-9873-4fe1-871a-5987bb3a0efb'
-        ),
-        top_k => 10,
-        distance_type => 'EUCLIDEAN',
-        options => '{"fraction_lists_to_search":0.1}')
+```
+SELECT base.*
+FROM
+  VECTOR_SEARCH(
+    TABLE vector_search.norfolk_buildings,
+    'geom_vector',
+    (
+      SELECT
+        geom_vector
+      FROM
+        vector_search.norfolk_buildings
+      WHERE id = '56873794-9873-4fe1-871a-5987bb3a0efb'
+    ),
+    top_k => 10,
+    distance_type => 'EUCLIDEAN',
+    options => '{"fraction_lists_to_search":0.1}')
+```
 
 > **Note:** You might need to adjust some parameters—such as `top_k` and `fraction_lists_to_search` —to work with your particular data.
 
@@ -161,8 +171,8 @@ Use the `ST_SUBDIVIDE` function to [break large shapes or long line strings into
 
 ## What's next
 
-  - Learn how to use [grid systems for spatial analysis](https://docs.cloud.google.com/bigquery/docs/grid-systems-spatial-analysis) .
-  - Learn more about [BigQuery geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
-  - Learn how to [manage vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
-  - Learn more about [best practices for spatial indexing and clustering in BigQuery](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery) .
-  - For more information on analyzing and visualizing geospatial data in BigQuery, see [Get started with geospatial analytics](https://docs.cloud.google.com/bigquery/docs/geospatial-get-started) .
+- Learn how to use [grid systems for spatial analysis](https://docs.cloud.google.com/bigquery/docs/grid-systems-spatial-analysis) .
+- Learn more about [BigQuery geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
+- Learn how to [manage vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
+- Learn more about [best practices for spatial indexing and clustering in BigQuery](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery) .
+- For more information on analyzing and visualizing geospatial data in BigQuery, see [Get started with geospatial analytics](https://docs.cloud.google.com/bigquery/docs/geospatial-get-started) .

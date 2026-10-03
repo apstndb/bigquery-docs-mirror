@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the catalog was created.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`DELTA_SHARING_CATALOG_CREATE_REQUEST`
-
-Delta Sharing catalog was created using the CreateDeltaSharingCatalog API.
+| Enums                                  |                                                                            |
+|----------------------------------------|----------------------------------------------------------------------------|
+| `REASON_UNSPECIFIED`                   | Unknown.                                                                   |
+| `DELTA_SHARING_CATALOG_CREATE_REQUEST` | Delta Sharing catalog was created using the CreateDeltaSharingCatalog API. |

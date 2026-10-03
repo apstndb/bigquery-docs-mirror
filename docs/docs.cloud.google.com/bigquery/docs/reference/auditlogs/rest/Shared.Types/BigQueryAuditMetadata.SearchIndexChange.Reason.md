@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the search index was changed.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`QUERY`
-
-Search index was changed using a DDL query.
+| Enums                |                                             |
+|----------------------|---------------------------------------------|
+| `REASON_UNSPECIFIED` | Unknown.                                    |
+| `QUERY`              | Search index was changed using a DDL query. |

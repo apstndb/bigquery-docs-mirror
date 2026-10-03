@@ -22,7 +22,7 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add\_box **Compose new query** . A new editor tab opens.
+2.  Click add_box **Compose new query** . A new editor tab opens.
 
 3.  Click **Edit** \> **Query settings** . The **Query settings** panel appears.
 
@@ -38,16 +38,18 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
-    bq query \
-    --nouse_legacy_sql \
-    --create_session
-    [--location 'SESSION_LOCATION'] \
-    'SQL_STATEMENT'
+```
+bq query \
+--nouse_legacy_sql \
+--create_session
+[--location 'SESSION_LOCATION'] \
+'SQL_STATEMENT'
+```
 
 where:
 
-  - SESSION\_LOCATION : Bind the session to a [physical location](https://docs.cloud.google.com/bigquery/docs/locations) . Restrict all queries in the session to this location. Optional.
-  - SQL\_STATEMENT : The first SQL statement for your session.
+- ` SESSION_LOCATION ` : Bind the session to a [physical location](https://docs.cloud.google.com/bigquery/docs/locations) . Restrict all queries in the session to this location. Optional.
+- ` SQL_STATEMENT ` : The first SQL statement for your session.
 
 Your session ID is returned with the results of the query.
 
@@ -55,30 +57,34 @@ Your session ID is returned with the results of the query.
 
 Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
-    {
-      "query": "SQL_STATEMENT",
-      "createSession": true,
-      ["location": "SESSION_LOCATION"]
-    }
+```
+{
+  "query": "SQL_STATEMENT",
+  "createSession": true,
+  ["location": "SESSION_LOCATION"]
+}
+```
 
 where:
 
-  - SQL\_STATEMENT : The first SQL statement for your session.
-  - SESSION\_LOCATION : Bind the session to a [physical location](https://docs.cloud.google.com/bigquery/docs/locations) . Restrict all queries in the session to this location. Optional.
+- ` SQL_STATEMENT ` : The first SQL statement for your session.
+- ` SESSION_LOCATION ` : Bind the session to a [physical location](https://docs.cloud.google.com/bigquery/docs/locations) . Restrict all queries in the session to this location. Optional.
 
 The response body is similar to the following:
 
-    {
-      "jobReference": {
-        "projectId": "myProject",
-        "jobId": "job_123"
-      },
-      "statistics": {
-        "sessionInfo": {
-          "sessionId": "CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ"
-        }
-      }
+```
+{
+  "jobReference": {
+    "projectId": "myProject",
+    "jobId": "job_123"
+  },
+  "statistics": {
+    "sessionInfo": {
+      "sessionId": "CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ"
     }
+  }
+}
+```
 
 ## Run a query in a session
 
@@ -96,15 +102,17 @@ After you create a session, you can run queries in that session:
 
 Open the [Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true) and enter the following [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command:
 
-    bq query \
-    --nouse_legacy_sql \
-    --session_id=SESSION_ID \
-    'SQL_STATEMENT'
+```
+bq query \
+--nouse_legacy_sql \
+--session_id=SESSION_ID \
+'SQL_STATEMENT'
+```
 
 where:
 
-  - SESSION\_ID : Replace this with the [ID of the session](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) you want to work with.
-  - SQL\_STATEMENT : A SQL statement to run in your session.
+- ` SESSION_ID ` : Replace this with the [ID of the session](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) you want to work with.
+- ` SQL_STATEMENT ` : A SQL statement to run in your session.
 
 The results of the query are followed by your session ID.
 
@@ -112,8 +120,10 @@ If you are going to run lots of queries with the Cloud Shell, you can add your s
 
 This is what a session ID looks like in `.bigqueryrc` :
 
-    [query]
-    --session_id=CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
+[query]
+--session_id=CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
 
 After you've added the session ID to `.bigqueryrc` , you can omit the `--session_id` flag from the `bq query` command. If you want to use a different session or if a session terminates, you must update your `.bigqueryrc` file.
 
@@ -121,18 +131,20 @@ After you've added the session ID to `.bigqueryrc` , you can omit the `--session
 
 Call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method with the following parameters:
 
-    {
-      "query": "SQL_STATEMENT",
-      "connectionProperties": [{
-        "key": "session_id",
-        "value": "SESSION_ID"
-      }]
-    }
+```
+{
+  "query": "SQL_STATEMENT",
+  "connectionProperties": [{
+    "key": "session_id",
+    "value": "SESSION_ID"
+  }]
+}
+```
 
 where:
 
-  - SQL\_STATEMENT : The first SQL statement for your session.
-  - SESSION\_ID : The [ID of the session](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) .
+- ` SQL_STATEMENT ` : The first SQL statement for your session.
+- ` SESSION_ID ` : The [ID of the session](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) .
 
 ## Terminate a session
 
@@ -159,10 +171,12 @@ Do the following to terminate your session:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CALL BQ.ABORT_SESSION();
 
-3.  Click play\_circle **Run** .
+    ```
+    CALL BQ.ABORT_SESSION();
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -172,9 +186,11 @@ You can terminate a session using its ID. You don't need to be in the session to
 
 [Get the session ID](https://docs.cloud.google.com/bigquery/docs/sessions#get-id) , and then run the following statement:
 
-    CALL BQ.ABORT_SESSION(SESSION_ID);
+```
+CALL BQ.ABORT_SESSION(SESSION_ID);
+```
 
-Replace SESSION\_ID with the ID of the session to terminate.
+Replace ` SESSION_ID ` with the ID of the session to terminate.
 
 ## Get the ID of your active session
 
@@ -193,8 +209,10 @@ Before you complete these steps, make sure that you have run at least one query 
 3.  In **Query results** , click **Job information** .
 
 4.  In the **Job information** list, search for the session ID:
-    
-        Session ID: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+
+    ```
+    Session ID: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+    ```
 
 ### bq
 
@@ -202,7 +220,9 @@ To run query commands in a session within the Cloud Shell, you need to include t
 
 When you create a session with the Cloud Shell, the session ID that is returned is similar to the following:
 
-    In session: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
+In session: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
 
 ### API
 
@@ -210,7 +230,9 @@ To pass SQL commands into a session with an API call, you need to include the se
 
 When you create a session with an API call, the session ID in the response looks similar to the following:
 
-    sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
+sessionId: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+```
 
 ## List active and inactive sessions
 
@@ -221,20 +243,20 @@ To get session IDs of active and inactive sessions, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Job history** .
 
 4.  Select the type of job history:
-    
-      - To display information of your recent jobs, click **Personal history** .
-      - To display information of recent jobs in your project, click **Project history** .
+
+    - To display information of your recent jobs, click **Personal history** .
+    - To display information of recent jobs in your project, click **Project history** .
 
 5.  In the **Session ID** column, you can view session IDs for your jobs.
-    
+
     ![Session ID in job history](https://docs.cloud.google.com/static/bigquery/images/job-history-session-id.png)
 
 ### SQL
@@ -244,32 +266,36 @@ To get a list of your three most recent sessions including the active and termin
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT
-          session_id,
-          MAX(creation_time) AS last_modified_time
-        FROM `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER>
-        WHERE
-          session_id IS NOT NULL
-          AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)
-        GROUP BY session_id
-        ORDER BY last_modified_time DESC;
-    
-    Replace REGION\_NAME with the name of the region in which to list sessions.
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      session_id,
+      MAX(creation_time) AS last_modified_time
+    FROM `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER>
+    WHERE
+      session_id IS NOT NULL
+      AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY)
+    GROUP BY session_id
+    ORDER BY last_modified_time DESC;
+    ```
+
+    Replace ` REGION_NAME ` with the name of the region in which to list sessions.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 The result is similar to the following:
 
-    +-------------------------------------------------------------------------+
-    | session_id                                        | last_modified_time  |
-    +-------------------------------------------------------------------------+
-    | CgwKCmZhbGl1LXRlc3QQARokMGQ5YWWYzZmE0YjhkMDBm     | 2021-06-01 23:04:26 |
-    | CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZTczwZjA1NDc2 | 2021-05-30 22:43:02 |
-    | CgwKCmZhbGl1LXRlc3QQY2MzLTg4ZDEtYzVhOWZiYmM5NzZk  | 2021-04-07 22:31:21 |
-    +-------------------------------------------------------------------------+
+```
++-------------------------------------------------------------------------+
+| session_id                                        | last_modified_time  |
++-------------------------------------------------------------------------+
+| CgwKCmZhbGl1LXRlc3QQARokMGQ5YWWYzZmE0YjhkMDBm     | 2021-06-01 23:04:26 |
+| CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZTczwZjA1NDc2 | 2021-05-30 22:43:02 |
+| CgwKCmZhbGl1LXRlc3QQY2MzLTg4ZDEtYzVhOWZiYmM5NzZk  | 2021-04-07 22:31:21 |
++-------------------------------------------------------------------------+
+```
 
 ## View the history of a session
 
@@ -282,21 +308,23 @@ To view the history of a session in the Google Cloud console, you can filter you
 1.  In the Google Cloud console, go to the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Job history** .
 
 4.  Select the type of job history you want to view:
-    
-      - To display information of your recent jobs, click **Personal history** .
-      - To display information of recent jobs in your project, click **Project history** .
 
-5.  Click filter\_list **Filter** and then select **Session ID** .
+    - To display information of your recent jobs, click **Personal history** .
+    - To display information of recent jobs in your project, click **Project history** .
+
+5.  Click filter_list **Filter** and then select **Session ID** .
 
 6.  In the **Session ID** field, search for the session ID:
-    
-        Session ID: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+
+    ```
+    Session ID: CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZ
+    ```
 
 ### SQL
 
@@ -305,20 +333,22 @@ To view historical data for a specific session, first [get your session ID](http
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT
-          *
-        FROM
-          `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER
-        WHERE
-          session_info.session_id = 'SESSION_ID';
-    
-    Replace the following:
-    
-      - REGION\_NAME : the name of the region in which to view session data
-      - SESSION\_ID : the ID of the session for which to retrieve historical data
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      *
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER
+    WHERE
+      session_info.session_id = 'SESSION_ID';
+    ```
+
+    Replace the following:
+
+    - ` REGION_NAME ` : the name of the region in which to view session data
+    - ` SESSION_ID ` : the ID of the session for which to retrieve historical data
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -326,24 +356,28 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 The following returns the history for a session that has the session ID `CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0` . You can replace this session ID with your own.
 
-    SELECT
-      creation_time, query
-    FROM
-      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
-    WHERE
-      session_info.session_id = 'CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0'
-      AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY);
+```
+SELECT
+  creation_time, query
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_USER
+WHERE
+  session_info.session_id = 'CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0'
+  AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 DAY);
+```
 
 The result is similar to the following:
 
-    +---------------------+------------------------------------------------------------------------------------------+
-    |    creation_time    |                                          query                                           |
-    +---------------------+------------------------------------------------------------------------------------------+
-    | 2021-06-01 23:04:26 | SELECT * FROM Purchases;                                                                 |
-    | 2021-06-01 23:02:51 | CREATE TEMP TABLE Purchases(total INT64) AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;  |
-    +---------------------+------------------------------------------------------------------------------------------+
+```
++---------------------+------------------------------------------------------------------------------------------+
+|    creation_time    |                                          query                                           |
++---------------------+------------------------------------------------------------------------------------------+
+| 2021-06-01 23:04:26 | SELECT * FROM Purchases;                                                                 |
+| 2021-06-01 23:02:51 | CREATE TEMP TABLE Purchases(total INT64) AS SELECT * FROM UNNEST([10,23,3,14,55]) AS a;  |
++---------------------+------------------------------------------------------------------------------------------+
+```
 
 ## What's next
 
-  - See the [Introduction to sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
-  - Learn more about [writing queries in sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries) .
+- See the [Introduction to sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
+- Learn more about [writing queries in sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries) .

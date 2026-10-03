@@ -18,9 +18,9 @@ To use the Storage Write API (gRPC), you must have `bigquery.tables.updateData` 
 
 The following predefined Identity and Access Management (IAM) roles include `bigquery.tables.updateData` permissions:
 
-  - `bigquery.dataEditor`
-  - `bigquery.dataOwner`
-  - `bigquery.admin`
+- `bigquery.dataEditor`
+- `bigquery.dataOwner`
+- `bigquery.admin`
 
 For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -28,9 +28,9 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 
 Using the Storage Write API (gRPC) requires one of the following OAuth scopes:
 
-  - `https://www.googleapis.com/auth/bigquery`
-  - `https://www.googleapis.com/auth/cloud-platform`
-  - `https://www.googleapis.com/auth/bigquery.insertdata`
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/bigquery.insertdata`
 
 For more information, see the [Authentication Overview](https://cloud.google.com/docs/authentication/) .
 
@@ -42,9 +42,9 @@ The core abstraction in the Storage Write API (gRPC) is a *stream* . A stream wr
 
 The Storage Write API (gRPC) provides a *default stream* , designed for streaming scenarios where you have continuously arriving data. It has the following characteristics:
 
-  - Data written to the default stream is available immediately for query.
-  - The default stream supports at-least-once semantics.
-  - You don't need to explicitly create the default stream.
+- Data written to the default stream is available immediately for query.
+- The default stream supports at-least-once semantics.
+- You don't need to explicitly create the default stream.
 
 If you are migrating from the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) , consider using the default stream. It has similar write semantics, with greater data resiliency and fewer scaling restrictions.
 
@@ -58,8 +58,8 @@ For more information and example code, see [Use the default stream for at-least-
 
 You can explicitly create a stream if you need either of the following behaviors:
 
-  - Exactly-once write semantics through the use of stream offsets.
-  - Support for additional ACID properties.
+- Exactly-once write semantics through the use of stream offsets.
+- Support for additional ACID properties.
 
 In general, application-created streams give more control over functionality at the cost of additional complexity.
 
@@ -114,13 +114,13 @@ The `AppendRows` method appends one or more records to the stream. The first cal
 
 Protocol buffers provide a language-neutral, platform-neutral, extensible mechanism for serializing structured data in a forward-compatible and backward-compatible way. They are advantageous in that they provide compact data storage with fast and efficient parsing. To learn more about protocol buffers, see [Protocol Buffer Overview](https://developers.google.com/protocol-buffers/docs/overview) .
 
-If you are going to consume the API directly with a pre-defined protocol buffer message, the protocol buffer message cannot use a `package` specifier, and all nested or enumeration types must be defined within the top-level root message. References to external messages are not allowed. For an example, see [sample\_data.proto](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/sample_data.proto) .
+If you are going to consume the API directly with a pre-defined protocol buffer message, the protocol buffer message cannot use a `package` specifier, and all nested or enumeration types must be defined within the top-level root message. References to external messages are not allowed. For an example, see [sample_data.proto](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/sample_data.proto) .
 
 The Java and Go clients support arbitrary protocol buffers, because the client library normalizes the protocol buffer schema.
 
 ##### Apache Arrow Handling
 
-[Apache Arrow](https://arrow.apache.org/docs/index.html) is a universal columnar format and multi-language toolbox for data processing. Apache Arrow provides a language-independent, column-oriented memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. The Storage Write API (gRPC) supports Arrow ingestion using serialized arrow schema and data in the [`AppendRowsRequest` class](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest/google.cloud.bigquery_storage_v1.types.AppendRowsRequest) . The Python and Java client libraries include built-in support for Apache Arrow ingestion.
+[Apache Arrow](https://arrow.apache.org/docs/index.html) is a universal columnar format and multi-language toolbox for data processing. Apache Arrow provides a language-independent, column-oriented memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. The Storage Write API (gRPC) supports Arrow ingestion using serialized arrow schema and data in the [`AppendRowsRequest` class](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest/google.cloud.bigquery_storage_v1.types.AppendRowsRequest) . The Python, Java, and Rust client libraries include built-in support for Apache Arrow ingestion.
 
 #### FinalizeWriteStream
 
@@ -136,11 +136,11 @@ If an error occurs, the returned `google.rpc.Status` can include a [`StorageErro
 
 The Storage Write API (gRPC) is a gRPC API that uses bidirectional connections. The `AppendRows` method creates a connection to a stream. You can open multiple connections on the default stream. These appends are asynchronous, which lets you send a series of writes simultaneously. Response messages on each bidirectional connection arrive in the same order as the requests were sent.
 
-Application-created streams can only have a single active connection. As a best practice, [limit the number of active connections](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) , and use one connection for as many data writes as possible. When using the default stream in Java or Go, you can use [Storage Write API (gRPC) multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) to write to multiple destination tables with shared connections.
+Application-created streams can only have a single active connection. As a best practice, [limit the number of active connections](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) , and use one connection for as many data writes as possible. When using the default stream in Java, Go, or Rust, you can use [Storage Write API (gRPC) multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) to write to multiple destination tables with shared connections.
 
 Generally, a single connection supports at least 1 MBps of throughput. The upper bound depends on several factors, such as network bandwidth, the schema of the data, and server load. When a connection reaches the throughput limit, incoming requests might be rejected or queued until the number of inflight requests goes down. If you require more throughput, create more connections.
 
-BigQuery closes the gRPC connection if the connection remains idle for too long. If this happens, the response code is `HTTP 409` . The gRPC connection can also be closed in the event of a server restart or for other reasons. If a connection error occurs, create a new connection. The Java and Go client libraries automatically reconnect if the connection is closed.
+BigQuery closes the gRPC connection if the connection remains idle for too long. If this happens, the response code is `HTTP 409` . The gRPC connection can also be closed in the event of a server restart or for other reasons. If a connection error occurs, create a new connection. The Java, Go, and Rust client libraries automatically reconnect if the connection is closed.
 
 ## Client library support
 
@@ -154,9 +154,9 @@ To see code samples related to the Storage Write API (gRPC), see [All BigQuery c
 
 The Java client library provides two writer objects:
 
-  - `StreamWriter` : Accepts data in protocol buffer format.
+- `StreamWriter` : Accepts data in protocol buffer format.
 
-  - `JsonStreamWriter` : Accepts data in JSON format and converts it to protocol buffers before sending it over the wire. The `JsonStreamWriter` also supports automatic schema updates. If the table schema changes, the writer automatically reconnects with the new schema, allowing the client to send data using the new schema.
+- `JsonStreamWriter` : Accepts data in JSON format and converts it to protocol buffers before sending it over the wire. The `JsonStreamWriter` also supports automatic schema updates. If the table schema changes, the writer automatically reconnects with the new schema, allowing the client to send data using the new schema.
 
 The programming model is similar for both writers. The main difference is how you format the payload.
 
@@ -181,6 +181,12 @@ You can also use the Apache Arrow ingestion format as an alternative protocol to
 ### NodeJS client
 
 The NodeJS client library accepts JSON input and provides automatic reconnect support. See the [documentation](https://www.npmjs.com/package/@google-cloud/bigquery-storage) for details on how to use the client.
+
+### Rust client
+
+The Rust client library provides a `Write` client and typed writer objects for each stream type ( `DefaultWriter` , `CommittedWriter` , `PendingWriter` , and `BufferedWriter` ). The writers accept data in the Apache Arrow format and automatically manage Storage Write API (gRPC) connections, routing headers, retries, and reconnections after connection errors. To ingest JSON data, you can convert JSON records into Apache Arrow record batches using the `arrow-json` crate.
+
+See the [Rust documentation](https://docs.rs/google-cloud-bigquery/latest/google_cloud_bigquery/client/struct.Write.html) for details on how to use the Rust client, and see [Use the Apache Arrow format to ingest data](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#arrow-format) for example code.
 
 ## Handle unavailability
 
@@ -222,9 +228,9 @@ The [Fluent Bit Storage Write API (gRPC) output plugin](https://github.com/Googl
 
 This plugin supports the following:
 
-  - At-least-once semantics using the default type.
-  - Exactly-once semantics using the committed type.
-  - Dynamic scaling for default streams, when backpressure is indicated.
+- At-least-once semantics using the default type.
+- Exactly-once semantics using the committed type.
+- Dynamic scaling for default streams, when backpressure is indicated.
 
 ## Apache Iceberg support
 
@@ -244,8 +250,8 @@ For more information about using DML to modify your streamed data, see [Using da
 
 ### Limitations
 
-  - Support for running mutating DML statements against recently streamed data does not extend to data streamed using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
-  - Running mutating DML statements within a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) against recently streamed data is unsupported.
+- Support for running mutating DML statements against recently streamed data does not extend to data streamed using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+- Running mutating DML statements within a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) against recently streamed data is unsupported.
 
 ## Query streamed data with `max_staleness`
 
@@ -253,8 +259,8 @@ By default, every time you run a query against a table with streamed data, BigQu
 
 If your use case doesn't require real-time data freshness—for example, in dashboards or reporting queries—you can reduce query latency and cost by configuring data staleness. To configure data staleness, use one of the following methods:
 
-  - **Configure staleness at the table level (CDC or materialized views)** : set the `max_staleness` option on your destination table to allow queries to return results based on recent data snapshots within the staleness interval. For more information, see [Change data capture `max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#query-max-staleness) and [Materialized views with `max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) .
-  - **Override staleness for a query or session** : set the [`@@max_staleness_override`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in your multi-statement query or session to override the staleness dynamically without altering table-level configurations—for example, `SET @@max_staleness_override = INTERVAL 10 MINUTE;` .
+- **Configure staleness at the table level (CDC or materialized views)** : set the `max_staleness` option on your destination table to allow queries to return results based on recent data snapshots within the staleness interval. For more information, see [Change data capture `max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#query-max-staleness) and [Materialized views with `max_staleness`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) .
+- **Override staleness for a query or session** : set the [`@@max_staleness_override`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) system variable in your multi-statement query or session to override the staleness dynamically without altering table-level configurations—for example, `SET @@max_staleness_override = INTERVAL 10 MINUTE;` .
 
 ## Storage Write API (gRPC) quotas
 
@@ -290,7 +296,7 @@ For a detailed example of how to use the Storage Write API (gRPC), see [Stream d
 
 ## What's next
 
-  - [Stream data using the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming)
-  - [Batch load data using the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-batch)
-  - [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types)
-  - [Storage Write API (gRPC) best practices](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices)
+- [Stream data using the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming)
+- [Batch load data using the Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-batch)
+- [Supported protocol buffer and Arrow data types](https://docs.cloud.google.com/bigquery/docs/supported-data-types)
+- [Storage Write API (gRPC) best practices](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices)

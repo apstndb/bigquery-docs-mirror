@@ -10,13 +10,13 @@ data_source: docs.cloud.google.com
 
 To filter resources using labels, you can do one of the following:
 
-  - Use the search bar in the Google Cloud console.
-  - Create a filter specification for use in the API, bq command-line tool, or client libraries.
+- Use the search bar in the Google Cloud console.
+- Create a filter specification for use in the API, bq command-line tool, or client libraries.
 
 ## Limitations
 
-  - The API, bq command-line tool, and client libraries support filtering only for datasets.
-  - You cannot filter jobs by label in any of the BigQuery tools.
+- The API, bq command-line tool, and client libraries support filtering only for datasets.
+- You cannot filter jobs by label in any of the BigQuery tools.
 
 ## Before you begin
 
@@ -26,25 +26,25 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To filter resources using labels, you must be able to retrieve resource metadata. To filter resources using labels, you need the following IAM permissions:
 
-  - `bigquery.datasets.get` (lets you filter datasets)
-  - `bigquery.tables.get` (lets you filter tables and views)
+- `bigquery.datasets.get` (lets you filter datasets)
+- `bigquery.tables.get` (lets you filter tables and views)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to filter datasets:
 
-  - `roles/bigquery.user`
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.user`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to filter tables and views:
 
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can filter the resources that you create.
 
@@ -57,7 +57,7 @@ To generate a filtered list of resources, use the Google Cloud console:
 1.  In the Google Cloud console, go to the **Explorer** pane.
 
 2.  In the search bar, enter the `key` or `key:value` pair. Your results include any partial matches.
-    
+
     For example, to show only datasets with the label `department:shipping` , you can enter `department` or `department:shipping` .
 
 ## Filter datasets in the API or bq command-line tool
@@ -66,19 +66,19 @@ The API, bq command-line tool, and client libraries support filtering only for d
 
 To filter datasets by using the API, bq tool, or client libraries, create a filter specification and use the specification:
 
-  - As the parameter for the `--filter` flag in the bq tool
-  - As the value for the `filter` property in the API's `datasets.list` method
+- As the parameter for the `--filter` flag in the bq tool
+- As the value for the `filter` property in the API's `datasets.list` method
 
 ### Limitations on filter specifications
 
 Filter specifications have the following limitations:
 
-  - Only the `AND` logical operator is supported. Space-separated comparisons are treated as having implicit `AND` operators.
-  - The only field eligible for filtering is `labels.key` where `key` is the name of a label.
-  - Each `key` in a filtering expression must be unique.
-  - The filter can include up to ten expressions.
-  - Filtering is case-sensitive.
-  - The API, bq command-line tool, and client libraries support filtering only for datasets.
+- Only the `AND` logical operator is supported. Space-separated comparisons are treated as having implicit `AND` operators.
+- The only field eligible for filtering is `labels.key` where `key` is the name of a label.
+- Each `key` in a filtering expression must be unique.
+- The filter can include up to ten expressions.
+- Filtering is case-sensitive.
+- The API, bq command-line tool, and client libraries support filtering only for datasets.
 
 ### Filter specification examples
 
@@ -88,8 +88,8 @@ A filter specification uses the following syntax:
 
 Replace the following:
 
-  - `field` is expressed as ` labels. key  ` where key is a label key.
-  - `value` is an optional label value.
+- `field` is expressed as `labels. `` key` where ` key ` is a label key.
+- `value` is an optional label value.
 
 The following examples show how to generate filter expressions.
 
@@ -121,37 +121,47 @@ To filter datasets by using the API, bq command-line tool, or client libraries:
 
 Issue the `bq ls` command with the `--filter` flag. If you are listing datasets in a project other than your default project, specify the `--project_id` flag.
 
-    bq ls \
-    --filter "filter_specification" \
-    --project_id project_id
+```
+bq ls \
+--filter "filter_specification" \
+--project_id project_id
+```
 
 Replace the following:
 
-  - `  filter_specification  ` is a valid filter specification.
-  - `  project_id  ` is your project ID.
+- `filter_specification` is a valid filter specification.
+- `project_id` is your project ID.
 
 Examples:
 
 Enter the following command to list datasets in your default project that have a `department:shipping` label:
 
-    bq ls --filter "labels.department:shipping"
+```
+bq ls --filter "labels.department:shipping"
+```
 
 Enter the following command to list datasets in your default project that have a `department:shipping` label and a `test_data` tag.
 
-    bq ls --filter "labels.department:shipping labels.test_data"
+```
+bq ls --filter "labels.department:shipping labels.test_data"
+```
 
 Enter the following command to list datasets in `myotherproject` that have a `department:shipping` label:
 
-    bq ls --filter "labels.department:shipping" --project_id myotherproject
+```
+bq ls --filter "labels.department:shipping" --project_id myotherproject
+```
 
 The output for each of these commands returns a list of datasets like the following.
 
-    +-----------+
-    | datasetId |
-    +-----------+
-    | mydataset |
-    | mydataset2|
-    +-----------+
+```
++-----------+
+| datasetId |
++-----------+
+| mydataset |
+| mydataset2|
++-----------+
+```
 
 ### API
 
@@ -163,40 +173,42 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // listDatasetsByLabel demonstrates walking the collection of datasets in a project, and
-    // filtering that list to a subset that has specific label metadata.
-    func listDatasetsByLabel(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     it := client.Datasets(ctx)
-     it.Filter = "labels.color:green"
-     for {
-         dataset, err := it.Next()
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintf(w, "dataset: %s\n", dataset.DatasetID)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// listDatasetsByLabel demonstrates walking the collection of datasets in a project, and
+// filtering that list to a subset that has specific label metadata.
+func listDatasetsByLabel(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    it := client.Datasets(ctx)
+    it.Filter = "labels.color:green"
+    for {
+        dataset, err := it.Next()
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintf(w, "dataset: %s\n", dataset.DatasetID)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -204,46 +216,48 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.paging.Page;
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Dataset;
-    
-    // Sample to get list of datasets by label
-    public class ListDatasetsByLabel {
-    
-      public static void runListDatasetsByLabel() {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "MY_PROJECT_ID";
-        String filter = "MY_LABEL_FILTER";
-        listDatasetsByLabel(projectId, filter);
+```java
+import com.google.api.gax.paging.Page;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Dataset;
+
+// Sample to get list of datasets by label
+public class ListDatasetsByLabel {
+
+  public static void runListDatasetsByLabel() {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "MY_PROJECT_ID";
+    String filter = "MY_LABEL_FILTER";
+    listDatasetsByLabel(projectId, filter);
+  }
+
+  public static void listDatasetsByLabel(String projectId, String filter) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Page<Dataset> datasets =
+          bigquery.listDatasets(
+              projectId,
+              BigQuery.DatasetListOption.pageSize(100),
+              BigQuery.DatasetListOption.labelFilter(filter)); // "labels.color:green"
+      if (datasets == null) {
+        System.out.println("Dataset does not contain any models");
+        return;
       }
-    
-      public static void listDatasetsByLabel(String projectId, String filter) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Page<Dataset> datasets =
-              bigquery.listDatasets(
-                  projectId,
-                  BigQuery.DatasetListOption.pageSize(100),
-                  BigQuery.DatasetListOption.labelFilter(filter)); // "labels.color:green"
-          if (datasets == null) {
-            System.out.println("Dataset does not contain any models");
-            return;
-          }
-          datasets
-              .iterateAll()
-              .forEach(
-                  dataset -> System.out.printf("Success! Dataset ID: %s ", dataset.getDatasetId()));
-        } catch (BigQueryException e) {
-          System.out.println("Project does not contain any datasets \n" + e.toString());
-        }
-      }
+      datasets
+          .iterateAll()
+          .forEach(
+              dataset -> System.out.printf("Success! Dataset ID: %s ", dataset.getDatasetId()));
+    } catch (BigQueryException e) {
+      System.out.println("Project does not contain any datasets \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -251,22 +265,24 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function listDatasetsByLabel() {
-      // Lists all datasets in current GCP project, filtering by label color:green.
-    
-      const options = {
-        filter: 'labels.color:green',
-      };
-      // Lists all datasets in the specified project
-      const [datasets] = await bigquery.getDatasets(options);
-    
-      console.log('Datasets:');
-      datasets.forEach(dataset => console.log(dataset.id));
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function listDatasetsByLabel() {
+  // Lists all datasets in current GCP project, filtering by label color:green.
+
+  const options = {
+    filter: 'labels.color:green',
+  };
+  // Lists all datasets in the specified project
+  const [datasets] = await bigquery.getDatasets(options);
+
+  console.log('Datasets:');
+  datasets.forEach(dataset => console.log(dataset.id));
+}
+```
 
 ### Python
 
@@ -274,26 +290,28 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    label_filter = "labels.color:green"
-    datasets = list(client.list_datasets(filter=label_filter))  # Make an API request.
-    
-    if datasets:
-        print("Datasets filtered by {}:".format(label_filter))
-        for dataset in datasets:
-            print("\t{}.{}".format(dataset.project, dataset.dataset_id))
-    else:
-        print("No datasets found with this filter.")
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+label_filter = "labels.color:green"
+datasets = list(client.list_datasets(filter=label_filter))  # Make an API request.
+
+if datasets:
+    print("Datasets filtered by {}:".format(label_filter))
+    for dataset in datasets:
+        print("\t{}.{}".format(dataset.project, dataset.dataset_id))
+else:
+    print("No datasets found with this filter.")
+```
 
 ## What's next
 
-  - Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
-  - Learn how to [identify and analyze agent-generated queries using labels](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#agent-queries) .
-  - Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
-  - Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
-  - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
-  - Read about [using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.
+- Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
+- Learn how to [identify and analyze agent-generated queries using labels](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#agent-queries) .
+- Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
+- Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
+- Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
+- Read about [using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.

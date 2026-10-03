@@ -10,116 +10,25 @@ This page provides an overview of all GoogleSQL for BigQuery data types, includi
 
 ## Data type list
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type">Array type</a></td>
-<td>An ordered list of zero or more elements of non-array values.<br />
-SQL type name: <code dir="ltr" translate="no">ARRAY</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type">Boolean type</a></td>
-<td>A value that can be either <code dir="ltr" translate="no">TRUE</code> or <code dir="ltr" translate="no">FALSE</code> .<br />
-SQL type name: <code dir="ltr" translate="no">BOOL</code><br />
-SQL aliases: <code dir="ltr" translate="no">BOOLEAN</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type">Bytes type</a></td>
-<td>Variable-length binary data.<br />
-SQL type name: <code dir="ltr" translate="no">BYTES</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type">Date type</a></td>
-<td>A Gregorian calendar date, independent of time zone.<br />
-SQL type name: <code dir="ltr" translate="no">DATE</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type">Datetime type</a></td>
-<td>A Gregorian date and a time, as they might be displayed on a watch, independent of time zone.<br />
-SQL type name: <code dir="ltr" translate="no">DATETIME</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type">Geography type</a></td>
-<td>A collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth.<br />
-SQL type name: <code dir="ltr" translate="no">GEOGRAPHY</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_element_type">Graph element type</a></td>
-<td>An element in a property graph. Can be a <code dir="ltr" translate="no">GRAPH_NODE</code> or <code dir="ltr" translate="no">GRAPH_EDGE</code> .<br />
-SQL type name: <code dir="ltr" translate="no">GRAPH_ELEMENT</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_path_type">Graph path type</a></td>
-<td>A path in a property graph.<br />
-SQL type name: <code dir="ltr" translate="no">GRAPH_PATH</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type">Interval type</a></td>
-<td>A duration of time, without referring to any specific point in time.<br />
-SQL type name: <code dir="ltr" translate="no">INTERVAL</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type">JSON type</a></td>
-<td>Represents JSON, a lightweight data-interchange format.<br />
-SQL type name: <code dir="ltr" translate="no">JSON</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type">Measure type</a></td>
-<td>An aggregate calculation that doesn’t overcount.<br />
-SQL type name: <code dir="ltr" translate="no">MEASURE</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types">Numeric types</a></td>
-<td><p>A numeric value. Several types are supported.</p>
-<p>A 64-bit integer.<br />
-SQL type name: <code dir="ltr" translate="no">INT64</code><br />
-SQL aliases: <code dir="ltr" translate="no">INT</code> , <code dir="ltr" translate="no">SMALLINT</code> , <code dir="ltr" translate="no">INTEGER</code> , <code dir="ltr" translate="no">BIGINT</code> , <code dir="ltr" translate="no">TINYINT</code> , <code dir="ltr" translate="no">BYTEINT</code></p>
-<p>A decimal value with precision of 38 digits.<br />
-SQL type name: <code dir="ltr" translate="no">NUMERIC</code><br />
-SQL aliases: <code dir="ltr" translate="no">DECIMAL</code></p>
-<p>A decimal value with precision of approximately 76.8 digits (the 77th digit is partial).<br />
-SQL type name: <code dir="ltr" translate="no">BIGNUMERIC</code><br />
-SQL aliases: <code dir="ltr" translate="no">BIGDECIMAL</code></p>
-<p>An approximate double precision numeric value.<br />
-SQL type name: <code dir="ltr" translate="no">FLOAT64</code></p></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type">Range type</a></td>
-<td>Contiguous range between two dates, datetimes, or timestamps.<br />
-SQL type name: <code dir="ltr" translate="no">RANGE</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type">String type</a></td>
-<td>Variable-length character data.<br />
-SQL type name: <code dir="ltr" translate="no">STRING</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type">Struct type</a></td>
-<td>Container of ordered fields.<br />
-SQL type name: <code dir="ltr" translate="no">STRUCT</code></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type">Time type</a></td>
-<td>A time of day, as might be displayed on a clock, independent of a specific date and time zone.<br />
-SQL type name: <code dir="ltr" translate="no">TIME</code></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type">Timestamp type</a></td>
-<td>A timestamp value represents an absolute point in time, independent of any time zone or convention such as daylight saving time (DST).<br />
-SQL type name: <code dir="ltr" translate="no">TIMESTAMP</code></td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                   | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Array type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)                 | An ordered list of zero or more elements of non-array values. SQL type name: `ARRAY`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [Boolean type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type)             | A value that can be either `TRUE` or `FALSE` . SQL type name: `BOOL` SQL aliases: `BOOLEAN`                                                                                                                                                                                                                                                                                                                                                                                               |
+| [Bytes type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type)                 | Variable-length binary data. SQL type name: `BYTES`                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [Date type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type)                   | A Gregorian calendar date, independent of time zone. SQL type name: `DATE`                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [Datetime type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type)           | A Gregorian date and a time, as they might be displayed on a watch, independent of time zone. SQL type name: `DATETIME`                                                                                                                                                                                                                                                                                                                                                                   |
+| [Geography type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type)         | A collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. SQL type name: `GEOGRAPHY`                                                                                                                                                                                                                                                                                                                               |
+| [Graph element type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_element_type) | An element in a property graph. Can be a `GRAPH_NODE` or `GRAPH_EDGE` . SQL type name: `GRAPH_ELEMENT`                                                                                                                                                                                                                                                                                                                                                                                    |
+| [Graph path type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#graph_path_type)       | A path in a property graph. SQL type name: `GRAPH_PATH`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [Interval type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type)           | A duration of time, without referring to any specific point in time. SQL type name: `INTERVAL`                                                                                                                                                                                                                                                                                                                                                                                            |
+| [JSON type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type)                   | Represents JSON, a lightweight data-interchange format. SQL type name: `JSON`                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type)             | An aggregate calculation that doesn’t overcount. SQL type name: `MEASURE`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [Numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types)           | A numeric value. Several types are supported. A 64-bit integer. SQL type name: `INT64` SQL aliases: `INT` , `SMALLINT` , `INTEGER` , `BIGINT` , `TINYINT` , `BYTEINT` A decimal value with precision of 38 digits. SQL type name: `NUMERIC` SQL aliases: `DECIMAL` A decimal value with precision of approximately 76.8 digits (the 77th digit is partial). SQL type name: `BIGNUMERIC` SQL aliases: `BIGDECIMAL` An approximate double precision numeric value. SQL type name: `FLOAT64` |
+| [Range type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type)                 | Contiguous range between two dates, datetimes, or timestamps. SQL type name: `RANGE`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [String type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)               | Variable-length character data. SQL type name: `STRING`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [Struct type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)               | Container of ordered fields. SQL type name: `STRUCT`                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [Time type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type)                   | A time of day, as might be displayed on a clock, independent of a specific date and time zone. SQL type name: `TIME`                                                                                                                                                                                                                                                                                                                                                                      |
+| [Timestamp type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)         | A timestamp value represents an absolute point in time, independent of any time zone or convention such as daylight saving time (DST). SQL type name: `TIMESTAMP`                                                                                                                                                                                                                                                                                                                         |
 
 ## Data type properties
 
@@ -133,12 +42,12 @@ For nullable data types, `NULL` is a valid value. Currently, all existing data t
 
 Expressions of orderable data types can be used in an `ORDER BY` clause. Applies to all data types except for:
 
-  - `ARRAY`
-  - `STRUCT`
-  - `GEOGRAPHY`
-  - `JSON`
-  - `GRAPH_ELEMENT`
-  - `GRAPH_PATH`
+- `ARRAY`
+- `STRUCT`
+- `GEOGRAPHY`
+- `JSON`
+- `GRAPH_ELEMENT`
+- `GRAPH_PATH`
 
 #### Ordering `NULL` s
 
@@ -164,9 +73,9 @@ Floating point values are sorted in this order, from least to greatest:
 
 Groupable data types can generally appear in an expression following `GROUP BY` , `DISTINCT` , and `PARTITION BY` . All data types are supported except for:
 
-  - `GEOGRAPHY`
-  - `JSON`
-  - `GRAPH_PATH`
+- `GEOGRAPHY`
+- `JSON`
+- `GRAPH_PATH`
 
 #### Grouping with floating point types
 
@@ -174,11 +83,11 @@ Groupable floating point types can appear in an expression following `GROUP BY` 
 
 Special floating point values are grouped in the following way, including both grouping done by a `GROUP BY` clause and grouping done by the `DISTINCT` keyword:
 
-  - `NULL`
-  - `NaN` — All `NaN` values are considered equal when grouping.
-  - `-inf`
-  - 0 or -0 — All zero values are considered equal when grouping.
-  - `+inf`
+- `NULL`
+- `NaN` — All `NaN` values are considered equal when grouping.
+- `-inf`
+- 0 or -0 — All zero values are considered equal when grouping.
+- `+inf`
 
 #### Grouping with arrays
 
@@ -186,8 +95,8 @@ An `ARRAY` type is groupable if its element type is groupable. An `ARRAY` type i
 
 Two arrays are in the same group if and only if one of the following statements is true:
 
-  - The two arrays are both `NULL` .
-  - The two arrays have the same number of elements and all corresponding elements are in the same groups.
+- The two arrays are both `NULL` .
+- The two arrays have the same number of elements and all corresponding elements are in the same groups.
 
 #### Grouping with structs
 
@@ -195,43 +104,43 @@ A `STRUCT` type is groupable if its field types are groupable. A `STRUCT` type i
 
 Two structs are in the same group if and only if one of the following statements is true:
 
-  - The two structs are both `NULL` .
-  - All corresponding field values between the structs are in the same groups.
+- The two structs are both `NULL` .
+- All corresponding field values between the structs are in the same groups.
 
 ### Comparable data types
 
 Values of the same comparable data type can be compared to each other. All data types are supported except for:
 
-  - `GEOGRAPHY`
-  - `JSON`
-  - `ARRAY`
+- `GEOGRAPHY`
+- `JSON`
+- `ARRAY`
 
 Notes:
 
-  - Equality comparisons for structs are supported field by field, in field order. Field names are ignored. Less than and greater than comparisons aren't supported.
-  - To compare geography values, use [ST\_Equals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_equals) .
-  - When comparing ranges, the lower bounds are compared. If the lower bounds are equal, the upper bounds are compared, instead.
-  - When comparing ranges, `NULL` values are handled as follows:
-      - `NULL` lower bounds are sorted before non- `NULL` lower bounds.
-      - `NULL` upper bounds are sorted after non- `NULL` upper bounds.
-      - If two bounds that are being compared are `NULL` , the comparison is `TRUE` .
-      - An `UNBOUNDED` bound is treated as a `NULL` bound.
-  - All types that support comparisons can be used in a `JOIN` condition. See [JOIN Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) for an explanation of join conditions.
+- Equality comparisons for structs are supported field by field, in field order. Field names are ignored. Less than and greater than comparisons aren't supported.
+- To compare geography values, use [ST_Equals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_equals) .
+- When comparing ranges, the lower bounds are compared. If the lower bounds are equal, the upper bounds are compared, instead.
+- When comparing ranges, `NULL` values are handled as follows:
+  - `NULL` lower bounds are sorted before non- `NULL` lower bounds.
+  - `NULL` upper bounds are sorted after non- `NULL` upper bounds.
+  - If two bounds that are being compared are `NULL` , the comparison is `TRUE` .
+  - An `UNBOUNDED` bound is treated as a `NULL` bound.
+- All types that support comparisons can be used in a `JOIN` condition. See [JOIN Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) for an explanation of join conditions.
 
 ### Collatable data types
 
 Collatable data types support collation, which determines how to sort and compare strings. These data types support collation:
 
-  - String
-  - String fields in a struct
-  - String elements in an array
+- String
+- String fields in a struct
+- String elements in an array
 
 ## Data type sizes
 
 Use the following table to see the size in logical bytes for each supported data type.
 
 | Data type    | Size                                                                                                                                                                                                                                                           |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ARRAY`      | The sum of the size of its elements. For example, an array defined as ( `ARRAY<INT64>` ) that contains 4 entries is calculated as 32 logical bytes (4 entries x 8 logical bytes).                                                                              |
 | `BIGNUMERIC` | 32 logical bytes                                                                                                                                                                                                                                               |
 | `BOOL`       | 1 logical byte                                                                                                                                                                                                                                                 |
@@ -258,14 +167,16 @@ A repeated column is stored as an array, and the size is calculated based on the
 
 Syntax:
 
-    DATA_TYPE(param[, ...])
+```
+DATA_TYPE(param[, ...])
+```
 
 You can use parameters to specify constraints for the following data types:
 
-  - `STRING`
-  - `BYTES`
-  - `NUMERIC`
-  - `BIGNUMERIC`
+- `STRING`
+- `BYTES`
+- `NUMERIC`
+- `BIGNUMERIC`
 
 A data type that's declared with parameters is called a parameterized data type. You can only use parameterized data types with columns and script variables. A column with a parameterized data type is a *parameterized column* and a script variable with a parameterized data type is a *parameterized script variable* . Parameterized type constraints are enforced when writing a value to a parameterized column or when assigning a value to a parameterized script variable.
 
@@ -273,31 +184,35 @@ A data type's parameters aren't propagated in an expression, only the data type 
 
 **Examples**
 
-    -- Declare a variable with type parameters.
-    DECLARE x STRING(10);
-    
-    -- This is a valid assignment to x.
-    SET x = "hello";
-    
-    -- This assignment to x violates the type parameter constraint and results in an OUT_OF_RANGE error.
-    SET x = "this string is too long"
+```
+-- Declare a variable with type parameters.
+DECLARE x STRING(10);
 
-    -- Declare variables with type parameters.
-    DECLARE x NUMERIC(10) DEFAULT 12345;
-    DECLARE y NUMERIC(5, 2) DEFAULT 123.45;
-    
-    -- The variable x is treated as a NUMERIC value when read, so the result of this query
-    -- is a NUMERIC without type parameters.
-    SELECT x;
-    
-    -- Type parameters aren't propagated within expressions, so variables x and y are treated
-    -- as NUMERIC values when read and the result of this query is a NUMERIC without type parameters.
-    SELECT x + y;
+-- This is a valid assignment to x.
+SET x = "hello";
+
+-- This assignment to x violates the type parameter constraint and results in an OUT_OF_RANGE error.
+SET x = "this string is too long"
+```
+
+```
+-- Declare variables with type parameters.
+DECLARE x NUMERIC(10) DEFAULT 12345;
+DECLARE y NUMERIC(5, 2) DEFAULT 123.45;
+
+-- The variable x is treated as a NUMERIC value when read, so the result of this query
+-- is a NUMERIC without type parameters.
+SELECT x;
+
+-- Type parameters aren't propagated within expressions, so variables x and y are treated
+-- as NUMERIC values when read and the result of this query is a NUMERIC without type parameters.
+SELECT x + y;
+```
 
 ## Array type
 
 | Name    | Description                                                  |
-| ------- | ------------------------------------------------------------ |
+|---------|--------------------------------------------------------------|
 | `ARRAY` | Ordered list of zero or more elements of any non-array type. |
 
 An array is an ordered list of zero or more elements of non-array values. Elements in an array must share the same type.
@@ -312,107 +227,91 @@ To learn more about using arrays in GoogleSQL, see [Work with arrays](https://do
 
 Currently, GoogleSQL for BigQuery has the following rules with respect to `NULL` s and arrays:
 
-  - An array can be `NULL` .
-    
-    For example:
-    
-        SELECT CAST(NULL AS ARRAY<INT64>) IS NULL AS array_is_null;
-        
-        /*---------------+
-         | array_is_null |
-         +---------------+
-         | TRUE          |
-         +---------------*/
+- An array can be `NULL` .
 
-  - GoogleSQL for BigQuery translates a `NULL` array into an empty array in the query result, although inside the query, `NULL` and empty arrays are two distinct values.
-    
-    For example:
-    
-        WITH Items AS (
-          SELECT [] AS numbers, "Empty array in query" AS description UNION ALL
-          SELECT CAST(NULL AS ARRAY<INT64>), "NULL array in query")
-        SELECT numbers, description, numbers IS NULL AS numbers_null
-        FROM Items;
-        
-        /*---------+----------------------+--------------+
-         | numbers | description          | numbers_null |
-         +---------+----------------------+--------------+
-         | []      | Empty array in query | false        |
-         | []      | NULL array in query  | true         |
-         +---------+----------------------+--------------*/
-    
-    When you write a `NULL` array to a table, it's converted to an empty array. If you write `Items` to a table from the previous query, then each array is written as an empty array:
-    
-        SELECT numbers, description, numbers IS NULL AS numbers_null
-        FROM Items;
-        
-        /*---------+----------------------+--------------+
-         | numbers | description          | numbers_null |
-         +---------+----------------------+--------------+
-         | []      | Empty array in query | false        |
-         | []      | NULL array in query  | false        |
-         +---------+----------------------+--------------*/
+  For example:
 
-  - GoogleSQL for BigQuery raises an error if the query result has an array which contains `NULL` elements, although such an array can be used inside the query.
-    
-    For example, this works:
-    
-        SELECT FORMAT("%T", [1, NULL, 3]) as numbers;
-        
-        /*--------------+
-         | numbers      |
-         +--------------+
-         | [1, NULL, 3] |
-         +--------------*/
-    
-    But this raises an error:
-    
-        -- error
-        SELECT [1, NULL, 3] as numbers;
+  ```
+  SELECT CAST(NULL AS ARRAY<INT64>) IS NULL AS array_is_null;
+
+  /*---------------+
+   | array_is_null |
+   +---------------+
+   | TRUE          |
+   +---------------*/
+  ```
+
+- GoogleSQL for BigQuery translates a `NULL` array into an empty array in the query result, although inside the query, `NULL` and empty arrays are two distinct values.
+
+  For example:
+
+  ```
+  WITH Items AS (
+    SELECT [] AS numbers, "Empty array in query" AS description UNION ALL
+    SELECT CAST(NULL AS ARRAY<INT64>), "NULL array in query")
+  SELECT numbers, description, numbers IS NULL AS numbers_null
+  FROM Items;
+
+  /*---------+----------------------+--------------+
+   | numbers | description          | numbers_null |
+   +---------+----------------------+--------------+
+   | []      | Empty array in query | false        |
+   | []      | NULL array in query  | true         |
+   +---------+----------------------+--------------*/
+  ```
+
+  When you write a `NULL` array to a table, it's converted to an empty array. If you write `Items` to a table from the previous query, then each array is written as an empty array:
+
+  ```
+  SELECT numbers, description, numbers IS NULL AS numbers_null
+  FROM Items;
+
+  /*---------+----------------------+--------------+
+   | numbers | description          | numbers_null |
+   +---------+----------------------+--------------+
+   | []      | Empty array in query | false        |
+   | []      | NULL array in query  | false        |
+   +---------+----------------------+--------------*/
+  ```
+
+- GoogleSQL for BigQuery raises an error if the query result has an array which contains `NULL` elements, although such an array can be used inside the query.
+
+  For example, this works:
+
+  ```
+  SELECT FORMAT("%T", [1, NULL, 3]) as numbers;
+
+  /*--------------+
+   | numbers      |
+   +--------------+
+   | [1, NULL, 3] |
+   +--------------*/
+  ```
+
+  But this raises an error:
+
+  ```
+  -- error
+  SELECT [1, NULL, 3] as numbers;
+  ```
 
 ### Declaring an array type
 
-    ARRAY<T>
+```
+ARRAY<T>
+```
 
 Array types are declared using the angle brackets ( `<` and `>` ). The type of the elements of an array can be arbitrarily complex with the exception that an array can't directly contain another array.
 
 **Examples**
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Type Declaration</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY&lt;INT64&gt;</code></td>
-<td>Simple array of 64-bit integers.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ARRAY&lt;BYTES(5)&gt;</code></td>
-<td>Simple array of parameterized bytes.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY&lt;STRUCT&lt;INT64, INT64&gt;&gt;</code></td>
-<td>An array of structs, each of which contains two 64-bit integers.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ARRAY&lt;ARRAY&lt;INT64&gt;&gt;</code><br />
-(not supported)</td>
-<td>This is an <strong>invalid</strong> type declaration which is included here just in case you came looking for how to create a multi-level array. Arrays can't contain arrays directly. Instead see the next example.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY&lt;STRUCT&lt;ARRAY&lt;INT64&gt;&gt;&gt;</code></td>
-<td>An array of arrays of 64-bit integers. Notice that there is a struct between the two arrays because arrays can't hold other arrays directly.</td>
-</tr>
-</tbody>
-</table>
+| Type Declaration                      | Meaning                                                                                                                                                                                                 |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ARRAY<INT64>`                        | Simple array of 64-bit integers.                                                                                                                                                                        |
+| `ARRAY<BYTES(5)>`                     | Simple array of parameterized bytes.                                                                                                                                                                    |
+| `ARRAY<STRUCT<INT64, INT64>>`         | An array of structs, each of which contains two 64-bit integers.                                                                                                                                        |
+| `ARRAY<ARRAY<INT64>>` (not supported) | This is an **invalid** type declaration which is included here just in case you came looking for how to create a multi-level array. Arrays can't contain arrays directly. Instead see the next example. |
+| `ARRAY<STRUCT<ARRAY<INT64>>>`         | An array of arrays of 64-bit integers. Notice that there is a struct between the two arrays because arrays can't hold other arrays directly.                                                            |
 
 ### Constructing an array
 
@@ -422,35 +321,43 @@ You can construct an array using array literals or array functions.
 
 You can build an array literal in GoogleSQL using brackets ( `[` and `]` ). Each element in an array is separated by a comma.
 
-    SELECT [1, 2, 3] AS numbers;
-    
-    SELECT ["apple", "pear", "orange"] AS fruit;
-    
-    SELECT [true, false, true] AS booleans;
+```
+SELECT [1, 2, 3] AS numbers;
+
+SELECT ["apple", "pear", "orange"] AS fruit;
+
+SELECT [true, false, true] AS booleans;
+```
 
 You can also create arrays from any expressions that have compatible types. For example:
 
-    SELECT [a, b, c]
-    FROM
-      (SELECT 5 AS a,
-              37 AS b,
-              406 AS c);
-    
-    SELECT [a, b, c]
-    FROM
-      (SELECT CAST(5 AS INT64) AS a,
-              CAST(37 AS FLOAT64) AS b,
-              406 AS c);
+```
+SELECT [a, b, c]
+FROM
+  (SELECT 5 AS a,
+          37 AS b,
+          406 AS c);
+
+SELECT [a, b, c]
+FROM
+  (SELECT CAST(5 AS INT64) AS a,
+          CAST(37 AS FLOAT64) AS b,
+          406 AS c);
+```
 
 Notice that the second example contains three expressions: one that returns an `INT64` , one that returns a `FLOAT64` , and one that declares a literal. This expression works because all three expressions share `FLOAT64` as a supertype.
 
 To declare a specific data type for an array, use angle brackets ( `<` and `>` ). For example:
 
-    SELECT ARRAY<FLOAT64>[1, 2, 3] AS floats;
+```
+SELECT ARRAY<FLOAT64>[1, 2, 3] AS floats;
+```
 
 Arrays of most data types, such as `INT64` or `STRING` , don't require that you declare them first.
 
-    SELECT [1, 2, 3] AS numbers;
+```
+SELECT [1, 2, 3] AS numbers;
+```
 
 You can write an empty array of a specific type using `ARRAY<type>[]` . You can also write an untyped empty array using `[]` , in which case GoogleSQL attempts to infer the array type from the surrounding context. If GoogleSQL can't infer a type, the default type `ARRAY<INT64>` is used.
 
@@ -462,23 +369,27 @@ You can also construct an `ARRAY` with generated values.
 
 [`GENERATE_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_array) generates an array of values from a starting and ending value and a step value. For example, the following query generates an array that contains all of the odd integers from 11 to 33, inclusive:
 
-    SELECT GENERATE_ARRAY(11, 33, 2) AS odds;
-    
-    /*--------------------------------------------------+
-     | odds                                             |
-     +--------------------------------------------------+
-     | [11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33] |
-     +--------------------------------------------------*/
+```
+SELECT GENERATE_ARRAY(11, 33, 2) AS odds;
+
+/*--------------------------------------------------+
+ | odds                                             |
+ +--------------------------------------------------+
+ | [11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33] |
+ +--------------------------------------------------*/
+```
 
 You can also generate an array of values in descending order by giving a negative step value:
 
-    SELECT GENERATE_ARRAY(21, 14, -1) AS countdown;
-    
-    /*----------------------------------+
-     | countdown                        |
-     +----------------------------------+
-     | [21, 20, 19, 18, 17, 16, 15, 14] |
-     +----------------------------------*/
+```
+SELECT GENERATE_ARRAY(21, 14, -1) AS countdown;
+
+/*----------------------------------+
+ | countdown                        |
+ +----------------------------------+
+ | [21, 20, 19, 18, 17, 16, 15, 14] |
+ +----------------------------------*/
+```
 
 ##### Generating arrays of dates
 
@@ -486,37 +397,23 @@ You can also generate an array of values in descending order by giving a negativ
 
 You can generate a set of `DATE` values using `GENERATE_DATE_ARRAY` . For example, this query returns the current `DATE` and the following `DATE` s at 1 `WEEK` intervals up to and including a later `DATE` :
 
-    SELECT
-      GENERATE_DATE_ARRAY('2017-11-21', '2017-12-31', INTERVAL 1 WEEK)
-        AS date_array;
-    
-    /*--------------------------------------------------------------------------+
-     | date_array                                                               |
-     +--------------------------------------------------------------------------+
-     | [2017-11-21, 2017-11-28, 2017-12-05, 2017-12-12, 2017-12-19, 2017-12-26] |
-     +--------------------------------------------------------------------------*/
+```
+SELECT
+  GENERATE_DATE_ARRAY('2017-11-21', '2017-12-31', INTERVAL 1 WEEK)
+    AS date_array;
+
+/*--------------------------------------------------------------------------+
+ | date_array                                                               |
+ +--------------------------------------------------------------------------+
+ | [2017-11-21, 2017-11-28, 2017-12-05, 2017-12-12, 2017-12-19, 2017-12-26] |
+ +--------------------------------------------------------------------------*/
+```
 
 ## Boolean type
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">BOOL</code><br />
-<code dir="ltr" translate="no">BOOLEAN</code></td>
-<td>Boolean values are represented by the keywords <code dir="ltr" translate="no">TRUE</code> and <code dir="ltr" translate="no">FALSE</code> (case-insensitive).</td>
-</tr>
-</tbody>
-</table>
+| Name             | Description                                                                           |
+|------------------|---------------------------------------------------------------------------------------|
+| `BOOL` `BOOLEAN` | Boolean values are represented by the keywords `TRUE` and `FALSE` (case-insensitive). |
 
 `BOOLEAN` is an alias for `BOOL` .
 
@@ -529,7 +426,7 @@ Boolean values are sorted in this order, from least to greatest:
 ## Bytes type
 
 | Name    | Description                  |
-| ------- | ---------------------------- |
+|---------|------------------------------|
 | `BYTES` | Variable-length binary data. |
 
 String and bytes are separate types that can't be used interchangeably. Most functions on strings are also defined on bytes. The bytes version operates on raw bytes rather than Unicode characters. Casts between string and bytes enforce that the bytes are encoded using UTF-8.
@@ -540,63 +437,67 @@ To learn more about the literal representation of a bytes type, see [Bytes liter
 
 ### Parameterized bytes type
 
-| Parameterized Type | Description                                                                                                                                                                                  |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `BYTES(L)`         | Sequence of bytes with a maximum of L bytes allowed in the binary string, where L is a positive `INT64` value. If a sequence of bytes has more than L bytes, throws an `OUT_OF_RANGE` error. |
+| Parameterized Type | Description                                                                                                                                                                                              |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `BYTES(L)`         | Sequence of bytes with a maximum of ` L ` bytes allowed in the binary string, where ` L ` is a positive `INT64` value. If a sequence of bytes has more than ` L ` bytes, throws an `OUT_OF_RANGE` error. |
 
 See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information on parameterized types and where they can be used.
 
 ## Date type
 
 | Name   | Range                     |
-| ------ | ------------------------- |
+|--------|---------------------------|
 | `DATE` | 0001-01-01 to 9999-12-31. |
 
 The date type represents a Gregorian calendar date, independent of time zone. A date value doesn't represent a specific 24-hour time period. Rather, a given date value represents a different 24-hour period when interpreted in different time zones, and may represent a shorter or longer day during daylight saving time (DST) transitions. To represent an absolute point in time, use a [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 ##### Canonical format
 
-    YYYY-[M]M-[D]D
+```
+YYYY-[M]M-[D]D
+```
 
-  - `YYYY` : Four-digit year.
-  - `[M]M` : One or two digit month.
-  - `[D]D` : One or two digit day.
+- `YYYY` : Four-digit year.
+- `[M]M` : One or two digit month.
+- `[D]D` : One or two digit day.
 
 To learn more about the literal representation of a date type, see [Date literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#date_literals) .
 
 ## Datetime type
 
 | Name       | Range                                             |
-| ---------- | ------------------------------------------------- |
+|------------|---------------------------------------------------|
 | `DATETIME` | 0001-01-01 00:00:00 to 9999-12-31 23:59:59.999999 |
 
 A datetime value represents a Gregorian date and a time, as they might be displayed on a watch, independent of time zone. It includes the year, month, day, hour, minute, second, and subsecond. To represent an absolute point in time, use a [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 ##### Canonical format
 
-    civil_date_part[time_part]
-    
-    civil_date_part:
-        YYYY-[M]M-[D]D
-    
-    time_part:
-        { |T|t}[H]H:[M]M:[S]S[.F]
+```
+civil_date_part[time_part]
 
-  - `YYYY` : Four-digit year.
-  - `[M]M` : One or two digit month.
-  - `[D]D` : One or two digit day.
-  - `{ |T|t}` : A space or a `T` or `t` separator. The `T` and `t` separators are flags for time.
-  - `[H]H` : One or two digit hour (valid values from 00 to 23).
-  - `[M]M` : One or two digit minutes (valid values from 00 to 59).
-  - `[S]S` : One or two digit seconds (valid values from 00 to 60).
-  - `[.F]` : Up to six fractional digits (microsecond precision).
+civil_date_part:
+    YYYY-[M]M-[D]D
+
+time_part:
+    { |T|t}[H]H:[M]M:[S]S[.F]
+```
+
+- `YYYY` : Four-digit year.
+- `[M]M` : One or two digit month.
+- `[D]D` : One or two digit day.
+- `{ |T|t}` : A space or a `T` or `t` separator. The `T` and `t` separators are flags for time.
+- `[H]H` : One or two digit hour (valid values from 00 to 23).
+- `[M]M` : One or two digit minutes (valid values from 00 to 59).
+- `[S]S` : One or two digit seconds (valid values from 00 to 60).
+- `[.F]` : Up to six fractional digits (microsecond precision).
 
 To learn more about the literal representation of a datetime type, see [Datetime literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) .
 
 ## Geography type
 
 | Name        | Description                                                                                                                      |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `GEOGRAPHY` | A collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. |
 
 The geography type is based on the [OGC Simple Features specification (SFS)](http://www.opengeospatial.org/standards/sfs#downloads) , and can contain the following objects:
@@ -614,70 +515,70 @@ The geography type is based on the [OGC Simple Features specification (SFS)](htt
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Point</code></td>
+<td><code>Point</code></td>
 <td><p>A single location in coordinate space known as a point. A point has an x-coordinate value and a y-coordinate value, where the x-coordinate is longitude and the y-coordinate is latitude of the point on the <a href="https://en.wikipedia.org/wiki/World_Geodetic_System">WGS84 reference ellipsoid</a> .</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POINT(x_coordinate y_coordinate)</code></pre>
+<pre data-fenced=""><code>POINT(x_coordinate y_coordinate)</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POINT(32 210)</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POINT EMPTY</code></pre></td>
+<pre data-fenced=""><code>POINT(32 210)</code></pre>
+<pre data-fenced=""><code>POINT EMPTY</code></pre></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">LineString</code></td>
+<td><code>LineString</code></td>
 <td><p>Represents a linestring, which is a one-dimensional geometric object, with a sequence of points and geodesic edges between them.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>LINESTRING(point[, ...])</code></pre>
+<pre data-fenced=""><code>LINESTRING(point[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>LINESTRING(1 1, 2 1, 3.1 2.88, 3 -3)</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>LINESTRING EMPTY</code></pre></td>
+<pre data-fenced=""><code>LINESTRING(1 1, 2 1, 3.1 2.88, 3 -3)</code></pre>
+<pre data-fenced=""><code>LINESTRING EMPTY</code></pre></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Polygon</code></td>
+<td><code>Polygon</code></td>
 <td><p>A polygon, which is represented as a planar surface defined by 1 exterior boundary and 0 or more interior boundaries. Each interior boundary defines a hole in the polygon. The boundary loops of polygons are oriented so that if you traverse the boundary vertices in order, the interior of the polygon is on the left.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POLYGON(interior_ring[, ...])
+<pre data-fenced=""><code>POLYGON(interior_ring[, ...])
 
 interior_ring:
   (point[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POLYGON((0 0, 2 2, 2 0, 0 0), (2 2, 3 4, 2 4, 2 2))</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>POLYGON EMPTY</code></pre></td>
+<pre data-fenced=""><code>POLYGON((0 0, 2 2, 2 0, 0 0), (2 2, 3 4, 2 4, 2 2))</code></pre>
+<pre data-fenced=""><code>POLYGON EMPTY</code></pre></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">MultiPoint</code></td>
+<td><code>MultiPoint</code></td>
 <td><p>A collection of points.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOINT(point[, ...])</code></pre>
+<pre data-fenced=""><code>MULTIPOINT(point[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOINT(0 32, 123 9, 48 67)</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOINT EMPTY</code></pre></td>
+<pre data-fenced=""><code>MULTIPOINT(0 32, 123 9, 48 67)</code></pre>
+<pre data-fenced=""><code>MULTIPOINT EMPTY</code></pre></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">MultiLineString</code></td>
+<td><code>MultiLineString</code></td>
 <td><p>Represents a multilinestring, which is a collection of linestrings.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTILINESTRING((linestring)[, ...])</code></pre>
+<pre data-fenced=""><code>MULTILINESTRING((linestring)[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTILINESTRING((2 2, 3 4), (5 6, 7 7))</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTILINESTRING EMPTY</code></pre></td>
+<pre data-fenced=""><code>MULTILINESTRING((2 2, 3 4), (5 6, 7 7))</code></pre>
+<pre data-fenced=""><code>MULTILINESTRING EMPTY</code></pre></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">MultiPolygon</code></td>
+<td><code>MultiPolygon</code></td>
 <td><p>Represents a multipolygon, which is a collection of polygons.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOLYGON((polygon)[, ...])</code></pre>
+<pre data-fenced=""><code>MULTIPOLYGON((polygon)[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOLYGON(((0 -1, 1 0, 1 1, 0 -1)), ((0 0, 2 2, 3 0, 0 0), (2 2, 3 4, 2 4, 1 9)))</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>MULTIPOLYGON EMPTY</code></pre></td>
+<pre data-fenced=""><code>MULTIPOLYGON(((0 -1, 1 0, 1 1, 0 -1)), ((0 0, 2 2, 3 0, 0 0), (2 2, 3 4, 2 4, 1 9)))</code></pre>
+<pre data-fenced=""><code>MULTIPOLYGON EMPTY</code></pre></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">GeometryCollection</code></td>
+<td><code>GeometryCollection</code></td>
 <td><p>Represents a geometry collection with elements of different dimensions or an empty geography.</p>
 <p>Syntax:</p>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>GEOMETRYCOLLECTION(geography_object[, ...])</code></pre>
+<pre data-fenced=""><code>GEOMETRYCOLLECTION(geography_object[, ...])</code></pre>
 Examples:
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>GEOMETRYCOLLECTION(MULTIPOINT(-1 2, 0 12), LINESTRING(-2 4, 0 6))</code></pre>
-<pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>GEOMETRYCOLLECTION EMPTY</code></pre></td>
+<pre data-fenced=""><code>GEOMETRYCOLLECTION(MULTIPOINT(-1 2, 0 12), LINESTRING(-2 4, 0 6))</code></pre>
+<pre data-fenced=""><code>GEOMETRYCOLLECTION EMPTY</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -686,39 +587,45 @@ The points, linestrings and polygons of a geography value form a simple arrangem
 
 The geography that contains no points, linestrings or polygons is called an empty geography. An empty geography isn't associated with a particular geometry shape. For example, the following query produces the same results:
 
-    SELECT
-      ST_GEOGFROMTEXT('POINT EMPTY') AS a,
-      ST_GEOGFROMTEXT('GEOMETRYCOLLECTION EMPTY') AS b
-    
-    /*--------------------------+--------------------------+
-     | a                        | b                        |
-     +--------------------------+--------------------------+
-     | GEOMETRYCOLLECTION EMPTY | GEOMETRYCOLLECTION EMPTY |
-     +--------------------------+--------------------------*/
+```
+SELECT
+  ST_GEOGFROMTEXT('POINT EMPTY') AS a,
+  ST_GEOGFROMTEXT('GEOMETRYCOLLECTION EMPTY') AS b
+
+/*--------------------------+--------------------------+
+ | a                        | b                        |
+ +--------------------------+--------------------------+
+ | GEOMETRYCOLLECTION EMPTY | GEOMETRYCOLLECTION EMPTY |
+ +--------------------------+--------------------------*/
+```
 
 The structure of compound geometry objects isn't preserved if a simpler type can be produced. For example, in column `b` , `GEOMETRYCOLLECTION` with `(POINT(1 1)` and `POINT(2 2)` is converted into the simplest possible geometry, `MULTIPOINT(1 1, 2 2)` .
 
-    SELECT
-      ST_GEOGFROMTEXT('MULTIPOINT(1 1, 2 2)') AS a,
-      ST_GEOGFROMTEXT('GEOMETRYCOLLECTION(POINT(1 1), POINT(2 2))') AS b
-    
-    /*----------------------+----------------------+
-     | a                    | b                    |
-     +----------------------+----------------------+
-     | MULTIPOINT(1 1, 2 2) | MULTIPOINT(1 1, 2 2) |
-     +----------------------+----------------------*/
+```
+SELECT
+  ST_GEOGFROMTEXT('MULTIPOINT(1 1, 2 2)') AS a,
+  ST_GEOGFROMTEXT('GEOMETRYCOLLECTION(POINT(1 1), POINT(2 2))') AS b
+
+/*----------------------+----------------------+
+ | a                    | b                    |
+ +----------------------+----------------------+
+ | MULTIPOINT(1 1, 2 2) | MULTIPOINT(1 1, 2 2) |
+ +----------------------+----------------------*/
+```
 
 A geography is the result of, or an argument to, a [Geography Function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
 
 ## Graph element type
 
 | Name            | Description                     |
-| --------------- | ------------------------------- |
+|-----------------|---------------------------------|
 | `GRAPH_ELEMENT` | An element in a property graph. |
 
 A variable with a `GRAPH_ELEMENT` type is produced by a graph query. The generated type has this format:
 
-    GRAPH_ELEMENT<T>
+```
+GRAPH_ELEMENT<T>
+```
 
 A graph element is either a node or an edge, representing data from a matching node or edge table based on its label. Each graph element holds a set of properties that can be accessed with a case-insensitive name, similar to fields of a struct.
 
@@ -726,59 +633,67 @@ A graph element is either a node or an edge, representing data from a matching n
 
 In the following example, `n` represents a graph element in the [`FinGraph`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) property graph:
 
-    GRAPH graph_db.FinGraph
-    MATCH (n:Person)
-    RETURN n.name
+```
+GRAPH graph_db.FinGraph
+MATCH (n:Person)
+RETURN n.name
+```
 
 In the following example, the [`TYPEOF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions#typeof) function is used to inspect the set of properties defined in the graph element type.
 
-    GRAPH graph_db.FinGraph
-    MATCH (n:Person)
-    RETURN TYPEOF(n) AS t
-    LIMIT 1
-    
-    /*--------------------------------------------------------+
-     | t                                                      |
-     +--------------------------------------------------------+
-     | GRAPH_NODE(myproject.graph_db.FinGraph)<id INT64, ...> |
-     +--------------------------------------------------------*/
+```
+GRAPH graph_db.FinGraph
+MATCH (n:Person)
+RETURN TYPEOF(n) AS t
+LIMIT 1
+
+/*--------------------------------------------------------+
+ | t                                                      |
+ +--------------------------------------------------------+
+ | GRAPH_NODE(myproject.graph_db.FinGraph)<id INT64, ...> |
+ +--------------------------------------------------------*/
+```
 
 ## Graph path type
 
 | Name         | Description                 |
-| ------------ | --------------------------- |
+|--------------|-----------------------------|
 | `GRAPH_PATH` | A path in a property graph. |
 
 The graph path data type represents a sequence of nodes interleaved with edges and has this format:
 
-    GRAPH_PATH<NODE_TYPE, EDGE_TYPE>
+```
+GRAPH_PATH<NODE_TYPE, EDGE_TYPE>
+```
 
 ## Interval type
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@google.com> .
 
-| Name       | Range                                                            |
-| ---------- | ---------------------------------------------------------------- |
-| `INTERVAL` | \-10000-0 -3660000 -87840000:0:0 to 10000-0 3660000 87840000:0:0 |
+| Name       | Range                                                           |
+|------------|-----------------------------------------------------------------|
+| `INTERVAL` | -10000-0 -3660000 -87840000:0:0 to 10000-0 3660000 87840000:0:0 |
 
 An `INTERVAL` object represents duration or amount of time, without referring to any specific point in time.
 
 ##### Canonical format
 
-    [sign]Y-M [sign]D [sign]H:M:S[.F]
+```
+[sign]Y-M [sign]D [sign]H:M:S[.F]
+```
 
-  - `sign` : `+` or `-`
-  - `Y` : Year
-  - `M` : Month
-  - `D` : Day
-  - `H` : Hour
-  - `M` : Minute
-  - `S` : Second
-  - `[.F]` : Up to six fractional digits (microsecond precision)
+- `sign` : `+` or `-`
+- `Y` : Year
+- `M` : Month
+- `D` : Day
+- `H` : Hour
+- `M` : Minute
+- `S` : Second
+- `[.F]` : Up to six fractional digits (microsecond precision)
 
 To learn more about the literal representation of an interval type, see [Interval literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) .
 
@@ -788,49 +703,55 @@ You can construct an interval with an interval literal that supports a [single d
 
 #### Construct an interval with a single datetime part
 
-    INTERVAL step_size step_unit
+```
+INTERVAL step_size step_unit
+```
 
 You can construct an `INTERVAL` object with an `INT64` expression and one [interval-supported datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
 
-    -- 1 year, 0 months, 0 days, 0 hours, 0 minutes, and 0 seconds (1-0 0 0:0:0)
-    INTERVAL 1 YEAR
-    INTERVAL 4 QUARTER
-    INTERVAL 12 MONTH
-    
-    -- 0 years, 3 months, 0 days, 0 hours, 0 minutes, and 0 seconds (0-3 0 0:0:0)
-    INTERVAL 1 QUARTER
-    INTERVAL 3 MONTH
-    
-    -- 0 years, 0 months, 42 days, 0 hours, 0 minutes, and 0 seconds (0-0 42 0:0:0)
-    INTERVAL 6 WEEK
-    INTERVAL 42 DAY
-    
-    -- 0 years, 0 months, 0 days, 25 hours, 0 minutes, and 0 seconds (0-0 0 25:0:0)
-    INTERVAL 25 HOUR
-    INTERVAL 1500 MINUTE
-    INTERVAL 90000 SECOND
-    
-    -- 0 years, 0 months, 0 days, 1 hours, 30 minutes, and 0 seconds (0-0 0 1:30:0)
-    INTERVAL 90 MINUTE
-    
-    -- 0 years, 0 months, 0 days, 0 hours, 1 minutes, and 30 seconds (0-0 0 0:1:30)
-    INTERVAL 90 SECOND
-    
-    -- 0 years, 0 months, -5 days, 0 hours, 0 minutes, and 0 seconds (0-0 -5 0:0:0)
-    INTERVAL -5 DAY
+```
+-- 1 year, 0 months, 0 days, 0 hours, 0 minutes, and 0 seconds (1-0 0 0:0:0)
+INTERVAL 1 YEAR
+INTERVAL 4 QUARTER
+INTERVAL 12 MONTH
+
+-- 0 years, 3 months, 0 days, 0 hours, 0 minutes, and 0 seconds (0-3 0 0:0:0)
+INTERVAL 1 QUARTER
+INTERVAL 3 MONTH
+
+-- 0 years, 0 months, 42 days, 0 hours, 0 minutes, and 0 seconds (0-0 42 0:0:0)
+INTERVAL 6 WEEK
+INTERVAL 42 DAY
+
+-- 0 years, 0 months, 0 days, 25 hours, 0 minutes, and 0 seconds (0-0 0 25:0:0)
+INTERVAL 25 HOUR
+INTERVAL 1500 MINUTE
+INTERVAL 90000 SECOND
+
+-- 0 years, 0 months, 0 days, 1 hours, 30 minutes, and 0 seconds (0-0 0 1:30:0)
+INTERVAL 90 MINUTE
+
+-- 0 years, 0 months, 0 days, 0 hours, 1 minutes, and 30 seconds (0-0 0 0:1:30)
+INTERVAL 90 SECOND
+
+-- 0 years, 0 months, -5 days, 0 hours, 0 minutes, and 0 seconds (0-0 -5 0:0:0)
+INTERVAL -5 DAY
+```
 
 For additional examples, see [Interval literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_single) .
 
 #### Construct an interval with a datetime part range
 
-    INTERVAL datetime_parts_string starting_datetime_part TO ending_datetime_part
+```
+INTERVAL datetime_parts_string starting_datetime_part TO ending_datetime_part
+```
 
 You can construct an `INTERVAL` object with a `STRING` that contains the datetime parts that you want to include, a starting datetime part, and an ending datetime part. The resulting `INTERVAL` object only includes datetime parts in the specified range.
 
 You can use one of the following formats with the [interval-supported datetime parts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) :
 
 | Datetime part string | Datetime parts     | Example                                      |
-| -------------------- | ------------------ | -------------------------------------------- |
+|----------------------|--------------------|----------------------------------------------|
 | `Y-M`                | `YEAR TO MONTH`    | `INTERVAL '2-11' YEAR TO MONTH`              |
 | `Y-M D`              | `YEAR TO DAY`      | `INTERVAL '2-11 28' YEAR TO DAY`             |
 | `Y-M D H`            | `YEAR TO HOUR`     | `INTERVAL '2-11 28 16' YEAR TO HOUR`         |
@@ -849,11 +770,13 @@ You can use one of the following formats with the [interval-supported datetime p
 
 For example:
 
-    -- 0 years, 8 months, 20 days, 17 hours, 0 minutes, and 0 seconds (0-8 20 17:0:0)
-    INTERVAL '8 20 17' MONTH TO HOUR
-    
-    -- 0 years, 8 months, -20 days, 17 hours, 0 minutes, and 0 seconds (0-8 -20 17:0:0)
-    INTERVAL '8 -20 17' MONTH TO HOUR
+```
+-- 0 years, 8 months, 20 days, 17 hours, 0 minutes, and 0 seconds (0-8 20 17:0:0)
+INTERVAL '8 20 17' MONTH TO HOUR
+
+-- 0 years, 8 months, -20 days, 17 hours, 0 minutes, and 0 seconds (0-8 -20 17:0:0)
+INTERVAL '8 -20 17' MONTH TO HOUR
+```
 
 For additional examples, see [Interval literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_range) .
 
@@ -861,43 +784,43 @@ For additional examples, see [Interval literals](https://docs.cloud.google.com/b
 
 You can use the following date parts to construct an interval:
 
-  - `YEAR` : Number of years, `Y` .
-  - `QUARTER` : Number of quarters; each quarter is converted to `3` months, `M` .
-  - `MONTH` : Number of months, `M` . Each `12` months is converted to `1` year.
-  - `WEEK` : Number of weeks; Each week is converted to `7` days, `D` .
-  - `DAY` : Number of days, `D` .
+- `YEAR` : Number of years, `Y` .
+- `QUARTER` : Number of quarters; each quarter is converted to `3` months, `M` .
+- `MONTH` : Number of months, `M` . Each `12` months is converted to `1` year.
+- `WEEK` : Number of weeks; Each week is converted to `7` days, `D` .
+- `DAY` : Number of days, `D` .
 
 You can use the following time parts to construct an interval:
 
-  - `HOUR` : Number of hours, `H` .
-  - `MINUTE` : Number of minutes, `M` . Each `60` minutes is converted to `1` hour.
-  - `SECOND` : Number of seconds, `S` . Each `60` seconds is converted to `1` minute. Can include up to six fractional digits (microsecond precision).
-  - `MILLISECOND` : Number of milliseconds.
-  - `MICROSECOND` : Number of microseconds.
+- `HOUR` : Number of hours, `H` .
+- `MINUTE` : Number of minutes, `M` . Each `60` minutes is converted to `1` hour.
+- `SECOND` : Number of seconds, `S` . Each `60` seconds is converted to `1` minute. Can include up to six fractional digits (microsecond precision).
+- `MILLISECOND` : Number of milliseconds.
+- `MICROSECOND` : Number of microseconds.
 
 ## JSON type
 
 | Name   | Description                                             |
-| ------ | ------------------------------------------------------- |
+|--------|---------------------------------------------------------|
 | `JSON` | Represents JSON, a lightweight data-interchange format. |
 
 Expect these canonicalization behaviors when creating a value of JSON type:
 
-  - Booleans, strings, and nulls are preserved exactly.
-  - Whitespace characters aren't preserved.
-  - A JSON value can store integers in the range of -9,223,372,036,854,775,808 (minimum signed 64-bit integer) to 18,446,744,073,709,551,615 (maximum unsigned 64-bit integer) and floating point numbers within a domain of `FLOAT64` .
-  - The order of elements in an array is preserved exactly.
-  - The order of the members of an object isn't guaranteed or preserved.
-  - If an object has duplicate keys, the first key that's found is preserved.
-  - Up to 500 levels can be nested.
-  - The format of the original string representation of a JSON number may not be preserved.
+- Booleans, strings, and nulls are preserved exactly.
+- Whitespace characters aren't preserved.
+- A JSON value can store integers in the range of -9,223,372,036,854,775,808 (minimum signed 64-bit integer) to 18,446,744,073,709,551,615 (maximum unsigned 64-bit integer) and floating point numbers within a domain of `FLOAT64` .
+- The order of elements in an array is preserved exactly.
+- The order of the members of an object isn't guaranteed or preserved.
+- If an object has duplicate keys, the first key that's found is preserved.
+- Up to 500 levels can be nested.
+- The format of the original string representation of a JSON number may not be preserved.
 
 To learn more about the literal representation of a JSON type, see [JSON literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#json_literals) .
 
 ## Measure type
 
 | Name      | Description                                      |
-| --------- | ------------------------------------------------ |
+|-----------|--------------------------------------------------|
 | `MEASURE` | An aggregate calculation that doesn't overcount. |
 
 A measure is a special type that aggregates data without overcounting. The measure type is used by only the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . Measures are useful for defining business metrics that you can query using the `AGG` function instead of complex aggregation queries.
@@ -908,50 +831,29 @@ For more information about overcounting with aggregations, see [multi-level aggr
 
 The measure type has the following limitations:
 
-  - Supported by only the `AGG` function on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
-  - Can't be a member type of non-measure container types, such as `STRUCT` , `ARRAY` , or `MAP` types.
-  - Defined only as a property in a graph. For more information and examples, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+- Supported by only the `AGG` function on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
+- Can't be a member type of non-measure container types, such as `STRUCT` , `ARRAY` , or `MAP` types.
+- Defined only as a property in a graph. For more information and examples, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 ## Numeric types
 
 Numeric types include the following types:
 
-  - `INT64` with alias `INT` , `SMALLINT` , `INTEGER` , `BIGINT` , `TINYINT` , `BYTEINT`
+- `INT64` with alias `INT` , `SMALLINT` , `INTEGER` , `BIGINT` , `TINYINT` , `BYTEINT`
 
-  - `NUMERIC` with alias `DECIMAL`
+- `NUMERIC` with alias `DECIMAL`
 
-  - `BIGNUMERIC` with alias `BIGDECIMAL`
+- `BIGNUMERIC` with alias `BIGDECIMAL`
 
-  - `FLOAT64`
+- `FLOAT64`
 
 ### Integer type
 
 Integers are numeric values that don't have fractional components.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Range</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">INT64</code><br />
-<code dir="ltr" translate="no">INT</code><br />
-<code dir="ltr" translate="no">SMALLINT</code><br />
-<code dir="ltr" translate="no">INTEGER</code><br />
-<code dir="ltr" translate="no">BIGINT</code><br />
-<code dir="ltr" translate="no">TINYINT</code><br />
-<code dir="ltr" translate="no">BYTEINT</code></td>
-<td>-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td>
-</tr>
-</tbody>
-</table>
+| Name                                                            | Range                                                   |
+|-----------------------------------------------------------------|---------------------------------------------------------|
+| `INT64` `INT` `SMALLINT` `INTEGER` `BIGINT` `TINYINT` `BYTEINT` | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
 
 `INT` , `SMALLINT` , `INTEGER` , `BIGINT` , `TINYINT` , and `BYTEINT` are aliases for `INT64` .
 
@@ -963,40 +865,10 @@ Decimal type values are numeric values with fixed decimal precision and scale. P
 
 This type can represent decimal fractions exactly, and is suitable for financial calculations.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Precision, Scale, and Range</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">NUMERIC</code><br />
-<code dir="ltr" translate="no">DECIMAL</code></td>
-<td>Precision: 38<br />
-Scale: 9<br />
-Minimum value greater than 0 that can be handled: 1e-9<br />
-Min: -9.9999999999999999999999999999999999999E+28<br />
-Max: 9.9999999999999999999999999999999999999E+28<br />
-</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">BIGNUMERIC</code><br />
-<code dir="ltr" translate="no">BIGDECIMAL</code></td>
-<td>Precision: approximately 76.8 digits (the 77th digit is partial)<br />
-Scale: 38<br />
-Minimum value greater than 0 that can be handled: 1e-38<br />
-Min: <span class="small">-5.7896044618658097711785492504343953926634992332820282019728792003956564819968E+38</span><br />
-Max: <span class="small">5.7896044618658097711785492504343953926634992332820282019728792003956564819967E+38</span><br />
-</td>
-</tr>
-</tbody>
-</table>
+| Name                      | Precision, Scale, and Range                                                                                                                                                                                                                                                                                                                                               |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NUMERIC` `DECIMAL`       | Precision: 38 Scale: 9 Minimum value greater than 0 that can be handled: 1e-9 Min: -9.9999999999999999999999999999999999999E+28 Max: 9.9999999999999999999999999999999999999E+28                                                                                                                                                                                          |
+| `BIGNUMERIC` `BIGDECIMAL` | Precision: approximately 76.8 digits (the 77th digit is partial) Scale: 38 Minimum value greater than 0 that can be handled: 1e-38 Min: <span class="small">-5.7896044618658097711785492504343953926634992332820282019728792003956564819968E+38</span> Max: <span class="small">5.7896044618658097711785492504343953926634992332820282019728792003956564819967E+38</span> |
 
 `DECIMAL` is an alias for `NUMERIC` .
 
@@ -1010,36 +882,10 @@ To learn more about how BigQuery rounds values stored as a `DECIMAL` type, see [
 
 #### Parameterized decimal type
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameterized Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">NUMERIC(P[,S])</code><br />
-<code dir="ltr" translate="no">DECIMAL(P[,S])</code></td>
-<td>A <code dir="ltr" translate="no">NUMERIC</code> or <code dir="ltr" translate="no">DECIMAL</code> type with a maximum precision of P and maximum scale of S , where P and S are <code dir="ltr" translate="no">INT64</code> types. S is interpreted to be 0 if unspecified.<br />
-<br />
-Maximum scale range: 0 ≤ S ≤ 9<br />
-Maximum precision range: max(1, S ) ≤ P ≤ S + 29</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">BIGNUMERIC(P[, S])</code><br />
-<code dir="ltr" translate="no">BIGDECIMAL(P[, S])</code></td>
-<td>A <code dir="ltr" translate="no">BIGNUMERIC</code> or <code dir="ltr" translate="no">BIGDECIMAL</code> type with a maximum precision of P and maximum scale of S , where P and S are <code dir="ltr" translate="no">INT64</code> types. S is interpreted to be 0 if unspecified.<br />
-<br />
-Maximum scale range: 0 ≤ S ≤ 38<br />
-Maximum precision range: max(1, S ) ≤ P ≤ S + 38</td>
-</tr>
-</tbody>
-</table>
+| Parameterized Type                        | Description                                                                                                                                                                                                                                                                               |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NUMERIC(P[,S])` `DECIMAL(P[,S])`         | A `NUMERIC` or `DECIMAL` type with a maximum precision of ` P ` and maximum scale of ` S ` , where ` P ` and ` S ` are `INT64` types. ` S ` is interpreted to be 0 if unspecified. Maximum scale range: 0 ≤ ` S ` ≤ 9 Maximum precision range: max(1, ` S ` ) ≤ ` P ` ≤ ` S ` + 29        |
+| `BIGNUMERIC(P[, S])` `BIGDECIMAL(P[, S])` | A `BIGNUMERIC` or `BIGDECIMAL` type with a maximum precision of ` P ` and maximum scale of ` S ` , where ` P ` and ` S ` are `INT64` types. ` S ` is interpreted to be 0 if unspecified. Maximum scale range: 0 ≤ ` S ` ≤ 38 Maximum precision range: max(1, ` S ` ) ≤ ` P ` ≤ ` S ` + 38 |
 
 If a value has more than `S` decimal digits, the value is rounded to `S` decimal digits. For example, inserting the value `1.125` into a `NUMERIC(5, 2)` column rounds `1.125` half-up to `1.13` .
 
@@ -1054,7 +900,7 @@ See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/refer
 Floating point values are approximate numeric values with fractional components.
 
 | Name      | Description                                    |
-| --------- | ---------------------------------------------- |
+|-----------|------------------------------------------------|
 | `FLOAT64` | Double precision (approximate) numeric values. |
 
 To learn more about the literal representation of a floating point type, see [Floating point literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#floating_point_literals) .
@@ -1069,14 +915,14 @@ Function calls and operators return an overflow error if the input is finite but
 
 Floating point values are approximations.
 
-  - The binary format used to represent floating point values can only represent a subset of the numbers between the most positive number and most negative number in the value range. This enables efficient handling of a much larger range than would be possible otherwise. Numbers that aren't exactly representable are approximated by utilizing a close value instead. For example, `0.1` can't be represented as an integer scaled by a power of `2` . When this value is displayed as a string, it's rounded to a limited number of digits, and the value approximating `0.1` might appear as `"0.1"` , hiding the fact that the value isn't precise. In other situations, the approximation can be visible.
-  - Summation of floating point values might produce surprising results because of [limited precision](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problems) . For example, `(1e30 + 1) - 1e30 = 0` , while `(1e30 - 1e30) + 1 = 1.0` . This is because the floating point value doesn't have enough precision to represent `(1e30 + 1)` , and the result is rounded to `1e30` . This example also shows that the result of the `SUM` aggregate function of floating points values depends on the order in which the values are accumulated. In general, this order isn't deterministic and therefore the result isn't deterministic. Thus, the resulting `SUM` of floating point values might not be deterministic and two executions of the same query on the same tables might produce different results.
-  - If the above points are concerning, use a [decimal type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) instead.
+- The binary format used to represent floating point values can only represent a subset of the numbers between the most positive number and most negative number in the value range. This enables efficient handling of a much larger range than would be possible otherwise. Numbers that aren't exactly representable are approximated by utilizing a close value instead. For example, `0.1` can't be represented as an integer scaled by a power of `2` . When this value is displayed as a string, it's rounded to a limited number of digits, and the value approximating `0.1` might appear as `"0.1"` , hiding the fact that the value isn't precise. In other situations, the approximation can be visible.
+- Summation of floating point values might produce surprising results because of [limited precision](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Accuracy_problems) . For example, `(1e30 + 1) - 1e30 = 0` , while `(1e30 - 1e30) + 1 = 1.0` . This is because the floating point value doesn't have enough precision to represent `(1e30 + 1)` , and the result is rounded to `1e30` . This example also shows that the result of the `SUM` aggregate function of floating points values depends on the order in which the values are accumulated. In general, this order isn't deterministic and therefore the result isn't deterministic. Thus, the resulting `SUM` of floating point values might not be deterministic and two executions of the same query on the same tables might produce different results.
+- If the above points are concerning, use a [decimal type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) instead.
 
 ##### Mathematical function examples
 
 | Left Term               | Operator | Right Term              | Returns                |
-| ----------------------- | -------- | ----------------------- | ---------------------- |
+|-------------------------|----------|-------------------------|------------------------|
 | Any value               | `+`      | `NaN`                   | `NaN`                  |
 | 1.0                     | `+`      | `+inf`                  | `+inf`                 |
 | 1.0                     | `+`      | `-inf`                  | `-inf`                 |
@@ -1090,19 +936,19 @@ Comparison operators provide standard IEEE-754 behavior for floating point input
 ##### Comparison operator examples
 
 | Left Term | Operator | Right Term | Returns |
-| --------- | -------- | ---------- | ------- |
+|-----------|----------|------------|---------|
 | `NaN`     | `=`      | Any value  | `FALSE` |
 | `NaN`     | `<`      | Any value  | `FALSE` |
 | Any value | `<`      | `NaN`      | `FALSE` |
-| \-0.0     | `=`      | 0.0        | `TRUE`  |
-| \-0.0     | `<`      | 0.0        | `FALSE` |
+| -0.0      | `=`      | 0.0        | `TRUE`  |
+| -0.0      | `<`      | 0.0        | `FALSE` |
 
 For more information on how these values are ordered and grouped so they can be compared, see [Ordering floating point values](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#orderable_floating_points) .
 
 ## Range type
 
 | Name    | Range                                                                                                                                                                              |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RANGE` | Contiguous range between two dates, datetimes, or timestamps. The lower and upper bound for the range are optional. The lower bound is inclusive and the upper bound is exclusive. |
 
 ### Declare a range type
@@ -1110,7 +956,7 @@ For more information on how these values are ordered and grouped so they can be 
 A range type can be declared as follows:
 
 | Type Declaration   | Meaning                                  |
-| ------------------ | ---------------------------------------- |
+|--------------------|------------------------------------------|
 | `RANGE<DATE>`      | Contiguous range between two dates.      |
 | `RANGE<DATETIME>`  | Contiguous range between two datetimes.  |
 | `RANGE<TIMESTAMP>` | Contiguous range between two timestamps. |
@@ -1127,11 +973,13 @@ You can construct a range with the `RANGE` constructor. To learn more, see [`RAN
 
 You can construct a range with a range literal. The canonical format for a range literal has the following parts:
 
-    RANGE<T> '[lower_bound, upper_bound)'
+```
+RANGE<T> '[lower_bound, upper_bound)'
+```
 
-  - `T` : The type of range. This can be `DATE` , `DATETIME` , or `TIMESTAMP` .
-  - `lower_bound` : The range starts from this value. This can be a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#date_literals) , [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) , or [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals) literal. If this value is `UNBOUNDED` or `NULL` , the range doesn't include a lower bound.
-  - `upper_bound` : The range ends before this value. This can be a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#date_literals) , [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) , or [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals) literal. If this value is `UNBOUNDED` or `NULL` , the range doesn't include an upper bound.
+- `T` : The type of range. This can be `DATE` , `DATETIME` , or `TIMESTAMP` .
+- `lower_bound` : The range starts from this value. This can be a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#date_literals) , [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) , or [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals) literal. If this value is `UNBOUNDED` or `NULL` , the range doesn't include a lower bound.
+- `upper_bound` : The range ends before this value. This can be a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#date_literals) , [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) , or [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals) literal. If this value is `UNBOUNDED` or `NULL` , the range doesn't include an upper bound.
 
 `T` , `lower_bound` , and `upper_bound` must be of the same data type.
 
@@ -1144,7 +992,7 @@ The range type doesn't support arithmetic operators.
 ## String type
 
 | Name     | Description                               |
-| -------- | ----------------------------------------- |
+|----------|-------------------------------------------|
 | `STRING` | Variable-length character (Unicode) data. |
 
 Input string values must be UTF-8 encoded and output string values will be UTF-8 encoded. Alternate encodings like CESU-8 and Modified UTF-8 aren't treated as valid UTF-8.
@@ -1159,30 +1007,32 @@ To learn more about the literal representation of a string type, see [String lit
 
 ### Parameterized string type
 
-| Parameterized Type | Description                                                                                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `STRING(L)`        | String with a maximum of L Unicode characters allowed in the string, where L is a positive `INT64` value. If a string with more than L Unicode characters is assigned, throws an `OUT_OF_RANGE` error. |
+| Parameterized Type | Description                                                                                                                                                                                                        |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `STRING(L)`        | String with a maximum of ` L ` Unicode characters allowed in the string, where ` L ` is a positive `INT64` value. If a string with more than ` L ` Unicode characters is assigned, throws an `OUT_OF_RANGE` error. |
 
 See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information on parameterized types and where they can be used.
 
 ## Struct type
 
 | Name     | Description                                                                        |
-| -------- | ---------------------------------------------------------------------------------- |
+|----------|------------------------------------------------------------------------------------|
 | `STRUCT` | Container of ordered fields each with a type (required) and field name (optional). |
 
 To learn more about the literal representation of a struct type, see [Struct literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#struct_literals) .
 
 ### Declaring a struct type
 
-    STRUCT<T>
+```
+STRUCT<T>
+```
 
 Struct types are declared using the angle brackets ( `<` and `>` ). The type of the elements of a struct can be arbitrarily complex.
 
 **Examples**
 
 | Type Declaration                     | Meaning                                                                                                                            |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | `STRUCT<INT64>`                      | Simple struct with a single unnamed 64-bit integer field.                                                                          |
 | `STRUCT<x STRING(10)>`               | Simple struct with a single parameterized string field named x.                                                                    |
 | `STRUCT<x STRUCT<y INT64, z INT64>>` | A struct with a nested struct named `x` inside it. The struct `x` has two fields, `y` and `z` , both of which are 64-bit integers. |
@@ -1194,30 +1044,36 @@ You can construct a struct using tuple syntax, typeless struct syntax, or typed 
 
 #### Tuple syntax
 
-    (expr1, expr2 [, ... ])
+```
+(expr1, expr2 [, ... ])
+```
 
 The output type is an anonymous struct type with anonymous fields with types matching the types of the input expressions. There must be at least two expressions specified. Otherwise this syntax is indistinguishable from an expression wrapped with parentheses.
 
 **Examples**
 
 | Syntax     | Output Type   | Notes                                                                                                                                                                                                                                                         |
-| ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `(x, x+y)` | `STRUCT<?,?>` | If column names are used (unquoted strings), the struct field data type is derived from the column data type. `x` and `y` are columns, so the data types of the struct fields are derived from the column types and the output type of the addition operator. |
 
 This syntax can also be used with struct comparison for comparison expressions using multi-part keys, e.g., in a `WHERE` clause:
 
-    WHERE (Key1,Key2) IN ( (12,34), (56,78) )
+```
+WHERE (Key1,Key2) IN ( (12,34), (56,78) )
+```
 
 #### Typeless struct syntax
 
-    STRUCT( expr1 [AS field_name] [, ... ])
+```
+STRUCT( expr1 [AS field_name] [, ... ])
+```
 
 Duplicate field names are allowed. Fields without names are considered anonymous fields and can't be referenced by name. struct values can be `NULL` , or can have `NULL` field values.
 
 **Examples**
 
 | Syntax                       | Output Type                     |
-| ---------------------------- | ------------------------------- |
+|------------------------------|---------------------------------|
 | `STRUCT(1,2,3)`              | `STRUCT<int64,int64,int64>`     |
 | `STRUCT()`                   | `STRUCT<>`                      |
 | `STRUCT('abc')`              | `STRUCT<string>`                |
@@ -1227,14 +1083,16 @@ Duplicate field names are allowed. Fields without names are considered anonymous
 
 #### Typed struct syntax
 
-    STRUCT<[field_name] field_type, ...>( expr1 [, ... ])
+```
+STRUCT<[field_name] field_type, ...>( expr1 [, ... ])
+```
 
 Typed syntax allows constructing structs with an explicit struct data type. The output type is exactly the `field_type` provided. The input expression is coerced to `field_type` if the two types aren't the same, and an error is produced if the types aren't compatible. `AS alias` isn't allowed on the input expressions. The number of expressions must match the number of fields in the type, and the expression types must be coercible or literal-coercible to the field types.
 
 **Examples**
 
 | Syntax                                    | Output Type                             |
-| ----------------------------------------- | --------------------------------------- |
+|-------------------------------------------|-----------------------------------------|
 | `STRUCT<int64>(5)`                        | `STRUCT<int64>`                         |
 | `STRUCT<date>("2011-05-05")`              | `STRUCT<date>`                          |
 | `STRUCT<x int64, y string>(1, t.str_col)` | `STRUCT<x int64, y string>`             |
@@ -1245,74 +1103,78 @@ Typed syntax allows constructing structs with an explicit struct data type. The 
 
 Structs can be directly compared using equality operators:
 
-  - Equal ( `=` )
-  - Not Equal ( `!=` or `<>` )
-  - \[ `NOT` \] `IN`
+- Equal ( `=` )
+- Not Equal ( `!=` or `<>` )
+- \[ `NOT` \] `IN`
 
 Notice, though, that these direct equality comparisons compare the fields of the struct pairwise in ordinal order ignoring any field names. If instead you want to compare identically named fields of a struct, you can compare the individual fields directly.
 
 ## Time type
 
 | Name   | Range                       |
-| ------ | --------------------------- |
+|--------|-----------------------------|
 | `TIME` | 00:00:00 to 23:59:59.999999 |
 
 A time value represents a time of day, as might be displayed on a clock, independent of a specific date and time zone. To represent an absolute point in time, use a [timestamp](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 ##### Canonical format
 
-    [H]H:[M]M:[S]S[.F]
+```
+[H]H:[M]M:[S]S[.F]
+```
 
-  - `[H]H` : One or two digit hour (valid values from 00 to 23).
-  - `[M]M` : One or two digit minutes (valid values from 00 to 59).
-  - `[S]S` : One or two digit seconds (valid values from 00 to 60).
-  - `[.F]` : Up to six fractional digits (microsecond precision).
+- `[H]H` : One or two digit hour (valid values from 00 to 23).
+- `[M]M` : One or two digit minutes (valid values from 00 to 59).
+- `[S]S` : One or two digit seconds (valid values from 00 to 60).
+- `[.F]` : Up to six fractional digits (microsecond precision).
 
 To learn more about the literal representation of a time type, see [Time literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) .
 
 ## Timestamp type
 
 | Name        | Range                                                 |
-| ----------- | ----------------------------------------------------- |
+|-------------|-------------------------------------------------------|
 | `TIMESTAMP` | 0001-01-01 00:00:00 to 9999-12-31 23:59:59.999999 UTC |
 
 A timestamp value represents an absolute point in time, independent of any time zone or convention such as daylight saving time (DST), with microsecond precision.
 
 A timestamp is typically represented internally as the number of elapsed microseconds since a fixed initial point in time.
 
-Note that a timestamp itself doesn't have a time zone; it represents the same instant in time globally. However, the *display* of a timestamp for human readability usually includes a Gregorian date, a time, and a time zone, in an implementation-dependent format. For example, the displayed values "2020-01-01 00:00:00 UTC", "2019-12-31 19:00:00 America/New\_York", and "2020-01-01 05:30:00 Asia/Kolkata" all represent the same instant in time and therefore represent the same timestamp value.
+Note that a timestamp itself doesn't have a time zone; it represents the same instant in time globally. However, the *display* of a timestamp for human readability usually includes a Gregorian date, a time, and a time zone, in an implementation-dependent format. For example, the displayed values "2020-01-01 00:00:00 UTC", "2019-12-31 19:00:00 America/New_York", and "2020-01-01 05:30:00 Asia/Kolkata" all represent the same instant in time and therefore represent the same timestamp value.
 
-  - To represent a Gregorian date as it might appear on a calendar (a civil date), use a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) value.
-  - To represent a time as it might appear on a clock (a civil time), use a [time](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type) value.
-  - To represent a Gregorian date and time as they might appear on a watch, use a [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) value.
+- To represent a Gregorian date as it might appear on a calendar (a civil date), use a [date](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) value.
+- To represent a time as it might appear on a clock (a civil time), use a [time](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type) value.
+- To represent a Gregorian date and time as they might appear on a watch, use a [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) value.
 
 ##### Canonical format
 
 The canonical format for a timestamp literal has the following parts:
 
-    {
-      civil_date_part[time_part [time_zone]] |
-      civil_date_part[time_part[time_zone_offset]] |
-      civil_date_part[time_part[utc_time_zone]]
-    }
-    
-    civil_date_part:
-        YYYY-[M]M-[D]D
-    
-    time_part:
-        { |T|t}[H]H:[M]M:[S]S[.F]
+```
+{
+  civil_date_part[time_part [time_zone]] |
+  civil_date_part[time_part[time_zone_offset]] |
+  civil_date_part[time_part[utc_time_zone]]
+}
 
-  - `YYYY` : Four-digit year.
-  - `[M]M` : One or two digit month.
-  - `[D]D` : One or two digit day.
-  - `{ |T|t}` : A space or a `T` or `t` separator. The `T` and `t` separators are flags for time.
-  - `[H]H` : One or two digit hour (valid values from 00 to 23).
-  - `[M]M` : One or two digit minutes (valid values from 00 to 59).
-  - `[S]S` : One or two digit seconds (valid values from 00 to 60).
-  - `[.F]` : Up to six fractional digits (microsecond precision).
-  - `[time_zone]` : String representing the time zone. When a time zone isn't explicitly specified, the default time zone, UTC, is used. For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
-  - `[time_zone_offset]` : String representing the offset from the Coordinated Universal Time (UTC) time zone. For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
-  - `[utc_time_zone]` : String representing the Coordinated Universal Time (UTC), usually the letter `Z` or `z` . For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+civil_date_part:
+    YYYY-[M]M-[D]D
+
+time_part:
+    { |T|t}[H]H:[M]M:[S]S[.F]
+```
+
+- `YYYY` : Four-digit year.
+- `[M]M` : One or two digit month.
+- `[D]D` : One or two digit day.
+- `{ |T|t}` : A space or a `T` or `t` separator. The `T` and `t` separators are flags for time.
+- `[H]H` : One or two digit hour (valid values from 00 to 23).
+- `[M]M` : One or two digit minutes (valid values from 00 to 59).
+- `[S]S` : One or two digit seconds (valid values from 00 to 60).
+- `[.F]` : Up to six fractional digits (microsecond precision).
+- `[time_zone]` : String representing the time zone. When a time zone isn't explicitly specified, the default time zone, UTC, is used. For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+- `[time_zone_offset]` : String representing the offset from the Coordinated Universal Time (UTC) time zone. For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+- `[utc_time_zone]` : String representing the Coordinated Universal Time (UTC), usually the letter `Z` or `z` . For details, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
 
 To learn more about the literal representation of a timestamp type, see [Timestamp literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals) .
 
@@ -1322,69 +1184,91 @@ A time zone is used when converting from a civil date or time (as might appear o
 
 Time zones are represented by strings in one of these canonical formats:
 
-  - Offset from Coordinated Universal Time (UTC), or the letter `Z` or `z` for UTC.
-  - Time zone name from the [tz database](http://www.iana.org/time-zones) . BigQuery syncs intermittently with the database.
+- Offset from Coordinated Universal Time (UTC), or the letter `Z` or `z` for UTC.
+- Time zone name from the [tz database](http://www.iana.org/time-zones) . BigQuery syncs intermittently with the database.
 
 The following timestamps are identical because the time zone offset for `America/Los_Angeles` is `-08` for the specified date and time.
 
-    SELECT UNIX_MILLIS(TIMESTAMP '2008-12-25 15:30:00 America/Los_Angeles') AS millis;
+```
+SELECT UNIX_MILLIS(TIMESTAMP '2008-12-25 15:30:00 America/Los_Angeles') AS millis;
+```
 
-    SELECT UNIX_MILLIS(TIMESTAMP '2008-12-25 15:30:00-08:00') AS millis;
+```
+SELECT UNIX_MILLIS(TIMESTAMP '2008-12-25 15:30:00-08:00') AS millis;
+```
 
 #### Specify Coordinated Universal Time (UTC)
 
 You can specify UTC using the following suffix:
 
-    {Z|z}
+```
+{Z|z}
+```
 
 You can also specify UTC using the following time zone name:
 
-    {Etc/UTC}
+```
+{Etc/UTC}
+```
 
 The `Z` suffix is a placeholder that implies UTC when converting an [RFC 3339-format](https://datatracker.ietf.org/doc/html/rfc3339#page-10) value to a `TIMESTAMP` value. The value `Z` isn't a valid time zone for functions that accept a time zone. If you're specifying a time zone, or you're unsure of the format to use to specify UTC, we recommend using the `Etc/UTC` time zone name.
 
 The `Z` suffix isn't case sensitive. When using the `Z` suffix, no space is allowed between the `Z` and the rest of the timestamp. The following are examples of using the `Z` suffix and the `Etc/UTC` time zone name:
 
-    SELECT TIMESTAMP '2014-09-27T12:30:00.45Z'
-    SELECT TIMESTAMP '2014-09-27 12:30:00.45z'
-    SELECT TIMESTAMP '2014-09-27T12:30:00.45 Etc/UTC'
+```
+SELECT TIMESTAMP '2014-09-27T12:30:00.45Z'
+SELECT TIMESTAMP '2014-09-27 12:30:00.45z'
+SELECT TIMESTAMP '2014-09-27T12:30:00.45 Etc/UTC'
+```
 
 #### Specify an offset from Coordinated Universal Time (UTC)
 
 You can specify the offset from UTC using the following format:
 
-    {+|-}H[H][:M[M]]
+```
+{+|-}H[H][:M[M]]
+```
 
 Examples:
 
-    -08:00
-    -8:15
-    +3:00
-    +07:30
-    -7
+```
+-08:00
+-8:15
++3:00
++07:30
+-7
+```
 
 When using this format, no space is allowed between the time zone and the rest of the timestamp.
 
-    2014-09-27 12:30:00.45-8:00
+```
+2014-09-27 12:30:00.45-8:00
+```
 
 #### Time zone name
 
 Format:
 
-    tz_identifier
+```
+tz_identifier
+```
 
 A time zone name is a tz identifier from the [tz database](http://www.iana.org/time-zones) . For a less comprehensive but simpler reference, see the [List of tz database time zones](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones) on Wikipedia.
 
 Examples:
 
-    America/Los_Angeles
-    America/Argentina/Buenos_Aires
-    Etc/UTC
-    Pacific/Auckland
+```
+America/Los_Angeles
+America/Argentina/Buenos_Aires
+Etc/UTC
+Pacific/Auckland
+```
 
 When using a time zone name, a space is required between the name and the rest of the timestamp:
 
-    2014-09-27 12:30:00.45 America/Los_Angeles
+```
+2014-09-27 12:30:00.45 America/Los_Angeles
+```
 
 Note that not all time zone names are interchangeable even if they do happen to report the same time during a given part of the year. For example, `America/Los_Angeles` reports the same time as `UTC-7:00` during daylight saving time (DST), but reports the same time as `UTC-8:00` outside of DST.
 
@@ -1402,37 +1286,43 @@ Leap seconds don't affect timestamp computations. All timestamp computations are
 
 A timestamp is unaffected by daylight saving time (DST) because it represents a point in time. When you display a timestamp as a civil time, with a timezone that observes DST, the following rules apply:
 
-  - During the transition from standard time to DST, one hour is skipped. A civil time from the skipped hour is treated the same as if it were written an hour later. For example, in the `America/Los_Angeles` time zone, the hour between 2 AM and 3 AM on March 10, 2024 is skipped on a clock. The times 2:30 AM and 3:30 AM on that date are treated as the same point in time:
-    
-        SELECT
-        FORMAT_TIMESTAMP("%c %Z", "2024-03-10 02:30:00 America/Los_Angeles", "UTC") AS two_thirty,
-        FORMAT_TIMESTAMP("%c %Z", "2024-03-10 03:30:00 America/Los_Angeles", "UTC") AS three_thirty;
-        
-        /*------------------------------+------------------------------+
-         | two_thirty                   | three_thirty                 |
-         +------------------------------+------------------------------+
-         | Sun Mar 10 10:30:00 2024 UTC | Sun Mar 10 10:30:00 2024 UTC |
-         +------------------------------+------------------------------*/
+- During the transition from standard time to DST, one hour is skipped. A civil time from the skipped hour is treated the same as if it were written an hour later. For example, in the `America/Los_Angeles` time zone, the hour between 2 AM and 3 AM on March 10, 2024 is skipped on a clock. The times 2:30 AM and 3:30 AM on that date are treated as the same point in time:
 
-  - When there's ambiguity in how to represent a civil time in a particular timezone because of DST, the later time is chosen:
-    
-        SELECT
-        FORMAT_TIMESTAMP("%c %Z", "2024-03-10 10:30:00 UTC", "America/Los_Angeles") as ten_thirty;
-        
-        /*--------------------------------+
-         | ten_thirty                     |
-         +--------------------------------+
-         | Sun Mar 10 03:30:00 2024 UTC-7 |
-         +--------------------------------*/
+  ```
+  SELECT
+  FORMAT_TIMESTAMP("%c %Z", "2024-03-10 02:30:00 America/Los_Angeles", "UTC") AS two_thirty,
+  FORMAT_TIMESTAMP("%c %Z", "2024-03-10 03:30:00 America/Los_Angeles", "UTC") AS three_thirty;
 
-  - During the transition from DST to standard time, one hour is repeated. A civil time that shows a time during that hour is treated as if it's the earlier instance of that time. For example, in the `America/Los_Angeles` time zone, the hour between 1 AM and 2 AM on November 3, 2024, is repeated on a clock. The time 1:30 AM on that date is treated as the earlier (DST) instance of that time.
-    
-        SELECT
-        FORMAT_TIMESTAMP("%c %Z", "2024-11-03 01:30:00 America/Los_Angeles", "UTC") as one_thirty,
-        FORMAT_TIMESTAMP("%c %Z", "2024-11-03 02:30:00 America/Los_Angeles", "UTC") as two_thirty;
-        
-        /*------------------------------+------------------------------+
-         | one_thirty                   | two_thirty                   |
-         +------------------------------+------------------------------+
-         | Sun Nov 3 08:30:00 2024 UTC  | Sun Nov 3 10:30:00 2024 UTC  |
-         +------------------------------+------------------------------*/
+  /*------------------------------+------------------------------+
+   | two_thirty                   | three_thirty                 |
+   +------------------------------+------------------------------+
+   | Sun Mar 10 10:30:00 2024 UTC | Sun Mar 10 10:30:00 2024 UTC |
+   +------------------------------+------------------------------*/
+  ```
+
+- When there's ambiguity in how to represent a civil time in a particular timezone because of DST, the later time is chosen:
+
+  ```
+  SELECT
+  FORMAT_TIMESTAMP("%c %Z", "2024-03-10 10:30:00 UTC", "America/Los_Angeles") as ten_thirty;
+
+  /*--------------------------------+
+   | ten_thirty                     |
+   +--------------------------------+
+   | Sun Mar 10 03:30:00 2024 UTC-7 |
+   +--------------------------------*/
+  ```
+
+- During the transition from DST to standard time, one hour is repeated. A civil time that shows a time during that hour is treated as if it's the earlier instance of that time. For example, in the `America/Los_Angeles` time zone, the hour between 1 AM and 2 AM on November 3, 2024, is repeated on a clock. The time 1:30 AM on that date is treated as the earlier (DST) instance of that time.
+
+  ```
+  SELECT
+  FORMAT_TIMESTAMP("%c %Z", "2024-11-03 01:30:00 America/Los_Angeles", "UTC") as one_thirty,
+  FORMAT_TIMESTAMP("%c %Z", "2024-11-03 02:30:00 America/Los_Angeles", "UTC") as two_thirty;
+
+  /*------------------------------+------------------------------+
+   | one_thirty                   | two_thirty                   |
+   +------------------------------+------------------------------+
+   | Sun Nov 3 08:30:00 2024 UTC  | Sun Nov 3 10:30:00 2024 UTC  |
+   +------------------------------+------------------------------*/
+  ```

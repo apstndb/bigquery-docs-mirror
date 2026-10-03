@@ -10,10 +10,10 @@ data_source: docs.cloud.google.com
 
 This document describes the user journeys for ML models that are imported to BigQuery ML from Cloud Storage, including the statements and functions that you can use to work with imported models. BigQuery ML offers the following types of imported models:
 
-  - [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
-  - [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-  - [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
-  - [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
+- [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
+- [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+- [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
+- [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
 
 ## Imported model user journeys
 
@@ -37,20 +37,20 @@ The following table describes the statements and functions you can use to create
 <tbody>
 <tr class="odd">
 <td>TensorFlow</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code dir="ltr" translate="no">ML.PREDICT</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow"><code>CREATE MODEL</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code>ML.PREDICT</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models">Make predictions with imported TensorFlow model</a></td>
 </tr>
 <tr class="even">
 <td>TensorFlow Lite</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code dir="ltr" translate="no">ML.PREDICT</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite"><code>CREATE MODEL</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code>ML.PREDICT</code></a></td>
 <td>N/A</td>
 </tr>
 <tr class="odd">
 <td>Open Neural Network Exchange (ONNX)</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code dir="ltr" translate="no">ML.PREDICT</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx"><code>CREATE MODEL</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code>ML.PREDICT</code></a></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format">Make predictions with scikit-learn models in ONNX format</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format">Make predictions PyTorch models in ONNX format</a></li>
@@ -58,8 +58,8 @@ The following table describes the statements and functions you can use to create
 </tr>
 <tr class="even">
 <td>XGBoost</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code dir="ltr" translate="no">ML.PREDICT</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost"><code>CREATE MODEL</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"><code>ML.PREDICT</code></a></td>
 <td>N/A</td>
 </tr>
 </tbody>

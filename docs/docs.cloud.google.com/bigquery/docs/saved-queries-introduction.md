@@ -10,9 +10,9 @@ data_source: docs.cloud.google.com
 
 This document provides an introduction to saved queries in BigQuery. You can use saved queries to create and manage SQL scripts. Changes to a saved query are automatically saved so that you don't lose your work when you close the query editor. Saved queries improve collaboration and query management with the following options:
 
-  - [Share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) with specific users and groups by using Identity and Access Management (IAM).
-  - Review the query version history.
-  - Revert to or branch from previous versions of the query.
+- [Share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) with specific users and groups by using Identity and Access Management (IAM).
+- Review the query version history.
+- Revert to or branch from previous versions of the query.
 
 Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
 
@@ -26,177 +26,45 @@ You control access to saved queries by using Identity and Access Management (IAM
 
 BigQuery Studio lets you save, share, and manage saved queries. The following table lists the regions where BigQuery Studio is available:
 
-Region description
-
-Region name
-
-Details
-
-**Africa**
-
-Johannesburg
-
-`africa-south1`
-
-**Americas**
-
-Columbus
-
-`us-east5`
-
-Dallas
-
-`us-south1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Iowa
-
-`us-central1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Los Angeles
-
-`us-west2`
-
-Las Vegas
-
-`us-west4`
-
-Montréal
-
-`northamerica-northeast1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-N. Virginia
-
-`us-east4`
-
-Oregon
-
-`us-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-São Paulo
-
-`southamerica-east1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-South Carolina
-
-`us-east1`
-
-**Asia Pacific**
-
-Hong Kong
-
-`asia-east2`
-
-Jakarta
-
-`asia-southeast2`
-
-Mumbai
-
-`asia-south1`
-
-Seoul
-
-`asia-northeast3`
-
-Singapore
-
-`asia-southeast1`
-
-Sydney
-
-`australia-southeast1`
-
-Taiwan
-
-`asia-east1`
-
-Tokyo
-
-`asia-northeast1`
-
-**Europe**
-
-Belgium
-
-`europe-west1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Finland
-
-`europe-north1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Frankfurt
-
-`europe-west3`
-
-London
-
-`europe-west2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Madrid
-
-`europe-southwest1`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Milan
-
-`europe-west8`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Netherlands
-
-`europe-west4`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Turin
-
-`europe-west12`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Warsaw
-
-`europe-central2`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-Zürich
-
-`europe-west6`
-
-![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
-
-**Middle East**
-
-Dammam
-
-`me-central2`
-
-Doha
-
-`me-central1`
-
-Tel Aviv
-
-`me-west1`
+|                  | Region description | Region name               | Details                                                                                                                                                                  |
+|------------------|--------------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Africa**       |                    |                           |                                                                                                                                                                          |
+|                  | Johannesburg       | `africa-south1`           |                                                                                                                                                                          |
+| **Americas**     |                    |                           |                                                                                                                                                                          |
+|                  | Columbus           | `us-east5`                |                                                                                                                                                                          |
+|                  | Dallas             | `us-south1`               | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Iowa               | `us-central1`             | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Los Angeles        | `us-west2`                |                                                                                                                                                                          |
+|                  | Las Vegas          | `us-west4`                |                                                                                                                                                                          |
+|                  | Montréal           | `northamerica-northeast1` | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | N. Virginia        | `us-east4`                |                                                                                                                                                                          |
+|                  | Oregon             | `us-west1`                | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | São Paulo          | `southamerica-east1`      | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | South Carolina     | `us-east1`                |                                                                                                                                                                          |
+| **Asia Pacific** |                    |                           |                                                                                                                                                                          |
+|                  | Hong Kong          | `asia-east2`              |                                                                                                                                                                          |
+|                  | Jakarta            | `asia-southeast2`         |                                                                                                                                                                          |
+|                  | Mumbai             | `asia-south1`             |                                                                                                                                                                          |
+|                  | Seoul              | `asia-northeast3`         |                                                                                                                                                                          |
+|                  | Singapore          | `asia-southeast1`         |                                                                                                                                                                          |
+|                  | Sydney             | `australia-southeast1`    |                                                                                                                                                                          |
+|                  | Taiwan             | `asia-east1`              |                                                                                                                                                                          |
+|                  | Tokyo              | `asia-northeast1`         |                                                                                                                                                                          |
+| **Europe**       |                    |                           |                                                                                                                                                                          |
+|                  | Belgium            | `europe-west1`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Finland            | `europe-north1`           | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Frankfurt          | `europe-west3`            |                                                                                                                                                                          |
+|                  | London             | `europe-west2`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Madrid             | `europe-southwest1`       | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Milan              | `europe-west8`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Netherlands        | `europe-west4`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Turin              | `europe-west12`           | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Warsaw             | `europe-central2`         | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+|                  | Zürich             | `europe-west6`            | ![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker) |
+| **Middle East**  |                    |                           |                                                                                                                                                                          |
+|                  | Dammam             | `me-central2`             |                                                                                                                                                                          |
+|                  | Doha               | `me-central1`             |                                                                                                                                                                          |
+|                  | Tel Aviv           | `me-west1`                |                                                                                                                                                                          |
 
 ### Quotas and limits
 
@@ -206,8 +74,8 @@ For more information, see [Saved query quotas and limits](https://docs.cloud.goo
 
 Saved queries have the following limitations:
 
-  - You can [grant public access to saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) only to the [`allAuthenticatedUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) principal. You can't grant access to saved queries to the [`allUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-users) principal.
-  - If your Google Cloud project contains more than 2500 classic saved queries, you can't use [batch migration](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) to migrate classic saved queries to saved queries.
+- You can [grant public access to saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#grant-public-access) only to the [`allAuthenticatedUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-authenticated-users) principal. You can't grant access to saved queries to the [`allUsers`](https://docs.cloud.google.com/iam/docs/principals-overview#all-users) principal.
+- If your Google Cloud project contains more than 2500 classic saved queries, you can't use [batch migration](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) to migrate classic saved queries to saved queries.
 
 ## Classic saved queries
 
@@ -219,13 +87,13 @@ You can see classic saved queries in the **(Classic) Queries** folder in the **C
 
 ![The (Classic) Queries folder in the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/saved-query-comparison.png)
 
-> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( NUMBER )** folder in the **Classic Explorer** pane, instead of the **(Classic) Queries** folder.
+> **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( ` NUMBER ` )** folder in the **Classic Explorer** pane, instead of the **(Classic) Queries** folder.
 
 There are 3 types of classic saved queries:
 
-  - **Personal.** Personal classic saved queries are visible only to the user who creates them. They are identified with the person icon.
-  - **Project-level.** Project-level saved queries are visible to principals that have the required [permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified with the people icon.
-  - **Public.** Public classic saved queries are visible to anyone with a link to the query. They are identified with the share icon.
+- **Personal.** Personal classic saved queries are visible only to the user who creates them. They are identified with the person icon.
+- **Project-level.** Project-level saved queries are visible to principals that have the required [permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified with the people icon.
+- **Public.** Public classic saved queries are visible to anyone with a link to the query. They are identified with the share icon.
 
 You can [migrate](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) classic saved queries to saved queries to take advantage of the new capabilities, or [continue to maintain them](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#update_classic_saved_queries) as classic saved queries until deprecation. The timeline for deprecation is being reviewed.
 
@@ -239,21 +107,21 @@ If users, including yourself, have personal queries with information that should
 
 To support this transition, the following BigQuery IAM roles were updated in February 2024:
 
-  - [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `roles/bigquery.admin` ) gets [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) permissions.
+- [BigQuery Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) ( `roles/bigquery.admin` ) gets [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` ) permissions.
 
-  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` ) gets the following permissions:
-    
-      - `dataform.locations.get`
-      - `dataform.locations.list`
-      - `dataform.repositories.create`
-      - `dataform.repositories.list`
+- [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` ) gets the following permissions:
 
-  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) gets the following permissions:
-    
-      - `dataform.locations.get`
-      - `dataform.locations.list`
-      - `dataform.repositories.create`
-      - `dataform.repositories.list`
+  - `dataform.locations.get`
+  - `dataform.locations.list`
+  - `dataform.repositories.create`
+  - `dataform.repositories.list`
+
+- [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) gets the following permissions:
+
+  - `dataform.locations.get`
+  - `dataform.locations.list`
+  - `dataform.repositories.create`
+  - `dataform.repositories.list`
 
 To let users without the BigQuery Admin, BigQuery Job User, or BigQuery User roles use saved queries, grant them the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions) in IAM.
 
@@ -261,5 +129,5 @@ To let users without the BigQuery Admin, BigQuery Job User, or BigQuery User rol
 
 ## What's next
 
-  - To learn how to create saved queries, see [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) .
-  - To learn how to manage saved queries, see [Manage saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries) .
+- To learn how to create saved queries, see [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) .
+- To learn how to manage saved queries, see [Manage saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries) .

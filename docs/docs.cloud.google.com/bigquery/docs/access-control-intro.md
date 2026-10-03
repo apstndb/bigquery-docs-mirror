@@ -20,17 +20,17 @@ To familiarize yourself with how access is managed in Google Cloud, see [IAM ove
 
 A role is a collection of permissions that can be granted to an IAM principal. You can use the following types of roles in IAM to grant access to BigQuery resources:
 
-  - [**Predefined roles**](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) are managed by Google Cloud and support common use cases and access control patterns.
-  - [**Custom roles**](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide access according to a user-specified list of permissions. For information on creating custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) in the IAM documentation.
+- [**Predefined roles**](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) are managed by Google Cloud and support common use cases and access control patterns.
+- [**Custom roles**](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide access according to a user-specified list of permissions. For information on creating custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) in the IAM documentation.
 
 > **Note:** When new capabilities are added to BigQuery, new permissions might be added to predefined IAM roles. Also, new predefined IAM roles can be added to BigQuery at any time. If your organization requires role definitions to remain unchanged, you should create [custom IAM roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 To determine if one or more permissions are included in a predefined IAM role, you can use one of the following methods:
 
-  - The [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) reference
-  - The [IAM roles and permissions index](https://docs.cloud.google.com/iam/docs/roles-permissions)
-  - The [`gcloud iam roles describe`](https://docs.cloud.google.com/sdk/gcloud/reference/iam/roles/describe) command
-  - The [`roles.get()`](https://docs.cloud.google.com/iam/reference/rest/v1/roles/get) method in the IAM API
+- The [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) reference
+- The [IAM roles and permissions index](https://docs.cloud.google.com/iam/docs/roles-permissions)
+- The [`gcloud iam roles describe`](https://docs.cloud.google.com/sdk/gcloud/reference/iam/roles/describe) command
+- The [`roles.get()`](https://docs.cloud.google.com/iam/reference/rest/v1/roles/get) method in the IAM API
 
 ## IAM roles in BigQuery
 
@@ -40,15 +40,15 @@ When you assign multiple role types to a user, the permissions granted are a uni
 
 You can grant access to the following BigQuery resources:
 
-  - Datasets and these resources within datasets:
-      - Tables and views
-      - Routines
-  - Connections
-  - Saved queries
-  - Data canvases
-  - Data preparations
-  - Pipelines
-  - Repositories
+- Datasets and these resources within datasets:
+  - Tables and views
+  - Routines
+- Connections
+- Saved queries
+- Data canvases
+- Data preparations
+- Pipelines
+- Repositories
 
 ### Grant access to Resource Manager resources
 
@@ -70,8 +70,8 @@ You can grant roles access to certain types of resources within datasets, withou
 
 Roles can be applied to the following resources within datasets:
 
-  - Tables and views
-  - Routines
+- Tables and views
+- Routines
 
 > **Note:** Roles cannot be applied to models.
 
@@ -79,5 +79,5 @@ For more information on assigning roles at the table, view, or routine level, se
 
 ## What's next
 
-  - For more information about assigning roles to BigQuery resources, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
-  - For a list of BigQuery predefined IAM roles and permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
+- For more information about assigning roles to BigQuery resources, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
+- For a list of BigQuery predefined IAM roles and permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .

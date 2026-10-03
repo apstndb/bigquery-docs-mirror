@@ -18,43 +18,45 @@ Cloud Client Libraries handle the low-level details of API pagination and provid
 
 The following samples demonstrate how to automatically iterate through BigQuery table data.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Api.Gax;
-    using Google.Apis.Bigquery.v2.Data;
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    using System.Linq;
-    
-    public class BigQueryBrowseTable
+```csharp
+using Google.Api.Gax;
+using Google.Apis.Bigquery.v2.Data;
+using Google.Cloud.BigQuery.V2;
+using System;
+using System.Linq;
+
+public class BigQueryBrowseTable
+{
+    public void BrowseTable(
+        string projectId = "your-project-id"
+    )
     {
-        public void BrowseTable(
-            string projectId = "your-project-id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        TableReference tableReference = new TableReference()
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            TableReference tableReference = new TableReference()
-            {
-                TableId = "shakespeare",
-                DatasetId = "samples",
-                ProjectId = "bigquery-public-data"
-            };
-            // Load all rows from a table
-            PagedEnumerable<TableDataList, BigQueryRow> result = client.ListRows(
-                tableReference: tableReference,
-                schema: null
-            );
-            // Print the first 10 rows
-            foreach (BigQueryRow row in result.Take(10))
-            {
-                Console.WriteLine($"{row["corpus"]}: {row["word_count"]}");
-            }
+            TableId = "shakespeare",
+            DatasetId = "samples",
+            ProjectId = "bigquery-public-data"
+        };
+        // Load all rows from a table
+        PagedEnumerable<TableDataList, BigQueryRow> result = client.ListRows(
+            tableReference: tableReference,
+            schema: null
+        );
+        // Print the first 10 rows
+        foreach (BigQueryRow row in result.Take(10))
+        {
+            Console.WriteLine($"{row["corpus"]}: {row["word_count"]}");
         }
     }
+}
+```
 
 ### Go
 
@@ -62,43 +64,45 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // browseTable demonstrates reading data from a BigQuery table directly without the use of a query.
-    // For large tables, we also recommend the BigQuery Storage API.
-    func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     table := client.Dataset(datasetID).Table(tableID)
-     it := table.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// browseTable demonstrates reading data from a BigQuery table directly without the use of a query.
+// For large tables, we also recommend the BigQuery Storage API.
+func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    table := client.Dataset(datasetID).Table(tableID)
+    it := table.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -106,50 +110,52 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQuery.TableDataListOption;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample to directly browse a table with optional paging
-    public class BrowseTable {
-    
-      public static void runBrowseTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String table = "MY_TABLE_NAME";
-        String dataset = "MY_DATASET_NAME";
-        browseTable(dataset, table);
-      }
-    
-      public static void browseTable(String dataset, String table) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Identify the table itself
-          TableId tableId = TableId.of(dataset, table);
-    
-          // Page over 100 records. If you don't need pagination, remove the pageSize parameter.
-          TableResult result = bigquery.listTableData(tableId, TableDataListOption.pageSize(100));
-    
-          // Print the records
-          result
-              .iterateAll()
-              .forEach(
-                  row -> {
-                    row.forEach(fieldValue -> System.out.print(fieldValue.toString() + ", "));
-                    System.out.println();
-                  });
-    
-          System.out.println("Query ran successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Query failed to run \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQuery.TableDataListOption;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample to directly browse a table with optional paging
+public class BrowseTable {
+
+  public static void runBrowseTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String table = "MY_TABLE_NAME";
+    String dataset = "MY_DATASET_NAME";
+    browseTable(dataset, table);
+  }
+
+  public static void browseTable(String dataset, String table) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Identify the table itself
+      TableId tableId = TableId.of(dataset, table);
+
+      // Page over 100 records. If you don't need pagination, remove the pageSize parameter.
+      TableResult result = bigquery.listTableData(tableId, TableDataListOption.pageSize(100));
+
+      // Print the records
+      result
+          .iterateAll()
+          .forEach(
+              row -> {
+                row.forEach(fieldValue -> System.out.print(fieldValue.toString() + ", "));
+                System.out.println();
+              });
+
+      System.out.println("Query ran successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Query failed to run \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -157,68 +163,70 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library using default credentials
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function browseTable() {
-      // Retrieve a table's rows using manual pagination.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset'; // Existing dataset
-      // const tableId = 'my_table'; // Table to create
-    
-      const query = `SELECT name, SUM(number) as total_people
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        GROUP BY name 
-        ORDER BY total_people 
-        DESC LIMIT 100`;
-    
-      // Create table reference.
-      const dataset = bigquery.dataset(datasetId);
-      const destinationTable = dataset.table(tableId);
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
-      const queryOptions = {
-        query: query,
-        destination: destinationTable,
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(queryOptions);
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults
-      const queryResultsOptions = {
-        // Retrieve zero resulting rows.
-        maxResults: 0,
-      };
-    
-      // Wait for the job to finish.
-      await job.getQueryResults(queryResultsOptions);
-    
-      function manualPaginationCallback(err, rows, nextQuery) {
-        rows.forEach(row => {
-          console.log(`name: ${row.name}, ${row.total_people} total people`);
-        });
-    
-        if (nextQuery) {
-          // More results exist.
-          destinationTable.getRows(nextQuery, manualPaginationCallback);
-        }
-      }
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list
-      const getRowsOptions = {
-        autoPaginate: false,
-        maxResults: 20,
-      };
-    
-      // Retrieve all rows.
-      destinationTable.getRows(getRowsOptions, manualPaginationCallback);
+```javascript
+// Import the Google Cloud client library using default credentials
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function browseTable() {
+  // Retrieve a table's rows using manual pagination.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset'; // Existing dataset
+  // const tableId = 'my_table'; // Table to create
+
+  const query = `SELECT name, SUM(number) as total_people
+    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+    GROUP BY name 
+    ORDER BY total_people 
+    DESC LIMIT 100`;
+
+  // Create table reference.
+  const dataset = bigquery.dataset(datasetId);
+  const destinationTable = dataset.table(tableId);
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationquery
+  const queryOptions = {
+    query: query,
+    destination: destinationTable,
+  };
+
+  // Run the query as a job
+  const [job] = await bigquery.createQueryJob(queryOptions);
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults
+  const queryResultsOptions = {
+    // Retrieve zero resulting rows.
+    maxResults: 0,
+  };
+
+  // Wait for the job to finish.
+  await job.getQueryResults(queryResultsOptions);
+
+  function manualPaginationCallback(err, rows, nextQuery) {
+    rows.forEach(row => {
+      console.log(`name: ${row.name}, ${row.total_people} total people`);
+    });
+
+    if (nextQuery) {
+      // More results exist.
+      destinationTable.getRows(nextQuery, manualPaginationCallback);
     }
-    browseTable();
+  }
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list
+  const getRowsOptions = {
+    autoPaginate: false,
+    maxResults: 20,
+  };
+
+  // Retrieve all rows.
+  destinationTable.getRows(getRowsOptions, manualPaginationCallback);
+}
+browseTable();
+```
 
 ### PHP
 
@@ -226,34 +234,36 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $tableId   = 'The BigQuery table ID';
-    // $maxResults = 10;
-    
-    $maxResults = 10;
-    $startIndex = 0;
-    
-    $options = [
-        'maxResults' => $maxResults,
-        'startIndex' => $startIndex
-    ];
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $numRows = 0;
-    foreach ($table->rows($options) as $row) {
-        print('---');
-        foreach ($row as $column => $value) {
-            printf('%s: %s' . PHP_EOL, $column, $value);
-        }
-        $numRows++;
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $tableId   = 'The BigQuery table ID';
+// $maxResults = 10;
+
+$maxResults = 10;
+$startIndex = 0;
+
+$options = [
+    'maxResults' => $maxResults,
+    'startIndex' => $startIndex
+];
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+$numRows = 0;
+foreach ($table->rows($options) as $row) {
+    print('---');
+    foreach ($row as $column => $value) {
+        printf('%s: %s' . PHP_EOL, $column, $value);
     }
+    $numRows++;
+}
+```
 
 ### Python
 
@@ -261,41 +271,43 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to browse data rows.
-    # table_id = "your-project.your_dataset.your_table_name"
-    
-    # Download all rows from a table.
-    rows_iter = client.list_rows(table_id)  # Make an API request.
-    
-    # Iterate over rows to make the API requests to fetch row data.
-    rows = list(rows_iter)
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Download at most 10 rows.
-    rows_iter = client.list_rows(table_id, max_results=10)
-    rows = list(rows_iter)
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Specify selected fields to limit the results to certain columns.
-    table = client.get_table(table_id)  # Make an API request.
-    fields = table.schema[:2]  # First two columns.
-    rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
-    rows = list(rows_iter)
-    print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Print row data in tabular format.
-    rows = client.list_rows(table, max_results=10)
-    format_string = "{!s:<16} " * len(rows.schema)
-    field_names = [field.name for field in rows.schema]
-    print(format_string.format(*field_names))  # Prints column headers.
-    for row in rows:
-        print(format_string.format(*row))  # Prints row data.
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to browse data rows.
+# table_id = "your-project.your_dataset.your_table_name"
+
+# Download all rows from a table.
+rows_iter = client.list_rows(table_id)  # Make an API request.
+
+# Iterate over rows to make the API requests to fetch row data.
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Download at most 10 rows.
+rows_iter = client.list_rows(table_id, max_results=10)
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Specify selected fields to limit the results to certain columns.
+table = client.get_table(table_id)  # Make an API request.
+fields = table.schema[:2]  # First two columns.
+rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
+rows = list(rows_iter)
+print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Print row data in tabular format.
+rows = client.list_rows(table, max_results=10)
+format_string = "{!s:<16} " * len(rows.schema)
+field_names = [field.name for field in rows.schema]
+print(format_string.format(*field_names))  # Prints column headers.
+for row in rows:
+    print(format_string.format(*row))  # Prints row data.
+```
 
 ### Ruby
 
@@ -303,22 +315,24 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def browse_table
-      bigquery = Google::Cloud::Bigquery.new project_id: "bigquery-public-data"
-      dataset  = bigquery.dataset "samples"
-      table    = dataset.table "shakespeare"
-    
-      # Load all rows from a table
-      rows = table.data
-    
-      # Load the first 10 rows
-      rows = table.data max: 10
-    
-      # Print row data
-      rows.each { |row| puts row }
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def browse_table
+  bigquery = Google::Cloud::Bigquery.new project_id: "bigquery-public-data"
+  dataset  = bigquery.dataset "samples"
+  table    = dataset.table "shakespeare"
+
+  # Load all rows from a table
+  rows = table.data
+
+  # Load the first 10 rows
+  rows = table.data max: 10
+
+  # Print row data
+  rows.each { |row| puts row }
+end
+```
 
 ## Control page size
 
@@ -347,72 +361,76 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample to run query with pagination.
-    public class QueryPagination {
-    
-      public static void main(String[] args) {
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        String query =
-            "SELECT name, SUM(number) as total_people"
-                + " FROM `bigquery-public-data.usa_names.usa_1910_2013`"
-                + " GROUP BY name"
-                + " ORDER BY total_people DESC"
-                + " LIMIT 100";
-        queryPagination(datasetName, tableName, query);
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample to run query with pagination.
+public class QueryPagination {
+
+  public static void main(String[] args) {
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    String query =
+        "SELECT name, SUM(number) as total_people"
+            + " FROM `bigquery-public-data.usa_names.usa_1910_2013`"
+            + " GROUP BY name"
+            + " ORDER BY total_people DESC"
+            + " LIMIT 100";
+    queryPagination(datasetName, tableName, query);
+  }
+
+  public static void queryPagination(String datasetName, String tableName, String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId tableId = TableId.of(datasetName, tableName);
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query)
+              // save results into a table.
+              .setDestinationTable(tableId)
+              .build();
+
+      bigquery.query(queryConfig);
+
+      TableResult results =
+          bigquery.listTableData(tableId, BigQuery.TableDataListOption.pageSize(20));
+
+      // First Page
+      results
+          .getValues()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,\n", val.toString())));
+
+      while (results.hasNextPage()) {
+        // Remaining Pages
+        results = results.getNextPage();
+        results
+            .getValues()
+            .forEach(row -> row.forEach(val -> System.out.printf("%s,\n", val.toString())));
       }
-    
-      public static void queryPagination(String datasetName, String tableName, String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId tableId = TableId.of(datasetName, tableName);
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query)
-                  // save results into a table.
-                  .setDestinationTable(tableId)
-                  .build();
-    
-          bigquery.query(queryConfig);
-    
-          TableResult results =
-              bigquery.listTableData(tableId, BigQuery.TableDataListOption.pageSize(20));
-    
-          // First Page
-          results
-              .getValues()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,\n", val.toString())));
-    
-          while (results.hasNextPage()) {
-            // Remaining Pages
-            results = results.getNextPage();
-            results
-                .getValues()
-                .forEach(row -> row.forEach(val -> System.out.printf("%s,\n", val.toString())));
-          }
-    
-          System.out.println("Query pagination performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+
+      System.out.println("Query pagination performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 To set the number of rows returned on each page, use a [`GetQueryResults` job](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.Job#com_google_cloud_bigquery_Job_getQueryResults_com_google_cloud_bigquery_BigQuery_QueryResultsOption____) and set the [`pageSize` option](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption#com_google_cloud_bigquery_BigQuery_QueryResultsOption_pageSize_long_) of the [`QueryResultsOption` object](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery.QueryResultsOption) that you pass in, as shown in the following example:
 
-    TableResult result = job.getQueryResults();
-    QueryResultsOption queryResultsOption = QueryResultsOption.pageSize(20);
-    
-    TableResult result = job.getQueryResults(queryResultsOption);
+```
+TableResult result = job.getQueryResults();
+QueryResultsOption queryResultsOption = QueryResultsOption.pageSize(20);
+
+TableResult result = job.getQueryResults(queryResultsOption);
+```
 
 ### Node.js
 
@@ -420,31 +438,33 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library using default credentials
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryPagination() {
-      // Run a query and get rows using automatic pagination.
-    
-      const query = `SELECT name, SUM(number) as total_people
-      FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-      GROUP BY name
-      ORDER BY total_people DESC
-      LIMIT 100`;
-    
-      // Run the query as a job.
-      const [job] = await bigquery.createQueryJob(query);
-    
-      // Wait for job to complete and get rows.
-      const [rows] = await job.getQueryResults();
-    
-      console.log('Query results:');
-      rows.forEach(row => {
-        console.log(`name: ${row.name}, ${row.total_people} total people`);
-      });
-    }
-    queryPagination();
+```javascript
+// Import the Google Cloud client library using default credentials
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryPagination() {
+  // Run a query and get rows using automatic pagination.
+
+  const query = `SELECT name, SUM(number) as total_people
+  FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+  GROUP BY name
+  ORDER BY total_people DESC
+  LIMIT 100`;
+
+  // Run the query as a job.
+  const [job] = await bigquery.createQueryJob(query);
+
+  // Wait for job to complete and get rows.
+  const [rows] = await job.getQueryResults();
+
+  console.log('Query results:');
+  rows.forEach(row => {
+    console.log(`name: ${row.name}, ${row.total_people} total people`);
+  });
+}
+queryPagination();
+```
 
 ### Python
 
@@ -458,39 +478,41 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    query = """
-        SELECT name, SUM(number) as total_people
-        FROM `bigquery-public-data.usa_names.usa_1910_2013`
-        GROUP BY name
-        ORDER BY total_people DESC
-    """
-    query_job = client.query(query)  # Make an API request.
-    query_job.result()  # Wait for the query to complete.
-    
-    # Get the destination table for the query results.
-    #
-    # All queries write to a destination table. If a destination table is not
-    # specified, the BigQuery populates it with a reference to a temporary
-    # anonymous table after the query completes.
-    destination = query_job.destination
-    
-    # Get the schema (and other properties) for the destination table.
-    #
-    # A schema is useful for converting from BigQuery types to Python types.
-    destination = client.get_table(destination)
-    
-    # Download rows.
-    #
-    # The client library automatically handles pagination.
-    print("The query data:")
-    rows = client.list_rows(destination, max_results=20)
-    for row in rows:
-        print("name={}, count={}".format(row["name"], row["total_people"]))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+query = """
+    SELECT name, SUM(number) as total_people
+    FROM `bigquery-public-data.usa_names.usa_1910_2013`
+    GROUP BY name
+    ORDER BY total_people DESC
+"""
+query_job = client.query(query)  # Make an API request.
+query_job.result()  # Wait for the query to complete.
+
+# Get the destination table for the query results.
+#
+# All queries write to a destination table. If a destination table is not
+# specified, the BigQuery populates it with a reference to a temporary
+# anonymous table after the query completes.
+destination = query_job.destination
+
+# Get the schema (and other properties) for the destination table.
+#
+# A schema is useful for converting from BigQuery types to Python types.
+destination = client.get_table(destination)
+
+# Download rows.
+#
+# The client library automatically handles pagination.
+print("The query data:")
+rows = client.list_rows(destination, max_results=20)
+for row in rows:
+    print("name={}, count={}".format(row["name"], row["total_people"]))
+```
 
 ## Optimize with ETags
 
@@ -498,8 +520,8 @@ When you page backwards or jump to arbitrary pages using cached `pageToken` valu
 
 Every `collection.list` method (except for `Tabledata` ) returns an `etag` property in the result. This property is a hash of the page results that can be used to verify whether the page has changed since the last request. When you make a request to BigQuery with an ETag value, BigQuery compares the ETag value to the ETag value returned by the API and responds based on whether the ETag values match. You can use ETags to avoid redundant list calls as follows:
 
-  - To return values only if they have changed, make a list call with a previously-stored ETag using the [HTTP `If-None-Match` header](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match) . If the ETags match, BigQuery returns an `HTTP 304 Not Modified` status code and no data, saving bandwidth.
-  - To return values only if they have **not** changed, use the [HTTP `If-Match` header](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match) . BigQuery returns a `412 Precondition Failed` if the page has changed.
+- To return values only if they have changed, make a list call with a previously-stored ETag using the [HTTP `If-None-Match` header](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-none-match) . If the ETags match, BigQuery returns an `HTTP 304 Not Modified` status code and no data, saving bandwidth.
+- To return values only if they have **not** changed, use the [HTTP `If-Match` header](https://www.rfc-editor.org/rfc/rfc9110.html#name-if-match) . BigQuery returns a `412 Precondition Failed` if the page has changed.
 
 **Note:** Although ETags are a great way to avoid making redundant list calls, you can apply the same methods to identifying if any objects have changed. For example, you can perform a \`GET\` request for a specific table and use ETags to determine if the table has changed before returning the full response.
 
@@ -508,7 +530,7 @@ Every `collection.list` method (except for `Tabledata` ) returns an `etag` prope
 All `*collection*.list` methods return paginated results under certain circumstances. The `maxResults` property limits the number of results per page.
 
 | Method                                | Pagination criteria                                                                                                    | Default `maxResults` limit | Maximum `maxResults` limit | Maximum `maxFieldValues` limit |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | ------------------------------ |
+|---------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------|----------------------------|--------------------------------|
 | `tabledata.list`                      | Returns paginated results if the response size is more than 10 MB <sup>1</sup> of data or more than `maxResults` rows. | Unlimited                  | Unlimited                  | Unlimited                      |
 | All other `*collection*.list` methods | Returns paginated results if the response is more than `maxResults` rows and also less than the maximum limits.        | 10,000                     | Unlimited                  | 300,000                        |
 

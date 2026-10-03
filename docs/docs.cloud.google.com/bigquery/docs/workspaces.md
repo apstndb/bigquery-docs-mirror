@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Create and manage workspaces
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
@@ -35,10 +35,10 @@ To create a new workspace in a BigQuery repository, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -47,7 +47,7 @@ To create a new workspace in a BigQuery repository, follow these steps:
 5.  In the editor, click **Add Workspace** .
 
 6.  In the **Create development workspace** pane, in the **Workspace ID** field, enter a unique ID for the workspace.
-    
+
     IDs can only include numbers, letters, hyphens, and underscores.
 
 7.  Click **Create** .
@@ -59,7 +59,7 @@ To create a new workspace in a third-party repository, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -71,11 +71,11 @@ To create a new workspace in a third-party repository, follow these steps:
 6.  Choose either the **Existing remote branch** or **New branch** radio button, depending on whether you want to use an existing or new branch for the workspace.
 
 7.  Specify the branch to use:
-    
+
     1.  If you chose the **Existing remote branch** radio button, choose an existing branch in the **Remote branch** field.
-    
+
     2.  If you chose the **New branch** radio button, type a branch name in the **Workspace ID** field. The branch name created in the third-party repository is the same as the BigQuery workspace ID.
-        
+
         IDs can only include numbers, letters, hyphens, and underscores.
 
 8.  Click **Create** .
@@ -87,7 +87,7 @@ To create a directory in a workspace, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -95,9 +95,9 @@ To create a directory in a workspace, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  Click add **Open creation menu** .
@@ -114,11 +114,11 @@ You can create new files in a workspace, or upload existing files.
 
 You can create or upload the following types of files to a repository:
 
-  - SQL queries
-  - Python notebooks
-  - [Data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
-  - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
-  - Files of any other type
+- SQL queries
+- Python notebooks
+- [Data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
+- [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
+- Files of any other type
 
 ### Create a file
 
@@ -127,7 +127,7 @@ To create a file in a workspace, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -135,9 +135,9 @@ To create a file in a workspace, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  Click add **Open creation menu** .
@@ -157,7 +157,7 @@ To upload a file to a workspace, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -165,9 +165,9 @@ To upload a file to a workspace, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  Click add **Open creation menu** .
@@ -175,9 +175,9 @@ To upload a file to a workspace, follow these steps:
 7.  Click **Upload to repository** and then click the type of file that you want to upload.
 
 8.  In the upload pane, do one of the following:
-    
-      - In the **File upload** field, click **Browse** , select a file, and then click **Open** .
-      - In the **URL** field, type the URL for the file.
+
+    - In the **File upload** field, click **Browse** , select a file, and then click **Open** .
+    - In the **URL** field, type the URL for the file.
 
 9.  Optional: in the **Parent directory** field, type the directory path in which you want to create the file.
 
@@ -190,7 +190,7 @@ To delete a file from a workspace, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -198,12 +198,12 @@ To delete a file from a workspace, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
-6.  Select the file that you want to delete, click more\_vert **View actions** , and then click **Delete** .
+6.  Select the file that you want to delete, click more_vert **View actions** , and then click **Delete** .
 
 7.  Click **Delete** to confirm.
 
@@ -217,18 +217,23 @@ BigQuery displays version control options based on the status of changes in your
 
 BigQuery displays the following version control options:
 
-  - Commit X change(s)  
-    Commit the X number of local changes in your workspace or selected changed files. BigQuery displays the uncommitted changes.
-  - Push to default branch  
-    Push your committed changes to your default branch. This option is available in a repository if you have no uncommitted changes in your workspace and there are unpushed commits.
-  - Push to `your-branch-name`  
-    Push your committed changes to `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
-  - Pull from default branch  
-    Update your workspaces with recent changes from your default branch. This option is available in a repository if you have no uncommitted changes in your workspace.
-  - Pull from `your-branch-name`  
-    Update your workspace with recent changes from `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
-  - Revert to last commit  
-    Restore the files in your workspace to their state from your last commit.
+Commit ` X ` change(s)  
+Commit the ` X ` number of local changes in your workspace or selected changed files. BigQuery displays the uncommitted changes.
+
+Push to default branch  
+Push your committed changes to your default branch. This option is available in a repository if you have no uncommitted changes in your workspace and there are unpushed commits.
+
+Push to `your-branch-name`  
+Push your committed changes to `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
+
+Pull from default branch  
+Update your workspaces with recent changes from your default branch. This option is available in a repository if you have no uncommitted changes in your workspace.
+
+Pull from `your-branch-name`  
+Update your workspace with recent changes from `your-branch-name` . This option is available in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) if you have no uncommitted changes in your workspace. The remote branch name in the third-party repository is the same as the BigQuery workspace ID.
+
+Revert to last commit  
+Restore the files in your workspace to their state from your last commit.
 
 ### Pull changes
 
@@ -239,7 +244,7 @@ To pull changes from your repository to your workspace, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -247,17 +252,17 @@ To pull changes from your repository to your workspace, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  In the workspace pane, do the following:
-    
+
     1.  If you are in a BigQuery repository, click **Pull from default branch** .
-    
+
     2.  If you are in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) , do one of the following:
-        
+
         1.  Click **Pull from default branch** to pull from the default branch of the third-party repository.
         2.  Click **Pull from `your-branch-name`** to pull from the branch of the third-party repository that corresponds to the current workspace.
 
@@ -272,7 +277,7 @@ To commit changes from your workspace to your repository, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -280,23 +285,23 @@ To commit changes from your workspace to your repository, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
-6.  In the workspace pane, click **Commit X changes** .
+6.  In the workspace pane, click **Commit ` X ` changes** .
 
 7.  In the **Commit changes** pane, do the following:
-    
+
     1.  Select the changed files that you want to commit.
-        
+
         If you don't select any files, BigQuery commits all local changes. You can filter changed files by file state, filename, and path.
-    
+
     2.  In the **Add a commit message** field, type a description for your commit.
-    
-    3.  Click **Commit All changes** , or **Commit X changes** .
-        
+
+    3.  Click **Commit All changes** , or **Commit ` X ` changes** .
+
         The button name depends on your selection of files to commit.
 
 ### Push changes
@@ -308,7 +313,7 @@ To push changes from your workspace to your repository, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -316,17 +321,17 @@ To push changes from your workspace to your repository, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  In the workspace pane, do the following:
-    
+
     1.  If you are in a BigQuery repository, click **Push to default branch** .
-    
+
     2.  If you are in a repository [connected to a third-party Git repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) , do one of the following:
-        
+
         1.  Click **Push to default branch** to push to the default branch of the third-party repository.
         2.  Click **Push to `your-branch-name`** to push to the branch of the third-party repository that corresponds to the current workspace.
 
@@ -337,7 +342,7 @@ To revert uncommitted changes, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -345,12 +350,12 @@ To revert uncommitted changes, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
-6.  In the workspace pane, click the arrow\_drop\_down arrow drop-down on the version control button, and then click **Revert to last commit** .
+6.  In the workspace pane, click the arrow_drop_down arrow drop-down on the version control button, and then click **Revert to last commit** .
 
 ### Resolve merge conflicts
 
@@ -360,7 +365,7 @@ You usually encounter a merge conflict when you pull from a branch after a diffe
 
 The following code sample shows a merge conflict displayed in a SQL file:
 
-``` 
+```
     <<<<<<< HEAD
     SELECT 1 as CustomerOrders
     =======
@@ -373,7 +378,7 @@ To resolve a merge conflict, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -381,9 +386,9 @@ To resolve a merge conflict, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
 6.  Select the affected file and edit it with your chosen changes.
@@ -399,7 +404,7 @@ To view commit history, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
@@ -407,12 +412,12 @@ To view commit history, follow these steps:
 4.  Select the repository that contains the workspace that you want to work with.
 
 5.  Locate the workspace and then click **Open** .
-    
-    This opens the workspace in the folder\_data **Git repository** pane.
-    
+
+    This opens the workspace in the folder_data **Git repository** pane.
+
     ![The workspace pane.](https://docs.cloud.google.com/static/bigquery/images/workspace-pane.png)
 
-6.  In the workspace pane, click the arrow\_drop\_down arrow drop-down on the version control button, and then click **View commit history** .
+6.  In the workspace pane, click the arrow_drop_down arrow drop-down on the version control button, and then click **View commit history** .
 
 ## Delete a workspace
 
@@ -421,17 +426,17 @@ To delete a workspace and all its contents, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
 4.  Select the repository that contains the workspace that you want to delete.
 
-5.  Locate your workspace, and then click more\_vert **Open actions \> Delete** .
+5.  Locate your workspace, and then click more_vert **Open actions \> Delete** .
 
 6.  Click **Delete** .
 
 ## What's next
 
-  - Learn how to [create repositories](https://docs.cloud.google.com/bigquery/docs/repositories) .
+- Learn how to [create repositories](https://docs.cloud.google.com/bigquery/docs/repositories) .

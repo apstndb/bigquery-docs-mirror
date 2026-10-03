@@ -24,9 +24,9 @@ You can also connect to BigQuery using a number of popular third-party tools suc
 
 ## What's next
 
-  - Learn to [use Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
-  - [Visualize data in Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
-  - Learn to [use Looker](https://docs.cloud.google.com/bigquery/docs/looker) .
-  - Learn to [use ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
-  - Learn to [use programmatic analysis tools](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
-  - [Use third-party tools](https://docs.cloud.google.com/bigquery/docs/third-party-integration) .
+- Learn to [use Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) .
+- [Visualize data in Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) .
+- Learn to [use Looker](https://docs.cloud.google.com/bigquery/docs/looker) .
+- Learn to [use ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
+- Learn to [use programmatic analysis tools](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
+- [Use third-party tools](https://docs.cloud.google.com/bigquery/docs/third-party-integration) .

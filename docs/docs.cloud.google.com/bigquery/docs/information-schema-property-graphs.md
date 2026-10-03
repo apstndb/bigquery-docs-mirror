@@ -6,10 +6,10 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# PROPERTY\_GRAPHS view
+# PROPERTY_GRAPHS view
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
@@ -20,10 +20,10 @@ The `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view contains one row for each [propert
 
 To get the permissions that you need to query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
-  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+- [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
+- [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` )
+- [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+- [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -33,8 +33,8 @@ These predefined roles contain the permissions required to query the `INFORMATIO
 
 The following permissions are required to query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view:
 
-  - `bigquery.propertyGraphs.get`
-  - `bigquery.propertyGraphs.list`
+- `bigquery.propertyGraphs.get`
+- `bigquery.propertyGraphs.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -47,7 +47,7 @@ When you query the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view, the query results 
 The `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view has the following schema:
 
 | Column name                    | Data type | Value                                                                                                                                                                                                              |
-| ------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|--------------------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `property_graph_catalog`       | `STRING`  | The name of the project that contains the dataset where the property graph is defined.                                                                                                                             |
 | `property_graph_schema`        | `STRING`  | The name of the dataset that contains the property graph.                                                                                                                                                          |
 | `property_graph_name`          | `STRING`  | The name of the property graph.                                                                                                                                                                                    |
@@ -58,39 +58,43 @@ The `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view has the following schema:
 
 Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-| View name                                                                                             | Resource scope | Region scope              |
-| ----------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.PROPERTY_GRAPHS`` | Project level  | `         REGION        ` |
-| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.PROPERTY_GRAPHS`        | Dataset level  | Dataset location          |
+| View name                                                                                 | Resource scope | Region scope     |
+|-------------------------------------------------------------------------------------------|----------------|------------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.PROPERTY_GRAPHS `` | Project level  | `REGION`         |
+| `[ `` PROJECT_ID `` .] `` DATASET_ID `` .INFORMATION_SCHEMA.PROPERTY_GRAPHS`              | Dataset level  | Dataset location |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
 
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `DATASET_ID` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
 The following example retrieves the `property_graph_name` , `property_graph_metadata_json` , and `ddl` columns from the `INFORMATION_SCHEMA.PROPERTY_GRAPHS` view:
 
-    SELECT
-      property_graph_name, property_graph_metadata_json, ddl
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
+```
+SELECT
+  property_graph_name, property_graph_metadata_json, ddl
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------+------------------------------------------------+------------------------------------------------------+
-    | property_graph_name | property_graph_metadata_json                   | ddl                                                  |
-    +---------------------+------------------------------------------------+------------------------------------------------------+
-    | FinGraph            | {"creationTime":"2026-01-05T22:22:22.365394Z", | CREATE PROPERTY GRAPH `my_project.graph_db.FinGraph` |
-    |                     | "edgeTables":[{"dataSourceTable":{"datasetId": | NODE TABLES (`my_project.graph_db.Account` AS        |
-    |                     | "graph_db","projectId":"my_project","tableId   | Account KEY (id)                                     |
-    |                     | ...                                            | ...                                                  |
-    +---------------------+------------------------------------------------+------------------------------------------------------+
+```
++---------------------+------------------------------------------------+------------------------------------------------------+
+| property_graph_name | property_graph_metadata_json                   | ddl                                                  |
++---------------------+------------------------------------------------+------------------------------------------------------+
+| FinGraph            | {"creationTime":"2026-01-05T22:22:22.365394Z", | CREATE PROPERTY GRAPH `my_project.graph_db.FinGraph` |
+|                     | "edgeTables":[{"dataSourceTable":{"datasetId": | NODE TABLES (`my_project.graph_db.Account` AS        |
+|                     | "graph_db","projectId":"my_project","tableId   | Account KEY (id)                                     |
+|                     | ...                                            | ...                                                  |
++---------------------+------------------------------------------------+------------------------------------------------------+
+```

@@ -16,9 +16,9 @@ Custom quota is proactive, so you can't run an 11 TB query if you have a 10 TB q
 
 To set custom cost controls, you can update one or both of the following query quotas:
 
-  - `QueryUsagePerDay` : Project-level custom quotas limit the aggregate usage of all users in that project.
+- `QueryUsagePerDay` : Project-level custom quotas limit the aggregate usage of all users in that project.
 
-  - `QueryUsagePerUserPerDay` : User-level custom quota is separately applied to all users and [service accounts](https://docs.cloud.google.com/docs/authentication#user_accounts_and_service_accounts) within a project. Regardless of the per user limit, the total usage for all users in the project combined can never exceed the query usage per day limit.
+- `QueryUsagePerUserPerDay` : User-level custom quota is separately applied to all users and [service accounts](https://docs.cloud.google.com/docs/authentication#user_accounts_and_service_accounts) within a project. Regardless of the per user limit, the total usage for all users in the project combined can never exceed the query usage per day limit.
 
 > **Note:** You can't assign a custom quota to an individual user or service account.
 
@@ -62,23 +62,27 @@ To set or update a custom cost control, such as limiting the amount of BigQuery 
 
 For more information about viewing and managing quotas, see [View and manage quotas](https://docs.cloud.google.com/docs/quotas/view-manage) .
 
-> **Note:** Query usage is an accumulation of billed bytes. The query usage value on the **Quotas & System Limits** page might not match the billed bytes for the same period obtained from the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) if some of the queries are charged at a higher rate compared to regular [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . For example, regular query on-demand pricing might be charged at X $ per TiB, whereas another query operation, such as creating a logistic regression model, might be charged at a value of 50X $ per TiB, 50 times more than the regular price. In this case, the `INFORMATION_SCHEMA.JOBS` view might return 100 GiB of billed bytes, but the query usage reported on the **Quotas & System Limits** page would show 5 TiB of usage, 50 times more, because values for query usage are normalized against the regular on-demand pricing.
+> **Note:** Query usage is an accumulation of billed bytes. The query usage value on the **Quotas & System Limits** page might not match the billed bytes for the same period obtained from the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) if some of the queries are charged at a higher rate compared to regular [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . For example, regular query on-demand pricing might be charged at X \$ per TiB, whereas another query operation, such as creating a logistic regression model, might be charged at a value of 50X \$ per TiB, 50 times more than the regular price. In this case, the `INFORMATION_SCHEMA.JOBS` view might return 100 GiB of billed bytes, but the query usage reported on the **Quotas & System Limits** page would show 5 TiB of usage, 50 times more, because values for query usage are normalized against the regular on-demand pricing.
 
 ## Returned error messages
 
 After you set a custom quota, BigQuery returns an error when you exceed it:
 
-  - If you exceed a project-level custom quota, BigQuery returns the [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error:
-    
-        Custom quota exceeded: Your usage exceeded the custom quota for
-        QueryUsagePerDay, which is set by your administrator. For more information,
-        see https://cloud.google.com/bigquery/cost-controls
+- If you exceed a project-level custom quota, BigQuery returns the [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error:
 
-  - If the user exceeds a user-level custom quota, BigQuery returns a [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error with a different error message:
-    
-        Custom quota exceeded: Your usage exceeded the custom quota for
-        QueryUsagePerUserPerDay, which is set by your administrator. For more
-        information, see https://cloud.google.com/bigquery/cost-controls
+  ```
+  Custom quota exceeded: Your usage exceeded the custom quota for
+  QueryUsagePerDay, which is set by your administrator. For more information,
+  see https://cloud.google.com/bigquery/cost-controls
+  ```
+
+- If the user exceeds a user-level custom quota, BigQuery returns a [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error with a different error message:
+
+  ```
+  Custom quota exceeded: Your usage exceeded the custom quota for
+  QueryUsagePerUserPerDay, which is set by your administrator. For more
+  information, see https://cloud.google.com/bigquery/cost-controls
+  ```
 
 You can run your query from another project that has access to your datasets and that doesn't have a custom quota or hasn't yet exceeded it.
 
@@ -86,55 +90,31 @@ You can run your query from another project that has access to your datasets and
 
 Suppose you set the following custom quotas for a project with 10 users, one of which is a service account:
 
-  - Project level: 50 TB per day
-  - User level: 10 TB per day
+- Project level: 50 TB per day
+- User level: 10 TB per day
 
 Project-level custom quotas limit the aggregate usage of all users in that project. User-level custom quotas are separately applied to each user or [service account](https://docs.cloud.google.com/docs/authentication#user_accounts_and_service_accounts) within a project.
 
 The following table describes the remaining quota as the 10 users run queries throughout the day.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Usage</th>
-<th>Remaining quota</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Each of the 10 users queries 4 TBs</td>
-<td><strong>Project level</strong> : 10 TBs remain.<br />
-<strong>User level</strong> : 6 TBs per user remain, but only up to 10 TBs total.</td>
-</tr>
-<tr class="even">
-<td>The service account queries another 6 TBs</td>
-<td><strong>Project level</strong> : 4 TBs remain.<br />
-<strong>User level</strong> : The service account can no longer use BigQuery. 6 TBs per user remain for the other users, but only up to 4 TBs total.</td>
-</tr>
-<tr class="odd">
-<td>One user queries another 4 TBs</td>
-<td><strong>Project level</strong> : 0 TBs remain.<br />
-<strong>User level</strong> : Various TBs remain, but no one can use BigQuery because the project-level quota has been exceeded.</td>
-</tr>
-</tbody>
-</table>
+| Usage                                     | Remaining quota                                                                                                                                                           |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Each of the 10 users queries 4 TBs        | **Project level** : 10 TBs remain. **User level** : 6 TBs per user remain, but only up to 10 TBs total.                                                                   |
+| The service account queries another 6 TBs | **Project level** : 4 TBs remain. **User level** : The service account can no longer use BigQuery. 6 TBs per user remain for the other users, but only up to 4 TBs total. |
+| One user queries another 4 TBs            | **Project level** : 0 TBs remain. **User level** : Various TBs remain, but no one can use BigQuery because the project-level quota has been exceeded.                     |
 
 With no remaining quota, BigQuery stops working for everyone in that project.
 
 ## What's next
 
-  - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+- Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-  - Learn how to [estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
+- Learn how to [estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
 
-  - Learn how to analyze [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) to monitor query costs and BigQuery usage.
+- Learn how to analyze [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) to monitor query costs and BigQuery usage.
 
-  - To learn about billing, alerts, and visualizing data, see the following topics:
-    
-      - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
-      - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
-      - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)
+- To learn about billing, alerts, and visualizing data, see the following topics:
+
+  - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
+  - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
+  - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)

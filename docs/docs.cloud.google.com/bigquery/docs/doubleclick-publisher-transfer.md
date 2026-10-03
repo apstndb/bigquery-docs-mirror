@@ -63,7 +63,7 @@ For information about the data retention policy for Google Ad Manager, see <a hr
 </tbody>
 </table>
 
-> **Note:** The BigQuery Data Transfer Service supports the following delimiters for Google Ad Manager DT files: Tab ( \\t ), Pipe ( | ), Caret ( ^ ), and Comma ( , ).
+> **Note:** The BigQuery Data Transfer Service supports the following delimiters for Google Ad Manager DT files: Tab ( \t ), Pipe ( \| ), Caret ( ^ ), and Comma ( , ).
 
 ## Data ingestion from Google Ad Manager transfers
 
@@ -88,7 +88,7 @@ For example, Google Ad Manager adds `file1` into the bucket at 1:00 AM and `file
 Match tables provide a lookup mechanism for the raw values contained within data transfer files. For a list of match tables, see [Google Ad Manager report transformation](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation) . Different match tables are updated with different ingestion methods. The match tables and their ingestion methods are listed in the following table:
 
 | Ingestion method      | Description                                                                                                                                                                                                                                                 | Match table                                                                                                                                                                                                                                                                                                                                           |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Incremental update    | Incremental updates are appended in every run. For example, a first transfer run of the day loads all data modified before the transfer run, the second transfer run in the same day loads data modified after the previous run and before the current run. | `Company` , `Order` , `Placement` , `LineItem` , `AdUnit`                                                                                                                                                                                                                                                                                             |
 | Whole table update    | Whole table updates loads the whole table once a day. For example, a first transfer run of the day loads all available data for a table. A second transfer run on the same day skips loading these tables.                                                  | `AdCategory` , `AudienceSegmentCategory` , `BandwidthGroup` , `Browser` , `BrowserLanguage` , `DeviceCapability` , `DeviceCategory` , `DeviceManufacturer` , `GeoTarget` , `MobileCarrier` , `MobileDevice` , `MobileDeviceSubmodel` , `OperatingSystem` , `OperatingSystemVersion` , `ThirdPartyCompany` , `TimeZone` , `User` , `ProgrammaticBuyer` |
 | Whole table overwrite | The whole table is overwritten with every transfer run.                                                                                                                                                                                                     | `AudienceSegment`                                                                                                                                                                                                                                                                                                                                     |
@@ -97,24 +97,24 @@ Match tables provide a lookup mechanism for the raw values contained within data
 
 Before you create a Google Ad Manager data transfer:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Google Ad Manager data.
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Google Ad Manager data.
 
-  - **Ensure that your organization has access to Google Ad Manager Data Transfer (Google Ad Manager DT) files.** These files are delivered by the Google Ad Manager team to a Cloud Storage bucket. To gain access to Google Ad Manager DT files, review [Ad Manager Data Transfer reports](https://support.google.com/admanager/answer/1733124) . Additional charges from the Google Ad Manager team might apply.
+- **Ensure that your organization has access to Google Ad Manager Data Transfer (Google Ad Manager DT) files.** These files are delivered by the Google Ad Manager team to a Cloud Storage bucket. To gain access to Google Ad Manager DT files, review [Ad Manager Data Transfer reports](https://support.google.com/admanager/answer/1733124) . Additional charges from the Google Ad Manager team might apply.
+
+  After completing this step, you will receive a Cloud Storage bucket similar to the following:
+
+  ```
+      gdfp-12345678
     
-    After completing this step, you will receive a Cloud Storage bucket similar to the following:
-    
-    ``` 
-        gdfp-12345678
-      
-    ```
-    
-    The Google Cloud team does **NOT** have the ability to generate or grant access to Google Ad Manager DT files on your behalf. Contact Google Ad Manager [support](https://support.google.com/admanager/answer/3059042?&ref_topic=7519191) , for access to Google Ad Manager DT files.
+  ```
 
-  - [Enable API access](https://support.google.com/admanager/answer/3088588) to your Google Ad Manager network.
+  The Google Cloud team does **NOT** have the ability to generate or grant access to Google Ad Manager DT files on your behalf. Contact Google Ad Manager [support](https://support.google.com/admanager/answer/3059042?&ref_topic=7519191) , for access to Google Ad Manager DT files.
 
-  - If you intend to set up data transfer notifications, you must have `pubsub.topics.setIamPolicy` permissions for Pub/Sub. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- [Enable API access](https://support.google.com/admanager/answer/3088588) to your Google Ad Manager network.
+
+- If you intend to set up data transfer notifications, you must have `pubsub.topics.setIamPolicy` permissions for Pub/Sub. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -130,15 +130,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -152,11 +152,13 @@ Grant read access to the Google Ad Manager DT files stored in Cloud Storage. Per
 
 Setting up a BigQuery data transfer for Google Ad Manager requires a:
 
-  - **Cloud Storage bucket** : The Cloud Storage bucket URI for your Google Ad Manager DT files as described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#before_you_begin) . The bucket name should look like the following:
-    
-        gdfp-12345678
+- **Cloud Storage bucket** : The Cloud Storage bucket URI for your Google Ad Manager DT files as described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#before_you_begin) . The bucket name should look like the following:
 
-  - **Network Code** : You'll find the Google Ad Manager network code in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/2032576#delivery` , `2032576` is your network code. For more information, see [Get started with Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start) .
+  ```
+  gdfp-12345678
+  ```
+
+- **Network Code** : You'll find the Google Ad Manager network code in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/2032576#delivery` , `2032576` is your network code. For more information, see [Get started with Google Ad Manager](https://developers.google.com/doubleclick-publishers/docs/start) .
 
 To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 
@@ -167,33 +169,33 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 2.  Click add **Create a transfer** .
 
 3.  On the **Create Transfer** page:
-    
-      - In the **Source type** section, for **Source** , choose **Google Ad Manager (formerly DFP)** .
-    
+
+    - In the **Source type** section, for **Source** , choose **Google Ad Manager (formerly DFP)** .
+
     ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/dfp-transfer-source.png)
-    
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-    
+
+    - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+
     ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
-    
-      - In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
-    
+
+    - In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
+
     ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
-    
-      - In the **Data source details** section:
-          - For **Cloud Storage bucket** , enter the name of the Cloud Storage bucket that stores your data transfer files. When you enter the bucket name, don't include `gs://` .
-          - For **Network code** , enter your network code.
-    
+
+    - In the **Data source details** section:
+      - For **Cloud Storage bucket** , enter the name of the Cloud Storage bucket that stores your data transfer files. When you enter the bucket name, don't include `gs://` .
+      - For **Network code** , enter your network code.
+
     ![Google Ad Manager source details](https://docs.cloud.google.com/static/bigquery/images/dfp-source-details-console.png)
-    
-      - In the **Service account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .  
-          
-        If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a Google Account, then a service account for the transfer is optional. The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
-    
-      - (Optional) In the **Notification options** section:
+
+    - In the **Service account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .  
         
-          - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-          - Click the toggle to enable Pub/Sub run notifications. For **Select a Cloud Pub/Sub topic** , choose your topic name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
+      If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a Google Account, then a service account for the transfer is optional. The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
+
+    - (Optional) In the **Notification options** section:
+
+      - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+      - Click the toggle to enable Pub/Sub run notifications. For **Select a Cloud Pub/Sub topic** , choose your topic name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 4.  Click **Save** .
 
@@ -201,36 +203,36 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `--data_source`
-  - `--target_dataset`
-  - `--display_name`
-  - `--params`
+- `--data_source`
+- `--target_dataset`
+- `--display_name`
+- `--params`
 
 Optional flags:
 
-  - `--service_account_name` - Specifies a service account to use for Google Ad Manager transfer authentication instead of your user account.
+- `--service_account_name` - Specifies a service account to use for Google Ad Manager transfer authentication instead of your user account.
 
-<!-- end list -->
-
-    bq mk --transfer_config \
-    --project_id=project_id \
-    --target_dataset=dataset \
-    --display_name=name \
-    --params='parameters' \
-    --data_source=data_source \
-    --service_account_name=service_account_name
+```
+bq mk --transfer_config \
+--project_id=project_id \
+--target_dataset=dataset \
+--display_name=name \
+--params='parameters' \
+--data_source=data_source \
+--service_account_name=service_account_name
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the target dataset for the transfer configuration.
-  - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the data transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Google Ad Manager, you must supply the `bucket` and `network_code` parameters.
-      - `bucket` : The Cloud Storage bucket that contains your Google Ad Manager DT files.
-      - `network_code` : Network code
-      - `load_match_tables` : Whether to load match tables. By default set to `True`
-  - data\_source is the data source — `dfp_dt` (Google Ad Manager).
-  - service\_account\_name is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
+- ` project_id ` is your project ID.
+- ` dataset ` is the target dataset for the transfer configuration.
+- ` name ` is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the data transfer if you need to modify it later.
+- ` parameters ` contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For Google Ad Manager, you must supply the `bucket` and `network_code` parameters.
+  - `bucket` : The Cloud Storage bucket that contains your Google Ad Manager DT files.
+  - `network_code` : Network code
+  - `load_match_tables` : Whether to load match tables. By default set to `True`
+- ` data_source ` is the data source — `dfp_dt` (Google Ad Manager).
+- ` service_account_name ` is the service account name used to authenticate your data transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#required_permissions) .
 
 > **Caution:** You cannot configure notifications using the command-line tool.
 
@@ -238,11 +240,13 @@ You can also supply the `--project_id` flag to specify a particular project. If 
 
 For example, the following command creates a Google Ad Manager data transfer named `My Transfer` using network code `12345678` , Cloud Storage bucket `gdfp-12345678` , and target dataset `mydataset` . The data transfer is created in the default project:
 
-    bq mk --transfer_config \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --params='{"bucket": "gdfp-12345678","network_code": "12345678"}' \
-    --data_source=dfp_dt
+```
+bq mk --transfer_config \
+--target_dataset=mydataset \
+--display_name='My Transfer' \
+--params='{"bucket": "gdfp-12345678","network_code": "12345678"}' \
+--data_source=dfp_dt
+```
 
 After running the command, you receive a message like the following:
 
@@ -260,56 +264,58 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.rpc.ApiException;
-    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-    import com.google.protobuf.Struct;
-    import com.google.protobuf.Value;
-    import java.io.IOException;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    // Sample to create a ad manager(formerly DFP) transfer config
-    public class CreateAdManagerTransfer {
-    
-      public static void main(String[] args) throws IOException {
-        // TODO(developer): Replace these variables before running the sample.
-        final String projectId = "MY_PROJECT_ID";
-        String datasetId = "MY_DATASET_ID";
-        String bucket = "gs://cloud-sample-data";
-        // the network_code can only be digits with length 1 to 15
-        String networkCode = "12345678";
-        Map<String, Value> params = new HashMap<>();
-        params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-        params.put("network_code", Value.newBuilder().setStringValue(networkCode).build());
-        TransferConfig transferConfig =
-            TransferConfig.newBuilder()
-                .setDestinationDatasetId(datasetId)
-                .setDisplayName("Your Ad Manager Config Name")
-                .setDataSourceId("dfp_dt")
-                .setParams(Struct.newBuilder().putAllFields(params).build())
-                .build();
-        createAdManagerTransfer(projectId, transferConfig);
-      }
-    
-      public static void createAdManagerTransfer(String projectId, TransferConfig transferConfig)
-          throws IOException {
-        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-          ProjectName parent = ProjectName.of(projectId);
-          CreateTransferConfigRequest request =
-              CreateTransferConfigRequest.newBuilder()
-                  .setParent(parent.toString())
-                  .setTransferConfig(transferConfig)
-                  .build();
-          TransferConfig config = client.createTransferConfig(request);
-          System.out.println("Ad manager transfer created successfully :" + config.getName());
-        } catch (ApiException ex) {
-          System.out.print("Ad manager transfer was not created." + ex.toString());
-        }
-      }
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+// Sample to create a ad manager(formerly DFP) transfer config
+public class CreateAdManagerTransfer {
+
+  public static void main(String[] args) throws IOException {
+    // TODO(developer): Replace these variables before running the sample.
+    final String projectId = "MY_PROJECT_ID";
+    String datasetId = "MY_DATASET_ID";
+    String bucket = "gs://cloud-sample-data";
+    // the network_code can only be digits with length 1 to 15
+    String networkCode = "12345678";
+    Map<String, Value> params = new HashMap<>();
+    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
+    params.put("network_code", Value.newBuilder().setStringValue(networkCode).build());
+    TransferConfig transferConfig =
+        TransferConfig.newBuilder()
+            .setDestinationDatasetId(datasetId)
+            .setDisplayName("Your Ad Manager Config Name")
+            .setDataSourceId("dfp_dt")
+            .setParams(Struct.newBuilder().putAllFields(params).build())
+            .build();
+    createAdManagerTransfer(projectId, transferConfig);
+  }
+
+  public static void createAdManagerTransfer(String projectId, TransferConfig transferConfig)
+      throws IOException {
+    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+      ProjectName parent = ProjectName.of(projectId);
+      CreateTransferConfigRequest request =
+          CreateTransferConfigRequest.newBuilder()
+              .setParent(parent.toString())
+              .setTransferConfig(transferConfig)
+              .build();
+      TransferConfig config = client.createTransferConfig(request);
+      System.out.println("Ad manager transfer created successfully :" + config.getName());
+    } catch (ApiException ex) {
+      System.out.print("Ad manager transfer was not created." + ex.toString());
     }
+  }
+}
+```
 
 > **Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
 
@@ -329,78 +335,86 @@ You can use the following Google Ad Manager sample queries to analyze your trans
 
 > **Note:** If you query your tables directly instead of using the auto-generated views, you must use the `_PARTITIONTIME` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-In each of the following queries, replace variables like dataset with your values. For example, replace network\_code with your Google Ad Manager network code.
+In each of the following queries, replace variables like ` dataset ` with your values. For example, replace ` network_code ` with your Google Ad Manager network code.
 
 ### Impressions and unique users by city
 
 The following SQL sample query analyzes the number of impressions and unique users by city over the past 30 days.
 
-    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-    SELECT
-      City,
-      _DATA_DATE AS Date,
-      count(*) AS imps,
-      count(distinct UserId) AS uniq_users
-    FROM `dataset.NetworkImpressions_network_code`
-    WHERE
-      _DATA_DATE BETWEEN start_date AND end_date
-    GROUP BY City, Date
+```
+# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+SELECT
+  City,
+  _DATA_DATE AS Date,
+  count(*) AS imps,
+  count(distinct UserId) AS uniq_users
+FROM `dataset.NetworkImpressions_network_code`
+WHERE
+  _DATA_DATE BETWEEN start_date AND end_date
+GROUP BY City, Date
+```
 
 ### Impressions and unique users by line item type
 
 The following SQL sample query analyzes the number of impressions and unique users by line item type over the past 30 days.
 
-    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-    SELECT
-      MT.LineItemType AS LineItemType,
-      DT._DATA_DATE AS Date,
-      count(*) AS imps,
-      count(distinct UserId) AS uniq_users
-    FROM `dataset.NetworkImpressions_network_code` AS DT
-    LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
-    ON
-      DT.LineItemId = MT.Id
-    WHERE
-      DT._DATA_DATE BETWEEN start_date AND end_date
-    GROUP BY LineItemType, Date
-    ORDER BY Date desc, imps desc
+```
+# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+SELECT
+  MT.LineItemType AS LineItemType,
+  DT._DATA_DATE AS Date,
+  count(*) AS imps,
+  count(distinct UserId) AS uniq_users
+FROM `dataset.NetworkImpressions_network_code` AS DT
+LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
+ON
+  DT.LineItemId = MT.Id
+WHERE
+  DT._DATA_DATE BETWEEN start_date AND end_date
+GROUP BY LineItemType, Date
+ORDER BY Date desc, imps desc
+```
 
 ### Impressions by ad unit
 
 The following SQL sample query analyzes the number of impressions by ad unit over the past 30 days.
 
-    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-    SELECT
-      MT.AdUnitCode AS AdUnitCode,
-      DT.DATA_DATE AS Date,
-      count(*) AS imps
-    FROM `dataset.NetworkImpressions_network_code` AS DT
-    LEFT JOIN `dataset.MatchTableAdUnit_network_code` AS MT
-    ON
-      DT.AdUnitId = MT.Id
-    WHERE
-      DT._DATA_DATE BETWEEN start_date AND end_date
-    GROUP BY AdUnitCode, Date
-    ORDER BY Date desc, imps desc
+```
+# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+SELECT
+  MT.AdUnitCode AS AdUnitCode,
+  DT.DATA_DATE AS Date,
+  count(*) AS imps
+FROM `dataset.NetworkImpressions_network_code` AS DT
+LEFT JOIN `dataset.MatchTableAdUnit_network_code` AS MT
+ON
+  DT.AdUnitId = MT.Id
+WHERE
+  DT._DATA_DATE BETWEEN start_date AND end_date
+GROUP BY AdUnitCode, Date
+ORDER BY Date desc, imps desc
+```
 
 ### Impressions by line item
 
 The following SQL sample query analyzes the number of impressions by line item over the past 30 days.
 
-    # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
-    # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
-    SELECT
-      MT.Name AS LineItemName,
-      DT._DATA_DATE AS Date,
-      count(*) AS imps
-    FROM `dataset.NetworkImpressions_network_code` AS DT
-    LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
-    ON
-      DT.LineItemId = MT.Id
-    WHERE
-      DT._DATA_DATE BETWEEN start_date AND end_date
-    GROUP BY LineItemName, Date
-    ORDER BY Date desc, imps desc
+```
+# START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
+# END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+SELECT
+  MT.Name AS LineItemName,
+  DT._DATA_DATE AS Date,
+  count(*) AS imps
+FROM `dataset.NetworkImpressions_network_code` AS DT
+LEFT JOIN `dataset.MatchTableLineItem_network_code` AS MT
+ON
+  DT.LineItemId = MT.Id
+WHERE
+  DT._DATA_DATE BETWEEN start_date AND end_date
+GROUP BY LineItemName, Date
+ORDER BY Date desc, imps desc
+```

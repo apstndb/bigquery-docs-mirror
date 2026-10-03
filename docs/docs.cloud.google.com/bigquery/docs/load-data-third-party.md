@@ -17,7 +17,7 @@ To load data using Informatica Data Loader, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the **Explorer** pane, click add **Add** .
-    
+
     The **Add data** dialog opens.
 
 3.  Click a data source, for example, **Amazon S3** or **Google Cloud AlloyDB** .
@@ -37,7 +37,7 @@ To load data using Fivetran Data Pipelines, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the **Explorer** pane, click add **Add** .
-    
+
     The **Add data** dialog opens.
 
 3.  Click a data source, for example, **Amazon S3** or **Google Cloud AlloyDB** .
@@ -52,5 +52,5 @@ To load data using Fivetran Data Pipelines, follow these steps:
 
 ## What's next
 
-  - Learn how to [work with BigQuery connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
-  - Learn about [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) .
+- Learn how to [work with BigQuery connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
+- Learn about [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) .

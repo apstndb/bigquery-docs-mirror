@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.CONFUSION\_MATRIX function
+# The ML.CONFUSION_MATRIX function
 
 This document describes the `ML.CONFUSION_MATRIX` function, which you can use to return a confusion matrix for the input classification model and input data.
 
@@ -25,41 +25,41 @@ ML.CONFUSION_MATRIX(
 
 `ML.CONFUSION_MATRIX` takes the following arguments:
 
-  - `  PROJECT_ID  ` : the project that contains the resource.
+- `PROJECT_ID` : the project that contains the resource.
 
-  - `  DATASET  ` : the dataset that contains the resource.
+- `DATASET` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the model.
+- `MODEL` : the name of the model.
 
-  - `  TABLE  ` : the name of the input table that contains the evaluation data.
-    
-    If `TABLE` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column named `label` in the training data is used.
-    
-    If you don't specify either `TABLE` or `QUERY_STATEMENT` , `ML.CONFUSION_MATRIX` computes the confusion matrix results as follows:
-    
-      - If the data is split during training, the split evaluation data is used to compute the confusion matrix results.
-      - If the data is not split during training, the entire training input is used to compute the confusion matrix results.
+- `TABLE` : the name of the input table that contains the evaluation data.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `QUERY_STATEMENT` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
-    
-    If `QUERY_STATEMENT` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column named `label` in the training data is used. The extra columns are ignored.
-    
-    If you used the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `CREATE MODEL` statement that created the model, then only the input columns present in the `TRANSFORM` clause must appear in `QUERY_STATEMENT` .
-    
-    If you don't specify either `TABLE` or `QUERY_STATEMENT` , `ML.CONFUSION_MATRIX` computes the confusion matrix results as follows:
-    
-      - If the data is split during training, the split evaluation data is used to compute the confusion matrix results.
-      - If the data is not split during training, the entire training input is used to compute the confusion matrix results.
+  If `TABLE` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column named `label` in the training data is used.
 
-  - `  THRESHOLD  ` : a `FLOAT64` value that specifies a custom threshold for the binary-class classification model to use for evaluation. The default value is `0.5` .
-    
-    A `0` value for precision or recall means that the selected threshold produced no true positive labels. A `NaN` value for precision means that the selected threshold produced no positive labels, neither true positives nor false positives.
-    
-    If both `TABLE` and `QUERY_STATEMENT` are unspecified, you can't use a threshold.
-    
-    You can't use `THRESHOLD` with multiclass classification models.
+  If you don't specify either `TABLE` or `QUERY_STATEMENT` , `ML.CONFUSION_MATRIX` computes the confusion matrix results as follows:
 
-  - `  TRIAL_ID  ` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
+  - If the data is split during training, the split evaluation data is used to compute the confusion matrix results.
+  - If the data is not split during training, the entire training input is used to compute the confusion matrix results.
+
+- `QUERY_STATEMENT` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `QUERY_STATEMENT` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+
+  If `QUERY_STATEMENT` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . The input must have a column that matches the label column name provided during training. This value is provided using the `input_label_cols` option. If `input_label_cols` is unspecified, the column named `label` in the training data is used. The extra columns are ignored.
+
+  If you used the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `CREATE MODEL` statement that created the model, then only the input columns present in the `TRANSFORM` clause must appear in `QUERY_STATEMENT` .
+
+  If you don't specify either `TABLE` or `QUERY_STATEMENT` , `ML.CONFUSION_MATRIX` computes the confusion matrix results as follows:
+
+  - If the data is split during training, the split evaluation data is used to compute the confusion matrix results.
+  - If the data is not split during training, the entire training input is used to compute the confusion matrix results.
+
+- `THRESHOLD` : a `FLOAT64` value that specifies a custom threshold for the binary-class classification model to use for evaluation. The default value is `0.5` .
+
+  A `0` value for precision or recall means that the selected threshold produced no true positive labels. A `NaN` value for precision means that the selected threshold produced no positive labels, neither true positives nor false positives.
+
+  If both `TABLE` and `QUERY_STATEMENT` are unspecified, you can't use a threshold.
+
+  You can't use `THRESHOLD` with multiclass classification models.
+
+- `TRIAL_ID` : an `INT64` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
 > **Note:** `ML.CONFUSION_MATRIX` requires input data with some models, and returns an error if it is absent. If this occurs, provide input data when using `ML.CONFUSION_MATRIX` with these models.
 
@@ -85,32 +85,36 @@ The following examples demonstrate the use of the `ML.CONFUSION_MATRIX` function
 
 The following example returns the confusion matrix for a logistic regression model named `mydataset.mymodel` in your default project:
 
+```
+SELECT
+  *
+FROM
+  ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
+  (
     SELECT
       *
     FROM
-      ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
-      (
-        SELECT
-          *
-        FROM
-          `mydataset.mytable`))
+      `mydataset.mytable`))
+```
 
 ### `ML.CONFUSION_MATRIX` with a custom threshold
 
 The following example returns the confusion matrix for a logistic regression model named `mydataset.mymodel` in your default project:
 
+```
+SELECT
+  *
+FROM
+  ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
+    (
     SELECT
       *
     FROM
-      ML.CONFUSION_MATRIX(MODEL `mydataset.mymodel`,
-        (
-        SELECT
-          *
-        FROM
-          `mydataset.mytable`),
-        STRUCT(0.6 AS threshold))
+      `mydataset.mytable`),
+    STRUCT(0.6 AS threshold))
+```
 
 ## What's next
 
-  - For more information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
+- For more information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
+- For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

@@ -22,9 +22,9 @@ After you create the dataset, the location cannot be changed, but you can [copy 
 
 If you don't [explicitly specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) , the location is determined in one of the following ways:
 
-  - The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `asia-northeast1` region, the query job runs in `asia-northeast1` .
-  - The region specified for a connection referenced in a request.
-  - The location of a destination table.
+- The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `asia-northeast1` region, the query job runs in `asia-northeast1` .
+- The region specified for a connection referenced in a request.
+- The location of a destination table.
 
 If the location isn't explicitly specified, and it can't be determined from the resources in the request, the default location is used. If default location isn't set, the job runs in the `US` multi-region.
 
@@ -40,8 +40,8 @@ Changing your storage billing model only changes the metering configuration. It 
 
 The model you select determines only how your stored bytes are measured and priced according to [storage pricing](https://cloud.google.com/bigquery/pricing#storage) :
 
-  - **Logical billing:** You are billed based on the uncompressed size of the data. This is the default model.
-  - **Physical billing:** You are billed based on the compressed size of the data on disk.
+- **Logical billing:** You are billed based on the uncompressed size of the data. This is the default model.
+- **Physical billing:** You are billed based on the compressed size of the data on disk.
 
 Whichever billing model you choose, your data is stored as physical bytes.
 
@@ -57,8 +57,8 @@ You can't enroll a dataset in physical storage billing if your organization has 
 
 In addition to BigQuery datasets, you can create external datasets, which are links to external data sources:
 
-  - [Spanner external dataset](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets)
-  - [AWS Glue federated dataset](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets)
+- [Spanner external dataset](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets)
+- [AWS Glue federated dataset](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets)
 
 *External datasets* are also known as *federated datasets* ; both terms are used interchangeably.
 
@@ -68,19 +68,19 @@ Once created, external datasets contain tables from a referenced external data s
 
 BigQuery datasets are subject to the following limitations:
 
-  - The [dataset location](https://docs.cloud.google.com/bigquery/docs/locations) can only be set at creation time. After a dataset is created, its location cannot be changed.
+- The [dataset location](https://docs.cloud.google.com/bigquery/docs/locations) can only be set at creation time. After a dataset is created, its location cannot be changed.
 
-  - All tables that are referenced in a query must be stored in datasets in the same location.
+- All tables that are referenced in a query must be stored in datasets in the same location.
 
-  - External datasets don't support table expiration, replicas, time travel, default collation, default rounding mode, or the option to enable or disable case-insensitive table names.
+- External datasets don't support table expiration, replicas, time travel, default collation, default rounding mode, or the option to enable or disable case-insensitive table names.
 
-  - When [you copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) , the datasets that contain the source table and destination table must reside in the same location.
+- When [you copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) , the datasets that contain the source table and destination table must reside in the same location.
 
-  - Dataset names must be unique for each project.
+- Dataset names must be unique for each project.
 
-  - If you change a dataset's [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) , you must wait 14 days before you can change the storage billing model again.
+- If you change a dataset's [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) , you must wait 14 days before you can change the storage billing model again.
 
-  - You can't enroll a dataset in physical storage billing if you have any existing legacy [flat-rate slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy) located in the same region as the dataset.
+- You can't enroll a dataset in physical storage billing if you have any existing legacy [flat-rate slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments-legacy) located in the same region as the dataset.
 
 ## Quotas
 
@@ -98,5 +98,5 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
 
 ## What's next
 
-  - For more information on creating datasets, see [Creating datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
-  - For more information on assigning access controls to datasets, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+- For more information on creating datasets, see [Creating datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
+- For more information on assigning access controls to datasets, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .

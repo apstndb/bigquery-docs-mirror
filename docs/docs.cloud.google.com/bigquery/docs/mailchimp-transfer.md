@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Load Mailchimp data into BigQuery
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
@@ -18,87 +18,31 @@ You can load data from Mailchimp to BigQuery using the [BigQuery Data Transfer S
 
 ## Limitations
 
-  - The Mailchimp marketing API only supports a maximum of 10 simultaneous connections per user. Exceeding this limit results in the error `429: TooManyRequests: You have exceeded the limit of 10 simultaneous connections`
-      - To avoid reaching this rate limit, we recommend only running one data transfer per Mailchimp account.
-      - For more information, see [Error glossary](https://mailchimp.com/developer/marketing/docs/errors/#error-glossary) .
-  - The `Integer` data type in Mailchimp has a maximum supported value of 2,147,483,647 across all objects.
-      - However, some Mailchimp fields support higher values, such as the `Quantity` field in `EcommerceOrderLines` and `EcommerceCartLines` .
+- The Mailchimp marketing API only supports a maximum of 10 simultaneous connections per user. Exceeding this limit results in the error `429: TooManyRequests: You have exceeded the limit of 10 simultaneous connections`
+  - To avoid reaching this rate limit, we recommend only running one data transfer per Mailchimp account.
+  - For more information, see [Error glossary](https://mailchimp.com/developer/marketing/docs/errors/#error-glossary) .
+- The `Integer` data type in Mailchimp has a maximum supported value of 2,147,483,647 across all objects.
+  - However, some Mailchimp fields support higher values, such as the `Quantity` field in `EcommerceOrderLines` and `EcommerceCartLines` .
 
 ### Array field limitations
 
 Mailchimp connector doesn't support `ARRAY` fields in the following Mailchimp objects:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Mailchimp Object</th>
-<th>Unsupported <code dir="ltr" translate="no">ARRAY</code> fields</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">Campaigns</code></td>
-<td><code dir="ltr" translate="no">VariateSettings_SubjectLines</code><br />
-<code dir="ltr" translate="no">VariateSettings_SendTimes</code><br />
-<code dir="ltr" translate="no">VariateSettings_FromNames</code><br />
-<code dir="ltr" translate="no">VariateSettings_ReplyToAddresses</code><br />
-<code dir="ltr" translate="no">VariateSettings_Contents</code><br />
-<code dir="ltr" translate="no">VariateSettings_Combinations</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">EcommerceCarts</code></td>
-<td><code dir="ltr" translate="no">Lines</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">EcommerceProducts</code></td>
-<td><code dir="ltr" translate="no">Variants</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ListMembers</code></td>
-<td><code dir="ltr" translate="no">TagsAggregate</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ListMergeFields</code></td>
-<td><code dir="ltr" translate="no">Options_Choices</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">Lists</code></td>
-<td><code dir="ltr" translate="no">Modules</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">AuthorizedApps</code></td>
-<td><code dir="ltr" translate="no">Users</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">AutomationEmails</code></td>
-<td><code dir="ltr" translate="no">Settings_AutoFbPost</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CampaignOpenEmailDetails</code></td>
-<td><code dir="ltr" translate="no">Opens</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">EcommerceProductImages</code></td>
-<td><code dir="ltr" translate="no">VariantIds</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ListSignupForms</code></td>
-<td><code dir="ltr" translate="no">Contents</code> , <code dir="ltr" translate="no">Styles</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ReportEmailActivity</code></td>
-<td><code dir="ltr" translate="no">Activity</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">Reports</code></td>
-<td><code dir="ltr" translate="no">Timewarp</code></td>
-</tr>
-</tbody>
-</table>
+| Mailchimp Object           | Unsupported `ARRAY` fields                                                                                                                                                          |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Campaigns`                | `VariateSettings_SubjectLines` `VariateSettings_SendTimes` `VariateSettings_FromNames` `VariateSettings_ReplyToAddresses` `VariateSettings_Contents` `VariateSettings_Combinations` |
+| `EcommerceCarts`           | `Lines`                                                                                                                                                                             |
+| `EcommerceProducts`        | `Variants`                                                                                                                                                                          |
+| `ListMembers`              | `TagsAggregate`                                                                                                                                                                     |
+| `ListMergeFields`          | `Options_Choices`                                                                                                                                                                   |
+| `Lists`                    | `Modules`                                                                                                                                                                           |
+| `AuthorizedApps`           | `Users`                                                                                                                                                                             |
+| `AutomationEmails`         | `Settings_AutoFbPost`                                                                                                                                                               |
+| `CampaignOpenEmailDetails` | `Opens`                                                                                                                                                                             |
+| `EcommerceProductImages`   | `VariantIds`                                                                                                                                                                        |
+| `ListSignupForms`          | `Contents` , `Styles`                                                                                                                                                               |
+| `ReportEmailActivity`      | `Activity`                                                                                                                                                                          |
+| `Reports`                  | `Timewarp`                                                                                                                                                                          |
 
 ## Before you begin
 
@@ -110,8 +54,8 @@ To enable data transfers from Mailchimp to BigQuery, you must have a Mailchimp A
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
 
 ### Required BigQuery roles
 
@@ -123,15 +67,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -152,25 +96,25 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
 3.  In the **Source type** section, for **Source** , choose **Mailchimp - Preview** .
 
 4.  In the **Data source details** section, do the following:
-    
-      - For **API Key** , enter your Mailchimp API key. For more information, see [Mailchimp prerequisites](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer#mailchimp-prerequisites) .
-      - Optional: For **Start Date** , specify a start date for new records to be included in the data transfer. Only records created on or after this date are included in the data transfer.
-          - Enter a date in the format `YYYY-MM-DD` . The minimum value is `2001-01-01` .
-      - For **Mailchimp objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
+
+    - For **API Key** , enter your Mailchimp API key. For more information, see [Mailchimp prerequisites](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer#mailchimp-prerequisites) .
+    - Optional: For **Start Date** , specify a start date for new records to be included in the data transfer. Only records created on or after this date are included in the data transfer.
+      - Enter a date in the format `YYYY-MM-DD` . The minimum value is `2001-01-01` .
+    - For **Mailchimp objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
 
 5.  In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
 
 6.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer.
 
 7.  In the **Schedule options** section:
-    
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
-      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+    - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
-    
-      - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) name, or you can click **Create a topic** to create one.
+
+    - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+    - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
@@ -178,34 +122,36 @@ Add Mailchimp data into BigQuery by setting up a transfer configuration using on
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-    bq mk
-        --transfer_config
-        --project_id=PROJECT_ID
-        --data_source=DATA_SOURCE
-        --display_name=NAME
-        --target_dataset=DATASET
-        --params='PARAMETERS'
+```
+bq mk
+    --transfer_config
+    --project_id=PROJECT_ID
+    --data_source=DATA_SOURCE
+    --display_name=NAME
+    --target_dataset=DATASET
+    --params='PARAMETERS'
+```
 
 Replace the following:
 
-  - `PROJECT_ID` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+- ` ``PROJECT_ID`` ` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - `DATA_SOURCE` : the data source — `mailchimp` .
+- ` ``DATA_SOURCE`` ` : the data source — `mailchimp` .
 
-  - `NAME` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` ``NAME`` ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - `DATASET` : the target dataset for the transfer configuration.
+- ` ``DATASET`` ` : the target dataset for the transfer configuration.
 
-  - `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Mailchimp data transfer:
-    
-      - `assets` : the path to the Mailchimp objects to be transferred to BigQuery.
-      - `connector.authentication.apiKey` : the Mailchimp API key.
-      - `connector.startDate` : (Optional) a start date for new records to be included in the data transfer, in the format `YYYY-MM-DD` . Only records created on or after this date are included in the data transfer.
+- ` ``PARAMETERS`` ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Mailchimp data transfer:
+
+  - `assets` : the path to the Mailchimp objects to be transferred to BigQuery.
+  - `connector.authentication.apiKey` : the Mailchimp API key.
+  - `connector.startDate` : (Optional) a start date for new records to be included in the data transfer, in the format `YYYY-MM-DD` . Only records created on or after this date are included in the data transfer.
 
 The following command creates a Mailchimp data transfer in the default project.
 
-``` 
-    bq mk
+```
+bq mk
         --transfer_config
         --target_dataset=mydataset
         --data_source=mailchimp
@@ -224,7 +170,7 @@ To manually run a data transfer outside of your regular schedule, you can start 
 The following table maps Mailchimp data types to the corresponding BigQuery data types:
 
 | Mailchimp data type          | BigQuery data type | Description                                                                                                                                                                                                                                     |
-| ---------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `String`                     | `STRING`           |                                                                                                                                                                                                                                                 |
 | `Integer`                    | `INT64`            |                                                                                                                                                                                                                                                 |
 | `Number`                     | `BIGNUMERIC`       | Mailchimp `Number` data objects are mapped to either the `BIGNUMERIC` data type for financial-related fields such as `Price` and `OrderTotal` , or the `FLOAT64` data type, for other fields such as `Stats_OpenRate` and `Location_Latitude` . |
@@ -242,5 +188,5 @@ If you are having issues setting up your data transfer, see [Mailchimp transfer 
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
-  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
+- For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .

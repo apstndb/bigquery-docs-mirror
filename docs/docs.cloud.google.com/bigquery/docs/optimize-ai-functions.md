@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Optimize AI function costs with model distillation
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** For support during the preview, contact <bqml-feedback@google.com> .
@@ -22,17 +22,19 @@ To better understand your token consumption, you can [view the number of tokens 
 
 The following example demonstrates how to use the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) with the optimized mode to identify news articles about natural disasters, using `text-embedding-005` as the embedding model:
 
-    SELECT
-      title,
-      body,
-      AI.IF(
-        ('The following news story is about a natural disaster: ', body),
-        embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
-        -- Optional, 'MINIMIZE_COST' is the default when embeddings are provided.
-        optimization_mode => 'MINIMIZE_COST'
-       ) AS is_natural_disaster
-    FROM
-      `bigquery-public-data.bbc_news.fulltext`;
+```
+SELECT
+  title,
+  body,
+  AI.IF(
+    ('The following news story is about a natural disaster: ', body),
+    embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
+    -- Optional, 'MINIMIZE_COST' is the default when embeddings are provided.
+    optimization_mode => 'MINIMIZE_COST'
+   ) AS is_natural_disaster
+FROM
+  `bigquery-public-data.bbc_news.fulltext`;
+```
 
 The `optimization_mode => 'MINIMIZE_COST'` argument enables the optimized mode. This is the default setting when embeddings are provided, so you can omit this argument.
 
@@ -46,20 +48,20 @@ The process works as follows:
 
 ![AI function workflow when optimized mode is enabled](https://docs.cloud.google.com/static/bigquery/images/ai-optimization-workflow.png)
 
-  - **Sampling and labeling** : BigQuery selects a small representative sample of your data and calls Gemini to provide labels.
-  - **Distilled model training** : a local distilled model is trained just-in-time using the LLM labels and data embeddings as features.
-  - **Quality check** : BigQuery evaluates the distilled model's accuracy against the LLM's results. By default, if the distilled model fails to meet the required quality threshold, the query fails with an error explaining why the model was discarded. If the model is of acceptable quality, BigQuery might still fall back to the remote LLM for specific rows to maintain consistent quality, or for rows lacking valid embeddings.
-  - **Inference** : the distilled model processes the majority of the rows, significantly reducing the number of Gemini calls.
+- **Sampling and labeling** : BigQuery selects a small representative sample of your data and calls Gemini to provide labels.
+- **Distilled model training** : a local distilled model is trained just-in-time using the LLM labels and data embeddings as features.
+- **Quality check** : BigQuery evaluates the distilled model's accuracy against the LLM's results. By default, if the distilled model fails to meet the required quality threshold, the query fails with an error explaining why the model was discarded. If the model is of acceptable quality, BigQuery might still fall back to the remote LLM for specific rows to maintain consistent quality, or for rows lacking valid embeddings.
+- **Inference** : the distilled model processes the majority of the rows, significantly reducing the number of Gemini calls.
 
 ## Limitations
 
 The optimized mode has the following limitations:
 
-  - **Minimum row count** : the input to the AI function must contain approximately 3,000 rows to ensure enough data for model training.
-  - **Data types** : for prompts that reference multiple columns, only string columns are supported for optimization.
-  - **Multi-label classification** : `AI.CLASSIFY` with `output_mode => 'multi'` isn't supported in optimized mode.
-  - **Function support** : only `AI.IF` and `AI.CLASSIFY` functions support optimized mode; however, when using optimized mode with `AI.CLASSIFY` , queries can fail if distilled model quality is insufficient.
-  - **Error ratio** : The `max_error_ratio` argument isn't supported in optimized mode.
+- **Minimum row count** : the input to the AI function must contain approximately 3,000 rows to ensure enough data for model training.
+- **Data types** : for prompts that reference multiple columns, only string columns are supported for optimization.
+- **Multi-label classification** : `AI.CLASSIFY` with `output_mode => 'multi'` isn't supported in optimized mode.
+- **Function support** : only `AI.IF` and `AI.CLASSIFY` functions support optimized mode; however, when using optimized mode with `AI.CLASSIFY` , queries can fail if distilled model quality is insufficient.
+- **Error ratio** : The `max_error_ratio` argument isn't supported in optimized mode.
 
 ## Before you begin
 
@@ -81,36 +83,38 @@ If you use [autonomous embedding generation](https://docs.cloud.google.com/bigqu
 
 The following example creates a table with an autonomously generated embedding column, using `text-embedding-005` as the embedding model, then uses the `AI.CLASSIFY` function to categorize the data:
 
-    -- Create a table with an autonomously generated embedding column
-    CREATE TABLE my_dataset.bbc_news (
-      title STRING,
-      body STRING,
-      body_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
-        GENERATED ALWAYS AS (
-          AI.EMBED(
-            body,
-            connection_id => '<my_connection_id>',
-            task_type => 'CLASSIFICATION',
-            endpoint => 'text-embedding-005')
-        ) STORED
-        OPTIONS(asynchronous = TRUE)
-    );
-    
-    -- Insert data into the table
-    INSERT INTO my_dataset.bbc_news (title, body)
-    SELECT title, body FROM `bigquery-public-data.bbc_news.fulltext`;
-    
-    -- Run the optimized query.
-    -- Wait for the background job to finish generating embeddings before running.
-    SELECT
-      title,
-      body,
-      AI.CLASSIFY(
+```
+-- Create a table with an autonomously generated embedding column
+CREATE TABLE my_dataset.bbc_news (
+  title STRING,
+  body STRING,
+  body_embedding STRUCT<result ARRAY<FLOAT64>, status STRING>
+    GENERATED ALWAYS AS (
+      AI.EMBED(
         body,
-        categories => ['tech', 'sport', 'business', 'other']
-      ) AS category
-    FROM
-      my_dataset.bbc_news;
+        connection_id => '<my_connection_id>',
+        task_type => 'CLASSIFICATION',
+        endpoint => 'text-embedding-005')
+    ) STORED
+    OPTIONS(asynchronous = TRUE)
+);
+
+-- Insert data into the table
+INSERT INTO my_dataset.bbc_news (title, body)
+SELECT title, body FROM `bigquery-public-data.bbc_news.fulltext`;
+
+-- Run the optimized query.
+-- Wait for the background job to finish generating embeddings before running.
+SELECT
+  title,
+  body,
+  AI.CLASSIFY(
+    body,
+    categories => ['tech', 'sport', 'business', 'other']
+  ) AS category
+FROM
+  my_dataset.bbc_news;
+```
 
 ### Manual column specification
 
@@ -118,30 +122,32 @@ If you have an existing embedding column, specify it in the `embeddings` argumen
 
 The following example demonstrates how to create a table with an embedding column, using `text-embedding-005` as the embedding model, and then use that column in an `AI.CLASSIFY` query:
 
-    -- Create a table with an embedding column
-    CREATE TABLE my_dataset.bbc_news AS
-    SELECT
-      title,
-      body,
-      AI.EMBED(
-        body,
-        endpoint => 'text-embedding-005',
-        task_type => 'CLASSIFICATION'
-      ).result AS body_embedding
-    FROM
-      `bigquery-public-data.bbc_news.fulltext`;
-    
-    -- Run the optimized query
-    SELECT
-      title,
-      body,
-      AI.CLASSIFY(
-        body,
-        categories => ['tech', 'sport', 'business', 'other'],
-        embeddings => body_embedding,
-      ) AS category
-    FROM
-      my_dataset.bbc_news;
+```
+-- Create a table with an embedding column
+CREATE TABLE my_dataset.bbc_news AS
+SELECT
+  title,
+  body,
+  AI.EMBED(
+    body,
+    endpoint => 'text-embedding-005',
+    task_type => 'CLASSIFICATION'
+  ).result AS body_embedding
+FROM
+  `bigquery-public-data.bbc_news.fulltext`;
+
+-- Run the optimized query
+SELECT
+  title,
+  body,
+  AI.CLASSIFY(
+    body,
+    categories => ['tech', 'sport', 'business', 'other'],
+    embeddings => body_embedding,
+  ) AS category
+FROM
+  my_dataset.bbc_news;
+```
 
 If your prompt references multiple columns, provide a list of column names and their corresponding embeddings in the `embeddings` argument. For example: `embeddings => [('body', body_embedding), ('title', title_embedding)]` .
 
@@ -160,7 +166,7 @@ To view how many rows were optimized and to see system messages about the optimi
 3.  Click the job ID to view the **Job details** pane.
 
 4.  Click the **Job information** tab and view the metrics and status in the **Gen AI function optimizations** field.
-    
+
     ![Gen AI function optimizations field in the job information tab](https://docs.cloud.google.com/static/bigquery/images/gen-ai-function-optimizations-field.png)
 
 ### API
@@ -183,8 +189,8 @@ The following sections explain how to diagnose and resolve common issues with us
 
 **Solution** :
 
-  - Remove rare or empty categories from the `AI.CLASSIFY` function call.
-  - Group rare categories into a broader one to increase the sample size. You can use an `OTHER` category to group items not covered by more specific categories. However, don't add `OTHER` if your list of categories is already complete, as this term is ambiguous and might cause confusion.
+- Remove rare or empty categories from the `AI.CLASSIFY` function call.
+- Group rare categories into a broader one to increase the sample size. You can use an `OTHER` category to group items not covered by more specific categories. However, don't add `OTHER` if your list of categories is already complete, as this term is ambiguous and might cause confusion.
 
 ### Embeddings have inconsistent dimensions
 
@@ -192,9 +198,11 @@ The following sections explain how to diagnose and resolve common issues with us
 
 **Solution** : Verify that the embeddings are generated by the same model and have the same embedding vector length. You can use a SQL query similar to the following to check that the embeddings in a column have the same length:
 
-    SELECT ARRAY_LENGTH(body_embedding.result), COUNT(*)
-    FROM `PROJECT_ID.DATASET.TABLE_NAME`
-    GROUP BY 1;
+```
+SELECT ARRAY_LENGTH(body_embedding.result), COUNT(*)
+FROM `PROJECT_ID.DATASET.TABLE_NAME`
+GROUP BY 1;
+```
 
 ### Prompt complexity is too high
 
@@ -202,34 +210,36 @@ The following sections explain how to diagnose and resolve common issues with us
 
 **Solution** :
 
-  - Use a set of categories that form a partition. Ensure that the categories have minimal overlap and cover all possible inputs.
-    
-      - Avoid overlapping categories where an input might belong to multiple categories simultaneously. For example, avoid categories like `['terrible', 'bad', 'okay', 'good', 'excellent']` .
-    
-      - Avoid gaps where no categories apply. For example, the list of categories `['bad', 'average']` doesn't cover a review expressing praise.
-    
-      - Provide category descriptions to guide the LLM to resolve ambiguity between categories. For example:
-        
-            AI.CLASSIFY(
-              review,
-              categories => [
-                ('terrible', 'Review where customer was not happy and the message indicates they will never try this product again'),
-                ('bad', 'Review where customer was not happy but suggested improvements to the product'),
-                ('okay', 'Review where customer was neutral about the product. Short reviews qualify for this category'),
-                ('good', 'Review where customers were happy using this product but had minor critiques'),
-                ('excellent', 'Review where customers were very happy using this product and will recommend others to try it too')],
-              embeddings => review_embeddings)
+- Use a set of categories that form a partition. Ensure that the categories have minimal overlap and cover all possible inputs.
 
-  - Try more advanced embedding models like `text-embedding-005` or `gemini-embedding-2` .
+  - Avoid overlapping categories where an input might belong to multiple categories simultaneously. For example, avoid categories like `['terrible', 'bad', 'okay', 'good', 'excellent']` .
 
-  - Contact <bqml-feedback@google.com> for additional debugging assistance.
+  - Avoid gaps where no categories apply. For example, the list of categories `['bad', 'average']` doesn't cover a review expressing praise.
+
+  - Provide category descriptions to guide the LLM to resolve ambiguity between categories. For example:
+
+    ```
+    AI.CLASSIFY(
+      review,
+      categories => [
+        ('terrible', 'Review where customer was not happy and the message indicates they will never try this product again'),
+        ('bad', 'Review where customer was not happy but suggested improvements to the product'),
+        ('okay', 'Review where customer was neutral about the product. Short reviews qualify for this category'),
+        ('good', 'Review where customers were happy using this product but had minor critiques'),
+        ('excellent', 'Review where customers were very happy using this product and will recommend others to try it too')],
+      embeddings => review_embeddings)
+    ```
+
+- Try more advanced embedding models like `text-embedding-005` or `gemini-embedding-2` .
+
+- Contact <bqml-feedback@google.com> for additional debugging assistance.
 
 ### Unexpected number of rows processed by the LLM
 
 **Issue** : Query execution statistics show that an unexpectedly high number of rows were processed by the remote LLM instead of the distilled model. This might be due to the following reasons:
 
-  - The distilled model was trained successfully, but some rows had missing embeddings. These rows are processed by the remote LLM.
-  - The distilled model was not able to be applied for each row and had to fall back to the remote LLM to maintain consistent quality.
+- The distilled model was trained successfully, but some rows had missing embeddings. These rows are processed by the remote LLM.
+- The distilled model was not able to be applied for each row and had to fall back to the remote LLM to maintain consistent quality.
 
 **Solution** : Verify that embeddings are properly generated and valid for all rows in your data. If the issue persists, contact <bqml-feedback@google.com> for debugging.
 
@@ -241,7 +251,7 @@ The following sections explain how to diagnose and resolve common issues with us
 
 ## What's next
 
-  - Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) .
-  - Learn more about [controlling generative AI costs with daily quotas in BigQuery](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
-  - Refer to the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) documentation.
-  - Refer to the [`AI.CLASSIFY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) documentation.
+- Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) .
+- Learn more about [controlling generative AI costs with daily quotas in BigQuery](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
+- Refer to the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) documentation.
+- Refer to the [`AI.CLASSIFY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) documentation.

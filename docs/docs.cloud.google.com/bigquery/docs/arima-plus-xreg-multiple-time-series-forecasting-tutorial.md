@@ -18,18 +18,18 @@ Before reading this tutorial, we highly recommend that you read [Forecast a sing
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a time series model to forecast liquor store orders by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Retrieving the forecasted order values from the model by using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
-  - Retrieving components of the time series, such as seasonality, trend, and feature attributions, by using the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
-  - Evaluate the model's accuracy by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Detect anomalies by using the model with the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
+- Creating a time series model to forecast liquor store orders by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+- Retrieving the forecasted order values from the model by using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+- Retrieving components of the time series, such as seasonality, trend, and feature attributions, by using the [`ML.EXPLAIN_FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
+- Evaluate the model's accuracy by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+- Detect anomalies by using the model with the [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -38,11 +38,11 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Create a dataset
@@ -54,21 +54,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -78,95 +78,103 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a table of input data
 
 Create a table of data that you can use to train and evaluate the model. This table combines columns from the `bigquery-public-data.iowa_liquor_sales.sales` and `bigquery-public-data.covid19_weathersource_com.postal_code_day_history` tables to analyze how weather affects the type and number of items ordered by liquor stores. You also create the following additional columns that you can use as input variables for the model:
 
-  - `date` : the date of the order
-  - `store_number` : the unique number of the store that placed the order
-  - `item_number` : the unique number of the item that was ordered
-  - `bottles_sold` : the number of bottles ordered of the associated item
-  - `temperature` : the average temperature at the store location on the order date
-  - `humidity` : the average humidity at the store location on the order date
+- `date` : the date of the order
+- `store_number` : the unique number of the store that placed the order
+- `item_number` : the unique number of the item that was ordered
+- `bottles_sold` : the number of bottles ordered of the associated item
+- `temperature` : the average temperature at the store location on the order date
+- `humidity` : the average humidity at the store location on the order date
 
 Follow these steps to create the input data table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE TABLE
-          `bqml_tutorial.iowa_liquor_sales_with_weather` AS
-        WITH
-          sales AS (
-            SELECT
-              DATE,
-              store_number,
-              item_number,
-              bottles_sold,
-              SAFE_CAST(SAFE_CAST(zip_code AS FLOAT64) AS INT64) AS zip_code
-            FROM
-              `bigquery-public-data.iowa_liquor_sales.sales` AS sales
-            WHERE
-              SAFE_CAST(zip_code AS FLOAT64) IS NOT NULL
-          ),
-          aggregated_sales AS (
-            SELECT
-              DATE,
-              store_number,
-              item_number,
-              ANY_VALUE(zip_code) AS zip_code,
-              SUM(bottles_sold) AS bottles_sold,
-            FROM
-              sales
-            GROUP BY
-              DATE,
-              store_number,
-              item_number
-          ),
-          weather AS (
-            SELECT
-              DATE,
-              SAFE_CAST(postal_code AS INT64) AS zip_code,
-              avg_temperature_air_2m_f AS temperature,
-              avg_humidity_specific_2m_gpkg AS humidity,
-            FROM
-              `bigquery-public-data.covid19_weathersource_com.postal_code_day_history`
-            WHERE
-              country = 'US' AND
-              SAFE_CAST(postal_code AS INT64) IS NOT NULL
-          )
+
+    ```
+    CREATE OR REPLACE TABLE
+      `bqml_tutorial.iowa_liquor_sales_with_weather` AS
+    WITH
+      sales AS (
         SELECT
-          aggregated_sales.date,
-          aggregated_sales.store_number,
-          aggregated_sales.item_number,
-          aggregated_sales.bottles_sold,
-          weather.temperature AS temperature,
-          weather.humidity AS humidity
+          DATE,
+          store_number,
+          item_number,
+          bottles_sold,
+          SAFE_CAST(SAFE_CAST(zip_code AS FLOAT64) AS INT64) AS zip_code
         FROM
-          aggregated_sales
-          LEFT JOIN weather ON aggregated_sales.zip_code=weather.zip_code
-          AND aggregated_sales.DATE=weather.DATE;
+          `bigquery-public-data.iowa_liquor_sales.sales` AS sales
+        WHERE
+          SAFE_CAST(zip_code AS FLOAT64) IS NOT NULL
+      ),
+      aggregated_sales AS (
+        SELECT
+          DATE,
+          store_number,
+          item_number,
+          ANY_VALUE(zip_code) AS zip_code,
+          SUM(bottles_sold) AS bottles_sold,
+        FROM
+          sales
+        GROUP BY
+          DATE,
+          store_number,
+          item_number
+      ),
+      weather AS (
+        SELECT
+          DATE,
+          SAFE_CAST(postal_code AS INT64) AS zip_code,
+          avg_temperature_air_2m_f AS temperature,
+          avg_humidity_specific_2m_gpkg AS humidity,
+        FROM
+          `bigquery-public-data.covid19_weathersource_com.postal_code_day_history`
+        WHERE
+          country = 'US' AND
+          SAFE_CAST(postal_code AS INT64) IS NOT NULL
+      )
+    SELECT
+      aggregated_sales.date,
+      aggregated_sales.store_number,
+      aggregated_sales.item_number,
+      aggregated_sales.bottles_sold,
+      weather.temperature AS temperature,
+      weather.humidity AS humidity
+    FROM
+      aggregated_sales
+      LEFT JOIN weather ON aggregated_sales.zip_code=weather.zip_code
+      AND aggregated_sales.DATE=weather.DATE;
+    ```
 
 ## Create the time series model
 
@@ -177,22 +185,24 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE
-        OR REPLACE MODEL `bqml_tutorial.multi_time_series_arimax_model`
-        OPTIONS(
-          model_type = 'ARIMA_PLUS_XREG',
-          time_series_id_col = ['store_number', 'item_number'],
-          time_series_data_col = 'bottles_sold',
-          time_series_timestamp_col = 'date'
-        )
-        AS SELECT
-          *
-        FROM
-          `bqml_tutorial.iowa_liquor_sales_with_weather`
-        WHERE
-          DATE < DATE('2022-09-01');
-    
+
+    ```
+    CREATE
+    OR REPLACE MODEL `bqml_tutorial.multi_time_series_arimax_model`
+    OPTIONS(
+      model_type = 'ARIMA_PLUS_XREG',
+      time_series_id_col = ['store_number', 'item_number'],
+      time_series_data_col = 'bottles_sold',
+      time_series_timestamp_col = 'date'
+    )
+    AS SELECT
+      *
+    FROM
+      `bqml_tutorial.iowa_liquor_sales_with_weather`
+    WHERE
+      DATE < DATE('2022-09-01');
+    ```
+
     The query takes approximately 38 minutes to complete, after which you can access the `multi_time_series_arimax_model` model. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
 ## Use the model to forecast data
@@ -208,29 +218,31 @@ Follow these steps to forecast data with the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.FORECAST (
-            model `bqml_tutorial.multi_time_series_arimax_model`,
-            STRUCT (5 AS horizon, 0.8 AS confidence_level),
-            (
-              SELECT
-                * EXCEPT (bottles_sold)
-              FROM
-                `bqml_tutorial.iowa_liquor_sales_with_weather`
-              WHERE
-                DATE>=DATE('2022-09-01')
-            )
-          );
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.FORECAST (
+        model `bqml_tutorial.multi_time_series_arimax_model`,
+        STRUCT (5 AS horizon, 0.8 AS confidence_level),
+        (
+          SELECT
+            * EXCEPT (bottles_sold)
+          FROM
+            `bqml_tutorial.iowa_liquor_sales_with_weather`
+          WHERE
+            DATE>=DATE('2022-09-01')
+        )
+      );
+    ```
+
     The results should look similar to the following:
-    
+
     ![Forecasted data for the number of bottles sold.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-forecast-output.png)
-    
+
     The output rows are in order by the `store_number` value, then by the `item_ID` value, then in chronological order by the `forecast_timestamp` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
-    
+
     For more information about the output columns, see [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
 
 ## Explain the forecasting results
@@ -246,29 +258,31 @@ Follow these steps to explain the model's results:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.EXPLAIN_FORECAST (
-            model `bqml_tutorial.multi_time_series_arimax_model`,
-            STRUCT (5 AS horizon, 0.8 AS confidence_level),
-            (
-              SELECT
-                * EXCEPT (bottles_sold)
-              FROM
-                `bqml_tutorial.iowa_liquor_sales_with_weather`
-              WHERE
-                DATE >= DATE('2022-09-01')
-            )
-          );
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.EXPLAIN_FORECAST (
+        model `bqml_tutorial.multi_time_series_arimax_model`,
+        STRUCT (5 AS horizon, 0.8 AS confidence_level),
+        (
+          SELECT
+            * EXCEPT (bottles_sold)
+          FROM
+            `bqml_tutorial.iowa_liquor_sales_with_weather`
+          WHERE
+            DATE >= DATE('2022-09-01')
+        )
+      );
+    ```
+
     The results should look similar to the following:
-    
+
     ![The first nine output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast1.png) ![The tenth through seventeenth output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast2.png) ![The last six output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast3.png)
-    
+
     The output rows are ordered chronologically by the `time_series_timestamp` column value.
-    
+
     For more information about the output columns, see [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 ## Evaluate forecasting accuracy
@@ -282,26 +296,28 @@ Follow these steps to evaluate the model's accuracy:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.EVALUATE (
-            model `bqml_tutorial.multi_time_series_arimax_model`,
-            (
-              SELECT
-                *
-              FROM
-               `bqml_tutorial.iowa_liquor_sales_with_weather`
-              WHERE
-                DATE >= DATE('2022-09-01')
-            )
-          );
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.EVALUATE (
+        model `bqml_tutorial.multi_time_series_arimax_model`,
+        (
+          SELECT
+            *
+          FROM
+           `bqml_tutorial.iowa_liquor_sales_with_weather`
+          WHERE
+            DATE >= DATE('2022-09-01')
+        )
+      );
+    ```
+
     The results should look similar to the following:
-    
+
     ![Evaluation metrics for the model.](https://docs.cloud.google.com/static/bigquery/images/arima-plus-xreg-multiple-time-series-ml-evaluate.png)
-    
+
     For more information about the output columns, see [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
 
 ## Use the model to detect anomalies
@@ -315,21 +331,23 @@ Follow these steps to detect anomalies in the training data:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.DETECT_ANOMALIES (
-            model `bqml_tutorial.multi_time_series_arimax_model`,
-            STRUCT (0.95 AS anomaly_prob_threshold)
-          );
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES (
+        model `bqml_tutorial.multi_time_series_arimax_model`,
+        STRUCT (0.95 AS anomaly_prob_threshold)
+      );
+    ```
+
     The results should look similar to the following:
-    
+
     ![Anomaly detection information for the training data.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-anomaly-detection.png)
-    
+
     The `anomaly_probability` column in the results identifies the likelihood that a given `bottles_sold` column value is anomalous.
-    
+
     For more information about the output columns, see [`ML.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
 
 ### Detect anomalies in new data
@@ -341,33 +359,35 @@ Follow these steps to detect anomalies in new data:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.DETECT_ANOMALIES (
-            model `bqml_tutorial.multi_time_series_arimax_model`,
-            STRUCT (0.95 AS anomaly_prob_threshold),
-            (
-              SELECT
-                *
-              FROM
-                `bqml_tutorial.iowa_liquor_sales_with_weather`
-              WHERE
-                DATE >= DATE('2022-09-01')
-            )
-          );
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.DETECT_ANOMALIES (
+        model `bqml_tutorial.multi_time_series_arimax_model`,
+        STRUCT (0.95 AS anomaly_prob_threshold),
+        (
+          SELECT
+            *
+          FROM
+            `bqml_tutorial.iowa_liquor_sales_with_weather`
+          WHERE
+            DATE >= DATE('2022-09-01')
+        )
+      );
+    ```
+
     The results should look similar to the following:
-    
+
     ![Anomaly detection information for new data.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-anomaly-detection2.png)
 
 ## Clean up
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -375,7 +395,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation, click the **bqml_tutorial** dataset you created.
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
@@ -386,22 +406,20 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
-  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
-  - Learn how to [hierarchically forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
+- Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
+- Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
+- Learn how to [hierarchically forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
+- For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

@@ -14,516 +14,162 @@ Many GoogleSQL parsing and formatting functions rely on a format string to descr
 
 These functions use format strings:
 
-  - [`FORMAT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date)
-  - [`FORMAT_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)
-  - [`FORMAT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time)
-  - [`FORMAT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)
-  - [`PARSE_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date)
-  - [`PARSE_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime)
-  - [`PARSE_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#parse_time)
-  - [`PARSE_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp)
+- [`FORMAT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date)
+- [`FORMAT_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)
+- [`FORMAT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time)
+- [`FORMAT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)
+- [`PARSE_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date)
+- [`PARSE_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime)
+- [`PARSE_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#parse_time)
+- [`PARSE_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp)
 
 Format strings generally support the following elements:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Type</th>
-<th>Description</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%A</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The full weekday name (English).</td>
-<td><code dir="ltr" translate="no">Wednesday</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%a</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The abbreviated weekday name (English).</td>
-<td><code dir="ltr" translate="no">Wed</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%B</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The full month name (English).</td>
-<td><code dir="ltr" translate="no">January</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%b</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The abbreviated month name (English).</td>
-<td><code dir="ltr" translate="no">Jan</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%C</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The century (a year divided by 100 and truncated to an integer) as a decimal number (00-99).</td>
-<td><code dir="ltr" translate="no">20</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%c</code></td>
-<td><code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The date and time representation (English).</td>
-<td><code dir="ltr" translate="no">Wed Jan 20 21:47:00 2021</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%D</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The date in the format %m/%d/%y.</td>
-<td><code dir="ltr" translate="no">01/20/21</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%d</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The day of the month as a decimal number (01-31).</td>
-<td><code dir="ltr" translate="no">20</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%e</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The day of month as a decimal number (1-31); single digits are preceded by a space.</td>
-<td><code dir="ltr" translate="no">20</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%F</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The date in the format %Y-%m-%d.</td>
-<td><code dir="ltr" translate="no">2021-01-20</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%G</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> year with century as a decimal number. Each ISO year begins on the Monday before the first Thursday of the Gregorian calendar year. Note that %G and %Y may produce different results near Gregorian year boundaries, where the Gregorian year and ISO year can diverge.</td>
-<td><code dir="ltr" translate="no">2021</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%g</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> year without century as a decimal number (00-99). Each ISO year begins on the Monday before the first Thursday of the Gregorian calendar year. Note that %g and %y may produce different results near Gregorian year boundaries, where the Gregorian year and ISO year can diverge.</td>
-<td><code dir="ltr" translate="no">21</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%H</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The hour (24-hour clock) as a decimal number (00-23).</td>
-<td><code dir="ltr" translate="no">21</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%h</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The abbreviated month name (English).</td>
-<td><code dir="ltr" translate="no">Jan</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%I</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The hour (12-hour clock) as a decimal number (01-12).</td>
-<td><code dir="ltr" translate="no">09</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%J</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 1-based day of the year (001-364 or 001-371 days). If the ISO year isn't set, this format element is ignored.</td>
-<td><code dir="ltr" translate="no">364</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%j</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The day of the year as a decimal number (001-366).</td>
-<td><code dir="ltr" translate="no">020</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%k</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The hour (24-hour clock) as a decimal number (0-23); single digits are preceded by a space.</td>
-<td><code dir="ltr" translate="no">21</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%l</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The hour (12-hour clock) as a decimal number (1-12); single digits are preceded by a space.</td>
-<td><code dir="ltr" translate="no">9</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%M</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The minute as a decimal number (00-59).</td>
-<td><code dir="ltr" translate="no">47</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%m</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The month as a decimal number (01-12).</td>
-<td><code dir="ltr" translate="no">01</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%n</code></td>
-<td>All</td>
-<td>A newline character.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%P</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>When formatting, this is either am or pm.<br />
-This can't be used with parsing. Instead, use %p.<br />
-</td>
-<td><code dir="ltr" translate="no">pm</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%p</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>When formatting, this is either AM or PM.<br />
-When parsing, this can be used with am, pm, AM, or PM.<br />
-</td>
-<td><code dir="ltr" translate="no">PM</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%Q</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The quarter as a decimal number (1-4).</td>
-<td><code dir="ltr" translate="no">1</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%R</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The time in the format %H:%M.</td>
-<td><code dir="ltr" translate="no">21:47</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%S</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The second as a decimal number (00-60).</td>
-<td><code dir="ltr" translate="no">00</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%s</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The number of seconds since 1970-01-01 00:00:00. Always overrides all other format elements, independent of where %s appears in the string. If multiple %s elements appear, then the last one takes precedence.</td>
-<td><code dir="ltr" translate="no">1611179220</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%T</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The time in the format %H:%M:%S.</td>
-<td><code dir="ltr" translate="no">21:47:00</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%t</code></td>
-<td>All</td>
-<td>A tab character.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%U</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The week number of the year (Sunday as the first day of the week) as a decimal number (00-53).</td>
-<td><code dir="ltr" translate="no">03</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%u</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The weekday (Monday as the first day of the week) as a decimal number (1-7).</td>
-<td><code dir="ltr" translate="no">3</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%V</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The <a href="https://en.wikipedia.org/wiki/ISO_week_date">ISO 8601</a> week number of the year (Monday as the first day of the week) as a decimal number (01-53). If the week containing January 1 has four or more days in the new year, then it's week 1; otherwise it's week 53 of the previous year, and the next week is week 1.</td>
-<td><code dir="ltr" translate="no">03</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%W</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The week number of the year (Monday as the first day of the week) as a decimal number (00-53).</td>
-<td><code dir="ltr" translate="no">03</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%w</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The weekday (Sunday as the first day of the week) as a decimal number (0-6).</td>
-<td><code dir="ltr" translate="no">3</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%X</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The time representation in HH:MM:SS format.</td>
-<td><code dir="ltr" translate="no">21:47:00</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%x</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The date representation in MM/DD/YY format.</td>
-<td><code dir="ltr" translate="no">01/20/21</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%Y</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The year with century as a decimal number.</td>
-<td><code dir="ltr" translate="no">2021</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%y</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The year without century as a decimal number (00-99), with an optional leading zero. Can be mixed with %C. If %C isn't specified, years 00-68 are 2000s, while years 69-99 are 1900s.</td>
-<td><code dir="ltr" translate="no">21</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%Z</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The time zone name.</td>
-<td><code dir="ltr" translate="no">UTC-5</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%z</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>The offset from the Prime Meridian in the format +HHMM or -HHMM as appropriate, with positive values representing locations east of Greenwich.</td>
-<td><code dir="ltr" translate="no">-0500</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%%</code></td>
-<td>All</td>
-<td>A single % character.</td>
-<td><code dir="ltr" translate="no">%</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%Ez</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>RFC 3339-compatible numeric time zone (+HH:MM or -HH:MM).</td>
-<td><code dir="ltr" translate="no">-05:00</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%E&lt;number&gt;S</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>Seconds with &lt;number&gt; digits of fractional precision.</td>
-<td><code dir="ltr" translate="no">00.000 for %E3S</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">%E*S</code></td>
-<td><code dir="ltr" translate="no">TIME</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>Seconds with full fractional precision (a literal '*').</td>
-<td><code dir="ltr" translate="no">00.123456</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">%E4Y</code></td>
-<td><code dir="ltr" translate="no">DATE</code><br />
-<code dir="ltr" translate="no">DATETIME</code><br />
-<code dir="ltr" translate="no">TIMESTAMP</code><br />
-</td>
-<td>Four-character years (0001 ... 9999). Note that %Y produces as many characters as it takes to fully render the year.</td>
-<td><code dir="ltr" translate="no">2021</code></td>
-</tr>
-</tbody>
-</table>
+| Format element | Type                          | Description                                                                                                                                                                                                                                                                                                                                | Example                    |
+|----------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| `%A`           | `DATE` `DATETIME` `TIMESTAMP` | The full weekday name (English).                                                                                                                                                                                                                                                                                                           | `Wednesday`                |
+| `%a`           | `DATE` `DATETIME` `TIMESTAMP` | The abbreviated weekday name (English).                                                                                                                                                                                                                                                                                                    | `Wed`                      |
+| `%B`           | `DATE` `DATETIME` `TIMESTAMP` | The full month name (English).                                                                                                                                                                                                                                                                                                             | `January`                  |
+| `%b`           | `DATE` `DATETIME` `TIMESTAMP` | The abbreviated month name (English).                                                                                                                                                                                                                                                                                                      | `Jan`                      |
+| `%C`           | `DATE` `DATETIME` `TIMESTAMP` | The century (a year divided by 100 and truncated to an integer) as a decimal number (00-99).                                                                                                                                                                                                                                               | `20`                       |
+| `%c`           | `DATETIME` `TIMESTAMP`        | The date and time representation (English).                                                                                                                                                                                                                                                                                                | `Wed Jan 20 21:47:00 2021` |
+| `%D`           | `DATE` `DATETIME` `TIMESTAMP` | The date in the format %m/%d/%y.                                                                                                                                                                                                                                                                                                           | `01/20/21`                 |
+| `%d`           | `DATE` `DATETIME` `TIMESTAMP` | The day of the month as a decimal number (01-31).                                                                                                                                                                                                                                                                                          | `20`                       |
+| `%e`           | `DATE` `DATETIME` `TIMESTAMP` | The day of month as a decimal number (1-31); single digits are preceded by a space.                                                                                                                                                                                                                                                        | `20`                       |
+| `%F`           | `DATE` `DATETIME` `TIMESTAMP` | The date in the format %Y-%m-%d.                                                                                                                                                                                                                                                                                                           | `2021-01-20`               |
+| `%G`           | `DATE` `DATETIME` `TIMESTAMP` | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) year with century as a decimal number. Each ISO year begins on the Monday before the first Thursday of the Gregorian calendar year. Note that %G and %Y may produce different results near Gregorian year boundaries, where the Gregorian year and ISO year can diverge.            | `2021`                     |
+| `%g`           | `DATE` `DATETIME` `TIMESTAMP` | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) year without century as a decimal number (00-99). Each ISO year begins on the Monday before the first Thursday of the Gregorian calendar year. Note that %g and %y may produce different results near Gregorian year boundaries, where the Gregorian year and ISO year can diverge. | `21`                       |
+| `%H`           | `TIME` `DATETIME` `TIMESTAMP` | The hour (24-hour clock) as a decimal number (00-23).                                                                                                                                                                                                                                                                                      | `21`                       |
+| `%h`           | `DATE` `DATETIME` `TIMESTAMP` | The abbreviated month name (English).                                                                                                                                                                                                                                                                                                      | `Jan`                      |
+| `%I`           | `TIME` `DATETIME` `TIMESTAMP` | The hour (12-hour clock) as a decimal number (01-12).                                                                                                                                                                                                                                                                                      | `09`                       |
+| `%J`           | `DATE` `DATETIME` `TIMESTAMP` | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 1-based day of the year (001-364 or 001-371 days). If the ISO year isn't set, this format element is ignored.                                                                                                                                                                       | `364`                      |
+| `%j`           | `DATE` `DATETIME` `TIMESTAMP` | The day of the year as a decimal number (001-366).                                                                                                                                                                                                                                                                                         | `020`                      |
+| `%k`           | `TIME` `DATETIME` `TIMESTAMP` | The hour (24-hour clock) as a decimal number (0-23); single digits are preceded by a space.                                                                                                                                                                                                                                                | `21`                       |
+| `%l`           | `TIME` `DATETIME` `TIMESTAMP` | The hour (12-hour clock) as a decimal number (1-12); single digits are preceded by a space.                                                                                                                                                                                                                                                | `9`                        |
+| `%M`           | `TIME` `DATETIME` `TIMESTAMP` | The minute as a decimal number (00-59).                                                                                                                                                                                                                                                                                                    | `47`                       |
+| `%m`           | `DATE` `DATETIME` `TIMESTAMP` | The month as a decimal number (01-12).                                                                                                                                                                                                                                                                                                     | `01`                       |
+| `%n`           | All                           | A newline character.                                                                                                                                                                                                                                                                                                                       |                            |
+| `%P`           | `TIME` `DATETIME` `TIMESTAMP` | When formatting, this is either am or pm. This can't be used with parsing. Instead, use %p.                                                                                                                                                                                                                                                | `pm`                       |
+| `%p`           | `TIME` `DATETIME` `TIMESTAMP` | When formatting, this is either AM or PM. When parsing, this can be used with am, pm, AM, or PM.                                                                                                                                                                                                                                           | `PM`                       |
+| `%Q`           | `DATE` `DATETIME` `TIMESTAMP` | The quarter as a decimal number (1-4).                                                                                                                                                                                                                                                                                                     | `1`                        |
+| `%R`           | `TIME` `DATETIME` `TIMESTAMP` | The time in the format %H:%M.                                                                                                                                                                                                                                                                                                              | `21:47`                    |
+| `%S`           | `TIME` `DATETIME` `TIMESTAMP` | The second as a decimal number (00-60).                                                                                                                                                                                                                                                                                                    | `00`                       |
+| `%s`           | `TIME` `DATETIME` `TIMESTAMP` | The number of seconds since 1970-01-01 00:00:00. Always overrides all other format elements, independent of where %s appears in the string. If multiple %s elements appear, then the last one takes precedence.                                                                                                                            | `1611179220`               |
+| `%T`           | `TIME` `DATETIME` `TIMESTAMP` | The time in the format %H:%M:%S.                                                                                                                                                                                                                                                                                                           | `21:47:00`                 |
+| `%t`           | All                           | A tab character.                                                                                                                                                                                                                                                                                                                           |                            |
+| `%U`           | `DATE` `DATETIME` `TIMESTAMP` | The week number of the year (Sunday as the first day of the week) as a decimal number (00-53).                                                                                                                                                                                                                                             | `03`                       |
+| `%u`           | `DATE` `DATETIME` `TIMESTAMP` | The weekday (Monday as the first day of the week) as a decimal number (1-7).                                                                                                                                                                                                                                                               | `3`                        |
+| `%V`           | `DATE` `DATETIME` `TIMESTAMP` | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_week_date) week number of the year (Monday as the first day of the week) as a decimal number (01-53). If the week containing January 1 has four or more days in the new year, then it's week 1; otherwise it's week 53 of the previous year, and the next week is week 1.                 | `03`                       |
+| `%W`           | `DATE` `DATETIME` `TIMESTAMP` | The week number of the year (Monday as the first day of the week) as a decimal number (00-53).                                                                                                                                                                                                                                             | `03`                       |
+| `%w`           | `DATE` `DATETIME` `TIMESTAMP` | The weekday (Sunday as the first day of the week) as a decimal number (0-6).                                                                                                                                                                                                                                                               | `3`                        |
+| `%X`           | `TIME` `DATETIME` `TIMESTAMP` | The time representation in HH:MM:SS format.                                                                                                                                                                                                                                                                                                | `21:47:00`                 |
+| `%x`           | `DATE` `DATETIME` `TIMESTAMP` | The date representation in MM/DD/YY format.                                                                                                                                                                                                                                                                                                | `01/20/21`                 |
+| `%Y`           | `DATE` `DATETIME` `TIMESTAMP` | The year with century as a decimal number.                                                                                                                                                                                                                                                                                                 | `2021`                     |
+| `%y`           | `DATE` `DATETIME` `TIMESTAMP` | The year without century as a decimal number (00-99), with an optional leading zero. Can be mixed with %C. If %C isn't specified, years 00-68 are 2000s, while years 69-99 are 1900s.                                                                                                                                                      | `21`                       |
+| `%Z`           | `TIMESTAMP`                   | The time zone name.                                                                                                                                                                                                                                                                                                                        | `UTC-5`                    |
+| `%z`           | `TIMESTAMP`                   | The offset from the Prime Meridian in the format +HHMM or -HHMM as appropriate, with positive values representing locations east of Greenwich.                                                                                                                                                                                             | `-0500`                    |
+| `%%`           | All                           | A single % character.                                                                                                                                                                                                                                                                                                                      | `%`                        |
+| `%Ez`          | `TIMESTAMP`                   | RFC 3339-compatible numeric time zone (+HH:MM or -HH:MM).                                                                                                                                                                                                                                                                                  | `-05:00`                   |
+| `%E<number>S`  | `TIME` `DATETIME` `TIMESTAMP` | Seconds with \<number\> digits of fractional precision.                                                                                                                                                                                                                                                                                    | `00.000 for %E3S`          |
+| `%E*S`         | `TIME` `DATETIME` `TIMESTAMP` | Seconds with full fractional precision (a literal '\*').                                                                                                                                                                                                                                                                                   | `00.123456`                |
+| `%E4Y`         | `DATE` `DATETIME` `TIMESTAMP` | Four-character years (0001 ... 9999). Note that %Y produces as many characters as it takes to fully render the year.                                                                                                                                                                                                                       | `2021`                     |
 
 Examples:
 
-    SELECT FORMAT_DATE("%b-%d-%Y", DATE "2008-12-25") AS formatted;
-    
-    /*-------------+
-     | formatted   |
-     +-------------+
-     | Dec-25-2008 |
-     +-------------*/
+```
+SELECT FORMAT_DATE("%b-%d-%Y", DATE "2008-12-25") AS formatted;
 
-    SELECT
-      FORMAT_DATETIME("%c", DATETIME "2008-12-25 15:30:00")
-      AS formatted;
-    
-    /*--------------------------+
-     | formatted                |
-     +--------------------------+
-     | Thu Dec 25 15:30:00 2008 |
-     +--------------------------*/
+/*-------------+
+ | formatted   |
+ +-------------+
+ | Dec-25-2008 |
+ +-------------*/
+```
 
-    SELECT FORMAT_TIME("%R", TIME "15:30:00") as formatted_time;
-    
-    /*----------------+
-     | formatted_time |
-     +----------------+
-     | 15:30          |
-     +----------------*/
+```
+SELECT
+  FORMAT_DATETIME("%c", DATETIME "2008-12-25 15:30:00")
+  AS formatted;
 
-    SELECT FORMAT_TIMESTAMP("%b %Y %Ez", TIMESTAMP "2008-12-25 15:30:00+00")
-      AS formatted;
-    
-    /*-----------------+
-     | formatted       |
-     +-----------------+
-     | Dec 2008 +00:00 |
-     +-----------------*/
+/*--------------------------+
+ | formatted                |
+ +--------------------------+
+ | Thu Dec 25 15:30:00 2008 |
+ +--------------------------*/
+```
 
-    SELECT PARSE_DATE("%Y%m%d", "20081225") AS parsed;
-    
-    /*------------+
-     | parsed     |
-     +------------+
-     | 2008-12-25 |
-     +------------*/
+```
+SELECT FORMAT_TIME("%R", TIME "15:30:00") as formatted_time;
 
-    SELECT PARSE_DATETIME('%Y-%m-%d %H:%M:%S', '1998-10-18 13:45:55') AS datetime;
-    
-    /*---------------------+
-     | datetime            |
-     +---------------------+
-     | 1998-10-18T13:45:55 |
-     +---------------------*/
+/*----------------+
+ | formatted_time |
+ +----------------+
+ | 15:30          |
+ +----------------*/
+```
 
-    SELECT PARSE_TIME('%I:%M:%S %p', '2:23:38 pm') AS parsed_time
-    
-    /*-------------+
-     | parsed_time |
-     +-------------+
-     | 14:23:38    |
-     +-------------*/
+```
+SELECT FORMAT_TIMESTAMP("%b %Y %Ez", TIMESTAMP "2008-12-25 15:30:00+00")
+  AS formatted;
 
-    SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008") AS parsed;
-    
-    -- Display of results may differ, depending upon the environment and
-    -- time zone where this query was executed.
-    /*-------------------------+
-     | parsed                  |
-     +-------------------------+
-     | 2008-12-25 07:30:00 UTC |
-     +-------------------------*/
+/*-----------------+
+ | formatted       |
+ +-----------------+
+ | Dec 2008 +00:00 |
+ +-----------------*/
+```
+
+```
+SELECT PARSE_DATE("%Y%m%d", "20081225") AS parsed;
+
+/*------------+
+ | parsed     |
+ +------------+
+ | 2008-12-25 |
+ +------------*/
+```
+
+```
+SELECT PARSE_DATETIME('%Y-%m-%d %H:%M:%S', '1998-10-18 13:45:55') AS datetime;
+
+/*---------------------+
+ | datetime            |
+ +---------------------+
+ | 1998-10-18T13:45:55 |
+ +---------------------*/
+```
+
+```
+SELECT PARSE_TIME('%I:%M:%S %p', '2:23:38 pm') AS parsed_time
+
+/*-------------+
+ | parsed_time |
+ +-------------+
+ | 14:23:38    |
+ +-------------*/
+```
+
+```
+SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008") AS parsed;
+
+-- Display of results may differ, depending upon the environment and
+-- time zone where this query was executed.
+/*-------------------------+
+ | parsed                  |
+ +-------------------------+
+ | 2008-12-25 07:30:00 UTC |
+ +-------------------------*/
+```
 
 ## Format clause for CAST
 
-    format_clause:
-      FORMAT format_model
-    
-    format_model:
-      format_string_expression
+```
+format_clause:
+  FORMAT format_model
+
+format_model:
+  format_string_expression
+```
 
 The format clause can be used in some [`CAST` functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) . You use a format clause to provide instructions for how to conduct a cast. For example, you could instruct a cast to convert a sequence of bytes to a base64-encoded string instead of a UTF-8-encoded string.
 
@@ -531,61 +177,20 @@ The format clause includes a format model. The format model can contain format e
 
 ### Format bytes as string
 
-    CAST(bytes_expression AS STRING FORMAT format_string_expression)
+```
+CAST(bytes_expression AS STRING FORMAT format_string_expression)
+```
 
 You can cast a sequence of bytes to a string with a format element in the format string. If the bytes can't be formatted with a format element, an error is returned. If the sequence of bytes is `NULL` , the result is `NULL` . Format elements are case-insensitive.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>HEX</td>
-<td>Converts a sequence of bytes into a hexadecimal string.</td>
-<td>Input: b'\x00\x01\xEF\xFF'<br />
-Output: 0001efff</td>
-</tr>
-<tr class="even">
-<td>BASEX</td>
-<td>Converts a sequence of bytes into a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding">BASEX</a> encoded string. X represents one of these numbers: 2, 8, 16, 32, 64.</td>
-<td>Input as BASE8: b'\x02\x11\x3B'<br />
-Output: 00410473</td>
-</tr>
-<tr class="odd">
-<td>BASE64M</td>
-<td>Converts a sequence of bytes into a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding">base64</a> -encoded string based on <a href="https://tools.ietf.org/html/rfc2045#section-6.8">rfc 2045</a> for MIME. Generates a newline character ("\n") every 76 characters.</td>
-<td>Input: b'\xde\xad\xbe\xef'<br />
-Output: 3q2+7w==</td>
-</tr>
-<tr class="even">
-<td>ASCII</td>
-<td>Converts a sequence of bytes that are ASCII values to a string. If the input contains bytes that aren't a valid ASCII encoding, an error is returned.</td>
-<td>Input: b'\x48\x65\x6c\x6c\x6f'<br />
-Output: Hello</td>
-</tr>
-<tr class="odd">
-<td>UTF-8</td>
-<td>Converts a sequence of bytes that are UTF-8 values to a string. If the input contains bytes that aren't a valid UTF-8 encoding, an error is returned.</td>
-<td>Input: b'\x24'<br />
-Output: $</td>
-</tr>
-<tr class="even">
-<td>UTF8</td>
-<td>Same behavior as UTF-8.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                                        | Example                                          |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| HEX            | Converts a sequence of bytes into a hexadecimal string.                                                                                                                                                                                                                                                        | Input: b'\x00\x01\xEF\xFF' Output: 0001efff      |
+| BASEX          | Converts a sequence of bytes into a [BASEX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding) encoded string. X represents one of these numbers: 2, 8, 16, 32, 64.                                                                                      | Input as BASE8: b'\x02\x11\x3B' Output: 00410473 |
+| BASE64M        | Converts a sequence of bytes into a [base64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding) -encoded string based on [rfc 2045](https://tools.ietf.org/html/rfc2045#section-6.8) for MIME. Generates a newline character ("\n") every 76 characters. | Input: b'\xde\xad\xbe\xef' Output: 3q2+7w==      |
+| ASCII          | Converts a sequence of bytes that are ASCII values to a string. If the input contains bytes that aren't a valid ASCII encoding, an error is returned.                                                                                                                                                          | Input: b'\x48\x65\x6c\x6c\x6f' Output: Hello     |
+| UTF-8          | Converts a sequence of bytes that are UTF-8 values to a string. If the input contains bytes that aren't a valid UTF-8 encoding, an error is returned.                                                                                                                                                          | Input: b'\x24' Output: \$                        |
+| UTF8           | Same behavior as UTF-8.                                                                                                                                                                                                                                                                                        |                                                  |
 
 **Return type**
 
@@ -593,17 +198,21 @@ Output: $</td>
 
 **Example**
 
-    SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS STRING FORMAT 'ASCII') AS bytes_to_string;
-    
-    /*-----------------+
-     | bytes_to_string |
-     +-----------------+
-     | Hello           |
-     +-----------------*/
+```
+SELECT CAST(b'\x48\x65\x6c\x6c\x6f' AS STRING FORMAT 'ASCII') AS bytes_to_string;
+
+/*-----------------+
+ | bytes_to_string |
+ +-----------------+
+ | Hello           |
+ +-----------------*/
+```
 
 ### Format string as bytes
 
-    CAST(string_expression AS BYTES FORMAT format_string_expression)
+```
+CAST(string_expression AS BYTES FORMAT format_string_expression)
+```
 
 You can cast a string to bytes with a format element in the format string. If the string can't be formatted with the format element, an error is returned. Format elements are case-insensitive.
 
@@ -611,57 +220,14 @@ In the string expression, whitespace characters, such as `\n` , are ignored if t
 
 > **Note:** The bytes output value is displayed as a base64-encoded string. For example, `b'\x00\x01\xEF\xFF'` is displayed as `0001efff` when you use the `HEX` format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>HEX</td>
-<td>Converts a hexadecimal-encoded string to bytes. If the input contains characters that aren't part of the HEX encoding alphabet (0~9, case-insensitive a~f), an error is returned.</td>
-<td>Input: '0001efff'<br />
-Output: b'\x00\x01\xEF\xFF'</td>
-</tr>
-<tr class="even">
-<td>BASEX</td>
-<td>Converts a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding">BASEX</a> -encoded string to bytes. X represents one of these numbers: 2, 8, 16, 32, 64. An error is returned if the input contains characters that aren't part of the BASEX encoding alphabet, except whitespace characters if the format element is <code dir="ltr" translate="no">BASE64</code> .</td>
-<td>Input as BASE8: '00410473'<br />
-Output: b'\x02\x11\x3B'</td>
-</tr>
-<tr class="odd">
-<td>BASE64M</td>
-<td>Converts a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding">base64</a> -encoded string to bytes. If the input contains characters that aren't whitespace and not part of the base64 encoding alphabet defined at <a href="https://tools.ietf.org/html/rfc2045#section-6.8">rfc 2045</a> , an error is returned. <code dir="ltr" translate="no">BASE64M</code> and <code dir="ltr" translate="no">BASE64</code> decoding have the same behavior.</td>
-<td>Input: '3q2+7w=='<br />
-Output: b'\xde\xad\xbe\xef'</td>
-</tr>
-<tr class="even">
-<td>ASCII</td>
-<td>Converts a string with only ASCII characters to bytes. If the input contains characters that aren't ASCII characters, an error is returned.</td>
-<td>Input: 'Hello'<br />
-Output: b'\x48\x65\x6c\x6c\x6f'</td>
-</tr>
-<tr class="odd">
-<td>UTF-8</td>
-<td>Converts a string to a sequence of UTF-8 bytes.</td>
-<td>Input: '$'<br />
-Output: b'\x24'</td>
-</tr>
-<tr class="even">
-<td>UTF8</td>
-<td>Same behavior as UTF-8.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                                                                                                                                            | Example                                            |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| HEX            | Converts a hexadecimal-encoded string to bytes. If the input contains characters that aren't part of the HEX encoding alphabet (0\~9, case-insensitive a\~f), an error is returned.                                                                                                                                                                                                                                | Input: '0001efff' Output: b'\x00\x01\xEF\xFF'      |
+| BASEX          | Converts a [BASEX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding) -encoded string to bytes. X represents one of these numbers: 2, 8, 16, 32, 64. An error is returned if the input contains characters that aren't part of the BASEX encoding alphabet, except whitespace characters if the format element is `BASE64` .                                 | Input as BASE8: '00410473' Output: b'\x02\x11\x3B' |
+| BASE64M        | Converts a [base64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#about_basex_encoding) -encoded string to bytes. If the input contains characters that aren't whitespace and not part of the base64 encoding alphabet defined at [rfc 2045](https://tools.ietf.org/html/rfc2045#section-6.8) , an error is returned. `BASE64M` and `BASE64` decoding have the same behavior. | Input: '3q2+7w==' Output: b'\xde\xad\xbe\xef'      |
+| ASCII          | Converts a string with only ASCII characters to bytes. If the input contains characters that aren't ASCII characters, an error is returned.                                                                                                                                                                                                                                                                        | Input: 'Hello' Output: b'\x48\x65\x6c\x6c\x6f'     |
+| UTF-8          | Converts a string to a sequence of UTF-8 bytes.                                                                                                                                                                                                                                                                                                                                                                    | Input: '\$' Output: b'\x24'                        |
+| UTF8           | Same behavior as UTF-8.                                                                                                                                                                                                                                                                                                                                                                                            |                                                    |
 
 **Return type**
 
@@ -669,29 +235,31 @@ Output: b'\x24'</td>
 
 **Example**
 
-    SELECT CAST('Hello' AS BYTES FORMAT 'ASCII') AS string_to_bytes
-    
-    -- Displays the bytes output value (b'\x48\x65\x6c\x6c\x6f').
-    
-    /*-------------------------+
-     | string_to_bytes         |
-     +-------------------------+
-     | b'\x48\x65\x6c\x6c\x6f' |
-     +-------------------------*/
+```
+SELECT CAST('Hello' AS BYTES FORMAT 'ASCII') AS string_to_bytes
+
+-- Displays the bytes output value (b'\x48\x65\x6c\x6c\x6f').
+
+/*-------------------------+
+ | string_to_bytes         |
+ +-------------------------+
+ | b'\x48\x65\x6c\x6c\x6f' |
+ +-------------------------*/
+```
 
 ### Format date and time as string
 
 You can format these date and time parts as a string:
 
-  - [Format year part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_year_as_string)
-  - [Format month part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_month_as_string)
-  - [Format day part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_day_as_string)
-  - [Format hour part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_hour_as_string)
-  - [Format minute part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_minute_as_string)
-  - [Format second part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_second_as_string)
-  - [Format meridian indicator as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_meridian_as_string)
-  - [Format time zone as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_tz_as_string)
-  - [Format literal as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_literal_as_string)
+- [Format year part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_year_as_string)
+- [Format month part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_month_as_string)
+- [Format day part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_day_as_string)
+- [Format hour part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_hour_as_string)
+- [Format minute part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_minute_as_string)
+- [Format second part as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_second_as_string)
+- [Format meridian indicator as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_meridian_as_string)
+- [Format time zone as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_tz_as_string)
+- [Format literal as string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_literal_as_string)
 
 Case matching is supported when you format some date or time parts as a string and the output contains letters. To learn more, see [Case matching](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time) .
 
@@ -699,24 +267,26 @@ Case matching is supported when you format some date or time parts as a string a
 
 When the output of some format element contains letters, the letter cases of the output is matched with the letter cases of the format element, meaning the words in the output are capitalized according to how the format element is capitalized. This is called case matching. The rules are:
 
-  - If the first two letters of the element are both upper case, the words in the output are capitalized. For example `DAY` = `THURSDAY` .
-  - If the first letter of the element is upper case, and the second letter is lowercase, the first letter of each word in the output is capitalized and other letters are lowercase. For example `Day` = `Thursday` .
-  - If the first letter of the element is lowercase, then all letters in the output are lowercase. For example, `day` = `thursday` .
+- If the first two letters of the element are both upper case, the words in the output are capitalized. For example `DAY` = `THURSDAY` .
+- If the first letter of the element is upper case, and the second letter is lowercase, the first letter of each word in the output is capitalized and other letters are lowercase. For example `Day` = `Thursday` .
+- If the first letter of the element is lowercase, then all letters in the output are lowercase. For example, `day` = `thursday` .
 
 #### Format year part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the year part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the year that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the year format element.
+- `expression` : This expression contains the data type with the year that you need to format.
+- `format_string_expression` : A string which contains format elements, including the year format element.
 
 These data types include a year part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
@@ -737,38 +307,30 @@ If `expression` or `format_string_expression` is `NULL` the return value is `NUL
 <tr class="odd">
 <td>YYYY</td>
 <td>Year, 4 or more digits.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: 2018
+<td>Input: DATE '2018-01-30' Output: 2018
 <hr />
-Input: DATE '76-01-30'<br />
-Output: 0076
+Input: DATE '76-01-30' Output: 0076
 <hr />
-Input: DATE '10000-01-30'<br />
-Output: 10000</td>
+Input: DATE '10000-01-30' Output: 10000</td>
 </tr>
 <tr class="even">
 <td>YYY</td>
 <td>Year, last 3 digits only.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: 018
+<td>Input: DATE '2018-01-30' Output: 018
 <hr />
-Input: DATE '98-01-30'<br />
-Output: 098</td>
+Input: DATE '98-01-30' Output: 098</td>
 </tr>
 <tr class="odd">
 <td>YY</td>
 <td>Year, last 2 digits only.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: 18
+<td>Input: DATE '2018-01-30' Output: 18
 <hr />
-Input: DATE '8-01-30'<br />
-Output: 08</td>
+Input: DATE '8-01-30' Output: 08</td>
 </tr>
 <tr class="even">
 <td>Y</td>
 <td>Year, last digit only.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: 8</td>
+<td>Input: DATE '2018-01-30' Output: 8</td>
 </tr>
 <tr class="odd">
 <td>RRRR</td>
@@ -789,65 +351,40 @@ Output: 8</td>
 
 **Example**
 
-    SELECT CAST(DATE '2018-01-30' AS STRING FORMAT 'YYYY') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 2018                |
-     +---------------------*/
+```
+SELECT CAST(DATE '2018-01-30' AS STRING FORMAT 'YYYY') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 2018                |
+ +---------------------*/
+```
 
 #### Format month part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the month part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the month that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the month format element.
+- `expression` : This expression contains the data type with the month that you need to format.
+- `format_string_expression` : A string which contains format elements, including the month format element.
 
 These data types include a month part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>MM</td>
-<td>Month, 2 digits.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: 01</td>
-</tr>
-<tr class="even">
-<td>MON</td>
-<td>Abbreviated, 3-character name of the month. The abbreviated month names for locale en-US are: JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC. <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time">Case matching</a> is supported.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: JAN</td>
-</tr>
-<tr class="odd">
-<td>MONTH</td>
-<td>Name of the month. <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time">Case matching</a> is supported.</td>
-<td>Input: DATE '2018-01-30'<br />
-Output: JANUARY</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                             | Example                                  |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
+| MM             | Month, 2 digits.                                                                                                                                                                                                                                                                                    | Input: DATE '2018-01-30' Output: 01      |
+| MON            | Abbreviated, 3-character name of the month. The abbreviated month names for locale en-US are: JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC. [Case matching](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time) is supported. | Input: DATE '2018-01-30' Output: JAN     |
+| MONTH          | Name of the month. [Case matching](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time) is supported.                                                                                                                                        | Input: DATE '2018-01-30' Output: JANUARY |
 
 **Return type**
 
@@ -855,77 +392,42 @@ Output: JANUARY</td>
 
 **Example**
 
-    SELECT CAST(DATE '2018-01-30' AS STRING FORMAT 'MONTH') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | JANUARY             |
-     +---------------------*/
+```
+SELECT CAST(DATE '2018-01-30' AS STRING FORMAT 'MONTH') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | JANUARY             |
+ +---------------------*/
+```
 
 #### Format day part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the day part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the day that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the day format element.
+- `expression` : This expression contains the data type with the day that you need to format.
+- `format_string_expression` : A string which contains format elements, including the day format element.
 
 These data types include a day part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>DAY</td>
-<td>Name of the day of the week, localized. Spaces are padded on the right side to make the output size exactly 9. <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time">Case matching</a> is supported.</td>
-<td>Input: DATE '2020-12-31'<br />
-Output: THURSDAY</td>
-</tr>
-<tr class="even">
-<td>DY</td>
-<td>Abbreviated, 3-character name of the weekday, localized. The abbreviated weekday names for locale en-US are: MON, TUE, WED, THU, FRI, SAT, SUN. <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time">Case matching</a> is supported.</td>
-<td>Input: DATE '2020-12-31'<br />
-Output: THU</td>
-</tr>
-<tr class="odd">
-<td>D</td>
-<td>Day of the week (1 to 7), starting with Sunday as 1.</td>
-<td>Input: DATE '2020-12-31'<br />
-Output: 4</td>
-</tr>
-<tr class="even">
-<td>DD</td>
-<td>2-digit day of the month.</td>
-<td>Input: DATE '2018-12-02'<br />
-Output: 02</td>
-</tr>
-<tr class="odd">
-<td>DDD</td>
-<td>3-digit day of the year.</td>
-<td>Input: DATE '2018-02-03'<br />
-Output: 034</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                   | Example                                   |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| DAY            | Name of the day of the week, localized. Spaces are padded on the right side to make the output size exactly 9. [Case matching](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time) is supported.                                  | Input: DATE '2020-12-31' Output: THURSDAY |
+| DY             | Abbreviated, 3-character name of the weekday, localized. The abbreviated weekday names for locale en-US are: MON, TUE, WED, THU, FRI, SAT, SUN. [Case matching](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#case_matching_date_time) is supported. | Input: DATE '2020-12-31' Output: THU      |
+| D              | Day of the week (1 to 7), starting with Sunday as 1.                                                                                                                                                                                                                                      | Input: DATE '2020-12-31' Output: 4        |
+| DD             | 2-digit day of the month.                                                                                                                                                                                                                                                                 | Input: DATE '2018-12-02' Output: 02       |
+| DDD            | 3-digit day of the year.                                                                                                                                                                                                                                                                  | Input: DATE '2018-02-03' Output: 034      |
 
 **Return type**
 
@@ -933,65 +435,40 @@ Output: 034</td>
 
 **Example**
 
-    SELECT CAST(DATE '2018-02-15' AS STRING FORMAT 'DD') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 15                  |
-     +---------------------*/
+```
+SELECT CAST(DATE '2018-02-15' AS STRING FORMAT 'DD') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 15                  |
+ +---------------------*/
+```
 
 #### Format hour part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the hour part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the hour that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the hour format element.
+- `expression` : This expression contains the data type with the hour that you need to format.
+- `format_string_expression` : A string which contains format elements, including the hour format element.
 
 These data types include a hour part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>HH</td>
-<td>Hour of the day, 12-hour clock, 2 digits.</td>
-<td>Input: TIME '21:30:00'<br />
-Output: 09</td>
-</tr>
-<tr class="even">
-<td>HH12</td>
-<td>Hour of the day, 12-hour clock.</td>
-<td>Input: TIME '21:30:00'<br />
-Output: 09</td>
-</tr>
-<tr class="odd">
-<td>HH24</td>
-<td>Hour of the day, 24-hour clock, 2 digits.</td>
-<td>Input: TIME '21:30:00'<br />
-Output: 21</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                   | Example                           |
+|----------------|-------------------------------------------|-----------------------------------|
+| HH             | Hour of the day, 12-hour clock, 2 digits. | Input: TIME '21:30:00' Output: 09 |
+| HH12           | Hour of the day, 12-hour clock.           | Input: TIME '21:30:00' Output: 09 |
+| HH24           | Hour of the day, 24-hour clock, 2 digits. | Input: TIME '21:30:00' Output: 21 |
 
 **Return type**
 
@@ -999,61 +476,48 @@ Output: 21</td>
 
 **Examples**
 
-    SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH24') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 21                  |
-     +---------------------*/
+```
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH24') AS date_time_to_string;
 
-    SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 09                  |
-     +---------------------*/
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 21                  |
+ +---------------------*/
+```
+
+```
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'HH12') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 09                  |
+ +---------------------*/
+```
 
 #### Format minute part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the minute part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the minute that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the minute format element.
+- `expression` : This expression contains the data type with the minute that you need to format.
+- `format_string_expression` : A string which contains format elements, including the minute format element.
 
 These data types include a minute part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>MI</td>
-<td>Minute, 2 digits.</td>
-<td>Input: TIME '01:02:03'<br />
-Output: 02</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns           | Example                           |
+|----------------|-------------------|-----------------------------------|
+| MI             | Minute, 2 digits. | Input: TIME '01:02:03' Output: 02 |
 
 **Return type**
 
@@ -1061,28 +525,32 @@ Output: 02</td>
 
 **Example**
 
-    SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'MI') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 30                  |
-     +---------------------*/
+```
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'MI') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 30                  |
+ +---------------------*/
+```
 
 #### Format second part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the second part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the second that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the second format element.
+- `expression` : This expression contains the data type with the second that you need to format.
+- `format_string_expression` : A string which contains format elements, including the second format element.
 
 These data types include a second part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
@@ -1103,26 +571,21 @@ If `expression` or `format_string_expression` is `NULL` the return value is `NUL
 <tr class="odd">
 <td>SS</td>
 <td>Seconds of the minute, 2 digits.</td>
-<td>Input: TIME '01:02:03'<br />
-Output: 03</td>
+<td>Input: TIME '01:02:03' Output: 03</td>
 </tr>
 <tr class="even">
 <td>SSSSS</td>
 <td>Seconds of the day, 5 digits.</td>
-<td>Input: TIME '01:02:03'<br />
-Output: 03723</td>
+<td>Input: TIME '01:02:03' Output: 03723</td>
 </tr>
 <tr class="odd">
 <td>FFn</td>
-<td>Fractional part of the second, <code dir="ltr" translate="no">n</code> digits long. Replace <code dir="ltr" translate="no">n</code> with a value from 1 to 9. For example, FF5. The fractional part of the second is rounded to fit the size of the output.</td>
-<td>Input for FF1: TIME '01:05:07.16'<br />
-Output: 1
+<td>Fractional part of the second, <code>n</code> digits long. Replace <code>n</code> with a value from 1 to 9. For example, FF5. The fractional part of the second is rounded to fit the size of the output.</td>
+<td>Input for FF1: TIME '01:05:07.16' Output: 1
 <hr />
-Input for FF2: TIME '01:05:07.16'<br />
-Output: 16
+Input for FF2: TIME '01:05:07.16' Output: 16
 <hr />
-Input for FF3: TIME '01:05:07.16'<br />
-Output: 016</td>
+Input for FF3: TIME '01:05:07.16' Output: 016</td>
 </tr>
 </tbody>
 </table>
@@ -1133,36 +596,42 @@ Output: 016</td>
 
 **Examples**
 
-    SELECT CAST(TIME '21:30:25.16' AS STRING FORMAT 'SS') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 25                  |
-     +---------------------*/
+```
+SELECT CAST(TIME '21:30:25.16' AS STRING FORMAT 'SS') AS date_time_to_string;
 
-    SELECT CAST(TIME '21:30:25.16' AS STRING FORMAT 'FF2') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 16                  |
-     +---------------------*/
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 25                  |
+ +---------------------*/
+```
+
+```
+SELECT CAST(TIME '21:30:25.16' AS STRING FORMAT 'FF2') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 16                  |
+ +---------------------*/
+```
 
 #### Format meridian indicator part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the meridian indicator part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the meridian indicator that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the meridian indicator format element.
+- `expression` : This expression contains the data type with the meridian indicator that you need to format.
+- `format_string_expression` : A string which contains format elements, including the meridian indicator format element.
 
 These data types include a meridian indicator part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
@@ -1183,32 +652,24 @@ If `expression` or `format_string_expression` is `NULL` the return value is `NUL
 <tr class="odd">
 <td>A.M.</td>
 <td>A.M. if the time is less than 12, otherwise P.M. The letter case of the output is determined by the first letter case of the format element.</td>
-<td>Input for A.M.: TIME '01:02:03'<br />
-Output: A.M.
+<td>Input for A.M.: TIME '01:02:03' Output: A.M.
 <hr />
-Input for A.M.: TIME '16:02:03'<br />
-Output: P.M.
+Input for A.M.: TIME '16:02:03' Output: P.M.
 <hr />
-Input for a.m.: TIME '01:02:03'<br />
-Output: a.m.
+Input for a.m.: TIME '01:02:03' Output: a.m.
 <hr />
-Input for a.M.: TIME '01:02:03'<br />
-Output: a.m.</td>
+Input for a.M.: TIME '01:02:03' Output: a.m.</td>
 </tr>
 <tr class="even">
 <td>AM</td>
 <td>AM if the time is less than 12, otherwise PM. The letter case of the output is determined by the first letter case of the format element.</td>
-<td>Input for AM: TIME '01:02:03'<br />
-Output: AM
+<td>Input for AM: TIME '01:02:03' Output: AM
 <hr />
-Input for AM: TIME '16:02:03'<br />
-Output: PM
+Input for AM: TIME '16:02:03' Output: PM
 <hr />
-Input for am: TIME '01:02:03'<br />
-Output: am
+Input for am: TIME '01:02:03' Output: am
 <hr />
-Input for aM: TIME '01:02:03'<br />
-Output: am</td>
+Input for aM: TIME '01:02:03' Output: am</td>
 </tr>
 <tr class="odd">
 <td>P.M.</td>
@@ -1229,44 +690,50 @@ Output: am</td>
 
 **Examples**
 
-    SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'AM') AS date_time_to_string;
-    SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'PM') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | PM                  |
-     +---------------------*/
+```
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'AM') AS date_time_to_string;
+SELECT CAST(TIME '21:30:00' AS STRING FORMAT 'PM') AS date_time_to_string;
 
-    SELECT CAST(TIME '01:30:00' AS STRING FORMAT 'AM') AS date_time_to_string;
-    SELECT CAST(TIME '01:30:00' AS STRING FORMAT 'PM') AS date_time_to_string;
-    
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | AM                  |
-     +---------------------*/
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | PM                  |
+ +---------------------*/
+```
+
+```
+SELECT CAST(TIME '01:30:00' AS STRING FORMAT 'AM') AS date_time_to_string;
+SELECT CAST(TIME '01:30:00' AS STRING FORMAT 'PM') AS date_time_to_string;
+
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | AM                  |
+ +---------------------*/
+```
 
 #### Format time zone part as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 Casts a data type that contains the time zone part to a string. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `expression` : This expression contains the data type with the time zone that you need to format.
-  - `format_string_expression` : A string which contains format elements, including the time zone format element.
+- `expression` : This expression contains the data type with the time zone that you need to format.
+- `format_string_expression` : A string which contains format elements, including the time zone format element.
 
 These data types include a time zone part:
 
-  - `DATE`
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If `expression` or `format_string_expression` is `NULL` the return value is `NULL` . If `format_string_expression` is an empty string, the output is an empty string. An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `expression` doesn't contain a value specified by a format element.
 
 | Format element | Returns                                                                     | Example                                                    |
-| -------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------- |
+|----------------|-----------------------------------------------------------------------------|------------------------------------------------------------|
 | TZH            | Hour offset for a time zone. This includes the `+/-` sign and 2-digit hour. | Inputstamp: TIMESTAMP '2008-12-25 05:30:00+00' Output: −08 |
 | TZM            | Minute offset for a time zone. This includes only the 2-digit minute.       | Inputstamp: TIMESTAMP '2008-12-25 05:30:00+00' Output: 00  |
 
@@ -1276,47 +743,57 @@ If `expression` or `format_string_expression` is `NULL` the return value is `NUL
 
 **Examples**
 
-    SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZH') AS date_time_to_string;
-    
-    -- Results depend upon where this query was executed.
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | -08                 |
-     +---------------------*/
+```
+SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZH') AS date_time_to_string;
 
-    SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZH' AT TIME ZONE 'Asia/Kolkata')
-    AS date_time_to_string;
-    
-    -- Because the time zone is specified, the result is always the same.
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | +05                 |
-     +---------------------*/
+-- Results depend upon where this query was executed.
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | -08                 |
+ +---------------------*/
+```
 
-    SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZM') AS date_time_to_string;
-    
-    -- Results depend upon where this query was executed.
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 00                  |
-     +---------------------*/
+```
+SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZH' AT TIME ZONE 'Asia/Kolkata')
+AS date_time_to_string;
 
-    SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZM' AT TIME ZONE 'Asia/Kolkata')
-    AS date_time_to_string;
-    
-    -- Because the time zone is specified, the result is always the same.
-    /*---------------------+
-     | date_time_to_string |
-     +---------------------+
-     | 30                  |
-     +---------------------*/
+-- Because the time zone is specified, the result is always the same.
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | +05                 |
+ +---------------------*/
+```
+
+```
+SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZM') AS date_time_to_string;
+
+-- Results depend upon where this query was executed.
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 00                  |
+ +---------------------*/
+```
+
+```
+SELECT CAST(TIMESTAMP '2008-12-25 00:00:00+00:00' AS STRING FORMAT 'TZM' AT TIME ZONE 'Asia/Kolkata')
+AS date_time_to_string;
+
+-- Because the time zone is specified, the result is always the same.
+/*---------------------+
+ | date_time_to_string |
+ +---------------------+
+ | 30                  |
+ +---------------------*/
+```
 
 #### Format literal as string
 
-    CAST(expression AS STRING FORMAT format_string_expression)
+```
+CAST(expression AS STRING FORMAT format_string_expression)
+```
 
 <table>
 <colgroup>
@@ -1374,12 +851,10 @@ If `expression` or `format_string_expression` is `NULL` the return value is `NUL
 </tr>
 <tr class="odd">
 <td>"text"</td>
-<td>Output is the value within the double quotes. To preserve a double quote or backslash character, use the <code dir="ltr" translate="no">\"</code> or <code dir="ltr" translate="no">\\</code> escape sequence. Other escape sequences aren't supported.</td>
-<td>Input: "abc"<br />
-Output: abc
+<td>Output is the value within the double quotes. To preserve a double quote or backslash character, use the <code>\"</code> or <code>\\</code> escape sequence. Other escape sequences aren't supported.</td>
+<td>Input: "abc" Output: abc
 <hr />
-Input: "a\"b\\c"<br />
-Output: a"b\c</td>
+Input: "a\"b\\c" Output: a"b\c</td>
 </tr>
 </tbody>
 </table>
@@ -1388,15 +863,15 @@ Output: a"b\c</td>
 
 You can format a string with these date and time parts:
 
-  - [Format string as year part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_year)
-  - [Format string as month part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_month)
-  - [Format string as day part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_day)
-  - [Format string as hour part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_hour)
-  - [Format string as minute part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_minute)
-  - [Format string as second part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_second)
-  - [Format string as meridian indicator part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_meridian)
-  - [Format string as time zone part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_tz)
-  - [Format string as literal part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_literal)
+- [Format string as year part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_year)
+- [Format string as month part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_month)
+- [Format string as day part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_day)
+- [Format string as hour part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_hour)
+- [Format string as minute part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_minute)
+- [Format string as second part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_second)
+- [Format string as meridian indicator part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_meridian)
+- [Format string as time zone part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_tz)
+- [Format string as literal part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_literal)
 
 When formatting a string with date and time parts, you must follow the [format model rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
@@ -1404,416 +879,329 @@ When formatting a string with date and time parts, you must follow the [format m
 
 When casting a string to date and time parts, you must ensure the *format model* is valid. The format model represents the elements passed into `CAST(string_expression AS type FORMAT format_string_expression)` as the `format_string_expression` and is validated according to the following rules:
 
-  - It contains at most one of each of the following parts: meridian indicator, year, month, day, hour.
-  - A non-literal, non-whitespace format element can't appear more than once.
-  - If it contains the day of year format element, `DDD` , then it can't contain the month.
-  - If it contains the 24-hour format element, `HH24` , then it can't contain the 12-hour format element or a meridian indicator.
-  - If it contains the 12-hour format element, `HH12` or `HH` , then it must also contain a meridian indicator.
-  - If it contains a meridian indicator, then it must also contain a 12-hour format element.
-  - If it contains the second of the day format element, `SSSSS` , then it can't contain any of the following: hour, minute, second, or meridian indicator.
-  - It can't contain a format element such that the value it sets doesn't exist in the target type. For example, an hour format element such as `HH24` can't appear in a string you are casting as a `DATE` .
+- It contains at most one of each of the following parts: meridian indicator, year, month, day, hour.
+- A non-literal, non-whitespace format element can't appear more than once.
+- If it contains the day of year format element, `DDD` , then it can't contain the month.
+- If it contains the 24-hour format element, `HH24` , then it can't contain the 12-hour format element or a meridian indicator.
+- If it contains the 12-hour format element, `HH12` or `HH` , then it must also contain a meridian indicator.
+- If it contains a meridian indicator, then it must also contain a 12-hour format element.
+- If it contains the second of the day format element, `SSSSS` , then it can't contain any of the following: hour, minute, second, or meridian indicator.
+- It can't contain a format element such that the value it sets doesn't exist in the target type. For example, an hour format element such as `HH24` can't appear in a string you are casting as a `DATE` .
 
 #### Format string as year part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted year to a data type that contains the year part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the year that you need to format.
-  - `type` : The data type to which you are casting. Must include the year part.
-  - `format_string_expression` : A string which contains format elements, including the year format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the year that you need to format.
+- `type` : The data type to which you are casting. Must include the year part.
+- `format_string_expression` : A string which contains format elements, including the year format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a year part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `YEAR` part is missing from `string_expression` and the return type includes this part, `YEAR` is set to the current year.
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-Format element
-
-Returns
-
-Example
-
-YYYY
-
-If it's delimited, matches 1 to 5 digits. If it isn't delimited, matches 4 digits. Sets the year part to the matched number.
-
-Input for MM-DD-YYYY: '03-12-2018'  
-Output as DATE: 2018-12-03
-
------
-
-Input for YYYY-MMDD: '10000-1203'  
-Output as DATE: 10000-12-03
-
------
-
-Input for YYYY: '18'  
-Output as DATE: 2018-03-01 (Assume current date is March 23, 2021)
-
-YYY
-
-Matches 3 digits. Sets the last 3 digits of the year part to the matched number.
-
-Input for YYY-MM-DD: '018-12-03'  
-Output as DATE: 2018-12-03
-
------
-
-Input for YYY-MM-DD: '038-12-03'  
-Output as DATE: 2038-12-03
-
-YY
-
-Matches 2 digits. Sets the last 2 digits of the year part to the matched number.
-
-Input for YY-MM-DD: '18-12-03'  
-Output as DATE: 2018-12-03
-
------
-
-Input for YY-MM-DD: '38-12-03'  
-Output as DATE: 2038-12-03
-
-Y
-
-Matches 1 digit. Sets the last digit of the year part to the matched number.
-
-Input for Y-MM-DD: '8-12-03'  
-Output as DATE: 2008-12-03
-
-Y,YYY
-
-Matches the pattern of 1 to 2 digits, comma, then exactly 3 digits. Sets the year part to the matched number.
-
-Input for Y,YYY-MM-DD: '2,018-12-03'  
-Output as DATE: 2008-12-03
-
-RRRR
-
-Same behavior as YYYY.
-
-RR
-
-Matches 2 digits.
-
-If the 2 digits entered are between 00 and 49 and the last 2 digits of the current year are between 00 and 49, the returned year has the same first 2 digits as the current year. If the last 2 digits of the current year are between 50 and 99, the first 2 digits of the returned year is 1 greater than the first 2 digits of the current year.
-
-If the 2 digits entered are between 50 and 99 and the last 2 digits of the current year are between 00 and 49, the first 2 digits of the returned year are 1 less than the first 2 digits of the current year. If the last 2 digits of the current year are between 50 and 99, the returned year has the same first 2 digits as the current year.
-
-Input for RR-MM-DD: '18-12-03'  
-Output as DATE: 2018-12-03 (executed in the year 2021) Output as DATE: 2118-12-03 (executed in the year 2050)
-
------
-
-Input for RR-MM-DD: '50-12-03'  
-Output as DATE: 2050-12-03 (executed in the year 2021) Output as DATE: 2050-12-03 (executed in the year 2050)
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Format element</th>
+<th>Returns</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>YYYY</td>
+<td>If it's delimited, matches 1 to 5 digits. If it isn't delimited, matches 4 digits. Sets the year part to the matched number.</td>
+<td>Input for MM-DD-YYYY: '03-12-2018' Output as DATE: 2018-12-03
+<hr />
+Input for YYYY-MMDD: '10000-1203' Output as DATE: 10000-12-03
+<hr />
+Input for YYYY: '18' Output as DATE: 2018-03-01 (Assume current date is March 23, 2021)</td>
+</tr>
+<tr class="even">
+<td>YYY</td>
+<td>Matches 3 digits. Sets the last 3 digits of the year part to the matched number.</td>
+<td>Input for YYY-MM-DD: '018-12-03' Output as DATE: 2018-12-03
+<hr />
+Input for YYY-MM-DD: '038-12-03' Output as DATE: 2038-12-03</td>
+</tr>
+<tr class="odd">
+<td>YY</td>
+<td>Matches 2 digits. Sets the last 2 digits of the year part to the matched number.</td>
+<td>Input for YY-MM-DD: '18-12-03' Output as DATE: 2018-12-03
+<hr />
+Input for YY-MM-DD: '38-12-03' Output as DATE: 2038-12-03</td>
+</tr>
+<tr class="even">
+<td>Y</td>
+<td>Matches 1 digit. Sets the last digit of the year part to the matched number.</td>
+<td>Input for Y-MM-DD: '8-12-03' Output as DATE: 2008-12-03</td>
+</tr>
+<tr class="odd">
+<td>Y,YYY</td>
+<td>Matches the pattern of 1 to 2 digits, comma, then exactly 3 digits. Sets the year part to the matched number.</td>
+<td>Input for Y,YYY-MM-DD: '2,018-12-03' Output as DATE: 2008-12-03</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RRRR</td>
+<td>Same behavior as YYYY.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RR</td>
+<td>Matches 2 digits. If the 2 digits entered are between 00 and 49 and the last 2 digits of the current year are between 00 and 49, the returned year has the same first 2 digits as the current year. If the last 2 digits of the current year are between 50 and 99, the first 2 digits of the returned year is 1 greater than the first 2 digits of the current year. If the 2 digits entered are between 50 and 99 and the last 2 digits of the current year are between 00 and 49, the first 2 digits of the returned year are 1 less than the first 2 digits of the current year. If the last 2 digits of the current year are between 50 and 99, the returned year has the same first 2 digits as the current year.</td>
+<td>Input for RR-MM-DD: '18-12-03' Output as DATE: 2018-12-03 (executed in the year 2021) Output as DATE: 2118-12-03 (executed in the year 2050)
+<hr />
+Input for RR-MM-DD: '50-12-03' Output as DATE: 2050-12-03 (executed in the year 2021) Output as DATE: 2050-12-03 (executed in the year 2050)</td>
+</tr>
+</tbody>
+</table>
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('18-12-03' AS DATE FORMAT 'YY-MM-DD') AS string_to_date
-    
-    /*----------------+
-     | string_to_date |
-     +----------------+
-     | 2018-12-03     |
-     +----------------*/
+```
+SELECT CAST('18-12-03' AS DATE FORMAT 'YY-MM-DD') AS string_to_date
+
+/*----------------+
+ | string_to_date |
+ +----------------+
+ | 2018-12-03     |
+ +----------------*/
+```
 
 #### Format string as month part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted month to a data type that contains the month part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the month that you need to format.
-  - `type` : The data type to which you are casting. Must include the month part.
-  - `format_string_expression` : A string which contains format elements, including the month format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the month that you need to format.
+- `type` : The data type to which you are casting. Must include the month part.
+- `format_string_expression` : A string which contains format elements, including the month format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a month part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `MONTH` part is missing from `string_expression` and the return type includes this part, `MONTH` is set to the current month.
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>MM</td>
-<td>Matches 2 digits. Sets the month part to the matched number.</td>
-<td>Input for MM-DD-YYYY: '03-12-2018'<br />
-Output as DATE: 2018-12-03</td>
-</tr>
-<tr class="even">
-<td>MON</td>
-<td>Matches 3 letters. Sets the month part to the matched string interpreted as the abbreviated name of the month.</td>
-<td>Input for MON DD, YYYY: 'DEC 03, 2018'<br />
-Output as DATE: 2018-12-03</td>
-</tr>
-<tr class="odd">
-<td>MONTH</td>
-<td>Matches 9 letters. Sets the month part to the matched string interpreted as the name of the month.</td>
-<td>Input for MONTH DD, YYYY: 'DECEMBER 03, 2018'<br />
-Output as DATE: 2018-12-03</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                        | Example                                                                  |
+|----------------|----------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| MM             | Matches 2 digits. Sets the month part to the matched number.                                                   | Input for MM-DD-YYYY: '03-12-2018' Output as DATE: 2018-12-03            |
+| MON            | Matches 3 letters. Sets the month part to the matched string interpreted as the abbreviated name of the month. | Input for MON DD, YYYY: 'DEC 03, 2018' Output as DATE: 2018-12-03        |
+| MONTH          | Matches 9 letters. Sets the month part to the matched string interpreted as the name of the month.             | Input for MONTH DD, YYYY: 'DECEMBER 03, 2018' Output as DATE: 2018-12-03 |
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('DEC 03, 2018' AS DATE FORMAT 'MON DD, YYYY') AS string_to_date
-    
-    /*----------------+
-     | string_to_date |
-     +----------------+
-     | 2018-12-03     |
-     +----------------*/
+```
+SELECT CAST('DEC 03, 2018' AS DATE FORMAT 'MON DD, YYYY') AS string_to_date
+
+/*----------------+
+ | string_to_date |
+ +----------------+
+ | 2018-12-03     |
+ +----------------*/
+```
 
 #### Format string as day part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted day to a data type that contains the day part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the day that you need to format.
-  - `type` : The data type to which you are casting. Must include the day part.
-  - `format_string_expression` : A string which contains format elements, including the day format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the day that you need to format.
+- `type` : The data type to which you are casting. Must include the day part.
+- `format_string_expression` : A string which contains format elements, including the day format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a day part:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `DAY` part is missing from `string_expression` and the return type includes this part, `DAY` is set to `1` .
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>DD</td>
-<td>Matches 2 digits. Sets the day part to the matched number.</td>
-<td>Input for MONTH DD, YYYY: 'DECEMBER 03, 2018'<br />
-Output as DATE: 2018-12-03</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                    | Example                                                                  |
+|----------------|------------------------------------------------------------|--------------------------------------------------------------------------|
+| DD             | Matches 2 digits. Sets the day part to the matched number. | Input for MONTH DD, YYYY: 'DECEMBER 03, 2018' Output as DATE: 2018-12-03 |
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `DATE`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('DECEMBER 03, 2018' AS DATE FORMAT 'MONTH DD, YYYY') AS string_to_date
-    
-    /*----------------+
-     | string_to_date |
-     +----------------+
-     | 2018-12-03     |
-     +----------------*/
+```
+SELECT CAST('DECEMBER 03, 2018' AS DATE FORMAT 'MONTH DD, YYYY') AS string_to_date
+
+/*----------------+
+ | string_to_date |
+ +----------------+
+ | 2018-12-03     |
+ +----------------*/
+```
 
 #### Format string as hour part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted hour to a data type that contains the hour part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the hour that you need to format.
-  - `type` : The data type to which you are casting. Must include the hour part.
-  - `format_string_expression` : A string which contains format elements, including the hour format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the hour that you need to format.
+- `type` : The data type to which you are casting. Must include the hour part.
+- `format_string_expression` : A string which contains format elements, including the hour format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a hour part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `HOUR` part is missing from `string_expression` and the return type includes this part, `HOUR` is set to `0` .
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>HH</td>
-<td>Matches 2 digits. If the matched number <code dir="ltr" translate="no">n</code> is <code dir="ltr" translate="no">12</code> , sets <code dir="ltr" translate="no">temp = 0</code> ; otherwise, sets <code dir="ltr" translate="no">temp = n</code> . If the matched value of the A.M./P.M. format element is P.M., sets <code dir="ltr" translate="no">temp = n + 12</code> . Sets the hour part to <code dir="ltr" translate="no">temp</code> . A meridian indicator must be present in the format model, when HH is present.</td>
-<td>Input for HH:MI P.M.: '03:30 P.M.'<br />
-Output as TIME: 15:30:00</td>
-</tr>
-<tr class="even">
-<td>HH12</td>
-<td>Same behavior as HH.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>HH24</td>
-<td>Matches 2 digits. Sets the hour part to the matched number.</td>
-<td>Input for HH24:MI: '15:30'<br />
-Output as TIME: 15:30:00</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                                | Example                                                     |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| HH             | Matches 2 digits. If the matched number `n` is `12` , sets `temp = 0` ; otherwise, sets `temp = n` . If the matched value of the A.M./P.M. format element is P.M., sets `temp = n + 12` . Sets the hour part to `temp` . A meridian indicator must be present in the format model, when HH is present. | Input for HH:MI P.M.: '03:30 P.M.' Output as TIME: 15:30:00 |
+| HH12           | Same behavior as HH.                                                                                                                                                                                                                                                                                   |                                                             |
+| HH24           | Matches 2 digits. Sets the hour part to the matched number.                                                                                                                                                                                                                                            | Input for HH24:MI: '15:30' Output as TIME: 15:30:00         |
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('15:30' AS TIME FORMAT 'HH24:MI') AS string_to_date_time
-    
-    /*---------------------+
-     | string_to_date_time |
-     +---------------------+
-     | 15:30:00            |
-     +---------------------*/
+```
+SELECT CAST('15:30' AS TIME FORMAT 'HH24:MI') AS string_to_date_time
+
+/*---------------------+
+ | string_to_date_time |
+ +---------------------+
+ | 15:30:00            |
+ +---------------------*/
+```
 
 #### Format string as minute part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted minute to a data type that contains the minute part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the minute that you need to format.
-  - `type` : The data type to which you are casting. Must include the minute part.
-  - `format_string_expression` : A string which contains format elements, including the minute format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the minute that you need to format.
+- `type` : The data type to which you are casting. Must include the minute part.
+- `format_string_expression` : A string which contains format elements, including the minute format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a minute part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `MINUTE` part is missing from `string_expression` and the return type includes this part, `MINUTE` is set to `0` .
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>MI</td>
-<td>Matches 2 digits. Sets the minute part to the matched number.</td>
-<td>Input for HH:MI P.M.: '03:30 P.M.'<br />
-Output as TIME: 15:30:00</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                       | Example                                                     |
+|----------------|---------------------------------------------------------------|-------------------------------------------------------------|
+| MI             | Matches 2 digits. Sets the minute part to the matched number. | Input for HH:MI P.M.: '03:30 P.M.' Output as TIME: 15:30:00 |
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('03:30 P.M.' AS TIME FORMAT 'HH:MI P.M.') AS string_to_date_time
-    
-    /*---------------------+
-     | string_to_date_time |
-     +---------------------+
-     | 15:30:00            |
-     +---------------------*/
+```
+SELECT CAST('03:30 P.M.' AS TIME FORMAT 'HH:MI P.M.') AS string_to_date_time
+
+/*---------------------+
+ | string_to_date_time |
+ +---------------------+
+ | 15:30:00            |
+ +---------------------*/
+```
 
 #### Format string as second part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted second to a data type that contains the second part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the second that you need to format.
-  - `type` : The data type to which you are casting. Must include the second part.
-  - `format_string_expression` : A string which contains format elements, including the second format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the second that you need to format.
+- `type` : The data type to which you are casting. Must include the second part.
+- `format_string_expression` : A string which contains format elements, including the second format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a second part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 If the `SECOND` part is missing from `string_expression` and the return type includes this part, `SECOND` is set to `0` .
 
@@ -1836,26 +1224,21 @@ An error is generated if a value that isn't a supported format element appears i
 <tr class="odd">
 <td>SS</td>
 <td>Matches 2 digits. Sets the second part to the matched number.</td>
-<td>Input for HH:MI:SS P.M.: '03:30:02 P.M.'<br />
-Output as TIME: 15:30:02</td>
+<td>Input for HH:MI:SS P.M.: '03:30:02 P.M.' Output as TIME: 15:30:02</td>
 </tr>
 <tr class="even">
 <td>SSSSS</td>
 <td>Matches 5 digits. Sets the hour, minute and second parts by interpreting the matched number as the number of seconds past midnight.</td>
-<td>Input for SSSSS: '03723'<br />
-Output as TIME: 01:02:03</td>
+<td>Input for SSSSS: '03723' Output as TIME: 01:02:03</td>
 </tr>
 <tr class="odd">
 <td>FFn</td>
-<td>Matches <code dir="ltr" translate="no">n</code> digits, where <code dir="ltr" translate="no">n</code> is the number following FF in the format element. Sets the fractional part of the second part to the matched number.</td>
-<td>Input for HH24:MI:SS.FF1: '01:05:07.16'<br />
-Output as TIME: 01:05:07.2
+<td>Matches <code>n</code> digits, where <code>n</code> is the number following FF in the format element. Sets the fractional part of the second part to the matched number.</td>
+<td>Input for HH24:MI:SS.FF1: '01:05:07.16' Output as TIME: 01:05:07.2
 <hr />
-Input for HH24:MI:SS.FF2: '01:05:07.16'<br />
-Output as TIME: 01:05:07.16
+Input for HH24:MI:SS.FF2: '01:05:07.16' Output as TIME: 01:05:07.16
 <hr />
-Input for HH24:MI:SS.FF3: 'FF3: 01:05:07.16'<br />
-Output as TIME: 01:05:07.160</td>
+Input for HH24:MI:SS.FF3: 'FF3: 01:05:07.16' Output as TIME: 01:05:07.160</td>
 </tr>
 </tbody>
 </table>
@@ -1864,35 +1247,39 @@ Output as TIME: 01:05:07.160</td>
 
 The data type to which the string was cast. This can be:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('01:05:07.16' AS TIME FORMAT 'HH24:MI:SS.FF1') AS string_to_date_time
-    
-    /*---------------------+
-     | string_to_date_time |
-     +---------------------+
-     | 01:05:07.2          |
-     +---------------------*/
+```
+SELECT CAST('01:05:07.16' AS TIME FORMAT 'HH24:MI:SS.FF1') AS string_to_date_time
+
+/*---------------------+
+ | string_to_date_time |
+ +---------------------+
+ | 01:05:07.2          |
+ +---------------------*/
+```
 
 #### Format string as meridian indicator part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted meridian indicator to a data type that contains the meridian indicator part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the meridian indicator that you need to format.
-  - `type` : The data type to which you are casting. Must include the meridian indicator part.
-  - `format_string_expression` : A string which contains format elements, including the meridian indicator format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the meridian indicator that you need to format.
+- `type` : The data type to which you are casting. Must include the meridian indicator part.
+- `format_string_expression` : A string which contains format elements, including the meridian indicator format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a meridian indicator part:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
@@ -1912,21 +1299,16 @@ An error is generated if a value that isn't a supported format element appears i
 <tbody>
 <tr class="odd">
 <td>A.M. or P.M.</td>
-<td>Matches using the regular expression <code dir="ltr" translate="no">'(A|P)\.M\.'</code> .</td>
-<td>Input for HH:MI A.M.: '03:30 A.M.'<br />
-Output as TIME: 03:30:00
+<td>Matches using the regular expression <code>'(A|P)\.M\.'</code> .</td>
+<td>Input for HH:MI A.M.: '03:30 A.M.' Output as TIME: 03:30:00
 <hr />
-Input for HH:MI P.M.: '03:30 P.M.'<br />
-Output as TIME: 15:30:00
+Input for HH:MI P.M.: '03:30 P.M.' Output as TIME: 15:30:00
 <hr />
-Input for HH:MI P.M.: '03:30 A.M.'<br />
-Output as TIME: 03:30:00
+Input for HH:MI P.M.: '03:30 A.M.' Output as TIME: 03:30:00
 <hr />
-Input for HH:MI A.M.: '03:30 P.M.'<br />
-Output as TIME: 15:30:00
+Input for HH:MI A.M.: '03:30 P.M.' Output as TIME: 15:30:00
 <hr />
-Input for HH:MI a.m.: '03:30 a.m.'<br />
-Output as TIME: 03:30:00</td>
+Input for HH:MI a.m.: '03:30 a.m.' Output as TIME: 03:30:00</td>
 </tr>
 </tbody>
 </table>
@@ -1935,90 +1317,74 @@ Output as TIME: 03:30:00</td>
 
 The data type to which the string was cast. This can be:
 
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('03:30 P.M.' AS TIME FORMAT 'HH:MI A.M.') AS string_to_date_time
-    
-    /*---------------------+
-     | string_to_date_time |
-     +---------------------+
-     | 15:30:00            |
-     +---------------------*/
+```
+SELECT CAST('03:30 P.M.' AS TIME FORMAT 'HH:MI A.M.') AS string_to_date_time
+
+/*---------------------+
+ | string_to_date_time |
+ +---------------------+
+ | 15:30:00            |
+ +---------------------*/
+```
 
 #### Format string as time zone part
 
-    CAST(string_expression AS type FORMAT format_string_expression)
+```
+CAST(string_expression AS type FORMAT format_string_expression)
+```
 
 Casts a string-formatted time zone to a data type that contains the time zone part. Includes format elements, which provide instructions for how to conduct the cast.
 
-  - `string_expression` : This expression contains the string with the time zone that you need to format.
-  - `type` : The data type to which you are casting. Must include the time zone part.
-  - `format_string_expression` : A string which contains format elements, including the time zone format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
+- `string_expression` : This expression contains the string with the time zone that you need to format.
+- `type` : The data type to which you are casting. Must include the time zone part.
+- `format_string_expression` : A string which contains format elements, including the time zone format element. The formats elements in this string are defined collectively as the format model, which must follow [these rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_model_rules_date_time) .
 
 These data types include a time zone part:
 
-  - `DATE`
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 An error is generated if a value that isn't a supported format element appears in `format_string_expression` or `string_expression` doesn't contain a value specified by a format element.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>TZH</td>
-<td>Matches using the regular expression <code dir="ltr" translate="no">'(\+|\-| )[0-9]{2}'</code> . Sets the time zone and hour parts to the matched sign and number. Sets the time zone sign to be the first letter of the matched string. The number 2 means matching up to 2 digits for non-exact matching, and exactly 2 digits for exact matching.</td>
-<td>Input for YYYY-MM-DD HH:MI:SSTZH: '2008-12-25 05:30:00-08'<br />
-Output as TIMESTAMP: 2008-12-25 05:30:00-08</td>
-</tr>
-<tr class="even">
-<td>TZM</td>
-<td>Matches 2 digits. Let <code dir="ltr" translate="no">n</code> be the matched number. If the time zone sign is the minus sign, sets the time zone minute part to <code dir="ltr" translate="no">-n</code> . Otherwise, sets the time zone minute part to <code dir="ltr" translate="no">n</code> .</td>
-<td>Input for YYYY-MM-DD HH:MI:SSTZH: '2008-12-25 05:30:00+05.30'<br />
-Output as TIMESTAMP: 2008-12-25 05:30:00+05.30</td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                                                                                                                                                                                                                                                                                          | Example                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| TZH            | Matches using the regular expression `'(\+|\-| )[0-9]{2}'` . Sets the time zone and hour parts to the matched sign and number. Sets the time zone sign to be the first letter of the matched string. The number 2 means matching up to 2 digits for non-exact matching, and exactly 2 digits for exact matching. | Input for YYYY-MM-DD HH:MI:SSTZH: '2008-12-25 05:30:00-08' Output as TIMESTAMP: 2008-12-25 05:30:00-08       |
+| TZM            | Matches 2 digits. Let `n` be the matched number. If the time zone sign is the minus sign, sets the time zone minute part to `-n` . Otherwise, sets the time zone minute part to `n` .                                                                                                                            | Input for YYYY-MM-DD HH:MI:SSTZH: '2008-12-25 05:30:00+05.30' Output as TIMESTAMP: 2008-12-25 05:30:00+05.30 |
 
 **Return type**
 
 The data type to which the string was cast. This can be:
 
-  - `DATE`
-  - `TIME`
-  - `DATETIME`
-  - `TIMESTAMP`
+- `DATE`
+- `TIME`
+- `DATETIME`
+- `TIMESTAMP`
 
 **Examples**
 
-    SELECT CAST('2020.06.03 00:00:53+00' AS TIMESTAMP FORMAT 'YYYY.MM.DD HH:MI:SSTZH') AS string_to_date_time
-    
-    /*-----------------------------+
-     | as_timestamp                |
-     +-----------------------------+
-     | 2020-06-03 00:00:53.110 UTC |
-     +-----------------------------*/
+```
+SELECT CAST('2020.06.03 00:00:53+00' AS TIMESTAMP FORMAT 'YYYY.MM.DD HH:MI:SSTZH') AS string_to_date_time
+
+/*-----------------------------+
+ | as_timestamp                |
+ +-----------------------------+
+ | 2020-06-03 00:00:53.110 UTC |
+ +-----------------------------*/
+```
 
 #### Format string as literal
 
-    CAST(string_expression AS data_type FORMAT format_string_expression)
+```
+CAST(string_expression AS data_type FORMAT format_string_expression)
+```
 
 <table>
 <colgroup>
@@ -2076,28 +1442,28 @@ The data type to which the string was cast. This can be:
 </tr>
 <tr class="odd">
 <td>"text"</td>
-<td>Output generated by the format element in formatting, using this regular expression, with <code dir="ltr" translate="no">s</code> representing the string input: <code dir="ltr" translate="no">regex.escape(s)</code> .</td>
-<td>Input: "abc"<br />
-Output: abc
+<td>Output generated by the format element in formatting, using this regular expression, with <code>s</code> representing the string input: <code>regex.escape(s)</code> .</td>
+<td>Input: "abc" Output: abc
 <hr />
-Input: "a\"b\\c"<br />
-Output: a"b\c</td>
+Input: "a\"b\\c" Output: a"b\c</td>
 </tr>
 </tbody>
 </table>
 
 ### Format numeric type as string
 
-    CAST(numeric_expression AS STRING FORMAT format_string_expression)
+```
+CAST(numeric_expression AS STRING FORMAT format_string_expression)
+```
 
 You can cast a [numeric type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) to a string by combining the following format elements:
 
-  - [Digits](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_digits)
-  - [Decimal point](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_decimal_point)
-  - [Sign](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_sign)
-  - [Currency symbol](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_currency_symbol)
-  - [Group separator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_group_separator)
-  - [Other format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_other_elements)
+- [Digits](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_digits)
+- [Decimal point](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_decimal_point)
+- [Sign](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_sign)
+- [Currency symbol](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_currency_symbol)
+- [Group separator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_group_separator)
+- [Other format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_other_elements)
 
 Except for the exponent format element ( `EEEE` ), all of the format elements generate a fixed number of characters in the output, and the output is aligned by the decimal point. The first character outputs a `-` for negative numbers; otherwise a space. To suppress blank characters and trailing zeroes, use the `FM` flag.
 
@@ -2109,19 +1475,21 @@ Except for the exponent format element ( `EEEE` ), all of the format elements ge
 
 **Example**
 
-    SELECT input, CAST(input AS STRING FORMAT '$999,999.999') AS output
-    FROM UNNEST([1.2, 12.3, 123.456, 1234.56, -12345.678, 1234567.89]) AS input
-    
-    /*------------+---------------+
-     |   input    |    output     |
-     +------------+---------------+
-     |        1.2 |        $1.200 |
-     |       12.3 |       $12.300 |
-     |    123.456 |      $123.456 |
-     |    1234.56 |    $1,234.560 |
-     | -12345.678 |  -$12,345.678 |
-     | 1234567.89 |  $###,###.### |
-     +------------+---------------*/
+```
+SELECT input, CAST(input AS STRING FORMAT '$999,999.999') AS output
+FROM UNNEST([1.2, 12.3, 123.456, 1234.56, -12345.678, 1234567.89]) AS input
+
+/*------------+---------------+
+ |   input    |    output     |
+ +------------+---------------+
+ |        1.2 |        $1.200 |
+ |       12.3 |       $12.300 |
+ |    123.456 |      $123.456 |
+ |    1234.56 |    $1,234.560 |
+ | -12345.678 |  -$12,345.678 |
+ | 1234567.89 |  $###,###.### |
+ +------------+---------------*/
+```
 
 #### Format digits as string
 
@@ -2144,49 +1512,29 @@ The following format elements output digits. If there aren't enough digit format
 <tr class="odd">
 <td>0</td>
 <td>A decimal digit. Leading and trailing zeros are included.</td>
-<td>Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'000'</code><br />
-Output: <code dir="ltr" translate="no">' 012'</code>
+<td>Input: <code>12</code> Format: <code>'000'</code> Output: <code>' 012'</code>
 <hr />
-Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'000.000'</code><br />
-Output: <code dir="ltr" translate="no">' 012.000'</code>
+Input: <code>12</code> Format: <code>'000.000'</code> Output: <code>' 012.000'</code>
 <hr />
-Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'000.000'</code><br />
-Output: <code dir="ltr" translate="no">'-012.000'</code></td>
+Input: <code>-12</code> Format: <code>'000.000'</code> Output: <code>'-012.000'</code></td>
 </tr>
 <tr class="even">
 <td>9</td>
 <td>A decimal digit. Leading zeros are replaced with spaces. Trailing zeros are included.</td>
-<td>Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'999'</code><br />
-Output: <code dir="ltr" translate="no">' 12'</code>
+<td>Input: <code>12</code> Format: <code>'999'</code> Output: <code>' 12'</code>
 <hr />
-Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'999.999'</code><br />
-Output: <code dir="ltr" translate="no">' 12.000'</code></td>
+Input: <code>12</code> Format: <code>'999.999'</code> Output: <code>' 12.000'</code></td>
 </tr>
 <tr class="odd">
 <td>X or x</td>
-<td><p>A hexadecimal digit. Can't appear with other format elements except 0, FM, and the sign format elements. The maximum number of hexadecimal digits in the format string is 16.</p>
-<p>X generates uppercase letters and x generates lowercase letters.</p>
-<p>When 0 is combined with the hexadecimal format element, the letter generated by 0 matches the case of the next X or x element. If there is no subsequent X or x, then 0 generates an uppercase letter.</p></td>
-<td>Input: <code dir="ltr" translate="no">43981</code><br />
-Format: <code dir="ltr" translate="no">'XXXX'</code><br />
-Output: <code dir="ltr" translate="no">' ABCD'</code>
+<td>A hexadecimal digit. Can't appear with other format elements except 0, FM, and the sign format elements. The maximum number of hexadecimal digits in the format string is 16. X generates uppercase letters and x generates lowercase letters. When 0 is combined with the hexadecimal format element, the letter generated by 0 matches the case of the next X or x element. If there is no subsequent X or x, then 0 generates an uppercase letter.</td>
+<td>Input: <code>43981</code> Format: <code>'XXXX'</code> Output: <code>' ABCD'</code>
 <hr />
-Input: <code dir="ltr" translate="no">43981</code><br />
-Format: <code dir="ltr" translate="no">'xxxx'</code><br />
-Output: <code dir="ltr" translate="no">' abcd'</code>
+Input: <code>43981</code> Format: <code>'xxxx'</code> Output: <code>' abcd'</code>
 <hr />
-Input: <code dir="ltr" translate="no">43981</code><br />
-Format: <code dir="ltr" translate="no">'0X0x'</code><br />
-Output: <code dir="ltr" translate="no">' ABcd'</code>
+Input: <code>43981</code> Format: <code>'0X0x'</code> Output: <code>' ABcd'</code>
 <hr />
-Input: <code dir="ltr" translate="no">43981</code><br />
-Format: <code dir="ltr" translate="no">'0000000X'</code><br />
-Output: <code dir="ltr" translate="no">' 0000ABCD'</code></td>
+Input: <code>43981</code> Format: <code>'0000000X'</code> Output: <code>' 0000ABCD'</code></td>
 </tr>
 </tbody>
 </table>
@@ -2197,50 +1545,26 @@ Output: <code dir="ltr" translate="no">' 0000ABCD'</code></td>
 
 **Example**
 
-    SELECT
-      CAST(12 AS STRING FORMAT '999') as a,
-      CAST(-12 AS STRING FORMAT '999') as b;
-    
-    /*------+------+
-     | a    | b    |
-     +------+------+
-     |   12 |  -12 |
-     +------+------*/
+```
+SELECT
+  CAST(12 AS STRING FORMAT '999') as a,
+  CAST(-12 AS STRING FORMAT '999') as b;
+
+/*------+------+
+ | a    | b    |
+ +------+------+
+ |   12 |  -12 |
+ +------+------*/
+```
 
 #### Format decimal point as string
 
 The following format elements output a decimal point. These format elements are mutually exclusive. At most one can appear in the format string.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>. (period)</td>
-<td>Decimal point.</td>
-<td>Input: <code dir="ltr" translate="no">123.58</code><br />
-Format: <code dir="ltr" translate="no">'999.999'</code><br />
-Output: <code dir="ltr" translate="no">' 123.580'</code></td>
-</tr>
-<tr class="even">
-<td>D</td>
-<td>The decimal point of the current locale.</td>
-<td>Input: <code dir="ltr" translate="no">123.58</code><br />
-Format: <code dir="ltr" translate="no">'999D999'</code><br />
-Output: <code dir="ltr" translate="no">' 123.580'</code></td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                  | Example                                                  |
+|----------------|------------------------------------------|----------------------------------------------------------|
+| . (period)     | Decimal point.                           | Input: `123.58` Format: `'999.999'` Output: `' 123.580'` |
+| D              | The decimal point of the current locale. | Input: `123.58` Format: `'999D999'` Output: `' 123.580'` |
 
 **Return type**
 
@@ -2248,13 +1572,15 @@ Output: <code dir="ltr" translate="no">' 123.580'</code></td>
 
 **Example**
 
-    SELECT CAST(12.5 AS STRING FORMAT '99.99') as a;
-    
-    /*--------+
-     | a      |
-     +--------+
-     |  12.50 |
-     +--------*/
+```
+SELECT CAST(12.5 AS STRING FORMAT '99.99') as a;
+
+/*--------+
+ | a      |
+ +--------+
+ |  12.50 |
+ +--------*/
+```
 
 #### Format sign as string
 
@@ -2280,36 +1606,24 @@ The sign appears before the number. If the format model includes a currency symb
 <tbody>
 <tr class="odd">
 <td>S</td>
-<td>Explicit sign. Outputs <code dir="ltr" translate="no">+</code> for positive numbers and <code dir="ltr" translate="no">-</code> for negative numbers. The position in the output is anchored to the number. <code dir="ltr" translate="no">NaN</code> and <code dir="ltr" translate="no">0</code> will not be signed.</td>
-<td>Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'S9999'</code><br />
-Output: <code dir="ltr" translate="no">' -12'</code>
+<td>Explicit sign. Outputs <code>+</code> for positive numbers and <code>-</code> for negative numbers. The position in the output is anchored to the number. <code>NaN</code> and <code>0</code> will not be signed.</td>
+<td>Input: <code>-12</code> Format: <code>'S9999'</code> Output: <code>' -12'</code>
 <hr />
-Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'9999S'</code><br />
-Output: <code dir="ltr" translate="no">' 12-'</code></td>
+Input: <code>-12</code> Format: <code>'9999S'</code> Output: <code>' 12-'</code></td>
 </tr>
 <tr class="even">
 <td>MI</td>
-<td>Explicit sign. Outputs a space for positive numbers and <code dir="ltr" translate="no">-</code> for negative numbers. This element can only appear in the last position.</td>
-<td>Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'9999MI'</code><br />
-Output: <code dir="ltr" translate="no">' 12 '</code>
+<td>Explicit sign. Outputs a space for positive numbers and <code>-</code> for negative numbers. This element can only appear in the last position.</td>
+<td>Input: <code>12</code> Format: <code>'9999MI'</code> Output: <code>' 12 '</code>
 <hr />
-Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'9999MI'</code><br />
-Output: <code dir="ltr" translate="no">' 12-'</code></td>
+Input: <code>-12</code> Format: <code>'9999MI'</code> Output: <code>' 12-'</code></td>
 </tr>
 <tr class="odd">
 <td>PR</td>
 <td>For negative numbers, the value is enclosed in angle brackets. For positive numbers, the value is returned with a leading and trailing space. This element can only appear in the last position.</td>
-<td>Input: <code dir="ltr" translate="no">12</code><br />
-Format: <code dir="ltr" translate="no">'9999PR'</code><br />
-Output: <code dir="ltr" translate="no">' 12 '</code>
+<td>Input: <code>12</code> Format: <code>'9999PR'</code> Output: <code>' 12 '</code>
 <hr />
-Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'9999PR'</code><br />
-Output: <code dir="ltr" translate="no">' &lt;12&gt;'</code></td>
+Input: <code>-12</code> Format: <code>'9999PR'</code> Output: <code>' &lt;12&gt;'</code></td>
 </tr>
 </tbody>
 </table>
@@ -2320,15 +1634,17 @@ Output: <code dir="ltr" translate="no">' &lt;12&gt;'</code></td>
 
 **Example**
 
-    SELECT
-      CAST(12 AS STRING FORMAT 'S99') as a,
-      CAST(-12 AS STRING FORMAT 'S99') as b;
-    
-    /*-----+-----+
-     | a   | b   |
-     +-----+-----+
-     | +12 | -12 |
-     +-----+-----*/
+```
+SELECT
+  CAST(12 AS STRING FORMAT 'S99') as a,
+  CAST(-12 AS STRING FORMAT 'S99') as b;
+
+/*-----+-----+
+ | a   | b   |
+ +-----+-----+
+ | +12 | -12 |
+ +-----+-----*/
+```
 
 #### Format currency symbol as string
 
@@ -2351,27 +1667,19 @@ The following format elements output a currency symbol. These format elements ar
 <tr class="odd">
 <td>$</td>
 <td>Dollar sign ($).</td>
-<td>Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'$999'</code><br />
-Output: <code dir="ltr" translate="no">' -$12'</code></td>
+<td>Input: <code>-12</code> Format: <code>'$999'</code> Output: <code>' -$12'</code></td>
 </tr>
 <tr class="even">
 <td>C or c</td>
 <td>The ISO-4217 currency code of the current locale.</td>
-<td>Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'C999'</code><br />
-Output: <code dir="ltr" translate="no">' -USD12'</code>
+<td>Input: <code>-12</code> Format: <code>'C999'</code> Output: <code>' -USD12'</code>
 <hr />
-Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'c999'</code><br />
-Output: <code dir="ltr" translate="no">' -usd12'</code></td>
+Input: <code>-12</code> Format: <code>'c999'</code> Output: <code>' -usd12'</code></td>
 </tr>
 <tr class="odd">
 <td>L</td>
 <td>The currency symbol of the current locale.</td>
-<td>Input: <code dir="ltr" translate="no">-12</code><br />
-Format: <code dir="ltr" translate="no">'L999'</code><br />
-Output: <code dir="ltr" translate="no">' -$12'</code></td>
+<td>Input: <code>-12</code> Format: <code>'L999'</code> Output: <code>' -$12'</code></td>
 </tr>
 </tbody>
 </table>
@@ -2382,50 +1690,26 @@ Output: <code dir="ltr" translate="no">' -$12'</code></td>
 
 **Example**
 
-    SELECT
-      CAST(12 AS STRING FORMAT '$99') as a,
-      CAST(-12 AS STRING FORMAT '$99') as b;
-    
-    /*------+------+
-     | a    | b    |
-     +------+------+
-     |  $12 | -$12 |
-     +------+------*/
+```
+SELECT
+  CAST(12 AS STRING FORMAT '$99') as a,
+  CAST(-12 AS STRING FORMAT '$99') as b;
+
+/*------+------+
+ | a    | b    |
+ +------+------+
+ |  $12 | -$12 |
+ +------+------*/
+```
 
 #### Format group separator as string
 
 The following format elements output a group separator.
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Format element</th>
-<th>Returns</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>, (comma)</td>
-<td>Group separator.</td>
-<td>Input: <code dir="ltr" translate="no">12345</code><br />
-Format: <code dir="ltr" translate="no">'999,999'</code><br />
-Output: <code dir="ltr" translate="no">' 12,345'</code></td>
-</tr>
-<tr class="even">
-<td>G</td>
-<td>The group separator point of the current locale.</td>
-<td>Input: <code dir="ltr" translate="no">12345</code><br />
-Format: <code dir="ltr" translate="no">'999G999'</code><br />
-Output: <code dir="ltr" translate="no">' 12,345'</code></td>
-</tr>
-</tbody>
-</table>
+| Format element | Returns                                          | Example                                                |
+|----------------|--------------------------------------------------|--------------------------------------------------------|
+| , (comma)      | Group separator.                                 | Input: `12345` Format: `'999,999'` Output: `' 12,345'` |
+| G              | The group separator point of the current locale. | Input: `12345` Format: `'999G999'` Output: `' 12,345'` |
 
 **Return type**
 
@@ -2433,13 +1717,15 @@ Output: <code dir="ltr" translate="no">' 12,345'</code></td>
 
 **Example**
 
-    SELECT CAST(1234 AS STRING FORMAT '999,999') as a;
-    
-    /*----------+
-     | a        |
-     +----------+
-     |    1,234 |
-     +----------*/
+```
+SELECT CAST(1234 AS STRING FORMAT '999,999') as a;
+
+/*----------+
+ | a        |
+ +----------+
+ |    1,234 |
+ +----------*/
+```
 
 #### Other numeric format elements
 
@@ -2460,45 +1746,31 @@ Output: <code dir="ltr" translate="no">' 12,345'</code></td>
 <tr class="odd">
 <td>B</td>
 <td>Outputs spaces when the integer part is zero. If the integer part of the number is 0, then the following format elements generate spaces in the output: digits (9, X, 0), decimal point, group separator, currency, sign, and exponent.</td>
-<td>Input: <code dir="ltr" translate="no">0.23</code><br />
-Format: <code dir="ltr" translate="no">'B99.999S'</code><br />
-Output: <code dir="ltr" translate="no">' '</code>
+<td>Input: <code>0.23</code> Format: <code>'B99.999S'</code> Output: <code>' '</code>
 <hr />
-Input: <code dir="ltr" translate="no">1.23</code><br />
-Format: <code dir="ltr" translate="no">'B99.999S'</code><br />
-Output: <code dir="ltr" translate="no">' 1.230+'</code></td>
+Input: <code>1.23</code> Format: <code>'B99.999S'</code> Output: <code>' 1.230+'</code></td>
 </tr>
 <tr class="even">
 <td>EEEE</td>
 <td>Outputs the exponent part of the value in scientific notation. If the exponent value is between -99 and 99, the output is four characters. Otherwise, the minimum number of digits is used in the output.</td>
-<td>Input: <code dir="ltr" translate="no">20</code><br />
-Format: <code dir="ltr" translate="no">'9.99EEEE'</code><br />
-Output: <code dir="ltr" translate="no">' 2.0E+01'</code>
+<td>Input: <code>20</code> Format: <code>'9.99EEEE'</code> Output: <code>' 2.0E+01'</code>
 <hr />
-Input: <code dir="ltr" translate="no">299792458</code><br />
-Format: <code dir="ltr" translate="no">'S9.999EEEE'</code><br />
-Output: <code dir="ltr" translate="no">'+2.998E+08'</code></td>
+Input: <code>299792458</code> Format: <code>'S9.999EEEE'</code> Output: <code>'+2.998E+08'</code></td>
 </tr>
 <tr class="odd">
 <td>FM</td>
 <td>Removes all spaces and trailing zeroes from the output. You can use this element to suppress spaces and trailing zeroes that are generated by other format elements.</td>
-<td>Input: <code dir="ltr" translate="no">12.5</code><br />
-Format: <code dir="ltr" translate="no">'999999.000FM'</code><br />
-Output: <code dir="ltr" translate="no">'12.5'</code></td>
+<td>Input: <code>12.5</code> Format: <code>'999999.000FM'</code> Output: <code>'12.5'</code></td>
 </tr>
 <tr class="even">
 <td>RN</td>
-<td>Returns the value as Roman numerals, rounded to the nearest integer. The input must be between 1 and 3999. The output is padded with spaces to the left to a length of 15. This element can't be used with other format elements except <code dir="ltr" translate="no">FM</code> .</td>
-<td>Input: <code dir="ltr" translate="no">2021</code><br />
-Format: <code dir="ltr" translate="no">'RN'</code><br />
-Output: <code dir="ltr" translate="no">' MMXXI'</code></td>
+<td>Returns the value as Roman numerals, rounded to the nearest integer. The input must be between 1 and 3999. The output is padded with spaces to the left to a length of 15. This element can't be used with other format elements except <code>FM</code> .</td>
+<td>Input: <code>2021</code> Format: <code>'RN'</code> Output: <code>' MMXXI'</code></td>
 </tr>
 <tr class="odd">
 <td>V</td>
-<td>The input value is multiplied by 10^n, where n is the number of 9s after the <code dir="ltr" translate="no">V</code> . This element can't be used with a decimal point or exponent format element.</td>
-<td>Input: <code dir="ltr" translate="no">23.5</code><br />
-Format: <code dir="ltr" translate="no">'S000V00'</code><br />
-Output: <code dir="ltr" translate="no">'+02350'</code></td>
+<td>The input value is multiplied by 10^n, where n is the number of 9s after the <code>V</code> . This element can't be used with a decimal point or exponent format element.</td>
+<td>Input: <code>23.5</code> Format: <code>'S000V00'</code> Output: <code>'+02350'</code></td>
 </tr>
 </tbody>
 </table>
@@ -2509,13 +1781,15 @@ Output: <code dir="ltr" translate="no">'+02350'</code></td>
 
 **Example**
 
-    SELECT CAST(-123456 AS STRING FORMAT '9.999EEEE') as a;"
-    
-    /*------------+
-     | a          |
-     +------------+
-     | -1.235E+05 |
-     +------------*/
+```
+SELECT CAST(-123456 AS STRING FORMAT '9.999EEEE') as a;"
+
+/*------------+
+ | a          |
+ +------------+
+ | -1.235E+05 |
+ +------------*/
+```
 
 ### About BASE encoding
 

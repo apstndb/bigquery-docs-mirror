@@ -26,17 +26,21 @@ The following examples show you how to set and remove the `enable_fine_grained_d
 
 To configure organization settings, use the [`ALTER ORGANIZATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) . The following example sets `enable_fine_grained_dataset_acls_option` to `TRUE` at the organization level:
 
-    ALTER ORGANIZATION
-    SET OPTIONS (
-      `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
+```
+ALTER ORGANIZATION
+SET OPTIONS (
+  `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
+```
 
-Replace REGION with the [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) associated with your organization—for example, `us` or `europe-west6` .
+Replace ` REGION ` with the [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) associated with your organization—for example, `us` or `europe-west6` .
 
 The following example clears the organization-level `enable_fine_grained_dataset_acls_option` setting:
 
-    ALTER ORGANIZATION
-    SET OPTIONS (
-      `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
+```
+ALTER ORGANIZATION
+SET OPTIONS (
+  `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
+```
 
 #### Configure project settings
 
@@ -44,17 +48,21 @@ To configure project settings, use the [`ALTER PROJECT SET OPTIONS` DDL statemen
 
 The following example sets `enable_fine_grained_dataset_acls_option` to `TRUE` .
 
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-      `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
+```
+ALTER PROJECT PROJECT_ID
+SET OPTIONS (
+  `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
+```
 
-Replace PROJECT\_ID with your project ID.
+Replace ` PROJECT_ID ` with your project ID.
 
 The following example clears the project-level `enable_fine_grained_dataset_acls_option` setting:
 
-    ALTER PROJECT PROJECT_ID
-    SET OPTIONS (
-      `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
+```
+ALTER PROJECT PROJECT_ID
+SET OPTIONS (
+  `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
+```
 
 ## Changes to custom roles
 
@@ -72,27 +80,29 @@ When you opt into early enforcement, the following bq tool commands are affected
 
 You can use the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command with the following flag:
 
-  - **`--dataset_view={METADATA|ACL|FULL}`**  
-    Specifies how to apply permissions when you're viewing a dataset's access controls or metadata. Use one of the following values:
-      - `METADATA` : view only the dataset's metadata. This value requires the `bigquery.datasets.get` permission.
-      - `ACL` : view only the dataset's access controls. This value requires the `bigquery.datasets.getIamPolicy` permission.
-      - `FULL` : view both the dataset's metadata and access controls. This value requires the `bigquery.datasets.get` permission and `bigquery.datasets.getIamPolicy` permissions.
+**`--dataset_view={METADATA|ACL|FULL}`**  
+Specifies how to apply permissions when you're viewing a dataset's access controls or metadata. Use one of the following values:
+
+- `METADATA` : view only the dataset's metadata. This value requires the `bigquery.datasets.get` permission.
+- `ACL` : view only the dataset's access controls. This value requires the `bigquery.datasets.getIamPolicy` permission.
+- `FULL` : view both the dataset's metadata and access controls. This value requires the `bigquery.datasets.get` permission and `bigquery.datasets.getIamPolicy` permissions.
 
 ### bq update
 
 You can use the [`bq update`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command with the following flag:
 
-  - **`--update_mode={UPDATE_METADATA|UPDATE_ACL|UPDATE_FULL}`**  
-    Specifies how to apply permissions when you're updating a dataset's access controls or metadata. Use one of the following values:
-      - `UPDATE_METADATA` : update only the dataset's metadata. This value requires the `bigquery.datasets.update` permission.
-      - `UPDATE_ACL` : update only the dataset's access controls. This value requires the `bigquery.datasets.setIamPolicy` permission.
-      - `UPDATE_FULL` : update both the dataset's metadata and access controls. This value requires the `bigquery.datasets.update` permission and `bigquery.datasets.setIamPolicy` permissions.
+**`--update_mode={UPDATE_METADATA|UPDATE_ACL|UPDATE_FULL}`**  
+Specifies how to apply permissions when you're updating a dataset's access controls or metadata. Use one of the following values:
+
+- `UPDATE_METADATA` : update only the dataset's metadata. This value requires the `bigquery.datasets.update` permission.
+- `UPDATE_ACL` : update only the dataset's access controls. This value requires the `bigquery.datasets.setIamPolicy` permission.
+- `UPDATE_FULL` : update both the dataset's metadata and access controls. This value requires the `bigquery.datasets.update` permission and `bigquery.datasets.setIamPolicy` permissions.
 
 ## Changes to data control language (DCL) statements
 
 When you opt into early enforcement, the following permissions are required to run `GRANT` and `REVOKE` statements on datasets using the [data control language (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) :
 
-  - `bigquery.datasets.setIamPolicy`
+- `bigquery.datasets.setIamPolicy`
 
 ## Changes to `INFORMATION_SCHEMA` view queries
 
@@ -127,32 +137,32 @@ The following table shows the required permission and API response for the diffe
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">DATASET_VIEW_UNSPECIFIED</code> (or empty)</td>
+<td><code>DATASET_VIEW_UNSPECIFIED</code> (or empty)</td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.get</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.getIamPolicy</code></li>
+<li><code>bigquery.datasets.get</code></li>
+<li><code>bigquery.datasets.getIamPolicy</code></li>
 </ul></td>
 <td>The default value. Returns the dataset's metadata and access controls.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">METADATA</code></td>
+<td><code>METADATA</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.get</code></li>
+<li><code>bigquery.datasets.get</code></li>
 </ul></td>
 <td>Returns the dataset's metadata.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">ACL</code></td>
+<td><code>ACL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.getIamPolicy</code></li>
+<li><code>bigquery.datasets.getIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's access controls, required fields, and fields in the dataset resource that are output only.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">FULL</code></td>
+<td><code>FULL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.get</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.getIamPolicy</code></li>
+<li><code>bigquery.datasets.get</code></li>
+<li><code>bigquery.datasets.getIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's metadata and access controls.</td>
 </tr>
@@ -165,13 +175,15 @@ If you don't opt into early enforcement, or if you opt out after opting in, you 
 
 The following example sends a `GET` request with the `dataset_view` parameter set to `METADATA` :
 
-    GET https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?datasetView=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
+GET https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?datasetView=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
 
 Replace the following:
 
-  - YOUR\_PROJECT : the name of your project
-  - YOUR\_DATASET : the name of the dataset
-  - YOUR\_API\_KEY : your API key
+- ` YOUR_PROJECT ` : the name of your project
+- ` YOUR_DATASET ` : the name of the dataset
+- ` YOUR_API_KEY ` : your API key
 
 ### datasets.update method
 
@@ -198,33 +210,33 @@ The following table shows the required permission and API response for the diffe
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
+<td><code>UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>The default value. Returns the dataset's updated metadata and access controls.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">UPDATE_METADATA</code></td>
+<td><code>UPDATE_METADATA</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.update</code></li>
 </ul></td>
 <td>Returns the dataset's updated metadata.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">UPDATE_ACL</code></td>
+<td><code>UPDATE_ACL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's updated access controls, required fields, and fields in the dataset resource that are output only.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">UPDATE_FULL</code></td>
+<td><code>UPDATE_FULL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's updated metadata and access controls.</td>
 </tr>
@@ -237,13 +249,15 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `PUT` request with the `update_mode` parameter set to `METADATA` :
 
-    PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
+PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
 
 Replace the following:
 
-  - YOUR\_PROJECT : the name of your project
-  - YOUR\_DATASET : the name of the dataset
-  - YOUR\_API\_KEY : your API key name
+- ` YOUR_PROJECT ` : the name of your project
+- ` YOUR_DATASET ` : the name of the dataset
+- ` YOUR_API_KEY ` : your API key name
 
 ### datasets.patch method
 
@@ -270,32 +284,32 @@ The following table shows the required permission and API response for the diffe
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
+<td><code>UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>The default value. Returns the dataset's updated metadata and access controls.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">UPDATE_METADATA</code></td>
+<td><code>UPDATE_METADATA</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.update</code></li>
 </ul></td>
 <td>Returns the dataset's updated metadata.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">UPDATE_ACL</code></td>
+<td><code>UPDATE_ACL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's updated access controls, required fields, and fields in the dataset resource that are output only.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">UPDATE_FULL</code></td>
+<td><code>UPDATE_FULL</code></td>
 <td><ul>
-<li><code dir="ltr" translate="no">bigquery.datasets.update</code></li>
-<li><code dir="ltr" translate="no">bigquery.datasets.setIamPolicy</code></li>
+<li><code>bigquery.datasets.update</code></li>
+<li><code>bigquery.datasets.setIamPolicy</code></li>
 </ul></td>
 <td>Returns the dataset's updated metadata and access controls.</td>
 </tr>
@@ -308,13 +322,15 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `PUT` request with the `update_mode` parameter set to `METADATA` :
 
-    PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
+PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
+```
 
 Replace the following:
 
-  - YOUR\_PROJECT : the name of your project
-  - YOUR\_DATASET : the name of the dataset
-  - YOUR\_API\_KEY : your API key name
+- ` YOUR_PROJECT ` : the name of your project
+- ` YOUR_DATASET ` : the name of the dataset
+- ` YOUR_API_KEY ` : your API key name
 
 ### datasets.insert method
 

@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Load PayPal data into BigQuery
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
@@ -20,82 +20,31 @@ The PayPal connector supports production and sandbox PayPal accounts.
 
 ## Supported objects
 
-PayPal object types
-
-BigQuery-supported objects
-
-Date filter support
-
-Transactions
-
-TransactionReports
-
-Supported
-
-TransactionReportsCartInfoItemDetails
-
-Supported
-
-TransactionReportsIncentiveDetails
-
-Supported
-
-Disputes
-
-Disputes
-
-Supported
-
-DisputeDetails
-
-Supported
-
-DisputeTransactions
-
-Supported
-
-Payments
-
-Payments
-
-Supported
-
-PaymentTransactions
-
-Supported
-
-Balance
-
-Balance
-
-Not supported
-
-Products
-
-Products
-
-Not supported
-
-ProductDetails
-
-Not supported
-
-Invoices
-
-Invoices
-
-Supported
+| PayPal object types                   | BigQuery-supported objects | Date filter support |
+|---------------------------------------|----------------------------|---------------------|
+| Transactions                          | TransactionReports         | Supported           |
+| TransactionReportsCartInfoItemDetails | Supported                  |                     |
+| TransactionReportsIncentiveDetails    | Supported                  |                     |
+| Disputes                              | Disputes                   | Supported           |
+| DisputeDetails                        | Supported                  |                     |
+| DisputeTransactions                   | Supported                  |                     |
+| Payments                              | Payments                   | Supported           |
+| PaymentTransactions                   | Supported                  |                     |
+| Balance                               | Balance                    | Not supported       |
+| Products                              | Products                   | Not supported       |
+| ProductDetails                        | Not supported              |                     |
+| Invoices                              | Invoices                   | Supported           |
 
 ## Limitations
 
 PayPal data transfers are subject to the following limitations:
 
-  - There can be a delay of several hours before PayPal transactions become available through the PayPal API.
-      - We recommend scheduling subsequent data transfers at longer intervals (no more than one every hour) to prevent missing data.
-  - The PayPal connector only supports [transactions data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 3 years.
-  - The PayPal connector only supports [disputes data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 6 months.
-  - PayPal APIs use different page size limits for each data object. The PayPal connector uses the maximum page size allowed by PayPal in a data transfer.
-      - However, some objects like `Payments` or `Payment Transactions` use smaller page size limits. This can lead to slower data transfers, especially when dealing with large datasets.
+- There can be a delay of several hours before PayPal transactions become available through the PayPal API.
+  - We recommend scheduling subsequent data transfers at longer intervals (no more than one every hour) to prevent missing data.
+- The PayPal connector only supports [transactions data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 3 years.
+- The PayPal connector only supports [disputes data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 6 months.
+- PayPal APIs use different page size limits for each data object. The PayPal connector uses the maximum page size allowed by PayPal in a data transfer.
+  - However, some objects like `Payments` or `Payment Transactions` use smaller page size limits. This can lead to slower data transfers, especially when dealing with large datasets.
 
 ## Before you begin
 
@@ -105,10 +54,10 @@ The following sections describe the steps that you need to take before you creat
 
 To enable data transfers from PayPal, you must have the following:
 
-  - You must have a PayPal Developer account. For more information, see [PayPal Developer Program](https://developer.paypal.com/developer-program/) .
-  - Create a PayPal REST API app. For more information, see [Get started with PayPal REST APIs](https://developer.paypal.com/api/rest/) .
-      - In the **Apps & Credentials** section, note the client ID and secret key for the app.
-      - In the **Features** section, enable the **Transaction search** and **Invoicing** API permissions.
+- You must have a PayPal Developer account. For more information, see [PayPal Developer Program](https://developer.paypal.com/developer-program/) .
+- Create a PayPal REST API app. For more information, see [Get started with PayPal REST APIs](https://developer.paypal.com/api/rest/) .
+  - In the **Apps & Credentials** section, note the client ID and secret key for the app.
+  - In the **Features** section, enable the **Transaction search** and **Invoicing** API permissions.
 
 ### Required BigQuery roles
 
@@ -120,17 +69,17 @@ This predefined role contains the permissions required to create a transfer. To 
 
 The following permissions are required to create a transfer:
 
-  - `bigquery.transfers.update` on the user
-  - `bigquery.datasets.get` on the target dataset
-  - `bigquery.datasets.update` on the target dataset
+- `bigquery.transfers.update` on the user
+- `bigquery.datasets.get` on the target dataset
+- `bigquery.datasets.update` on the target dataset
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+- If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a PayPal data transfer
 
@@ -145,28 +94,28 @@ Add PayPal data into BigQuery by setting up a transfer configuration using one o
 3.  In the **Source type** section, for **Source** , select **PayPal** .
 
 4.  In the **Data source details** section, do the following:
-    
-      - For **Client Id** , enter the PayPal client ID. For more information, see [PayPal prerequisites](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#paypal-prerequisites) .
-      - For **Client Secret** , enter the PayPal client secret key. For more information, see [PayPal prerequisites](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#paypal-prerequisites) .
-      - Select **Is Sandbox** if you are using a sandbox PayPal account.
-      - For **Start Date** , enter a date in the format `YYYY-MM-DD` . The data transfer loads PayPal data starting from this date.
-          - If this field is left blank, this transfer defaults to retrieving data from the past 3 years.
-          - For information about what objects support the start date filter, see [Supported objects](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) .
-      - For **PayPal objects to transfer** , enter the names of the PayPal objects to transfer, or click **Browse** and select the objects that you want to transfer.
+
+    - For **Client Id** , enter the PayPal client ID. For more information, see [PayPal prerequisites](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#paypal-prerequisites) .
+    - For **Client Secret** , enter the PayPal client secret key. For more information, see [PayPal prerequisites](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#paypal-prerequisites) .
+    - Select **Is Sandbox** if you are using a sandbox PayPal account.
+    - For **Start Date** , enter a date in the format `YYYY-MM-DD` . The data transfer loads PayPal data starting from this date.
+      - If this field is left blank, this transfer defaults to retrieving data from the past 3 years.
+      - For information about what objects support the start date filter, see [Supported objects](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) .
+    - For **PayPal objects to transfer** , enter the names of the PayPal objects to transfer, or click **Browse** and select the objects that you want to transfer.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
 6.  In the **Transfer config name** section, for **Display name** , enter a name for the data transfer.
 
 7.  In the **Schedule options** section, do the following:
-    
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
-      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+    - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
-    
-      - To enable email notifications, toggle **Email notification** to the on position. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, toggle **Pub/Sub notifications** to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
+
+    - To enable email notifications, toggle **Email notification** to the on position. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+    - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, toggle **Pub/Sub notifications** to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
@@ -174,36 +123,38 @@ Add PayPal data into BigQuery by setting up a transfer configuration using one o
 
 Enter the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `--transfer_config` :
 
-    bq mk
-        --transfer_config
-        --project_id=PROJECT_ID
-        --data_source=DATA_SOURCE
-        --display_name=DISPLAY_NAME
-        --target_dataset=DATASET
-        --params='PARAMETERS'
+```
+bq mk
+    --transfer_config
+    --project_id=PROJECT_ID
+    --data_source=DATA_SOURCE
+    --display_name=DISPLAY_NAME
+    --target_dataset=DATASET
+    --params='PARAMETERS'
+```
 
 Where:
 
-  - PROJECT\_ID (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+- ` PROJECT_ID ` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
 
-  - DATA\_SOURCE : the data source — `paypal` .
+- ` DATA_SOURCE ` : the data source — `paypal` .
 
-  - DISPLAY\_NAME : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` DISPLAY_NAME ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
 
-  - DATASET : the target dataset for the transfer configuration.
+- ` DATASET ` : the target dataset for the transfer configuration.
 
-  - PARAMETERS : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a PayPal data transfer:
-    
-      - `assets` : a list of PayPal objects to be included in this transfer.
-      - `connector.authentication.clientId` : client ID of the PayPal application.
-      - `connector.authentication.clientSecret` : client secret of the PayPal application.
-      - `connector.isSandbox` : set value to `true` if you are using a sandbox PayPal account, or `false` if you are using a production PayPal account.
-      - `connector.createdStartDate` : (Optional) enter a date in the format `YYYY-MM-DD` . The data transfer loads PayPal data starting from this date.
+- ` PARAMETERS ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a PayPal data transfer:
+
+  - `assets` : a list of PayPal objects to be included in this transfer.
+  - `connector.authentication.clientId` : client ID of the PayPal application.
+  - `connector.authentication.clientSecret` : client secret of the PayPal application.
+  - `connector.isSandbox` : set value to `true` if you are using a sandbox PayPal account, or `false` if you are using a production PayPal account.
+  - `connector.createdStartDate` : (Optional) enter a date in the format `YYYY-MM-DD` . The data transfer loads PayPal data starting from this date.
 
 For example, the following command creates a PayPal data transfer in the default project with all the required parameters:
 
-``` 
-  bq mk \
+```
+bq mk \
       --transfer_config \
       --target_dataset=mydataset \
       --data_source=PayPal \
@@ -232,7 +183,7 @@ To manually run a data transfer outside of your regular schedule, you can start 
 The following table maps PayPal data types to the corresponding BigQuery data types.
 
 | PayPal data type | BigQuery data type |
-| ---------------- | ------------------ |
+|------------------|--------------------|
 | `String`         | `STRING`           |
 | `Decimal`        | `BIGNUMERIC`       |
 | `Boolean`        | `BOOL`             |
@@ -248,6 +199,6 @@ There is no cost to transfer PayPal data into BigQuery while this feature is in 
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
-  - To learn about managing transfer configurations, including how to obtain information, list configurations, and view run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
-  - Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+- For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- To learn about managing transfer configurations, including how to obtain information, list configurations, and view run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
+- Learn how to [load data with BigQuery Omni operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

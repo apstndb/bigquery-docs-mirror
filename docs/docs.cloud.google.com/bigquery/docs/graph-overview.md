@@ -26,49 +26,49 @@ When your graph data is represented as tables, you must perform self joins or re
 
 ## Key capabilities
 
-  - **Built-in graph experience** . The ISO GQL interface offers a familiar, purpose-built graph experience that's based on open standards.
+- **Built-in graph experience** . The ISO GQL interface offers a familiar, purpose-built graph experience that's based on open standards.
 
-  - **Unified relational and graph** . Full interoperability between graph queries and SQL breaks down data silos and lets you choose the optimal tool for each use case, without any operational overhead to extract, transform, and load (ETL).
+- **Unified relational and graph** . Full interoperability between graph queries and SQL breaks down data silos and lets you choose the optimal tool for each use case, without any operational overhead to extract, transform, and load (ETL).
 
-  - **Built-in search capabilities** . Rich vector and full-text search capabilities integrate with graph, letting you use semantic meaning and keywords in graph analysis.
+- **Built-in search capabilities** . Rich vector and full-text search capabilities integrate with graph, letting you use semantic meaning and keywords in graph analysis.
 
-  - **Graph visualization** . Graph query results are displayed in a visually appealing graph format that makes data exploration, investigation, and explanation much easier.
+- **Graph visualization** . Graph query results are displayed in a visually appealing graph format that makes data exploration, investigation, and explanation much easier.
 
-  - **Performance and scalability** . Graph workloads are powered by BigQuery's scalable, cost-effective and distributed analytics engine.
+- **Performance and scalability** . Graph workloads are powered by BigQuery's scalable, cost-effective and distributed analytics engine.
 
-  - **Integration with Spanner Graph** . BigQuery Graph and Spanner Graph share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
+- **Integration with Spanner Graph** . BigQuery Graph and Spanner Graph share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
 
-  - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try chatting with an agent about a graph, use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
+- **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try chatting with an agent about a graph, use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
 
 ### Use cases
 
 You can use BigQuery Graph to build many types of analytic graph workloads, including the following:
 
-  - **Financial fraud detection** . Analyze complex relationships among users, accounts, and transactions to identify suspicious patterns and anomalies, such as money laundering and irregular connections between entities, which can be difficult to detect using relational databases.
+- **Financial fraud detection** . Analyze complex relationships among users, accounts, and transactions to identify suspicious patterns and anomalies, such as money laundering and irregular connections between entities, which can be difficult to detect using relational databases.
 
-  - **Customer profiles** . Track customer relationships, preferences, and purchase histories. Gain a holistic understanding of each customer to enable personalized recommendations, targeted marketing campaigns, and improved customer service experiences.
+- **Customer profiles** . Track customer relationships, preferences, and purchase histories. Gain a holistic understanding of each customer to enable personalized recommendations, targeted marketing campaigns, and improved customer service experiences.
 
-  - **Social networks** . Capture user activities and interactions and use graph pattern matching for friend recommendations and content discovery.
+- **Social networks** . Capture user activities and interactions and use graph pattern matching for friend recommendations and content discovery.
 
-  - **Manufacturing and supply chain management** . Use graph patterns for efficient impact analysis, cost rollups, and compliance checks by modeling parts, suppliers, orders, availability, and defects in the graph.
+- **Manufacturing and supply chain management** . Use graph patterns for efficient impact analysis, cost rollups, and compliance checks by modeling parts, suppliers, orders, availability, and defects in the graph.
 
-  - **Health care** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
+- **Health care** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
 
-  - **Transportation** . Model places, connections, distances, and costs in the graph, and then use graph queries to find the optimal route.
+- **Transportation** . Model places, connections, distances, and costs in the graph, and then use graph queries to find the optimal route.
 
 ## Tutorials
 
 The following tutorials show how to use BigQuery Graph in different scenarios:
 
-  - [Fraud detection with BigQuery Graph](https://codelabs.developers.google.com/codelabs/fraud-bigquery-graph)
-  - [Build customer 360 recommendations with BigQuery Graph](https://codelabs.developers.google.com/codelabs/c360-bigquery-graph)
-  - [Supply chain traceability with BigQuery Graph](https://codelabs.developers.google.com/codelabs/supplychaingraph)
-  - [Spanner & BigQuery: Real-Time Fraud Defense Shield](https://codelabs.developers.google.com/next26/spanner-bigquery-graph)
-  - [Perform semantic search on a graph](https://docs.cloud.google.com/bigquery/docs/graph-search)
-  - [Analyze drug interactions with BigQuery Graph](https://codelabs.developers.google.com/codelabs/drug-interaction-bigquery-graph)
-  - [Anti-money laundering & fraud prevention with BigQuery GraphRAG](https://codelabs.developers.google.com/codelabs/graphrag-with-bigquery)
-  - [Customer identity resolution with BigQuery Graph](https://codelabs.developers.google.com/codelabs/identity-resolution-bigquery-graph)
-  - [Trace AI agent decisions with BigQuery Graph](https://codelabs.developers.google.com/bqaa-context-graph)
+- [Fraud detection with BigQuery Graph](https://codelabs.developers.google.com/codelabs/fraud-bigquery-graph)
+- [Build customer 360 recommendations with BigQuery Graph](https://codelabs.developers.google.com/codelabs/c360-bigquery-graph)
+- [Supply chain traceability with BigQuery Graph](https://codelabs.developers.google.com/codelabs/supplychaingraph)
+- [Spanner & BigQuery: Real-Time Fraud Defense Shield](https://codelabs.developers.google.com/next26/spanner-bigquery-graph)
+- [Perform semantic search on a graph](https://docs.cloud.google.com/bigquery/docs/graph-search)
+- [Analyze drug interactions with BigQuery Graph](https://codelabs.developers.google.com/codelabs/drug-interaction-bigquery-graph)
+- [Anti-money laundering & fraud prevention with BigQuery GraphRAG](https://codelabs.developers.google.com/codelabs/graphrag-with-bigquery)
+- [Customer identity resolution with BigQuery Graph](https://codelabs.developers.google.com/codelabs/identity-resolution-bigquery-graph)
+- [Trace AI agent decisions with BigQuery Graph](https://codelabs.developers.google.com/bqaa-context-graph)
 
 ## Pricing
 
@@ -84,9 +84,9 @@ You are charged only once for the storage of the underlying tables used to defin
 
 ## What's next
 
-  - Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn about [graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
-  - Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
-  - Learn how to [visualize graphs](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .
-  - Learn about the [differences between BigQuery Graph and Spanner Graph](https://docs.cloud.google.com/bigquery/docs/graph-compare) .
-  - Learn about the [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) .
+- Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn about [graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
+- Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
+- Learn how to [visualize graphs](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .
+- Learn about the [differences between BigQuery Graph and Spanner Graph](https://docs.cloud.google.com/bigquery/docs/graph-compare) .
+- Learn about the [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) .

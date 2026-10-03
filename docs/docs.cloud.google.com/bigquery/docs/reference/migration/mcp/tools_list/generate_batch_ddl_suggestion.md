@@ -12,34 +12,24 @@ Generates Data Definition Language (DDL) suggestions for a batch translation. **
 
 The following code sample shows how to use `curl` to call the `generate_batch_ddl_suggestion` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;generate_batch_ddl_suggestion&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerymigration.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "generate_batch_ddl_suggestion",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -47,68 +37,29 @@ Request message for `GenerateBatchDdlSuggestion` .
 
 ### GenerateBatchDdlSuggestionRequest
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;projectNumber&quot;: string,
-  &quot;location&quot;: string,
-  &quot;sourceDialect&quot;: string,
-  &quot;targetDialect&quot;: string,
-  &quot;sourceBaseUri&quot;: [
+**JSON representation**
+
+```
+{
+  "projectNumber": string,
+  "location": string,
+  "sourceDialect": string,
+  "targetDialect": string,
+  "sourceBaseUri": [
     string
   ],
-  &quot;targetBaseUri&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "targetBaseUri": string
+}
+```
 
-Fields
-
-`projectNumber`
-
-`string`
-
-Required. The Google Cloud project number.
-
-`location`
-
-`string`
-
-Required. The location.
-
-`sourceDialect`
-
-`string`
-
-Required. The dialect of the source queries.
-
-`targetDialect`
-
-`string`
-
-Required. The dialect of the target queries.
-
-`sourceBaseUri[]`
-
-`string`
-
-Required. The Cloud Storage path containing the inputs.
-
-`targetBaseUri`
-
-`string`
-
-Required. The base URI for all writes to persistent storage in Cloud Storage.
+| Fields            |                                                                                        |
+|-------------------|----------------------------------------------------------------------------------------|
+| `projectNumber`   | `string` Required. The Google Cloud project number.                                    |
+| `location`        | `string` Required. The location.                                                       |
+| `sourceDialect`   | `string` Required. The dialect of the source queries.                                  |
+| `targetDialect`   | `string` Required. The dialect of the target queries.                                  |
+| `sourceBaseUri[]` | `string` Required. The Cloud Storage path containing the inputs.                       |
+| `targetBaseUri`   | `string` Required. The base URI for all writes to persistent storage in Cloud Storage. |
 
 ## Output Schema
 
@@ -116,38 +67,19 @@ Response message for `GenerateBatchDdlSuggestion` .
 
 ### GenerateBatchDdlSuggestionResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;suggestion&quot;: string,
-  &quot;suggestionState&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "suggestion": string,
+  "suggestionState": string
+}
+```
 
-`suggestion`
-
-`string`
-
-The ID of the suggestion workflow created for this batch translation.
-
-`suggestionState`
-
-`string`
-
-The current state of the suggestion workflow, typically `RUNNING` .
+| Fields            |                                                                                |
+|-------------------|--------------------------------------------------------------------------------|
+| `suggestion`      | `string` The ID of the suggestion workflow created for this batch translation. |
+| `suggestionState` | `string` The current state of the suggestion workflow, typically `RUNNING` .   |
 
 ### Tool Annotations
 
@@ -155,9 +87,9 @@ The current state of the suggestion workflow, typically `RUNNING` .
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ❌ \| Read Only Hint: ❌ \| Open World Hint: ❌

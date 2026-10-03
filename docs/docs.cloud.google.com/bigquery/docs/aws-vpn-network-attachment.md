@@ -14,8 +14,8 @@ This document provides detailed steps for setting up a VPN connection between Am
 
 Ensure that you have the following:
 
-  - Access to AWS and Google Cloud accounts with appropriate permissions.
-  - Existing [Virtual Private Clouds](https://docs.cloud.google.com/vpc/docs/overview) in both AWS and Google Cloud.
+- Access to AWS and Google Cloud accounts with appropriate permissions.
+- Existing [Virtual Private Clouds](https://docs.cloud.google.com/vpc/docs/overview) in both AWS and Google Cloud.
 
 ## Set up networking on AWS
 
@@ -86,7 +86,7 @@ For more information, see [Create network attachments](https://docs.cloud.google
 
 If you're having issues setting up your network attachment, do the following:
 
-  - Ensure that the VPN connections are up and running in both the AWS console and the Google Cloud console.
-  - Check the VPN logs for errors or dropped packets.
-  - Verify that the routing tables in both AWS and Google Cloud are correctly configured.
-  - Ensure that the necessary ports are open in both the AWS security groups and the Google Cloud firewall rules.
+- Ensure that the VPN connections are up and running in both the AWS console and the Google Cloud console.
+- Check the VPN logs for errors or dropped packets.
+- Verify that the routing tables in both AWS and Google Cloud are correctly configured.
+- Ensure that the necessary ports are open in both the AWS security groups and the Google Cloud firewall rules.

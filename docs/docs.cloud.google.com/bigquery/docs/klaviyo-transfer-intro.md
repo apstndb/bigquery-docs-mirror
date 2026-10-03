@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Introduction to Klaviyo data transfers
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
@@ -22,16 +22,16 @@ To learn how to schedule a Klaviyo transfer, see [Load Klaviyo data into BigQuer
 
 Incremental Klaviyo transfers are subject to the following limitations:
 
-  - You can only choose `TIMESTAMP` columns as watermark columns.
-  - Incremental ingestion is only supported for assets with valid watermark columns.
-  - Values in a watermark column must be monotonically increasing.
-  - Incremental transfers cannot sync delete operations in the source table.
-  - A single transfer configuration can only support either incremental or full ingestion.
-  - You cannot update objects in the `asset` list after the first incremental ingestion run.
-  - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
-  - You cannot change the watermark column or the primary key after the first incremental ingestion run.
-  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
-  - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
+- You can only choose `TIMESTAMP` columns as watermark columns.
+- Incremental ingestion is only supported for assets with valid watermark columns.
+- Values in a watermark column must be monotonically increasing.
+- Incremental transfers cannot sync delete operations in the source table.
+- A single transfer configuration can only support either incremental or full ingestion.
+- You cannot update objects in the `asset` list after the first incremental ingestion run.
+- You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
+- You cannot change the watermark column or the primary key after the first incremental ingestion run.
+- The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
+- When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
 
 ## Data ingestion options
 
@@ -61,23 +61,23 @@ The upsert write mode either updates a row or inserts a new row in your destinat
 
 When you select the upsert mode, you must select a watermark column and a primary key:
 
-  - A watermark column is required for the Klaviyo connector to track changes in the source table.
-      - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `UPDATED_AT` or `LAST_MODIFIED` column.
+- A watermark column is required for the Klaviyo connector to track changes in the source table.
+  - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `UPDATED_AT` or `LAST_MODIFIED` column.
 
-<!-- end list -->
+<!-- -->
 
-  - The primary key can be one or more columns on your table that are required for the Klaviyo connector to determine if it needs to insert or update a row.
-    
-    Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
-    
-    To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
+- The primary key can be one or more columns on your table that are required for the Klaviyo connector to determine if it needs to insert or update a row.
+
+  Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
+
+  To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
 
 ## Data type mapping
 
 The following table maps Klaviyo data types to the corresponding BigQuery data types:
 
 | Klaviyo data type            | BigQuery data type |
-| ---------------------------- | ------------------ |
+|------------------------------|--------------------|
 | `String`                     | `STRING`           |
 | `Text`                       | `STRING`           |
 | `Integer`                    | `INTEGER`          |
@@ -91,4 +91,4 @@ There is no cost to transfer Klaviyo data into BigQuery while this feature is in
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

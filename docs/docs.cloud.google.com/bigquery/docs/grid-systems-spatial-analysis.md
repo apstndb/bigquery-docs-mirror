@@ -20,8 +20,8 @@ Due to strict data privacy regulations in many areas, datasets that contain loca
 
 In the preceding examples, the designers of these analyses are presented with the following challenges:
 
-  - How to draw the area boundaries within which you analyze changes over time?
-  - How to use the existing administrative boundaries such as census tracts or a multi-resolution grid system?
+- How to draw the area boundaries within which you analyze changes over time?
+- How to use the existing administrative boundaries such as census tracts or a multi-resolution grid system?
 
 This document aims to answer these questions by explaining each option, describing best practices, and helping you avoid common pitfalls.
 
@@ -79,9 +79,9 @@ An additional scheme to grid the sphere, commonly used in the astronomy field, i
 
 HEALPix is a hierarchical equal-area pixelization scheme for the sphere. It is used to represent and analyze data on the celestial (or other) sphere. In addition to constant compute time, the HEALPix grid has the following characteristics:
 
-  - The grid cells are hierarchical, where parent-child relationships are maintained.
-  - At a specific hierarchy, cells are of equal areas.
-  - The cells follow an [*iso-latitude*](https://healpix.jpl.nasa.gov/html/intronode4.htm) distribution, allowing higher performance for spectral methods.
+- The grid cells are hierarchical, where parent-child relationships are maintained.
+- At a specific hierarchy, cells are of equal areas.
+- The cells follow an [*iso-latitude*](https://healpix.jpl.nasa.gov/html/intronode4.htm) distribution, allowing higher performance for spectral methods.
 
 BigQuery does not support HEALPix, but there are numerous implementations across a variety of languages, including [JavaScript](https://github.com/michitaro/healpix) , which makes it convenient for use in BigQuery user-defined functions (UDFs).
 
@@ -97,8 +97,8 @@ S2 cells can work better in analyses that are global in nature, such as analyses
 
 ## What's next
 
-  - For best practices for spatial clustering, see [Spatial Clustering on BigQuery - Best Practices](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery) .
-  - Learn to [create a spatial hierarchy from imperfect data](https://mentin.medium.com/creating-spatial-hierarchy-2ba5488eac0a) .
-  - Learn about [S2 geometry on GitHub](https://github.com/google/s2geometry) .
-  - Learn about [H3 geometry on GitHub](https://github.com/uber/h3) .
-  - See [examples that use H3, BigQuery, and Earth Engine](https://github.com/Prindle19/ee_python_esg_intro/blob/main/01%20-%20Dataframes%20and%20Zonal%20Statistics.ipynb) .
+- For best practices for spatial clustering, see [Spatial Clustering on BigQuery - Best Practices](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery) .
+- Learn to [create a spatial hierarchy from imperfect data](https://mentin.medium.com/creating-spatial-hierarchy-2ba5488eac0a) .
+- Learn about [S2 geometry on GitHub](https://github.com/google/s2geometry) .
+- Learn about [H3 geometry on GitHub](https://github.com/uber/h3) .
+- See [examples that use H3, BigQuery, and Earth Engine](https://github.com/Prindle19/ee_python_esg_intro/blob/main/01%20-%20Dataframes%20and%20Zonal%20Statistics.ipynb) .

@@ -15,81 +15,91 @@ This document helps you troubleshoot common issues related to materialized views
 When you investigate an issue with a materialized view, follow these diagnostic steps to identify the root cause:
 
 1.  **Verify the table type and metadata** . Confirm that the target table is a materialized view and check its configuration options:
-    
-        SELECT
-         table_name,
-         table_type
-        FROM
-         `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.TABLES
-        WHERE
-         table_name = 'MATERIALIZED_VIEW';
-    
+
+    ```
+    SELECT
+     table_name,
+     table_type
+    FROM
+     `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.TABLES
+    WHERE
+     table_name = 'MATERIALIZED_VIEW';
+    ```
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : the project that contains the materialized view.
-      - `  DATASET  ` : the dataset that contains the materialized view.
-      - `  MATERIALIZED_VIEW  ` : the name of the materialized view.
-    
+
+    - `PROJECT_ID` : the project that contains the materialized view.
+    - `DATASET` : the dataset that contains the materialized view.
+    - `MATERIALIZED_VIEW` : the name of the materialized view.
+
     To inspect configuration options such as `enable_refresh` , `refresh_interval_minutes` , and `max_staleness` , query the [`INFORMATION_SCHEMA.TABLE_OPTIONS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options) :
-    
-        SELECT
-         table_name,
-         option_name,
-         option_value
-        FROM
-         `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.TABLE_OPTIONS
-        WHERE
-         table_name = 'MATERIALIZED_VIEW';
+
+    ```
+    SELECT
+     table_name,
+     option_name,
+     option_value
+    FROM
+     `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.TABLE_OPTIONS
+    WHERE
+     table_name = 'MATERIALIZED_VIEW';
+    ```
 
 2.  **Check the last refresh status** . Query the [`INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) to check when the view was last refreshed and whether the last automatic refresh encountered errors:
-    
-        SELECT
-         table_name,
-         last_refresh_time,
-         refresh_watermark,
-         last_refresh_status
-        FROM
-         `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
-        WHERE
-         table_name = 'MATERIALIZED_VIEW';
-    
+
+    ```
+    SELECT
+     table_name,
+     last_refresh_time,
+     refresh_watermark,
+     last_refresh_status
+    FROM
+     `PROJECT_ID.DATASET`.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
+    WHERE
+     table_name = 'MATERIALIZED_VIEW';
+    ```
+
     If `last_refresh_status` is not `NULL` , the last automatic refresh job failed. If `last_refresh_time` is `NULL` or old, the materialized view has never successfully completed a refresh or has been failing to refresh.
 
 3.  **Inspect refresh job history and errors** . Query the [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to inspect recent automatic refresh jobs:
-    
-        SELECT
-         job_id,
-         creation_time,
-         end_time,
-         state,
-         error_result.reason AS error_reason,
-         error_result.message AS error_message,
-         total_slot_ms,
-         total_bytes_processed
-        FROM
-         `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-        WHERE
-         job_id LIKE '%materialized_view_refresh_%'
-         AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-        ORDER BY
-         creation_time DESC
-        LIMIT 50;
-    
-    Replace `  REGION  ` with your dataset's region—for example, `us` or `europe-west3` .
+
+    ```
+    SELECT
+     job_id,
+     creation_time,
+     end_time,
+     state,
+     error_result.reason AS error_reason,
+     error_result.message AS error_message,
+     total_slot_ms,
+     total_bytes_processed
+    FROM
+     `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE
+     job_id LIKE '%materialized_view_refresh_%'
+     AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+    ORDER BY
+     creation_time DESC
+    LIMIT 50;
+    ```
+
+    Replace `REGION` with your dataset's region—for example, `us` or `europe-west3` .
 
 4.  **Examine query execution and smart tuning statistics** . If a query is running slower than expected, examine the `materialized_view_statistics` field in the job statistics to verify whether the query optimizer used the materialized view:
-    
-        SELECT
-         job_id,
-         total_slot_ms,
-         total_bytes_billed,
-         materialized_view_statistics
-        FROM
-         `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-        WHERE
-         job_id = 'JOB_ID';
-    
-    Replace `  JOB_ID  ` with the query job ID.
+
+    ```
+    SELECT
+     job_id,
+     total_slot_ms,
+     total_bytes_billed,
+     materialized_view_statistics
+    FROM
+     `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE
+     job_id = 'JOB_ID';
+    ```
+
+    Replace `JOB_ID` with the query job ID.
 
 ## Troubleshoot materialized view creation errors
 
@@ -99,54 +109,62 @@ This section describes errors that you might encounter when creating materialize
 
 **Error message:**
 
-    Unsupported operator in materialized view: KEYWORD
+```
+Unsupported operator in materialized view: KEYWORD
+```
 
 or
 
-    Materialized view queries do not support FEATURE
+```
+Materialized view queries do not support FEATURE
+```
 
 **Cause:**
 
 Incremental materialized views support a restricted subset of SQL syntax to enable incremental maintenance and smart tuning. You might encounter this error if the query defining your materialized view includes unsupported features, such as the following:
 
-  - Non-deterministic functions (for example, `CURRENT_TIMESTAMP()` , `RAND()` , or `SESSION_USER()` )
-  - Analytical window functions with `OVER()`
-  - `ORDER BY` or `LIMIT` clauses
-  - `DISTINCT` without aggregation
-  - Subqueries in the `WHERE` or `SELECT` clauses
-  - User-defined functions (UDFs)
+- Non-deterministic functions (for example, `CURRENT_TIMESTAMP()` , `RAND()` , or `SESSION_USER()` )
+- Analytical window functions with `OVER()`
+- `ORDER BY` or `LIMIT` clauses
+- `DISTINCT` without aggregation
+- Subqueries in the `WHERE` or `SELECT` clauses
+- User-defined functions (UDFs)
 
 **Resolution:**
 
-  - Review the list of [unsupported SQL features](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#unsupported_sql_features) .
+- Review the list of [unsupported SQL features](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#unsupported_sql_features) .
 
-  - If your query requires broader SQL capabilities, consider creating a [non-incremental materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) by setting `allow_non_incremental_definition = true` and defining a `max_staleness` interval:
-    
-        CREATE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
-        OPTIONS (
-        enable_refresh = true,
-        refresh_interval_minutes = 60,
-        max_staleness = INTERVAL "4" HOUR,
-        allow_non_incremental_definition = true
-        ) AS
-        SELECT
-        ...
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : the project that contains the materialized view.
-      - `  DATASET  ` : the dataset that contains the materialized view.
-      - `  MATERIALIZED_VIEW  ` : the name of the materialized view.
-    
-    Non-incremental materialized views support a broader set of SQL queries, but they always perform full refreshes and don't support smart tuning.
+- If your query requires broader SQL capabilities, consider creating a [non-incremental materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) by setting `allow_non_incremental_definition = true` and defining a `max_staleness` interval:
 
-  - If the required SQL syntax isn't supported in non-incremental materialized views, use a [logical view](https://docs.cloud.google.com/bigquery/docs/views) or a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) to write results to a destination table.
+  ```
+  CREATE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
+  OPTIONS (
+  enable_refresh = true,
+  refresh_interval_minutes = 60,
+  max_staleness = INTERVAL "4" HOUR,
+  allow_non_incremental_definition = true
+  ) AS
+  SELECT
+  ...
+  ```
 
-### Invalid max\_staleness with CDC base table
+  Replace the following:
+
+  - `PROJECT_ID` : the project that contains the materialized view.
+  - `DATASET` : the dataset that contains the materialized view.
+  - `MATERIALIZED_VIEW` : the name of the materialized view.
+
+  Non-incremental materialized views support a broader set of SQL queries, but they always perform full refreshes and don't support smart tuning.
+
+- If the required SQL syntax isn't supported in non-incremental materialized views, use a [logical view](https://docs.cloud.google.com/bigquery/docs/views) or a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) to write results to a destination table.
+
+### Invalid max_staleness with CDC base table
 
 **Error message:**
 
-    Materialized view PROJECT_ID:DATASET.MATERIALIZED_VIEW has a CDC table as base table PROJECT_ID:DATASET.TABLE but does not have valid max_staleness. Materialized views over CDC tables must have max_staleness set at least 2 times the base table's max_staleness: 0-0 0 0:0:0
+```
+Materialized view PROJECT_ID:DATASET.MATERIALIZED_VIEW has a CDC table as base table PROJECT_ID:DATASET.TABLE but does not have valid max_staleness. Materialized views over CDC tables must have max_staleness set at least 2 times the base table's max_staleness: 0-0 0 0:0:0
+```
 
 **Cause:**
 
@@ -161,7 +179,9 @@ When you create a materialized view over a change data capture (CDC) base table,
 
 **Error message:**
 
-    Partitioned incremental materialized view must be created on top of partitioned managed storage base table.
+```
+Partitioned incremental materialized view must be created on top of partitioned managed storage base table.
+```
 
 **Cause:**
 
@@ -169,15 +189,17 @@ To create a partitioned incremental materialized view, the underlying base table
 
 **Resolution:**
 
-  - If you want the materialized view to be partitioned, ensure the base table is partitioned and configure the materialized view to use the same partitioning column. For more information, see [Partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition_alignment) .
-  - If the base table is not partitioned, create the materialized view without a `PARTITION BY` clause.
-  - If you need a partitioned view over a non-partitioned table, create a [non-incremental materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) with `allow_non_incremental_definition = true` and `max_staleness` . Non-incremental materialized views don't require partition alignment with base tables.
+- If you want the materialized view to be partitioned, ensure the base table is partitioned and configure the materialized view to use the same partitioning column. For more information, see [Partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition_alignment) .
+- If the base table is not partitioned, create the materialized view without a `PARTITION BY` clause.
+- If you need a partitioned view over a non-partitioned table, create a [non-incremental materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) with `allow_non_incremental_definition = true` and `max_staleness` . Non-incremental materialized views don't require partition alignment with base tables.
 
 ### Cross-region dataset replica is read-only
 
 **Error message:**
 
-    The dataset replica of the cross region dataset 'PROJECT_ID:DATASET' in region 'REGION' is read-only because it's not the primary replica.
+```
+The dataset replica of the cross region dataset 'PROJECT_ID:DATASET' in region 'REGION' is read-only because it's not the primary replica.
+```
 
 **Cause:**
 
@@ -191,7 +213,9 @@ Create the materialized view in the primary region of the replicated dataset. If
 
 **Error message:**
 
-    Materialized views support at most 10 source tables, query has NUMBER_OF_SOURCE_TABLES
+```
+Materialized views support at most 10 source tables, query has NUMBER_OF_SOURCE_TABLES
+```
 
 **Cause:**
 
@@ -205,7 +229,9 @@ Refactor the query defining the materialized view to reference 10 or fewer base 
 
 **Error message:**
 
-    Resources exceeded during query execution: The data accessed in this query is too large; consider accessing fewer tables, or for partitioned tables, fewer partitions.
+```
+Resources exceeded during query execution: The data accessed in this query is too large; consider accessing fewer tables, or for partitioned tables, fewer partitions.
+```
 
 **Cause:**
 
@@ -213,9 +239,9 @@ When you create a materialized view, BigQuery performs an initial full refresh t
 
 **Resolution:**
 
-  - Add filter conditions in the `WHERE` clause of the materialized view to limit the scope of scanned data to the required subset.
-  - Align the materialized view partitioning with the base table partitioning to prune partitions during refreshes.
-  - If using on-demand compute, consider using [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) with dedicated slot reservations to provide sufficient compute capacity for large refreshes.
+- Add filter conditions in the `WHERE` clause of the materialized view to limit the scope of scanned data to the required subset.
+- Align the materialized view partitioning with the base table partitioning to prune partitions during refreshes.
+- If using on-demand compute, consider using [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) with dedicated slot reservations to provide sufficient compute capacity for large refreshes.
 
 ### Issues with BigLake tables and metadata caching
 
@@ -227,9 +253,9 @@ Materialized views over [BigLake external tables](https://docs.cloud.google.com/
 
 Materialized views over external tables have specific architectural requirements:
 
-  - Materialized views are only supported over BigLake tables with [metadata caching enabled](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
-  - The `max_staleness` value of the materialized view must be greater than the `max_staleness` value of the underlying BigLake base table.
-  - A materialized view can reference BigLake external tables or BigQuery managed storage tables, but can't mix types in a single materialized view.
+- Materialized views are only supported over BigLake tables with [metadata caching enabled](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
+- The `max_staleness` value of the materialized view must be greater than the `max_staleness` value of the underlying BigLake base table.
+- A materialized view can reference BigLake external tables or BigQuery managed storage tables, but can't mix types in a single materialized view.
 
 **Resolution:**
 
@@ -256,20 +282,22 @@ If a base table's schema changes—such as dropping a column referenced by the m
 BigQuery does not support altering the column schema of an existing materialized view. To resolve schema invalidation, do the following:
 
 1.  Recreate the materialized view using the [`CREATE OR REPLACE MATERIALIZED VIEW` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement) :
-    
-        CREATE OR REPLACE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
-        OPTIONS (
-         enable_refresh = true,
-         refresh_interval_minutes = 30
-        ) AS
-        SELECT
-         ...
-    
+
+    ```
+    CREATE OR REPLACE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
+    OPTIONS (
+     enable_refresh = true,
+     refresh_interval_minutes = 30
+    ) AS
+    SELECT
+     ...
+    ```
+
     Replace the following:
-    
-      - `  PROJECT_ID  ` : the project that contains the materialized view.
-      - `  DATASET  ` : the dataset that contains the materialized view.
-      - `  MATERIALIZED_VIEW  ` : the name of the materialized view.
+
+    - `PROJECT_ID` : the project that contains the materialized view.
+    - `DATASET` : the dataset that contains the materialized view.
+    - `MATERIALIZED_VIEW` : the name of the materialized view.
 
 2.  Verify that the new definition matches the updated base table schema.
 
@@ -283,17 +311,19 @@ Materialized view refreshes fail, or queries against the materialized view fall 
 
 The following base table operations invalidate existing materialized view data:
 
-  - Truncating a base table or base table partition ( `TRUNCATE TABLE` )
-  - Partition expiration on a base table
-  - `DELETE` or `MERGE` data manipulation language (DML) statements on unpartitioned tables or secondary joined base tables
+- Truncating a base table or base table partition ( `TRUNCATE TABLE` )
+- Partition expiration on a base table
+- `DELETE` or `MERGE` data manipulation language (DML) statements on unpartitioned tables or secondary joined base tables
 
 When these operations occur, the affected partitions (or the entire materialized view for unpartitioned tables) are marked as invalid.
 
 **Resolution:**
 
 1.  Manually trigger a refresh to restore the materialized view to a valid state:
-    
-        CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT_ID.DATASET.MATERIALIZED_VIEW');
+
+    ```
+    CALL BQ.REFRESH_MATERIALIZED_VIEW('PROJECT_ID.DATASET.MATERIALIZED_VIEW');
+    ```
 
 2.  If you run batch ETL pipelines that execute DML statements or truncate data regularly, disable automatic refresh and call `BQ.REFRESH_MATERIALIZED_VIEW` at the end of your ETL pipeline. For more information, see [Automatic refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) .
 
@@ -309,15 +339,17 @@ As base tables grow, the volume of data processed during a refresh increases. If
 
 **Resolution:**
 
-  - Add filter criteria in the `WHERE` clause of the materialized view to restrict unnecessary historic data.
-  - Ensure the materialized view is partition-aligned with the base table so only modified partitions are refreshed incrementally.
-  - Allocate a slot reservation with sufficient capacity to accommodate the refresh workload.
+- Add filter criteria in the `WHERE` clause of the materialized view to restrict unnecessary historic data.
+- Ensure the materialized view is partition-aligned with the base table so only modified partitions are refreshed incrementally.
+- Allocate a slot reservation with sufficient capacity to accommodate the refresh workload.
 
 ### Duplicate refresh message
 
 **Message:**
 
-    Materialized view is already being refreshed.
+```
+Materialized view is already being refreshed.
+```
 
 **Cause:**
 
@@ -341,8 +373,8 @@ To maintain real-time consistency, queries reading from the materialized view re
 
 **Resolution:**
 
-  - If real-time read consistency on streaming data is required, the query planner automatically combines materialized view data with base table deltas.
-  - If real-time consistency is not required and you want to avoid scanning the streaming buffer on every query, set `max_staleness` on the materialized view (for example, `max_staleness = INTERVAL "15" MINUTE` ). Queries can then read directly from the precomputed materialized view without delta processing.
+- If real-time read consistency on streaming data is required, the query planner automatically combines materialized view data with base table deltas.
+- If real-time consistency is not required and you want to avoid scanning the streaming buffer on every query, set `max_staleness` on the materialized view (for example, `max_staleness = INTERVAL "15" MINUTE` ). Queries can then read directly from the precomputed materialized view without delta processing.
 
 ## Troubleshoot query performance and smart tuning
 
@@ -354,31 +386,33 @@ When you query a base table, BigQuery uses smart tuning to automatically rewrite
 
 To check whether a query used a materialized view, inspect the `materialized_view_statistics` field in the query job details or query the [`INFORMATION_SCHEMA.JOBS_BY_PROJECT` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
 
-    SELECT
-      job_id,
-      total_slot_ms,
-      total_bytes_billed,
-      mv.table_reference.dataset_id,
-      mv.table_reference.table_id,
-      mv.chosen,
-      mv.rejected_reason
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT,
-      UNNEST(materialized_view_statistics.materialized_view) AS mv
-    WHERE
-      job_id = 'JOB_ID';
+```
+SELECT
+  job_id,
+  total_slot_ms,
+  total_bytes_billed,
+  mv.table_reference.dataset_id,
+  mv.table_reference.table_id,
+  mv.chosen,
+  mv.rejected_reason
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT,
+  UNNEST(materialized_view_statistics.materialized_view) AS mv
+WHERE
+  job_id = 'JOB_ID';
+```
 
 Replace the following:
 
-  - `  REGION  ` : your dataset's region (for example, `us` or `europe-west3` ).
-  - `  JOB_ID  ` : the query job ID.
+- `REGION` : your dataset's region (for example, `us` or `europe-west3` ).
+- `JOB_ID` : the query job ID.
 
 In the `materialized_view_statistics` object, each entry in the `materialized_view` array contains the following fields:
 
-  - `table_reference` : identifies the materialized view candidate.
-  - `chosen` : a boolean indicating whether the query optimizer selected the materialized view for execution ( `true` ) or rejected it ( `false` ).
-  - `estimated_bytes_saved` : the estimated bytes that the query avoided scanning by using the materialized view.
-  - `rejected_reason` : if `chosen` is `false` , specifies the reason why the optimizer rejected the materialized view.
+- `table_reference` : identifies the materialized view candidate.
+- `chosen` : a boolean indicating whether the query optimizer selected the materialized view for execution ( `true` ) or rejected it ( `false` ).
+- `estimated_bytes_saved` : the estimated bytes that the query avoided scanning by using the materialized view.
+- `rejected_reason` : if `chosen` is `false` , specifies the reason why the optimizer rejected the materialized view.
 
 For more information about rejected reasons and the `rejected_reason` enum, see [Understand why materialized views were rejected](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#understand-rejected) .
 
@@ -387,7 +421,7 @@ For more information about rejected reasons and the `rejected_reason` enum, see 
 When `chosen` is `false` , examine the value of `rejected_reason` to diagnose the cause:
 
 | `rejected_reason` value                   | Description                                                                                                                                  | Resolution                                                                                                                                                                                                |
-| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NO_DATA`                                 | The materialized view has no cached data because it hasn't refreshed yet, or the initial refresh failed.                                     | Trigger a manual refresh using `CALL BQ.REFRESH_MATERIALIZED_VIEW(...)` .                                                                                                                                 |
 | `COST`                                    | The query optimizer estimated that querying the base table (or reading from the query cache) is cheaper than querying the materialized view. | Review query filters and partitions. If the base table query scans only a tiny partition while the materialized view spans multiple partitions, querying the base table directly might be more efficient. |
 | `BASE_TABLE_DATA_CHANGE`                  | Data changes in one or more base tables invalidated the cached data outside the configured staleness window.                                 | Perform a manual refresh or configure `max_staleness` to allow queries to read stale data without falling back to base tables.                                                                            |
@@ -406,16 +440,18 @@ If a materialized view is not listed in `materialized_view_statistics` , the que
 Common causes include the following:
 
 1.  **Aggregation or filter mismatch** . The query uses aggregation functions, grouping columns, or filter predicates that cannot be computed from the precomputed aggregations in the materialized view.
-      - *Resolution* : Align aggregate functions and groupings between your queries and the materialized view definition.
+    - *Resolution* : Align aggregate functions and groupings between your queries and the materialized view definition.
 2.  **Non-incremental materialized views** . Views created with `allow_non_incremental_definition = true` don't support smart tuning.
-      - *Resolution* : Query non-incremental materialized views directly by specifying the view name in the `FROM` clause.
+    - *Resolution* : Query non-incremental materialized views directly by specifying the view name in the `FROM` clause.
 3.  **Direct query over stale view** . If you query a materialized view directly that has `max_staleness` set, the query returns stale precomputed results up to `max_staleness` without delta processing from base tables.
 
 ### Incompatible HyperLogLog sketch error
 
 **Error message:**
 
-    Invalid or incompatible sketch in HLL_COUNT.MERGE_PARTIAL
+```
+Invalid or incompatible sketch in HLL_COUNT.MERGE_PARTIAL
+```
 
 **Cause:**
 
@@ -441,30 +477,34 @@ BigQuery does not support modifying the column schema of a materialized view dir
 
 **Resolution:**
 
-  - You can modify materialized view options (such as `enable_refresh` , `refresh_interval_minutes` , and `max_staleness` ) using the `ALTER MATERIALIZED VIEW SET OPTIONS` statement:
-    
-        ALTER MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
-        SET OPTIONS (
-        enable_refresh = true,
-        refresh_interval_minutes = 20
-        );
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : the project that contains the materialized view.
-      - `  DATASET  ` : the dataset that contains the materialized view.
-      - `  MATERIALIZED_VIEW  ` : the name of the materialized view.
+- You can modify materialized view options (such as `enable_refresh` , `refresh_interval_minutes` , and `max_staleness` ) using the `ALTER MATERIALIZED VIEW SET OPTIONS` statement:
 
-  - To change the SQL query definition, add columns, or change column data types, recreate the view using `CREATE OR REPLACE MATERIALIZED VIEW` :
-    
-        CREATE OR REPLACE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
-        AS SELECT
-        ...
+  ```
+  ALTER MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
+  SET OPTIONS (
+  enable_refresh = true,
+  refresh_interval_minutes = 20
+  );
+  ```
+
+  Replace the following:
+
+  - `PROJECT_ID` : the project that contains the materialized view.
+  - `DATASET` : the dataset that contains the materialized view.
+  - `MATERIALIZED_VIEW` : the name of the materialized view.
+
+- To change the SQL query definition, add columns, or change column data types, recreate the view using `CREATE OR REPLACE MATERIALIZED VIEW` :
+
+  ```
+  CREATE OR REPLACE MATERIALIZED VIEW `PROJECT_ID.DATASET.MATERIALIZED_VIEW`
+  AS SELECT
+  ...
+  ```
 
 ## What's next
 
-  - Learn how to [create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) .
-  - Learn how to [use materialized views and smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use) .
-  - Learn how to [manage and refresh materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage) .
-  - Learn how to [monitor materialized view refreshes and usage](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor) .
-  - Learn how to [troubleshoot general query performance issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
+- Learn how to [create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) .
+- Learn how to [use materialized views and smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use) .
+- Learn how to [manage and refresh materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage) .
+- Learn how to [monitor materialized view refreshes and usage](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor) .
+- Learn how to [troubleshoot general query performance issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .

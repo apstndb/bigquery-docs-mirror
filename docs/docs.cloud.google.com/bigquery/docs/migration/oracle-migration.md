@@ -26,9 +26,9 @@ BigQuery continuously calculates how many slots are required by queries as they 
 
 You can choose between the following pricing models when capacity planning for BigQuery slots:
 
-  - [On-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) : Under on-demand pricing, BigQuery charges for the number of bytes processed (data size), so you pay only for the queries that you run. For more information about how BigQuery determines data size, see [Data size calculation](https://cloud.google.com/bigquery/pricing#data) . Because slots determine the underlying computational capacity, you can pay for BigQuery usage depending on the number of slots you need (instead of bytes processed). By default, Google Cloud projects are limited to a maximum of 2,000 slots.
+- [On-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) : Under on-demand pricing, BigQuery charges for the number of bytes processed (data size), so you pay only for the queries that you run. For more information about how BigQuery determines data size, see [Data size calculation](https://cloud.google.com/bigquery/pricing#data) . Because slots determine the underlying computational capacity, you can pay for BigQuery usage depending on the number of slots you need (instead of bytes processed). By default, Google Cloud projects are limited to a maximum of 2,000 slots.
 
-  - [Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) : With capacity-based pricing, you purchase BigQuery slot [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) (a minimum of 100) instead of paying for the bytes processed by queries that you run. We recommend capacity-based pricing for enterprise data warehouse workloads, which commonly see many concurrent reporting and extract-load-transform (ELT) queries that have predictable consumption.
+- [Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) : With capacity-based pricing, you purchase BigQuery slot [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) (a minimum of 100) instead of paying for the bytes processed by queries that you run. We recommend capacity-based pricing for enterprise data warehouse workloads, which commonly see many concurrent reporting and extract-load-transform (ELT) queries that have predictable consumption.
 
 To help with slot estimation, we recommend setting up [BigQuery monitoring using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) and [analyzing your audit logs using BigQuery](https://docs.cloud.google.com/bigquery/audit-logs) . Many customers use [Data Studio](https://datastudio.google.com/) (for example, see an [open source example](https://github.com/GoogleCloudPlatform/professional-services/tree/master/examples/bigquery-audit-log) of a [Data Studio dashboard](https://datastudio.google.com/c/u/0/reporting/1kwNFt05J8_GCju5TBH1v4IlBmmAU74Nu/page/nSaN) ), [Looker](https://looker.com/) , or [Tableau](https://www.tableau.com/) as frontends to visualize BigQuery audit log data, specifically for slot usage across queries and projects. You can also leverage BigQuery system tables data for monitoring slot utilization across jobs and reservations. For an example, see an [open source example](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/dashboards/system_tables) of a [Data Studio dashboard](https://datastudio.google.com/s/kGZzZJWkeyA) .
 
@@ -52,13 +52,13 @@ To grant access to a resource, assign one or more roles to a user, group, or ser
 
 IAM provides these types of roles:
 
-  - [Predefined roles](https://docs.cloud.google.com/bigquery/docs/access-control) are meant to support common use cases and access control patterns. Predefined roles provide granular access for a specific service and are managed by Google Cloud.
+- [Predefined roles](https://docs.cloud.google.com/bigquery/docs/access-control) are meant to support common use cases and access control patterns. Predefined roles provide granular access for a specific service and are managed by Google Cloud.
 
-  - [Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) include the Owner, Editor, and Viewer roles.
-    
-    > **Caution:** BigQuery's dataset-level basic roles existed prior to the introduction of IAM. We recommend that you minimize the use of basic roles. In production environments, don't grant basic roles unless there is no alternative. Instead, use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles.
+- [Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) include the Owner, Editor, and Viewer roles.
 
-  - [Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide granular access according to a user-specified list of permissions.
+  > **Caution:** BigQuery's dataset-level basic roles existed prior to the introduction of IAM. We recommend that you minimize the use of basic roles. In production environments, don't grant basic roles unless there is no alternative. Instead, use [predefined IAM](https://docs.cloud.google.com/bigquery/docs/access-control) roles.
+
+- [Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) provide granular access according to a user-specified list of permissions.
 
 When you assign both predefined and basic roles to a user, the permissions granted are a union of the permissions of each individual role.
 
@@ -112,11 +112,11 @@ Oracle requires pre-provisioned storage capacity, careful sizing, and autoincrem
 
 BigQuery manages performance and scales on the query level to maximize performance for the cost. BigQuery uses many optimizations, for example:
 
-  - [In-memory query execution](https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery)
-  - Multilevel tree architecture based on [Dremel](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36632.pdf) execution engine
-  - Automatic storage optimization within Capacitor
-  - 1 petabit per second total bisection bandwidth with [Jupiter](https://cloudplatform.googleblog.com/2015/06/A-Look-Inside-Googles-Data-Center-Networks.html)
-  - [Autoscaling resource management](https://cloud.google.com/blog/products/gcp/understanding-bigquerys-rapid-scaling-and-simple-pricing) to provide fast petabyte-scale queries
+- [In-memory query execution](https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery)
+- Multilevel tree architecture based on [Dremel](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36632.pdf) execution engine
+- Automatic storage optimization within Capacitor
+- 1 petabit per second total bisection bandwidth with [Jupiter](https://cloudplatform.googleblog.com/2015/06/A-Look-Inside-Googles-Data-Center-Networks.html)
+- [Autoscaling resource management](https://cloud.google.com/blog/products/gcp/understanding-bigquerys-rapid-scaling-and-simple-pricing) to provide fast petabyte-scale queries
 
 BigQuery gathers column statistics while loading the data and includes diagnostic [query plan](https://docs.cloud.google.com/bigquery/query-plan-explanation) [and timing](https://docs.cloud.google.com/bigquery/query-plan-explanation) information. Query resources are allocated according to query type and complexity. Each query uses some number of [slots](https://docs.cloud.google.com/bigquery/docs/slots) , which are units of computation that includes certain amount of CPU and RAM.
 
@@ -146,7 +146,7 @@ Oracle offers several caches for data and query results such as [buffer cache](h
 
 #### Connections
 
-BigQuery handles connection management and does not require you to do any server-side configuration. BigQuery provides [JDBC and ODBC](https://docs.cloud.google.com/bigquery/partners/simba-drivers) drivers. You can use the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) or the `  bq command-line tool  ` for interactive querying. You can use [REST APIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) and [client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) to programmatically interact with BigQuery You can [connect Google Sheets](https://cloud.google.com/blog/products/g-suite/connecting-bigquery-and-google-sheets-to-help-with-hefty-data-analysis) directly with BigQuery and use [ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to connect to Excel. If you are looking for a desktop client, there are free tools like [DBeaver](https://dbeaver.io/) .
+BigQuery handles connection management and does not require you to do any server-side configuration. BigQuery provides [JDBC and ODBC](https://docs.cloud.google.com/bigquery/partners/simba-drivers) drivers. You can use the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) or the [`bq command-line tool`](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) for interactive querying. You can use [REST APIs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) and [client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) to programmatically interact with BigQuery You can [connect Google Sheets](https://cloud.google.com/blog/products/g-suite/connecting-bigquery-and-google-sheets-to-help-with-hefty-data-analysis) directly with BigQuery and use [ODBC and JDBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) to connect to Excel. If you are looking for a desktop client, there are free tools like [DBeaver](https://dbeaver.io/) .
 
 Oracle provides [listeners](https://docs.oracle.com/database/121/NETAG/listenercfg.htm#NETAG010) , [services](https://docs.oracle.com/html/E25494_01/create007.htm) , service handlers, several configuration and tuning [parameters](https://docs.oracle.com/cd/B28359_01/network.111/b28317/listener.htm#NETRF293) , and [shared and dedicated servers](https://docs.oracle.com/cd/B28359_01/server.111/b28310/manproc001.htm#ADMIN11166) to handle database [connections](https://docs.oracle.com/database/121/NETAG/concepts.htm#NETAG002) . Oracle provides [JDBC](https://docs.oracle.com/cd/E11882_01/appdev.112/e13995/oracle/jdbc/OracleDriver.html) , [JDBC Thin](https://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm) , [ODBC](https://docs.oracle.com/database/121/ADFNS/adfns_odbc.htm#ADFNS1112) drivers, [Oracle Client](https://docs.oracle.com/cd/E11882_01/install.112/e47959/install.htm#NTCLI1280) , and [TNS](https://docs.oracle.com/cd/B28359_01/network.111/b28317/tnsnames.htm#NETRF007) connections. Scan listeners, scan IP addresses, and scan-name are needed for [RAC configurations](https://docs.oracle.com/database/121/RILIN/undrstnd.htm#RILIN006) .
 
@@ -200,15 +200,15 @@ BigQuery is a platform as a service (PaaS) and a Cloud massively parallel proces
 
 In traditional VM terms, BigQuery gives you the equivalent of both:
 
-  - Per-second billing
-  - Per-second scaling
+- Per-second billing
+- Per-second scaling
 
 To accomplish this task, BigQuery does the following:
 
-  - Keeps vast resources deployed to avoid having to rapidly scale.
-  - Uses multitenant resources to instantly allocate large chunks for seconds at a time.
-  - Efficiently allocates resources across users with economies of scale.
-  - Charges you only for the jobs you run, rather than for deployed resources, so you pay for resources you use.
+- Keeps vast resources deployed to avoid having to rapidly scale.
+- Uses multitenant resources to instantly allocate large chunks for seconds at a time.
+- Efficiently allocates resources across users with economies of scale.
+- Charges you only for the jobs you run, rather than for deployed resources, so you pay for resources you use.
 
 For more information about pricing, see [Understanding BigQuery rapid scaling and simple pricing](https://cloud.google.com/blog/products/gcp/understanding-bigquerys-rapid-scaling-and-simple-pricing) .
 
@@ -248,9 +248,9 @@ Table partitioning is widely used in Oracle data warehouses. In contrast to Orac
 
 BigQuery implements three types of [table partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) that allow queries to specify predicate filters based on the partitioning column to reduce the amount of data scanned.
 
-  - [Tables partitioned by ingestion time](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) : Tables are partitioned based on the data's ingestion time.
-  - [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `TIMESTAMP` or `DATE` column.
-  - [Tables partitioned by integer range](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) : Tables are partitioned based on an integer column.
+- [Tables partitioned by ingestion time](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) : Tables are partitioned based on the data's ingestion time.
+- [Tables partitioned by column](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) : Tables are partitioned based on a `TIMESTAMP` or `DATE` column.
+- [Tables partitioned by integer range](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) : Tables are partitioned based on an integer column.
 
 For more information about limits and quotas applied to partitioned tables in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
@@ -272,13 +272,13 @@ BigQuery uses temporary tables to cache query results that aren't written to a p
 
 Similar to Oracle, BigQuery lets you query [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) . BigQuery supports querying data directly from the external data sources including:
 
-  - Amazon Simple Storage Service (Amazon S3)
-  - Azure Blob Storage
-  - Bigtable
-  - Spanner
-  - Cloud SQL
-  - Cloud Storage
-  - Google Drive
+- Amazon Simple Storage Service (Amazon S3)
+- Azure Blob Storage
+- Bigtable
+- Spanner
+- Cloud SQL
+- Cloud Storage
+- Google Drive
 
 ### Data modeling
 
@@ -310,10 +310,10 @@ When designing a BigQuery DWH schema, creating a fact table in a flat table stru
 
 Figure 1 shows a fictional sales management database that includes four tables:
 
-  - Orders/sales table (fact table)
-  - Employee table
-  - Location table
-  - Customer table
+- Orders/sales table (fact table)
+- Employee table
+- Location table
+- Customer table
 
 The primary key for the sales table is the `OrderNum` , which also contains foreign keys to the other three tables.
 
@@ -326,7 +326,7 @@ Figure 1: Sample sales data in a star schema
 **Orders/fact table content**
 
 | OrderNum | CustomerID | SalesPersonID | amount | Location |
-| -------- | ---------- | ------------- | ------ | -------- |
+|----------|------------|---------------|--------|----------|
 | O-1      | 1234       | 12            | 234.22 | 18       |
 | O-2      | 4567       | 1             | 192.10 | 27       |
 | O-3      |            | 12            | 14.66  | 18       |
@@ -335,7 +335,7 @@ Figure 1: Sample sales data in a star schema
 **Employee table content**
 
 | SalesPersonID | FName | LName | title           |
-| ------------- | ----- | ----- | --------------- |
+|---------------|-------|-------|-----------------|
 | 1             | Alex  | Smith | Sales Associate |
 | 4             | Lisa  | Doe   | Sales Associate |
 | 12            | John  | Doe   | Sales Associate |
@@ -343,139 +343,56 @@ Figure 1: Sample sales data in a star schema
 **Customer table content**
 
 | CustomerID | FName  | LName |
-| ---------- | ------ | ----- |
+|------------|--------|-------|
 | 1234       | Amanda | Lee   |
 | 4567       | Matt   | Ryan  |
 
 **Location table content**
 
 | Location | city          | state | zipcode |
-| -------- | ------------- | ----- | ------- |
+|----------|---------------|-------|---------|
 | 18       | Bronx         | NY    | 10452   |
 | 26       | Mountain View | CA    | 90210   |
 | 27       | Chicago       | IL    | 60613   |
 
 #### Query to flatten the data using `LEFT OUTER JOIN`
 
-    #standardSQL
-    INSERT INTO flattened
-    SELECT
-      orders.ordernum,
-      orders.customerID,
-      customer.fname,
-      customer.lname,
-      orders.salespersonID,
-      employee.fname,
-      employee.lname,
-      employee.title,
-      orders.amount,
-      orders.location,
-      location.city,
-      location.state,
-      location.zipcode
-    FROM orders
-    LEFT OUTER JOIN customer
-      ON customer.customerID = orders.customerID
-    LEFT OUTER JOIN employee
-      ON employee.salespersonID = orders.salespersonID
-    LEFT OUTER JOIN location
-      ON location.locationID = orders.locationID
+```
+#standardSQL
+INSERT INTO flattened
+SELECT
+  orders.ordernum,
+  orders.customerID,
+  customer.fname,
+  customer.lname,
+  orders.salespersonID,
+  employee.fname,
+  employee.lname,
+  employee.title,
+  orders.amount,
+  orders.location,
+  location.city,
+  location.state,
+  location.zipcode
+FROM orders
+LEFT OUTER JOIN customer
+  ON customer.customerID = orders.customerID
+LEFT OUTER JOIN employee
+  ON employee.salespersonID = orders.salespersonID
+LEFT OUTER JOIN location
+  ON location.locationID = orders.locationID
+```
 
 > **Note:** BigQuery processes `JOIN` s from left to right (top to bottom). Placing `JOIN` s that reduce the number of records as early as possible in the chain increases query efficiency by reducing response time.
 
 #### Output of the flattened data
 
-<table>
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-<col style="width: 8%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>OrderNum</th>
-<th>CustomerID</th>
-<th>FName</th>
-<th>LName</th>
-<th>SalesPersonID</th>
-<th>FName</th>
-<th>LName</th>
-<th>amount</th>
-<th>Location</th>
-<th>city</th>
-<th>state</th>
-<th>zipcode</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>O-1</td>
-<td>1234</td>
-<td>Amanda</td>
-<td>Lee</td>
-<td>12</td>
-<td>John</td>
-<td>Doe</td>
-<td>234.22</td>
-<td>18</td>
-<td>Bronx</td>
-<td>NY</td>
-<td>10452</td>
-</tr>
-<tr class="even">
-<td>O-2</td>
-<td>4567</td>
-<td>Matt</td>
-<td>Ryan</td>
-<td>1</td>
-<td>Alex</td>
-<td>Smith</td>
-<td>192.10</td>
-<td>27</td>
-<td>Chicago</td>
-<td>IL</td>
-<td>60613</td>
-</tr>
-<tr class="odd">
-<td>O-3</td>
-<td></td>
-<td></td>
-<td></td>
-<td>12</td>
-<td>John</td>
-<td>Doe</td>
-<td>14.66</td>
-<td>18</td>
-<td>Bronx</td>
-<td>NY</td>
-<td>10452</td>
-</tr>
-<tr class="even">
-<td>O-4</td>
-<td>4567</td>
-<td>Matt</td>
-<td>Ryan</td>
-<td>4</td>
-<td>Lisa</td>
-<td>Doe</td>
-<td>182.00</td>
-<td>26</td>
-<td>Mountain
-<p>View</p></td>
-<td>CA</td>
-<td>90210</td>
-</tr>
-</tbody>
-</table>
+| OrderNum | CustomerID | FName  | LName | SalesPersonID | FName | LName | amount | Location | city          | state | zipcode |
+|----------|------------|--------|-------|---------------|-------|-------|--------|----------|---------------|-------|---------|
+| O-1      | 1234       | Amanda | Lee   | 12            | John  | Doe   | 234.22 | 18       | Bronx         | NY    | 10452   |
+| O-2      | 4567       | Matt   | Ryan  | 1             | Alex  | Smith | 192.10 | 27       | Chicago       | IL    | 60613   |
+| O-3      |            |        |       | 12            | John  | Doe   | 14.66  | 18       | Bronx         | NY    | 10452   |
+| O-4      | 4567       | Matt   | Ryan  | 4             | Lisa  | Doe   | 182.00 | 26       | Mountain View | CA    | 90210   |
 
 #### Nested and repeated fields
 
@@ -485,9 +402,9 @@ To better understand the implementation of nested and repeated fields, look at a
 
 To convert the flat structure into a nested or repeated schema, nest the fields as follows:
 
-  - `CustomerID` , `FName` , `LName` nested into a new field called `Customer` .
-  - `SalesPersonID` , `FName` , `LName` nested into a new field called `Salesperson` .
-  - `LocationID` , `city` , `state` , `zip code` nested into a new field called `Location` .
+- `CustomerID` , `FName` , `LName` nested into a new field called `Customer` .
+- `SalesPersonID` , `FName` , `LName` nested into a new field called `Salesperson` .
+- `LocationID` , `city` , `state` , `zip code` nested into a new field called `Location` .
 
 Fields `OrderNum` and `amount` are not nested, as they represent unique elements.
 
@@ -523,13 +440,13 @@ This section provides information about data migration from Oracle to BigQuery, 
 
 It is recommended to perform migration in phases by identifying appropriate use cases for migration. There are multiple tools and services available to migrate data from Oracle to Google Cloud. While this list is not exhaustive, it does provide a sense of the size and scope of the migration effort.
 
-  - **Exporting data out of Oracle:** For more information, see [Initial load](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#initial_load) and [CDC and streaming ingestion from Oracle to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#cdc-streaming-oracle-bigquery) . [ETL tools](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#etl-elt-migration) can be used for the initial load.
+- **Exporting data out of Oracle:** For more information, see [Initial load](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#initial_load) and [CDC and streaming ingestion from Oracle to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#cdc-streaming-oracle-bigquery) . [ETL tools](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#etl-elt-migration) can be used for the initial load.
 
-  - **Data staging (in Cloud Storage):** Cloud Storage is the recommended landing place (staging area) for data exported from Oracle. Cloud Storage is designed for fast, flexible ingestion of structured or unstructured data.
+- **Data staging (in Cloud Storage):** Cloud Storage is the recommended landing place (staging area) for data exported from Oracle. Cloud Storage is designed for fast, flexible ingestion of structured or unstructured data.
 
-  - **ETL process:** For more information, see [ETL/ELT migration](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#etl-elt-migration) .
+- **ETL process:** For more information, see [ETL/ELT migration](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration#etl-elt-migration) .
 
-  - **Loading data directly into BigQuery:** You can load data into BigQuery directly from Cloud Storage, through Dataflow, or through real-time streaming. Use Dataflow when data transformation is required.
+- **Loading data directly into BigQuery:** You can load data into BigQuery directly from Cloud Storage, through Dataflow, or through real-time streaming. Use Dataflow when data transformation is required.
 
 ### Initial load
 
@@ -541,11 +458,11 @@ If the data is up to a few terabytes, dumping the data and using `gcloud storage
 
 When planning for data migration, consider the following:
 
-  - **Oracle DWH data size:** The source size of your schema carries a significant weight on the chosen data transfer method, especially when the data size is large (terabytes and above). When the data size is relatively small, the data transfer process can be completed in fewer steps. Dealing with large-scale data sizes makes the overall process more complex.
+- **Oracle DWH data size:** The source size of your schema carries a significant weight on the chosen data transfer method, especially when the data size is large (terabytes and above). When the data size is relatively small, the data transfer process can be completed in fewer steps. Dealing with large-scale data sizes makes the overall process more complex.
 
-  - **Downtime:** Deciding whether downtime is an option for your migration to BigQuery is important. To reduce downtime, you can bulk load the steady historical data and have a CDC solution to catch up with changes that happen during the transfer process.
+- **Downtime:** Deciding whether downtime is an option for your migration to BigQuery is important. To reduce downtime, you can bulk load the steady historical data and have a CDC solution to catch up with changes that happen during the transfer process.
 
-  - **Pricing:** In some scenarios, you might need third-party integration tools (for example, ETL or replication tools) that require additional licenses.
+- **Pricing:** In some scenarios, you might need third-party integration tools (for example, ETL or replication tools) that require additional licenses.
 
 #### Initial data transfer (batch)
 
@@ -591,8 +508,8 @@ There are many possibilities for handling ETL/ELT on Google Cloud. Technical gui
 
 If your existing platform supports BigQuery and you want to continue using your existing data integration tool:
 
-  - You can keep the ETL/ELT platform as it is and change the necessary storage stages with BigQuery in your ETL/ELT jobs.
-  - If you want to migrate the ETL/ELT platform to Google Cloud as well, you can ask your vendor whether their tool is licensed on Google Cloud, and if it is, you can install it on Compute Engine or check the Google Cloud Marketplace.
+- You can keep the ETL/ELT platform as it is and change the necessary storage stages with BigQuery in your ETL/ELT jobs.
+- If you want to migrate the ETL/ELT platform to Google Cloud as well, you can ask your vendor whether their tool is licensed on Google Cloud, and if it is, you can install it on Compute Engine or check the Google Cloud Marketplace.
 
 For information about the data integration solution providers, see [BigQuery partners](https://docs.cloud.google.com/bigquery#section-6) .
 
@@ -622,7 +539,7 @@ Managed Airflow uses directed acyclic graphs (DAGs) for scheduling and orchestra
 
 The following sample code is a high-level part of a sample DAG for the preceding diagram:
 
-``` 
+```
     default_args = {
       'owner': 'airflow',
       'depends_on_past': False,
@@ -743,7 +660,7 @@ The preceding code is provided for demonstration purposes and cannot be used as 
 
 ##### Managed Service for Apache Spark
 
-[Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) is a Google managed Hadoop service. You can use Sqoop to export data from Oracle and many relational databases into Cloud Storage as Avro files, and then you can load Avro files into BigQuery using the `  bq tool  ` . It is very common to install ETL tools like CDAP on Hadoop that use JDBC to extract data and Apache Spark or MapReduce for transformations of the data.
+[Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc) is a Google managed Hadoop service. You can use Sqoop to export data from Oracle and many relational databases into Cloud Storage as Avro files, and then you can load Avro files into BigQuery using the [`bq tool`](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600) . It is very common to install ETL tools like CDAP on Hadoop that use JDBC to extract data and Apache Spark or MapReduce for transformations of the data.
 
 #### Partner tools for data migration
 
@@ -807,7 +724,7 @@ Oracle Application Express (APEX) applications are unique to Oracle and need to 
 
 ## What's next
 
-  - Learn how to [Optimize workloads](https://docs.cloud.google.com/bigquery/docs/admin-intro#optimize_workloads) for overall performance optimization and cost reduction.
-  - Learn about how to [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
-  - For BigQuery updates, see [release notes](https://docs.cloud.google.com/bigquery/docs/release-notes) .
-  - Reference the [Oracle SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql) .
+- Learn how to [Optimize workloads](https://docs.cloud.google.com/bigquery/docs/admin-intro#optimize_workloads) for overall performance optimization and cost reduction.
+- Learn about how to [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
+- For BigQuery updates, see [release notes](https://docs.cloud.google.com/bigquery/docs/release-notes) .
+- Reference the [Oracle SQL translation guide](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql) .

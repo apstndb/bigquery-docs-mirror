@@ -22,21 +22,21 @@ For more information, see [Create metadata files](https://docs.cloud.google.com/
 
 You can use the `dwh-migration-dumper` tool to extract metadata from the following database platforms:
 
-  - Teradata version 15 or later, and on-premises Teradata VantageCore
-  - Amazon Redshift
-  - Apache Hive
-  - Apache Impala
-  - Apache Spark
-  - Azure Synapse
-  - Greenplum
-  - SQL Server
-  - IBM Netezza
-  - Oracle
-  - PostgreSQL
-  - Snowflake
-  - Trino or PrestoSQL
-  - Vertica
-  - BigQuery
+- Teradata version 15 or later, and on-premises Teradata VantageCore
+- Amazon Redshift
+- Apache Hive
+- Apache Impala
+- Apache Spark
+- Azure Synapse
+- Greenplum
+- SQL Server
+- IBM Netezza
+- Oracle
+- PostgreSQL
+- Snowflake
+- Trino or PrestoSQL
+- Vertica
+- BigQuery
 
 For most of these databases you can also extract query logs.
 
@@ -73,21 +73,25 @@ To install the `dwh-migration-dumper` tool, follow these steps:
 1.  On the machine where you want to run the `dwh-migration-dumper` tool, download the zip file from the [`dwh-migration-dumper` tool GitHub repository](https://github.com/google/dwh-migration-tools/releases/latest) .
 
 2.  To validate the `dwh-migration-dumper` tool zip file, download the [`SHA256SUMS.txt` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command:
-    
+
     ### Bash
-    
-        sha256sum --check SHA256SUMS.txt
-    
+
+    ```
+    sha256sum --check SHA256SUMS.txt
+    ```
+
     If verification fails, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#corrupted_zip_file) .
-    
+
     ### Windows PowerShell
-    
-        (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
-    
-    Replace the `  RELEASE_ZIP_FILENAME  ` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
-    
+
+    ```
+    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+    ```
+
+    Replace the `RELEASE_ZIP_FILENAME` with the downloaded zip filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip`
+
     The `True` result confirms successful checksum verification.
-    
+
     The `False` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
 3.  Extract the zip file. The extraction tool binary is in the `/bin` subdirectory of the folder created by extracting the zip file.
@@ -98,7 +102,9 @@ To install the `dwh-migration-dumper` tool, follow these steps:
 
 The `dwh-migration-dumper` tool uses the following format:
 
-    dwh-migration-dumper [FLAGS]
+```
+dwh-migration-dumper [FLAGS]
+```
 
 Running the `dwh-migration-dumper` tool creates an output file named `dwh-migration-<source platform>-metadata.zip` —for example, `dwh-migration-teradata-metadata.zip` , in your working directory.
 
@@ -131,227 +137,227 @@ The following table describes the commonly used flags for extracting Teradata me
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--assessment</code></td>
+<td><code>--assessment</code></td>
 <td></td>
-<td><p>Turns on assessment mode when generating database logs or extracting metadata. The <code dir="ltr" translate="no">dwh-migration-dumper</code> tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs it extracts additional columns for BigQuery migration assessment.</p></td>
+<td><p>Turns on assessment mode when generating database logs or extracting metadata. The <code>dwh-migration-dumper</code> tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs it extracts additional columns for BigQuery migration assessment.</p></td>
 <td>Required when using for running assessment, not required for translation.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--connector</code></td>
+<td><code>--connector</code></td>
 <td></td>
 <td>The name of the connector to use, in this case <strong>teradata</strong> for metadata or <strong>teradata-logs</strong> for query logs.</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--database</code></td>
+<td><code>--database</code></td>
 <td></td>
 <td><p>A list of the databases to extract, separated by commas. The database names might be case-sensitive, depending on the Teradata server configuration.</p>
-<p>If this flag is used in combination with the <code dir="ltr" translate="no">teradata</code> connector, then the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool filters the metadata tables and views by the provided list of databases. The exceptions are the <code dir="ltr" translate="no">DatabasesV</code> and <code dir="ltr" translate="no">RoleMembersV</code> views - the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool extracts the databases and users from these views without filtering by the database name.</p>
-<p>This flag cannot be used in combination with the <code dir="ltr" translate="no">teradata-logs</code> connector. Query logs are always extracted for all the databases.</p></td>
+<p>If this flag is used in combination with the <code>teradata</code> connector, then the <code>dwh-migration-dumper</code> tool filters the metadata tables and views by the provided list of databases. The exceptions are the <code>DatabasesV</code> and <code>RoleMembersV</code> views - the <code>dwh-migration-dumper</code> tool extracts the databases and users from these views without filtering by the database name.</p>
+<p>This flag cannot be used in combination with the <code>teradata-logs</code> connector. Query logs are always extracted for all the databases.</p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--driver</code></td>
+<td><code>--driver</code></td>
 <td></td>
 <td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--host</code></td>
+<td><code>--host</code></td>
 <td>localhost</td>
 <td>The hostname or IP address of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--password</code></td>
+<td><code>--password</code></td>
 <td></td>
 <td>The password to use for the database connection.</td>
 <td>If not specified, the extraction tool uses a secure prompt to request it.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--port</code></td>
+<td><code>--port</code></td>
 <td>1025</td>
 <td>The port of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--user</code></td>
+<td><code>--user</code></td>
 <td></td>
 <td><p>The username to use for the database connection.</p></td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--query-log-alternates</code></td>
+<td><code>--query-log-alternates</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>To extract the query logs from an alternative location, we recommend that you use the <code dir="ltr" translate="no">-Dteradata-logs.query-logs-table</code> and <code dir="ltr" translate="no">-Dteradata-logs.sql-logs-table</code> flags instead.</p>
-<p>By default, the query logs are extracted from the tables <code dir="ltr" translate="no">dbc.DBQLogTbl</code> and <code dir="ltr" translate="no">dbc.DBQLSQLTbl</code> . If you use the <code dir="ltr" translate="no">--assessment</code> flag, then the query logs are extracted from the view <code dir="ltr" translate="no">dbc.QryLogV</code> and from the table <code dir="ltr" translate="no">dbc.DBQLSQLTbl</code> . If you need to extract the query logs from an alternative location, you can specify the fully-qualified names of the tables or views by using the <code dir="ltr" translate="no">--query-log-alternates</code> flag. The first parameter references the alternative to the <code dir="ltr" translate="no">dbc.DBQLogTbl</code> table, and the second parameter references the alternative to the <code dir="ltr" translate="no">dbc.DBQLSQLTbl</code> table. Both parameters are required.<br />
-The <code dir="ltr" translate="no">-Dteradata-logs.log-date-column</code> flag can be used to improve extraction performance when both tables have an indexed column of type <code dir="ltr" translate="no">DATE</code> .</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-alternates historicdb.ArchivedQryLogV,historicdb.ArchivedDBQLSqlTbl</code></p></td>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>To extract the query logs from an alternative location, we recommend that you use the <code>-Dteradata-logs.query-logs-table</code> and <code>-Dteradata-logs.sql-logs-table</code> flags instead.</p>
+<p>By default, the query logs are extracted from the tables <code>dbc.DBQLogTbl</code> and <code>dbc.DBQLSQLTbl</code> . If you use the <code>--assessment</code> flag, then the query logs are extracted from the view <code>dbc.QryLogV</code> and from the table <code>dbc.DBQLSQLTbl</code> . If you need to extract the query logs from an alternative location, you can specify the fully-qualified names of the tables or views by using the <code>--query-log-alternates</code> flag. The first parameter references the alternative to the <code>dbc.DBQLogTbl</code> table, and the second parameter references the alternative to the <code>dbc.DBQLSQLTbl</code> table. Both parameters are required.<br />
+The <code>-Dteradata-logs.log-date-column</code> flag can be used to improve extraction performance when both tables have an indexed column of type <code>DATE</code> .</p>
+<p>Example: <code>--query-log-alternates historicdb.ArchivedQryLogV,historicdb.ArchivedDBQLSqlTbl</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata.tmode</code></td>
+<td><code>-Dteradata.tmode</code></td>
 <td></td>
 <td><p>The transaction mode for the connection. The following values are supported:</p>
 <ul>
-<li><code dir="ltr" translate="no">ANSI</code> : ANSI mode. This is the default mode (if the flag is not specified)</li>
-<li><code dir="ltr" translate="no">TERA</code> : Teradata transaction mode (BTET)</li>
-<li><code dir="ltr" translate="no">DEFAULT</code> : use the default transaction mode configured on the database server</li>
-<li><code dir="ltr" translate="no">NONE</code> : no mode is set for the connection</li>
+<li><code>ANSI</code> : ANSI mode. This is the default mode (if the flag is not specified)</li>
+<li><code>TERA</code> : Teradata transaction mode (BTET)</li>
+<li><code>DEFAULT</code> : use the default transaction mode configured on the database server</li>
+<li><code>NONE</code> : no mode is set for the connection</li>
 </ul>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.tmode=TERA</code></p>
+<code>-Dteradata.tmode=TERA</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.tmode=TERA"</code></p></td>
+<code>"-Dteradata.tmode=TERA"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata-logs.log-date-column</code></td>
+<td><code>-Dteradata-logs.log-date-column</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>To improve performance of joining tables that are specified by the <code dir="ltr" translate="no">-Dteradata-logs.query-logs-table</code> and <code dir="ltr" translate="no">-Dteradata-logs.sql-logs-table</code> flags, you can include an additional column of type <code dir="ltr" translate="no">DATE</code> in the <code dir="ltr" translate="no">JOIN</code> condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>To improve performance of joining tables that are specified by the <code>-Dteradata-logs.query-logs-table</code> and <code>-Dteradata-logs.sql-logs-table</code> flags, you can include an additional column of type <code>DATE</code> in the <code>JOIN</code> condition. This column must be defined in both tables and it must be part of the Partitioned Primary Index.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.log-date-column=ArchiveLogDate</code></p>
+<code>-Dteradata-logs.log-date-column=ArchiveLogDate</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.log-date-column=ArchiveLogDate"</code></p></td>
+<code>"-Dteradata-logs.log-date-column=ArchiveLogDate"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata-logs.query-logs-table</code></td>
+<td><code>-Dteradata-logs.query-logs-table</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>By default, the query logs are extracted from the <code dir="ltr" translate="no">dbc.DBQLogTbl</code> table. If you use the <code dir="ltr" translate="no">--assessment</code> flag, then the query logs are extracted from the view <code dir="ltr" translate="no">dbc.QryLogV</code> . If you need to extract the query logs from an alternative location, you can specify the fully-qualified name of the table or view by using this flag.<br />
-See <code dir="ltr" translate="no">-Dteradata-logs.log-date-column</code> flag to improve extraction performance.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>By default, the query logs are extracted from the <code>dbc.DBQLogTbl</code> table. If you use the <code>--assessment</code> flag, then the query logs are extracted from the view <code>dbc.QryLogV</code> . If you need to extract the query logs from an alternative location, you can specify the fully-qualified name of the table or view by using this flag.<br />
+See <code>-Dteradata-logs.log-date-column</code> flag to improve extraction performance.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV</code></p>
+<code>-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV"</code></p></td>
+<code>"-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata-logs.sql-logs-table</code></td>
+<td><code>-Dteradata-logs.sql-logs-table</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>By default, the query logs containing SQL text are extracted from the <code dir="ltr" translate="no">dbc.DBQLSqlTbl</code> table. If you need to extract them from an alternative location, you can specify the fully-qualified name of the table or view by using this flag.<br />
-See <code dir="ltr" translate="no">-Dteradata-logs.log-date-column</code> flag to improve extraction performance.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>By default, the query logs containing SQL text are extracted from the <code>dbc.DBQLSqlTbl</code> table. If you need to extract them from an alternative location, you can specify the fully-qualified name of the table or view by using this flag.<br />
+See <code>-Dteradata-logs.log-date-column</code> flag to improve extraction performance.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl</code></p>
+<code>-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl"</code></p></td>
+<code>"-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata-logs.utility-logs-table</code></td>
+<td><code>-Dteradata-logs.utility-logs-table</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>By default, the utility logs are extracted from the table <code dir="ltr" translate="no">dbc.DBQLUtilityTbl</code> . If you need to extract the utility logs from an alternative location, you can specify the fully-qualified name of the table by using the <code dir="ltr" translate="no">-Dteradata-logs.utility-logs-table</code> flag.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>By default, the utility logs are extracted from the table <code>dbc.DBQLUtilityTbl</code> . If you need to extract the utility logs from an alternative location, you can specify the fully-qualified name of the table by using the <code>-Dteradata-logs.utility-logs-table</code> flag.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs</code></p>
+<code>-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"</code></p></td>
+<code>"-Dteradata-logs.utility-logs-table=historicdb.ArchivedUtilityLogs"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata-logs.res-usage-scpu-table</code></td>
+<td><code>-Dteradata-logs.res-usage-scpu-table</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>By default, the SCPU resource usage logs are extracted from the table <code dir="ltr" translate="no">dbc.ResUsageScpu</code> . If you need to extract these from an alternative location, you can specify the fully-qualified name of the table by using the <code dir="ltr" translate="no">-Dteradata-logs.res-usage-scpu-table</code> flag.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>By default, the SCPU resource usage logs are extracted from the table <code>dbc.ResUsageScpu</code> . If you need to extract these from an alternative location, you can specify the fully-qualified name of the table by using the <code>-Dteradata-logs.res-usage-scpu-table</code> flag.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu</code></p>
+<code>-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu"</code></p></td>
+<code>"-Dteradata-logs.res-usage-scpu-table=historicdb.ArchivedResUsageScpu"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata-logs.res-usage-spma-table</code></td>
+<td><code>-Dteradata-logs.res-usage-spma-table</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>By default, the SPMA resource usage logs are extracted from the table <code dir="ltr" translate="no">dbc.ResUsageSpma</code> . If you need to extract these logs from an alternative location, you can specify the fully-qualified name of the table by using the <code dir="ltr" translate="no">-Dteradata-logs.res-usage-spma-table</code> flag.</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>By default, the SPMA resource usage logs are extracted from the table <code>dbc.ResUsageSpma</code> . If you need to extract these logs from an alternative location, you can specify the fully-qualified name of the table by using the <code>-Dteradata-logs.res-usage-spma-table</code> flag.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma</code></p>
+<code>-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma"</code></p></td>
+<code>"-Dteradata-logs.res-usage-spma-table=historicdb.ArchivedResUsageSpma"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--query-log-start</code></td>
+<td><code>--query-log-start</code></td>
 <td></td>
 <td><p>The start time (inclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <strong>teradata-logs</strong> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-start "2023-01-01 14:00:00"</code></p></td>
+<p>Example: <code>--query-log-start "2023-01-01 14:00:00"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--query-log-end</code></td>
+<td><code>--query-log-end</code></td>
 <td></td>
 <td><p>The end time (exclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <strong>teradata-logs</strong> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-end "2023-01-15 22:00:00"</code></p></td>
+<p>Example: <code>--query-log-end "2023-01-15 22:00:00"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata.metadata.tablesizev.max-rows</code></td>
+<td><code>-Dteradata.metadata.tablesizev.max-rows</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata</code> connector only.</p>
-<p>Limit the number of rows extracted from the view <code dir="ltr" translate="no">TableSizeV</code> . The rows are grouped by the columns <code dir="ltr" translate="no">DatabaseName</code> , <code dir="ltr" translate="no">AccountName</code> , and <code dir="ltr" translate="no">TableName</code> , and then sorted in descending order by the size of the permanent space (the expression <code dir="ltr" translate="no">SUM(CurrentPerm)</code> ). Then, the specified number of rows are extracted.</p>
+<td><p>For the <code>teradata</code> connector only.</p>
+<p>Limit the number of rows extracted from the view <code>TableSizeV</code> . The rows are grouped by the columns <code>DatabaseName</code> , <code>AccountName</code> , and <code>TableName</code> , and then sorted in descending order by the size of the permanent space (the expression <code>SUM(CurrentPerm)</code> ). Then, the specified number of rows are extracted.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.metadata.tablesizev.max-rows=100000</code></p>
+<code>-Dteradata.metadata.tablesizev.max-rows=100000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.metadata.tablesizev.max-rows=100000"</code></p></td>
+<code>"-Dteradata.metadata.tablesizev.max-rows=100000"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata.metadata.diskspacev.max-rows</code></td>
+<td><code>-Dteradata.metadata.diskspacev.max-rows</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata</code> connector only.</p>
-<p>Limit the number of rows extracted from the view <code dir="ltr" translate="no">DiskSpaceV</code> . The rows are sorted in descending order by the size of the permanent space (column <code dir="ltr" translate="no">CurrentPerm</code> ), and then the specified number of rows are extracted.</p>
+<td><p>For the <code>teradata</code> connector only.</p>
+<p>Limit the number of rows extracted from the view <code>DiskSpaceV</code> . The rows are sorted in descending order by the size of the permanent space (column <code>CurrentPerm</code> ), and then the specified number of rows are extracted.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.metadata.diskspacev.max-rows=100000</code></p>
+<code>-Dteradata.metadata.diskspacev.max-rows=100000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.metadata.diskspacev.max-rows=100000"</code></p></td>
+<code>"-Dteradata.metadata.diskspacev.max-rows=100000"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata.metadata.databasesv.users.max-rows</code></td>
+<td><code>-Dteradata.metadata.databasesv.users.max-rows</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata</code> connector only.</p>
-<p>Limit the number of rows that represent users ( <code dir="ltr" translate="no">DBKind='U'</code> ) that are extracted from the view <code dir="ltr" translate="no">DatabasesV</code> . The rows are sorted in descending order by the column <code dir="ltr" translate="no">PermSpace</code> , and then the specified number of rows are extracted.</p>
+<td><p>For the <code>teradata</code> connector only.</p>
+<p>Limit the number of rows that represent users ( <code>DBKind='U'</code> ) that are extracted from the view <code>DatabasesV</code> . The rows are sorted in descending order by the column <code>PermSpace</code> , and then the specified number of rows are extracted.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.metadata.databasesv.users.max-rows=100000</code></p>
+<code>-Dteradata.metadata.databasesv.users.max-rows=100000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.metadata.databasesv.users.max-rows=100000"</code></p></td>
+<code>"-Dteradata.metadata.databasesv.users.max-rows=100000"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata.metadata.databasesv.dbs.max-rows</code></td>
+<td><code>-Dteradata.metadata.databasesv.dbs.max-rows</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata</code> connector only.</p>
-<p>Limit the number of rows that represent databases ( <code dir="ltr" translate="no">DBKind='D'</code> ) that are extracted from the view <code dir="ltr" translate="no">DatabasesV</code> . The rows are sorted in descending order by the column <code dir="ltr" translate="no">PermSpace</code> , and then the specified number of rows are extracted.</p>
+<td><p>For the <code>teradata</code> connector only.</p>
+<p>Limit the number of rows that represent databases ( <code>DBKind='D'</code> ) that are extracted from the view <code>DatabasesV</code> . The rows are sorted in descending order by the column <code>PermSpace</code> , and then the specified number of rows are extracted.</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.metadata.databasesv.dbs.max-rows=100000</code></p>
+<code>-Dteradata.metadata.databasesv.dbs.max-rows=100000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.metadata.databasesv.dbs.max-rows=100000"</code></p></td>
+<code>"-Dteradata.metadata.databasesv.dbs.max-rows=100000"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">-Dteradata.metadata.max-text-length</code></td>
+<td><code>-Dteradata.metadata.max-text-length</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata</code> connector only.</p>
-<p>Maximum length of the text column when extracting the data from the <code dir="ltr" translate="no">TableTextV</code> view. Text longer than the defined limit will be split into multiple rows. Allowed range: between 5000 and 32000 (inclusive).</p>
+<td><p>For the <code>teradata</code> connector only.</p>
+<p>Maximum length of the text column when extracting the data from the <code>TableTextV</code> view. Text longer than the defined limit will be split into multiple rows. Allowed range: between 5000 and 32000 (inclusive).</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata.metadata.max-text-length=10000</code></p>
+<code>-Dteradata.metadata.max-text-length=10000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata.metadata.max-text-length=10000"</code></p></td>
+<code>"-Dteradata.metadata.max-text-length=10000"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dteradata-logs.max-sql-length</code></td>
+<td><code>-Dteradata-logs.max-sql-length</code></td>
 <td></td>
-<td><p>For the <code dir="ltr" translate="no">teradata-logs</code> connector only.</p>
-<p>Maximum length of the <code dir="ltr" translate="no">DBQLSqlTbl.SqlTextInfo</code> column. Query text longer than the defined limit will be split into multiple rows. Allowed range: between 5000 and 31000 (inclusive).</p>
+<td><p>For the <code>teradata-logs</code> connector only.</p>
+<p>Maximum length of the <code>DBQLSqlTbl.SqlTextInfo</code> column. Query text longer than the defined limit will be split into multiple rows. Allowed range: between 5000 and 31000 (inclusive).</p>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dteradata-logs.max-sql-length=10000</code></p>
+<code>-Dteradata-logs.max-sql-length=10000</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dteradata-logs.max-sql-length=10000"</code></p></td>
+<code>"-Dteradata-logs.max-sql-length=10000"</code></p></td>
 <td>No</td>
 </tr>
 </tbody>
@@ -361,63 +367,67 @@ See <code dir="ltr" translate="no">-Dteradata-logs.log-date-column</code> flag t
 
 The following example shows how to extract metadata for two Teradata databases on the local host:
 
-    dwh-migration-dumper \
-      --connector teradata \
-      --user user \
-      --password password \
-      --database database1,database2 \
-      --driver path/terajdbc4.jar
+```
+dwh-migration-dumper \
+  --connector teradata \
+  --user user \
+  --password password \
+  --database database1,database2 \
+  --driver path/terajdbc4.jar
+```
 
 The following example shows how to extract query logs for Assessment on the local host for authentication:
 
-    dwh-migration-dumper \
-      --connector teradata-logs \
-      --assessment \
-      --user user \
-      --password password \
-      --driver path/terajdbc4.jar
+```
+dwh-migration-dumper \
+  --connector teradata-logs \
+  --assessment \
+  --user user \
+  --password password \
+  --driver path/terajdbc4.jar
+```
 
 #### Tables and views extracted by the `dwh-migration-dumper` tool
 
 The following tables and views are extracted when you use the `teradata` connector:
 
-  - `DBC.ColumnsV`
-  - `DBC.DatabasesV`
-  - `DBC.DBCInfo`
-  - `DBC.FunctionsV`
-  - `DBC.IndicesV`
-  - `DBC.PartitioningConstraintsV`
-  - `DBC.TablesV`
-  - `DBC.TableTextV`
+- `DBC.ColumnsV`
+- `DBC.DatabasesV`
+- `DBC.DBCInfo`
+- `DBC.FunctionsV`
+- `DBC.IndicesV`
+- `DBC.PartitioningConstraintsV`
+- `DBC.TablesV`
+- `DBC.TableTextV`
 
 The following additional tables and views are extracted when you use the `teradata` connector with `--assessment` flag:
 
-  - `DBC.All_RI_ChildrenV`
-  - `DBC.All_RI_ParentsV`
-  - `DBC.AllTempTablesVX`
-  - `DBC.DiskSpaceV`
-  - `DBC.RoleMembersV`
-  - `DBC.StatsV`
-  - `DBC.TableSizeV`
+- `DBC.All_RI_ChildrenV`
+- `DBC.All_RI_ParentsV`
+- `DBC.AllTempTablesVX`
+- `DBC.DiskSpaceV`
+- `DBC.RoleMembersV`
+- `DBC.StatsV`
+- `DBC.TableSizeV`
 
 The following tables and views are extracted when you use the `teradata-logs` connector:
 
-  - `DBC.DBQLogTbl` (changes to `DBC.QryLogV` if `--assessment` flag is used)
-  - `DBC.DBQLSqlTbl`
+- `DBC.DBQLogTbl` (changes to `DBC.QryLogV` if `--assessment` flag is used)
+- `DBC.DBQLSqlTbl`
 
 The following additional tables and views are extracted when you use the `teradata-logs` connector with `--assessment` flag:
 
-  - `DBC.DBQLUtilityTbl`
-  - `DBC.ResUsageScpu`
-  - `DBC.ResUsageSpma`
+- `DBC.DBQLUtilityTbl`
+- `DBC.ResUsageScpu`
+- `DBC.ResUsageSpma`
 
 ### Redshift
 
 You can use any of the following Amazon Redshift authentication and authorization mechanisms with the extraction tool:
 
-  - A username and password.
-  - An AWS Identity and Access Management (Identity and Access Management (IAM)) access key ID and secret key.
-  - An AWS IAM profile name.
+- A username and password.
+- An AWS Identity and Access Management (Identity and Access Management (IAM)) access key ID and secret key.
+- An AWS IAM profile name.
 
 To authenticate with the username and password, use the Amazon Redshift default PostgreSQL JDBC driver. To authenticate with AWS IAM, use the Amazon Redshift JDBC driver, which you can download from their [download page](https://docs.aws.amazon.com/redshift/latest/mgmt/jdbc20-download-driver.html) .
 
@@ -440,107 +450,107 @@ The following table describes the commonly used flags for extracting Amazon Reds
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--assessment</code></td>
+<td><code>--assessment</code></td>
 <td></td>
 <td><p>Turning on assessment mode when generating database logs or extracting metadata. It generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs extraction it generates query metrics statistics for BigQuery migration assessment.</p></td>
 <td>Required when running in assessment mode, not required for translation.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--connector</code></td>
+<td><code>--connector</code></td>
 <td></td>
 <td>The name of the connector to use, in this case <strong>redshift</strong> for metadata or <strong>redshift-raw-logs</strong> for query logs.</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--database</code></td>
-<td>If not specified, Amazon Redshift uses the <code dir="ltr" translate="no">--user</code> value as the default database name.</td>
+<td><code>--database</code></td>
+<td>If not specified, Amazon Redshift uses the <code>--user</code> value as the default database name.</td>
 <td><p>The name of the database to connect to.</p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--driver</code></td>
+<td><code>--driver</code></td>
 <td>If not specified, Amazon Redshift uses the default PostgreSQL JDBC driver.</td>
 <td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--host</code></td>
+<td><code>--host</code></td>
 <td>localhost</td>
 <td>The hostname or IP address of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--iam-accesskeyid</code></td>
+<td><code>--iam-accesskeyid</code></td>
 <td></td>
-<td><p>The AWS IAM access key ID to use for authentication. The access key is a string of characters, something like <code dir="ltr" translate="no">AKIAIOSFODNN7EXAMPLE</code> .</p>
-<p>Use in conjunction with the <code dir="ltr" translate="no">--iam-secretaccesskey</code> flag. Do not use this flag when specifying the <code dir="ltr" translate="no">--iam-profile</code> or <code dir="ltr" translate="no">--password</code> flags.</p></td>
+<td><p>The AWS IAM access key ID to use for authentication. The access key is a string of characters, something like <code>AKIAIOSFODNN7EXAMPLE</code> .</p>
+<p>Use in conjunction with the <code>--iam-secretaccesskey</code> flag. Do not use this flag when specifying the <code>--iam-profile</code> or <code>--password</code> flags.</p></td>
 <td><p>Not explicitly, but you must provide authentication information through one of the following methods:</p>
 <ul>
-<li>Using this flag in conjunction with the <code dir="ltr" translate="no">--iam-secretaccesskey</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--iam-profile</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--password</code> flag in conjunction with the <code dir="ltr" translate="no">--user</code> flag.</li>
+<li>Using this flag in conjunction with the <code>--iam-secretaccesskey</code> flag.</li>
+<li>Using the <code>--iam-profile</code> flag.</li>
+<li>Using the <code>--password</code> flag in conjunction with the <code>--user</code> flag.</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--iam-profile</code></td>
+<td><code>--iam-profile</code></td>
 <td></td>
-<td><p>The AWS IAM profile to use for authentication. You can retrieve a profile value to use by examining the <code dir="ltr" translate="no">$HOME/.aws/credentials</code> file or by running <code dir="ltr" translate="no">aws configure list-profiles</code> .</p>
-<p>Do not use this flag with the <code dir="ltr" translate="no">--iam-accesskeyid</code> , <code dir="ltr" translate="no">--iam-secretaccesskey</code> or <code dir="ltr" translate="no">--password</code> flags.</p></td>
+<td><p>The AWS IAM profile to use for authentication. You can retrieve a profile value to use by examining the <code>$HOME/.aws/credentials</code> file or by running <code>aws configure list-profiles</code> .</p>
+<p>Do not use this flag with the <code>--iam-accesskeyid</code> , <code>--iam-secretaccesskey</code> or <code>--password</code> flags.</p></td>
 <td><p>Not explicitly, but you must provide authentication information through one of the following methods:</p>
 <ul>
 <li>Using this flag.</li>
-<li>Using the <code dir="ltr" translate="no">--iam-accesskeyid</code> flag in conjunction with the <code dir="ltr" translate="no">--iam-secretaccesskey</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--password</code> flag in conjunction with the <code dir="ltr" translate="no">--user</code> flag.</li>
+<li>Using the <code>--iam-accesskeyid</code> flag in conjunction with the <code>--iam-secretaccesskey</code> flag.</li>
+<li>Using the <code>--password</code> flag in conjunction with the <code>--user</code> flag.</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--iam-secretaccesskey</code></td>
+<td><code>--iam-secretaccesskey</code></td>
 <td></td>
-<td><p>The AWS IAM secret access key to use for authentication. The secret access key is a string of characters, something like <code dir="ltr" translate="no">wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</code> .</p>
-<p>Use in conjunction with the <code dir="ltr" translate="no">--iam-accesskeyid</code> flag. Do not use this flag with the <code dir="ltr" translate="no">--iam-profile</code> or <code dir="ltr" translate="no">--password</code> flags.</p></td>
+<td><p>The AWS IAM secret access key to use for authentication. The secret access key is a string of characters, something like <code>wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</code> .</p>
+<p>Use in conjunction with the <code>--iam-accesskeyid</code> flag. Do not use this flag with the <code>--iam-profile</code> or <code>--password</code> flags.</p></td>
 <td><p>Not explicitly, but you must provide authentication information through one of the following methods:</p>
 <ul>
-<li>Using this flag in conjunction with the <code dir="ltr" translate="no">--iam-accesskeyid</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--iam-profile</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--password</code> flag in conjunction with the <code dir="ltr" translate="no">--user</code> flag.</li>
+<li>Using this flag in conjunction with the <code>--iam-accesskeyid</code> flag.</li>
+<li>Using the <code>--iam-profile</code> flag.</li>
+<li>Using the <code>--password</code> flag in conjunction with the <code>--user</code> flag.</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--password</code></td>
+<td><code>--password</code></td>
 <td></td>
 <td>The password to use for the database connection.
-<p>Do not use this flag with the <code dir="ltr" translate="no">--iam-accesskeyid</code> , <code dir="ltr" translate="no">--iam-secretaccesskey</code> or <code dir="ltr" translate="no">--iam-profile</code> flags.</p></td>
+<p>Do not use this flag with the <code>--iam-accesskeyid</code> , <code>--iam-secretaccesskey</code> or <code>--iam-profile</code> flags.</p></td>
 <td><p>Not explicitly, but you must provide authentication information through one of the following methods:</p>
 <ul>
-<li>Using this flag in conjunction with the <code dir="ltr" translate="no">--user</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--iam-accesskeyid</code> flag in conjunction with the <code dir="ltr" translate="no">--iam-secretaccesskey</code> flag.</li>
-<li>Using the <code dir="ltr" translate="no">--password</code> flag.</li>
+<li>Using this flag in conjunction with the <code>--user</code> flag.</li>
+<li>Using the <code>--iam-accesskeyid</code> flag in conjunction with the <code>--iam-secretaccesskey</code> flag.</li>
+<li>Using the <code>--password</code> flag.</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--port</code></td>
+<td><code>--port</code></td>
 <td>5439</td>
 <td>The port of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--user</code></td>
+<td><code>--user</code></td>
 <td></td>
 <td>The username to use for the database connection.</td>
 <td>Yes</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--query-log-start</code></td>
+<td><code>--query-log-start</code></td>
 <td></td>
 <td><p>The start time (inclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <strong>redshift-raw-logs</strong> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-start "2023-01-01 14:00:00"</code></p></td>
+<p>Example: <code>--query-log-start "2023-01-01 14:00:00"</code></p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--query-log-end</code></td>
+<td><code>--query-log-end</code></td>
 <td></td>
 <td><p>The end time (exclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <strong>redshift-raw-logs</strong> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-end "2023-01-15 22:00:00"</code></p></td>
+<p>Example: <code>--query-log-end "2023-01-15 22:00:00"</code></p></td>
 <td>No</td>
 </tr>
 </tbody>
@@ -550,89 +560,97 @@ The following table describes the commonly used flags for extracting Amazon Reds
 
 The following example shows how to extract metadata from an Amazon Redshift database on a specified host, using AWS IAM keys for authentication:
 
-    dwh-migration-dumper \
-      --connector redshift \
-      --database database \
-      --driver path/redshift-jdbc42-version.jar \
-      --host host.region.redshift.amazonaws.com \
-      --iam-accesskeyid access_key_ID \
-      --iam-secretaccesskey secret_access-key \
-      --user user
+```
+dwh-migration-dumper \
+  --connector redshift \
+  --database database \
+  --driver path/redshift-jdbc42-version.jar \
+  --host host.region.redshift.amazonaws.com \
+  --iam-accesskeyid access_key_ID \
+  --iam-secretaccesskey secret_access-key \
+  --user user
+```
 
 The following example shows how to extract metadata from an Amazon Redshift database on the default host, using the username and password for authentication:
 
-    dwh-migration-dumper \
-      --connector redshift \
-      --database database \
-      --password password \
-      --user user
+```
+dwh-migration-dumper \
+  --connector redshift \
+  --database database \
+  --password password \
+  --user user
+```
 
 The following example shows how to extract metadata from an Amazon Redshift database on a specified host, using an AWS IAM profile for authentication:
 
-    dwh-migration-dumper \
-      --connector redshift \
-      --database database \
-      --driver path/redshift-jdbc42-version.jar \
-      --host host.region.redshift.amazonaws.com \
-      --iam-profile profile \
-      --user user \
-      --assessment
+```
+dwh-migration-dumper \
+  --connector redshift \
+  --database database \
+  --driver path/redshift-jdbc42-version.jar \
+  --host host.region.redshift.amazonaws.com \
+  --iam-profile profile \
+  --user user \
+  --assessment
+```
 
 The following example shows how to extract query logs for Assessment from an Amazon Redshift database on a specified host, using an AWS IAM profile for authentication:
 
-    dwh-migration-dumper \
-      --connector redshift-raw-logs \
-      --database database \
-      --driver path/redshift-jdbc42-version.jar \
-      --host 123.456.789.012 \
-      --iam-profile profile \
-      --user user \
-      --assessment
+```
+dwh-migration-dumper \
+  --connector redshift-raw-logs \
+  --database database \
+  --driver path/redshift-jdbc42-version.jar \
+  --host 123.456.789.012 \
+  --iam-profile profile \
+  --user user \
+  --assessment
+```
 
 #### Tables and views extracted by the `dwh-migration-dumper` tool
 
 The following tables and views are extracted when you use the `redshift` connector:
 
-  - `SVV_COLUMNS`
-  - `SVV_EXTERNAL_COLUMNS`
-  - `SVV_EXTERNAL_DATABASES`
-  - `SVV_EXTERNAL_PARTITIONS`
-  - `SVV_EXTERNAL_SCHEMAS`
-  - `SVV_EXTERNAL_TABLES`
-  - `SVV_TABLES`
-  - `SVV_TABLE_INFO`
-  - `INFORMATION_SCHEMA.COLUMNS`
-  - `PG_CAST`
-  - `PG_DATABASE`
-  - `PG_LANGUAGE`
-  - `PG_LIBRARY`
-  - `PG_NAMESPACE`
-  - `PG_OPERATOR`
-  - `PG_PROC`
-  - `PG_TABLE_DEF`
-  - `PG_TABLES`
-  - `PG_TYPE`
-  - `PG_VIEWS`
+- `SVV_COLUMNS`
+- `SVV_EXTERNAL_COLUMNS`
+- `SVV_EXTERNAL_DATABASES`
+- `SVV_EXTERNAL_PARTITIONS`
+- `SVV_EXTERNAL_SCHEMAS`
+- `SVV_EXTERNAL_TABLES`
+- `SVV_TABLES`
+- `SVV_TABLE_INFO`
+- `INFORMATION_SCHEMA.COLUMNS`
+- `PG_CAST`
+- `PG_DATABASE`
+- `PG_LANGUAGE`
+- `PG_LIBRARY`
+- `PG_NAMESPACE`
+- `PG_OPERATOR`
+- `PG_PROC`
+- `PG_TABLE_DEF`
+- `PG_TABLES`
+- `PG_TYPE`
+- `PG_VIEWS`
 
 The following additional tables and views are extracted when you use the `redshift` connector with `--assessment` flag:
 
-  - `SVV_DISKUSAGE`
-  - `STV_MV_INFO`
-  - `STV_WLM_SERVICE_CLASS_CONFIG`
-  - `STV_WLM_SERVICE_CLASS_STATE`
+- `SVV_DISKUSAGE`
+- `STV_MV_INFO`
+- `STV_WLM_SERVICE_CLASS_CONFIG`
+- `STV_WLM_SERVICE_CLASS_STATE`
 
 The following tables and views are extracted when you use the `redshift-raw-logs` connector:
 
-  - `STL_DDLTEXT`
-  - `STL_QUERY`
-  - `STL_QUERYTEXT`
-  - `PG_USER`
+- `STL_DDLTEXT`
+- `STL_QUERY`
+- `STL_QUERYTEXT`
+- `PG_USER`
 
 The following additional tables and views are extracted when you use the `redshift-raw-logs` connector with `--assessment` flag:
 
-  - `STL_QUERY_METRICS`
-  - `SVL_QUERY_QUEUE_INFO`
-  - `STL_WLM_QUERY`
+- `STL_QUERY_METRICS`
+- `SVL_QUERY_QUEUE_INFO`
+- `STL_WLM_QUERY`
 
 For information about the system views and tables in Redshift, see [Redshift system views](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_system_views.html) and [Redshift system catalog tables](https://docs.aws.amazon.com/redshift/latest/dg/c_intro_catalog_views.html) .
 
@@ -659,62 +677,62 @@ The following table describes the commonly used flags for extracting Apache Hive
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--assessment</code></td>
+<td><code>--assessment</code></td>
 <td></td>
-<td><p>Turns on assessment mode when extracting metadata. The <code dir="ltr" translate="no">dwh-migration-dumper</code> tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction.</p></td>
+<td><p>Turns on assessment mode when extracting metadata. The <code>dwh-migration-dumper</code> tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction.</p></td>
 <td>Required for assessment. Not required for translation.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--connector</code></td>
+<td><code>--connector</code></td>
 <td></td>
 <td>The name of the connector to use, in this case <strong>hiveql</strong> .</td>
 <td>Yes</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--hive-metastore-dump-partition-metadata</code></td>
+<td><code>--hive-metastore-dump-partition-metadata</code></td>
 <td>true</td>
-<td><p>Causes the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool to extract partition metadata. You might want to set this flag to <code dir="ltr" translate="no">false</code> for production metastore with a significant number of partitions, due to Thrift client performance implications. This improves the extraction tool performance, but causes some loss of partition optimization on the BigQuery side.</p>
-<p>Don't use this flag with the <code dir="ltr" translate="no">--assessment</code> flag, as it will have no effect.</p></td>
+<td><p>Causes the <code>dwh-migration-dumper</code> tool to extract partition metadata. You might want to set this flag to <code>false</code> for production metastore with a significant number of partitions, due to Thrift client performance implications. This improves the extraction tool performance, but causes some loss of partition optimization on the BigQuery side.</p>
+<p>Don't use this flag with the <code>--assessment</code> flag, as it will have no effect.</p></td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--hive-metastore-version</code></td>
+<td><code>--hive-metastore-version</code></td>
 <td>2.3.6</td>
-<td><p>When you run the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool, it selects the appropriate <a href="https://thrift.apache.org/">Thrift</a> specification to use for communicating with your Apache Hive server, based on the value of this flag. If the extraction tool doesn't have an appropriate Thrift specification, it uses the 2.3.6 client and emits a warning to <code dir="ltr" translate="no">stdout</code> . If this occurs, please <a href="https://cloud.google.com/support-hub">contact Support</a> and provide the Apache Hive version number you requested.</p></td>
+<td><p>When you run the <code>dwh-migration-dumper</code> tool, it selects the appropriate <a href="https://thrift.apache.org/">Thrift</a> specification to use for communicating with your Apache Hive server, based on the value of this flag. If the extraction tool doesn't have an appropriate Thrift specification, it uses the 2.3.6 client and emits a warning to <code>stdout</code> . If this occurs, please <a href="https://cloud.google.com/support-hub">contact Support</a> and provide the Apache Hive version number you requested.</p></td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--host</code></td>
+<td><code>--host</code></td>
 <td>localhost</td>
 <td>The hostname or IP address of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">--port</code></td>
+<td><code>--port</code></td>
 <td>9083</td>
 <td>The port of the database server.</td>
 <td>No</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">--hive-kerberos-url</code></td>
+<td><code>--hive-kerberos-url</code></td>
 <td></td>
 <td>The Kerberos principal and host to use for authentication.</td>
 <td>Required for clusters with enabled Kerberos authentication.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">-Dhiveql.rpc.protection</code></td>
+<td><code>-Dhiveql.rpc.protection</code></td>
 <td></td>
-<td><p>The RPC protection configuration level. This determines the Quality of Protection (QOP) of the Simple Authentication and Security Layer (SASL) connection between cluster and the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool.</p>
-<p>Must be equal to the value of the <code dir="ltr" translate="no">hadoop.rpc.protection</code> parameter inside the <code dir="ltr" translate="no">/etc/hadoop/conf/core-site.xml</code> file on the cluster, with one of the following values:</p>
+<td><p>The RPC protection configuration level. This determines the Quality of Protection (QOP) of the Simple Authentication and Security Layer (SASL) connection between cluster and the <code>dwh-migration-dumper</code> tool.</p>
+<p>Must be equal to the value of the <code>hadoop.rpc.protection</code> parameter inside the <code>/etc/hadoop/conf/core-site.xml</code> file on the cluster, with one of the following values:</p>
 <ul>
-<li><code dir="ltr" translate="no">authentication</code></li>
-<li><code dir="ltr" translate="no">integrity</code></li>
-<li><code dir="ltr" translate="no">privacy</code></li>
+<li><code>authentication</code></li>
+<li><code>integrity</code></li>
+<li><code>privacy</code></li>
 </ul>
 <p>Example (Bash):<br />
-<code dir="ltr" translate="no">-Dhiveql.rpc.protection=privacy</code></p>
+<code>-Dhiveql.rpc.protection=privacy</code></p>
 <p>Example (Windows PowerShell):<br />
-<code dir="ltr" translate="no">"-Dhiveql.rpc.protection=privacy"</code></p></td>
+<code>"-Dhiveql.rpc.protection=privacy"</code></p></td>
 <td>Required for clusters with enabled Kerberos authentication.</td>
 </tr>
 </tbody>
@@ -724,20 +742,24 @@ The following table describes the commonly used flags for extracting Apache Hive
 
 The following example shows how to extract metadata for a Hive 2.3.7 database on a specified host, without authentication and using an alternate port for connection:
 
-    dwh-migration-dumper \
-      --connector hiveql \
-      --hive-metastore-version 2.3.7 \
-      --host host \
-      --port port
+```
+dwh-migration-dumper \
+  --connector hiveql \
+  --hive-metastore-version 2.3.7 \
+  --host host \
+  --port port
+```
 
 To use Kerberos authentication, sign in as a user that has read permissions to the Hive metastore and generate a Kerberos ticket. Then, generate the metadata zip file with the following command:
 
-    JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
-      dwh-migration-dumper \
-      --connector hiveql \
-      --host host \
-      --port port \
-      --hive-kerberos-url principal/kerberos_host
+```
+JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
+  dwh-migration-dumper \
+  --connector hiveql \
+  --host host \
+  --port port \
+  --hive-kerberos-url principal/kerberos_host
+```
 
 ### Azure Synapse or Microsoft SQL Server
 
@@ -746,7 +768,7 @@ To allow the `dwh-migration-dumper` tool to connect to Azure Synapse or Microsof
 The following table describes the commonly used flags for extracting Azure Synapse or Microsoft SQL Server metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | `--connector` |                   | The name of the connector to use, in this case **sqlserver** .                                                                                         | Yes          |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
@@ -759,13 +781,15 @@ The following table describes the commonly used flags for extracting Azure Synap
 
 The following example shows how to extract metadata from an Azure Synapse database on a specified host:
 
-    dwh-migration-dumper \
-      --connector sqlserver \
-      --database database \
-      --driver path/mssql-jdbc.jar \
-      --host server_name.sql.azuresynapse.net \
-      --password password \
-      --user user
+```
+dwh-migration-dumper \
+  --connector sqlserver \
+  --database database \
+  --driver path/mssql-jdbc.jar \
+  --host server_name.sql.azuresynapse.net \
+  --password password \
+  --user user
+```
 
 ### Greenplum
 
@@ -774,7 +798,7 @@ To allow the `dwh-migration-dumper` tool to connect to Greenplum, download their
 The following table describes the commonly used flags for extracting Greenplum metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | `--connector` |                   | The name of the connector to use, in this case **greenplum** .                                                                                         | Yes                                                                       |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
@@ -787,13 +811,15 @@ The following table describes the commonly used flags for extracting Greenplum m
 
 The following example shows how to extract metadata for a Greenplum database on a specified host:
 
-    dwh-migration-dumper \
-      --connector greenplum \
-      --database database \
-      --driver path/greenplum.jar \
-      --host host \
-      --password password \
-      --user user \
+```
+dwh-migration-dumper \
+  --connector greenplum \
+  --database database \
+  --driver path/greenplum.jar \
+  --host host \
+  --password password \
+  --user user \
+```
 
 ### Netezza
 
@@ -802,7 +828,7 @@ To allow the `dwh-migration-dumper` tool to connect to IBM Netezza, you must get
 The following table describes the commonly used flags for extracting IBM Netezza metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | `--connector` |                   | The name of the connector to use, in this case **netezza** .                                                                                           | Yes          |
 | `--database`  |                   | A list of the databases to extract, separated by commas.                                                                                               | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
@@ -815,13 +841,15 @@ The following table describes the commonly used flags for extracting IBM Netezza
 
 The following example shows how to extract metadata for two IBM Netezza databases on a specified host:
 
-    dwh-migration-dumper \
-      --connector netezza \
-      --database database1,database2 \
-      --driver path/nzjdbc.jar \
-      --host host \
-      --password password \
-      --user user
+```
+dwh-migration-dumper \
+  --connector netezza \
+  --database database1,database2 \
+  --driver path/nzjdbc.jar \
+  --host host \
+  --password password \
+  --user user
+```
 
 ### PostgreSQL
 
@@ -830,7 +858,7 @@ To allow the `dwh-migration-dumper` tool to connect to PostgreSQL, download thei
 The following table describes the commonly used flags for extracting PostgreSQL metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | `--connector` |                   | The name of the connector to use, in this case **postgresql** .                                                                                        | Yes                                                                       |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
@@ -843,13 +871,15 @@ The following table describes the commonly used flags for extracting PostgreSQL 
 
 The following example shows how to extract metadata for a PostgreSQL database on a specified host:
 
-    dwh-migration-dumper \
-      --connector postgresql \
-      --database database \
-      --driver path/postgresql-version.jar \
-      --host host \
-      --password password \
-      --user user
+```
+dwh-migration-dumper \
+  --connector postgresql \
+  --database database \
+  --driver path/postgresql-version.jar \
+  --host host \
+  --password password \
+  --user user
+```
 
 ### Oracle / Oracle Exadata
 
@@ -859,229 +889,103 @@ The `oracle` and `oracle-stats` connectors also support Oracle Exadata.
 
 The following table describes the commonly used flags for extracting Oracle metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--connector</code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>oracle</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--driver</code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--host</code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--oracle-service</code></td>
-<td></td>
-<td><p>The Oracle service name to use for the connection.</p></td>
-<td>Not explicitly, but you must specify either this flag or the <code dir="ltr" translate="no">--oracle-sid</code> flag.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--oracle-sid</code></td>
-<td></td>
-<td><p>The Oracle system identifier (SID) to use for the connection.</p></td>
-<td>Not explicitly, but you must specify either this flag or the <code dir="ltr" translate="no">--oracle-service</code> flag.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--password</code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>If not specified, the extraction tool uses a secure prompt to request it.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--port</code></td>
-<td>1521</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--user</code></td>
-<td></td>
-<td><p>The username to use for the database connection.</p>
-<p>The user you specify must have the role <code dir="ltr" translate="no">SELECT_CATALOG_ROLE</code> in order to extract metadata. To see whether the user has the required role, run the query <code dir="ltr" translate="no">select granted_role from user_role_privs;</code> against the Oracle database.</p></td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**           | **Default value** | **Description**                                                                                                                                                                                                                                                                    | **Required**                                                                          |
+|--------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| `--connector`      |                   | The name of the connector to use, in this case **oracle** .                                                                                                                                                                                                                        | Yes                                                                                   |
+| `--driver`         |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.                                                                                                                             | Yes                                                                                   |
+| `--host`           | localhost         | The hostname or IP address of the database server.                                                                                                                                                                                                                                 | No                                                                                    |
+| `--oracle-service` |                   | The Oracle service name to use for the connection.                                                                                                                                                                                                                                 | Not explicitly, but you must specify either this flag or the `--oracle-sid` flag.     |
+| `--oracle-sid`     |                   | The Oracle system identifier (SID) to use for the connection.                                                                                                                                                                                                                      | Not explicitly, but you must specify either this flag or the `--oracle-service` flag. |
+| `--password`       |                   | The password to use for the database connection.                                                                                                                                                                                                                                   | If not specified, the extraction tool uses a secure prompt to request it.             |
+| `--port`           | 1521              | The port of the database server.                                                                                                                                                                                                                                                   | No                                                                                    |
+| `--user`           |                   | The username to use for the database connection. The user you specify must have the role `SELECT_CATALOG_ROLE` in order to extract metadata. To see whether the user has the required role, run the query `select granted_role from user_role_privs;` against the Oracle database. | Yes                                                                                   |
 
 #### Examples
 
 The following example shows how to extract metadata for an Oracle database on a specified host, using the Oracle service for the connection:
 
-    dwh-migration-dumper \
-      --connector oracle \
-      --driver path/ojdbc8.jar \
-      --host host \
-      --oracle-service service_name \
-      --password password \
-      --user user
+```
+dwh-migration-dumper \
+  --connector oracle \
+  --driver path/ojdbc8.jar \
+  --host host \
+  --oracle-service service_name \
+  --password password \
+  --user user
+```
 
 ### Snowflake
 
 The following table describes the commonly used flags for extracting Snowflake metadata by using the `dwh-migration-dumper` tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--assessment</code></td>
-<td></td>
-<td><p>Turns on assessment mode when generating database logs or extracting metadata. The <code dir="ltr" translate="no">dwh-migration-dumper</code> tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs, the tool extracts additional columns for BigQuery migration assessment.</p></td>
-<td>Only for assessment.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--connector</code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>snowflake</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--database</code></td>
-<td></td>
-<td><p>A comma-separated list of database names to extract.</p>
-<p>This flag is not allowed in assessment mode.</p></td>
-<td>Only for translation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--host</code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--private-key-file</code></td>
-<td></td>
-<td><p>The path to the RSA private key used for authentication. We recommend using a <a href="https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users"><code dir="ltr" translate="no">SERVICE</code></a> user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.</p></td>
-<td>No, if not provided extraction tool uses a password based authentication.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--private-key-password</code></td>
-<td></td>
-<td><p>The password that was used when creating the RSA private key.</p></td>
-<td>No, it is required only if the private key is encrypted.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--password</code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>If not specified, the extraction tool uses a secure prompt to request it. However, we recommend using key-pair based authentication instead.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--query-log-start</code></td>
-<td></td>
-<td><p>The start time (inclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <code dir="ltr" translate="no">snowflake-logs</code> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-start "2023-01-01 14:00:00"</code></p></td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--query-log-end</code></td>
-<td></td>
-<td><p>The end time (exclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the <code dir="ltr" translate="no">snowflake-logs</code> connector.</p>
-<p>Example: <code dir="ltr" translate="no">--query-log-end "2023-01-15 22:00:00"</code></p></td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--role</code></td>
-<td></td>
-<td>The Snowflake role to use for authorization. While technically optional if your default role has sufficient privileges, we highly recommend specifying a role, such as <code dir="ltr" translate="no">ACCOUNTADMIN</code> , to ensure that the session has the necessary privileges to access the <code dir="ltr" translate="no">SNOWFLAKE.ACCOUNT_USAGE</code> schema. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/generate-metadata#large-instance">Working with large Snowflake instances</a> .</td>
-<td>No, but highly recommended.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--user</code></td>
-<td></td>
-<td><p>The username to use for the database connection.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--warehouse</code></td>
-<td></td>
-<td><p>The Snowflake warehouse to use for processing metadata queries.</p></td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                 | **Default value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                    | **Required**                                                                                                                                 |
+|--------------------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `--assessment`           |                   | Turns on assessment mode when generating database logs or extracting metadata. The `dwh-migration-dumper` tool generates required metadata statistics for BigQuery migration assessment when used for metadata extraction. When used for query logs, the tool extracts additional columns for BigQuery migration assessment.                                                                                                                       | Only for assessment.                                                                                                                         |
+| `--connector`            |                   | The name of the connector to use, in this case **snowflake** .                                                                                                                                                                                                                                                                                                                                                                                     | Yes                                                                                                                                          |
+| `--database`             |                   | A comma-separated list of database names to extract. This flag is not allowed in assessment mode.                                                                                                                                                                                                                                                                                                                                                  | Only for translation.                                                                                                                        |
+| `--host`                 | localhost         | The hostname or IP address of the database server.                                                                                                                                                                                                                                                                                                                                                                                                 | No                                                                                                                                           |
+| `--private-key-file`     |                   | The path to the RSA private key used for authentication. We recommend using a [`SERVICE`](https://docs.snowflake.com/en/user-guide/admin-user-management#types-of-users) user with a key-pair based authentication. This provides the secure method for accessing Snowflake data platform without a need to generate MFA tokens.                                                                                                                   | No, if not provided extraction tool uses a password based authentication.                                                                    |
+| `--private-key-password` |                   | The password that was used when creating the RSA private key.                                                                                                                                                                                                                                                                                                                                                                                      | No, it is required only if the private key is encrypted.                                                                                     |
+| `--password`             |                   | The password to use for the database connection.                                                                                                                                                                                                                                                                                                                                                                                                   | If not specified, the extraction tool uses a secure prompt to request it. However, we recommend using key-pair based authentication instead. |
+| `--query-log-start`      |                   | The start time (inclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the `snowflake-logs` connector. Example: `--query-log-start "2023-01-01 14:00:00"`                                                                                                                                                                                                                                       | No                                                                                                                                           |
+| `--query-log-end`        |                   | The end time (exclusive) for query logs to extract. The value is truncated to the hour. This flag is only available for the `snowflake-logs` connector. Example: `--query-log-end "2023-01-15 22:00:00"`                                                                                                                                                                                                                                           | No                                                                                                                                           |
+| `--role`                 |                   | The Snowflake role to use for authorization. While technically optional if your default role has sufficient privileges, we highly recommend specifying a role, such as `ACCOUNTADMIN` , to ensure that the session has the necessary privileges to access the `SNOWFLAKE.ACCOUNT_USAGE` schema. For more information, see [Working with large Snowflake instances](https://docs.cloud.google.com/bigquery/docs/generate-metadata#large-instance) . | No, but highly recommended.                                                                                                                  |
+| `--user`                 |                   | The username to use for the database connection.                                                                                                                                                                                                                                                                                                                                                                                                   | Yes                                                                                                                                          |
+| `--warehouse`            |                   | The Snowflake warehouse to use for processing metadata queries.                                                                                                                                                                                                                                                                                                                                                                                    | Yes                                                                                                                                          |
 
 #### Examples
 
 The following example shows how to extract metadata for assessment:
 
-    dwh-migration-dumper \
-      --connector snowflake \
-      --assessment \
-      --host "account.snowflakecomputing.com" \
-      --role role \
-      --user user \
-      --private-key-file private-key-file \
-      --private-key-password private-key-password \
-      --warehouse warehouse
+```
+dwh-migration-dumper \
+  --connector snowflake \
+  --assessment \
+  --host "account.snowflakecomputing.com" \
+  --role role \
+  --user user \
+  --private-key-file private-key-file \
+  --private-key-password private-key-password \
+  --warehouse warehouse
+```
 
 The following example shows how to extract metadata for a typically sized Snowflake database on the local host:
 
-    dwh-migration-dumper \
-      --connector snowflake \
-      --database database \
-      --user user \
-      --private-key-file private-key-file \
-      --private-key-password private-key-password \
-      --warehouse warehouse
+```
+dwh-migration-dumper \
+  --connector snowflake \
+  --database database \
+  --user user \
+  --private-key-file private-key-file \
+  --private-key-password private-key-password \
+  --warehouse warehouse
+```
 
 The following example shows how to extract metadata for a large Snowflake database on a specified host:
 
-    dwh-migration-dumper \
-      --connector snowflake \
-      --database database \
-      --host "account.snowflakecomputing.com" \
-      --role role \
-      --user user \
-      --private-key-file private-key-file \
-      --private-key-password private-key-password \
-      --warehouse warehouse
+```
+dwh-migration-dumper \
+  --connector snowflake \
+  --database database \
+  --host "account.snowflakecomputing.com" \
+  --role role \
+  --user user \
+  --private-key-file private-key-file \
+  --private-key-password private-key-password \
+  --warehouse warehouse
+```
 
 Alternatively, you can use the following example to extract metadata using password-based authentication:
 
-    dwh-migration-dumper \
-      --connector snowflake \
-      --database database \
-      --host "account.snowflakecomputing.com" \
-      --password password \
-      --user user \
-      --warehouse warehouse
+```
+dwh-migration-dumper \
+  --connector snowflake \
+  --database database \
+  --host "account.snowflakecomputing.com" \
+  --password password \
+  --user user \
+  --warehouse warehouse
+```
 
 #### Working with large Snowflake instances
 
@@ -1090,20 +994,28 @@ The `dwh-migration-dumper` tool reads metadata from the Snowflake `INFORMATION_S
 1.  Open the **Shares** option in the Snowflake web interface.
 
 2.  Create a database from the `SNOWFLAKE.ACCOUNT_USAGE` share:
-    
-        -- CREATE DATABASE database FROM SHARE SNOWFLAKE.ACCOUNT_USAGE;
+
+    ```
+    -- CREATE DATABASE database FROM SHARE SNOWFLAKE.ACCOUNT_USAGE;
+    ```
 
 3.  Create a role:
-    
-        CREATE ROLE role;
+
+    ```
+    CREATE ROLE role;
+    ```
 
 4.  Grant `IMPORTED` privileges on the new database to the role:
-    
-        GRANT IMPORTED PRIVILEGES ON DATABASE database TO ROLE role;
+
+    ```
+    GRANT IMPORTED PRIVILEGES ON DATABASE database TO ROLE role;
+    ```
 
 5.  Grant the role to the user you intend to use to run the `dwh-migration-dumper` tool:
-    
-        GRANT ROLE role TO USER user;
+
+    ```
+    GRANT ROLE role TO USER user;
+    ```
 
 ### Vertica
 
@@ -1112,7 +1024,7 @@ To allow the `dwh-migration-dumper` tool to connect to Vertica, download their J
 The following table describes the commonly used flags for extracting Vertica metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                                                                                        | **Required** |
-| ------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+|---------------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | `--connector` |                   | The name of the connector to use, in this case **vertica** .                                                                                           | Yes          |
 | `--database`  |                   | The name of the database to connect to.                                                                                                                | Yes          |
 | `--driver`    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
@@ -1125,19 +1037,21 @@ The following table describes the commonly used flags for extracting Vertica met
 
 The following example shows how to extract metadata from a Vertica database on the local host:
 
-    dwh-migration-dumper \
-      --driver path/vertica-jdbc.jar \
-      --connector vertica \
-      --database database
-      --user user
-      --password password
+```
+dwh-migration-dumper \
+  --driver path/vertica-jdbc.jar \
+  --connector vertica \
+  --database database
+  --user user
+  --password password
+```
 
 ### BigQuery
 
 The following table describes the commonly used flags for extracting BigQuery metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 | **Name**      | **Default value** | **Description**                                                                    | **Required** |
-| ------------- | ----------------- | ---------------------------------------------------------------------------------- | ------------ |
+|---------------|-------------------|------------------------------------------------------------------------------------|--------------|
 | `--connector` |                   | The name of the connector to use, in this case **bigquery** .                      | Yes          |
 | `--database`  |                   | The list of projects to extract metadata and query logs from, separated by commas. | Yes          |
 | `--schema`    |                   | The list of datasets to extract metadata and query logs from, separated by commas. | Yes          |
@@ -1146,103 +1060,36 @@ The following table describes the commonly used flags for extracting BigQuery me
 
 The following example shows how to extract metadata from a Vertica database on the local host:
 
-    dwh-migration-dumper \
-      --connector bigquery \
-      --database PROJECT1, PROJECT2
-      --schema DATASET1, DATASET2
+```
+dwh-migration-dumper \
+  --connector bigquery \
+  --database PROJECT1, PROJECT2
+  --schema DATASET1, DATASET2
+```
 
 ## Global flags
 
 The following table describes the flags that can be used with any of the supported source platforms.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--connector</code></td>
-<td>The connector name for the source system.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--database</code></td>
-<td>Usage varies by source system.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--driver</code></td>
-<td>The absolute or relative path to the driver JAR file to use when connecting to the source system. You can specify multiple driver JAR files, separating them by commas.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--dry-run</code> or <code dir="ltr" translate="no">-n</code></td>
-<td>Show what actions the extraction tool would make without executing them.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--help</code></td>
-<td>Displays command-line help.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--host</code></td>
-<td>The hostname or IP address of the database server to connect to.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--jdbcDriverClass</code></td>
-<td>Optionally overrides the vendor-specified JDBC driver class name. Use this if you have a custom JDBC client.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--output</code></td>
-<td>The path of the output zip file. For example, <code dir="ltr" translate="no">dir1/dir2/teradata-metadata.zip</code> . If you don't specify a path, the output file is created in your working directory. If you specify the path to a directory, the default zip filename is created in the specified directory. If the directory does not exist, it is created.
-<p>To use Cloud Storage, use the following format:<br />
-<code dir="ltr" translate="no">gs://&lt;BUCKET&gt;/&lt;PATH&gt;</code> .</p>
-<p>To authenticate using Google Cloud credentials, see <a href="https://docs.cloud.google.com/docs/authentication/client-libraries">Authenticate for using client libraries</a> .</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--password</code></td>
-<td>The password to use for the database connection.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--port</code></td>
-<td>The port of the database server.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--save-response-file</code></td>
-<td>Saves your command line flags in a JSON file for easy re-use. The file is named <code dir="ltr" translate="no">dumper-response-file.json</code> and is created in the working directory. To use the response file, provide the path to it prefixed by <code dir="ltr" translate="no">@</code> when you run the extraction tool, for example <code dir="ltr" translate="no">dwh-migration-dumper @path/to/dumper-response-file.json</code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--schema</code></td>
-<td><p>A list of the schemas to extract, separated by commas.</p>
-<p>Oracle doesn't differentiate between a <a href="https://docs.oracle.com/cd/B19306_01/server.102/b14196/schema.htm#CFHHBEGH">schema</a> and the database user who created the schema, so you can use either schema names or user names with the <code dir="ltr" translate="no">--schema</code> flag. For example, <code dir="ltr" translate="no">--schema schema1,user2,schema3</code> .</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--thread-pool-size</code></td>
-<td><p>Sets the thread pool size, which affects the connection pool size. The default size of the thread pool is the number of cores on the server running the <code dir="ltr" translate="no">dwh-migration-dumper</code> tool.</p>
-<p>If the extraction tool seems slow or otherwise in need of more resources, you can raise the number of threads used. If there are indications that other processes on the server require more bandwidth, you can lower the number of threads used.</p></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--url</code></td>
-<td><p>The URL to use for the database connection, instead of the URI generated by the JDBC driver.</p>
-<p>The generated URI should be sufficient in most cases. Only override the generated URI when you need to use a JDBC connection setting that is specific to the source platform and is not already set by one of the flags listed in this table.</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--user</code></td>
-<td>The username to use for the database connection.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">--version</code></td>
-<td>Displays the product version.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">--telemetry</code></td>
-<td><p>Collects insights into the performance characteristics of runs, such as duration, run counts, and resource usage. This is enabled by default. To disable telemetry, set this flag to <code dir="ltr" translate="no">false</code> .</p></td>
-</tr>
-</tbody>
-</table>
+| **Name**               | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--connector`          | The connector name for the source system.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--database`           | Usage varies by source system.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `--driver`             | The absolute or relative path to the driver JAR file to use when connecting to the source system. You can specify multiple driver JAR files, separating them by commas.                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--dry-run` or `-n`    | Show what actions the extraction tool would make without executing them.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `--help`               | Displays command-line help.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `--host`               | The hostname or IP address of the database server to connect to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `--jdbcDriverClass`    | Optionally overrides the vendor-specified JDBC driver class name. Use this if you have a custom JDBC client.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `--output`             | The path of the output zip file. For example, `dir1/dir2/teradata-metadata.zip` . If you don't specify a path, the output file is created in your working directory. If you specify the path to a directory, the default zip filename is created in the specified directory. If the directory does not exist, it is created. To use Cloud Storage, use the following format: `gs://<BUCKET>/<PATH>` . To authenticate using Google Cloud credentials, see [Authenticate for using client libraries](https://docs.cloud.google.com/docs/authentication/client-libraries) . |
+| `--password`           | The password to use for the database connection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `--port`               | The port of the database server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `--save-response-file` | Saves your command line flags in a JSON file for easy re-use. The file is named `dumper-response-file.json` and is created in the working directory. To use the response file, provide the path to it prefixed by `@` when you run the extraction tool, for example `dwh-migration-dumper @path/to/dumper-response-file.json` .                                                                                                                                                                                                                                           |
+| `--schema`             | A list of the schemas to extract, separated by commas. Oracle doesn't differentiate between a [schema](https://docs.oracle.com/cd/B19306_01/server.102/b14196/schema.htm#CFHHBEGH) and the database user who created the schema, so you can use either schema names or user names with the `--schema` flag. For example, `--schema schema1,user2,schema3` .                                                                                                                                                                                                               |
+| `--thread-pool-size`   | Sets the thread pool size, which affects the connection pool size. The default size of the thread pool is the number of cores on the server running the `dwh-migration-dumper` tool. If the extraction tool seems slow or otherwise in need of more resources, you can raise the number of threads used. If there are indications that other processes on the server require more bandwidth, you can lower the number of threads used.                                                                                                                                    |
+| `--url`                | The URL to use for the database connection, instead of the URI generated by the JDBC driver. The generated URI should be sufficient in most cases. Only override the generated URI when you need to use a JDBC connection setting that is specific to the source platform and is not already set by one of the flags listed in this table.                                                                                                                                                                                                                                |
+| `--user`               | The username to use for the database connection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `--version`            | Displays the product version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `--telemetry`          | Collects insights into the performance characteristics of runs, such as duration, run counts, and resource usage. This is enabled by default. To disable telemetry, set this flag to `false` .                                                                                                                                                                                                                                                                                                                                                                            |
 
 ## Troubleshooting
 
@@ -1256,15 +1103,21 @@ You can increase maximum memory by exporting the `JAVA_OPTS` environment variabl
 
 ### Linux
 
-    export JAVA_OPTS="-Xmx4G"
+```
+export JAVA_OPTS="-Xmx4G"
+```
 
 ### Windows
 
-    set JAVA_OPTS="-Xmx4G"
+```
+set JAVA_OPTS="-Xmx4G"
+```
 
 You can reduce the number of processing threads (the default is 32) by including the `--thread-pool-size` flag value. This option is supported for `hiveql` and `redshift*` connectors only:
 
-    dwh-migration-dumper --thread-pool-size=1
+```
+dwh-migration-dumper --thread-pool-size=1
+```
 
 ### Handling a `WARN...Task failed` error
 
@@ -1276,18 +1129,22 @@ To validate the `dwh-migration-dumper` tool ZIP file, download the [`SHA256SUMS.
 
 ### Bash
 
-    sha256sum --check SHA256SUMS.txt
+```
+sha256sum --check SHA256SUMS.txt
+```
 
 The `OK` result confirms successful checksum verification. Any other message indicates a verification error:
 
-  - `FAILED: computed checksum did NOT match` : the ZIP file is corrupted and must be downloaded again.
-  - `FAILED: listed file could not be read` : the ZIP file version can't be located. Download the checksum and ZIP files from the same release version and place them in the same directory.
+- `FAILED: computed checksum did NOT match` : the ZIP file is corrupted and must be downloaded again.
+- `FAILED: listed file could not be read` : the ZIP file version can't be located. Download the checksum and ZIP files from the same release version and place them in the same directory.
 
 ### Windows PowerShell
 
-    (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+```
+(Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
+```
 
-Replace `  RELEASE_ZIP_FILENAME  ` with the downloaded ZIP filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip` .
+Replace `RELEASE_ZIP_FILENAME` with the downloaded ZIP filename of the `dwh-migration-dumper` command-line extraction tool release—for example, `dwh-migration-tools-v1.0.52.zip` .
 
 The `True` result confirms successful checksum verification.
 
@@ -1301,56 +1158,70 @@ The following example shows how to use the `-Dteradata-logs.log-date-column` fla
 
 ### Bash
 
-    dwh-migration-dumper \
-      -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
-      -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
-      -Dteradata-logs.log-date-column=ArchiveLogDate
+```
+dwh-migration-dumper \
+  -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
+  -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
+  -Dteradata-logs.log-date-column=ArchiveLogDate
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
-      "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
-      "-Dteradata-logs.log-date-column=ArchiveLogDate"
+```
+dwh-migration-dumper `
+  "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
+  "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
+  "-Dteradata-logs.log-date-column=ArchiveLogDate"
+```
 
 ### Teradata row size limit exceeded
 
 Teradata version 15 has a 64 KB row size limit. If the limit is exceeded, the extraction tool fails with the following message:
 
-    [Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
+```
+[Error 9804] [SQLState HY000] Response Row size or Constant Row size overflow
+```
 
 To resolve this error, either extend the row limit to 1 MB or split the rows into multiple rows:
 
-  - Install and enable the 1 MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804) .
-  - Split the long query text into multiple rows by using the `-Dteradata.metadata.max-text-length` and `-Dteradata-logs.max-sql-length` flags.
+- Install and enable the 1 MB Perm and Response Rows feature and current TTU software. For more information, see [Teradata Database Message 9804](https://docs.teradata.com/r/Teradata-VantageCloud-Lake-Analytics-Database-Messages/Database-Messages/9804) .
+- Split the long query text into multiple rows by using the `-Dteradata.metadata.max-text-length` and `-Dteradata-logs.max-sql-length` flags.
 
 The following command shows how to use the `-Dteradata.metadata.max-text-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
-    dwh-migration-dumper \
-      --connector teradata \
-      -Dteradata.metadata.max-text-length=10000
+```
+dwh-migration-dumper \
+  --connector teradata \
+  -Dteradata.metadata.max-text-length=10000
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      --connector teradata `
-      "-Dteradata.metadata.max-text-length=10000"
+```
+dwh-migration-dumper `
+  --connector teradata `
+  "-Dteradata.metadata.max-text-length=10000"
+```
 
 The following command shows how to use the `-Dteradata-logs.max-sql-length` flag to split long query text into multiple rows of at most 10,000 characters each:
 
 ### Bash
 
-    dwh-migration-dumper \
-      --connector teradata-logs \
-      -Dteradata-logs.max-sql-length=10000
+```
+dwh-migration-dumper \
+  --connector teradata-logs \
+  -Dteradata-logs.max-sql-length=10000
+```
 
 ### Windows PowerShell
 
-    dwh-migration-dumper `
-      --connector teradata-logs `
-      "-Dteradata-logs.max-sql-length=10000"
+```
+dwh-migration-dumper `
+  --connector teradata-logs `
+  "-Dteradata-logs.max-sql-length=10000"
+```
 
 ### Oracle connection issue
 
@@ -1358,21 +1229,25 @@ In common cases such as an invalid password or hostname, `dwh-migration-dumper` 
 
 One of these issues is `IO Error: Got minus one from a read call` . This error indicates that the connection to the Oracle server was established, but the server didn't accept the client and closed the connection. This issue typically occurs when the server accepts `TCPS` connections only. By default, `dwh-migration-dumper` tool uses the `TCP` protocol. To solve this issue, you must override the Oracle JDBC connection URL.
 
-Instead of providing the `oracle-service` , `host` , and `port` flags, you can resolve this issue by providing the `url` flag in the following format: ` jdbc:oracle:thin:@tcps:// HOST_NAME : PORT / ORACLE_SERVICE  ` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
+Instead of providing the `oracle-service` , `host` , and `port` flags, you can resolve this issue by providing the `url` flag in the following format: `jdbc:oracle:thin:@tcps:// `` HOST_NAME `` : `` PORT `` / `` ORACLE_SERVICE` . Typically, the `TCPS` port number used by the Oracle server is `2484` .
 
 The following example shows how to specify the connection URL in the command:
 
-    dwh-migration-dumper \
-      --connector oracle-stats \
-      --url "jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE" \
-      --assessment \
-      --driver "JDBC_DRIVER_PATH" \
-      --user "USER" \
-      --password
+```
+dwh-migration-dumper \
+  --connector oracle-stats \
+  --url "jdbc:oracle:thin:@tcps://HOST_NAME:PORT/ORACLE_SERVICE" \
+  --assessment \
+  --driver "JDBC_DRIVER_PATH" \
+  --user "USER" \
+  --password
+```
 
 In addition to changing the connection protocol to `TCPS` , you might need to provide the trustStore SSL configuration that is required to verify the Oracle server certificate. A missing SSL configuration results in an `Unable to find valid certification path` error message. To resolve this issue, set the `JAVA_OPTS` environment variable:
 
-    set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
+```
+set JAVA_OPTS=-Djavax.net.ssl.trustStore="JKS_FILE_LOCATION" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="PASSWORD"
+```
 
 Depending on your Oracle server configuration, you might also need to provide the keyStore configuration. For more information about configuration options, see [SSL With Oracle JDBC Driver](https://www.oracle.com/docs/tech/wp-oracle-jdbc-thin-ssl.pdf) .
 

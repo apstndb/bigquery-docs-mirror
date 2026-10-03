@@ -16,9 +16,11 @@ Like BigLake tables, object tables use access delegation, which decouples access
 
 You can use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to create an object table, as shown in the following example:
 
-    CREATE EXTERNAL TABLE `myproject.mydataset.myobjecttable`
-    WITH CONNECTION `myproject.us.myconnection`
-    OPTIONS ( object_metadata = 'SIMPLE', uris = ['gs://mybucket/*'] );
+```
+CREATE EXTERNAL TABLE `myproject.mydataset.myobjecttable`
+WITH CONNECTION `myproject.us.myconnection`
+OPTIONS ( object_metadata = 'SIMPLE', uris = ['gs://mybucket/*'] );
+```
 
 To learn more about creating object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) .
 
@@ -32,96 +34,30 @@ An object table also contains a `data` pseudocolumn that represents the file con
 
 The following table describes the fixed schema used by object tables:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Field name</strong></th>
-<th><strong>Type</strong></th>
-<th><strong>Mode</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">uri</code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td><code dir="ltr" translate="no">uri</code> : the Uniform Resource Identifier (URI) of the object, in the format <code dir="ltr" translate="no">gs://bucket_name/[folder_name/]object_name</code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">generation</code></td>
-<td>INTEGER</td>
-<td>NULLABLE</td>
-<td>The <a href="https://docs.cloud.google.com/storage/docs/metadata#generation-number">generation</a> of this object, which identifies the object version.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">content_type</code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td>The <a href="https://docs.cloud.google.com/storage/docs/metadata#content-type">Content-Type</a> of the object data, which identifies what kind of media it is. If an object is stored without a Content-Type, it is served as application/octet-stream.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">size</code></td>
-<td>INTEGER</td>
-<td>NULLABLE</td>
-<td>The <a href="https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2">Content-Length</a> of the data in bytes.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">md5_hash</code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td>The <a href="https://wikipedia.org/wiki/MD5">MD5 hash</a> of the data, encoded using <a href="https://datatracker.ietf.org/doc/html/rfc4648#section-4">base64</a> . For more information about using the MD5 hash, see <a href="https://docs.cloud.google.com/storage/docs/metadata#md5">Cloud Storage object metadata</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">updated</code></td>
-<td>TIMESTAMP</td>
-<td>NULLABLE</td>
-<td>The last time the object's metadata was modified.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">metadata</code></td>
-<td>RECORD</td>
-<td>REPEATED</td>
-<td><a href="https://docs.cloud.google.com/storage/docs/metadata#custom-metadata">Custom metadata</a> for the object. Each piece of metadata is represented as a key-value pair in the child <code dir="ltr" translate="no">(metadata.)name</code> and <code dir="ltr" translate="no">(metadata.)value</code> fields of the <code dir="ltr" translate="no">metadata</code> field.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">(metadata.)name</code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td>Key in an individual metadata entry.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">(metadata.)value</code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td>Value in an individual metadata entry.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ref</code></td>
-<td>STRUCT</td>
-<td>NULLABLE</td>
-<td>Google-managed Cloud Storage metadata stored in the <a href="https://docs.cloud.google.com/bigquery/docs/work-with-objectref"><code dir="ltr" translate="no">ObjectRef</code> format</a> .<br />
-<br />
-You can use this column <a href="https://docs.cloud.google.com/bigquery/docs/objectref-columns">to maintain <code dir="ltr" translate="no">ObjectRef</code> values in standard tables</a> . <code dir="ltr" translate="no">ObjectRef</code> values let you integrate object data with structured data.</td>
-</tr>
-</tbody>
-</table>
+| **Field name**     | **Type**  | **Mode** | **Description**                                                                                                                                                                                                                                                                                                                                                 |
+|--------------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `uri`              | STRING    | NULLABLE | `uri` : the Uniform Resource Identifier (URI) of the object, in the format `gs://bucket_name/[folder_name/]object_name` .                                                                                                                                                                                                                                       |
+| `generation`       | INTEGER   | NULLABLE | The [generation](https://docs.cloud.google.com/storage/docs/metadata#generation-number) of this object, which identifies the object version.                                                                                                                                                                                                                    |
+| `content_type`     | STRING    | NULLABLE | The [Content-Type](https://docs.cloud.google.com/storage/docs/metadata#content-type) of the object data, which identifies what kind of media it is. If an object is stored without a Content-Type, it is served as application/octet-stream.                                                                                                                    |
+| `size`             | INTEGER   | NULLABLE | The [Content-Length](https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2) of the data in bytes.                                                                                                                                                                                                                                                         |
+| `md5_hash`         | STRING    | NULLABLE | The [MD5 hash](https://wikipedia.org/wiki/MD5) of the data, encoded using [base64](https://datatracker.ietf.org/doc/html/rfc4648#section-4) . For more information about using the MD5 hash, see [Cloud Storage object metadata](https://docs.cloud.google.com/storage/docs/metadata#md5) .                                                                     |
+| `updated`          | TIMESTAMP | NULLABLE | The last time the object's metadata was modified.                                                                                                                                                                                                                                                                                                               |
+| `metadata`         | RECORD    | REPEATED | [Custom metadata](https://docs.cloud.google.com/storage/docs/metadata#custom-metadata) for the object. Each piece of metadata is represented as a key-value pair in the child `(metadata.)name` and `(metadata.)value` fields of the `metadata` field.                                                                                                          |
+| `(metadata.)name`  | STRING    | NULLABLE | Key in an individual metadata entry.                                                                                                                                                                                                                                                                                                                            |
+| `(metadata.)value` | STRING    | NULLABLE | Value in an individual metadata entry.                                                                                                                                                                                                                                                                                                                          |
+| `ref`              | STRUCT    | NULLABLE | Google-managed Cloud Storage metadata stored in the [`ObjectRef` format](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . You can use this column [to maintain `ObjectRef` values in standard tables](https://docs.cloud.google.com/bigquery/docs/objectref-columns) . `ObjectRef` values let you integrate object data with structured data. |
 
 The rows in an object table look similar to the following:
 
-    -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    |  uri                 | generation | content_type | size  | md5_hash   | updated                        | metadata...name | metadata...value  | ref.uri              | ref.version | ref.authorizer | ref.details                                              |
-    —----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    | gs://mybucket/a.jpeg | 165842…    | image/jpeg   | 26797 | 8c33be10f… | 2022-07-21 17:35:40.148000 UTC | null            | null              | gs://mybucket/a.jpeg | 12345678    | us.conn        | {"gcs_metadata":{"content_type":"image/jpeg","md5_hash"… |
-    —----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    | gs://mybucket/b.bmp  | 305722…    | image/bmp    | 57932 | 44eb90cd1… | 2022-05-14 12:09:38.114000 UTC | null            | null              | gs://mybucket/b.bmp  | 23456789    | us.conn        | {"gcs_metadata":{"content_type":"image/bmp","md5_hash"…  |
-    —----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+```
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|  uri                 | generation | content_type | size  | md5_hash   | updated                        | metadata...name | metadata...value  | ref.uri              | ref.version | ref.authorizer | ref.details                                              |
+—----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| gs://mybucket/a.jpeg | 165842…    | image/jpeg   | 26797 | 8c33be10f… | 2022-07-21 17:35:40.148000 UTC | null            | null              | gs://mybucket/a.jpeg | 12345678    | us.conn        | {"gcs_metadata":{"content_type":"image/jpeg","md5_hash"… |
+—----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| gs://mybucket/b.bmp  | 305722…    | image/bmp    | 57932 | 44eb90cd1… | 2022-05-14 12:09:38.114000 UTC | null            | null              | gs://mybucket/b.bmp  | 23456789    | us.conn        | {"gcs_metadata":{"content_type":"image/bmp","md5_hash"…  |
+—----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+```
 
 ## Use cases
 
@@ -129,101 +65,56 @@ You can query the metadata in an object table in the same way you would query an
 
 The following table describes the integration points you can use to do machine learning on object table data:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Integration</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Use case</strong></th>
-<th><strong>Tutorial</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text"><code dir="ltr" translate="no">AI.GENERATE_TEXT</code> function</a></td>
-<td>Generate text by using a Gemini Enterprise Agent Platform, partner, or open model.</td>
-<td>You want to generate text from object data.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/generate-text">Generate text by using the <code dir="ltr" translate="no">AI.GENERATE_TEXT</code> function</a></td>
-</tr>
-<tr class="even">
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding"><code dir="ltr" translate="no">AI.GENERATE_EMBEDDING</code> function</a></td>
-<td>Generate embeddings by using a Gemini Enterprise Agent Platform multimodal model.</td>
-<td>You want to generate embeddings for video or image data to use in vector searches, model input, or other use cases.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding">Generate image embeddings by using the <code dir="ltr" translate="no">AI.GENERATE_EMBEDDING</code> function</a><br />
-<br />
-<a href="https://docs.cloud.google.com/bigquery/docs/generate-video-embedding">Generate video embeddings by using the <code dir="ltr" translate="no">AI.GENERATE_EMBEDDING</code> function</a></td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#inference_using_imported_models">Imported BigQuery ML models</a></td>
-<td>Import <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow">TensorFlow</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite">TensorFlow Lite</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx">ONNX</a> models to BigQuery ML to run local inference in BigQuery .</td>
-<td>You are using open-source or custom models that fit within <a href="https://docs.cloud.google.com/bigquery/docs/object-table-inference#limitations">supported limitations</a> .</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet">Tutorial: Run inference on an object table by using a feature vector model</a></td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/object-table-remote-function">Cloud Run functions</a></td>
-<td>Use Cloud Run functions to call services or hosted models. This is the most generic integration.</td>
-<td>You are self-hosting your models on Compute Engine, Google Kubernetes Engine, or other customer-owned infrastructure.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image"><code dir="ltr" translate="no">ML.ANNOTATE_IMAGE</code> function</a></td>
-<td>Use the Cloud Vision API to annotate images.</td>
-<td>You want to annotate images by using a Vision API pre-trained model.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/annotate-image">Annotate images with the <code dir="ltr" translate="no">ML.ANNOTATE_IMAGE</code> function</a></td>
-</tr>
-<tr class="even">
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document"><code dir="ltr" translate="no">ML.PROCESS_DOCUMENT</code> function</a></td>
-<td>Use the Document AI API to extract document insights.</td>
-<td>You want to use Document AI pre-trained or custom document processors.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/process-document">Process documents with the <code dir="ltr" translate="no">ML.PROCESS_DOCUMENT</code> function</a></td>
-</tr>
-<tr class="odd">
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe"><code dir="ltr" translate="no">ML.TRANSCRIBE</code> function</a></td>
-<td>Use the Speech-to-Text API to transcribe audio files.</td>
-<td>You want to use Speech-to-Text pre-trained or custom speech recognizers.</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/transcribe">Transcribe audio files with the <code dir="ltr" translate="no">ML.TRANSCRIBE</code> function</a></td>
-</tr>
-</tbody>
-</table>
+| **Integration**                                                                                                                                      | **Description**                                                                                                                                                                                                                                                                                                                                                                                                              | **Use case**                                                                                                                                                         | **Tutorial**                                                                                                                                                                                                                                                                                             |
+|------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)             | Generate text by using a Gemini Enterprise Agent Platform, partner, or open model.                                                                                                                                                                                                                                                                                                                                           | You want to generate text from object data.                                                                                                                          | [Generate text by using the `AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text)                                                                                                                                                                                      |
+| The [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)   | Generate embeddings by using a Gemini Enterprise Agent Platform multimodal model.                                                                                                                                                                                                                                                                                                                                            | You want to generate embeddings for video or image data to use in vector searches, model input, or other use cases.                                                  | [Generate image embeddings by using the `AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) [Generate video embeddings by using the `AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) |
+| [Imported BigQuery ML models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#inference_using_imported_models) | Import [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , or [ONNX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) models to BigQuery ML to run local inference in BigQuery . | You are using open-source or custom models that fit within [supported limitations](https://docs.cloud.google.com/bigquery/docs/object-table-inference#limitations) . | [Tutorial: Run inference on an object table by using a feature vector model](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet)                                                                                                                                                   |
+| [Cloud Run functions](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function)                                                      | Use Cloud Run functions to call services or hosted models. This is the most generic integration.                                                                                                                                                                                                                                                                                                                             | You are self-hosting your models on Compute Engine, Google Kubernetes Engine, or other customer-owned infrastructure.                                                |                                                                                                                                                                                                                                                                                                          |
+| The [`ML.ANNOTATE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image)              | Use the Cloud Vision API to annotate images.                                                                                                                                                                                                                                                                                                                                                                                 | You want to annotate images by using a Vision API pre-trained model.                                                                                                 | [Annotate images with the `ML.ANNOTATE_IMAGE` function](https://docs.cloud.google.com/bigquery/docs/annotate-image)                                                                                                                                                                                      |
+| The [`ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document)          | Use the Document AI API to extract document insights.                                                                                                                                                                                                                                                                                                                                                                        | You want to use Document AI pre-trained or custom document processors.                                                                                               | [Process documents with the `ML.PROCESS_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/process-document)                                                                                                                                                                                |
+| The [`ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe)                      | Use the Speech-to-Text API to transcribe audio files.                                                                                                                                                                                                                                                                                                                                                                        | You want to use Speech-to-Text pre-trained or custom speech recognizers.                                                                                             | [Transcribe audio files with the `ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/transcribe)                                                                                                                                                                                       |
 
 You can create a view or table from the results of your analysis if you want to join your results with other structured data. For example, the following statement creates a table based on inference results:
 
-    CREATE TABLE my_dataset.my_inference_results AS
-    SELECT uri, content_type, vision_feature
-    FROM ML.PREDICT(
-      MODEL my_dataset.vision_model,
-      SELECT ML.DECODE_IMAGE(data) AS vision_input
-      FROM my_dataset.object_table
-    );
+```
+CREATE TABLE my_dataset.my_inference_results AS
+SELECT uri, content_type, vision_feature
+FROM ML.PREDICT(
+  MODEL my_dataset.vision_model,
+  SELECT ML.DECODE_IMAGE(data) AS vision_input
+  FROM my_dataset.object_table
+);
+```
 
 After the table is created, you can join it with other tables based on either standard or custom metadata fields, as shown following:
 
-    SELECT a.vision_feature, a.uri, b.description
-    FROM my_dataset.my_inference_results a
-    JOIN my_dataset.image_description b
-    ON a.uri = b.uri;
+```
+SELECT a.vision_feature, a.uri, b.description
+FROM my_dataset.my_inference_results a
+JOIN my_dataset.image_description b
+ON a.uri = b.uri;
+```
 
 You can also [create a search index](https://docs.cloud.google.com/bigquery/docs/search-index) to power searches over the results of your analysis. For example, the following statement creates a search index over data extracted from PDF files:
 
-    CREATE SEARCH INDEX my_index ON pdf_text_extract(ALL COLUMNS);
+```
+CREATE SEARCH INDEX my_index ON pdf_text_extract(ALL COLUMNS);
+```
 
 You can then use the index to find what you need in those results:
 
-    SELECT * FROM pdf_text_extract WHERE SEARCH(pdf_text, 'Google');
+```
+SELECT * FROM pdf_text_extract WHERE SEARCH(pdf_text, 'Google');
+```
 
 ## Benefits
 
 Analyzing unstructured data natively in BigQuery provides the following benefits:
 
-  - It reduces manual effort by letting you automate pre-processing steps such as tuning image sizes to model requirements.
-  - It lets you use the familiar SQL interface to work with unstructured data.
-  - It helps you save costs by utilizing existing BigQuery slots instead of having to provision new forms of compute.
+- It reduces manual effort by letting you automate pre-processing steps such as tuning image sizes to model requirements.
+- It lets you use the familiar SQL interface to work with unstructured data.
+- It helps you save costs by utilizing existing BigQuery slots instead of having to provision new forms of compute.
 
 ## Signed URLs
 
@@ -231,18 +122,22 @@ To get access to the data represented by an object, generate a signed URL. You c
 
 Use the [`EXTERNAL_OBJECT_TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) to generate signed URLs, as shown in the following example:
 
-    SELECT uri, signed_url
-    FROM EXTERNAL_OBJECT_TRANSFORM(TABLE `mydataset.myobjecttable`, ['SIGNED_URL']);
+```
+SELECT uri, signed_url
+FROM EXTERNAL_OBJECT_TRANSFORM(TABLE `mydataset.myobjecttable`, ['SIGNED_URL']);
+```
 
 This returns results similar to the following:
 
-    ---------------------------------------------------------------------------------------------------
-    |  uri                 | signed_url                                                               |
-    —--------------------------------------------------------------------------------------------------
-    | gs://mybucket/a.docx | https://storage.googleapis.com/mybucket/a.docx?X-Goog-Signature=abcd&... |
-    —-------------------------------------------------------------------------------------------------
-    | gs://mybucket/b.pdf  | https://storage.googleapis.com/mybucket/b.pdf?X-Goog-Signature=wxyz&...  |
-    —--------------------------------------------------------------------------------------------------
+```
+---------------------------------------------------------------------------------------------------
+|  uri                 | signed_url                                                               |
+—--------------------------------------------------------------------------------------------------
+| gs://mybucket/a.docx | https://storage.googleapis.com/mybucket/a.docx?X-Goog-Signature=abcd&... |
+—-------------------------------------------------------------------------------------------------
+| gs://mybucket/b.pdf  | https://storage.googleapis.com/mybucket/b.pdf?X-Goog-Signature=wxyz&...  |
+—--------------------------------------------------------------------------------------------------
+```
 
 Signed URLs generated from object tables allow any user or procedure that possesses them to read the corresponding objects. Generated signed URLs expire after 6 hours. For more information, see [Cloud Storage Signed URLs](https://docs.cloud.google.com/storage/docs/access-control/signed-urls) .
 
@@ -254,42 +149,46 @@ Object tables vary from other tables that use access delegation, in that having 
 
 Setting a row-level access policy on an object table restricts a user or group's access to the object metadata in selected rows, and also to the objects represented by those rows. For example, the following statement grants the user Alice access only to rows that represent objects created before June 25, 2022:
 
-    CREATE ROW ACCESS POLICY before_20220625
-    ON my_dataset.my_object_table
-    GRANT TO ("user:alice@example.com")
-    FILTER USING (updated < TIMESTAMP("2022-06-25"));
+```
+CREATE ROW ACCESS POLICY before_20220625
+ON my_dataset.my_object_table
+GRANT TO ("user:alice@example.com")
+FILTER USING (updated < TIMESTAMP("2022-06-25"));
+```
 
 With this row-level access policy in place, the following outcomes are true for Alice:
 
-  - Running the query `SELECT * FROM my_dataset.my_object_table;` only returns rows that have an `updated` value prior to June 25, 2022.
-  - Running inference on `my_dataset.my_object_table` only returns predictions for objects that have an `updated` value prior to June 25, 2022.
-  - Generating signed URLs for `my_dataset.my_object_table` only creates URLs for objects that have an `updated` value prior to June 25, 2022.
+- Running the query `SELECT * FROM my_dataset.my_object_table;` only returns rows that have an `updated` value prior to June 25, 2022.
+- Running inference on `my_dataset.my_object_table` only returns predictions for objects that have an `updated` value prior to June 25, 2022.
+- Generating signed URLs for `my_dataset.my_object_table` only creates URLs for objects that have an `updated` value prior to June 25, 2022.
 
 You can also restrict access to object table rows by using custom metadata. For example, the following statement restricts the `users` group to only access rows where the object has been tagged as not containing any personally identifiable information:
 
-    CREATE ROW ACCESS POLICY no_pii
-    ON my_dataset.my_object_table
-    GRANT TO ("group:users@example.com")
-    FILTER USING (ARRAY_LENGTH(metadata)=1
-    AND metadata[OFFSET(0)].name="no_pii")
+```
+CREATE ROW ACCESS POLICY no_pii
+ON my_dataset.my_object_table
+GRANT TO ("group:users@example.com")
+FILTER USING (ARRAY_LENGTH(metadata)=1
+AND metadata[OFFSET(0)].name="no_pii")
+```
 
 ## Security model
 
 The following organizational roles are typically involved in managing and using object tables:
 
-  - **Data lake administrators.** These administrators typically manage Identity and Access Management (IAM) policies on Cloud Storage buckets and objects.
-  - **Data warehouse administrators.** These administrators typically create, delete, and update tables.
-  - **Data analysts.** Analysts typically read data and run queries.
+- **Data lake administrators.** These administrators typically manage Identity and Access Management (IAM) policies on Cloud Storage buckets and objects.
+- **Data warehouse administrators.** These administrators typically create, delete, and update tables.
+- **Data analysts.** Analysts typically read data and run queries.
 
 Data lake administrators are responsible for creating connections and sharing them with data warehouse administrators. In turn, data warehouse administrators create tables, set appropriate access controls, and share the tables with data analysts.
 
 > **Caution:** Data analysts should **not** have the following:
-> 
->   - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
-> 
->   - The ability to bind tables to connections (like the BigQuery Connection Administrator).
->     
->     Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
+>
+> - The ability to read objects directly from Cloud Storage (see the [Storage Object Viewer IAM role](https://docs.cloud.google.com/storage/docs/access-control/iam-roles) ), which lets data analysts circumvent access controls placed by data warehouse administrators.
+>
+> - The ability to bind tables to connections (like the BigQuery Connection Administrator).
+>
+>   Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
 
 ## Supported object files
 
@@ -307,18 +206,18 @@ Metadata caching also integrates with Cloud Storage object versioning. When the 
 
 There are two properties that control this feature:
 
-  - **Maximum staleness** specifies when queries use cached metadata.
-  - **Metadata cache mode** specifies how the metadata is collected.
+- **Maximum staleness** specifies when queries use cached metadata.
+- **Metadata cache mode** specifies how the metadata is collected.
 
 When you have metadata caching enabled, you specify the maximum interval of metadata staleness that is acceptable for operations against the table. For example, if you specify an interval of 1 hour, then operations against the table use cached metadata if it has been refreshed within the past hour. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead. You can specify a staleness interval between 30 minutes and 7 days.
 
 When you enable metadata caching for BigLake or object tables, BigQuery triggers metadata generation refresh jobs. You can choose to refresh the cache either automatically or manually:
 
-  - For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in Cloud Storage are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
+- For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in Cloud Storage are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
 
-  - For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. Refreshing the cache manually is a good approach if the files in Cloud Storage are added, deleted, or modified at known intervals, for example as the output of a pipeline.
-    
-    If you issue multiple concurrent manual refreshes, only one will succeed.
+- For manual refreshes, you run the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on a schedule that meets your requirements. Refreshing the cache manually is a good approach if the files in Cloud Storage are added, deleted, or modified at known intervals, for example as the output of a pipeline.
+
+  If you issue multiple concurrent manual refreshes, only one will succeed.
 
 The metadata cache expires after 7 days if it isn't refreshed.
 
@@ -332,17 +231,19 @@ While using a shared slot pool incurs no extra cost, using `BACKGROUND` reservat
 
 You should consider how the staleness interval and metadata caching mode values will interact before you set them. Consider the following examples:
 
-  - If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
-  - If you are automatically refreshing the metadata cache for a table, and you set the staleness interval to 30 minutes, it is possible that some of your operations against the table might read from Cloud Storage if the metadata cache refresh takes on the longer side of the usual 30 to 60 minute window.
+- If you are manually refreshing the metadata cache for a table, and you set the staleness interval to 2 days, you must run the `BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure every 2 days or less if you want operations against the table to use cached metadata.
+- If you are automatically refreshing the metadata cache for a table, and you set the staleness interval to 30 minutes, it is possible that some of your operations against the table might read from Cloud Storage if the metadata cache refresh takes on the longer side of the usual 30 to 60 minute window.
 
 To find information about metadata refresh jobs, query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , as shown in the following example:
 
-    SELECT *
-    FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-    WHERE job_id LIKE '%metadata_cache_refresh%'
-    AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
-    ORDER BY start_time DESC
-    LIMIT 10;
+```
+SELECT *
+FROM `region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+WHERE job_id LIKE '%metadata_cache_refresh%'
+AND creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
+ORDER BY start_time DESC
+LIMIT 10;
+```
 
 To learn more, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
 
@@ -350,100 +251,61 @@ For more information on setting metadata caching options, see [Create object tab
 
 ## Limitations
 
-  - Object tables are read-only, because they map to unstructured data objects in Cloud Storage. You can't alter an object table or modify object table data.
+- Object tables are read-only, because they map to unstructured data objects in Cloud Storage. You can't alter an object table or modify object table data.
 
-  - Object table support isn't available in Legacy SQL, or other cloud environments such as Amazon Web Services (AWS) and Microsoft Azure.
+- Object table support isn't available in Legacy SQL, or other cloud environments such as Amazon Web Services (AWS) and Microsoft Azure.
 
-  - If you want to perform inference by using BigQuery ML, the model and the object table you use must meet the requirements described in [Limitations](https://docs.cloud.google.com/bigquery/docs/object-table-inference#limitations) .
+- If you want to perform inference by using BigQuery ML, the model and the object table you use must meet the requirements described in [Limitations](https://docs.cloud.google.com/bigquery/docs/object-table-inference#limitations) .
 
-  - Queries that include object tables can't access more than 10 GB of object metadata. For example, if a query accesses 100 TB from a combination of metadata columns in object tables and object data through signed URLs, only 10 GB of that 100 TB can be from the metadata columns.
+- Queries that include object tables can't access more than 10 GB of object metadata. For example, if a query accesses 100 TB from a combination of metadata columns in object tables and object data through signed URLs, only 10 GB of that 100 TB can be from the metadata columns.
 
-  - Object tables are subject to the same limitations as all other BigQuery external tables. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#external_tables) .
+- Object tables are subject to the same limitations as all other BigQuery external tables. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#external_tables) .
 
-  - Queries over object tables are subject to the same limitations as all other BigQuery queries. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
+- Queries over object tables are subject to the same limitations as all other BigQuery queries. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 
-  - Remote functions that process unstructured data from object tables are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#limitations) as all other remote functions.
+- Remote functions that process unstructured data from object tables are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#limitations) as all other remote functions.
 
-  - Signed URLs generated for the objects in an object table expire after 6 hours, which is the [query execution time limit](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
+- Signed URLs generated for the objects in an object table expire after 6 hours, which is the [query execution time limit](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 
-  - Inference with BigQuery ML is not supported with on-demand pricing or with the Standard edition.
+- Inference with BigQuery ML is not supported with on-demand pricing or with the Standard edition.
 
-  - The following functions are not supported with on-demand pricing or with the Standard edition:
-    
-      - [`ML.CONVERT_COLOR_SPACE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space)
-      - [`ML.CONVERT_IMAGE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type)
-      - [`ML.RESIZE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image)
+- The following functions are not supported with on-demand pricing or with the Standard edition:
 
-  - Object tables can have a maximum of 300 million rows.
+  - [`ML.CONVERT_COLOR_SPACE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-color-space)
+  - [`ML.CONVERT_IMAGE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type)
+  - [`ML.RESIZE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image)
 
-  - `UNION ALL` operations that combine both empty and non-empty object tables are not supported and might return an error.
+- Object tables can have a maximum of 300 million rows.
 
-  - Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process the `ref` column of an object table. The `ref` column always uses the object table's connection as its authorizer, which means that BigQuery generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the error `INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.` to the `status` field of its output. To analyze the object, pass a single-argument [`OBJ.MAKE_REF(uri)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) value instead, which sends the Cloud Storage URI to the model without generating a signed URL. `OBJ.MAKE_REF` retrieves object metadata from Cloud Storage each time it runs, which might be less scalable for large workloads. For more information, see [Maintaining `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns#maintaining_objectref_values) .
+- `UNION ALL` operations that combine both empty and non-empty object tables are not supported and might return an error.
+
+- Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process the `ref` column of an object table. The `ref` column always uses the object table's connection as its authorizer, which means that BigQuery generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the error `INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.` to the `status` field of its output. To analyze the object, pass a single-argument [`OBJ.MAKE_REF(uri)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) value instead, which sends the Cloud Storage URI to the model without generating a signed URL. `OBJ.MAKE_REF` retrieves object metadata from Cloud Storage each time it runs, which might be less scalable for large workloads. For more information, see [Maintaining `ObjectRef` values](https://docs.cloud.google.com/bigquery/docs/objectref-columns#maintaining_objectref_values) .
 
 ## Costs
 
 Costs are associated with the following aspects of object tables:
 
-  - Querying the tables.
-  - [Refreshing the metadata cache](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
+- Querying the tables.
+- [Refreshing the metadata cache](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
 
 If you have [slot reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) , you are not charged for querying external tables. Instead, slots are consumed for these queries.
 
 The following table shows how your pricing model affects how these costs are applied:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><br />
-<strong>On-demand pricing</strong></th>
-<th><br />
-<strong>Standard, Enterprise, and Enterprise Plus editions</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><br />
-Queries</td>
-<td><br />
-You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> by user queries.</td>
-<td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">QUERY</code> job type</a> are consumed during query time.</td>
-</tr>
-<tr class="even">
-<td><br />
-Manually refreshing the metadata cache.</td>
-<td><br />
-You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> to refresh the cache.</td>
-<td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">QUERY</code> job type</a> are consumed during cache refresh.</td>
-</tr>
-<tr class="odd">
-<td><br />
-Automatically refreshing the metadata cache.</td>
-<td><br />
-You are <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">billed for the bytes processed</a> to refresh the cache.</td>
-<td><br />
-<a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">Slots</a> in <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">reservation assignments with a <code dir="ltr" translate="no">BACKGROUND</code> job type</a> are consumed during cache refresh.<br />
-<br />
-If there are no <code dir="ltr" translate="no">BACKGROUND</code> reservations available for refreshing the metadata cache, BigQuery automatically uses slots in <code dir="ltr" translate="no">QUERY</code> reservations instead if you are using the Enterprise or Enterprise Plus edition.</td>
-</tr>
-</tbody>
-</table>
+|                                              | **On-demand pricing**                                                                                                       | **Standard, Enterprise, and Enterprise Plus editions**                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Queries                                      | You are [billed for the bytes processed](https://cloud.google.com/bigquery/pricing#on_demand_pricing) by user queries.      | [Slots](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) in [reservation assignments with a `QUERY` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) are consumed during query time.                                                                                                                                                                                                                              |
+| Manually refreshing the metadata cache.      | You are [billed for the bytes processed](https://cloud.google.com/bigquery/pricing#on_demand_pricing) to refresh the cache. | [Slots](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) in [reservation assignments with a `QUERY` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) are consumed during cache refresh.                                                                                                                                                                                                                           |
+| Automatically refreshing the metadata cache. | You are [billed for the bytes processed](https://cloud.google.com/bigquery/pricing#on_demand_pricing) to refresh the cache. | [Slots](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) in [reservation assignments with a `BACKGROUND` job type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) are consumed during cache refresh. If there are no `BACKGROUND` reservations available for refreshing the metadata cache, BigQuery automatically uses slots in `QUERY` reservations instead if you are using the Enterprise or Enterprise Plus edition. |
 
 You are also charged for storage and data access by [Cloud Storage](https://cloud.google.com/storage/pricing) , [Amazon S3](https://aws.amazon.com/s3/pricing/) , and [Azure Blob Storage](https://azure.microsoft.com/pricing/details/storage/blobs/) , subject to each product's pricing guidelines.
 
 When BigQuery interacts with Cloud Storage, you might incur the following Cloud Storage costs:
 
-  - Data storage costs for the amount of data stored.
-  - Data retrieval costs for accessing data in [Nearline](https://docs.cloud.google.com/storage/docs/storage-classes#nearline) , [Coldline](https://docs.cloud.google.com/storage/docs/storage-classes#coldline) , and [Archive](https://docs.cloud.google.com/storage/docs/storage-classes#archive) storage classes. Take caution when querying tables or refreshing the metadata cache against these storage classes, as charges can be significant.
-  - Network usage costs for data that you read across different regions, such as when your BigQuery dataset and Cloud Storage bucket are in different regions.
-  - Data processing charges. However, you aren't charged for API calls that are made by BigQuery on your behalf, such as listing or getting resources.
+- Data storage costs for the amount of data stored.
+- Data retrieval costs for accessing data in [Nearline](https://docs.cloud.google.com/storage/docs/storage-classes#nearline) , [Coldline](https://docs.cloud.google.com/storage/docs/storage-classes#coldline) , and [Archive](https://docs.cloud.google.com/storage/docs/storage-classes#archive) storage classes. Take caution when querying tables or refreshing the metadata cache against these storage classes, as charges can be significant.
+- Network usage costs for data that you read across different regions, such as when your BigQuery dataset and Cloud Storage bucket are in different regions.
+- Data processing charges. However, you aren't charged for API calls that are made by BigQuery on your behalf, such as listing or getting resources.
 
 ## Using object tables with BigQuery sharing
 
@@ -451,7 +313,7 @@ Object tables are compatible with BigQuery sharing (formerly Analytics Hub). Dat
 
 ## What's next
 
-  - Learn how to [create an object table](https://docs.cloud.google.com/bigquery/docs/object-tables) .
-  - Learn how to [use object tables to maintain `ObjectRef` columns in standard tables](https://docs.cloud.google.com/bigquery/docs/objectref-columns) .
-  - Learn how to [run inference on image object tables](https://docs.cloud.google.com/bigquery/docs/object-table-inference) .
-  - Learn how to [analyze object tables by using remote functions](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function) .
+- Learn how to [create an object table](https://docs.cloud.google.com/bigquery/docs/object-tables) .
+- Learn how to [use object tables to maintain `ObjectRef` columns in standard tables](https://docs.cloud.google.com/bigquery/docs/objectref-columns) .
+- Learn how to [run inference on image object tables](https://docs.cloud.google.com/bigquery/docs/object-table-inference) .
+- Learn how to [analyze object tables by using remote functions](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function) .

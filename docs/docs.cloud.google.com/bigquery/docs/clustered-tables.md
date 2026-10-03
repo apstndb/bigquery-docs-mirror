@@ -26,16 +26,16 @@ Clustering doesn't guarantee a reduction in the slots required to query a table.
 
 Clustering addresses how a table is stored so it's generally a good first option for improving query performance. You should therefore always consider clustering given the following advantages it provides:
 
-  - Unpartitioned tables larger than 64 MB are likely to benefit from clustering. Similarly, table partitions larger than 64 MB are also likely to benefit from clustering. Clustering smaller tables or partitions is possible, but the performance improvement is usually negligible.
-  - If your queries commonly filter on particular columns, clustering accelerates queries because the query only scans the blocks that match the filter.
-  - If your queries filter on columns that have many distinct values (high cardinality), clustering accelerates these queries by providing BigQuery with detailed metadata for where to get input data.
-  - Clustering enables your table's underlying storage blocks to be adaptively sized based on the size of the table.
+- Unpartitioned tables larger than 64 MB are likely to benefit from clustering. Similarly, table partitions larger than 64 MB are also likely to benefit from clustering. Clustering smaller tables or partitions is possible, but the performance improvement is usually negligible.
+- If your queries commonly filter on particular columns, clustering accelerates queries because the query only scans the blocks that match the filter.
+- If your queries filter on columns that have many distinct values (high cardinality), clustering accelerates these queries by providing BigQuery with detailed metadata for where to get input data.
+- Clustering enables your table's underlying storage blocks to be adaptively sized based on the size of the table.
 
 You might consider [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) your table in addition to clustering. In this approach, you first segment data into partitions, and then you cluster the data within each partition by the clustering columns. Consider this approach in the following circumstances:
 
-  - You need a strict query cost estimate before you run a query. The cost of queries over clustered tables can only be determined after the query is run. Partitioning provides granular query cost estimates before you run a query.
-  - Partitioning your table results in an average partition size of at least 10 GB per partition. Creating many small partitions increases the table's metadata, and can affect metadata access times when querying the table.
-  - You need to continually update your table but still want to [take advantage of long-term storage pricing](https://cloud.google.com/bigquery/pricing#storage-pricing) . Partitioning enables each partition to be considered separately for eligibility for long term pricing. If your table is not partitioned, then your entire table must not be edited for 90 consecutive days to be considered for long term pricing.
+- You need a strict query cost estimate before you run a query. The cost of queries over clustered tables can only be determined after the query is run. Partitioning provides granular query cost estimates before you run a query.
+- Partitioning your table results in an average partition size of at least 10 GB per partition. Creating many small partitions increases the table's metadata, and can affect metadata access times when querying the table.
+- You need to continually update your table but still want to [take advantage of long-term storage pricing](https://cloud.google.com/bigquery/pricing#storage-pricing) . Partitioning enables each partition to be considered separately for eligibility for long term pricing. If your table is not partitioned, then your entire table must not be edited for 90 consecutive days to be considered for long term pricing.
 
 For more information, see [Combine clustered and partitioned tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#combine-clustered-partitioned-tables) .
 
@@ -47,16 +47,16 @@ This section describes column types and how column order works in table clusteri
 
 Cluster columns must be top-level, non-repeated columns that are one of the following types:
 
-  - `BIGNUMERIC`
-  - `BOOL`
-  - `DATE`
-  - `DATETIME`
-  - `GEOGRAPHY`
-  - `INT64`
-  - `NUMERIC`
-  - `RANGE`
-  - `STRING`
-  - `TIMESTAMP`
+- `BIGNUMERIC`
+- `BOOL`
+- `DATE`
+- `DATETIME`
+- `GEOGRAPHY`
+- `INT64`
+- `NUMERIC`
+- `RANGE`
+- `STRING`
+- `TIMESTAMP`
 
 For more information about data types, see [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
 
@@ -90,29 +90,31 @@ When you create a table that is clustered and partitioned, you can achieve more 
 
 You have a clustered table named `ClusteredSalesData` . The table is partitioned by the `timestamp` column, and it is clustered by the `customer_id` column. The data is organized into the following set of blocks:
 
-| Partition identifier | Block ID | Minimum value for customer\_id in the block | Maximum value for customer\_id in the block |
-| -------------------- | -------- | ------------------------------------------- | ------------------------------------------- |
-| 20160501             | B1       | 10000                                       | 19999                                       |
-| 20160501             | B2       | 20000                                       | 24999                                       |
-| 20160502             | B3       | 15000                                       | 17999                                       |
-| 20160501             | B4       | 22000                                       | 27999                                       |
+| Partition identifier | Block ID | Minimum value for customer_id in the block | Maximum value for customer_id in the block |
+|----------------------|----------|--------------------------------------------|--------------------------------------------|
+| 20160501             | B1       | 10000                                      | 19999                                      |
+| 20160501             | B2       | 20000                                      | 24999                                      |
+| 20160502             | B3       | 15000                                      | 17999                                      |
+| 20160501             | B4       | 22000                                      | 27999                                      |
 
 You run the following query against the table. The query contains a filter on the `customer_id` column.
 
-    SELECT
-      SUM(totalSale)
-    FROM
-      `mydataset.ClusteredSalesData`
-    WHERE
-      customer_id BETWEEN 20000
-      AND 23000
-      AND DATE(timestamp) = "2016-05-01"
+```
+SELECT
+  SUM(totalSale)
+FROM
+  `mydataset.ClusteredSalesData`
+WHERE
+  customer_id BETWEEN 20000
+  AND 23000
+  AND DATE(timestamp) = "2016-05-01"
+```
 
 The preceding query involves the following steps:
 
-  - Scans the `timestamp` , `customer_id` , and `totalSale` columns in blocks B2 and B4.
-  - Prunes the B3 block because of the `DATE(timestamp) = "2016-05-01"` filter predicate on the `timestamp` partitioning column.
-  - Prunes the B1 block because of the `customer_id BETWEEN 20000 AND 23000` filter predicate on the `customer_id` clustering column.
+- Scans the `timestamp` , `customer_id` , and `totalSale` columns in blocks B2 and B4.
+- Prunes the B3 block because of the `DATE(timestamp) = "2016-05-01"` filter predicate on the `timestamp` partitioning column.
+- Prunes the B1 block because of the `customer_id BETWEEN 20000 AND 23000` filter predicate on the `customer_id` clustering column.
 
 ## Automatic reclustering
 
@@ -124,10 +126,10 @@ To maintain the performance characteristics of a clustered table, BigQuery perfo
 
 ## Limitations
 
-  - Only GoogleSQL is supported for querying clustered tables and for writing query results to clustered tables.
-  - You can only specify up to four clustering columns. If you need additional columns, consider combining clustering with partitioning.
-  - When using `STRING` type columns for clustering, BigQuery uses only the first 1,024 characters to cluster the data. The values in the columns can themselves be longer than 1,024 characters.
-  - If you alter an existing non-clustered table to be clustered, the existing data is not automatically clustered. Only new data that's stored using the clustered columns is subject to automatic reclustering. For more information about reclustering existing data using an [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) , see [Modify clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+- Only GoogleSQL is supported for querying clustered tables and for writing query results to clustered tables.
+- You can only specify up to four clustering columns. If you need additional columns, consider combining clustering with partitioning.
+- When using `STRING` type columns for clustering, BigQuery uses only the first 1,024 characters to cluster the data. The values in the columns can themselves be longer than 1,024 characters.
+- If you alter an existing non-clustered table to be clustered, the existing data is not automatically clustered. Only new data that's stored using the clustered columns is subject to automatic reclustering. For more information about reclustering existing data using an [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) , see [Modify clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
 ## Clustered table quotas and limits
 
@@ -151,5 +153,5 @@ To control access to tables in BigQuery, see [Control access to resources with I
 
 ## What's next
 
-  - To learn how to create and use clustered tables, see [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
-  - For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
+- To learn how to create and use clustered tables, see [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+- For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .

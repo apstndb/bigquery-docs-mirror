@@ -18,69 +18,19 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 To create a table clone, you need the following permissions:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Permission</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>All of the following:<br />
-<br />
-<code dir="ltr" translate="no">bigquery.tables.get</code><br />
-<code dir="ltr" translate="no">bigquery.tables.getData</code><br />
-</td>
-<td>The table that you want to make a clone of.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">bigquery.tables.create</code><br />
-<code dir="ltr" translate="no">bigquery.tables.updateData</code></td>
-<td>The dataset that contains the table clone.</td>
-</tr>
-</tbody>
-</table>
+| **Permission**                                                        | **Resource**                                |
+|-----------------------------------------------------------------------|---------------------------------------------|
+| All of the following: `bigquery.tables.get` `bigquery.tables.getData` | The table that you want to make a clone of. |
+| `bigquery.tables.create` `bigquery.tables.updateData`                 | The dataset that contains the table clone.  |
 
 ### Roles
 
 The predefined BigQuery roles that provide the required permissions are as follows:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Role</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Any of the following:<br />
-<br />
-<code dir="ltr" translate="no">bigquery.dataViewer</code><br />
-<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
-<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
-<code dir="ltr" translate="no">bigquery.admin</code></td>
-<td>The table that you want to make a clone of.</td>
-</tr>
-<tr class="even">
-<td>Any of the following:<br />
-<br />
-<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
-<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
-<code dir="ltr" translate="no">bigquery.admin</code></td>
-<td>The dataset that contains the new table clone.</td>
-</tr>
-</tbody>
-</table>
+| **Role**                                                                                                | **Resource**                                   |
+|---------------------------------------------------------------------------------------------------------|------------------------------------------------|
+| Any of the following: `bigquery.dataViewer` `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The table that you want to make a clone of.    |
+| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin`                       | The dataset that contains the new table clone. |
 
 ## Create a table clone
 
@@ -93,38 +43,44 @@ To clone a table, use the [CREATE TABLE CLONE](https://docs.cloud.google.com/big
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE TABLE
-        myproject.myDataset_backup.myTableClone
-        CLONE myproject.myDataset.myTable;
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE TABLE
+    myproject.myDataset_backup.myTableClone
+    CLONE myproject.myDataset.myTable;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 Replace the following:
 
-  - `  PROJECT  ` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
-  - `  DATASET  ` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning.
-  - `  CLONE_NAME  ` is name of the table clone that you are creating.
+- `PROJECT` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
+- `DATASET` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning.
+- `CLONE_NAME` is name of the table clone that you are creating.
 
 ### bq
 
 Use a [`bq cp`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command with the `--clone` flag:
 
-    bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME
+```
+bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME
+```
 
 Replace the following:
 
-  - `  PROJECT  ` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
-  - `  DATASET  ` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning. If the dataset is not in the same region as the dataset containing the table you are cloning then a full table is copied.
-  - `  CLONE_NAME  ` is name of the table clone that you are creating.
+- `PROJECT` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
+- `DATASET` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning. If the dataset is not in the same region as the dataset containing the table you are cloning then a full table is copied.
+- `CLONE_NAME` is name of the table clone that you are creating.
 
 The `--no_clobber` flag is required.
 
 If you are creating a clone in the same project as the base table, you can skip specifying a project, as shown following:
 
-    bq cp --clone --no_clobber myDataset.myTable DATASET.CLONE_NAME
+```
+bq cp --clone --no_clobber myDataset.myTable DATASET.CLONE_NAME
+```
 
 ### API
 
@@ -143,12 +99,12 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">projectId</code></td>
+<td><code>projectId</code></td>
 <td>The project ID of the project that runs the job.</td>
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre data-fenced=""><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -174,23 +130,23 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 
 Replace the following:
 
-  - `  PROJECT  ` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
-  - `  DATASET  ` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning. If the dataset is not in the same region as the dataset containing the table you are cloning a full table is copied.
-  - `  CLONE_NAME  ` is name of the table clone that you are creating.
+- `PROJECT` is the project ID of the target project. This project must be in the same organization as the project containing the table you are cloning.
+- `DATASET` is the name of the target dataset. This dataset must be in the same region as the dataset containing the table you are cloning. If the dataset is not in the same region as the dataset containing the table you are cloning a full table is copied.
+- `CLONE_NAME` is name of the table clone that you are creating.
 
 ## Access control
 
 When you create a table clone, access to the table clone is set as follows:
 
-  - [Row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) are copied from the base table to the table clone.
+- [Row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) are copied from the base table to the table clone.
 
-  - [Column-level access policies](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) are copied from the base table to the table clone.
+- [Column-level access policies](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) are copied from the base table to the table clone.
 
-  - [Table-level access](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro) is determined as follows:
-    
-      - If the table clone overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) aren't copied from the base table.
-      - If the table clone is a new resource, then the table-level access for the table clone is determined by the access policies of the dataset in which the table clone is created. Additionally, [tags](https://docs.cloud.google.com/bigquery/docs/tags) are copied from the base table to the table clone.
+- [Table-level access](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro) is determined as follows:
+
+  - If the table clone overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) aren't copied from the base table.
+  - If the table clone is a new resource, then the table-level access for the table clone is determined by the access policies of the dataset in which the table clone is created. Additionally, [tags](https://docs.cloud.google.com/bigquery/docs/tags) are copied from the base table to the table clone.
 
 ## What's next
 
-  - After you create a table clone, you can use it like you use standard tables. For more information, see [Manage tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+- After you create a table clone, you can use it like you use standard tables. For more information, see [Manage tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .

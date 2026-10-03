@@ -14,8 +14,8 @@ Alternatively, you can use the Google Cloud console user interface to [create a 
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
-  - [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
-  - [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) (only for Gemini models)
+- [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+- [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) (only for Gemini models)
 
 ## `CREATE MODEL` syntax
 
@@ -42,14 +42,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -57,21 +57,23 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
+`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
+```
 
 BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Gemini Enterprise Agent Platform endpoint.
 
 The connection elements are as follows:
 
-  - `PROJECT_ID` : the project ID of the project that contains the connection.
+- `PROJECT_ID` : the project ID of the project that contains the connection.
 
-  - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
-  - `CONNECTION_ID` : the connection ID—for example, `myconnection` .
-    
-    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example ` projects/myproject/locations/connection_location/connections/ myconnection  ` .
-    
-    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+- `CONNECTION_ID` : the connection ID—for example, `myconnection` .
+
+  To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
+
+  To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection string containing ` PROJECT_ID ` . ` LOCATION ` . ` CONNECTION_ID ` .
 
 If you are creating a remote model over an Agent Platform model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
@@ -79,13 +81,17 @@ If you are using the remote model to analyze unstructured data from an [object t
 
 **Example**
 
-    `myproject.us.my_connection`
+```
+`myproject.us.my_connection`
+```
 
 ### `ENDPOINT`
 
 **Syntax**
 
-    ENDPOINT = 'vertex_ai_llm_endpoint'
+```
+ENDPOINT = 'vertex_ai_llm_endpoint'
+```
 
 **Description**
 
@@ -103,7 +109,7 @@ All of the [generally available](https://docs.cloud.google.com/vertex-ai/generat
 
 For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
-``` 
+```
   https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-pro
 ```
 
@@ -115,24 +121,24 @@ Using the global endpoint for your requests can improve overall availability whi
 
 BigQuery supports the following models:
 
-  - `gemini-3.1-flash-lite`
-  - `gemini-3.5-flash`
-  - `gemini-3.5-flash-lite`
-  - `gemini-3.6-flash`
-  - `gemini-3.7-flash`
-  - `gemini-3.8-flash`
+- `gemini-3.1-flash-lite`
+- `gemini-3.5-flash`
+- `gemini-3.5-flash-lite`
+- `gemini-3.6-flash`
+- `gemini-3.7-flash`
+- `gemini-3.8-flash`
 
 Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
 
-  - If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
-  - If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
-  - For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+- If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+- If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+- For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
 
 To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
 
-  - ` https:// aiplatform.us.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ us /publishers/google/models/ MODEL_ID  `
-  - ` https:// aiplatform.eu.rep.googleapis.com /v1/projects/ PROJECT_ID /locations/ eu /publishers/google/models/ MODEL_ID  `
-  - ` https:// aiplatform.googleapis.com /v1/projects/ PROJECT_ID /locations/ global /publishers/google/models/ MODEL_ID  `
+- `https:// `**`aiplatform.us.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`us`**` /publishers/google/models/ `` MODEL_ID`
+- `https:// `**`aiplatform.eu.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`eu`**` /publishers/google/models/ `` MODEL_ID`
+- `https:// `**`aiplatform.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`global`**` /publishers/google/models/ `` MODEL_ID`
 
 If your query runs in the `asia-south1` region, then you must use the fully qualified global endpoint name.
 
@@ -140,14 +146,14 @@ If your query runs in the `asia-south1` region, then you must use the fully qual
 
 The following [Anthropic Claude models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) are supported:
 
-  - `claude-opus-4-6`
-  - `claude-sonnet-4-6`
-  - `claude-opus-4-5`
-  - `claude-haiku-4-5`
-  - `claude-sonnet-4-5`
-  - `claude-opus-4-1`
-  - `claude-opus-4`
-  - `claude-sonnet-4`
+- `claude-opus-4-6`
+- `claude-sonnet-4-6`
+- `claude-opus-4-5`
+- `claude-haiku-4-5`
+- `claude-sonnet-4-5`
+- `claude-opus-4-1`
+- `claude-opus-4`
+- `claude-sonnet-4`
 
 You must enable Claude models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
@@ -159,9 +165,9 @@ After you create a remote model based on a Claude model, you can use the model w
 
 The following [Mistral AI models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral) are supported:
 
-  - `mistral-large-2411`
-  - `mistral-nemo`
-  - `mistral-small-2503`
+- `mistral-large-2411`
+- `mistral-nemo`
+- `mistral-small-2503`
 
 Don't use a version suffix with any Mistral AI model.
 
@@ -175,13 +181,13 @@ To create a Llama model in BigQuery ML, you must specify it as an [OpenAI API](h
 
 The following [Llama models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama) are supported:
 
-  - Llama 4 Scout 17B-16E, endpoint `meta/llama-4-scout-17b-16e-instruct-maas`
-  - Llama 4 Maverick 17B-128E, endpoint `meta/llama-4-maverick-17b-128e-instruct-maas`
-  - Llama 3.3 70B (Preview), endpoint `openapi/meta/llama-3.3-70b-instruct-maas`
-  - Llama 3.2 90B (Preview), endpoint `openapi/meta/llama-3.2-90b-vision-instruct-maas`
-  - Llama 3.1 405B (GA), endpoint `openapi/meta/llama-3.1-405b-instruct-maas`
-  - Llama 3.1 70B (Preview), endpoint `openapi/meta/llama-3.1-70b-instruct-maas`
-  - Llama 3.1 8B (Preview), endpoint `openapi/meta/llama-3.1-8b-instruct-maas`
+- Llama 4 Scout 17B-16E, endpoint `meta/llama-4-scout-17b-16e-instruct-maas`
+- Llama 4 Maverick 17B-128E, endpoint `meta/llama-4-maverick-17b-128e-instruct-maas`
+- Llama 3.3 70B (Preview), endpoint `openapi/meta/llama-3.3-70b-instruct-maas`
+- Llama 3.2 90B (Preview), endpoint `openapi/meta/llama-3.2-90b-vision-instruct-maas`
+- Llama 3.1 405B (GA), endpoint `openapi/meta/llama-3.1-405b-instruct-maas`
+- Llama 3.1 70B (Preview), endpoint `openapi/meta/llama-3.1-70b-instruct-maas`
+- Llama 3.1 8B (Preview), endpoint `openapi/meta/llama-3.1-8b-instruct-maas`
 
 > **Important:** For Llama 4.0 and greater models, you must create the dataset and connection for the remote model in the same region as the Llama model endpoint.
 
@@ -203,20 +209,24 @@ The following examples create BigQuery ML remote models.
 
 The following example creates a BigQuery ML remote model over a Gemini model:
 
-    CREATE OR REPLACE MODEL `mydataset.gemini_model`
-    REMOTE WITH CONNECTION DEFAULT
-    OPTIONS(ENDPOINT = 'gemini-2.5-pro');
+```
+CREATE OR REPLACE MODEL `mydataset.gemini_model`
+REMOTE WITH CONNECTION DEFAULT
+OPTIONS(ENDPOINT = 'gemini-2.5-pro');
+```
 
 ### Create a partner model that uses the default connection
 
 The following example creates a BigQuery ML remote model over a Mistral AI model:
 
-    CREATE OR REPLACE MODEL `mydataset.mistral_model`
-    REMOTE WITH CONNECTION DEFAULT
-    OPTIONS(ENDPOINT = 'mistral-large-2411');
+```
+CREATE OR REPLACE MODEL `mydataset.mistral_model`
+REMOTE WITH CONNECTION DEFAULT
+OPTIONS(ENDPOINT = 'mistral-large-2411');
+```
 
 ## What's next
 
-  - For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Try [generating text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
-  - Try [generating structured text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-table) .
+- For more information about using Agent Platform models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Try [generating text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
+- Try [generating structured text from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-table) .

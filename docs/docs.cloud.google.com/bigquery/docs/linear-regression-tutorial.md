@@ -14,16 +14,16 @@ This tutorial uses the [`bigquery-public-data.ml_datasets.penguins`](https://con
 
 In this tutorial, you will perform the following tasks:
 
-  - Create a linear regression model.
-  - Evaluate the model.
-  - Make predictions by using the model.
+- Create a linear regression model.
+- Evaluate the model.
+- Make predictions by using the model.
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information on BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -32,36 +32,36 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Required permissions
 
 To create the model using BigQuery ML, you need the following IAM permissions:
 
-  - `bigquery.jobs.create`
-  - `bigquery.models.create`
-  - `bigquery.models.getData`
-  - `bigquery.models.updateData`
-  - `bigquery.models.updateMetadata`
+- `bigquery.jobs.create`
+- `bigquery.models.create`
+- `bigquery.models.getData`
+- `bigquery.models.updateData`
+- `bigquery.models.updateMetadata`
 
 To run inference, you need the following permissions:
 
-  - `bigquery.models.getData` on the model
-  - `bigquery.jobs.create`
+- `bigquery.models.getData` on the model
+- `bigquery.jobs.create`
 
 ## Create a dataset
 
@@ -72,21 +72,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -96,25 +96,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ### BigQuery DataFrames
 
@@ -122,10 +128,12 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import google.cloud.bigquery
-    
-    bqclient = google.cloud.bigquery.Client()
-    bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```python
+import google.cloud.bigquery
+
+bqclient = google.cloud.bigquery.Client()
+bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```
 
 ## Create the model
 
@@ -137,50 +145,52 @@ You can create a linear regression model by using the [`CREATE MODEL` statement]
 
 The following are useful things to know about the `CREATE MODEL` statement:
 
-  - The [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols) option specifies which column in the `SELECT` statement to use as the label column. Here, the label column is `body_mass_g` . For linear regression models, the label column must be real-valued, that is, the column values must be real numbers.
+- The [`input_label_cols`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#input_label_cols) option specifies which column in the `SELECT` statement to use as the label column. Here, the label column is `body_mass_g` . For linear regression models, the label column must be real-valued, that is, the column values must be real numbers.
 
-  - This query's `SELECT` statement uses the following columns in the `bigquery-public-data.ml_datasets.penguins` table to predict a penguin's weight:
-    
-      - `species` : the species of penguin.
-      - `island` : the island that the penguin resides on.
-      - `culmen_length_mm` : the length of the penguin's culmen in millimeters.
-      - `culmen_depth_mm` : the depth of the penguin's culmen in millimeters.
-      - `flipper_length_mm` : the length of the penguin's flippers in millimeters.
-      - `sex` : the sex of the penguin.
+- This query's `SELECT` statement uses the following columns in the `bigquery-public-data.ml_datasets.penguins` table to predict a penguin's weight:
 
-  - The `WHERE` clause in this query's `SELECT` statement, `WHERE body_mass_g IS NOT NULL` , excludes rows where the `body_mass_g` column is `NULL` .
+  - `species` : the species of penguin.
+  - `island` : the island that the penguin resides on.
+  - `culmen_length_mm` : the length of the penguin's culmen in millimeters.
+  - `culmen_depth_mm` : the depth of the penguin's culmen in millimeters.
+  - `flipper_length_mm` : the length of the penguin's flippers in millimeters.
+  - `sex` : the sex of the penguin.
+
+- The `WHERE` clause in this query's `SELECT` statement, `WHERE body_mass_g IS NOT NULL` , excludes rows where the `body_mass_g` column is `NULL` .
 
 Run the query that creates your linear regression model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query:
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
-        OPTIONS
-          (model_type='linear_reg',
-          input_label_cols=['body_mass_g']) AS
-        SELECT
-          *
-        FROM
-          `bigquery-public-data.ml_datasets.penguins`
-        WHERE
-          body_mass_g IS NOT NULL;
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
+    OPTIONS
+      (model_type='linear_reg',
+      input_label_cols=['body_mass_g']) AS
+    SELECT
+      *
+    FROM
+      `bigquery-public-data.ml_datasets.penguins`
+    WHERE
+      body_mass_g IS NOT NULL;
+    ```
 
 3.  It takes about 30 seconds to create the `penguins_model` model.
-    
+
     To see the model, follow these steps:
-    
+
     1.  In the left pane, click explore **Explorer** :
-        
+
         ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-        
-        If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
-    
+
+        If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+
     2.  In the **Explorer** pane, expand your project and click **Datasets** .
-    
+
     3.  Click the `bqml_tutorial` dataset.
-    
+
     4.  Click the **Models** tab.
 
 ### BigQuery DataFrames
@@ -189,40 +199,42 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # Load data from BigQuery
-    bq_df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
-    
-    # Drop rows with nulls to get training data
-    training_data = bq_df.dropna(subset=["body_mass_g"])
-    
-    # A Linear Regression model predicts a continuous numerical value.
-    #
-    # Use ml.create_model to create and train the model in BigQuery.
-    # The options parameter specifies the model type and the label column.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
-    ml.create_model(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-        options={
-            "model_type": "LINEAR_REG",
-            "input_label_cols": ["body_mass_g"],
-        },
-        training_data=training_data,
-        replace=True,
-    )
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Load data from BigQuery
+bq_df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
+
+# Drop rows with nulls to get training data
+training_data = bq_df.dropna(subset=["body_mass_g"])
+
+# A Linear Regression model predicts a continuous numerical value.
+#
+# Use ml.create_model to create and train the model in BigQuery.
+# The options parameter specifies the model type and the label column.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+    options={
+        "model_type": "LINEAR_REG",
+        "input_label_cols": ["body_mass_g"],
+    },
+    training_data=training_data,
+    replace=True,
+)
+```
 
 It takes about 30 seconds to create the model. To see the model, follow these steps:
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
@@ -242,7 +254,7 @@ Loss is the penalty for a bad prediction. It is a number indicating how bad the 
 See the model training statistics that were generated when you ran the `CREATE MODEL` query:
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
@@ -251,13 +263,13 @@ See the model training statistics that were generated when you ran the `CREATE M
 
 4.  Click the **Models** tab.
 
-5.  To open the model information pane, click **penguins\_model** .
+5.  To open the model information pane, click **penguins_model** .
 
 6.  Click the **Training** tab, and then click **Table** . The results should look similar to the following:
-    
-    ![ML.TRAINING\_INFO output](https://docs.cloud.google.com/static/bigquery/images/training-stats-penguins-insta-model.png)
-    
-    The **Training Data Loss** column represents the loss metric calculated after the model is trained on the training dataset. Since you performed a linear regression, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) value. A [normal\_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) optimization strategy is automatically used for this training, so only one iteration is required to converge to the final model. For more information on setting the model optimization strategy, see [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) .
+
+    ![ML.TRAINING_INFO output](https://docs.cloud.google.com/static/bigquery/images/training-stats-penguins-insta-model.png)
+
+    The **Training Data Loss** column represents the loss metric calculated after the model is trained on the training dataset. Since you performed a linear regression, this column shows the [mean squared error](https://developers.google.com/machine-learning/glossary/#MSE) value. A [normal_equation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) optimization strategy is automatically used for this training, so only one iteration is required to converge to the final model. For more information on setting the model optimization strategy, see [`optimize_strategy`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#optimize_strategy) .
 
 ## Evaluate the model
 
@@ -267,8 +279,11 @@ After creating the model, evaluate the model's performance by using the [`ML.EVA
 
 For input, the `ML.EVALUATE` function takes the trained model and a dataset that matches the schema of the data that you used to train the model. In a production environment, you should evaluate the model on different data than the data you used to train the model. If you run `ML.EVALUATE` without providing input data, the function retrieves the evaluation metrics calculated during training. These metrics are calculated by using the automatically reserved evaluation dataset:
 
-``` 
-    SELECT      *    FROM      ML.EVALUATE(MODEL bqml_tutorial.penguins_model);    
+```
+SELECT
+      *
+    FROM
+      ML.EVALUATE(MODEL bqml_tutorial.penguins_model);
 ```
 
 Run the `ML.EVALUATE` query:
@@ -276,9 +291,9 @@ Run the `ML.EVALUATE` query:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query:
-    
-    ``` 
-      SELECT
+
+    ```
+    SELECT
         *
       FROM
         ML.EVALUATE(MODEL `bqml_tutorial.penguins_model`,
@@ -289,7 +304,6 @@ Run the `ML.EVALUATE` query:
             `bigquery-public-data.ml_datasets.penguins`
           WHERE
             body_mass_g IS NOT NULL));
-      
     ```
 
 ### BigQuery DataFrames
@@ -298,17 +312,19 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # Use the ml.evaluate method to evaluate the model with test data.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
-    ml.evaluate(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-        input_=training_data,
-    )
-    # Expected output results:
-    # index  mean_absolute_error  mean_squared_error  mean_squared_log_error  median_absolute_error  r2_score  explained_variance
-    #   0        227.012237         81838.159892            0.00507                173.080816        0.872377    0.872377
-    #   1 rows x 6 columns
+```python
+# Use the ml.evaluate method to evaluate the model with test data.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
+ml.evaluate(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+    input_=training_data,
+)
+# Expected output results:
+# index  mean_absolute_error  mean_squared_error  mean_squared_log_error  median_absolute_error  r2_score  explained_variance
+#   0        227.012237         81838.159892            0.00507                173.080816        0.872377    0.872377
+#   1 rows x 6 columns
+```
 
 The results should look similar to the following:
 
@@ -316,12 +332,12 @@ The results should look similar to the following:
 
 Because you performed a linear regression, the results include the following columns:
 
-  - `mean_absolute_error`
-  - `mean_squared_error`
-  - `mean_squared_log_error`
-  - `median_absolute_error`
-  - `r2_score`
-  - `explained_variance`
+- `mean_absolute_error`
+- `mean_squared_error`
+- `mean_squared_log_error`
+- `median_absolute_error`
+- `r2_score`
+- `explained_variance`
 
 An important metric in the evaluation results is the [R <sup>2</sup> score](https://en.wikipedia.org/wiki/Coefficient_of_determination) . The R <sup>2</sup> score is a statistical measure that determines if the linear regression predictions approximate the actual data. A value of `0` indicates that the model explains none of the variability of the response data around the mean. A value of `1` indicates that the model explains all the variability of the response data around the mean.
 
@@ -342,17 +358,19 @@ Run the `ML.PREDICT` query:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following query:
-    
-        SELECT
+
+    ```
+    SELECT
+    *
+    FROM
+    ML.PREDICT(MODEL `bqml_tutorial.penguins_model`,
+      (
+      SELECT
         *
-        FROM
-        ML.PREDICT(MODEL `bqml_tutorial.penguins_model`,
-          (
-          SELECT
-            *
-          FROM
-            `bigquery-public-data.ml_datasets.penguins`
-          WHERE island = 'Biscoe'));
+      FROM
+        `bigquery-public-data.ml_datasets.penguins`
+      WHERE island = 'Biscoe'));
+    ```
 
 ### BigQuery DataFrames
 
@@ -360,26 +378,28 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # Load data from BigQuery
-    bq_df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
-    
-    # Use 'contains' function to filter by island containing the string
-    # "Biscoe".
-    biscoe_data = bq_df[bq_df["island"].str.contains("Biscoe")]
-    
-    # Use the ml.predict method to predict results using your model.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
-    ml.predict(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-        input_=biscoe_data,
-    )
-    
-    # Expected output results:
-    #     predicted_body_mass_g           species                   island   culmen_length_mm  culmen_depth_mm   body_mass_g    flipper_length_mm   sex
-    # 23      4681.782896      Gentoo penguin (Pygoscelis papua)    Biscoe        <NA>                <NA>          <NA>            <NA>            <NA>
-    # 332     4740.7907        Gentoo penguin (Pygoscelis papua)    Biscoe        46.2              14.4            214.0             4650.0        <NA>
-    # 160     4731.310452      Gentoo penguin (Pygoscelis papua)    Biscoe        44.5              14.3            216.0             4100.0        <NA>
+```python
+# Load data from BigQuery
+bq_df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
+
+# Use 'contains' function to filter by island containing the string
+# "Biscoe".
+biscoe_data = bq_df[bq_df["island"].str.contains("Biscoe")]
+
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+    input_=biscoe_data,
+)
+
+# Expected output results:
+#     predicted_body_mass_g           species                   island   culmen_length_mm  culmen_depth_mm   body_mass_g    flipper_length_mm   sex
+# 23      4681.782896      Gentoo penguin (Pygoscelis papua)    Biscoe        <NA>                <NA>          <NA>            <NA>            <NA>
+# 332     4740.7907        Gentoo penguin (Pygoscelis papua)    Biscoe        46.2              14.4            214.0             4650.0        <NA>
+# 160     4731.310452      Gentoo penguin (Pygoscelis papua)    Biscoe        44.5              14.3            216.0             4100.0        <NA>
+```
 
 The results should look similar to the following:
 
@@ -397,27 +417,27 @@ Run the `ML.EXPLAIN_PREDICT` query:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-<!-- end list -->
+<!-- -->
 
 1.  In the query editor, run the following query:
 
-<!-- end list -->
-
+```
+SELECT
+  *
+FROM
+  ML.EXPLAIN_PREDICT(MODEL `bqml_tutorial.penguins_model`,
+    (
     SELECT
       *
     FROM
-      ML.EXPLAIN_PREDICT(MODEL `bqml_tutorial.penguins_model`,
-        (
-        SELECT
-          *
-        FROM
-          `bigquery-public-data.ml_datasets.penguins`
-        WHERE island = 'Biscoe'),
-        STRUCT(3 as top_k_features));
+      `bigquery-public-data.ml_datasets.penguins`
+    WHERE island = 'Biscoe'),
+    STRUCT(3 as top_k_features));
+```
 
 1.  The results should look similar to the following:
-    
-    ![ML.EXPLAIN\_PREDICT output](https://docs.cloud.google.com/static/bigquery/images/explain-penguin.png)
+
+    ![ML.EXPLAIN_PREDICT output](https://docs.cloud.google.com/static/bigquery/images/explain-penguin.png)
 
 > **Note:** The `ML.EXPLAIN_PREDICT` query outputs all the input feature columns, similar to what `ML.PREDICT` does. For readability purposes, only one feature column, `species` , is shown in the preceding figure.
 
@@ -427,26 +447,28 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # Use the ml.explain_predict method to understand why the model is
-    # generating these prediction results.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_predict.html#bigframes.bigquery.ml.explain_predict
-    #
-    # Using the trained model and utilizing data specific to Biscoe Island,
-    # explain the predictions of the top 3 features.
-    ml.explain_predict(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-        input_=biscoe_data,
-        top_k_features=3,
-    )
-    
-    # Expected results:
-    #   predicted_body_mass_g               top_feature_attributions            baseline_prediction_value   prediction_value    approximation_error               species               island  culmen_length_mm    culmen_depth_mm flipper_length_mm   body_mass_g     sex
-    # 0  5413.510134            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              5413.510134               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      45.2                  16.4          223.0              5950.0       MALE
-    # 1  4768.351092            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              4768.351092               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.5                  14.5          213.0              4400.0      FEMALE
-    # 2  3235.896372            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              3235.896372               0.0         Adelie Penguin (Pygoscelis adeliae) Biscoe      37.7                  16.0          183.0              3075.0      FEMALE
-    # 3  5349.603734            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              5349.603734               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.4                  15.6          221.0              5000.0       MALE
-    # 4  4637.165037            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              4637.165037               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.1                  13.2          211.0              4500.0      FEMALE
+```python
+# Use the ml.explain_predict method to understand why the model is
+# generating these prediction results.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_predict.html#bigframes.bigquery.ml.explain_predict
+#
+# Using the trained model and utilizing data specific to Biscoe Island,
+# explain the predictions of the top 3 features.
+ml.explain_predict(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+    input_=biscoe_data,
+    top_k_features=3,
+)
+
+# Expected results:
+#   predicted_body_mass_g               top_feature_attributions            baseline_prediction_value   prediction_value    approximation_error               species               island  culmen_length_mm    culmen_depth_mm flipper_length_mm   body_mass_g     sex
+# 0  5413.510134            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              5413.510134               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      45.2                  16.4          223.0              5950.0       MALE
+# 1  4768.351092            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              4768.351092               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.5                  14.5          213.0              4400.0      FEMALE
+# 2  3235.896372            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              3235.896372               0.0         Adelie Penguin (Pygoscelis adeliae) Biscoe      37.7                  16.0          183.0              3075.0      FEMALE
+# 3  5349.603734            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              5349.603734               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.4                  15.6          221.0              5000.0       MALE
+# 4  4637.165037            [{'feature': 'island', 'attribution': 7348.877...   -5320.222128              4637.165037               0.0          Gentoo penguin (Pygoscelis papua)  Biscoe      46.1                  13.2          211.0              4500.0      FEMALE
+```
 
 For linear regression models, Shapley values are used to generate feature attribution values for each feature in the model. The output includes the top three feature attributions per row of the `penguins` table because `top_k_features` was set to `3` . These attributions are sorted by the absolute value of the attribution in descending order. In all examples, the feature `sex` contributed the most to the overall prediction.
 
@@ -460,34 +482,38 @@ Retrain and get global explanations for the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-<!-- end list -->
+<!-- -->
 
 1.  In the query editor, run the following query to retrain the model:
-    
-        #standardSQL
-        CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
-        OPTIONS (
-          model_type = 'linear_reg',
-          input_label_cols = ['body_mass_g'],
-          enable_global_explain = TRUE)
-        AS
-        SELECT
-        *
-        FROM
-        `bigquery-public-data.ml_datasets.penguins`
-        WHERE
-        body_mass_g IS NOT NULL;
+
+    ```
+    #standardSQL
+    CREATE OR REPLACE MODEL `bqml_tutorial.penguins_model`
+    OPTIONS (
+      model_type = 'linear_reg',
+      input_label_cols = ['body_mass_g'],
+      enable_global_explain = TRUE)
+    AS
+    SELECT
+    *
+    FROM
+    `bigquery-public-data.ml_datasets.penguins`
+    WHERE
+    body_mass_g IS NOT NULL;
+    ```
 
 2.  In the query editor, run the following query to get global explanations:
-    
-        SELECT
-        *
-        FROM
-        ML.GLOBAL_EXPLAIN(MODEL `bqml_tutorial.penguins_model`)
+
+    ```
+    SELECT
+    *
+    FROM
+    ML.GLOBAL_EXPLAIN(MODEL `bqml_tutorial.penguins_model`)
+    ```
 
 3.  The results should look similar to the following:
-    
-    ![ML.GLOBAL\_EXPLAIN output](https://docs.cloud.google.com/static/bigquery/images/global-explain-penguin.png)
+
+    ![ML.GLOBAL_EXPLAIN output](https://docs.cloud.google.com/static/bigquery/images/global-explain-penguin.png)
 
 ### BigQuery DataFrames
 
@@ -495,48 +521,50 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    # To use the ml.global_explain method, the model must be created with
-    # enable_global_explain set to True.
-    #
-    # Use ml.create_model to create and train the model in BigQuery.
-    # The options parameter specifies the model type and the label column.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
-    training_data = bq_df.dropna(subset=["body_mass_g"])
-    ml.create_model(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-        options={
-            "model_type": "LINEAR_REG",
-            "input_label_cols": ["body_mass_g"],
-            "enable_global_explain": True,
-        },
-        training_data=training_data,
-        replace=True,
-    )
-    
-    # Use the ml.global_explain method to explain the model.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.global_explain.html#bigframes.bigquery.ml.global_explain
-    ml.global_explain(
-        your_model_id,  # For example: "bqml_tutorial.penguins_model",
-    )
-    
-    # Expected results:
-    #                       attribution
-    # feature
-    # island                5737.315921
-    # species               4073.280549
-    # sex                   622.070896
-    # flipper_length_mm     193.612051
-    # culmen_depth_mm       117.084944
-    # culmen_length_mm      94.366793
+```python
+# To use the ml.global_explain method, the model must be created with
+# enable_global_explain set to True.
+#
+# Use ml.create_model to create and train the model in BigQuery.
+# The options parameter specifies the model type and the label column.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+training_data = bq_df.dropna(subset=["body_mass_g"])
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+    options={
+        "model_type": "LINEAR_REG",
+        "input_label_cols": ["body_mass_g"],
+        "enable_global_explain": True,
+    },
+    training_data=training_data,
+    replace=True,
+)
+
+# Use the ml.global_explain method to explain the model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.global_explain.html#bigframes.bigquery.ml.global_explain
+ml.global_explain(
+    your_model_id,  # For example: "bqml_tutorial.penguins_model",
+)
+
+# Expected results:
+#                       attribution
+# feature
+# island                5737.315921
+# species               4073.280549
+# sex                   622.070896
+# flipper_length_mm     193.612051
+# culmen_depth_mm       117.084944
+# culmen_length_mm      94.366793
+```
 
 ## Clean up
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -544,7 +572,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation, click the **bqml_tutorial** dataset you created.
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
@@ -555,19 +583,17 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - For information on creating models, see the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- For information on creating models, see the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) syntax page.

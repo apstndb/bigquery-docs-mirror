@@ -17,7 +17,7 @@ GoogleSQL for BigQuery supports the following HLL++ functions.
 ## Function list
 
 | Name                                                                                                                                 | Summary                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | [`HLL_COUNT.EXTRACT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countextract)             | Extracts a cardinality estimate of an HLL++ sketch.                                                                   |
 | [`HLL_COUNT.INIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit)                   | Aggregates values of the same underlying type into a new HLL++ sketch.                                                |
 | [`HLL_COUNT.MERGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countmerge)                 | Merges HLL++ sketches of the same underlying type into a new sketch, and then gets the cardinality of the new sketch. |
@@ -25,7 +25,9 @@ GoogleSQL for BigQuery supports the following HLL++ functions.
 
 ## `HLL_COUNT.EXTRACT`
 
-    HLL_COUNT.EXTRACT(sketch)
+```
+HLL_COUNT.EXTRACT(sketch)
+```
 
 **Description**
 
@@ -45,37 +47,41 @@ If `sketch` is `NULL` , this function returns a cardinality estimate of `0` .
 
 The following query returns the number of distinct users for each country who have at least one invoice.
 
+```
+SELECT
+  country,
+  HLL_COUNT.EXTRACT(HLL_sketch) AS distinct_customers_with_open_invoice
+FROM
+  (
     SELECT
       country,
-      HLL_COUNT.EXTRACT(HLL_sketch) AS distinct_customers_with_open_invoice
+      HLL_COUNT.INIT(customer_id) AS hll_sketch
     FROM
-      (
-        SELECT
-          country,
-          HLL_COUNT.INIT(customer_id) AS hll_sketch
-        FROM
-          UNNEST(
-            ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
-              ('UA', 'customer_id_1', 'invoice_id_11'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('CZ', 'customer_id_2', 'invoice_id_22'),
-              ('CZ', 'customer_id_2', 'invoice_id_23'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('UA', 'customer_id_2', 'invoice_id_24')])
-        GROUP BY country
-      );
-    
-    /*---------+--------------------------------------+
-     | country | distinct_customers_with_open_invoice |
-     +---------+--------------------------------------+
-     | UA      |                                    2 |
-     | BR      |                                    1 |
-     | CZ      |                                    1 |
-     +---------+--------------------------------------*/
+      UNNEST(
+        ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
+          ('UA', 'customer_id_1', 'invoice_id_11'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('CZ', 'customer_id_2', 'invoice_id_22'),
+          ('CZ', 'customer_id_2', 'invoice_id_23'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('UA', 'customer_id_2', 'invoice_id_24')])
+    GROUP BY country
+  );
+
+/*---------+--------------------------------------+
+ | country | distinct_customers_with_open_invoice |
+ +---------+--------------------------------------+
+ | UA      |                                    2 |
+ | BR      |                                    1 |
+ | CZ      |                                    1 |
+ +---------+--------------------------------------*/
+```
 
 ## `HLL_COUNT.INIT`
 
-    HLL_COUNT.INIT(input [, precision])
+```
+HLL_COUNT.INIT(input [, precision])
+```
 
 **Description**
 
@@ -87,15 +93,15 @@ For more information, see [HyperLogLog in Practice: Algorithmic Engineering of a
 
 **Definitions**
 
-  - `precision` : Defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` , where larger values indicate higher accuracy, with `24` being the most accurate. The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
+- `precision` : Defines the accuracy of the estimate at the cost of additional memory required to process the sketches or store them on disk. The range for this value is `10` to `24` , where larger values indicate higher accuracy, with `24` being the most accurate. The default value is `15` . For more information about precision, see [Precision for sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_hll) .
 
 **Supported input types**
 
-  - `INT64`
-  - `NUMERIC`
-  - `BIGNUMERIC`
-  - `STRING`
-  - `BYTES`
+- `INT64`
+- `NUMERIC`
+- `BIGNUMERIC`
+- `STRING`
+- `BYTES`
 
 **Return type**
 
@@ -105,31 +111,35 @@ For more information, see [HyperLogLog in Practice: Algorithmic Engineering of a
 
 The following query creates HLL++ sketches that count the number of distinct users with at least one invoice per country.
 
-    SELECT
-      country,
-      HLL_COUNT.INIT(customer_id, 10)
-        AS hll_sketch
-    FROM
-      UNNEST(
-        ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
-          ('UA', 'customer_id_1', 'invoice_id_11'),
-          ('CZ', 'customer_id_2', 'invoice_id_22'),
-          ('CZ', 'customer_id_2', 'invoice_id_23'),
-          ('BR', 'customer_id_3', 'invoice_id_31'),
-          ('UA', 'customer_id_2', 'invoice_id_24')])
-    GROUP BY country;
-    
-    /*---------+------------------------------------------------------------------------------------+
-     | country | hll_sketch                                                                         |
-     +---------+------------------------------------------------------------------------------------+
-     | UA      | "\010p\020\002\030\002 \013\202\007\r\020\002\030\n \0172\005\371\344\001\315\010" |
-     | CZ      | "\010p\020\002\030\002 \013\202\007\013\020\001\030\n \0172\003\371\344\001"       |
-     | BR      | "\010p\020\001\030\002 \013\202\007\013\020\001\030\n \0172\003\202\341\001"       |
-     +---------+------------------------------------------------------------------------------------*/
+```
+SELECT
+  country,
+  HLL_COUNT.INIT(customer_id, 10)
+    AS hll_sketch
+FROM
+  UNNEST(
+    ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
+      ('UA', 'customer_id_1', 'invoice_id_11'),
+      ('CZ', 'customer_id_2', 'invoice_id_22'),
+      ('CZ', 'customer_id_2', 'invoice_id_23'),
+      ('BR', 'customer_id_3', 'invoice_id_31'),
+      ('UA', 'customer_id_2', 'invoice_id_24')])
+GROUP BY country;
+
+/*---------+------------------------------------------------------------------------------------+
+ | country | hll_sketch                                                                         |
+ +---------+------------------------------------------------------------------------------------+
+ | UA      | "\010p\020\002\030\002 \013\202\007\r\020\002\030\n \0172\005\371\344\001\315\010" |
+ | CZ      | "\010p\020\002\030\002 \013\202\007\013\020\001\030\n \0172\003\371\344\001"       |
+ | BR      | "\010p\020\001\030\002 \013\202\007\013\020\001\030\n \0172\003\202\341\001"       |
+ +---------+------------------------------------------------------------------------------------*/
+```
 
 ## `HLL_COUNT.MERGE`
 
-    HLL_COUNT.MERGE(sketch)
+```
+HLL_COUNT.MERGE(sketch)
+```
 
 **Description**
 
@@ -153,33 +163,37 @@ This function ignores `NULL` values when merging sketches. If the merge happens 
 
 The following query counts the number of distinct users across all countries who have at least one invoice. The inner query produces one sketch per country by grouping on `country` , and the outer query merges those sketches into a single distinct count.
 
-    SELECT HLL_COUNT.MERGE(hll_sketch) AS distinct_customers_with_open_invoice
+```
+SELECT HLL_COUNT.MERGE(hll_sketch) AS distinct_customers_with_open_invoice
+FROM
+  (
+    SELECT
+      country,
+      HLL_COUNT.INIT(customer_id) AS hll_sketch
     FROM
-      (
-        SELECT
-          country,
-          HLL_COUNT.INIT(customer_id) AS hll_sketch
-        FROM
-          UNNEST(
-            ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
-              ('UA', 'customer_id_1', 'invoice_id_11'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('CZ', 'customer_id_2', 'invoice_id_22'),
-              ('CZ', 'customer_id_2', 'invoice_id_23'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('UA', 'customer_id_2', 'invoice_id_24')])
-        GROUP BY country
-      );
-    
-    /*--------------------------------------+
-     | distinct_customers_with_open_invoice |
-     +--------------------------------------+
-     |                                    3 |
-     +--------------------------------------*/
+      UNNEST(
+        ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
+          ('UA', 'customer_id_1', 'invoice_id_11'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('CZ', 'customer_id_2', 'invoice_id_22'),
+          ('CZ', 'customer_id_2', 'invoice_id_23'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('UA', 'customer_id_2', 'invoice_id_24')])
+    GROUP BY country
+  );
+
+/*--------------------------------------+
+ | distinct_customers_with_open_invoice |
+ +--------------------------------------+
+ |                                    3 |
+ +--------------------------------------*/
+```
 
 ## `HLL_COUNT.MERGE_PARTIAL`
 
-    HLL_COUNT.MERGE_PARTIAL(sketch)
+```
+HLL_COUNT.MERGE_PARTIAL(sketch)
+```
 
 **Description**
 
@@ -203,26 +217,28 @@ This function returns `NULL` if there is no input or all inputs are `NULL` .
 
 The following query returns an HLL++ sketch that counts the number of distinct users who have at least one invoice across all countries. The inner query produces one sketch per country by grouping on `country` , and the outer query merges those sketches into a new sketch.
 
-    SELECT HLL_COUNT.MERGE_PARTIAL(HLL_sketch) AS distinct_customers_with_open_invoice
+```
+SELECT HLL_COUNT.MERGE_PARTIAL(HLL_sketch) AS distinct_customers_with_open_invoice
+FROM
+  (
+    SELECT
+      country,
+      HLL_COUNT.INIT(customer_id) AS hll_sketch
     FROM
-      (
-        SELECT
-          country,
-          HLL_COUNT.INIT(customer_id) AS hll_sketch
-        FROM
-          UNNEST(
-            ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
-              ('UA', 'customer_id_1', 'invoice_id_11'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('CZ', 'customer_id_2', 'invoice_id_22'),
-              ('CZ', 'customer_id_2', 'invoice_id_23'),
-              ('BR', 'customer_id_3', 'invoice_id_31'),
-              ('UA', 'customer_id_2', 'invoice_id_24')])
-        GROUP BY country
-      );
-    
-    /*----------------------------------------------------------------------------------------------+
-     | distinct_customers_with_open_invoice                                                         |
-     +----------------------------------------------------------------------------------------------+
-     | "\010p\020\006\030\002 \013\202\007\020\020\003\030\017 \0242\010\320\2408\352}\244\223\002" |
-     +----------------------------------------------------------------------------------------------*/
+      UNNEST(
+        ARRAY<STRUCT<country STRING, customer_id STRING, invoice_id STRING>>[
+          ('UA', 'customer_id_1', 'invoice_id_11'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('CZ', 'customer_id_2', 'invoice_id_22'),
+          ('CZ', 'customer_id_2', 'invoice_id_23'),
+          ('BR', 'customer_id_3', 'invoice_id_31'),
+          ('UA', 'customer_id_2', 'invoice_id_24')])
+    GROUP BY country
+  );
+
+/*----------------------------------------------------------------------------------------------+
+ | distinct_customers_with_open_invoice                                                         |
+ +----------------------------------------------------------------------------------------------+
+ | "\010p\020\006\030\002 \013\202\007\020\020\003\030\017 \0242\010\320\2408\352}\244\223\002" |
+ +----------------------------------------------------------------------------------------------*/
+```

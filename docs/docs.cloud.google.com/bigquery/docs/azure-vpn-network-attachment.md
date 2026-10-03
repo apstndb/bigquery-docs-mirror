@@ -14,8 +14,8 @@ This document provides high-level guidance on how to establish a VPN connection 
 
 Ensure you have the following:
 
-  - Access to Azure and Google Cloud accounts with appropriate permissions.
-  - Existing VPCs in both Azure and Google Cloud.
+- Access to Azure and Google Cloud accounts with appropriate permissions.
+- Existing VPCs in both Azure and Google Cloud.
 
 ## Set up networking on Google Cloud
 

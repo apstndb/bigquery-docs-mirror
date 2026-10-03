@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Plan a migration with migration lineage
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this feature, contact <bq-edw-migration-support@google.com> .
@@ -22,10 +22,10 @@ When you create a migration lineage, the lineage service provides a graph that v
 
 The migration lineage service supports the following SQL dialects:
 
-  - Amazon Redshift SQL
-  - Snowflake SQL
-  - Teradata SQL
-  - GoogleSQL (BigQuery)
+- Amazon Redshift SQL
+- Snowflake SQL
+- Teradata SQL
+- GoogleSQL (BigQuery)
 
 ## Limitations
 
@@ -45,9 +45,9 @@ This predefined role contains the permissions required to use the migration line
 
 The following permissions are required to use the migration lineage service:
 
-  - `bigquerymigration.workflows.create`
-  - `bigquerymigration.workflows.get`
-  - `bigquerymigration.lineageDbs.query`
+- `bigquerymigration.workflows.create`
+- `bigquerymigration.workflows.get`
+- `bigquerymigration.lineageDbs.query`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -87,17 +87,18 @@ To trace and view a migration lineage on an Teradata database, do the following:
 To trace and view a migration lineage on a BigQuery database, do the following:
 
 1.  Grant the account or service account the following roles:
-    
-      - [BigQuery Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
-      - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` )
+    - [BigQuery Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
+    - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` )
 
 2.  Install the [`dwh-migration-dumper` tool](https://docs.cloud.google.com/bigquery/docs/generate-metadata#install-dumper) .
 
 3.  To generate metadata and query logs, run the `dwh-migration-dumper` tool. These metadata and query logs are contained in one or more ZIP files.
-    
-        dwh-migration-dumper --connector bigquery
-        
-        dwh-migration-dumper --connector bigquery-logs
+
+    ```
+    dwh-migration-dumper --connector bigquery
+
+    dwh-migration-dumper --connector bigquery-logs
+    ```
 
 4.  Upload the ZIP files to a Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
@@ -112,12 +113,12 @@ After you upload the ZIP files that contain the metadata and query logs to Cloud
 2.  Under **Trace Lineage** , click **Trace translation** .
 
 3.  Under **Lineage configuration** , enter the following:
-    
+
     1.  For **Display name** , specify a name for the lineage job. The name can contain letters, numbers or underscores.
     2.  For **Processing Location** , select the location where you want the lineage job to run.
 
-4.  For **Edit input directory location** , specify the path to the Cloud Storage folder containing the log ZIP files that you uploaded earlier. You can type the path in the format `  bucket_name / folder_name / ` or click **Browse** . You can also name the subdirectory of your output files in the **Output subdirectory name** field.
-    
+4.  For **Edit input directory location** , specify the path to the Cloud Storage folder containing the log ZIP files that you uploaded earlier. You can type the path in the format `bucket_name `` / `` folder_name `` /` or click **Browse** . You can also name the subdirectory of your output files in the **Output subdirectory name** field.
+
     You can add additional input files by clicking **Add an input directory location** .
 
 5.  Click **Trace** .
@@ -128,7 +129,7 @@ The lineage job is now running. The job can take several hours to complete depen
 
 To trace a lineage job, run the following `curl` command:
 
-``` 
+```
   curl -d "{
     \"tasks\": {
       \"TASK_NAME\": {
@@ -152,14 +153,14 @@ To trace a lineage job, run the following `curl` command:
 
 Replace the following:
 
-  - `  TASK_NAME  ` : a name to identify this lineage job.
-  - `  BUCKET_PATH  ` : the path to the Cloud Storage bucket that contains your input ZIP files.
-  - `  PROJECT_ID  ` : the project ID to your Google Cloud project.
-  - `  LOCATION  ` : a processing location. This value must either be `eu` or `us` .
+- `TASK_NAME` : a name to identify this lineage job.
+- `BUCKET_PATH` : the path to the Cloud Storage bucket that contains your input ZIP files.
+- `PROJECT_ID` : the project ID to your Google Cloud project.
+- `LOCATION` : a processing location. This value must either be `eu` or `us` .
 
 This call returns a message similar to the following:
 
-``` 
+```
   {
     "name": "projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID",
     "tasks": {
@@ -171,7 +172,7 @@ This call returns a message similar to the following:
 
 The lineage job is now running. The job can take several hours to complete depending on your input size. To check the status of the lineage job, run the following `curl` command with the workflow ID:
 
-``` 
+```
   curl \
   -H "Content-Type:application/json" \
   -H "Authorization:Bearer " -X GET https://bigquerymigration.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
@@ -197,7 +198,7 @@ After you have traced a migration lineage, you can open the migration lineage by
 
 To open a completed migration lineage, run the following `curl` command with the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest) :
 
-``` 
+```
   curl \
   -H "Content-Type:application/json" \
   -H "Authorization:Bearer " -X GET https://bigquerymigration.googleapis.com/v2/projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
@@ -205,9 +206,9 @@ To open a completed migration lineage, run the following `curl` command with the
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID to your Google Cloud project.
-  - `  LOCATION  ` : a processing location. This value must either be `eu` or `us` .
-  - `  WORKFLOW_ID  ` : the workflow ID of the traced lineage.
+- `PROJECT_ID` : the project ID to your Google Cloud project.
+- `LOCATION` : a processing location. This value must either be `eu` or `us` .
+- `WORKFLOW_ID` : the workflow ID of the traced lineage.
 
 Navigate to the link included in the `taskResult.translationTaskResult.consoleUri` field of the output message.
 
@@ -220,7 +221,7 @@ The following sections describe ways you can use migration lineage to work with 
 The following terms are used in a migration lineage:
 
 | Terms               | Description                                                                                                                                                                                                                                                                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Scripts             | SQL scripts and other programs that are visible in the database logs ingested during lineage building. Scripts are composed of statements, which are most commonly single SQL statements.                                                                                                                                                                                                           |
 | Nodes               | The vertices of the lineage graph. These consist of *tables* and *columns* .                                                                                                                                                                                                                                                                                                                        |
 | Tables              | Also referred to as *relations* , including ordinary tables, views, structured files, and other table-like resources.                                                                                                                                                                                                                                                                               |
@@ -251,21 +252,21 @@ Each table in the **Data Flow** graph shows its unqualified name. To see a table
 
 Each node displays an icon, which indicates the node's properties:
 
-  - monitor : a view, not a table.
-  - cached : a table that is always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
-  - cached : a table that is not always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
-  - timer : a table that was short lived. Hold the pointer over the icon to view the duration for which the table existed.
-  - snowflake : a table that was last written more more than seven days ago, which suggests a table with static or infrequently-written data.
+- monitor : a view, not a table.
+- cached : a table that is always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
+- cached : a table that is not always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
+- timer : a table that was short lived. Hold the pointer over the icon to view the duration for which the table existed.
+- snowflake : a table that was last written more more than seven days ago, which suggests a table with static or infrequently-written data.
 
 To review the objects in the **Data Flow** graph, do the following:
 
-  - To view a list of table columns, click a table. This view includes the name of each column as well as its data type, as determined from a provided metadata dump or deduced from the SQL seen in the query logs.
+- To view a list of table columns, click a table. This view includes the name of each column as well as its data type, as determined from a provided metadata dump or deduced from the SQL seen in the query logs.
 
-  - To view the column-level lineage graph for a column, click a column. In the column-level lineage graph, the edges represent data flows that affect the target column.
+- To view the column-level lineage graph for a column, click a column. In the column-level lineage graph, the edges represent data flows that affect the target column.
 
-  - To view details about an edge, click an edge in the graph. This view includes links to the SQL scripts that induced the edge.
-    
-    An edge is generated from a source node to a target node when a SQL statement references the source node while the statement is computing data that is inserted into the target node. Typically, this involves transfer of data from the source to the target, but the **Data Flow** tab also shows an edge when the source node is used in a `WHERE` or `GROUP BY` clause that affects the target. To filter for data transfers only, toggle the **Show non-data edges** button in the toolbar.
+- To view details about an edge, click an edge in the graph. This view includes links to the SQL scripts that induced the edge.
+
+  An edge is generated from a source node to a target node when a SQL statement references the source node while the statement is computing data that is inserted into the target node. Typically, this involves transfer of data from the source to the target, but the **Data Flow** tab also shows an edge when the source node is used in a `WHERE` or `GROUP BY` clause that affects the target. To filter for data transfers only, toggle the **Show non-data edges** button in the toolbar.
 
 > **Note:** To help with navigating large migration lineages, you can refocus the graph on a node by clicking the fully qualified name of the node in the sidebar or in the node's tooltip.
 
@@ -305,27 +306,27 @@ The **Details** tab for an edge displays predicates and categories, which descri
 
 Predicates are notated as three-part codes that are separated by hyphens. The first part is either `r` , indicating that the source of the edge is a relation, or `a` , indicating that the source of the edge is an attribute. The second part is one of the following abbreviations that indicates the way the source node influenced the data in the target node:
 
-  - `has` : the source relation contains the target attribute.
-  - `dat` : the source copies or transfers data to the target.
-  - `res` : the source filters or restricts the cardinality of the target in a clause such as `WHERE` , `HAVING` , or `JOIN ON` .
-  - `grp` : the source is used in a `GROUP BY` clause that affects the target.
+- `has` : the source relation contains the target attribute.
+- `dat` : the source copies or transfers data to the target.
+- `res` : the source filters or restricts the cardinality of the target in a clause such as `WHERE` , `HAVING` , or `JOIN ON` .
+- `grp` : the source is used in a `GROUP BY` clause that affects the target.
 
 The third part is also either `r` or `a` , indicating whether the target of the edge is a relation or an attribute.
 
 Edge categories can include the following:
 
-  - `dat` predicates:
-      - `AGGREGATE` : the source was used in an aggregate computation that wrote the target.
-      - `EXACT_COPY` : data from the source was copied in its entirety to the target.
-      - `FUNCTION` : the source was used to compute the target.
-      - `IDENTITY_COPY` : the target was not computed. The target was a literal copy of the source without any casts or conversions.
-      - `PARTITION_PROMOTION` : the target contains data from the source as a result of promoting a partition of the source to the target.
-      - `WEAK_COPY` : data from the source was copied at least partially to the target.
-  - `res` predicates:
-      - `FILTER` : the source was used in a comparison that wrote the target.
-      - `KEY` : data from the source was used as a key in a join comparison which wrote the target.
-  - `grp` predicates:
-      - `GROUP` : data from the source was used as a key in a `GROUP BY` clause which affects the target.
+- `dat` predicates:
+  - `AGGREGATE` : the source was used in an aggregate computation that wrote the target.
+  - `EXACT_COPY` : data from the source was copied in its entirety to the target.
+  - `FUNCTION` : the source was used to compute the target.
+  - `IDENTITY_COPY` : the target was not computed. The target was a literal copy of the source without any casts or conversions.
+  - `PARTITION_PROMOTION` : the target contains data from the source as a result of promoting a partition of the source to the target.
+  - `WEAK_COPY` : data from the source was copied at least partially to the target.
+- `res` predicates:
+  - `FILTER` : the source was used in a comparison that wrote the target.
+  - `KEY` : data from the source was used as a key in a join comparison which wrote the target.
+- `grp` predicates:
+  - `GROUP` : data from the source was used as a key in a `GROUP BY` clause which affects the target.
 
 #### Code tab
 
@@ -333,5 +334,5 @@ The **Code** tab for an edge shows the SQL scripts that induced that edge. The s
 
 ## What's next
 
-  - Run a [migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) to assess the feasibility and potential benefits of migrating your data warehouse to BigQuery.
-  - Use the SQL translation service, such as the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , the [translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to automate the conversion of your SQL queries into GoogleSQL, including Gemini-enhanced SQL customization.
+- Run a [migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) to assess the feasibility and potential benefits of migrating your data warehouse to BigQuery.
+- Use the SQL translation service, such as the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , the [translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to automate the conversion of your SQL queries into GoogleSQL, including Gemini-enhanced SQL customization.

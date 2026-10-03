@@ -10,10 +10,10 @@ data_source: docs.cloud.google.com
 
 This document describes how to manage views in BigQuery. You can manage your BigQuery views in the following ways:
 
-  - [Update a view](https://docs.cloud.google.com/bigquery/docs/managing-views#update_a_view)
-  - [Copy a view](https://docs.cloud.google.com/bigquery/docs/managing-views#copy)
-  - [Rename a view](https://docs.cloud.google.com/bigquery/docs/managing-views#rename_a_view)
-  - [Delete a view](https://docs.cloud.google.com/bigquery/docs/managing-views#delete_views)
+- [Update a view](https://docs.cloud.google.com/bigquery/docs/managing-views#update_a_view)
+- [Copy a view](https://docs.cloud.google.com/bigquery/docs/managing-views#copy)
+- [Rename a view](https://docs.cloud.google.com/bigquery/docs/managing-views#rename_a_view)
+- [Delete a view](https://docs.cloud.google.com/bigquery/docs/managing-views#delete_views)
 
 ## Before you begin
 
@@ -23,23 +23,23 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 After creating a view, you can update the following view properties:
 
-  - [SQL query](https://docs.cloud.google.com/bigquery/docs/managing-views#update-sql)
-  - [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-views#view-expiration)
-  - [Description](https://docs.cloud.google.com/bigquery/docs/managing-views#update-description)
-  - [Labels](https://docs.cloud.google.com/bigquery/docs/adding-using-labels#adding_table_and_view_labels)
+- [SQL query](https://docs.cloud.google.com/bigquery/docs/managing-views#update-sql)
+- [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-views#view-expiration)
+- [Description](https://docs.cloud.google.com/bigquery/docs/managing-views#update-description)
+- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-using-labels#adding_table_and_view_labels)
 
 ### Required permissions
 
 To update a view, you need the following IAM permissions:
 
-  - `bigquery.tables.update`
-  - `bigquery.tables.get`
+- `bigquery.tables.update`
+- `bigquery.tables.get`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a view:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can update tables and views in the datasets that you create.
 
@@ -55,9 +55,9 @@ Consider a setup where you're updating a view in *Project A* ( `authorized_datas
 
 The following permissions are required:
 
-  - *Project A* : `bigquery.tables.update` on the specific view resource you update.
-  - *Project B* : `bigquery.datasets.get` and `bigquery.tables.getData` on the referenced shared resources.
-  - *Project C* : `bigquery.routines.get` on the specific UDF you call.
+- *Project A* : `bigquery.tables.update` on the specific view resource you update.
+- *Project B* : `bigquery.datasets.get` and `bigquery.tables.getData` on the referenced shared resources.
+- *Project C* : `bigquery.routines.get` on the specific UDF you call.
 
 Crucially, your identity doesn't require the `bigquery.datasets.update` permission on *Project B* or *Project C* to perform this update.
 
@@ -65,10 +65,10 @@ Crucially, your identity doesn't require the `bigquery.datasets.update` permissi
 
 You can update the SQL query used to define a view by:
 
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `bq update` command
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-  - Using the client libraries
+- Using the Google Cloud console
+- Using the bq command-line tool's `bq update` command
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+- Using the client libraries
 
 You can change the SQL dialect from legacy SQL to GoogleSQL in the API or bq command-line tool. You cannot update a legacy SQL view to GoogleSQL in the Google Cloud console.
 
@@ -77,10 +77,10 @@ To update a view's SQL query:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
@@ -89,11 +89,11 @@ To update a view's SQL query:
 4.  Click the **Details** tab.
 
 5.  Above the **Query** box, click **Edit query** . This opens the query in the query editor.
-    
+
     ![Edit query](https://docs.cloud.google.com/static/bigquery/images/edit-query-button.png)
 
 6.  Edit the SQL query and then click **Save view \> Save view** :
-    
+
     ![Save a view in editor](https://docs.cloud.google.com/static/bigquery/images/save-view-button.png)
 
 ### bq
@@ -104,53 +104,59 @@ If your query references external user-defined function resources stored in Clou
 
 If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-    bq update \
-        --use_legacy_sql=false \
-        --view_udf_resource=path_to_file \
-        --view='query' \
-        project_id:dataset.view
+```
+bq update \
+    --use_legacy_sql=false \
+    --view_udf_resource=path_to_file \
+    --view='query' \
+    project_id:dataset.view
+```
 
 Replace the following:
 
-  - path\_to\_file : the URI or local file system path to a code file to be loaded and evaluated immediately as a user-defined function resource used by the view. Repeat the flag to specify multiple files.
-  - query : a valid GoogleSQL query
-  - project\_id : your project ID
-  - dataset : the name of the dataset containing the view you're updating
-  - view : the name of the view you're updating
+- ` path_to_file ` : the URI or local file system path to a code file to be loaded and evaluated immediately as a user-defined function resource used by the view. Repeat the flag to specify multiple files.
+- ` query ` : a valid GoogleSQL query
+- ` project_id ` : your project ID
+- ` dataset ` : the name of the dataset containing the view you're updating
+- ` view ` : the name of the view you're updating
 
 **Examples**
 
 Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
 
-    bq update \
-        --use_legacy_sql=false \
-        --view \
-        'SELECT
-          name,
-          number
-        FROM
-          `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE
-          gender = "M"
-        ORDER BY
-          number DESC;' \
-        mydataset.myview
+```
+bq update \
+    --use_legacy_sql=false \
+    --view \
+    'SELECT
+      name,
+      number
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE
+      gender = "M"
+    ORDER BY
+      number DESC;' \
+    mydataset.myview
+```
 
 Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in `myotherproject` , not your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
 
-    bq update \
-        --use_legacy_sql=false \
-        --view \
-        'SELECT
-          name,
-          number
-        FROM
-          `bigquery-public-data.usa_names.usa_1910_current`
-        WHERE
-          gender = "M"
-        ORDER BY
-          number DESC;' \
-        myotherproject:mydataset.myview
+```
+bq update \
+    --use_legacy_sql=false \
+    --view \
+    'SELECT
+      name,
+      number
+    FROM
+      `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE
+      gender = "M"
+    ORDER BY
+      number DESC;' \
+    myotherproject:mydataset.myview
+```
 
 ### API
 
@@ -162,41 +168,43 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // updateView demonstrates updating the query metadata that defines a logical view.
-    func updateView(projectID, datasetID, viewID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // viewID := "myview"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     view := client.Dataset(datasetID).Table(viewID)
-     meta, err := view.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-    
-     newMeta := bigquery.TableMetadataToUpdate{
-         // This example updates a view into the shakespeare dataset to exclude works named after kings.
-         ViewQuery: "SELECT word, word_count, corpus, corpus_date FROM `bigquery-public-data.samples.shakespeare` WHERE corpus NOT LIKE '%king%'",
-     }
-    
-     if _, err := view.Update(ctx, newMeta, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// updateView demonstrates updating the query metadata that defines a logical view.
+func updateView(projectID, datasetID, viewID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // viewID := "myview"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    view := client.Dataset(datasetID).Table(viewID)
+    meta, err := view.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+
+    newMeta := bigquery.TableMetadataToUpdate{
+        // This example updates a view into the shakespeare dataset to exclude works named after kings.
+        ViewQuery: "SELECT word, word_count, corpus, corpus_date FROM `bigquery-public-data.samples.shakespeare` WHERE corpus NOT LIKE '%king%'",
+    }
+
+    if _, err := view.Update(ctx, newMeta, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -204,48 +212,50 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableInfo;
-    import com.google.cloud.bigquery.ViewDefinition;
-    
-    // Sample to update query on a view
-    public class UpdateViewQuery {
-    
-      public static void runUpdateViewQuery() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        String viewName = "MY_VIEW_NAME";
-        String updateQuery =
-            String.format("SELECT TimestampField, StringField FROM %s.%s", datasetName, tableName);
-        updateViewQuery(datasetName, viewName, updateQuery);
-      }
-    
-      public static void updateViewQuery(String datasetName, String viewName, String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Retrieve existing view metadata
-          TableInfo viewMetadata = bigquery.getTable(TableId.of(datasetName, viewName));
-    
-          // Update view query
-          ViewDefinition viewDefinition = viewMetadata.getDefinition();
-          viewDefinition.toBuilder().setQuery(query).build();
-    
-          // Set metadata
-          bigquery.update(viewMetadata.toBuilder().setDefinition(viewDefinition).build());
-    
-          System.out.println("View query updated successfully");
-        } catch (BigQueryException e) {
-          System.out.println("View query was not updated. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableInfo;
+import com.google.cloud.bigquery.ViewDefinition;
+
+// Sample to update query on a view
+public class UpdateViewQuery {
+
+  public static void runUpdateViewQuery() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    String viewName = "MY_VIEW_NAME";
+    String updateQuery =
+        String.format("SELECT TimestampField, StringField FROM %s.%s", datasetName, tableName);
+    updateViewQuery(datasetName, viewName, updateQuery);
+  }
+
+  public static void updateViewQuery(String datasetName, String viewName, String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Retrieve existing view metadata
+      TableInfo viewMetadata = bigquery.getTable(TableId.of(datasetName, viewName));
+
+      // Update view query
+      ViewDefinition viewDefinition = viewMetadata.getDefinition();
+      viewDefinition.toBuilder().setQuery(query).build();
+
+      // Set metadata
+      bigquery.update(viewMetadata.toBuilder().setDefinition(viewDefinition).build());
+
+      System.out.println("View query updated successfully");
+    } catch (BigQueryException e) {
+      System.out.println("View query was not updated. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -253,39 +263,41 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function updateViewQuery() {
-      // Updates a view named "my_existing_view" in "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_existing_dataset"
-      // const tableId = "my_existing_table"
-      const dataset = await bigquery.dataset(datasetId);
-    
-      // This example updates a view into the USA names dataset to include state.
-      const newViewQuery = `SELECT name, state 
-      FROM \`bigquery-public-data.usa_names.usa_1910_current\`
-      LIMIT 10`;
-    
-      // Retrieve existing view
-      const [view] = await dataset.table(tableId).get();
-    
-      // Retrieve existing view metadata
-      const [metadata] = await view.getMetadata();
-    
-      // Update view query
-      metadata.view = newViewQuery;
-    
-      // Set metadata
-      await view.setMetadata(metadata);
-    
-      console.log(`View ${tableId} updated.`);
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function updateViewQuery() {
+  // Updates a view named "my_existing_view" in "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_existing_dataset"
+  // const tableId = "my_existing_table"
+  const dataset = await bigquery.dataset(datasetId);
+
+  // This example updates a view into the USA names dataset to include state.
+  const newViewQuery = `SELECT name, state 
+  FROM \`bigquery-public-data.usa_names.usa_1910_current\`
+  LIMIT 10`;
+
+  // Retrieve existing view
+  const [view] = await dataset.table(tableId).get();
+
+  // Retrieve existing view metadata
+  const [metadata] = await view.getMetadata();
+
+  // Update view query
+  metadata.view = newViewQuery;
+
+  // Set metadata
+  await view.setMetadata(metadata);
+
+  console.log(`View ${tableId} updated.`);
+}
+```
 
 ### Python
 
@@ -293,24 +305,26 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    
-    view_id = "my-project.my_dataset.my_view"
-    source_id = "my-project.my_dataset.my_table"
-    view = bigquery.Table(view_id)
-    
-    # The source table in this example is created from a CSV file in Google
-    # Cloud Storage located at
-    # `gs://cloud-samples-data/bigquery/us-states/us-states.csv`. It contains
-    # 50 US states, while the view returns only those states with names
-    # starting with the letter 'M'.
-    view.view_query = f"SELECT name, post_abbr FROM `{source_id}` WHERE name LIKE 'M%'"
-    
-    # Make an API request to update the query property of the view.
-    view = client.update_table(view, ["view_query"])
-    print(f"Updated {view.table_type}: {str(view.reference)}")
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+view_id = "my-project.my_dataset.my_view"
+source_id = "my-project.my_dataset.my_table"
+view = bigquery.Table(view_id)
+
+# The source table in this example is created from a CSV file in Google
+# Cloud Storage located at
+# `gs://cloud-samples-data/bigquery/us-states/us-states.csv`. It contains
+# 50 US states, while the view returns only those states with names
+# starting with the letter 'M'.
+view.view_query = f"SELECT name, post_abbr FROM `{source_id}` WHERE name LIKE 'M%'"
+
+# Make an API request to update the query property of the view.
+view = client.update_table(view, ["view_query"])
+print(f"Updated {view.table_type}: {str(view.reference)}")
+```
 
 > **Note:** If you update the datasets referenced by the query of an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , you must [authorize the view](https://docs.cloud.google.com/bigquery/docs/authorized-views#manage_users_or_groups_for_authorized_views) access to any new underlying datasets.
 
@@ -320,11 +334,11 @@ You can set a default table expiration time at the dataset level (which affects 
 
 At any point after the view is created, you can update the view's expiration time by:
 
-  - Using the Google Cloud console
-  - Using a Data definition language (DDL) statement written in GoogleSQL syntax
-  - Using the bq command-line tool's `bq update` command
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-  - Using the client libraries
+- Using the Google Cloud console
+- Using a Data definition language (DDL) statement written in GoogleSQL syntax
+- Using the bq command-line tool's `bq update` command
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+- Using the client libraries
 
 > **Note:** If you set an expiration time that has already passed, the view is deleted immediately.
 
@@ -333,7 +347,7 @@ To update a view's expiration time:
 ### Console
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
@@ -355,20 +369,20 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-    ``` 
-     ALTER VIEW DATASET_ID.MY_VIEW
+
+    ```
+    ALTER VIEW DATASET_ID.MY_VIEW
      SET OPTIONS (
       expiration_timestamp = TIMESTAMP('NEW_TIMESTAMP'));
     ```
-    
-    Replace the following:
-    
-      - DATASET\_ID : the ID of the dataset containing your view
-      - MY\_VIEW : the name of the view to be updated
-      - NEW\_TIMESTAMP : a [TIMESTAMP value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
 
-3.  Click play\_circle **Run** .
+    Replace the following:
+
+    - ` DATASET_ID ` : the ID of the dataset containing your view
+    - ` MY_VIEW ` : the name of the view to be updated
+    - ` NEW_TIMESTAMP ` : a [TIMESTAMP value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -376,30 +390,36 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--expiration` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-    bq update \
-        --expiration integer \
-        project_id:dataset.view
+```
+bq update \
+    --expiration integer \
+    project_id:dataset.view
+```
 
 Replace the following:
 
-  - integer : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value.
-  - project\_id : your project ID
-  - dataset : the name of the dataset containing the view you're updating
-  - view : the name of the view you're updating
+- ` integer ` : the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current time plus the integer value.
+- ` project_id ` : your project ID
+- ` dataset ` : the name of the dataset containing the view you're updating
+- ` view ` : the name of the view you're updating
 
 **Examples**
 
 Enter the following command to update the expiration time of `myview` in `mydataset` to 5 days (432000 seconds). `mydataset` is in your default project.
 
-    bq update \
-        --expiration 432000 \
-        mydataset.myview
+```
+bq update \
+    --expiration 432000 \
+    mydataset.myview
+```
 
 Enter the following command to update the expiration time of `myview` in `mydataset` to 5 days (432000 seconds). `mydataset` is in `myotherproject` , not your default project.
 
-    bq update \
-        --expiration 432000 \
-        myotherproject:mydataset.myview
+```
+bq update \
+    --expiration 432000 \
+    myotherproject:mydataset.myview
+```
 
 ### API
 
@@ -411,40 +431,42 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "time"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // updateTableExpiration demonstrates setting the table expiration of a table to a specific point in time
-    // in the future, at which time it will be deleted.
-    func updateTableExpiration(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     tableRef := client.Dataset(datasetID).Table(tableID)
-     meta, err := tableRef.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     update := bigquery.TableMetadataToUpdate{
-         ExpirationTime: time.Now().Add(time.Duration(5*24) * time.Hour), // table expiration in 5 days.
-     }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "time"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// updateTableExpiration demonstrates setting the table expiration of a table to a specific point in time
+// in the future, at which time it will be deleted.
+func updateTableExpiration(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    tableRef := client.Dataset(datasetID).Table(tableID)
+    meta, err := tableRef.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    update := bigquery.TableMetadataToUpdate{
+        ExpirationTime: time.Now().Add(time.Duration(5*24) * time.Hour), // table expiration in 5 days.
+    }
+    if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -452,14 +474,16 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    Table beforeTable = bigquery.getTable(datasetName, tableName);
-    
-    // Set table to expire 5 days from now.
-    long expirationMillis = DateTime.now().plusDays(5).getMillis();
-    TableInfo tableInfo = beforeTable.toBuilder()
-            .setExpirationTime(expirationMillis)
-            .build();
-    Table afterTable = bigquery.update(tableInfo);
+```java
+Table beforeTable = bigquery.getTable(datasetName, tableName);
+
+// Set table to expire 5 days from now.
+long expirationMillis = DateTime.now().plusDays(5).getMillis();
+TableInfo tableInfo = beforeTable.toBuilder()
+        .setExpirationTime(expirationMillis)
+        .build();
+Table afterTable = bigquery.update(tableInfo);
+```
 
 ### Node.js
 
@@ -467,31 +491,33 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function updateTableExpiration() {
-      // Updates a table's expiration.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset', // Existing dataset
-      // const tableId = 'my_table', // Existing table
-      // const expirationTime = Date.now() + 1000 * 60 * 60 * 24 * 5 // 5 days from current time in ms
-    
-      // Retreive current table metadata
-      const table = bigquery.dataset(datasetId).table(tableId);
-      const [metadata] = await table.getMetadata();
-    
-      // Set new table expiration to 5 days from current time
-      metadata.expirationTime = expirationTime.toString();
-      const [apiResponse] = await table.setMetadata(metadata);
-    
-      const newExpirationTime = apiResponse.expirationTime;
-      console.log(`${tableId} expiration: ${newExpirationTime}`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function updateTableExpiration() {
+  // Updates a table's expiration.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset', // Existing dataset
+  // const tableId = 'my_table', // Existing table
+  // const expirationTime = Date.now() + 1000 * 60 * 60 * 24 * 5 // 5 days from current time in ms
+
+  // Retreive current table metadata
+  const table = bigquery.dataset(datasetId).table(tableId);
+  const [metadata] = await table.getMetadata();
+
+  // Set new table expiration to 5 days from current time
+  metadata.expirationTime = expirationTime.toString();
+  const [apiResponse] = await table.setMetadata(metadata);
+
+  const newExpirationTime = apiResponse.expirationTime;
+  console.log(`${tableId} expiration: ${newExpirationTime}`);
+}
+```
 
 ### Python
 
@@ -501,32 +527,34 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    client = bigquery.Client()
-    
-    # TODO(dev): Change table_id to the full name of the table you want to update.
-    table_id = "your-project.your_dataset.your_table_name"
-    
-    # TODO(dev): Set table to expire for desired days days from now.
-    expiration = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
-        days=5
-    )
-    table = client.get_table(table_id)  # Make an API request.
-    table.expires = expiration
-    table = client.update_table(table, ["expires"])  # API request
-    
-    print(f"Updated {table_id}, expires {table.expires}.")
+```python
+from google.cloud import bigquery
+
+client = bigquery.Client()
+
+# TODO(dev): Change table_id to the full name of the table you want to update.
+table_id = "your-project.your_dataset.your_table_name"
+
+# TODO(dev): Set table to expire for desired days days from now.
+expiration = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
+    days=5
+)
+table = client.get_table(table_id)  # Make an API request.
+table.expires = expiration
+table = client.update_table(table, ["expires"])  # API request
+
+print(f"Updated {table_id}, expires {table.expires}.")
+```
 
 ### Updating a view's description
 
 You can update a view's description by:
 
-  - Using the Google Cloud console
-  - Using a Data definition language (DDL) statement written in GoogleSQL syntax
-  - Using the bq command-line tool's `bq update` command
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-  - Using the client libraries
+- Using the Google Cloud console
+- Using a Data definition language (DDL) statement written in GoogleSQL syntax
+- Using the bq command-line tool's `bq update` command
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+- Using the client libraries
 
 To update a view's description:
 
@@ -535,7 +563,7 @@ To update a view's description:
 You cannot add a description when you create a view using the Google Cloud console. After the view is created, you can add a description on the **Details** page.
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
@@ -557,20 +585,20 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-    ``` 
-     ALTER VIEW DATASET_ID.MY_VIEW
+
+    ```
+    ALTER VIEW DATASET_ID.MY_VIEW
      SET OPTIONS (
       description = 'NEW_DESCRIPTION');
     ```
-    
-    Replace the following:
-    
-      - DATASET\_ID : the ID of the dataset containing your view
-      - MY\_VIEW : the name of the view to be updated
-      - NEW\_DESCRIPTION : the new view description
 
-3.  Click play\_circle **Run** .
+    Replace the following:
+
+    - ` DATASET_ID ` : the ID of the dataset containing your view
+    - ` MY_VIEW ` : the name of the view to be updated
+    - ` NEW_DESCRIPTION ` : the new view description
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -578,30 +606,36 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Issue the `bq update` command with the `--description` flag. If you are updating a view in a project other than your default project, add the project ID to the dataset name in the following format: `[PROJECT_ID]:[DATASET]` .
 
-    bq update \
-        --description "description" \
-        project_id:dataset.view
+```
+bq update \
+    --description "description" \
+    project_id:dataset.view
+```
 
 Replace the following:
 
-  - description : the text describing the view in quotes
-  - project\_id : your project ID.
-  - dataset : the name of the dataset containing the view you're updating
-  - view : the name of the view you're updating
+- ` description ` : the text describing the view in quotes
+- ` project_id ` : your project ID.
+- ` dataset ` : the name of the dataset containing the view you're updating
+- ` view ` : the name of the view you're updating
 
 **Examples**
 
 Enter the following command to change the description of `myview` in `mydataset` to "Description of myview." `mydataset` is in your default project.
 
-    bq update \
-        --description "Description of myview" \
-        mydataset.myview
+```
+bq update \
+    --description "Description of myview" \
+    mydataset.myview
+```
 
 Enter the following command to change the description of `myview` in `mydataset` to "Description of myview." `mydataset` is in `myotherproject` , not your default project.
 
-    bq update \
-        --description "Description of myview" \
-        myotherproject:mydataset.myview
+```
+bq update \
+    --description "Description of myview" \
+    myotherproject:mydataset.myview
+```
 
 ### API
 
@@ -613,38 +647,40 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // updateTableDescription demonstrates how to fetch a table's metadata and updates the Description metadata.
-    func updateTableDescription(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     tableRef := client.Dataset(datasetID).Table(tableID)
-     meta, err := tableRef.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     update := bigquery.TableMetadataToUpdate{
-         Description: "Updated description.",
-     }
-     if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// updateTableDescription demonstrates how to fetch a table's metadata and updates the Description metadata.
+func updateTableDescription(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    tableRef := client.Dataset(datasetID).Table(tableID)
+    meta, err := tableRef.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    update := bigquery.TableMetadataToUpdate{
+        Description: "Updated description.",
+    }
+    if _, err = tableRef.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -654,15 +690,17 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // String datasetName = "my_dataset_name";
-    // String tableName = "my_table_name";
-    // String newDescription = "new_description";
-    
-    Table beforeTable = bigquery.getTable(datasetName, tableName);
-    TableInfo tableInfo = beforeTable.toBuilder()
-        .setDescription(newDescription)
-        .build();
-    Table afterTable = bigquery.update(tableInfo);
+```java
+// String datasetName = "my_dataset_name";
+// String tableName = "my_table_name";
+// String newDescription = "new_description";
+
+Table beforeTable = bigquery.getTable(datasetName, tableName);
+TableInfo tableInfo = beforeTable.toBuilder()
+    .setDescription(newDescription)
+    .build();
+Table afterTable = bigquery.update(tableInfo);
+```
 
 ### Node.js
 
@@ -670,25 +708,27 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function updateTableDescription() {
-      // Updates a table's description.
-    
-      // Retreive current table metadata
-      const table = bigquery.dataset(datasetId).table(tableId);
-      const [metadata] = await table.getMetadata();
-    
-      // Set new table description
-      const description = 'New table description.';
-      metadata.description = description;
-      const [apiResponse] = await table.setMetadata(metadata);
-      const newDescription = apiResponse.description;
-    
-      console.log(`${tableId} description: ${newDescription}`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function updateTableDescription() {
+  // Updates a table's description.
+
+  // Retreive current table metadata
+  const table = bigquery.dataset(datasetId).table(tableId);
+  const [metadata] = await table.getMetadata();
+
+  // Set new table description
+  const description = 'New table description.';
+  metadata.description = description;
+  const [apiResponse] = await table.setMetadata(metadata);
+  const newDescription = apiResponse.description;
+
+  console.log(`${tableId} description: ${newDescription}`);
+}
+```
 
 ### Python
 
@@ -698,19 +738,21 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    # from google.cloud import bigquery
-    # client = bigquery.Client()
-    # project = client.project
-    # dataset_ref = bigquery.DatasetReference(project, dataset_id)
-    # table_ref = dataset_ref.table('my_table')
-    # table = client.get_table(table_ref)  # API request
-    
-    assert table.description == "Original description."
-    table.description = "Updated description."
-    
-    table = client.update_table(table, ["description"])  # API request
-    
-    assert table.description == "Updated description."
+```python
+# from google.cloud import bigquery
+# client = bigquery.Client()
+# project = client.project
+# dataset_ref = bigquery.DatasetReference(project, dataset_id)
+# table_ref = dataset_ref.table('my_table')
+# table = client.get_table(table_ref)  # API request
+
+assert table.description == "Original description."
+table.description = "Updated description."
+
+table = client.update_table(table, ["description"])  # API request
+
+assert table.description == "Updated description."
+```
 
 ## Copy views
 
@@ -722,20 +764,20 @@ You cannot copy a view by using the bq command-line tool, the REST API, or the c
 
 To copy a view in the Google Cloud console, you need IAM permissions on the source and destination datasets.
 
-  - On the source dataset, you need the following:
-    
-      - `bigquery.tables.get`
-      - `bigquery.tables.getData` (required to access the tables referenced by the view's SQL query)
+- On the source dataset, you need the following:
 
-  - On the destination dataset, you need the following:
-    
-      - `bigquery.tables.create` (lets you create a copy of the view in the destination dataset)
+  - `bigquery.tables.get`
+  - `bigquery.tables.getData` (required to access the tables referenced by the view's SQL query)
+
+- On the destination dataset, you need the following:
+
+  - `bigquery.tables.create` (lets you create a copy of the view in the destination dataset)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to copy a view:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can copy views in the datasets that you create. You also need access to the destination dataset unless you created it.
 
@@ -748,7 +790,7 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 To copy a view, follow these steps:
 
 1.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
@@ -758,17 +800,17 @@ To copy a view, follow these steps:
 4.  In the details pane, click **Copy** .
 
 5.  In the **Copy view** dialog, do the following:
-    
+
     1.  In the **Source** section, verify that your project name, dataset name, and table name are correct.
-    
+
     2.  In the **Destination** section, do the following:
-        
-          - For **Project** , choose the project to which you are copying the view.
-          - For **Dataset** , choose the dataset that will contain the copied view.
-          - For **Table** , enter the name of the view. You can rename the view by entering a new view name in the box. If you enter a new name, it must follow the [view naming](https://docs.cloud.google.com/bigquery/docs/views#view_naming) rules.
-    
+
+        - For **Project** , choose the project to which you are copying the view.
+        - For **Dataset** , choose the dataset that will contain the copied view.
+        - For **Table** , enter the name of the view. You can rename the view by entering a new view name in the box. If you enter a new name, it must follow the [view naming](https://docs.cloud.google.com/bigquery/docs/views#view_naming) rules.
+
     3.  Click **Copy** :
-        
+
         ![Copy a view dialog](https://docs.cloud.google.com/static/bigquery/images/view-copy-dialog.png)
 
 Limits for copy jobs apply. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) .
@@ -783,9 +825,9 @@ You cannot change the name of an existing view by using the bq command-line tool
 
 You can delete a view by:
 
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `bq rm` command
-  - Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method
+- Using the Google Cloud console
+- Using the bq command-line tool's `bq rm` command
+- Calling the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method
 
 Using any available method, you can only delete one view at a time.
 
@@ -798,21 +840,21 @@ When you delete an [authorized view](https://docs.cloud.google.com/bigquery/docs
 Deleting a view also deletes any permissions associated with this view. When you recreate a deleted view, you must also manually [reconfigure any access permissions](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) previously associated with it.
 
 > **Note:** You cannot recover views directly, but you can recover the view creation statement by searching for the corresponding [audit log activity](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .
-> 
->   - For information about using the log explorer to query the activity log by audit log name, see the [audit logs overview](https://docs.cloud.google.com/logging/docs/audit) .
->   - For information about using `projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
+>
+> - For information about using the log explorer to query the activity log by audit log name, see the [audit logs overview](https://docs.cloud.google.com/logging/docs/audit) .
+> - For information about using `projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity` , see [BigQuery Data Policy audit logging](https://docs.cloud.google.com/bigquery/docs/column-data-masking-audit-logging) .
 
 ### Required permissions
 
 To delete a view, you need the following IAM permissions:
 
-  - `bigquery.tables.delete`
+- `bigquery.tables.delete`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to delete a view:
 
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can delete views in the datasets that you create.
 
@@ -827,7 +869,7 @@ To delete a view:
 1.  In the Google Cloud console, go to the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
@@ -845,16 +887,18 @@ Use the [`DROP VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        DROP VIEW mydataset.myview;
-    
-    Replace the following:
-    
-      - DATASET\_ID : the ID of the dataset containing your view
-      - MY\_VIEW : the name of the view to be updated
-      - NEW\_DESCRIPTION : the new view description
 
-3.  Click play\_circle **Run** .
+    ```
+    DROP VIEW mydataset.myview;
+    ```
+
+    Replace the following:
+
+    - ` DATASET_ID ` : the ID of the dataset containing your view
+    - ` MY_VIEW ` : the name of the view to be updated
+    - ` NEW_DESCRIPTION ` : the new view description
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -862,18 +906,20 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq rm` command with the `--table` flag (or `-t` shortcut) to delete a view. When you use the bq command-line tool to remove a view, you must confirm the action. You can use the `--force` flag (or `-f` shortcut) to skip confirmation.
 
-If the view is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
+If the view is in a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-    bq rm \
-    -f \
-    -t \
-    project_id:dataset.view
+```
+bq rm \
+-f \
+-t \
+project_id:dataset.view
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the name of the dataset that contains the table.
-  - view is the name of the view you're deleting.
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the dataset that contains the table.
+- ` view ` is the name of the view you're deleting.
 
 Examples:
 
@@ -883,44 +929,52 @@ In the Google Cloud console, activate **Cloud Shell** .
 
 Enter the following command to delete `myview` from `mydataset` . `mydataset` is in your default project.
 
-    bq rm -t mydataset.myview
+```
+bq rm -t mydataset.myview
+```
 
 Enter the following command to delete `myview` from `mydataset` . `mydataset` is in `myotherproject` , not your default project.
 
-    bq rm -t myotherproject:mydataset.myview
+```
+bq rm -t myotherproject:mydataset.myview
+```
 
 Enter the following command to delete `myview` from `mydataset` . `mydataset` is in your default project. The command uses the `-f` shortcut to bypass confirmation.
 
-    bq rm -f -t mydataset.myview
+```
+bq rm -f -t mydataset.myview
+```
 
-> **Note:** You can enter the [` bq ls dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
+> **Note:** You can enter the [`bq ls `` dataset`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command to confirm that a view was removed from a dataset.
 
 ### API
 
 Call the [`tables.delete`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete) API method and specify the view to delete using the `tableId` parameter.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    
-    public class BigQueryDeleteTable
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+
+public class BigQueryDeleteTable
+{
+    public void DeleteTable(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id",
+        string tableId = "your_table_id"
+    )
     {
-        public void DeleteTable(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id",
-            string tableId = "your_table_id"
-        )
-        {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            client.DeleteTable(datasetId, tableId);
-            Console.WriteLine($"Table {tableId} deleted.");
-        }
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        client.DeleteTable(datasetId, tableId);
+        Console.WriteLine($"Table {tableId} deleted.");
     }
+}
+```
 
 ### Go
 
@@ -928,31 +982,33 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // deleteTable demonstrates deletion of a BigQuery table.
-    func deleteTable(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     table := client.Dataset(datasetID).Table(tableID)
-     if err := table.Delete(ctx); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// deleteTable demonstrates deletion of a BigQuery table.
+func deleteTable(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    table := client.Dataset(datasetID).Table(tableID)
+    if err := table.Delete(ctx); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -960,13 +1016,15 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    TableId tableId = TableId.of(projectId, datasetName, tableName);
-    boolean deleted = bigquery.delete(tableId);
-    if (deleted) {
-      // the table was deleted
-    } else {
-      // the table was not found
-    }
+```java
+TableId tableId = TableId.of(projectId, datasetName, tableName);
+boolean deleted = bigquery.delete(tableId);
+if (deleted) {
+  // the table was deleted
+} else {
+  // the table was not found
+}
+```
 
 ### Node.js
 
@@ -974,27 +1032,29 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function deleteTable() {
-      // Deletes "my_table" from "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_table";
-    
-      // Delete the table
-      await bigquery
-        .dataset(datasetId)
-        .table(tableId)
-        .delete();
-    
-      console.log(`Table ${tableId} deleted.`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function deleteTable() {
+  // Deletes "my_table" from "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_table";
+
+  // Delete the table
+  await bigquery
+    .dataset(datasetId)
+    .table(tableId)
+    .delete();
+
+  console.log(`Table ${tableId} deleted.`);
+}
+```
 
 ### PHP
 
@@ -1002,20 +1062,22 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $tableId = 'The BigQuery table ID';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $table->delete();
-    printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $tableId = 'The BigQuery table ID';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+$table->delete();
+printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
+```
 
 ### Python
 
@@ -1023,18 +1085,20 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to fetch.
-    # table_id = 'your-project.your_dataset.your_table'
-    
-    # If the table does not exist, delete_table raises
-    # google.api_core.exceptions.NotFound unless not_found_ok is True.
-    client.delete_table(table_id, not_found_ok=True)  # Make an API request.
-    print("Deleted table '{}'.".format(table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to fetch.
+# table_id = 'your-project.your_dataset.your_table'
+
+# If the table does not exist, delete_table raises
+# google.api_core.exceptions.NotFound unless not_found_ok is True.
+client.delete_table(table_id, not_found_ok=True)  # Make an API request.
+print("Deleted table '{}'.".format(table_id))
+```
 
 ### Ruby
 
@@ -1042,24 +1106,26 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-      table    = dataset.table table_id
-    
-      table.delete
-    
-      puts "Table #{table_id} deleted."
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+  table    = dataset.table table_id
+
+  table.delete
+
+  puts "Table #{table_id} deleted."
+end
+```
 
 ## Restore a view
 
 You can't restore a deleted view directly, but there are workarounds for certain scenarios:
 
-  - If a view is deleted because the parent dataset was deleted, then you can [undelete the dataset](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) to retrieve the view.
-  - If a view is deleted explicitly, then you can [recreate the view](https://docs.cloud.google.com/bigquery/docs/views) by using the last query that was used to create or update the view. You can find the query definition of the view creation or update operation in [logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableViewDefinition) .
+- If a view is deleted because the parent dataset was deleted, then you can [undelete the dataset](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) to retrieve the view.
+- If a view is deleted explicitly, then you can [recreate the view](https://docs.cloud.google.com/bigquery/docs/views) by using the last query that was used to create or update the view. You can find the query definition of the view creation or update operation in [logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableViewDefinition) .
 
 ## View security
 
@@ -1067,6 +1133,6 @@ To control access to views in BigQuery, see [Authorized views](https://docs.clou
 
 ## What's next
 
-  - For information on creating views, see [Create views](https://docs.cloud.google.com/bigquery/docs/views) .
-  - For information on creating an authorized view, see [Creating authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
-  - For information on getting view metadata, see [Get information about views](https://docs.cloud.google.com/bigquery/docs/view-metadata) .
+- For information on creating views, see [Create views](https://docs.cloud.google.com/bigquery/docs/views) .
+- For information on creating an authorized view, see [Creating authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
+- For information on getting view metadata, see [Get information about views](https://docs.cloud.google.com/bigquery/docs/view-metadata) .

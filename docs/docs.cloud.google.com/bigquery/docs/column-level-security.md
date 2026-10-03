@@ -14,9 +14,9 @@ The instructions in this page use both BigQuery and Data Catalog.
 
 You need to update the table schema to set a policy tag on a column. You can use the Google Cloud console, the bq command-line tool, and the BigQuery API to set a policy tag on a column. Additionally, you can create a table, specify the schema, and specify policy tags within one operation, using the following techniques:
 
-  - The bq command-line tool's `bq mk` and `bq load` commands.
-  - The `tables.insert` API method.
-  - The **Create table** page in the Google Cloud console. If you use the Google Cloud console, you must select **Edit as text** when you add or edit the schema.
+- The bq command-line tool's `bq mk` and `bq load` commands.
+- The `tables.insert` API method.
+- The **Create table** page in the Google Cloud console. If you use the Google Cloud console, you must select **Edit as text** when you add or edit the schema.
 
 > **Note:** You cannot use the DDL `CREATE TABLE` statement to specify policy tags.
 
@@ -25,11 +25,11 @@ To enhance column-level access control, you can optionally use [dynamic data mas
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects, but you might need to activate it in a pre-existing project.
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 > **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and cataloging features are deprecated and transitioning to Knowledge Catalog, the specific Data Catalog API functionality for policy tags isn't deprecated.
@@ -38,10 +38,10 @@ To enhance column-level access control, you can optionally use [dynamic data mas
 
 There are several roles related to policy tags for users and service accounts.
 
-  - Users or service accounts that administer policy tags are required to have the Data Catalog Policy Tag Admin role. The Policy Tag Admin role can manage taxonomies and policy tags, and can grant or remove IAM roles associated with policy tags.
-  - Users or service accounts that [enforce access control](https://docs.cloud.google.com/bigquery/docs/column-level-security#enforce_access_control) for column-level access control are required to have the BigQuery Admin role or the BigQuery Data Owner role. The BigQuery roles can manage data policies, which are used to enforce access control on a taxonomy.
-  - To view taxonomies and policy tags for all projects in an organization in the Google Cloud console, users need the Organization Viewer role. Otherwise, the console displays only taxonomies and policy tags associated with the selected project.
-  - Users or service accounts that query data that is protected by column-level access control must have the Data Catalog Fine-Grained Reader role to access that data.
+- Users or service accounts that administer policy tags are required to have the Data Catalog Policy Tag Admin role. The Policy Tag Admin role can manage taxonomies and policy tags, and can grant or remove IAM roles associated with policy tags.
+- Users or service accounts that [enforce access control](https://docs.cloud.google.com/bigquery/docs/column-level-security#enforce_access_control) for column-level access control are required to have the BigQuery Admin role or the BigQuery Data Owner role. The BigQuery roles can manage data policies, which are used to enforce access control on a taxonomy.
+- To view taxonomies and policy tags for all projects in an organization in the Google Cloud console, users need the Organization Viewer role. Otherwise, the console displays only taxonomies and policy tags associated with the selected project.
+- Users or service accounts that query data that is protected by column-level access control must have the Data Catalog Fine-Grained Reader role to access that data.
 
 For more information about all policy tag-related roles, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
 
@@ -54,8 +54,8 @@ To grant the Policy Tag Admin role, you must have the `resourcemanager.projects.
 1.  In the Google Cloud console, go to the **IAM** page.
 
 2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . The **Edit access** pane opens. Click **Add another role** .
-    
-    If the user email address is not in the list, click person\_add **Add** , then enter the email address in the **New principals** box.
+
+    If the user email address is not in the list, click person_add **Add** , then enter the email address in the **New principals** box.
 
 3.  Click the **Select a role** drop-down list.
 
@@ -72,8 +72,8 @@ To grant either of these roles, you must have the `resourcemanager.projects.setI
 1.  In the Google Cloud console, go to the **IAM** page.
 
 2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . Then click **Add another role** .
-    
-    If the user email address is not in the list, click person\_add **Add** , then enter the email address in the **New principals** box.
+
+    If the user email address is not in the list, click person_add **Add** , then enter the email address in the **New principals** box.
 
 3.  Click the **Select a role** drop-down list.
 
@@ -97,10 +97,10 @@ For instructions, see [Set permissions on policy tags](https://docs.cloud.google
 
 Set up column-level access control by completing these tasks:
 
-  - Create a taxonomy of policy tags.
-  - Associate principals with the policy tags and grant the principals the Data Catalog Fine-Grained Reader role.
-  - Associate the policy tags with BigQuery table columns.
-  - Enforce access control on the taxonomy containing the policy tags.
+- Create a taxonomy of policy tags.
+- Associate principals with the policy tags and grant the principals the Data Catalog Fine-Grained Reader role.
+- Associate the policy tags with BigQuery table columns.
+- Enforce access control on the taxonomy containing the policy tags.
 
 ### Create taxonomies
 
@@ -113,7 +113,7 @@ The user or service account that creates a taxonomy must be granted the Data Cat
 2.  Click **Create taxonomy** .
 
 3.  On the **New taxonomy** page:
-    
+
     1.  For **Taxonomy name** , enter the name of the taxonomy that you want to create.
     2.  For **Description** , enter a description.
     3.  If needed, change the project listed under **Project** .
@@ -176,7 +176,7 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 5.  In the **Add a policy tag** screen, locate and select the policy tag that you want to apply to the column.
 
 6.  Click **Select** . Your screen should look similar to the following:
-    
+
     ![Edit schema.](https://docs.cloud.google.com/static/bigquery/images/schema-ui-policy-tags2.png)
 
 7.  Click **Save** .
@@ -184,35 +184,41 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 ### bq
 
 1.  Write the schema to a local file.
-    
-        bq show --schema --format=prettyjson \
-           project-id:dataset.table > schema.json
-    
+
+    ```
+    bq show --schema --format=prettyjson \
+       project-id:dataset.table > schema.json
+    ```
+
     where:
-    
-      - project-id is your project ID.
-      - dataset is the name of the dataset that contains the table you're updating.
-      - table is the name of the table you're updating.
+
+    - ` project-id ` is your project ID.
+    - ` dataset ` is the name of the dataset that contains the table you're updating.
+    - ` table ` is the name of the table you're updating.
 
 2.  Modify schema.json to set a policy tag on a column. For the value of the `names` field of `policyTags` , use the [policy tag resource name](https://docs.cloud.google.com/bigquery/docs/column-level-security#retrieve_policy_tag_name) .
-    
-        [
-         ...
-         {
-           "name": "ssn",
-           "type": "STRING",
-           "mode": "REQUIRED",
-           "policyTags": {
-             "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
-           }
-         },
-         ...
-        ]
+
+    ```
+    [
+     ...
+     {
+       "name": "ssn",
+       "type": "STRING",
+       "mode": "REQUIRED",
+       "policyTags": {
+         "names": ["projects/project-id/locations/location/taxonomies/taxonomy-id/policyTags/policytag-id"]
+       }
+     },
+     ...
+    ]
+    ```
 
 3.  Update the schema.
-    
-        bq update \
-           project-id:dataset.table schema.json
+
+    ```
+    bq update \
+       project-id:dataset.table schema.json
+    ```
 
 ### API
 
@@ -224,8 +230,8 @@ When working with an existing table, the `tables.patch` method is preferred, bec
 
 You can also set policy tags when you:
 
-  - Use [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a table. Pass in a schema to use for creation of the table.
-  - Use [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) to load data to a table. Pass in a schema to use when you load the table.
+- Use [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) to create a table. Pass in a schema to use for creation of the table.
+- Use [`bq load`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) to load data to a table. Pass in a schema to use when you load the table.
 
 For general schema information, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
@@ -269,60 +275,62 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    const {DataPolicyServiceClient} =
-      require('@google-cloud/bigquery-datapolicies').v2;
-    const {status} = require('@grpc/grpc-js');
-    
-    const client = new DataPolicyServiceClient();
-    
-    /**
-     * Gets a specific data policy from the BigQuery Data Policy API by its name.
-     *
-     * This sample demonstrates how to fetch the details of an existing data policy.
-     * Data policies are used to define rules for data masking or row-level security
-     * on BigQuery tables.
-     *
-     * @param {string} projectId The Google Cloud project ID (for example, 'example-project-id')
-     * @param {string} [location='us'] The Google Cloud location of the data policy (For example, 'us', 'europe-west2').
-     * @param {string} [dataPolicyId='example-data-policy'] The ID of the data policy to retrieve.
-     */
-    async function getDataPolicy(
-      projectId,
-      location = 'us',
-      dataPolicyId = 'example-data-policy',
-    ) {
-      const name = client.dataPolicyPath(projectId, location, dataPolicyId);
-    
-      const request = {
-        name,
-      };
-    
-      try {
-        const [dataPolicy] = await client.getDataPolicy(request);
-        console.log('Successfully retrieved data policy:');
-        console.log(`  Name: ${dataPolicy.name}`);
-        console.log(`  Type: ${dataPolicy.dataPolicyType}`);
-        if (dataPolicy.dataMaskingPolicy) {
-          console.log(
-            `  Data Masking Policy: ${dataPolicy.dataMaskingPolicy.predefinedExpression || dataPolicy.dataMaskingPolicy.routine}`,
-          );
-        }
-        if (dataPolicy.grantees && dataPolicy.grantees.length > 0) {
-          console.log(`  Grantees: ${dataPolicy.grantees.join(', ')}`);
-        }
-      } catch (err) {
-        if (err.code === status.NOT_FOUND) {
-          console.error(
-            `Error: Data policy '${dataPolicyId}' not found in location '${location}' for project '${projectId}'.`,
-          );
-          console.error(
-            'Make sure the data policy ID, project ID, and location are correct.',
-          );
-        } else {
-          console.error('Error retrieving data policy:', err.message);
-        }
-      }
+```javascript
+const {DataPolicyServiceClient} =
+  require('@google-cloud/bigquery-datapolicies').v2;
+const {status} = require('@grpc/grpc-js');
+
+const client = new DataPolicyServiceClient();
+
+/**
+ * Gets a specific data policy from the BigQuery Data Policy API by its name.
+ *
+ * This sample demonstrates how to fetch the details of an existing data policy.
+ * Data policies are used to define rules for data masking or row-level security
+ * on BigQuery tables.
+ *
+ * @param {string} projectId The Google Cloud project ID (for example, 'example-project-id')
+ * @param {string} [location='us'] The Google Cloud location of the data policy (For example, 'us', 'europe-west2').
+ * @param {string} [dataPolicyId='example-data-policy'] The ID of the data policy to retrieve.
+ */
+async function getDataPolicy(
+  projectId,
+  location = 'us',
+  dataPolicyId = 'example-data-policy',
+) {
+  const name = client.dataPolicyPath(projectId, location, dataPolicyId);
+
+  const request = {
+    name,
+  };
+
+  try {
+    const [dataPolicy] = await client.getDataPolicy(request);
+    console.log('Successfully retrieved data policy:');
+    console.log(`  Name: ${dataPolicy.name}`);
+    console.log(`  Type: ${dataPolicy.dataPolicyType}`);
+    if (dataPolicy.dataMaskingPolicy) {
+      console.log(
+        `  Data Masking Policy: ${dataPolicy.dataMaskingPolicy.predefinedExpression || dataPolicy.dataMaskingPolicy.routine}`,
+      );
     }
+    if (dataPolicy.grantees && dataPolicy.grantees.length > 0) {
+      console.log(`  Grantees: ${dataPolicy.grantees.join(', ')}`);
+    }
+  } catch (err) {
+    if (err.code === status.NOT_FOUND) {
+      console.error(
+        `Error: Data policy '${dataPolicyId}' not found in location '${location}' for project '${projectId}'.`,
+      );
+      console.error(
+        'Make sure the data policy ID, project ID, and location are correct.',
+      );
+    } else {
+      console.error('Error retrieving data policy:', err.message);
+    }
+  }
+}
+```
 
 ### Python
 
@@ -330,57 +338,59 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.api_core import exceptions
-    from google.cloud import bigquery_datapolicies_v2
-    
+```python
+from google.api_core import exceptions
+from google.cloud import bigquery_datapolicies_v2
+
+client = bigquery_datapolicies_v2.DataPolicyServiceClient()
+
+
+def get_data_policy(
+    project_id: str,
+    location: str,
+    data_policy_id: str,
+) -> None:
+    """Gets a specific data policy from the BigQuery Data Policy API by its name.
+
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The geographic location of the data policy (for example, "us", "eu").
+        data_policy_id: The user-assigned ID of the data policy.
+    """
     client = bigquery_datapolicies_v2.DataPolicyServiceClient()
-    
-    
-    def get_data_policy(
-        project_id: str,
-        location: str,
-        data_policy_id: str,
-    ) -> None:
-        """Gets a specific data policy from the BigQuery Data Policy API by its name.
-    
-    
-        Args:
-            project_id: The Google Cloud project ID.
-            location: The geographic location of the data policy (for example, "us", "eu").
-            data_policy_id: The user-assigned ID of the data policy.
-        """
-        client = bigquery_datapolicies_v2.DataPolicyServiceClient()
-    
-        data_policy_name = client.data_policy_path(
-            project=project_id,
-            location=location,
-            data_policy=data_policy_id,
-        )
-    
-        try:
-            response = client.get_data_policy(name=data_policy_name)
-    
-            print(f"Successfully retrieved data policy: {response.name}")
-            print(f"  Data Policy ID: {response.data_policy_id}")
-            print(f"  Data Policy Type: {response.data_policy_type.name}")
-            if response.policy_tag:
-                print(f"  Policy Tag: {response.policy_tag}")
-            if response.grantees:
-                print(f"  Grantees: {', '.join(response.grantees)}")
-            if response.data_masking_policy:
-                masking_policy = response.data_masking_policy
-                if masking_policy.predefined_expression:
-                    print(
-                        f"  Data Masking Predefined Expression: {masking_policy.predefined_expression.name}"
-                    )
-                elif masking_policy.routine:
-                    print(f"  Data Masking Routine: {masking_policy.routine}")
-    
-        except exceptions.NotFound:
-            print(f"Error: Data policy '{data_policy_name}' not found.")
-            print("Make sure the data policy ID, project ID, and location are correct.")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+
+    data_policy_name = client.data_policy_path(
+        project=project_id,
+        location=location,
+        data_policy=data_policy_id,
+    )
+
+    try:
+        response = client.get_data_policy(name=data_policy_name)
+
+        print(f"Successfully retrieved data policy: {response.name}")
+        print(f"  Data Policy ID: {response.data_policy_id}")
+        print(f"  Data Policy Type: {response.data_policy_type.name}")
+        if response.policy_tag:
+            print(f"  Policy Tag: {response.policy_tag}")
+        if response.grantees:
+            print(f"  Grantees: {', '.join(response.grantees)}")
+        if response.data_masking_policy:
+            masking_policy = response.data_masking_policy
+            if masking_policy.predefined_expression:
+                print(
+                    f"  Data Masking Predefined Expression: {masking_policy.predefined_expression.name}"
+                )
+            elif masking_policy.routine:
+                print(f"  Data Masking Routine: {masking_policy.routine}")
+
+    except exceptions.NotFound:
+        print(f"Error: Data policy '{data_policy_name}' not found.")
+        print("Make sure the data policy ID, project ID, and location are correct.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+```
 
 #### Get the Identity and Access Management (IAM) policy for a data policy
 
@@ -392,49 +402,51 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    const {DataPolicyServiceClient} =
-      require('@google-cloud/bigquery-datapolicies').v2;
-    const {status} = require('@grpc/grpc-js');
-    
-    const client = new DataPolicyServiceClient();
-    
-    /**
-     * Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
-     * This is useful for auditing which members have which roles on the policy.
-     *
-     *
-     * @param {string} projectId Google Cloud Project ID (For example, 'example-project-id')
-     * @param {string} location Google Cloud Location (For example, 'us-central1')
-     * @param {string} dataPolicyId The ID of the data policy (For example, 'example-data-policy-id')
-     */
-    async function getIamPolicy(projectId, location, dataPolicyId) {
-      const resourceName = client.dataPolicyPath(projectId, location, dataPolicyId);
-    
-      const request = {
-        resource: resourceName,
-      };
-    
-      try {
-        const [policy] = await client.getIamPolicy(request);
-        console.log(
-          'Successfully retrieved IAM policy for data policy %s:',
-          resourceName,
-        );
-        console.log(JSON.stringify(policy, null, 2));
-      } catch (err) {
-        if (err.code === status.NOT_FOUND) {
-          console.error(
-            `Error: Data Policy '${dataPolicyId}' not found in location '${location}' of project '${projectId}'. ` +
-              'Make sure the data policy exists and the resource name is correct.',
-          );
-        } else {
-          console.error(
-            `Error getting IAM policy for data policy '${dataPolicyId}':`,
-            err,
-          );
-        }
-      }
+```javascript
+const {DataPolicyServiceClient} =
+  require('@google-cloud/bigquery-datapolicies').v2;
+const {status} = require('@grpc/grpc-js');
+
+const client = new DataPolicyServiceClient();
+
+/**
+ * Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
+ * This is useful for auditing which members have which roles on the policy.
+ *
+ *
+ * @param {string} projectId Google Cloud Project ID (For example, 'example-project-id')
+ * @param {string} location Google Cloud Location (For example, 'us-central1')
+ * @param {string} dataPolicyId The ID of the data policy (For example, 'example-data-policy-id')
+ */
+async function getIamPolicy(projectId, location, dataPolicyId) {
+  const resourceName = client.dataPolicyPath(projectId, location, dataPolicyId);
+
+  const request = {
+    resource: resourceName,
+  };
+
+  try {
+    const [policy] = await client.getIamPolicy(request);
+    console.log(
+      'Successfully retrieved IAM policy for data policy %s:',
+      resourceName,
+    );
+    console.log(JSON.stringify(policy, null, 2));
+  } catch (err) {
+    if (err.code === status.NOT_FOUND) {
+      console.error(
+        `Error: Data Policy '${dataPolicyId}' not found in location '${location}' of project '${projectId}'. ` +
+          'Make sure the data policy exists and the resource name is correct.',
+      );
+    } else {
+      console.error(
+        `Error getting IAM policy for data policy '${dataPolicyId}':`,
+        err,
+      );
     }
+  }
+}
+```
 
 ### Python
 
@@ -442,57 +454,59 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.api_core import exceptions
-    from google.cloud import bigquery_datapolicies_v2
-    from google.iam.v1 import iam_policy_pb2
-    
-    client = bigquery_datapolicies_v2.DataPolicyServiceClient()
-    
-    
-    def get_data_policy_iam_policy(
-        project_id: str,
-        location: str,
-        data_policy_id: str,
-    ) -> None:
-        """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
-        This is useful for auditing which members have which roles on the policy.
-    
-        Args:
-            project_id: The Google Cloud project ID.
-            location: The geographic location of the data policy (for example, "us").
-            data_policy_id: The ID of the data policy.
-        """
-    
-        resource_name = client.data_policy_path(
-            project=project_id,
-            location=location,
-            data_policy=data_policy_id,
-        )
-    
-        request = iam_policy_pb2.GetIamPolicyRequest(resource=resource_name)
-    
-        try:
-            policy = client.get_iam_policy(request=request)
-    
-            print(f"Successfully retrieved IAM policy for data policy: {resource_name}")
-            print("Policy Version:", policy.version)
-            if policy.bindings:
-                print("Policy Bindings:")
-                for binding in policy.bindings:
-                    print(f"  Role: {binding.role}")
-                    print(f"  Members: {', '.join(binding.members)}")
-                    if binding.condition.expression:
-                        print(f"  Condition: {binding.condition.expression}")
-            else:
-                print("No bindings found in the policy.")
-    
-        except exceptions.NotFound:
-            print(f"Error: Data policy '{resource_name}' not found.")
-            print("Make sure the project ID, location, and data policy ID are correct.")
-        except exceptions.GoogleAPIError as e:
-            print(f"An API error occurred: {e}")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+```python
+from google.api_core import exceptions
+from google.cloud import bigquery_datapolicies_v2
+from google.iam.v1 import iam_policy_pb2
+
+client = bigquery_datapolicies_v2.DataPolicyServiceClient()
+
+
+def get_data_policy_iam_policy(
+    project_id: str,
+    location: str,
+    data_policy_id: str,
+) -> None:
+    """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
+    This is useful for auditing which members have which roles on the policy.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The geographic location of the data policy (for example, "us").
+        data_policy_id: The ID of the data policy.
+    """
+
+    resource_name = client.data_policy_path(
+        project=project_id,
+        location=location,
+        data_policy=data_policy_id,
+    )
+
+    request = iam_policy_pb2.GetIamPolicyRequest(resource=resource_name)
+
+    try:
+        policy = client.get_iam_policy(request=request)
+
+        print(f"Successfully retrieved IAM policy for data policy: {resource_name}")
+        print("Policy Version:", policy.version)
+        if policy.bindings:
+            print("Policy Bindings:")
+            for binding in policy.bindings:
+                print(f"  Role: {binding.role}")
+                print(f"  Members: {', '.join(binding.members)}")
+                if binding.condition.expression:
+                    print(f"  Condition: {binding.condition.expression}")
+        else:
+            print("No bindings found in the policy.")
+
+    except exceptions.NotFound:
+        print(f"Error: Data policy '{resource_name}' not found.")
+        print("Make sure the project ID, location, and data policy ID are correct.")
+    except exceptions.GoogleAPIError as e:
+        print(f"An API error occurred: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+```
 
 #### List data policies
 
@@ -504,81 +518,83 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    const {DataPolicyServiceClient} =
-      require('@google-cloud/bigquery-datapolicies').v2;
-    const {status} = require('@grpc/grpc-js');
-    
-    const client = new DataPolicyServiceClient();
-    
-    /**
-     * Lists all data policies in a given project and location.
-     *
-     * Data policies define rules for data masking, row-level security, or column-level security.
-     *
-     * @param {string} projectId The Google Cloud project ID. (for example, 'example-project-id')
-     * @param {string} location The Google Cloud location of the data policies. (For example, 'us')
-     */
-    async function listDataPolicies(projectId, location) {
-      const parent = `projects/${projectId}/locations/${location}`;
-    
-      const request = {
-        parent,
-      };
-    
-      try {
-        console.log(
-          `Listing data policies for project: ${projectId} in location: ${location}`,
-        );
-        const [dataPolicies] = await client.listDataPolicies(request);
-    
-        if (dataPolicies.length === 0) {
+```javascript
+const {DataPolicyServiceClient} =
+  require('@google-cloud/bigquery-datapolicies').v2;
+const {status} = require('@grpc/grpc-js');
+
+const client = new DataPolicyServiceClient();
+
+/**
+ * Lists all data policies in a given project and location.
+ *
+ * Data policies define rules for data masking, row-level security, or column-level security.
+ *
+ * @param {string} projectId The Google Cloud project ID. (for example, 'example-project-id')
+ * @param {string} location The Google Cloud location of the data policies. (For example, 'us')
+ */
+async function listDataPolicies(projectId, location) {
+  const parent = `projects/${projectId}/locations/${location}`;
+
+  const request = {
+    parent,
+  };
+
+  try {
+    console.log(
+      `Listing data policies for project: ${projectId} in location: ${location}`,
+    );
+    const [dataPolicies] = await client.listDataPolicies(request);
+
+    if (dataPolicies.length === 0) {
+      console.log(
+        `No data policies found in location ${location} for project ${projectId}.`,
+      );
+      return;
+    }
+
+    console.log('Data Policies:');
+    for (const dataPolicy of dataPolicies) {
+      console.log(`  Data Policy Name: ${dataPolicy.name}`);
+      console.log(`    ID: ${dataPolicy.dataPolicyId}`);
+      console.log(`    Type: ${dataPolicy.dataPolicyType}`);
+      if (dataPolicy.policyTag) {
+        console.log(`    Policy Tag: ${dataPolicy.policyTag}`);
+      }
+      if (dataPolicy.grantees && dataPolicy.grantees.length > 0) {
+        console.log(`    Grantees: ${dataPolicy.grantees.join(', ')}`);
+      }
+      if (dataPolicy.dataMaskingPolicy) {
+        if (dataPolicy.dataMaskingPolicy.predefinedExpression) {
           console.log(
-            `No data policies found in location ${location} for project ${projectId}.`,
+            `    Data Masking Predefined Expression: ${dataPolicy.dataMaskingPolicy.predefinedExpression}`,
           );
-          return;
-        }
-    
-        console.log('Data Policies:');
-        for (const dataPolicy of dataPolicies) {
-          console.log(`  Data Policy Name: ${dataPolicy.name}`);
-          console.log(`    ID: ${dataPolicy.dataPolicyId}`);
-          console.log(`    Type: ${dataPolicy.dataPolicyType}`);
-          if (dataPolicy.policyTag) {
-            console.log(`    Policy Tag: ${dataPolicy.policyTag}`);
-          }
-          if (dataPolicy.grantees && dataPolicy.grantees.length > 0) {
-            console.log(`    Grantees: ${dataPolicy.grantees.join(', ')}`);
-          }
-          if (dataPolicy.dataMaskingPolicy) {
-            if (dataPolicy.dataMaskingPolicy.predefinedExpression) {
-              console.log(
-                `    Data Masking Predefined Expression: ${dataPolicy.dataMaskingPolicy.predefinedExpression}`,
-              );
-            } else if (dataPolicy.dataMaskingPolicy.routine) {
-              console.log(
-                `    Data Masking Routine: ${dataPolicy.dataMaskingPolicy.routine}`,
-              );
-            }
-          }
-        }
-    
-        console.log(`Successfully listed ${dataPolicies.length} data policies.`);
-      } catch (err) {
-        if (err.code === status.NOT_FOUND) {
-          console.error(
-            `Error: The project or location '${location}' for project '${projectId}' was not found. ` +
-              'Make sure the project ID and location are correct and that the BigQuery Data Policy API is enabled.',
+        } else if (dataPolicy.dataMaskingPolicy.routine) {
+          console.log(
+            `    Data Masking Routine: ${dataPolicy.dataMaskingPolicy.routine}`,
           );
-        } else if (err.code === status.PERMISSION_DENIED) {
-          console.error(
-            `Error: Permission denied when listing data policies for project '${projectId}' in location '${location}'. ` +
-              'Make sure the authenticated account has the necessary permissions (For example, bigquery.datapolicies.list).',
-          );
-        } else {
-          console.error(`Error listing data policies: ${err.message}`);
         }
       }
     }
+
+    console.log(`Successfully listed ${dataPolicies.length} data policies.`);
+  } catch (err) {
+    if (err.code === status.NOT_FOUND) {
+      console.error(
+        `Error: The project or location '${location}' for project '${projectId}' was not found. ` +
+          'Make sure the project ID and location are correct and that the BigQuery Data Policy API is enabled.',
+      );
+    } else if (err.code === status.PERMISSION_DENIED) {
+      console.error(
+        `Error: Permission denied when listing data policies for project '${projectId}' in location '${location}'. ` +
+          'Make sure the authenticated account has the necessary permissions (For example, bigquery.datapolicies.list).',
+      );
+    } else {
+      console.error(`Error listing data policies: ${err.message}`);
+    }
+  }
+}
+```
 
 ### Python
 
@@ -586,53 +602,55 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import google.api_core.exceptions
-    from google.cloud import bigquery_datapolicies_v2
-    
-    client = bigquery_datapolicies_v2.DataPolicyServiceClient()
-    
-    
-    def list_data_policies(project_id: str, location: str) -> None:
-        """Lists all data policies in a specified project.
-    
-        Args:
-            project_id: The Google Cloud project ID.
-            location: The geographic location of the data policies (for example, "us", "us-central1").
-        """
-    
-        parent = f"projects/{project_id}/locations/{location}"
-    
-        try:
-            request = bigquery_datapolicies_v2.ListDataPoliciesRequest(parent=parent)
-    
-            print(
-                f"Listing data policies for project '{project_id}' in location '{location}':"
-            )
-            page_result = client.list_data_policies(request=request)
-    
-            found_policies = False
-            for data_policy in page_result:
-                found_policies = True
-                print(f"  Data Policy Name: {data_policy.name}")
-                print(f"  Data Policy ID: {data_policy.data_policy_id}")
-                print(f"  Data Policy Type: {data_policy.data_policy_type.name}")
-                if data_policy.policy_tag:
-                    print(f"  Policy Tag: {data_policy.policy_tag}")
-                if data_policy.grantees:
-                    print(f"  Grantees: {', '.join(data_policy.grantees)}")
-                print("-" * 20)
-    
-            if not found_policies:
-                print("No data policies found.")
-    
-        except google.api_core.exceptions.NotFound as e:
-            print(f"Error: The specified project or location was not found or accessible.")
-            print(f"Details: {e}")
-            print(
-                "Make sure the project ID and location are correct and you have the necessary permissions."
-            )
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+```python
+import google.api_core.exceptions
+from google.cloud import bigquery_datapolicies_v2
+
+client = bigquery_datapolicies_v2.DataPolicyServiceClient()
+
+
+def list_data_policies(project_id: str, location: str) -> None:
+    """Lists all data policies in a specified project.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The geographic location of the data policies (for example, "us", "us-central1").
+    """
+
+    parent = f"projects/{project_id}/locations/{location}"
+
+    try:
+        request = bigquery_datapolicies_v2.ListDataPoliciesRequest(parent=parent)
+
+        print(
+            f"Listing data policies for project '{project_id}' in location '{location}':"
+        )
+        page_result = client.list_data_policies(request=request)
+
+        found_policies = False
+        for data_policy in page_result:
+            found_policies = True
+            print(f"  Data Policy Name: {data_policy.name}")
+            print(f"  Data Policy ID: {data_policy.data_policy_id}")
+            print(f"  Data Policy Type: {data_policy.data_policy_type.name}")
+            if data_policy.policy_tag:
+                print(f"  Policy Tag: {data_policy.policy_tag}")
+            if data_policy.grantees:
+                print(f"  Grantees: {', '.join(data_policy.grantees)}")
+            print("-" * 20)
+
+        if not found_policies:
+            print("No data policies found.")
+
+    except google.api_core.exceptions.NotFound as e:
+        print(f"Error: The specified project or location was not found or accessible.")
+        print(f"Details: {e}")
+        print(
+            "Make sure the project ID and location are correct and you have the necessary permissions."
+        )
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+```
 
 #### Delete a data policy
 
@@ -644,39 +662,41 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    const {DataPolicyServiceClient} =
-      require('@google-cloud/bigquery-datapolicies').v2;
-    const {status} = require('@grpc/grpc-js');
-    
-    const client = new DataPolicyServiceClient();
-    
-    /**
-     * Deletes a data policy from the BigQuery Data Policy API, which is identified by its project ID, location, and data policy ID.
-     *
-     * @param {string} projectId The Google Cloud project ID.
-     * @param {string} location The Google Cloud location (For example, 'us').
-     * @param {string} dataPolicyId The ID of the data policy to delete (For example, 'example-data-policy').
-     */
-    async function deleteDataPolicy(projectId, location, dataPolicyId) {
-      const name = client.dataPolicyPath(projectId, location, dataPolicyId);
-    
-      const request = {
-        name,
-      };
-    
-      try {
-        await client.deleteDataPolicy(request);
-        console.log(`Successfully deleted data policy: ${name}`);
-      } catch (err) {
-        if (err.code === status.NOT_FOUND) {
-          console.error(
-            `Data policy ${name} not found. Make sure the data policy ID and location are correct.`,
-          );
-        } else {
-          console.error(`Error deleting data policy ${name}:`, err.message);
-        }
-      }
+```javascript
+const {DataPolicyServiceClient} =
+  require('@google-cloud/bigquery-datapolicies').v2;
+const {status} = require('@grpc/grpc-js');
+
+const client = new DataPolicyServiceClient();
+
+/**
+ * Deletes a data policy from the BigQuery Data Policy API, which is identified by its project ID, location, and data policy ID.
+ *
+ * @param {string} projectId The Google Cloud project ID.
+ * @param {string} location The Google Cloud location (For example, 'us').
+ * @param {string} dataPolicyId The ID of the data policy to delete (For example, 'example-data-policy').
+ */
+async function deleteDataPolicy(projectId, location, dataPolicyId) {
+  const name = client.dataPolicyPath(projectId, location, dataPolicyId);
+
+  const request = {
+    name,
+  };
+
+  try {
+    await client.deleteDataPolicy(request);
+    console.log(`Successfully deleted data policy: ${name}`);
+  } catch (err) {
+    if (err.code === status.NOT_FOUND) {
+      console.error(
+        `Data policy ${name} not found. Make sure the data policy ID and location are correct.`,
+      );
+    } else {
+      console.error(`Error deleting data policy ${name}:`, err.message);
     }
+  }
+}
+```
 
 ### Python
 
@@ -684,32 +704,34 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.api_core import exceptions as core_exceptions
-    from google.cloud import bigquery_datapolicies_v2
-    
-    client = bigquery_datapolicies_v2.DataPolicyServiceClient()
-    
-    
-    def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> None:
-        """Deletes a data policy from the BigQuery Data Policy APIs.
-    
-        Args:
-            project_id: The Google Cloud project ID.
-            location: The location of the data policy (for example, "us").
-            data_policy_id: The ID of the data policy to delete.
-        """
-    
-        name = client.data_policy_path(
-            project=project_id, location=location, data_policy=data_policy_id
-        )
-    
-        try:
-            client.delete_data_policy(name=name)
-            print(f"Successfully deleted data policy: {name}")
-        except core_exceptions.NotFound:
-            print(f"Data policy '{name}' not found. It may have already been deleted.")
-        except Exception as e:
-            print(f"Error deleting data policy '{name}': {e}")
+```python
+from google.api_core import exceptions as core_exceptions
+from google.cloud import bigquery_datapolicies_v2
+
+client = bigquery_datapolicies_v2.DataPolicyServiceClient()
+
+
+def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> None:
+    """Deletes a data policy from the BigQuery Data Policy APIs.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The location of the data policy (for example, "us").
+        data_policy_id: The ID of the data policy to delete.
+    """
+
+    name = client.data_policy_path(
+        project=project_id, location=location, data_policy=data_policy_id
+    )
+
+    try:
+        client.delete_data_policy(name=name)
+        print(f"Successfully deleted data policy: {name}")
+    except core_exceptions.NotFound:
+        print(f"Data policy '{name}' not found. It may have already been deleted.")
+    except Exception as e:
+        print(f"Error deleting data policy '{name}': {e}")
+```
 
 ## Work with policy tags
 
@@ -767,7 +789,7 @@ To retrieve the policy tag resource name:
 2.  Find the policy tag whose resource name you want to copy.
 
 3.  Click the **Copy policy tag resource name** icon.
-    
+
     ![Copy resource name.](https://docs.cloud.google.com/static/bigquery/images/policy-tags-ui-copy-resource-name.png)
 
 ### Clear policy tags
@@ -785,35 +807,41 @@ In the **Current schema** page, under **Policy tags** , click **X** .
 > **Note:** To clear a policy tag, you must explicitly set the `names` field of `policyTags` to an empty list, `[]` . If you delete the `policyTags` field, it has no effect on existing policy tags. This is by design, to prevent accidental removal of policy tags that would expose sensitive data.
 
 1.  Retrieve the schema and save it to a local file.
-    
-        bq show --schema --format=prettyjson \
-           project-id:dataset.table > schema.json
-    
+
+    ```
+    bq show --schema --format=prettyjson \
+       project-id:dataset.table > schema.json
+    ```
+
     where:
-    
-      - project-id is your project ID.
-      - dataset is the name of the dataset that contains the table you're updating.
-      - table is the name of the table you're updating.
+
+    - ` project-id ` is your project ID.
+    - ` dataset ` is the name of the dataset that contains the table you're updating.
+    - ` table ` is the name of the table you're updating.
 
 2.  Modify schema.json to clear a policy tag from a column.
-    
-        [
-         ...
-         {
-           "name": "ssn",
-           "type": "STRING",
-           "mode": "REQUIRED",
-           "policyTags": {
-             "names": []
-           }
-         },
-         ...
-        ]
+
+    ```
+    [
+     ...
+     {
+       "name": "ssn",
+       "type": "STRING",
+       "mode": "REQUIRED",
+       "policyTags": {
+         "names": []
+       }
+     },
+     ...
+    ]
+    ```
 
 3.  Update the schema.
-    
-        bq update \
-           project-id:dataset.table schema.json
+
+    ```
+    bq update \
+       project-id:dataset.table schema.json
+    ```
 
 ### API
 
@@ -851,13 +879,15 @@ If a user has dataset access and has the Data Catalog Fine-Grained Reader role, 
 
 If a user has dataset access but does not have the Data Catalog Fine-Grained Reader role, the column data is not available to the user. If such a user runs `SELECT *` , they receive an error which lists the columns that the user cannot access. To resolve the error, you can either:
 
-  - Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
-    
-        SELECT * EXCEPT (ssn) FROM ...
-    
-    In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
+- Modify the query to exclude the columns that the user cannot access. For example, if the user does not have access to the `ssn` column, but does have access to the remaining columns, the user can run the following query:
 
-  - Ask a Data Catalog Administrator to add the user as a Data Catalog Fine-Grained Reader to the relevant data class. The error message provides the full name of the policy tag for which the user would need access.
+  ```
+  SELECT * EXCEPT (ssn) FROM ...
+  ```
+
+  In the preceding example, the `EXCEPT` clause excludes the `ssn` column.
+
+- Ask a Data Catalog Administrator to add the user as a Data Catalog Fine-Grained Reader to the relevant data class. The error message provides the full name of the policy tag for which the user would need access.
 
 ## FAQs
 
@@ -889,9 +919,9 @@ Yes. You cannot copy columns if you don't have access to them.
 
 The following operations verify column-level permissions.
 
-  - `SELECT` queries with destination tables
-  - [Table copy jobs](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table)
-  - [Data extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data) (for example, to Cloud Storage)
+- `SELECT` queries with destination tables
+- [Table copy jobs](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table)
+- [Data extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data) (for example, to Cloud Storage)
 
 ### When I copy data to a new table, are policy tags automatically propagated?
 
@@ -907,9 +937,9 @@ VPC leverages IAM to control access to services, such as BigQuery and Cloud Stor
 
 To enforce VPC for policy tags and data policies for column-level access control and dynamic data masking, you must restrict the following APIs in the perimeter:
 
-  - [Data Catalog API](https://docs.cloud.google.com/data-catalog/docs/reference/rest)
-  - [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest)
-  - [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
+- [Data Catalog API](https://docs.cloud.google.com/data-catalog/docs/reference/rest)
+- [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest)
+- [BigQuery Data Policy API](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest)
 
 ## Troubleshoot
 
@@ -935,18 +965,20 @@ You need either the [Fine-Grained Reader role](https://docs.cloud.google.com/big
 
 To troubleshoot this issue, confirm the following details:
 
-  - On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
+- On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
 
-  - Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
-    
-        bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
+- Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
+
+  ```
+  bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
+  ```
 
 ### Project migration considerations
 
 Policy tags and taxonomies are homed within a specific Google Cloud organization and are not automatically re-associated when a project is migrated to a new organization. If you migrate a project that uses policy tags for column-level access control to a different organization, the following issues will occur:
 
-  - The policy tags will no longer be manageable in the Google Cloud console UI within the migrated project.
-  - You won't be able to apply these policy tags to new columns in the migrated project.
-  - Existing column-level access controls may appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
+- The policy tags will no longer be manageable in the Google Cloud console UI within the migrated project.
+- You won't be able to apply these policy tags to new columns in the migrated project.
+- Existing column-level access controls may appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
 
 Resolving this requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you have migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](https://docs.cloud.google.com/support) .

@@ -11,14 +11,16 @@ GoogleSQL for BigQuery supports the following vector index functions.
 ## Function list
 
 | Name                                                                                                                                         | Summary                                                                                                         |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
 | [`VECTOR_INDEX.STATISTICS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics) | Calculate how much an indexed table's data has drifted between when a vector index was trained and the present. |
 
 ## `VECTOR_INDEX.STATISTICS`
 
-    VECTOR_INDEX.STATISTICS(
-      TABLE table_name
-    )
+```
+VECTOR_INDEX.STATISTICS(
+  TABLE table_name
+)
+```
 
 **Description**
 
@@ -28,9 +30,9 @@ To alter vector indexes, you must have the BigQuery Data Editor ( `roles/bigquer
 
 **Definitions**
 
-  - `table_name` : The name of the table that contains the vector index, in the format `dataset_name.table_name` .
-    
-    If there is no active vector index on the table, the function returns empty results. If there is an active vector index on the table, but the index training isn't complete, the function returns a `NULL` drift score.
+- `table_name` : The name of the table that contains the vector index, in the format `dataset_name.table_name` .
+
+  If there is no active vector index on the table, the function returns empty results. If there is an active vector index on the table, but the index training isn't complete, the function returns a `NULL` drift score.
 
 **Output**
 
@@ -40,4 +42,6 @@ A `FLOAT64` value in the range `[0,1)` . A lower value indicates less drift. Typ
 
 This example returns the drift for the table `mytable` .
 
-    SELECT * FROM VECTOR_INDEX.STATISTICS(TABLE mydataset.mytable);
+```
+SELECT * FROM VECTOR_INDEX.STATISTICS(TABLE mydataset.mytable);
+```

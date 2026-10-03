@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# CAPACITY\_COMMITMENT\_CHANGES view
+# CAPACITY_COMMITMENT_CHANGES view
 
 The `INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES` view contains a near real-time list of all changes to capacity commitments within the administration project. Each row represents a single change to a single capacity commitment. For more information, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
 
@@ -16,11 +16,11 @@ The `INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES` view contains a near real-t
 
 To query the `INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES` view, you need the `bigquery.capacityCommitments.list` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
-  - `roles/bigquery.resourceAdmin`
-  - `roles/bigquery.resourceEditor`
-  - `roles/bigquery.resourceViewer`
-  - `roles/bigquery.user`
-  - `roles/bigquery.admin`
+- `roles/bigquery.resourceAdmin`
+- `roles/bigquery.resourceEditor`
+- `roles/bigquery.resourceViewer`
+- `roles/bigquery.user`
+- `roles/bigquery.admin`
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -29,7 +29,7 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 The `INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES` view has the following schema:
 
 | Column name              | Data type   | Value                                                                                                                                                                                                                                                                |
-| ------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `change_timestamp`       | `TIMESTAMP` | Time when the change occurred.                                                                                                                                                                                                                                       |
 | `project_id`             | `STRING`    | ID of the administration project.                                                                                                                                                                                                                                    |
 | `project_number`         | `INTEGER`   | Number of the administration project.                                                                                                                                                                                                                                |
@@ -56,37 +56,41 @@ This view contains current capacity commitments and the deleted capacity commitm
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                                      | Resource scope | Region scope              |
-| ------------------------------------------------------------------------------------------------------------------------------ | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES[_BY_PROJECT]`` | Project level  | `         REGION        ` |
+| View name                                                                                                          | Resource scope | Region scope |
+|--------------------------------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES[_BY_PROJECT] `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
 The following query displays the user who has made the latest capacity commitment update to the current project within the specified date.
 
-    SELECT
-      user_email,
-      change_timestamp
-    FROM
-      `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES
-    WHERE
-      change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
-    ORDER BY
-      change_timestamp DESC
-    LIMIT 1;
+```
+SELECT
+  user_email,
+  change_timestamp
+FROM
+  `region-us`.INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES
+WHERE
+  change_timestamp BETWEEN '2021-09-30' AND '2021-10-01'
+ORDER BY
+  change_timestamp DESC
+LIMIT 1;
+```
 
 The result is similar to the following:
 
-    +--------------------------------+-------------------------+
-    |           user_email           |     change_timestamp    |
-    +--------------------------------+-------------------------+
-    |     222larabrown@gmail.com     | 2021-09-30 09:30:00 UTC |
-    +--------------------------------+-------------------------+
+```
++--------------------------------+-------------------------+
+|           user_email           |     change_timestamp    |
++--------------------------------+-------------------------+
+|     222larabrown@gmail.com     | 2021-09-30 09:30:00 UTC |
++--------------------------------+-------------------------+
+```

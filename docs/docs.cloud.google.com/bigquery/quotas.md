@@ -10,16 +10,16 @@ data_source: docs.cloud.google.com
 
 This document lists the quotas and system limits that apply to BigQuery.
 
-  - *Quotas* have default values, but you can typically request adjustments.
-  - *System limits* are fixed values that can't be changed.
+- *Quotas* have default values, but you can typically request adjustments.
+- *System limits* are fixed values that can't be changed.
 
 Google Cloud uses quotas to help ensure fairness and reduce spikes in resource use and availability. A quota restricts how much of a Google Cloud resource your Google Cloud project can use. Quotas apply to a range of resource types, including hardware, software, and network components. For example, quotas can restrict the number of API calls to a service, the number of load balancers used concurrently by your project, or the number of projects that you can create. Quotas protect the community of Google Cloud users by preventing the overloading of services. Quotas also help you to manage your own Google Cloud resources.
 
 The Cloud Quotas system does the following:
 
-  - Monitors your consumption of Google Cloud products and services
-  - Restricts your consumption of those resources
-  - Provides a way to [request changes to the quota value](https://docs.cloud.google.com/docs/quotas/help/request_increase) and [automate quota adjustments](https://docs.cloud.google.com/docs/quotas/quota-adjuster)
+- Monitors your consumption of Google Cloud products and services
+- Restricts your consumption of those resources
+- Provides a way to [request changes to the quota value](https://docs.cloud.google.com/docs/quotas/help/request_increase) and [automate quota adjustments](https://docs.cloud.google.com/docs/quotas/quota-adjuster)
 
 In most cases, when you attempt to consume more of a resource than its quota allows, the system blocks access to the resource, and the task that you're trying to perform fails.
 
@@ -68,7 +68,7 @@ Quotas and limits apply to jobs that BigQuery runs on your behalf whether they a
 The following limit applies to pending jobs in BigQuery:
 
 | Limit                          | Default                             | Notes                                                                                                                                                                                                                               |
-| ------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------------|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of pending jobs | 50,000 jobs per project, per region | The concurrent number of jobs that can be in the pending state. This limit cannot be increased. For more information, see [Troubleshooting BigQuery quota errors.](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) |
 
 ### Query jobs
@@ -79,9 +79,9 @@ For troubleshooting information, see the BigQuery [Troubleshooting page](https:/
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -120,7 +120,7 @@ There is no default limit on how many TiB in queries a user can run per day. You
 <tr class="odd">
 <td>BigQuery Omni transferred bytes per job</td>
 <td>60 GB</td>
-<td>The maximum transfer size per job is 60 GB when you run <code dir="ltr" translate="no">CREATE TABLE AS SELECT</code> (CTAS) or <code dir="ltr" translate="no">INSERT INTO SELECT</code> statements in BigQuery Omni regions to <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data">filter data</a> during a cross-cloud transfer. This limit also applies to <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins">BigQuery Omni joins</a> , which runs an Omni CTAS query in the background to transfer data into a temporary table in your BigQuery region. To request an increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_costs">BigQuery Omni join costs</a> .</td>
+<td>The maximum transfer size per job is 60 GB when you run <code>CREATE TABLE AS SELECT</code> (CTAS) or <code>INSERT INTO SELECT</code> statements in BigQuery Omni regions to <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data">filter data</a> during a cross-cloud transfer. This limit also applies to <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins">BigQuery Omni joins</a> , which runs an Omni CTAS query in the background to transfer data into a temporary table in your BigQuery region. To request an increase, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">contact Support</a> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_costs">BigQuery Omni join costs</a> .</td>
 </tr>
 <tr class="even">
 <td>Bytes transferred by global queries per day per region pair</td>
@@ -142,8 +142,8 @@ There is no default limit on how many TiB in queries a user can run per day. You
 <td>5</td>
 <td><p>When you run a DDL statement that changes <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings">global configuration options</a> , you can run up to five statements every 10 seconds. This limit applies to the following DDL statements:</p>
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement"><code dir="ltr" translate="no">ALTER PROJECT SET OPTIONS</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement"><code dir="ltr" translate="no">ALTER ORGANIZATION SET OPTIONS</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement"><code>ALTER PROJECT SET OPTIONS</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement"><code>ALTER ORGANIZATION SET OPTIONS</code></a></li>
 </ul></td>
 </tr>
 </tbody>
@@ -153,9 +153,9 @@ The following limits apply to query jobs created automatically by running intera
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -203,7 +203,7 @@ The following limits apply to query jobs created automatically by running intera
 <tr class="even">
 <td>Daily destination table update limit</td>
 <td>See <a href="https://docs.cloud.google.com/bigquery/quotas#load_job_per_table.long">Maximum number of table operations per day</a> .</td>
-<td>Updates to destination tables in a query job count toward the limit on the maximum number of table operations per day for the destination tables. Destination table updates include append and overwrite operations that are performed by queries that you run by using the Google Cloud console, using the bq command-line tool, or calling the <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query"><code dir="ltr" translate="no">jobs.query</code></a> and query-type <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert"><code dir="ltr" translate="no">jobs.insert</code></a> API methods.</td>
+<td>Updates to destination tables in a query job count toward the limit on the maximum number of table operations per day for the destination tables. Destination table updates include append and overwrite operations that are performed by queries that you run by using the Google Cloud console, using the bq command-line tool, or calling the <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query"><code>jobs.query</code></a> and query-type <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert"><code>jobs.insert</code></a> API methods.</td>
 </tr>
 <tr class="odd">
 <td>Query/multi-statement query execution-time limit</td>
@@ -212,11 +212,11 @@ The following limits apply to query jobs created automatically by running intera
 <p>To check whether a job was retried, you can look for these signals:</p>
 <ul>
 <li><strong>Google Cloud console</strong> : In the <strong>Jobs explorer</strong> , <a href="https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-jobs">compare two jobs</a> . In the <strong>Query level analysis</strong> section, check the <strong>Retry</strong> field on the <strong>Metrics</strong> tab.</li>
-<li><strong><code dir="ltr" translate="no">INFORMATION_SCHEMA</code></strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code dir="ltr" translate="no">INFORMATION_SCHEMA.JOBS</code></a> views, check the <code dir="ltr" translate="no">final_execution_duration_ms</code> column. If the difference between <code dir="ltr" translate="no">start_time</code> and <code dir="ltr" translate="no">end_time</code> is significantly larger than <code dir="ltr" translate="no">final_execution_duration_ms</code> , then the query was retried.</li>
-<li><strong>BigQuery API</strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics"><code dir="ltr" translate="no">JobStatistics</code></a> object, check the <code dir="ltr" translate="no">finalExecutionDurationMs</code> field. If the difference between <code dir="ltr" translate="no">startTime</code> and <code dir="ltr" translate="no">endTime</code> is significantly larger than <code dir="ltr" translate="no">finalExecutionDurationMs</code> , then the query was retried.</li>
+<li><strong><code>INFORMATION_SCHEMA</code></strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code>INFORMATION_SCHEMA.JOBS</code></a> views, check the <code>final_execution_duration_ms</code> column. If the difference between <code>start_time</code> and <code>end_time</code> is significantly larger than <code>final_execution_duration_ms</code> , then the query was retried.</li>
+<li><strong>BigQuery API</strong> : In the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics"><code>JobStatistics</code></a> object, check the <code>finalExecutionDurationMs</code> field. If the difference between <code>startTime</code> and <code>endTime</code> is significantly larger than <code>finalExecutionDurationMs</code> , then the query was retried.</li>
 </ul>
 <p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#execution_duration">Execution duration</a> in the query troubleshooting documentation.</p>
-<p>The <code dir="ltr" translate="no">         CREATE MODEL        </code> job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs, which time out at 48 hours.</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create"><code>CREATE MODEL</code></a> job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs, which time out at 48 hours.</p></td>
 </tr>
 <tr class="even">
 <td>Maximum number of resources referenced per query</td>
@@ -230,17 +230,17 @@ The following limits apply to query jobs created automatically by running intera
 <tr class="odd">
 <td>Maximum SQL query character length</td>
 <td>1,024k characters</td>
-<td>A SQL query can be up to 1,024k characters long. This limit includes comments and whitespace characters. If your query is longer, you receive the following error: <code dir="ltr" translate="no">The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters and breaking a long query into multiple queries in the session.</td>
+<td>A SQL query can be up to 1,024k characters long. This limit includes comments and whitespace characters. If your query is longer, you receive the following error: <code>The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters and breaking a long query into multiple queries in the session.</td>
 </tr>
 <tr class="even">
 <td>Maximum unresolved legacy SQL query length</td>
 <td>256 KB</td>
-<td>An unresolved legacy SQL query can be up to 256 KB long. If your query is longer, you receive the following error: <code dir="ltr" translate="no">The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters.</td>
+<td>An unresolved legacy SQL query can be up to 256 KB long. If your query is longer, you receive the following error: <code>The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters.</td>
 </tr>
 <tr class="odd">
 <td>Maximum unresolved GoogleSQL query length</td>
 <td>1 MB</td>
-<td>An unresolved GoogleSQL query can be up to 1 MB long. If your query is longer, you receive the following error: <code dir="ltr" translate="no">The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters.</td>
+<td>An unresolved GoogleSQL query can be up to 1 MB long. If your query is longer, you receive the following error: <code>The query is too large.</code> To stay within this limit, consider replacing large arrays or lists with query parameters.</td>
 </tr>
 <tr class="even">
 <td>Maximum resolved legacy and GoogleSQL query length</td>
@@ -282,7 +282,7 @@ The following limits apply to query jobs created automatically by running intera
 <tr class="odd">
 <td>Maximum CPU usage per scanned data for on-demand pricing</td>
 <td>256 CPU seconds per MiB scanned</td>
-<td>With on-demand pricing, your query can use up to approximately 256 CPU seconds per MiB of scanned data. If your query is too CPU-intensive for the amount of data being processed, the query fails with a <code dir="ltr" translate="no">billingTierLimitExceeded</code> error. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/error-messages">Error messages</a> .</td>
+<td>With on-demand pricing, your query can use up to approximately 256 CPU seconds per MiB of scanned data. If your query is too CPU-intensive for the amount of data being processed, the query fails with a <code>billingTierLimitExceeded</code> error. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/error-messages">Error messages</a> .</td>
 </tr>
 <tr class="even">
 <td>Multi-statement transaction table mutations</td>
@@ -326,9 +326,9 @@ The following limits apply to jobs that [extract data](https://docs.cloud.google
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -341,12 +341,12 @@ The following limits apply to jobs that [extract data](https://docs.cloud.google
 <tr class="odd">
 <td>Maximum number of extracted bytes per day</td>
 <td>50 TiB</td>
-<td>The 50 TiB per day limit ( <code dir="ltr" translate="no">ExtractBytesPerDay</code> ) is an abuse-prevention limit that applies only to extract jobs using the free shared slot pool. You can extract up to 50 TiB of data per day from a project at no cost using the shared slot pool. You can <a href="https://docs.cloud.google.com/bigquery/docs/exporting-data#view_current_quota_usage">set up a Cloud Monitoring</a> alert policy that provides notification of the number of bytes extracted.<br />
+<td>The 50 TiB per day limit ( <code>ExtractBytesPerDay</code> ) is an abuse-prevention limit that applies only to extract jobs using the free shared slot pool. You can extract up to 50 TiB of data per day from a project at no cost using the shared slot pool. You can <a href="https://docs.cloud.google.com/bigquery/docs/exporting-data#view_current_quota_usage">set up a Cloud Monitoring</a> alert policy that provides notification of the number of bytes extracted.<br />
 <br />
 Extract jobs are exempt from the 50 TiB daily limit and can exceed it if you do one of the following:
 <ul>
-<li>Create a <a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations">slot reservation</a> or use an existing reservation, and then <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">assign</a> your project to the reservation with job type <code dir="ltr" translate="no">PIPELINE</code> . Because extract jobs use dedicated or autoscaled slot capacity instead of the shared pool, they bypass the 50 TiB daily quota. You are billed using <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> . <code dir="ltr" translate="no">EXPORT DATA</code> statements aren't supported for <code dir="ltr" translate="no">PIPELINE</code> reservations.</li>
-<li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement"><code dir="ltr" translate="no">EXPORT DATA</code></a> SQL statement. Because the statement runs as a query job using query capacity rather than the shared extract pool, it is exempt from the extract bytes quota. You are billed using either <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">on-demand</a> or <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> , depending on how your project is configured.</li>
+<li>Create a <a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations">slot reservation</a> or use an existing reservation, and then <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">assign</a> your project to the reservation with job type <code>PIPELINE</code> . Because extract jobs use dedicated or autoscaled slot capacity instead of the shared pool, they bypass the 50 TiB daily quota. You are billed using <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> . <code>EXPORT DATA</code> statements aren't supported for <code>PIPELINE</code> reservations.</li>
+<li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement"><code>EXPORT DATA</code></a> SQL statement. Because the statement runs as a query job using query capacity rather than the shared extract pool, it is exempt from the extract bytes quota. You are billed using either <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">on-demand</a> or <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> , depending on how your project is configured.</li>
 <li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">Storage Read API</a> . Because streaming reads read directly from BigQuery storage, they bypass extract job quotas. You are billed using the price for <a href="https://cloud.google.com/bigquery/pricing#data_extraction_pricing">streaming reads</a> . The expiration time is guaranteed to be at least <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session">6 hours</a> from session creation time.</li>
 </ul></td>
 </tr>
@@ -357,8 +357,8 @@ Extract jobs are exempt from the 50 TiB daily limit and can exceed it if you do 
 <br />
 Extract jobs are exempt from the 100,000 daily jobs limit and can exceed it if you do one of the following:
 <ul>
-<li>Create a <a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations">slot reservation</a> or use an existing reservation, and then <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">assign</a> your project to the reservation with job type <code dir="ltr" translate="no">PIPELINE</code> . Because extract jobs use dedicated or autoscaled capacity instead of the shared pool, they completely bypass the daily extract job limit. You are billed using <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> .</li>
-<li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement"><code dir="ltr" translate="no">EXPORT DATA</code></a> SQL statement. Because the statement runs as a query job, it is exempt from daily extract job limits. You are billed using either <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">on-demand</a> or <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> , depending on how your project is configured.</li>
+<li>Create a <a href="https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations">slot reservation</a> or use an existing reservation, and then <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments">assign</a> your project to the reservation with job type <code>PIPELINE</code> . Because extract jobs use dedicated or autoscaled capacity instead of the shared pool, they completely bypass the daily extract job limit. You are billed using <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> .</li>
+<li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement"><code>EXPORT DATA</code></a> SQL statement. Because the statement runs as a query job, it is exempt from daily extract job limits. You are billed using either <a href="https://cloud.google.com/bigquery/pricing#on_demand_pricing">on-demand</a> or <a href="https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing">capacity-based pricing</a> , depending on how your project is configured.</li>
 <li>Use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">Storage Read API</a> . Because streaming reads read directly from BigQuery storage, they bypass extract job quotas. You are billed using the price for <a href="https://cloud.google.com/bigquery/pricing#data_extraction_pricing">streaming reads</a> . The expiration time is guaranteed to be at least <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session">6 hours</a> from session creation time.</li>
 </ul></td>
 </tr>
@@ -382,7 +382,7 @@ For more information about viewing your current extract job usage, see [View cur
 The following limits apply when you [load data](https://docs.cloud.google.com/bigquery/loading-data-into-bigquery) into BigQuery, using the Google Cloud console, the bq command-line tool, or the load-type [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API method.
 
 | Limit                                                      | Default                        | Notes                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Load jobs per table per day                                | 1,500 jobs                     | Load jobs, including failed load jobs, count toward the limit on the number of table operations per day for the destination table. For information about limits on the number of table operations per day for standard tables and partitioned tables, see [Tables](https://docs.cloud.google.com/bigquery/quotas#table_limits) . |
 | Load jobs per day                                          | 100,000 jobs                   | Your project is replenished with a maximum of 100,000 load jobs quota every 24 hours. Failed load jobs count toward this limit. In some cases, it is possible to run more than 100,000 load jobs in 24 hours if a prior day's quota is not fully used.                                                                           |
 | Maximum columns per table                                  | 10,000 columns                 | A table can have up to 10,000 columns. This includes nested and repeated columns.                                                                                                                                                                                                                                                |
@@ -414,36 +414,36 @@ You can use the following equation to estimate how many load jobs are required b
 
 Where:
 
-  - `Number of transfers` is the number of transfer configurations you enable in your project.
+- `Number of transfers` is the number of transfer configurations you enable in your project.
 
-  - `Number of tables` is the number of tables created by each specific transfer type. The number of tables varies by transfer type:
-    
-      - Campaign Manager transfers create approximately 25 tables.
-      - Google Ads transfers create approximately 60 tables.
-      - Google Ad Manager transfers create approximately 40 tables.
-      - Google Play transfers create approximately 25 tables.
-      - Search Ads 360 transfers create approximately 50 tables.
-      - YouTube transfers create approximately 50 tables.
+- `Number of tables` is the number of tables created by each specific transfer type. The number of tables varies by transfer type:
 
-  - `Schedule frequency` describes how often the transfer runs. Transfer run schedules are provided for each transfer type:
-    
-      - [Campaign Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#connector_overview)
-      - [Google Ads](https://docs.cloud.google.com/bigquery/docs/adwords-transfer#connector_overview)
-      - [Google Ad Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer)
-      - [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer#supported_reports) (beta)
-      - [Google Play](https://docs.cloud.google.com/bigquery/docs/play-transfer)
-      - [Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#connector_overview) (beta)
-      - [YouTube Channel](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer)
-      - [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer)
+  - Campaign Manager transfers create approximately 25 tables.
+  - Google Ads transfers create approximately 60 tables.
+  - Google Ad Manager transfers create approximately 40 tables.
+  - Google Play transfers create approximately 25 tables.
+  - Search Ads 360 transfers create approximately 50 tables.
+  - YouTube transfers create approximately 50 tables.
 
-  - `Refresh window` is the number of days to include in the data transfer. If you enter 1, there is no daily backfill.
+- `Schedule frequency` describes how often the transfer runs. Transfer run schedules are provided for each transfer type:
+
+  - [Campaign Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#connector_overview)
+  - [Google Ads](https://docs.cloud.google.com/bigquery/docs/adwords-transfer#connector_overview)
+  - [Google Ad Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer)
+  - [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer#supported_reports) (beta)
+  - [Google Play](https://docs.cloud.google.com/bigquery/docs/play-transfer)
+  - [Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#connector_overview) (beta)
+  - [YouTube Channel](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer)
+  - [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer)
+
+- `Refresh window` is the number of days to include in the data transfer. If you enter 1, there is no daily backfill.
 
 ### Copy jobs
 
 The following limits apply to BigQuery jobs for [copying tables](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) , including jobs that create a copy, clone, or snapshot of a standard table, table clone, or table snapshot. The limits apply to jobs created by using the Google Cloud console, the bq command-line tool, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) that specifies the [`copy` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.copy) in the job configuration. Copy jobs count toward these limits whether they succeed or fail.
 
 | Limit                                                | Default             | Notes                                                                                                   |
-| ---------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------|---------------------|---------------------------------------------------------------------------------------------------------|
 | Copy jobs per destination table per day              |                     | See [Table operations per day](https://docs.cloud.google.com/bigquery/quotas#load_job_per_table.long) . |
 | Copy jobs per day                                    | 100,000 jobs        | Your project can run up to 100,000 copy jobs per day.                                                   |
 | Cross-region copy jobs per destination table per day | 100 jobs            | Your project can run up to 100 cross-region copy jobs for a destination table per day.                  |
@@ -455,7 +455,7 @@ For information on viewing your current copy job usage, see [Copy jobs - View cu
 The following limits apply to [copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets) :
 
 | Limit                                                                                              | Default       | Notes                                                                                                                                                                                                                                                                                                                                                                                                             |
-| -------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of tables in the source dataset                                                     | 25,000 tables | A source dataset can have up to 25,000 tables.                                                                                                                                                                                                                                                                                                                                                                    |
 | Maximum number of tables that can be copied per run to a destination dataset in the same region    | 20,000 tables | Your project can copy a maximum of 20,000 tables per run to a destination dataset within the same region. If a source dataset contains more than 20,000 tables, the BigQuery Data Transfer Service schedules sequential runs, each copying up to 20,000 tables, until all tables are copied. These runs are separated by a default interval of 24 hours, which users can customize down to a minimum of 12 hours. |
 | Maximum number of tables that can be copied per run to a destination dataset in a different region | 1,000 tables  | Your project can copy a maximum of 1,000 tables per run to a destination dataset in a different region. If a source dataset contains more than 1,000 tables, the BigQuery Data Transfer Service schedules sequential runs, each copying up to 1,000 tables, until all tables are copied. These runs are separated by a default interval of 24 hours, which users can customize down to a minimum of 12 hours.     |
@@ -466,9 +466,9 @@ The following quotas apply to [reservations](https://docs.cloud.google.com/bigqu
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -491,7 +491,7 @@ The following quotas apply to [reservations](https://docs.cloud.google.com/bigqu
 </td>
 </tr>
 <tr class="odd">
-<td>Total number of slots for the <code dir="ltr" translate="no">us-east1</code> region</td>
+<td>Total number of slots for the <code>us-east1</code> region</td>
 <td>4,000 slots</td>
 <td>The maximum number of BigQuery slots that you can purchase in the listed region by using the Google Cloud console.<br />
 </td>
@@ -499,11 +499,11 @@ The following quotas apply to [reservations](https://docs.cloud.google.com/bigqu
 <tr class="even">
 <td>Total number of slots for the following regions:
 <ul>
-<li><code dir="ltr" translate="no">asia-south1</code></li>
-<li><code dir="ltr" translate="no">asia-southeast1</code></li>
-<li><code dir="ltr" translate="no">europe-west2</code></li>
-<li><code dir="ltr" translate="no">us-central1</code></li>
-<li><code dir="ltr" translate="no">us-west1</code></li>
+<li><code>asia-south1</code></li>
+<li><code>asia-southeast1</code></li>
+<li><code>europe-west2</code></li>
+<li><code>us-central1</code></li>
+<li><code>us-west1</code></li>
 </ul></td>
 <td>2,000 slots</td>
 <td>The maximum number of BigQuery slots that you can purchase in each of the listed regions by using the Google Cloud console.<br />
@@ -512,18 +512,18 @@ The following quotas apply to [reservations](https://docs.cloud.google.com/bigqu
 <tr class="odd">
 <td>Total number of slots for the following regions:
 <ul>
-<li><code dir="ltr" translate="no">asia-east1</code></li>
-<li><code dir="ltr" translate="no">asia-northeast1</code></li>
-<li><code dir="ltr" translate="no">asia-northeast3</code></li>
-<li><code dir="ltr" translate="no">asia-southeast2</code></li>
-<li><code dir="ltr" translate="no">australia-southeast1</code></li>
-<li><code dir="ltr" translate="no">europe-north1</code></li>
-<li><code dir="ltr" translate="no">europe-west1</code></li>
-<li><code dir="ltr" translate="no">europe-west3</code></li>
-<li><code dir="ltr" translate="no">europe-west4</code></li>
-<li><code dir="ltr" translate="no">northamerica-northeast1</code></li>
-<li><code dir="ltr" translate="no">us-east4</code></li>
-<li><code dir="ltr" translate="no">southamerica-east1</code></li>
+<li><code>asia-east1</code></li>
+<li><code>asia-northeast1</code></li>
+<li><code>asia-northeast3</code></li>
+<li><code>asia-southeast2</code></li>
+<li><code>australia-southeast1</code></li>
+<li><code>europe-north1</code></li>
+<li><code>europe-west1</code></li>
+<li><code>europe-west3</code></li>
+<li><code>europe-west4</code></li>
+<li><code>northamerica-northeast1</code></li>
+<li><code>us-east4</code></li>
+<li><code>southamerica-east1</code></li>
 </ul></td>
 <td>1,000 slots</td>
 <td>The maximum number of BigQuery slots you can purchase in each of the listed regions by using the Google Cloud console.<br />
@@ -547,7 +547,7 @@ The following quotas apply to [reservations](https://docs.cloud.google.com/bigqu
 The following limits apply to [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) :
 
 | Limit                                                                                                                                                 | Value                        | Notes                                                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Number of [administration projects](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) for slot reservations | 10 projects per organization | The maximum number of projects within an organization that can contain a reservation or an active commitment for slots for a given location / region.     |
 | Maximum number of [standard](https://docs.cloud.google.com/bigquery/docs/editions-intro) edition reservations                                         | 10 reservations per project  | The maximum number of standard edition reservations per administration project within an organization for a given location / region.                      |
 | Maximum number of [Enterprise or Enterprise Plus](https://docs.cloud.google.com/bigquery/docs/editions-intro) edition reservations                    | 200 reservations per project | The maximum number of Enterprise or Enterprise Plus edition reservations per administration project within an organization for a given location / region. |
@@ -559,9 +559,9 @@ The following limits apply to BigQuery [datasets](https://docs.cloud.google.com/
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -596,18 +596,18 @@ The following limits apply to BigQuery [datasets](https://docs.cloud.google.com/
 <li>BigQuery client libraries</li>
 <li>The following API methods:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/insert"><code dir="ltr" translate="no">datasets.insert</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/patch"><code dir="ltr" translate="no">datasets.patch</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update"><code dir="ltr" translate="no">datasets.update</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/delete"><code dir="ltr" translate="no">datasets.delete</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete"><code dir="ltr" translate="no">datasets.undelete</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/insert"><code>datasets.insert</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/patch"><code>datasets.patch</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update"><code>datasets.update</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/delete"><code>datasets.delete</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/undelete"><code>datasets.undelete</code></a></li>
 </ul></li>
 <li>The following DDL statements:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement"><code dir="ltr" translate="no">CREATE SCHEMA</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement"><code dir="ltr" translate="no">ALTER SCHEMA</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement"><code dir="ltr" translate="no">DROP SCHEMA</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement"><code dir="ltr" translate="no">UNDROP SCHEMA</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement"><code>CREATE SCHEMA</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement"><code>ALTER SCHEMA</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement"><code>DROP SCHEMA</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement"><code>UNDROP SCHEMA</code></a></li>
 </ul></li>
 </ul></td>
 </tr>
@@ -628,7 +628,7 @@ The following limits apply to all BigQuery tables.
 > **Note:** Quotas and limits are associated with table names. Therefore, when you truncate the table, or drop the table and then recreate it, the quota/limit doesn't reset, because the table name hasn't changed.
 
 | Limit                                  | Default           | Notes                                                                                                                                                                                                                        |
-| -------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum length of a column name        | 300 characters    | Your column name can be at most 300 characters.                                                                                                                                                                              |
 | Maximum length of a column description | 1,024 characters  | When you add a description to a column, the text can be at most 1,024 characters.                                                                                                                                            |
 | Maximum depth of nested records        | 15 levels         | Columns of type `RECORD` can contain nested `RECORD` types, also called *child* records. The maximum nested depth limit is 15 levels. This limit is independent of whether the records are scalar or array-based (repeated). |
@@ -642,9 +642,9 @@ The following limits apply to BigQuery standard (built-in) [tables](https://docs
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -671,14 +671,14 @@ The following limits apply to BigQuery standard (built-in) [tables](https://docs
 <li>BigQuery client libraries</li>
 <li>The following API methods:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert"><code dir="ltr" translate="no">tables.insert</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/patch"><code dir="ltr" translate="no">tables.patch</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/update"><code dir="ltr" translate="no">tables.update</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert"><code>tables.insert</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/patch"><code>tables.patch</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/update"><code>tables.update</code></a></li>
 </ul></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL</a> statements on tables</li>
 </ul>
-This limit also includes the combined total of all load jobs, copy jobs, and query jobs that append to or overwrite a destination table or that use a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax">DML</a> <code dir="ltr" translate="no">DELETE</code> , <code dir="ltr" translate="no">INSERT</code> , <code dir="ltr" translate="no">MERGE</code> , <code dir="ltr" translate="no">TRUNCATE TABLE</code> , or <code dir="ltr" translate="no">UPDATE</code> statements to write data to a table. Note that while DML statements count toward this limit, they are not subject to it if it is reached. DML operations have <a href="https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements">dedicated rate limits</a> .
-<p>If you exceed this limit, you get an error message like <code dir="ltr" translate="no">Exceeded rate limits: too many table update operations for this table</code> . This error is transient; you can retry with an exponential backoff.</p>
+This limit also includes the combined total of all load jobs, copy jobs, and query jobs that append to or overwrite a destination table or that use a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax">DML</a> <code>DELETE</code> , <code>INSERT</code> , <code>MERGE</code> , <code>TRUNCATE TABLE</code> , or <code>UPDATE</code> statements to write data to a table. Note that while DML statements count toward this limit, they are not subject to it if it is reached. DML operations have <a href="https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements">dedicated rate limits</a> .
+<p>If you exceed this limit, you get an error message like <code>Exceeded rate limits: too many table update operations for this table</code> . This error is transient; you can retry with an exponential backoff.</p>
 <p>To identify the operations that count toward this limit, you can <a href="https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#bigqueryauditmetadata_format">Inspect your logs</a> . Refer to <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-update-table-metadata-limit">Troubleshoot quota errors</a> for guidance on diagnosing and resolving this error.</p></td>
 </tr>
 <tr class="odd">
@@ -694,7 +694,7 @@ This limit also includes the combined total of all load jobs, copy jobs, and que
 The following limits apply to BigQuery tables with data stored on Cloud Storage in Parquet, ORC, Avro, CSV, or JSON format:
 
 | Limit                                                           | Default                         | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| --------------------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of source URIs per external table                | 10,000 URIs                     | Each external table can have up to 10,000 source URIs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Maximum number of files per external table                      | 10,000,000 files                | An external table can have up to 10 million files, including all files matching all wildcard URIs.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Maximum size of stored data on Cloud Storage per external table | 600 TB                          | An external table can have up to 600 terabytes across all input files. This limit applies to the file sizes as stored on Cloud Storage; this size is not the same as the size used in the query [pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) formula. For [externally partitioned](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) tables, the limit is applied after [partition pruning](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#partition_pruning) . |
@@ -716,9 +716,9 @@ For information about strategies to stay within the limits for partitioned table
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -762,14 +762,14 @@ For information about strategies to stay within the limits for partitioned table
 <li>BigQuery client libraries</li>
 <li>The following API methods:
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert"><code dir="ltr" translate="no">tables.insert</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/patch"><code dir="ltr" translate="no">tables.patch</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/update"><code dir="ltr" translate="no">tables.update</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert"><code>tables.insert</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/patch"><code>tables.patch</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/update"><code>tables.update</code></a></li>
 </ul></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL</a> statements on tables</li>
 </ul>
-This limit also includes the combined total of all load jobs, copy jobs, and query jobs that append to or overwrite a destination table or that use a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax">DML</a> <code dir="ltr" translate="no">DELETE</code> , <code dir="ltr" translate="no">INSERT</code> , <code dir="ltr" translate="no">MERGE</code> , <code dir="ltr" translate="no">TRUNCATE TABLE</code> , or <code dir="ltr" translate="no">UPDATE</code> statements to write data to a table.
-<p>If you exceed this limit, you get an error message like <code dir="ltr" translate="no">Exceeded rate limits: too many partitioned table update operations for this table</code> . This error is transient; you can retry with an exponential backoff.</p>
+This limit also includes the combined total of all load jobs, copy jobs, and query jobs that append to or overwrite a destination table or that use a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax">DML</a> <code>DELETE</code> , <code>INSERT</code> , <code>MERGE</code> , <code>TRUNCATE TABLE</code> , or <code>UPDATE</code> statements to write data to a table.
+<p>If you exceed this limit, you get an error message like <code>Exceeded rate limits: too many partitioned table update operations for this table</code> . This error is transient; you can retry with an exponential backoff.</p>
 <p>To identify the operations that count toward this limit, you can <a href="https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#bigqueryauditmetadata_format">Inspect your logs</a> .</p></td>
 </tr>
 <tr class="even">
@@ -785,7 +785,7 @@ This limit also includes the combined total of all load jobs, copy jobs, and que
 The following limits apply to BigQuery [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) :
 
 | Limit                                                   | Default                         | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of clones and snapshots in a chain       | 3 table clones or snapshots     | Clones and snapshots in combination are limited to a depth of 3. When you clone or snapshot a base table, you can clone or snapshot the result only two more times; attempting to clone or snapshot the result a third time results in an error. For example, you can create clone A of the base table, create snapshot B of clone A, and create clone C of snapshot B. To make additional duplicates of the third-level clone or snapshot, use a [copy operation](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) instead. |
 | Maximum number of clones and snapshots for a base table | 1,000 table clones or snapshots | You can have no more than 1,000 existing clones and snapshots combined of a given base table. For example, if you have 600 snapshots and 400 clones, you reach the limit.                                                                                                                                                                                                                                                                                                                                                                           |
 
@@ -794,7 +794,7 @@ The following limits apply to BigQuery [table clones](https://docs.cloud.google.
 The following limits apply to BigQuery [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) :
 
 | Limit                                                                 | Default                         | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of concurrent table snapshot jobs                      | 100 jobs                        | Your project can run up to 100 concurrent table snapshot jobs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Maximum number of table snapshot jobs per day                         | 50,000 jobs                     | Your project can run up to 50,000 table snapshot jobs per day.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Maximum number of table snapshot jobs per table per day               | 50 jobs                         | Your project can run up to 50 table snapshot jobs per table per day.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -811,7 +811,7 @@ The following quotas and limits apply to [views](https://docs.cloud.google.com/b
 The following limits apply to BigQuery standard [views](https://docs.cloud.google.com/bigquery/docs/views-intro) :
 
 | Limit                                                     | Default           | Notes                                                                                                                                                                                                      |
-| --------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of nested view levels                      | 16 levels         | BigQuery supports up to 16 levels of nested views. Creating views up to this limit is possible, but querying is limited to 15 levels. If the limit is exceeded, BigQuery returns an `INVALID_INPUT` error. |
 | Maximum length of a GoogleSQL query used to define a view | 256 K characters  | A single GoogleSQL query that defines a view can be up to 256 K characters long. This limit applies to a single query and does not include the length of the views referenced in the query.                |
 | Maximum number of authorized views per dataset            |                   | See [Datasets](https://docs.cloud.google.com/bigquery/quotas#auth_views_in_dataset_acl) .                                                                                                                  |
@@ -822,7 +822,7 @@ The following limits apply to BigQuery standard [views](https://docs.cloud.googl
 The following limits apply to BigQuery [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) :
 
 | Limit                                              | Default                | Notes                                                                                                                                                 |
-| -------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------------------------------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Base table references (same project)               | 100 materialized views | Each base table can be referenced by up to 100 materialized views from the same project.                                                              |
 | Base table references (entire organization)        | 500 materialized views | Each base table can be referenced by up to 500 materialized views from the entire organization.                                                       |
 | Maximum number of authorized views per dataset     |                        | See [Datasets](https://docs.cloud.google.com/bigquery/quotas#auth_views_in_dataset_acl) .                                                             |
@@ -834,7 +834,7 @@ The following limits apply to BigQuery [materialized views](https://docs.cloud.g
 The following limits apply to BigQuery [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) :
 
 | Limit                                                                                                                  | Default                                             | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Number of `CREATE INDEX` or `ALTER INDEX` DDL statements per project per region per day                                | 500 operations                                      | Your project can issue up to 500 `CREATE INDEX` or `ALTER INDEX` DDL operations every day within a region.                                                                                                                                                                                                                                                                                                                                  |
 | Number of search index DDL statements per table per day                                                                | 20 operations                                       | Your project can issue up to 20 `CREATE INDEX` , `ALTER INDEX` , or `DROP INDEX` DDL operations per table per day.                                                                                                                                                                                                                                                                                                                          |
 | Maximum total size of table data per organization allowed for search index creation that does not run in a reservation | 100 TB in multi-regions; 20 TB in all other regions | You can create a search index for a table if the overall size of tables with indexes in your organization is below your region's limit: 100 TB for the `US` and `EU` multi-regions, and 20 TB for all other regions. If your index-management jobs run in [your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) , then this limit doesn't apply.                                        |
@@ -844,69 +844,17 @@ The following limits apply to BigQuery [search indexes](https://docs.cloud.googl
 
 The following limits apply to BigQuery [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) :
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Limit</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Base table minimum number of rows</td>
-<td>5,000 rows</td>
-<td>A table must have at least 5,000 rows to create a vector index.</td>
-</tr>
-<tr class="even">
-<td>Base table maximum number of rows for index type <code dir="ltr" translate="no">IVF</code></td>
-<td>10,000,000,000 rows</td>
-<td>A table can have at most 10,000,000,000 rows to create an <code dir="ltr" translate="no">IVF</code> vector index</td>
-</tr>
-<tr class="odd">
-<td>Base table maximum number of rows for index type <code dir="ltr" translate="no">TREE_AH</code></td>
-<td>200,000,000 rows</td>
-<td>A table can have at most 200,000,000 rows to create an <code dir="ltr" translate="no">TREE_AH</code> vector index</td>
-</tr>
-<tr class="even">
-<td>Base table maximum number of rows for partitioned index type <code dir="ltr" translate="no">TREE_AH</code></td>
-<td>10,000,000,000 rows in total<br />
-<br />
-200,000,000 rows for each partition</td>
-<td>A table can have at most 10,000,000,000 rows, and each partition can have at most 200,000,000 rows to create a <code dir="ltr" translate="no">TREE_AH</code> partitioned vector index.</td>
-</tr>
-<tr class="odd">
-<td>Maximum size of the array in the indexed column</td>
-<td>4,096 elements</td>
-<td>The column to index can have at most 4,096 elements in the array.</td>
-</tr>
-<tr class="even">
-<td>Minimum table size for vector index population</td>
-<td>10 MB</td>
-<td>If you create a vector index on a table that is under 10 MB, then the index is not populated. Similarly, if you delete data from a vector-indexed table such that the table size is under 10 MB, then the vector index is temporarily disabled. This happens regardless of whether you use your own reservation for your index-management jobs. Once a vector-indexed table's size again exceeds 10 MB, its index is populated automatically.</td>
-</tr>
-<tr class="odd">
-<td>Number of <code dir="ltr" translate="no">CREATE VECTOR INDEX</code> DDL statements per project per region per day</td>
-<td>500 operations</td>
-<td>For each project, you can issue up to 500 <code dir="ltr" translate="no">CREATE VECTOR INDEX</code> operations per day for each region.</td>
-</tr>
-<tr class="even">
-<td>Number of vector index DDL statements per table per day</td>
-<td>10 operations</td>
-<td>You can issue up to 10 <code dir="ltr" translate="no">CREATE VECTOR INDEX</code> or <code dir="ltr" translate="no">DROP VECTOR INDEX</code> operations per table per day.</td>
-</tr>
-<tr class="odd">
-<td>Maximum total size of table data per organization allowed for vector index creation that does not run in a reservation</td>
-<td>6 TB</td>
-<td>You can create a vector index for a table if the total size of tables with indexes in your organization is under 6 TB. If your index-management jobs run in <a href="https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation">your own reservation</a> , then this limit doesn't apply.</td>
-</tr>
-</tbody>
-</table>
+| Limit                                                                                                                  | Default                                                          | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Base table minimum number of rows                                                                                      | 5,000 rows                                                       | A table must have at least 5,000 rows to create a vector index.                                                                                                                                                                                                                                                                                                                                                                               |
+| Base table maximum number of rows for index type `IVF`                                                                 | 10,000,000,000 rows                                              | A table can have at most 10,000,000,000 rows to create an `IVF` vector index                                                                                                                                                                                                                                                                                                                                                                  |
+| Base table maximum number of rows for index type `TREE_AH`                                                             | 200,000,000 rows                                                 | A table can have at most 200,000,000 rows to create an `TREE_AH` vector index                                                                                                                                                                                                                                                                                                                                                                 |
+| Base table maximum number of rows for partitioned index type `TREE_AH`                                                 | 10,000,000,000 rows in total 200,000,000 rows for each partition | A table can have at most 10,000,000,000 rows, and each partition can have at most 200,000,000 rows to create a `TREE_AH` partitioned vector index.                                                                                                                                                                                                                                                                                            |
+| Maximum size of the array in the indexed column                                                                        | 4,096 elements                                                   | The column to index can have at most 4,096 elements in the array.                                                                                                                                                                                                                                                                                                                                                                             |
+| Minimum table size for vector index population                                                                         | 10 MB                                                            | If you create a vector index on a table that is under 10 MB, then the index is not populated. Similarly, if you delete data from a vector-indexed table such that the table size is under 10 MB, then the vector index is temporarily disabled. This happens regardless of whether you use your own reservation for your index-management jobs. Once a vector-indexed table's size again exceeds 10 MB, its index is populated automatically. |
+| Number of `CREATE VECTOR INDEX` DDL statements per project per region per day                                          | 500 operations                                                   | For each project, you can issue up to 500 `CREATE VECTOR INDEX` operations per day for each region.                                                                                                                                                                                                                                                                                                                                           |
+| Number of vector index DDL statements per table per day                                                                | 10 operations                                                    | You can issue up to 10 `CREATE VECTOR INDEX` or `DROP VECTOR INDEX` operations per table per day.                                                                                                                                                                                                                                                                                                                                             |
+| Maximum total size of table data per organization allowed for vector index creation that does not run in a reservation | 6 TB                                                             | You can create a vector index for a table if the total size of tables with indexes in your organization is under 6 TB. If your index-management jobs run in [your own reservation](https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation) , then this limit doesn't apply.                                                                                                                                        |
 
 ## Routines
 
@@ -919,7 +867,7 @@ The following limits apply to both temporary and persistent [user-defined functi
 > **Note:** UDFs and the tables they reference count toward the limit on the [number of resources referenced in a query](https://docs.cloud.google.com/bigquery/quotas#tables_referenced_per_query) .
 
 | Limit                                                      | Default      | Notes                                                                                                                                                                                                                                                                       |
-| ---------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum output per row                                     | 5 MB         | The maximum amount of data that your JavaScript UDF can output when processing a single row is approximately 5 MB.                                                                                                                                                          |
 | Maximum concurrent legacy SQL queries with Javascript UDFs | 6 queries    | Your project can have up to six concurrent legacy SQL queries that contain UDFs in JavaScript. This limit includes both interactive and [batch](https://docs.cloud.google.com/bigquery/docs/running-queries#batch) queries. This limit does not apply to GoogleSQL queries. |
 | Maximum JavaScript UDF resources per query                 | 50 resources | A query job can have up to 50 JavaScript UDF resources, such as inline code blobs or external files.                                                                                                                                                                        |
@@ -929,7 +877,7 @@ The following limits apply to both temporary and persistent [user-defined functi
 The following limits apply to persistent UDFs:
 
 | Limit                                                                   | Default          | Notes                                                                                                 |
-| ----------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------------|------------------|-------------------------------------------------------------------------------------------------------|
 | Maximum length of a UDF name                                            | 256 characters   | A UDF name can be up to 256 characters long.                                                          |
 | Maximum number of arguments                                             | 256 arguments    | A UDF can have up to 256 arguments.                                                                   |
 | Maximum length of an argument name                                      | 128 characters   | A UDF argument name can be up to 128 characters long.                                                 |
@@ -951,7 +899,7 @@ The following limits apply to [remote functions](https://docs.cloud.google.com/b
 For troubleshooting information, see [Maximum number of concurrent queries that contain remote functions](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-number-of-concurrent-remote-functions) .
 
 | Limit                                                                 | Default    | Notes                                                                                                                                                                                                                                                                                                                             |
-| --------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of concurrent queries that contain remote functions    | 10 queries | You can run up to ten concurrent queries with [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) per project.                                                                                                                                                                                       |
 | Maximum input size                                                    | 5 MB       | The maximum total size of all input arguments from a single row is 5 MB.                                                                                                                                                                                                                                                          |
 | HTTP response size limit (Cloud Run functions 1st gen)                | 10 MB      | HTTP response body from your Cloud Run function 1st gen is up to 10 MB. Exceeding this value causes query failures.                                                                                                                                                                                                               |
@@ -965,7 +913,7 @@ For troubleshooting information, see [Maximum number of concurrent queries that 
 The following limits apply to BigQuery [table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) :
 
 | Limit                                                                                    | Default        | Notes                                                                                                                                                        |
-| ---------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|------------------------------------------------------------------------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum length of a table function name                                                  | 256 characters | The name of a table function can be up to 256 characters in length.                                                                                          |
 | Maximum length of an argument name                                                       | 128 characters | The name of a table function argument can be up to 128 characters in length.                                                                                 |
 | Maximum number of arguments                                                              | 256 arguments  | A table function can have up to 256 arguments.                                                                                                               |
@@ -982,9 +930,9 @@ The following limits apply for [BigQuery stored procedures for Apache Spark](htt
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1005,12 +953,12 @@ The following limits apply for [BigQuery stored procedures for Apache Spark](htt
 <td>You can use up to 12,000 CPUs for each project. Queries that have already been processed don't consume this limit.
 <p>You can use up to 2,400 CPUs for each location for each project, except in the following locations:</p>
 <ul>
-<li><code dir="ltr" translate="no">asia-south2</code></li>
-<li><code dir="ltr" translate="no">australia-southeast2</code></li>
-<li><code dir="ltr" translate="no">europe-central2</code></li>
-<li><code dir="ltr" translate="no">europe-west8</code></li>
-<li><code dir="ltr" translate="no">northamerica-northeast2</code></li>
-<li><code dir="ltr" translate="no">southamerica-west1</code></li>
+<li><code>asia-south2</code></li>
+<li><code>australia-southeast2</code></li>
+<li><code>europe-central2</code></li>
+<li><code>europe-west8</code></li>
+<li><code>northamerica-northeast2</code></li>
+<li><code>southamerica-west1</code></li>
 </ul>
 <p>In these locations, you can use up to 500 CPUs for each location for each project.</p>
 <p>If you run concurrent queries in a multi-region location and a single region location that is in the same geographic area, then your queries might consume the same concurrent CPU quota.</p></td>
@@ -1028,40 +976,17 @@ The following limits apply for [BigQuery stored procedures for Apache Spark](htt
 
 All [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quotas) and [Colab Enterprise quotas and limits](https://docs.cloud.google.com/colab/docs/quotas) apply to [notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . The following limits also apply:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Limit</strong></th>
-<th><strong>Default</strong></th>
-<th><strong>Notes</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Maximum notebook size</td>
-<td>20 MB</td>
-<td><p>A notebook's size is the total of its content, metadata, and encoding overhead.</p>
-<p>You can view the size of notebook content by expanding the notebook header, clicking <strong>View</strong> , and then clicking <strong>Notebook info</strong> .</p></td>
-</tr>
-<tr class="even">
-<td>Maximum number of requests per second to Dataform</td>
-<td>100</td>
-<td>Notebooks are created and managed through Dataform. Any action that creates or modifies a notebook counts against this quota. This quota is shared with saved queries. For example, if you make 50 changes to notebooks and 50 changes to saved queries within 1 second, you reach the quota.</td>
-</tr>
-</tbody>
-</table>
+| **Limit**                                         | **Default** | **Notes**                                                                                                                                                                                                                                                                                     |
+|---------------------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Maximum notebook size                             | 20 MB       | A notebook's size is the total of its content, metadata, and encoding overhead. You can view the size of notebook content by expanding the notebook header, clicking **View** , and then clicking **Notebook info** .                                                                         |
+| Maximum number of requests per second to Dataform | 100         | Notebooks are created and managed through Dataform. Any action that creates or modifies a notebook counts against this quota. This quota is shared with saved queries. For example, if you make 50 changes to notebooks and 50 changes to saved queries within 1 second, you reach the quota. |
 
 ## Saved queries
 
 All [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quotas) apply to [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) . The following limits also apply:
 
 | **Limit**                                         | **Default** | **Notes**                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|---------------------------------------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum saved query size                          | 10 MB       |                                                                                                                                                                                                                                                                                                  |
 | Maximum number of requests per second to Dataform | 100         | Saved queries are created and managed through Dataform. Any action that creates or modifies a saved query counts against this quota. This quota is shared with notebooks. For example, if you make 50 changes to notebooks and 50 changes to saved queries within 1 second, you reach the quota. |
 
@@ -1069,58 +994,14 @@ All [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quo
 
 The following limits apply for BigQuery [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language) statements:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Limit</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>DML statements per day</td>
-<td>Unlimited</td>
-<td>The number of DML statements your project can run per day is unlimited.<br />
-<br />
-DML statements <em>do not</em> count toward the number of <a href="https://docs.cloud.google.com/bigquery/quotas#load_job_per_table.long">table modifications per day</a> or the number of <a href="https://docs.cloud.google.com/bigquery/quotas#load_job_per_partitioned_table.long">partitioned table modifications per day</a> for partitioned tables.<br />
-<br />
-DML statements have the following <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language#dml-limitations">limitations</a> to be aware of.</td>
-</tr>
-<tr class="even">
-<td>Concurrent <code dir="ltr" translate="no">INSERT</code> DML statements per table per day</td>
-<td>1,500 statements</td>
-<td>The first 1,500 <code dir="ltr" translate="no">INSERT</code> statements run immediately after they are submitted. After this limit is reached, the concurrency of <code dir="ltr" translate="no">INSERT</code> statements that write to a table is limited to 10. Additional <code dir="ltr" translate="no">INSERT</code> statements are added to a <code dir="ltr" translate="no">PENDING</code> queue. Up to 100 <code dir="ltr" translate="no">INSERT</code> statements can be queued against a table at any given time. When an <code dir="ltr" translate="no">INSERT</code> statement completes, the next <code dir="ltr" translate="no">INSERT</code> statement is removed from the queue and run.<br />
-<br />
-If you must run DML <code dir="ltr" translate="no">INSERT</code> statements more frequently, consider streaming data to your table using the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API (gRPC)</a> .</td>
-</tr>
-<tr class="odd">
-<td>Concurrent mutating DML statements per table</td>
-<td>2 statements</td>
-<td>BigQuery runs up to two concurrent mutating DML statements ( <code dir="ltr" translate="no">UPDATE</code> , <code dir="ltr" translate="no">DELETE</code> , and <code dir="ltr" translate="no">MERGE</code> ) for each table. Additional mutating DML statements for a table are queued.</td>
-</tr>
-<tr class="even">
-<td>Queued mutating DML statements per table</td>
-<td>20 statements</td>
-<td>A table can have up to 20 mutating DML statements in the queue waiting to run. If you submit additional mutating DML statements for the table, then those statements fail.</td>
-</tr>
-<tr class="odd">
-<td>Maximum time in queue for DML statement</td>
-<td>7 hours</td>
-<td>An interactive priority DML statement can wait in the queue for up to seven hours. If the statement has not run after seven hours, it fails.</td>
-</tr>
-<tr class="even">
-<td>Maximum rate of DML statements for each table</td>
-<td>25 statements every 10 seconds</td>
-<td>Your project can run up to 25 DML statements every 10 seconds for each table. Both <code dir="ltr" translate="no">INSERT</code> and mutating DML statements contribute to this limit.</td>
-</tr>
-</tbody>
-</table>
+| Limit                                                | Default                        | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|------------------------------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| DML statements per day                               | Unlimited                      | The number of DML statements your project can run per day is unlimited. DML statements *do not* count toward the number of [table modifications per day](https://docs.cloud.google.com/bigquery/quotas#load_job_per_table.long) or the number of [partitioned table modifications per day](https://docs.cloud.google.com/bigquery/quotas#load_job_per_partitioned_table.long) for partitioned tables. DML statements have the following [limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language#dml-limitations) to be aware of.                                                      |
+| Concurrent `INSERT` DML statements per table per day | 1,500 statements               | The first 1,500 `INSERT` statements run immediately after they are submitted. After this limit is reached, the concurrency of `INSERT` statements that write to a table is limited to 10. Additional `INSERT` statements are added to a `PENDING` queue. Up to 100 `INSERT` statements can be queued against a table at any given time. When an `INSERT` statement completes, the next `INSERT` statement is removed from the queue and run. If you must run DML `INSERT` statements more frequently, consider streaming data to your table using the [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . |
+| Concurrent mutating DML statements per table         | 2 statements                   | BigQuery runs up to two concurrent mutating DML statements ( `UPDATE` , `DELETE` , and `MERGE` ) for each table. Additional mutating DML statements for a table are queued.                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Queued mutating DML statements per table             | 20 statements                  | A table can have up to 20 mutating DML statements in the queue waiting to run. If you submit additional mutating DML statements for the table, then those statements fail.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Maximum time in queue for DML statement              | 7 hours                        | An interactive priority DML statement can wait in the queue for up to seven hours. If the statement has not run after seven hours, it fails.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Maximum rate of DML statements for each table        | 25 statements every 10 seconds | Your project can run up to 25 DML statements every 10 seconds for each table. Both `INSERT` and mutating DML statements contribute to this limit.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 For more information about mutating DML statements, see [`INSERT` DML concurrency](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language#insert_dml_concurrency) and [`UPDATE, DELETE, MERGE` DML concurrency](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language#update_delete_merge_dml_concurrency) .
 
@@ -1129,7 +1010,7 @@ For more information about mutating DML statements, see [`INSERT` DML concurrenc
 The following limits apply to [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) in BigQuery.
 
 | Limit                                                | Default                       | Notes                                                                                                                                        |
-| ---------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of concurrent multi-statement queries | 1,000 multi-statement queries | Your project can run up to 1,000 concurrent [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) . |
 | Cumulative time limit                                | 24 hours                      | The cumulative time limit for a multi-statement query is 24 hours.                                                                           |
 | Statement time limit                                 | 6 hours                       | The time limit for an individual statement within a multi-statement query is 6 hours.                                                        |
@@ -1139,7 +1020,7 @@ The following limits apply to [multi-statement queries](https://docs.cloud.googl
 The following limits apply to [recursive common table expressions (CTEs)](https://docs.cloud.google.com/bigquery/docs/recursive-ctes) in BigQuery.
 
 | Limit           | Default        | Notes                                                                                                                                                                                                                                                                                  |
-| --------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Iteration limit | 500 iterations | The recursive CTE can execute this number of iterations. If this limit is exceeded, an error is produced. To work around iteration limits, see [Troubleshoot iteration limit errors](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/recursive-ctes#troubleshoot) . |
 
 ## Row-level security
@@ -1147,7 +1028,7 @@ The following limits apply to [recursive common table expressions (CTEs)](https:
 The following limits apply for BigQuery [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) :
 
 | **Limit**                                                                    | **Default**   | **Notes**                                                                                                       |
-| ---------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------|
 | Maximum number of row-access policies per table                              | 400 policies  | A table can have up to 400 row-access policies.                                                                 |
 | Maximum number of row-access policies per query                              | 6000 policies | A query can access up to a total of 6000 row-access policies.                                                   |
 | Maximum number of `CREATE` / `DROP` DDL statements per policy per 10 seconds | 5 statements  | Your project can make up to five `CREATE` or `DROP` statements per row-access policy resource every 10 seconds. |
@@ -1158,7 +1039,7 @@ The following limits apply for BigQuery [row-level access policies](https://docs
 The following limits apply for [column-level dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) :
 
 | Limit                                           | Default                   | Notes                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum number of data policies per policy tag. | 8 policies per policy tag | Up to eight data policies per policy tag. One of these policies can be used for [column-level access controls](https://docs.cloud.google.com/bigquery/docs/column-level-security#set_up_column-level_access_control) . Duplicate masking expressions are not supported. |
 
 ## BigQuery ML
@@ -1173,10 +1054,10 @@ All [query job quotas and limits](https://docs.cloud.google.com/bigquery/quotas#
 
 The following limits apply to [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) jobs:
 
-| Limit                                                                           | Default                  | Notes                                                                                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `         CREATE MODEL        ` statement queries per 48 hours for each project | 20,000 statement queries | Some models are trained by utilizing [Vertex AI services](https://docs.cloud.google.com/vertex-ai/docs/start/introduction-unified-platform) , which have their own [resource and quota management](https://docs.cloud.google.com/vertex-ai/docs/quotas) . |
-| Execution-time limit                                                            | 24 hours or 48 hours     | `         CREATE MODEL        ` job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs which timeout at 48 hours.                                                                                    |
+| Limit                                                                                                                                                         | Default                  | Notes                                                                                                                                                                                                                                                     |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) statement queries per 48 hours for each project | 20,000 statement queries | Some models are trained by utilizing [Vertex AI services](https://docs.cloud.google.com/vertex-ai/docs/start/introduction-unified-platform) , which have their own [resource and quota management](https://docs.cloud.google.com/vertex-ai/docs/quotas) . |
+| Execution-time limit                                                                                                                                          | 24 hours or 48 hours     | [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) job timeout defaults to 24 hours, with the exception of time series, AutoML, and hyperparameter tuning jobs which timeout at 48 hours.      |
 
 ### Generative AI functions
 
@@ -1186,167 +1067,21 @@ The following limits apply to functions that use Agent Platform large language m
 
 The following limits apply to Agent Platform models that use a requests per minute limit.
 
-Function
-
-Model
-
-Region
-
-Requests per minute
-
-Rows per job
-
-`  AI.GENERATE_TEXT  `  
-  
-`  ML.GENERATE_TEXT  `  
-  
-`  AI.GENERATE_TABLE  `  
-  
-`  AI.GENERATE  `  
-  
-`  AI.GENERATE_BOOL  `  
-  
-`  AI.GENERATE_DOUBLE  `  
-  
-`  AI.GENERATE_INT  `
-
-`gemini-2.0-flash-lite-001`
-
-`US` and `EU` multi-regions  
-  
-Single regions as documented for `gemini-2.0-flash-lite-001` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-
-No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) and [Provisioned Throughput <sup>2</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview)
-
-N/A for Provisioned Throughput  
-  
-10,500,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens
-
-`gemini-2.0-flash-001`
-
-`US` and `EU` multi-regions  
-  
-Single regions as documented for `gemini-2.0-flash-001` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-
-N/A for Provisioned Throughput  
-  
-10,200,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens
-
-`gemini-2.5-flash`
-
-`US` and `EU` multi-regions  
-  
-Single regions as documented for `gemini-2.5-flash` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-
-N/A for Provisioned Throughput  
-  
-9,300,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens
-
-`gemini-2.5-pro`
-
-`US` and `EU` multi-regions  
-  
-Single regions as documented for `gemini-2.5-pro` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-
-N/A for Provisioned Throughput  
-  
-7,600,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens
-
-`  AI.IF  `  
-  
-`  AI.SCORE  `  
-  
-`  AI.CLASSIFY  `
-
-Various `gemini-2.5-*` models
-
-`US` and `EU` multi-regions  
-  
-Any single region supported for one of the `gemini-2.5-* models` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
-
-No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota)
-
-10,000,000 for a call with an average of 500 tokens in each input row and 50 output tokens.
-
-`  AI.AGG  `
-
-Various Gemini models
-
-See [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg#locations)
-
-No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) .
-
-20,000,000
-
-`  AI.GENERATE_TEXT  `  
-  
-`  ML.GENERATE_TEXT  `
-
-Anthropic Claude
-
-See [Quotas by model and region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude/use-claude#quotas)
-
-See [Quotas by model and region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude/use-claude#quotas)
-
-The requests per minute value \* 60 \* 6
-
-Llama
-
-See [Llama model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama/use-llama#regions-quotas)
-
-See [Llama model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama/use-llama#regions-quotas)
-
-Mistral AI
-
-See [Mistral AI model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral#regions-quotas)
-
-See [Mistral AI model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral#regions-quotas)
-
-`  AI.GENERATE_EMBEDDING 5  `  
-  
-`  AI.EMBED  `  
-  
-`  AI.SIMILARITY  `  
-  
-`  AI.SEARCH  `  
-  
-`  VECTOR_SEARCH  `  
-  
-`  ML.GENERATE_EMBEDDING 5  `
-
-`text-embedding`  
-  
-`text-multilingual-embedding`
-
-[All regions that support remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models)
-
-1,500 <sup>3,4</sup>
-
-80,000,000 for a call with an average of 50 tokens in each input row  
-  
-14,000,000 for a call with an average of 600 tokens in each input row
-
-`multimodalembedding`
-
-[Supported European single regions](https://docs.cloud.google.com/bigquery/docs/locations#regions)
-
-120 <sup>3</sup>
-
-43,200
-
-Regions other than [supported European single regions](https://docs.cloud.google.com/bigquery/docs/locations#regions)
-
-600 <sup>3</sup>
-
-216,000
-
-`gemini-embedding-2-preview`
-
-`us-central1` and `US` multi-region
-
-4,000 <sup>3</sup>
-
-1,440,000
+| Function                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Model                                                                                                                                                                                                                                | Region                                                                                                                                                                                                                                        | Requests per minute                                                                                                                                                                                                                                                                                | Rows per job                                                                                                                               |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) [`ML.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) [`AI.GENERATE_TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) [`AI.GENERATE_BOOL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) [`AI.GENERATE_DOUBLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double) [`AI.GENERATE_INT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int) | `gemini-2.0-flash-lite-001`                                                                                                                                                                                                          | `US` and `EU` multi-regions Single regions as documented for `gemini-2.0-flash-lite-001` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)     | No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) and [Provisioned Throughput <sup>2</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/provisioned-throughput/overview) | N/A for Provisioned Throughput 10,500,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens                     |
+| `gemini-2.0-flash-001`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `US` and `EU` multi-regions Single regions as documented for `gemini-2.0-flash-001` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) | N/A for Provisioned Throughput 10,200,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens                                                                                                                        |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| `gemini-2.5-flash`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `US` and `EU` multi-regions Single regions as documented for `gemini-2.5-flash` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)     | N/A for Provisioned Throughput 9,300,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens                                                                                                                         |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| `gemini-2.5-pro`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `US` and `EU` multi-regions Single regions as documented for `gemini-2.5-pro` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)       | N/A for Provisioned Throughput 7,600,000 for DSQ, for a call with an average of 500 input tokens and 50 output tokens                                                                                                                         |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Various `gemini-2.5-*` models                                                                                                                                                                                                        | `US` and `EU` multi-regions Any single region supported for one of the `gemini-2.5-* models` in [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) | No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota)                                                                                                                                       | 10,000,000 for a call with an average of 500 tokens in each input row and 50 output tokens.                                                |
+| [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Various Gemini models                                                                                                                                                                                                                | See [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg#locations)                                                                                                                        | No set quota. Quota determined by [dynamic shared quota (DSQ) <sup>1</sup>](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) .                                                                                                                                     | 20,000,000                                                                                                                                 |
+| [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) [`ML.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Anthropic Claude                                                                                                                                                                                                                     | See [Quotas by model and region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude/use-claude#quotas)                                                                                                          | See [Quotas by model and region](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude/use-claude#quotas)                                                                                                                                                               | The requests per minute value \* 60 \* 6                                                                                                   |
+| Llama                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | See [Llama model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama/use-llama#regions-quotas)                                                                           | See [Llama model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama/use-llama#regions-quotas)                                                                                    |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| Mistral AI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | See [Mistral AI model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral#regions-quotas)                                                                              | See [Mistral AI model region availability and quotas](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral#regions-quotas)                                                                                       |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| [`AI.GENERATE_EMBEDDING `<sup>`5`</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) [`AI.EMBED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) [`ML.GENERATE_EMBEDDING `<sup>`5`</sup>](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding)                                                                                                             | `text-embedding` `text-multilingual-embedding`                                                                                                                                                                                       | [All regions that support remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models)                                                                                                                   | 1,500 <sup>3,4</sup>                                                                                                                                                                                                                                                                               | 80,000,000 for a call with an average of 50 tokens in each input row 14,000,000 for a call with an average of 600 tokens in each input row |
+| `multimodalembedding`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | [Supported European single regions](https://docs.cloud.google.com/bigquery/docs/locations#regions)                                                                                                                                   | 120 <sup>3</sup>                                                                                                                                                                                                                              | 43,200                                                                                                                                                                                                                                                                                             |                                                                                                                                            |
+| Regions other than [supported European single regions](https://docs.cloud.google.com/bigquery/docs/locations#regions)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 600 <sup>3</sup>                                                                                                                                                                                                                     | 216,000                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                                    |                                                                                                                                            |
+| `gemini-embedding-2-preview`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `us-central1` and `US` multi-region                                                                                                                                                                                                  | 4,000 <sup>3</sup>                                                                                                                                                                                                                            | 1,440,000                                                                                                                                                                                                                                                                                          |                                                                                                                                            |
 
 <sup>1</sup> When you use DSQ, there are no predefined quota limits on your usage. Instead, DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model. When more customers are active, each customer gets less throughput. Similarly, when fewer customers are active, each customer might get higher throughput.
 
@@ -1365,7 +1100,7 @@ For more information about quota for Agent Platform LLMs, see [Generative AI on 
 The following limits apply to Agent Platform models that use a tokens per minute limit:
 
 | **Function**                                                                                                                                                                                                                                                                                                                                    | **Tokens per minute** | **Rows per job**                                             | **Number of concurrently running jobs** |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ------------------------------------------------------------ | --------------------------------------- |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|--------------------------------------------------------------|-----------------------------------------|
 | [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) when using a remote model over a `gemini-embedding-001` model       | 10,000,000            | 12,000,000, for a call with an average of 300 tokens per row | 5                                       |
 | [`AI.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`ML.GENERATE_EMBEDDING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) when using a remote model over a `gemini-embedding-2-preview` model | 5,000,000             | 1,440,000                                                    | 5                                       |
 
@@ -1374,7 +1109,7 @@ The following limits apply to Agent Platform models that use a tokens per minute
 The following daily limits apply to token usage for large language models accessed through BigQuery generative AI functions. These limits apply globally across all regions, and you can [request an adjustment](https://docs.cloud.google.com/docs/quotas/view-manage#requesting_higher_quota) to them. For more information, see [Control costs with token quotas](https://docs.cloud.google.com/bigquery/docs/control-genai-costs) .
 
 | **Quota name**                   | **Metric**                                | **Scope**           | **Default value** |
-| -------------------------------- | ----------------------------------------- | ------------------- | ----------------- |
+|----------------------------------|-------------------------------------------|---------------------|-------------------|
 | `GenAiInputTokensPerDay`         | Input tokens used by the LLM              | Per day per project | 200,000,000,000   |
 | `GenAiInputTokensPerUserPerDay`  | Input tokens used by the LLM              | Per day per user    | 150,000,000,000   |
 | `GenAiOutputTokensPerDay`        | Output and thought tokens used by the LLM | Per day per project | 20,000,000,000    |
@@ -1385,7 +1120,7 @@ The following daily limits apply to token usage for large language models access
 The following limits apply to functions that use Cloud AI services:
 
 | **Function**                                                                                                                                                        | **Requests per minute** | **Rows per job**                                                          | **Number of concurrently running jobs** |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------- | --------------------------------------- |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|---------------------------------------------------------------------------|-----------------------------------------|
 | [`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) with documents averaging fifty pages | 600                     | 100,000 (based on an average of 50 pages in each input document)          | 5                                       |
 | [`ML.TRANSCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe)                                                  | 200                     | 10,000 (based on an average length of 1 minute for each input audio file) | 5                                       |
 | [`ML.ANNOTATE_IMAGE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-annotate-image)                                          | 1,800                   | 648,000                                                                   | 5                                       |
@@ -1394,66 +1129,66 @@ The following limits apply to functions that use Cloud AI services:
 
 For more information about quota for Cloud AI service APIs, see the following documents:
 
-  - [Cloud Translation API quota and limits](https://docs.cloud.google.com/translate/quotas)
-  - [Vision API quota and limits](https://docs.cloud.google.com/vision/quotas)
-  - [Natural Language API quota and limits](https://docs.cloud.google.com/natural-language/quotas)
-  - [Document AI quota and limits](https://docs.cloud.google.com/document-ai/quotas)
-  - [Speech-to-Text quota and limits](https://docs.cloud.google.com/speech-to-text/quotas)
+- [Cloud Translation API quota and limits](https://docs.cloud.google.com/translate/quotas)
+- [Vision API quota and limits](https://docs.cloud.google.com/vision/quotas)
+- [Natural Language API quota and limits](https://docs.cloud.google.com/natural-language/quotas)
+- [Document AI quota and limits](https://docs.cloud.google.com/document-ai/quotas)
+- [Speech-to-Text quota and limits](https://docs.cloud.google.com/speech-to-text/quotas)
 
 ### Function quota definitions
 
 The following list describes the quotas that apply to generative AI and Cloud AI service functions:
 
-  - Functions that call an Agent Platform model use one Agent Platform quota, which is queries per minute (QPM). In this context, the queries are request calls from the function to the Agent Platform model's API. The QPM quota applies to a base model and all versions, identifiers, and tuned versions of that model. For more information on the Agent Platform model quotas, see [Generative AI on Agent Platform quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
+- Functions that call an Agent Platform model use one Agent Platform quota, which is queries per minute (QPM). In this context, the queries are request calls from the function to the Agent Platform model's API. The QPM quota applies to a base model and all versions, identifiers, and tuned versions of that model. For more information on the Agent Platform model quotas, see [Generative AI on Agent Platform quota limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/quotas) .
 
-  - Functions that call a Cloud AI service use the target service's request quotas. Check the given Cloud AI service's quota reference for details.
+- Functions that call a Cloud AI service use the target service's request quotas. Check the given Cloud AI service's quota reference for details.
 
-  - BigQuery ML uses the following quotas:
-    
-      - **Requests per minute** . This quota is the limit on the number of request calls per minute that functions can make to the Agent Platform model's or Cloud AI service's API. This limit applies to each project and is shared among all jobs using the same model endpoint.
-        
-        Calls to Agent Platform Gemini models have no predefined quota limits on your usage, because Gemini models use [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) . DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model.
-    
-      - **Tokens per minute** . This quota is the limit on the number of tokens per minute that functions can send to the Agent Platform model's API. This limit applies to each project.
-        
-        For functions that call an Agent Platform foundation model, the number of tokens per minute varies depending on the Agent Platform model endpoint, version, and region, and also your project's reputation. This quota is conceptually the same as the QPM quota used by Agent Platform.
-    
-      - **Rows per job** . The `Rows per job` value serves as a performance benchmark, approximating the processing capacity when a single job has exclusive use of the project's model endpoint resources. The actual number of processed rows depends on many factors, including the size of the input request to the model, the size of output responses from the model, and availability of dynamic shared quota. The following examples show some common scenarios:
-        
-          - For the `gemini-2.0-flash-lite-001` endpoint, the number of rows processable by the `AI.GENERATE_TEXT` or `ML.GENERATE_TEXT` function depends on input and output token counts. The service can process approximately 7.6 million rows for calls that have an average input token count of 2,000 and a maximum output token count of 50. This number decreases to about 1 million rows if the average input token count is 10,000 and the maximum output token count is 3,000.
-            
-            Similarly, the `gemini-2.0-flash-001` endpoint can process 4.4 million rows for calls that have an average input token count of 2,000 and a maximum output token count of 50, but only about 1 million rows with for calls with 10,000 input and 3,000 output tokens.
-        
-          - The `ML.PROCESS_DOCUMENT` function can process more rows per job for short documents as opposed to long documents.
-        
-          - The `ML.TRANSCRIBE` function can process more rows per job for short audio clips as opposed to long audio clips.
-    
-      - **Number of concurrently running jobs** . This quota is the limit per project on the number of SQL queries that can run at the same time for the given function.
+- BigQuery ML uses the following quotas:
+
+  - **Requests per minute** . This quota is the limit on the number of request calls per minute that functions can make to the Agent Platform model's or Cloud AI service's API. This limit applies to each project and is shared among all jobs using the same model endpoint.
+
+    Calls to Agent Platform Gemini models have no predefined quota limits on your usage, because Gemini models use [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) . DSQ provides access to a large shared pool of resources, which are dynamically allocated based on real-time availability of resources and the customer demand for the given model.
+
+  - **Tokens per minute** . This quota is the limit on the number of tokens per minute that functions can send to the Agent Platform model's API. This limit applies to each project.
+
+    For functions that call an Agent Platform foundation model, the number of tokens per minute varies depending on the Agent Platform model endpoint, version, and region, and also your project's reputation. This quota is conceptually the same as the QPM quota used by Agent Platform.
+
+  - **Rows per job** . The `Rows per job` value serves as a performance benchmark, approximating the processing capacity when a single job has exclusive use of the project's model endpoint resources. The actual number of processed rows depends on many factors, including the size of the input request to the model, the size of output responses from the model, and availability of dynamic shared quota. The following examples show some common scenarios:
+
+    - For the `gemini-2.0-flash-lite-001` endpoint, the number of rows processable by the `AI.GENERATE_TEXT` or `ML.GENERATE_TEXT` function depends on input and output token counts. The service can process approximately 7.6 million rows for calls that have an average input token count of 2,000 and a maximum output token count of 50. This number decreases to about 1 million rows if the average input token count is 10,000 and the maximum output token count is 3,000.
+
+      Similarly, the `gemini-2.0-flash-001` endpoint can process 4.4 million rows for calls that have an average input token count of 2,000 and a maximum output token count of 50, but only about 1 million rows with for calls with 10,000 input and 3,000 output tokens.
+
+    - The `ML.PROCESS_DOCUMENT` function can process more rows per job for short documents as opposed to long documents.
+
+    - The `ML.TRANSCRIBE` function can process more rows per job for short audio clips as opposed to long audio clips.
+
+  - **Number of concurrently running jobs** . This quota is the limit per project on the number of SQL queries that can run at the same time for the given function.
 
 The following examples show how to interpret quota limitations in typical situations:
 
-  - I have a quota of 1,000 QPM in Agent Platform, so a query with 100,000 rows should take around 100 minutes. Why is the job running longer?
-    
-    Job runtimes can vary even for the same input data. In Agent Platform, remote procedure calls (RPCs) have different priorities in order to avoid quota drainage. When there isn't enough quota, RPCs with lower priorities wait and possibly fail if it takes too long to process them.
+- I have a quota of 1,000 QPM in Agent Platform, so a query with 100,000 rows should take around 100 minutes. Why is the job running longer?
 
-  - How should I interpret the rows per job quota?
-    
-    In BigQuery, a query can execute for up to six hours. The maximum supported rows is a function of this timeline and your Agent Platform QPM quota, in order to make sure that BigQuery can complete query processing in six hours. Since typically a query can't use the whole quota, this is a lower number than your QPM quota multiplied by 360.
+  Job runtimes can vary even for the same input data. In Agent Platform, remote procedure calls (RPCs) have different priorities in order to avoid quota drainage. When there isn't enough quota, RPCs with lower priorities wait and possibly fail if it takes too long to process them.
 
-  - What happens if I run a batch inference job on a table with more rows than the rows per job quota, for example 10,000,000 rows?
-    
-    BigQuery only processes the number of rows specified by the rows per job quota. You are only charged for the successful API calls for that number of rows, instead of the full 10,000,000 rows in your table. For the rest of the rows, BigQuery responds to the request with a `A retryable error occurred: the maximum size quota per query has reached` error, which is returned in the `status` column of the result. You can use this set of [SQL scripts](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/tree/master/sql_scripts/remote_inference) or this [Dataform package](https://github.com/dataform-co/dataform-bqml) to iterate through inference calls until all rows are successfully processed.
+- How should I interpret the rows per job quota?
 
-  - I have many more rows to process than the rows per job quota. Will splitting my rows across multiple queries and running them simultaneously help?
-    
-    No, because these queries are consuming the same BigQuery ML requests per minute quota and Agent Platform QPM quota. If there are multiple queries that all stay within the rows per job quota and number of concurrently running jobs quota, the cumulative processing exhausts the requests per minute quota.
+  In BigQuery, a query can execute for up to six hours. The maximum supported rows is a function of this timeline and your Agent Platform QPM quota, in order to make sure that BigQuery can complete query processing in six hours. Since typically a query can't use the whole quota, this is a lower number than your QPM quota multiplied by 360.
+
+- What happens if I run a batch inference job on a table with more rows than the rows per job quota, for example 10,000,000 rows?
+
+  BigQuery only processes the number of rows specified by the rows per job quota. You are only charged for the successful API calls for that number of rows, instead of the full 10,000,000 rows in your table. For the rest of the rows, BigQuery responds to the request with a `A retryable error occurred: the maximum size quota per query has reached` error, which is returned in the `status` column of the result. You can use this set of [SQL scripts](https://github.com/GoogleCloudPlatform/bigquery-ml-utils/tree/master/sql_scripts/remote_inference) or this [Dataform package](https://github.com/dataform-co/dataform-bqml) to iterate through inference calls until all rows are successfully processed.
+
+- I have many more rows to process than the rows per job quota. Will splitting my rows across multiple queries and running them simultaneously help?
+
+  No, because these queries are consuming the same BigQuery ML requests per minute quota and Agent Platform QPM quota. If there are multiple queries that all stay within the rows per job quota and number of concurrently running jobs quota, the cumulative processing exhausts the requests per minute quota.
 
 ## BigQuery Graph
 
 The following limits apply to [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) :
 
 | Limit                                                | Default          | Notes                                                                                          |
-| ---------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------- |
+|------------------------------------------------------|------------------|------------------------------------------------------------------------------------------------|
 | Maximum number of tables referenced by a graph       | 1,000 tables     | A graph can reference up to 1,000 total node and edge tables in its node and edge definitions. |
 | Maximum number of key columns per node or edge table | 16 columns       | You can define a key that uses up to 16 columns on a node or edge table of a graph.            |
 | Maximum number of columns per node reference         | 16 columns       | A source key or destination key can reference up to 16 columns from a node table in a graph.   |
@@ -1468,7 +1203,7 @@ The following limits apply to [BigQuery Graph](https://docs.cloud.google.com/big
 The following limits apply to [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
 | Limit                                                                                                                                   | Default   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------------------------------------------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum reservation size per project per location ( [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) ) | 250 GiB   | 250 Gib is the default maximum reservation size per project per location. You can [request an increase](https://docs.google.com/forms/d/1KX2E2ggOy1eUNB0Hjf9l9l0Sm0TbmPuS0XvyZtdnRes/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and might take 3 or more business days depending on the size of the increase requested. Please contact your Google Cloud representative or Cloud Customer Care for urgent requests. |
 | Maximum number of rows per query                                                                                                        | 7 billion | Maximum number of rows per query.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
@@ -1477,7 +1212,7 @@ The following limits apply to [BigQuery BI Engine](https://docs.cloud.google.com
 The following limits apply to [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) :
 
 | Limit                                                | Default               | Notes                                                                                                       |
-| ---------------------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------|
 | Maximum number of data exchanges per project         | 500 exchanges         | You can create up to 500 data exchanges in a project.                                                       |
 | Maximum number of listings per data exchange         | 1,000 listings        | You can create up to 1,000 listings in a data exchange.                                                     |
 | Maximum number of linked datasets per shared dataset | 1,000 linked datasets | All BigQuery sharing subscribers, combined, can have a maximum of 1,000 linked datasets per shared dataset. |
@@ -1487,7 +1222,7 @@ The following limits apply to [BigQuery sharing (formerly Analytics Hub)](https:
 The following limits apply to [Knowledge Catalog automatic discovery](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) :
 
 | Limit                                                                                                 | Default                         | Notes                                                                |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------- | -------------------------------------------------------------------- |
+|-------------------------------------------------------------------------------------------------------|---------------------------------|----------------------------------------------------------------------|
 | Maximum BigQuery, BigLake, or external tables per Cloud Storage bucket that a discovery scan supports | 1000 BigQuery tables per bucket | You can create up to 1,000 BigQuery tables per Cloud Storage bucket. |
 
 ## API quotas and limits
@@ -1498,163 +1233,46 @@ These quotas and limits apply to [BigQuery API](https://docs.cloud.google.com/bi
 
 The following quotas apply to [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) (core) requests:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Requests per day</td>
-<td>Unlimited</td>
-<td>Your project can make an unlimited number of BigQuery API requests per day.<br />
-</td>
-</tr>
-<tr class="even">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> bytes per minute</td>
-<td>7.5 GB in multi-regions; 3.7 GB in all other regions</td>
-<td>Your project can return a maximum of 7.5 GB of table row data per minute via <code dir="ltr" translate="no">tabledata.list</code> in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions, and 3.7 GB of table row data per minute in all other regions. This quota applies to the project that contains the table being read. Other APIs including <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults"><code dir="ltr" translate="no">jobs.getQueryResults</code></a> and fetching results from <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query"><code dir="ltr" translate="no">jobs.query</code></a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert"><code dir="ltr" translate="no">jobs.insert</code></a> can also consume this quota. For troubleshooting information, see the <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-tabledata-list-bytes-per-second-per-project-quota">Troubleshooting page</a> .<br />
-
-<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">BigQuery Storage Read API</a> can sustain significantly higher throughput than <code dir="ltr" translate="no">tabledata.list</code> . If you need more throughput than allowed under this quota, consider using the BigQuery Storage Read API.</p></td>
-</tr>
-</tbody>
-</table>
+| Quota                                                                                                                     | Default                                              | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requests per day                                                                                                          | Unlimited                                            | Your project can make an unlimited number of BigQuery API requests per day.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Maximum [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) bytes per minute | 7.5 GB in multi-regions; 3.7 GB in all other regions | Your project can return a maximum of 7.5 GB of table row data per minute via `tabledata.list` in the `us` and `eu` multi-regions, and 3.7 GB of table row data per minute in all other regions. This quota applies to the project that contains the table being read. Other APIs including [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults) and fetching results from [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) and [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) can also consume this quota. For troubleshooting information, see the [Troubleshooting page](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-tabledata-list-bytes-per-second-per-project-quota) . The [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) can sustain significantly higher throughput than `tabledata.list` . If you need more throughput than allowed under this quota, consider using the BigQuery Storage Read API. |
 
 The following limits apply to [BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) (core) requests:
 
 > **Note:** While most BigQuery API core methods have a maximum of 100 API requests per user per method, some core methods can have different rate limits.
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Limit</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Maximum number of API requests per second per user per method</td>
-<td>100 requests</td>
-<td>A user can make up to 100 API requests per second to an API method. If a user makes more than 100 requests per second to a method, then throttling can occur. This limit does not apply to <a href="https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery">streaming inserts</a> .<br />
-<br />
-For troubleshooting information, see the <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-api-request-limit">Troubleshooting page</a> .</td>
-</tr>
-<tr class="even">
-<td>Maximum number of concurrent API requests per user</td>
-<td>300 requests</td>
-<td>If a user makes more than 300 concurrent requests, throttling can occur. This limit does not apply to streaming inserts.</td>
-</tr>
-<tr class="odd">
-<td>Maximum request header size</td>
-<td>16 KiB</td>
-<td>Your BigQuery API request can be up to 16 KiB, including the request URL and all headers. This limit does not apply to the request body, such as in a <code dir="ltr" translate="no">POST</code> request.</td>
-</tr>
-<tr class="even">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get"><code dir="ltr" translate="no">jobs.get</code></a> requests per second</td>
-<td>1,000 requests</td>
-<td>Your project can make up to 1,000 <code dir="ltr" translate="no">jobs.get</code> requests per second.</td>
-</tr>
-<tr class="odd">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query"><code dir="ltr" translate="no">jobs.query</code></a> response size</td>
-<td>20 MB</td>
-<td>By default, there is no maximum row count for the number of rows of data returned by <code dir="ltr" translate="no">jobs.query</code> per page of results. However, you are limited to the 20-MB maximum response size. You can alter the number of rows to return by using the <code dir="ltr" translate="no">maxResults</code> parameter.</td>
-</tr>
-<tr class="even">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults"><code dir="ltr" translate="no">jobs.getQueryResults</code></a> row size</td>
-<td>20 MB</td>
-<td>The maximum row size is approximate because the limit is based on the internal representation of row data. The limit is enforced during transcoding.</td>
-</tr>
-<tr class="odd">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list"><code dir="ltr" translate="no">projects.list</code></a> requests per second</td>
-<td>10 requests</td>
-<td>A user can make up to 10 <code dir="ltr" translate="no">projects.list</code> requests per second.</td>
-</tr>
-<tr class="even">
-<td>Maximum number of <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> requests per second</td>
-<td>1,000 requests</td>
-<td>Your project can make up to 1,000 <code dir="ltr" translate="no">tabledata.list</code> requests per second.</td>
-</tr>
-<tr class="odd">
-<td>Maximum rows per <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> response</td>
-<td>100,000 rows</td>
-<td>A <code dir="ltr" translate="no">tabledata.list</code> call can return up to 100,000 table rows. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/paging-results#api-limits">Reference: API limits and criteria</a> .</td>
-</tr>
-<tr class="even">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list"><code dir="ltr" translate="no">tabledata.list</code></a> row size</td>
-<td>100 MB</td>
-<td>The maximum row size is approximate because the limit is based on the internal representation of row data. The limit is enforced during transcoding.</td>
-</tr>
-<tr class="odd">
-<td>Maximum <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert"><code dir="ltr" translate="no">tables.insert</code></a> requests per second</td>
-<td>10 requests</td>
-<td>A user can make up to 10 <code dir="ltr" translate="no">tables.insert</code> requests per second. The <code dir="ltr" translate="no">tables.insert</code> method creates a new, empty table in a dataset.</td>
-</tr>
-</tbody>
-</table>
+| Limit                                                                                                                                  | Default        | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------------------------------------------------------------------------------------------------------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Maximum number of API requests per second per user per method                                                                          | 100 requests   | A user can make up to 100 API requests per second to an API method. If a user makes more than 100 requests per second to a method, then throttling can occur. This limit does not apply to [streaming inserts](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery) . For troubleshooting information, see the [Troubleshooting page](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-api-request-limit) . |
+| Maximum number of concurrent API requests per user                                                                                     | 300 requests   | If a user makes more than 300 concurrent requests, throttling can occur. This limit does not apply to streaming inserts.                                                                                                                                                                                                                                                                                                                              |
+| Maximum request header size                                                                                                            | 16 KiB         | Your BigQuery API request can be up to 16 KiB, including the request URL and all headers. This limit does not apply to the request body, such as in a `POST` request.                                                                                                                                                                                                                                                                                 |
+| Maximum [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) requests per second                       | 1,000 requests | Your project can make up to 1,000 `jobs.get` requests per second.                                                                                                                                                                                                                                                                                                                                                                                     |
+| Maximum [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) response size                         | 20 MB          | By default, there is no maximum row count for the number of rows of data returned by `jobs.query` per page of results. However, you are limited to the 20-MB maximum response size. You can alter the number of rows to return by using the `maxResults` parameter.                                                                                                                                                                                   |
+| Maximum [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) row size          | 20 MB          | The maximum row size is approximate because the limit is based on the internal representation of row data. The limit is enforced during transcoding.                                                                                                                                                                                                                                                                                                  |
+| Maximum [`projects.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list) requests per second             | 10 requests    | A user can make up to 10 `projects.list` requests per second.                                                                                                                                                                                                                                                                                                                                                                                         |
+| Maximum number of [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) requests per second | 1,000 requests | Your project can make up to 1,000 `tabledata.list` requests per second.                                                                                                                                                                                                                                                                                                                                                                               |
+| Maximum rows per [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) response             | 100,000 rows   | A `tabledata.list` call can return up to 100,000 table rows. For more information, see [Reference: API limits and criteria](https://docs.cloud.google.com/bigquery/docs/paging-results#api-limits) .                                                                                                                                                                                                                                                  |
+| Maximum [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) row size                      | 100 MB         | The maximum row size is approximate because the limit is based on the internal representation of row data. The limit is enforced during transcoding.                                                                                                                                                                                                                                                                                                  |
+| Maximum [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) requests per second             | 10 requests    | A user can make up to 10 `tables.insert` requests per second. The `tables.insert` method creates a new, empty table in a dataset.                                                                                                                                                                                                                                                                                                                     |
 
 ### BigQuery Connection API
 
 The following quotas apply to [BigQuery Connection API](https://docs.cloud.google.com/bigquery/docs/working-with-connections) requests:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Read requests per minute</td>
-<td>1,000 requests per minute</td>
-<td>Your project can make up to 1,000 requests per minute to BigQuery Connection API methods that read connection data.<br />
-</td>
-</tr>
-<tr class="even">
-<td>Write requests per minute</td>
-<td>100 requests per minute</td>
-<td>Your project can make up to 100 requests per minute to BigQuery Connection API methods that create or update connections.<br />
-</td>
-</tr>
-<tr class="odd">
-<td>BigQuery Omni connections created per minute</td>
-<td>10 connections created per minute</td>
-<td>Your project can create up to 10 BigQuery Omni connections total across both AWS and Azure per minute.</td>
-</tr>
-<tr class="even">
-<td>BigQuery Omni connection uses</td>
-<td>500 connection uses per minute</td>
-<td>Your project can use a BigQuery Omni connection up to 500 times per minute. This applies to operations which use your connection to access your AWS account, such as querying a table.</td>
-</tr>
-</tbody>
-</table>
+| Quota                                        | Default                           | Notes                                                                                                                                                                                  |
+|----------------------------------------------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Read requests per minute                     | 1,000 requests per minute         | Your project can make up to 1,000 requests per minute to BigQuery Connection API methods that read connection data.                                                                    |
+| Write requests per minute                    | 100 requests per minute           | Your project can make up to 100 requests per minute to BigQuery Connection API methods that create or update connections.                                                              |
+| BigQuery Omni connections created per minute | 10 connections created per minute | Your project can create up to 10 BigQuery Omni connections total across both AWS and Azure per minute.                                                                                 |
+| BigQuery Omni connection uses                | 500 connection uses per minute    | Your project can use a BigQuery Omni connection up to 500 times per minute. This applies to operations which use your connection to access your AWS account, such as querying a table. |
 
 ### BigQuery Migration API
 
 The following limits apply to the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc) :
 
 | Limit                                                           | Default                                         | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| --------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Individual file size for batch SQL translation                  | 10 MB                                           | Each individual source and metadata file can be up to 10 MB. This limit does not apply to the metadata zip file produced by the `dwh-migration-dumper` command-line extraction tool.                                                                                                                                                                                                                                                                                         |
 | Total size of source files for batch SQL translation            | 1 GB                                            | The total size of all input files uploaded to Cloud Storage can be up to 1 GB. This includes all source files, and all metadata files if you choose to include them.                                                                                                                                                                                                                                                                                                         |
 | Input string size for interactive SQL translation               | 1 MB                                            | The string that you enter for interactive SQL translation must not exceed 1 MB. When running interactive translations using the Translation API, this limit applies to the total size of all string inputs.                                                                                                                                                                                                                                                                  |
@@ -1663,94 +1281,22 @@ The following limits apply to the [BigQuery Migration API](https://docs.cloud.go
 
 The following quotas apply to the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc) . The following default values apply in most cases. The defaults for your project might be different:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>EDWMigration Service List Requests per minute</p>
-<p>EDWMigration Service List Requests per minute per user</p></td>
-<td><p>12,000 requests</p>
-<p>2,500 requests</p></td>
-<td><p>Your project can make up to 12,000 Migration API List requests per minute.</p>
-<p>Each user can make up to 2,500 Migration API List requests per minute.</p></td>
-</tr>
-<tr class="even">
-<td><p>EDWMigration Service Get Requests per minute</p>
-<p>EDWMigration Service Get Requests per minute per user</p></td>
-<td><p>25,000 requests</p>
-<p>2,500 requests</p></td>
-<td><p>Your project can make up to 25,000 Migration API Get requests per minute.</p>
-<p>Each user can make up to 2,500 Migration API Get requests per minute.</p></td>
-</tr>
-<tr class="odd">
-<td><p>EDWMigration Service Other Requests per minute</p>
-<p>EDWMigration Service Other Requests per minute per user</p></td>
-<td><p>25 requests</p>
-<p>5 requests</p></td>
-<td><p>Your project can make up to 25 other Migration API requests per minute.</p>
-<p>Each user can make up to 5 other Migration API requests per minute.</p></td>
-</tr>
-<tr class="even">
-<td><p>Interactive SQL translation requests per minute</p>
-<p>Interactive SQL translation requests per minute per user</p></td>
-<td><p>200 requests</p>
-<p>50 requests</p></td>
-<td><p>Your project can make up to 200 SQL translation service requests per minute.</p>
-<p>Each user can make up to 50 other SQL translation service requests per minute.</p></td>
-</tr>
-</tbody>
-</table>
+| Quota                                                                                                    | Default                        | Notes                                                                                                                                                       |
+|----------------------------------------------------------------------------------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| EDWMigration Service List Requests per minute EDWMigration Service List Requests per minute per user     | 12,000 requests 2,500 requests | Your project can make up to 12,000 Migration API List requests per minute. Each user can make up to 2,500 Migration API List requests per minute.           |
+| EDWMigration Service Get Requests per minute EDWMigration Service Get Requests per minute per user       | 25,000 requests 2,500 requests | Your project can make up to 25,000 Migration API Get requests per minute. Each user can make up to 2,500 Migration API Get requests per minute.             |
+| EDWMigration Service Other Requests per minute EDWMigration Service Other Requests per minute per user   | 25 requests 5 requests         | Your project can make up to 25 other Migration API requests per minute. Each user can make up to 5 other Migration API requests per minute.                 |
+| Interactive SQL translation requests per minute Interactive SQL translation requests per minute per user | 200 requests 50 requests       | Your project can make up to 200 SQL translation service requests per minute. Each user can make up to 50 other SQL translation service requests per minute. |
 
 ### BigQuery Reservation API
 
 The following quotas apply to [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) requests:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Requests per minute per region</td>
-<td>100 requests</td>
-<td>Your project can make a total of up to 100 calls to BigQuery Reservation API methods per minute per region.<br />
-</td>
-</tr>
-<tr class="even">
-<td>Number of <code dir="ltr" translate="no">SearchAllAssignments</code> calls per minute per region</td>
-<td>100 requests</td>
-<td>Your project can make up to 100 calls to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAllAssignments"><code dir="ltr" translate="no">SearchAllAssignments</code></a> method per minute per region.<br />
-</td>
-</tr>
-<tr class="odd">
-<td>Requests for <code dir="ltr" translate="no">SearchAllAssignments</code> per minute per region per user</td>
-<td>10 requests</td>
-<td>Each user can make up to 10 calls to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAllAssignments"><code dir="ltr" translate="no">SearchAllAssignments</code></a> method per minute per region.<br />
-<br />
-(In the Google Cloud console search results, search for <strong>per user</strong> .)</td>
-</tr>
-</tbody>
-</table>
+| Quota                                                              | Default      | Notes                                                                                                                                                                                                                                                                                       |
+|--------------------------------------------------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Requests per minute per region                                     | 100 requests | Your project can make a total of up to 100 calls to BigQuery Reservation API methods per minute per region.                                                                                                                                                                                 |
+| Number of `SearchAllAssignments` calls per minute per region       | 100 requests | Your project can make up to 100 calls to the [`SearchAllAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAllAssignments) method per minute per region.                                                                     |
+| Requests for `SearchAllAssignments` per minute per region per user | 10 requests  | Each user can make up to 10 calls to the [`SearchAllAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations/searchAllAssignments) method per minute per region. (In the Google Cloud console search results, search for **per user** .) |
 
 ### BigQuery Data Policy API
 
@@ -1758,9 +1304,9 @@ The following limits apply for the [Data Policy API](https://docs.cloud.google.c
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1771,14 +1317,14 @@ The following limits apply for the [Data Policy API](https://docs.cloud.google.c
 </thead>
 <tbody>
 <tr class="odd">
-<td>Maximum number of <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/list"><code dir="ltr" translate="no">dataPolicies.list</code></a> calls.</td>
+<td>Maximum number of <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/list"><code>dataPolicies.list</code></a> calls.</td>
 <td>400 requests per minute per project<br />
 <br />
 600 requests per minute per organization</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>Maximum number of <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/testIamPermissions"><code dir="ltr" translate="no">dataPolicies.testIamPermissions</code></a> calls.</td>
+<td>Maximum number of <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/testIamPermissions"><code>dataPolicies.testIamPermissions</code></a> calls.</td>
 <td>400 requests per minute per project<br />
 <br />
 600 requests per minute per organization</td>
@@ -1789,7 +1335,7 @@ The following limits apply for the [Data Policy API](https://docs.cloud.google.c
 <td>1200 requests per minute per project<br />
 <br />
 1800 requests per minute per organization</td>
-<td>This includes calls to <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/get"><code dir="ltr" translate="no">dataPolicies.get</code></a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/getIamPolicy"><code dir="ltr" translate="no">dataPolicies.getIamPolicy</code></a> .</td>
+<td>This includes calls to <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/get"><code>dataPolicies.get</code></a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/getIamPolicy"><code>dataPolicies.getIamPolicy</code></a> .</td>
 </tr>
 <tr class="even">
 <td>Maximum number of write requests.</td>
@@ -1798,10 +1344,10 @@ The following limits apply for the [Data Policy API](https://docs.cloud.google.c
 900 requests per minute per organization</td>
 <td><p>This includes calls to:</p>
 <ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/create"><code dir="ltr" translate="no">dataPolicies.create</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/delete"><code dir="ltr" translate="no">dataPolicies.delete</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/setIamPolicy"><code dir="ltr" translate="no">dataPolicies.setIamPolicy</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/patch"><code dir="ltr" translate="no">dataPolicies.patch</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/create"><code>dataPolicies.create</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/delete"><code>dataPolicies.delete</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/setIamPolicy"><code>dataPolicies.setIamPolicy</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies/patch"><code>dataPolicies.patch</code></a></li>
 </ul></td>
 </tr>
 </tbody>
@@ -1813,98 +1359,28 @@ The following quotas apply when you use [Identity and Access Management](https:/
 
 > **Note:** If you are encountering IAM request constraints, we recommend that you evaluate whether your project can use [IAM permission inheritance](https://docs.cloud.google.com/iam/docs/resource-hierarchy-access-control) to alleviate the constraint.
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">IamPolicy</code> requests per minute per user</td>
-<td>1,500 requests per minute per user</td>
-<td>Each user can make up to 1,500 requests per minute per project.<br />
-</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">IamPolicy</code> requests per minute per project</td>
-<td>3,000 requests per minute per project</td>
-<td>Your project can make up to 3,000 requests per minute.<br />
-</td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/locations#regions">Single-region</a> <code dir="ltr" translate="no">SetIAMPolicy</code> requests per minute per project</td>
-<td>1,000 requests per minute per project</td>
-<td>Your single-region project can make up to 1,000 requests per minute.<br />
-</td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/locations#multi-regions">Multi-region</a> <code dir="ltr" translate="no">SetIAMPolicy</code> requests per minute per project</td>
-<td>2,000 requests per minute per project</td>
-<td>Your multi-region project can make up to 2,000 requests per minute.<br />
-</td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/locations#omni-loc">Omni-region</a> <code dir="ltr" translate="no">SetIAMPolicy</code> requests per minute per project</td>
-<td>200 requests per minute per project</td>
-<td>Your Omni-region project can make up to 200 requests per minute.<br />
-</td>
-</tr>
-</tbody>
-</table>
+| Quota                                                                                                                              | Default                               | Notes                                                                |
+|------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|----------------------------------------------------------------------|
+| `IamPolicy` requests per minute per user                                                                                           | 1,500 requests per minute per user    | Each user can make up to 1,500 requests per minute per project.      |
+| `IamPolicy` requests per minute per project                                                                                        | 3,000 requests per minute per project | Your project can make up to 3,000 requests per minute.               |
+| [Single-region](https://docs.cloud.google.com/bigquery/docs/locations#regions) `SetIAMPolicy` requests per minute per project      | 1,000 requests per minute per project | Your single-region project can make up to 1,000 requests per minute. |
+| [Multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) `SetIAMPolicy` requests per minute per project | 2,000 requests per minute per project | Your multi-region project can make up to 2,000 requests per minute.  |
+| [Omni-region](https://docs.cloud.google.com/bigquery/docs/locations#omni-loc) `SetIAMPolicy` requests per minute per project       | 200 requests per minute per project   | Your Omni-region project can make up to 200 requests per minute.     |
 
 ### Storage Read API
 
 The following quotas apply to [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) requests:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Read data plane requests per minute per user</td>
-<td>25,000 requests</td>
-<td>Each user can make up to 25,000 <code dir="ltr" translate="no">ReadRows</code> calls per minute per project.<br />
-</td>
-</tr>
-<tr class="even">
-<td>Maximum concurrent read connections</td>
-<td>2,000 in multi-regions; 400 in regions</td>
-<td>Maximum number of concurrent <code dir="ltr" translate="no">ReadRows</code> connections per project. The default is 2,000 connections in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions, and 400 connections in other regions.<br />
-Actual connection availability can fluctuate based on overall region-wide service load and demand. This dynamic adjustment ensures fair resource distribution and maintains service stability for all users. When a stream is closed for fairness or when you reach the connection limit, you receive a <code dir="ltr" translate="no">RESOURCE_EXHAUSTED</code> error (HTTP 429).<br />
-Quota increase requests (QIRs) are reviewed based on the project's past usage patterns and the general availability of resources within the region.<br />
-</td>
-</tr>
-<tr class="odd">
-<td>Read control plane requests per minute per user</td>
-<td>5,000 requests</td>
-<td>Each user can make up to 5,000 Storage Read API metadata operation calls per minute per project. The metadata calls include the <code dir="ltr" translate="no">CreateReadSession</code> and <code dir="ltr" translate="no">SplitReadStream</code> methods.<br />
-</td>
-</tr>
-</tbody>
-</table>
+| Quota                                           | Default                                | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|-------------------------------------------------|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Read data plane requests per minute per user    | 25,000 requests                        | Each user can make up to 25,000 `ReadRows` calls per minute per project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Maximum concurrent read connections             | 2,000 in multi-regions; 400 in regions | Maximum number of concurrent `ReadRows` connections per project. The default is 2,000 connections in the `us` and `eu` multi-regions, and 400 connections in other regions. Actual connection availability can fluctuate based on overall region-wide service load and demand. This dynamic adjustment ensures fair resource distribution and maintains service stability for all users. When a stream is closed for fairness or when you reach the connection limit, you receive a `RESOURCE_EXHAUSTED` error (HTTP 429). Quota increase requests (QIRs) are reviewed based on the project's past usage patterns and the general availability of resources within the region. |
+| Read control plane requests per minute per user | 5,000 requests                         | Each user can make up to 5,000 Storage Read API metadata operation calls per minute per project. The metadata calls include the `CreateReadSession` and `SplitReadStream` methods.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 The following limits apply to [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) requests:
 
 | Limit                           | Default | Notes                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Maximum row/filter length       | 1 MB    | When you use the Storage Read API `CreateReadSession` call, you are limited to a maximum length of 1 MB for each row or filter.                                                                                                                                                                                                                             |
 | Maximum serialized data size    | 128 MB  | When you use the Storage Read API `ReadRows` call, the serialized representation of the data in an individual `ReadRowsResponse` message cannot be larger than 128 MB.                                                                                                                                                                                      |
 | Maximum per-stream memory usage | 1.5 GB  | The maximum per-stream memory is approximate because the limit is based on the internal representation of the row data. Streams utilizing more than 1.5 GB memory for a single row might fail. For more information, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) . |
@@ -1919,62 +1395,17 @@ The following quotas apply to [Storage Write API (gRPC)](https://docs.cloud.goog
 
 If you plan to [request a quota adjustment](https://docs.cloud.google.com/docs/quotas/help/request_increase) , include the quota error message in your request to expedite processing. BigQuery might reduce your provisioned quota if your quota is significantly under-utilized for more than one year.
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Quota</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Concurrent write connections</td>
-<td>5,000 in a region; 20,000 in a multi-region</td>
-<td><p>The concurrent connections quota is based on the client project that initiates the Storage Write API (gRPC) request, not the project containing the BigQuery dataset resource. The initiating project is the project associated with the <a href="https://docs.cloud.google.com/docs/authentication/api-keys">API key</a> or the <a href="https://docs.cloud.google.com/iam/docs/understanding-service-accounts">service account</a> .</p>
-<p>Your project can operate on 5,000 concurrent connections in a region, or 20,000 concurrent connections in the <code dir="ltr" translate="no">US</code> and <code dir="ltr" translate="no">EU</code> multi-regions.</p>
-<p>A connection should be long lived and used to send as many requests as possible. Use of short-lived connections is discouraged and could cause inflated concurrent connection quota usage. For quota accounting purposes, we suggest a connection lifetime of at least several minutes.</p>
-<p>When you use the <a href="https://docs.cloud.google.com/bigquery/docs/write-api#default_stream">default stream</a> in Java or Go, we recommend using <a href="https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management">Storage Write API (gRPC) multiplexing</a> to write to multiple destination tables with shared connections in order to reduce the number of overall connections that are needed. If you are using the <a href="https://beam.apache.org/documentation/io/built-in/google-bigquery/#at-least-once-semantics">Beam connector with at-least-once semantics</a> , you can set <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/gcp/bigquery/BigQueryOptions.html#setUseStorageApiConnectionPool-java.lang.Boolean-">UseStorageApiConnectionPool</a> to <code dir="ltr" translate="no">TRUE</code> to enable multiplexing.</p>
-<br />
-
-<p>You can view usage quota and limits metrics for your projects in <a href="https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits">Cloud Monitoring</a> . Select the concurrent connections limit name based on your region. The options are <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProject</code> , <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProjectEU</code> , and <code dir="ltr" translate="no">ConcurrentWriteConnectionsPerProjectRegion</code> for <code dir="ltr" translate="no">us</code> , <code dir="ltr" translate="no">eu</code> , and other regions, respectively.<br />
-<br />
-It is strongly recommended that you set up <a href="https://docs.cloud.google.com/monitoring/alerts/using-quota-metrics">alerts</a> to monitor your quota usage and limits. In addition, if your traffic patterns experience spikes and/or regular organic growth, it might be beneficial to consider over-provisioning your quota by 25 - 50% in order to handle unexpected demand.</p></td>
-</tr>
-<tr class="even">
-<td>Throughput</td>
-<td>3 GB per second throughput in multi-regions; 300 MB per second in regions</td>
-<td>You can stream up to 3 GBps in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions, and 300 MBps in other regions per project.<br />
-<br />
-
-<p>You can view usage quota and limits metrics for your projects in <a href="https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits">Cloud Monitoring</a> . Select the throughput limit name based on your region. The options are <code dir="ltr" translate="no">AppendBytesThroughputPerProject</code> , <code dir="ltr" translate="no">AppendBytesThroughputPerProjectEU</code> , and <code dir="ltr" translate="no">AppendBytesThroughputPerProjectRegion</code> for <code dir="ltr" translate="no">us</code> , <code dir="ltr" translate="no">eu</code> , and other regions, respectively. Write throughput quota is metered based on the project where the target dataset resides, not the client project.<br />
-<br />
-It is strongly recommended that you set up <a href="https://docs.cloud.google.com/monitoring/alerts/using-quota-metrics">alerts</a> to monitor your quota usage and limits. In addition, if your traffic patterns experience spikes and/or regular organic growth, it might be beneficial to consider over-provisioning your quota by 25 - 50% in order to handle unexpected demand.</p>
-<br />
-</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CreateWriteStream</code> requests</td>
-<td>10,000 streams every hour, per project per region</td>
-<td>You can call <code dir="ltr" translate="no">CreateWriteStream</code> up to 10,000 times per hour per project per region. Consider using the <a href="https://docs.cloud.google.com/bigquery/docs/write-api#default_stream">default stream</a> if you don't need exactly-once semantics. This quota is per hour but the metric shown in the Google Cloud console is per minute.</td>
-</tr>
-<tr class="even">
-<td>Pending stream bytes</td>
-<td>10 TB in multi-regions; 1 TB in regions</td>
-<td>For every commit that you trigger, you can commit up to 10 TB in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions, and 1 TB in other regions. There is no quota reporting on this quota.</td>
-</tr>
-</tbody>
-</table>
+| Quota                        | Default                                                                   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Concurrent write connections | 5,000 in a region; 20,000 in a multi-region                               | The concurrent connections quota is based on the client project that initiates the Storage Write API (gRPC) request, not the project containing the BigQuery dataset resource. The initiating project is the project associated with the [API key](https://docs.cloud.google.com/docs/authentication/api-keys) or the [service account](https://docs.cloud.google.com/iam/docs/understanding-service-accounts) . Your project can operate on 5,000 concurrent connections in a region, or 20,000 concurrent connections in the `US` and `EU` multi-regions. A connection should be long lived and used to send as many requests as possible. Use of short-lived connections is discouraged and could cause inflated concurrent connection quota usage. For quota accounting purposes, we suggest a connection lifetime of at least several minutes. When you use the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) in Java or Go, we recommend using [Storage Write API (gRPC) multiplexing](https://docs.cloud.google.com/bigquery/docs/write-api-best-practices#connection_pool_management) to write to multiple destination tables with shared connections in order to reduce the number of overall connections that are needed. If you are using the [Beam connector with at-least-once semantics](https://beam.apache.org/documentation/io/built-in/google-bigquery/#at-least-once-semantics) , you can set [UseStorageApiConnectionPool](https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/io/gcp/bigquery/BigQueryOptions.html#setUseStorageApiConnectionPool-java.lang.Boolean-) to `TRUE` to enable multiplexing. You can view usage quota and limits metrics for your projects in [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits) . Select the concurrent connections limit name based on your region. The options are `ConcurrentWriteConnectionsPerProject` , `ConcurrentWriteConnectionsPerProjectEU` , and `ConcurrentWriteConnectionsPerProjectRegion` for `us` , `eu` , and other regions, respectively. It is strongly recommended that you set up [alerts](https://docs.cloud.google.com/monitoring/alerts/using-quota-metrics) to monitor your quota usage and limits. In addition, if your traffic patterns experience spikes and/or regular organic growth, it might be beneficial to consider over-provisioning your quota by 25 - 50% in order to handle unexpected demand. |
+| Throughput                   | 3 GB per second throughput in multi-regions; 300 MB per second in regions | You can stream up to 3 GBps in the `us` and `eu` multi-regions, and 300 MBps in other regions per project. You can view usage quota and limits metrics for your projects in [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits) . Select the throughput limit name based on your region. The options are `AppendBytesThroughputPerProject` , `AppendBytesThroughputPerProjectEU` , and `AppendBytesThroughputPerProjectRegion` for `us` , `eu` , and other regions, respectively. Write throughput quota is metered based on the project where the target dataset resides, not the client project. It is strongly recommended that you set up [alerts](https://docs.cloud.google.com/monitoring/alerts/using-quota-metrics) to monitor your quota usage and limits. In addition, if your traffic patterns experience spikes and/or regular organic growth, it might be beneficial to consider over-provisioning your quota by 25 - 50% in order to handle unexpected demand.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `CreateWriteStream` requests | 10,000 streams every hour, per project per region                         | You can call `CreateWriteStream` up to 10,000 times per hour per project per region. Consider using the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) if you don't need exactly-once semantics. This quota is per hour but the metric shown in the Google Cloud console is per minute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Pending stream bytes         | 10 TB in multi-regions; 1 TB in regions                                   | For every commit that you trigger, you can commit up to 10 TB in the `us` and `eu` multi-regions, and 1 TB in other regions. There is no quota reporting on this quota.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 The following limits apply to [Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) requests:
 
 | Limit                     | Default                  | Notes                                                                      |
-| ------------------------- | ------------------------ | -------------------------------------------------------------------------- |
+|---------------------------|--------------------------|----------------------------------------------------------------------------|
 | Batch commits             | 10,000 streams per table | You can commit up to 10,000 streams in each `BatchCommitWriteStream` call. |
 | `AppendRows` request size | 20 MB                    | The maximum request size is 20 MB.                                         |
 
@@ -1982,57 +1413,14 @@ The following limits apply to [Storage Write API (gRPC)](https://docs.cloud.goog
 
 The following quotas and limits apply when you stream data into BigQuery by using the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) . For information about strategies to stay within these limits, see [Troubleshooting quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-streaming-insert-quota) . If you exceed these quotas, BigQuery returns a `quotaExceeded` error. BigQuery might reduce your provisioned quota if your quota is significantly under-utilized for more than one year.
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Limit</th>
-<th>Default</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Maximum bytes per second per project in the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions</td>
-<td>1 GB per second</td>
-<td><p>Your project can stream up to 1 GB per second. This quota is cumulative within a given multi-region. In other words, the sum of bytes per second streamed to all tables for a given project within a multi-region is limited to 1 GB.</p>
-<p>Exceeding this limit causes <code dir="ltr" translate="no">quotaExceeded</code> errors.</p>
-<p>If necessary, you can request a quota increase by contacting <a href="https://cloud.google.com/support-hub">Cloud Customer Care</a> . Request any increase as early as possible, at minimum two weeks before you need it. Quota increase takes time to become available, especially in the case of a significant increase.</p></td>
-</tr>
-<tr class="even">
-<td>Maximum bytes per second per project in all other locations</td>
-<td>300 MB per second</td>
-<td><p>Your project can stream up to 300 MB per second in all locations except the <code dir="ltr" translate="no">us</code> and <code dir="ltr" translate="no">eu</code> multi-regions. This quota is cumulative within a given multi-region. In other words, the sum of bytes per second streamed to all tables for a given project within a region is limited to 300 MB.</p>
-<p>Exceeding this limit causes <code dir="ltr" translate="no">quotaExceeded</code> errors.</p>
-<p>If necessary, you can request a quota increase by contacting <a href="https://cloud.google.com/support-hub">Cloud Customer Care</a> . Request any increase as early as possible, at minimum two weeks before you need it. Quota increase takes time to become available, especially in the case of a significant increase.</p></td>
-</tr>
-<tr class="odd">
-<td>Maximum row size</td>
-<td>10 MB</td>
-<td>Exceeding this value causes <code dir="ltr" translate="no">invalid</code> errors.</td>
-</tr>
-<tr class="even">
-<td>HTTP request size limit</td>
-<td>10 MB</td>
-<td><p>Exceeding this value causes <code dir="ltr" translate="no">invalid</code> errors.</p>
-<p>Internally the request is translated from HTTP JSON into an internal data structure. The translated data structure has its own enforced size limit. It's hard to predict the size of the resulting internal data structure, but if you keep your HTTP requests to 10 MB or less, the chance of hitting the internal limit is low.</p></td>
-</tr>
-<tr class="odd">
-<td>Maximum rows per request</td>
-<td>50,000 rows</td>
-<td>A maximum of 500 rows is recommended. Batching can increase performance and throughput to a point, but at the cost of per-request latency. Too few rows per request and the overhead of each request can make ingestion inefficient. Too many rows per request and the throughput can drop. Experiment with representative data (schema and data sizes) to determine the ideal batch size for your data.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">insertId</code> field length</td>
-<td>128 characters</td>
-<td>Exceeding this value causes <code dir="ltr" translate="no">invalid</code> errors.</td>
-</tr>
-</tbody>
-</table>
+| Limit                                                                   | Default           | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-------------------------------------------------------------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Maximum bytes per second per project in the `us` and `eu` multi-regions | 1 GB per second   | Your project can stream up to 1 GB per second. This quota is cumulative within a given multi-region. In other words, the sum of bytes per second streamed to all tables for a given project within a multi-region is limited to 1 GB. Exceeding this limit causes `quotaExceeded` errors. If necessary, you can request a quota increase by contacting [Cloud Customer Care](https://cloud.google.com/support-hub) . Request any increase as early as possible, at minimum two weeks before you need it. Quota increase takes time to become available, especially in the case of a significant increase.                                                       |
+| Maximum bytes per second per project in all other locations             | 300 MB per second | Your project can stream up to 300 MB per second in all locations except the `us` and `eu` multi-regions. This quota is cumulative within a given multi-region. In other words, the sum of bytes per second streamed to all tables for a given project within a region is limited to 300 MB. Exceeding this limit causes `quotaExceeded` errors. If necessary, you can request a quota increase by contacting [Cloud Customer Care](https://cloud.google.com/support-hub) . Request any increase as early as possible, at minimum two weeks before you need it. Quota increase takes time to become available, especially in the case of a significant increase. |
+| Maximum row size                                                        | 10 MB             | Exceeding this value causes `invalid` errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| HTTP request size limit                                                 | 10 MB             | Exceeding this value causes `invalid` errors. Internally the request is translated from HTTP JSON into an internal data structure. The translated data structure has its own enforced size limit. It's hard to predict the size of the resulting internal data structure, but if you keep your HTTP requests to 10 MB or less, the chance of hitting the internal limit is low.                                                                                                                                                                                                                                                                                 |
+| Maximum rows per request                                                | 50,000 rows       | A maximum of 500 rows is recommended. Batching can increase performance and throughput to a point, but at the cost of per-request latency. Too few rows per request and the overhead of each request can make ingestion inefficient. Too many rows per request and the throughput can drop. Experiment with representative data (schema and data sizes) to determine the ideal batch size for your data.                                                                                                                                                                                                                                                        |
+| `insertId` field length                                                 | 128 characters    | Exceeding this value causes `invalid` errors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 For additional streaming quota, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
@@ -2041,7 +1429,7 @@ For additional streaming quota, see [Request a quota increase](https://docs.clou
 The following quotas apply to the replication bandwidth:
 
 | Quota                                                                                                                                                                                                             | Default                                       | Notes                                                                              |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|------------------------------------------------------------------------------------|
 | Maximum initial backfill replication bandwidth for each [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) that has cross-region data egress from the primary replica to secondary replicas. | 10 physical GiBps per region per organization |                                                                                    |
 | Maximum ongoing replication bandwidth for each [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) that has cross-region data egress from the primary replica to secondary replicas.          | 5 physical GiBps per region per organization  |                                                                                    |
 | Maximum turbo replication bandwidth for each [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) that has cross-region data egress from the primary replica to secondary replicas.            | 5 physical GiBps per region per organization  | Turbo replication bandwidth quota doesn't apply to the initial backfill operation. |

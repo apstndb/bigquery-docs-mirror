@@ -6,7 +6,7 @@ description: Describes INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION view to 
 data_source: docs.cloud.google.com
 ---
 
-# TABLE\_STORAGE\_BY\_ORGANIZATION view
+# TABLE_STORAGE_BY_ORGANIZATION view
 
 The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION` view contains one row for each table or materialized view for the whole organization associated with the current project.
 
@@ -18,9 +18,9 @@ The table storage views give you a convenient way to observe your current storag
 
 The `*_BYTES` columns in the table storage views include information about your use of storage bytes. This information is determined by looking at your storage usage for materialized views and the following types of tables:
 
-  - Permanent tables created through any of the methods described in [Create and use tables](https://docs.cloud.google.com/bigquery/docs/tables) .
-  - Temporary tables created in [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . These tables are placed into datasets with generated names like "\_c018003e063d09570001ef33ae401fad6ab92a6a".
-  - Temporary tables created in [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) ("scripts"). These tables are placed into datasets with generated names like "\_script72280c173c88442c3a7200183a50eeeaa4073719".
+- Permanent tables created through any of the methods described in [Create and use tables](https://docs.cloud.google.com/bigquery/docs/tables) .
+- Temporary tables created in [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . These tables are placed into datasets with generated names like "\_c018003e063d09570001ef33ae401fad6ab92a6a".
+- Temporary tables created in [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) ("scripts"). These tables are placed into datasets with generated names like "\_script72280c173c88442c3a7200183a50eeeaa4073719".
 
 Data stored in the [query results cache](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) is not billed to you and so is not included in the `*_BYTES` column values.
 
@@ -50,15 +50,15 @@ For more information, see [Storage pricing](https://cloud.google.com/bigquery/pr
 
 To query the `INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION` view, you need the following Identity and Access Management (IAM) permissions for your organization:
 
-  - `bigquery.tables.get`
-  - `bigquery.tables.list`
+- `bigquery.tables.get`
+- `bigquery.tables.list`
 
 Each of the following predefined IAM roles includes the preceding permissions:
 
-  - `roles/bigquery.admin`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.metadataViewer`
+- `roles/bigquery.admin`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.metadataViewer`
 
 This schema view is only available to users with defined [Google Cloud organizations](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) .
 
@@ -83,128 +83,128 @@ The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION` view has the following sc
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">project_id</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>project_id</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">project_number</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>project_number</code></td>
+<td><code>INT64</code></td>
 <td>The project number of the project that contains the dataset.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>table_catalog</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset that contains the table or materialized view, also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
+<td><code>table_schema</code></td>
+<td><code>STRING</code></td>
+<td>The name of the dataset that contains the table or materialized view, also referred to as the <code>datasetId</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the table or materialized view, also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
+<td><code>table_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the table or materialized view, also referred to as the <code>tableId</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">creation_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>creation_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The creation time of the table.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_rows</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_rows</code></td>
+<td><code>INT64</code></td>
 <td>The total number of rows in the table or materialized view.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">total_partitions</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_partitions</code></td>
+<td><code>INT64</code></td>
 <td>The number of partitions present in the table or materialized view. Unpartitioned tables return 0.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of logical (uncompressed) bytes in the table or materialized view.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">active_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>active_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of logical (uncompressed) bytes that are younger than 90 days.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">long_term_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>long_term_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of logical (uncompressed) bytes that are older than 90 days.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">current_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>current_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of physical bytes for the current storage of the table across all partitions.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of physical (compressed) bytes used for storage, including active, long-term, and time-travel (deleted or changed data) bytes. Fail-safe (deleted or changed data retained after the time-travel window) bytes aren't included.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">active_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>active_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes younger than 90 days, including time-travel (deleted or changed data) bytes.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">long_term_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>long_term_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes older than 90 days.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">time_travel_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>time_travel_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes used by time-travel storage (deleted or changed data).</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">storage_last_modified_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
-<td>The most recent time that data was written to the table. Returns <code dir="ltr" translate="no">NULL</code> if no data exists.</td>
+<td><code>storage_last_modified_time</code></td>
+<td><code>TIMESTAMP</code></td>
+<td>The most recent time that data was written to the table. Returns <code>NULL</code> if no data exists.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">deleted</code></td>
-<td><code dir="ltr" translate="no">BOOLEAN</code></td>
+<td><code>deleted</code></td>
+<td><code>BOOLEAN</code></td>
 <td>Indicates whether or not the table is deleted.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The type of table. For example, <code dir="ltr" translate="no">BASE TABLE</code> .</td>
+<td><code>table_type</code></td>
+<td><code>STRING</code></td>
+<td>The type of table. For example, <code>BASE TABLE</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">managed_table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>This column is in Preview. The managed type of the table. For example, <code dir="ltr" translate="no">NATIVE</code> or <code dir="ltr" translate="no">BIGLAKE</code> .</td>
+<td><code>managed_table_type</code></td>
+<td><code>STRING</code></td>
+<td>This column is in Preview. The managed type of the table. For example, <code>NATIVE</code> or <code>BIGLAKE</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">fail_safe_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>fail_safe_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes used by the fail-safe storage (deleted or changed data).</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">last_metadata_index_refresh_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>last_metadata_index_refresh_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The last metadata index refresh time of the table.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_deletion_reason</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>Table deletion reason if the <code dir="ltr" translate="no">deleted</code> field is true. The possible values are as follows:
+<td><code>table_deletion_reason</code></td>
+<td><code>STRING</code></td>
+<td>Table deletion reason if the <code>deleted</code> field is true. The possible values are as follows:
 <ul>
-<li><code dir="ltr" translate="no">TABLE_EXPIRATION:</code> table deleted after set expiration time</li>
-<li><code dir="ltr" translate="no">DATASET_DELETION:</code> dataset deleted by user</li>
-<li><code dir="ltr" translate="no">USER_DELETED:</code> table was deleted by user</li>
+<li><code>TABLE_EXPIRATION:</code> table deleted after set expiration time</li>
+<li><code>DATASET_DELETION:</code> dataset deleted by user</li>
+<li><code>USER_DELETED:</code> table was deleted by user</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_deletion_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>table_deletion_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The deletion time of the table.</td>
 </tr>
 </tbody>
@@ -216,48 +216,56 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-| View name                                                                                                             | Resource scope                                   | Region scope              |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------- |
-| ``[`         PROJECT_ID        `.]`region-         REGION        `.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`` | Organization that contains the specified project | `         REGION        ` |
+| View name                                                                                                     | Resource scope                                   | Region scope |
+|---------------------------------------------------------------------------------------------------------------|--------------------------------------------------|--------------|
+| `` [`  ``` PROJECT_ID ```  `.]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION `` | Organization that contains the specified project | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 The following example shows how to return storage information for tables in a specified project in an organization:
 
-    SELECT * FROM `myProject`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION;
+```
+SELECT * FROM `myProject`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION;
+```
 
 The following example shows how to return storage information by project for tables in an organization:
 
-    SELECT * FROM `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION;
+```
+SELECT * FROM `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION;
+```
 
 ## Example
 
 The following example shows you which projects in an organization are currently using the most storage.
 
-    SELECT
-      project_id,
-      SUM(total_logical_bytes) AS total_logical_bytes
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION
-    GROUP BY
-      project_id
-    ORDER BY
-      total_logical_bytes DESC;
+```
+SELECT
+  project_id,
+  SUM(total_logical_bytes) AS total_logical_bytes
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION
+GROUP BY
+  project_id
+ORDER BY
+  total_logical_bytes DESC;
+```
 
 The result is similar to the following:
 
-    +---------------------+---------------------+
-    |     project_id      | total_logical_bytes |
-    +---------------------+---------------------+
-    | projecta            |     971329178274633 |
-    +---------------------+---------------------+
-    | projectb            |     834638211024843 |
-    +---------------------+---------------------+
-    | projectc            |     562910385625126 |
-    +---------------------+---------------------+
+```
++---------------------+---------------------+
+|     project_id      | total_logical_bytes |
++---------------------+---------------------+
+| projecta            |     971329178274633 |
++---------------------+---------------------+
+| projectb            |     834638211024843 |
++---------------------+---------------------+
+| projectc            |     562910385625126 |
++---------------------+---------------------+
+```

@@ -6,38 +6,26 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DatasetAccessEntry#SCHEMA_REPRESENTATION)
+- [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DatasetAccessEntry#SCHEMA_REPRESENTATION)
 
 Grants all resources of particular types in a particular dataset read access to the current dataset.
 
 Similar to how individually authorized views work, updates to any resource granted through its dataset (including creation of new resources) requires read permission to referenced resources, plus write permission to the authorizing dataset.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataset&quot;: {object (DatasetReference)},&quot;targetTypes&quot;: [enum (TargetType)]}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "dataset": {
+    object (DatasetReference)
+  },
+  "targetTypes": [
+    enum (TargetType)
+  ]
+}
+```
 
-`dataset`
-
-` object ( DatasetReference  ` )
-
-The dataset this entry applies to
-
-`targetTypes[]`
-
-` enum ( TargetType  ` )
-
-Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.
+| Fields          |                                                                                                                                                                                                                                                          |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dataset`       | `object ( `[`DatasetReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference)` )` The dataset this entry applies to                                                                                           |
+| `targetTypes[]` | `enum ( `[`TargetType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/TargetType)` )` Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future. |

@@ -28,22 +28,22 @@ The BigQuery Data Transfer Service for the Facebook Ads connector supports the f
 <td>Supported reports</td>
 <td>The BigQuery Data Transfer Service for Facebook Ads supports the transfer of the following Facebook Ads reports:
 <ul>
-<li><code dir="ltr" translate="no">AdAccounts</code></li>
-<li><code dir="ltr" translate="no">AdInsights</code></li>
-<li><code dir="ltr" translate="no">AdInsightsActions</code></li>
-<li><p><code dir="ltr" translate="no">AdInsightsMMM</code><br />
+<li><code>AdAccounts</code></li>
+<li><code>AdInsights</code></li>
+<li><code>AdInsightsActions</code></li>
+<li><p><code>AdInsightsMMM</code><br />
 </p>
 <blockquote>
 <strong>Note:</strong> Support for this report is temporarily disabled. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jul06-fb-ads">July 06, 2026</a>
 </blockquote></li>
-<li><code dir="ltr" translate="no">Ads</code></li>
-<li><code dir="ltr" translate="no">AdCreatives</code></li>
-<li><code dir="ltr" translate="no">AdSets</code></li>
-<li><code dir="ltr" translate="no">Campaigns</code></li>
-<li><code dir="ltr" translate="no">AdImages</code></li>
-<li><code dir="ltr" translate="no">AdLabels</code></li>
-<li><code dir="ltr" translate="no">Businesses</code></li>
-<li><code dir="ltr" translate="no">CustomAudiences</code></li>
+<li><code>Ads</code></li>
+<li><code>AdCreatives</code></li>
+<li><code>AdSets</code></li>
+<li><code>Campaigns</code></li>
+<li><code>AdImages</code></li>
+<li><code>AdLabels</code></li>
+<li><code>Businesses</code></li>
+<li><code>CustomAudiences</code></li>
 </ul>
 <p>For information about how Facebook Ads reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/facebook-ads-transformation">Facebook Ads report transformation</a> .</p></td>
 </tr>
@@ -74,13 +74,13 @@ When you transfer data from Facebook Ads into BigQuery, the data is loaded into 
 
 Some ingestion behaviors differ between different Facebook Ads reports:
 
-  - For `AdAccounts` , `AdCreatives` , `AdImages` , `AdLabels` , `Businesses` , and `CustomAudiences` tables, snapshots are taken once a day and stored in the partition of the last transfer run date.
+- For `AdAccounts` , `AdCreatives` , `AdImages` , `AdLabels` , `Businesses` , and `CustomAudiences` tables, snapshots are taken once a day and stored in the partition of the last transfer run date.
 
-  - Data transfers for the `AdInsights` , `AdInsightActions` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify a `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
+- Data transfers for the `AdInsights` , `AdInsightActions` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify a `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
 
-  - For `AdInsights` and `AdInsightsActions` tables, the table partition that the data is loaded into corresponds to the date from the data source.
+- For `AdInsights` and `AdInsightsActions` tables, the table partition that the data is loaded into corresponds to the date from the data source.
 
-  - The [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro#refresh) only applies to the `AdInsights` and `AdInsightsActions` tables.
+- The [refresh window](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer-intro#refresh) only applies to the `AdInsights` and `AdInsightsActions` tables.
 
 ### Refresh windows
 
@@ -96,5 +96,5 @@ For pricing information about Facebook Ads transfers, see [Data Transfer Service
 
 ## What's next
 
-  - Learn about [scheduling a Facebook Ads transfer](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) .
-  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- Learn about [scheduling a Facebook Ads transfer](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) .
+- Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

@@ -20,25 +20,25 @@ When you run a query, the query engine distributes the work in parallel across m
 
 Here are some key features of BigQuery storage:
 
-  - **Managed** . BigQuery storage is a completely managed service. You don't need to provision storage resources or reserve units of storage. BigQuery automatically allocates storage for you when you load data into the system. You only pay for the amount of storage that you use. The BigQuery pricing model charges for compute and storage separately. For pricing details, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#storage) .
+- **Managed** . BigQuery storage is a completely managed service. You don't need to provision storage resources or reserve units of storage. BigQuery automatically allocates storage for you when you load data into the system. You only pay for the amount of storage that you use. The BigQuery pricing model charges for compute and storage separately. For pricing details, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
-  - **Durable** . BigQuery storage is designed for 99.999999999% (11 9's) annual durability. BigQuery replicates your data across multiple availability zones to protect from data loss due to machine-level failures or [zonal](https://docs.cloud.google.com/docs/geography-and-regions#zonal_resources) failures. For more information, see [Reliability: Disaster planning](https://docs.cloud.google.com/bigquery/docs/reliability-intro#disaster_planning) .
+- **Durable** . BigQuery storage is designed for 99.999999999% (11 9's) annual durability. BigQuery replicates your data across multiple availability zones to protect from data loss due to machine-level failures or [zonal](https://docs.cloud.google.com/docs/geography-and-regions#zonal_resources) failures. For more information, see [Reliability: Disaster planning](https://docs.cloud.google.com/bigquery/docs/reliability-intro#disaster_planning) .
 
-  - **Encrypted** . BigQuery automatically encrypts all data before it is written to disk. You can provide your own encryption key or let Google manage the encryption key. For more information, see [Encryption at rest](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .
+- **Encrypted** . BigQuery automatically encrypts all data before it is written to disk. You can provide your own encryption key or let Google manage the encryption key. For more information, see [Encryption at rest](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .
 
-  - **Efficient** . BigQuery storage uses an efficient encoding format that is optimized for analytic workloads. If you want to learn more about BigQuery's storage format, see the blog post [Inside Capacitor, BigQuery's next-generation columnar storage format](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) .
+- **Efficient** . BigQuery storage uses an efficient encoding format that is optimized for analytic workloads. If you want to learn more about BigQuery's storage format, see the blog post [Inside Capacitor, BigQuery's next-generation columnar storage format](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) .
 
 ## Table data
 
 The majority of the data that you store in BigQuery is table data. Table data includes standard tables, table clones, table snapshots, and materialized views. You are billed for the storage that you use for these resources. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
-  - [Standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) contain structured data. Every table has a schema, and every column in the schema has a data type. BigQuery stores data in columnar format. See [Storage layout](https://docs.cloud.google.com/bigquery/docs/storage_overview#storage_layout) in this document.
+- [Standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) contain structured data. Every table has a schema, and every column in the schema has a data type. BigQuery stores data in columnar format. See [Storage layout](https://docs.cloud.google.com/bigquery/docs/storage_overview#storage_layout) in this document.
 
-  - [Table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) are lightweight, writable copies of standard tables. BigQuery only stores the delta between a table clone and its base table.
+- [Table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) are lightweight, writable copies of standard tables. BigQuery only stores the delta between a table clone and its base table.
 
-  - [Table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) are point-in-time copies of tables. Table snapshots are read-only, but you can restore a table from a table snapshot. BigQuery only stores the delta between a table snapshot and its base table.
+- [Table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) are point-in-time copies of tables. Table snapshots are read-only, but you can restore a table from a table snapshot. BigQuery only stores the delta between a table snapshot and its base table.
 
-  - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) are precomputed views that periodically cache the results of the view query. The cached results are stored in BigQuery storage.
+- [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) are precomputed views that periodically cache the results of the view query. The cached results are stored in BigQuery storage.
 
 In addition, [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) are stored as temporary tables. You aren't charged for cached query results stored in temporary tables.
 
@@ -78,8 +78,8 @@ Changing your storage billing model only changes the metering configuration. It 
 
 The model you select determines only how your stored bytes are measured and priced according to [storage pricing](https://cloud.google.com/bigquery/pricing#storage) :
 
-  - **Logical billing:** You are billed based on the uncompressed size of the data. This is the default model.
-  - **Physical billing:** You are billed based on the compressed size of the data on disk.
+- **Logical billing:** You are billed based on the uncompressed size of the data. This is the default model.
+- **Physical billing:** You are billed based on the compressed size of the data on disk.
 
 Whichever billing model you choose, your data is stored as physical bytes.
 
@@ -95,8 +95,8 @@ You can't enroll a dataset in physical storage billing if your organization has 
 
 Optimizing BigQuery storage improves query performance and controls cost. To view the table storage metadata, query the following `INFORMATION_SCHEMA` views:
 
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
 
 For information about optimizing storage, see [Optimize storage in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
 
@@ -104,11 +104,11 @@ For information about optimizing storage, see [Optimize storage in BigQuery](htt
 
 There are several basic patterns for ingesting data into BigQuery.
 
-  - **Batch load:** Load your source data into a BigQuery table in a single batch operation. This can be a one-time operation or you can automate it to occur on a schedule. A batch load operation can create a new table or append data into an existing table.
+- **Batch load:** Load your source data into a BigQuery table in a single batch operation. This can be a one-time operation or you can automate it to occur on a schedule. A batch load operation can create a new table or append data into an existing table.
 
-  - **Streaming:** Continually stream smaller batches of data, so that the data is available for querying in near-real-time.
+- **Streaming:** Continually stream smaller batches of data, so that the data is available for querying in near-real-time.
 
-  - **Generated data:** Use SQL statements to insert rows into an existing table or write the results of a query to a table.
+- **Generated data:** Use SQL statements to insert rows into an existing table or write the results of a query to a table.
 
 For more information about when to choose each of these ingestion methods, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) . For pricing information, see [Data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
@@ -116,21 +116,21 @@ For more information about when to choose each of these ingestion methods, see [
 
 Most of the time, you store data in BigQuery in order to run analytical [queries](https://docs.cloud.google.com/bigquery/docs/query-overview) on that data. However, sometimes you might want to read records directly from a table. BigQuery provides several ways to read table data:
 
-  - **[BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) :** Synchronous paginated access with the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. Data is read in a serial fashion, one page per invocation. For more information, see [Browsing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) .
+- **[BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest) :** Synchronous paginated access with the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method. Data is read in a serial fashion, one page per invocation. For more information, see [Browsing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) .
 
-  - **[BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) :** Streaming high-throughput access that also supports server-side column projection and filtering. Reads can be parallelized across many readers by segmenting them into multiple disjoint streams.
+- **[BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) :** Streaming high-throughput access that also supports server-side column projection and filtering. Reads can be parallelized across many readers by segmenting them into multiple disjoint streams.
 
-  - **[Export](https://docs.cloud.google.com/bigquery/docs/exporting-data) :** Asynchronous high-throughput copying to Google Cloud Storage, either with extract jobs or the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) . If you need to copy data in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement.
+- **[Export](https://docs.cloud.google.com/bigquery/docs/exporting-data) :** Asynchronous high-throughput copying to Google Cloud Storage, either with extract jobs or the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) . If you need to copy data in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement.
 
-  - **[Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets) :** Asynchronous copying of datasets within BigQuery. The copy is done logically when the source and destination location is the same.
+- **[Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets) :** Asynchronous copying of datasets within BigQuery. The copy is done logically when the source and destination location is the same.
 
 For pricing information, see [Data extraction pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) .
 
 Based on the application requirements, you can read the table data:
 
-  - **Read and copy:** If you need an at-rest copy in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement. If you only want to read the data, use the BigQuery Storage API. If you want to make a copy within BigQuery, then use a copy job.
-  - **Scale:** The BigQuery API is the least efficient method and shouldn't be used for high volume reads. If you need to export more than 50 TB of data per day, use the `EXPORT DATA` statement or the BigQuery Storage API.
-  - **Time to return the first row:** The BigQuery API is the fastest method to return the first row, but should only be used to read small amounts of data. The BigQuery Storage API is slower to return the first row, but has much higher-throughput. Exports and copies must finish before any rows can be read, so the time to the first row for these types of jobs can be on the order of minutes.
+- **Read and copy:** If you need an at-rest copy in Cloud Storage, export the data either with an extract job or an `EXPORT DATA` statement. If you only want to read the data, use the BigQuery Storage API. If you want to make a copy within BigQuery, then use a copy job.
+- **Scale:** The BigQuery API is the least efficient method and shouldn't be used for high volume reads. If you need to export more than 50 TB of data per day, use the `EXPORT DATA` statement or the BigQuery Storage API.
+- **Time to return the first row:** The BigQuery API is the fastest method to return the first row, but should only be used to read small amounts of data. The BigQuery Storage API is slower to return the first row, but has much higher-throughput. Exports and copies must finish before any rows can be read, so the time to the first row for these types of jobs can be on the order of minutes.
 
 ## Deletion
 
@@ -138,7 +138,7 @@ When you delete a table, the data persists for at least the duration of your [ti
 
 ## What's next
 
-  - Learn about [working with tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) .
-  - Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
-  - Learn how to [query data in BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview) .
-  - Learn about [data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance) .
+- Learn about [working with tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) .
+- Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
+- Learn how to [query data in BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview) .
+- Learn about [data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance) .

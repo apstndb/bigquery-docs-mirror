@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# SESSIONS\_BY\_PROJECT view
+# SESSIONS_BY_PROJECT view
 
 The `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view contains real-time metadata about all BigQuery sessions in the current project.
 
@@ -16,8 +16,8 @@ The `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view contains real-time metadata ab
 
 To query the `INFORMATION_SCHEMA.SESSIONS_BY_PROJECT` view, you need the `bigquery.jobs.listAll` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
-  - Project Owner
-  - BigQuery Admin
+- Project Owner
+- BigQuery Admin
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -30,7 +30,7 @@ The `INFORMATION_SCHEMA.SESSIONS_BY_*` view has the following schema:
 > **Note:** The underlying data is partitioned by the `creation_time` column and clustered by `project_id` and `user_email` .
 
 | Column name          | Data type   | Value                                                                                                                       |
-| -------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+|----------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `creation_time`      | `TIMESTAMP` | ( *Partitioning column* ) Creation time of this session. Partitioning is based on the UTC time of this timestamp.           |
 | `expiration_time`    | `TIMESTAMP` | ( *Partitioning column* ) Expiration time of this session. Partitioning is based on the UTC time of this timestamp.         |
 | `is_active`          | `BOOL`      | Is the session is still active? `TRUE` if yes, otherwise `FALSE` .                                                          |
@@ -50,42 +50,48 @@ This view contains currently running sessions and the history of sessions comple
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                 | Resource scope | Region scope              |
-| --------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT`` | Project level  | `         REGION        ` |
+| View name                                                                                     | Resource scope | Region scope |
+|-----------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
+```
+`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
+```
 
 For example, `` `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT `` . The following example lists all users or service accounts that created sessions for a given project within the last day:
 
-    SELECT
-      DISTINCT(user_email) AS user
-    FROM
-      `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
-    WHERE
-      is_active = true
-      AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
+```
+SELECT
+  DISTINCT(user_email) AS user
+FROM
+  `region-us`.INFORMATION_SCHEMA.SESSIONS_BY_PROJECT
+WHERE
+  is_active = true
+  AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY);
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +--------------+
-    | user         |
-    +--------------+
-    | abc@xyz.com  |
-    +--------------+
-    | def@xyz.com  |
-    +--------------+
+```
++--------------+
+| user         |
++--------------+
+| abc@xyz.com  |
++--------------+
+| def@xyz.com  |
++--------------+
+```

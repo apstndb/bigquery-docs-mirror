@@ -10,20 +10,20 @@ data_source: docs.cloud.google.com
 
 This page shows you how to list BigQuery ML models in a dataset. You can list BigQuery ML models by:
 
-  - Using the Google Cloud console.
-  - Using the `bq ls` command in the bq command-line tool.
-  - Calling the [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) API method directly or by using the client libraries.
+- Using the Google Cloud console.
+- Using the `bq ls` command in the bq command-line tool.
+- Calling the [`models.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/list) API method directly or by using the client libraries.
 
 ## Required permissions
 
 To list models in a dataset, you must be assigned the [`READER`](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles) role on the dataset, or you must be assigned a project-level Identity and Access Management (IAM) role that includes `bigquery.models.list` permissions. If you are granted `bigquery.models.list` permissions at the project level, you can list models in any dataset in the project. The following predefined, project-level IAM roles include `bigquery.models.list` permissions:
 
-  - `bigquery.dataViewer`
-  - `bigquery.dataEditor`
-  - `bigquery.dataOwner`
-  - `bigquery.metadataViewer`
-  - `bigquery.user`
-  - `bigquery.admin`
+- `bigquery.dataViewer`
+- `bigquery.dataEditor`
+- `bigquery.dataOwner`
+- `bigquery.metadataViewer`
+- `bigquery.user`
+- `bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery ML, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) . For more information on dataset-level roles, see [Basic roles for datasets](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles#dataset-basic-roles) .
 
@@ -36,10 +36,10 @@ To list models in a dataset:
 1.  In the Google Cloud console, go to the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -51,30 +51,38 @@ To list models in a dataset:
 
 Issue the `bq ls` command with the `--models` or `-m` flag. The [`--format`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) flag can be used to control the output. If you are listing models in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
-    bq ls -m --format=pretty PROJECT_ID:DATASET
+```
+bq ls -m --format=pretty PROJECT_ID:DATASET
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` is your project ID.
-  - `  DATASET  ` is the name of the dataset.
+- `PROJECT_ID` is your project ID.
+- `DATASET` is the name of the dataset.
 
 The command output looks like the following when the `--format=pretty` flag is used. `--format=pretty` produces formatted table output. The `Model Type` column displays the model type, for example, `KMEANS` .
 
-    +-------------------------+------------+--------+-----------------+
-    |           Id            | Model Type | Labels |  Creation Time  |
-    +-------------------------+------------+--------+-----------------+
-    | mymodel                 | KMEANS     |        | 03 May 03:02:27 |
-    +-------------------------+------------+--------+-----------------+
+```
++-------------------------+------------+--------+-----------------+
+|           Id            | Model Type | Labels |  Creation Time  |
++-------------------------+------------+--------+-----------------+
+| mymodel                 | KMEANS     |        | 03 May 03:02:27 |
++-------------------------+------------+--------+-----------------+
+```
 
 Examples:
 
 Enter the following command to list models in dataset `mydataset` in your default project.
 
-    bq ls --models --format=pretty mydataset
+```
+bq ls --models --format=pretty mydataset
+```
 
 Enter the following command to list models in dataset `mydataset` in `myotherproject` . This command uses the `-m` shortcut to list models.
 
-    bq ls -m --format=pretty myotherproject:mydataset
+```
+bq ls -m --format=pretty myotherproject:mydataset
+```
 
 ### API
 
@@ -86,42 +94,44 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // listModels demonstrates iterating through the collection of ML models in a dataset
-    // and printing a basic identifier of the model.
-    func listModels(w io.Writer, projectID, datasetID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     ctx := context.Background()
-    
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %w", err)
-     }
-     defer client.Close()
-    
-     fmt.Fprintf(w, "Models contained in dataset %q\n", datasetID)
-     it := client.Dataset(datasetID).Models(ctx)
-     for {
-         m, err := it.Next()
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintf(w, "Model: %s\n", m.FullyQualifiedName())
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// listModels demonstrates iterating through the collection of ML models in a dataset
+// and printing a basic identifier of the model.
+func listModels(w io.Writer, projectID, datasetID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    ctx := context.Background()
+
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %w", err)
     }
+    defer client.Close()
+
+    fmt.Fprintf(w, "Models contained in dataset %q\n", datasetID)
+    it := client.Dataset(datasetID).Models(ctx)
+    for {
+        m, err := it.Next()
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintf(w, "Model: %s\n", m.FullyQualifiedName())
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -129,40 +139,42 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.paging.Page;
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQuery.ModelListOption;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Model;
-    
-    public class ListModels {
-    
-      public static void runListModels() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        listModels(datasetName);
+```java
+import com.google.api.gax.paging.Page;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQuery.ModelListOption;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Model;
+
+public class ListModels {
+
+  public static void runListModels() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    listModels(datasetName);
+  }
+
+  public static void listModels(String datasetName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Page<Model> models = bigquery.listModels(datasetName, ModelListOption.pageSize(100));
+      if (models == null) {
+        System.out.println("Dataset does not contain any models.");
+        return;
       }
-    
-      public static void listModels(String datasetName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Page<Model> models = bigquery.listModels(datasetName, ModelListOption.pageSize(100));
-          if (models == null) {
-            System.out.println("Dataset does not contain any models.");
-            return;
-          }
-          models
-              .iterateAll()
-              .forEach(model -> System.out.printf("Success! Model ID: %s", model.getModelId()));
-        } catch (BigQueryException e) {
-          System.out.println("Models not listed in dataset due to error: \n" + e.toString());
-        }
-      }
+      models
+          .iterateAll()
+          .forEach(model -> System.out.printf("Success! Model ID: %s", model.getModelId()));
+    } catch (BigQueryException e) {
+      System.out.println("Models not listed in dataset due to error: \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -170,26 +182,28 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function listModels() {
-      // Lists all existing models in the dataset.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-    
-      const dataset = bigquery.dataset(datasetId);
-    
-      dataset.getModels().then(data => {
-        const models = data[0];
-        console.log('Models:');
-        models.forEach(model => console.log(model.metadata));
-      });
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function listModels() {
+  // Lists all existing models in the dataset.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+
+  const dataset = bigquery.dataset(datasetId);
+
+  dataset.getModels().then(data => {
+    const models = data[0];
+    console.log('Models:');
+    models.forEach(model => console.log(model.metadata));
+  });
+}
+```
 
 ### Python
 
@@ -197,31 +211,33 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set dataset_id to the ID of the dataset that contains
-    #                  the models you are listing.
-    # dataset_id = 'your-project.your_dataset'
-    
-    models = client.list_models(dataset_id)  # Make an API request.
-    
-    print("Models contained in '{}':".format(dataset_id))
-    for model in models:
-        full_model_id = "{}.{}.{}".format(
-            model.project, model.dataset_id, model.model_id
-        )
-        friendly_name = model.friendly_name
-        print("{}: friendly_name='{}'".format(full_model_id, friendly_name))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set dataset_id to the ID of the dataset that contains
+#                  the models you are listing.
+# dataset_id = 'your-project.your_dataset'
+
+models = client.list_models(dataset_id)  # Make an API request.
+
+print("Models contained in '{}':".format(dataset_id))
+for model in models:
+    full_model_id = "{}.{}.{}".format(
+        model.project, model.dataset_id, model.model_id
+    )
+    friendly_name = model.friendly_name
+    print("{}: friendly_name='{}'".format(full_model_id, friendly_name))
+```
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .
-  - To learn more about working with models, see:
-      - [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata)
-      - [Update model metadata](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata)
-      - [Manage models](https://docs.cloud.google.com/bigquery/docs/managing-models)
-      - [Delete models](https://docs.cloud.google.com/bigquery/docs/deleting-models)
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .
+- To learn more about working with models, see:
+  - [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata)
+  - [Update model metadata](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata)
+  - [Manage models](https://docs.cloud.google.com/bigquery/docs/managing-models)
+  - [Delete models](https://docs.cloud.google.com/bigquery/docs/deleting-models)

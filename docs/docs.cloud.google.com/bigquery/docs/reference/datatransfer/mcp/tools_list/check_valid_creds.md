@@ -20,34 +20,24 @@ If `has_valid_creds` is true, then the credentials are valid. Otherwise, the cre
 
 The following code sample shows how to use `curl` to call the `check_valid_creds` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;check_valid_creds&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerydatatransfer.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "check_valid_creds",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -55,37 +45,40 @@ A request to determine whether the user has valid credentials. This method is us
 
 ### CheckValidCredsRequest
 
+**JSON representation**
+
+```
+{
+  "name": string
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;name&quot;: string
-}</code></pre></td>
+<td><code>name</code></td>
+<td><p><code>string</code></p>
+<p>Required. The name of the data source. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/dataSources/{data_source_id}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}</code></li>
+</ul></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`name`
-
-`string`
-
-Required. The name of the data source. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{project_id}/dataSources/{data_source_id}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
 
 ## Output Schema
 
@@ -93,31 +86,17 @@ A response indicating whether the credentials exist and are valid.
 
 ### CheckValidCredsResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;hasValidCreds&quot;: boolean
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "hasValidCreds": boolean
+}
+```
 
-`hasValidCreds`
-
-`boolean`
-
-If set to `true` , the credentials exist and are valid.
+| Fields          |                                                                   |
+|-----------------|-------------------------------------------------------------------|
+| `hasValidCreds` | `boolean` If set to `true` , the credentials exist and are valid. |
 
 ### Tool Annotations
 
@@ -125,9 +104,9 @@ If set to `true` , the credentials exist and are valid.
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ✅ \| Read Only Hint: ✅ \| Open World Hint: ❌

@@ -34,8 +34,8 @@ Your project can run an unlimited number of DML statements. While DML statements
 
 To stay within BigQuery's daily table operation limit, consider these best practices:
 
-  - Perform fewer, larger writes instead of many small ones.
-  - Minimize separate write jobs to your final production table each day.
+- Perform fewer, larger writes instead of many small ones.
+- Minimize separate write jobs to your final production table each day.
 
 To use these best practices, batch or stream your data into BigQuery. Your choice of load method depends on whether you need to load high volumes of data in real time, or if real-time loading is not a concern. The following sections explain batch loading and data streaming in detail, including the tools and services you can use for each method.
 
@@ -55,44 +55,48 @@ The following example shows how to use wildcards with your `bq load` command or 
 
 The following example shows a [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) to load CSV data from Cloud Storage into a BigQuery table named `my_target_table` . To select more than one source filename, use a wildcard with the command. The `AUTODETECT` flag automatically determines your table schema from the source data in Cloud Storage, and can support a wildcard ( `*` ) to load multiple files that fit a specific naming pattern into the BigQuery table.
 
-    bq load \
-      --source_format=CSV \
-      --autodetect \
-      --project_id=PROJECT_ID \
-      DATASET_NAME.TABLE_NAME \
-      "gs://BUCKET_NAME/OBJECT_PATH_WILDCARD"
+```
+bq load \
+  --source_format=CSV \
+  --autodetect \
+  --project_id=PROJECT_ID \
+  DATASET_NAME.TABLE_NAME \
+  "gs://BUCKET_NAME/OBJECT_PATH_WILDCARD"
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the ID of your Google Cloud project.
-  - `  DATASET_NAME  ` : the name of the BigQuery dataset where you want to load the data.
-  - `  TABLE_NAME  ` : the name of the BigQuery table where you want to load the data.
-  - `  BUCKET_NAME  ` : the name of your Cloud Storage bucket that contains the source files.
-  - `  OBJECT_PATH_WILDCARD  ` : the path to your CSV files in the Cloud Storage bucket. Include a wildcard ( `*` ) to match multiple files. For example, the string `gs://my-bucket/path/to/data/my_prefix_*.csv` uses the wildcard character `*` to load all files in `gs://my-bucket/path/to/data/` that begin with `my_prefix_` and end with `.csv` .
+- `PROJECT_ID` : the ID of your Google Cloud project.
+- `DATASET_NAME` : the name of the BigQuery dataset where you want to load the data.
+- `TABLE_NAME` : the name of the BigQuery table where you want to load the data.
+- `BUCKET_NAME` : the name of your Cloud Storage bucket that contains the source files.
+- `OBJECT_PATH_WILDCARD` : the path to your CSV files in the Cloud Storage bucket. Include a wildcard ( `*` ) to match multiple files. For example, the string `gs://my-bucket/path/to/data/my_prefix_*.csv` uses the wildcard character `*` to load all files in `gs://my-bucket/path/to/data/` that begin with `my_prefix_` and end with `.csv` .
 
 For more information, see the following:
 
-  - [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards)
-  - [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference)
+- [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards)
+- [bq command-line tool reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference)
 
 ### SQL
 
 The following example shows how to use the SQL [`LOAD DATA` query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) to load CSV data from a Cloud Storage bucket into BigQuery table. To select more than one source filename, use a wildcard with the command.
 
-    LOAD DATA INTO
-    DATASET_NAME.TABLE_NAME
-    FROM FILES (
-      format = 'SOURCE_FORMAT',
-      uris = ['gs://BUCKET_NAME/OBJECT_PATH_WILDCARD]
-      );
+```
+LOAD DATA INTO
+DATASET_NAME.TABLE_NAME
+FROM FILES (
+  format = 'SOURCE_FORMAT',
+  uris = ['gs://BUCKET_NAME/OBJECT_PATH_WILDCARD]
+  );
+```
 
 Replace the following:
 
-  - `  DATASET_NAME  ` : the name of the BigQuery dataset where you want to load the data.
-  - `  TABLE_NAME  ` : the name of the BigQuery table where you want to load the data.
-  - The `  SOURCE_FORMAT  ` sets the type of your source files, for example, `CSV` or `JSON` . In this example, use `CSV` .
-  - `  BUCKET_NAME  ` : the name of your Cloud Storage bucket that contains the source files.
-  - `  OBJECT_PATH_WILDCARD  ` : the path to your CSV files in the Cloud Storage bucket. Include a wildcard ( `*` ) to match multiple files. For example, the string `gs://my-bucket/path/to/data/my_prefix_*.csv` uses the wildcard character `*` to load all files in `gs://my-bucket/path/to/data/` that begin with `my_prefix_` and end with `.csv` .
+- `DATASET_NAME` : the name of the BigQuery dataset where you want to load the data.
+- `TABLE_NAME` : the name of the BigQuery table where you want to load the data.
+- The `SOURCE_FORMAT` sets the type of your source files, for example, `CSV` or `JSON` . In this example, use `CSV` .
+- `BUCKET_NAME` : the name of your Cloud Storage bucket that contains the source files.
+- `OBJECT_PATH_WILDCARD` : the path to your CSV files in the Cloud Storage bucket. Include a wildcard ( `*` ) to match multiple files. For example, the string `gs://my-bucket/path/to/data/my_prefix_*.csv` uses the wildcard character `*` to load all files in `gs://my-bucket/path/to/data/` that begin with `my_prefix_` and end with `.csv` .
 
 For more information, see [Load statements in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) .
 

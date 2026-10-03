@@ -12,123 +12,36 @@ A service to modify your BigQuery reservations.
 
 The Service name `bigqueryreservation.googleapis.com` is needed to create RPC client stubs.
 
-## `        google.cloud.bigquery.reservation.v1.ReservationService       `
+## [`google.cloud.bigquery.reservation.v1.ReservationService`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService)
 
-Methods
-
-`  CreateAssignment  `
-
-Creates an assignment object which allows the given project to submit jobs of a certain type using slots from the specified reservation.
-
-`  CreateCapacityCommitment  `
-
-Creates a new capacity commitment resource.
-
-`  CreateReservation  `
-
-Creates a new reservation resource.
-
-`  CreateReservationGroup  `
-
-Creates a new reservation group.
-
-`  DeleteAssignment  `
-
-Deletes a assignment.
-
-`  DeleteCapacityCommitment  `
-
-Deletes a capacity commitment.
-
-`  DeleteReservation  `
-
-Deletes a reservation.
-
-`  DeleteReservationGroup  `
-
-Deletes a reservation.
-
-`  FailoverReservation  `
-
-Fail over a reservation to the secondary location.
-
-`  GetBiReservation  `
-
-Retrieves a BI reservation.
-
-`  GetCapacityCommitment  `
-
-Returns information about the capacity commitment.
-
-`  GetIamPolicy  `
-
-Gets the access control policy for a resource.
-
-`  GetReservation  `
-
-Returns information about the reservation.
-
-`  GetReservationGroup  `
-
-Returns information about the reservation group.
-
-`  ListAssignments  `
-
-Lists assignments.
-
-`  ListCapacityCommitments  `
-
-Lists all the capacity commitments for the admin project.
-
-`  ListReservationGroups  `
-
-Lists all the reservation groups for the project in the specified location.
-
-`  ListReservations  `
-
-Lists all the reservations for the project in the specified location.
-
-`  MergeCapacityCommitments  `
-
-Merges capacity commitments of the same plan into a single commitment.
-
-`  MoveAssignment  `
-
-Moves an assignment under a new reservation.
-
-`  SearchAllAssignments  `
-
-Looks up assignments for a specified resource for a particular region.
-
-`  SearchAssignments  `  
-**(deprecated)**
-
-Deprecated: Looks up assignments for a specified resource for a particular region.
-
-`  SetIamPolicy  `
-
-Sets an access control policy for a resource.
-
-`  SplitCapacityCommitment  `
-
-Splits capacity commitment to two commitments of the same plan and `commitment_end_time` .
-
-`  TestIamPermissions  `
-
-Gets your permissions on a resource.
-
-`  UpdateAssignment  `
-
-Updates an existing assignment.
-
-`  UpdateBiReservation  `
-
-Updates a BI reservation.
-
-`  UpdateCapacityCommitment  `
-
-Updates an existing capacity commitment.
-
-`  UpdateReservation  `
-
-Updates an existing reservation resource.
+| Methods                                                                                                                                                                                                                           |                                                                                                                                          |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| [`CreateAssignment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.CreateAssignment)                        | Creates an assignment object which allows the given project to submit jobs of a certain type using slots from the specified reservation. |
+| [`CreateCapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.CreateCapacityCommitment)        | Creates a new capacity commitment resource.                                                                                              |
+| [`CreateReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.CreateReservation)                      | Creates a new reservation resource.                                                                                                      |
+| [`CreateReservationGroup`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.CreateReservationGroup)            | Creates a new reservation group.                                                                                                         |
+| [`DeleteAssignment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.DeleteAssignment)                        | Deletes a assignment.                                                                                                                    |
+| [`DeleteCapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.DeleteCapacityCommitment)        | Deletes a capacity commitment.                                                                                                           |
+| [`DeleteReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservation)                      | Deletes a reservation.                                                                                                                   |
+| [`DeleteReservationGroup`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservationGroup)            | Deletes a reservation.                                                                                                                   |
+| [`FailoverReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.FailoverReservation)                  | Fail over a reservation to the secondary location.                                                                                       |
+| [`GetBiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.GetBiReservation)                        | Retrieves a BI reservation.                                                                                                              |
+| [`GetCapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.GetCapacityCommitment)              | Returns information about the capacity commitment.                                                                                       |
+| [`GetIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.GetIamPolicy)                                | Gets the access control policy for a resource.                                                                                           |
+| [`GetReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.GetReservation)                            | Returns information about the reservation.                                                                                               |
+| [`GetReservationGroup`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.GetReservationGroup)                  | Returns information about the reservation group.                                                                                         |
+| [`ListAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.ListAssignments)                          | Lists assignments.                                                                                                                       |
+| [`ListCapacityCommitments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.ListCapacityCommitments)          | Lists all the capacity commitments for the admin project.                                                                                |
+| [`ListReservationGroups`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.ListReservationGroups)              | Lists all the reservation groups for the project in the specified location.                                                              |
+| [`ListReservations`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.ListReservations)                        | Lists all the reservations for the project in the specified location.                                                                    |
+| [`MergeCapacityCommitments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.MergeCapacityCommitments)        | Merges capacity commitments of the same plan into a single commitment.                                                                   |
+| [`MoveAssignment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.MoveAssignment)                            | Moves an assignment under a new reservation.                                                                                             |
+| [`SearchAllAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.SearchAllAssignments)                | Looks up assignments for a specified resource for a particular region.                                                                   |
+| [`SearchAssignments`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.SearchAssignments)` `**`(deprecated)`** | Deprecated: Looks up assignments for a specified resource for a particular region.                                                       |
+| [`SetIamPolicy`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.SetIamPolicy)                                | Sets an access control policy for a resource.                                                                                            |
+| [`SplitCapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.SplitCapacityCommitment)          | Splits capacity commitment to two commitments of the same plan and `commitment_end_time` .                                               |
+| [`TestIamPermissions`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.TestIamPermissions)                    | Gets your permissions on a resource.                                                                                                     |
+| [`UpdateAssignment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpdateAssignment)                        | Updates an existing assignment.                                                                                                          |
+| [`UpdateBiReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpdateBiReservation)                  | Updates a BI reservation.                                                                                                                |
+| [`UpdateCapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpdateCapacityCommitment)        | Updates an existing capacity commitment.                                                                                                 |
+| [`UpdateReservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpdateReservation)                      | Updates an existing reservation resource.                                                                                                |

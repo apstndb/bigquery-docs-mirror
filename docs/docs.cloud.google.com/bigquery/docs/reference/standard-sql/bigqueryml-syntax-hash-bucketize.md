@@ -6,14 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.HASH\_BUCKETIZE function
+# The ML.HASH_BUCKETIZE function
 
 This document describes the `ML.HASH_BUCKETIZE` function, which lets you convert a string expression to a deterministic hash and then bucketize it by the modulo value of that hash.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+- [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
@@ -25,8 +25,8 @@ ML.HASH_BUCKETIZE(string_expression, hash_bucket_size)
 
 `ML.HASH_BUCKETIZE` takes the following arguments:
 
-  - `string_expression` : the `STRING` expression to bucketize.
-  - `hash_bucket_size` : an `INT64` value that specifies the number of buckets to create. This value must be greater than or equal to `0` . If `hash_bucket_size` equals `0` , the function only hashes the string without bucketizing the hashed value.
+- `string_expression` : the `STRING` expression to bucketize.
+- `hash_bucket_size` : an `INT64` value that specifies the number of buckets to create. This value must be greater than or equal to `0` . If `hash_bucket_size` equals `0` , the function only hashes the string without bucketizing the hashed value.
 
 ## Output
 
@@ -36,9 +36,11 @@ ML.HASH_BUCKETIZE(string_expression, hash_bucket_size)
 
 The following example bucketizes string expressions into three buckets:
 
-    SELECT
-      f, ML.HASH_BUCKETIZE(f, 3) AS bucket
-    FROM UNNEST(['a', 'b', 'c', 'd']) AS f;
+```
+SELECT
+  f, ML.HASH_BUCKETIZE(f, 3) AS bucket
+FROM UNNEST(['a', 'b', 'c', 'd']) AS f;
+```
 
 The output looks similar to the following:
 
@@ -58,4 +60,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

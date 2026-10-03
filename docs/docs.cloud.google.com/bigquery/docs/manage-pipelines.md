@@ -23,21 +23,21 @@ Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/
 
 To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
 
-  - To view and run pipelines:
-      - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `roles/dataform.Viewer` ) on the project
-      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
-  - To run pipelines with user credentials for a Google Account: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
-  - To delete pipelines: [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Admin) ( `roles/dataform.Admin` ) on the pipeline
-  - To manage pipelines in user folders:
-      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
-      - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
-      - [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` ) on the folder
-  - To manage pipelines in team folders:
-      - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
-      - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
-      - [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `roles/dataform.teamFolderViewer` ) on the team folder
-  - To manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
-  - To view and manage metadata in Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
+- To view and run pipelines:
+  - [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `roles/dataform.Viewer` ) on the project
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+- To run pipelines with user credentials for a Google Account: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
+- To delete pipelines: [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.Admin) ( `roles/dataform.Admin` ) on the pipeline
+- To manage pipelines in user folders:
+  - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
+  - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
+  - [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `roles/dataform.codeViewer` ) on the folder
+- To manage pipelines in team folders:
+  - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
+  - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
+  - [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `roles/dataform.teamFolderViewer` ) on the team folder
+- To manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
+- To view and manage metadata in Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -49,9 +49,9 @@ For more information about Dataform IAM, see [Control access with IAM](https://d
 
 If you use a custom service account to run pipelines, you must grant the following roles to that service account:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
-  - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
+- [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
+- [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
+- [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
 
 ## View pipelines
 
@@ -66,15 +66,15 @@ To view a pipeline stored in a folder or Git folder, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  Expand your **User** folder, a **Team folder** , or a connected Git repository folder.
-    
+
     Pipelines are displayed with a **Pipeline** icon instead of a standard folder icon.
 
 4.  Click a pipeline folder to open the **Pipeline Viewer** .
-    
+
     The **Pipeline Viewer** displays the compiled Directed Acyclic Graph (DAG) of your pipeline tasks, execution status, and configuration tabs.
 
 5.  Expand the pipeline directory in the file browser to browse nested directories (such as `definitions/` ) and individual task files.
@@ -88,10 +88,10 @@ To view a list of standalone pipelines and pipelines stored in folders, do the f
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Pipelines** .
 
@@ -104,7 +104,7 @@ To view past manual runs of a selected pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
@@ -124,13 +124,13 @@ To find the Dataform repository ID of your pipeline, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
 4.  Click **Settings** .
-    
+
     The Dataform repository ID of your pipeline is displayed at the bottom of the **Settings** tab.
 
 ## Delete a pipeline
@@ -139,33 +139,31 @@ To permanently delete a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-<!-- end list -->
+- To delete a pipeline stored in a folder or Git folder, do the following:
 
-  - To delete a pipeline stored in a folder or Git folder, do the following:
-    
-    1.  In the left pane, click folder **Files** .
-    
-    2.  In the file tree, find the pipeline folder that you want to delete.
-    
-    3.  Click more\_vert **View actions** next to the pipeline folder, and then click **Delete** .
-    
-    4.  In the confirmation dialog, click **Delete** .
-        
-        The pipeline folder and all tasks and files contained within it are deleted from your workspace.
+  1.  In the left pane, click folder **Files** .
 
-  - To delete a pipeline listed in the **Explorer** pane, do the following:
-    
-    1.  In the left pane, click explore **Explorer** :
-        
-        ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    2.  In the **Explorer** pane, expand your project and click **Pipelines** .
-    
-    3.  Find the pipeline that you want to delete.
-    
-    4.  Click more\_vert **View actions** next to the pipeline, and then click **Delete** .
-    
-    5.  Click **Delete** .
+  2.  In the file tree, find the pipeline folder that you want to delete.
+
+  3.  Click more_vert **View actions** next to the pipeline folder, and then click **Delete** .
+
+  4.  In the confirmation dialog, click **Delete** .
+
+      The pipeline folder and all tasks and files contained within it are deleted from your workspace.
+
+- To delete a pipeline listed in the **Explorer** pane, do the following:
+
+  1.  In the left pane, click explore **Explorer** :
+
+      ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+
+  2.  In the **Explorer** pane, expand your project and click **Pipelines** .
+
+  3.  Find the pipeline that you want to delete.
+
+  4.  Click more_vert **View actions** next to the pipeline, and then click **Delete** .
+
+  5.  Click **Delete** .
 
 ## Manage metadata in Knowledge Catalog
 
@@ -175,22 +173,25 @@ You can use Knowledge Catalog to manage pipelines in all [pipeline locations](ht
 
 Knowledge Catalog automatically retrieves the following metadata from pipelines:
 
-  - Data asset name
-  - Data asset parent
-  - Data asset location
-  - Data asset type
-  - Corresponding Google Cloud project
+- Data asset name
+- Data asset parent
+- Data asset location
+- Data asset type
+- Corresponding Google Cloud project
 
 Knowledge Catalog logs pipelines as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
-  - System entry group  
-    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for pipelines is `@dataform` . To view details of pipeline entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
-  - System entry type  
-    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for pipelines is `dataform-code-asset` . To view details of pipelines,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected pipeline. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
-  - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for pipelines is `dataform-code-asset` . To provide additional context to pipelines in Knowledge Catalog by annotating data pipeline entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
-  - Type  
-    The type for data canvases is `WORKFLOW` . This type lets you filter pipelines in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
+System entry group  
+The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for pipelines is `@dataform` . To view details of pipeline entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+
+System entry type  
+The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for pipelines is `dataform-code-asset` . To view details of pipelines,you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected pipeline. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+
+System aspect type  
+The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for pipelines is `dataform-code-asset` . To provide additional context to pipelines in Knowledge Catalog by annotating data pipeline entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `WORKFLOW`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+
+Type  
+The type for data canvases is `WORKFLOW` . This type lets you filter pipelines in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=WORKFLOW` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
@@ -198,9 +199,9 @@ For instructions about how to search for assets in Knowledge Catalog, see [Searc
 
 Dataform can publish the following metadata to Knowledge Catalog:
 
-  - Overview aspect type
-  - Generic aspect type
-  - Data quality scorecard aspect type
+- Overview aspect type
+- Generic aspect type
+- Data quality scorecard aspect type
 
 Dataform assertions are automatically integrated with the [Knowledge Catalog data quality scorecard](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#data-quality-scorecard) . During pipeline execution, the results of any Dataform assertions are automatically published to Knowledge Catalog. These results populate the Knowledge Catalog data quality scorecard with a pass or fail status.
 
@@ -212,9 +213,9 @@ After the metadata has been synchronized, you can search for and view the entry 
 
 ## What's next
 
-  - Learn more about [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
-  - Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
-  - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
-  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
-  - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
-  - Learn more about [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .
+- Learn more about [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
+- Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
+- Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
+- Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
+- Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+- Learn more about [Dataform Deployments](https://docs.cloud.google.com/dataform/docs/deployments) .

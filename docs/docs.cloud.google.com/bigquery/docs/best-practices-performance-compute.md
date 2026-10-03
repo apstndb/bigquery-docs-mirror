@@ -16,10 +16,10 @@ The query plan includes details about query stages and steps. These details can 
 
 To learn more about the query plan and see examples of how the query plan information can help you to improve query performance, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) . After addressing the query performance insights, you can further optimize your query by performing the following tasks:
 
-  - [Reduce data that is to be processed](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed)
-  - [Optimize query operations](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#optimize-query-operations)
-  - [Reduce the output of your query](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-query-output)
-  - [Avoid anti-SQL patterns](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-anti-sql-patterns)
+- [Reduce data that is to be processed](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed)
+- [Optimize query operations](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#optimize-query-operations)
+- [Reduce the output of your query](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-query-output)
+- [Avoid anti-SQL patterns](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-anti-sql-patterns)
 
 ## Reduce data processed
 
@@ -31,18 +31,20 @@ You can reduce data that needs to be processed by using the options described in
 
 Projection refers to the number of columns that are read by your query. Projecting excess columns incurs additional (wasted) I/O and materialization (writing results).
 
-  - **Use the data preview options.** If you are experimenting with data or exploring data, use one of the [data preview options](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) instead of `SELECT *` .
-  - **Query specific columns.** Applying a `LIMIT` clause to a `SELECT *` query does not affect the amount of data read. You are billed for reading all bytes in the entire table, and the query counts against your free tier quota. Instead, query only the columns you need. For example, use `SELECT * EXCEPT` to exclude one or more columns from the results.
-  - **Use partitioned tables.** If you do require queries against every column in a table, but only against a subset of data, consider:
-      - Materializing results in a destination table and querying that table instead.
-      - [Partitioning your tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [querying the relevant partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . For example, use `WHERE _PARTITIONDATE="2017-01-01"` to query only the January 1, 2017 partition.
+- **Use the data preview options.** If you are experimenting with data or exploring data, use one of the [data preview options](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) instead of `SELECT *` .
+- **Query specific columns.** Applying a `LIMIT` clause to a `SELECT *` query does not affect the amount of data read. You are billed for reading all bytes in the entire table, and the query counts against your free tier quota. Instead, query only the columns you need. For example, use `SELECT * EXCEPT` to exclude one or more columns from the results.
+- **Use partitioned tables.** If you do require queries against every column in a table, but only against a subset of data, consider:
+  - Materializing results in a destination table and querying that table instead.
+  - [Partitioning your tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [querying the relevant partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) . For example, use `WHERE _PARTITIONDATE="2017-01-01"` to query only the January 1, 2017 partition.
 
-<!-- end list -->
+<!-- -->
 
-  - **Use `SELECT * EXCEPT`** . Querying a subset of data or using `SELECT * EXCEPT` can greatly reduce the amount of data that is read by a query. In addition to the cost savings, performance is improved by reducing the amount of data I/O and the amount of materialization that is required for the query results.
-    
-        SELECT * EXCEPT (col1, col2, col5)
-        FROM mydataset.newtable
+- **Use `SELECT * EXCEPT`** . Querying a subset of data or using `SELECT * EXCEPT` can greatly reduce the amount of data that is read by a query. In addition to the cost savings, performance is improved by reducing the amount of data I/O and the amount of materialization that is required for the query results.
+
+  ```
+  SELECT * EXCEPT (col1, col2, col5)
+  FROM mydataset.newtable
+  ```
 
 ### Avoid excessive wildcard tables
 
@@ -50,14 +52,14 @@ Projection refers to the number of columns that are read by your query. Projecti
 
 Use wildcards to query multiple tables by using concise SQL statements. Wildcard tables are a union of tables that match the wildcard expression. Wildcard tables are useful if your dataset contains the following resources:
 
-  - Multiple, similarly named tables with compatible schemas
-  - Sharded tables
+- Multiple, similarly named tables with compatible schemas
+- Sharded tables
 
 > **Note:** If your data allows it, use time-partitioned tables instead of sharded tables. For more information, see [Avoid oversharding tables](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-oversharding-tables) .
 
-When you query a wildcard table, specify a wildcard ( `*` ) after the common table prefix. For example, `FROM bigquery-public-data.noaa_gsod.gsod194*` queries all tables from the 1940s.
+When you query a wildcard table, specify a wildcard ( `*` ) after the common table prefix. For example, `FROM ``bigquery-public-data.noaa_gsod.gsod194*` queries all tables from the 1940s.
 
-More granular prefixes perform better than shorter prefixes. For example, `FROM bigquery-public-data.noaa_gsod.gsod194*` performs better than `FROM bigquery-public-data.noaa_gsod.*` because fewer tables match the wildcard.
+More granular prefixes perform better than shorter prefixes. For example, `FROM ``bigquery-public-data.noaa_gsod.gsod194*` performs better than `FROM ``bigquery-public-data.noaa_gsod.*` because fewer tables match the wildcard.
 
 ### Avoid tables sharded by date
 
@@ -81,14 +83,16 @@ The amount and source of data read by a query can impact query performance and c
 
 **Best practice:** When querying a [partitioned table](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) , to filter with partitions on partitioned tables, use the following columns:
 
-  - For ingestion-time partitioned tables, use the pseudocolumn `_PARTITIONTIME`
-  - For partitioned tables such as the time-unit column-based and integer-range, use the *partitioning column* .
+- For ingestion-time partitioned tables, use the pseudocolumn `_PARTITIONTIME`
+- For partitioned tables such as the time-unit column-based and integer-range, use the *partitioning column* .
 
 For time-unit partitioned tables, filtering the data with `_PARTITIONTIME` or *partitioning column* lets you specify a date or range of dates. For example, the following `WHERE` clause uses the `_PARTITIONTIME` pseudocolumn to specify partitions between January 1, 2016 and January 31, 2016:
 
-    WHERE _PARTITIONTIME
-    BETWEEN TIMESTAMP("20160101")
-    AND TIMESTAMP("20160131")
+```
+WHERE _PARTITIONTIME
+BETWEEN TIMESTAMP("20160101")
+AND TIMESTAMP("20160131")
+```
 
 The query processes data only in the partitions that are indicated by the date range. Filtering your partitions improves query performance and reduces costs.
 
@@ -100,52 +104,56 @@ Using a [`GROUP BY` clause](https://docs.cloud.google.com/bigquery/docs/referenc
 
 For queries with `GROUP BY` and `JOIN` , perform aggregation earlier in the query to reduce the amount of data processed. For example, the following query performs a `JOIN` on two large tables without any filtering beforehand:
 
-    WITH
-      users_posts AS (
-      SELECT *
-      FROM
-        `bigquery-public-data`.stackoverflow.comments AS c
-      JOIN
-        `bigquery-public-data`.stackoverflow.users AS u
-      ON
-        c.user_id = u.id
-      )
-    SELECT
-      user_id,
-      ANY_VALUE(display_name) AS display_name,
-      ANY_VALUE(reputation) AS reputation,
-      COUNT(text) AS comments_count
-    FROM users_posts
-    GROUP BY user_id
-    ORDER BY comments_count DESC
-    LIMIT 20;
+```
+WITH
+  users_posts AS (
+  SELECT *
+  FROM
+    `bigquery-public-data`.stackoverflow.comments AS c
+  JOIN
+    `bigquery-public-data`.stackoverflow.users AS u
+  ON
+    c.user_id = u.id
+  )
+SELECT
+  user_id,
+  ANY_VALUE(display_name) AS display_name,
+  ANY_VALUE(reputation) AS reputation,
+  COUNT(text) AS comments_count
+FROM users_posts
+GROUP BY user_id
+ORDER BY comments_count DESC
+LIMIT 20;
+```
 
 This query pre-aggregates the comment counts which reduces the amount of data read for the `JOIN` :
 
-    WITH
-      comments AS (
-      SELECT
-        user_id,
-        COUNT(text) AS comments_count
-      FROM
-        `bigquery-public-data`.stackoverflow.comments
-      WHERE
-        user_id IS NOT NULL
-      GROUP BY user_id
-      ORDER BY comments_count DESC
-      LIMIT 20
-      )
-    SELECT
-      user_id,
-      display_name,
-      reputation,
-      comments_count
-    FROM comments
-    JOIN
-      `bigquery-public-data`.stackoverflow.users AS u
-    ON
-      user_id = u.id
-    ORDER BY comments_count DESC;
+```
+WITH
+  comments AS (
+  SELECT
+    user_id,
+    COUNT(text) AS comments_count
+  FROM
+    `bigquery-public-data`.stackoverflow.comments
+  WHERE
+    user_id IS NOT NULL
+  GROUP BY user_id
+  ORDER BY comments_count DESC
+  LIMIT 20
+  )
+SELECT
+  user_id,
+  display_name,
+  reputation,
+  comments_count
+FROM comments
+JOIN
+  `bigquery-public-data`.stackoverflow.users AS u
+ON
+  user_id = u.id
+ORDER BY comments_count DESC;
+```
 
 > **Note:** `WITH` clauses with common table expressions (CTEs) are used for query readability, not performance. There is no guarantee that adding a `WITH` clause causes BigQuery to materialize temporary intermediate tables and reuse the temporary result for multiple references. The `WITH` clause might be evaluated multiple times within a query, depending on query optimizer decisions.
 
@@ -221,64 +229,72 @@ BigQuery doesn't automatically check for data integrity, so you must ensure that
 
 **Best practice:** When you use the `ORDER BY` clause, ensure that you follow the best practices:
 
-  - **Use `ORDER BY` in the outermost query or within [window clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .** Push complex operations to the end of the query. Placing an `ORDER BY` clause in the middle of a query greatly impacts performance unless it is being used in a window function.
-    
-    Another technique for ordering your query is to push complex operations, such as regular expressions and mathematical functions, to the end of the query. This technique reduces the data to be processed before the complex operations are performed.
+- **Use `ORDER BY` in the outermost query or within [window clauses](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .** Push complex operations to the end of the query. Placing an `ORDER BY` clause in the middle of a query greatly impacts performance unless it is being used in a window function.
 
-  - **Use a `LIMIT` clause.** If you are ordering a very large number of values but don't need to have all of them returned, use a `LIMIT` clause. For example, the following query orders a very large result set and throws a `Resources exceeded` error. The query sorts by the `title` column in `mytable` . The `title` column contains millions of values.
-    
-        SELECT
-        title
-        FROM
-        `my-project.mydataset.mytable`
-        ORDER BY
-        title;
-    
-    To remove the error, use a query like the following:
-    
-        SELECT
-        title
-        FROM
-        `my-project.mydataset.mytable`
-        ORDER BY
-        title DESC
-        LIMIT
-        1000;
+  Another technique for ordering your query is to push complex operations, such as regular expressions and mathematical functions, to the end of the query. This technique reduces the data to be processed before the complex operations are performed.
 
-  - **Use a window function.** If you are ordering a very large number of values, use a window function, and limit data before calling the window function. For example, the following query lists the ten oldest Stack Overflow users and their ranking, with the oldest account being ranked lowest:
-    
-        SELECT
-        id,
-        reputation,
-        creation_date,
-        DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
-        FROM bigquery-public-data.stackoverflow.users
-        ORDER BY user_rank ASC
-        LIMIT 10;
-    
-    This query takes approximately 15 seconds to run. This query uses `LIMIT` at the end of the query, but not in the `DENSE_RANK() OVER` window function. Because of this, the query requires all of the data to be sorted on a single worker node.
-    
-    Instead, you should limit the dataset before computing the window function in order to improve performance:
-    
-        WITH users AS (
-        SELECT
-        id,
-        reputation,
-        creation_date,
-        FROM bigquery-public-data.stackoverflow.users
-        ORDER BY creation_date ASC
-        LIMIT 10)
-        SELECT
-        id,
-        reputation,
-        creation_date,
-        DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
-        FROM users
-        ORDER BY user_rank;
-    
-    This query takes approximately 2 seconds to run, while returning the same results as the previous query.
-    
-    One caveat is that the `DENSE_RANK()` function ranks the data within years, so for ranking data that spans across multiple years, these queries don't give identical results.
+- **Use a `LIMIT` clause.** If you are ordering a very large number of values but don't need to have all of them returned, use a `LIMIT` clause. For example, the following query orders a very large result set and throws a `Resources exceeded` error. The query sorts by the `title` column in `mytable` . The `title` column contains millions of values.
+
+  ```
+  SELECT
+  title
+  FROM
+  `my-project.mydataset.mytable`
+  ORDER BY
+  title;
+  ```
+
+  To remove the error, use a query like the following:
+
+  ```
+  SELECT
+  title
+  FROM
+  `my-project.mydataset.mytable`
+  ORDER BY
+  title DESC
+  LIMIT
+  1000;
+  ```
+
+- **Use a window function.** If you are ordering a very large number of values, use a window function, and limit data before calling the window function. For example, the following query lists the ten oldest Stack Overflow users and their ranking, with the oldest account being ranked lowest:
+
+  ```
+  SELECT
+  id,
+  reputation,
+  creation_date,
+  DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
+  FROM bigquery-public-data.stackoverflow.users
+  ORDER BY user_rank ASC
+  LIMIT 10;
+  ```
+
+  This query takes approximately 15 seconds to run. This query uses `LIMIT` at the end of the query, but not in the `DENSE_RANK() OVER` window function. Because of this, the query requires all of the data to be sorted on a single worker node.
+
+  Instead, you should limit the dataset before computing the window function in order to improve performance:
+
+  ```
+  WITH users AS (
+  SELECT
+  id,
+  reputation,
+  creation_date,
+  FROM bigquery-public-data.stackoverflow.users
+  ORDER BY creation_date ASC
+  LIMIT 10)
+  SELECT
+  id,
+  reputation,
+  creation_date,
+  DENSE_RANK() OVER (ORDER BY creation_date) AS user_rank
+  FROM users
+  ORDER BY user_rank;
+  ```
+
+  This query takes approximately 2 seconds to run, while returning the same results as the previous query.
+
+  One caveat is that the `DENSE_RANK()` function ranks the data within years, so for ranking data that spans across multiple years, these queries don't give identical results.
 
 ### Split complex queries into smaller ones
 
@@ -314,9 +330,9 @@ This error often occurs when you select a large number of fields from a table wi
 
 You can overcome the limitation on cached result size by using the following options:
 
-  - Use filters to limit the result set
-  - Use a `LIMIT` clause to reduce the result set, especially if you are using an `ORDER BY` clause
-  - Write the output data to a destination table
+- Use filters to limit the result set
+- Use a `LIMIT` clause to reduce the result set, especially if you are using an `ORDER BY` clause
+- Write the output data to a destination table
 
 You can page through the results using the BigQuery REST API. For more information, see [Paging through table data](https://docs.cloud.google.com/bigquery/docs/paging-results) .
 
@@ -342,8 +358,8 @@ If the query job completes, the query plan explanation shows output rows versus 
 
 To avoid performance issues associated with joins that generate more outputs than inputs:
 
-  - Use a `GROUP BY` clause to [pre-aggregate the data](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce_data_before_using_a_join) .
-  - Use a window function. Window functions are often more efficient than using a cross join. For more information, see [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
+- Use a `GROUP BY` clause to [pre-aggregate the data](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce_data_before_using_a_join) .
+- Use a window function. Window functions are often more efficient than using a cross join. For more information, see [window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 ### Avoid DML statements that update or insert single rows
 
@@ -357,14 +373,16 @@ If batching your `UPDATE` statements yields many tuples in very long queries, yo
 
 For example, you could load your set of replacement records into another table, then write the DML statement to update all values in the original table if the non-updated columns match. For example, if the original data is in table `t` and the updates are staged in table `u` , the query would look like the following:
 
-    UPDATE
-      dataset.t t
-    SET
-      my_column = u.my_column
-    FROM
-      dataset.u u
-    WHERE
-      t.my_key = u.my_key
+```
+UPDATE
+  dataset.t t
+SET
+  my_column = u.my_column
+FROM
+  dataset.u u
+WHERE
+  t.my_key = u.my_key
+```
 
 ### Use alias names for similarly named columns
 
@@ -374,6 +392,6 @@ Aliases help to identify which columns and tables are referenced in addition to 
 
 ## What's next
 
-  - Learn how to [optimize cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
-  - Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
-  - Learn how to [optimize functions](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-functions) .
+- Learn how to [optimize cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
+- Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
+- Learn how to [optimize functions](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-functions) .

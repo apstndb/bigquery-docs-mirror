@@ -12,34 +12,24 @@ Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This f
 
 The following code sample shows how to use `curl` to call the `translate_batch_queries` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;translate_batch_queries&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerymigration.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "translate_batch_queries",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -47,90 +37,37 @@ Request message for TranslateBatchQueries.
 
 ### TranslateBatchQueriesRequest
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;projectNumber&quot;: string,
-  &quot;location&quot;: string,
-  &quot;sourceDialect&quot;: string,
-  &quot;targetDialect&quot;: string,
-  &quot;sourceBaseUri&quot;: [
+**JSON representation**
+
+```
+{
+  "projectNumber": string,
+  "location": string,
+  "sourceDialect": string,
+  "targetDialect": string,
+  "sourceBaseUri": [
     string
   ],
-  &quot;targetBaseUri&quot;: string,
-  &quot;configurationFilePaths&quot;: [
+  "targetBaseUri": string,
+  "configurationFilePaths": [
     string
   ],
-  &quot;metadataFilePaths&quot;: [
+  "metadataFilePaths": [
     string
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`projectNumber`
-
-`string`
-
-Required. The Google Cloud project number.
-
-`location`
-
-`string`
-
-Required. The location.
-
-`sourceDialect`
-
-`string`
-
-Required. The dialect of the source queries.
-
-`targetDialect`
-
-`string`
-
-Required. The dialect of the target queries.
-
-`sourceBaseUri[]`
-
-`string`
-
-Required. The Cloud Storage path containing the inputs. All files with this path will be included in the translation, including input queries, configuration files, and metadata files.
-
-`targetBaseUri`
-
-`string`
-
-Required. The base URI for all writes to persistent storage in Cloud Storage.
-
-`configurationFilePaths[]`
-
-`string`
-
-Optional. The Cloud Storage path of the configuration files for this batch translation. See [YAML configuration guidelines](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) .
-
-Do not set this field if the configuration files are already located within a path specified in `source_base_uri` .
-
-`metadataFilePaths[]`
-
-`string`
-
-Optional. The Cloud Storage path of the metadata files for this batch translation. See [Generate metadata](https://cloud.google.com/bigquery/docs/generate-metadata) .
-
-Do not set this field if the metadata files are already located within a path specified in `source_base_uri` .
+| Fields                     |                                                                                                                                                                                                                                                                                                                                                 |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `projectNumber`            | `string` Required. The Google Cloud project number.                                                                                                                                                                                                                                                                                             |
+| `location`                 | `string` Required. The location.                                                                                                                                                                                                                                                                                                                |
+| `sourceDialect`            | `string` Required. The dialect of the source queries.                                                                                                                                                                                                                                                                                           |
+| `targetDialect`            | `string` Required. The dialect of the target queries.                                                                                                                                                                                                                                                                                           |
+| `sourceBaseUri[]`          | `string` Required. The Cloud Storage path containing the inputs. All files with this path will be included in the translation, including input queries, configuration files, and metadata files.                                                                                                                                                |
+| `targetBaseUri`            | `string` Required. The base URI for all writes to persistent storage in Cloud Storage.                                                                                                                                                                                                                                                          |
+| `configurationFilePaths[]` | `string` Optional. The Cloud Storage path of the configuration files for this batch translation. See [YAML configuration guidelines](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) . Do not set this field if the configuration files are already located within a path specified in `source_base_uri` . |
+| `metadataFilePaths[]`      | `string` Optional. The Cloud Storage path of the metadata files for this batch translation. See [Generate metadata](https://cloud.google.com/bigquery/docs/generate-metadata) . Do not set this field if the metadata files are already located within a path specified in `source_base_uri` .                                                  |
 
 ## Output Schema
 
@@ -138,38 +75,19 @@ Response message for TranslateBatchQueries.
 
 ### TranslateBatchQueriesResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;translation&quot;: string,
-  &quot;translationState&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "translation": string,
+  "translationState": string
+}
+```
 
-`translation`
-
-`string`
-
-The ID of the migration workflow created for this batch translation.
-
-`translationState`
-
-`string`
-
-The current state of the translation workflow, typically `RUNNING` .
+| Fields             |                                                                               |
+|--------------------|-------------------------------------------------------------------------------|
+| `translation`      | `string` The ID of the migration workflow created for this batch translation. |
+| `translationState` | `string` The current state of the translation workflow, typically `RUNNING` . |
 
 ### Tool Annotations
 
@@ -177,9 +95,9 @@ The current state of the translation workflow, typically `RUNNING` .
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ❌ | Read Only Hint: ❌ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ❌ \| Read Only Hint: ❌ \| Open World Hint: ❌

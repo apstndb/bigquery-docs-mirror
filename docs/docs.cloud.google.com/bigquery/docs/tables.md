@@ -10,15 +10,15 @@ data_source: docs.cloud.google.com
 
 This document describes how to create and use [standard (built-in) tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . For information about creating other table types, see the following:
 
-  - [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
-  - [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables)
+- [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
+- [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables)
 
 After creating a table, you can do the following:
 
-  - Control access to your table data.
-  - Get information about your tables.
-  - List the tables in a dataset.
-  - Get table metadata.
+- Control access to your table data.
+- Get information about your tables.
+- List the tables in a dataset.
+- Get table metadata.
 
 For more information about managing tables including updating table properties, copying a table, and deleting a table, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
@@ -30,8 +30,8 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project if you're creating a table by loading data or by saving query results to a table.
-  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the dataset where you're creating the table.
+- [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project if you're creating a table by loading data or by saving query results to a table.
+- [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the dataset where you're creating the table.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -41,10 +41,10 @@ These predefined roles contain the permissions required to create a table. To se
 
 The following permissions are required to create a table:
 
-  - `bigquery.tables.create` on the dataset where you're creating the table.
-  - `bigquery.tables.getData` on all tables and views that your query references if you're saving query results as a table.
-  - `bigquery.jobs.create` on the project if you're creating the table by loading data or by saving query results to a table.
-  - `bigquery.tables.updateData` on the table if you're appending to or overwriting a table with query results.
+- `bigquery.tables.create` on the dataset where you're creating the table.
+- `bigquery.tables.getData` on all tables and views that your query references if you're saving query results as a table.
+- `bigquery.jobs.create` on the project if you're creating the table by loading data or by saving query results to a table.
+- `bigquery.tables.updateData` on the table if you're appending to or overwriting a table with query results.
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -54,43 +54,43 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 When you create a table in BigQuery, the table name must be unique per dataset. The table name can:
 
-  - Contain characters with a total of up to 1,024 UTF-8 bytes.
-  - Contain Unicode characters in category L (letter), M (mark), N (number), Pc (connector, including underscore), Pd (dash), Zs (space). For more information, see [General Category](https://wikipedia.org/wiki/Unicode_character_property#General_Category) .
+- Contain characters with a total of up to 1,024 UTF-8 bytes.
+- Contain Unicode characters in category L (letter), M (mark), N (number), Pc (connector, including underscore), Pd (dash), Zs (space). For more information, see [General Category](https://wikipedia.org/wiki/Unicode_character_property#General_Category) .
 
 The following are all examples of valid table names: `table 01` , `ग्राहक` , `00_お客様` , `étudiant-01` .
 
 Caveats:
 
-  - Table names are case-sensitive by default. `mytable` and `MyTable` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
+- Table names are case-sensitive by default. `mytable` and `MyTable` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
 
-  - Some table names and table name prefixes are reserved. If you receive an error saying that your table name or prefix is reserved, then select a different name and try again.
+- Some table names and table name prefixes are reserved. If you receive an error saying that your table name or prefix is reserved, then select a different name and try again.
 
-  - If you include multiple dot operators ( `.` ) in a sequence, the duplicate operators are implicitly stripped.
-    
-    For example, this: `project_name....dataset_name..table_name`
-    
-    Becomes this: `project_name.dataset_name.table_name`
+- If you include multiple dot operators ( `.` ) in a sequence, the duplicate operators are implicitly stripped.
+
+  For example, this: `project_name....dataset_name..table_name`
+
+  Becomes this: `project_name.dataset_name.table_name`
 
 ## Create tables
 
 You can create a table in BigQuery in the following ways:
 
-  - Manually by using the Google Cloud console or the bq command-line tool [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
-  - Programmatically by calling the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method.
-  - By using the client libraries.
-  - From query results.
-  - By defining a table that references an external data source.
-  - When you load data.
-  - By using a [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_new_table) data definition language (DDL) statement.
+- Manually by using the Google Cloud console or the bq command-line tool [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
+- Programmatically by calling the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API method.
+- By using the client libraries.
+- From query results.
+- By defining a table that references an external data source.
+- When you load data.
+- By using a [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_new_table) data definition language (DDL) statement.
 
 ### Create an empty table with a schema definition
 
 You can create an empty table with a schema definition in the following ways:
 
-  - Enter the schema using the Google Cloud console.
-  - Provide the schema inline using the bq command-line tool.
-  - Submit a JSON schema file using the bq command-line tool.
-  - Provide the schema in a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#resource:-table) when calling the APIs [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) .
+- Enter the schema using the Google Cloud console.
+- Provide the schema inline using the bq command-line tool.
+- Submit a JSON schema file using the bq command-line tool.
+- Provide the schema in a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#resource:-table) when calling the APIs [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) .
 
 For more information about specifying a table schema, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
@@ -100,33 +100,31 @@ To create an empty table with a schema definition:
 
 ### Console
 
-In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-In the left pane, click explore **Explorer** .
+2.  In the left pane, click explore **Explorer** .
 
-In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
+3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-In the **Dataset info** section, click add\_box **Create table** .
+4.  In the **Dataset info** section, click add_box **Create table** .
 
-In the **Create table** pane, specify the following details:
+5.  In the **Create table** pane, specify the following details:
+    1.  In the **Source** section, select **Empty table** in the **Create table from** list.
+    2.  In the **Destination** section, specify the following details:
+        1.  For **Dataset** , select the dataset in which you want to create the table.
+        2.  In the **Table** field, enter the name of the table that you want to create.
+        3.  Verify that the **Table type** field is set to **Native table** .
+    3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. You can enter schema information manually by using one of the following methods:
+        - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
 
-1.  In the **Source** section, select **Empty table** in the **Create table from** list.
-2.  In the **Destination** section, specify the following details:
-    1.  For **Dataset** , select the dataset in which you want to create the table.
-    2.  In the **Table** field, enter the name of the table that you want to create.
-    3.  Verify that the **Table type** field is set to **Native table** .
-3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. You can enter schema information manually by using one of the following methods:
-      - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
-        
-        ``` 
-            bq show --format=prettyjson dataset.table
-            
-        ```
-    
-      - Option 2: Click add\_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
-4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
-5.  Optional: In the **Advanced options** section, if you want to use a customer-managed encryption key, then select the **Use a customer-managed encryption key (CMEK)** option. By default, BigQuery [encrypts customer content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) by using a Google-owned and Google-managed encryption key.
-6.  Click **Create table** .
+          ```
+          bq show --format=prettyjson dataset.table
+          ```
+
+        - Option 2: Click add_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
+    4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+    5.  Optional: In the **Advanced options** section, if you want to use a customer-managed encryption key, then select the **Use a customer-managed encryption key (CMEK)** option. By default, BigQuery [encrypts customer content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) by using a Google-owned and Google-managed encryption key.
+    6.  Click **Create table** .
 
 > **Note:** When you create an empty table using the Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a table using the bq command-line tool or API. After you create a table in the Google Cloud console, you can add an expiration, description, and labels.
 
@@ -137,104 +135,114 @@ The following example creates a table named `newtable` that expires on January 1
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE TABLE mydataset.newtable (
-          x INT64 OPTIONS (description = 'An optional INTEGER field'),
-          y STRUCT <
-            a ARRAY <STRING> OPTIONS (description = 'A repeated STRING field'),
-            b BOOL
-          >
-        ) OPTIONS (
-            expiration_timestamp = TIMESTAMP '2023-01-01 00:00:00 UTC',
-            description = 'a table that expires in 2023',
-            labels = [('org_unit', 'development')]);
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE TABLE mydataset.newtable (
+      x INT64 OPTIONS (description = 'An optional INTEGER field'),
+      y STRUCT <
+        a ARRAY <STRING> OPTIONS (description = 'A repeated STRING field'),
+        b BOOL
+      >
+    ) OPTIONS (
+        expiration_timestamp = TIMESTAMP '2023-01-01 00:00:00 UTC',
+        description = 'a table that expires in 2023',
+        labels = [('org_unit', 'development')]);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Use the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the `--table` or `-t` flag. You can supply table schema information inline or with a JSON schema file. For a full list of parameters, see the [`bq mk --table` reference](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) . Some optional parameters include:
-    
-      - `--expiration`
-      - `--description`
-      - `--time_partitioning_field`
-      - `--time_partitioning_type`
-      - `--range_partitioning`
-      - `--clustering_fields`
-      - `--destination_kms_key`
-      - `--label`
-    
+
+    - `--expiration`
+    - `--description`
+    - `--time_partitioning_field`
+    - `--time_partitioning_type`
+    - `--range_partitioning`
+    - `--clustering_fields`
+    - `--destination_kms_key`
+    - `--label`
+
     `--time_partitioning_field` , `--time_partitioning_type` , `--range_partitioning` , `--clustering_fields` , and `--destination_kms_key` are not demonstrated here. Refer to the following links for more information on these optional parameters:
-    
-      - For more information about `--time_partitioning_field` , `--time_partitioning_type` , and `--range_partitioning` see [partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
-      - For more information about `--clustering_fields` , see [clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
-      - For more information about `--destination_kms_key` , see [customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
-    
+
+    - For more information about `--time_partitioning_field` , `--time_partitioning_type` , and `--range_partitioning` see [partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+    - For more information about `--clustering_fields` , see [clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+    - For more information about `--destination_kms_key` , see [customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
+
     If you are creating a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
-    
+
     To create an empty table in an existing dataset with a schema definition, enter the following:
-    
-        bq mk \
-        --table \
-        --expiration=integer \
-        --description=description \
-        --label=key_1:value_1 \
-        --label=key_2:value_2 \
-        --add_tags=key_3:value_3[,...] \
-        project_id:dataset.table \
-        schema
-    
+
+    ```
+    bq mk \
+    --table \
+    --expiration=integer \
+    --description=description \
+    --label=key_1:value_1 \
+    --label=key_2:value_2 \
+    --add_tags=key_3:value_3[,...] \
+    project_id:dataset.table \
+    schema
+    ```
+
     Replace the following:
-    
-      - integer is the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. If you set the expiration time when you create a table, the dataset's default table expiration setting is ignored.
-      - description is a description of the table in quotes.
-      - key\_1 : value\_1 and key\_2 : value\_2 are key-value pairs that specify [labels](https://docs.cloud.google.com/bigquery/docs/labels) .
-      - key\_3 : value\_3 are key-value pairs that specify [tags](https://docs.cloud.google.com/bigquery/docs/tags) . Add multiple tags under the same flag with commas between key:value pairs.
-      - project\_id is your project ID.
-      - dataset is a dataset in your project.
-      - table is the name of the table you're creating.
-      - schema is an inline schema definition in the format field:data\_type,field:data\_type or the path to the JSON schema file on your local machine.
-    
+
+    - ` integer ` is the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. If you set the expiration time when you create a table, the dataset's default table expiration setting is ignored.
+    - ` description ` is a description of the table in quotes.
+    - ` key_1 ` : ` value_1 ` and ` key_2 ` : ` value_2 ` are key-value pairs that specify [labels](https://docs.cloud.google.com/bigquery/docs/labels) .
+    - ` key_3 ` : ` value_3 ` are key-value pairs that specify [tags](https://docs.cloud.google.com/bigquery/docs/tags) . Add multiple tags under the same flag with commas between key:value pairs.
+    - ` project_id ` is your project ID.
+    - ` dataset ` is a dataset in your project.
+    - ` table ` is the name of the table you're creating.
+    - ` schema ` is an inline schema definition in the format ` field:data_type,field:data_type ` or the path to the JSON schema file on your local machine.
+
     When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type, you cannot include a column description, and you cannot specify the column mode. All modes default to `NULLABLE` . To include descriptions, modes, and `RECORD` types, [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
-    
+
     Examples:
-    
+
     Enter the following command to create a table using an inline schema definition. This command creates a table named `mytable` in `mydataset` in your default project. The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The command uses the `-t` shortcut instead of `--table` . The schema is specified inline as: `qtr:STRING,sales:FLOAT,year:STRING` .
-    
-        bq mk \
-         -t \
-         --expiration 3600 \
-         --description "This is my table" \
-         --label organization:development \
-         mydataset.mytable \
-         qtr:STRING,sales:FLOAT,year:STRING
-    
+
+    ```
+    bq mk \
+     -t \
+     --expiration 3600 \
+     --description "This is my table" \
+     --label organization:development \
+     mydataset.mytable \
+     qtr:STRING,sales:FLOAT,year:STRING
+    ```
+
     Enter the following command to create a table using a JSON schema file. This command creates a table named `mytable` in `mydataset` in your default project. The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
-    
-        bq mk \
-         --table \
-         --expiration 3600 \
-         --description "This is my table" \
-         --label organization:development \
-         mydataset.mytable \
-         /tmp/myschema.json
-    
+
+    ```
+    bq mk \
+     --table \
+     --expiration 3600 \
+     --description "This is my table" \
+     --label organization:development \
+     mydataset.mytable \
+     /tmp/myschema.json
+    ```
+
     Enter the following command to create a table using a JSON schema file. This command creates a table named `mytable` in `mydataset` in `myotherproject` . The table expiration is set to 3600 seconds (1 hour), the description is set to `This is my table` , and the label is set to `organization:development` . The path to the schema file is `/tmp/myschema.json` .
-    
-        bq mk \
-         --table \
-         --expiration 3600 \
-         --description "This is my table" \
-         --label organization:development \
-         myotherproject:mydataset.mytable \
-         /tmp/myschema.json
-    
+
+    ```
+    bq mk \
+     --table \
+     --expiration 3600 \
+     --description "This is my table" \
+     --label organization:development \
+     myotherproject:mydataset.mytable \
+     /tmp/myschema.json
+    ```
+
     After the table is created, you can [update](https://docs.cloud.google.com/bigquery/docs/managing-tables) the table's expiration, description, and labels. You can also [modify the schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ### Terraform
@@ -422,11 +430,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -434,13 +444,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -448,26 +460,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -477,33 +497,35 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) .
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    
-    public class BigQueryCreateTable
+```csharp
+using Google.Cloud.BigQuery.V2;
+
+public class BigQueryCreateTable
+{
+    public BigQueryTable CreateTable(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id"
+    )
     {
-        public BigQueryTable CreateTable(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        var dataset = client.GetDataset(datasetId);
+        // Create schema for new table.
+        var schema = new TableSchemaBuilder
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            var dataset = client.GetDataset(datasetId);
-            // Create schema for new table.
-            var schema = new TableSchemaBuilder
-            {
-                { "full_name", BigQueryDbType.String },
-                { "age", BigQueryDbType.Int64 }
-            }.Build();
-            // Create the table
-            return dataset.CreateTable(tableId: "your_table_id", schema: schema);
-        }
+            { "full_name", BigQueryDbType.String },
+            { "age", BigQueryDbType.Int64 }
+        }.Build();
+        // Create the table
+        return dataset.CreateTable(tableId: "your_table_id", schema: schema);
     }
+}
+```
 
 ### Go
 
@@ -511,42 +533,44 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "time"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // createTableExplicitSchema demonstrates creating a new BigQuery table and specifying a schema.
-    func createTableExplicitSchema(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydatasetid"
-     // tableID := "mytableid"
-     ctx := context.Background()
-    
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     sampleSchema := bigquery.Schema{
-         {Name: "full_name", Type: bigquery.StringFieldType},
-         {Name: "age", Type: bigquery.IntegerFieldType},
-     }
-    
-     metaData := &bigquery.TableMetadata{
-         Schema:         sampleSchema,
-         ExpirationTime: time.Now().AddDate(1, 0, 0), // Table will be automatically deleted in 1 year.
-     }
-     tableRef := client.Dataset(datasetID).Table(tableID)
-     if err := tableRef.Create(ctx, metaData); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "time"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// createTableExplicitSchema demonstrates creating a new BigQuery table and specifying a schema.
+func createTableExplicitSchema(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydatasetid"
+    // tableID := "mytableid"
+    ctx := context.Background()
+
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    sampleSchema := bigquery.Schema{
+        {Name: "full_name", Type: bigquery.StringFieldType},
+        {Name: "age", Type: bigquery.IntegerFieldType},
+    }
+
+    metaData := &bigquery.TableMetadata{
+        Schema:         sampleSchema,
+        ExpirationTime: time.Now().AddDate(1, 0, 0), // Table will be automatically deleted in 1 year.
+    }
+    tableRef := client.Dataset(datasetID).Table(tableID)
+    if err := tableRef.Create(ctx, metaData); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -554,47 +578,49 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Field;
-    import com.google.cloud.bigquery.Schema;
-    import com.google.cloud.bigquery.StandardSQLTypeName;
-    import com.google.cloud.bigquery.StandardTableDefinition;
-    import com.google.cloud.bigquery.TableDefinition;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableInfo;
-    
-    public class CreateTable {
-    
-      public static void runCreateTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        Schema schema =
-            Schema.of(
-                Field.of("stringField", StandardSQLTypeName.STRING),
-                Field.of("booleanField", StandardSQLTypeName.BOOL));
-        createTable(datasetName, tableName, schema);
-      }
-    
-      public static void createTable(String datasetName, String tableName, Schema schema) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId tableId = TableId.of(datasetName, tableName);
-          TableDefinition tableDefinition = StandardTableDefinition.of(schema);
-          TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
-    
-          bigquery.create(tableInfo);
-          System.out.println("Table created successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Table was not created. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Field;
+import com.google.cloud.bigquery.Schema;
+import com.google.cloud.bigquery.StandardSQLTypeName;
+import com.google.cloud.bigquery.StandardTableDefinition;
+import com.google.cloud.bigquery.TableDefinition;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableInfo;
+
+public class CreateTable {
+
+  public static void runCreateTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    Schema schema =
+        Schema.of(
+            Field.of("stringField", StandardSQLTypeName.STRING),
+            Field.of("booleanField", StandardSQLTypeName.BOOL));
+    createTable(datasetName, tableName, schema);
+  }
+
+  public static void createTable(String datasetName, String tableName, Schema schema) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId tableId = TableId.of(datasetName, tableName);
+      TableDefinition tableDefinition = StandardTableDefinition.of(schema);
+      TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
+
+      bigquery.create(tableInfo);
+      System.out.println("Table created successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Table was not created. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -602,33 +628,35 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function createTable() {
-      // Creates a new table named "my_table" in "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_table";
-      // const schema = 'Name:string, Age:integer, Weight:float, IsMagic:boolean';
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tables#resource
-      const options = {
-        schema: schema,
-        location: 'US',
-      };
-    
-      // Create a new table in the dataset
-      const [table] = await bigquery
-        .dataset(datasetId)
-        .createTable(tableId, options);
-    
-      console.log(`Table ${table.id} created.`);
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function createTable() {
+  // Creates a new table named "my_table" in "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_table";
+  // const schema = 'Name:string, Age:integer, Weight:float, IsMagic:boolean';
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tables#resource
+  const options = {
+    schema: schema,
+    location: 'US',
+  };
+
+  // Create a new table in the dataset
+  const [table] = await bigquery
+    .dataset(datasetId)
+    .createTable(tableId, options);
+
+  console.log(`Table ${table.id} created.`);
+}
+```
 
 ### PHP
 
@@ -636,31 +664,33 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $tableId = 'The BigQuery table ID';
-    // $fields = [
-    //    [
-    //        'name' => 'field1',
-    //        'type' => 'string',
-    //        'mode' => 'required'
-    //    ],
-    //    [
-    //        'name' => 'field2',
-    //        'type' => 'integer'
-    //    ],
-    //];
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $schema = ['fields' => $fields];
-    $table = $dataset->createTable($tableId, ['schema' => $schema]);
-    printf('Created table %s' . PHP_EOL, $tableId);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $tableId = 'The BigQuery table ID';
+// $fields = [
+//    [
+//        'name' => 'field1',
+//        'type' => 'string',
+//        'mode' => 'required'
+//    ],
+//    [
+//        'name' => 'field2',
+//        'type' => 'integer'
+//    ],
+//];
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$schema = ['fields' => $fields];
+$table = $dataset->createTable($tableId, ['schema' => $schema]);
+printf('Created table %s' . PHP_EOL, $tableId);
+```
 
 ### Python
 
@@ -668,24 +698,26 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to create.
-    # table_id = "your-project.your_dataset.your_table_name"
-    
-    schema = [
-        bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
-        bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
-    ]
-    
-    table = bigquery.Table(table_id, schema=schema)
-    table = client.create_table(table)  # Make an API request.
-    print(
-        "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
-    )
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to create.
+# table_id = "your-project.your_dataset.your_table_name"
+
+schema = [
+    bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),
+    bigquery.SchemaField("age", "INTEGER", mode="REQUIRED"),
+]
+
+table = bigquery.Table(table_id, schema=schema)
+table = client.create_table(table)  # Make an API request.
+print(
+    "Created table {}.{}.{}".format(table.project, table.dataset_id, table.table_id)
+)
+```
 
 ### Ruby
 
@@ -693,20 +725,22 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def create_table dataset_id = "my_dataset"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-      table_id = "my_table"
-    
-      table = dataset.create_table table_id do |updater|
-        updater.string  "full_name", mode: :required
-        updater.integer "age",       mode: :required
-      end
-    
-      puts "Created table: #{table_id}"
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def create_table dataset_id = "my_dataset"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+  table_id = "my_table"
+
+  table = dataset.create_table table_id do |updater|
+    updater.string  "full_name", mode: :required
+    updater.integer "age",       mode: :required
+  end
+
+  puts "Created table: #{table_id}"
+end
+```
 
 ### Create an empty table without a schema definition
 
@@ -716,42 +750,44 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Schema;
-    import com.google.cloud.bigquery.StandardTableDefinition;
-    import com.google.cloud.bigquery.TableDefinition;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableInfo;
-    
-    // Sample to create a table without schema
-    public class CreateTableWithoutSchema {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        createTableWithoutSchema(datasetName, tableName);
-      }
-    
-      public static void createTableWithoutSchema(String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId tableId = TableId.of(datasetName, tableName);
-          TableDefinition tableDefinition = StandardTableDefinition.of(Schema.of());
-          TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
-    
-          bigquery.create(tableInfo);
-          System.out.println("Table created successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Table was not created. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Schema;
+import com.google.cloud.bigquery.StandardTableDefinition;
+import com.google.cloud.bigquery.TableDefinition;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableInfo;
+
+// Sample to create a table without schema
+public class CreateTableWithoutSchema {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    createTableWithoutSchema(datasetName, tableName);
+  }
+
+  public static void createTableWithoutSchema(String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId tableId = TableId.of(datasetName, tableName);
+      TableDefinition tableDefinition = StandardTableDefinition.of(Schema.of());
+      TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
+
+      bigquery.create(tableInfo);
+      System.out.println("Table created successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Table was not created. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Create a table from a query result
 
@@ -762,30 +798,30 @@ To create a table from a query result, write the results to a destination table.
 1.  Open the BigQuery page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
 4.  In the query editor, enter a valid SQL query.
 
 5.  Click **Edit** \> **Query settings** .
-    
+
     ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
 
 6.  Select the **Set a destination table for query results** option.
-    
+
     ![Set destination](https://docs.cloud.google.com/static/bigquery/images/set-destination.png)
 
 7.  In the **Destination** section, select the **Dataset** in which you want to create the table, and then choose a **Table Id** .
 
 8.  In the **Destination table write preference** section, choose one of the following:
-    
-      - **Write if empty** — Writes the query results to the table only if the table is empty.
-      - **Append to table** — Appends the query results to an existing table.
-      - **Overwrite table** — Overwrites an existing table with the same name using the query results.
+
+    - **Write if empty** — Writes the query results to the table only if the table is empty.
+    - **Append to table** — Appends the query results to an existing table.
+    - **Overwrite table** — Overwrites an existing table with the same name using the query results.
 
 9.  Optional: For **Data location** , choose your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
@@ -802,17 +838,19 @@ The following example uses the [`CREATE TABLE` statement](https://docs.cloud.goo
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE TABLE mydataset.trips AS (
-          SELECT
-            bike_id,
-            start_time,
-            duration_minutes
-          FROM
-            bigquery-public-data.austin_bikeshare.bikeshare_trips
-        );
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE TABLE mydataset.trips AS (
+      SELECT
+        bike_id,
+        start_time,
+        duration_minutes
+      FROM
+        bigquery-public-data.austin_bikeshare.bikeshare_trips
+    );
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -821,99 +859,109 @@ For more information, see [Creating a new table from an existing table](https://
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and specify the `--destination_table` flag to create a permanent table based on the query results. Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `  project_id : dataset  ` .
-    
+2.  Enter the [`bq query`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and specify the `--destination_table` flag to create a permanent table based on the query results. Specify the `use_legacy_sql=false` flag to use GoogleSQL syntax. To write the query results to a table that is not in your default project, add the project ID to the dataset name in the following format: `project_id `` : `` dataset` .
+
     Optional: Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
-    
+
     To control the write disposition for an existing destination table, specify one of the following optional flags:
-    
-      - `--append_table` : If the destination table exists, the query results are appended to it.
-    
-      - `--replace` : If the destination table exists, it is overwritten with the query results.
-        
-            bq --location=location query \
-            --destination_table project_id:dataset.table \
-            --use_legacy_sql=false 'query'
-        
-        Replace the following:
-    
-      - `  location  ` is the name of the location used to process the query. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-    
-      - `  project_id  ` is your project ID.
-    
-      - `  dataset  ` is the name of the dataset that contains the table to which you are writing the query results.
-    
-      - `  table  ` is the name of the table to which you're writing the query results.
-    
-      - `  query  ` is a query in GoogleSQL syntax.
-        
-        If no write disposition flag is specified, the default behavior is to write the results to the table only if it is empty. If the table exists and it is not empty, the following error is returned: ` BigQuery error in query operation: Error processing job project_id :bqjob_123abc456789_00000e1234f_1: Already Exists: Table project_id:dataset.table  ` .
-        
-        Examples:
-        
-        > **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
-        
-        Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
-        
-            bq query \
-            --destination_table mydataset.mytable \
-            --use_legacy_sql=false \
-            'SELECT
-            name,
-            number
-            FROM
-            `bigquery-public-data`.usa_names.usa_1910_current
-            WHERE
-            gender = "M"
-            ORDER BY
-            number DESC'
-        
-        Enter the following command to use query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in your default project. The command uses the `--replace` flag to overwrite the destination table.
-        
-            bq query \
-            --destination_table mydataset.mytable \
-            --replace \
-            --use_legacy_sql=false \
-            'SELECT
-            name,
-            number
-            FROM
-            `bigquery-public-data`.usa_names.usa_1910_current
-            WHERE
-            gender = "M"
-            ORDER BY
-            number DESC'
-        
-        Enter the following command to append query results to a destination table named `mytable` in `mydataset` . The dataset is in `my-other-project` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
-        
-            bq query \
-            --append_table \
-            --use_legacy_sql=false \
-            --destination_table my-other-project:mydataset.mytable \
-            'SELECT
-            name,
-            number
-            FROM
-            `bigquery-public-data`.usa_names.usa_1910_current
-            WHERE
-            gender = "M"
-            ORDER BY
-            number DESC'
-        
-        The output for each of these examples looks like the following. For readability, some output is truncated.
-        
-            Waiting on bqjob_r123abc456_000001234567_1 ... (2s) Current status: DONE
-            +---------+--------+
-            |  name   | number |
-            +---------+--------+
-            | Robert  |  10021 |
-            | John    |   9636 |
-            | Robert  |   9297 |
-            | ...              |
-            +---------+--------+
+
+    - `--append_table` : If the destination table exists, the query results are appended to it.
+
+    - `--replace` : If the destination table exists, it is overwritten with the query results.
+
+      ```
+      bq --location=location query \
+      --destination_table project_id:dataset.table \
+      --use_legacy_sql=false 'query'
+      ```
+
+      Replace the following:
+
+    - `location` is the name of the location used to process the query. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+
+    - `project_id` is your project ID.
+
+    - `dataset` is the name of the dataset that contains the table to which you are writing the query results.
+
+    - `table` is the name of the table to which you're writing the query results.
+
+    - `query` is a query in GoogleSQL syntax.
+
+      If no write disposition flag is specified, the default behavior is to write the results to the table only if it is empty. If the table exists and it is not empty, the following error is returned: `BigQuery error in query operation: Error processing job `` project_id `` :bqjob_123abc456789_00000e1234f_1: Already Exists: Table `` project_id:dataset.table` .
+
+      Examples:
+
+      > **Note:** These examples query a US-based public dataset. Because the public dataset is stored in the US multi-region location, the dataset that contains your destination table must also be in the US. You cannot query a dataset in one location and write the results to a destination table in another location.
+
+      Enter the following command to write query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/marketplace/product/social-security-administration/us-names) .
+
+      ```
+      bq query \
+      --destination_table mydataset.mytable \
+      --use_legacy_sql=false \
+      'SELECT
+      name,
+      number
+      FROM
+      `bigquery-public-data`.usa_names.usa_1910_current
+      WHERE
+      gender = "M"
+      ORDER BY
+      number DESC'
+      ```
+
+      Enter the following command to use query results to overwrite a destination table named `mytable` in `mydataset` . The dataset is in your default project. The command uses the `--replace` flag to overwrite the destination table.
+
+      ```
+      bq query \
+      --destination_table mydataset.mytable \
+      --replace \
+      --use_legacy_sql=false \
+      'SELECT
+      name,
+      number
+      FROM
+      `bigquery-public-data`.usa_names.usa_1910_current
+      WHERE
+      gender = "M"
+      ORDER BY
+      number DESC'
+      ```
+
+      Enter the following command to append query results to a destination table named `mytable` in `mydataset` . The dataset is in `my-other-project` , not your default project. The command uses the `--append_table` flag to append the query results to the destination table.
+
+      ```
+      bq query \
+      --append_table \
+      --use_legacy_sql=false \
+      --destination_table my-other-project:mydataset.mytable \
+      'SELECT
+      name,
+      number
+      FROM
+      `bigquery-public-data`.usa_names.usa_1910_current
+      WHERE
+      gender = "M"
+      ORDER BY
+      number DESC'
+      ```
+
+      The output for each of these examples looks like the following. For readability, some output is truncated.
+
+      ```
+      Waiting on bqjob_r123abc456_000001234567_1 ... (2s) Current status: DONE
+      +---------+--------+
+      |  name   | number |
+      +---------+--------+
+      | Robert  |  10021 |
+      | John    |   9636 |
+      | Robert  |   9297 |
+      | ...              |
+      +---------+--------+
+      ```
 
 ### API
 
@@ -927,57 +975,59 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // queryWithDestination demonstrates saving the results of a query to a specific table by setting the destination
-    // via the API properties.
-    func queryWithDestination(w io.Writer, projectID, destDatasetID, destTableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query("SELECT 17 as my_col")
-     q.Location = "US" // Location must match the dataset(s) referenced in query.
-     q.QueryConfig.Dst = client.Dataset(destDatasetID).Table(destTableID)
-     // Run the query and print results when the query job is completed.
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     status, err := job.Wait(ctx)
-     if err != nil {
-         return err
-     }
-     if err := status.Err(); err != nil {
-         return err
-     }
-     it, err := job.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// queryWithDestination demonstrates saving the results of a query to a specific table by setting the destination
+// via the API properties.
+func queryWithDestination(w io.Writer, projectID, destDatasetID, destTableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query("SELECT 17 as my_col")
+    q.Location = "US" // Location must match the dataset(s) referenced in query.
+    q.QueryConfig.Dst = client.Dataset(destDatasetID).Table(destTableID)
+    // Run the query and print results when the query job is completed.
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    status, err := job.Wait(ctx)
+    if err != nil {
+        return err
+    }
+    if err := status.Err(); err != nil {
+        return err
+    }
+    it, err := job.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -987,48 +1037,50 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To save query results to a permanent table, set the [destination table](https://cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setDestinationTable_com_google_cloud_bigquery_TableId_) to the desired [TableId](https://cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) in a [QueryJobConfiguration](https://cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableId;
-    
-    public class SaveQueryToTable {
-    
-      public static void runSaveQueryToTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String query = "SELECT corpus FROM `bigquery-public-data.samples.shakespeare` GROUP BY corpus;";
-        String destinationTable = "MY_TABLE";
-        String destinationDataset = "MY_DATASET";
-    
-        saveQueryToTable(destinationDataset, destinationTable, query);
-      }
-    
-      public static void saveQueryToTable(
-          String destinationDataset, String destinationTableId, String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Identify the destination table
-          TableId destinationTable = TableId.of(destinationDataset, destinationTableId);
-    
-          // Build the query job
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query).setDestinationTable(destinationTable).build();
-    
-          // Execute the query.
-          bigquery.query(queryConfig);
-    
-          // The results are now saved in the destination table.
-    
-          System.out.println("Saved query ran successfully");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Saved query did not run \n" + e.toString());
-        }
-      }
+```
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableId;
+
+public class SaveQueryToTable {
+
+  public static void runSaveQueryToTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String query = "SELECT corpus FROM `bigquery-public-data.samples.shakespeare` GROUP BY corpus;";
+    String destinationTable = "MY_TABLE";
+    String destinationDataset = "MY_DATASET";
+
+    saveQueryToTable(destinationDataset, destinationTable, query);
+  }
+
+  public static void saveQueryToTable(
+      String destinationDataset, String destinationTableId, String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Identify the destination table
+      TableId destinationTable = TableId.of(destinationDataset, destinationTableId);
+
+      // Build the query job
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query).setDestinationTable(destinationTable).build();
+
+      // Execute the query.
+      bigquery.query(queryConfig);
+
+      // The results are now saved in the destination table.
+
+      System.out.println("Saved query ran successfully");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Saved query did not run \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1036,43 +1088,45 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryDestinationTable() {
-      // Queries the U.S. given names dataset for the state of Texas
-      // and saves results to permanent table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset';
-      // const tableId = 'my_table';
-    
-      // Create destination table reference
-      const dataset = bigquery.dataset(datasetId);
-      const destinationTable = dataset.table(tableId);
-    
-      const query = `SELECT name
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        WHERE state = 'TX'
-        LIMIT 100`;
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tables#resource
-      const options = {
-        query: query,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        destination: destinationTable,
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(options);
-    
-      console.log(`Job ${job.id} started.`);
-      console.log(`Query results loaded to table ${destinationTable.id}`);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryDestinationTable() {
+  // Queries the U.S. given names dataset for the state of Texas
+  // and saves results to permanent table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset';
+  // const tableId = 'my_table';
+
+  // Create destination table reference
+  const dataset = bigquery.dataset(datasetId);
+  const destinationTable = dataset.table(tableId);
+
+  const query = `SELECT name
+    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+    WHERE state = 'TX'
+    LIMIT 100`;
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/v2/tables#resource
+  const options = {
+    query: query,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    destination: destinationTable,
+  };
+
+  // Run the query as a job
+  const [job] = await bigquery.createQueryJob(options);
+
+  console.log(`Job ${job.id} started.`);
+  console.log(`Query results loaded to table ${destinationTable.id}`);
+}
+```
 
 ### Python
 
@@ -1082,27 +1136,29 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 To save query results to a permanent table, create a [QueryJobConfig](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) and set the [destination](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_destination) to the desired [TableReference](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.TableReference) . Pass the job configuration to the [query method](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the destination table.
-    # table_id = "your-project.your_dataset.your_table_name"
-    
-    job_config = bigquery.QueryJobConfig(destination=table_id)
-    
-    sql = """
-        SELECT corpus
-        FROM `bigquery-public-data.samples.shakespeare`
-        GROUP BY corpus;
-    """
-    
-    # Start the query, passing in the extra configuration.
-    query_job = client.query(sql, job_config=job_config)  # Make an API request.
-    query_job.result()  # Wait for the job to complete.
-    
-    print("Query results loaded to the table {}".format(table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the destination table.
+# table_id = "your-project.your_dataset.your_table_name"
+
+job_config = bigquery.QueryJobConfig(destination=table_id)
+
+sql = """
+    SELECT corpus
+    FROM `bigquery-public-data.samples.shakespeare`
+    GROUP BY corpus;
+"""
+
+# Start the query, passing in the extra configuration.
+query_job = client.query(sql, job_config=job_config)  # Make an API request.
+query_job.result()  # Wait for the job to complete.
+
+print("Query results loaded to the table {}".format(table_id))
+```
 
 ### Create a table that references an external data source
 
@@ -1128,15 +1184,15 @@ To learn how to create a multimodal table, see [Analyze multimodal data with SQL
 
 To configure access to tables and views, you can grant an IAM role to an entity at the following levels, which are listed in order of the range of resources allowed (largest to smallest):
 
-  - A high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
-  - The dataset level
-  - The table or view level
+- A high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
+- The dataset level
+- The table or view level
 
 You can also restrict data access within tables, by using the following methods:
 
-  - [Column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
-  - [Column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
-  - [Row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
+- [Column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
+- [Column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
+- [Row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
 
 Access to any resource protected by IAM is additive. For example, if an entity does not have access at a high level such as a project, you can grant the entity access at the dataset level, and the entity then has access to the tables and views in the dataset. Similarly, if the entity does not have access at the high level or the dataset level, you can grant the entity access at the table or view level.
 
@@ -1156,21 +1212,21 @@ For more information about roles and permissions, see [Understanding roles](http
 
 You can get information or metadata about tables in the following ways:
 
-  - Using the Google Cloud console.
-  - Using the bq command-line tool [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
-  - Calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API method.
-  - Using the client libraries.
-  - Querying the [`INFORMATION_SCHEMA.VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view.
+- Using the Google Cloud console.
+- Using the bq command-line tool [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command.
+- Calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API method.
+- Using the client libraries.
+- Querying the [`INFORMATION_SCHEMA.VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view.
 
 ### Required permissions
 
 At a minimum, to get information about tables, you must be granted `bigquery.tables.get` permissions. The following predefined IAM roles include `bigquery.tables.get` permissions:
 
-  - `bigquery.metadataViewer`
-  - `bigquery.dataViewer`
-  - `bigquery.dataOwner`
-  - `bigquery.dataEditor`
-  - `bigquery.admin`
+- `bigquery.metadataViewer`
+- `bigquery.dataViewer`
+- `bigquery.dataOwner`
+- `bigquery.dataEditor`
+- `bigquery.admin`
 
 In addition, if a user has `bigquery.datasets.create` permissions, when that user creates a dataset, they are granted `bigquery.dataOwner` access to it. `bigquery.dataOwner` access gives the user the ability to retrieve table metadata.
 
@@ -1195,37 +1251,45 @@ To get information about tables:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Issue the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command to display all table information. Use the `--schema` flag to display only table schema information. The `--format` flag can be used to control the output.
-    
+
     If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
-    
-        bq show \
-        --schema \
-        --format=prettyjson \
-        project_id:dataset.table
-    
+
+    ```
+    bq show \
+    --schema \
+    --format=prettyjson \
+    project_id:dataset.table
+    ```
+
     Where:
-    
-      - project\_id is your project ID.
-      - dataset is the name of the dataset.
-      - table is the name of the table.
-    
+
+    - ` project_id ` is your project ID.
+    - ` dataset ` is the name of the dataset.
+    - ` table ` is the name of the table.
+
     Examples:
-    
+
     Enter the following command to display all information about `mytable` in `mydataset` . `mydataset` is in your default project.
-    
-        bq show --format=prettyjson mydataset.mytable
-    
+
+    ```
+    bq show --format=prettyjson mydataset.mytable
+    ```
+
     Enter the following command to display all information about `mytable` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
-    
-        bq show --format=prettyjson myotherproject:mydataset.mytable
-    
+
+    ```
+    bq show --format=prettyjson myotherproject:mydataset.mytable
+    ```
+
     Enter the following command to display only schema information about `mytable` in `mydataset` . `mydataset` is in `myotherproject` , not your default project.
-    
-        bq show --schema --format=prettyjson myotherproject:mydataset.mytable
+
+    ```
+    bq show --schema --format=prettyjson myotherproject:mydataset.mytable
+    ```
 
 ### API
 
@@ -1237,37 +1301,39 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // printTableInfo demonstrates fetching metadata from a table and printing some basic information
-    // to an io.Writer.
-    func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     meta, err := client.Dataset(datasetID).Table(tableID).Metadata(ctx)
-     if err != nil {
-         return err
-     }
-     // Print basic information about the table.
-     fmt.Fprintf(w, "Schema has %d top-level fields\n", len(meta.Schema))
-     fmt.Fprintf(w, "Description: %s\n", meta.Description)
-     fmt.Fprintf(w, "Rows in managed storage: %d\n", meta.NumRows)
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// printTableInfo demonstrates fetching metadata from a table and printing some basic information
+// to an io.Writer.
+func printTableInfo(w io.Writer, projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    meta, err := client.Dataset(datasetID).Table(tableID).Metadata(ctx)
+    if err != nil {
+        return err
+    }
+    // Print basic information about the table.
+    fmt.Fprintf(w, "Schema has %d top-level fields\n", len(meta.Schema))
+    fmt.Fprintf(w, "Description: %s\n", meta.Description)
+    fmt.Fprintf(w, "Rows in managed storage: %d\n", meta.NumRows)
+    return nil
+}
+```
 
 ### Java
 
@@ -1275,36 +1341,38 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    import com.google.cloud.bigquery.TableId;
-    
-    public class GetTable {
-    
-      public static void runGetTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "bigquery_public_data";
-        String datasetName = "samples";
-        String tableName = "shakespeare";
-        getTable(projectId, datasetName, tableName);
-      }
-    
-      public static void getTable(String projectId, String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          TableId tableId = TableId.of(projectId, datasetName, tableName);
-          Table table = bigquery.getTable(tableId);
-          System.out.println("Table info: " + table.getDescription());
-        } catch (BigQueryException e) {
-          System.out.println("Table not retrieved. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+import com.google.cloud.bigquery.TableId;
+
+public class GetTable {
+
+  public static void runGetTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "bigquery_public_data";
+    String datasetName = "samples";
+    String tableName = "shakespeare";
+    getTable(projectId, datasetName, tableName);
+  }
+
+  public static void getTable(String projectId, String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      TableId tableId = TableId.of(projectId, datasetName, tableName);
+      Table table = bigquery.getTable(tableId);
+      System.out.println("Table info: " + table.getDescription());
+    } catch (BigQueryException e) {
+      System.out.println("Table not retrieved. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -1312,27 +1380,29 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function getTable() {
-      // Retrieves table named "my_table" in "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_table";
-    
-      // Retrieve table reference
-      const dataset = bigquery.dataset(datasetId);
-      const [table] = await dataset.table(tableId).get();
-    
-      console.log('Table:');
-      console.log(table.metadata.tableReference);
-    }
-    getTable();
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function getTable() {
+  // Retrieves table named "my_table" in "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_table";
+
+  // Retrieve table reference
+  const dataset = bigquery.dataset(datasetId);
+  const [table] = await dataset.table(tableId).get();
+
+  console.log('Table:');
+  console.log(table.metadata.tableReference);
+}
+getTable();
+```
 
 ### PHP
 
@@ -1340,18 +1410,20 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    //$projectId = 'The Google project ID';
-    //$datasetId = 'The BigQuery dataset ID';
-    //$tableId   = 'The BigQuery table ID';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+//$projectId = 'The Google project ID';
+//$datasetId = 'The BigQuery dataset ID';
+//$tableId   = 'The BigQuery table ID';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+```
 
 ### Python
 
@@ -1359,23 +1431,25 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the model to fetch.
-    # table_id = 'your-project.your_dataset.your_table'
-    
-    table = client.get_table(table_id)  # Make an API request.
-    
-    # View table properties
-    print(
-        "Got table '{}.{}.{}'.".format(table.project, table.dataset_id, table.table_id)
-    )
-    print("Table schema: {}".format(table.schema))
-    print("Table description: {}".format(table.description))
-    print("Table has {} rows".format(table.num_rows))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the model to fetch.
+# table_id = 'your-project.your_dataset.your_table'
+
+table = client.get_table(table_id)  # Make an API request.
+
+# View table properties
+print(
+    "Got table '{}.{}.{}'.".format(table.project, table.dataset_id, table.table_id)
+)
+print("Table schema: {}".format(table.schema))
+print("Table description: {}".format(table.description))
+print("Table has {} rows".format(table.num_rows))
+```
 
 ### Get table information using `INFORMATION_SCHEMA`
 
@@ -1383,9 +1457,9 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 You can query the following views to get table information:
 
-  - Use the `INFORMATION_SCHEMA.TABLES` and `INFORMATION_SCHEMA.TABLE_OPTIONS` views to retrieve metadata about tables and views in a project.
-  - Use the `INFORMATION_SCHEMA.COLUMNS` and `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` views to retrieve metadata about the columns (fields) in a table.
-  - Use the `INFORMATION_SCHEMA.TABLE_STORAGE` views to retrieve metadata about current and historical storage usage by a table.
+- Use the `INFORMATION_SCHEMA.TABLES` and `INFORMATION_SCHEMA.TABLE_OPTIONS` views to retrieve metadata about tables and views in a project.
+- Use the `INFORMATION_SCHEMA.COLUMNS` and `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` views to retrieve metadata about the columns (fields) in a table.
+- Use the `INFORMATION_SCHEMA.TABLE_STORAGE` views to retrieve metadata about current and historical storage usage by a table.
 
 The `TABLES` and `TABLE_OPTIONS` views also contain high-level information about views. For detailed information, query the [`INFORMATION_SCHEMA.VIEWS`](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view instead.
 
@@ -1397,9 +1471,9 @@ The `INFORMATION_SCHEMA.TABLES` view has the following schema:
 
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 10%" />
-<col style="width: 65%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1410,140 +1484,140 @@ The `INFORMATION_SCHEMA.TABLES` view has the following schema:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>table_catalog</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset that contains the table or view. Also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
+<td><code>table_schema</code></td>
+<td><code>STRING</code></td>
+<td>The name of the dataset that contains the table or view. Also referred to as the <code>datasetId</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the table or view. Also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
+<td><code>table_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the table or view. Also referred to as the <code>tableId</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>table_type</code></td>
+<td><code>STRING</code></td>
 <td>The table type; one of the following:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">BASE TABLE</code> : A standard <a href="https://docs.cloud.google.com/bigquery/docs/tables-intro">table</a></li>
-<li><code dir="ltr" translate="no">CLONE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clone</a></li>
-<li><code dir="ltr" translate="no">SNAPSHOT</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshot</a></li>
-<li><code dir="ltr" translate="no">VIEW</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/views-intro">view</a></li>
-<li><code dir="ltr" translate="no">MATERIALIZED VIEW</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-intro">materialized view</a> or <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replica</a></li>
-<li><code dir="ltr" translate="no">EXTERNAL</code> : A table that references an <a href="https://docs.cloud.google.com/bigquery/external-data-sources">external data source</a></li>
+<li><code>BASE TABLE</code> : A standard <a href="https://docs.cloud.google.com/bigquery/docs/tables-intro">table</a></li>
+<li><code>CLONE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clone</a></li>
+<li><code>SNAPSHOT</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshot</a></li>
+<li><code>VIEW</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/views-intro">view</a></li>
+<li><code>MATERIALIZED VIEW</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-intro">materialized view</a> or <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replica</a></li>
+<li><code>EXTERNAL</code> : A table that references an <a href="https://docs.cloud.google.com/bigquery/external-data-sources">external data source</a></li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">managed_table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>managed_table_type</code></td>
+<td><code>STRING</code></td>
 <td>This column is in Preview. The managed table type; one of the following:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">NATIVE</code> : A standard <a href="https://docs.cloud.google.com/bigquery/docs/tables-intro">table</a></li>
-<li><code dir="ltr" translate="no">BIGLAKE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/iceberg-tables">Apache Iceberg managed table</a></li>
+<li><code>NATIVE</code> : A standard <a href="https://docs.cloud.google.com/bigquery/docs/tables-intro">table</a></li>
+<li><code>BIGLAKE</code> : A <a href="https://docs.cloud.google.com/bigquery/docs/iceberg-tables">Apache Iceberg managed table</a></li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_insertable_into</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the table supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement">DML INSERT</a> statements</td>
+<td><code>is_insertable_into</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the table supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement">DML INSERT</a> statements</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">is_fine_grained_mutations_enabled</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#enable_fine-grained_dml">fine-grained DML mutations</a> are enabled on the table</td>
+<td><code>is_fine_grained_mutations_enabled</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#enable_fine-grained_dml">fine-grained DML mutations</a> are enabled on the table</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_typed</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value is always <code dir="ltr" translate="no">NO</code></td>
+<td><code>is_typed</code></td>
+<td><code>STRING</code></td>
+<td>The value is always <code>NO</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">is_change_history_enabled</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> is enabled</td>
+<td><code>is_change_history_enabled</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> is enabled</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">creation_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>creation_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The table's creation time</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">base_table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's project. Applicable only to tables with <code dir="ltr" translate="no">table_type</code> set to <code dir="ltr" translate="no">CLONE</code> or <code dir="ltr" translate="no">SNAPSHOT</code> .</td>
+<td><code>base_table_catalog</code></td>
+<td><code>STRING</code></td>
+<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's project. Applicable only to tables with <code>table_type</code> set to <code>CLONE</code> or <code>SNAPSHOT</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">base_table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's dataset. Applicable only to tables with <code dir="ltr" translate="no">table_type</code> set to <code dir="ltr" translate="no">CLONE</code> or <code dir="ltr" translate="no">SNAPSHOT</code> .</td>
+<td><code>base_table_schema</code></td>
+<td><code>STRING</code></td>
+<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's dataset. Applicable only to tables with <code>table_type</code> set to <code>CLONE</code> or <code>SNAPSHOT</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">base_table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's name. Applicable only to tables with <code dir="ltr" translate="no">table_type</code> set to <code dir="ltr" translate="no">CLONE</code> or <code dir="ltr" translate="no">SNAPSHOT</code> .</td>
+<td><code>base_table_name</code></td>
+<td><code>STRING</code></td>
+<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the base table's name. Applicable only to tables with <code>table_type</code> set to <code>CLONE</code> or <code>SNAPSHOT</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">snapshot_time_ms</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
-<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the time when the <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-create">clone</a> or <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-create">snapshot</a> operation was run on the base table to create this table. If <a href="https://docs.cloud.google.com/bigquery/docs/time-travel">time travel</a> was used, then this field contains the time travel timestamp. Otherwise, the <code dir="ltr" translate="no">snapshot_time_ms</code> field is the same as the <code dir="ltr" translate="no">creation_time</code> field. Applicable only to tables with <code dir="ltr" translate="no">table_type</code> set to <code dir="ltr" translate="no">CLONE</code> or <code dir="ltr" translate="no">SNAPSHOT</code> .</td>
+<td><code>snapshot_time_ms</code></td>
+<td><code>TIMESTAMP</code></td>
+<td>For <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-intro">table clones</a> and <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro">table snapshots</a> , the time when the <a href="https://docs.cloud.google.com/bigquery/docs/table-clones-create">clone</a> or <a href="https://docs.cloud.google.com/bigquery/docs/table-snapshots-create">snapshot</a> operation was run on the base table to create this table. If <a href="https://docs.cloud.google.com/bigquery/docs/time-travel">time travel</a> was used, then this field contains the time travel timestamp. Otherwise, the <code>snapshot_time_ms</code> field is the same as the <code>creation_time</code> field. Applicable only to tables with <code>table_type</code> set to <code>CLONE</code> or <code>SNAPSHOT</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">replica_source_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>replica_source_catalog</code></td>
+<td><code>STRING</code></td>
 <td>For <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replicas</a> , the base materialized view's project.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">replica_source_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>replica_source_schema</code></td>
+<td><code>STRING</code></td>
 <td>For <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replicas</a> , the base materialized view's dataset.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">replica_source_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>replica_source_name</code></td>
+<td><code>STRING</code></td>
 <td>For <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replicas</a> , the base materialized view's name.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">replication_status</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>replication_status</code></td>
+<td><code>STRING</code></td>
 <td>For <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replicas</a> , the status of the replication from the base materialized view to the materialized view replica; one of the following:<br />
 
 <ul>
-<li><code dir="ltr" translate="no">REPLICATION_STATUS_UNSPECIFIED</code></li>
-<li><code dir="ltr" translate="no">ACTIVE</code> : Replication is active with no errors</li>
-<li><code dir="ltr" translate="no">SOURCE_DELETED</code> : The source materialized view has been deleted</li>
-<li><code dir="ltr" translate="no">PERMISSION_DENIED</code> : The source materialized view hasn't been <a href="https://docs.cloud.google.com/bigquery/docs/authorized-views">authorized</a> on the dataset that contains the source Amazon S3 BigLake tables used in the query that created the materialized view.</li>
-<li><code dir="ltr" translate="no">UNSUPPORTED_CONFIGURATION</code> : There is an issue with the replica's <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#create">prerequisites</a> other than source materialized view authorization.</li>
+<li><code>REPLICATION_STATUS_UNSPECIFIED</code></li>
+<li><code>ACTIVE</code> : Replication is active with no errors</li>
+<li><code>SOURCE_DELETED</code> : The source materialized view has been deleted</li>
+<li><code>PERMISSION_DENIED</code> : The source materialized view hasn't been <a href="https://docs.cloud.google.com/bigquery/docs/authorized-views">authorized</a> on the dataset that contains the source Amazon S3 BigLake tables used in the query that created the materialized view.</li>
+<li><code>UNSUPPORTED_CONFIGURATION</code> : There is an issue with the replica's <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#create">prerequisites</a> other than source materialized view authorization.</li>
 </ul></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">replication_error</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>If <code dir="ltr" translate="no">replication_status</code> indicates a replication issue for a <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replica</a> , <code dir="ltr" translate="no">replication_error</code> provides further details about the issue.</td>
+<td><code>replication_error</code></td>
+<td><code>STRING</code></td>
+<td>If <code>replication_status</code> indicates a replication issue for a <a href="https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas">materialized view replica</a> , <code>replication_error</code> provides further details about the issue.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">ddl</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to recreate the table, such as <code dir="ltr" translate="no">        CREATE TABLE       </code> or <code dir="ltr" translate="no">        CREATE VIEW       </code></td>
+<td><code>ddl</code></td>
+<td><code>STRING</code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to recreate the table, such as <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement"><code>CREATE TABLE</code></a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement"><code>CREATE VIEW</code></a></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">default_collation_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the default <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>default_collation_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the default <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">sync_status</code></td>
-<td><code dir="ltr" translate="no">JSON</code></td>
-<td>The status of the sync between the primary and secondary replicas for <a href="https://docs.cloud.google.com/bigquery/docs/data-replication">cross-region replication</a> and <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">disaster recovery</a> datasets. Returns <code dir="ltr" translate="no">NULL</code> if the replica is a primary replica or the dataset doesn't use replication.</td>
+<td><code>sync_status</code></td>
+<td><code>JSON</code></td>
+<td>The status of the sync between the primary and secondary replicas for <a href="https://docs.cloud.google.com/bigquery/docs/data-replication">cross-region replication</a> and <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">disaster recovery</a> datasets. Returns <code>NULL</code> if the replica is a primary replica or the dataset doesn't use replication.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">upsert_stream_apply_watermark</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>upsert_stream_apply_watermark</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>For tables that use change data capture (CDC), the time when row modifications were last applied. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture#monitor_table_upsert_operation_progress">Monitor table upsert operation progress</a> .</td>
 </tr>
 </tbody>
@@ -1557,40 +1631,44 @@ The following example retrieves table metadata for all of the tables in the data
 
 `mydataset` contains the following tables:
 
-  - `mytable1` : a standard BigQuery table
-  - `myview1` : a BigQuery view
+- `mytable1` : a standard BigQuery table
+- `myview1` : a BigQuery view
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-    SELECT
-      table_catalog, table_schema, table_name, table_type,
-      is_insertable_into, creation_time, ddl
-    FROM
-      mydataset.INFORMATION_SCHEMA.TABLES;
+```
+SELECT
+  table_catalog, table_schema, table_name, table_type,
+  is_insertable_into, creation_time, ddl
+FROM
+  mydataset.INFORMATION_SCHEMA.TABLES;
+```
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
-    +----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
-    | table_catalog  | table_schema  |   table_name   | table_type | is_insertable_into |    creation_time    |                     ddl                     |
-    +----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
-    | myproject      | mydataset     | mytable1       | BASE TABLE | YES                | 2018-10-29 20:34:44 | CREATE TABLE `myproject.mydataset.mytable1` |
-    |                |               |                |            |                    |                     | (                                           |
-    |                |               |                |            |                    |                     |   id INT64                                  |
-    |                |               |                |            |                    |                     | );                                          |
-    | myproject      | mydataset     | myview1        | VIEW       | NO                 | 2018-12-29 00:19:20 | CREATE VIEW `myproject.mydataset.myview1`   |
-    |                |               |                |            |                    |                     | AS SELECT 100 as id;                        |
-    +----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
+```
++----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
+| table_catalog  | table_schema  |   table_name   | table_type | is_insertable_into |    creation_time    |                     ddl                     |
++----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
+| myproject      | mydataset     | mytable1       | BASE TABLE | YES                | 2018-10-29 20:34:44 | CREATE TABLE `myproject.mydataset.mytable1` |
+|                |               |                |            |                    |                     | (                                           |
+|                |               |                |            |                    |                     |   id INT64                                  |
+|                |               |                |            |                    |                     | );                                          |
+| myproject      | mydataset     | myview1        | VIEW       | NO                 | 2018-12-29 00:19:20 | CREATE VIEW `myproject.mydataset.myview1`   |
+|                |               |                |            |                    |                     | AS SELECT 100 as id;                        |
++----------------+---------------+----------------+------------+--------------------+---------------------+---------------------------------------------+
+```
 
 ##### Example 2:
 
 The following example retrieves table metadata for all tables of type `CLONE` or `SNAPSHOT` from the `INFORMATION_SCHEMA.TABLES` view. The metadata returned is for tables in `mydataset` in your default project.
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLES `` .
 
-``` 
-  SELECT
+```
+SELECT
     table_name, table_type, base_table_catalog,
     base_table_schema, base_table_name, snapshot_time_ms
   FROM
@@ -1603,7 +1681,7 @@ To run the query against a project other than your default project, add the proj
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
-``` 
+```
   +--------------+------------+--------------------+-------------------+-----------------+---------------------+
   | table_name   | table_type | base_table_catalog | base_table_schema | base_table_name | snapshot_time_ms    |
   +--------------+------------+--------------------+-------------------+-----------------+---------------------+
@@ -1616,18 +1694,20 @@ The result is similar to the following. For readability, some columns are exclud
 
 The following example retrieves `table_name` and `ddl` columns from the `INFORMATION_SCHEMA.TABLES` view for the `population_by_zip_2010` table in the [`census_bureau_usa`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=census_bureau_usa&page=dataset) dataset. This dataset is part of the BigQuery [public dataset program](https://docs.cloud.google.com/bigquery/public-data) .
 
-Because the table you're querying is in another project, you add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` . In this example, the value is `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
+Because the table you're querying is in another project, you add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` . In this example, the value is `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
 
-    SELECT
-      table_name, ddl
-    FROM
-      `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
-    WHERE
-      table_name = 'population_by_zip_2010';
+```
+SELECT
+  table_name, ddl
+FROM
+  `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES
+WHERE
+  table_name = 'population_by_zip_2010';
+```
 
 The result is similar to the following:
 
-``` 
+```
 +------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |       table_name       |                                                                                                            ddl                                                                                                             |
 +------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1654,7 +1734,7 @@ When you query the `INFORMATION_SCHEMA.TABLE_OPTIONS` view, the query results co
 The `INFORMATION_SCHEMA.TABLE_OPTIONS` view has the following schema:
 
 | Column name     | Data type | Value                                                                                                                |
-| --------------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
+|-----------------|-----------|----------------------------------------------------------------------------------------------------------------------|
 | `table_catalog` | `STRING`  | The project ID of the project that contains the dataset                                                              |
 | `table_schema`  | `STRING`  | The name of the dataset that contains the table or view also referred to as the `datasetId`                          |
 | `table_name`    | `STRING`  | The name of the table or view also referred to as the `tableId`                                                      |
@@ -1665,7 +1745,7 @@ The `INFORMATION_SCHEMA.TABLE_OPTIONS` view has the following schema:
 ##### Options table
 
 | `OPTION_NAME`               | `OPTION_TYPE`                   | `OPTION_VALUE`                                                                                                                                                                        |
-| --------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `description`               | `STRING`                        | A description of the table                                                                                                                                                            |
 | `enable_refresh`            | `BOOL`                          | Whether automatic refresh is enabled for a materialized view                                                                                                                          |
 | `expiration_timestamp`      | `TIMESTAMP`                     | The time when this table expires                                                                                                                                                      |
@@ -1680,376 +1760,294 @@ The `INFORMATION_SCHEMA.TABLE_OPTIONS` view has the following schema:
 
 For external tables, the following options are possible:
 
-Options
-
-`allow_jagged_rows`
-
-`BOOL`
-
-If `true` , allow rows that are missing trailing optional columns.
-
-Applies to CSV data.
-
-`allow_quoted_newlines`
-
-`BOOL`
-
-If `true` , allow quoted data sections that contain newline characters in the file.
-
-Applies to CSV data.
-
-`bigtable_options`
-
-`STRING`
-
-Only required when creating a Bigtable external table.
-
-Specifies the schema of the Bigtable external table in JSON format.
-
-For a list of Bigtable table definition options, see `  BigtableOptions  ` in the REST API reference.
-
-`column_name_character_map`
-
-`STRING`
-
-Defines the scope of supported column name characters and the handling behavior of unsupported characters. The default setting is `STRICT` , which means unsupported characters cause BigQuery to throw errors. `V1` and `V2` replace any unsupported characters with underscores.
-
-Supported values include:
-
-  - `STRICT` . Enables [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the [`default_column_name_character_map`](https://docs.cloud.google.com/bigquery/docs/default-configuration) configuration setting.
-  - `V1` . Column names can only contain [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores. This is the default behavior for tables created before the introduction of `column_name_character_map` .
-  - `V2` . Besides [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) , it also supports [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores.
-
-`compression`
-
-`STRING`
-
-The compression type of the data source. Supported values include: `GZIP` . If not specified, the data source is uncompressed.
-
-Applies to CSV and JSON data.
-
-`decimal_target_types`
-
-`ARRAY<STRING>`
-
-Determines how to convert a `Decimal` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
-
-Example: `["NUMERIC", "BIGNUMERIC"]` .
-
-`description`
-
-`STRING`
-
-A description of this table.
-
-`enable_list_inference`
-
-`BOOL`
-
-If `true` , use schema inference specifically for Parquet LIST logical type.
-
-Applies to Parquet data.
-
-`enable_logical_types`
-
-`BOOL`
-
-If `true` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
-
-Applies to Avro data.
-
-`encoding`
-
-`STRING`
-
-The character encoding of the data. Supported values include: `UTF8` (or `UTF-8` ), `ISO_8859_1` (or `ISO-8859-1` ), `UTF-16BE` , `UTF-16LE` , `UTF-32BE` , or `UTF-32LE` . The default value is `UTF-8` .
-
-Applies to CSV data.
-
-`enum_as_string`
-
-`BOOL`
-
-If `true` , infer Parquet ENUM logical type as STRING instead of BYTES by default.
-
-Applies to Parquet data.
-
-`expiration_timestamp`
-
-`TIMESTAMP`
-
-The time when this table expires. If not specified, the table does not expire.
-
-Example: `"2025-01-01 00:00:00 UTC"` .
-
-`field_delimiter`
-
-`STRING`
-
-The separator for fields in a CSV file.
-
-Applies to CSV data.
-
-`format`
-
-`STRING`
-
-The format of the external data. Supported values for [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `AVRO` , `CLOUD_BIGTABLE` , `CSV` , `DATASTORE_BACKUP` , `DELTA_LAKE` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `GOOGLE_SHEETS` , `NEWLINE_DELIMITED_JSON` (or `JSON` ), `ORC` , `PARQUET` .
-
-Supported values for [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) include: `AVRO` , `CSV` , `DELTA_LAKE` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `NEWLINE_DELIMITED_JSON` (or `JSON` ), `ORC` , `PARQUET` .
-
-The value `JSON` is equivalent to `NEWLINE_DELIMITED_JSON` .
-
-`hive_partition_uri_prefix`
-
-`STRING`
-
-A common prefix for all source URIs before the partition key encoding begins. Applies only to hive-partitioned external tables.
-
-Applies to Avro, CSV, JSON, Parquet, and ORC data.
-
-Example: `"gs://bucket/path"` .
-
-`file_set_spec_type`
-
-`STRING`
-
-Specifies how to interpret source URIs for load jobs and external tables.
-
-Supported values include:
-
-  - `FILE_SYSTEM_MATCH` . Expands source URIs by listing files from the object store. This is the default behavior if FileSetSpecType is not set.
-  - `NEW_LINE_DELIMITED_MANIFEST` . Indicates that the provided URIs are newline-delimited manifest files, with one URI per line. Wildcard URIs are not supported in the manifest files, and all referenced data files must be in the same bucket as the manifest file.
-
-For example, if you have a source URI of `"gs://bucket/path/file"` and the `file_set_spec_type` is `FILE_SYSTEM_MATCH` , then the file is used directly as a data file. If the `file_set_spec_type` is `NEW_LINE_DELIMITED_MANIFEST` , then each line in the file is interpreted as a URI that points to a data file.
-
-`ignore_unknown_values`
-
-`BOOL`
-
-If `true` , ignore extra values that are not represented in the table schema, without returning an error.
-
-Applies to CSV and JSON data.
-
-`json_extension`
-
-`STRING`
-
-For JSON data, indicates a particular JSON interchange format. If not specified, BigQuery reads the data as generic JSON records.
-
-Supported values include:  
-`GEOJSON` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](https://docs.cloud.google.com/bigquery/docs/geospatial-data#external-geojson) .
-
-`max_bad_records`
-
-`INT64`
-
-The maximum number of bad records to ignore when reading the data.
-
-Applies to: CSV, JSON, and Google Sheets data.
-
-`max_staleness`
-
-`INTERVAL`
-
-Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
-
-Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
-
-To disable metadata caching, specify 0. This is the default.
-
-To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `INTERVAL 4 HOUR` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
-
-`null_marker`
-
-`STRING`
-
-The string that represents `NULL` values in a CSV file.
-
-Applies to CSV data.
-
-`null_markers`
-
-`ARRAY<STRING>`
-
-The list of strings that represent `NULL` values in a CSV file.
-
-This option cannot be used with `null_marker` option.
-
-Applies to CSV data.
-
-`object_metadata`
-
-`STRING`
-
-Only required when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
-
-Set the value of this option to `SIMPLE` when creating an object table.
-
-`preserve_ascii_control_characters`
-
-`BOOL`
-
-If `true` , then the embedded ASCII control characters which are the first 32 characters in the ASCII table, ranging from '\\x00' to '\\x1F', are preserved.
-
-Applies to CSV data.
-
-`projection_fields`
-
-`STRING`
-
-A list of entity properties to load.
-
-Applies to Datastore data.
-
-`quote`
-
-`STRING`
-
-The string used to quote data sections in a CSV file. If your data contains quoted newline characters, also set the `allow_quoted_newlines` property to `true` .
-
-Applies to CSV data.
-
-`reference_file_schema_uri`
-
-`STRING`
-
-User provided reference file with the table schema.
-
-Applies to Parquet/ORC/AVRO data.
-
-Example: `"gs://bucket/path/reference_schema_file.parquet"` .
-
-`require_hive_partition_filter`
-
-`BOOL`
-
-If `true` , all queries over this table require a partition filter that can be used to eliminate partitions when reading data. Applies only to hive-partitioned external tables.
-
-Applies to Avro, CSV, JSON, Parquet, and ORC data.
-
-`sheet_range`
-
-`STRING`
-
-Range of a Google Sheets spreadsheet to query from.
-
-Applies to Google Sheets data.
-
-Example: `"sheet1!A1:B20"` ,
-
-`skip_leading_rows`
-
-`INT64`
-
-The number of rows at the top of a file to skip when reading the data.
-
-Applies to CSV and Google Sheets data.
-
-`source_column_match`
-
-`STRING`
-
-This controls the strategy used to match loaded columns to the schema.
-
-If this value is unspecified, then the default is based on how the schema is provided. If autodetect is enabled, then the default behavior is to match columns by name. Otherwise, the default is to match columns by position. This is done to keep the behavior backward-compatible.
-
-Supported values include:
-
-  - `POSITION` : matches by position. This option assumes that the columns are ordered the same way as the schema.
-  - `NAME` : matches by name. This option reads the header row as column names and reorders columns to match the field names in the schema. Column names are read from the last skipped row based on the `skip_leading_rows` property.
-
-`tags`
-
-`<ARRAY<STRUCT<STRING, STRING>>>`
-
-An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) , and the value should be the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
-
-`time_zone`
-
-`STRING`
-
-Default time zone that will apply when parsing timestamp values that have no specific time zone.
-
-Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
-
-If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
-
-Applies to CSV and JSON data.
-
-`date_format`
-
-`STRING`
-
-[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `MM/DD/YYYY` ).
-
-If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
-
-If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-
-Applies to CSV and JSON data.
-
-`datetime_format`
-
-`STRING`
-
-[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ).
-
-If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
-
-If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-
-Applies to CSV and JSON data.
-
-`time_format`
-
-`STRING`
-
-[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `HH24:MI:SS.FF3` ).
-
-If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
-
-If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-
-Applies to CSV and JSON data.
-
-`timestamp_format`
-
-`STRING`
-
-[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `MM/DD/YYYY HH24:MI:SS.FF3` ).
-
-If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
-
-If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
-
-Applies to CSV and JSON data.
-
-`uris`
-
-For external tables, including object tables, that aren't Bigtable tables:
-
-`ARRAY<STRING>`
-
-An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `*` ) [wildcard character](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `uris` values that target multiple files, all of those files must share a compatible schema.
-
-The following examples show valid `uris` values:
-
-  - `['gs://bucket/path1/myfile.csv']`
-  - `['gs://bucket/path1/*.csv']`
-  - `['gs://bucket/path1/*', 'gs://bucket/path2/file00*']`
-
-  
-
-For Bigtable tables:
-
-`STRING`
-
-The URI identifying the Bigtable table to use as a data source. You can only specify one Bigtable URI.
-
-Example: ` https://googleapis.com/bigtable/projects/ project_id /instances/ instance_id [/appProfiles/ app_profile ]/tables/ table_name  `
-
-For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Options</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>allow_jagged_rows</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , allow rows that are missing trailing optional columns.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="even">
+<td><code>allow_quoted_newlines</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , allow quoted data sections that contain newline characters in the file.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>bigtable_options</code></td>
+<td><p><code>STRING</code></p>
+<p>Only required when creating a Bigtable external table.</p>
+<p>Specifies the schema of the Bigtable external table in JSON format.</p>
+<p>For a list of Bigtable table definition options, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#bigtableoptions"><code>BigtableOptions</code></a> in the REST API reference.</p></td>
+</tr>
+<tr class="even">
+<td><code>column_name_character_map</code></td>
+<td><p><code>STRING</code></p>
+<p>Defines the scope of supported column name characters and the handling behavior of unsupported characters. The default setting is <code>STRICT</code> , which means unsupported characters cause BigQuery to throw errors. <code>V1</code> and <code>V2</code> replace any unsupported characters with underscores.</p>
+<p>Supported values include:</p>
+<ul>
+<li><code>STRICT</code> . Enables <a href="https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names">flexible column names</a> . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration"><code>default_column_name_character_map</code></a> configuration setting.</li>
+<li><code>V1</code> . Column names can only contain <a href="https://docs.cloud.google.com/bigquery/docs/schemas#column_names">standard column name characters</a> . Unsupported characters (except <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2">periods in Parquet file column names</a> ) are replaced with underscores. This is the default behavior for tables created before the introduction of <code>column_name_character_map</code> .</li>
+<li><code>V2</code> . Besides <a href="https://docs.cloud.google.com/bigquery/docs/schemas#column_names">standard column name characters</a> , it also supports <a href="https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names">flexible column names</a> . Unsupported characters (except <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2">periods in Parquet file column names</a> ) are replaced with underscores.</li>
+</ul>
+<p>Applies to CSV and Parquet data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>compression</code></td>
+<td><p><code>STRING</code></p>
+<p>The compression type of the data source. Supported values include: <code>GZIP</code> . If not specified, the data source is uncompressed.</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="even">
+<td><code>decimal_target_types</code></td>
+<td><p><code>ARRAY&lt;STRING&gt;</code></p>
+<p>Determines how to convert a <code>Decimal</code> type. Equivalent to <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types">ExternalDataConfiguration.decimal_target_types</a></p>
+<p>Example: <code>["NUMERIC", "BIGNUMERIC"]</code> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>description</code></td>
+<td><p><code>STRING</code></p>
+<p>A description of this table.</p></td>
+</tr>
+<tr class="even">
+<td><code>enable_list_inference</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , use schema inference specifically for Parquet LIST logical type.</p>
+<p>Applies to Parquet data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>enable_logical_types</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , convert Avro logical types into their corresponding SQL types. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#logical_types">Logical types</a> .</p>
+<p>Applies to Avro data.</p></td>
+</tr>
+<tr class="even">
+<td><code>encoding</code></td>
+<td><p><code>STRING</code></p>
+<p>The character encoding of the data. Supported values include: <code>UTF8</code> (or <code>UTF-8</code> ), <code>ISO_8859_1</code> (or <code>ISO-8859-1</code> ), <code>UTF-16BE</code> , <code>UTF-16LE</code> , <code>UTF-32BE</code> , or <code>UTF-32LE</code> . The default value is <code>UTF-8</code> .</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>enum_as_string</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , infer Parquet ENUM logical type as STRING instead of BYTES by default.</p>
+<p>Applies to Parquet data.</p></td>
+</tr>
+<tr class="even">
+<td><code>expiration_timestamp</code></td>
+<td><p><code>TIMESTAMP</code></p>
+<p>The time when this table expires. If not specified, the table does not expire.</p>
+<p>Example: <code>"2025-01-01 00:00:00 UTC"</code> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>field_delimiter</code></td>
+<td><p><code>STRING</code></p>
+<p>The separator for fields in a CSV file.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="even">
+<td><code>format</code></td>
+<td><p><code>STRING</code></p>
+<p>The format of the external data. Supported values for <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement"><code>CREATE EXTERNAL TABLE</code></a> include: <code>AVRO</code> , <code>CLOUD_BIGTABLE</code> , <code>CSV</code> , <code>DATASTORE_BACKUP</code> , <code>DELTA_LAKE</code> ( <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> ), <code>GOOGLE_SHEETS</code> , <code>NEWLINE_DELIMITED_JSON</code> (or <code>JSON</code> ), <code>ORC</code> , <code>PARQUET</code> .</p>
+<p>Supported values for <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements"><code>LOAD DATA</code></a> include: <code>AVRO</code> , <code>CSV</code> , <code>DELTA_LAKE</code> ( <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> ) <code>NEWLINE_DELIMITED_JSON</code> (or <code>JSON</code> ), <code>ORC</code> , <code>PARQUET</code> .</p>
+<p>The value <code>JSON</code> is equivalent to <code>NEWLINE_DELIMITED_JSON</code> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>hive_partition_uri_prefix</code></td>
+<td><p><code>STRING</code></p>
+<p>A common prefix for all source URIs before the partition key encoding begins. Applies only to hive-partitioned external tables.</p>
+<p>Applies to Avro, CSV, JSON, Parquet, and ORC data.</p>
+<p>Example: <code>"gs://bucket/path"</code> .</p></td>
+</tr>
+<tr class="even">
+<td><code>file_set_spec_type</code></td>
+<td><p><code>STRING</code></p>
+<p>Specifies how to interpret source URIs for load jobs and external tables.</p>
+<p>Supported values include:</p>
+<ul>
+<li><code>FILE_SYSTEM_MATCH</code> . Expands source URIs by listing files from the object store. This is the default behavior if FileSetSpecType is not set.</li>
+<li><code>NEW_LINE_DELIMITED_MANIFEST</code> . Indicates that the provided URIs are newline-delimited manifest files, with one URI per line. Wildcard URIs are not supported in the manifest files, and all referenced data files must be in the same bucket as the manifest file.</li>
+</ul>
+<p>For example, if you have a source URI of <code>"gs://bucket/path/file"</code> and the <code>file_set_spec_type</code> is <code>FILE_SYSTEM_MATCH</code> , then the file is used directly as a data file. If the <code>file_set_spec_type</code> is <code>NEW_LINE_DELIMITED_MANIFEST</code> , then each line in the file is interpreted as a URI that points to a data file.</p></td>
+</tr>
+<tr class="odd">
+<td><code>ignore_unknown_values</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , ignore extra values that are not represented in the table schema, without returning an error.</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="even">
+<td><code>json_extension</code></td>
+<td><p><code>STRING</code></p>
+<p>For JSON data, indicates a particular JSON interchange format. If not specified, BigQuery reads the data as generic JSON records.</p>
+<p>Supported values include:<br />
+<code>GEOJSON</code> . Newline-delimited GeoJSON data. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/geospatial-data#external-geojson">Creating an external table from a newline-delimited GeoJSON file</a> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>max_bad_records</code></td>
+<td><p><code>INT64</code></p>
+<p>The maximum number of bad records to ignore when reading the data.</p>
+<p>Applies to: CSV, JSON, and Google Sheets data.</p></td>
+</tr>
+<tr class="even">
+<td><code>max_staleness</code></td>
+<td><p><code>INTERVAL</code></p>
+<p>Applicable for <a href="https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance">BigLake tables</a> and <a href="https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance">object tables</a> .</p>
+<p>Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.</p>
+<p>To disable metadata caching, specify 0. This is the default.</p>
+<p>To enable metadata caching, specify an <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals">interval literal</a> value between 30 minutes and 7 days. For example, specify <code>INTERVAL 4 HOUR</code> for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.</p></td>
+</tr>
+<tr class="odd">
+<td><code>null_marker</code></td>
+<td><p><code>STRING</code></p>
+<p>The string that represents <code>NULL</code> values in a CSV file.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="even">
+<td><code>null_markers</code></td>
+<td><p><code>ARRAY&lt;STRING&gt;</code></p>
+<p>The list of strings that represent <code>NULL</code> values in a CSV file.</p>
+<p>This option cannot be used with <code>null_marker</code> option.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>object_metadata</code></td>
+<td><p><code>STRING</code></p>
+<p>Only required when creating an <a href="https://docs.cloud.google.com/bigquery/docs/object-table-introduction">object table</a> .</p>
+<p>Set the value of this option to <code>SIMPLE</code> when creating an object table.</p></td>
+</tr>
+<tr class="even">
+<td><code>preserve_ascii_control_characters</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , then the embedded ASCII control characters which are the first 32 characters in the ASCII table, ranging from '\x00' to '\x1F', are preserved.</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>projection_fields</code></td>
+<td><p><code>STRING</code></p>
+<p>A list of entity properties to load.</p>
+<p>Applies to Datastore data.</p></td>
+</tr>
+<tr class="even">
+<td><code>quote</code></td>
+<td><p><code>STRING</code></p>
+<p>The string used to quote data sections in a CSV file. If your data contains quoted newline characters, also set the <code>allow_quoted_newlines</code> property to <code>true</code> .</p>
+<p>Applies to CSV data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>reference_file_schema_uri</code></td>
+<td><p><code>STRING</code></p>
+<p>User provided reference file with the table schema.</p>
+<p>Applies to Parquet/ORC/AVRO data.</p>
+<p>Example: <code>"gs://bucket/path/reference_schema_file.parquet"</code> .</p></td>
+</tr>
+<tr class="even">
+<td><code>require_hive_partition_filter</code></td>
+<td><p><code>BOOL</code></p>
+<p>If <code>true</code> , all queries over this table require a partition filter that can be used to eliminate partitions when reading data. Applies only to hive-partitioned external tables.</p>
+<p>Applies to Avro, CSV, JSON, Parquet, and ORC data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>sheet_range</code></td>
+<td><p><code>STRING</code></p>
+<p>Range of a Google Sheets spreadsheet to query from.</p>
+<p>Applies to Google Sheets data.</p>
+<p>Example: <code>"sheet1!A1:B20"</code> ,</p></td>
+</tr>
+<tr class="even">
+<td><code>skip_leading_rows</code></td>
+<td><p><code>INT64</code></p>
+<p>The number of rows at the top of a file to skip when reading the data.</p>
+<p>Applies to CSV and Google Sheets data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>source_column_match</code></td>
+<td><p><code>STRING</code></p>
+<p>This controls the strategy used to match loaded columns to the schema.</p>
+<p>If this value is unspecified, then the default is based on how the schema is provided. If autodetect is enabled, then the default behavior is to match columns by name. Otherwise, the default is to match columns by position. This is done to keep the behavior backward-compatible.</p>
+<p>Supported values include:</p>
+<ul>
+<li><code>POSITION</code> : matches by position. This option assumes that the columns are ordered the same way as the schema.</li>
+<li><code>NAME</code> : matches by name. This option reads the header row as column names and reorders columns to match the field names in the schema. Column names are read from the last skipped row based on the <code>skip_leading_rows</code> property.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>tags</code></td>
+<td><code>&lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;</code>
+<p>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>time_zone</code></td>
+<td><p><code>STRING</code></p>
+<p>Default time zone that will apply when parsing timestamp values that have no specific time zone.</p>
+<p>Check <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name">valid time zone names</a> .</p>
+<p>If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="even">
+<td><code>date_format</code></td>
+<td><p><code>STRING</code></p>
+<p><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime">Format elements</a> that define how the DATE values are formatted in the input files (for example, <code>MM/DD/YYYY</code> ).</p>
+<p>If this value is present, this format is the only compatible DATE format. <a href="https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values">Schema autodetection</a> will also decide DATE column type based on this format instead of the existing format.</p>
+<p>If this value is not present, the DATE field is parsed with the <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types">default formats</a> .</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>datetime_format</code></td>
+<td><p><code>STRING</code></p>
+<p><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime">Format elements</a> that define how the DATETIME values are formatted in the input files (for example, <code>MM/DD/YYYY HH24:MI:SS.FF3</code> ).</p>
+<p>If this value is present, this format is the only compatible DATETIME format. <a href="https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values">Schema autodetection</a> will also decide DATETIME column type based on this format instead of the existing format.</p>
+<p>If this value is not present, the DATETIME field is parsed with the <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types">default formats</a> .</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="even">
+<td><code>time_format</code></td>
+<td><p><code>STRING</code></p>
+<p><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime">Format elements</a> that define how the TIME values are formatted in the input files (for example, <code>HH24:MI:SS.FF3</code> ).</p>
+<p>If this value is present, this format is the only compatible TIME format. <a href="https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values">Schema autodetection</a> will also decide TIME column type based on this format instead of the existing format.</p>
+<p>If this value is not present, the TIME field is parsed with the <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types">default formats</a> .</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="odd">
+<td><code>timestamp_format</code></td>
+<td><p><code>STRING</code></p>
+<p><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime">Format elements</a> that define how the TIMESTAMP values are formatted in the input files (for example, <code>MM/DD/YYYY HH24:MI:SS.FF3</code> ).</p>
+<p>If this value is present, this format is the only compatible TIMESTAMP format. <a href="https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values">Schema autodetection</a> will also decide TIMESTAMP column type based on this format instead of the existing format.</p>
+<p>If this value is not present, the TIMESTAMP field is parsed with the <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types">default formats</a> .</p>
+<p>Applies to CSV and JSON data.</p></td>
+</tr>
+<tr class="even">
+<td><code>uris</code></td>
+<td><p>For external tables, including object tables, that aren't Bigtable tables:</p>
+<p><code>ARRAY&lt;STRING&gt;</code></p>
+<p>An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( <code>*</code> ) <a href="https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#load-wildcards">wildcard character</a> , which must come after the bucket name. When you specify <code>uris</code> values that target multiple files, all of those files must share a compatible schema.</p>
+<p>The following examples show valid <code>uris</code> values:</p>
+<ul>
+<li><code>['gs://bucket/path1/myfile.csv']</code></li>
+<li><code>['gs://bucket/path1/*.csv']</code></li>
+<li><code>['gs://bucket/path1/*', 'gs://bucket/path2/file00*']</code></li>
+</ul>
+<br />
+
+<p>For Bigtable tables:</p>
+<p><code>STRING</code></p>
+<p>The URI identifying the Bigtable table to use as a data source. You can only specify one Bigtable URI.</p>
+<p>Example: <code>https://googleapis.com/bigtable/projects/ </code><var translate="no"> project_id </var><code> /instances/ </code><var translate="no"> instance_id </var><code> [/appProfiles/ </code><var translate="no"> app_profile </var><code> ]/tables/ </code><var translate="no"> table_name</var></p>
+<p>For more information on constructing a Bigtable URI, see <a href="https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri">Retrieve the Bigtable URI</a> .</p></td>
+</tr>
+</tbody>
+</table>
 
 #### Examples
 
@@ -2057,12 +2055,12 @@ For more information on constructing a Bigtable URI, see [Retrieve the Bigtable 
 
 The following example retrieves the default table expiration times for all tables in `mydataset` in your default project ( `myproject` ) by querying the `INFORMATION_SCHEMA.TABLE_OPTIONS` view.
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` 
-  SELECT
+```
+SELECT
     *
   FROM
     mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS
@@ -2072,7 +2070,7 @@ To run the query against a project other than your default project, add the proj
 
 The result is similar to the following:
 
-``` 
+```
   +----------------+---------------+------------+----------------------+-------------+--------------------------------------+
   | table_catalog  | table_schema  | table_name |     option_name      | option_type |             option_value             |
   +----------------+---------------+------------+----------------------+-------------+--------------------------------------+
@@ -2088,10 +2086,10 @@ The result is similar to the following:
 
 The following example retrieves metadata about all tables in `mydataset` that contain test data. The query uses the values in the `description` option to find tables that contain "test" anywhere in the description. `mydataset` is in your default project — `myproject` .
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS `` .
 
-``` 
-  SELECT
+```
+SELECT
     *
   FROM
     mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS
@@ -2102,7 +2100,7 @@ To run the query against a project other than your default project, add the proj
 
 The result is similar to the following:
 
-``` 
+```
   +----------------+---------------+------------+-------------+-------------+--------------+
   | table_catalog  | table_schema  | table_name | option_name | option_type | option_value |
   +----------------+---------------+------------+-------------+-------------+--------------+
@@ -2133,153 +2131,153 @@ The `INFORMATION_SCHEMA.COLUMNS` view has the following schema:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>table_catalog</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset that contains the table also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
+<td><code>table_schema</code></td>
+<td><code>STRING</code></td>
+<td>The name of the dataset that contains the table also referred to as the <code>datasetId</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the table or view also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
+<td><code>table_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the table or view also referred to as the <code>tableId</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">column_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>column_name</code></td>
+<td><code>STRING</code></td>
 <td>The name of the column.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">ordinal_position</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The 1-indexed offset of the column within the table; if it's a pseudo column such as _PARTITIONTIME or _PARTITIONDATE, the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>ordinal_position</code></td>
+<td><code>INT64</code></td>
+<td>The 1-indexed offset of the column within the table; if it's a pseudo column such as _PARTITIONTIME or _PARTITIONDATE, the value is <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_nullable</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column's mode allows <code dir="ltr" translate="no">NULL</code> values.</td>
+<td><code>is_nullable</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the column's mode allows <code>NULL</code> values.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">data_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>data_type</code></td>
+<td><code>STRING</code></td>
 <td>The column's GoogleSQL <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data type</a> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_generated</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value is <code dir="ltr" translate="no">ALWAYS</code> if the column is an <a href="https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation">automatically generated embedding column</a> ; otherwise, the value is <code dir="ltr" translate="no">NEVER</code> .</td>
+<td><code>is_generated</code></td>
+<td><code>STRING</code></td>
+<td>The value is <code>ALWAYS</code> if the column is an <a href="https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation">automatically generated embedding column</a> ; otherwise, the value is <code>NEVER</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">generation_expression</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value is the generation expression used to define the column if the column is an automatically generated embedding column; otherwise the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>generation_expression</code></td>
+<td><code>STRING</code></td>
+<td>The value is the generation expression used to define the column if the column is an automatically generated embedding column; otherwise the value is <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_stored</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value is <code dir="ltr" translate="no">YES</code> if the column is an automatically generated embedding column; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>is_stored</code></td>
+<td><code>STRING</code></td>
+<td>The value is <code>YES</code> if the column is an automatically generated embedding column; otherwise, the value is <code>NULL</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">async_generation_status</code></td>
-<td><code dir="ltr" translate="no">STRUCT</code></td>
-<td>Contains blocking errors for background embedding generation jobs if the column is an automatically generated embedding column; otherwise, the value is <code dir="ltr" translate="no">NULL</code> . For information about blocking errors, see the <code dir="ltr" translate="no">async_generation_status.blocking_error.message</code> field. Blocking errors can include the following:
+<td><code>async_generation_status</code></td>
+<td><code>STRUCT</code></td>
+<td>Contains blocking errors for background embedding generation jobs if the column is an automatically generated embedding column; otherwise, the value is <code>NULL</code> . For information about blocking errors, see the <code>async_generation_status.blocking_error.message</code> field. Blocking errors can include the following:
 <ul>
 <li>Permission denied errors</li>
 <li>Not found errors</li>
 <li>Unsupported embedding model endpoint errors</li>
 <li>Vertex AI API not enabled errors</li>
 </ul>
-Once the next embedding generation job succeeds, the <code dir="ltr" translate="no">async_generation_status</code> column is cleared.</td>
+Once the next embedding generation job succeeds, the <code>async_generation_status</code> column is cleared.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_hidden</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
+<td><code>is_hidden</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">is_updatable</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The value is always <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>is_updatable</code></td>
+<td><code>STRING</code></td>
+<td>The value is always <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_system_defined</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
+<td><code>is_system_defined</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the column is a pseudo column such as _PARTITIONTIME or _PARTITIONDATE.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">is_partitioning_column</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is a <a href="https://docs.cloud.google.com/bigquery/docs/partitioned-tables">partitioning column</a> .</td>
+<td><code>is_partitioning_column</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the column is a <a href="https://docs.cloud.google.com/bigquery/docs/partitioned-tables">partitioning column</a> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">clustering_ordinal_position</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The 1-indexed offset of the column within the table's clustering columns; the value is <code dir="ltr" translate="no">NULL</code> if the table is not a clustered table.</td>
+<td><code>clustering_ordinal_position</code></td>
+<td><code>INT64</code></td>
+<td>The 1-indexed offset of the column within the table's clustering columns; the value is <code>NULL</code> if the table is not a clustered table.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">collation_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">NULL</code> .<br />
+<td><code>collation_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code>NULL</code> .<br />
 <br />
-If a <code dir="ltr" translate="no">STRING</code> or <code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code> is passed in, the collation specification is returned if it exists; otherwise <code dir="ltr" translate="no">NULL</code> is returned.</td>
+If a <code>STRING</code> or <code>ARRAY&lt;STRING&gt;</code> is passed in, the collation specification is returned if it exists; otherwise <code>NULL</code> is returned.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">column_default</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The <a href="https://docs.cloud.google.com/bigquery/docs/default-values">default value</a> of the column if it exists; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>column_default</code></td>
+<td><code>STRING</code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/default-values">default value</a> of the column if it exists; otherwise, the value is <code>NULL</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">rounding_mode</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The mode of rounding that's used for values written to the field if its type is a parameterized <code dir="ltr" translate="no">NUMERIC</code> or <code dir="ltr" translate="no">BIGNUMERIC</code> ; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>rounding_mode</code></td>
+<td><code>STRING</code></td>
+<td>The mode of rounding that's used for values written to the field if its type is a parameterized <code>NUMERIC</code> or <code>BIGNUMERIC</code> ; otherwise, the value is <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">data_policies.name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>data_policies.name</code></td>
+<td><code>STRING</code></td>
 <td>The list of data policies that are attached to the column to control access and masking. This field is in ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ).</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">policy_tags</code></td>
-<td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
+<td><code>policy_tags</code></td>
+<td><code>ARRAY&lt;STRING&gt;</code></td>
 <td>The list of policy tags that are attached to the column.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">is_identity</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td><code dir="ltr" translate="no">YES</code> or <code dir="ltr" translate="no">NO</code> depending on whether the column is an identity column.</td>
+<td><code>is_identity</code></td>
+<td><code>STRING</code></td>
+<td><code>YES</code> or <code>NO</code> depending on whether the column is an identity column.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">identity_generation</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>One of <code dir="ltr" translate="no">ALWAYS</code> or <code dir="ltr" translate="no">BY DEFAULT</code> , depending on the generation mode of the identity column. If the column isn't an identity column, then the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>identity_generation</code></td>
+<td><code>STRING</code></td>
+<td>One of <code>ALWAYS</code> or <code>BY DEFAULT</code> , depending on the generation mode of the identity column. If the column isn't an identity column, then the value is <code>NULL</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">identity_start</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The first value generated by the identity column, or <code dir="ltr" translate="no">NULL</code> if the column isn't an identity column.</td>
+<td><code>identity_start</code></td>
+<td><code>INT64</code></td>
+<td>The first value generated by the identity column, or <code>NULL</code> if the column isn't an identity column.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">identity_increment</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The minimum difference between successively generated IDs for the identity column, or <code dir="ltr" translate="no">NULL</code> if the column isn't an identity column.</td>
+<td><code>identity_increment</code></td>
+<td><code>INT64</code></td>
+<td>The minimum difference between successively generated IDs for the identity column, or <code>NULL</code> if the column isn't an identity column.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">identity_maximum</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The maximum value that can be generated for the identity column, or <code dir="ltr" translate="no">NULL</code> if the column isn't an identity column.</td>
+<td><code>identity_maximum</code></td>
+<td><code>INT64</code></td>
+<td>The maximum value that can be generated for the identity column, or <code>NULL</code> if the column isn't an identity column.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">identity_minimum</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
-<td>The minimum value that can be generated for the identity column, or <code dir="ltr" translate="no">NULL</code> if the column isn't an identity column.</td>
+<td><code>identity_minimum</code></td>
+<td><code>INT64</code></td>
+<td>The minimum value that can be generated for the identity column, or <code>NULL</code> if the column isn't an identity column.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">identity_cycle</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>If the column is an identity column, then this value is <code dir="ltr" translate="no">NEVER</code> ; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
+<td><code>identity_cycle</code></td>
+<td><code>STRING</code></td>
+<td>If the column is an identity column, then this value is <code>NEVER</code> ; otherwise, the value is <code>NULL</code> .</td>
 </tr>
 </tbody>
 </table>
@@ -2288,16 +2286,16 @@ If a <code dir="ltr" translate="no">STRING</code> or <code dir="ltr" translate="
 
 The following example retrieves metadata from the `INFORMATION_SCHEMA.COLUMNS` view for the `population_by_zip_2010` table in the [`census_bureau_usa`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=census_bureau_usa&page=dataset) dataset. This dataset is part of the BigQuery [public dataset program](https://cloud.google.com/public-datasets/) .
 
-Because the table you're querying is in another project, the `bigquery-public-data` project, you add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
+Because the table you're querying is in another project, the `bigquery-public-data` project, you add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.TABLES `` .
 
 The following column is excluded from the query results:
 
-  - `IS_UPDATABLE`
+- `IS_UPDATABLE`
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-``` 
-  SELECT
+```
+SELECT
     * EXCEPT(is_updatable)
   FROM
     `bigquery-public-data`.census_bureau_usa.INFORMATION_SCHEMA.COLUMNS
@@ -2307,7 +2305,7 @@ The following column is excluded from the query results:
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
-``` 
+```
 +------------------------+-------------+------------------+-------------+-----------+-----------+-------------------+------------------------+-----------------------------+-------------+
 |       table_name       | column_name | ordinal_position | is_nullable | data_type | is_hidden | is_system_defined | is_partitioning_column | clustering_ordinal_position | policy_tags |
 +------------------------+-------------+------------------+-------------+-----------+-----------+-------------------+------------------------+-----------------------------+-------------+
@@ -2327,108 +2325,50 @@ When you query the `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view, the query resul
 
 The `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view has the following schema:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The project ID of the project that contains the dataset.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset that contains the table also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the table or view also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">column_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the top-level column.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">field_path</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the top-level column or the path to the column <a href="https://docs.cloud.google.com/bigquery/docs/nested-repeated">nested</a> within a <code dir="ltr" translate="no">RECORD</code> or <code dir="ltr" translate="no">STRUCT</code> column.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">data_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The column's GoogleSQL <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data type</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">description</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The column's description.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">collation_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">NULL</code> .<br />
-<br />
-If a <code dir="ltr" translate="no">STRING</code> , <code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code> , or <code dir="ltr" translate="no">STRING</code> field in a <code dir="ltr" translate="no">STRUCT</code> is passed in, the collation specification is returned if it exists; otherwise, <code dir="ltr" translate="no">NULL</code> is returned.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">rounding_mode</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The mode of rounding that's used when applying precision and scale to+ parameterized <code dir="ltr" translate="no">NUMERIC</code> or <code dir="ltr" translate="no">BIGNUMERIC</code> values; otherwise, the value is <code dir="ltr" translate="no">NULL</code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">data_policies.name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The list of data policies that are attached to the column to control access and masking. This field is in ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ).</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">policy_tags</code></td>
-<td><code dir="ltr" translate="no">ARRAY&lt;STRING&gt;</code></td>
-<td>The list of policy tags that are attached to the column.</td>
-</tr>
-</tbody>
-</table>
+| Column name          | Data type       | Value                                                                                                                                                                                                                                                                                                                                   |
+|----------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `table_catalog`      | `STRING`        | The project ID of the project that contains the dataset.                                                                                                                                                                                                                                                                                |
+| `table_schema`       | `STRING`        | The name of the dataset that contains the table also referred to as the `datasetId` .                                                                                                                                                                                                                                                   |
+| `table_name`         | `STRING`        | The name of the table or view also referred to as the `tableId` .                                                                                                                                                                                                                                                                       |
+| `column_name`        | `STRING`        | The name of the top-level column.                                                                                                                                                                                                                                                                                                       |
+| `field_path`         | `STRING`        | The name of the top-level column or the path to the column [nested](https://docs.cloud.google.com/bigquery/docs/nested-repeated) within a `RECORD` or `STRUCT` column.                                                                                                                                                                  |
+| `data_type`          | `STRING`        | The column's GoogleSQL [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .                                                                                                                                                                                                                     |
+| `description`        | `STRING`        | The column's description.                                                                                                                                                                                                                                                                                                               |
+| `collation_name`     | `STRING`        | The name of the [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) if it exists; otherwise, `NULL` . If a `STRING` , `ARRAY<STRING>` , or `STRING` field in a `STRUCT` is passed in, the collation specification is returned if it exists; otherwise, `NULL` is returned. |
+| `rounding_mode`      | `STRING`        | The mode of rounding that's used when applying precision and scale to+ parameterized `NUMERIC` or `BIGNUMERIC` values; otherwise, the value is `NULL` .                                                                                                                                                                                 |
+| `data_policies.name` | `STRING`        | The list of data policies that are attached to the column to control access and masking. This field is in ( [Preview](https://cloud.google.com/products#product-launch-stages) ).                                                                                                                                                       |
+| `policy_tags`        | `ARRAY<STRING>` | The list of policy tags that are attached to the column.                                                                                                                                                                                                                                                                                |
 
 #### Examples
 
 The following example retrieves metadata from the `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view for the `commits` table in the [`github_repos` dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=github_repos&page=dataset) . This dataset is part of the BigQuery [public dataset program](https://cloud.google.com/public-datasets/) .
 
-Because the table you're querying is in another project, the `bigquery-public-data` project, you add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, `` `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS `` .
+Because the table you're querying is in another project, the `bigquery-public-data` project, you add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS `` .
 
 The `commits` table contains the following nested and nested and repeated columns:
 
-  - `author` : nested `RECORD` column
-  - `committer` : nested `RECORD` column
-  - `trailer` : nested and repeated `RECORD` column
-  - `difference` : nested and repeated `RECORD` column
+- `author` : nested `RECORD` column
+- `committer` : nested `RECORD` column
+- `trailer` : nested and repeated `RECORD` column
+- `difference` : nested and repeated `RECORD` column
 
 To view metadata about the `author` and `difference` columns, run the following query.
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
-    SELECT
-      *
-    FROM
-      `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
-    WHERE
-      table_name = 'commits'
-      AND (column_name = 'author' OR column_name = 'difference');
+```
+SELECT
+  *
+FROM
+  `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS
+WHERE
+  table_name = 'commits'
+  AND (column_name = 'author' OR column_name = 'difference');
+```
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
-``` 
+```
   +------------+-------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+-------------+-------------+
   | table_name | column_name |     field_path      |                                                                      data_type                                                                      | description | policy_tags |
   +------------+-------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+-------------+-------------+
@@ -2470,128 +2410,128 @@ The `TABLE_STORAGE` and `TABLE_STORAGE_BY_ORGANIZATION` views have the following
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">project_id</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>project_id</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">project_number</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>project_number</code></td>
+<td><code>INT64</code></td>
 <td>The project number of the project that contains the dataset.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_catalog</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
+<td><code>table_catalog</code></td>
+<td><code>STRING</code></td>
 <td>The project ID of the project that contains the dataset.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_schema</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the dataset that contains the table or materialized view, also referred to as the <code dir="ltr" translate="no">datasetId</code> .</td>
+<td><code>table_schema</code></td>
+<td><code>STRING</code></td>
+<td>The name of the dataset that contains the table or materialized view, also referred to as the <code>datasetId</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_name</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The name of the table or materialized view, also referred to as the <code dir="ltr" translate="no">tableId</code> .</td>
+<td><code>table_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the table or materialized view, also referred to as the <code>tableId</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">creation_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>creation_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The creation time of the table.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_rows</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_rows</code></td>
+<td><code>INT64</code></td>
 <td>The total number of rows in the table or materialized view.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">total_partitions</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_partitions</code></td>
+<td><code>INT64</code></td>
 <td>The number of partitions present in the table or materialized view. Unpartitioned tables return 0.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of logical (uncompressed) bytes in the table or materialized view.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">active_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>active_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of logical (uncompressed) bytes that are younger than 90 days.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">long_term_logical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>long_term_logical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of logical (uncompressed) bytes that are older than 90 days.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">current_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>current_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of physical bytes for the current storage of the table across all partitions.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">total_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>total_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Total number of physical (compressed) bytes used for storage, including active, long-term, and time-travel (deleted or changed data) bytes. Fail-safe (deleted or changed data retained after the time-travel window) bytes aren't included.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">active_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>active_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes younger than 90 days, including time-travel (deleted or changed data) bytes.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">long_term_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>long_term_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes older than 90 days.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">time_travel_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>time_travel_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes used by time-travel storage (deleted or changed data).</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">storage_last_modified_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
-<td>The most recent time that data was written to the table. Returns <code dir="ltr" translate="no">NULL</code> if no data exists.</td>
+<td><code>storage_last_modified_time</code></td>
+<td><code>TIMESTAMP</code></td>
+<td>The most recent time that data was written to the table. Returns <code>NULL</code> if no data exists.</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">deleted</code></td>
-<td><code dir="ltr" translate="no">BOOLEAN</code></td>
+<td><code>deleted</code></td>
+<td><code>BOOLEAN</code></td>
 <td>Indicates whether or not the table is deleted.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>The type of table. For example, <code dir="ltr" translate="no">BASE TABLE</code> .</td>
+<td><code>table_type</code></td>
+<td><code>STRING</code></td>
+<td>The type of table. For example, <code>BASE TABLE</code> .</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">managed_table_type</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>This column is in Preview. The managed type of the table. For example, <code dir="ltr" translate="no">NATIVE</code> or <code dir="ltr" translate="no">BIGLAKE</code> .</td>
+<td><code>managed_table_type</code></td>
+<td><code>STRING</code></td>
+<td>This column is in Preview. The managed type of the table. For example, <code>NATIVE</code> or <code>BIGLAKE</code> .</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">fail_safe_physical_bytes</code></td>
-<td><code dir="ltr" translate="no">INT64</code></td>
+<td><code>fail_safe_physical_bytes</code></td>
+<td><code>INT64</code></td>
 <td>Number of physical (compressed) bytes used by the fail-safe storage (deleted or changed data).</td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">last_metadata_index_refresh_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>last_metadata_index_refresh_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The last metadata index refresh time of the table.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">table_deletion_reason</code></td>
-<td><code dir="ltr" translate="no">STRING</code></td>
-<td>Table deletion reason if the <code dir="ltr" translate="no">deleted</code> field is true. The possible values are as follows:
+<td><code>table_deletion_reason</code></td>
+<td><code>STRING</code></td>
+<td>Table deletion reason if the <code>deleted</code> field is true. The possible values are as follows:
 <ul>
-<li><code dir="ltr" translate="no">TABLE_EXPIRATION:</code> table deleted after set expiration time</li>
-<li><code dir="ltr" translate="no">DATASET_DELETION:</code> dataset deleted by user</li>
-<li><code dir="ltr" translate="no">USER_DELETED:</code> table was deleted by user</li>
+<li><code>TABLE_EXPIRATION:</code> table deleted after set expiration time</li>
+<li><code>DATASET_DELETION:</code> dataset deleted by user</li>
+<li><code>USER_DELETED:</code> table was deleted by user</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">table_deletion_time</code></td>
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
+<td><code>table_deletion_time</code></td>
+<td><code>TIMESTAMP</code></td>
 <td>The deletion time of the table.</td>
 </tr>
 </tbody>
@@ -2603,44 +2543,50 @@ The `TABLE_STORAGE` and `TABLE_STORAGE_BY_ORGANIZATION` views have the following
 
 The following example shows you the total logical bytes billed for the current project.
 
-    SELECT
-      SUM(total_logical_bytes) AS total_logical_bytes
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE;
+```
+SELECT
+  SUM(total_logical_bytes) AS total_logical_bytes
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE;
+```
 
 The result is similar to the following:
 
-    +---------------------+
-    | total_logical_bytes |
-    +---------------------+
-    | 971329178274633     |
-    +---------------------+
+```
++---------------------+
+| total_logical_bytes |
++---------------------+
+| 971329178274633     |
++---------------------+
+```
 
 ##### Example 2:
 
 The following example shows different storage bytes in GiB at the dataset(s) level for current project.
 
-    SELECT
-      table_schema AS dataset_name,
-      -- Logical
-      SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,
-      SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib,
-      SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib,
-      -- Physical
-      SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
-      SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
-      SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
-      SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
-      SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
-      SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
-    WHERE
-      table_type ='BASE TABLE'
-    GROUP BY
-      table_schema
-    ORDER BY
-      dataset_name
+```
+SELECT
+  table_schema AS dataset_name,
+  -- Logical
+  SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,
+  SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib,
+  SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib,
+  -- Physical
+  SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
+  SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
+  SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
+  SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
+  SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
+  SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
+WHERE
+  table_type ='BASE TABLE'
+GROUP BY
+  table_schema
+ORDER BY
+  dataset_name
+```
 
 ##### Example 3:
 
@@ -2651,70 +2597,74 @@ The prices used in the pricing variables for this query are for the `us-central1
 1.  Open the BigQuery page in the Google Cloud console.
 
 2.  Enter the following GoogleSQL query in the **Query editor** box. `INFORMATION_SCHEMA` requires GoogleSQL syntax. GoogleSQL is the default syntax in the Google Cloud console.
-    
-        DECLARE active_logical_gib_price FLOAT64 DEFAULT 0.02;
-        DECLARE long_term_logical_gib_price FLOAT64 DEFAULT 0.01;
-        DECLARE active_physical_gib_price FLOAT64 DEFAULT 0.04;
-        DECLARE long_term_physical_gib_price FLOAT64 DEFAULT 0.02;
-        
-        WITH
-         storage_sizes AS (
-           SELECT
-             table_schema AS dataset_name,
-             -- Logical
-             SUM(IF(deleted=false, active_logical_bytes, 0)) / power(1024, 3) AS active_logical_gib,
-             SUM(IF(deleted=false, long_term_logical_bytes, 0)) / power(1024, 3) AS long_term_logical_gib,
-             -- Physical
-             SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
-             SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
-             SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
-             -- Restorable previously deleted physical
-             SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
-             SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib,
-           FROM
-             `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT
-           WHERE total_physical_bytes + fail_safe_physical_bytes > 0
-             -- Base the forecast on base tables only for highest precision results
-             AND table_type  = 'BASE TABLE'
-             GROUP BY 1
-         )
-        SELECT
-          dataset_name,
-          -- Logical
-          ROUND(active_logical_gib, 2) AS active_logical_gib,
-          ROUND(long_term_logical_gib, 2) AS long_term_logical_gib,
-          -- Physical
-          ROUND(active_physical_gib, 2) AS active_physical_gib,
-          ROUND(long_term_physical_gib, 2) AS long_term_physical_gib,
-          ROUND(time_travel_physical_gib, 2) AS time_travel_physical_gib,
-          ROUND(fail_safe_physical_gib, 2) AS fail_safe_physical_gib,
-          -- Compression ratio
-          ROUND(SAFE_DIVIDE(active_logical_gib, active_no_tt_physical_gib), 2) AS active_compression_ratio,
-          ROUND(SAFE_DIVIDE(long_term_logical_gib, long_term_physical_gib), 2) AS long_term_compression_ratio,
-          -- Forecast costs logical
-          ROUND(active_logical_gib * active_logical_gib_price, 2) AS forecast_active_logical_cost,
-          ROUND(long_term_logical_gib * long_term_logical_gib_price, 2) AS forecast_long_term_logical_cost,
-          -- Forecast costs physical
-          ROUND((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
-          ROUND(long_term_physical_gib * long_term_physical_gib_price, 2) AS forecast_long_term_physical_cost,
-          -- Forecast costs total
-          ROUND(((active_logical_gib * active_logical_gib_price) + (long_term_logical_gib * long_term_logical_gib_price)) -
-             (((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
-        FROM
-          storage_sizes
-        ORDER BY
-          (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
-    
+
+    ```
+    DECLARE active_logical_gib_price FLOAT64 DEFAULT 0.02;
+    DECLARE long_term_logical_gib_price FLOAT64 DEFAULT 0.01;
+    DECLARE active_physical_gib_price FLOAT64 DEFAULT 0.04;
+    DECLARE long_term_physical_gib_price FLOAT64 DEFAULT 0.02;
+
+    WITH
+     storage_sizes AS (
+       SELECT
+         table_schema AS dataset_name,
+         -- Logical
+         SUM(IF(deleted=false, active_logical_bytes, 0)) / power(1024, 3) AS active_logical_gib,
+         SUM(IF(deleted=false, long_term_logical_bytes, 0)) / power(1024, 3) AS long_term_logical_gib,
+         -- Physical
+         SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
+         SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
+         SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
+         -- Restorable previously deleted physical
+         SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
+         SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib,
+       FROM
+         `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_PROJECT
+       WHERE total_physical_bytes + fail_safe_physical_bytes > 0
+         -- Base the forecast on base tables only for highest precision results
+         AND table_type  = 'BASE TABLE'
+         GROUP BY 1
+     )
+    SELECT
+      dataset_name,
+      -- Logical
+      ROUND(active_logical_gib, 2) AS active_logical_gib,
+      ROUND(long_term_logical_gib, 2) AS long_term_logical_gib,
+      -- Physical
+      ROUND(active_physical_gib, 2) AS active_physical_gib,
+      ROUND(long_term_physical_gib, 2) AS long_term_physical_gib,
+      ROUND(time_travel_physical_gib, 2) AS time_travel_physical_gib,
+      ROUND(fail_safe_physical_gib, 2) AS fail_safe_physical_gib,
+      -- Compression ratio
+      ROUND(SAFE_DIVIDE(active_logical_gib, active_no_tt_physical_gib), 2) AS active_compression_ratio,
+      ROUND(SAFE_DIVIDE(long_term_logical_gib, long_term_physical_gib), 2) AS long_term_compression_ratio,
+      -- Forecast costs logical
+      ROUND(active_logical_gib * active_logical_gib_price, 2) AS forecast_active_logical_cost,
+      ROUND(long_term_logical_gib * long_term_logical_gib_price, 2) AS forecast_long_term_logical_cost,
+      -- Forecast costs physical
+      ROUND((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
+      ROUND(long_term_physical_gib * long_term_physical_gib_price, 2) AS forecast_long_term_physical_cost,
+      -- Forecast costs total
+      ROUND(((active_logical_gib * active_logical_gib_price) + (long_term_logical_gib * long_term_logical_gib_price)) -
+         (((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
+    FROM
+      storage_sizes
+    ORDER BY
+      (forecast_active_logical_cost + forecast_active_physical_cost) DESC;
+    ```
+
     > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 3.  Click **Run** .
 
 The result is similar to the following:
 
-    +--------------+--------------------+-----------------------+---------------------+------------------------+--------------------------+-----------------------------+------------------------------+----------------------------------+-------------------------------+----------------------------------+--------------------------------+
-    | dataset_name | active_logical_gib | long_term_logical_gib | active_physical_gib | long_term_physical_gib | active_compression_ratio | long_term_compression_ratio | forecast_active_logical_cost | forecaset_long_term_logical_cost | forecast_active_physical_cost | forecast_long_term_physical_cost | forecast_total_cost_difference |
-    +--------------+--------------------+-----------------------+---------------------+------------------------+--------------------------+-----------------------------+------------------------------+----------------------------------+-------------------------------+----------------------------------+--------------------------------+
-    | dataset1     |               10.0 |                  10.0 |                 1.0 |                    1.0 |                     10.0 |                        10.0 |                          0.2 |                              0.1 |                          0.04 |                             0.02 |                           0.24 |
+```
++--------------+--------------------+-----------------------+---------------------+------------------------+--------------------------+-----------------------------+------------------------------+----------------------------------+-------------------------------+----------------------------------+--------------------------------+
+| dataset_name | active_logical_gib | long_term_logical_gib | active_physical_gib | long_term_physical_gib | active_compression_ratio | long_term_compression_ratio | forecast_active_logical_cost | forecaset_long_term_logical_cost | forecast_active_physical_cost | forecast_long_term_physical_cost | forecast_total_cost_difference |
++--------------+--------------------+-----------------------+---------------------+------------------------+--------------------------+-----------------------------+------------------------------+----------------------------------+-------------------------------+----------------------------------+--------------------------------+
+| dataset1     |               10.0 |                  10.0 |                 1.0 |                    1.0 |                     10.0 |                        10.0 |                          0.2 |                              0.1 |                          0.04 |                             0.02 |                           0.24 |
+```
 
 ## Troubleshooting
 
@@ -2722,17 +2672,19 @@ To enable this view, you can set the value of `enable_info_schema_storage` to `T
 
 If you haven't configured this setting, you will see the following error:
 
-    INFORMATION_SCHEMA.TABLE_STORAGE hasn't been enabled for project <myproject>.
-    Consider using one of the following SQL statements to enable data collection:
-    ALTER PROJECT `<myproject>`
-    SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
-    
-    Or to enable for the entire organization:
-    ALTER ORGANIZATION
-    SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
-    
-    After enabling, please allow around 1 day for the complete historical data to
-    become available.
+```
+INFORMATION_SCHEMA.TABLE_STORAGE hasn't been enabled for project <myproject>.
+Consider using one of the following SQL statements to enable data collection:
+ALTER PROJECT `<myproject>`
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+Or to enable for the entire organization:
+ALTER ORGANIZATION
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+After enabling, please allow around 1 day for the complete historical data to
+become available.
+```
 
 Run the SQL statements described in the error message to enable the view.
 
@@ -2740,21 +2692,21 @@ Run the SQL statements described in the error message to enable the view.
 
 You can list tables in datasets in the following ways:
 
-  - Using the Google Cloud console.
-  - Using the bq command-line tool [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command.
-  - Calling the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) API method.
-  - Using the client libraries.
+- Using the Google Cloud console.
+- Using the bq command-line tool [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command.
+- Calling the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) API method.
+- Using the client libraries.
 
 #### Required permissions
 
 At a minimum, to list tables in a dataset, you must be granted `bigquery.tables.list` permissions. The following predefined IAM roles include `bigquery.tables.list` permissions:
 
-  - `bigquery.user`
-  - `bigquery.metadataViewer`
-  - `bigquery.dataViewer`
-  - `bigquery.dataEditor`
-  - `bigquery.dataOwner`
-  - `bigquery.admin`
+- `bigquery.user`
+- `bigquery.metadataViewer`
+- `bigquery.dataViewer`
+- `bigquery.dataEditor`
+- `bigquery.dataOwner`
+- `bigquery.admin`
 
 For more information on IAM roles and permissions in BigQuery, see [Access control](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -2771,97 +2723,101 @@ To list the tables in a dataset:
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-    
+
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Issue the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command. The `--format` flag can be used to control the output. If you are listing tables in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
-    
+
     Additional flags include:
-    
-      - `--max_results` or `-n` : An integer indicating the maximum number of results. The default value is `50` .
-    
-    <!-- end list -->
-    
-        bq ls \
-        --format=pretty \
-        --max_results integer \
-        project_id:dataset
-    
+
+    - `--max_results` or `-n` : An integer indicating the maximum number of results. The default value is `50` .
+
+    ```
+    bq ls \
+    --format=pretty \
+    --max_results integer \
+    project_id:dataset
+    ```
+
     Where:
-    
-      - integer is an integer representing the number of tables to list.
-      - project\_id is your project ID.
-      - dataset is the name of the dataset.
-    
+
+    - ` integer ` is an integer representing the number of tables to list.
+    - ` project_id ` is your project ID.
+    - ` dataset ` is the name of the dataset.
+
     When you run the command, the `Type` field displays either `TABLE` or `VIEW` . For example:
-    
-        +-------------------------+-------+----------------------+-------------------+
-        |         tableId         | Type  |        Labels        | Time Partitioning |
-        +-------------------------+-------+----------------------+-------------------+
-        | mytable                 | TABLE | department:shipping  |                   |
-        | myview                  | VIEW  |                      |                   |
-        +-------------------------+-------+----------------------+-------------------+
-    
+
+    ```
+    +-------------------------+-------+----------------------+-------------------+
+    |         tableId         | Type  |        Labels        | Time Partitioning |
+    +-------------------------+-------+----------------------+-------------------+
+    | mytable                 | TABLE | department:shipping  |                   |
+    | myview                  | VIEW  |                      |                   |
+    +-------------------------+-------+----------------------+-------------------+
+    ```
+
     Examples:
-    
+
     Enter the following command to list tables in dataset `mydataset` in your default project.
-    
-    ``` 
-       bq ls --format=pretty mydataset
+
     ```
-    
+    bq ls --format=pretty mydataset
+    ```
+
     Enter the following command to return more than the default output of 50 tables from `mydataset` . `mydataset` is in your default project.
-    
-    ``` 
-       bq ls --format=pretty --max_results 60 mydataset
+
     ```
-    
+    bq ls --format=pretty --max_results 60 mydataset
+    ```
+
     Enter the following command to list tables in dataset `mydataset` in `myotherproject` .
-    
-    ``` 
-       bq ls --format=pretty myotherproject:mydataset
+
+    ```
+    bq ls --format=pretty myotherproject:mydataset
     ```
 
 ### API
 
 To list tables using the API, call the [`tables.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list) method.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    
-    public class BigQueryListTables
+```csharp
+using Google.Cloud.BigQuery.V2;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class BigQueryListTables
+{
+    public void ListTables(
+        string projectId = "your-project-id",
+        string datasetId = "your_dataset_id"
+    )
     {
-        public void ListTables(
-            string projectId = "your-project-id",
-            string datasetId = "your_dataset_id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        // Retrieve list of tables in the dataset
+        List<BigQueryTable> tables = client.ListTables(datasetId).ToList();
+        // Display the results
+        if (tables.Count > 0)
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            // Retrieve list of tables in the dataset
-            List<BigQueryTable> tables = client.ListTables(datasetId).ToList();
-            // Display the results
-            if (tables.Count > 0)
+            Console.WriteLine($"Tables in dataset {datasetId}:");
+            foreach (var table in tables)
             {
-                Console.WriteLine($"Tables in dataset {datasetId}:");
-                foreach (var table in tables)
-                {
-                    Console.WriteLine($"\t{table.Reference.TableId}");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"{datasetId} does not contain any tables.");
+                Console.WriteLine($"\t{table.Reference.TableId}");
             }
         }
+        else
+        {
+            Console.WriteLine($"{datasetId} does not contain any tables.");
+        }
     }
+}
+```
 
 ### Go
 
@@ -2869,39 +2825,41 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // listTables demonstrates iterating through the collection of tables in a given dataset.
-    func listTables(w io.Writer, projectID, datasetID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     ts := client.Dataset(datasetID).Tables(ctx)
-     for {
-         t, err := ts.Next()
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintf(w, "Table: %q\n", t.TableID)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// listTables demonstrates iterating through the collection of tables in a given dataset.
+func listTables(w io.Writer, projectID, datasetID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    ts := client.Dataset(datasetID).Tables(ctx)
+    for {
+        t, err := ts.Next()
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintf(w, "Table: %q\n", t.TableID)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -2909,39 +2867,41 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.paging.Page;
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQuery.TableListOption;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.DatasetId;
-    import com.google.cloud.bigquery.Table;
-    
-    public class ListTables {
-    
-      public static void runListTables() {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "bigquery-public-data";
-        String datasetName = "samples";
-        listTables(projectId, datasetName);
-      }
-    
-      public static void listTables(String projectId, String datasetName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          DatasetId datasetId = DatasetId.of(projectId, datasetName);
-          Page<Table> tables = bigquery.listTables(datasetId, TableListOption.pageSize(100));
-          tables.iterateAll().forEach(table -> System.out.print(table.getTableId().getTable() + "\n"));
-    
-          System.out.println("Tables listed successfully.");
-        } catch (BigQueryException e) {
-          System.out.println("Tables were not listed. Error occurred: " + e.toString());
-        }
-      }
+```java
+import com.google.api.gax.paging.Page;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQuery.TableListOption;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.DatasetId;
+import com.google.cloud.bigquery.Table;
+
+public class ListTables {
+
+  public static void runListTables() {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "bigquery-public-data";
+    String datasetName = "samples";
+    listTables(projectId, datasetName);
+  }
+
+  public static void listTables(String projectId, String datasetName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      DatasetId datasetId = DatasetId.of(projectId, datasetName);
+      Page<Table> tables = bigquery.listTables(datasetId, TableListOption.pageSize(100));
+      tables.iterateAll().forEach(table -> System.out.print(table.getTableId().getTable() + "\n"));
+
+      System.out.println("Tables listed successfully.");
+    } catch (BigQueryException e) {
+      System.out.println("Tables were not listed. Error occurred: " + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -2949,24 +2909,26 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function listTables() {
-      // Lists tables in 'my_dataset'.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset';
-    
-      // List all tables in the dataset
-      const [tables] = await bigquery.dataset(datasetId).getTables();
-    
-      console.log('Tables:');
-      tables.forEach(table => console.log(table.id));
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function listTables() {
+  // Lists tables in 'my_dataset'.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset';
+
+  // List all tables in the dataset
+  const [tables] = await bigquery.dataset(datasetId).getTables();
+
+  console.log('Tables:');
+  tables.forEach(table => console.log(table.id));
+}
+```
 
 ### PHP
 
@@ -2974,20 +2936,22 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId  = 'The Google project ID';
-    // $datasetId  = 'The BigQuery dataset ID';
-    
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $tables = $dataset->tables();
-    foreach ($tables as $table) {
-        print($table->id() . PHP_EOL);
-    }
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId  = 'The Google project ID';
+// $datasetId  = 'The BigQuery dataset ID';
+
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$tables = $dataset->tables();
+foreach ($tables as $table) {
+    print($table->id() . PHP_EOL);
+}
+```
 
 ### Python
 
@@ -2995,20 +2959,22 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set dataset_id to the ID of the dataset that contains
-    #                  the tables you are listing.
-    # dataset_id = 'your-project.your_dataset'
-    
-    tables = client.list_tables(dataset_id)  # Make an API request.
-    
-    print("Tables contained in '{}':".format(dataset_id))
-    for table in tables:
-        print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set dataset_id to the ID of the dataset that contains
+#                  the tables you are listing.
+# dataset_id = 'your-project.your_dataset'
+
+tables = client.list_tables(dataset_id)  # Make an API request.
+
+print("Tables contained in '{}':".format(dataset_id))
+for table in tables:
+    print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
+```
 
 ### Ruby
 
@@ -3016,17 +2982,19 @@ Before trying this sample, follow the Ruby setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    require "google/cloud/bigquery"
-    
-    def list_tables dataset_id = "your_dataset_id"
-      bigquery = Google::Cloud::Bigquery.new
-      dataset  = bigquery.dataset dataset_id
-    
-      puts "Tables in dataset #{dataset_id}:"
-      dataset.tables.each do |table|
-        puts "\t#{table.table_id}"
-      end
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def list_tables dataset_id = "your_dataset_id"
+  bigquery = Google::Cloud::Bigquery.new
+  dataset  = bigquery.dataset dataset_id
+
+  puts "Tables in dataset #{dataset_id}:"
+  dataset.tables.each do |table|
+    puts "\t#{table.table_id}"
+  end
+end
+```
 
 ## Audit table history
 
@@ -3043,23 +3011,25 @@ You can access audit information from the Google Cloud console, `gcloud` command
 1.  In the Google Cloud console, go to the **Logging** page.
 
 2.  Use the following query to access the audit data:
-    
-        logName = "projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity"
-        AND resource.type = "bigquery_dataset"
-        AND timestamp >= "STARTING_TIMESTAMP"
-        AND protoPayload.@type = "type.googleapis.com/google.cloud.audit.AuditLog"
-        AND (
-          protoPayload.metadata.tableCreation :*
-          OR protoPayload.metadata.tableChange :*
-          OR protoPayload.metadata.tableDeletion :*
-        )
-        AND protoPayload.resourceName : "projects/PROJECT_ID/datasets/DATASET_ID/tables/"
+
+    ```
+    logName = "projects/PROJECT_ID/logs/cloudaudit.googleapis.com%2Factivity"
+    AND resource.type = "bigquery_dataset"
+    AND timestamp >= "STARTING_TIMESTAMP"
+    AND protoPayload.@type = "type.googleapis.com/google.cloud.audit.AuditLog"
+    AND (
+      protoPayload.metadata.tableCreation :*
+      OR protoPayload.metadata.tableChange :*
+      OR protoPayload.metadata.tableDeletion :*
+    )
+    AND protoPayload.resourceName : "projects/PROJECT_ID/datasets/DATASET_ID/tables/"
+    ```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project that contains datasets and tables you are interested in.
-  - `  STARTING_TIMESTAMP  ` : the oldest logs that you want to see. Use ISO 8601 format, such as `2025-01-01` or `2025-02-03T04:05:06Z` .
-  - `  DATASET_ID  ` : the dataset that you want to filter by.
+- `PROJECT_ID` : the project that contains datasets and tables you are interested in.
+- `STARTING_TIMESTAMP` : the oldest logs that you want to see. Use ISO 8601 format, such as `2025-01-01` or `2025-02-03T04:05:06Z` .
+- `DATASET_ID` : the dataset that you want to filter by.
 
 #### Interpret the results
 
@@ -3067,28 +3037,28 @@ In the Logs Explorer result pane, expand the entry you're interested in, and the
 
 The logging entry contains only one of the following objects to indicate the operation performed:
 
-  - `protoPayload.metadata.tableCreation` : a table was created.
-  - `protoPayload.metadata.tableChange` : table metadata was changed, such as schema update, description change, or table replacement.
-  - `protoPayload.metadata.tableDeletion` : a table was deleted.
+- `protoPayload.metadata.tableCreation` : a table was created.
+- `protoPayload.metadata.tableChange` : table metadata was changed, such as schema update, description change, or table replacement.
+- `protoPayload.metadata.tableDeletion` : a table was deleted.
 
 The content of these objects describes the requested action. For a detailed description, see [`BigQueryAuditMetadata`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) .
 
 #### Explanation of the query
 
-  - `logName = "projects/ PROJECT_ID /logs/cloudaudit.googleapis.com%2Factivity"` : This line filters for Admin Activity audit logs within your Google Cloud project. These logs record API calls and actions that modify the configuration or metadata of your resources.
+- `logName = "projects/ `` PROJECT_ID `` /logs/cloudaudit.googleapis.com%2Factivity"` : This line filters for Admin Activity audit logs within your Google Cloud project. These logs record API calls and actions that modify the configuration or metadata of your resources.
 
-  - `resource.type = "bigquery_dataset"` : This narrows the search to events related to BigQuery datasets, where table operations are logged.
+- `resource.type = "bigquery_dataset"` : This narrows the search to events related to BigQuery datasets, where table operations are logged.
 
-  - `timestamp >= " STARTING_TIMESTAMP "` : Filters log entries to only show those created on or after the specified timestamp.
+- `timestamp >= " `` STARTING_TIMESTAMP `` "` : Filters log entries to only show those created on or after the specified timestamp.
 
-  - `protoPayload.@type = "type.googleapis.com/google.cloud.audit.AuditLog"` : Ensures the log message conforms to the standard Cloud Audit Log structure.
+- `protoPayload.@type = "type.googleapis.com/google.cloud.audit.AuditLog"` : Ensures the log message conforms to the standard Cloud Audit Log structure.
 
-  - `( ... )` : This block groups conditions to find different types of table events, as outlined in the previous section. The `:*` operator indicates that the key must be present. If you are interested in only one event, such as table creation, remove unnecessary conditions from this block.
+- `( ... )` : This block groups conditions to find different types of table events, as outlined in the previous section. The `:*` operator indicates that the key must be present. If you are interested in only one event, such as table creation, remove unnecessary conditions from this block.
 
-  - `protoPayload.resourceName : "projects/ PROJECT_ID /datasets/ DATASET_ID /tables/"` : Selects log entries matching tables contained in the specified dataset. The colon ( `:` ) operator performs a substring search.
-    
-      - To filter entries for a single table, replace the condition with the following one: `protoPayload.resourceName = "projects/ PROJECT_ID /datasets/ DATASET_ID /tables/ TABLE_NAME "` .
-      - To include all tables in all datasets in the specific project, remove this condition.
+- `protoPayload.resourceName : "projects/ `` PROJECT_ID `` /datasets/ `` DATASET_ID `` /tables/"` : Selects log entries matching tables contained in the specified dataset. The colon ( `:` ) operator performs a substring search.
+
+  - To filter entries for a single table, replace the condition with the following one: `protoPayload.resourceName = "projects/ `` PROJECT_ID `` /datasets/ `` DATASET_ID `` /tables/ `` TABLE_NAME `` "` .
+  - To include all tables in all datasets in the specific project, remove this condition.
 
 For more information on log filtering, see [logging query language](https://docs.cloud.google.com/logging/docs/view/logging-query-language) .
 
@@ -3098,9 +3068,9 @@ To control access to tables in BigQuery, see [Control access to resources with I
 
 ## What's next
 
-  - For more information about datasets, see [Introduction to datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) .
-  - For more information about handling table data, see [Managing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) .
-  - For more information about specifying table schemas, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
-  - For more information about modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
-  - For more information about managing tables, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
-  - To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+- For more information about datasets, see [Introduction to datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) .
+- For more information about handling table data, see [Managing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) .
+- For more information about specifying table schemas, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+- For more information about modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+- For more information about managing tables, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+- To see an overview of `INFORMATION_SCHEMA` , go to [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .

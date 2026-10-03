@@ -6,10 +6,10 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# FAILOVER\_HISTORY view
+# FAILOVER_HISTORY view
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bigquery-wlm-feedback@google.com> .
@@ -31,7 +31,7 @@ You might also be able to get this permission with [custom roles](https://docs.c
 The `INFORMATION_SCHEMA.FAILOVER_HISTORY` view has the following schema:
 
 | Column name                 | Data type   | Value                                                                                                                                                                                                                                                                                                                                        |
-| --------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `project_id`                | `STRING`    | ID of the administration project that contains the reservation.                                                                                                                                                                                                                                                                              |
 | `project_number`            | `INTEGER`   | Number of the administration project.                                                                                                                                                                                                                                                                                                        |
 | `reservation_name`          | `STRING`    | User-provided reservation name. For example, if the reservation URI is `projects/my-project/locations/US/reservations/my-reservation` , then the reservation name is `my-reservation` .                                                                                                                                                      |
@@ -53,54 +53,58 @@ This view keeps failover events for 180 days, after which they are removed from 
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-| View name                                                                                                           | Resource scope | Region scope              |
-| ------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.FAILOVER_HISTORY[_BY_PROJECT]`` | Project level  | `         REGION        ` |
+| View name                                                                                               | Resource scope | Region scope |
+|---------------------------------------------------------------------------------------------------------|----------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.FAILOVER_HISTORY[_BY_PROJECT] `` | Project level  | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Limitations
 
 The following limitations apply to the `INFORMATION_SCHEMA.FAILOVER_HISTORY` view:
 
-  - This view only contains failover events for reservations. It doesn't contain failover events for individual datasets.
+- This view only contains failover events for reservations. It doesn't contain failover events for individual datasets.
 
-  - Each failover event is recorded in the region that becomes the new primary location ( `to_location` ). For example, if you fail over a reservation from `US` to `EU` , the event is recorded in `region-eu` . To view failover events in both directions between a primary and secondary location, query the view separately in each region.
+- Each failover event is recorded in the region that becomes the new primary location ( `to_location` ). For example, if you fail over a reservation from `US` to `EU` , the event is recorded in `region-eu` . To view failover events in both directions between a primary and secondary location, query the view separately in each region.
 
-  - A hard failover doesn't wait for the operation to be confirmed in the secondary location, so a hard failover event has no completion signal. The `state` column for a hard failover event remains `STARTED` , and the `end_time` column remains `NULL` , even after the failover has taken effect.
+- A hard failover doesn't wait for the operation to be confirmed in the secondary location, so a hard failover event has no completion signal. The `state` column for a hard failover event remains `STARTED` , and the `end_time` column remains `NULL` , even after the failover has taken effect.
 
 ## Example
 
 The following example retrieves the failover events in `region-us` (where `US` was the destination location `to_location` of the failover) for a specific reservation and project, ordered by the most recent event:
 
-    SELECT
-      project_id,
-      reservation_name,
-      failover_mode,
-      state,
-      original_primary_location,
-      from_location,
-      to_location,
-      start_time,
-      end_time
-    FROM
-      `reservation-admin-project.region-us`.INFORMATION_SCHEMA.FAILOVER_HISTORY
-    WHERE
-      reservation_name = 'my-reservation'
-    ORDER BY
-      start_time DESC;
+```
+SELECT
+  project_id,
+  reservation_name,
+  failover_mode,
+  state,
+  original_primary_location,
+  from_location,
+  to_location,
+  start_time,
+  end_time
+FROM
+  `reservation-admin-project.region-us`.INFORMATION_SCHEMA.FAILOVER_HISTORY
+WHERE
+  reservation_name = 'my-reservation'
+ORDER BY
+  start_time DESC;
+```
 
 The output is similar to the following:
 
-    +---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
-    |  project_id   | reservation_name | failover_mode |   state   | original_primary_location | from_location | to_location |     start_time      |      end_time       |
-    +---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
-    | my-admin-proj | my-reservation   | SOFT          | COMPLETED | US                        | EU            | US          | 2026-03-15 14:20:00 | 2026-03-15 14:31:05 |
-    | my-admin-proj | my-reservation   | HARD          | STARTED   | US                        | EU            | US          | 2026-02-10 08:15:30 | NULL                |
-    +---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
+```
++---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
+|  project_id   | reservation_name | failover_mode |   state   | original_primary_location | from_location | to_location |     start_time      |      end_time       |
++---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
+| my-admin-proj | my-reservation   | SOFT          | COMPLETED | US                        | EU            | US          | 2026-03-15 14:20:00 | 2026-03-15 14:31:05 |
+| my-admin-proj | my-reservation   | HARD          | STARTED   | US                        | EU            | US          | 2026-02-10 08:15:30 | NULL                |
++---------------+------------------+---------------+-----------+---------------------------+---------------+-------------+---------------------+---------------------+
+```

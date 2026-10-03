@@ -30,14 +30,16 @@ A node pattern matches nodes in your graph. This pattern contains matching paren
 
 The following query returns all nodes in the graph. The variable `n` , a graph pattern variable, binds to the matching nodes. In this case, the node pattern matches all nodes in the graph.
 
-    GRAPH graph_db.FinGraph
-    MATCH (n)
-    RETURN LABELS(n) AS label, n.id;
+```
+GRAPH graph_db.FinGraph
+MATCH (n)
+RETURN LABELS(n) AS label, n.id;
+```
 
 This query returns `label` and `id` :
 
 | `label`   | `id` |
-| --------- | ---- |
+|-----------|------|
 | `Account` | `7`  |
 | `Account` | `16` |
 | `Account` | `20` |
@@ -49,14 +51,16 @@ This query returns `label` and `id` :
 
 The following query matches all nodes in the graph that have the `Person` [label](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-patterns#label_expression_definition) . The query returns the label and some properties of the matched nodes.
 
-    GRAPH graph_db.FinGraph
-    MATCH (p:Person)
-    RETURN LABELS(p) AS label, p.id, p.name;
+```
+GRAPH graph_db.FinGraph
+MATCH (p:Person)
+RETURN LABELS(p) AS label, p.id, p.name;
+```
 
 This query returns the following properties of the matched nodes:
 
 | `label`  | `id` | `name` |
-| -------- | ---- | ------ |
+|----------|------|--------|
 | `Person` | `1`  | `Alex` |
 | `Person` | `2`  | `Dana` |
 | `Person` | `3`  | `Lee`  |
@@ -65,18 +69,20 @@ This query returns the following properties of the matched nodes:
 
 You can create a [label expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-patterns#label_expression_definition) with one or more logical operators. For example, the following query matches all nodes in the graph that have either the `Person` or `Account` label. The graph pattern variable `n` exposes all [properties](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) from nodes with the `Person` or `Account` label.
 
-    GRAPH graph_db.FinGraph
-    MATCH (n:Person|Account)
-    RETURN LABELS(n) AS label, n.id, n.birthday, n.create_time;
+```
+GRAPH graph_db.FinGraph
+MATCH (n:Person|Account)
+RETURN LABELS(n) AS label, n.id, n.birthday, n.create_time;
+```
 
 Note the following in the results of this query:
 
-  - All nodes have the `id` property.
-  - Nodes matching the `Account` label have the `create_time` property but don't have the `birthday` property. The `birthday` property is `NULL` for these nodes.
-  - Nodes matching the `Person` label have the `birthday` property but don't have the `create_time` property. The `create_time` property is `NULL` for these nodes.
+- All nodes have the `id` property.
+- Nodes matching the `Account` label have the `create_time` property but don't have the `birthday` property. The `birthday` property is `NULL` for these nodes.
+- Nodes matching the `Person` label have the `birthday` property but don't have the `create_time` property. The `create_time` property is `NULL` for these nodes.
 
 | `label`   | `id` | `birthday`             | `create_time`              |
-| --------- | ---- | ---------------------- | -------------------------- |
+|-----------|------|------------------------|----------------------------|
 | `Account` | `7`  | `NULL`                 | `2020-01-10T14:22:20.222Z` |
 | `Account` | `16` | `NULL`                 | `2020-01-28T01:55:09.206Z` |
 | `Account` | `20` | `NULL`                 | `2020-02-18T13:44:20.655Z` |
@@ -90,28 +96,32 @@ Note the following in the results of this query:
 
 The following query matches all nodes in the graph that have the `Person` label and the property `id` equal to `1` :
 
-    GRAPH graph_db.FinGraph
-    MATCH (p:Person {id: 1})
-    RETURN LABELS(p) AS label, p.id, p.name, p.birthday;
+```
+GRAPH graph_db.FinGraph
+MATCH (p:Person {id: 1})
+RETURN LABELS(p) AS label, p.id, p.name, p.birthday;
+```
 
 The result is similar to the following:
 
 | `label`  | `id` | `name` | `birthday`             |
-| -------- | ---- | ------ | ---------------------- |
+|----------|------|--------|------------------------|
 | `Person` | `1`  | `Alex` | `1991-12-21T08:00:00Z` |
 
 You can use the `WHERE` clause to form more complex filtering conditions on labels and properties.
 
 The following query uses the `WHERE` clause to filter on nodes for which the property `birthday` is before `1990-01-10` :
 
-    GRAPH graph_db.FinGraph
-    MATCH (p:Person WHERE p.birthday < '1990-01-10')
-    RETURN LABELS(p) AS label, p.name, p.birthday;
+```
+GRAPH graph_db.FinGraph
+MATCH (p:Person WHERE p.birthday < '1990-01-10')
+RETURN LABELS(p) AS label, p.name, p.birthday;
+```
 
 The result is similar to the following:
 
 | `label`  | `name` | `birthday`             |
-| -------- | ------ | ---------------------- |
+|----------|--------|------------------------|
 | `Person` | `Dana` | `1980-10-31T08:00:00Z` |
 | `Person` | `Lee`  | `1986-12-07T08:00:00Z` |
 
@@ -123,14 +133,16 @@ An edge pattern matches edges or relationships between nodes. Edge patterns are 
 
 This query returns all edges in the graph with the `Transfers` label. The query binds the graph pattern variable `e` to the matching edges.
 
-    GRAPH graph_db.FinGraph
-    MATCH -[e:Transfers]->
-    RETURN e.Id as src_account, e.order_number;
+```
+GRAPH graph_db.FinGraph
+MATCH -[e:Transfers]->
+RETURN e.Id as src_account, e.order_number;
+```
 
 The result is similar to the following:
 
 | `src_account` | `order_number`    |
-| ------------- | ----------------- |
+|---------------|-------------------|
 | `7`           | `304330008004315` |
 | `7`           | `304120005529714` |
 | `16`          | `103650009791820` |
@@ -141,14 +153,16 @@ The result is similar to the following:
 
 The edge pattern in the following query uses a label expression and a property filter to find all edges labeled `Transfers` that match a specified order number:
 
-    GRAPH graph_db.FinGraph
-    MATCH -[e:Transfers {order_number: "304120005529714"}]->
-    RETURN e.Id AS src_account, e.order_number;
+```
+GRAPH graph_db.FinGraph
+MATCH -[e:Transfers {order_number: "304120005529714"}]->
+RETURN e.Id AS src_account, e.order_number;
+```
 
 The result is similar to the following:
 
 | `src_account` | `order_number`    |
-| ------------- | ----------------- |
+|---------------|-------------------|
 | `7`           | `304120005529714` |
 | `20`          | `304120005529714` |
 
@@ -156,14 +170,16 @@ The result is similar to the following:
 
 You can use the `any direction` edge pattern ( `-[]-` ) in a query to match edges in either direction. The following query finds all transfers with a blocked account:
 
-    GRAPH graph_db.FinGraph
-    MATCH (account:Account)-[transfer:Transfers]-(:Account {is_blocked:true})
-    RETURN transfer.order_number, transfer.amount;
+```
+GRAPH graph_db.FinGraph
+MATCH (account:Account)-[transfer:Transfers]-(:Account {is_blocked:true})
+RETURN transfer.order_number, transfer.amount;
+```
 
 The result is similar to the following:
 
 | `order_number`    | `amount` |
-| ----------------- | -------- |
+|-------------------|----------|
 | `304330008004315` | `300`    |
 | `304120005529714` | `100`    |
 | `103650009791820` | `300`    |
@@ -179,17 +195,19 @@ The following query finds all transfers to an account initiated from an account 
 
 Each matched result represents a path from a `Person` node when `id` is equal to `2` through a connected `Account` node using an `Owns` edge, into another `Account` node using a `Transfers` edge.
 
-    GRAPH graph_db.FinGraph
-    MATCH
-      (p:Person {id: 2})-[:Owns]->(account:Account)-[t:Transfers]->
-      (to_account:Account)
-    RETURN
-      p.id AS sender_id, account.id AS from_id, to_account.id AS to_id;
+```
+GRAPH graph_db.FinGraph
+MATCH
+  (p:Person {id: 2})-[:Owns]->(account:Account)-[t:Transfers]->
+  (to_account:Account)
+RETURN
+  p.id AS sender_id, account.id AS from_id, to_account.id AS to_id;
+```
 
 The result is similar to the following:
 
 | `sender_id` | `from_id` | `to_id` |
-| ----------- | --------- | ------- |
+|-------------|-----------|---------|
 | `2`         | `20`      | `7`     |
 | `2`         | `20`      | `16`    |
 
@@ -203,15 +221,17 @@ To find paths of a variable length, you can apply a quantifier to an edge patter
 
 The query applies the quantifier `{1, 3}` to the edge pattern `-[e:Transfers]->` . This instructs the query to match paths that repeat the `Transfers` edge pattern one, two, or three times. The `WHERE` clause is used to exclude the source account from the results. The `ARRAY_LENGTH` function is used to access the [`group variable`](https://docs.cloud.google.com/bigquery/docs/graph-query-overview#group-variables) `e` .
 
-    GRAPH graph_db.FinGraph
-    MATCH (src:Account {id: 7})-[e:Transfers]->{1, 3}(dst:Account)
-    WHERE src != dst
-    RETURN src.id AS src_account_id, ARRAY_LENGTH(e) AS path_length, dst.id AS dst_account_id;
+```
+GRAPH graph_db.FinGraph
+MATCH (src:Account {id: 7})-[e:Transfers]->{1, 3}(dst:Account)
+WHERE src != dst
+RETURN src.id AS src_account_id, ARRAY_LENGTH(e) AS path_length, dst.id AS dst_account_id;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `path_length` | `dst_account_id` |
-| ---------------- | ------------- | ---------------- |
+|------------------|---------------|------------------|
 | `7`              | `1`           | `16`             |
 | `7`              | `1`           | `16`             |
 | `7`              | `3`           | `16`             |
@@ -227,17 +247,19 @@ The following query finds paths between `Account` nodes with one to two `Transfe
 
 The parenthesized path pattern is quantified, and its `WHERE` clause specifies conditions for the repeated pattern.
 
-    GRAPH graph_db.FinGraph
-    MATCH
-      (src:Account)
-      ((a:Account)-[:Transfers]->(b:Account {is_blocked:true}) WHERE a != b){1,2}
-        -[:Transfers]->(dst:Account)
-    RETURN src.id AS src_account_id, dst.id AS dst_account_id;
+```
+GRAPH graph_db.FinGraph
+MATCH
+  (src:Account)
+  ((a:Account)-[:Transfers]->(b:Account {is_blocked:true}) WHERE a != b){1,2}
+    -[:Transfers]->(dst:Account)
+RETURN src.id AS src_account_id, dst.id AS dst_account_id;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `dst_account_id` |
-| ---------------- | ---------------- |
+|------------------|------------------|
 | `7`              | `20`             |
 | `7`              | `20`             |
 | `20`             | `20`             |
@@ -252,26 +274,26 @@ You can access a group variable as an array. Its graph elements are preserved in
 
 In the following example, the variable `e` is accessed as follows:
 
-  - As a graph pattern variable bound to a single edge in the `WHERE` clause `e.amount > 100` when it's within the quantified pattern.
-  - As a group variable bound to an array of edge elements in `ARRAY_LENGTH(e)` in the `RETURN` statement when it's outside the quantified pattern.
-  - As a group variable bound to an array of edge elements, which is aggregated by `SUM(e.amount)` outside the quantified pattern. This is an example of [horizontal aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-gql-functions#gql-horiz-agg-func-calls) .
+- As a graph pattern variable bound to a single edge in the `WHERE` clause `e.amount > 100` when it's within the quantified pattern.
+- As a group variable bound to an array of edge elements in `ARRAY_LENGTH(e)` in the `RETURN` statement when it's outside the quantified pattern.
+- As a group variable bound to an array of edge elements, which is aggregated by `SUM(e.amount)` outside the quantified pattern. This is an example of [horizontal aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-gql-functions#gql-horiz-agg-func-calls) .
 
-<!-- end list -->
-
-    GRAPH graph_db.FinGraph
-    MATCH
-      (src:Account {id: 7})-[e:Transfers WHERE e.amount > 100]->{0,2}
-      (dst:Account)
-    WHERE src.id != dst.id
-    LET total_amount = SUM(e.amount)
-    RETURN
-      src.id AS src_account_id, ARRAY_LENGTH(e) AS path_length,
-      total_amount, dst.id AS dst_account_id;
+```
+GRAPH graph_db.FinGraph
+MATCH
+  (src:Account {id: 7})-[e:Transfers WHERE e.amount > 100]->{0,2}
+  (dst:Account)
+WHERE src.id != dst.id
+LET total_amount = SUM(e.amount)
+RETURN
+  src.id AS src_account_id, ARRAY_LENGTH(e) AS path_length,
+  total_amount, dst.id AS dst_account_id;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `path_length` | `total_amount` | `dst_account_id` |
-| ---------------- | ------------- | -------------- | ---------------- |
+|------------------|---------------|----------------|------------------|
 | `7`              | `1`           | `300`          | `16`             |
 | `7`              | `2`           | `600`          | `20`             |
 
@@ -285,15 +307,17 @@ The following query finds all reachable unique accounts that are one or two `Tra
 
 The `ANY` path search prefix ensures that the query returns only one path between a unique pair of `src` and `dst` `Account` nodes. In the following example, although you can reach the `Account` node with `{id: 16}` in two different paths from the source `Account` node, the query returns only one path.
 
-    GRAPH graph_db.FinGraph
-    MATCH ANY (src:Account {id: 7})-[e:Transfers]->{1,2}(dst:Account)
-    LET ids_in_path = ARRAY_CONCAT(ARRAY_AGG(e.Id), [dst.Id])
-    RETURN src.id AS src_account_id, dst.id AS dst_account_id, ids_in_path;
+```
+GRAPH graph_db.FinGraph
+MATCH ANY (src:Account {id: 7})-[e:Transfers]->{1,2}(dst:Account)
+LET ids_in_path = ARRAY_CONCAT(ARRAY_AGG(e.Id), [dst.Id])
+RETURN src.id AS src_account_id, dst.id AS dst_account_id, ids_in_path;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `dst_account_id` | `ids_in_path` |
-| ---------------- | ---------------- | ------------- |
+|------------------|------------------|---------------|
 | `7`              | `16`             | `7,16`        |
 | `7`              | `20`             | `7,16,20`     |
 
@@ -303,14 +327,16 @@ The `ANY SHORTEST` path search prefix returns a single path for each pair of sou
 
 For example, the following query finds one of the shortest paths between an `Account` node with `id` value of `7` and an `Account` node with an `id` value of `20` . The query considers paths with one to three `Transfers` edges.
 
-    GRAPH graph_db.FinGraph
-    MATCH ANY SHORTEST (src:Account {id: 7})-[e:Transfers]->{1, 3}(dst:Account {id: 20})
-    RETURN src.id AS src_account_id, dst.id AS dst_account_id, ARRAY_LENGTH(e) AS path_length;
+```
+GRAPH graph_db.FinGraph
+MATCH ANY SHORTEST (src:Account {id: 7})-[e:Transfers]->{1, 3}(dst:Account {id: 20})
+RETURN src.id AS src_account_id, dst.id AS dst_account_id, ARRAY_LENGTH(e) AS path_length;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `dst_account_id` | `path_length` |
-| ---------------- | ---------------- | ------------- |
+|------------------|------------------|---------------|
 | `7`              | `20`             | `2`           |
 
 #### Match using `ANY CHEAPEST`
@@ -319,15 +345,17 @@ The `ANY CHEAPEST` path search prefix ensures that for each pair of source and d
 
 The following query finds a path with the minimum total compute cost between `Account` nodes. This cost is based on the sum of the `amount` property of the `Transfers` edges. The search considers paths with one to three `Transfers` edges.
 
-    GRAPH graph_db.FinGraph
-    MATCH ANY CHEAPEST (src:Account)-[e:Transfers COST e.amount]->{1,3}(dst:Account)
-    LET total_cost = sum(e.amount)
-    RETURN src.id AS src_account_id, dst.id AS dst_account_id, total_cost;
+```
+GRAPH graph_db.FinGraph
+MATCH ANY CHEAPEST (src:Account)-[e:Transfers COST e.amount]->{1,3}(dst:Account)
+LET total_cost = sum(e.amount)
+RETURN src.id AS src_account_id, dst.id AS dst_account_id, total_cost;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `dst_account_id` | `total_cost` |
-| ---------------- | ---------------- | ------------ |
+|------------------|------------------|--------------|
 | `7`              | `7`              | `900`        |
 | `7`              | `16`             | `100`        |
 | `7`              | `20`             | `400`        |
@@ -348,44 +376,48 @@ The following query identifies intermediary accounts and their owners involved i
 
 The following path patterns form the graph pattern:
 
-  - The first pattern finds paths where the transfer occurs from one account to a blocked account using an intermediate account.
-  - The second pattern finds paths from an account to its owning person.
+- The first pattern finds paths where the transfer occurs from one account to a blocked account using an intermediate account.
+- The second pattern finds paths from an account to its owning person.
 
 The variable `interm` acts as a common link between the two path patterns, which requires `interm` to reference the same element node in both path patterns. This creates an equi-join operation based on the `interm` variable.
 
 > **Note:** If there is no shared variable among the path patterns, a [cross join](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) is performed between the collection of matches for each path pattern.
 
-    GRAPH graph_db.FinGraph
-    MATCH
-      (src:Account)-[t1:Transfers]->(interm:Account)-[t2:Transfers]->(dst:Account),
-      (interm)<-[:Owns]-(p:Person)
-    WHERE dst.is_blocked = TRUE AND t1.amount > 200 AND t2.amount > 200
-    RETURN
-      src.id AS src_account_id, dst.id AS dst_account_id,
-      interm.id AS interm_account_id, p.id AS owner_id;
+```
+GRAPH graph_db.FinGraph
+MATCH
+  (src:Account)-[t1:Transfers]->(interm:Account)-[t2:Transfers]->(dst:Account),
+  (interm)<-[:Owns]-(p:Person)
+WHERE dst.is_blocked = TRUE AND t1.amount > 200 AND t2.amount > 200
+RETURN
+  src.id AS src_account_id, dst.id AS dst_account_id,
+  interm.id AS interm_account_id, p.id AS owner_id;
+```
 
 The result is similar to the following:
 
 | `src_account_id` | `dst_account_id` | `interm_account_id` | `owner_id` |
-| ---------------- | ---------------- | ------------------- | ---------- |
+|------------------|------------------|---------------------|------------|
 | `20`             | `16`             | `7`                 | `1`        |
 
 ### Linear query statements
 
 You can chain multiple graph statements together to form a [linear query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro#linear_query_statement) . The statements are executed in the same order as they appear in the query.
 
-  - Each statement takes the output from the previous statement as input. The input is empty for the first statement.
+- Each statement takes the output from the previous statement as input. The input is empty for the first statement.
 
-  - The output of the last statement is the final result.
+- The output of the last statement is the final result.
 
 For example, you can use linear query statements to find the maximum transfer to a blocked account. The following query finds the account and its owner with the largest outgoing transfer to a blocked account.
 
-    GRAPH graph_db.FinGraph
-    MATCH (src_account:Account)-[transfer:Transfers]->(dst_account:Account {is_blocked:true})
-    ORDER BY transfer.amount DESC
-    LIMIT 1
-    MATCH (src_account:Account)<-[owns:Owns]-(owner:Person)
-    RETURN src_account.id AS account_id, owner.name AS owner_name;
+```
+GRAPH graph_db.FinGraph
+MATCH (src_account:Account)-[transfer:Transfers]->(dst_account:Account {is_blocked:true})
+ORDER BY transfer.amount DESC
+LIMIT 1
+MATCH (src_account:Account)<-[owns:Owns]-(owner:Person)
+RETURN src_account.id AS account_id, owner.name AS owner_name;
+```
 
 The following table illustrates this process by showing the intermediate results passed between each statement. For brevity, only some properties are shown.
 
@@ -402,7 +434,7 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>MATCH
+<td><pre data-fenced=""><code>MATCH
   (src_account:Account)
     -[transfer:Transfers]-&gt;
   (dst_account:Account {is_blocked:true})</code></pre></td>
@@ -416,25 +448,25 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 300.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 300.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 100.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 100.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 20}</code></td>
-<td><code dir="ltr" translate="no">{amount: 200.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 20}</code></td>
+<td><code>{amount: 200.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>ORDER BY transfer.amount DESC</code></pre></td>
+<td><pre data-fenced=""><code>ORDER BY transfer.amount DESC</code></pre></td>
 <td><table>
 <thead>
 <tr class="header">
@@ -445,25 +477,25 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 300.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 300.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">{id: 20}</code></td>
-<td><code dir="ltr" translate="no">{amount: 200.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 20}</code></td>
+<td><code>{amount: 200.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 100.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 100.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>LIMIT 1</code></pre></td>
+<td><pre data-fenced=""><code>LIMIT 1</code></pre></td>
 <td><table>
 <thead>
 <tr class="header">
@@ -474,15 +506,15 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 300.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 300.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>MATCH
+<td><pre data-fenced=""><code>MATCH
   (src_account:Account)
     &lt;-[owns:Owns]-
   (owner:Person)</code></pre></td>
@@ -498,17 +530,17 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">{id: 7}</code></td>
-<td><code dir="ltr" translate="no">{amount: 300.0}</code></td>
-<td><code dir="ltr" translate="no">{id: 16, is_blocked: true}</code></td>
-<td><code dir="ltr" translate="no">{person_id: 1, account_id: 7}</code></td>
-<td><code dir="ltr" translate="no">{id: 1, name: Alex}</code></td>
+<td><code>{id: 7}</code></td>
+<td><code>{amount: 300.0}</code></td>
+<td><code>{id: 16, is_blocked: true}</code></td>
+<td><code>{person_id: 1, account_id: 7}</code></td>
+<td><code>{id: 1, name: Alex}</code></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>RETURN
+<td><pre data-fenced=""><code>RETURN
   src_account.id AS account_id,
   owner.name AS owner_name
         </code></pre></td>
@@ -521,8 +553,8 @@ The following table illustrates this process by showing the intermediate results
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">7</code></td>
-<td><code dir="ltr" translate="no">Alex</code></td>
+<td><code>7</code></td>
+<td><code>Alex</code></td>
 </tr>
 </tbody>
 </table></td>
@@ -532,9 +564,9 @@ The following table illustrates this process by showing the intermediate results
 
 The result is similar to the following:
 
-| account\_id | owner\_name |
-| ----------- | ----------- |
-| `7`         | `Alex`      |
+| account_id | owner_name |
+|------------|------------|
+| `7`        | `Alex`     |
 
 ### Return statement
 
@@ -544,17 +576,19 @@ BigQuery Graph doesn't support returning graph elements as query results. To ret
 
 #### Return graph elements as JSON
 
-    GRAPH graph_db.FinGraph
-    MATCH (n:Account {id: 7})
-    -- Returning a graph element in the final results is NOT allowed. Instead, use
-    -- the TO_JSON function or explicitly return the graph element's properties.
-    RETURN TO_JSON(n) AS n;
+```
+GRAPH graph_db.FinGraph
+MATCH (n:Account {id: 7})
+-- Returning a graph element in the final results is NOT allowed. Instead, use
+-- the TO_JSON function or explicitly return the graph element's properties.
+RETURN TO_JSON(n) AS n;
+```
 
 The result is similar to the following:
 
-| n                                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `{"identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEO","kind":"node","labels":["Account"],"properties":{"create_time":"2020-01-10T14:22:20.222Z","id":7,"is_blocked":false,"nick_name":"Vacation Fund"}}` |
+**n**
+
+`{"identifier":"mUZpbkdyYXBoLkFjY291bnQAeJEO","kind":"node","labels":["Account"],"properties":{"create_time":"2020-01-10T14:22:20.222Z","id":7,"is_blocked":false,"nick_name":"Vacation Fund"}}`
 
 ## Compose larger queries with the `NEXT` keyword
 
@@ -562,23 +596,25 @@ You can chain multiple graph linear query statements using the `NEXT` keyword. T
 
 The following example finds the owner of the account with the most incoming transfers by chaining multiple graph linear statements. You can use the same variable, for example, `account` , to refer to the same graph element across multiple linear statements.
 
-    GRAPH graph_db.FinGraph
-    MATCH (:Account)-[:Transfers]->(account:Account)
-    RETURN account, COUNT(*) AS num_incoming_transfers
-    GROUP BY account
-    ORDER BY num_incoming_transfers DESC
-    LIMIT 1
-    
-    NEXT
-    
-    MATCH (account:Account)<-[:Owns]-(owner:Person)
-    RETURN account.id AS account_id, owner.name AS owner_name, num_incoming_transfers;
+```
+GRAPH graph_db.FinGraph
+MATCH (:Account)-[:Transfers]->(account:Account)
+RETURN account, COUNT(*) AS num_incoming_transfers
+GROUP BY account
+ORDER BY num_incoming_transfers DESC
+LIMIT 1
+
+NEXT
+
+MATCH (account:Account)<-[:Owns]-(owner:Person)
+RETURN account.id AS account_id, owner.name AS owner_name, num_incoming_transfers;
+```
 
 The result is similar to the following:
 
-| account\_id | owner\_name | num\_incoming\_transfers |
-| ----------- | ----------- | ------------------------ |
-| `16`        | `Lee`       | `3`                      |
+| account_id | owner_name | num_incoming_transfers |
+|------------|------------|------------------------|
+| `16`       | `Lee`      | `3`                    |
 
 You can also [combine linear query statements with set operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro#combining_linear_query_statements_with_set_operators) .
 
@@ -588,55 +624,59 @@ You can use all GoogleSQL [functions](https://docs.cloud.google.com/bigquery/doc
 
 The following query includes a mix of GQL and SQL functions and operators within a graph query:
 
-    GRAPH graph_db.FinGraph
-    MATCH (person:Person)-[o:Owns]->(account:Account)
-    WHERE person IS SOURCE OF o
-    RETURN person, ARRAY_AGG(account.nick_name) AS accounts
-    GROUP BY person
-    
-    NEXT
-    
-    RETURN
-      LABELS(person) AS labels,
-      accounts,
-      CONCAT(person.city, ", ", person.country) AS location,
-      TO_JSON(person) AS person
-    LIMIT 1;
+```
+GRAPH graph_db.FinGraph
+MATCH (person:Person)-[o:Owns]->(account:Account)
+WHERE person IS SOURCE OF o
+RETURN person, ARRAY_AGG(account.nick_name) AS accounts
+GROUP BY person
+
+NEXT
+
+RETURN
+  LABELS(person) AS labels,
+  accounts,
+  CONCAT(person.city, ", ", person.country) AS location,
+  TO_JSON(person) AS person
+LIMIT 1;
+```
 
 The result is similar to the following:
 
 | labels   | accounts            | location              | person                                                                                                                                                                                          |
-| -------- | ------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------|---------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Person` | `["Vacation Fund"]` | `Adelaide, Australia` | `{"identifier":"mUZpbkdyYXBoLlBlcnNvbgB4kQI=","kind":"node","labels":["Person"],"properties":{"birthday":"1991-12-21T08:00:00Z","city":"Adelaide","country":"Australia","id":1,"name":"Alex"}}` |
 
 ## Subqueries
 
 A *subquery* is a query that is nested in another query. The following rules apply to subqueries within graph queries:
 
-  - A subquery is enclosed within a pair of braces `{}` .
-  - A subquery starts with a `GRAPH` clause to specify the graph in scope. The specified graph doesn't need to be the same as the one used in the outer query.
-  - A graph pattern variable declared outside the subquery scope can't be declared again inside the subquery, but it can be referred to in expressions or functions inside the subquery.
+- A subquery is enclosed within a pair of braces `{}` .
+- A subquery starts with a `GRAPH` clause to specify the graph in scope. The specified graph doesn't need to be the same as the one used in the outer query.
+- A graph pattern variable declared outside the subquery scope can't be declared again inside the subquery, but it can be referred to in expressions or functions inside the subquery.
 
 #### Use a subquery to find the total number of transfers from each account
 
 The following query illustrates the use of the `VALUE` subquery. The subquery is enclosed in braces `{}` prefixed by the `VALUE` keyword. The query returns the total number of transfers initiated from an account.
 
-    GRAPH graph_db.FinGraph
-    MATCH (p:Person)-[:Owns]->(account:Account)
-    RETURN p.name, account.id AS account_id, VALUE {
-      GRAPH graph_db.FinGraph
-      MATCH (a:Account)-[transfer:Transfers]->(:Account)
-      WHERE a = account
-      RETURN COUNT(transfer) AS num_transfers
-    } AS num_transfers;
+```
+GRAPH graph_db.FinGraph
+MATCH (p:Person)-[:Owns]->(account:Account)
+RETURN p.name, account.id AS account_id, VALUE {
+  GRAPH graph_db.FinGraph
+  MATCH (a:Account)-[transfer:Transfers]->(:Account)
+  WHERE a = account
+  RETURN COUNT(transfer) AS num_transfers
+} AS num_transfers;
+```
 
 The result is similar to the following:
 
-| name   | account\_id | num\_transfers |
-| ------ | ----------- | -------------- |
-| `Alex` | `7`         | `2`            |
-| `Dana` | `20`        | `2`            |
-| `Lee`  | `16`        | `1`            |
+| name   | account_id | num_transfers |
+|--------|------------|---------------|
+| `Alex` | `7`        | `2`           |
+| `Dana` | `20`       | `2`           |
+| `Lee`  | `16`       | `1`           |
 
 For a list of supported subquery expressions, see [BigQuery Graph subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-subqueries) .
 
@@ -646,9 +686,11 @@ You can query BigQuery Graph with parameters. For more information, see the [syn
 
 The following query matches `Person` nodes that have an `id` value that matches a query parameter:
 
-    GRAPH graph_db.FinGraph
-    MATCH (person:Person {id: @id})
-    RETURN person.name;
+```
+GRAPH graph_db.FinGraph
+MATCH (person:Person {id: @id})
+RETURN person.name;
+```
 
 ## Query graphs and tables together
 
@@ -658,42 +700,48 @@ The `GRAPH_TABLE` operator takes a linear graph query and returns its result in 
 
 For example, you can create a `CreditReports` table and insert a few credit reports, as shown in the following example:
 
-    CREATE TABLE graph_db.CreditReports (
-      person_id     INT64 NOT NULL,
-      create_time   TIMESTAMP NOT NULL,
-      score         INT64 NOT NULL,
-      PRIMARY KEY (person_id, create_time) NOT ENFORCED
-    );
+```
+CREATE TABLE graph_db.CreditReports (
+  person_id     INT64 NOT NULL,
+  create_time   TIMESTAMP NOT NULL,
+  score         INT64 NOT NULL,
+  PRIMARY KEY (person_id, create_time) NOT ENFORCED
+);
+```
 
-    INSERT INTO graph_db.CreditReports (person_id, create_time, score)
-    VALUES
-      (1,"2020-01-10 06:22:20.222", 700),
-      (2,"2020-02-10 06:22:20.222", 800),
-      (3,"2020-03-10 06:22:20.222", 750);
+```
+INSERT INTO graph_db.CreditReports (person_id, create_time, score)
+VALUES
+  (1,"2020-01-10 06:22:20.222", 700),
+  (2,"2020-02-10 06:22:20.222", 800),
+  (3,"2020-03-10 06:22:20.222", 750);
+```
 
 Next, you can identify specific persons through graph pattern matching in `GRAPH_TABLE` and join the graph query results with the `CreditReports` table to retrieve credit scores.
 
-    SELECT
-      gt.person.id,
-      credit.score AS latest_credit_score
-    FROM GRAPH_TABLE(
-      graph_db.FinGraph
-      MATCH (person:Person)-[:Owns]->(:Account)-[:Transfers]->(account:Account {is_blocked:true})
-      RETURN DISTINCT person
-    ) AS gt
-    JOIN graph_db.CreditReports AS credit
-      ON gt.person.id = credit.person_id
-    ORDER BY credit.create_time;
+```
+SELECT
+  gt.person.id,
+  credit.score AS latest_credit_score
+FROM GRAPH_TABLE(
+  graph_db.FinGraph
+  MATCH (person:Person)-[:Owns]->(:Account)-[:Transfers]->(account:Account {is_blocked:true})
+  RETURN DISTINCT person
+) AS gt
+JOIN graph_db.CreditReports AS credit
+  ON gt.person.id = credit.person_id
+ORDER BY credit.create_time;
+```
 
 The result is similar to the following:
 
-| person\_id | latest\_credit\_score |
-| ---------- | --------------------- |
-| `1`        | `700`                 |
-| `2`        | `800`                 |
+| person_id | latest_credit_score |
+|-----------|---------------------|
+| `1`       | `700`               |
+| `2`       | `800`               |
 
 ## What's next
 
-  - Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn more about how to design a [graph schema](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
-  - Learn how to [visualize query results](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .
+- Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn more about how to design a [graph schema](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
+- Learn how to [visualize query results](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .

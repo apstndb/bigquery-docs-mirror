@@ -22,11 +22,11 @@ You can see that the animal and vehicle clusters are positioned far apart from e
 
 The combination of embedding generation and vector search enables many interesting use cases. Some possible use cases are as follows:
 
-  - **[Retrieval-augmented generation (RAG)](https://cloud.google.com/use-cases/retrieval-augmented-generation) :** Parse documents, perform vector search on content, and generate summarized answers to natural language questions using Gemini models, all within BigQuery. For a notebook that illustrates this scenario, see [Build a Vector Search application using BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/generative_ai/bq_dataframes_llm_vector_search.ipynb) .
-  - **Recommending product substitutes or matching products:** Enhance ecommerce applications by suggesting product alternatives based on customer behavior and product similarity.
-  - **Log analytics:** Help teams proactively triage anomalies in logs and accelerate investigations. You can also use this capability to enrich context for LLMs, in order to improve threat detection, forensics, and troubleshooting workflows. For a notebook that illustrates this scenario, see [Log Anomaly Detection & Investigation with Text Embeddings + BigQuery Vector Search](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/embeddings/use-cases/outlier-detection/bq-vector-search-outlier-detection-audit-logs.ipynb) .
-  - **Clustering and targeting:** Segment audiences with precision. For example, a hospital chain could cluster patients using natural language notes and structured data, or a marketer could target ads based on query intent. For a notebook that illustrates this scenario, see [Create-Campaign-Customer-Segmentation](https://github.com/GoogleCloudPlatform/chocolate-ai/blob/main/colab-enterprise/Create-Campaign-Customer-Segmentation.ipynb) .
-  - **Entity resolution and deduplication:** Cleanse and consolidate data. For example, an advertising company could deduplicate personally identifiable information (PII) records, or a real estate company could identify matching mailing addresses.
+- **[Retrieval-augmented generation (RAG)](https://cloud.google.com/use-cases/retrieval-augmented-generation) :** Parse documents, perform vector search on content, and generate summarized answers to natural language questions using Gemini models, all within BigQuery. For a notebook that illustrates this scenario, see [Build a Vector Search application using BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/generative_ai/bq_dataframes_llm_vector_search.ipynb) .
+- **Recommending product substitutes or matching products:** Enhance ecommerce applications by suggesting product alternatives based on customer behavior and product similarity.
+- **Log analytics:** Help teams proactively triage anomalies in logs and accelerate investigations. You can also use this capability to enrich context for LLMs, in order to improve threat detection, forensics, and troubleshooting workflows. For a notebook that illustrates this scenario, see [Log Anomaly Detection & Investigation with Text Embeddings + BigQuery Vector Search](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/embeddings/use-cases/outlier-detection/bq-vector-search-outlier-detection-audit-logs.ipynb) .
+- **Clustering and targeting:** Segment audiences with precision. For example, a hospital chain could cluster patients using natural language notes and structured data, or a marketer could target ads based on query intent. For a notebook that illustrates this scenario, see [Create-Campaign-Customer-Segmentation](https://github.com/GoogleCloudPlatform/chocolate-ai/blob/main/colab-enterprise/Create-Campaign-Customer-Segmentation.ipynb) .
+- **Entity resolution and deduplication:** Cleanse and consolidate data. For example, an advertising company could deduplicate personally identifiable information (PII) records, or a real estate company could identify matching mailing addresses.
 
 ## Generate embeddings
 
@@ -38,8 +38,8 @@ You can use the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/doc
 
 The `AI.EMBED` function supports the following types of input:
 
-  - Text data.
-  - Image data represented by [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values.
+- Text data.
+- Image data represented by [`ObjectRef`](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values.
 
 ### Generate a table of embeddings
 
@@ -49,9 +49,9 @@ For remote models, all inference occurs in Agent Platform. For other model types
 
 Use the following topics to try embedding generation in BigQuery ML:
 
-  - Generate [text](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) , [images](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) , or [video](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) by using the `AI.GENERATE_EMBEDDING` function.
-  - [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
-  - [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial)
+- Generate [text](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) , [images](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) , or [video](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) by using the `AI.GENERATE_EMBEDDING` function.
+- [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
+- [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial)
 
 ### Autonomous embedding generation
 
@@ -61,11 +61,11 @@ You can use [autonomous embedding generation](https://docs.cloud.google.com/bigq
 
 You can use the following search functions to perform a semantic vector search, or a **hybrid search** that combines a semantic search with a lexical keyword search:
 
-  - [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a semantic vector search or hybrid search by using SQL.
+- [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) : Perform a semantic vector search or hybrid search by using SQL.
 
-  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) : Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
+- [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) : Perform a semantic or a hybrid search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#autonomous_embedding_generation) enabled.
 
-  - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
+- [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `VECTOR_SEARCH` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 
 Optionally, you can create a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) by using the [`CREATE VECTOR INDEX` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . When a vector index is used, the `VECTOR_SEARCH` and `AI.SEARCH` functions use the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, these functions use [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record. You can also choose to use brute force to get exact results even when a vector index is available.
 
@@ -73,20 +73,20 @@ Optionally, you can create a [vector index](https://docs.cloud.google.com/bigque
 
 The `VECTOR_SEARCH` and `AI.SEARCH` functions and the `CREATE VECTOR INDEX` statement use [BigQuery compute pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .
 
-  - `VECTOR_SEARCH` and `AI.SEARCH` functions: You are charged for similarity search, using on-demand or editions pricing.
-    
-      - On-demand: You are charged for the amount of bytes scanned in the base table, the index, and the search query.
-    
-      - Editions pricing: You are charged for the slots required to complete the job within your reservation edition. Larger, more complex similarity calculations incur more charges.
-        
-        > **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- `VECTOR_SEARCH` and `AI.SEARCH` functions: You are charged for similarity search, using on-demand or editions pricing.
 
-  - `CREATE VECTOR INDEX` statement: There is no charge for the processing required to build and refresh your vector indexes as long as the total size of the indexed table data is below your per-organization [limit](https://docs.cloud.google.com/bigquery/quotas#vector_index_maximum_table_size) . To support indexing beyond this limit, you must [provide your own reservation](https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation) for handling the index management jobs.
+  - On-demand: You are charged for the amount of bytes scanned in the base table, the index, and the search query.
+
+  - Editions pricing: You are charged for the slots required to complete the job within your reservation edition. Larger, more complex similarity calculations incur more charges.
+
+    > **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+
+- `CREATE VECTOR INDEX` statement: There is no charge for the processing required to build and refresh your vector indexes as long as the total size of the indexed table data is below your per-organization [limit](https://docs.cloud.google.com/bigquery/quotas#vector_index_maximum_table_size) . To support indexing beyond this limit, you must [provide your own reservation](https://docs.cloud.google.com/bigquery/docs/vector-index#use_your_own_reservation) for handling the index management jobs.
 
 Storage is also a consideration for embeddings and indexes. The amount of bytes stored as embeddings and indexes are subject to [active storage costs](https://cloud.google.com/bigquery/pricing#storage) .
 
-  - Vector indexes incur storage costs when they are active.
-  - You can find the index storage size by using the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `INFORMATION_SCHEMA.VECTOR_INDEXES` view.
+- Vector indexes incur storage costs when they are active.
+- You can find the index storage size by using the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `INFORMATION_SCHEMA.VECTOR_INDEXES` view.
 
 ## Quotas and limits
 
@@ -98,23 +98,23 @@ Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelera
 
 ## What's next
 
-  - Learn more about [creating a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) and [using vector indexes with hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-index#use_vector_indexes_with_hybrid_search) .
+- Learn more about [creating a vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) and [using vector indexes with hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-index#use_vector_indexes_with_hybrid_search) .
 
-  - Learn how to perform a semantic or hybrid search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
+- Learn how to perform a semantic or hybrid search using the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) .
 
-  - Learn how to perform semantic or hybrid search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
+- Learn how to perform semantic or hybrid search using the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) .
 
-  - Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
+- Learn more about [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
 
-  - Try the [Search embeddings with vector search](https://docs.cloud.google.com/bigquery/docs/vector-search) tutorial to learn how to create a vector index, and then do a vector search for embeddings both with and without the index.
+- Try the [Search embeddings with vector search](https://docs.cloud.google.com/bigquery/docs/vector-search) tutorial to learn how to create a vector index, and then do a vector search for embeddings both with and without the index.
 
-  - Try the [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
-    
-      - Generate text embeddings.
-      - Create a vector index on the embeddings.
-      - Perform a vector search with the embeddings to search for similar text.
-      - Perform retrieval-augmented generation (RAG) by using vector search results to augment the prompt input and improve results.
+- Try the [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
 
-  - Try the [Parse PDFs in a retrieval-augmented generation pipeline](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf) tutorial to learn how to create a RAG pipeline based on parsed PDF content.
+  - Generate text embeddings.
+  - Create a vector index on the embeddings.
+  - Perform a vector search with the embeddings to search for similar text.
+  - Perform retrieval-augmented generation (RAG) by using vector search results to augment the prompt input and improve results.
 
-  - You can also perform vector searches by using BigQuery DataFrames in Python. For a notebook that illustrates this approach, see [Build a Vector Search application using BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/generative_ai/bq_dataframes_llm_vector_search.ipynb) .
+- Try the [Parse PDFs in a retrieval-augmented generation pipeline](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf) tutorial to learn how to create a RAG pipeline based on parsed PDF content.
+
+- You can also perform vector searches by using BigQuery DataFrames in Python. For a notebook that illustrates this approach, see [Build a Vector Search application using BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/generative_ai/bq_dataframes_llm_vector_search.ipynb) .

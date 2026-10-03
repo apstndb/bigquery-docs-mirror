@@ -16,9 +16,9 @@ This document provides an overview of the different text analyzers available in 
 
 BigQuery supports the following text analyzers:
 
-  - `NO_OP_ANALYZER`
-  - `LOG_ANALYZER`
-  - `PATTERN_ANALYZER`
+- `NO_OP_ANALYZER`
+- `LOG_ANALYZER`
+- `PATTERN_ANALYZER`
 
 ### `NO_OP_ANALYZER`
 
@@ -28,17 +28,19 @@ Use the `NO_OP_ANALYZER` when you have pre-processed data that you want to match
 
 The `LOG_ANALYZER` modifies data in the following ways:
 
-  - Text is made lowercase.
+- Text is made lowercase.
 
-  - ASCII values greater than 127 are kept as is.
+- ASCII values greater than 127 are kept as is.
 
-  - Text is split into individual terms called *tokens* by the following delimiters:
-    
-        [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
-        %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
-        %0a %2C %2c %28 %29
-    
-    If you don't want to use the default delimiters, you can specify the delimiters you want to use as text analyzer options. `LOG_ANALYZER` lets you configure specific delimiters and token filters for more control over your search results. For more information about the specific configuration options available when using the `LOG_ANALYZER` , see [`delimiters` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) and [`token_filters` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) .
+- Text is split into individual terms called *tokens* by the following delimiters:
+
+  ```
+  [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
+  %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
+  %0a %2C %2c %28 %29
+  ```
+
+  If you don't want to use the default delimiters, you can specify the delimiters you want to use as text analyzer options. `LOG_ANALYZER` lets you configure specific delimiters and token filters for more control over your search results. For more information about the specific configuration options available when using the `LOG_ANALYZER` , see [`delimiters` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) and [`token_filters` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) .
 
 ### `PATTERN_ANALYZER`
 
@@ -355,161 +357,74 @@ The following examples demonstrates the use of text analysis with customization 
 
 The following example configures `LOG_ANALYZER` options with [NFKC ICU](https://en.wikipedia.org/wiki/Unicode_equivalence) normalization and stop words. The example assumes the following data table with data already populated:
 
-    CREATE TABLE dataset.data_table(
-      text_data STRING
-    );
+```
+CREATE TABLE dataset.data_table(
+  text_data STRING
+);
+```
 
 To create a search index with NFKC ICU normalization and a list of stop words, create a JSON-formatted string in the `analyzer_options` option of the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `LOG_ANALYZER` , see [`LOG_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) . For this example, our stop words are `"the", "of", "and", "for"` .
 
-    CREATE OR REPLACE SEARCH INDEX `my_index` ON `dataset.data_table`(ALL COLUMNS) OPTIONS(
-      analyzer='PATTERN_ANALYZER',
-      analyzer_options= '''{
-        "token_filters": [
-          {
-            "normalizer": {
-              "mode": "ICU_NORMALIZE",
-              "icu_normalize_mode": "NFKC",
-              "icu_case_folding": true
-            }
-          },
-          { "stop_words": ["the", "of", "and", "for"] }
-        ]
-      }''');
+```
+CREATE OR REPLACE SEARCH INDEX `my_index` ON `dataset.data_table`(ALL COLUMNS) OPTIONS(
+  analyzer='PATTERN_ANALYZER',
+  analyzer_options= '''{
+    "token_filters": [
+      {
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFKC",
+          "icu_case_folding": true
+        }
+      },
+      { "stop_words": ["the", "of", "and", "for"] }
+    ]
+  }''');
+```
 
 Given the previous example, the following table describes the token extraction for various values of `text_data` . Note that in this document the double question mark character ( *⁇* ) has been italicized to differentiate between two question marks (??):
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data Text</th>
-<th>Tokens for index</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The Quick Brown Fox</td>
-<td>["quick", "brown", "fox"]</td>
-<td>LOG_ANALYZER tokenization produces the tokens ["The", "Quick", "Brown", "Fox"].<br />
-<br />
-Next, ICU normalization with <code dir="ltr" translate="no">icu_case_folding = true</code> lower cases the tokens to produce ["the", "quick", "brown", "fox"]<br />
-<br />
-Finally, the stop words filter removes "the" from the list.</td>
-</tr>
-<tr class="even">
-<td>The Ⓠuick Ⓑrown Ⓕox</td>
-<td>["quick", "brown", "fox"]</td>
-<td>LOG_ANALYZER tokenization produces the tokens ["The", "Ⓠuick", "Ⓑrown", "Ⓕox"].<br />
-<br />
-Next, NFKC ICU normalization with <code dir="ltr" translate="no">icu_case_folding = true</code> lower cases the tokens to produce ["the", "quick", "brown", "fox"]<br />
-<br />
-Finally, the stop words filter removes "the" from the list.</td>
-</tr>
-<tr class="odd">
-<td>Ⓠuick <em>⁇</em> Ⓕox</td>
-<td>["quick??fox"]</td>
-<td>LOG_ANALYZER tokenization produces the tokens ["The", "Ⓠuick <em>⁇</em> Ⓕox"].<br />
-<br />
-Next, NFKC ICU normalization with <code dir="ltr" translate="no">icu_case_folding = true</code> lower cases the tokens to produce ["quick??fox"]. Notice that the double question mark unicode has been normalized into 2 question mark ASCII characters.<br />
-<br />
-Finally, the stop words filter does nothing because none of the tokens are in the filter list.</td>
-</tr>
-</tbody>
-</table>
+| Data Text           | Tokens for index            | Explanation                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The Quick Brown Fox | \["quick", "brown", "fox"\] | LOG_ANALYZER tokenization produces the tokens \["The", "Quick", "Brown", "Fox"\]. Next, ICU normalization with `icu_case_folding = true` lower cases the tokens to produce \["the", "quick", "brown", "fox"\] Finally, the stop words filter removes "the" from the list.                                                                                                                        |
+| The Ⓠuick Ⓑrown Ⓕox | \["quick", "brown", "fox"\] | LOG_ANALYZER tokenization produces the tokens \["The", "Ⓠuick", "Ⓑrown", "Ⓕox"\]. Next, NFKC ICU normalization with `icu_case_folding = true` lower cases the tokens to produce \["the", "quick", "brown", "fox"\] Finally, the stop words filter removes "the" from the list.                                                                                                                   |
+| Ⓠuick *⁇* Ⓕox       | \["quick??fox"\]            | LOG_ANALYZER tokenization produces the tokens \["The", "Ⓠuick *⁇* Ⓕox"\]. Next, NFKC ICU normalization with `icu_case_folding = true` lower cases the tokens to produce \["quick??fox"\]. Notice that the double question mark unicode has been normalized into 2 question mark ASCII characters. Finally, the stop words filter does nothing because none of the tokens are in the filter list. |
 
 Now that the search index has been created, you can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table using the same analyzer configurations specified in the search index. Note that if the analyzer configurations in the `SEARCH` function don't match those of the search index, the search index won't be used. Use the following query:
 
-    SELECT
-      SEARCH(
-      analyzer => 'LOG_ANALYZER',
-      analyzer_options => '''{
-        "token_filters": [
-          {
-            "normalizer": {
-              "mode": "ICU_NORMALIZE",
-              "icu_normalize_mode": "NFKC",
-              "icu_case_folding": true
-            }
-          },
-          {
-            "stop_words": ["the", "of", "and", "for"]
-          }
-        ]
-      }''')
+```
+SELECT
+  SEARCH(
+  analyzer => 'LOG_ANALYZER',
+  analyzer_options => '''{
+    "token_filters": [
+      {
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFKC",
+          "icu_case_folding": true
+        }
+      },
+      {
+        "stop_words": ["the", "of", "and", "for"]
+      }
+    ]
+  }''')
+```
 
 Replace the following:
 
-  - `search_query` : The text you want to search for.
+- ` ``search_query`` ` : The text you want to search for.
 
 The following table demonstrates various results based on different search text and different values of `search_query` :
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>text_data</th>
-<th><code dir="ltr" translate="no">search_query</code></th>
-<th>Result</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>The Quick Brown Fox</td>
-<td><code dir="ltr" translate="no">"Ⓠuick"</code></td>
-<td><code dir="ltr" translate="no">TRUE</code></td>
-<td>The final list of tokens extracted from the text is ["quick", "brown", "fox"].<br />
-The final list of tokens extracted from the text query is ["quick"].<br />
-<br />
-The list query tokens can all be found in the text tokens.</td>
-</tr>
-<tr class="even">
-<td>The Ⓠuick Ⓑrown Ⓕox</td>
-<td><code dir="ltr" translate="no">"quick"</code></td>
-<td><code dir="ltr" translate="no">TRUE</code></td>
-<td>The final list of tokens extracted from the text is ["quick", "brown", "fox"].<br />
-The final list of tokens extracted from the text query is ["quick"].<br />
-<br />
-The list query tokens can all be found in the text tokens.</td>
-</tr>
-<tr class="odd">
-<td>Ⓠuick <em>⁇</em> Ⓕox</td>
-<td><code dir="ltr" translate="no">"quick"</code></td>
-<td><code dir="ltr" translate="no">FALSE</code></td>
-<td>The final list of tokens extracted from the text is ["quick??fox"].<br />
-<br />
-The final list of tokens extracted from the text query is ["quick"].<br />
-<br />
-"quick" is not in the list of tokens from the text.</td>
-</tr>
-<tr class="even">
-<td>Ⓠuick <em>⁇</em> Ⓕox</td>
-<td><code dir="ltr" translate="no">"quick         ⁇        fox"</code></td>
-<td><code dir="ltr" translate="no">TRUE</code></td>
-<td>The final list of tokens extracted from the text is ["quick??fox"].<br />
-<br />
-The final list of tokens extracted from the text query is ["quick??fox"].<br />
-<br />
-"quick??fox" is in the list of tokens from the text.</td>
-</tr>
-<tr class="odd">
-<td>Ⓠuick <em>⁇</em> Ⓕox</td>
-<td><code dir="ltr" translate="no">"`quick         ⁇        fox`"</code></td>
-<td><code dir="ltr" translate="no">FALSE</code></td>
-<td>In <code dir="ltr" translate="no">LOG_ANALYZER</code> , backtick requires exact text match.</td>
-</tr>
-</tbody>
-</table>
+| text_data           | `search_query`                  | Result  | Explanation                                                                                                                                                                                                        |
+|---------------------|---------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The Quick Brown Fox | `"Ⓠuick"`                       | `TRUE`  | The final list of tokens extracted from the text is \["quick", "brown", "fox"\]. The final list of tokens extracted from the text query is \["quick"\]. The list query tokens can all be found in the text tokens. |
+| The Ⓠuick Ⓑrown Ⓕox | `"quick"`                       | `TRUE`  | The final list of tokens extracted from the text is \["quick", "brown", "fox"\]. The final list of tokens extracted from the text query is \["quick"\]. The list query tokens can all be found in the text tokens. |
+| Ⓠuick *⁇* Ⓕox       | `"quick"`                       | `FALSE` | The final list of tokens extracted from the text is \["quick??fox"\]. The final list of tokens extracted from the text query is \["quick"\]. "quick" is not in the list of tokens from the text.                   |
+| Ⓠuick *⁇* Ⓕox       | `"quick `*`⁇`*` fox"`           | `TRUE`  | The final list of tokens extracted from the text is \["quick??fox"\]. The final list of tokens extracted from the text query is \["quick??fox"\]. "quick??fox" is in the list of tokens from the text.             |
+| Ⓠuick *⁇* Ⓕox       | `` "`quick  ``*`⁇`*``  fox`" `` | `FALSE` | In `LOG_ANALYZER` , backtick requires exact text match.                                                                                                                                                            |
 
 ### `PATTERN_ANALYZER` for IPv4 search with stop words
 
@@ -517,109 +432,76 @@ The following example configures the `PATTERN_ANALYZER` text analyzer to search 
 
 This example assumes that the following table is populated with data:
 
-    CREATE TABLE dataset.data_table(
-      text_data STRING
-    );
+```
+CREATE TABLE dataset.data_table(
+  text_data STRING
+);
+```
 
 To create a search index the `pattern` option and a list of stop words, create a JSON-formatted string in the `analyzer_options` option of the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `PATTERN_ANALYZER` , see [`PATTERN_ANALYZER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) . For this example, our stop words are the localhost address, `127.0.0.1` .
 
-    CREATE SEARCH INDEX my_index
-    ON dataset.data_table(text_data)
-    OPTIONS (analyzer = 'PATTERN_ANALYZER', analyzer_options = '''{
-      "patterns": [
-        "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-      ],
-      "token_filters": [
-        {
-          "stop_words": [
-            "127.0.0.1"
-          ]
-        }
+```
+CREATE SEARCH INDEX my_index
+ON dataset.data_table(text_data)
+OPTIONS (analyzer = 'PATTERN_ANALYZER', analyzer_options = '''{
+  "patterns": [
+    "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+  ],
+  "token_filters": [
+    {
+      "stop_words": [
+        "127.0.0.1"
       ]
-    }'''
-    );
+    }
+  ]
+}'''
+);
+```
 
 When using regular expressions with `analyzer_options` , include three leading `\` symbols to properly escape regular expressions that include a `\` symbol, such as `\d` or `\b` .
 
 The following table describes the tokenization options for various values of `text_data`
 
 | Data Text                        | Tokens for index                    | Explanation                                                                                             |
-| -------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+|----------------------------------|-------------------------------------|---------------------------------------------------------------------------------------------------------|
 | abc192.168.1.1def 172.217.20.142 | \["192.168.1.1", "172.217.20.142"\] | The IPv4 patterns capture the IPv4 addresses even if there's no space between the address and the text. |
 | 104.24.12.10abc 127.0.0.1        | \["104.24.12.10"\]                  | "127.0.0.1" is filtered out since it's in the list of stop words.                                       |
 
 Now that the search index has been created, you can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table based on the tokenization specified in `analyzer_options` . Use the following query:
 
-    SELECT
-      SEARCH(dataset.data_table.text_data
-      "search_data",
-      analyzer => 'PATTERN_ANALYZER',
-      analyzer_options => '''{
-        "patterns": [
-          "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-          ],
-        "token_filters": [
-          {
-            "stop_words": [
-              "127.0.0.1"
-            ]
-          }
+```
+SELECT
+  SEARCH(dataset.data_table.text_data
+  "search_data",
+  analyzer => 'PATTERN_ANALYZER',
+  analyzer_options => '''{
+    "patterns": [
+      "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+      ],
+    "token_filters": [
+      {
+        "stop_words": [
+          "127.0.0.1"
         ]
-      }'''
-    );
+      }
+    ]
+  }'''
+);
+```
 
 Replace the following:
 
-  - `search_query` : The text you want to search for.
+- ` ``search_query`` ` : The text you want to search for.
 
 The following table demonstrates various results based on different search text and different values of `search_query` :
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>text_data</th>
-<th><code dir="ltr" translate="no">search_query</code></th>
-<th>Result</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>128.0.0.2</td>
-<td>"127.0.0.1"</td>
-<td>ERROR</td>
-<td>No search token in query.<br />
-<br />
-The query goes through the text analyzer, which filters out the "127.0.0.1" token.</td>
-</tr>
-<tr class="even">
-<td>abc192.168.1.1def 172.217.20.142</td>
-<td>"192.168.1.1abc"</td>
-<td>TRUE</td>
-<td>The list of tokens extracted from the query is ["192.168.1.1"].<br />
-<br />
-The list of tokens extracted from text is ["192.168.1.1", "172.217.20.142"].</td>
-</tr>
-<tr class="odd">
-<td>abc192.168.1.1def 172.217.20.142</td>
-<td>"`192.168.1.1`"</td>
-<td>TRUE</td>
-<td>The list of tokens extracted from the query is ["192.168.1.1"].<br />
-<br />
-The list of tokens extracted from text is ["192.168.1.1", "172.217.20.142"].<br />
-<br />
-Note that backticks are treated as regular characters for PATTERN_ANALYZER.</td>
-</tr>
-</tbody>
-</table>
+| text_data                        | `search_query`    | Result | Explanation                                                                                                                                                                                                                  |
+|----------------------------------|-------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 128.0.0.2                        | "127.0.0.1"       | ERROR  | No search token in query. The query goes through the text analyzer, which filters out the "127.0.0.1" token.                                                                                                                 |
+| abc192.168.1.1def 172.217.20.142 | "192.168.1.1abc"  | TRUE   | The list of tokens extracted from the query is \["192.168.1.1"\]. The list of tokens extracted from text is \["192.168.1.1", "172.217.20.142"\].                                                                             |
+| abc192.168.1.1def 172.217.20.142 | "\`192.168.1.1\`" | TRUE   | The list of tokens extracted from the query is \["192.168.1.1"\]. The list of tokens extracted from text is \["192.168.1.1", "172.217.20.142"\]. Note that backticks are treated as regular characters for PATTERN_ANALYZER. |
 
 ## What's next
 
-  - For an overview of search index use cases, pricing, required permissions, and limitations, see the [Introduction to search in BigQuery](https://docs.cloud.google.com/bigquery/docs/search-intro) .
-  - For information about efficient searching of indexed columns, see [Search with an index](https://docs.cloud.google.com/bigquery/docs/search) .
+- For an overview of search index use cases, pricing, required permissions, and limitations, see the [Introduction to search in BigQuery](https://docs.cloud.google.com/bigquery/docs/search-intro) .
+- For information about efficient searching of indexed columns, see [Search with an index](https://docs.cloud.google.com/bigquery/docs/search) .

@@ -15,7 +15,7 @@ Additionally, computing [cardinalities](https://en.wikipedia.org/wiki/Cardinalit
 Consider a table with the following data:
 
 | Product   | Number of users | Median visit duration |
-| --------- | --------------- | --------------------- |
+|-----------|-----------------|-----------------------|
 | Product A | 500 million     | 10 minutes            |
 | Product B | 20 million      | 2 minutes             |
 
@@ -25,63 +25,65 @@ A solution is to store sketches in the table instead. Each sketch is an approxim
 
 For example, the following query uses [HLL++](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_hll) and [KLL](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_kll) sketches to estimate distinct users and median visit duration for YouTube (Product A) and Google Maps (Product B):
 
-    -- Build sketches for YouTube stats.
-    CREATE TABLE user.YOUTUBE_ACCESS_STATS
-    AS
-    SELECT
-      HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
-      KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
-      hour_of_day
-    FROM YOUTUBE_ACCESS_LOG()
-    GROUP BY hour_of_day;
-    
-    -- Build sketches for Maps stats.
-    CREATE TABLE user.MAPS_ACCESS_STATS
-    AS
-    SELECT
-      HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
-      KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
-      hour_of_day
-    FROM MAPS_ACCESS_LOG()
-    GROUP BY hour_of_day;
-    
-    -- Query YouTube hourly stats.
-    SELECT
-      HLL_COUNT.EXTRACT(distinct_users_sketch) AS distinct_users,
-      KLL_QUANTILES.EXTRACT_POINT_INT64(visit_duration_ms_sketch, 0.5)
-      AS median_visit_duration, hour_of_day
-    FROM user.YOUTUBE_ACCESS_STATS;
-    
-    -- Query YouTube daily stats.
-    SELECT
-      HLL_COUNT.MERGE(distinct_users_sketch),
-      KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
-      AS median_visit_duration, date
-    FROM user.YOUTUBE_ACCESS_STATS
-    GROUP BY date;
-    
-    -- Query total stats across YouTube and Maps.
-    SELECT
-      HLL_COUNT.MERGE(distinct_users_sketch) AS unique_users_all_services,
-      KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
-        AS median_visit_duration_all_services,
-    FROM
-      (
-        SELECT * FROM user.YOUTUBE_ACCESS_STATS
-        UNION ALL
-        SELECT * FROM user.MAPS_ACCESS_STATS
-      );
+```
+-- Build sketches for YouTube stats.
+CREATE TABLE user.YOUTUBE_ACCESS_STATS
+AS
+SELECT
+  HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
+  KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
+  hour_of_day
+FROM YOUTUBE_ACCESS_LOG()
+GROUP BY hour_of_day;
+
+-- Build sketches for Maps stats.
+CREATE TABLE user.MAPS_ACCESS_STATS
+AS
+SELECT
+  HLL_COUNT.INIT(user_id) AS distinct_users_sketch,
+  KLL_QUANTILES.INIT_INT64(visit_duration_ms) AS visit_duration_ms_sketch,
+  hour_of_day
+FROM MAPS_ACCESS_LOG()
+GROUP BY hour_of_day;
+
+-- Query YouTube hourly stats.
+SELECT
+  HLL_COUNT.EXTRACT(distinct_users_sketch) AS distinct_users,
+  KLL_QUANTILES.EXTRACT_POINT_INT64(visit_duration_ms_sketch, 0.5)
+  AS median_visit_duration, hour_of_day
+FROM user.YOUTUBE_ACCESS_STATS;
+
+-- Query YouTube daily stats.
+SELECT
+  HLL_COUNT.MERGE(distinct_users_sketch),
+  KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
+  AS median_visit_duration, date
+FROM user.YOUTUBE_ACCESS_STATS
+GROUP BY date;
+
+-- Query total stats across YouTube and Maps.
+SELECT
+  HLL_COUNT.MERGE(distinct_users_sketch) AS unique_users_all_services,
+  KLL_QUANTILES.MERGE_POINT_INT64(visit_duration_ms_sketch, 0.5)
+    AS median_visit_duration_all_services,
+FROM
+  (
+    SELECT * FROM user.YOUTUBE_ACCESS_STATS
+    UNION ALL
+    SELECT * FROM user.MAPS_ACCESS_STATS
+  );
+```
 
 Because a sketch has lossy compression of the original data, it introduces a statistical error that's represented by an error bound or confidence interval (CI). For most applications, this uncertainty is small. For example, a typical cardinality-counting sketch has a relative error of about 1% in 95% of all cases. A sketch trades some accuracy, or *precision* , for faster and less expensive computations, and less storage.
 
 In summary, a sketch has these main properties:
 
-  - Represents an approximate aggregate for a specific metric
-  - Is compact
-  - Is a serialized form of an in-memory, sublinear data structure
-  - Is typically a fixed size and asymptotically smaller than the input
-  - Can introduce a statistical error that you determine with a precision level
-  - Can be merged with other sketches to summarize the union of the underlying data sets
+- Represents an approximate aggregate for a specific metric
+- Is compact
+- Is a serialized form of an in-memory, sublinear data structure
+- Is typically a fixed size and asymptotically smaller than the input
+- Can introduce a statistical error that you determine with a precision level
+- Can be merged with other sketches to summarize the union of the underlying data sets
 
 ## Re-aggregation with sketch merging
 
@@ -117,14 +119,12 @@ HyperLogLog++ (HLL++) is a sketching algorithm for estimating cardinality. HLL++
 
 HLL++ estimates very small and very large cardinalities. HLL++ includes a 64-bit hash function, sparse representation to reduce memory requirements for small cardinality estimates, and empirical bias correction for small cardinality estimates.
 
-<span id="precision_hll"></span>
-
 **Precision**
 
 HLL++ sketches support custom precision. The following table shows the supported precision values, the maximum storage size, and the confidence interval (CI) of typical precision levels:
 
 | Precision    | Max storage size | 65% CI | 95% CI | 99% CI |
-| ------------ | ---------------- | ------ | ------ | ------ |
+|--------------|------------------|--------|--------|--------|
 | 10           | 1 KiB + 28 B     | ±3.25% | ±6.50% | ±9.75% |
 | 11           | 2 KiB + 28 B     | ±2.30% | ±4.60% | ±6.89% |
 | 12           | 4 KiB + 28 B     | ±1.63% | ±3.25% | ±4.88% |
@@ -161,8 +161,6 @@ In addition to GoogleSQL, you can use HLL++ sketches with [Java](https://github.
 
 KLL (short for Karnin-Lang-Liberty) is a streaming algorithm to compute sketches for approximate [quantiles](https://docs.cloud.google.com/bigquery/docs/sketches#quantiles) . It computes arbitrary quantiles far more efficiently than exact computations at the price of a small approximation error.
 
-<span id="precision_kll"></span>
-
 **Precision**
 
 KLL sketches support custom precision. Precision defines the exactness of a returned approximate quantile *q* .
@@ -177,14 +175,12 @@ If you use a custom precision of `100` to find the median value, then the rank o
 
 You can define precision for a KLL sketch when you initialize it with the [`KLL_QUANTILES.INIT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) function.
 
-<span id="phi_kll"></span>
-
 **Size**
 
 KLL sketch size depends on the precision parameter and the input type. If your input type is `INT64` , the sketches can use additional optimization that's especially helpful if the input values come from a small universe. The following table contains two columns for `INT64` . One column provides an upper bound on sketch size for items from a limited universe of size 1B, and a second column provides an upper bound for arbitrary input values.
 
 | Precision | FLOAT64   | INT64 (\<1B) | INT64 (Any) |
-| --------- | --------- | ------------ | ----------- |
+|-----------|-----------|--------------|-------------|
 | 10        | 761 B     | 360 B        | 717 B       |
 | 20        | 1.46 KB   | 706 B        | 1.47 KB     |
 | 50        | 3.49 KB   | 1.72 KB      | 3.60 KB     |
@@ -215,13 +211,13 @@ The KLL algorithm is defined in the paper [Optimal Quantile Approximation in Str
 
 Quantiles are typically defined in two ways:
 
-  - For a positive integer `q` , `q` -quantiles are a set of values that partition an input set into `q` subsets of nearly equal size. Some of these have specific names: the single 2-quantile is the median, the 4-quantiles are quartiles, the 100-quantiles are percentiles, etc. KLL functions additionally return the (exact) minimum and the maximum of the input, so when querying for the 2-quantiles, three values are returned.
-    
-    > **Tip:** To extract a set of `q` -quantiles where `q` is the `number` argument, use the `MERGE` and `EXTRACT` functions in the `KLL_QUANTILES.*` functions.
+- For a positive integer `q` , `q` -quantiles are a set of values that partition an input set into `q` subsets of nearly equal size. Some of these have specific names: the single 2-quantile is the median, the 4-quantiles are quartiles, the 100-quantiles are percentiles, etc. KLL functions additionally return the (exact) minimum and the maximum of the input, so when querying for the 2-quantiles, three values are returned.
 
-  - Alternatively, quantiles might be considered individual `Φ` -quantiles, where `Φ` is a real number with `0 <= Φ <= 1` . The `Φ` -quantile `x` is an element of the input such that a `Φ` fraction of the input is less than or equal to `x` , and a `(1-Φ)` fraction is greater than or equal to `x` . In this notation, the median is the 0.5-quantile, and the 95th percentile is the 0.95-quantile.
-    
-    > **Tip:** To extract individual `Φ` -quantiles, use the quantile-supporting `MERGE_POINT` and `EXTRACT_POINT` functions, where `Φ` is the `phi` argument.
+  > **Tip:** To extract a set of `q` -quantiles where `q` is the `number` argument, use the `MERGE` and `EXTRACT` functions in the `KLL_QUANTILES.*` functions.
+
+- Alternatively, quantiles might be considered individual `Φ` -quantiles, where `Φ` is a real number with `0 <= Φ <= 1` . The `Φ` -quantile `x` is an element of the input such that a `Φ` fraction of the input is less than or equal to `x` , and a `(1-Φ)` fraction is greater than or equal to `x` . In this notation, the median is the 0.5-quantile, and the 95th percentile is the 0.95-quantile.
+
+  > **Tip:** To extract individual `Φ` -quantiles, use the quantile-supporting `MERGE_POINT` and `EXTRACT_POINT` functions, where `Φ` is the `phi` argument.
 
 For example, you can use a quantiles-supporting sketch to get the median of the number of times an application is opened by users.
 

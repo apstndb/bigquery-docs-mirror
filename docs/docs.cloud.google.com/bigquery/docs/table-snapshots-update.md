@@ -19,35 +19,16 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 To update a table snapshot's metadata, you need the following permission:
 
 | **Permission**           | **Resource**       |
-| ------------------------ | ------------------ |
+|--------------------------|--------------------|
 | `bigquery.tables.update` | The table snapshot |
 
 ### Roles
 
 The predefined BigQuery roles that provide the required permission are as follows:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Role</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Any of the following:<br />
-<br />
-<code dir="ltr" translate="no">bigquery.dataEditor</code><br />
-<code dir="ltr" translate="no">bigquery.dataOwner</code><br />
-<code dir="ltr" translate="no">biguqery.admin</code></td>
-<td>The table snapshot</td>
-</tr>
-</tbody>
-</table>
+| **Role**                                                                          | **Resource**       |
+|-----------------------------------------------------------------------------------|--------------------|
+| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `biguqery.admin` | The table snapshot |
 
 ## Limitations
 
@@ -66,10 +47,10 @@ You can change the description for a table snapshot by using one of the followin
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
 
@@ -85,23 +66,25 @@ You can change the description for a table snapshot by using one of the followin
 
 Enter the following command in the Cloud Shell:
 
-    bq update \
-    --description="DESCRIPTION" \
-    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
+bq update \
+--description="DESCRIPTION" \
+PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
 
 Replace the following:
 
-  - `  DESCRIPTION  ` : text describing the snapshot. For example, `Snapshot after table schema change X.` .
-  - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-  - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-  - `  SNAPSHOT_NAME  ` : the name of the snapshot.
+- `DESCRIPTION` : text describing the snapshot. For example, `Snapshot after table schema change X.` .
+- `PROJECT_ID` : the project ID of the project that contains the snapshot.
+- `DATASET_NAME` : the name of the dataset that contains the snapshot.
+- `SNAPSHOT_NAME` : the name of the snapshot.
 
 ### API
 
 Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
 
 | **Parameter**                    | **Value**                                                                           |
-| -------------------------------- | ----------------------------------------------------------------------------------- |
+|----------------------------------|-------------------------------------------------------------------------------------|
 | `projectId`                      | The project ID of the project that contains the snapshot.                           |
 | `datasetId`                      | The name of the dataset that contains the snapshot.                                 |
 | `tableId`                        | The name of the snapshot.                                                           |
@@ -118,7 +101,7 @@ You can change the expiration of a table snapshot by using one of the following 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
@@ -135,23 +118,25 @@ You can change the expiration of a table snapshot by using one of the following 
 
 Enter the following command in the Cloud Shell:
 
-    bq update \
-    --expiration=EXPIRATION_TIME \
-    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
+bq update \
+--expiration=EXPIRATION_TIME \
+PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
 
 Replace the following:
 
-  - `  EXPIRATION_TIME  ` : the number of seconds from the current time to the expiration time.
-  - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-  - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-  - `  SNAPSHOT_NAME  ` : the name of the snapshot.
+- `EXPIRATION_TIME` : the number of seconds from the current time to the expiration time.
+- `PROJECT_ID` : the project ID of the project that contains the snapshot.
+- `DATASET_NAME` : the name of the dataset that contains the snapshot.
+- `SNAPSHOT_NAME` : the name of the snapshot.
 
 ### API
 
 Call the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) method with the following parameters:
 
 | **Parameter**                       | **Value**                                                            |
-| ----------------------------------- | -------------------------------------------------------------------- |
+|-------------------------------------|----------------------------------------------------------------------|
 | `projectId`                         | The project ID of the project that contains the snapshot.            |
 | `datasetId`                         | The name of the dataset that contains the snapshot.                  |
 | `tableId`                           | The name of the snapshot.                                            |
@@ -168,7 +153,7 @@ You can give a user access to view the data in a table snapshot by using one of 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
@@ -187,17 +172,19 @@ You can give a user access to view the data in a table snapshot by using one of 
 
 Enter the following command in the Cloud Shell:
 
-    bq add-iam-policy-binding \
-        --member="user:PRINCIPAL" \
-        --role="roles/bigquery.dataViewer" \
-        PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
+bq add-iam-policy-binding \
+    --member="user:PRINCIPAL" \
+    --role="roles/bigquery.dataViewer" \
+    PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
+```
 
 Replace the following:
 
-  - `  PRINCIPAL  ` : the [principal](https://docs.cloud.google.com/iam/docs/principals-overview) you want to give access to the table snapshot.
-  - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-  - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-  - `  SNAPSHOT_NAME  ` : the name of the snapshot.
+- `PRINCIPAL` : the [principal](https://docs.cloud.google.com/iam/docs/principals-overview) you want to give access to the table snapshot.
+- `PROJECT_ID` : the project ID of the project that contains the snapshot.
+- `DATASET_NAME` : the name of the dataset that contains the snapshot.
+- `SNAPSHOT_NAME` : the name of the snapshot.
 
 ### API
 
@@ -216,12 +203,12 @@ Call the [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/ref
 </thead>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">Resource</code></td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>projects/PROJECT_ID/datasets/DATASET_NAME/tables/SNAPSHOT_NAME</code></pre></td>
+<td><code>Resource</code></td>
+<td><pre data-fenced=""><code>projects/PROJECT_ID/datasets/DATASET_NAME/tables/SNAPSHOT_NAME</code></pre></td>
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre data-fenced=""><code>{
       &quot;policy&quot;: {
         &quot;bindings&quot;: [
           {
@@ -239,13 +226,13 @@ Call the [`tables.setIamPolicy`](https://docs.cloud.google.com/bigquery/docs/ref
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project ID of the project that contains the snapshot.
-  - `  DATASET_NAME  ` : the name of the dataset that contains the snapshot.
-  - `  SNAPSHOT_NAME  ` : the name of the snapshot.
-  - `  PRINCIPAL  ` : the [principal](https://docs.cloud.google.com/iam/docs/overview#concepts_related_identity) you want to give access to the table snapshot.
+- `PROJECT_ID` : the project ID of the project that contains the snapshot.
+- `DATASET_NAME` : the name of the dataset that contains the snapshot.
+- `SNAPSHOT_NAME` : the name of the snapshot.
+- `PRINCIPAL` : the [principal](https://docs.cloud.google.com/iam/docs/overview#concepts_related_identity) you want to give access to the table snapshot.
 
 ## What's next
 
-  - [List the table snapshots in a dataset](https://docs.cloud.google.com/bigquery/docs/table-snapshots-list) .
-  - [View the metadata for a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-metadata) .
-  - [Delete a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete) .
+- [List the table snapshots in a dataset](https://docs.cloud.google.com/bigquery/docs/table-snapshots-list) .
+- [View the metadata for a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-metadata) .
+- [Delete a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete) .

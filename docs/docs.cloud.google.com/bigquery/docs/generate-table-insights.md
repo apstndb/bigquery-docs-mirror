@@ -73,23 +73,23 @@ For more information about enabling the Gemini for Google Cloud API, see [Enable
 
 To create, manage, and retrieve data insights, ask your administrator to grant you the following Identity and Access Management (IAM) roles:
 
-  - [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `roles/dataplex.dataScanEditor` ) or [Dataplex DataScan Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `roles/dataplex.dataScanAdmin` ) on the project where you want to generate insights.
-  - [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery tables for which you want to generate insights.
-  - [BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the BigQuery tables for which you want to generate insights.
-  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` ) on the project where you want to generate insights.
+- [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `roles/dataplex.dataScanEditor` ) or [Dataplex DataScan Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `roles/dataplex.dataScanAdmin` ) on the project where you want to generate insights.
+- [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery tables for which you want to generate insights.
+- [BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the BigQuery tables for which you want to generate insights.
+- [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `roles/bigquery.user` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` ) on the project where you want to generate insights.
 
 To get read-only access to the generated insights, ask your administrator to grant you the following IAM role:
 
-  - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on the project containing the BigQuery tables for which you want to view insights.
+- [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on the project containing the BigQuery tables for which you want to view insights.
 
 To publish data insights to Knowledge Catalog, ask your administrator to grant you the following IAM roles on the resource:
 
-  - Publish descriptions as aspects: [Dataplex Catalog Editor](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )
-  - Publish queries as aspects: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.entryOwner) ( `roles/dataplex.entryOwner` )
+- Publish descriptions as aspects: [Dataplex Catalog Editor](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` )
+- Publish queries as aspects: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/knowledge-catalog/docs/iam-roles#dataplex.entryOwner) ( `roles/dataplex.entryOwner` )
 
 To enable APIs, ask your administrator to grant you the following IAM role:
 
-  - [Service Usage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) ( `roles/serviceusage.serviceUsageAdmin` ) on the project where you want to generate insights.
+- [Service Usage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) ( `roles/serviceusage.serviceUsageAdmin` ) on the project where you want to generate insights.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -97,13 +97,13 @@ You might also be able to get the required permissions through [custom roles](ht
 
 #### Required permissions
 
-  - `bigquery.jobs.create`
-  - `bigquery.tables.get`
-  - `bigquery.tables.getData`
-  - `dataplex.datascans.create`
-  - `dataplex.datascans.get`
-  - `dataplex.datascans.getData`
-  - `dataplex.datascans.run`
+- `bigquery.jobs.create`
+- `bigquery.tables.get`
+- `bigquery.tables.getData`
+- `dataplex.datascans.create`
+- `dataplex.datascans.get`
+- `dataplex.datascans.getData`
+- `dataplex.datascans.run`
 
 ## Generate insights for a BigQuery table
 
@@ -120,15 +120,15 @@ To generate insights for a BigQuery table, you must access the table entry in Bi
 3.  Click the **Insights** tab. If the tab is empty, it means that the insights for this table are not generated yet.
 
 4.  To generate insights and publish them to Knowledge Catalog, click **Generate and publish** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-    
+
     To generate insights without publishing them to Knowledge Catalog, click **Generate without publishing** .
-    
+
     For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#modes_for_generating_table_data_insights) .
 
 5.  Select a region to generate insights and click **Generate** .
-    
+
     It takes a few minutes for the insights to be populated.
-    
+
     If published data profiling results for the table are available, they're used to generate insights. Otherwise, insights are generated based on the column names and descriptions. For more information, see [Best practices to improve generated insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#best_practices_for_generating_data_insights) .
 
 6.  In the **Insights** tab, explore the generated natural language questions.
@@ -138,11 +138,11 @@ To generate insights for a BigQuery table, you must access the table entry in Bi
 8.  To open a query in BigQuery, click **Copy to Query** .
 
 9.  To ask follow-up questions, do the following:
-    
+
     1.  Click **Ask a follow-up** . The query opens in a new [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
-    
+
     2.  Click **Run** , then click **Query these results** .
-    
+
     3.  To ask a follow-up question, enter a prompt in the **Natural language** prompt field or edit the SQL in the query editor.
 
 10. To generate a new set of queries, click **Generate insights** and trigger the pipeline again.
@@ -169,11 +169,11 @@ To create and run a data profile scan, follow these steps:
 2.  Run the data profile scan using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) . Wait for the run to complete.
 
 3.  Publish the scan results to the BigQuery table by attaching the following data profiling labels to the table:
-    
-      - ` dataplex-dp-published-scan: DATASCAN_ID  `
-      - ` dataplex-dp-published-project: PROJECT_ID  `
-      - ` dataplex-dp-published-location: LOCATION  `
-    
+
+    - `dataplex-dp-published-scan: `` DATASCAN_ID`
+    - `dataplex-dp-published-project: `` PROJECT_ID`
+    - `dataplex-dp-published-location: `` LOCATION`
+
     For more information, see [Add labels to tables and views](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels) .
 
 ### Generate a data documentation datascan for the BigQuery table
@@ -188,90 +188,90 @@ Use this method if you want to manage the scan resource over time.
 
 You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `generation_scopes` parameter. Optionally, you can publish these insights to Knowledge Catalog by setting the `catalogPublishingEnabled` parameter to `true` .
 
-  - To generate schema, table descriptions, and SQL queries, leave `data_documentation_spec` empty or set `generation_scopes` to `ALL` . For example:
-    
-    ``` 
-      gcurl -X POST \
-      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-      dataScans?dataScanId=DATASCAN_ID \
-      -d '{
-        "data": {
-          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-      datasets/DATASET_ID/tables/TABLE_ID"
-        },
-        "executionSpec": {
-          "trigger": { "onDemand": {} }
-        },
-        "type": "DATA_DOCUMENTATION",
-        "dataDocumentationSpec": {
-          "generationScopes": "ALL"
-          "catalogPublishingEnabled": true
-        }
-      }'
-    ```
-    
-    Replace the following:
-    
-      - PROJECT\_ID : the ID of your Google Cloud project where the dataset resides
-      - LOCATION : the region where the data scan runs
-      - DATASCAN\_ID : a unique name you provide for this scan
-      - DATASET\_ID : the ID of the BigQuery dataset being scanned
-      - TABLE\_ID : the ID of the BigQuery table being scanned
+- To generate schema, table descriptions, and SQL queries, leave `data_documentation_spec` empty or set `generation_scopes` to `ALL` . For example:
 
-  - To generate the schema, table descriptions, and column descriptions, without SQL queries, set `generation_scopes` to `TABLE_AND_COLUMN_DESCRIPTIONS` . For example:
-    
-    ``` 
-      gcurl -X POST \
-      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-      dataScans?dataScanId=DATASCAN_ID \
-      -d '{
-        "data": {
-          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-      datasets/DATASET_ID/tables/TABLE_ID"
-        },
-        "executionSpec": {
-          "trigger": { "onDemand": {} }
-        },
-        "type": "DATA_DOCUMENTATION",
-        "dataDocumentationSpec": {
-          "generationScopes": "TABLE_AND_COLUMN_DESCRIPTIONS"
-          "catalogPublishingEnabled": true
-        }
-      }'
-    ```
+  ```
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans?dataScanId=DATASCAN_ID \
+    -d '{
+      "data": {
+        "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+    datasets/DATASET_ID/tables/TABLE_ID"
+      },
+      "executionSpec": {
+        "trigger": { "onDemand": {} }
+      },
+      "type": "DATA_DOCUMENTATION",
+      "dataDocumentationSpec": {
+        "generationScopes": "ALL"
+        "catalogPublishingEnabled": true
+      }
+    }'
+  ```
 
-  - To generate SQL queries without descriptions, set `generation_scopes` to `SQL_QUERIES` . For example:
-    
-    ``` 
-      gcurl -X POST \
-      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-      dataScans?dataScanId=DATASCAN_ID \
-      -d '{
-        "data": {
-          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-      datasets/DATASET_ID/tables/TABLE_ID"
-        },
-        "executionSpec": {
-          "trigger": { "onDemand": {} }
-        },
-        "type": "DATA_DOCUMENTATION",
-        "dataDocumentationSpec": {
-          "generationScopes": "SQL_QUERIES"
-          "catalogPublishingEnabled": true
-        }
-      }'
-    ```
+  Replace the following:
 
-<!-- end list -->
+  - ` PROJECT_ID ` : the ID of your Google Cloud project where the dataset resides
+  - ` LOCATION ` : the region where the data scan runs
+  - ` DATASCAN_ID ` : a unique name you provide for this scan
+  - ` DATASET_ID ` : the ID of the BigQuery dataset being scanned
+  - ` TABLE_ID ` : the ID of the BigQuery table being scanned
+
+- To generate the schema, table descriptions, and column descriptions, without SQL queries, set `generation_scopes` to `TABLE_AND_COLUMN_DESCRIPTIONS` . For example:
+
+  ```
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans?dataScanId=DATASCAN_ID \
+    -d '{
+      "data": {
+        "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+    datasets/DATASET_ID/tables/TABLE_ID"
+      },
+      "executionSpec": {
+        "trigger": { "onDemand": {} }
+      },
+      "type": "DATA_DOCUMENTATION",
+      "dataDocumentationSpec": {
+        "generationScopes": "TABLE_AND_COLUMN_DESCRIPTIONS"
+        "catalogPublishingEnabled": true
+      }
+    }'
+  ```
+
+- To generate SQL queries without descriptions, set `generation_scopes` to `SQL_QUERIES` . For example:
+
+  ```
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans?dataScanId=DATASCAN_ID \
+    -d '{
+      "data": {
+        "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+    datasets/DATASET_ID/tables/TABLE_ID"
+      },
+      "executionSpec": {
+        "trigger": { "onDemand": {} }
+      },
+      "type": "DATA_DOCUMENTATION",
+      "dataDocumentationSpec": {
+        "generationScopes": "SQL_QUERIES"
+        "catalogPublishingEnabled": true
+      }
+    }'
+  ```
 
 1.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) .
-    
+
     For example:
-    
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans/DATASCAN_ID:run
-    
+
+    ```
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans/DATASCAN_ID:run
+    ```
+
     This request returns a unique job ID along with the initial state.
 
 #### Option B: One-time scan (streamlined)
@@ -282,36 +282,38 @@ Use this method to initiate and complete a scan in a single API call. This metho
 
 Create and trigger the scan using the `dataScans.create` method. For example:
 
-    gcurl -X POST \
-    "https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans?\
-    dataScanId=DATASCAN_ID" \
-    -d '{
-      "data": {
-        "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/\
-        tables/TABLE_ID"
-      },
-      "type": "DATA_DOCUMENTATION",
-      "dataDocumentationSpec": {
-        "generationScopes": "ALL",
-        "catalogPublishingEnabled": true
+```
+gcurl -X POST \
+"https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans?\
+dataScanId=DATASCAN_ID" \
+-d '{
+  "data": {
+    "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/\
+    tables/TABLE_ID"
+  },
+  "type": "DATA_DOCUMENTATION",
+  "dataDocumentationSpec": {
+    "generationScopes": "ALL",
+    "catalogPublishingEnabled": true
+  }
+  "executionSpec": {
+    "trigger": {
+      "one_time": {
+        "ttl_after_scan_completion": { "seconds": TTL_TIME }
       }
-      "executionSpec": {
-        "trigger": {
-          "one_time": {
-            "ttl_after_scan_completion": { "seconds": TTL_TIME }
-          }
-        }
-      }
-    }'
+    }
+  }
+}'
+```
 
 Replace the following:
 
-  - PROJECT\_ID : the ID of your Google Cloud project where the dataset resides
-  - LOCATION : the region where the data scan runs
-  - DATASCAN\_ID : a unique name you provide for this scan
-  - DATASET\_ID : the ID of the BigQuery dataset being scanned
-  - TABLE\_ID : the ID of the BigQuery table being scanned
-  - TTL\_TIME : the duration in seconds after which the scan resource should be automatically deleted (for example, `3600` for one hour)
+- ` PROJECT_ID ` : the ID of your Google Cloud project where the dataset resides
+- ` LOCATION ` : the region where the data scan runs
+- ` DATASCAN_ID ` : a unique name you provide for this scan
+- ` DATASET_ID ` : the ID of the BigQuery dataset being scanned
+- ` TABLE_ID ` : the ID of the BigQuery table being scanned
+- ` TTL_TIME ` : the duration in seconds after which the scan resource should be automatically deleted (for example, `3600` for one hour)
 
 ### Check the data documentation scan status
 
@@ -319,7 +321,9 @@ Check completion of the scan job run using the [`dataScans.get` method](https://
 
 Use the job ID to fetch the status of the job. For example:
 
-    gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans/DATASCAN_ID/jobs/JOB_ID
+```
+gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans/DATASCAN_ID/jobs/JOB_ID
+```
 
 The job completes when the status is either `SUCCEEDED` or `FAILURE` .
 
@@ -327,9 +331,9 @@ The job completes when the status is either `SUCCEEDED` or `FAILURE` .
 
 To publish the scan results to the BigQuery table, attach the following data documentation labels to the table:
 
-  - ` dataplex-data-documentation-published-scan: DATASCAN_ID  `
-  - ` dataplex-data-documentation-published-project: PROJECT_ID  `
-  - ` dataplex-data-documentation-published-location: LOCATION  `
+- `dataplex-data-documentation-published-scan: `` DATASCAN_ID`
+- `dataplex-data-documentation-published-project: `` PROJECT_ID`
+- `dataplex-data-documentation-published-location: `` LOCATION`
 
 ## Generate insights for a BigQuery external table
 
@@ -346,7 +350,7 @@ To generate insights for a [BigLake table](https://docs.cloud.google.com/bigquer
 2.  Create a BigQuery connection. For more information, see [Manage connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
 
 3.  Grant the Storage Object Viewer ( `roles/storage.objectViewer` ) IAM role to the service account corresponding to the BigQuery connection that you created.
-    
+
     You can retrieve the service account ID from the [connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
 4.  To generate insights, follow the instructions described in the [Generate insights for a BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-table) section of this document.
@@ -370,37 +374,37 @@ For a list of supported languages, see [Gemini language support](https://docs.cl
 To generate table and column descriptions, follow these steps:
 
 1.  Generate insights by following the instructions described in the relevant section of this document:
-    
-      - [Generate insights for a BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-table)
-      - [Generate insights for a BigQuery external table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-external-table)
-      - [Generate insights for a BigLake table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-biglake-table)
+
+    - [Generate insights for a BigQuery table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-table)
+    - [Generate insights for a BigQuery external table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-external-table)
+    - [Generate insights for a BigLake table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-biglake-table)
 
 2.  Click the **Schema** tab.
 
 3.  Click **View column descriptions** .
-    
+
     > **Note:** If you don't see the **View column descriptions** button, click **Describe data** . You might need to scroll to see this button.
-    
+
     The table description and column descriptions that were generated are displayed.
 
 4.  To edit and save the generated table description, do the following:
-    
+
     1.  In the **Table description** section, click **Save to details** .
-    
+
     2.  To replace the current description with the generated description, click **Copy suggested description** .
-    
+
     3.  Edit the table description as necessary, and then click **Save to details** .
-        
+
         The table description is updated immediately.
 
 5.  To edit and save the generated column descriptions, do the following:
-    
+
     1.  In the **Column descriptions** section, click **Save to schema** .
-        
+
         The column descriptions that were generated are populated in the **New description** field for each column.
-    
+
     2.  Edit the column descriptions as necessary, and then click **Save** .
-        
+
         The column descriptions are updated immediately.
 
 6.  To close the preview panel, click close **Close** .
@@ -409,11 +413,11 @@ To generate table and column descriptions, follow these steps:
 
 To enhance the precision of your generated insights, adhere to the following recommendations:
 
-  - Provide comprehensive descriptions. Ensure both tables and columns within the dataset have clear, detailed descriptions.
+- Provide comprehensive descriptions. Ensure both tables and columns within the dataset have clear, detailed descriptions.
 
-  - Ground insights with profiling. If descriptions are unavailable, ensure a profile scan is linked to each table in the dataset to aid in grounding the generated insights.
+- Ground insights with profiling. If descriptions are unavailable, ensure a profile scan is linked to each table in the dataset to aid in grounding the generated insights.
 
-  - Explicitly define rules. Include any relationships or business logic that the insights module uses to influence relationship generation within the respective table's description.
+- Explicitly define rules. Include any relationships or business logic that the insights module uses to influence relationship generation within the respective table's description.
 
 ### Ground insights to data profiling results
 
@@ -429,9 +433,9 @@ When you [create a data profiling scan](https://docs.cloud.google.com/bigquery/d
 
 Without data profiling scans, the following things happen:
 
-  - The generated queries are more likely to include inaccurate clauses or produce meaningless results.
+- The generated queries are more likely to include inaccurate clauses or produce meaningless results.
 
-  - The generated column descriptions are based only on the column name.
+- The generated column descriptions are based only on the column name.
 
 Ensure that the data profiling scan for your table is up-to-date and that the results are published to BigQuery.
 
@@ -445,8 +449,10 @@ Detailed table descriptions that describe what you want to analyze in your table
 
 For example, you might add the following description to a `telco_churn` table such as the one used in [Example of table data insights](https://docs.cloud.google.com/bigquery/docs/data-insights#example_of_table_data_insights) :
 
-    This table tracks customer churn data, including subscription details, tenure,
-    and service usage, to predict customer churn behavior.
+```
+This table tracks customer churn data, including subscription details, tenure,
+and service usage, to predict customer churn behavior.
+```
 
 If you save the [table description that Gemini generates](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#generate-column-table-descriptions) , then that description is used to generate future insights.
 
@@ -458,12 +464,16 @@ For example, you might add the following descriptions to specific columns of a `
 
 For the `tenure` column:
 
-    The number of months the customer has been with the service.
+```
+The number of months the customer has been with the service.
+```
 
 For the `churn` column:
 
-    Whether the customer has stopped using the service. TRUE indicates the customer
-    no longer uses the service, FALSE indicates the customer is active.
+```
+Whether the customer has stopped using the service. TRUE indicates the customer
+no longer uses the service, FALSE indicates the customer is active.
+```
 
 If you save the [column descriptions that Gemini generates](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#generate-column-table-descriptions) , then those descriptions are used to generate future insights.
 
@@ -473,6 +483,6 @@ After you generate insights for a table, you can manage, update, or delete them 
 
 ## What's next
 
-  - Learn about [data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
-  - Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
+- Learn about [data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+- Learn how to [generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) .
+- Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .

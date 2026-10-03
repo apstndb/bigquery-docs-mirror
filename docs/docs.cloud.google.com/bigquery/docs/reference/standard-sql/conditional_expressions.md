@@ -11,7 +11,7 @@ GoogleSQL for BigQuery supports conditional expressions. Conditional expressions
 ### Expression list
 
 | Name                                                                                                                | Summary                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | [`CASE expr`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr) | Compares the given expression to each successive `WHEN` clause and produces the first result where the values are equal.         |
 | [`CASE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case)           | Evaluates the condition of each successive `WHEN` clause and produces the first result where the condition evaluates to `TRUE` . |
 | [`COALESCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#coalesce)   | Produces the value of the first non- `NULL` expression, if any, otherwise `NULL` .                                               |
@@ -21,11 +21,13 @@ GoogleSQL for BigQuery supports conditional expressions. Conditional expressions
 
 ### `CASE expr`
 
-    CASE expr
-      WHEN expr_to_match THEN result
-      [ ... ]
-      [ ELSE else_result ]
-      END
+```
+CASE expr
+  WHEN expr_to_match THEN result
+  [ ... ]
+  [ ELSE else_result ]
+  END
+```
 
 **Description**
 
@@ -45,39 +47,43 @@ This expression supports specifying [collation](https://docs.cloud.google.com/bi
 
 **Example**
 
-    WITH Numbers AS (
-      SELECT 90 as A, 2 as B UNION ALL
-      SELECT 50, 8 UNION ALL
-      SELECT 60, 6 UNION ALL
-      SELECT 50, 10
-    )
-    SELECT
-      A,
-      B,
-      CASE A
-        WHEN 90 THEN 'red'
-        WHEN 50 THEN 'blue'
-        ELSE 'green'
-        END
-        AS result
-    FROM Numbers
-    
-    /*------------------+
-     | A  | B  | result |
-     +------------------+
-     | 90 | 2  | red    |
-     | 50 | 8  | blue   |
-     | 60 | 6  | green  |
-     | 50 | 10 | blue   |
-     +------------------*/
+```
+WITH Numbers AS (
+  SELECT 90 as A, 2 as B UNION ALL
+  SELECT 50, 8 UNION ALL
+  SELECT 60, 6 UNION ALL
+  SELECT 50, 10
+)
+SELECT
+  A,
+  B,
+  CASE A
+    WHEN 90 THEN 'red'
+    WHEN 50 THEN 'blue'
+    ELSE 'green'
+    END
+    AS result
+FROM Numbers
+
+/*------------------+
+ | A  | B  | result |
+ +------------------+
+ | 90 | 2  | red    |
+ | 50 | 8  | blue   |
+ | 60 | 6  | green  |
+ | 50 | 10 | blue   |
+ +------------------*/
+```
 
 ### `CASE`
 
-    CASE
-      WHEN condition THEN result
-      [ ... ]
-      [ ELSE else_result ]
-      END
+```
+CASE
+  WHEN condition THEN result
+  [ ... ]
+  [ ELSE else_result ]
+  END
+```
 
 **Description**
 
@@ -99,33 +105,37 @@ This expression supports specifying [collation](https://docs.cloud.google.com/bi
 
 **Example**
 
-    WITH Numbers AS (
-      SELECT 90 as A, 2 as B UNION ALL
-      SELECT 50, 6 UNION ALL
-      SELECT 20, 10
-    )
-    SELECT
-      A,
-      B,
-      CASE
-        WHEN A > 60 THEN 'red'
-        WHEN B = 6 THEN 'blue'
-        ELSE 'green'
-        END
-        AS result
-    FROM Numbers
-    
-    /*------------------+
-     | A  | B  | result |
-     +------------------+
-     | 90 | 2  | red    |
-     | 50 | 6  | blue   |
-     | 20 | 10 | green  |
-     +------------------*/
+```
+WITH Numbers AS (
+  SELECT 90 as A, 2 as B UNION ALL
+  SELECT 50, 6 UNION ALL
+  SELECT 20, 10
+)
+SELECT
+  A,
+  B,
+  CASE
+    WHEN A > 60 THEN 'red'
+    WHEN B = 6 THEN 'blue'
+    ELSE 'green'
+    END
+    AS result
+FROM Numbers
+
+/*------------------+
+ | A  | B  | result |
+ +------------------+
+ | 90 | 2  | red    |
+ | 50 | 6  | blue   |
+ | 20 | 10 | green  |
+ +------------------*/
+```
 
 ### `COALESCE`
 
-    COALESCE(expr[, ...])
+```
+COALESCE(expr[, ...])
+```
 
 **Description**
 
@@ -137,25 +147,31 @@ Returns the value of the first non- `NULL` expression, if any, otherwise `NULL` 
 
 **Examples**
 
-    SELECT COALESCE('A', 'B', 'C') as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | A      |
-     +--------*/
+```
+SELECT COALESCE('A', 'B', 'C') as result
 
-    SELECT COALESCE(NULL, 'B', 'C') as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | B      |
-     +--------*/
+/*--------+
+ | result |
+ +--------+
+ | A      |
+ +--------*/
+```
+
+```
+SELECT COALESCE(NULL, 'B', 'C') as result
+
+/*--------+
+ | result |
+ +--------+
+ | B      |
+ +--------*/
+```
 
 ### `IF`
 
-    IF(expr, true_result, else_result)
+```
+IF(expr, true_result, else_result)
+```
 
 **Description**
 
@@ -169,31 +185,37 @@ If `expr` evaluates to `TRUE` , returns `true_result` , else returns the evaluat
 
 **Examples**
 
-    SELECT
-      10 AS A,
-      20 AS B,
-      IF(10 < 20, 'true', 'false') AS result
-    
-    /*------------------+
-     | A  | B  | result |
-     +------------------+
-     | 10 | 20 | true   |
-     +------------------*/
+```
+SELECT
+  10 AS A,
+  20 AS B,
+  IF(10 < 20, 'true', 'false') AS result
 
-    SELECT
-      30 AS A,
-      20 AS B,
-      IF(30 < 20, 'true', 'false') AS result
-    
-    /*------------------+
-     | A  | B  | result |
-     +------------------+
-     | 30 | 20 | false  |
-     +------------------*/
+/*------------------+
+ | A  | B  | result |
+ +------------------+
+ | 10 | 20 | true   |
+ +------------------*/
+```
+
+```
+SELECT
+  30 AS A,
+  20 AS B,
+  IF(30 < 20, 'true', 'false') AS result
+
+/*------------------+
+ | A  | B  | result |
+ +------------------+
+ | 30 | 20 | false  |
+ +------------------*/
+```
 
 ### `IFNULL`
 
-    IFNULL(expr, null_result)
+```
+IFNULL(expr, null_result)
+```
 
 **Description**
 
@@ -207,25 +229,31 @@ If `expr` evaluates to `NULL` , returns `null_result` . Otherwise, returns `expr
 
 **Examples**
 
-    SELECT IFNULL(NULL, 0) as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | 0      |
-     +--------*/
+```
+SELECT IFNULL(NULL, 0) as result
 
-    SELECT IFNULL(10, 0) as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | 10     |
-     +--------*/
+/*--------+
+ | result |
+ +--------+
+ | 0      |
+ +--------*/
+```
+
+```
+SELECT IFNULL(10, 0) as result
+
+/*--------+
+ | result |
+ +--------+
+ | 10     |
+ +--------*/
+```
 
 ### `NULLIF`
 
-    NULLIF(expr, expr_to_match)
+```
+NULLIF(expr, expr_to_match)
+```
 
 **Description**
 
@@ -241,18 +269,22 @@ This expression supports specifying [collation](https://docs.cloud.google.com/bi
 
 **Example**
 
-    SELECT NULLIF(0, 0) as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | NULL   |
-     +--------*/
+```
+SELECT NULLIF(0, 0) as result
 
-    SELECT NULLIF(10, 0) as result
-    
-    /*--------+
-     | result |
-     +--------+
-     | 10     |
-     +--------*/
+/*--------+
+ | result |
+ +--------+
+ | NULL   |
+ +--------*/
+```
+
+```
+SELECT NULLIF(10, 0) as result
+
+/*--------+
+ | result |
+ +--------+
+ | 10     |
+ +--------*/
+```

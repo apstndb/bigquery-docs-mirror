@@ -10,8 +10,8 @@ data_source: docs.cloud.google.com
 
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:
 
-  - `analyticshub.googleapis.com/DataExchange`
-  - `analyticshub.googleapis.com/Listing`
+- `analyticshub.googleapis.com/DataExchange`
+- `analyticshub.googleapis.com/Listing`
 
 To learn more about Organization Policy, see [Custom organization policies](https://docs.cloud.google.com/organization-policy/overview#custom-organization-policies) .
 
@@ -29,10 +29,10 @@ By default, organization policies are inherited by the descendants of the resour
 
 ## Limitations
 
-  - You can set up custom constraints for BigQuery sharing resources only by using the Google Cloud console or Google Cloud CLI.
-  - You can enforce custom constraints only on the `CREATE` or `UPDATE` methods for BigQuery sharing resources.
-  - New custom constraints don't automatically apply to existing resources. You must update existing resources for the constraint to apply. To find existing resources that need to be updated, enforce a [dry-run organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/dry-run-policy) . Existing [listings published to data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#add-data) aren't checked during the dry run of existing resources.
-  - You must set the value in the `resource.bigqueryDataset.replicaLocations` field in lowercase letters. For more information, see [Supported resources](https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints#supported_resources) .
+- You can set up custom constraints for BigQuery sharing resources only by using the Google Cloud console or Google Cloud CLI.
+- You can enforce custom constraints only on the `CREATE` or `UPDATE` methods for BigQuery sharing resources.
+- New custom constraints don't automatically apply to existing resources. You must update existing resources for the constraint to apply. To find existing resources that need to be updated, enforce a [dry-run organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/dry-run-policy) . Existing [listings published to data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#add-data) aren't checked during the dry run of existing resources.
+- You must set the value in the `resource.bigqueryDataset.replicaLocations` field in lowercase letters. For more information, see [Supported resources](https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints#supported_resources) .
 
 ## Before you begin
 
@@ -48,77 +48,40 @@ You might also be able to get the required permissions through [custom roles](ht
 
 The following table lists the BigQuery sharing resources that you can reference in custom constraints.
 
-Resource
-
-Field
-
-analyticshub.googleapis.com/DataExchange
-
-`resource.description`
-
-`resource.discoveryType`
-
-`resource.displayName`
-
-`resource.documentation`
-
-`resource.icon`
-
-`resource.logLinkedDatasetQueryUserEmail`
-
-`resource.primaryContact`
-
-analyticshub.googleapis.com/Listing
-
-`resource.allowOnlyMetadataSharing`
-
-`resource.bigqueryDataset.dataset`
-
-`resource.bigqueryDataset.replicaLocations`
-
-`resource.bigqueryDataset.restrictedExportPolicy.enabled`
-
-`resource.bigqueryDataset.restrictedExportPolicy.restrictDirectTableAccess`
-
-`resource.bigqueryDataset.restrictedExportPolicy.restrictQueryResult`
-
-`resource.bigqueryDataset.selectedResources.routine`
-
-`resource.bigqueryDataset.selectedResources.table`
-
-`resource.categories`
-
-`resource.dataProvider.name`
-
-`resource.dataProvider.primaryContact`
-
-`resource.description`
-
-`resource.discoveryType`
-
-`resource.displayName`
-
-`resource.documentation`
-
-`resource.icon`
-
-`resource.logLinkedDatasetQueryUserEmail`
-
-`resource.primaryContact`
-
-`resource.publisher.name`
-
-`resource.publisher.primaryContact`
-
-`resource.pubsubTopic.dataAffinityRegions`
-
-`resource.pubsubTopic.topic`
-
-`resource.requestAccess`
-
-`resource.restrictedExportConfig.enabled`
-
-`resource.restrictedExportConfig.restrictQueryResult`
+| Resource                                                                    | Field                               |
+|-----------------------------------------------------------------------------|-------------------------------------|
+| analyticshub.googleapis.com/DataExchange                                    | `resource.description`              |
+| `resource.discoveryType`                                                    |                                     |
+| `resource.displayName`                                                      |                                     |
+| `resource.documentation`                                                    |                                     |
+| `resource.icon`                                                             |                                     |
+| `resource.logLinkedDatasetQueryUserEmail`                                   |                                     |
+| `resource.primaryContact`                                                   |                                     |
+| analyticshub.googleapis.com/Listing                                         | `resource.allowOnlyMetadataSharing` |
+| `resource.bigqueryDataset.dataset`                                          |                                     |
+| `resource.bigqueryDataset.replicaLocations`                                 |                                     |
+| `resource.bigqueryDataset.restrictedExportPolicy.enabled`                   |                                     |
+| `resource.bigqueryDataset.restrictedExportPolicy.restrictDirectTableAccess` |                                     |
+| `resource.bigqueryDataset.restrictedExportPolicy.restrictQueryResult`       |                                     |
+| `resource.bigqueryDataset.selectedResources.routine`                        |                                     |
+| `resource.bigqueryDataset.selectedResources.table`                          |                                     |
+| `resource.categories`                                                       |                                     |
+| `resource.dataProvider.name`                                                |                                     |
+| `resource.dataProvider.primaryContact`                                      |                                     |
+| `resource.description`                                                      |                                     |
+| `resource.discoveryType`                                                    |                                     |
+| `resource.displayName`                                                      |                                     |
+| `resource.documentation`                                                    |                                     |
+| `resource.icon`                                                             |                                     |
+| `resource.logLinkedDatasetQueryUserEmail`                                   |                                     |
+| `resource.primaryContact`                                                   |                                     |
+| `resource.publisher.name`                                                   |                                     |
+| `resource.publisher.primaryContact`                                         |                                     |
+| `resource.pubsubTopic.dataAffinityRegions`                                  |                                     |
+| `resource.pubsubTopic.topic`                                                |                                     |
+| `resource.requestAccess`                                                    |                                     |
+| `resource.restrictedExportConfig.enabled`                                   |                                     |
+| `resource.restrictedExportConfig.restrictQueryResult`                       |                                     |
 
 ## Set up a custom constraint
 
@@ -128,77 +91,85 @@ A custom constraint is defined in a YAML file by the resources, methods, conditi
 
 To create a custom constraint, do the following:
 
-In the Google Cloud console, go to the **Organization policies** page.
-
-From the project picker, select the project that you want to set the organization policy for.
-
-Click add **Custom constraint** .
-
-In the **Display name** box, enter a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use personally identifiable information (PII) or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
-
-In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `custom.enforceDataExchangeDiscovery` . This field can contain up to 70 characters, not counting the prefix ( `custom.` ), for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
-
-In the **Description** box, enter a human-readable description of the constraint. This description is used as an error message when the policy is violated. Include details about why the policy violation occurred and how to resolve the policy violation. Don't include PII or sensitive data in your description, because it could be exposed in error messages. This field can contain up to 2000 characters.
-
-In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `container.googleapis.com/NodePool` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
-
-Under **Enforcement method** , select whether to enforce the constraint on a REST `CREATE` method or both `CREATE` and `UPDATE` methods. If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
+1.  In the Google Cloud console, go to the **Organization policies** page.
+2.  From the project picker, select the project that you want to set the organization policy for.
+3.  Click add **Custom constraint** .
+4.  In the **Display name** box, enter a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use personally identifiable information (PII) or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
+5.  In the **Constraint ID** box, enter the ID that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example `custom.enforceDataExchangeDiscovery` . This field can contain up to 70 characters, not counting the prefix ( `custom.` ), for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+6.  In the **Description** box, enter a human-readable description of the constraint. This description is used as an error message when the policy is violated. Include details about why the policy violation occurred and how to resolve the policy violation. Don't include PII or sensitive data in your description, because it could be exposed in error messages. This field can contain up to 2000 characters.
+7.  In the **Resource type** box, select the name of the Google Cloud REST resource containing the object and field that you want to restrict—for example, `container.googleapis.com/NodePool` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+8.  Under **Enforcement method** , select whether to enforce the constraint on a REST `CREATE` method or both `CREATE` and `UPDATE` methods. If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
 
 To see supported methods for each service, find the service in [Services that support custom constraints](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services) .
 
-To define a condition, click edit **Edit condition** .
-
-1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `resource.management.autoUpgrade == false` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
-2.  Click **Save** .
-
-Under **Action** , select whether to allow or deny the evaluated method if the condition is met.
+1.  To define a condition, click edit **Edit condition** .
+    1.  In the **Add condition** panel, create a CEL condition that refers to a supported service resource, for example, `resource.management.autoUpgrade == false` . This field can contain up to 1000 characters. For details about CEL usage, see [Common Expression Language](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) . For more information about the service resources you can use in your custom constraints, see [Custom constraint supported services](https://docs.cloud.google.com/resource-manager/docs/organization-policy/custom-constraint-supported-services) .
+    2.  Click **Save** .
+2.  Under **Action** , select whether to allow or deny the evaluated method if the condition is met.
 
 The deny action means that the operation to create or update the resource is blocked if the condition evaluates to true.
 
 The allow action means that the operation to create or update the resource is permitted only if the condition evaluates to true. Every other case except those explicitly listed in the condition is blocked.
 
-Click **Create constraint** .
+1.  Click **Create constraint** .
 
 When you have entered a value into each field, the equivalent YAML configuration for this custom constraint appears on the right.
 
 ### gcloud
 
-To create a custom constraint, create a YAML file using the following format:
+1.  To create a custom constraint, create a YAML file using the following format:
 
-    name: organizations/ORGANIZATION_ID/customConstraints/CONSTRAINT_NAME
-    resourceTypes: RESOURCE_NAME
-    methodTypes:
-      - CREATE
-      - UPDATE 
-    condition: "CONDITION"
-    actionType: ACTION
-    displayName: DISPLAY_NAME
-    description: DESCRIPTION
+```
+name: organizations/ORGANIZATION_ID/customConstraints/CONSTRAINT_NAME
+resourceTypes: RESOURCE_NAME
+methodTypes:
+  - CREATE
+  - UPDATE 
+condition: "CONDITION"
+actionType: ACTION
+displayName: DISPLAY_NAME
+description: DESCRIPTION
+```
 
 Replace the following:
 
-  - `  ORGANIZATION_ID  ` : your organization ID, such as `123456789` .
-  - `  CONSTRAINT_NAME  ` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `custom.enforceDataExchangeDiscovery` . This field can contain up to 70 characters, not counting the prefix ( `custom.` )— for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
-  - `  RESOURCE_NAME  ` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `analyticshub.googleapis.com/DataExchange` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
-  - `methodTypes` : the REST methods that the constraint is enforced on. Can be `CREATE` or both `CREATE` and `UPDATE` . If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
-  - `  CONDITION  ` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `"resource.discoveryType == 'DISCOVERY_TYPE_PUBLIC'"` .
-  - `  ACTION  ` : the action to take if the `condition` is met. Possible values are `ALLOW` and `DENY` .
-  - `  DISPLAY_NAME  ` : a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use PII or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
-  - `  DESCRIPTION  ` : a human-friendly description of the constraint to display as an error message when the policy is violated. This field can contain up to 2000 characters.
+- `ORGANIZATION_ID` : your organization ID, such as `123456789` .
+- `CONSTRAINT_NAME` : the name that you want for your new custom constraint. A custom constraint can only contain letters (including upper and lowercase) or numbers, for example, `custom.enforceDataExchangeDiscovery` . This field can contain up to 70 characters, not counting the prefix ( `custom.` )— for example, `organizations/123456789/customConstraints/custom` . Don't include PII or sensitive data in your constraint ID, because it could be exposed in error messages.
+- `RESOURCE_NAME` : the fully qualified name of the Google Cloud resource containing the object and field that you want to restrict. For example, `analyticshub.googleapis.com/DataExchange` . Most resource types support up to 20 custom constraints. If you attempt to create more custom constraints, the operation fails.
+- `methodTypes` : the REST methods that the constraint is enforced on. Can be `CREATE` or both `CREATE` and `UPDATE` . If you enforce the constraint with the `UPDATE` method on a resource that violates the constraint, changes to that resource are blocked by the organization policy unless the change resolves the violation.
 
-After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
+To see the supported methods for each service, find the service in [Services that support custom constraints](https://docs.cloud.google.com/organization-policy/reference/custom-constraint-supported-services) .
 
-    gcloud org-policies set-custom-constraint CONSTRAINT_PATH
+- `CONDITION` : a [CEL condition](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-custom-constraints#common_expression_language) that is written against a representation of a supported service resource. This field can contain up to 1000 characters. For example, `"resource.discoveryType == 'DISCOVERY_TYPE_PUBLIC'"` .
 
-Replace `  CONSTRAINT_PATH  ` with the full path to your custom constraint file. For example, `/home/user/customconstraint.yaml` .
+For more information about the resources available to write conditions against, see [Supported resources](https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints#supported_resources) .
+
+- `ACTION` : the action to take if the `condition` is met. Possible values are `ALLOW` and `DENY` .
+
+The allow action means that if the condition evaluates to true, the operation to create or update the resource is permitted. This also means that every other case except the one explicitly listed in the condition is blocked.
+
+The deny action means that if the condition evaluates to true, the operation to create or update the resource is blocked.
+
+- `DISPLAY_NAME` : a human-readable name for the constraint. This name is used in error messages and can be used for identification and debugging. Don't use PII or sensitive data in display names because this name could be exposed in error messages. This field can contain up to 200 characters.
+- `DESCRIPTION` : a human-friendly description of the constraint to display as an error message when the policy is violated. This field can contain up to 2000 characters.
+
+1.  After you have created the YAML file for a new custom constraint, you must set it up to make it available for organization policies in your organization. To set up a custom constraint, use the [`gcloud org-policies set-custom-constraint`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/set-custom-constraint) command:
+
+```
+gcloud org-policies set-custom-constraint CONSTRAINT_PATH
+```
+
+Replace `CONSTRAINT_PATH` with the full path to your custom constraint file. For example, `/home/user/customconstraint.yaml` .
 
 After this operation is complete, your custom constraints are available as organization policies in your list of Google Cloud organization policies.
 
-To verify that the custom constraint exists, use the [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
+1.  To verify that the custom constraint exists, use the [`gcloud org-policies list-custom-constraints`](https://docs.cloud.google.com/sdk/gcloud/reference/org-policies/list-custom-constraints) command:
 
-    gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
+```
+gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
+```
 
-Replace `  ORGANIZATION_ID  ` with the ID of your organization resource.
+Replace `ORGANIZATION_ID` with the ID of your organization resource.
 
 For more information, see [Viewing organization policies](https://docs.cloud.google.com/resource-manager/docs/organization-policy/creating-managing-policies#viewing_organization_policies) .
 
@@ -222,33 +193,39 @@ You can enforce a constraint by creating an organization policy that references 
 
 ### gcloud
 
-To create an organization policy with boolean rules, create a policy YAML file that references the constraint:
+1.  To create an organization policy with boolean rules, create a policy YAML file that references the constraint:
 
-    name: projects/PROJECT_ID/policies/CONSTRAINT_NAME
-    spec:
-      rules:
-      - enforce: true
-    
-    dryRunSpec:
-      rules:
-      - enforce: true
+```
+name: projects/PROJECT_ID/policies/CONSTRAINT_NAME
+spec:
+  rules:
+  - enforce: true
+
+dryRunSpec:
+  rules:
+  - enforce: true
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the project that you want to enforce your constraint on.
-  - `  CONSTRAINT_NAME  ` : the name you defined for your custom constraint. For example, `custom.enforceDataExchangeDiscovery` .
+- `PROJECT_ID` : the project that you want to enforce your constraint on.
+- `CONSTRAINT_NAME` : the name you defined for your custom constraint. For example, `custom.enforceDataExchangeDiscovery` .
 
-To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `dryRunSpec` flag:
+1.  To enforce the organization policy in [dry-run mode](https://docs.cloud.google.com/organization-policy/test-policies) , run the following command with the `dryRunSpec` flag:
 
-    gcloud org-policies set-policy POLICY_PATH --update-mask=dryRunSpec
+```
+gcloud org-policies set-policy POLICY_PATH --update-mask=dryRunSpec
+```
 
-Replace `  POLICY_PATH  ` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
+Replace `POLICY_PATH` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
 
-After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `org-policies set-policy` command and the `spec` flag:
+1.  After you verify that the organization policy in dry-run mode works as intended, set the live policy with the `org-policies set-policy` command and the `spec` flag:
 
-    gcloud org-policies set-policy POLICY_PATH --update-mask=spec
+```
+gcloud org-policies set-policy POLICY_PATH --update-mask=spec
+```
 
-Replace `  POLICY_PATH  ` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
+Replace `POLICY_PATH` with the full path to your organization policy YAML file. The policy requires up to 15 minutes to take effect.
 
 ## Test the custom organization policy
 
@@ -256,68 +233,84 @@ The following example shows how you can create a custom constraint and an organi
 
 Before you begin, ensure that you have the following:
 
-  - Your organization ID
-  - A project ID
+- Your organization ID
+- A project ID
 
 ### Create the constraint
 
 To create a custom constraint, follow these steps:
 
 1.  To define the constraint, save the following configuration as `constraint-enforce-dataExchangeDiscovery.yaml` :
-    
-        name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
-        resourceTypes:
-        - analyticshub.googleapis.com/DataExchange
-        methodTypes:
-        - CREATE
-        condition: "resource.discoveryType == 'DISCOVERY_TYPE_PUBLIC'"
-        actionType: DENY
-        displayName: Reject public DataExchanges.
-        description: All DataExchange resources must be private.
-    
-    Replace `  ORGANIZATION_ID  ` with your organization ID.
-    
+
+    ```
+    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
+    resourceTypes:
+    - analyticshub.googleapis.com/DataExchange
+    methodTypes:
+    - CREATE
+    condition: "resource.discoveryType == 'DISCOVERY_TYPE_PUBLIC'"
+    actionType: DENY
+    displayName: Reject public DataExchanges.
+    description: All DataExchange resources must be private.
+    ```
+
+    Replace `ORGANIZATION_ID` with your organization ID.
+
     If the discovery type is public, this constraint denies operations that create or update `analyticshub.googleapis.com/DataExchange` resources.
 
 2.  To apply the constraint, run the `gcloud org-policies set-custom-constraint` command in your local terminal or Cloud Shell:
-    
-        gcloud org-policies set-custom-constraint ~/constraint-enforce-dataExchangeDiscovery.yaml
+
+    ```
+    gcloud org-policies set-custom-constraint ~/constraint-enforce-dataExchangeDiscovery.yaml
+    ```
 
 3.  To verify that the constraint exists, list the custom constraints for your organization:
-    
-        gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
-    
+
+    ```
+    gcloud org-policies list-custom-constraints --organization=ORGANIZATION_ID
+    ```
+
     The output is similar to the following:
-    
-        CUSTOM_CONSTRAINT                       ACTION_TYPE  METHOD_TYPES   RESOURCE_TYPES                           DISPLAY_NAME
-        custom.enforceDataExchangeDiscovery     DENY         CREATE,UPDATE  analyticshub.googleapis.com/DataExchange Reject public DataExchanges.
-        ...
+
+    ```
+    CUSTOM_CONSTRAINT                       ACTION_TYPE  METHOD_TYPES   RESOURCE_TYPES                           DISPLAY_NAME
+    custom.enforceDataExchangeDiscovery     DENY         CREATE,UPDATE  analyticshub.googleapis.com/DataExchange Reject public DataExchanges.
+    ...
+    ```
 
 ### Create the policy
 
 To enforce the custom constraint on your project, do the following:
 
 1.  To define the policy, save the following configuration as `policy-enforce-dataExchangeDiscovery.yaml` :
-    
-        name: projects/PROJECT_ID/policies/custom.enforceDataExchangeDiscovery
-        spec:
-          rules:
-          - enforce: true
-    
-    Replace `  PROJECT_ID  ` with your project ID.
+
+    ```
+    name: projects/PROJECT_ID/policies/custom.enforceDataExchangeDiscovery
+    spec:
+      rules:
+      - enforce: true
+    ```
+
+    Replace `PROJECT_ID` with your project ID.
 
 2.  To apply the policy, run the `gcloud org-policies set-policy` command in your local terminal or Cloud Shell:
-    
-        gcloud org-policies set-policy ~/policy-enforce-dataExchangeDiscovery.yaml
+
+    ```
+    gcloud org-policies set-policy ~/policy-enforce-dataExchangeDiscovery.yaml
+    ```
 
 3.  To verify that the policy exists, list the policies for your project:
-    
-        gcloud org-policies list --project=PROJECT_ID
-    
+
+    ```
+    gcloud org-policies list --project=PROJECT_ID
+    ```
+
     The output is similar to the following:
-    
-        CONSTRAINT                           LIST_POLICY    BOOLEAN_POLICY    ETAG
-        custom.enforceDataExchangeDiscovery  -              SET               ETAG
+
+    ```
+    CONSTRAINT                           LIST_POLICY    BOOLEAN_POLICY    ETAG
+    custom.enforceDataExchangeDiscovery  -              SET               ETAG
+    ```
 
 After you apply the policy, wait about two minutes for Google Cloud to start enforcing it.
 
@@ -327,8 +320,10 @@ To test that the policy is enforced, follow the steps in [Create a data exchange
 
 Because the policy denies public data exchanges, the operation fails with an error message similar to the following:
 
-    Operation failed, please try again. Error Message: Operation denied by org policy on resource 'projects/PROJECT_ID/locations/us':
-    ["customConstraints/custom.enforceDataExchangeDiscovery": "All DataExchange resources must be private."]
+```
+Operation failed, please try again. Error Message: Operation denied by org policy on resource 'projects/PROJECT_ID/locations/us':
+["customConstraints/custom.enforceDataExchangeDiscovery": "All DataExchange resources must be private."]
+```
 
 ## Example custom organization policies for common use cases
 
@@ -348,7 +343,7 @@ This table provides syntax examples for some common custom constraints.
 <tbody>
 <tr class="odd">
 <td>Deny publicly discoverable data exchanges.</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceDataExchangeDiscovery
     resource_types: analyticshub.googleapis.com/DataExchange
     method_types:
       - CREATE
@@ -356,12 +351,11 @@ This table provides syntax examples for some common custom constraints.
     condition: resource.discoveryType == &#39;DISCOVERY_TYPE_PUBLIC&#39;
     action_type: DENY
     display_name: Reject public DataExchanges.
-    description: All DataExchange resources must be private.
-    </code></pre></td>
+    description: All DataExchange resources must be private.</code></pre></td>
 </tr>
 <tr class="even">
 <td>Allow data exchanges only in a data clean room (DCR).</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name:
+<td><pre data-fenced=""><code>name:
       organizations/ORGANIZATION_ID/customConstraints/custom.analyticsHubAllowDCRDataExchange
     resource_types: analyticshub.googleapis.com/DataExchange
     method_types:
@@ -369,12 +363,11 @@ This table provides syntax examples for some common custom constraints.
     condition: has(resource.sharingEnvironmentConfig.dcrExchangeConfig)
     action_type: ALLOW
     display_name: Allow a DataExchange in a DCR.
-    description: Only allow the creation of a DataExchange resource in a DCR.
-    </code></pre></td>
+    description: Only allow the creation of a DataExchange resource in a DCR.</code></pre></td>
 </tr>
 <tr class="odd">
 <td>Allow data exchanges only with subscriber email logging enabled.</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.subscriberEmailLoggingAllowed
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.subscriberEmailLoggingAllowed
     resource_types: analyticshub.googleapis.com/DataExchange
     method_types:
       - CREATE
@@ -382,12 +375,11 @@ This table provides syntax examples for some common custom constraints.
     condition: resource.logLinkedDatasetQueryUserEmail == true
     action_type: ALLOW
     display_name: Subscriber email logging must be enabled.
-    description: Subscriber email logging must be enabled for DataExchange resources.
-    </code></pre></td>
+    description: Subscriber email logging must be enabled for DataExchange resources.</code></pre></td>
 </tr>
 <tr class="even">
 <td>Deny publicly discoverable listings.</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.noPublicListing
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.noPublicListing
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
       - CREATE
@@ -395,12 +387,11 @@ This table provides syntax examples for some common custom constraints.
     condition: resource.discoveryType == &#39;DISCOVERY_TYPE_PUBLIC&#39;
     action_type: DENY
     display_name: Reject public Listings.
-    description: All Listing resources must be undiscoverable.
-    </code></pre></td>
+    description: All Listing resources must be undiscoverable.</code></pre></td>
 </tr>
 <tr class="odd">
 <td>Allow listings only if they reference a BigQuery dataset.</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithBQDataset
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithBQDataset
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
       - CREATE
@@ -408,12 +399,11 @@ This table provides syntax examples for some common custom constraints.
     condition: has(resource.bigqueryDataset) &amp;&amp; resource.bigqueryDataset.dataset.contains(&#39;test&#39;)
     action_type: ALLOW
     display_name: Listing must have a BigQuery dataset.
-    description: Listing must have a BigQuery dataset whose name contains the string &quot;test&quot;.
-    </code></pre></td>
+    description: Listing must have a BigQuery dataset whose name contains the string &quot;test&quot;.</code></pre></td>
 </tr>
 <tr class="even">
 <td>Allow listings only with restricted export policies enabled.</td>
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithRestrictedExportPolicy
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.listingWithRestrictedExportPolicy
     resource_types: analyticshub.googleapis.com/Listing
     method_types:
       - CREATE
@@ -421,15 +411,14 @@ This table provides syntax examples for some common custom constraints.
     condition: has(resource.bigqueryDataset) &amp;&amp; has(resource.bigqueryDataset.restrictedExportPolicy) &amp;&amp; resource.bigqueryDataset.restrictedExportPolicy.enabled == true
     action_type: DENY
     display_name: The Listing must have restricted export policy.
-    description: The Listing resource must have restrictedExportPolicy enabled to allow egress controls.
-    </code></pre></td>
+    description: The Listing resource must have restrictedExportPolicy enabled to allow egress controls.</code></pre></td>
 </tr>
 </tbody>
 </table>
 
 ## What's next
 
-  - Learn more about [custom constraints](https://docs.cloud.google.com/organization-policy/create-custom-constraints) .
-  - Learn more about [Organization Policy Service](https://docs.cloud.google.com/organization-policy/overview) .
-  - Learn more about how to [create and manage organization policies](https://docs.cloud.google.com/organization-policy/create-organization-policies) .
-  - See the full list of managed [organization policy constraints](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints) .
+- Learn more about [custom constraints](https://docs.cloud.google.com/organization-policy/create-custom-constraints) .
+- Learn more about [Organization Policy Service](https://docs.cloud.google.com/organization-policy/overview) .
+- Learn more about how to [create and manage organization policies](https://docs.cloud.google.com/organization-policy/create-organization-policies) .
+- See the full list of managed [organization policy constraints](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints) .

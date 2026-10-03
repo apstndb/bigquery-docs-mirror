@@ -16,21 +16,23 @@ This document describes how to manage partitioned tables in BigQuery.
 
 You can get information about partitioned tables in the following ways:
 
-  - Use the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-  - Use the `__PARTITIONS_SUMMARY__` meta-table (legacy SQL only).
+- Use the [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) view ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
+- Use the `__PARTITIONS_SUMMARY__` meta-table (legacy SQL only).
 
 ### Getting partition metadata using `INFORMATION_SCHEMA` views
 
 When you query the `INFORMATION_SCHEMA.PARTITIONS` view, the query results contain one row for each partition. For example, the following query lists all of the partitions for a specific table within a dataset:
 
-    #standardSQL
-    SELECT
-      partition_id
-    FROM
-      `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
-    WHERE
-      table_name = 'TABLE_NAME'
-      AND partition_id IS NOT NULL --filter out non-partitioned tables
+```
+#standardSQL
+SELECT
+  partition_id
+FROM
+  `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+WHERE
+  table_name = 'TABLE_NAME'
+  AND partition_id IS NOT NULL --filter out non-partitioned tables
+```
 
 For more information, see [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
 
@@ -40,18 +42,20 @@ In legacy SQL, you can get metadata about table partitions by querying the `__PA
 
 Query the `__PARTITIONS_SUMMARY__` meta-table as follows:
 
-    #legacySQL
-    SELECT
-      partition_id
-    FROM
-      [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
+```
+#legacySQL
+SELECT
+  partition_id
+FROM
+  [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
+```
 
 > **Note:** For migration to GoogleSQL refer to the [legacy SQL migration documentation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_partition_meta_table_decorator) .
 
 The `__PARTITIONS_SUMMARY__` meta-table has the following columns:
 
 | Value                | Description                                                                                   |
-| -------------------- | --------------------------------------------------------------------------------------------- |
+|----------------------|-----------------------------------------------------------------------------------------------|
 | `project_id`         | Name of the project.                                                                          |
 | `dataset_id`         | Name of the dataset.                                                                          |
 | `table_id`           | Name of the time-partitioned table.                                                           |
@@ -98,44 +102,52 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER TABLE mydataset.mytable
-          SET OPTIONS (
-            -- Sets partition expiration to 5 days
-            partition_expiration_days = 5);
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER TABLE mydataset.mytable
+      SET OPTIONS (
+        -- Sets partition expiration to 5 days
+        partition_expiration_days = 5);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Issue the `bq update` command with the `--time_partitioning_expiration` flag. If you are updating a partitioned table in a project other than your default project, add the project ID to the dataset name in the following format: `  project_id:dataset  ` .
+Issue the `bq update` command with the `--time_partitioning_expiration` flag. If you are updating a partitioned table in a project other than your default project, add the project ID to the dataset name in the following format: `project_id:dataset` .
 
-    bq update \
-    --time_partitioning_expiration integer_in_seconds \
-    --time_partitioning_type unit_time \
-    project_id:dataset.table
+```
+bq update \
+--time_partitioning_expiration integer_in_seconds \
+--time_partitioning_type unit_time \
+project_id:dataset.table
+```
 
 Where:
 
-  - integer is the default lifetime (in seconds) for the table's partitions. There is no minimum value. The expiration time evaluates to the partition's date plus the integer value. If you specify `0` , the partition expiration is removed, and the partition never expires. Partitions with no expiration must be manually deleted.
-  - unit\_time is either `DAY` , `HOUR` , `MONTH` , or `YEAR` , based on the table's partitioning granularity. This value must match the granularity that you set when you created the table.
-  - project\_id is your project ID.
-  - dataset is the name of the dataset that contains the table you're updating.
-  - table is the name of the table you're updating.
+- ` integer ` is the default lifetime (in seconds) for the table's partitions. There is no minimum value. The expiration time evaluates to the partition's date plus the integer value. If you specify `0` , the partition expiration is removed, and the partition never expires. Partitions with no expiration must be manually deleted.
+- ` unit_time ` is either `DAY` , `HOUR` , `MONTH` , or `YEAR` , based on the table's partitioning granularity. This value must match the granularity that you set when you created the table.
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the dataset that contains the table you're updating.
+- ` table ` is the name of the table you're updating.
 
 Examples:
 
 Enter the following command to update the expiration time of partitions in `mydataset.mytable` to 5 days (432000 seconds). `mydataset` is in your default project.
 
-    bq update --time_partitioning_expiration 432000 mydataset.mytable
+```
+bq update --time_partitioning_expiration 432000 mydataset.mytable
+```
 
 Enter the following command to update the expiration time of partitions in `mydataset.mytable` to 5 days (432000 seconds). `mydataset` is in `myotherproject` , not your default project.
 
-    bq update \
-    --time_partitioning_expiration 432000 \
-    myotherproject:mydataset.mytable
+```
+bq update \
+--time_partitioning_expiration 432000 \
+myotherproject:mydataset.mytable
+```
 
 ### API
 
@@ -149,7 +161,7 @@ For information on adding the **Require partition filter** option when you creat
 
 If a partitioned table has the **Require partition filter** setting, then every query on that table must include at least one predicate that only references the partitioning column. Queries without such a predicate return the following error:
 
-`Cannot query over table ' project_id.dataset.table ' without a filter that can be used for partition elimination` .
+`Cannot query over table ' `` project_id.dataset.table `` ' without a filter that can be used for partition elimination` .
 
 For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
@@ -168,12 +180,14 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER TABLE mydataset.mypartitionedtable
-          SET OPTIONS (
-            require_partition_filter = true);
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER TABLE mydataset.mypartitionedtable
+      SET OPTIONS (
+        require_partition_filter = true);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -181,17 +195,21 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To update a partitioned table to require partition filters by using the bq command-line tool, enter the `bq update` command and supply the `--require_partition_filter` flag.
 
-To update a partitioned table in a project other than your default project, add the project ID to the dataset in the following format: project\_id:dataset .
+To update a partitioned table in a project other than your default project, add the project ID to the dataset in the following format: ` project_id:dataset ` .
 
 For example:
 
 To update `mypartitionedtable` in `mydataset` in your default project, enter:
 
-    bq update --require_partition_filter mydataset.mytable
+```
+bq update --require_partition_filter mydataset.mytable
+```
 
 To update `mypartitionedtable` in `mydataset` in `myotherproject` , enter:
 
-    bq update --require_partition_filter myotherproject:mydataset.mytable
+```
+bq update --require_partition_filter myotherproject:mydataset.mytable
+```
 
 ### API
 
@@ -203,36 +221,38 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    
-    // Sample to update require partition filter on a table.
-    public class UpdateTableRequirePartitionFilter {
-    
-      public static void runUpdateTableRequirePartitionFilter() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        updateTableRequirePartitionFilter(datasetName, tableName);
-      }
-    
-      public static void updateTableRequirePartitionFilter(String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          Table table = bigquery.getTable(datasetName, tableName);
-          table.toBuilder().setRequirePartitionFilter(true).build().update();
-    
-          System.out.println("Table require partition filter updated successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Table require partition filter was not updated \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+
+// Sample to update require partition filter on a table.
+public class UpdateTableRequirePartitionFilter {
+
+  public static void runUpdateTableRequirePartitionFilter() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    updateTableRequirePartitionFilter(datasetName, tableName);
+  }
+
+  public static void updateTableRequirePartitionFilter(String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      Table table = bigquery.getTable(datasetName, tableName);
+      table.toBuilder().setRequirePartitionFilter(true).build().update();
+
+      System.out.println("Table require partition filter updated successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Table require partition filter was not updated \n" + e.toString());
     }
+  }
+}
+```
 
 ## Copy a partitioned table
 
@@ -240,27 +260,27 @@ The process for copying a partitioned table is the same as the process for copyi
 
 When you copy a partitioned table, note the following:
 
-  -   - Copying a partitioned table to a new destination table  
-        All of the partitioning information is copied with the table. The new table and the old table will have identical partitions.
+- Copying a partitioned table to a new destination table  
+  All of the partitioning information is copied with the table. The new table and the old table will have identical partitions.
 
-  -   - Copying a non-partitioned table into an existing partitioned table  
-        This operation is only supported for ingestion-time partitioning. BigQuery copies the source data into the partition that represents the current date. This operation is not supported for time-unit column-partitioned or integer-range partitioned tables.
+- Copying a non-partitioned table into an existing partitioned table  
+  This operation is only supported for ingestion-time partitioning. BigQuery copies the source data into the partition that represents the current date. This operation is not supported for time-unit column-partitioned or integer-range partitioned tables.
 
-  -   - Copying a partitioned table into another partitioned table  
-        The partition specifications for the source and destination tables must match.
+- Copying a partitioned table into another partitioned table  
+  The partition specifications for the source and destination tables must match.
 
-  -   - Copying a partitioned table into a non-partitioned table  
-        The destination table remains unpartitioned.
+- Copying a partitioned table into a non-partitioned table  
+  The destination table remains unpartitioned.
 
-  -   - Copying multiple partitioned tables  
-        If you copy multiple source tables into a partitioned table in the same job, the source tables can't contain a mixture of partitioned and non-partitioned tables.
-        
-        If all of the source tables are partitioned tables, the partition specifications for all source tables must match the destination table's partition specification.
+- Copying multiple partitioned tables  
+  If you copy multiple source tables into a partitioned table in the same job, the source tables can't contain a mixture of partitioned and non-partitioned tables.
 
-  -   - Copying a partitioned table that has a [clustering specification](https://docs.cloud.google.com/bigquery/docs/clustered-tables)  
-        If you copy into a new table, all of the clustering information is copied with the table. The new table and the old table will have identical clustering.
-        
-        If you copy into an existing table, then the cluster specifications for the source and destination tables must match.
+  If all of the source tables are partitioned tables, the partition specifications for all source tables must match the destination table's partition specification.
+
+- Copying a partitioned table that has a [clustering specification](https://docs.cloud.google.com/bigquery/docs/clustered-tables)  
+  If you copy into a new table, all of the clustering information is copied with the table. The new table and the old table will have identical clustering.
+
+  If you copy into an existing table, then the cluster specifications for the source and destination tables must match.
 
 When you copy to an existing table, you can specify whether to append or overwrite the destination table.
 
@@ -276,87 +296,103 @@ Copying partitions is not supported by the Google Cloud console.
 
 ### bq
 
-To copy a partition, use the bq command-line tool's `bq cp` (copy) command with a partition decorator ( ` $ date  ` ) such as `$20160201` .
+To copy a partition, use the bq command-line tool's `bq cp` (copy) command with a partition decorator ( `$ `` date` ) such as `$20160201` .
 
 Optional flags can be used to control the write disposition of the destination partition:
 
-  - `-a` or `--append_table` appends the data from the source partition to an existing table or partition in the destination dataset.
-  - `-f` or `--force` overwrites an existing table or partition in the destination dataset and doesn't prompt you for confirmation.
-  - `-n` or `--no_clobber` returns the following error message if the table or partition exists in the destination dataset: `Table '<var>project_id:dataset.table</var> or <var>table$date</var>' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table or partition.
-  - `--destination_kms_key` is the customer-managed Cloud KMS key used to encrypt the destination table or partition.
+- `-a` or `--append_table` appends the data from the source partition to an existing table or partition in the destination dataset.
+- `-f` or `--force` overwrites an existing table or partition in the destination dataset and doesn't prompt you for confirmation.
+- `-n` or `--no_clobber` returns the following error message if the table or partition exists in the destination dataset: `Table '<var>project_id:dataset.table</var> or <var>table$date</var>' already exists, skipping.` If `-n` is not specified, the default behavior is to prompt you to choose whether to replace the destination table or partition.
+- `--destination_kms_key` is the customer-managed Cloud KMS key used to encrypt the destination table or partition.
 
 The `cp` command does not support the `--time_partitioning_field` or `--time_partitioning_type` flags. You cannot use a copy job to convert an ingestion-time partitioned table into a partitioned table.
 
 `--destination_kms_key` is not demonstrated here. See [Protecting data with Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for more information.
 
-If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `  project_id:dataset  ` .
+If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `project_id:dataset` .
 
 (Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
-    bq --location=location cp \
-    -a -f -n \
-    project_id:dataset.source_table$source_partition \
-    project_id:dataset.destination_table$destination_partition
+```
+bq --location=location cp \
+-a -f -n \
+project_id:dataset.source_table$source_partition \
+project_id:dataset.destination_table$destination_partition
+```
 
 Where:
 
-  - location is the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - project\_id is your project ID.
-  - dataset is the name of the source or destination dataset.
-  - source\_table is the table you're copying.
-  - source\_partition is the partition decorator of the source partition.
-  - destination\_table is the name of the table in the destination dataset.
-  - destination\_partition is the partition decorator of the destination partition.
+- ` location ` is the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the source or destination dataset.
+- ` source_table ` is the table you're copying.
+- ` source_partition ` is the partition decorator of the source partition.
+- ` destination_table ` is the name of the table in the destination dataset.
+- ` destination_partition ` is the partition decorator of the destination partition.
 
 Examples:
 
-> **Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
+> **Note:** The partition decorator separator (\$) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
 
 **Copying a partition to a new table**
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to a new table — `mydataset.mytable2` . `mydataset` is in your default project.
 
-    bq cp -a 'mydataset.mytable$20180130' mydataset.mytable2
+```
+bq cp -a 'mydataset.mytable$20180130' mydataset.mytable2
+```
 
 **Copying a partition to a non-partitioned table**
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to a non-partitioned table — `mydataset2.mytable2` . The `-a` shortcut is used to append the partition's data to the non-partitioned destination table. Both datasets are in your default project.
 
-    bq cp -a 'mydataset.mytable$20180130' mydataset2.mytable2
+```
+bq cp -a 'mydataset.mytable$20180130' mydataset2.mytable2
+```
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to a non-partitioned table — `mydataset2.mytable2` . The `-f` shortcut is used to overwrite the non-partitioned destination table without prompting.
 
-    bq --location=US cp -f 'mydataset.mytable$20180130' mydataset2.mytable2
+```
+bq --location=US cp -f 'mydataset.mytable$20180130' mydataset2.mytable2
+```
 
 **Copying a partition to another partitioned table**
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to another partitioned table — `mydataset2.mytable2` . The `-a` shortcut is used to append the partition's data to the destination table. Since no partition decorator is specified on the destination table, the source partition key is preserved and the data is copied to the January 30, 2018 partition in the destination table. You can also specify a partition decorator on the destination table to copy data to a specific partition. `mydataset` is in your default project. `mydataset2` is in `myotherproject` , not your default project.
 
-    bq --location=US cp \
-    -a \
-    'mydataset.mytable$20180130' \
-    myotherproject:mydataset2.mytable2
+```
+bq --location=US cp \
+-a \
+'mydataset.mytable$20180130' \
+myotherproject:mydataset2.mytable2
+```
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to the January 30, 2018 partition of another partitioned table — `mydataset2.mytable2` . The `-f` shortcut is used to overwrite the January 30, 2018 partition in the destination table without prompting. If no partition decorator is used, all data in the destination table is overwritten. `mydataset` is in your default project. `mydataset2` is in `myotherproject` , not your default project.
 
-    bq cp \
-    -f \
-    'mydataset.mytable$20180130' \
-    'myotherproject:mydataset2.mytable2$20180130'
+```
+bq cp \
+-f \
+'mydataset.mytable$20180130' \
+'myotherproject:mydataset2.mytable2$20180130'
+```
 
 Enter the following command to copy the January 30, 2018 partition from `mydataset.mytable` to another partitioned table — `mydataset2.mytable2` . `mydataset` is in your default project. `mydataset2` is in `myotherproject` , not your default project. If there is data in the destination table, the default behavior is to prompt you to overwrite.
 
-    bq cp \
-    'mydataset.mytable$20180130' \
-    myotherproject:mydataset2.mytable2
+```
+bq cp \
+'mydataset.mytable$20180130' \
+myotherproject:mydataset2.mytable2
+```
 
 > **Note:** The `bq cp` command with a partition decorator works on column-based partitions in which the source partition and destination partition are identical. The `bq cp` command also works on ingestion-time based partitions where the partition represents either the same time unit or a coarser time unit that contains the source partition. For example, if `$20180130` is the source partition decorator, valid destination partition decorators include `$20180130` , `$201801` , and `$2018` . To copy a column-based partition to a completely different partition decorator or to a time-unit partition with finer granularity, use an [`INSERT SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
 
 To copy multiple partitions, specify them as a comma-separated list:
 
-    bq cp \
-    'mydataset.mytable$20180130,mydataset.mytable$20180131' \
-    myotherproject:mydataset.mytable2
+```
+bq cp \
+'mydataset.mytable$20180130,mydataset.mytable$20180131' \
+myotherproject:mydataset.mytable2
+```
 
 ### API
 
@@ -364,9 +400,9 @@ Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/r
 
 Specify the following properties in your job configuration:
 
-  - Enter the source dataset, table, and partition in the `sourceTables` property.
-  - Enter the destination dataset and table in the `destinationTable` property.
-  - Use the `writeDisposition` property to specify whether to append or overwrite the destination table or partition.
+- Enter the source dataset, table, and partition in the `sourceTables` property.
+- Enter the destination dataset and table in the `destinationTable` property.
+- Use the `writeDisposition` property to specify whether to append or overwrite the destination table or partition.
 
 To copy multiple partitions, enter the source partitions (including the dataset and table names) in the `sourceTables` property.
 
@@ -393,11 +429,13 @@ If a [qualifying `DELETE` statement](https://docs.cloud.google.com/bigquery/docs
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        DELETE mydataset.mytable
-        WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
 
-3.  Click play\_circle **Run** .
+    ```
+    DELETE mydataset.mytable
+    WHERE _PARTITIONDATE IN ('2076-10-07', '2076-03-06');
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -405,40 +443,48 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the `bq rm` command with the `--table` flag (or `-t` shortcut) and specify the partition decorator to delete a specific partition.
 
-    bq rm --table project_id:dataset.table$partition
+```
+bq rm --table project_id:dataset.table$partition
+```
 
 Where:
 
-  - project\_id is your project ID. If omitted, your default project is used.
-  - dataset is the name of the dataset that contains the table.
-  - table is the name of the table.
-  - partition is the partition decorator of the partition you're deleting.
+- ` project_id ` is your project ID. If omitted, your default project is used.
+- ` dataset ` is the name of the dataset that contains the table.
+- ` table ` is the name of the table.
+- ` partition ` is the partition decorator of the partition you're deleting.
 
 Partition decorators have the following format, depending on the type of partitioning:
 
-  - Hourly partition: `yyyymmddhh` . Example: `$2016030100` .
-  - Daily partition: `yyyymmdd` . Example: `$20160301` .
-  - Monthly partition: `yyyymm` . Example: `$201603` .
-  - Yearly partition: `yyyy` . Example: `$2016` .
-  - Integer range partition: Start of the partition range. Example: `$20` .
+- Hourly partition: `yyyymmddhh` . Example: `$2016030100` .
+- Daily partition: `yyyymmdd` . Example: `$20160301` .
+- Monthly partition: `yyyymm` . Example: `$201603` .
+- Yearly partition: `yyyy` . Example: `$2016` .
+- Integer range partition: Start of the partition range. Example: `$20` .
 
 The bq command-line tool prompts you to confirm the action. To skip the confirmation, use the `--force` flag (or `-f` shortcut).
 
-> **Note:** The partition decorator separator ($) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
+> **Note:** The partition decorator separator (\$) is a special variable in the unix shell. You might have to escape the decorator when you use the command- line tool. The following examples escape the partition decorator: `mydataset.table\$20160519` , `'mydataset.table$20160519'` .
 
 Examples:
 
 Delete the partition for March 1, 2016 in a daily partitioned table named `mydataset.mytable` in your default project:
 
-    bq rm --table 'mydataset.mytable$20160301'
+```
+bq rm --table 'mydataset.mytable$20160301'
+```
 
 Delete the partition for March, 2016 in a monthly partitioned table:
 
-    bq rm --table 'mydataset.mytable$201603'
+```
+bq rm --table 'mydataset.mytable$201603'
+```
 
 Delete the integer range starting at 20 in an integer range partitioned table named `mydataset.mytable` :
 
-    bq rm --table 'mydataset.mytable$20'
+```
+bq rm --table 'mydataset.mytable$20'
+```
 
 ### API
 

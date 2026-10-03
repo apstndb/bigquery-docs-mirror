@@ -6,14 +6,14 @@ description: Create feature crosses using the BigQuery ML `ML.FEATURE_CROSS` fun
 data_source: docs.cloud.google.com
 ---
 
-# The ML.FEATURE\_CROSS function
+# The ML.FEATURE_CROSS function
 
 This document describes the `ML.FEATURE_CROSS` function, which lets you create [feature crosses](https://developers.google.com/machine-learning/crash-course/feature-crosses/video-lecture) .
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+- [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
@@ -25,8 +25,8 @@ ML.FEATURE_CROSS(struct_categorical_features [, degree])
 
 `ML.FEATURE_CROSS` takes the following arguments:
 
-  - `struct_categorical_features` : a `STRUCT<STRING>` value that specifies the categorical features to cross. The maximum number of input features is 10. Don't specify unnamed features or duplicate features in `struct_numerical_features` .
-  - `degree` : an `INT64` value that specifies the highest degree of all combinations of features in the range of `[2, 4]` . The default value is `2` .
+- `struct_categorical_features` : a `STRUCT<STRING>` value that specifies the categorical features to cross. The maximum number of input features is 10. Don't specify unnamed features or duplicate features in `struct_numerical_features` .
+- `degree` : an `INT64` value that specifies the highest degree of all combinations of features in the range of `[2, 4]` . The default value is `2` .
 
 ## Output
 
@@ -36,8 +36,10 @@ ML.FEATURE_CROSS(struct_categorical_features [, degree])
 
 The following example crosses three features:
 
-    SELECT
-      ML.FEATURE_CROSS(STRUCT('a' AS f1, 'b' AS f2, 'c' AS f3)) AS output;
+```
+SELECT
+  ML.FEATURE_CROSS(STRUCT('a' AS f1, 'b' AS f2, 'c' AS f3)) AS output;
+```
 
 The output looks similar to the following:
 
@@ -51,4 +53,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

@@ -14,50 +14,52 @@ The BigQuery sandbox lets you learn BigQuery with a limited set of BigQuery feat
 
 Google Cloud offers public datasets that are stored in BigQuery and made available to the general public through the [Google Cloud Public Dataset Program](https://cloud.google.com/datasets) . For more information about working with public datasets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
 
------
+------------------------------------------------------------------------
 
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
 
------
+------------------------------------------------------------------------
 
 ## Before you begin
 
 ### Enable the BigQuery sandbox
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-    
+
     You can also open BigQuery in the Google Cloud console by entering the following URL in your browser:
-    
-        https://console.cloud.google.com/bigquery
-    
+
+    ```
+    https://console.cloud.google.com/bigquery
+    ```
+
     The Google Cloud console is the graphical interface that you use to create and manage BigQuery resources and to run SQL queries.
 
 2.  Authenticate with your Google Account, or create a new one.
 
 3.  On the welcome page, do the following:
-    
+
     1.  For **Country** , select your country.
-    
+
     2.  For **Terms of Service** , select the checkbox if you agree to the terms of service.
-    
+
     3.  Optional: If you are asked about email updates, select the checkbox if you want to receive email updates.
-    
+
     4.  Click **Agree and continue** .
-    
+
     ![Items on the BigQuery sandbox welcome page.](https://docs.cloud.google.com/static/bigquery/images/sandbox-welcome.png)
 
 4.  Click **Create project** .
 
 5.  On the **New Project** page, do the following:
-    
+
     1.  For **Project name** , enter a name for your project.
-    
+
     2.  For **Organization** , select an organization or select **No organization** if you are not part of one. Managed accounts, such as those associated with academic institutions, must select an organization.
-    
+
     3.  If you are asked to select a **Location** , click **Browse** and select a location for your project.
-    
+
     4.  Click **Create** . You are redirected back to the **BigQuery** page in the Google Cloud console.
-    
+
     ![BigQuery sandbox project creation page.](https://docs.cloud.google.com/static/bigquery/images/sandbox-project.png)
 
 You have successfully enabled the BigQuery sandbox. A BigQuery sandbox notice is now displayed on the **BigQuery** page:
@@ -68,19 +70,19 @@ You have successfully enabled the BigQuery sandbox. A BigQuery sandbox notice is
 
 The BigQuery sandbox is subject to the following limits:
 
-  - All BigQuery [quotas and limits](https://docs.cloud.google.com/bigquery/quotas) apply.
+- All BigQuery [quotas and limits](https://docs.cloud.google.com/bigquery/quotas) apply.
 
-  - You are granted a lifetime limit of 10 GiB of storage. This quota is not refunded upon data deletion.
+- You are granted a lifetime limit of 10 GiB of storage. This quota is not refunded upon data deletion.
 
-  - You are granted the same free compute limit as the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-usage-tier) of 1 TiB of processed query data each month.
+- You are granted the same free compute limit as the BigQuery [free tier](https://cloud.google.com/bigquery/pricing#free-usage-tier) of 1 TiB of processed query data each month.
 
-  - All BigQuery [datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) have a [default table expiration time](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , and all [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [views](https://docs.cloud.google.com/bigquery/docs/views-intro) , and [partitions](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) automatically expire after 60 days.
+- All BigQuery [datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) have a [default table expiration time](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , and all [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [views](https://docs.cloud.google.com/bigquery/docs/views-intro) , and [partitions](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) automatically expire after 60 days.
 
-  - The BigQuery sandbox does not support several BigQuery features, including the following:
-    
-      - [Streaming data](https://docs.cloud.google.com/bigquery/docs/write-api)
-      - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language)
-      - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
+- The BigQuery sandbox does not support several BigQuery features, including the following:
+
+  - [Streaming data](https://docs.cloud.google.com/bigquery/docs/write-api)
+  - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language)
+  - [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction)
 
 ## View a public dataset
 
@@ -89,10 +91,10 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **add Add data** .
 
@@ -108,37 +110,39 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 
 In the following steps, you query the `citibike_trips` table to determine the 100 most popular Citi Bike stations in the NYC Citi Bike Trips public dataset. The query retrieves the station's name and location, and the number of trips that started at that station.
 
-The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `GEOGRAPHY` column. The `GEOGRAPHY` column is used to generate a heatmap in the integrated geography data viewer.
+The query uses the [ST_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `GEOGRAPHY` column. The `GEOGRAPHY` column is used to generate a heatmap in the integrated geography data viewer.
 
 1.  In the Google Cloud console, open the **BigQuery** page.
 
-2.  Click add\_box **SQL query** .
+2.  Click add_box **SQL query** .
 
 3.  In the query editor , enter the following query:
-    
-        SELECT
-          start_station_name,
-          start_station_latitude,
-          start_station_longitude,
-          ST_GEOGPOINT(start_station_longitude, start_station_latitude) AS geo_location,
-          COUNT(*) AS num_trips
-        FROM
-          `bigquery-public-data.new_york.citibike_trips`
-        GROUP BY
-          1,
-          2,
-          3
-        ORDER BY
-          num_trips DESC
-        LIMIT
-          100;
-    
+
+    ```
+    SELECT
+      start_station_name,
+      start_station_latitude,
+      start_station_longitude,
+      ST_GEOGPOINT(start_station_longitude, start_station_latitude) AS geo_location,
+      COUNT(*) AS num_trips
+    FROM
+      `bigquery-public-data.new_york.citibike_trips`
+    GROUP BY
+      1,
+      2,
+      3
+    ORDER BY
+      num_trips DESC
+    LIMIT
+      100;
+    ```
+
     If the query is valid, then a check mark appears along with the amount of data that the query processes. If the query is invalid, then an exclamation point appears along with an error message.
-    
+
     ![Query validator](https://docs.cloud.google.com/static/bigquery/images/quickstart-query-validator.png)
 
 4.  Click **Run** . The most popular stations are listed in the **Query results** section.
-    
+
     ![Query results in the Google Cloud console](https://docs.cloud.google.com/static/bigquery/images/query-results-ui.png)
 
 5.  Optional: To display the duration of the job and the amount of data that the query job processed, click the **Job information** tab in the **Query results** section.
@@ -146,12 +150,12 @@ The query uses the [ST\_GEOGPOINT function](https://docs.cloud.google.com/bigque
 6.  Switch to the **Visualization** tab. This tab generates a map to quickly visualize your results.
 
 7.  In the **Visualization configuration** panel:
-    
+
     1.  Verify that **Visualization type** is set to **Map** .
     2.  Verify that **Geography column** is set to **`geo_location`** .
     3.  For **Data column** , choose **`num_trips`** .
     4.  Use the add **Zoom in** option to reveal the map of Manhattan.
-    
+
     ![A heatmap generated on the Visualization tab](https://docs.cloud.google.com/static/bigquery/images/query-visualization-ui.png)
 
 ## Upgrade from the BigQuery sandbox
@@ -179,19 +183,17 @@ The easiest way to eliminate billing is to delete the project that you created f
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - For more information about using BigQuery at no cost in the free usage tier, see [Free usage tier](https://cloud.google.com/bigquery/pricing#free-tier) .
-  - Learn how to [create a dataset, load data, and query tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console) .
+- For more information about using BigQuery at no cost in the free usage tier, see [Free usage tier](https://cloud.google.com/bigquery/pricing#free-tier) .
+- Learn how to [create a dataset, load data, and query tables in BigQuery](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-console) .

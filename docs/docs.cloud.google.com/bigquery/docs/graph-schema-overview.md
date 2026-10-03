@@ -20,19 +20,19 @@ A property graph lets you model connected data as a network of nodes and edges. 
 
 Nodes and edges can include the following information:
 
-  - **Labels** : classify nodes and edge types. For example, students in a class might have a `Student` label and a `Person` label. If you don't explicitly define a label for a node or an edge, BigQuery Graph uses the input table name as the default label.
+- **Labels** : classify nodes and edge types. For example, students in a class might have a `Student` label and a `Person` label. If you don't explicitly define a label for a node or an edge, BigQuery Graph uses the input table name as the default label.
 
-  - **Properties** : used to describe nodes and edges. For example, a node that represents a person might have a `name` property with the value `Alex` and an `id` property with the value `1` .
+- **Properties** : used to describe nodes and edges. For example, a node that represents a person might have a `name` property with the value `Alex` and an `id` property with the value `1` .
 
 The example in Figure 1 shows how you might design a graph to model financial activities. This graph includes the following types of entities modeled as nodes:
 
-  - **Person** : represents an individual involved in financial transactions.
-  - **Account** : represents a bank account used for transactions.
+- **Person** : represents an individual involved in financial transactions.
+- **Account** : represents a bank account used for transactions.
 
 These entities are connected by different types of relationships, which are represented by the following directed edges:
 
-  - **Owns** : a person owns one or more accounts.
-  - **Transfers** : money moves from one account to another.
+- **Owns** : a person owns one or more accounts.
+- **Transfers** : money moves from one account to another.
 
 Each directed edge indicates a one-way relationship that flows from a source node to a destination node. For example, a `Transfers` edge connects a source `Account` to a destination `Account` , indicating the flow of money.
 
@@ -42,14 +42,14 @@ Each directed edge indicates a one-way relationship that flows from a source nod
 
 Nodes and edges include additional information in properties.
 
-  - `Person` nodes include these properties:
-    
-      - `name` ( `STRING` )
-      - `id` ( `INT64` )
+- `Person` nodes include these properties:
 
-  - `Transfers` edges include this property:
-    
-      - `amount` ( `FLOAT64` )
+  - `name` ( `STRING` )
+  - `id` ( `INT64` )
+
+- `Transfers` edges include this property:
+
+  - `amount` ( `FLOAT64` )
 
 ### Directed and undirected edges
 
@@ -63,34 +63,36 @@ BigQuery Graph lets you use the [`CREATE PROPERTY GRAPH`](https://docs.cloud.goo
 
 Nodes are defined by rows in the following types of tables or views:
 
-  - Standard tables
-  - External tables
-  - Apache Iceberg managed tables
-  - Lakehouse Iceberg REST catalog tables
-  - Views, including authorized views
-  - Non-incremental materialized views
+- Standard tables
+- External tables
+- Apache Iceberg managed tables
+- Lakehouse Iceberg REST catalog tables
+- Views, including authorized views
+- Non-incremental materialized views
 
 To define a node, add a node definition in the [`NODE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of a node definition contains the name of an input table with a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . BigQuery Graph maps rows from the input table to graph nodes.
 
 In the following example, you use the `NODE TABLES` clause to define the `Account` node in the `FinGraph` property graph. The node definition contains the input table `Account` .
 
-    -- Create an Account table.
-    CREATE TABLE graph_db.Account (
-      id           INT64 NOT NULL,
-      create_time  TIMESTAMP,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    -- Use the Account table as the input table for the Account node definition.
-    CREATE PROPERTY GRAPH graph_db.FinGraph
-      NODE TABLES (
-        graph_db.Account
-      );
+```
+-- Create an Account table.
+CREATE TABLE graph_db.Account (
+  id           INT64 NOT NULL,
+  create_time  TIMESTAMP,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+-- Use the Account table as the input table for the Account node definition.
+CREATE PROPERTY GRAPH graph_db.FinGraph
+  NODE TABLES (
+    graph_db.Account
+  );
+```
 
 By default, BigQuery uses the table name as the label and exposes all columns from the input table as properties.
 
-  - Each account node uses the `Account` label.
-  - Each account node includes `id` and `create_time` properties from the `Account` table columns.
+- Each account node uses the `Account` label.
+- Each account node includes `id` and `create_time` properties from the `Account` table columns.
 
 #### Element key
 
@@ -100,25 +102,27 @@ A node definition also defines the *element key* , a collection of columns that 
 
 The following example defines an `Account` node and a `Person` node. The `Account` node uses the `Account` table's primary key as its element key. The `Person` node explicitly specifies the `id` column as the element key by using the `KEY` clause.
 
-    CREATE TABLE graph_db.Person (
-      id           INT64 NOT NULL,
-      name         STRING
-    );
-    
-    CREATE TABLE graph_db.Account (
-      id           INT64 NOT NULL,
-      create_time  TIMESTAMP,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE PROPERTY GRAPH graph_db.FinGraph
-      NODE TABLES (
-        graph_db.Person KEY (id),
-        graph_db.Account
-      );
+```
+CREATE TABLE graph_db.Person (
+  id           INT64 NOT NULL,
+  name         STRING
+);
 
-  - Each row with a non-null element key maps to a unique node in the graph identified by the element key.
-  - Rows with a null element key are ignored.
+CREATE TABLE graph_db.Account (
+  id           INT64 NOT NULL,
+  create_time  TIMESTAMP,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+CREATE PROPERTY GRAPH graph_db.FinGraph
+  NODE TABLES (
+    graph_db.Person KEY (id),
+    graph_db.Account
+  );
+```
+
+- Each row with a non-null element key maps to a unique node in the graph identified by the element key.
+- Rows with a null element key are ignored.
 
 The same input table can be used in multiple node definitions. In this case, a given row in the input table maps to one node for each node definition.
 
@@ -126,18 +130,18 @@ The same input table can be used in multiple node definitions. In this case, a g
 
 Edges are defined by rows in the following types of tables or views:
 
-  - Standard tables
-  - External tables
-  - Apache Iceberg managed tables
-  - Lakehouse Iceberg REST catalog tables
-  - Views, including authorized views
-  - Non-incremental materialized views
+- Standard tables
+- External tables
+- Apache Iceberg managed tables
+- Lakehouse Iceberg REST catalog tables
+- Views, including authorized views
+- Non-incremental materialized views
 
 To define an edge, add an edge definition to the [`EDGE TABLES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#property_graph_definition) . The simplest form of edge definition contains the name of an input table and defines source and destination node references. BigQuery Graph uses this definition to map rows from the input table to graph edges.
 
 By default, BigQuery uses the table name as the label and exposes all columns from the input table as properties.
 
-  - Each edge's element key is [defined in the same way as nodes](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#element-key) .
+- Each edge's element key is [defined in the same way as nodes](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#element-key) .
 
 #### Source and destination node references
 
@@ -145,49 +149,49 @@ An edge definition defines the source and destination node reference by using th
 
 In the following example, you create a property graph `FinGraph` with the following:
 
-  - `Person` and `Account` nodes
-  - `PersonOwnAccount` edge
+- `Person` and `Account` nodes
+- `PersonOwnAccount` edge
 
-<!-- end list -->
+```
+CREATE TABLE graph_db.Person (
+  id            INT64 NOT NULL,
+  name          STRING,
+  PRIMARY KEY (id) NOT ENFORCED
+);
 
-    CREATE TABLE graph_db.Person (
-      id            INT64 NOT NULL,
-      name          STRING,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE TABLE graph_db.Account (
-      id            INT64 NOT NULL,
-      create_time   TIMESTAMP,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE TABLE graph_db.PersonOwnAccount (
-      id            INT64 NOT NULL,
-      account_id    INT64 NOT NULL,
-      create_time   TIMESTAMP,
-      FOREIGN KEY (account_id) REFERENCES graph_db.Account (id) NOT ENFORCED,
-      PRIMARY KEY (id, account_id) NOT ENFORCED
-    );
-    
-    CREATE PROPERTY GRAPH graph_db.FinGraph
-      NODE TABLES (
-        graph_db.Person,
-        graph_db.Account
-      )
-      EDGE TABLES (
-        PersonOwnAccount
-          SOURCE KEY (id) REFERENCES Person (id)
-          DESTINATION KEY (account_id) REFERENCES Account (id)
-      );
+CREATE TABLE graph_db.Account (
+  id            INT64 NOT NULL,
+  create_time   TIMESTAMP,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+CREATE TABLE graph_db.PersonOwnAccount (
+  id            INT64 NOT NULL,
+  account_id    INT64 NOT NULL,
+  create_time   TIMESTAMP,
+  FOREIGN KEY (account_id) REFERENCES graph_db.Account (id) NOT ENFORCED,
+  PRIMARY KEY (id, account_id) NOT ENFORCED
+);
+
+CREATE PROPERTY GRAPH graph_db.FinGraph
+  NODE TABLES (
+    graph_db.Person,
+    graph_db.Account
+  )
+  EDGE TABLES (
+    PersonOwnAccount
+      SOURCE KEY (id) REFERENCES Person (id)
+      DESTINATION KEY (account_id) REFERENCES Account (id)
+  );
+```
 
 Each `PersonOwnAccount` edge connects a `Person` (source) node to an `Account` (destination) node.
 
-  - The source node of an edge is a `Person` node where the `id` property is the same as the edge `id` property.
-  - The destination node of an edge is an `Account` node where the `id` property is the same as the edge `account_id` property.
-  - The element key is the primary key of the `PersonOwnAccount` table, namely `(id, account_id)` .
-  - Each edge has the same set of properties as the columns from the `PersonOwnAccount` table.
-  - Each edge has the default `PersonOwnAccount` label.
+- The source node of an edge is a `Person` node where the `id` property is the same as the edge `id` property.
+- The destination node of an edge is an `Account` node where the `id` property is the same as the edge `account_id` property.
+- The element key is the primary key of the `PersonOwnAccount` table, namely `(id, account_id)` .
+- Each edge has the same set of properties as the columns from the `PersonOwnAccount` table.
+- Each edge has the default `PersonOwnAccount` label.
 
 #### Map rows to edges
 
@@ -199,31 +203,35 @@ You can define a node and its incoming or outgoing edges in a single table if yo
 
 For example, if the following `Account` table has a composite primary key `(owner_id, account_id)` , the `owner_id` column can be a foreign key that references a `Person` table. This structure allows the `Account` table to represent both the `Account` node and the incoming edge from the `Person` node.
 
-    CREATE TABLE graph_db.Person (
-      id INT64 NOT NULL,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    -- Assume each account has exactly one owner.
-    CREATE TABLE graph_db.Account (
-      owner_id INT64 NOT NULL,
-      account_id INT64 NOT NULL,
-      FOREIGN KEY (owner_id) REFERENCES graph_db.Person(id) NOT ENFORCED,
-      PRIMARY KEY (owner_id, account_id) NOT ENFORCED
-    );
+```
+CREATE TABLE graph_db.Person (
+  id INT64 NOT NULL,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+-- Assume each account has exactly one owner.
+CREATE TABLE graph_db.Account (
+  owner_id INT64 NOT NULL,
+  account_id INT64 NOT NULL,
+  FOREIGN KEY (owner_id) REFERENCES graph_db.Person(id) NOT ENFORCED,
+  PRIMARY KEY (owner_id, account_id) NOT ENFORCED
+);
+```
 
 You can use the `Account` table to define both the `Account` node and its incoming `Owns` edge. This is shown in the following `CREATE PROPERTY GRAPH` statement. In the `EDGE TABLES` clause, you give the `Account` table the alias `Owns` . This is because each element in the graph schema must have a unique name.
 
-    CREATE PROPERTY GRAPH graph_db.FinGraph
-      NODE TABLES (
-        graph_db.Person,
-        graph_db.Account
-      )
-      EDGE TABLES (
-        graph_db.Account AS Owns
-          SOURCE KEY (owner_id) REFERENCES Person
-          DESTINATION KEY (owner_id, account_id) REFERENCES Account
-      );
+```
+CREATE PROPERTY GRAPH graph_db.FinGraph
+  NODE TABLES (
+    graph_db.Person,
+    graph_db.Account
+  )
+  EDGE TABLES (
+    graph_db.Account AS Owns
+      SOURCE KEY (owner_id) REFERENCES Person
+      DESTINATION KEY (owner_id, account_id) REFERENCES Account
+  );
+```
 
 ### Customize labels and properties
 
@@ -231,56 +239,58 @@ You can use the [`LABEL`](https://docs.cloud.google.com/bigquery/docs/reference/
 
 The following example defines a `Person` node with a custom property and an `Account` node with multiple labels:
 
-    CREATE TABLE graph_db.Person (
-      id               INT64 NOT NULL,
-      name             STRING,
-      birthday         TIMESTAMP,
-      country          STRING,
-      city             STRING,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE TABLE graph_db.Account (
-      id               INT64 NOT NULL,
-      create_time      TIMESTAMP,
-      is_blocked       BOOL,
-      nick_name        STRING,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE PROPERTY GRAPH graph_db.FinGraph
-      NODE TABLES (
-        graph_db.Person KEY (id)
-          LABEL Customer
-          PROPERTIES (CONCAT(city, ", ", country) AS address)
-          LABEL Entity PROPERTIES (id, name),
-        graph_db.Account KEY (id)
-          DEFAULT LABEL OPTIONS(description = 'A checking or savings account')
-          PROPERTIES (id, create_time)
-          LABEL Entity
-          PROPERTIES (
-            id,
-            nick_name AS name OPTIONS(description = 'A user-defined account name',
-                                      synonyms = ['friendly name', 'display name'])
-          )
-      );
+```
+CREATE TABLE graph_db.Person (
+  id               INT64 NOT NULL,
+  name             STRING,
+  birthday         TIMESTAMP,
+  country          STRING,
+  city             STRING,
+  PRIMARY KEY (id) NOT ENFORCED
+);
 
-  - The `Person` nodes use the `Customer` label to expose the `address` property. The `address` property is defined by the expression `CONCAT(city, ", ", country),` that refers to the `city` and `country` column from the input table `Person` .
+CREATE TABLE graph_db.Account (
+  id               INT64 NOT NULL,
+  create_time      TIMESTAMP,
+  is_blocked       BOOL,
+  nick_name        STRING,
+  PRIMARY KEY (id) NOT ENFORCED
+);
 
-  - The `Account` node uses the `Account` label to expose the `id` and `create_time` properties.
+CREATE PROPERTY GRAPH graph_db.FinGraph
+  NODE TABLES (
+    graph_db.Person KEY (id)
+      LABEL Customer
+      PROPERTIES (CONCAT(city, ", ", country) AS address)
+      LABEL Entity PROPERTIES (id, name),
+    graph_db.Account KEY (id)
+      DEFAULT LABEL OPTIONS(description = 'A checking or savings account')
+      PROPERTIES (id, create_time)
+      LABEL Entity
+      PROPERTIES (
+        id,
+        nick_name AS name OPTIONS(description = 'A user-defined account name',
+                                  synonyms = ['friendly name', 'display name'])
+      )
+  );
+```
+
+- The `Person` nodes use the `Customer` label to expose the `address` property. The `address` property is defined by the expression `CONCAT(city, ", ", country),` that refers to the `city` and `country` column from the input table `Person` .
+
+- The `Account` node uses the `Account` label to expose the `id` and `create_time` properties.
 
 The `Person` and `Account` nodes both have the `Entity` label with properties `id` and `name` .
 
-  - In the `Person` node, the `id` and `name` properties come from the input table columns.
-  - In the `Account` node, the `name` property refers to the `nick_name` column of the input table.
-  - In the `Account` node, the `name` property uses the `OPTIONS` clause to provide a description of the property and a list of synonyms. These fields provide context and improve discoverability for natural language querying interfaces. You can't access these fields directly in your graph queries and they don't change the query results in any way.
+- In the `Person` node, the `id` and `name` properties come from the input table columns.
+- In the `Account` node, the `name` property refers to the `nick_name` column of the input table.
+- In the `Account` node, the `name` property uses the `OPTIONS` clause to provide a description of the property and a list of synonyms. These fields provide context and improve discoverability for natural language querying interfaces. You can't access these fields directly in your graph queries and they don't change the query results in any way.
 
 #### Label and property consistency
 
 In a graph, labels and properties are uniquely identified by their names. You can use labels and properties with the same name in multiple node or edge definitions. However, labels and properties with the same name must follow these rules:
 
-  - Properties with the same name must use the same value type.
-  - Labels with the same name must expose the same list of properties.
+- Properties with the same name must use the same value type.
+- Labels with the same name must expose the same list of properties.
 
 In the previous example, the `Entity` label is defined in both the `Person` and `Account` nodes. Both definitions include the same set of property names, `id` and `name` , with identical value types.
 
@@ -290,20 +300,22 @@ Graphs depend on the schema of the input tables to the node and edge definitions
 
 You are responsible for avoiding breaking schema changes. Follow these best practices:
 
-  - Before you delete a table used in a graph node definition, first remove that node definition from the graph.
-  - Before you remove a column from a table that is exposed as a property in a graph, remove the property from the corresponding node or edge definition.
+- Before you delete a table used in a graph node definition, first remove that node definition from the graph.
+- Before you remove a column from a table that is exposed as a property in a graph, remove the property from the corresponding node or edge definition.
 
 ## View graph schemas
 
 To see the `CREATE PROPERTY GRAPH` statement used to construct an existing graph, query the [`INFORMATION_SCHEMA.PROPERTY_GRAPHS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-property-graphs) :
 
-    SELECT
-      property_graph_name,
-      ddl
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
+```
+SELECT
+  property_graph_name,
+  ddl
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.PROPERTY_GRAPHS;
+```
 
-Replace `  REGION  ` with the region of the dataset that contains the graph.
+Replace `REGION` with the region of the dataset that contains the graph.
 
 Alternatively, you can [visualize your graph schema](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualize-schema) in a notebook.
 
@@ -327,9 +339,11 @@ To restrict the properties that you include in a node or edge definition, use th
 
 The following node table definition restricts the properties for the `Person` node table to `id` and `name` :
 
-    NODE TABLES (
-      graph_db.Person PROPERTIES (id, name)
-    )
+```
+NODE TABLES (
+  graph_db.Person PROPERTIES (id, name)
+)
+```
 
 ### Define primary and foreign key constraints on graph nodes and edges
 
@@ -337,35 +351,37 @@ BigQuery can use [primary and foreign key constraints](https://docs.cloud.google
 
 The following example defines primary and foreign key constraints on the node tables `Person` and `Account` , and the edge table `PersonOwnAccount` :
 
-    CREATE OR REPLACE TABLE graph_db.Person (
-      id               INT64,
-      name             STRING,
-      birthday         TIMESTAMP,
-      country          STRING,
-      city             STRING,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE OR REPLACE TABLE graph_db.Account (
-      id               INT64,
-      create_time      TIMESTAMP,
-      is_blocked       BOOL,
-      nick_name        STRING,
-      PRIMARY KEY (id) NOT ENFORCED
-    );
-    
-    CREATE OR REPLACE TABLE graph_db.PersonOwnAccount (
-      id               INT64 NOT NULL,
-      account_id       INT64 NOT NULL,
-      create_time      TIMESTAMP,
-      PRIMARY KEY (id, account_id) NOT ENFORCED,
-      FOREIGN KEY (id) references graph_db.Person(id) NOT ENFORCED,
-      FOREIGN KEY (account_id) references graph_db.Account(id) NOT ENFORCED
-    );
+```
+CREATE OR REPLACE TABLE graph_db.Person (
+  id               INT64,
+  name             STRING,
+  birthday         TIMESTAMP,
+  country          STRING,
+  city             STRING,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+CREATE OR REPLACE TABLE graph_db.Account (
+  id               INT64,
+  create_time      TIMESTAMP,
+  is_blocked       BOOL,
+  nick_name        STRING,
+  PRIMARY KEY (id) NOT ENFORCED
+);
+
+CREATE OR REPLACE TABLE graph_db.PersonOwnAccount (
+  id               INT64 NOT NULL,
+  account_id       INT64 NOT NULL,
+  create_time      TIMESTAMP,
+  PRIMARY KEY (id, account_id) NOT ENFORCED,
+  FOREIGN KEY (id) references graph_db.Person(id) NOT ENFORCED,
+  FOREIGN KEY (account_id) references graph_db.Account(id) NOT ENFORCED
+);
+```
 
 ## What's next
 
-  - Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
-  - Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
-  - Learn more about [building graphs with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+- Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
+- Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
+- Learn more about [building graphs with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .

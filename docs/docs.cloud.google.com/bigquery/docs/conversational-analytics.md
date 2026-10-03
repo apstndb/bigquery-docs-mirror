@@ -10,15 +10,15 @@ data_source: docs.cloud.google.com
 
 Conversational analytics in BigQuery lets you chat with agents about your data using natural language. To get answers about your data, you can do the following:
 
-  - Create [data agents](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#data-agents) that automatically define data context and query processing instructions for a set of knowledge sources, such as tables, views, graphs, or user-defined functions (UDFs) that you select.
-  - If needed, you can create context and instructions for an agent in the form of custom table and field metadata, instructions to the agent for interpreting and querying the data, or by creating verified queries (previously known as *golden queries* ) to configure the data agent to effectively answer questions for specific use cases.
+- Create [data agents](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#data-agents) that automatically define data context and query processing instructions for a set of knowledge sources, such as tables, views, graphs, or user-defined functions (UDFs) that you select.
+- If needed, you can create context and instructions for an agent in the form of custom table and field metadata, instructions to the agent for interpreting and querying the data, or by creating verified queries (previously known as *golden queries* ) to configure the data agent to effectively answer questions for specific use cases.
 
 Before customizing an agent, it's recommended that you first work with the context and instructions that the agent creates.
 
 Some examples of context and instructions that you provide to the agent are the following:
 
-  - **Context** . A data agent for sales analysis can be configured to understand that "top performers" refers to sales representatives with the highest revenue, rather than just the most closed deals.
-  - **Instructions** . You can instruct a data agent to always filter data to the most recent quarter when asked about "trends," or to group results by "product category" by default.
+- **Context** . A data agent for sales analysis can be configured to understand that "top performers" refers to sales representatives with the highest revenue, rather than just the most closed deals.
+- **Instructions** . You can instruct a data agent to always filter data to the most recent quarter when asked about "trends," or to group results by "product category" by default.
 
 After creating data agents, you can then have [conversations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#conversations) with them to ask questions about BigQuery data by using natural language. You can also create [direct conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with one or more data sources to answer basic, one-off questions.
 
@@ -32,21 +32,21 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 Data agents consist of one or more knowledge sources, and a set of instructions specific to a use case for processing that data. When you create a data agent, you can configure it using the following options:
 
-  - Use *knowledge sources* such as tables, views, graphs, and UDFs with a data agent. You can also connect to borderless Lakehouse tables as sources. For more information, see [Query Lakehouse tables with natural language](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
-  - Provide custom table and field metadata to describe the data in the most appropriate way for the given use case.
-  - Provide instructions for interpreting and querying the data, such as defining the following:
-      - Synonyms and business terms for field names
-      - Most important fields and defaults for filtering and grouping
-  - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery AI and ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) and support [query parameters](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) .
-  - Create BigQuery custom glossary terms for each agent or import business glossary terms from Knowledge Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
+- Use *knowledge sources* such as tables, views, graphs, and UDFs with a data agent. You can also connect to borderless Lakehouse tables as sources. For more information, see [Query Lakehouse tables with natural language](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
+- Provide custom table and field metadata to describe the data in the most appropriate way for the given use case.
+- Provide instructions for interpreting and querying the data, such as defining the following:
+  - Synonyms and business terms for field names
+  - Most important fields and defaults for filtering and grouping
+- Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery AI and ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) and support [query parameters](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-param-verified-queries) .
+- Create BigQuery custom glossary terms for each agent or import business glossary terms from Knowledge Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-review-glossary-terms) .
 
 ### Manage data agents
 
 You can create, manage, and work with the following types of data agents in the **Agent Catalog** tab in the Google Cloud console:
 
-  - A predefined sample agent for each Google Cloud project.
-  - A list of your drafted, created, and published agents.
-  - A list of agents that other people create and share with you.
+- A predefined sample agent for each Google Cloud project.
+- A list of your drafted, created, and published agents.
+- A list of agents that other people create and share with you.
 
 For more information, see [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
 
@@ -58,10 +58,10 @@ Conversations are persisted chats with a data agent or data source. You can ask 
 
 The chat response returned to you provides the following features:
 
-  - The answer to your question as text, code, or images (multimodal). The answer can include supported BigQuery AI and ML functions.
-  - Generated charts where appropriate.
-  - The agent's reasoning behind the results.
-  - Metadata about the conversation, such as the agent and data sources used.
+- The answer to your question as text, code, or images (multimodal). The answer can include supported BigQuery AI and ML functions.
+- Generated charts where appropriate.
+- The agent's reasoning behind the results.
+- Metadata about the conversation, such as the agent and data sources used.
 
 When you create a direct conversation with a data source, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions that a data agent offers. Because of this, direct conversation results can be less accurate. Use data agents for cases that require greater accuracy.
 
@@ -71,22 +71,22 @@ You can create and manage conversations in BigQuery using the Google Cloud conso
 
 Conversational analytics supports the following AI and ML functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
 
-  - [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
-  - [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
-  - [`AI.KEY_DRIVERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
-  - [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
-  - [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
-  - [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
-  - [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
-  - [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
-  - [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
-  - [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)
-  - [`AI.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict)
-  - [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points)
-  - [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality)
-  - [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend)
-  - [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)
-  - [`ML.CORRELATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation)
+- [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
+- [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
+- [`AI.KEY_DRIVERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
+- [`AI.GENERATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
+- [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if)
+- [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score)
+- [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify)
+- [`AI.SIMILARITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity)
+- [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search)
+- [`AI.AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg)
+- [`AI.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict)
+- [`ML.DETECT_CHANGE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-change-points)
+- [`ML.SEASONALITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-seasonality)
+- [`ML.TREND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trend)
+- [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data)
+- [`ML.CORRELATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-correlation)
 
 You must have [the required permissions](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
@@ -96,13 +96,13 @@ The agent only uses the `AI.SEARCH` function on tables that have [autonomous emb
 
 To activate supported functions, use them in the following ways:
 
-  - When you create an agent and add a verified query—for example, if you are a data scientist who prepares a recurring report—you can use supported AI functions in a verified query to describe defaults and automate the report.
-  - When you ask high-level questions about data to an agent, in a conversation, or in a verified query using keywords, the agent generates SQL in response to your questions.
+- When you create an agent and add a verified query—for example, if you are a data scientist who prepares a recurring report—you can use supported AI functions in a verified query to describe defaults and automate the report.
+- When you ask high-level questions about data to an agent, in a conversation, or in a verified query using keywords, the agent generates SQL in response to your questions.
 
 The following table shows examples of one-shot prompts that activate the use of AI or ML functions:
 
 | Use case                | Sample usage                                                                                                       | [Public dataset](https://docs.cloud.google.com/bigquery/public-data)                                                                                                                      |
-| :---------------------- | :----------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Forecasting             | "Predict the number of trips for the next month."                                                                  | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
 | Anomaly detection       | "Find outliers in trips per day for 2018 using 2017 as a baseline."                                                | [`bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) |
 | Key drivers             | "Identify the key drivers for changes in trip volume between 2017 and 2018."                                       | [`bigquery-public-data.austin_bikeshare.bikeshare_trips`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=austin_bikeshare&t=bikeshare_trips&page=table)               |
@@ -137,8 +137,8 @@ Depending on your graph schema and the question that you ask, the agent queries 
 
 For example, you can use the `Look Graph` sample agent on the BigQuery [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions similar to the following about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph:
 
-  - `Which product is most popular among 25-year-olds?`
-  - `Show me the connection between bow tie orders and distribution centers`
+- `Which product is most popular among 25-year-olds?`
+- `Show me the connection between bow tie orders and distribution centers`
 
 ## Security
 
@@ -146,27 +146,27 @@ You can manage access to conversational analytics in BigQuery using [Conversatio
 
 Conversational analytics includes the following security features and safeguards:
 
-  - It can only access data and resources that you have permission to access.
-  - It respects VPC-SC security controls.
-  - It can't perform write operations and can't run DML queries.
-  - It can't execute remote functions.
-  - It can only access the knowledge sources that you explicitly select.
-  - Your conversation history is only shared with you. You can't share it with other users.
-  - When you create a data agent, you must have access to query every knowledge source that you add.
+- It can only access data and resources that you have permission to access.
+- It respects VPC-SC security controls.
+- It can't perform write operations and can't run DML queries.
+- It can't execute remote functions.
+- It can only access the knowledge sources that you explicitly select.
+- Your conversation history is only shared with you. You can't share it with other users.
+- When you create a data agent, you must have access to query every knowledge source that you add.
 
 ## Locations
 
 Conversational analytics supports three locations that govern the storage of agent and conversation resources, and the location used for ML processing:
 
-  - US MREP
-  - EU MREP
-  - Global
+- US MREP
+- EU MREP
+- Global
 
 The following default behaviors apply when you create agents and conversations:
 
-  - If all of your knowledge sources come from regions in the US, then the US MREP is used.
-  - If all of your knowledge sources come from regions in the EU, then the EU MREP is used.
-  - Otherwise, the global location is used.
+- If all of your knowledge sources come from regions in the US, then the US MREP is used.
+- If all of your knowledge sources come from regions in the EU, then the EU MREP is used.
+- Otherwise, the global location is used.
 
 When you create an agent, you can optionally select a different location. After you save the agent you can't change its location.
 
@@ -180,29 +180,29 @@ You are charged at [BigQuery compute pricing](https://docs.cloud.google.com/bigq
 
 Follow these best practices when you work with conversational analytics:
 
-  - Perform data cleaning on your tables before adding them as data sources.
+- Perform data cleaning on your tables before adding them as data sources.
 
-  - Join related tables in a view and use that view as a data source, rather than relying on the agent to determine the correct way to join your data.
+- Join related tables in a view and use that view as a data source, rather than relying on the agent to determine the correct way to join your data.
 
-  - [Run profile scans](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) on your data.
+- [Run profile scans](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) on your data.
 
-  - Scope your agents. Broadly scoped agents can have instructional conflicts, ambiguous outputs, and inconsistent performance. If your agent requires more than 20 data sources, is used across teams that have different metric definitions, or prioritizes one type of result at the expense of another, consider creating additional agents.
+- Scope your agents. Broadly scoped agents can have instructional conflicts, ambiguous outputs, and inconsistent performance. If your agent requires more than 20 data sources, is used across teams that have different metric definitions, or prioritizes one type of result at the expense of another, consider creating additional agents.
 
-  - Provide context to your agent. Prioritize types of context in the following way:
-    
-    1.  **Verified queries.** Deterministic SQL that executes when it matches a user prompt.
-    2.  **Glossaries.** Definitions of terms that link columns to semantic context.
-    3.  **Agent instructions.** Global behavior rules and definitions that are written using natural language, such as fiscal calendar definitions or formatting rules.
+- Provide context to your agent. Prioritize types of context in the following way:
 
-  - Add table and column descriptions to your tables.
+  1.  **Verified queries.** Deterministic SQL that executes when it matches a user prompt.
+  2.  **Glossaries.** Definitions of terms that link columns to semantic context.
+  3.  **Agent instructions.** Global behavior rules and definitions that are written using natural language, such as fiscal calendar definitions or formatting rules.
 
-  - Don't duplicate glossary definitions in Knowledge Catalog and the BigQuery custom glossary.
+- Add table and column descriptions to your tables.
 
-  - Set project-level, user-level, and query-level spending limits to [manage costs for your agents](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/manage-costs) .
+- Don't duplicate glossary definitions in Knowledge Catalog and the BigQuery custom glossary.
 
-  - [Ask effective questions](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/ask-effective-questions) in your conversations.
+- Set project-level, user-level, and query-level spending limits to [manage costs for your agents](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/manage-costs) .
 
-  - Understand how [data retention and deletion](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/retention-deletion) works for data agents and conversations.
+- [Ask effective questions](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/ask-effective-questions) in your conversations.
+
+- Understand how [data retention and deletion](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/retention-deletion) works for data agents and conversations.
 
 ## Limitations
 
@@ -222,9 +222,9 @@ BigQuery jobs run by a data agent include specific labels. These labels let you 
 
 You can use these labels for the following tasks:
 
-  - [Filter your billing report by label](https://docs.cloud.google.com/billing/docs/how-to/reports#filter-by-labels) to understand agent costs.
-  - Audit agent activity.
-  - Analyze query performance.
+- [Filter your billing report by label](https://docs.cloud.google.com/billing/docs/how-to/reports#filter-by-labels) to understand agent costs.
+- Audit agent activity.
+- Analyze query performance.
 
 ### Identify data agent labels
 
@@ -235,35 +235,37 @@ To view a data agent's labels, follow these steps:
 1.  In the Google Cloud console, [view the job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
 
 2.  In the **Query job details** pane, locate the **Labels** section, and look for the following labels:
-    
-      - `ca-bq-job: true` indicates that your job was run using conversational analytics.
-      - ` data-agent-id: DATA_AGENT_ID  ` indicates that the job was run by a data agent. The value is the resource ID segment extracted from the data agent resource name.
-      - ` conversation-id: CONVERSATION_ID  ` indicates that the job is associated with a conversation. The value is the ID segment extracted from the conversation resource name.
+
+    - `ca-bq-job: true` indicates that your job was run using conversational analytics.
+    - `data-agent-id: `` DATA_AGENT_ID` indicates that the job was run by a data agent. The value is the resource ID segment extracted from the data agent resource name.
+    - `conversation-id: `` CONVERSATION_ID` indicates that the job is associated with a conversation. The value is the ID segment extracted from the conversation resource name.
 
 ### Analyze agent-generated jobs
 
 Use the label to analyze your agent-generated jobs. For example, to check how many jobs were run by a data agent, run the following query against the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
 
-    SELECT
-      COUNT(*) AS job_count
-    FROM
-      `PROJECT_ID`.`region-REGION`.INFORMATION_SCHEMA.JOBS
-    WHERE
-      EXISTS (
-        SELECT 1
-        FROM UNNEST(labels) AS label
-        WHERE label.key = 'ca-bq-job' AND label.value = 'true'
-      );
+```
+SELECT
+  COUNT(*) AS job_count
+FROM
+  `PROJECT_ID`.`region-REGION`.INFORMATION_SCHEMA.JOBS
+WHERE
+  EXISTS (
+    SELECT 1
+    FROM UNNEST(labels) AS label
+    WHERE label.key = 'ca-bq-job' AND label.value = 'true'
+  );
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : your Google Cloud project ID.
-  - `  REGION  ` : the region where your jobs run (for example, `us` or `eu` ).
+- `PROJECT_ID` : your Google Cloud project ID.
+- `REGION` : the region where your jobs run (for example, `us` or `eu` ).
 
 ## What's next
 
-  - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
-  - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
-  - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
-  - [Use conversational analytics with Lakehouse](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
-  - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
+- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+- [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
+- [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
+- [Use conversational analytics with Lakehouse](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .
+- Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .

@@ -20,8 +20,8 @@ To increase or decrease quotas, see [Quotas and limits](https://docs.cloud.googl
 
 For help using the BigQuery API you can post questions to the developer community on [Stack Overflow](https://stackoverflow.com/questions/ask?tags=google-bigquery) with the tag [google-bigquery](https://stackoverflow.com/questions/tagged/google-bigquery) .
 
-  - [Ask a question](https://stackoverflow.com/questions/ask?tags=google-bigquery)
-  - [See a list of all questions](https://stackoverflow.com/questions/tagged/google-bigquery)
+- [Ask a question](https://stackoverflow.com/questions/ask?tags=google-bigquery)
+- [See a list of all questions](https://stackoverflow.com/questions/tagged/google-bigquery)
 
 ## Discuss BigQuery
 

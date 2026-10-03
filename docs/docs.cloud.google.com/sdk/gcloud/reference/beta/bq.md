@@ -12,7 +12,7 @@ gcloud beta bq - manage Bq resources
 
 SYNOPSIS
 
-`gcloud beta bq` `  GROUP  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud beta bq` [`GROUP`](https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq#GROUP) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,21 +20,25 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 GROUPS
 
-`  GROUP  ` is one of the following:
+`GROUP` is one of the following:
 
-  - `  migration-workflows  `  
-    `(BETA)` Manage Migration Workflow resources.
+[`migration-workflows`](https://docs.cloud.google.com/sdk/gcloud/reference/beta/bq/migration-workflows)  
+`(BETA)` Manage Migration Workflow resources.
 
 NOTES
 
 This command is currently in beta and might change without notice. These variants are also available:
 
-    gcloud bq
+```
+gcloud bq
+```
 
-    gcloud alpha bq
+```
+gcloud alpha bq
+```

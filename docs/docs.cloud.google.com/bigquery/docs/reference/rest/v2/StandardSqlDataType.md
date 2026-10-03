@@ -6,203 +6,129 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#SCHEMA_REPRESENTATION)
-  - [TypeKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#TypeKind)
-  - [StandardSqlStructType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType.SCHEMA_REPRESENTATION)
+- [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#SCHEMA_REPRESENTATION)
+- [TypeKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#TypeKind)
+- [StandardSqlStructType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType.SCHEMA_REPRESENTATION)
 
 The data type of a variable such as a function argument. Examples include:
 
-  - INT64: `{"typeKind": "INT64"}`
+- INT64: `{"typeKind": "INT64"}`
 
-  - ARRAY :
+- ARRAY :
 
-<!-- end list -->
+```
+{
+  "typeKind": "ARRAY",
+  "arrayElementType": {"typeKind": "STRING"}
+}
+```
 
-    {
-      "typeKind": "ARRAY",
-      "arrayElementType": {"typeKind": "STRING"}
-    }
+- STRUCT\<x STRING, y ARRAY \>:
 
-  - STRUCT\<x STRING, y ARRAY \>:
-
-<!-- end list -->
-
-    {
-      "typeKind": "STRUCT",
-      "structType":
+```
+{
+  "typeKind": "STRUCT",
+  "structType":
+  {
+    "fields":
+    [
       {
-        "fields":
-        [
-          {
-            "name": "x",
-            "type": {"typeKind": "STRING"}
-          },
-          {
-            "name": "y",
-            "type":
-            {
-              "typeKind": "ARRAY",
-              "arrayElementType": {"typeKind": "DATE"}
-            }
-          }
-        ]
+        "name": "x",
+        "type": {"typeKind": "STRING"}
+      },
+      {
+        "name": "y",
+        "type":
+        {
+          "typeKind": "ARRAY",
+          "arrayElementType": {"typeKind": "DATE"}
+        }
       }
-    }
+    ]
+  }
+}
+```
 
-  - RANGE :
+- RANGE :
 
-<!-- end list -->
+```
+{
+  "typeKind": "RANGE",
+  "rangeElementType": {"typeKind": "DATE"}
+}
+```
 
-    {
-      "typeKind": "RANGE",
-      "rangeElementType": {"typeKind": "DATE"}
-    }
+**JSON representation**
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeKind&quot;: enum (TypeKind),// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;arrayElementType&quot;: {object (StandardSqlDataType)},&quot;structType&quot;: {object (StandardSqlStructType)},&quot;rangeElementType&quot;: {object (StandardSqlDataType)}// End of mutually exclusive fields.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+```
+{
+  "typeKind": enum (TypeKind),
 
-Fields
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  "arrayElementType": {
+    object (StandardSqlDataType)
+  },
+  "structType": {
+    object (StandardSqlStructType)
+  },
+  "rangeElementType": {
+    object (StandardSqlDataType)
+  }
+  // End of mutually exclusive fields.
+}
+```
 
-`typeKind`
-
-` enum ( TypeKind  ` )
-
-Required. The top level type of this field. Can be any GoogleSQL data type (e.g., "INT64", "DATE", "ARRAY").
-
-For complex types, the sub type information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
-
-`arrayElementType`
-
-` object ( StandardSqlDataType  ` )
-
-The type of the array's elements, if typeKind = "ARRAY".
-
-`structType`
-
-` object ( StandardSqlStructType  ` )
-
-The fields of this struct, in order, if typeKind = "STRUCT".
-
-`rangeElementType`
-
-` object ( StandardSqlDataType  ` )
-
-The type of the range's elements, if typeKind = "RANGE".
-
-End of mutually exclusive fields.
+| Fields                                                                                                                                                  |                                                                                                                                                                                                                                    |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `typeKind`                                                                                                                                              | `enum ( `[`TypeKind`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#TypeKind)` )` Required. The top level type of this field. Can be any GoogleSQL data type (e.g., "INT64", "DATE", "ARRAY"). |
+| For complex types, the sub type information. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: |                                                                                                                                                                                                                                    |
+| `arrayElementType`                                                                                                                                      | `object ( `[`StandardSqlDataType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType)` )` The type of the array's elements, if typeKind = "ARRAY".                                                 |
+| `structType`                                                                                                                                            | `object ( `[`StandardSqlStructType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType)` )` The fields of this struct, in order, if typeKind = "STRUCT".                     |
+| `rangeElementType`                                                                                                                                      | `object ( `[`StandardSqlDataType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType)` )` The type of the range's elements, if typeKind = "RANGE".                                                 |
+| End of mutually exclusive fields.                                                                                                                       |                                                                                                                                                                                                                                    |
 
 ## TypeKind
 
 The kind of the datatype.
 
-Enums
-
-`TYPE_KIND_UNSPECIFIED`
-
-Invalid type.
-
-`INT64`
-
-Encoded as a string in decimal format.
-
-`BOOL`
-
-Encoded as a boolean "false" or "true".
-
-`FLOAT64`
-
-Encoded as a number, or string "NaN", "Infinity" or "-Infinity".
-
-`STRING`
-
-Encoded as a string value.
-
-`BYTES`
-
-Encoded as a base64 string per RFC 4648, section 4.
-
-`TIMESTAMP`
-
-Encoded as an RFC 3339 timestamp with mandatory "Z" time zone string: 1985-04-12T23:20:50.52Z
-
-`DATE`
-
-Encoded as RFC 3339 full-date format string: 1985-04-12
-
-`TIME`
-
-Encoded as RFC 3339 partial-time format string: 23:20:50.52
-
-`DATETIME`
-
-Encoded as RFC 3339 full-date "T" partial-time: 1985-04-12T23:20:50.52
-
-`GEOGRAPHY`
-
-Encoded as WKT
-
-`NUMERIC`
-
-Encoded as a decimal string.
-
-`BIGNUMERIC`
-
-Encoded as a decimal string.
-
-`JSON`
-
-Encoded as a string.
-
-`ARRAY`
-
-Encoded as a list with types matching Type.array\_type.
-
-`STRUCT`
-
-Encoded as a list with fields of type Type.struct\_type\[i\]. tabledata.list is used because a JSON object cannot have duplicate field names.
-
-`RANGE`
-
-Encoded as a pair with types matching rangeElementType. Pairs must begin with "\[", end with ")", and be separated by ", ".
+| Enums                   |                                                                                                                                              |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `TYPE_KIND_UNSPECIFIED` | Invalid type.                                                                                                                                |
+| `INT64`                 | Encoded as a string in decimal format.                                                                                                       |
+| `BOOL`                  | Encoded as a boolean "false" or "true".                                                                                                      |
+| `FLOAT64`               | Encoded as a number, or string "NaN", "Infinity" or "-Infinity".                                                                             |
+| `STRING`                | Encoded as a string value.                                                                                                                   |
+| `BYTES`                 | Encoded as a base64 string per RFC 4648, section 4.                                                                                          |
+| `TIMESTAMP`             | Encoded as an RFC 3339 timestamp with mandatory "Z" time zone string: 1985-04-12T23:20:50.52Z                                                |
+| `DATE`                  | Encoded as RFC 3339 full-date format string: 1985-04-12                                                                                      |
+| `TIME`                  | Encoded as RFC 3339 partial-time format string: 23:20:50.52                                                                                  |
+| `DATETIME`              | Encoded as RFC 3339 full-date "T" partial-time: 1985-04-12T23:20:50.52                                                                       |
+| `GEOGRAPHY`             | Encoded as WKT                                                                                                                               |
+| `NUMERIC`               | Encoded as a decimal string.                                                                                                                 |
+| `BIGNUMERIC`            | Encoded as a decimal string.                                                                                                                 |
+| `JSON`                  | Encoded as a string.                                                                                                                         |
+| `ARRAY`                 | Encoded as a list with types matching Type.array_type.                                                                                       |
+| `STRUCT`                | Encoded as a list with fields of type Type.struct_type\[i\]. tabledata.list is used because a JSON object cannot have duplicate field names. |
+| `RANGE`                 | Encoded as a pair with types matching rangeElementType. Pairs must begin with "\[", end with ")", and be separated by ", ".                  |
 
 ## StandardSqlStructType
 
 The representation of a SQL STRUCT type.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [{object (StandardSqlField)}]}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "fields": [
+    {
+      object (StandardSqlField)
+    }
+  ]
+}
+```
 
-`fields[]`
-
-` object ( StandardSqlField  ` )
-
-Fields within the struct.
+| Fields     |                                                                                                                                               |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields[]` | `object ( `[`StandardSqlField`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlField)` )` Fields within the struct. |

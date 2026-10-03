@@ -23,27 +23,27 @@ Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/quer
 
 To share notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) at the resource level.
+- [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+- [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+- [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) at the resource level.
 
 To save and delete notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
+- [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+- [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+- [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
 
 To work with notebook revisions, you need the following IAM roles:
 
-  - [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+- [BigQuery Job User ( `roles/bigquery.jobUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
 
-  - [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+- [BigQuery Read Session User ( `roles/bigquery.readSessionUser` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
 
-  - Any one of the following roles:
-    
-      - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner)
-      - [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
-      - [Code Viewer ( `roles/dataform.codeViewer` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer)
+- Any one of the following roles:
+
+  - [Code Owner ( `roles/dataform.codeOwner` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner)
+  - [Code Editor ( `roles/dataform.codeEditor` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
+  - [Code Viewer ( `roles/dataform.codeViewer` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer)
 
 For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -58,27 +58,27 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Find the notebook that you want to grant access to.
 
-5.  Click more\_vert **Open actions** next to the notebook, and then click **Share** .
+5.  Click more_vert **Open actions** next to the notebook, and then click **Share** .
 
 6.  In the **Share permissions** pane, click **Add user/group** .
 
 7.  In the **New principals** field, enter a principal.
 
 8.  In the **Role** list, select one of the following roles:
-    
-      - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
-      - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
-      - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
-    
+
+    - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
+    - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
+    - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
+
     > **Note:** The principal must also have the [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
@@ -98,16 +98,16 @@ To run a notebook, users must have access to the data that the notebook accesses
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Find the notebook that you want to share. You can use the search feature or filters to find your notebook.
 
-5.  Click more\_vert **View actions** next to the notebook, and then click **Share** \> **Copy link** .
+5.  Click more_vert **View actions** next to the notebook, and then click **Share** \> **Copy link** .
 
 6.  Share the link with other users.
 
@@ -118,18 +118,16 @@ To view a list of all notebooks in your project, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click more\_vert **View actions** next to **Notebooks** , and then do one of the following:
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-<!-- end list -->
+3.  In the **Explorer** pane, click more_vert **View actions** next to **Notebooks** , and then do one of the following:
 
-  - To open the list in the current tab, click **Show all** .
-  - To open the list in a new tab, click **Show all in** \> **New tab** .
-  - To open the list in a split tab, click **Show all in** \> **Split tab** .
+- To open the list in the current tab, click **Show all** .
+- To open the list in a new tab, click **Show all in** \> **New tab** .
+- To open the list in a split tab, click **Show all in** \> **Split tab** .
 
 ## View notebook metadata
 
@@ -138,7 +136,7 @@ To view notebook metadata, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -166,7 +164,7 @@ To view notebook versions, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** . Click the name of the notebook you want to view version history for.
@@ -180,7 +178,7 @@ To compare notebook versions, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -189,7 +187,7 @@ To compare notebook versions, follow these steps:
 
 5.  Click schedule **Version history** .
 
-6.  Click more\_vert **View actions** next to a notebook version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the current notebook version.
+6.  Click more_vert **View actions** next to a notebook version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the current notebook version.
 
 7.  Optional: To compare the versions inline instead of in separate panes, click **Compare** and then click **Inline** .
 
@@ -204,7 +202,7 @@ Restoring a notebook version from the comparison pane lets you compare the curre
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -213,7 +211,7 @@ Restoring a notebook version from the comparison pane lets you compare the curre
 
 5.  Click schedule **Version history** .
 
-6.  Click more\_vert **View actions** next to the version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the most recent notebook version.
+6.  Click more_vert **View actions** next to the version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the most recent notebook version.
 
 7.  If you want to restore the previous notebook version after comparison, click **Restore** .
 
@@ -226,7 +224,7 @@ To download a notebook, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -234,7 +232,7 @@ To download a notebook, follow these steps:
 4.  Click the name of the notebook that you want to download. You can use the search feature or filters to find your notebook.
 
 5.  Expand the menu bar and go to the **File** menu:
-    
+
     ![The notebook menu bar](https://docs.cloud.google.com/static/bigquery/images/notebook-menu-bar.png)
 
 6.  Select **Download** , and then select the file type in which you want to download the file.
@@ -246,14 +244,14 @@ To delete a notebook, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Find the notebook that you want to delete.
 
-5.  Click more\_vert **View actions** next to the notebook and then click **Delete** .
+5.  Click more_vert **View actions** next to the notebook and then click **Delete** .
 
 6.  To confirm deletion, type `delete` in the dialog.
 
@@ -267,22 +265,25 @@ You can use Knowledge Catalog to manage notebooks in all [BigQuery locations](ht
 
 Knowledge Catalog automatically retrieves the following metadata from notebooks:
 
-  - Data asset name
-  - Data asset parent
-  - Data asset location
-  - Data asset type
-  - Corresponding Google Cloud project
+- Data asset name
+- Data asset parent
+- Data asset location
+- Data asset type
+- Corresponding Google Cloud project
 
 Knowledge Catalog logs notebooks as [entries](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entries) with the following entry values:
 
-  - System entry group  
-    The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for notebooks is `@dataform` . To view details of notebook entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
-  - System entry type  
-    The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for notebooks is `dataform-code-asset` . To view details of notebooks, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
-  - System aspect type  
-    The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for notebooks is `dataform-code-asset` . To provide additional context to notebooks in Knowledge Catalog by annotating notebook entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
-  - Type  
-    The type for data canvases is `NOTEBOOK` . This type lets you filter notebooks in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
+System entry group  
+The [system entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-groups) for notebooks is `@dataform` . To view details of notebook entries in Knowledge Catalog, you need to view the `dataform` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-group-details) in the Knowledge Catalog documentation.
+
+System entry type  
+The [system entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-types) for notebooks is `dataform-code-asset` . To view details of notebooks, you need to view the `dataform-code-asset` system entry type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/knowledge-catalog/docs/ingest-custom-sources#entry-type-details) in the Knowledge Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#view-entry-details) in the Knowledge Catalog documentation.
+
+System aspect type  
+The [system aspect type](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) for notebooks is `dataform-code-asset` . To provide additional context to notebooks in Knowledge Catalog by annotating notebook entries with [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) , view the `dataform-code-asset` aspect type, filter the results with an aspect-based filter, and [set the `type` field inside `dataform-code-asset` aspect to `NOTEBOOK`](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata) in the Knowledge Catalog documentation.
+
+Type  
+The type for data canvases is `NOTEBOOK` . This type lets you filter notebooks in the `dataform-code-asset` system entry type and the `dataform-code-asset` aspect type by using the `aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK` query in an [aspect-based filter](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax#aspect-search) .
 
 For instructions about how to search for assets in Knowledge Catalog, see [Search for data assets in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in the Knowledge Catalog documentation.
 
@@ -292,6 +293,6 @@ For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.goo
 
 ## What's next
 
-  - Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
-  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
-  - Learn how to [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) .
+- Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+- Learn how to [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) .

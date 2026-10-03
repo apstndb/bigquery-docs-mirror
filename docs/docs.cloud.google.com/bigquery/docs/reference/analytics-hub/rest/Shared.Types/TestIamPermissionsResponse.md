@@ -6,34 +6,20 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsResponse#SCHEMA_REPRESENTATION)
+- [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/TestIamPermissionsResponse#SCHEMA_REPRESENTATION)
 
 Response message for `TestIamPermissions` method.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;permissions&quot;: [
+**JSON representation**
+
+```
+{
+  "permissions": [
     string
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`permissions[]`
-
-`string`
-
-A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+| Fields          |                                                                                       |
+|-----------------|---------------------------------------------------------------------------------------|
+| `permissions[]` | `string` A subset of `TestPermissionsRequest.permissions` that the caller is allowed. |

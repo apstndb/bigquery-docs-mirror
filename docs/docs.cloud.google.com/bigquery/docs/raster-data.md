@@ -18,9 +18,9 @@ Raster data is often contrasted with *vector* data, in which the data is describ
 
 Geospatial raster and vector data is often combined using a *zonal statistics* operation, which computes an aggregate of all raster values within a given vector region. For example, you might want to compute the following:
 
-  - Average air quality in a collection of cities.
-  - Solar potential for a collection of building polygons.
-  - Fire risk summarized along power line corridors in forested areas.
+- Average air quality in a collection of cities.
+- Solar potential for a collection of building polygons.
+- Fire risk summarized along power line corridors in forested areas.
 
 BigQuery excels in processing vector data, and Google Earth Engine excels in processing raster data. You can use the [`ST_REGIONSTATS` geography function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) to combine raster data using Earth Engine with your vector data stored in BigQuery.
 
@@ -36,9 +36,9 @@ BigQuery excels in processing vector data, and Google Earth Engine excels in pro
 
 To get the permissions that you need to call the `ST_REGIONSTATS` function, ask your administrator to grant you the following IAM roles on your project:
 
-  - [Earth Engine Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/earthengine#earthengine.viewer) ( `roles/earthengine.viewer` )
-  - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
-  - Subscribe to datasets in BigQuery sharing: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+- [Earth Engine Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/earthengine#earthengine.viewer) ( `roles/earthengine.viewer` )
+- [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
+- Subscribe to datasets in BigQuery sharing: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -48,9 +48,9 @@ These predefined roles contain the permissions required to call the `ST_REGIONST
 
 The following permissions are required to call the `ST_REGIONSTATS` function:
 
-  - `earthengine.computations.create`
-  - `serviceusage.services.use`
-  - `bigquery.datasets.create`
+- `earthengine.computations.create`
+- `serviceusage.services.use`
+- `bigquery.datasets.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -90,29 +90,31 @@ For example, the ERA5-Land dataset provides daily climate variable statistics an
 
 ### SQL
 
-    WITH SimplifiedCountries AS (
-      SELECT
-        ST_SIMPLIFY(geometry, 10000) AS simplified_geometry,
-        names.primary AS name
-      FROM
-        `bigquery-public-data.overture_maps.division_area`
-      WHERE
-        subtype = 'country'
-    )
-    SELECT
-      sc.simplified_geometry AS geometry,
-      sc.name,
-      ST_REGIONSTATS(
-        sc.simplified_geometry,
-        (SELECT assets.image.href
-        FROM `LINKED_DATASET_NAME.climate`
-        WHERE start_datetime = '2025-01-01 00:00:00'),
-        'temperature_2m'
-      ).mean - 273.15 AS mean_temperature
-    FROM
-      SimplifiedCountries AS sc
-    ORDER BY
-      mean_temperature DESC;
+```
+WITH SimplifiedCountries AS (
+  SELECT
+    ST_SIMPLIFY(geometry, 10000) AS simplified_geometry,
+    names.primary AS name
+  FROM
+    `bigquery-public-data.overture_maps.division_area`
+  WHERE
+    subtype = 'country'
+)
+SELECT
+  sc.simplified_geometry AS geometry,
+  sc.name,
+  ST_REGIONSTATS(
+    sc.simplified_geometry,
+    (SELECT assets.image.href
+    FROM `LINKED_DATASET_NAME.climate`
+    WHERE start_datetime = '2025-01-01 00:00:00'),
+    'temperature_2m'
+  ).mean - 273.15 AS mean_temperature
+FROM
+  SimplifiedCountries AS sc
+ORDER BY
+  mean_temperature DESC;
+```
 
 ### BigQuery DataFrames
 
@@ -120,67 +122,69 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import datetime
-    from typing import cast
-    
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    # TODO: Set the project_id to your Google Cloud project ID.
-    # project_id = "your-project-id"
-    bpd.options.bigquery.project = project_id
-    
-    # TODO: Set the dataset_id to the ID of the dataset that contains the
-    # `climate` table. This is likely a linked dataset to Earth Engine.
-    # See: https://cloud.google.com/bigquery/docs/link-earth-engine
-    linked_dataset = "era5_land_daily_aggregated"
-    
-    # For the best efficiency, use partial ordering mode.
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # Load the table of country boundaries.
-    countries = bpd.read_gbq("bigquery-public-data.overture_maps.division_area")
-    
-    # Filter to just the countries.
-    countries = countries[countries["subtype"] == "country"].copy()
-    countries["name"] = countries["names"].struct.field("primary")
-    countries["simplified_geometry"] = bbq.st_simplify(
-        countries["geometry"],
-        tolerance_meters=10_000,
-    )
-    
-    # Get the reference to the temperature data from a linked dataset.
-    # Note: This sample assumes you have a linked dataset to Earth Engine.
-    image_href = (
-        bpd.read_gbq(f"{project_id}.{linked_dataset}.climate")
-        .set_index("start_datetime")
-        .loc[[datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc)], :]
-    )
-    raster_id = image_href["assets"].struct.field("image").struct.field("href")
-    raster_id = raster_id.item()
-    stats = bbq.st_regionstats(
-        countries["simplified_geometry"],
-        raster_id=cast(str, raster_id),
-        band="temperature_2m",
-    )
-    
-    # Extract the mean and convert from Kelvin to Celsius.
-    countries["mean_temperature"] = stats.struct.field("mean") - 273.15
-    
-    # Sort by the mean temperature to find the warmest countries.
-    result = countries[["name", "mean_temperature"]].sort_values(
-        "mean_temperature", ascending=False
-    )
-    print(result.head(10))
+```python
+import datetime
+from typing import cast
+
+import bigframes.bigquery as bbq
+import bigframes.pandas as bpd
+
+# TODO: Set the project_id to your Google Cloud project ID.
+# project_id = "your-project-id"
+bpd.options.bigquery.project = project_id
+
+# TODO: Set the dataset_id to the ID of the dataset that contains the
+# `climate` table. This is likely a linked dataset to Earth Engine.
+# See: https://cloud.google.com/bigquery/docs/link-earth-engine
+linked_dataset = "era5_land_daily_aggregated"
+
+# For the best efficiency, use partial ordering mode.
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Load the table of country boundaries.
+countries = bpd.read_gbq("bigquery-public-data.overture_maps.division_area")
+
+# Filter to just the countries.
+countries = countries[countries["subtype"] == "country"].copy()
+countries["name"] = countries["names"].struct.field("primary")
+countries["simplified_geometry"] = bbq.st_simplify(
+    countries["geometry"],
+    tolerance_meters=10_000,
+)
+
+# Get the reference to the temperature data from a linked dataset.
+# Note: This sample assumes you have a linked dataset to Earth Engine.
+image_href = (
+    bpd.read_gbq(f"{project_id}.{linked_dataset}.climate")
+    .set_index("start_datetime")
+    .loc[[datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc)], :]
+)
+raster_id = image_href["assets"].struct.field("image").struct.field("href")
+raster_id = raster_id.item()
+stats = bbq.st_regionstats(
+    countries["simplified_geometry"],
+    raster_id=cast(str, raster_id),
+    band="temperature_2m",
+)
+
+# Extract the mean and convert from Kelvin to Celsius.
+countries["mean_temperature"] = stats.struct.field("mean") - 273.15
+
+# Sort by the mean temperature to find the warmest countries.
+result = countries[["name", "mean_temperature"]].sort_values(
+    "mean_temperature", ascending=False
+)
+print(result.head(10))
+```
 
 ### Cloud Storage GeoTIFF
 
 GeoTIFF is a common file format for storing geospatial raster data. The `ST_REGIONSTATS` function supports raster data stored in the [Cloud Optimized GeoTIFF](https://developers.google.com/earth-engine/Earth_Engine_asset_from_cloud_geotiff) (COG) format in Cloud Storage buckets that are located in the following regions:
 
-  - `US` multi-region
-  - `us-central1`
-  - `EU` multi-region
-  - `europe-west1`
+- `US` multi-region
+- `us-central1`
+- `EU` multi-region
+- `europe-west1`
 
 Provide the Cloud Storage URI as the raster ID, such as `gs://bucket/folder/raster.tif` .
 
@@ -191,10 +195,10 @@ The `ST_REGIONSTATS` function supports passing an Earth Engine image asset path 
 1.  Search the [Earth Engine data catalog](https://developers.google.com/earth-engine/datasets) for the dataset that you're interested in.
 
 2.  To open the description page for that entry, click the dataset name. The **Earth Engine Snippet** either describes a single image or a collection of images.
-    
+
     If the Earth Engine snippet is of the form `ee.Image('IMAGE_PATH')` , then the raster ID is `'ee://IMAGE_PATH'` .
-    
-    If the Earth Engine snippet is of the form `ee.ImageCollection(' IMAGE_COLLECTION_PATH ')` , you can use the [Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/quickstart_javascript) to [filter the ImageCollection](https://developers.google.com/earth-engine/guides/ic_filtering) to a single image. Use the `ee.Image.get('system:id')` method to print the `IMAGE_PATH` value for that image to the console. The raster ID is `'ee://IMAGE_PATH'` .
+
+    If the Earth Engine snippet is of the form `ee.ImageCollection(' `` IMAGE_COLLECTION_PATH `` ')` , you can use the [Earth Engine Code Editor](https://developers.google.com/earth-engine/guides/quickstart_javascript) to [filter the ImageCollection](https://developers.google.com/earth-engine/guides/ic_filtering) to a single image. Use the `ee.Image.get('system:id')` method to print the `IMAGE_PATH` value for that image to the console. The raster ID is `'ee://IMAGE_PATH'` .
 
 ## Pixel weights
 
@@ -210,11 +214,15 @@ Weight values don't have the same precision as `FLOAT64` values. In practice, th
 
 You can provide an expression using Earth Engine [image expression syntax](https://developers.google.com/earth-engine/guides/image_math#expressions) in your `include` argument to dynamically weight pixels based on specific criteria within raster bands. For example, the following expression restricts calculations to pixels where the `probability` band exceeds 70%:
 
-    include => 'probability > 0.7'
+```
+include => 'probability > 0.7'
+```
 
 If the dataset includes a weight-factor band, you can use it with the following syntax:
 
-    include => 'weight_factor_band_name'
+```
+include => 'weight_factor_band_name'
+```
 
 ## Pixel size and scale of analysis
 
@@ -236,8 +244,8 @@ When you run a query, usage of the `ST_REGIONSTATS` function is billed separatel
 
 For each query, you can use the [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) in the BigQuery API to see the following information:
 
-  - The [`slotMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#externalservicecost) , which shows the number of slot milliseconds consumed by Earth Engine when the `externalService` field is `EARTH_ENGINE` and the `billingMethod` field is `SERVICES_SKU` .
-  - The [`totalServicesSkuSlotMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) , which shows the total number of slot milliseconds used by all BigQuery external services that get billed on the BigQuery Services SKU.
+- The [`slotMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#externalservicecost) , which shows the number of slot milliseconds consumed by Earth Engine when the `externalService` field is `EARTH_ENGINE` and the `billingMethod` field is `SERVICES_SKU` .
+- The [`totalServicesSkuSlotMs` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) , which shows the total number of slot milliseconds used by all BigQuery external services that get billed on the BigQuery Services SKU.
 
 You can also query the `total_services_sku_slot_ms` field in the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to find the total slot milliseconds consumed by external services billed on the BigQuery Services SKU.
 
@@ -245,22 +253,22 @@ You can also query the `total_services_sku_slot_ms` field in the [`INFORMATION_S
 
 The following factors impact the compute usage when you run the `ST_REGIONSTATS` function:
 
-  - The number of input rows.
+- The number of input rows.
 
-  - The raster image that you use. Some rasters are composites created from source image collections in the Earth Engine data catalog, and the computational resources to produce the composite result varies.
+- The raster image that you use. Some rasters are composites created from source image collections in the Earth Engine data catalog, and the computational resources to produce the composite result varies.
 
-  - The resolution of the image.
+- The resolution of the image.
 
-  - The size and complexity of the input geography, number of pixels that intersect the geography, and the number of image tiles and bytes read by Earth Engine.
+- The size and complexity of the input geography, number of pixels that intersect the geography, and the number of image tiles and bytes read by Earth Engine.
 
-  - The location of the input geography on Earth relative to the source images and the image's projection and resolution.
-    
-      - Image projections can warp pixels, especially pixels at high latitudes or far outside the image's intended coverage area.
-      - For composite rasters, the number of source images intersecting the input geography can vary regionally and over time. For example, some satellites produce more images at low or high latitudes, depending on their orbit and data collection parameters, or may omit images depending on changing atmospheric conditions.
+- The location of the input geography on Earth relative to the source images and the image's projection and resolution.
 
-  - The use of formulas in the `include` or `band_name` arguments, and the number of bands they involve.
+  - Image projections can warp pixels, especially pixels at high latitudes or far outside the image's intended coverage area.
+  - For composite rasters, the number of source images intersecting the input geography can vary regionally and over time. For example, some satellites produce more images at low or high latitudes, depending on their orbit and data collection parameters, or may omit images depending on changing atmospheric conditions.
 
-  - The caching of previous results.
+- The use of formulas in the `include` or `band_name` arguments, and the number of bands they involve.
+
+- The caching of previous results.
 
 ### Control costs
 
@@ -272,14 +280,14 @@ To control costs associated with the `ST_REGIONSTATS` function, you can adjust t
 
 Queries that call the `ST_REGIONSTATS` function must run in one of the following regions:
 
-  - `US` multi-region
-  - `us-central1`
-  - `us-central2`
-  - `EU` multi-region
-  - `europe-west1`
+- `US` multi-region
+- `us-central1`
+- `us-central2`
+- `EU` multi-region
+- `europe-west1`
 
 ## What's next
 
-  - Try the tutorial that shows you how to [use raster data to analyze temperature](https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather) .
-  - Learn more about [geography functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
-  - Learn more about [working with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .
+- Try the tutorial that shows you how to [use raster data to analyze temperature](https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather) .
+- Learn more about [geography functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
+- Learn more about [working with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .

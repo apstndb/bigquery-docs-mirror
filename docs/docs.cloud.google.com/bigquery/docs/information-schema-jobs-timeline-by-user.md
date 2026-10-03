@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# JOBS\_TIMELINE\_BY\_USER view
+# JOBS_TIMELINE_BY_USER view
 
 The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER` view contains near real-time BigQuery metadata by timeslice of the jobs submitted by the current user in the current project. This view contains currently running and completed jobs.
 
@@ -14,8 +14,8 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER` view contains near real-time BigQ
 
 To query the `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER` view, you need the `bigquery.jobs.list` Identity and Access Management (IAM) permission for the project. Each of the following predefined IAM roles includes the required permission:
 
-  - Project Viewer
-  - BigQuery User
+- Project Viewer
+- BigQuery User
 
 For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -28,7 +28,7 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*` view has the following schema:
 > **Note:** The underlying data is partitioned by the `job_creation_time` column and clustered by `project_id` and `user_email` .
 
 | Column name                       | Data type       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `period_start`                    | `TIMESTAMP`     | Start time of this period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `period_slot_ms`                  | `INTEGER`       | Slot milliseconds consumed in this period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `project_id`                      | `STRING`        | *(Clustering column)* ID of the project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -50,7 +50,7 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*` view has the following schema:
 | `edition`                         | `STRING`        | The edition associated with the reservation assigned to this job. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                                                                                                                                                                                                                                                     |
 | `total_bytes_billed`              | `INTEGER`       | If the project is configured to use [on-demand pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) , then this field contains the total bytes billed for the job. If the project is configured to use [flat-rate pricing](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) , then you are not billed for bytes and this field is informational only. This field is only populated for completed jobs and contains the total number of bytes billed for the entire duration of the job. |
 | `total_bytes_processed`           | `INTEGER`       | Total bytes processed by the job. This field is only populated for completed jobs and contains the total number of bytes processed over the entire duration of the job.                                                                                                                                                                                                                                                                                                                                                          |
-| `error_result`                    | `RECORD`        | Details of error (if any) as an `         ErrorProto        . `                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `error_result`                    | `RECORD`        | Details of error (if any) as an [`ErrorProto`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto)` .`                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `cache_hit`                       | `BOOLEAN`       | Whether the query results of this job were from a cache.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `period_shuffle_ram_usage_ratio`  | `FLOAT`         | Shuffle usage ratio in the selected time period. The value is `0.0` if the job ran with a reservation that uses autoscaling and has zero baseline slots.                                                                                                                                                                                                                                                                                                                                                                         |
 | `period_estimated_runnable_units` | `INTEGER`       | Units of work that can be scheduled immediately in this period. Additional slots for these units of work accelerate your query, provided no other query in the reservation needs additional slots.                                                                                                                                                                                                                                                                                                                               |
@@ -66,42 +66,46 @@ This view displays running jobs along with job history for the past 180 days. If
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region and resource scope for this view:
 
-| View name                                                                                                   | Resource scope                                               | Region scope              |
-| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER`` | Jobs submitted by the current user in the specified project. | `         REGION        ` |
+| View name                                                                                       | Resource scope                                               | Region scope |
+|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER `` | Jobs submitted by the current user in the specified project. | `REGION`     |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 ## Example
 
 The following query displays the total slot milliseconds consumed per second by jobs submitted by the current user in the designated project:
 
-    SELECT
-      period_start,
-      SUM(period_slot_ms) AS total_period_slot_ms
-    FROM
-      `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER
-    GROUP BY
-      period_start
-    ORDER BY
-      period_start DESC;
+```
+SELECT
+  period_start,
+  SUM(period_slot_ms) AS total_period_slot_ms
+FROM
+  `region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_USER
+GROUP BY
+  period_start
+ORDER BY
+  period_start DESC;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------------+---------------------------------+
-    |  period_start             |  total_period_slot_ms           |
-    +---------------------------+---------------------------------+
-    |  2019-10-10 00:00:04 UTC  |  118639                         |
-    |  2019-10-10 00:00:03 UTC  |  251353                         |
-    |  2019-10-10 00:00:02 UTC  |  1074064                        |
-    |  2019-10-10 00:00:01 UTC  |  1124868                        |
-    |  2019-10-10 00:00:00 UTC  |  1113961                        |
-    +---------------------------+---------------------------------+
+```
++---------------------------+---------------------------------+
+|  period_start             |  total_period_slot_ms           |
++---------------------------+---------------------------------+
+|  2019-10-10 00:00:04 UTC  |  118639                         |
+|  2019-10-10 00:00:03 UTC  |  251353                         |
+|  2019-10-10 00:00:02 UTC  |  1074064                        |
+|  2019-10-10 00:00:01 UTC  |  1124868                        |
+|  2019-10-10 00:00:00 UTC  |  1113961                        |
++---------------------------+---------------------------------+
+```

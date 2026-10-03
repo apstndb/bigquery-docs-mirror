@@ -43,10 +43,10 @@ Select one of the following options:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -71,53 +71,59 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-        OPTIONS (
-          connection_type = "CLOUD_RESOURCE",
-          friendly_name = "FRIENDLY_NAME",
-          description = "DESCRIPTION"
-          );
-    
-    Replace the following:
-    
-      - `  CONNECTION_NAME  ` : the name of the connection in either the `  PROJECT_ID . LOCATION . CONNECTION_ID  ` , `  LOCATION . CONNECTION_ID  ` , or `  CONNECTION_ID  ` format. If the project or location are omitted, then they are inferred from the project and location where the statement is run.
-      - `  FRIENDLY_NAME  ` (optional): a descriptive name for the connection.
-      - `  DESCRIPTION  ` (optional): a description of the connection.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+    OPTIONS (
+      connection_type = "CLOUD_RESOURCE",
+      friendly_name = "FRIENDLY_NAME",
+      description = "DESCRIPTION"
+      );
+    ```
+
+    Replace the following:
+
+    - `CONNECTION_NAME` : the name of the connection in either the `PROJECT_ID `` . `` LOCATION `` . `` CONNECTION_ID` , `LOCATION `` . `` CONNECTION_ID` , or `CONNECTION_ID` format. If the project or location are omitted, then they are inferred from the project and location where the statement is run.
+    - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
+    - `DESCRIPTION` (optional): a description of the connection.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In a command-line environment, create a connection:
-    
-        bq mk --connection --location=REGION --project_id=PROJECT_ID \
-            --connection_type=CLOUD_RESOURCE CONNECTION_ID
-    
+
+    ```
+    bq mk --connection --location=REGION --project_id=PROJECT_ID \
+        --connection_type=CLOUD_RESOURCE CONNECTION_ID
+    ```
+
     The `--project_id` parameter overrides the default project.
-    
+
     Replace the following:
-    
-      - `  REGION  ` : your [connection region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations)
-      - `  PROJECT_ID  ` : your Google Cloud project ID
-      - `  CONNECTION_ID  ` : an ID for your connection
-    
+
+    - `REGION` : your [connection region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations)
+    - `PROJECT_ID` : your Google Cloud project ID
+    - `CONNECTION_ID` : an ID for your connection
+
     When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
-    
+
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
-    
+
     ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
-    
-        bq show --connection PROJECT_ID.REGION.CONNECTION_ID
-    
+
+    ```
+    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
+    ```
+
     The output is similar to the following:
-    
+
     ```console
     name                          properties
     1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
@@ -129,51 +135,53 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import google.api_core.exceptions
-    from google.cloud import bigquery_connection_v1
-    
-    client = bigquery_connection_v1.ConnectionServiceClient()
-    
-    
-    def create_connection(
-        project_id: str,
-        location: str,
-        connection_id: str,
-    ):
-        """Creates a BigQuery connection to a Cloud Resource.
-    
-        Cloud Resource connection creates a service account which can then be
-        granted access to other Google Cloud resources for federated queries.
-    
-        Args:
-            project_id: The Google Cloud project ID.
-            location: The location of the connection (for example, "us-central1").
-            connection_id: The ID of the connection to create.
-        """
-    
-        parent = client.common_location_path(project_id, location)
-    
-        connection = bigquery_connection_v1.Connection(
-            friendly_name="Example Connection",
-            description="A sample connection for a Cloud Resource.",
-            cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
+```python
+import google.api_core.exceptions
+from google.cloud import bigquery_connection_v1
+
+client = bigquery_connection_v1.ConnectionServiceClient()
+
+
+def create_connection(
+    project_id: str,
+    location: str,
+    connection_id: str,
+):
+    """Creates a BigQuery connection to a Cloud Resource.
+
+    Cloud Resource connection creates a service account which can then be
+    granted access to other Google Cloud resources for federated queries.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The location of the connection (for example, "us-central1").
+        connection_id: The ID of the connection to create.
+    """
+
+    parent = client.common_location_path(project_id, location)
+
+    connection = bigquery_connection_v1.Connection(
+        friendly_name="Example Connection",
+        description="A sample connection for a Cloud Resource.",
+        cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
+    )
+
+    try:
+        created_connection = client.create_connection(
+            parent=parent, connection_id=connection_id, connection=connection
         )
-    
-        try:
-            created_connection = client.create_connection(
-                parent=parent, connection_id=connection_id, connection=connection
-            )
-            print(f"Successfully created connection: {created_connection.name}")
-            print(f"Friendly name: {created_connection.friendly_name}")
-            print(
-                f"Service Account: {created_connection.cloud_resource.service_account_id}"
-            )
-    
-        except google.api_core.exceptions.AlreadyExists:
-            print(f"Connection with ID '{connection_id}' already exists.")
-            print("Please use a different connection ID.")
-        except Exception as e:
-            print(f"An unexpected error occurred while creating the connection: {e}")
+        print(f"Successfully created connection: {created_connection.name}")
+        print(f"Friendly name: {created_connection.friendly_name}")
+        print(
+            f"Service Account: {created_connection.cloud_resource.service_account_id}"
+        )
+
+    except google.api_core.exceptions.AlreadyExists:
+        print(f"Connection with ID '{connection_id}' already exists.")
+        print("Please use a different connection ID.")
+    except Exception as e:
+        print(f"An unexpected error occurred while creating the connection: {e}")
+```
 
 ### Node.js
 
@@ -181,54 +189,56 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    const {ConnectionServiceClient} =
-      require('@google-cloud/bigquery-connection').v1;
-    const {status} = require('@grpc/grpc-js');
-    
-    const client = new ConnectionServiceClient();
-    
-    /**
-     * Creates a new BigQuery connection to a Cloud Resource.
-     *
-     * A Cloud Resource connection creates a service account that can be granted access
-     * to other Google Cloud resources.
-     *
-     * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
-     * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
-     * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
-     */
-    async function createConnection(projectId, location, connectionId) {
-      const parent = client.locationPath(projectId, location);
-    
-      const connection = {
-        friendlyName: 'Example Connection',
-        description: 'A sample connection for a Cloud Resource',
-        // The service account for this cloudResource will be created by the API.
-        // Its ID will be available in the response.
-        cloudResource: {},
-      };
-    
-      const request = {
-        parent,
-        connectionId,
-        connection,
-      };
-    
-      try {
-        const [response] = await client.createConnection(request);
-    
-        console.log(`Successfully created connection: ${response.name}`);
-        console.log(`Friendly name: ${response.friendlyName}`);
-    
-        console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
-      } catch (err) {
-        if (err.code === status.ALREADY_EXISTS) {
-          console.log(`Connection '${connectionId}' already exists.`);
-        } else {
-          console.error(`Error creating connection: ${err.message}`);
-        }
-      }
+```javascript
+const {ConnectionServiceClient} =
+  require('@google-cloud/bigquery-connection').v1;
+const {status} = require('@grpc/grpc-js');
+
+const client = new ConnectionServiceClient();
+
+/**
+ * Creates a new BigQuery connection to a Cloud Resource.
+ *
+ * A Cloud Resource connection creates a service account that can be granted access
+ * to other Google Cloud resources.
+ *
+ * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
+ * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
+ * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
+ */
+async function createConnection(projectId, location, connectionId) {
+  const parent = client.locationPath(projectId, location);
+
+  const connection = {
+    friendlyName: 'Example Connection',
+    description: 'A sample connection for a Cloud Resource',
+    // The service account for this cloudResource will be created by the API.
+    // Its ID will be available in the response.
+    cloudResource: {},
+  };
+
+  const request = {
+    parent,
+    connectionId,
+    connection,
+  };
+
+  try {
+    const [response] = await client.createConnection(request);
+
+    console.log(`Successfully created connection: ${response.name}`);
+    console.log(`Friendly name: ${response.friendlyName}`);
+
+    console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
+  } catch (err) {
+    if (err.code === status.ALREADY_EXISTS) {
+      console.log(`Connection '${connectionId}' already exists.`);
+    } else {
+      console.error(`Error creating connection: ${err.message}`);
     }
+  }
+}
+```
 
 ### Terraform
 
@@ -261,11 +271,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -273,13 +285,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -287,26 +301,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -344,30 +366,30 @@ To create an external dataset, do the following:
 1.  Open the BigQuery page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, select the project where you want to create the dataset.
 
-4.  Click more\_vert **View actions** , and then click **Create dataset** .
+4.  Click more_vert **View actions** , and then click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
-    
-      - For **Dataset ID** , enter a unique dataset name.
-    
-      - For **Location type** , choose a location for the dataset, such as `us-central1` or multiregion `us` . After you create a dataset, the location can't be changed.
-    
-      - For **External Dataset** , do the following:
-        
-          - Check the box next to **Link to an external dataset** .
-          - For **External dataset type** , select `Spanner` .
-          - For **External source** , enter the full identifier of your Spanner database in the following format: ` projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `projects/my_project/instances/my_instance/databases/my_database` .
-          - Optionally, for **Database role** enter the name of a Spanner database role. For more information read about database roles used for [creating Spanner Connections](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner#create-spanner-connection)
-          - Optionally, check the box next to **Use a Cloud Resource connection** to create the external dataset with a connection.
-    
-      - Leave the other default settings as they are.
+
+    - For **Dataset ID** , enter a unique dataset name.
+
+    - For **Location type** , choose a location for the dataset, such as `us-central1` or multiregion `us` . After you create a dataset, the location can't be changed.
+
+    - For **External Dataset** , do the following:
+
+      - Check the box next to **Link to an external dataset** .
+      - For **External dataset type** , select `Spanner` .
+      - For **External source** , enter the full identifier of your Spanner database in the following format: `projects/ `` PROJECT_ID `` /instances/ `` INSTANCE `` /databases/ `` DATABASE` . For example: `projects/my_project/instances/my_instance/databases/my_database` .
+      - Optionally, for **Database role** enter the name of a Spanner database role. For more information read about database roles used for [creating Spanner Connections](https://docs.cloud.google.com/bigquery/docs/connect-to-spanner#create-spanner-connection)
+      - Optionally, check the box next to **Use a Cloud Resource connection** to create the external dataset with a connection.
+
+    - Leave the other default settings as they are.
 
 6.  Click **Create dataset** .
 
@@ -378,17 +400,30 @@ Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](http
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE EXTERNAL SCHEMA DATASET_NAME  OPTIONS (    external_source = 'SPANNER_EXTERNAL_SOURCE',    location = 'LOCATION');/*  Alternatively, create with a connection:*/CREATE EXTERNAL SCHEMA DATASET_NAME  WITH CONNECTION PROJECT_ID.LOCATION.CONNECTION_NAME  OPTIONS (    external_source = 'SPANNER_EXTERNAL_SOURCE',    location = 'LOCATION');
-    
-    Replace the following:
-    
-      - `  DATASET_NAME  ` : the name of your new dataset in BigQuery.
-      - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: ` google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
-      - `  LOCATION  ` : the location of your new dataset in BigQuery, for example, `us-central1` . After you create a dataset, you can't change its location.
-      - (Optional) `  CONNECTION_NAME  ` : the name of your Cloud resource connection.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE EXTERNAL SCHEMA DATASET_NAME
+      OPTIONS (
+        external_source = 'SPANNER_EXTERNAL_SOURCE',
+        location = 'LOCATION');
+    /*
+      Alternatively, create with a connection:
+    */
+    CREATE EXTERNAL SCHEMA DATASET_NAME
+      WITH CONNECTION PROJECT_ID.LOCATION.CONNECTION_NAME
+      OPTIONS (
+        external_source = 'SPANNER_EXTERNAL_SOURCE',
+        location = 'LOCATION');
+    ```
+
+    Replace the following:
+
+    - `DATASET_NAME` : the name of your new dataset in BigQuery.
+    - `SPANNER_EXTERNAL_SOURCE` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: `google-cloudspanner://[ `` DATABASE_ROLE `` @]/projects/ `` PROJECT_ID `` /instances/ `` INSTANCE `` /databases/ `` DATABASE` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
+    - `LOCATION` : the location of your new dataset in BigQuery, for example, `us-central1` . After you create a dataset, you can't change its location.
+    - (Optional) `CONNECTION_NAME` : the name of your Cloud resource connection.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -396,23 +431,27 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 In a command-line environment, create an external dataset by using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
-    bq --location=LOCATION mk --dataset \
-        --external_source SPANNER_EXTERNAL_SOURCE \
-        DATASET_NAME
+```
+bq --location=LOCATION mk --dataset \
+    --external_source SPANNER_EXTERNAL_SOURCE \
+    DATASET_NAME
+```
 
 Alternatively, create with a connection:
 
-    bq --location=LOCATION mk --dataset \
-        --external_source SPANNER_EXTERNAL_SOURCE \
-        --connection_id PROJECT_ID.LOCATION.CONNECTION_NAME \
-        DATASET_NAME
+```
+bq --location=LOCATION mk --dataset \
+    --external_source SPANNER_EXTERNAL_SOURCE \
+    --connection_id PROJECT_ID.LOCATION.CONNECTION_NAME \
+    DATASET_NAME
+```
 
 Replace the following:
 
-  - `  LOCATION  ` : the location of your new dataset in BigQuery—for example, `us-central1` . After you create a dataset, you can't change its location. You can set a default location value by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-  - `  SPANNER_EXTERNAL_SOURCE  ` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: ` google-cloudspanner://[ DATABASE_ROLE @]/projects/ PROJECT_ID /instances/ INSTANCE /databases/ DATABASE  ` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
-  - `  DATASET_NAME  ` : the name of your new dataset in BigQuery. To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `  PROJECT_ID  ` : `  DATASET_NAME  ` .
-  - (Optional) `  CONNECTION_NAME  ` : the name of your Cloud resource connection.
+- `LOCATION` : the location of your new dataset in BigQuery—for example, `us-central1` . After you create a dataset, you can't change its location. You can set a default location value by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `SPANNER_EXTERNAL_SOURCE` : the full, qualified Spanner database name, with a prefix identifying the source, in the following format: `google-cloudspanner://[ `` DATABASE_ROLE `` @]/projects/ `` PROJECT_ID `` /instances/ `` INSTANCE `` /databases/ `` DATABASE` . For example: `google-cloudspanner://admin@/projects/my_project/instances/my_instance/databases/my_database` or `google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database` .
+- `DATASET_NAME` : the name of your new dataset in BigQuery. To create a dataset in a project other than your default project, add the project ID to the dataset name in the following format: `PROJECT_ID` : `DATASET_NAME` .
+- (Optional) `CONNECTION_NAME` : the name of your Cloud resource connection.
 
 ### Terraform
 
@@ -446,11 +485,13 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
 
 2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-    
+
     You only need to run this command once per project, and you can run it in any directory.
-    
-        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    
+
+    ```
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
 ## Prepare the directory
@@ -458,13 +499,15 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
 Each Terraform configuration file must have its own directory (also called a *root module* ).
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-    
-        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+
+    ```
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
-    
+
     Copy the sample code into the newly created `main.tf` .
-    
+
     Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
 
 3.  Review and modify the sample parameters to apply to your environment.
@@ -472,26 +515,34 @@ Each Terraform configuration file must have its own directory (also called a *ro
 4.  Save your changes.
 
 5.  Initialize Terraform. You only need to do this once per directory.
-    
-        terraform init
-    
+
+    ```
+    terraform init
+    ```
+
     Optionally, to use the latest Google provider version, include the `-upgrade` option:
-    
-        terraform init -upgrade
+
+    ```
+    terraform init -upgrade
+    ```
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-    
-        terraform plan
-    
+
+    ```
+    terraform plan
+    ```
+
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-    
-        terraform apply
-    
-    Wait until Terraform displays the "Apply complete\!" message.
+
+    ```
+    terraform apply
+    ```
+
+    Wait until Terraform displays the "Apply complete!" message.
 
 3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
 
@@ -539,40 +590,42 @@ Before you proceed, you must create the underlying Spanner external dataset usin
 
 You can create non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) by using the `allow_non_incremental_definition` option. The following example uses a base Spanner external dataset table:
 
-    /*
-      You must create the spanner_external_dataset with a CLOUD_RESOURCE connection.
-    */
-    CREATE MATERIALIZED VIEW sample_dataset.sample_spanner_mv
-      OPTIONS (
-          enable_refresh = true, refresh_interval_minutes = 60,
-          max_staleness = INTERVAL "24" HOUR,
-            allow_non_incremental_definition = true)
-    AS
-      SELECT COUNT(*) cnt FROM spanner_external_dataset.spanner_table;
+```
+/*
+  You must create the spanner_external_dataset with a CLOUD_RESOURCE connection.
+*/
+CREATE MATERIALIZED VIEW sample_dataset.sample_spanner_mv
+  OPTIONS (
+      enable_refresh = true, refresh_interval_minutes = 60,
+      max_staleness = INTERVAL "24" HOUR,
+        allow_non_incremental_definition = true)
+AS
+  SELECT COUNT(*) cnt FROM spanner_external_dataset.spanner_table;
+```
 
 ## Limitations
 
-  - BigQuery federated queries [limitations](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#limitations) apply.
-  - Only tables from a default Spanner schema are accessible in BigQuery. Tables from [named schemas](https://docs.cloud.google.com/spanner/docs/schema-and-data-model#named-schemas) aren't supported.
-  - Primary and foreign keys defined in Spanner database aren't visible in BigQuery.
-  - If a table in Spanner database contains a column of a type that isn't supported by BigQuery then this column won't be accessible on BigQuery side.
-  - You can't add, delete, or update data or metadata in tables in a Spanner external dataset.
-  - You can't create new tables, views, or materialized views in a Spanner external dataset.
-  - [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) aren't supported.
-  - [Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) isn't supported.
-  - Dataset-level settings that are related to table creation defaults don't affect external datasets because you can't create tables manually.
-  - Write API and Read API aren't supported.
-  - Row-level security, column-level security, and data masking aren't supported.
-  - Incremental materialized views based on tables from Spanner external datasets aren't supported, however, non-incremental materialized views are supported in preview.
-  - Integration with Knowledge Catalog isn't supported. For example, data profiles and data quality scans aren't supported.
-  - Tags on a table level aren't supported.
-  - SQL auto completion does not work with Spanner external tables when you write queries.
-  - [Scan with Sensitive Data Protection](https://docs.cloud.google.com/bigquery/docs/scan-with-dlp#scanning-bigquery-data-using-the-cloud-console) isn't supported for external datasets.
-  - Sharing with BigQuery sharing (formerly Analytics Hub) isn't supported for external datasets.
-  - If the Spanner external dataset uses end-user credentials (EUC), you can create an authorized view that references the external dataset. However, when this view is queried, then EUC of a person who executes a query will be sent to Spanner.
-  - If the Spanner external dataset uses a Cloud resource connection for access delegation, you can create an authorized view or an authorized routine that references the external dataset.
+- BigQuery federated queries [limitations](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#limitations) apply.
+- Only tables from a default Spanner schema are accessible in BigQuery. Tables from [named schemas](https://docs.cloud.google.com/spanner/docs/schema-and-data-model#named-schemas) aren't supported.
+- Primary and foreign keys defined in Spanner database aren't visible in BigQuery.
+- If a table in Spanner database contains a column of a type that isn't supported by BigQuery then this column won't be accessible on BigQuery side.
+- You can't add, delete, or update data or metadata in tables in a Spanner external dataset.
+- You can't create new tables, views, or materialized views in a Spanner external dataset.
+- [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) aren't supported.
+- [Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) isn't supported.
+- Dataset-level settings that are related to table creation defaults don't affect external datasets because you can't create tables manually.
+- Write API and Read API aren't supported.
+- Row-level security, column-level security, and data masking aren't supported.
+- Incremental materialized views based on tables from Spanner external datasets aren't supported, however, non-incremental materialized views are supported in preview.
+- Integration with Knowledge Catalog isn't supported. For example, data profiles and data quality scans aren't supported.
+- Tags on a table level aren't supported.
+- SQL auto completion does not work with Spanner external tables when you write queries.
+- [Scan with Sensitive Data Protection](https://docs.cloud.google.com/bigquery/docs/scan-with-dlp#scanning-bigquery-data-using-the-cloud-console) isn't supported for external datasets.
+- Sharing with BigQuery sharing (formerly Analytics Hub) isn't supported for external datasets.
+- If the Spanner external dataset uses end-user credentials (EUC), you can create an authorized view that references the external dataset. However, when this view is queried, then EUC of a person who executes a query will be sent to Spanner.
+- If the Spanner external dataset uses a Cloud resource connection for access delegation, you can create an authorized view or an authorized routine that references the external dataset.
 
 ## What's next
 
-  - Learn more about [Spanner federated queries](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) .
-  - Learn more about [creating materialized views over Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#spanner) .
+- Learn more about [Spanner federated queries](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) .
+- Learn more about [creating materialized views over Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#spanner) .

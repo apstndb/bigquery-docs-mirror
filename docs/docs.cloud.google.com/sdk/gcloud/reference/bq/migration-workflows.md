@@ -12,7 +12,7 @@ gcloud bq migration-workflows - manage Migration Workflow resources
 
 SYNOPSIS
 
-`gcloud bq migration-workflows` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud bq migration-workflows` [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,27 +20,34 @@ Manage Migration Workflow resources.
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  create  `  
-    create migration workflows.
-  - `  delete  `  
-    Delete migration workflows.
-  - `  describe  `  
-    Describe migration workflows.
-  - `  list  `  
-    List migration workflows.
+[`create`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows/create)  
+create migration workflows.
+
+[`delete`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows/delete)  
+Delete migration workflows.
+
+[`describe`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows/describe)  
+Describe migration workflows.
+
+[`list`](https://docs.cloud.google.com/sdk/gcloud/reference/bq/migration-workflows/list)  
+List migration workflows.
 
 NOTES
 
 These variants are also available:
 
-    gcloud alpha bq migration-workflows
+```
+gcloud alpha bq migration-workflows
+```
 
-    gcloud beta bq migration-workflows
+```
+gcloud beta bq migration-workflows
+```

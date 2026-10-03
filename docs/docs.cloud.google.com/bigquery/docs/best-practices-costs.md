@@ -24,15 +24,15 @@ Alternatively, for capacity compute in BigQuery, you incur charges for the compu
 
 Reservations have the following features:
 
-  - They are allocated in pools of slots, and they let you manage capacity and isolate workloads in ways that make sense for your organization.
-  - They must reside in one administration project and are subject to [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservations) .
+- They are allocated in pools of slots, and they let you manage capacity and isolate workloads in ways that make sense for your organization.
+- They must reside in one administration project and are subject to [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservations) .
 
 The capacity pricing model offers several [*editions*](https://docs.cloud.google.com/bigquery/docs/editions-intro) , which all offer a pay-as-you-go option that's charged in slot hours. Enterprise and Enterprise Plus editions also provide optional one- or three-year slot commitments that can save money over the pay-as-you-go rate.
 
 You can also set [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) using the pay-as-you-go option. For more information, see the following:
 
-  - To compare pricing models, see [Choosing a model](https://docs.cloud.google.com/bigquery/docs/reservations-intro#choosing_a_model) .
-  - For pricing details, see [On-demand compute pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) and [Capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+- To compare pricing models, see [Choosing a model](https://docs.cloud.google.com/bigquery/docs/reservations-intro#choosing_a_model) .
+- For pricing details, see [On-demand compute pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) and [Capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
 ### Restrict costs for each model
 
@@ -64,8 +64,8 @@ For more information, see [Restrict costs for each pricing model](https://docs.c
 
 When using the on-demand pricing model, queries are billed according to the number of bytes read. To estimate costs before running a query:
 
-  - [Use the query validator](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#use-query-validator) in the Google Cloud console.
-  - [Perform a dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) for queries, unless the target table is masked with row-level security, in which case dry runs always return 0 bytes to prevent side-channel attacks.
+- [Use the query validator](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#use-query-validator) in the Google Cloud console.
+- [Perform a dry run](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#perform-dry-run) for queries, unless the target table is masked with row-level security, in which case dry runs always return 0 bytes to prevent side-channel attacks.
 
 > **Note:** The estimate of the number of bytes that is billed for a query is an upper bound, and can be higher than the actual number of bytes billed after running the query.
 
@@ -73,13 +73,13 @@ When using the on-demand pricing model, queries are billed according to the numb
 
 When you enter a query in the Google Cloud console, the query validator verifies the query syntax and provides an estimate of the number of bytes read. You can use this estimate to calculate query cost in the pricing calculator.
 
-  - If your query is not valid, then the query validator displays an error message. For example:
-    
-    `Not found: Table myProject:myDataset.myTable was not found in location US`
+- If your query is not valid, then the query validator displays an error message. For example:
 
-  - If your query is valid, then the query validator provides an estimate of the number of bytes required to process the query. For example:
-    
-    `This query will process 623.1 KiB when run.`
+  `Not found: Table myProject:myDataset.myTable was not found in location US`
+
+- If your query is valid, then the query validator provides an estimate of the number of bytes required to process the query. For example:
+
+  `This query will process 623.1 KiB when run.`
 
 #### Perform a dry run
 
@@ -90,14 +90,14 @@ To perform a dry run, do the following:
 1.  Go to the BigQuery page.
 
 2.  Enter your query in the query editor.
-    
+
     If the query is valid, then a check mark automatically appears along with the amount of data that the query will process. If the query is invalid, then an exclamation point appears along with an error message.
 
 ### bq
 
 Enter a query like the following using the `--dry_run` flag.
 
-``` 
+```
 bq query \
 --use_legacy_sql=false \
 --dry_run \
@@ -109,13 +109,14 @@ bq query \
    `project_id`.dataset.airports
  LIMIT
    1000'
- 
 ```
 
 For a valid query, the command produces the following response:
 
-    Query successfully validated. Assuming the tables are not modified,
-    running this query will process 10918 bytes of data.
+```
+Query successfully validated. Assuming the tables are not modified,
+running this query will process 10918 bytes of data.
+```
 
 > **Note:** If your query processes a small amount of data, you might need to convert the bytes that are processed from KB to MB. MB is the smallest measure used by the pricing calculator.
 
@@ -129,48 +130,50 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // queryDryRun demonstrates issuing a dry run query to validate query structure and
-    // provide an estimate of the bytes scanned.
-    func queryDryRun(w io.Writer, projectID string) error {
-     // projectID := "my-project-id"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     q := client.Query(`
-     SELECT
-         name,
-         COUNT(*) as name_count
-     FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
-     WHERE state = 'WA'
-     GROUP BY name`)
-     q.DryRun = true
-     // Location must match that of the dataset(s) referenced in the query.
-     q.Location = "US"
-    
-     job, err := q.Run(ctx)
-     if err != nil {
-         return err
-     }
-     // Dry run is not asynchronous, so get the latest status and statistics.
-     status := job.LastStatus()
-     if err := status.Err(); err != nil {
-         return err
-     }
-     fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// queryDryRun demonstrates issuing a dry run query to validate query structure and
+// provide an estimate of the bytes scanned.
+func queryDryRun(w io.Writer, projectID string) error {
+    // projectID := "my-project-id"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    q := client.Query(`
+    SELECT
+        name,
+        COUNT(*) as name_count
+    FROM ` + "`bigquery-public-data.usa_names.usa_1910_2013`" + `
+    WHERE state = 'WA'
+    GROUP BY name`)
+    q.DryRun = true
+    // Location must match that of the dataset(s) referenced in the query.
+    q.Location = "US"
+
+    job, err := q.Run(ctx)
+    if err != nil {
+        return err
+    }
+    // Dry run is not asynchronous, so get the latest status and statistics.
+    status := job.LastStatus()
+    if err := status.Err(); err != nil {
+        return err
+    }
+    fmt.Fprintf(w, "This query will process %d bytes\n", status.Statistics.TotalBytesProcessed)
+    return nil
+}
+```
 
 ### Java
 
@@ -178,45 +181,47 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.JobStatistics;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    
-    // Sample to run dry query on the table
-    public class QueryDryRun {
-    
-      public static void runQueryDryRun() {
-        String query =
-            "SELECT name, COUNT(*) as name_count "
-                + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-                + "WHERE state = 'WA' "
-                + "GROUP BY name";
-        queryDryRun(query);
-      }
-    
-      public static void queryDryRun(String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
-    
-          Job job = bigquery.create(JobInfo.of(queryConfig));
-          JobStatistics.QueryStatistics statistics = job.getStatistics();
-    
-          System.out.println(
-              "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
-        } catch (BigQueryException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Job;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.JobStatistics;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+
+// Sample to run dry query on the table
+public class QueryDryRun {
+
+  public static void runQueryDryRun() {
+    String query =
+        "SELECT name, COUNT(*) as name_count "
+            + "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+            + "WHERE state = 'WA' "
+            + "GROUP BY name";
+    queryDryRun(query);
+  }
+
+  public static void queryDryRun(String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      QueryJobConfiguration queryConfig =
+          QueryJobConfiguration.newBuilder(query).setDryRun(true).setUseQueryCache(false).build();
+
+      Job job = bigquery.create(JobInfo.of(queryConfig));
+      JobStatistics.QueryStatistics statistics = job.getStatistics();
+
+      System.out.println(
+          "Query dry run performed successfully." + statistics.getTotalBytesProcessed());
+    } catch (BigQueryException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -224,35 +229,37 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function queryDryRun() {
-      // Runs a dry query of the U.S. given names dataset for the state of Texas.
-    
-      const query = `SELECT name
-        FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
-        WHERE state = 'TX'
-        LIMIT 100`;
-    
-      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-      const options = {
-        query: query,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-        dryRun: true,
-      };
-    
-      // Run the query as a job
-      const [job] = await bigquery.createQueryJob(options);
-    
-      // Print the status and statistics
-      console.log('Status:');
-      console.log(job.metadata.status);
-      console.log('\nJob Statistics:');
-      console.log(job.metadata.statistics);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function queryDryRun() {
+  // Runs a dry query of the U.S. given names dataset for the state of Texas.
+
+  const query = `SELECT name
+    FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
+    WHERE state = 'TX'
+    LIMIT 100`;
+
+  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+  const options = {
+    query: query,
+    // Location must match that of the dataset(s) referenced in the query.
+    location: 'US',
+    dryRun: true,
+  };
+
+  // Run the query as a job
+  const [job] = await bigquery.createQueryJob(options);
+
+  // Print the status and statistics
+  console.log('Status:');
+  console.log(job.metadata.status);
+  console.log('\nJob Statistics:');
+  console.log(job.metadata.statistics);
+}
+```
 
 ### PHP
 
@@ -260,56 +267,60 @@ Before trying this sample, follow the PHP setup instructions in the [BigQuery qu
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
-    
-    // Construct a BigQuery client object.
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    
-    // Set job configs
-    $jobConfig = $bigQuery->query($query);
-    $jobConfig->useQueryCache(false);
-    $jobConfig->dryRun(true);
-    
-    // Extract query results
-    $queryJob = $bigQuery->startJob($jobConfig);
-    $info = $queryJob->info();
-    
-    printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
+
+// Construct a BigQuery client object.
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+
+// Set job configs
+$jobConfig = $bigQuery->query($query);
+$jobConfig->useQueryCache(false);
+$jobConfig->dryRun(true);
+
+// Extract query results
+$queryJob = $bigQuery->startJob($jobConfig);
+$info = $queryJob->info();
+
+printf('This query will process %s bytes' . PHP_EOL, $info['statistics']['totalBytesProcessed']);
+```
 
 ### Python
 
-Set the [QueryJobConfig.dry\_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
+Set the [QueryJobConfig.dry_run](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_dry_run) property to `True` . [Client.query()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) always returns a completed [QueryJob](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob) when provided a dry run query configuration.
 
 Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
-    
-    # Start the query, passing in the extra configuration.
-    query_job = client.query(
-        (
-            "SELECT name, COUNT(*) as name_count "
-            "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
-            "WHERE state = 'WA' "
-            "GROUP BY name"
-        ),
-        job_config=job_config,
-    )  # Make an API request.
-    
-    # A dry run query completes immediately.
-    print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+job_config = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
+
+# Start the query, passing in the extra configuration.
+query_job = client.query(
+    (
+        "SELECT name, COUNT(*) as name_count "
+        "FROM `bigquery-public-data.usa_names.usa_1910_2013` "
+        "WHERE state = 'WA' "
+        "GROUP BY name"
+    ),
+    job_config=job_config,
+)  # Make an API request.
+
+# A dry run query completes immediately.
+print("This query will process {} bytes.".format(query_job.total_bytes_processed))
+```
 
 ### Estimate query costs
 
@@ -325,9 +336,9 @@ When using [capacity-based pricing](https://docs.cloud.google.com/bigquery/docs/
 
 Estimating individual query costs before execution is difficult due to dynamic runtime factors, including the following:
 
-  - **Dynamic slot allocation** : the number of slots allocated to a query depends on query complexity, runtime optimization, and resource availability.
-  - **Concurrency** : multiple queries dynamically share the slots available in the reservation.
-  - **Autoscaling behavior** : if [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) is enabled, the reservation scales up and down based on aggregate workload demand rather than single query execution.
+- **Dynamic slot allocation** : the number of slots allocated to a query depends on query complexity, runtime optimization, and resource availability.
+- **Concurrency** : multiple queries dynamically share the slots available in the reservation.
+- **Autoscaling behavior** : if [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) is enabled, the reservation scales up and down based on aggregate workload demand rather than single query execution.
 
 After query execution, you can view the actual compute resources consumed by the query in slot-milliseconds ( `total_slot_ms` ) by inspecting the query execution details or querying the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
@@ -343,9 +354,9 @@ For more information, see [Reservation cost attribution](https://docs.cloud.goog
 
 To calculate the number of bytes processed by the various types of queries, see the following sections:
 
-  - [DML statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#on-demand-query-size-calculation)
-  - [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#on-demand-query-size-calculation)
-  - [Clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning)
+- [DML statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#on-demand-query-size-calculation)
+- [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#on-demand-query-size-calculation)
+- [Clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning)
 
 > **Note:** The selected [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) does not affect the on-demand query cost calculation. BigQuery always uses logical (uncompressed) bytes to calculate on-demand query costs.
 
@@ -359,10 +370,10 @@ If you are experimenting with or exploring your data, you can use table preview 
 
 BigQuery supports the following data preview options:
 
-  - In the Google Cloud console, on the table details page, click the **Preview** tab to sample the data.
-  - In the bq command-line tool, use the [`bq head`](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) command and specify the number of rows to preview.
-  - In the API, use [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) to retrieve table data from a specified set of rows.
-  - Avoid using `LIMIT` in non-clustered tables. For non-clustered tables, a `LIMIT` clause won't reduce compute costs.
+- In the Google Cloud console, on the table details page, click the **Preview** tab to sample the data.
+- In the bq command-line tool, use the [`bq head`](https://docs.cloud.google.com/bigquery/docs/managing-table-data#browse-table) command and specify the number of rows to preview.
+- In the API, use [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) to retrieve table data from a specified set of rows.
+- Avoid using `LIMIT` in non-clustered tables. For non-clustered tables, a `LIMIT` clause won't reduce compute costs.
 
 ### Restrict the number of bytes billed per query
 
@@ -388,8 +399,8 @@ To set the maximum bytes billed:
 
 Use the `bq query` command with the `--maximum_bytes_billed` flag.
 
-``` 
-  bq query --maximum_bytes_billed=1000000 \
+```
+bq query --maximum_bytes_billed=1000000 \
   --use_legacy_sql=false \
   'SELECT
      word
@@ -505,15 +516,15 @@ If you have a table that is not modified for 90 consecutive days, the price of s
 
 Be aware that, once tables and table partitions are in long-term storage, any modifications to data, metadata, or partitioning, can cause these resources to move back to active BigQuery storage. The following are examples of actions that might result in this move:
 
-  - Insert, update, truncate, merge, or delete statements that change table data
+- Insert, update, truncate, merge, or delete statements that change table data
 
-  - Loading, streaming, or appending data to the table
+- Loading, streaming, or appending data to the table
 
-  - `ALTER` statements that change the table schema
+- `ALTER` statements that change the table schema
 
-  - Adding or modifying table properties like description, labels, or expiration
+- Adding or modifying table properties like description, labels, or expiration
 
-  - Modifying table metadata
+- Modifying table metadata
 
 ### Configure the storage billing model
 
@@ -560,20 +571,20 @@ Follow these steps to troubleshoot unexpected BigQuery charges or cost discrepan
 2.  After that, study the pricing for the corresponding SKUs in the [SKU documentation page](https://cloud.google.com/skus) or the `Pricing` page in the Cloud Billing UI to understand which feature it is, for example, BigQuery Storage Read API, long-term storage, on-demand pricing, Standard edition.
 
 3.  After identifying the corresponding SKUs, use the `INFORMATION_SCHEMA` views to identify the specific resources associated with these charges, for example:
-    
-      - If you are charged for on-demand analysis, look into the [`INFORMATION_SCHEMA.JOBS` view examples](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#examples) to determine jobs driving costs and users who launched them.
-      - If you are charged for reservation or commitment SKUs, look into the corresponding [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) and [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments#example) views to identify the reservations and commitments that are being charged.
-      - If the charges come from storage SKUs, look at the [`INFORMATION_SCHEMA.TABLE_STORAGE` view examples](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage#example_2) to understand which datasets and tables are driving more costs.
+
+    - If you are charged for on-demand analysis, look into the [`INFORMATION_SCHEMA.JOBS` view examples](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#examples) to determine jobs driving costs and users who launched them.
+    - If you are charged for reservation or commitment SKUs, look into the corresponding [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) and [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments#example) views to identify the reservations and commitments that are being charged.
+    - If the charges come from storage SKUs, look at the [`INFORMATION_SCHEMA.TABLE_STORAGE` view examples](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage#example_2) to understand which datasets and tables are driving more costs.
 
 Important troubleshooting considerations:
 
-  - Take into account that a *Daily* time period in the Cloud Billing report starts at midnight US and Canadian Pacific Time (UTC-8), and observes daylight saving time shifts in the United States—adjust your calculations and data aggregations to match the same timeframes.
+- Take into account that a *Daily* time period in the Cloud Billing report starts at midnight US and Canadian Pacific Time (UTC-8), and observes daylight saving time shifts in the United States—adjust your calculations and data aggregations to match the same timeframes.
 
-  - When you compare the Cloud Billing UI to the [Cloud Billing data export](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery) , to BigQuery, make sure that you aggregate based on `usage_start_time` and `usage_end_time` , not the `export_time` .
+- When you compare the Cloud Billing UI to the [Cloud Billing data export](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery) , to BigQuery, make sure that you aggregate based on `usage_start_time` and `usage_end_time` , not the `export_time` .
 
-  - Filter by project if there are multiple projects attached to the billing account and you want to review charges coming from a specific project.
+- Filter by project if there are multiple projects attached to the billing account and you want to review charges coming from a specific project.
 
-  - Make sure to select the correct region when performing investigations.
+- Make sure to select the correct region when performing investigations.
 
 ### Your project exceeded quota for free query bytes scanned
 
@@ -581,7 +592,9 @@ BigQuery returns this error when you run a query in the free usage tier and the 
 
 **Error message**
 
-    Your project exceeded quota for free query bytes scanned
+```
+Your project exceeded quota for free query bytes scanned
+```
 
 #### Resolution
 
@@ -591,45 +604,43 @@ To continue using BigQuery, you need to [upgrade the account to a paid Cloud Bil
 
 Troubleshooting unexpected charges related to job execution depends on the origin of these charges:
 
-  - If you see an increase in on-demand analysis costs, this can be related to an increase in the number of jobs that were launched or the change in the amount of data that needs to be processed by jobs. Investigate this using the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view.
-  - If there is an increase in charges for committed slots, investigate this by querying [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes) to see if new commitments have been purchased or modified.
-  - For increases in charges originating from reservation usage look into changes to reservations that are recorded in [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes) . To match autoscaling reservation usage with billing data follow [the autoscaling example](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#monitor_autoscaling_with_information_schema) .
+- If you see an increase in on-demand analysis costs, this can be related to an increase in the number of jobs that were launched or the change in the amount of data that needs to be processed by jobs. Investigate this using the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view.
+- If there is an increase in charges for committed slots, investigate this by querying [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes) to see if new commitments have been purchased or modified.
+- For increases in charges originating from reservation usage look into changes to reservations that are recorded in [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes) . To match autoscaling reservation usage with billing data follow [the autoscaling example](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#monitor_autoscaling_with_information_schema) .
 
-#### Slot-hours billed larger than INFORMATION\_SCHEMA.JOBS view calculated slot-hours
+#### Slot-hours billed larger than INFORMATION_SCHEMA.JOBS view calculated slot-hours
 
 When using an autoscaling reservation, billing is calculated according to the number of scaled slots, not the number of slots used. BigQuery autoscales in multiples of 50 slots, which leads to billing for the nearest multiple even if less than the autoscaled amount is actually used. Autoscaler has a 1 minute minimum period before scaling down by default, which translates into at least 1 minute being charged even if the query used the slots for less time, for example, for only 10 seconds out of the minute. To avoid these charges, you can opt in to BigQuery fluid scaling at the reservation level for per-second billing with no minimum duration. The correct way to estimate charges for an autoscaling reservation is documented in the [Slots Autoscaling page](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#monitor_autoscaling_with_information_schema) . For more information about using autoscaling efficiently, see [autoscaling best practices](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#autoscaling_best_practices) to use autoscaling efficiently.
 
 A similar scenario will be observed for non-autoscaling reservations—billing is calculated according to the number of slots provisioned, not the number of slots used. If you want to estimate charges for a non-autoscaling reservation, you can query the [`RESERVATIONS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#examples) directly.
 
-#### Billing is less than the total bytes billed calculated through INFORMATION\_SCHEMA.JOBS for project running on-demand queries
+#### Billing is less than the total bytes billed calculated through INFORMATION_SCHEMA.JOBS for project running on-demand queries
 
 There can be multiple reasons for the actual billing to be less than the calculated bytes processed:
 
-  - Each project is provided with 1 TB of free tier querying per month for no extra charge.
-  - `SCRIPT` type jobs were not excluded from the calculation, which could lead to some values being counted twice.
-  - Different types of savings applied to your Cloud Billing account, such as negotiated discounts, promotional credits and others. Check the Savings section of the [Cloud Billing report](https://docs.cloud.google.com/billing/docs/how-to/cost-breakdown#credits) . The free tier 1 TB of querying per month is also included here.
+- Each project is provided with 1 TB of free tier querying per month for no extra charge.
+- `SCRIPT` type jobs were not excluded from the calculation, which could lead to some values being counted twice.
+- Different types of savings applied to your Cloud Billing account, such as negotiated discounts, promotional credits and others. Check the Savings section of the [Cloud Billing report](https://docs.cloud.google.com/billing/docs/how-to/cost-breakdown#credits) . The free tier 1 TB of querying per month is also included here.
 
-#### Billing is larger than the bytes processed calculated through INFORMATION\_SCHEMA.JOBS for project running on-demand queries
+#### Billing is larger than the bytes processed calculated through INFORMATION_SCHEMA.JOBS for project running on-demand queries
 
 If the billing amount is larger than the value you calculated by querying the `INFORMATION_SCHEMA.JOBS` view, there might be certain conditions that caused this:
 
-  - Queries over row-level security tables
-    
-      - Queries over tables with row-level security don't produce a value for `total_bytes_billed` in the `INFORMATION_SCHEMA.JOBS` view, therefore, the billing calculated using `total_bytes_billed` from `INFORMATION_SCHEMA.JOBS` view will be less than the billed value. See the [Row Level Security best practices](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) page for more details about why this information is not visible.
+- Queries over row-level security tables
 
-  - 
-    
-    <div id="ml-operations-in-bigquery">
-    
-    Performing ML operations in BigQuery
-    
-      - BigQuery ML pricing for on-demand queries depends on the type of model being created. Some of these model operations are charged at a higher rate than non-ML queries. Therefore, if you just add up all of the `total_billed_bytes` for the project and use the standard on-demand pricing per-TB rate, this won't be a correct pricing aggregation—you need to account for the pricing difference per-TB.
-    
-    </div>
+  - Queries over tables with row-level security don't produce a value for `total_bytes_billed` in the `INFORMATION_SCHEMA.JOBS` view, therefore, the billing calculated using `total_bytes_billed` from `INFORMATION_SCHEMA.JOBS` view will be less than the billed value. See the [Row Level Security best practices](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) page for more details about why this information is not visible.
 
-  - Incorrect pricing amounts
-    
-      - Confirm that the correct per-TB pricing values are used in the calculations - make sure to choose the correct region as prices are location-dependent. See the [Pricing documentation](https://cloud.google.com/bigquery/pricing?e=48754805#bigquery-pricing) .
+- <div id="ml-operations-in-bigquery">
+
+  Performing ML operations in BigQuery
+
+  - BigQuery ML pricing for on-demand queries depends on the type of model being created. Some of these model operations are charged at a higher rate than non-ML queries. Therefore, if you just add up all of the `total_billed_bytes` for the project and use the standard on-demand pricing per-TB rate, this won't be a correct pricing aggregation—you need to account for the pricing difference per-TB.
+
+  </div>
+
+- Incorrect pricing amounts
+
+  - Confirm that the correct per-TB pricing values are used in the calculations - make sure to choose the correct region as prices are location-dependent. See the [Pricing documentation](https://cloud.google.com/bigquery/pricing?e=48754805#bigquery-pricing) .
 
 The general advice is following the recommended way of calculating the on-demand job usage for billing in our [public documentation](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#compare_on-demand_job_usage_to_billing_data) .
 
@@ -661,10 +672,10 @@ The minimum "processed data per referenced table" billed for a BigQuery query is
 
 Scenarios that could lead to storage charge increases:
 
-  - Increases in the amount of data that is stored in your tables—use the [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) view to monitor the change in bytes for your tables
-  - Changing [dataset billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models)
-  - Increasing the [time-travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) for physical billing model datasets
-  - Modification of tables that have data in [long-term storage](https://cloud.google.com/bigquery/pricing?e=48754805#storage-pricing) , causing them to become [active storage](https://cloud.google.com/bigquery/pricing?e=48754805#storage-pricing)
+- Increases in the amount of data that is stored in your tables—use the [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) view to monitor the change in bytes for your tables
+- Changing [dataset billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models)
+- Increasing the [time-travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) for physical billing model datasets
+- Modification of tables that have data in [long-term storage](https://cloud.google.com/bigquery/pricing?e=48754805#storage-pricing) , causing them to become [active storage](https://cloud.google.com/bigquery/pricing?e=48754805#storage-pricing)
 
 #### Deletion of table(s) or dataset(s) resulted in higher BigQuery storage costs
 
@@ -678,22 +689,22 @@ In BigQuery users pay for active and long-term storage. Active storage charges i
 
 Storage costs can increase if data in long-term storage moves to active BigQuery storage as a result of certain actions on table data, metadata, or partitions. For more details, see [Use long-term storage](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#store-data-bigquery) .
 
-#### INFORMATION\_SCHEMA storage calculations don't match billing
+#### INFORMATION_SCHEMA storage calculations don't match billing
 
-  - Use the [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) instead of `INFORMATION_SCHEMA.TABLE_STORAGE` - `TABLE_STORAGE_USAGE_TIMELINE` provides more accurate and granular data to correctly calculate storage costs
-  - The queries run on `INFORMATION_SCHEMA` views don't include taxes, adjustments, and rounding errors—take these into account when comparing the data. Read more about Reports in Cloud Billing [on this page](https://docs.cloud.google.com/billing/docs/how-to/reports) .
-  - Data presented in the `INFORMATION_SCHEMA` views is in UTC, whereas billing report data is reported in the US and Canadian Pacific Time (UTC-8).
+- Use the [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) instead of `INFORMATION_SCHEMA.TABLE_STORAGE` - `TABLE_STORAGE_USAGE_TIMELINE` provides more accurate and granular data to correctly calculate storage costs
+- The queries run on `INFORMATION_SCHEMA` views don't include taxes, adjustments, and rounding errors—take these into account when comparing the data. Read more about Reports in Cloud Billing [on this page](https://docs.cloud.google.com/billing/docs/how-to/reports) .
+- Data presented in the `INFORMATION_SCHEMA` views is in UTC, whereas billing report data is reported in the US and Canadian Pacific Time (UTC-8).
 
 ## What's next
 
-  - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+- Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-  - Learn how to [optimize queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
+- Learn how to [optimize queries](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
 
-  - Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
+- Learn how to [optimize storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .
 
-  - To learn about billing, alerts, and visualizing data, see the following topics:
-    
-      - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
-      - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
-      - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)
+- To learn about billing, alerts, and visualizing data, see the following topics:
+
+  - [Create, edit, or delete budgets and budget alerts](https://docs.cloud.google.com/billing/docs/how-to/budgets)
+  - [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery)
+  - [Visualize your costs with Data Studio](https://docs.cloud.google.com/billing/docs/how-to/visualize-data)

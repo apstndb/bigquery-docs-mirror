@@ -7,7 +7,7 @@ data_source: docs.cloud.google.com
 ---
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
 
 > **Note:** To provide feedback or request support for this feature, send an email to <bigquery-sql-preview-support@googlegroups.com> .
@@ -25,7 +25,7 @@ Due to the non-deterministic nature of the KLL algorithm, sketches created on th
 ## Function list
 
 | Name                                                                                                                                                        | Summary                                                                                                              |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | [`KLL_QUANTILES.EXTRACT_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_int64)                | Gets a selected number of quantiles from an `INT64` -initialized KLL sketch.                                         |
 | [`KLL_QUANTILES.EXTRACT_FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_double)             | Gets a selected number of quantiles from a `FLOAT64` -initialized KLL sketch.                                        |
 | [`KLL_QUANTILES.EXTRACT_POINT_INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesextract_point_int64)    | Gets a specific quantile from an `INT64` -initialized KLL sketch.                                                    |
@@ -40,7 +40,9 @@ Due to the non-deterministic nature of the KLL algorithm, sketches created on th
 
 ## `KLL_QUANTILES.EXTRACT_INT64`
 
-    KLL_QUANTILES.EXTRACT_INT64(sketch, num_quantiles)
+```
+KLL_QUANTILES.EXTRACT_INT64(sketch, num_quantiles)
+```
 
 **Description**
 
@@ -48,16 +50,16 @@ Gets a selected number of approximate quantiles from an `INT64` -initialized KLL
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on the `INT64` data type. If this isn't a valid KLL quantiles sketch, or if the underlying data type is different from `INT64` , an error is produced.
-  - `num_quantiles` : A positive `INT64` value that represents the number of roughly equal-sized subsets that the quantiles partition the sketch-captured input values into. The maximum value is 100,000.
+- `sketch` : `BYTES` KLL sketch initialized on the `INT64` data type. If this isn't a valid KLL quantiles sketch, or if the underlying data type is different from `INT64` , an error is produced.
+- `num_quantiles` : A positive `INT64` value that represents the number of roughly equal-sized subsets that the quantiles partition the sketch-captured input values into. The maximum value is 100,000.
 
 **Details**
 
 The number of returned values produced is always `num_quantiles + 1` as an array in this order:
 
-  - minimum value in input set
-  - each approximate quantile
-  - maximum value in input set
+- minimum value in input set
+- each approximate quantile
+- maximum value in input set
 
 For example, if `num_quantiles` is `3` , and the result of this function is `[0, 34, 67, 100]` , this means that `0` is the minimum value, `34` and `67` are the approximate quantiles, and `100` is the maximum value. In addition, the result represents the following three segments: `0 to 34` , `34 to 67` , and `67 to 100` .
 
@@ -71,25 +73,29 @@ For example, if `num_quantiles` is `3` , and the result of this function is `[0,
 
 The following query initializes a KLL sketch, `kll_sketch` , from `Data` , and then extracts the minimum value ( `0` ), the maximum value ( `100` ), and approximate quantiles in between.
 
-    WITH Data AS (
-      SELECT x FROM UNNEST(GENERATE_ARRAY(1, 100)) AS x
-    )
-    SELECT
-      KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves,
-      KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 3) AS terciles,
-      KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 4) AS quartiles,
-      KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 6) AS sextiles,
-    FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch FROM Data);
-    
-    /*------------+---------------+------------------+------------------------+
-     | halves     | terciles      | quartiles        | sextiles               |
-     +------------+---------------+------------------+------------------------+
-     | [1,50,100] | [1,34,67,100] | [1,25,50,75,100] | [1,17,34,50,67,84,100] |
-     +------------+---------------+------------------+------------------------*/
+```
+WITH Data AS (
+  SELECT x FROM UNNEST(GENERATE_ARRAY(1, 100)) AS x
+)
+SELECT
+  KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves,
+  KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 3) AS terciles,
+  KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 4) AS quartiles,
+  KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 6) AS sextiles,
+FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch FROM Data);
+
+/*------------+---------------+------------------+------------------------+
+ | halves     | terciles      | quartiles        | sextiles               |
+ +------------+---------------+------------------+------------------------+
+ | [1,50,100] | [1,34,67,100] | [1,25,50,75,100] | [1,17,34,50,67,84,100] |
+ +------------+---------------+------------------+------------------------*/
+```
 
 ## `KLL_QUANTILES.EXTRACT_FLOAT64`
 
-    KLL_QUANTILES.EXTRACT_FLOAT64(sketch, num_quantiles)
+```
+KLL_QUANTILES.EXTRACT_FLOAT64(sketch, num_quantiles)
+```
 
 **Description**
 
@@ -101,7 +107,9 @@ Like [`KLL_QUANTILES.EXTRACT_INT64`](https://docs.cloud.google.com/bigquery/docs
 
 ## `KLL_QUANTILES.EXTRACT_POINT_INT64`
 
-    KLL_QUANTILES.EXTRACT_POINT_INT64(sketch, phi)
+```
+KLL_QUANTILES.EXTRACT_POINT_INT64(sketch, phi)
+```
 
 **Description**
 
@@ -113,8 +121,8 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
-  - `phi` : `FLOAT64` between 0 and 1
+- `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
+- `phi` : `FLOAT64` between 0 and 1
 
 **Return Type**
 
@@ -124,23 +132,27 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 The following query initializes a KLL sketch from five rows of data. Then it returns the value of the eighth decile or 80th percentile of the sketch.
 
-    SELECT KLL_QUANTILES.EXTRACT_POINT_INT64(kll_sketch, .8) AS quintile
-    FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 1 AS x UNION ALL
-                SELECT 2 AS x UNION ALL
-                SELECT 3 AS x UNION ALL
-                SELECT 4 AS x UNION ALL
-                SELECT 5 AS x));
-    
-    /*----------+
-     | quintile |
-     +----------+
-     |      4   |
-     +----------*/
+```
+SELECT KLL_QUANTILES.EXTRACT_POINT_INT64(kll_sketch, .8) AS quintile
+FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 1 AS x UNION ALL
+            SELECT 2 AS x UNION ALL
+            SELECT 3 AS x UNION ALL
+            SELECT 4 AS x UNION ALL
+            SELECT 5 AS x));
+
+/*----------+
+ | quintile |
+ +----------+
+ |      4   |
+ +----------*/
+```
 
 ## `KLL_QUANTILES.EXTRACT_POINT_FLOAT64`
 
-    KLL_QUANTILES.EXTRACT_POINT_FLOAT64(sketch, phi)
+```
+KLL_QUANTILES.EXTRACT_POINT_FLOAT64(sketch, phi)
+```
 
 **Description**
 
@@ -148,8 +160,8 @@ Like [`KLL_QUANTILES.EXTRACT_POINT_INT64`](https://docs.cloud.google.com/bigquer
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
-  - `phi` : `FLOAT64` between 0 and 1
+- `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
+- `phi` : `FLOAT64` between 0 and 1
 
 **Return Type**
 
@@ -157,10 +169,12 @@ Like [`KLL_QUANTILES.EXTRACT_POINT_INT64`](https://docs.cloud.google.com/bigquer
 
 ## `KLL_QUANTILES.INIT_INT64`
 
-    KLL_QUANTILES.INIT_INT64(
-      input
-      [, precision [, weight => input_weight ]]
-    )
+```
+KLL_QUANTILES.INIT_INT64(
+  input
+  [, precision [, weight => input_weight ]]
+)
+```
 
 **Description**
 
@@ -168,9 +182,9 @@ Takes one or more `input` values and aggregates them into a [KLL](https://docs.c
 
 **Supported Argument Types**
 
-  - `input` : `INT64`
-  - `precision` : An `INT64` value that defines the exactness of the returned approximate quantile *q* . The default value is 1000. For more information about precision, see [Precision for KLL sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_kll) . The value of `precision` must be between 1 and 100,000.
-  - `input_weight` : `INT64` . By default, values in an initialized KLL sketch are weighted equally as `1` . To weight values differently, use the named argument, `weight` , which assigns a weight to each input in the resulting KLL sketch. `weight` is a multiplier. For example, if you assign a weight of `3` to an input value, it's as if three instances of the input value are included in the generation of the KLL sketch. The minimum value for `weight` is `1` and the maximum value is `2,147,483,647` .
+- `input` : `INT64`
+- `precision` : An `INT64` value that defines the exactness of the returned approximate quantile *q* . The default value is 1000. For more information about precision, see [Precision for KLL sketches](https://docs.cloud.google.com/bigquery/docs/sketches#precision_kll) . The value of `precision` must be between 1 and 100,000.
+- `input_weight` : `INT64` . By default, values in an initialized KLL sketch are weighted equally as `1` . To weight values differently, use the named argument, `weight` , which assigns a weight to each input in the resulting KLL sketch. `weight` is a multiplier. For example, if you assign a weight of `3` to an input value, it's as if three instances of the input value are included in the generation of the KLL sketch. The minimum value for `weight` is `1` and the maximum value is `2,147,483,647` .
 
 **Return Type**
 
@@ -180,56 +194,64 @@ KLL sketch as `BYTES`
 
 The following query takes a column of type `INT64` and outputs a sketch as `BYTES` that allows you to retrieve values whose ranks are within ±1/1000 \* 5 = ±1/200 ≈ 0 ranks of their exact quantile.
 
-    SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-    FROM (SELECT 1 AS x UNION ALL
-          SELECT 2 AS x UNION ALL
-          SELECT 3 AS x UNION ALL
-          SELECT 4 AS x UNION ALL
-          SELECT 5 AS x);
+```
+SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+FROM (SELECT 1 AS x UNION ALL
+      SELECT 2 AS x UNION ALL
+      SELECT 3 AS x UNION ALL
+      SELECT 4 AS x UNION ALL
+      SELECT 5 AS x);
+```
 
 The following examples illustrate how weight works when you initialize a KLL sketch. The results are converted to quantiles.
 
-    WITH points AS (
-      SELECT 1 AS x, 1 AS y UNION ALL
-      SELECT 2 AS x, 1 AS y UNION ALL
-      SELECT 3 AS x, 1 AS y UNION ALL
-      SELECT 4 AS x, 1 AS y UNION ALL
-      SELECT 5 AS x, 1 AS y)
-    SELECT KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves
-    FROM
-      (
-        SELECT KLL_QUANTILES.INIT_INT64(x, 1000,  weight=>y) AS kll_sketch
-        FROM points
-      );
-    
-    /*---------+
-     | halves  |
-     +---------+
-     | [1,3,5] |
-     +---------*/
+```
+WITH points AS (
+  SELECT 1 AS x, 1 AS y UNION ALL
+  SELECT 2 AS x, 1 AS y UNION ALL
+  SELECT 3 AS x, 1 AS y UNION ALL
+  SELECT 4 AS x, 1 AS y UNION ALL
+  SELECT 5 AS x, 1 AS y)
+SELECT KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves
+FROM
+  (
+    SELECT KLL_QUANTILES.INIT_INT64(x, 1000,  weight=>y) AS kll_sketch
+    FROM points
+  );
 
-    WITH points AS (
-      SELECT 1 AS x, 1 AS y UNION ALL
-      SELECT 2 AS x, 3 AS y UNION ALL
-      SELECT 3 AS x, 1 AS y UNION ALL
-      SELECT 4 AS x, 1 AS y UNION ALL
-      SELECT 5 AS x, 1 AS y)
-    SELECT KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves
-    FROM
-      (
-        SELECT KLL_QUANTILES.INIT_INT64(x, 1000,  weight=>y) AS kll_sketch
-        FROM points
-      );
-    
-    /*---------+
-     | halves  |
-     +---------+
-     | [1,2,5] |
-     +---------*/
+/*---------+
+ | halves  |
+ +---------+
+ | [1,3,5] |
+ +---------*/
+```
+
+```
+WITH points AS (
+  SELECT 1 AS x, 1 AS y UNION ALL
+  SELECT 2 AS x, 3 AS y UNION ALL
+  SELECT 3 AS x, 1 AS y UNION ALL
+  SELECT 4 AS x, 1 AS y UNION ALL
+  SELECT 5 AS x, 1 AS y)
+SELECT KLL_QUANTILES.EXTRACT_INT64(kll_sketch, 2) AS halves
+FROM
+  (
+    SELECT KLL_QUANTILES.INIT_INT64(x, 1000,  weight=>y) AS kll_sketch
+    FROM points
+  );
+
+/*---------+
+ | halves  |
+ +---------+
+ | [1,2,5] |
+ +---------*/
+```
 
 ## `KLL_QUANTILES.INIT_FLOAT64`
 
-    KLL_QUANTILES.INIT_FLOAT64(input[, precision[, weight => input_weight]])
+```
+KLL_QUANTILES.INIT_FLOAT64(input[, precision[, weight => input_weight]])
+```
 
 **Description**
 
@@ -239,9 +261,9 @@ Like [`KLL_QUANTILES.INIT_INT64`](https://docs.cloud.google.com/bigquery/docs/re
 
 **Supported Argument Types**
 
-  - `input` : `FLOAT64`
-  - `precision` : `INT64`
-  - `input_weight` : `INT64`
+- `input` : `FLOAT64`
+- `precision` : `INT64`
+- `input_weight` : `INT64`
 
 **Return Type**
 
@@ -249,7 +271,9 @@ KLL sketch as `BYTES`
 
 ## `KLL_QUANTILES.MERGE_INT64`
 
-    KLL_QUANTILES.MERGE_INT64(sketch, num_quantiles)
+```
+KLL_QUANTILES.MERGE_INT64(sketch, num_quantiles)
+```
 
 **Description**
 
@@ -263,8 +287,8 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
-  - `num_quantiles` : A positive `INT64` value that represents the number of roughly equal-sized groups to divide the merged sketches into. The maximum value is 100,000.
+- `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
+- `num_quantiles` : A positive `INT64` value that represents the number of roughly equal-sized groups to divide the merged sketches into. The maximum value is 100,000.
 
 **Return Type**
 
@@ -274,30 +298,34 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 The following query initializes two KLL sketches from five rows of data each. Then it merges these two sketches and returns an `ARRAY` containing the minimum, median, and maximum values in the input sketches.
 
-    SELECT KLL_QUANTILES.MERGE_INT64(kll_sketch, 2) AS halves
-    FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 1 AS x UNION ALL
-                SELECT 2 AS x UNION ALL
-                SELECT 3 AS x UNION ALL
-                SELECT 4 AS x UNION ALL
-                SELECT 5)
-          UNION ALL
-          SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 6 AS x UNION ALL
-                SELECT 7 AS x UNION ALL
-                SELECT 8 AS x UNION ALL
-                SELECT 9 AS x UNION ALL
-                SELECT 10 AS x));
-    
-    /*----------+
-     | halves   |
-     +----------+
-     | [1,5,10] |
-     +----------*/
+```
+SELECT KLL_QUANTILES.MERGE_INT64(kll_sketch, 2) AS halves
+FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 1 AS x UNION ALL
+            SELECT 2 AS x UNION ALL
+            SELECT 3 AS x UNION ALL
+            SELECT 4 AS x UNION ALL
+            SELECT 5)
+      UNION ALL
+      SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 6 AS x UNION ALL
+            SELECT 7 AS x UNION ALL
+            SELECT 8 AS x UNION ALL
+            SELECT 9 AS x UNION ALL
+            SELECT 10 AS x));
+
+/*----------+
+ | halves   |
+ +----------+
+ | [1,5,10] |
+ +----------*/
+```
 
 ## `KLL_QUANTILES.MERGE_FLOAT64`
 
-    KLL_QUANTILES.MERGE_FLOAT64(sketch, num_quantiles)
+```
+KLL_QUANTILES.MERGE_FLOAT64(sketch, num_quantiles)
+```
 
 **Description**
 
@@ -307,8 +335,8 @@ Like [`KLL_QUANTILES.MERGE_INT64`](https://docs.cloud.google.com/bigquery/docs/r
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
-  - `num_quantiles` : `INT64`
+- `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
+- `num_quantiles` : `INT64`
 
 **Return Type**
 
@@ -316,7 +344,9 @@ Like [`KLL_QUANTILES.MERGE_INT64`](https://docs.cloud.google.com/bigquery/docs/r
 
 ## `KLL_QUANTILES.MERGE_PARTIAL`
 
-    KLL_QUANTILES.MERGE_PARTIAL(sketch)
+```
+KLL_QUANTILES.MERGE_PARTIAL(sketch)
+```
 
 **Description**
 
@@ -332,7 +362,7 @@ Ignores `NULL` sketches. If the input contains zero rows or only `NULL` sketches
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch
+- `sketch` : `BYTES` KLL sketch
 
 **Return Type**
 
@@ -342,24 +372,28 @@ KLL sketch as `BYTES`
 
 The following query initializes two KLL sketches from five rows of data each. Then it merges these two sketches into a new sketch, also as `BYTES` . Both input sketches have the same underlying data type and precision.
 
-    SELECT KLL_QUANTILES.MERGE_PARTIAL(kll_sketch) AS merged_sketch
-    FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 1 AS x UNION ALL
-                SELECT 2 AS x UNION ALL
-                SELECT 3 AS x UNION ALL
-                SELECT 4 AS x UNION ALL
-                SELECT 5)
-          UNION ALL
-          SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 6 AS x UNION ALL
-                SELECT 7 AS x UNION ALL
-                SELECT 8 AS x UNION ALL
-                SELECT 9 AS x UNION ALL
-                SELECT 10 AS x));
+```
+SELECT KLL_QUANTILES.MERGE_PARTIAL(kll_sketch) AS merged_sketch
+FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 1 AS x UNION ALL
+            SELECT 2 AS x UNION ALL
+            SELECT 3 AS x UNION ALL
+            SELECT 4 AS x UNION ALL
+            SELECT 5)
+      UNION ALL
+      SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 6 AS x UNION ALL
+            SELECT 7 AS x UNION ALL
+            SELECT 8 AS x UNION ALL
+            SELECT 9 AS x UNION ALL
+            SELECT 10 AS x));
+```
 
 ## `KLL_QUANTILES.MERGE_POINT_INT64`
 
-    KLL_QUANTILES.MERGE_POINT_INT64(sketch, phi)
+```
+KLL_QUANTILES.MERGE_POINT_INT64(sketch, phi)
+```
 
 **Description**
 
@@ -373,8 +407,8 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
-  - `phi` : `FLOAT64` between 0 and 1
+- `sketch` : `BYTES` KLL sketch initialized on `INT64` data type
+- `phi` : `FLOAT64` between 0 and 1
 
 **Return Type**
 
@@ -384,30 +418,34 @@ Returns an error if the input isn't a valid KLL quantiles sketch.
 
 The following query initializes two KLL sketches from five rows of data each. Then it merges these two sketches and returns the value of the ninth decile or 90th percentile of the merged sketch.
 
-    SELECT KLL_QUANTILES.MERGE_POINT_INT64(kll_sketch, .9) AS quantile
-    FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 1 AS x UNION ALL
-                SELECT 2 AS x UNION ALL
-                SELECT 3 AS x UNION ALL
-                SELECT 4 AS x UNION ALL
-                SELECT 5)
-          UNION ALL
-          SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
-          FROM (SELECT 6 AS x UNION ALL
-                SELECT 7 AS x UNION ALL
-                SELECT 8 AS x UNION ALL
-                SELECT 9 AS x UNION ALL
-                SELECT 10 AS x));
-    
-    /*----------+
-     | quantile |
-     +----------+
-     |        9 |
-     +----------*/
+```
+SELECT KLL_QUANTILES.MERGE_POINT_INT64(kll_sketch, .9) AS quantile
+FROM (SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 1 AS x UNION ALL
+            SELECT 2 AS x UNION ALL
+            SELECT 3 AS x UNION ALL
+            SELECT 4 AS x UNION ALL
+            SELECT 5)
+      UNION ALL
+      SELECT KLL_QUANTILES.INIT_INT64(x, 1000) AS kll_sketch
+      FROM (SELECT 6 AS x UNION ALL
+            SELECT 7 AS x UNION ALL
+            SELECT 8 AS x UNION ALL
+            SELECT 9 AS x UNION ALL
+            SELECT 10 AS x));
+
+/*----------+
+ | quantile |
+ +----------+
+ |        9 |
+ +----------*/
+```
 
 ## `KLL_QUANTILES.MERGE_POINT_FLOAT64`
 
-    KLL_QUANTILES.MERGE_POINT_FLOAT64(sketch, phi)
+```
+KLL_QUANTILES.MERGE_POINT_FLOAT64(sketch, phi)
+```
 
 **Description**
 
@@ -417,8 +455,8 @@ Like [`KLL_QUANTILES.MERGE_POINT_INT64`](https://docs.cloud.google.com/bigquery/
 
 **Supported Argument Types**
 
-  - `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
-  - `phi` : `FLOAT64` between 0 and 1
+- `sketch` : `BYTES` KLL sketch initialized on `FLOAT64` data type
+- `phi` : `FLOAT64` between 0 and 1
 
 **Return Type**
 

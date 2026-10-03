@@ -16,9 +16,9 @@ Using BigQuery ML's built-in TimesFM model with the [`AI.FORECAST` function](htt
 
 To learn how to use a TimesFM model with the `AI.FORECAST` function, see the following tutorials:
 
-  - [Forecast single or multiple time series with a TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial)
-  - [Forecast a single time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-single-time-series-forecasting-tutorial) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
-  - [Forecast multiple time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-multi-time-series-forecasting-tutorial) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+- [Forecast single or multiple time series with a TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-time-series-forecasting-tutorial)
+- [Forecast a single time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-single-time-series-forecasting-tutorial) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+- [Forecast multiple time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-multi-time-series-forecasting-tutorial) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
 
 To use the TimesFM model to detect anomalies in time series data, use the [`AI.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) .
 
@@ -26,8 +26,8 @@ To evaluate forecasted values from the TimesFM model against the actual values, 
 
 To learn more about the Google Research TimesFM model, use the following resources:
 
-  - [Google Research blog](https://research.google/blog/a-decoder-only-foundation-model-for-time-series-forecasting/)
-  - [GitHub repository](https://github.com/google-research/timesfm)
-  - [Hugging Face page](https://huggingface.co/collections/google/timesfm-release-66e4be5fdb56e960c1e482a6)
+- [Google Research blog](https://research.google/blog/a-decoder-only-foundation-model-for-time-series-forecasting/)
+- [GitHub repository](https://github.com/google-research/timesfm)
+- [Hugging Face page](https://huggingface.co/collections/google/timesfm-release-66e4be5fdb56e960c1e482a6)
 
 When you use TimesFM through BigQuery, your usage is governed by the [Google Cloud Terms of Service](https://cloud.google.com/terms) and allows for commercial uses. The non-commercial license associated with the publicly downloadable `TimesFM 3.0` weights on GitHub and Hugging Face applies only to self-hosted downloads and does not restrict usage within BigQuery.

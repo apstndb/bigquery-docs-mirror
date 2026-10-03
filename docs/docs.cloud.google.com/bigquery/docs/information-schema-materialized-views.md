@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# MATERIALIZED\_VIEWS view
+# MATERIALIZED_VIEWS view
 
 The `INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view contains status about materialized views.
 
@@ -20,8 +20,8 @@ This predefined role contains the permissions required to query the `INFORMATION
 
 The following permissions are required to query the `INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view:
 
-  - `bigquery.tables.get`
-  - `bigquery.tables.list`
+- `bigquery.tables.get`
+- `bigquery.tables.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -34,7 +34,7 @@ When you query the `INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view, the query resul
 The `INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view has the following schema:
 
 | Column name           | Data type   | Value                                                                                                                                                                                                                       |
-| --------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `table_catalog`       | `STRING`    | The name of the project that contains the dataset. Also referred to as the `projectId` .                                                                                                                                    |
 | `table_schema`        | `STRING`    | The name of the dataset that contains the materialized view. Also referred to as the `datasetId` .                                                                                                                          |
 | `table_name`          | `STRING`    | The name of the materialized view. Also referred to as the `tableId` .                                                                                                                                                      |
@@ -48,28 +48,30 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information, see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-| View name                                                                                                | Resource scope | Region scope              |
-| -------------------------------------------------------------------------------------------------------- | -------------- | ------------------------- |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.MATERIALIZED_VIEWS`` | Project level  | `         REGION        ` |
-| `[         PROJECT_ID        .]         DATASET_ID        .INFORMATION_SCHEMA.MATERIALIZED_VIEWS`        | Dataset level  | Dataset location          |
+| View name                                                                                    | Resource scope | Region scope     |
+|----------------------------------------------------------------------------------------------|----------------|------------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` | Project level  | `REGION`         |
+| `[ `` PROJECT_ID `` .] `` DATASET_ID `` .INFORMATION_SCHEMA.MATERIALIZED_VIEWS`              | Dataset level  | Dataset location |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
 
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `DATASET_ID` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 For example:
 
-    -- Returns metadata for views in a single dataset.
-    SELECT * FROM myDataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
-    
-    -- Returns metadata for all views in a region.
-    SELECT * FROM region-us.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
+```
+-- Returns metadata for views in a single dataset.
+SELECT * FROM myDataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
+
+-- Returns metadata for all views in a region.
+SELECT * FROM region-us.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
+```
 
 ## Examples
 
@@ -77,20 +79,22 @@ For example:
 
 The following example retrieves all the unhealthy materialized views from the `INFORMATION_SCHEMA.MATERIALIZED_VIEWS` view. It returns the materialized views with non `NULL` `last_refresh_status` values in `mydataset` in your default project — `myproject` .
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA.MATERIALIZED_VIEWS` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
 
-    SELECT
-      table_name, last_refresh_status
-    FROM
-      mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
-    WHERE
-      last_refresh_status IS NOT NULL;
+```
+SELECT
+  table_name, last_refresh_status
+FROM
+  mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
+WHERE
+  last_refresh_status IS NOT NULL;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-``` 
+```
   +---------------+---------------------------------------------------------------------+
   |  table_name   |                        last_refresh_status                          |
   +---------------------------------------------------------------------+---------------+
@@ -103,20 +107,22 @@ The result is similar to the following:
 
 The following example retrieves the `last_refresh_time` and `refresh_watermark` of materialized view `myview` in `mydataset` in your default project — `myproject` . The result shows when the materialized was last refreshed and up to when data of base tables are collected into the materialized view cache.
 
-To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
+To run the query against a project other than your default project, add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA.MATERIALIZED_VIEWS` ; for example, `` `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS `` .
 
-    SELECT
-      table_name, last_refresh_time, refresh_watermark
-    FROM
-      mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
-    WHERE
-      table_name = 'myview';
+```
+SELECT
+  table_name, last_refresh_time, refresh_watermark
+FROM
+  mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS
+WHERE
+  table_name = 'myview';
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-``` 
+```
   +---------------+------------------------------------------------+
   |  table_name   |  last_refresh_time     | refresh_watermark     |
   +---------------+------------------------------------------------+

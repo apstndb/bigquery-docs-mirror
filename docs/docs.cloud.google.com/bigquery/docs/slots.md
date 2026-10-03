@@ -22,9 +22,9 @@ With the *capacity-based model* , you pay for the slot capacity allocated for yo
 
 To prevent unassigned or newly created projects from defaulting to on-demand pricing, manage your BigQuery reservations using the Google Cloud resource hierarchy with the following practices:
 
-  - **Assign at the folder or organization level** : instead of a project-by-project setup, create a reservation assignment at the folder or organization level. This ensures that all existing and future projects within that hierarchy automatically inherit the reservation and use the reservation's slot capacity.
-  - **Consider default behavior** : without an explicit or inherited assignment, BigQuery automatically applies the on-demand pricing model.
-  - **Override for exceptions** : if specific projects must use on-demand pricing, you can override the inherited assignment by explicitly assigning those projects to the reservation *None* .
+- **Assign at the folder or organization level** : instead of a project-by-project setup, create a reservation assignment at the folder or organization level. This ensures that all existing and future projects within that hierarchy automatically inherit the reservation and use the reservation's slot capacity.
+- **Consider default behavior** : without an explicit or inherited assignment, BigQuery automatically applies the on-demand pricing model.
+- **Override for exceptions** : if specific projects must use on-demand pricing, you can override the inherited assignment by explicitly assigning those projects to the reservation *None* .
 
 For details on assignment priority, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) .
 
@@ -74,9 +74,9 @@ The BigQuery scheduler enforces the equal sharing of slots among projects with r
 
 Fair scheduling ensures that every query has access to all available slots at any time, and capacity is dynamically and automatically re-allocated among active queries as each query's capacity demands change. Queries complete and new queries get submitted for execution under the following conditions:
 
-  - Whenever a new query is submitted, capacity is automatically re-allocated across executing queries. Individual units of work can be gracefully paused, resumed, and queued up as more capacity becomes available to each query.
-  - Whenever a query completes, capacity consumed by that query automatically becomes immediately available for all other queries to use.
-  - Whenever a query's capacity demands change due to changes in query's dynamic DAG, BigQuery automatically re-evaluates capacity availability for this and all other queries, re-allocating and pausing slots as necessary.
+- Whenever a new query is submitted, capacity is automatically re-allocated across executing queries. Individual units of work can be gracefully paused, resumed, and queued up as more capacity becomes available to each query.
+- Whenever a query completes, capacity consumed by that query automatically becomes immediately available for all other queries to use.
+- Whenever a query's capacity demands change due to changes in query's dynamic DAG, BigQuery automatically re-evaluates capacity availability for this and all other queries, re-allocating and pausing slots as necessary.
 
 ![Fair scheduling in BigQuery](https://docs.cloud.google.com/static/bigquery/images/slots-scheduling-multiple-queries.svg)
 
@@ -86,23 +86,23 @@ If an important job consistently needs more slots than it receives from the sche
 
 As an example of fair scheduling, suppose you have the following reservation configuration:
 
-  - Reservation `A` , which has 1,000 baseline slots with no autoscaling
-  - Project `A` and project `B` , which are assigned to your reservation
+- Reservation `A` , which has 1,000 baseline slots with no autoscaling
+- Project `A` and project `B` , which are assigned to your reservation
 
 Scenario 1: In project `A` , you run query `A` (one concurrent query) that requires high slot usage, and in project `B` you run 20 concurrent queries. Even though there are a total of 21 queries that are using reservation `A` , the slot distribution is the following:
 
-  - Project `A` receives 500 slots, and query `A` runs with 500 slots.
-  - Project `B` receives 500 slots that are shared among its 20 queries.
+- Project `A` receives 500 slots, and query `A` runs with 500 slots.
+- Project `B` receives 500 slots that are shared among its 20 queries.
 
 Scenario 2: In project `A` , you run query `A` (one concurrent query) that requires 100 slots to run, and in project `B` you run 20 concurrent queries. Since query `A` doesn't require 50% of the reservation, then the slot distribution is the following:
 
-  - Project `A` receives 100 slots, and query `A` runs with 100 slots.
-  - Project `B` receives 900 slots that are shared among its 20 queries.
+- Project `A` receives 100 slots, and query `A` runs with 100 slots.
+- Project `B` receives 900 slots that are shared among its 20 queries.
 
 Inversely, consider the following reservation configuration:
 
-  - Reservation `B` , which has 1,000 baseline slots with no autoscaling.
-  - 10 projects, which are all assigned to reservation `B` .
+- Reservation `B` , which has 1,000 baseline slots with no autoscaling.
+- 10 projects, which are all assigned to reservation `B` .
 
 Assume the 10 projects are running queries that have sufficient slot demand, then each project receives 1/10 of the total reservation slots (or 100 slots), regardless of how many queries are running on each project.
 
@@ -110,9 +110,9 @@ Assume the 10 projects are running queries that have sufficient slot demand, the
 
 Slot quotas and limits provide a safeguard for BigQuery. Different pricing models use different slot quota types, as follows:
 
-  - On-demand pricing model: You are subject to a [maximum concurrent slots limit for on-demand pricing](https://docs.cloud.google.com/bigquery/quotas#max_concurrent_slots_on-demand) with transient burst capability. Depending on your workloads, access to more slots can improve query performance.
+- On-demand pricing model: You are subject to a [maximum concurrent slots limit for on-demand pricing](https://docs.cloud.google.com/bigquery/quotas#max_concurrent_slots_on-demand) with transient burst capability. Depending on your workloads, access to more slots can improve query performance.
 
-  - Capacity-based pricing model: [Reservations quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservation-api-limits) define the maximum number of slots you can allocate across all reservations in a location. If you use autoscaling, the sum of your maximum reservation sizes cannot exceed this limit. You are only billed for your reservations and commitments, not for the quotas. For information about increasing your slot quota, see [Requesting a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
+- Capacity-based pricing model: [Reservations quotas and limits](https://docs.cloud.google.com/bigquery/quotas#reservation-api-limits) define the maximum number of slots you can allocate across all reservations in a location. If you use autoscaling, the sum of your maximum reservation sizes cannot exceed this limit. You are only billed for your reservations and commitments, not for the quotas. For information about increasing your slot quota, see [Requesting a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
 Note the distinction between allocated slots (which impact your quota and billing) and utilized slots (which represent active compute). For a detailed comparison between the two, see [Understand slot metrics](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#understand_slot_metrics) .
 
@@ -122,8 +122,8 @@ To check how many slots you are using, see [BigQuery monitoring](https://docs.cl
 
 The concept of idle slots applies only within the capacity-based pricing model and doesn't apply to the autoscaled slots. The slots are considered "idle" in two scenarios:
 
-  - Slots from commitments that are not allocated to any reservation baseline.
-  - Slots that are allocated to a reservation baseline, but are not actively being used by jobs within that reservation.
+- Slots from commitments that are not allocated to any reservation baseline.
+- Slots that are allocated to a reservation baseline, but are not actively being used by jobs within that reservation.
 
 To maximize the value and efficiency of your purchased capacity, BigQuery is designed to automatically share these idle slots. By default, queries running in any reservation can use idle slots from other reservations within the same administration project.
 
@@ -131,17 +131,17 @@ When the reservation that "owns" those slots needs them for a job, BigQuery imme
 
 For example, suppose you have the following reservation setup:
 
-  - `project_a` is assigned to `reservation_a` , which has 500 baseline slots with no autoscaling.
-  - `project_b` is assigned to `reservation_b` , which has 100 baseline slots with no autoscaling.
-  - Both reservations are in the same region and administrative project and there are no other projects assigned to these reservations.
+- `project_a` is assigned to `reservation_a` , which has 500 baseline slots with no autoscaling.
+- `project_b` is assigned to `reservation_b` , which has 100 baseline slots with no autoscaling.
+- Both reservations are in the same region and administrative project and there are no other projects assigned to these reservations.
 
 You run `query_b` in `project_b` . If no query is running in `project_a` , then `query_b` has access to the 500 idle slots from `reservation_a` . While `query_b` is still running, it might use up to 600 slots: 100 baseline slots plus 500 idle slots.
 
 While `query_b` is running, suppose you run `query_a` in `project_a` that can use 500 slots.
 
-  - Since you have 500 baseline slots reserved for `project_a` , `query_a` immediately starts and is allocated 500 slots.
-  - The number of slots allocated to `query_b` quickly decreases to 100 baseline slots.
-  - Additional queries run in `project_b` share those 100 slots. If subsequent queries don't have enough slots to start, then they queue up until running queries complete and slots become available.
+- Since you have 500 baseline slots reserved for `project_a` , `query_a` immediately starts and is allocated 500 slots.
+- The number of slots allocated to `query_b` quickly decreases to 100 baseline slots.
+- Additional queries run in `project_b` share those 100 slots. If subsequent queries don't have enough slots to start, then they queue up until running queries complete and slots become available.
 
 In this example, if `project_b` was assigned to a reservation with no baseline slots or autoscaling, then `query_b` would have no slots after `query_a` starts running. BigQuery would pause `query_b` until idle slots are available or the query times out. Additional queries in `project_b` would queue up until idle slots are available.
 
@@ -151,14 +151,14 @@ To prevent a specific reservation from borrowing idle slots from other reservati
 
 In addition to `ignore_idle_slots` , you can use the following mechanisms to manage and control idle slot sharing across your workloads:
 
-  - **[Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness)** : Distributes idle slots equally across reservations rather than individual projects, preventing multi-project workloads from monopolizing the idle slot pool. To enable this setting, see [Enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) .
-  - **[Predictable reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable)** : Establishes maximum capacity boundaries when consuming capacity (including idle slots), ensuring predictable resource scaling without unexpected bursts. For configuration steps, see [Create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
-  - **[Reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#groups)** : Groups related reservations together to cap total slot consumption across the group and prioritize idle slot sharing within the group before sharing across the organization. To set up groups, see [Create a reservation group](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservation_group) .
+- **[Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness)** : Distributes idle slots equally across reservations rather than individual projects, preventing multi-project workloads from monopolizing the idle slot pool. To enable this setting, see [Enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) .
+- **[Predictable reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable)** : Establishes maximum capacity boundaries when consuming capacity (including idle slots), ensuring predictable resource scaling without unexpected bursts. For configuration steps, see [Create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
+- **[Reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#groups)** : Groups related reservations together to cap total slot consumption across the group and prioritize idle slot sharing within the group before sharing across the organization. To set up groups, see [Create a reservation group](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservation_group) .
 
 There are two key restrictions around idle slot sharing:
 
-  - You cannot share idle slots between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
-  - Assignments of type `ML_EXTERNAL` are an exception in that slots used by BigQuery ML external model creation jobs are not preemptible. The slots in a reservation with both `ML_EXTERNAL` and `QUERY` assignment types are only available for other query jobs when the slots are not occupied by the `ML_EXTERNAL` jobs. Moreover, these jobs cannot use idle slots from other reservations.
+- You cannot share idle slots between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Assignments of type `ML_EXTERNAL` are an exception in that slots used by BigQuery ML external model creation jobs are not preemptible. The slots in a reservation with both `ML_EXTERNAL` and `QUERY` assignment types are only available for other query jobs when the slots are not occupied by the `ML_EXTERNAL` jobs. Moreover, these jobs cannot use idle slots from other reservations.
 
 ### Reservation-based fairness
 
@@ -196,11 +196,11 @@ You don't need to purchase slot commitments before creating autoscaling reservat
 
 When you create autoscaling reservations, consider the following:
 
-  - BigQuery scales reservations almost instantly until it has reached the number of slots needed to execute the jobs, or it reaches the maximum number of slots available to the reservation. Slots always autoscale to a multiple of 50.
-  - Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment.
-  - Your autoscaled slots are charged at [capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) for your associated edition while scaling up. You are charged for the number of scaled slots, not the number of slots used. This charge applies even if the job that causes BigQuery to scale up fails. For this reason, don't use the [jobs information schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to match the billing. Instead, see [Monitor autoscaling with information schema](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#monitor_autoscaling_with_information_schema) .
-  - While the number of slots always scales by multiples of 50, it might scale more than 50 slots within one step. For example, if your workload requires an additional 450 slots, BigQuery can attempt to scale by 450 slots at once to meet the capacity requirement.
-  - BigQuery scales down when the jobs associated with the reservation no longer need the capacity. By default, capacity is billed per second with a one-minute minimum duration. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration.
+- BigQuery scales reservations almost instantly until it has reached the number of slots needed to execute the jobs, or it reaches the maximum number of slots available to the reservation. Slots always autoscale to a multiple of 50.
+- Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment.
+- Your autoscaled slots are charged at [capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) for your associated edition while scaling up. You are charged for the number of scaled slots, not the number of slots used. This charge applies even if the job that causes BigQuery to scale up fails. For this reason, don't use the [jobs information schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to match the billing. Instead, see [Monitor autoscaling with information schema](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#monitor_autoscaling_with_information_schema) .
+- While the number of slots always scales by multiples of 50, it might scale more than 50 slots within one step. For example, if your workload requires an additional 450 slots, BigQuery can attempt to scale by 450 slots at once to meet the capacity requirement.
+- BigQuery scales down when the jobs associated with the reservation no longer need the capacity. By default, capacity is billed per second with a one-minute minimum duration. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration.
 
 > **Note:** Changes to the maximum slots value for a reservation can take a few seconds to propagate.
 
@@ -274,11 +274,11 @@ You can calculate the maximum number of slots a reservation can use by adding th
 
 ![Autoscaling reservations with capacity commitments.](https://docs.cloud.google.com/static/bigquery/images/autoscaling-example.png)
 
-  - A capacity commitment of 1000 annual slots. Those slots are assigned as baseline slots in the `etl` reservation and the `dashboard` reservation.
-  - 700 baseline slots assigned to the `etl` reservation.
-  - 300 baseline slots assigned to the `dashboard` reservation.
-  - Autoscale slots of 600 for the `etl` reservation.
-  - Autoscale slots of 800 for the `dashboard` reservation.
+- A capacity commitment of 1000 annual slots. Those slots are assigned as baseline slots in the `etl` reservation and the `dashboard` reservation.
+- 700 baseline slots assigned to the `etl` reservation.
+- 300 baseline slots assigned to the `dashboard` reservation.
+- Autoscale slots of 600 for the `etl` reservation.
+- Autoscale slots of 800 for the `dashboard` reservation.
 
 For the `etl` reservation, the maximum number of slots possible is equal to the `etl` baseline slots (700) plus the `dashboard` baseline slots (300, if all slots are idle) plus the maximum number of autoscale slots (600). So the maximum number of slots the `etl` reservation could use in this example is 1600. This number exceeds the number in the capacity commitment.
 
@@ -288,9 +288,9 @@ In the following example, the annual commitment exceeds the assigned baseline sl
 
 In this example, we have:
 
-  - A capacity commitment of 1600 annual slots.
-  - A maximum reservation size of 1500 (including 500 autoscaling slots).
-  - 1000 baseline slots assigned to the `etl` reservation.
+- A capacity commitment of 1600 annual slots.
+- A maximum reservation size of 1500 (including 500 autoscaling slots).
+- 1000 baseline slots assigned to the `etl` reservation.
 
 The maximum number of slots available to the reservation is equal to the baseline slots (1000) plus any committed idle slots not dedicated to the baseline slots (1600 annual slots - 1000 baseline slots = 600) plus the number of autoscaling slots (500). So the maximum potential slots in this reservation is 2100. The autoscaled slots are additional slots above the capacity commitment.
 
@@ -298,17 +298,17 @@ BigQuery may sometimes use available BigQuery system capacity to process your qu
 
 ### Autoscaling best practices
 
-  - When first using autoscaler, set the number of autoscaling slots to a meaningful number based on past and expected performance. Once the reservation is created, actively monitor the failure rate, performance, and bill and adjust the number of autoscaling slots as needed.
+- When first using autoscaler, set the number of autoscaling slots to a meaningful number based on past and expected performance. Once the reservation is created, actively monitor the failure rate, performance, and bill and adjust the number of autoscaling slots as needed.
 
-  - Autoscaler has a 1 minute minimum before scaling down so it is important to set the maximum number of autoscaled slots to balance between performance and cost. If the maximum number of autoscale slots is too large and your job can use all the slots to complete a job in seconds, you still incur costs for the maximum slots for the full minute. If you lower your max slots to half the current amount, your reservation is scaled to a lower number and the job can use more `slot_seconds` during that minute, reducing waste. For help determining your slot requirements, see [Monitor job performance](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor_job_performance) . As an alternative approach to determine your slot requirements, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
+- Autoscaler has a 1 minute minimum before scaling down so it is important to set the maximum number of autoscaled slots to balance between performance and cost. If the maximum number of autoscale slots is too large and your job can use all the slots to complete a job in seconds, you still incur costs for the maximum slots for the full minute. If you lower your max slots to half the current amount, your reservation is scaled to a lower number and the job can use more `slot_seconds` during that minute, reducing waste. For help determining your slot requirements, see [Monitor job performance](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor_job_performance) . As an alternative approach to determine your slot requirements, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
 
-  - Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
+- Slot usage can occasionally exceed the sum of your baseline plus scaled slots. You aren't billed for slot usage that's greater than your baseline plus scaled slots.
 
-  - Autoscaler is most efficient for heavy, long-running workloads, such as workloads with multiple concurrent queries. Avoid sending queries one at a time, since each query scales the reservation where it will remain scaled for a 1-minute minimum. If you continuously send queries, causing a constant workload, setting a baseline and buying a commitment provides constant capacity at a discounted price.
+- Autoscaler is most efficient for heavy, long-running workloads, such as workloads with multiple concurrent queries. Avoid sending queries one at a time, since each query scales the reservation where it will remain scaled for a 1-minute minimum. If you continuously send queries, causing a constant workload, setting a baseline and buying a commitment provides constant capacity at a discounted price.
 
-  - BigQuery autoscaling is subject to capacity availability. BigQuery attempts to meet customer capacity demand based on historical usage. You can set an optional slot baseline so that slots are immediately available. With baselines, you pay for them whether you use them or not. To ensure capacity is available for large, inorganic demands, such as high-traffic holidays, contact [the BigQuery team](https://cloud.google.com/support) several weeks in advance.
+- BigQuery autoscaling is subject to capacity availability. BigQuery attempts to meet customer capacity demand based on historical usage. You can set an optional slot baseline so that slots are immediately available. With baselines, you pay for them whether you use them or not. To ensure capacity is available for large, inorganic demands, such as high-traffic holidays, contact [the BigQuery team](https://cloud.google.com/support) several weeks in advance.
 
-  - Baseline slots are always charged. If a [capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) expires, you might need to manually adjust the amount of baseline slots in your reservations to avoid any unwanted charges. For example, consider that you have a 1-year commitment with 100 slots and a reservation with 100 baseline slots. The commitment expires and doesn't have a renewal plan. Once the commitment expires, you pay for 100 baseline slots at the [pay as you go rate](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+- Baseline slots are always charged. If a [capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) expires, you might need to manually adjust the amount of baseline slots in your reservations to avoid any unwanted charges. For example, consider that you have a 1-year commitment with 100 slots and a reservation with 100 baseline slots. The commitment expires and doesn't have a renewal plan. Once the commitment expires, you pay for 100 baseline slots at the [pay as you go rate](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
 ### Observability
 

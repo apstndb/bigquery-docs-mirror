@@ -12,8 +12,8 @@ In this tutorial, you query data from a [BigQuery public dataset](https://docs.c
 
 ## Objectives
 
-  - Create and run a query in BigQuery.
-  - Explore query results in a notebook using SQL cells and code cells.
+- Create and run a query in BigQuery.
+- Explore query results in a notebook using SQL cells and code cells.
 
 ## Costs
 
@@ -22,22 +22,22 @@ This tutorial uses a dataset available through the [Google Cloud Public Datasets
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
     For new projects, BigQuery is automatically enabled.
 
 ## Set the default region for code assets
@@ -51,10 +51,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -66,9 +66,9 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 
 To create and run notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
-  - [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
-  - [Code Creator ( `roles/dataform.codeCreator` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
+- [BigQuery User ( `roles/bigquery.user` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+- [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser)
+- [Code Creator ( `roles/dataform.codeCreator` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator)
 
 ## Open query results in a notebook
 
@@ -78,21 +78,23 @@ You can run a SQL query and then use a notebook to explore the data. This approa
 
 2.  In the left pane, click explore **Explorer** .
 
-3.  Go to the `bigquery-public-data` project, click arrow\_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
+3.  Go to the `bigquery-public-data` project, click arrow_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
 
-4.  In the filter\_list **Filter** box, choose **Dataset ID** and enter **ml\_datasets** .
-    
+4.  In the filter_list **Filter** box, choose **Dataset ID** and enter **ml_datasets** .
+
     ![The Filter field on the Datasets page](https://docs.cloud.google.com/bigquery/images/public-dataset-filter.png)
 
-5.  On the **Datasets** page, click **ml\_datasets \> penguins** .
+5.  On the **Datasets** page, click **ml_datasets \> penguins** .
 
 6.  Click search **Query** .
 
 7.  Add an asterisk ( `*` ) for field selection to the generated query, so that it looks like the following example:
-    
-        SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
 
-8.  Click play\_circle **Run** .
+    ```
+    SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
+    ```
+
+8.  Click play_circle **Run** .
 
 9.  In the **Query results** section, click **Open in** , and then click **Notebook** .
 
@@ -102,92 +104,96 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 
 1.  In the notebook header, click **Connect** to [connect to the default runtime](https://docs.cloud.google.com/bigquery/docs/create-notebooks#connect_to_the_default_runtime) .
 
-2.  In the **Setup** code block, click play\_circle **Run cell** .
+2.  In the **Setup** code block, click play_circle **Run cell** .
 
 ## Explore the data
 
-1.  Click arrow\_drop\_down **Insert code cell options \> Add SQL cell** .
-    
+1.  Click arrow_drop_down **Insert code cell options \> Add SQL cell** .
+
     ![The Add SQL cell option in the Insert code cell menu](https://docs.cloud.google.com/bigquery/images/add-sql-cell-option.png)
 
 2.  Enter the following query in the SQL cell:
-    
-        SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
 
-3.  Click play\_circle **Run cell** .
-    
+    ```
+    SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
+    ```
+
+3.  Click play_circle **Run cell** .
+
     The query results are displayed in a [BigQuery DataFrame](https://docs.cloud.google.com/bigquery/docs/reference/bigquery-dataframes) .
 
 4.  Alternatively, to load the query results into a BigQuery DataFrame using the query job you previously ran in the query editor, follow these steps:
-    
+
     1.  Go to the **Result set loaded from BigQuery job as a DataFrame** section.
-    
-    2.  In the code block, click play\_circle **Run cell** .
-        
+
+    2.  In the code block, click play_circle **Run cell** .
+
         The query results are displayed in a BigQuery DataFrame.
 
 5.  To get descriptive metrics for the data, follow these steps:
-    
+
     1.  Go to the **Show descriptive statistics using describe()** section.
-    
-    2.  In the code block, click play\_circle **Run cell** .
-        
+
+    2.  In the code block, click play_circle **Run cell** .
+
         The results are displayed in a BigQuery DataFrame.
 
 6.  Optional: Use other Python functions or packages to explore and analyze the data.
 
 The following code sample shows using [`bigframes.pandas`](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to analyze data, and [`bigframes.ml`](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai) to create a linear regression model from **penguins** data in a BigQuery DataFrame:
 
-    import bigframes.pandas as bpd
-    
-    # Load data from BigQuery
-    query_or_table = "bigquery-public-data.ml_datasets.penguins"
-    bq_df = bpd.read_gbq(query_or_table)
-    
-    # Inspect one of the columns (or series) of the DataFrame:
+```
+import bigframes.pandas as bpd
+
+# Load data from BigQuery
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+bq_df = bpd.read_gbq(query_or_table)
+
+# Inspect one of the columns (or series) of the DataFrame:
+bq_df["body_mass_g"]
+
+# Compute the mean of this series:
+average_body_mass = bq_df["body_mass_g"].mean()
+print(f"average_body_mass: {average_body_mass}")
+
+# Find the heaviest species using the groupby operation to calculate the
+# mean body_mass_g:
+(
     bq_df["body_mass_g"]
-    
-    # Compute the mean of this series:
-    average_body_mass = bq_df["body_mass_g"].mean()
-    print(f"average_body_mass: {average_body_mass}")
-    
-    # Find the heaviest species using the groupby operation to calculate the
-    # mean body_mass_g:
-    (
-        bq_df["body_mass_g"]
-        .groupby(by=bq_df["species"])
-        .mean()
-        .sort_values(ascending=False)
-        .head(10)
-    )
-    
-    # Create the Linear Regression model
-    from bigframes.ml.linear_model import LinearRegression
-    
-    # Filter down to the data we want to analyze
-    adelie_data = bq_df[bq_df.species == "Adelie Penguin (Pygoscelis adeliae)"]
-    
-    # Drop the columns we don't care about
-    adelie_data = adelie_data.drop(columns=["species"])
-    
-    # Drop rows with nulls to get our training data
-    training_data = adelie_data.dropna()
-    
-    # Pick feature columns and label column
-    X = training_data[
-        [
-            "island",
-            "culmen_length_mm",
-            "culmen_depth_mm",
-            "flipper_length_mm",
-            "sex",
-        ]
+    .groupby(by=bq_df["species"])
+    .mean()
+    .sort_values(ascending=False)
+    .head(10)
+)
+
+# Create the Linear Regression model
+from bigframes.ml.linear_model import LinearRegression
+
+# Filter down to the data we want to analyze
+adelie_data = bq_df[bq_df.species == "Adelie Penguin (Pygoscelis adeliae)"]
+
+# Drop the columns we don't care about
+adelie_data = adelie_data.drop(columns=["species"])
+
+# Drop rows with nulls to get our training data
+training_data = adelie_data.dropna()
+
+# Pick feature columns and label column
+X = training_data[
+    [
+        "island",
+        "culmen_length_mm",
+        "culmen_depth_mm",
+        "flipper_length_mm",
+        "sex",
     ]
-    y = training_data[["body_mass_g"]]
-    
-    model = LinearRegression(fit_intercept=False)
-    model.fit(X, y)
-    model.score(X, y)
+]
+y = training_data[["body_mass_g"]]
+
+model = LinearRegression(fit_intercept=False)
+model.fit(X, y)
+model.score(X, y)
+```
 
 ## Clean up
 
@@ -196,19 +202,17 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 The easiest way to eliminate billing is to delete the Google Cloud project that you created for this tutorial.
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn more about [creating notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
-  - Learn more about [exploring data with BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
+- Learn more about [creating notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+- Learn more about [exploring data with BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .

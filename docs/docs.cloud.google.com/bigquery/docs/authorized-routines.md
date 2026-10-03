@@ -14,9 +14,9 @@ By default, if a user invokes a routine, the user must have access to read the d
 
 The following types of routines can be authorized:
 
-  - [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions)
-  - [User-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
-  - [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures)
+- [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions)
+- [User-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
+- [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures)
 
 > **Caution:** Stored procedures authorized as routines have DDL and DML access. These procedures can create, modify, and delete database objects. Principals with access to authorized stored procedures can bypass Identity and Access Management (IAM) permissions and perform actions that are normally denied to them. Only grant authorized stored procedure access to principals that you trust to run the procedure in its entirety.
 
@@ -29,10 +29,10 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 1.  Go to the BigQuery page in the Google Cloud console.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -45,89 +45,101 @@ To authorize a routine, use the Google Cloud console, the bq command-line tool, 
 ### bq
 
 1.  Use the `bq show` command to get the JSON representation of the dataset that you want the routine to access. The output from the command is a JSON representation of the [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource. Save the result to a local file.
-    
-        bq show --format=prettyjson TARGET_DATASET > dataset.json
-    
-    Replace `  TARGET_DATASET  ` with the name of the dataset that the routine can access.
+
+    ```
+    bq show --format=prettyjson TARGET_DATASET > dataset.json
+    ```
+
+    Replace `TARGET_DATASET` with the name of the dataset that the routine can access.
 
 2.  Edit the file to add the following JSON object to the `access` array in the `Dataset` resource:
-    
-        {
-         "routine": {
-           "datasetId": "DATASET_NAME",
-           "projectId": "PROJECT_ID",
-           "routineId": "ROUTINE_NAME"
-         }
-        }
-    
+
+    ```
+    {
+     "routine": {
+       "datasetId": "DATASET_NAME",
+       "projectId": "PROJECT_ID",
+       "routineId": "ROUTINE_NAME"
+     }
+    }
+    ```
+
     Replace the following:
-    
-      - `  DATASET_NAME  ` : the name of the dataset that contains the routine.
-      - `  PROJECT_ID  ` : the project ID of the project that contains the routine.
-      - `  ROUTINE_NAME  ` : the name of the routine.
+
+    - `DATASET_NAME` : the name of the dataset that contains the routine.
+    - `PROJECT_ID` : the project ID of the project that contains the routine.
+    - `ROUTINE_NAME` : the name of the routine.
 
 3.  Optional: If you are authorizing a stored procedure, attach an IAM role. This role restricts access to the authorized procedure based on its permissions. To do this, add `"role"` to the JSON object:
-    
-        {
-         "role": "ROLE_NAME",
-         "routine": {
-           "datasetId": "DATASET_NAME",
-           "projectId": "PROJECT_ID",
-           "routineId": "ROUTINE_NAME"
-         }
-        }
-    
-    Replace `  ROLE_NAME  ` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
-    
-      - [BigQuery Routine Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineMetadataViewer) ( `roles/bigquery.routineMetadataViewer` )
-      - [BigQuery Routine Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataViewer) ( `roles/bigquery.routineDataViewer` )
-      - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
-      - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
-    
+
+    ```
+    {
+     "role": "ROLE_NAME",
+     "routine": {
+       "datasetId": "DATASET_NAME",
+       "projectId": "PROJECT_ID",
+       "routineId": "ROUTINE_NAME"
+     }
+    }
+    ```
+
+    Replace `ROLE_NAME` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
+
+    - [BigQuery Routine Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineMetadataViewer) ( `roles/bigquery.routineMetadataViewer` )
+    - [BigQuery Routine Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataViewer) ( `roles/bigquery.routineDataViewer` )
+    - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
+    - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
+
     > **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
 
 4.  Use the `bq update` command to update the dataset:
-    
-        bq update --source dataset.json TARGET_DATASET
+
+    ```
+    bq update --source dataset.json TARGET_DATASET
+    ```
 
 ### API
 
 1.  Call the [`datasets.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) method to fetch the dataset that you want the routine to access. The response body contains a representation of the [`Dataset`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset) resource.
 
 2.  Add the following JSON object to the `access` array in the `Dataset` resource:
-    
-        {
-         "routine": {
-           "datasetId": "DATASET_NAME",
-           "projectId": "PROJECT_ID",
-           "routineId": "ROUTINE_NAME"
-         }
-        }
-    
+
+    ```
+    {
+     "routine": {
+       "datasetId": "DATASET_NAME",
+       "projectId": "PROJECT_ID",
+       "routineId": "ROUTINE_NAME"
+     }
+    }
+    ```
+
     Replace the following:
-    
-      - `  DATASET_NAME  ` : the name of the dataset that contains the UDF.
-      - `  PROJECT_ID  ` : the project ID of the project that contains the UDF.
-      - `  ROUTINE_NAME  ` : the name of the routine.
+
+    - `DATASET_NAME` : the name of the dataset that contains the UDF.
+    - `PROJECT_ID` : the project ID of the project that contains the UDF.
+    - `ROUTINE_NAME` : the name of the routine.
 
 3.  Optional: If you are authorizing a stored procedure, attach an IAM role. This role restricts access to the authorized procedure based on its permissions. To do this, add `"role"` to the JSON object:
-    
-        {
-         "role": "ROLE_NAME",
-         "routine": {
-           "datasetId": "DATASET_NAME",
-           "projectId": "PROJECT_ID",
-           "routineId": "ROUTINE_NAME"
-         }
-        }
-    
-    Replace `  ROLE_NAME  ` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
-    
-      - [BigQuery Routine Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineMetadataViewer) ( `roles/bigquery.routineMetadataViewer` )
-      - [BigQuery Routine Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataViewer) ( `roles/bigquery.routineDataViewer` )
-      - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
-      - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
-    
+
+    ```
+    {
+     "role": "ROLE_NAME",
+     "routine": {
+       "datasetId": "DATASET_NAME",
+       "projectId": "PROJECT_ID",
+       "routineId": "ROUTINE_NAME"
+     }
+    }
+    ```
+
+    Replace `ROLE_NAME` with the name of the role that you want to attach. You can attach the following roles to a stored procedure:
+
+    - [BigQuery Routine Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineMetadataViewer) ( `roles/bigquery.routineMetadataViewer` )
+    - [BigQuery Routine Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataViewer) ( `roles/bigquery.routineDataViewer` )
+    - [BigQuery Routine Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineDataEditor) ( `roles/bigquery.routineDataEditor` )
+    - [BigQuery Routine Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.routineAdmin) ( `roles/bigquery.routineAdmin` )
+
     > **Note:** You can attach these roles only to stored procedures. Other types of routines don't support roles.
 
 4.  Call the [`dataset.update`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) method with the modified `Dataset` representation.
@@ -151,48 +163,62 @@ The following is an end-to-end example of creating and using an authorized UDF.
 1.  Create two datasets named `private_dataset` and `public_dataset` . For more information about creating a dataset, see [Creating a dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) .
 
 2.  Run the following statement to create a table named `private_table` in `private_dataset` :
-    
-        CREATE OR REPLACE TABLE private_dataset.private_table
-        AS SELECT key FROM UNNEST(['key1', 'key1','key2','key3']) key;
+
+    ```
+    CREATE OR REPLACE TABLE private_dataset.private_table
+    AS SELECT key FROM UNNEST(['key1', 'key1','key2','key3']) key;
+    ```
 
 3.  Run the following statement to create a UDF named `count_key` in `public_dataset` . The UDF includes a `SELECT` statement on `private_table` .
-    
-        CREATE OR REPLACE FUNCTION public_dataset.count_key(input_key STRING)
-        RETURNS INT64
-        AS
-        ((SELECT COUNT(1) FROM private_dataset.private_table t WHERE t.key = input_key));
+
+    ```
+    CREATE OR REPLACE FUNCTION public_dataset.count_key(input_key STRING)
+    RETURNS INT64
+    AS
+    ((SELECT COUNT(1) FROM private_dataset.private_table t WHERE t.key = input_key));
+    ```
 
 4.  Grant the `bigquery.dataViewer` role to a user on the `public_dataset` dataset. This role includes the `bigquery.routines.get` permission, which lets the user call the routine. For information about how to assign access controls to a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
-    
+
     > **Note:** Instead of using a built-in role, consider creating a custom role with minimal permissions. For more information, see [Creating and managing custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 5.  At this point, the user has permission to call the `count_key` routine but cannot access the table in `private_dataset` . If the user tries to call the routine, they get an error message similar to the following:
-    
-        Access Denied: Table myproject:private_dataset.private_table: User does
-        not have permission to query table myproject:private_dataset.private_table.
+
+    ```
+    Access Denied: Table myproject:private_dataset.private_table: User does
+    not have permission to query table myproject:private_dataset.private_table.
+    ```
 
 6.  Using the bq command-line tool, run the `show` command as follows:
-    
-        bq show --format=prettyjson private_dataset > dataset.json
-    
+
+    ```
+    bq show --format=prettyjson private_dataset > dataset.json
+    ```
+
     The output is saved to a local file named `dataset.json` .
 
 7.  Edit `dataset.json` to add the following JSON object to the `access` array:
-    
-        {
-         "routine": {
-           "datasetId": "public_dataset",
-           "projectId": "PROJECT_ID",
-           "routineId": "count_key"
-         }
-        }
-    
-    Replace `  PROJECT_ID  ` with the project ID for `public_dataset` .
+
+    ```
+    {
+     "routine": {
+       "datasetId": "public_dataset",
+       "projectId": "PROJECT_ID",
+       "routineId": "count_key"
+     }
+    }
+    ```
+
+    Replace `PROJECT_ID` with the project ID for `public_dataset` .
 
 8.  Using the bq command-line tool, run the `update` command as follows:
-    
-        bq update --source dataset.json private_dataset
+
+    ```
+    bq update --source dataset.json private_dataset
+    ```
 
 9.  To verify that the UDF has access to `private_dataset` , the user can run the following query:
-    
-        SELECT public_dataset.count_key('key1');
+
+    ```
+    SELECT public_dataset.count_key('key1');
+    ```

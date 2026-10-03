@@ -12,7 +12,7 @@ gcloud alpha bq tables config - manage Google BigQuery table configurations
 
 SYNOPSIS
 
-`gcloud alpha bq tables config` `  COMMAND  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables config` [`COMMAND`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config#COMMAND) \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -20,16 +20,16 @@ DESCRIPTION
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --help  ` .
+These flags are available to all commands: [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 COMMANDS
 
-`  COMMAND  ` is one of the following:
+`COMMAND` is one of the following:
 
-  - `  export  `  
-    `(ALPHA)` Export the configuration for a Google BigQuery table.
+[`export`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/config/export)  
+`(ALPHA)` Export the configuration for a Google BigQuery table.
 
 NOTES
 

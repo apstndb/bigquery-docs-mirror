@@ -16,47 +16,47 @@ This tutorial uses the public [`tlc_yellow_trips_2018` sample table](https://con
 
 This tutorial guides you through completing the following tasks:
 
-  - Using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) to create a baseline linear regression model.
-  - Evaluating the baseline model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Using the `CREATE MODEL` statement with hyperparameter tuning options to train twenty trials of a linear regression model.
-  - Reviewing the trials by using the [`ML.TRIAL_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info) .
-  - Evaluating the trials by using the `ML.EVALUATE` function.
-  - Get predictions about taxi trips from the optimal model among the trials by using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+- Using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) to create a baseline linear regression model.
+- Evaluating the baseline model by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+- Using the `CREATE MODEL` statement with hyperparameter tuning options to train twenty trials of a linear regression model.
+- Reviewing the trials by using the [`ML.TRIAL_INFO` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info) .
+- Evaluating the trials by using the `ML.EVALUATE` function.
+- Get predictions about taxi trips from the optimal model among the trials by using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Required permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
+- To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
-  - To create the model, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+- To create the model, you need the following permissions:
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.models.getData`
-      - `bigquery.jobs.create`
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.models.getData`
+  - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -69,21 +69,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -93,25 +93,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a table of training data
 
@@ -122,15 +128,17 @@ Follow these steps to create the table:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE TABLE `bqml_tutorial.taxi_tip_input`
-        AS
-        SELECT * EXCEPT (tip_amount), tip_amount AS label
-        FROM
-          `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2018`
-        WHERE
-          tip_amount IS NOT NULL
-        LIMIT 100000;
+
+    ```
+    CREATE OR REPLACE TABLE `bqml_tutorial.taxi_tip_input`
+    AS
+    SELECT * EXCEPT (tip_amount), tip_amount AS label
+    FROM
+      `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2018`
+    WHERE
+      tip_amount IS NOT NULL
+    LIMIT 100000;
+    ```
 
 ## Create a baseline linear regression model
 
@@ -141,17 +149,19 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.baseline_taxi_tip_model`
-          OPTIONS (
-            MODEL_TYPE = 'LINEAR_REG'
-          )
-        AS
-        SELECT
-          *
-        FROM
-          `bqml_tutorial.taxi_tip_input`;
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.baseline_taxi_tip_model`
+      OPTIONS (
+        MODEL_TYPE = 'LINEAR_REG'
+      )
+    AS
+    SELECT
+      *
+    FROM
+      `bqml_tutorial.taxi_tip_input`;
+    ```
+
     The query takes about 2 minutes to complete.
 
 ## Evaluate the baseline model
@@ -163,13 +173,15 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.baseline_taxi_tip_model`);
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.baseline_taxi_tip_model`);
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +---------------------+--------------------+------------------------+-----------------------+---------------------+---------------------+
     | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error |      r2_score       | explained_variance  |
@@ -186,34 +198,36 @@ Create a linear regression model with hyperparameter tuning and train it on the 
 
 You use the following hyperparameter tuning options in the `CREATE MODEL` statement:
 
-  - The [`NUM_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#num_trials) to set the number of trials to twenty.
-  - The [`MAX_PARALLEL_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_parallel_trials) to run two trials in each training job, for a total of ten jobs and twenty trials. This reduces the training time needed. However, the two concurrent trials don't benefit from each other's training results.
-  - The [`L1_REG` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l1_reg) to try different L1 regularization values in the different trials. L1 regularization removes irrelevant features from the model, which helps prevent [overfitting](https://developers.google.com/machine-learning/glossary/#overfitting) .
+- The [`NUM_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#num_trials) to set the number of trials to twenty.
+- The [`MAX_PARALLEL_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_parallel_trials) to run two trials in each training job, for a total of ten jobs and twenty trials. This reduces the training time needed. However, the two concurrent trials don't benefit from each other's training results.
+- The [`L1_REG` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l1_reg) to try different L1 regularization values in the different trials. L1 regularization removes irrelevant features from the model, which helps prevent [overfitting](https://developers.google.com/machine-learning/glossary/#overfitting) .
 
 The other hyperparameter tuning options supported by the model use their default values, as follows:
 
-  - `L1_REG` : `0`
-  - `HPARAM_TUNING_ALGORITHM` : `'VIZIER_DEFAULT'`
-  - `HPARAM_TUNING_OBJECTIVES` : `['R2_SCORE']`
+- `L1_REG` : `0`
+- `HPARAM_TUNING_ALGORITHM` : `'VIZIER_DEFAULT'`
+- `HPARAM_TUNING_OBJECTIVES` : `['R2_SCORE']`
 
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.hp_taxi_tip_model`
-          OPTIONS (
-            MODEL_TYPE = 'LINEAR_REG',
-            NUM_TRIALS = 20,
-            MAX_PARALLEL_TRIALS = 2,
-            L1_REG = HPARAM_RANGE(0, 5))
-        AS
-        SELECT
-          *
-        FROM
-          `bqml_tutorial.taxi_tip_input`;
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.hp_taxi_tip_model`
+      OPTIONS (
+        MODEL_TYPE = 'LINEAR_REG',
+        NUM_TRIALS = 20,
+        MAX_PARALLEL_TRIALS = 2,
+        L1_REG = HPARAM_RANGE(0, 5))
+    AS
+    SELECT
+      *
+    FROM
+      `bqml_tutorial.taxi_tip_input`;
+    ```
+
     The query takes approximately 20 minutes to complete.
 
 ## Get information about the training trials
@@ -225,14 +239,16 @@ Follow these steps to get trial information:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.TRIAL_INFO(MODEL `bqml_tutorial.hp_taxi_tip_model`)
-        ORDER BY is_optimal DESC;
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.TRIAL_INFO(MODEL `bqml_tutorial.hp_taxi_tip_model`)
+    ORDER BY is_optimal DESC;
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
     | trial_id |           hyperparameters           | hparam_tuning_evaluation_metrics  |   training_loss    |     eval_loss      |  status   | error_message | is_optimal |
@@ -244,7 +260,7 @@ Follow these steps to get trial information:
     |      ... |                             ...     |                           ...     |              ...   |             ...    |       ... |          ...  |        ... |
     +----------+-------------------------------------+-----------------------------------+--------------------+--------------------+-----------+---------------+------------+
     ```
-    
+
     The `is_optimal` column value indicates that trial 7 is the optimal model returned by the tuning.
 
 ## Evaluate the tuned model trials
@@ -256,14 +272,16 @@ Follow these steps to evaluate the model trials:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.hp_taxi_tip_model`)
-        ORDER BY r2_score DESC;
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.hp_taxi_tip_model`)
+    ORDER BY r2_score DESC;
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +----------+---------------------+--------------------+------------------------+-----------------------+--------------------+--------------------+
     | trial_id | mean_absolute_error | mean_squared_error | mean_squared_log_error | median_absolute_error |      r2_score      | explained_variance |
@@ -275,7 +293,7 @@ Follow these steps to evaluate the model trials:
     |      ... |                ...  |                ... |                    ... |                   ... |                ... |                ... |
     +----------+---------------------+--------------------+------------------------+-----------------------+--------------------+--------------------+
     ```
-    
+
     The `r2_score` value for the optimal model, which is trial 7, is `0.66521103056591446` , which shows significant improvement over the baseline model.
 
 You can evaluate a specific trial by specifying the `TRIAL_ID` argument in the `ML.EVALUATE` function.
@@ -291,21 +309,23 @@ Follow these steps to get predictions:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.PREDICT(
-            MODEL `bqml_tutorial.hp_taxi_tip_model`,
-            (
-              SELECT
-                *
-              FROM
-                `bqml_tutorial.taxi_tip_input`
-              LIMIT 5
-            ));
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.PREDICT(
+        MODEL `bqml_tutorial.hp_taxi_tip_model`,
+        (
+          SELECT
+            *
+          FROM
+            `bqml_tutorial.taxi_tip_input`
+          LIMIT 5
+        ));
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +----------+--------------------+-----------+---------------------+---------------------+-----------------+---------------+-----------+--------------------+--------------+-------------+-------+---------+--------------+---------------+--------------+--------------------+---------------------+----------------+-----------------+-------+
     | trial_id |  predicted_label   | vendor_id |   pickup_datetime   |  dropoff_datetime   | passenger_count | trip_distance | rate_code | store_and_fwd_flag | payment_type | fare_amount | extra | mta_tax | tolls_amount | imp_surcharge | total_amount | pickup_location_id | dropoff_location_id | data_file_year | data_file_month | label |
@@ -322,8 +342,8 @@ Follow these steps to get predictions:
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -331,7 +351,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation panel, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation panel, click the **bqml_tutorial** dataset you created.
 
 3.  On the right side of the window, click **Delete dataset** . This action deletes the dataset, the table, and all the data.
 
@@ -342,20 +362,18 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .
+- To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .

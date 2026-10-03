@@ -10,11 +10,11 @@ data_source: docs.cloud.google.com
 
 This document helps you understand where Gemini in BigQuery processes your data. This behavior applies to the following Gemini in BigQuery features:
 
-  - [SQL code assist](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
-  - [BigQuery Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-engineering-agent)
-  - [BigQuery data canvas](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
-  - [BigQuery data insights](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-insights)
-  - [BigQuery data preparation](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-preparation)
+- [SQL code assist](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
+- [BigQuery Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-engineering-agent)
+- [BigQuery data canvas](https://docs.cloud.google.com/bigquery/docs/gemini-locations#sql-editor-canvas)
+- [BigQuery data insights](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-insights)
+- [BigQuery data preparation](https://docs.cloud.google.com/bigquery/docs/gemini-locations#bigquery-data-preparation)
 
 For these features, Gemini processing occurs in the jurisdictional boundaries of the query location, or where the BigQuery dataset is stored. For example, if your BigQuery query location or dataset is in the `europe-west1` region, Gemini processing occurs in a location within the `EU` jurisdictional boundary. This design minimizes data movement and follows data governance best practices. For more information about restrictions on available jurisdictions, see [Limitations](https://docs.cloud.google.com/bigquery/docs/gemini-locations#limitations) .
 
@@ -28,14 +28,14 @@ The following sections explain how you can manage where each Gemini in BigQuery 
 
 When you [generate code using the SQL editor](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) , or use [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) to create data analysis workflows, Gemini in BigQuery uses the following logic to determine the processing location:
 
-  - A BigQuery administrator can specify a default organization-level or project-level location. To learn how to specify a default location, see [Specify the default organization-level or project-level location](https://docs.cloud.google.com/bigquery/docs/gemini-locations#specify-default-location) .
+- A BigQuery administrator can specify a default organization-level or project-level location. To learn how to specify a default location, see [Specify the default organization-level or project-level location](https://docs.cloud.google.com/bigquery/docs/gemini-locations#specify-default-location) .
 
-  - A BigQuery user can specify a query location in BigQuery Studio that overrides the administrator setting. To learn how to specify a default query location setting in BigQuery, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
+- A BigQuery user can specify a query location in BigQuery Studio that overrides the administrator setting. To learn how to specify a default query location setting in BigQuery, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-  - If a dataset's location cannot be determined, or if the user's default query location is unspecified,BigQuery attempts to determine the location of the dataset or query based on the [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) . For example:
-    
-      - SQL editor example: If your Gemini request for **Transform SQL with Gemini** references a dataset in `europe-west1` , then Gemini processes the data in the `EU` jurisdictional boundary.
-      - Data canvas example: If your data canvas visualizes data from a dataset located in `us-east4` , any Gemini in BigQuery analyses or suggestions are processed in the `US` jurisdictional boundaries.
+- If a dataset's location cannot be determined, or if the user's default query location is unspecified,BigQuery attempts to determine the location of the dataset or query based on the [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) . For example:
+
+  - SQL editor example: If your Gemini request for **Transform SQL with Gemini** references a dataset in `europe-west1` , then Gemini processes the data in the `EU` jurisdictional boundary.
+  - Data canvas example: If your data canvas visualizes data from a dataset located in `us-east4` , any Gemini in BigQuery analyses or suggestions are processed in the `US` jurisdictional boundaries.
 
 ### Specify the default organization-level or project-level location
 
@@ -75,23 +75,23 @@ To generate insights using [BigQuery data insights](https://docs.cloud.google.co
 
 The location where [BigQuery data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) processes data depends upon which data preparation feature you are using.
 
-  - For standalone data preparation, the Gemini in BigQuery processing location is the location where the BigQuery dataset is located.
-  - If you run data preparation as part of Dataform or BigQuery pipelines, then the Gemini in BigQuery data processing location is determined by the Dataform [`defaultLocation` setting](https://docs.cloud.google.com/dataform/docs/manage-repository#about-workflow-settings-yaml) , if it's set. The `defaultLocation` setting also determines the BigQuery job location. This ensures that Gemini in BigQuery processing is done in the same jurisdictional boundaries.
-  - If `defaultLocation` for Dataform or the BigQuery pipeline that contains your data preparation is not set, then the Gemini in BigQuery processing region is determined by using the repository's [region setting](https://docs.cloud.google.com/dataform/docs/create-repository#repository-settings) . A pipeline without a `defaultLocation` setting specified can run different BigQuery jobs in different locations based on the location of the tables used in pipeline nodes. As a best practice, you should set `defaultLocation` to ensure a consistent processing location.
+- For standalone data preparation, the Gemini in BigQuery processing location is the location where the BigQuery dataset is located.
+- If you run data preparation as part of Dataform or BigQuery pipelines, then the Gemini in BigQuery data processing location is determined by the Dataform [`defaultLocation` setting](https://docs.cloud.google.com/dataform/docs/manage-repository#about-workflow-settings-yaml) , if it's set. The `defaultLocation` setting also determines the BigQuery job location. This ensures that Gemini in BigQuery processing is done in the same jurisdictional boundaries.
+- If `defaultLocation` for Dataform or the BigQuery pipeline that contains your data preparation is not set, then the Gemini in BigQuery processing region is determined by using the repository's [region setting](https://docs.cloud.google.com/dataform/docs/create-repository#repository-settings) . A pipeline without a `defaultLocation` setting specified can run different BigQuery jobs in different locations based on the location of the tables used in pipeline nodes. As a best practice, you should set `defaultLocation` to ensure a consistent processing location.
 
 ## Limitations
 
 The following limitations apply when you identify where Gemini in BigQuery processes data:
 
-  - Gemini in BigQuery doesn't provide data residency for individual locations. Data processing can be specified for `US` and `EU` supported jurisdictions. Data outside these jurisdictions is processed globally.
-  - Gemini in BigQuery jurisdiction processing is only available for Gemini in BigQuery features that are generally available (GA). For a list of Gemini in BigQuery features, see [Overview of Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
-  - Gemini in Cloud Assist chat (GCA) only supports global Gemini processing. You can deny access to the GCA chat panel by removing the `geminicloudassist.agents.invoke` Identity and Access Management (IAM) permission for your users. To learn more about how to create custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
+- Gemini in BigQuery doesn't provide data residency for individual locations. Data processing can be specified for `US` and `EU` supported jurisdictions. Data outside these jurisdictions is processed globally.
+- Gemini in BigQuery jurisdiction processing is only available for Gemini in BigQuery features that are generally available (GA). For a list of Gemini in BigQuery features, see [Overview of Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
+- Gemini in Cloud Assist chat (GCA) only supports global Gemini processing. You can deny access to the GCA chat panel by removing the `geminicloudassist.agents.invoke` Identity and Access Management (IAM) permission for your users. To learn more about how to create custom roles, see [Create and manage custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 ## What's next
 
-  - Read the [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
-  - Learn how to [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
-  - Learn how to [write queries with Gemini assistance](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
-  - Learn more about [Google Cloud compliance](https://cloud.google.com/security/compliance) .
-  - Learn about [security, privacy, and compliance for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance) .
-  - Learn more about [how Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
+- Read the [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
+- Learn how to [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
+- Learn how to [write queries with Gemini assistance](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
+- Learn more about [Google Cloud compliance](https://cloud.google.com/security/compliance) .
+- Learn about [security, privacy, and compliance for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance) .
+- Learn more about [how Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .

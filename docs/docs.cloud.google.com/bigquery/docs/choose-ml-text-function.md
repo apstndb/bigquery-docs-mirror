@@ -12,9 +12,9 @@ This document provides a comparison of the natural language processing functions
 
 At a high level, the difference between these functions is as follows:
 
-  - `AI.GENERATE_TEXT` is a good choice for performing customized natural language processing (NLP) tasks at a lower cost. This function offers more language support, faster throughput, and model tuning capability, and also works with multimodal models.
-  - `ML.TRANSLATE` is a good choice for performing translation-specific NLP tasks where you need to support a high rate of queries per minute.
-  - `ML.UNDERSTAND_TEXT` is a good choice for performing NLP tasks that are supported by the Cloud Natural Language API.
+- `AI.GENERATE_TEXT` is a good choice for performing customized natural language processing (NLP) tasks at a lower cost. This function offers more language support, faster throughput, and model tuning capability, and also works with multimodal models.
+- `ML.TRANSLATE` is a good choice for performing translation-specific NLP tasks where you need to support a high rate of queries per minute.
+- `ML.UNDERSTAND_TEXT` is a good choice for performing NLP tasks that are supported by the Cloud Natural Language API.
 
 ## Function comparison
 
@@ -30,28 +30,28 @@ Use the following table to compare the `AI.GENERATE_TEXT` , `ML.TRANSLATE` , and
 <thead>
 <tr class="header">
 <th></th>
-<th><code dir="ltr" translate="no">AI.GENERATE_TEXT</code></th>
-<th><code dir="ltr" translate="no">ML.TRANSLATE</code></th>
-<th><code dir="ltr" translate="no">ML.UNDERSTAND_TEXT</code></th>
+<th><code>AI.GENERATE_TEXT</code></th>
+<th><code>ML.TRANSLATE</code></th>
+<th><code>ML.UNDERSTAND_TEXT</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Purpose</td>
 <td><p>Perform any NLP task by passing a prompt to a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Gemini or partner model</a> or to an <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open">open model</a> .</p>
-<p>For example, to perform a question answering task, you could provide a prompt similar to <code dir="ltr" translate="no">CONCAT("What are the key concepts in the following article?: ", article_text)</code> .</p></td>
+<p>For example, to perform a question answering task, you could provide a prompt similar to <code>CONCAT("What are the key concepts in the following article?: ", article_text)</code> .</p></td>
 <td>Use the <a href="https://docs.cloud.google.com/translate">Cloud Translation API</a> to perform the following tasks:
 <ul>
-<li><a href="https://docs.cloud.google.com/translate/docs/advanced/translating-text-v3"><code dir="ltr" translate="no">TRANSLATE_TEXT</code></a></li>
-<li><a href="https://docs.cloud.google.com/translate/docs/advanced/detecting-language-v3"><code dir="ltr" translate="no">DETECT_LANGUAGE</code></a></li>
+<li><a href="https://docs.cloud.google.com/translate/docs/advanced/translating-text-v3"><code>TRANSLATE_TEXT</code></a></li>
+<li><a href="https://docs.cloud.google.com/translate/docs/advanced/detecting-language-v3"><code>DETECT_LANGUAGE</code></a></li>
 </ul></td>
 <td>Use the <a href="https://docs.cloud.google.com/natural-language">Cloud Natural Language API</a> to perform the following tasks:
 <ul>
-<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-entities"><code dir="ltr" translate="no">ANALYZE_ENTITIES</code></a></li>
-<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-entity-sentiment"><code dir="ltr" translate="no">ANALYZE_ENTITY_SENTIMENT</code></a></li>
-<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-sentiment"><code dir="ltr" translate="no">ANALYZE_SENTIMENT</code></a></li>
-<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-syntax"><code dir="ltr" translate="no">ANALYZE_SYNTAX</code></a></li>
-<li><a href="https://docs.cloud.google.com/natural-language/docs/classifying-text"><code dir="ltr" translate="no">CLASSIFY_TEXT</code></a></li>
+<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-entities"><code>ANALYZE_ENTITIES</code></a></li>
+<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-entity-sentiment"><code>ANALYZE_ENTITY_SENTIMENT</code></a></li>
+<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-sentiment"><code>ANALYZE_SENTIMENT</code></a></li>
+<li><a href="https://docs.cloud.google.com/natural-language/docs/analyzing-syntax"><code>ANALYZE_SYNTAX</code></a></li>
+<li><a href="https://docs.cloud.google.com/natural-language/docs/classifying-text"><code>CLASSIFY_TEXT</code></a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -73,7 +73,7 @@ Incurs charges for calls to the Cloud Translation API. For more information, see
 <tr class="even">
 <td>Tokens per minute</td>
 <td>Ranges from 8,192 to over 1 million, depending on the model used.</td>
-<td>No token limit. However, <code dir="ltr" translate="no">ML_TRANSLATE</code> does have a <a href="https://docs.cloud.google.com/translate/quotas#content-limit">30,000 bytes limit</a> .</td>
+<td>No token limit. However, <code>ML_TRANSLATE</code> does have a <a href="https://docs.cloud.google.com/translate/quotas#content-limit">30,000 bytes limit</a> .</td>
 <td><a href="https://docs.cloud.google.com/natural-language/quotas#content">100,000</a> .</td>
 </tr>
 <tr class="odd">
@@ -109,8 +109,8 @@ Incurs charges for calls to the Cloud Translation API. For more information, see
 <tr class="even">
 <td>Supported regions</td>
 <td>Supported in all Generative AI for Agent Platform <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions">regions</a> .</td>
-<td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions.</td>
-<td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions.</td>
+<td>Supported in the <code>EU</code> and <code>US</code> multi-regions.</td>
+<td>Supported in the <code>EU</code> and <code>US</code> multi-regions.</td>
 </tr>
 </tbody>
 </table>

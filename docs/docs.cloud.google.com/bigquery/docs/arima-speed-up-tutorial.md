@@ -18,9 +18,9 @@ Before reading this tutorial, you should read [Forecast multiple time series wit
 
 In this tutorial, you use the following:
 
-  - Creating a time series model by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Evaluating the model's accuracy by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Using the [`AUTO_ARIMA_MAX_ORDER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) , [`TIME_SERIES_LENGTH_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_length_fraction) , [`MIN_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#min_time_series_length) , and [`MAX_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#max_time_series_length) options of the `CREATE MODEL` statement to significantly reduce the model training time.
+- Creating a time series model by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+- Evaluating the model's accuracy by using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+- Using the [`AUTO_ARIMA_MAX_ORDER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) , [`TIME_SERIES_LENGTH_FRACTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_length_fraction) , [`MIN_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#min_time_series_length) , and [`MAX_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#max_time_series_length) options of the `CREATE MODEL` statement to significantly reduce the model training time.
 
 For simplicity, this tutorial doesn't cover how to use the [`ML.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) or [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) functions to generate forecasts. To learn how to use those functions, see [Forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial) .
 
@@ -28,36 +28,36 @@ For simplicity, this tutorial doesn't cover how to use the [`ML.FORECAST`](https
 
 This tutorial uses billable components of Google Cloud, including:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page and the [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) page.
 
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Required Permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
+- To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
-  - To create the model, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+- To create the model, you need the following permissions:
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.models.getData`
-      - `bigquery.jobs.create`
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.models.getData`
+  - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -70,21 +70,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -94,25 +94,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a table of input data
 
@@ -125,30 +131,32 @@ Follow these steps to create the input data table:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE TABLE
-          `bqml_tutorial.nyc_citibike_time_series` AS
-        WITH input_time_series AS
-        (
-          SELECT
-            start_station_name,
-            EXTRACT(DATE FROM starttime) AS date,
-            COUNT(*) AS num_trips
-          FROM
-            `bigquery-public-data.new_york.citibike_trips`
-          GROUP BY
-            start_station_name, date
-        )
-        SELECT table_1.*
-        FROM input_time_series AS table_1
-        INNER JOIN (
-          SELECT start_station_name,  COUNT(*) AS num_points
-          FROM input_time_series
-          GROUP BY start_station_name) table_2
-        ON
-          table_1.start_station_name = table_2.start_station_name
-        WHERE
-          num_points > 400;
+
+    ```
+    CREATE OR REPLACE TABLE
+      `bqml_tutorial.nyc_citibike_time_series` AS
+    WITH input_time_series AS
+    (
+      SELECT
+        start_station_name,
+        EXTRACT(DATE FROM starttime) AS date,
+        COUNT(*) AS num_trips
+      FROM
+        `bigquery-public-data.new_york.citibike_trips`
+      GROUP BY
+        start_station_name, date
+    )
+    SELECT table_1.*
+    FROM input_time_series AS table_1
+    INNER JOIN (
+      SELECT start_station_name,  COUNT(*) AS num_points
+      FROM input_time_series
+      GROUP BY start_station_name) table_2
+    ON
+      table_1.start_station_name = table_2.start_station_name
+    WHERE
+      num_points > 400;
+    ```
 
 ## Create a model to multiple time-series with default parameters
 
@@ -163,18 +171,20 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_default`
-        OPTIONS
-          (model_type = 'ARIMA_PLUS',
-          time_series_timestamp_col = 'date',
-          time_series_data_col = 'num_trips',
-          time_series_id_col = 'start_station_name'
-          ) AS
-        SELECT *
-        FROM bqml_tutorial.nyc_citibike_time_series
-        WHERE date < '2016-06-01';
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_default`
+    OPTIONS
+      (model_type = 'ARIMA_PLUS',
+      time_series_timestamp_col = 'date',
+      time_series_data_col = 'num_trips',
+      time_series_id_col = 'start_station_name'
+      ) AS
+    SELECT *
+    FROM bqml_tutorial.nyc_citibike_time_series
+    WHERE date < '2016-06-01';
+    ```
+
     The query takes about 15 minutes to complete.
 
 ## Evaluate forecasting accuracy for each time series
@@ -186,21 +196,23 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
-          TABLE `bqml_tutorial.nyc_citibike_time_series`,
-          STRUCT(7 AS horizon, TRUE AS perform_aggregation));
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
+      TABLE `bqml_tutorial.nyc_citibike_time_series`,
+      STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+    ```
+
     This query reports several forecasting metrics, including:
-    
+
     The results should look similar to the following: ![Evaluation metrics for the time series model.](https://docs.cloud.google.com/static/bigquery/images/forecast_accuracy.png)
-    
+
     The `TABLE` clause in the `ML.EVALUATE` function identifies a table containing the ground truth data. The forecasting results are compared to the ground truth data to compute accuracy metrics. In this case, the `nyc_citibike_time_series` contains both the time series points that are before and after June 1, 2016. The points after June 1, 2016 are the ground truth data. The points before June 1, 2016 are used to train the model to generate forecasts after that date. Only the points after June 1, 2016 are necessary to compute the metrics. The points before June 1, 2016 are ignored in metrics calculation.
-    
+
     The `STRUCT` clause in the `ML.EVALUATE` function specified parameters for the function. The `horizon` value is `7` , which means the query is calculating the forecasting accuracy based on a seven point forecast. Note that if the ground truth data has less than seven points for the comparison, then accuracy metrics are computed based on the available points only. The `perform_aggregation` value is `TRUE` , which means that the forecasting accuracy metrics are aggregated over the metrics on the time point basis. If you specify a `perform_aggregation` value of `FALSE` , forecasting accuracy is returned for each forecasted time point.
-    
+
     For more information about the output columns, see [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
 
 ## Evaluate overall forecasting accuracy
@@ -214,14 +226,16 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          AVG(mean_absolute_percentage_error) AS MAPE,
-          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
-            TABLE `bqml_tutorial.nyc_citibike_time_series`,
-            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+
+    ```
+    SELECT
+      AVG(mean_absolute_percentage_error) AS MAPE,
+      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_default`,
+        TABLE `bqml_tutorial.nyc_citibike_time_series`,
+        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+    ```
 
 This query returns a `MAPE` value of `0.3471` , and a `sMAPE` value of `0.2563` .
 
@@ -236,19 +250,21 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`
-        OPTIONS
-          (model_type = 'ARIMA_PLUS',
-          time_series_timestamp_col = 'date',
-          time_series_data_col = 'num_trips',
-          time_series_id_col = 'start_station_name',
-          auto_arima_max_order = 2
-          ) AS
-        SELECT *
-        FROM `bqml_tutorial.nyc_citibike_time_series`
-        WHERE date < '2016-06-01';
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`
+    OPTIONS
+      (model_type = 'ARIMA_PLUS',
+      time_series_timestamp_col = 'date',
+      time_series_data_col = 'num_trips',
+      time_series_id_col = 'start_station_name',
+      auto_arima_max_order = 2
+      ) AS
+    SELECT *
+    FROM `bqml_tutorial.nyc_citibike_time_series`
+    WHERE date < '2016-06-01';
+    ```
+
     The query takes about 2 minutes to complete. Recall that the previous model took about 15 minutes to complete when the `auto_arima_max_order` value was `5` , so this change improves model training speed gain by around 7x. If you wonder why the speed gain is not `5/2=2.5x` , this is because when the `auto_arima_max_order` value increases, not only do the number of candidate models increase, but also the complexity. This causes the training time of the model increases.
 
 ## Evaluate forecasting accuracy for a model with a smaller hyperparameter search space
@@ -258,14 +274,16 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          AVG(mean_absolute_percentage_error) AS MAPE,
-          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`,
-            TABLE `bqml_tutorial.nyc_citibike_time_series`,
-            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+
+    ```
+    SELECT
+      AVG(mean_absolute_percentage_error) AS MAPE,
+      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2`,
+        TABLE `bqml_tutorial.nyc_citibike_time_series`,
+        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+    ```
 
 This query returns a `MAPE` value of `0.3337` , and a `sMAPE` value of `0.2337` .
 
@@ -284,20 +302,22 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`
-        OPTIONS
-          (model_type = 'ARIMA_PLUS',
-          time_series_timestamp_col = 'date',
-          time_series_data_col = 'num_trips',
-          time_series_id_col = 'start_station_name',
-          auto_arima_max_order = 2,
-          max_time_series_length = 30
-          ) AS
-        SELECT *
-        FROM `bqml_tutorial.nyc_citibike_time_series`
-        WHERE date < '2016-06-01';
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`
+    OPTIONS
+      (model_type = 'ARIMA_PLUS',
+      time_series_timestamp_col = 'date',
+      time_series_data_col = 'num_trips',
+      time_series_id_col = 'start_station_name',
+      auto_arima_max_order = 2,
+      max_time_series_length = 30
+      ) AS
+    SELECT *
+    FROM `bqml_tutorial.nyc_citibike_time_series`
+    WHERE date < '2016-06-01';
+    ```
+
     The query takes about 35 seconds to complete. This is 3x faster compared to the query you used in the [Create a model to forecast multiple time-series with a smaller hyperparameter search space](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial#small-search-space) section. Due to the constant time overhead for the non-training part of the query, such as data preprocessing, the speed gain is much higher when the number of time series is much larger than in this example. For a million time series, the speed gain approaches the ratio of the time series length and the value of the `max_time_series_length` option value. In that case, the speed gain is greater than 10x.
 
 ## Evaluate forecasting accuracy for a model with a smaller hyperparameter search space and smart fast training strategies
@@ -307,14 +327,16 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          AVG(mean_absolute_percentage_error) AS MAPE,
-          AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
-        FROM
-          ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`,
-            TABLE `bqml_tutorial.nyc_citibike_time_series`,
-            STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+
+    ```
+    SELECT
+      AVG(mean_absolute_percentage_error) AS MAPE,
+      AVG(symmetric_mean_absolute_percentage_error) AS sMAPE
+    FROM
+      ML.EVALUATE(MODEL `bqml_tutorial.nyc_citibike_arima_model_max_order_2_fast_training`,
+        TABLE `bqml_tutorial.nyc_citibike_time_series`,
+        STRUCT(7 AS horizon, TRUE AS perform_aggregation));
+    ```
 
 This query returns a `MAPE` value of `0.3515` , and a `sMAPE` value of `0.2473` .
 
@@ -331,36 +353,38 @@ Follow these steps to evaluate the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL
-          `bqml_tutorial.liquor_forecast_by_product`
-        OPTIONS(
-          MODEL_TYPE = 'ARIMA_PLUS',
-          TIME_SERIES_TIMESTAMP_COL = 'date',
-          TIME_SERIES_DATA_COL = 'total_bottles_sold',
-          TIME_SERIES_ID_COL = ['store_number', 'item_description'],
-          HOLIDAY_REGION = 'US',
-          AUTO_ARIMA_MAX_ORDER = 2,
-          MAX_TIME_SERIES_LENGTH = 30
-        ) AS
-        SELECT
-          store_number,
-          item_description,
-          date,
-          SUM(bottles_sold) as total_bottles_sold
-        FROM
-          `bigquery-public-data.iowa_liquor_sales.sales`
-        WHERE date BETWEEN DATE("2015-01-01") AND DATE("2021-12-31")
-        GROUP BY store_number, item_description, date;
-    
+
+    ```
+    CREATE OR REPLACE MODEL
+      `bqml_tutorial.liquor_forecast_by_product`
+    OPTIONS(
+      MODEL_TYPE = 'ARIMA_PLUS',
+      TIME_SERIES_TIMESTAMP_COL = 'date',
+      TIME_SERIES_DATA_COL = 'total_bottles_sold',
+      TIME_SERIES_ID_COL = ['store_number', 'item_description'],
+      HOLIDAY_REGION = 'US',
+      AUTO_ARIMA_MAX_ORDER = 2,
+      MAX_TIME_SERIES_LENGTH = 30
+    ) AS
+    SELECT
+      store_number,
+      item_description,
+      date,
+      SUM(bottles_sold) as total_bottles_sold
+    FROM
+      `bigquery-public-data.iowa_liquor_sales.sales`
+    WHERE date BETWEEN DATE("2015-01-01") AND DATE("2021-12-31")
+    GROUP BY store_number, item_description, date;
+    ```
+
     The query takes about 1 hour 16 minutes to complete.
 
 ## Clean up
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -368,7 +392,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation, click the **bqml_tutorial** dataset you created.
 
 3.  Click **Delete dataset** to delete the dataset, the table, and all of the data.
 
@@ -379,22 +403,20 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
-  - Learn how to [hierarchically forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
+- Learn how to [forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
+- Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
+- Learn how to [hierarchically forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
+- For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the table was created.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`ICEBERG_TABLE_SET_IAM_POLICY_REQUEST`
-
-Iceberg table was created using the icebergtables.create API.
+| Enums                                  |                                                               |
+|----------------------------------------|---------------------------------------------------------------|
+| `REASON_UNSPECIFIED`                   | Unknown.                                                      |
+| `ICEBERG_TABLE_SET_IAM_POLICY_REQUEST` | Iceberg table was created using the icebergtables.create API. |

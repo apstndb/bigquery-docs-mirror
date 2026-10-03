@@ -20,16 +20,16 @@ To learn how to create models by using the Google Cloud console user interface, 
 
 This tutorial shows you how to perform the following tasks:
 
-  - Using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) to create a binary logistic regression model.
-  - Using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to evaluate the model.
-  - Using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions by using the model.
+- Using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) to create a binary logistic regression model.
+- Using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to evaluate the model.
+- Using the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions by using the model.
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information on BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -37,19 +37,19 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 
 ## Required roles
 
-  - To create a model and run inference, you must be granted the following roles:
-    
-      - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
-      - BigQuery User ( `roles/bigquery.user` )
+- To create a model and run inference, you must be granted the following roles:
+
+  - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+  - BigQuery User ( `roles/bigquery.user` )
 
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Create a dataset
@@ -61,21 +61,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -85,25 +85,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ### BigQuery DataFrames
 
@@ -111,10 +117,12 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import google.cloud.bigquery
-    
-    bqclient = google.cloud.bigquery.Client()
-    bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```python
+import google.cloud.bigquery
+
+bqclient = google.cloud.bigquery.Client()
+bqclient.create_dataset("bqml_tutorial", exists_ok=True)
+```
 
 ## Create a logistic regression model
 
@@ -125,20 +133,22 @@ Create a logistic regression model using the Analytics sample dataset for BigQue
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
-        OPTIONS(model_type='logistic_reg') AS
-        SELECT
-        IF(totals.transactions IS NULL, 0, 1) AS label,
-        IFNULL(device.operatingSystem, "") AS os,
-        device.isMobile AS is_mobile,
-        IFNULL(geoNetwork.country, "") AS country,
-        IFNULL(totals.pageviews, 0) AS pageviews
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.sample_model`
+    OPTIONS(model_type='logistic_reg') AS
+    SELECT
+    IF(totals.transactions IS NULL, 0, 1) AS label,
+    IFNULL(device.operatingSystem, "") AS os,
+    device.isMobile AS is_mobile,
+    IFNULL(geoNetwork.country, "") AS country,
+    IFNULL(totals.pageviews, 0) AS pageviews
+    FROM
+    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+    WHERE
+    _TABLE_SUFFIX BETWEEN '20160801' AND '20170630'
+    ```
+
     The query takes several minutes to complete. After the first iteration is complete, your model ( `sample_model` ) appears in the navigation panel. Because the query uses a `CREATE MODEL` statement to create a model, you don't see query results.
 
 **Query details**
@@ -149,11 +159,11 @@ The `OPTIONS(model_type='logistic_reg')` clause creates a [logistic regression](
 
 This query's `SELECT` statement retrieves the following columns that are used by the model to predict the probability that a customer will complete a transaction:
 
-  - `totals.transactions` : the total number of ecommerce transactions within the session. If the number of transactions is `NULL` , the value in the `label` column is set to `0` . Otherwise, it is set to `1` . These values represent the possible outcomes. Creating an alias named `label` is an alternative to setting the `input_label_cols=` option in the `CREATE MODEL` statement.
-  - `device.operatingSystem` : the operating system of the visitor's device.
-  - `device.isMobile` — Indicates whether the visitor's device is a mobile device.
-  - `geoNetwork.country` : the country from which the sessions originated, based on the IP address.
-  - `totals.pageviews` : the total number of page views within the session.
+- `totals.transactions` : the total number of ecommerce transactions within the session. If the number of transactions is `NULL` , the value in the `label` column is set to `0` . Otherwise, it is set to `1` . These values represent the possible outcomes. Creating an alias named `label` is an alternative to setting the `input_label_cols=` option in the `CREATE MODEL` statement.
+- `device.operatingSystem` : the operating system of the visitor's device.
+- `device.isMobile` — Indicates whether the visitor's device is a mobile device.
+- `geoNetwork.country` : the country from which the sessions originated, based on the IP address.
+- `totals.pageviews` : the total number of page views within the session.
 
 The `FROM` clause — causes the query to train the model by using the `bigquery-public-data.google_analytics_sample.ga_sessions` sample tables. These tables are sharded by date, so you aggregate them by using a wildcard in the table name: `google_analytics_sample.ga_sessions_*` .
 
@@ -165,82 +175,84 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # Start by selecting the data you'll use for training.
-    # The filters parameter limits the number of tables scanned by the query.
-    
-    df = bpd.read_gbq_table(
-        "bigquery-public-data.google_analytics_sample.ga_sessions_*",
-        filters=[
-            ("_table_suffix", ">=", "20160801"),
-            ("_table_suffix", "<=", "20170630"),
-        ],
-    )
-    
-    # Extract the total number of transactions within
-    # the Google Analytics session.
-    #
-    # Because the totals column is a STRUCT data type, call
-    # Series.struct.field("transactions") to extract the transactions field.
-    # See the reference documentation below:
-    # https://cloud.google.com/python/docs/reference/bigframes/latest/bigframes.operations.structs.StructAccessor#bigframes_operations_structs_StructAccessor_field
-    transactions = df["totals"].struct.field("transactions")
-    
-    # The "label" values represent the outcome of the model's
-    # prediction. In this case, the model predicts if there are any
-    # ecommerce transactions within the Google Analytics session.
-    # If the number of transactions is NULL, the value in the label
-    # column is set to 0. Otherwise, it is set to 1.
-    label = transactions.notnull().map({True: 1, False: 0}).rename("label")
-    
-    # Extract the operating system of the visitor's device.
-    operating_system = df["device"].struct.field("operatingSystem")
-    operating_system = operating_system.fillna("")
-    
-    # Extract whether the visitor's device is a mobile device.
-    is_mobile = df["device"].struct.field("isMobile")
-    
-    # Extract the country from which the sessions originated, based on the IP address.
-    country = df["geoNetwork"].struct.field("country").fillna("")
-    
-    # Extract the total number of page views within the session.
-    pageviews = df["totals"].struct.field("pageviews").fillna(0)
-    
-    # Combine all the feature columns and the label column into a single DataFrame
-    # to use as training data.
-    training_data = bpd.DataFrame(
-        {
-            "label": label,
-            "os": operating_system,
-            "is_mobile": is_mobile,
-            "country": country,
-            "pageviews": pageviews,
-        }
-    )
-    
-    # A Logistic Regression model splits data into two classes, giving a
-    # confidence score that the data is in one of the classes.
-    #
-    # Use ml.create_model to create and train the model in BigQuery.
-    # The options parameter specifies the model type and the label column.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
-    ml.create_model(
-        your_model_id,  # For example: "bqml_tutorial.sample_model",
-        options={
-            "model_type": "LOGISTIC_REG",
-            "input_label_cols": ["label"],
-        },
-        training_data=training_data,
-        replace=True,
-    )
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Start by selecting the data you'll use for training.
+# The filters parameter limits the number of tables scanned by the query.
+
+df = bpd.read_gbq_table(
+    "bigquery-public-data.google_analytics_sample.ga_sessions_*",
+    filters=[
+        ("_table_suffix", ">=", "20160801"),
+        ("_table_suffix", "<=", "20170630"),
+    ],
+)
+
+# Extract the total number of transactions within
+# the Google Analytics session.
+#
+# Because the totals column is a STRUCT data type, call
+# Series.struct.field("transactions") to extract the transactions field.
+# See the reference documentation below:
+# https://cloud.google.com/python/docs/reference/bigframes/latest/bigframes.operations.structs.StructAccessor#bigframes_operations_structs_StructAccessor_field
+transactions = df["totals"].struct.field("transactions")
+
+# The "label" values represent the outcome of the model's
+# prediction. In this case, the model predicts if there are any
+# ecommerce transactions within the Google Analytics session.
+# If the number of transactions is NULL, the value in the label
+# column is set to 0. Otherwise, it is set to 1.
+label = transactions.notnull().map({True: 1, False: 0}).rename("label")
+
+# Extract the operating system of the visitor's device.
+operating_system = df["device"].struct.field("operatingSystem")
+operating_system = operating_system.fillna("")
+
+# Extract whether the visitor's device is a mobile device.
+is_mobile = df["device"].struct.field("isMobile")
+
+# Extract the country from which the sessions originated, based on the IP address.
+country = df["geoNetwork"].struct.field("country").fillna("")
+
+# Extract the total number of page views within the session.
+pageviews = df["totals"].struct.field("pageviews").fillna(0)
+
+# Combine all the feature columns and the label column into a single DataFrame
+# to use as training data.
+training_data = bpd.DataFrame(
+    {
+        "label": label,
+        "os": operating_system,
+        "is_mobile": is_mobile,
+        "country": country,
+        "pageviews": pageviews,
+    }
+)
+
+# A Logistic Regression model splits data into two classes, giving a
+# confidence score that the data is in one of the classes.
+#
+# Use ml.create_model to create and train the model in BigQuery.
+# The options parameter specifies the model type and the label column.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
+    your_model_id,  # For example: "bqml_tutorial.sample_model",
+    options={
+        "model_type": "LOGISTIC_REG",
+        "input_label_cols": ["label"],
+    },
+    training_data=training_data,
+    replace=True,
+)
+```
 
 ## View the model's loss statistics
 
@@ -257,10 +269,10 @@ Use the Google Cloud console to see how the model's loss changes over the model'
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `bqml_tutorial` dataset.
 
@@ -281,25 +293,27 @@ In this tutorial, you are using a binary classification model that detects trans
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        SELECT
-        *
-        FROM
-        ML.EVALUATE(MODEL `bqml_tutorial.sample_model`, (
-        SELECT
-        IF(totals.transactions IS NULL, 0, 1) AS label,
-        IFNULL(device.operatingSystem, "") AS os,
-        device.isMobile AS is_mobile,
-        IFNULL(geoNetwork.country, "") AS country,
-        IFNULL(totals.pageviews, 0) AS pageviews
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-    
+
+    ```
+    SELECT
+    *
+    FROM
+    ML.EVALUATE(MODEL `bqml_tutorial.sample_model`, (
+    SELECT
+    IF(totals.transactions IS NULL, 0, 1) AS label,
+    IFNULL(device.operatingSystem, "") AS os,
+    device.isMobile AS is_mobile,
+    IFNULL(geoNetwork.country, "") AS country,
+    IFNULL(totals.pageviews, 0) AS pageviews
+    FROM
+    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+    WHERE
+    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
+    ```
+
     The results should look like the following:
-    
-    ``` 
+
+    ```
       +--------------------+---------------------+---------------------+---------------------+---------------------+--------------------+
       |     precision      |       recall        |      accuracy       |      f1_score       |      log_loss       | roc_auc                   |
       +--------------------+---------------------+---------------------+---------------------+---------------------+--------------------+
@@ -307,20 +321,20 @@ In this tutorial, you are using a binary classification model that detects trans
       +--------------------+---------------------+---------------------+---------------------+---------------------+--------------------+
       
     ```
-    
+
     Because you performed a logistic regression, the results include the following columns:
-    
-      - [`precision`](https://developers.google.com/machine-learning/glossary/#precision) : a metric for classification models. Precision identifies the frequency with which a model was correct when predicting the positive class.
-    
-      - [`recall`](https://developers.google.com/machine-learning/glossary/#recall) : a metric for classification models that answers the following question: Out of all the possible positive labels, how many did the model correctly identify?
-    
-      - [`accuracy`](https://developers.google.com/machine-learning/glossary/#accuracy) : accuracy is the fraction of predictions that a classification model got right.
-    
-      - [`f1_score`](https://en.wikipedia.org/wiki/F1_score) : a measure of the accuracy of the model. The f1 score is the harmonic average of the precision and recall. An f1 score's best value is 1. The worst value is 0.
-    
-      - [`log_loss`](https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_error_function_and_logistic_regression) : the loss function used in a logistic regression. This is the measure of how far the model's predictions are from the correct labels.
-    
-      - [`roc_auc`](https://developers.google.com/machine-learning/glossary/#AUC) : the area under the [ROC](https://developers.google.com/machine-learning/glossary/#ROC) curve. This is the probability that a classifier is more confident that a randomly chosen positive example is actually positive than that a randomly chosen negative example is positive. For more information, see [Classification](https://developers.google.com/machine-learning/crash-course/classification/video-lecture) in the Machine Learning Crash Course.
+
+    - [`precision`](https://developers.google.com/machine-learning/glossary/#precision) : a metric for classification models. Precision identifies the frequency with which a model was correct when predicting the positive class.
+
+    - [`recall`](https://developers.google.com/machine-learning/glossary/#recall) : a metric for classification models that answers the following question: Out of all the possible positive labels, how many did the model correctly identify?
+
+    - [`accuracy`](https://developers.google.com/machine-learning/glossary/#accuracy) : accuracy is the fraction of predictions that a classification model got right.
+
+    - [`f1_score`](https://en.wikipedia.org/wiki/F1_score) : a measure of the accuracy of the model. The f1 score is the harmonic average of the precision and recall. An f1 score's best value is 1. The worst value is 0.
+
+    - [`log_loss`](https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_error_function_and_logistic_regression) : the loss function used in a logistic regression. This is the measure of how far the model's predictions are from the correct labels.
+
+    - [`roc_auc`](https://developers.google.com/machine-learning/glossary/#AUC) : the area under the [ROC](https://developers.google.com/machine-learning/glossary/#ROC) curve. This is the probability that a classifier is more confident that a randomly chosen positive example is actually positive than that a randomly chosen negative example is positive. For more information, see [Classification](https://developers.google.com/machine-learning/crash-course/classification/video-lecture) in the Machine Learning Crash Course.
 
 **Query details**
 
@@ -338,77 +352,79 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # The filters parameter limits the number of tables scanned by the query.
-    # The date range scanned is July 1, 2017 to August 1, 2017. This is the
-    # data you're using to evaluate the predictive performance of the model.
-    # It was collected in the month immediately following the time period
-    # spanned by the training data.
-    df = bpd.read_gbq_table(
-        "bigquery-public-data.google_analytics_sample.ga_sessions_*",
-        filters=[
-            ("_table_suffix", ">=", "20170701"),
-            ("_table_suffix", "<=", "20170801"),
-        ],
-    )
-    
-    transactions = df["totals"].struct.field("transactions")
-    label = transactions.notnull().map({True: 1, False: 0}).rename("label")
-    operating_system = df["device"].struct.field("operatingSystem")
-    operating_system = operating_system.fillna("")
-    is_mobile = df["device"].struct.field("isMobile")
-    country = df["geoNetwork"].struct.field("country").fillna("")
-    pageviews = df["totals"].struct.field("pageviews").fillna(0)
-    eval_data = bpd.DataFrame(
-        {
-            "label": label,
-            "os": operating_system,
-            "is_mobile": is_mobile,
-            "country": country,
-            "pageviews": pageviews,
-        }
-    )
-    
-    # Use the ml.evaluate method to evaluate the model with test data.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
-    #
-    # Because you performed a logistic regression, the results include the following columns:
-    
-    # - precision — A metric for classification models. Precision identifies the frequency with
-    # which a model was correct when predicting the positive class.
-    
-    # - recall — A metric for classification models that answers the following question:
-    # Out of all the possible positive labels, how many did the model correctly identify?
-    
-    # - accuracy — Accuracy is the fraction of predictions that a classification model got right.
-    
-    # - f1_score — A measure of the accuracy of the model. The f1 score is the harmonic average of
-    # the precision and recall. An f1 score's best value is 1. The worst value is 0.
-    
-    # - log_loss — The loss function used in a logistic regression. This is the measure of how far the
-    # model's predictions are from the correct labels.
-    
-    # - roc_auc — The area under the ROC curve. This is the probability that a classifier is more confident that
-    # a randomly chosen positive example
-    # is actually positive than that a randomly chosen negative example is positive.
-    # For more information, see Classification in the Machine Learning Crash Course:
-    # https://developers.google.com/machine-learning/crash-course/classification/video-lecture
-    
-    ml.evaluate(
-      evaluateodel_id,  # For example: "bqml_tutorial.sample_model",
-        input_=eval_data,
-    )
-    #    precision    recall  accuracy  f1_score  log_loss   roc_auc
-    # 0   0.451613  0.078212  0.985316  0.133333  0.046824  0.980537
-    # [1 rows x 6 columns]
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# The filters parameter limits the number of tables scanned by the query.
+# The date range scanned is July 1, 2017 to August 1, 2017. This is the
+# data you're using to evaluate the predictive performance of the model.
+# It was collected in the month immediately following the time period
+# spanned by the training data.
+df = bpd.read_gbq_table(
+    "bigquery-public-data.google_analytics_sample.ga_sessions_*",
+    filters=[
+        ("_table_suffix", ">=", "20170701"),
+        ("_table_suffix", "<=", "20170801"),
+    ],
+)
+
+transactions = df["totals"].struct.field("transactions")
+label = transactions.notnull().map({True: 1, False: 0}).rename("label")
+operating_system = df["device"].struct.field("operatingSystem")
+operating_system = operating_system.fillna("")
+is_mobile = df["device"].struct.field("isMobile")
+country = df["geoNetwork"].struct.field("country").fillna("")
+pageviews = df["totals"].struct.field("pageviews").fillna(0)
+eval_data = bpd.DataFrame(
+    {
+        "label": label,
+        "os": operating_system,
+        "is_mobile": is_mobile,
+        "country": country,
+        "pageviews": pageviews,
+    }
+)
+
+# Use the ml.evaluate method to evaluate the model with test data.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate
+#
+# Because you performed a logistic regression, the results include the following columns:
+
+# - precision — A metric for classification models. Precision identifies the frequency with
+# which a model was correct when predicting the positive class.
+
+# - recall — A metric for classification models that answers the following question:
+# Out of all the possible positive labels, how many did the model correctly identify?
+
+# - accuracy — Accuracy is the fraction of predictions that a classification model got right.
+
+# - f1_score — A measure of the accuracy of the model. The f1 score is the harmonic average of
+# the precision and recall. An f1 score's best value is 1. The worst value is 0.
+
+# - log_loss — The loss function used in a logistic regression. This is the measure of how far the
+# model's predictions are from the correct labels.
+
+# - roc_auc — The area under the ROC curve. This is the probability that a classifier is more confident that
+# a randomly chosen positive example
+# is actually positive than that a randomly chosen negative example is positive.
+# For more information, see Classification in the Machine Learning Crash Course:
+# https://developers.google.com/machine-learning/crash-course/classification/video-lecture
+
+ml.evaluate(
+  evaluateodel_id,  # For example: "bqml_tutorial.sample_model",
+    input_=eval_data,
+)
+#    precision    recall  accuracy  f1_score  log_loss   roc_auc
+# 0   0.451613  0.078212  0.985316  0.133333  0.046824  0.980537
+# [1 rows x 6 columns]
+```
 
 ## Use the model to predict outcomes
 
@@ -419,41 +435,45 @@ Use the model to predict the number of transactions made by website visitors fro
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        SELECT
-        country,
-        SUM(predicted_label) as total_predicted_purchases
-        FROM
-        ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
-        SELECT
-        IFNULL(device.operatingSystem, "") AS os,
-        device.isMobile AS is_mobile,
-        IFNULL(totals.pageviews, 0) AS pageviews,
-        IFNULL(geoNetwork.country, "") AS country
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-        GROUP BY country
-        ORDER BY total_predicted_purchases DESC
-        LIMIT 10
-    
+
+    ```
+    SELECT
+    country,
+    SUM(predicted_label) as total_predicted_purchases
+    FROM
+    ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
+    SELECT
+    IFNULL(device.operatingSystem, "") AS os,
+    device.isMobile AS is_mobile,
+    IFNULL(totals.pageviews, 0) AS pageviews,
+    IFNULL(geoNetwork.country, "") AS country
+    FROM
+    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+    WHERE
+    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
+    GROUP BY country
+    ORDER BY total_predicted_purchases DESC
+    LIMIT 10
+    ```
+
     The results should look like the following:
-    
-        +----------------+---------------------------+
-        |    country     | total_predicted_purchases |
-        +----------------+---------------------------+
-        | United States  |                       220 |
-        | Taiwan         |                         8 |
-        | Canada         |                         7 |
-        | India          |                         2 |
-        | Turkey         |                         2 |
-        | Japan          |                         2 |
-        | Italy          |                         1 |
-        | Brazil         |                         1 |
-        | Singapore      |                         1 |
-        | Australia      |                         1 |
-        +----------------+---------------------------+
+
+    ```
+    +----------------+---------------------------+
+    |    country     | total_predicted_purchases |
+    +----------------+---------------------------+
+    | United States  |                       220 |
+    | Taiwan         |                         8 |
+    | Canada         |                         7 |
+    | India          |                         2 |
+    | Turkey         |                         2 |
+    | Japan          |                         2 |
+    | Italy          |                         1 |
+    | Brazil         |                         1 |
+    | Singapore      |                         1 |
+    | Australia      |                         1 |
+    +----------------+---------------------------+
+    ```
 
 **Query details**
 
@@ -475,73 +495,75 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # The filters parameter limits the number of tables scanned by the query.
-    # The date range scanned is July 1, 2017 to August 1, 2017. This is the
-    # data you're using to make the prediction.
-    # It was collected in the month immediately following the time period
-    # spanned by the training data.
-    df = bpd.read_gbq_table(
-        "bigquery-public-data.google_analytics_sample.ga_sessions_*",
-        filters=[
-            ("_table_suffix", ">=", "20170701"),
-            ("_table_suffix", "<=", "20170801"),
-        ],
-    )
-    
-    operating_system = df["device"].struct.field("operatingSystem")
-    operating_system = operating_system.fillna("")
-    is_mobile = df["device"].struct.field("isMobile")
-    country = df["geoNetwork"].struct.field("country").fillna("")
-    pageviews = df["totals"].struct.field("pageviews").fillna(0)
-    features = bpd.DataFrame(
-        {
-            "os": operating_system,
-            "is_mobile": is_mobile,
-            "country": country,
-            "pageviews": pageviews,
-        }
-    )
-    
-    # Use the ml.predict method to predict results using your model.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
-    
-    predictions = ml.predict(
-        your_model_id,  # For example: "bqml_tutorial.sample_model",
-        input_=features,
-    )
-    
-    # Call groupby method to group predicted_label by country.
-    # Call sum method to get the total_predicted_purchases by country.
-    total_predicted_purchases = predictions.groupby(["country"])[
-        ["predicted_label"]
-    ].sum()
-    
-    # Call the sort_values method with the parameter
-    # ascending = False to get the highest values.
-    # Call head method to limit to the 10 highest values.
-    total_predicted_purchases.sort_values(ascending=False).head(10)
-    
-    # country
-    # United States    162
-    # Taiwan             5
-    # Canada             3
-    # India              2
-    # Japan              2
-    # Turkey             2
-    # Australia          1
-    # Brazil             1
-    # Germany            1
-    # Guyana             1
-    # Name: predicted_label, dtype: Int64
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# The filters parameter limits the number of tables scanned by the query.
+# The date range scanned is July 1, 2017 to August 1, 2017. This is the
+# data you're using to make the prediction.
+# It was collected in the month immediately following the time period
+# spanned by the training data.
+df = bpd.read_gbq_table(
+    "bigquery-public-data.google_analytics_sample.ga_sessions_*",
+    filters=[
+        ("_table_suffix", ">=", "20170701"),
+        ("_table_suffix", "<=", "20170801"),
+    ],
+)
+
+operating_system = df["device"].struct.field("operatingSystem")
+operating_system = operating_system.fillna("")
+is_mobile = df["device"].struct.field("isMobile")
+country = df["geoNetwork"].struct.field("country").fillna("")
+pageviews = df["totals"].struct.field("pageviews").fillna(0)
+features = bpd.DataFrame(
+    {
+        "os": operating_system,
+        "is_mobile": is_mobile,
+        "country": country,
+        "pageviews": pageviews,
+    }
+)
+
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+
+predictions = ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.sample_model",
+    input_=features,
+)
+
+# Call groupby method to group predicted_label by country.
+# Call sum method to get the total_predicted_purchases by country.
+total_predicted_purchases = predictions.groupby(["country"])[
+    ["predicted_label"]
+].sum()
+
+# Call the sort_values method with the parameter
+# ascending = False to get the highest values.
+# Call head method to limit to the 10 highest values.
+total_predicted_purchases.sort_values(ascending=False).head(10)
+
+# country
+# United States    162
+# Taiwan             5
+# Canada             3
+# India              2
+# Japan              2
+# Turkey             2
+# Australia          1
+# Brazil             1
+# Germany            1
+# Guyana             1
+# Name: predicted_label, dtype: Int64
+```
 
 ## Predict purchases per user
 
@@ -554,29 +576,31 @@ This query is identical to the query in the previous section except for the `GRO
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, run the following statement:
-    
-        SELECT
-        fullVisitorId,
-        SUM(predicted_label) as total_predicted_purchases
-        FROM
-        ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
-        SELECT
-        IFNULL(device.operatingSystem, "") AS os,
-        device.isMobile AS is_mobile,
-        IFNULL(totals.pageviews, 0) AS pageviews,
-        IFNULL(geoNetwork.country, "") AS country,
-        fullVisitorId
-        FROM
-        `bigquery-public-data.google_analytics_sample.ga_sessions_*`
-        WHERE
-        _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
-        GROUP BY fullVisitorId
-        ORDER BY total_predicted_purchases DESC
-        LIMIT 10
-    
+
+    ```
+    SELECT
+    fullVisitorId,
+    SUM(predicted_label) as total_predicted_purchases
+    FROM
+    ML.PREDICT(MODEL `bqml_tutorial.sample_model`, (
+    SELECT
+    IFNULL(device.operatingSystem, "") AS os,
+    device.isMobile AS is_mobile,
+    IFNULL(totals.pageviews, 0) AS pageviews,
+    IFNULL(geoNetwork.country, "") AS country,
+    fullVisitorId
+    FROM
+    `bigquery-public-data.google_analytics_sample.ga_sessions_*`
+    WHERE
+    _TABLE_SUFFIX BETWEEN '20170701' AND '20170801'))
+    GROUP BY fullVisitorId
+    ORDER BY total_predicted_purchases DESC
+    LIMIT 10
+    ```
+
     The results should look like the following:
-    
-    ``` 
+
+    ```
       +---------------------+---------------------------+
       |    fullVisitorId    | total_predicted_purchases |
       +---------------------+---------------------------+
@@ -600,76 +624,78 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-    import bigframes.pandas as bpd
-    from bigframes.bigquery import ml
-    
-    # Set partial ordering mode for BigQuery DataFrames.
-    # For more information, see the BigQuery DataFrames performance documentation:
-    # https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
-    bpd.options.bigquery.ordering_mode = "partial"
-    
-    # The filters parameter limits the number of tables scanned by the query.
-    # The date range scanned is July 1, 2017 to August 1, 2017. This is the
-    # data you're using to make the prediction.
-    # It was collected in the month immediately following the time period
-    # spanned by the training data.
-    df = bpd.read_gbq_table(
-        "bigquery-public-data.google_analytics_sample.ga_sessions_*",
-        filters=[
-            ("_table_suffix", ">=", "20170701"),
-            ("_table_suffix", "<=", "20170801"),
-        ],
-    )
-    
-    operating_system = df["device"].struct.field("operatingSystem")
-    operating_system = operating_system.fillna("")
-    is_mobile = df["device"].struct.field("isMobile")
-    country = df["geoNetwork"].struct.field("country").fillna("")
-    pageviews = df["totals"].struct.field("pageviews").fillna(0)
-    full_visitor_id = df["fullVisitorId"]
-    
-    features = bpd.DataFrame(
-        {
-            "os": operating_system,
-            "is_mobile": is_mobile,
-            "country": country,
-            "pageviews": pageviews,
-            "fullVisitorId": full_visitor_id,
-        }
-    )
-    
-    # Use the ml.predict method to predict results using your model.
-    # For more information, see the BigQuery DataFrames API reference documentation:
-    # https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
-    
-    predictions = ml.predict(
-        your_model_id,  # For example: "bqml_tutorial.sample_model",
-        input_=features,
-    )
-    
-    # Call groupby method to group predicted_label by visitor.
-    # Call sum method to get the total_predicted_purchases by visitor.
-    total_predicted_purchases = predictions.groupby(["fullVisitorId"])[
-        ["predicted_label"]
-    ].sum()
-    
-    # Call the sort_values method with the parameter
-    # ascending = False to get the highest values.
-    # Call head method to limit to the 10 highest values.
-    total_predicted_purchases.sort_values(ascending=False).head(10)
-    
-    # fullVisitorId
-    # 9417857471295131045    3
-    # 0376394056092189113    2
-    # 057693500927581077     2
-    # 112288330928895942     2
-    # 1280993661204347450    2
-    # 2969418676126258798    2
-    # 7420300501523012460    2
-    # 806992249032686650     2
-    # 8388931032955052746    2
-    # 0082806901961150595    1
-    # Name: predicted_label, dtype: Int64
+```python
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# The filters parameter limits the number of tables scanned by the query.
+# The date range scanned is July 1, 2017 to August 1, 2017. This is the
+# data you're using to make the prediction.
+# It was collected in the month immediately following the time period
+# spanned by the training data.
+df = bpd.read_gbq_table(
+    "bigquery-public-data.google_analytics_sample.ga_sessions_*",
+    filters=[
+        ("_table_suffix", ">=", "20170701"),
+        ("_table_suffix", "<=", "20170801"),
+    ],
+)
+
+operating_system = df["device"].struct.field("operatingSystem")
+operating_system = operating_system.fillna("")
+is_mobile = df["device"].struct.field("isMobile")
+country = df["geoNetwork"].struct.field("country").fillna("")
+pageviews = df["totals"].struct.field("pageviews").fillna(0)
+full_visitor_id = df["fullVisitorId"]
+
+features = bpd.DataFrame(
+    {
+        "os": operating_system,
+        "is_mobile": is_mobile,
+        "country": country,
+        "pageviews": pageviews,
+        "fullVisitorId": full_visitor_id,
+    }
+)
+
+# Use the ml.predict method to predict results using your model.
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.predict.html#bigframes.bigquery.ml.predict
+
+predictions = ml.predict(
+    your_model_id,  # For example: "bqml_tutorial.sample_model",
+    input_=features,
+)
+
+# Call groupby method to group predicted_label by visitor.
+# Call sum method to get the total_predicted_purchases by visitor.
+total_predicted_purchases = predictions.groupby(["fullVisitorId"])[
+    ["predicted_label"]
+].sum()
+
+# Call the sort_values method with the parameter
+# ascending = False to get the highest values.
+# Call head method to limit to the 10 highest values.
+total_predicted_purchases.sort_values(ascending=False).head(10)
+
+# fullVisitorId
+# 9417857471295131045    3
+# 0376394056092189113    2
+# 057693500927581077     2
+# 112288330928895942     2
+# 1280993661204347450    2
+# 2969418676126258798    2
+# 7420300501523012460    2
+# 806992249032686650     2
+# 8388931032955052746    2
+# 0082806901961150595    1
+# Name: predicted_label, dtype: Int64
+```
 
 ## Clean up
 
@@ -684,7 +710,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `bqml_tutorial` dataset that you created.
@@ -700,20 +726,18 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .
+- To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
+- For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .

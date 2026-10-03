@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the subscription was created.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`CLOUD_MARKETPLACE_ORDER`
-
-Subscription was created using the Marketplace flow.
+| Enums                     |                                                      |
+|---------------------------|------------------------------------------------------|
+| `REASON_UNSPECIFIED`      | Unknown.                                             |
+| `CLOUD_MARKETPLACE_ORDER` | Subscription was created using the Marketplace flow. |

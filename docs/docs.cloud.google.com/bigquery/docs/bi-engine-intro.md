@@ -14,10 +14,10 @@ For example, if your dashboard only displays data from the last quarter, you can
 
 BI Engine provides the following advantages:
 
-  - **BigQuery API compatibility** : BI Engine directly integrates with the BigQuery API. Any BI solution or custom application that works with the BigQuery API through standard mechanisms such as the [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest) or [JDBC and ODBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) can use BI Engine without modification.
-  - **Vectorized runtime** : using vectorized processing in an execution engine makes more efficient use of modern CPU architecture by operating on batches of data at a time. BI Engine also uses advanced data encodings, specifically dictionary run-length encoding, to further compress data stored in the in-memory layer.
-  - **Seamless integration** : BI Engine works with BigQuery features and metadata, including authorized views, column-level security, and data masking.
-  - **Reservation allocations** : BI Engine reservations separately manage memory allocation for each project and region. BI Engine only caches the queried parts of columns and partitions. You can specify which tables use BI Engine acceleration with [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) .
+- **BigQuery API compatibility** : BI Engine directly integrates with the BigQuery API. Any BI solution or custom application that works with the BigQuery API through standard mechanisms such as the [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest) or [JDBC and ODBC drivers](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) can use BI Engine without modification.
+- **Vectorized runtime** : using vectorized processing in an execution engine makes more efficient use of modern CPU architecture by operating on batches of data at a time. BI Engine also uses advanced data encodings, specifically dictionary run-length encoding, to further compress data stored in the in-memory layer.
+- **Seamless integration** : BI Engine works with BigQuery features and metadata, including authorized views, column-level security, and data masking.
+- **Reservation allocations** : BI Engine reservations separately manage memory allocation for each project and region. BI Engine only caches the queried parts of columns and partitions. You can specify which tables use BI Engine acceleration with [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) .
 
 In most organizations, BI Engine is enabled by a billing administrator who reserves capacity for BI Engine acceleration with an appropriate [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro#administration_features) . For more information, see [Reserve BI Engine capacity](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity) .
 
@@ -33,13 +33,13 @@ BI Engine can significantly accelerate many SQL queries, including queries used 
 
 BI Engine is useful in the following use cases:
 
-  - **You use BI tools to analyze your data** : BI Engine accelerates BigQuery queries whether they run in the BigQuery console, a BI tool such as Data Studio or Tableau, a client library, an API, or an ODBC or JDBC connector. This can significantly improve the performance of dashboards connected to BigQuery through a built-in connection (API) or connectors.
-  - **You have frequently queried tables** : BI Engine lets you designate preferred tables to accelerate. This is helpful if you have a subset of tables that are queried more frequently or are used for high-visibility dashboards.
+- **You use BI tools to analyze your data** : BI Engine accelerates BigQuery queries whether they run in the BigQuery console, a BI tool such as Data Studio or Tableau, a client library, an API, or an ODBC or JDBC connector. This can significantly improve the performance of dashboards connected to BigQuery through a built-in connection (API) or connectors.
+- **You have frequently queried tables** : BI Engine lets you designate preferred tables to accelerate. This is helpful if you have a subset of tables that are queried more frequently or are used for high-visibility dashboards.
 
 BI Engine might not fit your needs in the following cases:
 
-  - **You use wildcards in your queries** : queries referencing wildcard tables aren't supported by BI Engine and don't benefit from acceleration.
-  - **You require BigQuery features unsupported by BI Engine** : while BI Engine supports most SQL functions and operators, [unsupported features](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#unsupported-features) include external tables, row-level security, and non-SQL user-defined functions.
+- **You use wildcards in your queries** : queries referencing wildcard tables aren't supported by BI Engine and don't benefit from acceleration.
+- **You require BigQuery features unsupported by BI Engine** : while BI Engine supports most SQL functions and operators, [unsupported features](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#unsupported-features) include external tables, row-level security, and non-SQL user-defined functions.
 
 ## Considerations for BI Engine
 
@@ -67,12 +67,12 @@ If there isn't enough memory in the project to hold all of the preferred tables,
 
 BI Engine preferred tables have the following limitations:
 
-  - You can't add logical views to the preferred tables reservation list. BI Engine preferred tables only support tables.
-  - Queries to materialized views are only accelerated if both the materialized views and their base tables are in the preferred tables list.
-  - Specifying partitions or columns for acceleration isn't supported.
-  - `JSON` type columns aren't supported and aren't accelerated by BI Engine.
-  - Queries that access multiple tables are only accelerated if all tables are preferred tables. For example, all tables in a query with a `JOIN` must be in the preferred tables list to be accelerated. If even one table isn't in the preferred list, the query can't use BI Engine.
-  - Public datasets aren't supported in the Google Cloud console. To add a public table as a preferred table, use the API or DDL.
+- You can't add logical views to the preferred tables reservation list. BI Engine preferred tables only support tables.
+- Queries to materialized views are only accelerated if both the materialized views and their base tables are in the preferred tables list.
+- Specifying partitions or columns for acceleration isn't supported.
+- `JSON` type columns aren't supported and aren't accelerated by BI Engine.
+- Queries that access multiple tables are only accelerated if all tables are preferred tables. For example, all tables in a query with a `JOIN` must be in the preferred tables list to be accelerated. If even one table isn't in the preferred list, the query can't use BI Engine.
+- Public datasets aren't supported in the Google Cloud console. To add a public table as a preferred table, use the API or DDL.
 
 ## Query optimization and acceleration
 
@@ -80,8 +80,8 @@ BigQuery, and by extension BI Engine, divides a query plan into multiple subquer
 
 While all supported BigQuery SQL queries execute correctly with BI Engine, BI Engine selectively optimizes specific stages:
 
-  - **Leaf-level subqueries** : BI Engine is most optimized for leaf-level subqueries that scan data from storage and perform operations such as filtering, computation, aggregation, sorting ( `ORDER BY` ), and supported joins.
-  - **Fallback execution** : query stages or subqueries that can't be accelerated by BI Engine automatically fall back to standard BigQuery execution slots without failing the query.
+- **Leaf-level subqueries** : BI Engine is most optimized for leaf-level subqueries that scan data from storage and perform operations such as filtering, computation, aggregation, sorting ( `ORDER BY` ), and supported joins.
+- **Fallback execution** : query stages or subqueries that can't be accelerated by BI Engine automatically fall back to standard BigQuery execution slots without failing the query.
 
 Because of this selective optimization, simpler business intelligence or dashboard-type queries benefit the most from BI Engine because the majority of their execution time is spent processing raw data in leaf-level subqueries.
 
@@ -95,17 +95,17 @@ In addition, BI Engine has limitations that the following sections describe.
 
 BI Engine accelerates certain types of join queries. Acceleration happens on leaf-level subqueries with `INNER` and `LEFT OUTER` joins, where a large fact table is joined with up to four smaller dimension tables. Small dimension tables have the following restrictions:
 
-  - Fewer than 5 million rows
-  - Size limits:
-      - Unpartitioned tables: 5 GiB or less
-      - Partitioned tables: referenced partitions 1 GiB or less
+- Fewer than 5 million rows
+- Size limits:
+  - Unpartitioned tables: 5 GiB or less
+  - Partitioned tables: referenced partitions 1 GiB or less
 
 ### Window functions
 
 [Window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , also known as *analytic functions* , have the following limitations when accelerated by BI Engine:
 
-  - Input stages without window functions are accelerated by BI Engine. In this case, the `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics.acceleration_mode` as `FULL_INPUT` .
-  - Input stages of queries with window functions are accelerated by BI Engine if they comply with the [BI Engine window functions limitations](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#window_function_limitations) . In that case, the input stages or the full query is executed in BI Engine, and the `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics.acceleration_mode` as `FULL_INPUT` or `FULL_QUERY` .
+- Input stages without window functions are accelerated by BI Engine. In this case, the `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics.acceleration_mode` as `FULL_INPUT` .
+- Input stages of queries with window functions are accelerated by BI Engine if they comply with the [BI Engine window functions limitations](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#window_function_limitations) . In that case, the input stages or the full query is executed in BI Engine, and the `INFORMATION_SCHEMA.JOBS` view reports `bi_engine_statistics.acceleration_mode` as `FULL_INPUT` or `FULL_QUERY` .
 
 For more information about the `BiEngineStatistics` field, see the [Job reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics) .
 
@@ -113,58 +113,58 @@ For more information about the `BiEngineStatistics` field, see the [Job referenc
 
 Queries with window functions only run in BI Engine if all of the following conditions are true:
 
-  - The query scans exactly one table.
-      - The table isn't partitioned.
-      - The table has fewer than 5 million rows.
-  - The query has no `JOIN` operators.
-  - The scanned table size multiplied by the number of window function operators doesn't exceed 300 MiB.
+- The query scans exactly one table.
+  - The table isn't partitioned.
+  - The table has fewer than 5 million rows.
+- The query has no `JOIN` operators.
+- The scanned table size multiplied by the number of window function operators doesn't exceed 300 MiB.
 
 Two window functions with identical `OVER` clauses and the same direct inputs can share the same window function operator. For example:
 
-  - `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (ORDER BY x) FROM my_table` has only one window function operator.
-  - `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (PARTITION BY y ORDER BY x) FROM my_table` has two window function operators because the two functions have different `OVER` clauses.
-  - `SELECT ROW_NUMBER() OVER (ORDER BY x) FROM (SELECT SUM(x) OVER (ORDER BY x) AS x FROM my_table)` has two window function operators because the two functions have different direct inputs although their `OVER` clauses appear the same.
+- `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (ORDER BY x) FROM my_table` has only one window function operator.
+- `SELECT ROW_NUMBER() OVER (ORDER BY x), SUM(x) OVER (PARTITION BY y ORDER BY x) FROM my_table` has two window function operators because the two functions have different `OVER` clauses.
+- `SELECT ROW_NUMBER() OVER (ORDER BY x) FROM (SELECT SUM(x) OVER (ORDER BY x) AS x FROM my_table)` has two window function operators because the two functions have different direct inputs although their `OVER` clauses appear the same.
 
 #### Supported window functions
 
 The following window functions are supported:
 
-  - `ANY_VALUE`
-  - `AVG`
-  - `BIT_AND`
-  - `BIT_OR`
-  - `BIT_XOR`
-  - `CORR`
-  - `COUNT`
-  - `COUNTIF`
-  - `COVAR_POP`
-  - `COVAR_SAMP`
-  - `CUME_DIST`
-  - `DENSE_RANK`
-  - `FIRST_VALUE`
-  - `LAG`
-  - `LAST_VALUE`
-  - `LEAD`
-  - `LOGICAL_AND`
-  - `LOGICAL_OR`
-  - `MAX`
-  - `MIN`
-  - `NTH_VALUE`
-  - `NTILE`
-  - `PERCENT_RANK`
-  - `PERCENTILE_CONT`
-  - `PERCENTILE_DISC`
-  - `RANK`
-  - `ROW_NUMBER`
-  - `ST_CLUSTERDBSCAN`
-  - `STDDEV_POP`
-  - `STDDEV_SAMP`
-  - `STDDEV`
-  - `STRING_AGG`
-  - `SUM`
-  - `VAR_POP`
-  - `VAR_SAMP`
-  - `VARIANCE`
+- `ANY_VALUE`
+- `AVG`
+- `BIT_AND`
+- `BIT_OR`
+- `BIT_XOR`
+- `CORR`
+- `COUNT`
+- `COUNTIF`
+- `COVAR_POP`
+- `COVAR_SAMP`
+- `CUME_DIST`
+- `DENSE_RANK`
+- `FIRST_VALUE`
+- `LAG`
+- `LAST_VALUE`
+- `LEAD`
+- `LOGICAL_AND`
+- `LOGICAL_OR`
+- `MAX`
+- `MIN`
+- `NTH_VALUE`
+- `NTILE`
+- `PERCENT_RANK`
+- `PERCENTILE_CONT`
+- `PERCENTILE_DISC`
+- `RANK`
+- `ROW_NUMBER`
+- `ST_CLUSTERDBSCAN`
+- `STDDEV_POP`
+- `STDDEV_SAMP`
+- `STDDEV`
+- `STRING_AGG`
+- `SUM`
+- `VAR_POP`
+- `VAR_SAMP`
+- `VARIANCE`
 
 If window functions aren't supported, you might see the following error message:
 
@@ -174,18 +174,18 @@ If window functions aren't supported, you might see the following error message:
 
 BI Engine acceleration isn't available for the following features:
 
-  - JavaScript UDFs and remote functions.
-  - External tables, including BigLake tables.
-  - Querying `JSON` data (error message: `JSON native type is not supported.` ).
-  - Querying `RANGE` data (error message: `RANGE native type is not supported.` ).
-  - Writing results to a permanent BigQuery table.
-  - Tables containing upserts that use [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) .
-  - [Transactions](https://docs.cloud.google.com/bigquery/docs/transactions) .
-  - Queries that return more than 1 GiB of data (for latency-sensitive applications, a response size of less than 1 MiB is recommended).
-  - Row-level security.
-  - Queries that use search and vector search functions (such as the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) ) or are optimized by [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) or [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
-  - Recursive queries using `RECURSIVE` .
-  - BigQuery ML queries.
+- JavaScript UDFs and remote functions.
+- External tables, including BigLake tables.
+- Querying `JSON` data (error message: `JSON native type is not supported.` ).
+- Querying `RANGE` data (error message: `RANGE native type is not supported.` ).
+- Writing results to a permanent BigQuery table.
+- Tables containing upserts that use [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) .
+- [Transactions](https://docs.cloud.google.com/bigquery/docs/transactions) .
+- Queries that return more than 1 GiB of data (for latency-sensitive applications, a response size of less than 1 MiB is recommended).
+- Row-level security.
+- Queries that use search and vector search functions (such as the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) ) or are optimized by [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) or [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
+- Recursive queries using `RECURSIVE` .
+- BigQuery ML queries.
 
 #### Workaround for unsupported features
 
@@ -206,7 +206,7 @@ You incur costs for the reservation that you create for BI Engine capacity. For 
 
 ## What's next
 
-  - Learn how to create a reservation in [Reserve BI Engine capacity](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity) .
-  - Learn how to designate preferred tables in [Preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) .
-  - Learn how to monitor utilization in [Monitor BI Engine with Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) .
-  - Learn how to use BI Engine with [Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) and [Tableau](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau) .
+- Learn how to create a reservation in [Reserve BI Engine capacity](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity) .
+- Learn how to designate preferred tables in [Preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) .
+- Learn how to monitor utilization in [Monitor BI Engine with Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor) .
+- Learn how to use BI Engine with [Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) and [Tableau](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau) .

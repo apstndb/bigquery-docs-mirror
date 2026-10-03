@@ -6,14 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.PATH_PARAMETERS)
-  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.QUERY_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.request_body)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.response_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.DatasetList.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.PATH_PARAMETERS)
+- [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.QUERY_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.request_body)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.response_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.DatasetList.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list#try-it)
 
 Lists all datasets in the specified project to which the user has been granted the READER dataset role.
 
@@ -29,41 +29,18 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`projectId`
-
-`string`
-
-Required. Project ID of the datasets to be listed
+| Parameters  |                                                            |
+|-------------|------------------------------------------------------------|
+| `projectId` | `string` Required. Project ID of the datasets to be listed |
 
 ### Query parameters
 
-Parameters
-
-`maxResults`
-
-`integer`
-
-The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
-
-`pageToken`
-
-`string`
-
-Page token, returned by a previous call, to request the next page of results
-
-`all`
-
-`boolean`
-
-Whether to list all datasets, including hidden ones
-
-`filter`
-
-`string`
-
-An expression for filtering the results of the request by label. The syntax is `labels.<name>[:<value>]` . Multiple filters can be AND-ed together by connecting with a space. Example: `labels.department:receiving labels.active` . See [Filtering datasets using labels](https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) for details.
+| Parameters   |                                                                                                                                                                                                                                                                                                                                                                                            |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `maxResults` | `integer` The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.                                                                                                                                                                                                                                            |
+| `pageToken`  | `string` Page token, returned by a previous call, to request the next page of results                                                                                                                                                                                                                                                                                                      |
+| `all`        | `boolean` Whether to list all datasets, including hidden ones                                                                                                                                                                                                                                                                                                                              |
+| `filter`     | `string` An expression for filtering the results of the request by label. The syntax is `labels.<name>[:<value>]` . Multiple filters can be AND-ed together by connecting with a space. Example: `labels.department:receiving labels.active` . See [Filtering datasets using labels](https://cloud.google.com/bigquery/docs/filtering-labels#filtering_datasets_using_labels) for details. |
 
 ### Request body
 
@@ -75,125 +52,143 @@ Response format for a page of results when listing datasets.
 
 If successful, the response body contains data with the following structure:
 
+**JSON representation**
+
+```
+{
+  "kind": string,
+  "etag": string,
+  "nextPageToken": string,
+  "datasets": [
+    {
+      "kind": string,
+      "id": string,
+      "datasetReference": {
+        object (DatasetReference)
+      },
+      "labels": {
+        string: string,
+        ...
+      },
+      "friendlyName": string,
+      "location": string,
+      "type": string,
+      "catalogSource": string,
+      "externalDatasetReference": {
+        object (ExternalDatasetReference)
+      }
+    }
+  ],
+  "unreachable": [
+    string
+  ]
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;etag&quot;: string,&quot;nextPageToken&quot;: string,&quot;datasets&quot;: [{&quot;kind&quot;: string,&quot;id&quot;: string,&quot;datasetReference&quot;: {object (DatasetReference)},&quot;labels&quot;: {string: string,...},&quot;friendlyName&quot;: string,&quot;location&quot;: string,&quot;type&quot;: string,&quot;catalogSource&quot;: string,&quot;externalDatasetReference&quot;: {object (ExternalDatasetReference)}}],&quot;unreachable&quot;: [string]}</code></pre></td>
+<td><code>kind</code></td>
+<td><p><code>string</code></p>
+<p>Output only. The resource type. This property always returns the value "bigquery#datasetList"</p></td>
+</tr>
+<tr class="even">
+<td><code>etag</code></td>
+<td><p><code>string</code></p>
+<p>Output only. A hash value of the results page. You can use this property to determine if the page has changed since the last request.</p></td>
+</tr>
+<tr class="odd">
+<td><code>nextPageToken</code></td>
+<td><p><code>string</code></p>
+<p>A token that can be used to request the next results page. This property is omitted on the final results page.</p></td>
+</tr>
+<tr class="even">
+<td><code>datasets[]</code></td>
+<td><p><code>object</code></p>
+<p>An array of the dataset resources in the project. Each resource contains basic information. For full information about a particular dataset resource, use the Datasets: get method. This property is omitted when there are no datasets in the project.</p></td>
+</tr>
+<tr class="odd">
+<td><code>datasets[].kind</code></td>
+<td><p><code>string</code></p>
+<p>The resource type. This property always returns the value "bigquery#dataset"</p></td>
+</tr>
+<tr class="even">
+<td><code>datasets[].id</code></td>
+<td><p><code>string</code></p>
+<p>The fully-qualified, unique, opaque ID of the dataset.</p></td>
+</tr>
+<tr class="odd">
+<td><code>datasets[].datasetReference</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference"><code>DatasetReference</code></a><code> )</code></p>
+<p>The dataset reference. Use this property to access specific parts of the dataset's ID, such as project ID or dataset ID.</p></td>
+</tr>
+<tr class="even">
+<td><code>datasets[].labels</code></td>
+<td><p><code>map (key: string, value: string)</code></p>
+<p>The labels associated with this dataset. You can use these to organize and group your datasets.</p></td>
+</tr>
+<tr class="odd">
+<td><code>datasets[].friendlyName</code></td>
+<td><p><code>string</code></p>
+<p>An alternate name for the dataset. The friendly name is purely decorative in nature.</p></td>
+</tr>
+<tr class="even">
+<td><code>datasets[].location</code></td>
+<td><p><code>string</code></p>
+<p>The geographic location where the dataset resides.</p></td>
+</tr>
+<tr class="odd">
+<td><code>datasets[].type</code></td>
+<td><p><code>string</code></p>
+<p>Output only. Same as <code>type</code> in <code>Dataset</code> . The type of the dataset, one of:</p>
+<ul>
+<li>DEFAULT - only accessible by owner and authorized accounts,</li>
+<li>PUBLIC - accessible by everyone,</li>
+<li>LINKED - linked dataset,</li>
+<li>EXTERNAL - dataset with definition in external metadata catalog,</li>
+<li>BIGLAKE_ICEBERG - a Biglake dataset accessible through the Iceberg API,</li>
+<li>BIGLAKE_HIVE - a Biglake dataset accessible through the Hive API.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>datasets[].catalogSource</code></td>
+<td><p><code>string</code></p>
+<p>Output only. The origin of the dataset, one of:</p>
+<ul>
+<li>(Unset) - Native BigQuery Dataset.</li>
+<li>BIGLAKE - Dataset is backed by a namespace stored natively in Biglake.</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td><code>datasets[].externalDatasetReference</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference"><code>ExternalDatasetReference</code></a><code> )</code></p>
+<p>Output only. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.</p></td>
+</tr>
+<tr class="even">
+<td><code>unreachable[]</code></td>
+<td><p><code>string</code></p>
+<p>A list of skipped locations that were unreachable. For more information about BigQuery locations, see: <a href="https://cloud.google.com/bigquery/docs/locations">https://cloud.google.com/bigquery/docs/locations</a> . Example: "europe-west5"</p></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`kind`
-
-`string`
-
-Output only. The resource type. This property always returns the value "bigquery\#datasetList"
-
-`etag`
-
-`string`
-
-Output only. A hash value of the results page. You can use this property to determine if the page has changed since the last request.
-
-`nextPageToken`
-
-`string`
-
-A token that can be used to request the next results page. This property is omitted on the final results page.
-
-`datasets[]`
-
-`object`
-
-An array of the dataset resources in the project. Each resource contains basic information. For full information about a particular dataset resource, use the Datasets: get method. This property is omitted when there are no datasets in the project.
-
-`datasets[].kind`
-
-`string`
-
-The resource type. This property always returns the value "bigquery\#dataset"
-
-`datasets[].id`
-
-`string`
-
-The fully-qualified, unique, opaque ID of the dataset.
-
-`datasets[].datasetReference`
-
-` object ( DatasetReference  ` )
-
-The dataset reference. Use this property to access specific parts of the dataset's ID, such as project ID or dataset ID.
-
-`datasets[].labels`
-
-`map (key: string, value: string)`
-
-The labels associated with this dataset. You can use these to organize and group your datasets.
-
-`datasets[].friendlyName`
-
-`string`
-
-An alternate name for the dataset. The friendly name is purely decorative in nature.
-
-`datasets[].location`
-
-`string`
-
-The geographic location where the dataset resides.
-
-`datasets[].type`
-
-`string`
-
-Output only. Same as `type` in `Dataset` . The type of the dataset, one of:
-
-  - DEFAULT - only accessible by owner and authorized accounts,
-  - PUBLIC - accessible by everyone,
-  - LINKED - linked dataset,
-  - EXTERNAL - dataset with definition in external metadata catalog,
-  - BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API,
-  - BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API.
-
-`datasets[].catalogSource`
-
-`string`
-
-Output only. The origin of the dataset, one of:
-
-  - (Unset) - Native BigQuery Dataset.
-  - BIGLAKE - Dataset is backed by a namespace stored natively in Biglake.
-
-`datasets[].externalDatasetReference`
-
-` object ( ExternalDatasetReference  ` )
-
-Output only. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.
-
-`unreachable[]`
-
-`string`
-
-A list of skipped locations that were unreachable. For more information about BigQuery locations, see: <https://cloud.google.com/bigquery/docs/locations> . Example: "europe-west5"
 
 ### Authorization scopes
 
 Requires one of the following OAuth scopes:
 
-  - `https://www.googleapis.com/auth/bigquery`
-  - `https://www.googleapis.com/auth/cloud-platform`
-  - `https://www.googleapis.com/auth/bigquery.readonly`
-  - `https://www.googleapis.com/auth/cloud-platform.read-only`
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/bigquery.readonly`
+- `https://www.googleapis.com/auth/cloud-platform.read-only`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

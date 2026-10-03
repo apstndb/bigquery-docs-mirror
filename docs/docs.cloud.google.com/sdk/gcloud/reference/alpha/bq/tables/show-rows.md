@@ -12,7 +12,7 @@ gcloud alpha bq tables show-rows - display selected rows in a specified table or
 
 SYNOPSIS
 
-`gcloud alpha bq tables show-rows` ( `  --table  ` = `  TABLE  ` : `  --dataset  ` = `  DATASET  ` ) \[ `  --limit  ` = `  LIMIT  ` ; default=100\] \[ `  --start  ` = `  START  ` \] \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables show-rows` ( [`--table`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/show-rows#--table) = `TABLE` : [`--dataset`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/show-rows#--dataset) = `DATASET` ) \[ [`--limit`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/show-rows#--limit) = `LIMIT` ; default=100\] \[ [`--start`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/show-rows#--start) = `START` \] \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/show-rows#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,7 +22,9 @@ EXAMPLES
 
 The following command displays 150 rows of `my-table` in `my-dataset` starting from row 10:
 
-    gcloud alpha bq tables show-rows --table /projects/myproject/datasets/my-dataset/tables/my-table --limit 150 --start 10
+```
+gcloud alpha bq tables show-rows --table /projects/myproject/datasets/my-dataset/tables/my-table --limit 150 --start 10
+```
 
 REQUIRED FLAGS
 
@@ -30,41 +32,42 @@ Table resource - The BigQuery table you want to fetch rows from. The arguments i
 
 To set the `project` attribute:
 
-  - provide the argument `--table` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `--table` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
 This must be specified.
 
-  - `--table` = `  TABLE  `  
-    ID of the table or fully qualified identifier for the table.
-    
-    To set the `table` attribute:
-    
-      - provide the argument `--table` on the command line.
-    
-    This flag argument must be specified if any of the other arguments in this group are specified.
+`--table` = `TABLE`  
+ID of the table or fully qualified identifier for the table.
 
-  - `--dataset` = `  DATASET  `  
-    The id of the BigQuery dataset.
-    
-    To set the `dataset` attribute:
-    
-      - provide the argument `--table` on the command line with a fully specified name;
-      - provide the argument `--dataset` on the command line.
+To set the `table` attribute:
+
+- provide the argument `--table` on the command line.
+
+This flag argument must be specified if any of the other arguments in this group are specified.
+
+`--dataset` = `DATASET`  
+The id of the BigQuery dataset.
+
+To set the `dataset` attribute:
+
+- provide the argument `--table` on the command line with a fully specified name;
+- provide the argument `--dataset` on the command line.
 
 OPTIONAL FLAGS
 
-  - `--limit` = `  LIMIT  ` ; default=100  
-    How many rows to return in the result.
-  - `--start` = `  START  `  
-    First row to return in the result.
+`--limit` = `LIMIT` ; default=100  
+How many rows to return in the result.
+
+`--start` = `START`  
+First row to return in the result.
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 

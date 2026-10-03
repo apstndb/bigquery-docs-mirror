@@ -10,11 +10,11 @@ data_source: docs.cloud.google.com
 
 This document describes how to use [Cloud Logging](https://docs.cloud.google.com/logging/docs) to audit activities related to policy tags. For example, you can determine:
 
-  - The email address for the principal that grants or removes access on a policy tag
+- The email address for the principal that grants or removes access on a policy tag
 
-  - The email address for whom the access was granted or removed
+- The email address for whom the access was granted or removed
 
-  - The policy tag whose access was changed
+- The policy tag whose access was changed
 
 ## Access to logs
 
@@ -31,10 +31,10 @@ For information about the permission you need to view logs, see the [Cloud Loggi
 4.  Click the log entry to see details about the call to the `SetIamPolicy` method.
 
 5.  Click the log entry fields to see details for the `SetIamPolicy` entry.
-    
-      - Click `protoPayload` , then click `authenticationInfo` to see the `principalEmail` for the entity that set the IAM policy.
-    
-      - Click `protoPayload` , click `request` , click `policy` , and then click `bindings` to see the bindings, including principals and roles, that were changed.
+
+    - Click `protoPayload` , then click `authenticationInfo` to see the `principalEmail` for the entity that set the IAM policy.
+
+    - Click `protoPayload` , click `request` , click `policy` , and then click `bindings` to see the bindings, including principals and roles, that were changed.
 
 ## What's next
 

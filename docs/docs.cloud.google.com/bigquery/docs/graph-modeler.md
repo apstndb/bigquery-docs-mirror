@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Use the BigQuery Graph visual modeler
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, send an email to <bq-graph-preview-support@google.com> .
@@ -30,14 +30,14 @@ To create a graph using the visual modeler, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  To open the gallery, in the editor tab bar, click the arrow\_drop\_down **arrow** next to add\_box **SQL query** , and then click **Graph** .
+2.  To open the gallery, in the editor tab bar, click the arrow_drop_down **arrow** next to add_box **SQL query** , and then click **Graph** .
 
 3.  In the **Graph name** field, enter a name for the graph.
 
 4.  In the **Graph destination in dataset** field, do one of the following:
-    
-      - Click **Create new dataset** to [create a new dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) .
-      - Select an existing dataset.
+
+    - Click **Create new dataset** to [create a new dataset](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) .
+    - Select an existing dataset.
 
 5.  Select the tables that you want to use as your data sources.
 
@@ -94,21 +94,21 @@ To add a node, follow these steps. Changes that you make aren't applied until yo
 11. Select the fields that you want to use as the primary keys, and then click **Add** .
 
 12. Optional: Click **Add label** .
-    
+
     1.  In the **Name** field, enter a name for your label.
-    
+
     2.  In the **Description** field, enter a description of your label.
-    
+
     3.  In the **Synonyms** field, enter up to eight synonyms.
-    
+
     4.  Click **Add property** .
-    
+
     5.  In the **Select fields** pane, select all the properties that you want to add to the label.
-        
+
         Optional: You can add a custom field with a measure. For more information, see [Graph measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
-    
+
     6.  Click **Add** .
-    
+
     7.  Click **Done** .
 
 13. Click **Done** .
@@ -138,7 +138,7 @@ To edit a node, follow these steps. Changes that you make aren't applied until y
 10. Select the fields that you want to use as the primary keys, and then click **Add** .
 
 11. Optional: Click **Add label** .
-    
+
     1.  In the **Name** field, enter a name for your label.
     2.  In the **Description** field, enter a description of your label.
     3.  In the **Synonyms** field, enter up to eight synonyms.
@@ -201,24 +201,24 @@ To add an edge, follow these steps. Changes that you make aren't applied until y
 10. In the **Source node** list, select the node that you want to use as the source.
 
 11. Click **Add referenced columns in the node** .
-    
+
     1.  Select the fields that you want to reference.
     2.  Click **Add** .
 
 12. In the **Target node** list, select the node that you want to use as the target.
 
 13. Click **Add referenced columns in the node** .
-    
+
     1.  Select the fields that you want to reference.
     2.  Click **Add** .
 
 14. Click **Add referenced columns in the edge** .
-    
+
     1.  Select the fields that you want to reference. The number of columns and data types of these edge columns must match the referenced columns selected for the source and target nodes.
     2.  Click **Add** .
 
 15. Optional: Click **Add label** .
-    
+
     1.  In the **Name** field, enter a name for your label.
     2.  In the **Description** field, enter a description of your label.
     3.  In the **Synonyms** field, enter up to eight synonyms.
@@ -253,24 +253,24 @@ To edit an edge, follow these steps. Changes that you make aren't applied until 
 9.  In the **Edit edge** panel, in the **Source node** list, select the node that you want to use as the source.
 
 10. Click **Add referenced columns in the node** .
-    
+
     1.  Select the fields that you want to reference.
     2.  Click **Add** .
 
 11. In the **Target node** list, select the node that you want to use as the target.
 
 12. Click **Add referenced columns in the node** .
-    
+
     1.  Select the fields that you want to reference.
     2.  Click **Add** .
 
 13. Click **Add referenced columns in the edge** .
-    
+
     1.  Select the fields that you want to reference. The number of columns and data types of these edge columns must match the referenced columns selected for the source and target nodes.
     2.  Click **Add** .
 
 14. Optional: Click **Add label** .
-    
+
     1.  In the **Name** field, enter a name for your label.
     2.  In the **Description** field, enter a description of your label.
     3.  In the **Synonyms** field, enter up to eight synonyms.
@@ -326,6 +326,6 @@ To save your modifications, publish them to the graph resource. Follow these ste
 
 ## What's next
 
-  - Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
-  - Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn how to [visualize graphs](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .
+- Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
+- Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn how to [visualize graphs](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .

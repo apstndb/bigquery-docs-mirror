@@ -14,13 +14,13 @@ The approximate aggregate functions in this section work directly on the input d
 
 To specify precision with sketches, use the following functions:
 
-  - [HyperLogLog++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality
-  - [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values
+- [HyperLogLog++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) to estimate cardinality
+- [KLL functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions) to estimate quantile values
 
 ## Function list
 
 | Name                                                                                                                                                | Summary                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct) | Gets the approximate result for `COUNT(DISTINCT expression)` .                                 |
 | [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)           | Gets the approximate quantile boundaries.                                                      |
 | [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)           | Gets the approximate top elements and their approximate count.                                 |
@@ -28,10 +28,12 @@ To specify precision with sketches, use the following functions:
 
 ## `APPROX_COUNT_DISTINCT`
 
-    APPROX_COUNT_DISTINCT(
-      expression
-      [ WHERE where_expression ]
-    )
+```
+APPROX_COUNT_DISTINCT(
+  expression
+  [ WHERE where_expression ]
+)
+```
 
 **Description**
 
@@ -43,9 +45,9 @@ This function is less accurate than `COUNT(DISTINCT expression)` , but performs 
 
 Any data type **except** :
 
-  - `ARRAY`
-  - `STRUCT`
-  - `INTERVAL`
+- `ARRAY`
+- `STRUCT`
+- `INTERVAL`
 
 **Returned Data Types**
 
@@ -53,23 +55,27 @@ Any data type **except** :
 
 **Examples**
 
-    SELECT APPROX_COUNT_DISTINCT(x) as approx_distinct
-    FROM UNNEST([0, 1, 1, 2, 3, 5]) as x;
-    
-    /*-----------------+
-     | approx_distinct |
-     +-----------------+
-     | 5               |
-     +-----------------*/
+```
+SELECT APPROX_COUNT_DISTINCT(x) as approx_distinct
+FROM UNNEST([0, 1, 1, 2, 3, 5]) as x;
+
+/*-----------------+
+ | approx_distinct |
+ +-----------------+
+ | 5               |
+ +-----------------*/
+```
 
 ## `APPROX_QUANTILES`
 
-    APPROX_QUANTILES(
-      [ DISTINCT ]
-      expression, number
-      [ { IGNORE | RESPECT } NULLS ]
-      [ WHERE where_expression ]
-    )
+```
+APPROX_QUANTILES(
+  [ DISTINCT ]
+  expression, number
+  [ { IGNORE | RESPECT } NULLS ]
+  [ WHERE where_expression ]
+)
+```
 
 **Description**
 
@@ -81,13 +87,13 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Supported Argument Types**
 
-  - `expression` : Any supported data type **except** :
-    
-      - `ARRAY`
-      - `STRUCT`
-      - `INTERVAL`
+- `expression` : Any supported data type **except** :
 
-  - `number` : `INT64` literal or query parameter.
+  - `ARRAY`
+  - `STRUCT`
+  - `INTERVAL`
+
+- `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
@@ -95,54 +101,66 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Examples**
 
-    SELECT APPROX_QUANTILES(x, 2) AS approx_quantiles
-    FROM UNNEST([1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
-    
-    /*------------------+
-     | approx_quantiles |
-     +------------------+
-     | [1, 5, 10]       |
-     +------------------*/
+```
+SELECT APPROX_QUANTILES(x, 2) AS approx_quantiles
+FROM UNNEST([1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
 
-    SELECT APPROX_QUANTILES(x, 100)[OFFSET(90)] AS percentile_90
-    FROM UNNEST([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) AS x;
-    
-    /*---------------+
-     | percentile_90 |
-     +---------------+
-     | 9             |
-     +---------------*/
+/*------------------+
+ | approx_quantiles |
+ +------------------+
+ | [1, 5, 10]       |
+ +------------------*/
+```
 
-    SELECT APPROX_QUANTILES(DISTINCT x, 2) AS approx_quantiles
-    FROM UNNEST([1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
-    
-    /*------------------+
-     | approx_quantiles |
-     +------------------+
-     | [1, 6, 10]       |
-     +------------------*/
+```
+SELECT APPROX_QUANTILES(x, 100)[OFFSET(90)] AS percentile_90
+FROM UNNEST([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) AS x;
 
-    SELECT FORMAT("%T", APPROX_QUANTILES(x, 2 RESPECT NULLS)) AS approx_quantiles
-    FROM UNNEST([NULL, NULL, 1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
-    
-    /*------------------+
-     | approx_quantiles |
-     +------------------+
-     | [NULL, 4, 10]    |
-     +------------------*/
+/*---------------+
+ | percentile_90 |
+ +---------------+
+ | 9             |
+ +---------------*/
+```
 
-    SELECT FORMAT("%T", APPROX_QUANTILES(DISTINCT x, 2 RESPECT NULLS)) AS approx_quantiles
-    FROM UNNEST([NULL, NULL, 1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
-    
-    /*------------------+
-     | approx_quantiles |
-     +------------------+
-     | [NULL, 6, 10]    |
-     +------------------*/
+```
+SELECT APPROX_QUANTILES(DISTINCT x, 2) AS approx_quantiles
+FROM UNNEST([1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
+
+/*------------------+
+ | approx_quantiles |
+ +------------------+
+ | [1, 6, 10]       |
+ +------------------*/
+```
+
+```
+SELECT FORMAT("%T", APPROX_QUANTILES(x, 2 RESPECT NULLS)) AS approx_quantiles
+FROM UNNEST([NULL, NULL, 1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
+
+/*------------------+
+ | approx_quantiles |
+ +------------------+
+ | [NULL, 4, 10]    |
+ +------------------*/
+```
+
+```
+SELECT FORMAT("%T", APPROX_QUANTILES(DISTINCT x, 2 RESPECT NULLS)) AS approx_quantiles
+FROM UNNEST([NULL, NULL, 1, 1, 1, 4, 5, 6, 7, 8, 9, 10]) AS x;
+
+/*------------------+
+ | approx_quantiles |
+ +------------------+
+ | [NULL, 6, 10]    |
+ +------------------*/
+```
 
 ## `APPROX_TOP_COUNT`
 
-    APPROX_TOP_COUNT(expression, number)
+```
+APPROX_TOP_COUNT(expression, number)
+```
 
 **Description**
 
@@ -156,8 +174,8 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Supported Argument Types**
 
-  - `expression` : Any data type that the `GROUP BY` clause supports.
-  - `number` : `INT64` literal or query parameter.
+- `expression` : Any data type that the `GROUP BY` clause supports.
+- `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
@@ -165,31 +183,37 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Examples**
 
-    SELECT APPROX_TOP_COUNT(x, 2) as approx_top_count
-    FROM UNNEST(["apple", "apple", "pear", "pear", "pear", "banana"]) as x;
-    
-    /*-------------------------+
-     | approx_top_count        |
-     +-------------------------+
-     | [{pear, 3}, {apple, 2}] |
-     +-------------------------*/
+```
+SELECT APPROX_TOP_COUNT(x, 2) as approx_top_count
+FROM UNNEST(["apple", "apple", "pear", "pear", "pear", "banana"]) as x;
+
+/*-------------------------+
+ | approx_top_count        |
+ +-------------------------+
+ | [{pear, 3}, {apple, 2}] |
+ +-------------------------*/
+```
 
 **NULL handling**
 
 `APPROX_TOP_COUNT` doesn't ignore `NULL` s in the input. For example:
 
-    SELECT APPROX_TOP_COUNT(x, 2) as approx_top_count
-    FROM UNNEST([NULL, "pear", "pear", "pear", "apple", NULL]) as x;
-    
-    /*------------------------+
-     | approx_top_count       |
-     +------------------------+
-     | [{pear, 3}, {NULL, 2}] |
-     +------------------------*/
+```
+SELECT APPROX_TOP_COUNT(x, 2) as approx_top_count
+FROM UNNEST([NULL, "pear", "pear", "pear", "apple", NULL]) as x;
+
+/*------------------------+
+ | approx_top_count       |
+ +------------------------+
+ | [{pear, 3}, {NULL, 2}] |
+ +------------------------*/
+```
 
 ## `APPROX_TOP_SUM`
 
-    APPROX_TOP_SUM(expression, weight, number)
+```
+APPROX_TOP_SUM(expression, weight, number)
+```
 
 **Description**
 
@@ -205,16 +229,16 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Supported Argument Types**
 
-  - `expression` : Any data type that the `GROUP BY` clause supports.
+- `expression` : Any data type that the `GROUP BY` clause supports.
 
-  - `weight` : One of the following:
-    
-      - `INT64`
-      - `NUMERIC`
-      - `BIGNUMERIC`
-      - `FLOAT64`
+- `weight` : One of the following:
 
-  - `number` : `INT64` literal or query parameter.
+  - `INT64`
+  - `NUMERIC`
+  - `BIGNUMERIC`
+  - `FLOAT64`
+
+- `number` : `INT64` literal or query parameter.
 
 **Returned Data Types**
 
@@ -222,48 +246,56 @@ To learn more about the optional aggregate clauses that you can pass into this f
 
 **Examples**
 
-    SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-    UNNEST([
-      STRUCT("apple" AS x, 3 AS weight),
-      ("pear", 2),
-      ("apple", 0),
-      ("banana", 5),
-      ("pear", 4)
-    ]);
-    
-    /*--------------------------+
-     | approx_top_sum           |
-     +--------------------------+
-     | [{pear, 6}, {banana, 5}] |
-     +--------------------------*/
+```
+SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
+UNNEST([
+  STRUCT("apple" AS x, 3 AS weight),
+  ("pear", 2),
+  ("apple", 0),
+  ("banana", 5),
+  ("pear", 4)
+]);
+
+/*--------------------------+
+ | approx_top_sum           |
+ +--------------------------+
+ | [{pear, 6}, {banana, 5}] |
+ +--------------------------*/
+```
 
 **NULL handling**
 
 `APPROX_TOP_SUM` doesn't ignore `NULL` values for the `expression` and `weight` parameters.
 
-    SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-    UNNEST([STRUCT("apple" AS x, NULL AS weight), ("pear", 0), ("pear", NULL)]);
-    
-    /*----------------------------+
-     | approx_top_sum             |
-     +----------------------------+
-     | [{pear, 0}, {apple, NULL}] |
-     +----------------------------*/
+```
+SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
+UNNEST([STRUCT("apple" AS x, NULL AS weight), ("pear", 0), ("pear", NULL)]);
 
-    SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-    UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, 2)]);
-    
-    /*-------------------------+
-     | approx_top_sum          |
-     +-------------------------+
-     | [{NULL, 2}, {apple, 0}] |
-     +-------------------------*/
+/*----------------------------+
+ | approx_top_sum             |
+ +----------------------------+
+ | [{pear, 0}, {apple, NULL}] |
+ +----------------------------*/
+```
 
-    SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
-    UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, NULL)]);
-    
-    /*----------------------------+
-     | approx_top_sum             |
-     +----------------------------+
-     | [{apple, 0}, {NULL, NULL}] |
-     +----------------------------*/
+```
+SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
+UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, 2)]);
+
+/*-------------------------+
+ | approx_top_sum          |
+ +-------------------------+
+ | [{NULL, 2}, {apple, 0}] |
+ +-------------------------*/
+```
+
+```
+SELECT APPROX_TOP_SUM(x, weight, 2) AS approx_top_sum FROM
+UNNEST([STRUCT("apple" AS x, 0 AS weight), (NULL, NULL)]);
+
+/*----------------------------+
+ | approx_top_sum             |
+ +----------------------------+
+ | [{apple, 0}, {NULL, NULL}] |
+ +----------------------------*/
+```

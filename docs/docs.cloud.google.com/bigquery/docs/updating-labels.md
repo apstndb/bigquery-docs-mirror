@@ -18,11 +18,11 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 A dataset label can be updated by:
 
-  - Using the Google Cloud console
-  - Using SQL [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
-  - Using the bq command-line tool's `bq update` command
-  - Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method
-  - Using the client libraries
+- Using the Google Cloud console
+- Using SQL [DDL statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+- Using the bq command-line tool's `bq update` command
+- Calling the [`datasets.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) API method
+- Using the client libraries
 
 ### Required permissions
 
@@ -30,8 +30,8 @@ To update a dataset label, you need the `bigquery.datasets.update` IAM permissio
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a dataset label:
 
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the datasets that you create.
 
@@ -46,14 +46,14 @@ To update labels on a dataset, select one of the following options:
 1.  In the Google Cloud console, select the dataset.
 
 2.  On the dataset details page, click the pencil icon to the right of **Labels** .
-    
+
     ![Label pencil](https://docs.cloud.google.com/static/bigquery/images/label-pencil.png)
 
 3.  In the **Edit labels** dialog:
-    
-      - To apply additional labels, click **Add label** . Each key can be used only once per dataset, but you can use the same key in different datasets in the same project.
-      - Modify the existing keys or values to update a label.
-      - Click **Update** to save your changes.
+
+    - To apply additional labels, click **Add label** . Each key can be used only once per dataset, but you can use the same key in different datasets in the same project.
+    - Modify the existing keys or values to update a label.
+    - Click **Update** to save your changes.
 
 ### SQL
 
@@ -62,11 +62,13 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER SCHEMA mydataset
-        SET OPTIONS (labels = [('sensitivity', 'high')]);
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER SCHEMA mydataset
+    SET OPTIONS (labels = [('sensitivity', 'high')]);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -76,21 +78,23 @@ To add additional labels or to update a dataset label, issue the `bq update` com
 
 If the dataset is in a project other than your default project, add the project ID to the dataset in the following format: `[PROJECT_ID]:[DATASET]` .
 
-    bq update \
-    --set_label key:value \
-    project_id:dataset
+```
+bq update \
+--set_label key:value \
+project_id:dataset
+```
 
 Where:
 
-  - key:value corresponds to a key:value pair for a label that you want to add or update. If you specify the same key as an existing label, the value for the existing label is updated. The key must be unique.
-  - project\_id is your project ID.
-  - dataset is the dataset you're updating.
+- ` key:value ` corresponds to a key:value pair for a label that you want to add or update. If you specify the same key as an existing label, the value for the existing label is updated. The key must be unique.
+- ` project_id ` is your project ID.
+- ` dataset ` is the dataset you're updating.
 
 Example:
 
 To update the `department` label on `mydataset` , enter the `bq update` command and specify `department` as the label key. For example, to update the `department:shipping` label to `department:logistics` , enter the following command. `mydataset` is in `myotherproject` , not your default project.
 
-``` 
+```
     bq update \
     --set_label department:logistics \
     myotherproject:mydataset
@@ -98,7 +102,9 @@ To update the `department` label on `mydataset` , enter the `bq update` command 
 
 The output looks like the following.
 
-    Dataset 'myotherproject:mydataset' successfully updated.
+```
+Dataset 'myotherproject:mydataset' successfully updated.
+```
 
 ### API
 
@@ -112,37 +118,39 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // addDatasetLabel demonstrates adding label metadata to an existing dataset.
-    func addDatasetLabel(projectID, datasetID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     ds := client.Dataset(datasetID)
-     meta, err := ds.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-    
-     update := bigquery.DatasetMetadataToUpdate{}
-     update.SetLabel("color", "green")
-     if _, err := ds.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// addDatasetLabel demonstrates adding label metadata to an existing dataset.
+func addDatasetLabel(projectID, datasetID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    ds := client.Dataset(datasetID)
+    meta, err := ds.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+
+    update := bigquery.DatasetMetadataToUpdate{}
+    update.SetLabel("color", "green")
+    if _, err := ds.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -152,41 +160,43 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Dataset;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    // Sample to updates a label on dataset
-    public class LabelDataset {
-    
-      public static void runLabelDataset() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        labelDataset(datasetName);
-      }
-    
-      public static void labelDataset(String datasetName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // This example dataset starts with existing label { color: 'green' }
-          Dataset dataset = bigquery.getDataset(datasetName);
-          // Add label to dataset
-          Map<String, String> labels = new HashMap<>();
-          labels.put("color", "green");
-    
-          dataset.toBuilder().setLabels(labels).build().update();
-          System.out.println("Label added successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Label was not added. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Dataset;
+import java.util.HashMap;
+import java.util.Map;
+
+// Sample to updates a label on dataset
+public class LabelDataset {
+
+  public static void runLabelDataset() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    labelDataset(datasetName);
+  }
+
+  public static void labelDataset(String datasetName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // This example dataset starts with existing label { color: 'green' }
+      Dataset dataset = bigquery.getDataset(datasetName);
+      // Add label to dataset
+      Map<String, String> labels = new HashMap<>();
+      labels.put("color", "green");
+
+      dataset.toBuilder().setLabels(labels).build().update();
+      System.out.println("Label added successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Label was not added. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -194,29 +204,31 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function labelDataset() {
-      // Updates a label on a dataset.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample
-       */
-      // const datasetId = "my_dataset";
-    
-      // Retrieve current dataset metadata.
-      const dataset = bigquery.dataset(datasetId);
-      const [metadata] = await dataset.getMetadata();
-    
-      // Add label to dataset metadata
-      metadata.labels = {color: 'green'};
-      const [apiResponse] = await dataset.setMetadata(metadata);
-    
-      console.log(`${datasetId} labels:`);
-      console.log(apiResponse.labels);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function labelDataset() {
+  // Updates a label on a dataset.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample
+   */
+  // const datasetId = "my_dataset";
+
+  // Retrieve current dataset metadata.
+  const dataset = bigquery.dataset(datasetId);
+  const [metadata] = await dataset.getMetadata();
+
+  // Add label to dataset metadata
+  metadata.labels = {color: 'green'};
+  const [apiResponse] = await dataset.setMetadata(metadata);
+
+  console.log(`${datasetId} labels:`);
+  console.log(apiResponse.labels);
+}
+```
 
 ### Python
 
@@ -224,29 +236,31 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-    # dataset_id = "your-project.your_dataset"
-    
-    dataset = client.get_dataset(dataset_id)  # Make an API request.
-    dataset.labels = {"color": "green"}
-    dataset = client.update_dataset(dataset, ["labels"])  # Make an API request.
-    
-    print("Labels added to {}".format(dataset_id))
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set dataset_id to the ID of the dataset to fetch.
+# dataset_id = "your-project.your_dataset"
+
+dataset = client.get_dataset(dataset_id)  # Make an API request.
+dataset.labels = {"color": "green"}
+dataset = client.update_dataset(dataset, ["labels"])  # Make an API request.
+
+print("Labels added to {}".format(dataset_id))
+```
 
 ## Update table and view labels
 
 A label can be updated after a table or view is created by:
 
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `bq update` command
-  - Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
-      - Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
-  - Using the client libraries
+- Using the Google Cloud console
+- Using the bq command-line tool's `bq update` command
+- Calling the [`tables.patch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/patch) API method
+  - Because views are treated like table resources, you use the `tables.patch` method to modify both views and tables.
+- Using the client libraries
 
 ### Required permissions
 
@@ -254,9 +268,9 @@ To update a table or view label, you need the `bigquery.tables.update` IAM permi
 
 Each of the following predefined IAM roles includes the permissions that you need in order to update a table or view label:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the tables and views in the datasets that you create.
 
@@ -273,10 +287,10 @@ To update a table or view label:
 2.  Click the **Details** tab, and then click the pencil icon to the right of **Labels** .
 
 3.  In the **Edit labels** dialog:
-    
-      - To apply additional labels, click **Add label** . Each key can be used only once per table or view, but you can use the same key in tables or views in different datasets.
-      - Modify the existing keys or values to update a label.
-      - Click **Update** to save your changes.
+
+    - To apply additional labels, click **Add label** . Each key can be used only once per table or view, but you can use the same key in tables or views in different datasets.
+    - Modify the existing keys or values to update a label.
+    - Click **Update** to save your changes.
 
 ### SQL
 
@@ -285,12 +299,14 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER TABLE mydataset.mytable
-        SET OPTIONS (
-          labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER TABLE mydataset.mytable
+    SET OPTIONS (
+      labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -300,22 +316,24 @@ To add additional labels or to update a table or view label, issue the `bq updat
 
 If the table or view is in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
 
-    bq update \
-    --set_label key:value \
-    project_id:dataset.table_or_view
+```
+bq update \
+--set_label key:value \
+project_id:dataset.table_or_view
+```
 
 Where:
 
-  - key:value corresponds to a key:value pair for a label that you want to add or update. If you specify the same key as an existing label, the value for the existing label is updated. The key must be unique.
-  - project\_id is your project ID.
-  - dataset is the dataset that contains the table or view you're updating.
-  - table\_or\_view is the name of the table or view you're updating.
+- ` key:value ` corresponds to a key:value pair for a label that you want to add or update. If you specify the same key as an existing label, the value for the existing label is updated. The key must be unique.
+- ` project_id ` is your project ID.
+- ` dataset ` is the dataset that contains the table or view you're updating.
+- ` table_or_view ` is the name of the table or view you're updating.
 
 Example:
 
 To update the `department` label for `mytable` , enter the `bq update` command and specify `department` as the label key. For example, to update the `department:shipping` label to `department:logistics` for `mytable` , enter the following command. `mytable` is in `myotherproject` , not your default project.
 
-``` 
+```
     bq update \
     --set_label department:logistics \
     myotherproject:mydataset.mytable
@@ -323,7 +341,9 @@ To update the `department` label for `mytable` , enter the `bq update` command a
 
 The output looks like the following:
 
-    Table 'myotherproject:mydataset.mytable' successfully updated.
+```
+Table 'myotherproject:mydataset.mytable' successfully updated.
+```
 
 ### API
 
@@ -339,38 +359,40 @@ Before trying this sample, follow the Go setup instructions in the [BigQuery qui
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import (
-     "context"
-     "fmt"
-    
-     "cloud.google.com/go/bigquery"
-    )
-    
-    // addTableLabel demonstrates adding Label metadata to a BigQuery table.
-    func addTableLabel(projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     tbl := client.Dataset(datasetID).Table(tableID)
-     meta, err := tbl.Metadata(ctx)
-     if err != nil {
-         return err
-     }
-    
-     update := bigquery.TableMetadataToUpdate{}
-     update.SetLabel("color", "green")
-     if _, err := tbl.Update(ctx, update, meta.ETag); err != nil {
-         return err
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+
+    "cloud.google.com/go/bigquery"
+)
+
+// addTableLabel demonstrates adding Label metadata to a BigQuery table.
+func addTableLabel(projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    tbl := client.Dataset(datasetID).Table(tableID)
+    meta, err := tbl.Metadata(ctx)
+    if err != nil {
+        return err
+    }
+
+    update := bigquery.TableMetadataToUpdate{}
+    update.SetLabel("color", "green")
+    if _, err := tbl.Update(ctx, update, meta.ETag); err != nil {
+        return err
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -380,43 +402,45 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.Table;
-    import com.google.cloud.bigquery.TableId;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    // Sample to adds a label to an existing table
-    public class LabelTable {
-    
-      public static void runLabelTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String datasetName = "MY_DATASET_NAME";
-        String tableName = "MY_TABLE_NAME";
-        labelTable(datasetName, tableName);
-      }
-    
-      public static void labelTable(String datasetName, String tableName) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // This example table starts with existing label { color: 'green' }
-          Table table = bigquery.getTable(TableId.of(datasetName, tableName));
-          // Add label to table
-          Map<String, String> labels = new HashMap<>();
-          labels.put("color", "green");
-    
-          table.toBuilder().setLabels(labels).build().update();
-          System.out.println("Label added successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Label was not added. \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.Table;
+import com.google.cloud.bigquery.TableId;
+import java.util.HashMap;
+import java.util.Map;
+
+// Sample to adds a label to an existing table
+public class LabelTable {
+
+  public static void runLabelTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String datasetName = "MY_DATASET_NAME";
+    String tableName = "MY_TABLE_NAME";
+    labelTable(datasetName, tableName);
+  }
+
+  public static void labelTable(String datasetName, String tableName) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // This example table starts with existing label { color: 'green' }
+      Table table = bigquery.getTable(TableId.of(datasetName, tableName));
+      // Add label to table
+      Map<String, String> labels = new HashMap<>();
+      labels.put("color", "green");
+
+      table.toBuilder().setLabels(labels).build().update();
+      System.out.println("Label added successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Label was not added. \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -424,32 +448,34 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function labelTable() {
-      // Adds a label to an existing table.
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = 'my_dataset';
-      // const tableId = 'my_table';
-    
-      const dataset = bigquery.dataset(datasetId);
-      const [table] = await dataset.table(tableId).get();
-    
-      // Retrieve current table metadata
-      const [metadata] = await table.getMetadata();
-    
-      // Add label to table metadata
-      metadata.labels = {color: 'green'};
-      const [apiResponse] = await table.setMetadata(metadata);
-    
-      console.log(`${tableId} labels:`);
-      console.log(apiResponse.labels);
-    }
+```javascript
+// Import the Google Cloud client library
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function labelTable() {
+  // Adds a label to an existing table.
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = 'my_dataset';
+  // const tableId = 'my_table';
+
+  const dataset = bigquery.dataset(datasetId);
+  const [table] = await dataset.table(tableId).get();
+
+  // Retrieve current table metadata
+  const [metadata] = await table.getMetadata();
+
+  // Add label to table metadata
+  metadata.labels = {color: 'green'};
+  const [apiResponse] = await table.setMetadata(metadata);
+
+  console.log(`${tableId} labels:`);
+  console.log(apiResponse.labels);
+}
+```
 
 ### Python
 
@@ -457,20 +483,22 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    # from google.cloud import bigquery
-    # client = bigquery.Client()
-    # project = client.project
-    # dataset_ref = bigquery.DatasetReference(project, dataset_id)
-    # table_ref = dataset_ref.table('my_table')
-    # table = client.get_table(table_ref)  # API request
-    
-    assert table.labels == {}
-    labels = {"color": "green"}
-    table.labels = labels
-    
-    table = client.update_table(table, ["labels"])  # API request
-    
-    assert table.labels == labels
+```python
+# from google.cloud import bigquery
+# client = bigquery.Client()
+# project = client.project
+# dataset_ref = bigquery.DatasetReference(project, dataset_id)
+# table_ref = dataset_ref.table('my_table')
+# table = client.get_table(table_ref)  # API request
+
+assert table.labels == {}
+labels = {"color": "green"}
+table.labels = labels
+
+table = client.update_table(table, ["labels"])  # API request
+
+assert table.labels == labels
+```
 
 ## Update job labels
 
@@ -502,11 +530,11 @@ To update a label to a reservation:
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more\_vert **Actions** option.
+5.  Expand the more_vert **Actions** option.
 
 6.  Click **Edit** .
 
-7.  To expand the **Advanced settings** section, click the expand\_more expander arrow.
+7.  To expand the **Advanced settings** section, click the expand_more expander arrow.
 
 8.  Update the names of the key-value pair.
 
@@ -516,12 +544,14 @@ To update a label to a reservation:
 
 To update a label to a reservation, issue the `bq update` command with the `set_label` flag and `--reservation` flag. To update multiple labels, repeat the flag.
 
-    bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
+```
+bq update --set_label KEY:VALUE  --reservation RESERVATION_NAME
+```
 
 Replace the following:
 
-  - `  KEY:VALUE  ` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `--set_label` flag and specify a unique key for each label.
-  - `  RESERVATION_NAME  ` : the name of the reservation.
+- `KEY:VALUE` : a key-value pair for a label that you want to update on the reservation. The key must be unique. Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. All characters must use UTF-8 encoding, and international characters are allowed. To update multiple labels on a reservation, repeat the `--set_label` flag and specify a unique key for each label.
+- `RESERVATION_NAME` : the name of the reservation.
 
 ### SQL
 
@@ -530,12 +560,14 @@ To update a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        ALTER RESERVATION myreservation
-        SET OPTIONS (
-          labels = [('sensitivity', 'high')]);
 
-3.  Click play\_circle **Run** .
+    ```
+    ALTER RESERVATION myreservation
+    SET OPTIONS (
+      labels = [('sensitivity', 'high')]);
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -549,19 +581,19 @@ Tags can be useful in situations where you are labeling a resource, but you don'
 
 To convert a label to a tag, you need the following IAM permissions:
 
-  - `bigquery.datasets.update` (lets you convert a dataset label)
-  - `bigquery.tables.update` (lets you convert a table or view label)
+- `bigquery.datasets.update` (lets you convert a dataset label)
+- `bigquery.tables.update` (lets you convert a table or view label)
 
 Each of the following predefined IAM roles includes the permissions that you need in order to convert a dataset label:
 
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Each of the following predefined IAM roles includes the permissions that you need in order to convert a table or view label:
 
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 Additionally, if you have the `bigquery.datasets.create` permission, you can update labels of the datasets that you create and the tables and views in those datasets.
 
@@ -576,40 +608,46 @@ To convert a label to a tag:
 1.  In the Google Cloud console, select the dataset, table, or view.
 
 2.  For datasets, the dataset details page is automatically opened. For tables and views, click **Details** to open the details page.
-    
+
     ![Table details](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
 
 3.  On the details page, click the pencil icon to the right of **Labels** .
-    
+
     ![Label pencil](https://docs.cloud.google.com/static/bigquery/images/label-pencil.png)
 
 4.  In the **Edit labels** dialog:
-    
-      - Delete the value for an existing label.
-      - Click **Update** .
+
+    - Delete the value for an existing label.
+    - Click **Update** .
 
 ### bq
 
 To convert a label to a tag, use the `bq update` command with the `set_label` flag. Specify the key, followed by a colon, but leave the value unspecified. This updates an existing label to a tag.
 
-    bq update \
-    --set_label key: \
-    resource_id
+```
+bq update \
+--set_label key: \
+resource_id
+```
 
 Where:
 
-  - key: is the label key that you want update to a tag.
-  - resource\_id is a valid dataset, table, or view name. If the resource is in a project other than your default project, add the project ID in the following format: `project_id:dataset` .
+- ` key: ` is the label key that you want update to a tag.
+- ` resource_id ` is a valid dataset, table, or view name. If the resource is in a project other than your default project, add the project ID in the following format: `project_id:dataset` .
 
 Examples:
 
 Enter the following command to change the existing `test_data:development` label on `mydataset` to a tag. `mydataset` is in `myotherproject` , not your default project.
 
-    bq update --set_label test_data: myotherproject:mydataset
+```
+bq update --set_label test_data: myotherproject:mydataset
+```
 
 The output looks like the following:
 
-    Dataset 'myotherproject:mydataset' successfully updated.
+```
+Dataset 'myotherproject:mydataset' successfully updated.
+```
 
 ### API
 
@@ -619,8 +657,8 @@ Because views are treated like table resources, you use the `tables.patch` metho
 
 ## What's next
 
-  - Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
-  - Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
-  - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
-  - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
-  - Read about [using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.
+- Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
+- Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
+- Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
+- Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
+- Read about [using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.

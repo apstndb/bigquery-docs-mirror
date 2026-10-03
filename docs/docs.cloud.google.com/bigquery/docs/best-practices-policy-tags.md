@@ -16,9 +16,9 @@ Build a hierarchy of data classes that makes sense for your business.
 
 First, consider what kinds of data the organization processes. Usually there are a small number of data classes managed by an organization. For example, an organization could have data classes such as:
 
-  - PII data
-  - Financial data
-  - Customer order history
+- PII data
+- Financial data
+- Customer order history
 
 A single data class can be applied to multiple data columns using a policy tag. You should use this level of abstraction to efficiently manage many columns with only a few policy tags.
 
@@ -34,17 +34,17 @@ Each of the top-level policy tags contains leaf policy tags. For example, the **
 
 This structure has several benefits:
 
-  - You can grant access to an entire group of policy tags at once. For example, you can grant the Data Catalog Fine-Grained Reader role on the **Low** tier.
+- You can grant access to an entire group of policy tags at once. For example, you can grant the Data Catalog Fine-Grained Reader role on the **Low** tier.
 
-  - You can move policy tags from one tier to another. For example, you can move **Address** from the **Low** tier to the **Medium** tier to further restrict its access, without needing to reclassify all **Address** columns.
-    
-    > **Note:** You can move a policy tag only through the Data Catalog `PolicyTagManager.UpdatePolicyTag` method.
+- You can move policy tags from one tier to another. For example, you can move **Address** from the **Low** tier to the **Medium** tier to further restrict its access, without needing to reclassify all **Address** columns.
 
-  - With this fine-grained access, you can manage access to many columns by controlling only a small number of data classification policy tags.
+  > **Note:** You can move a policy tag only through the Data Catalog `PolicyTagManager.UpdatePolicyTag` method.
+
+- With this fine-grained access, you can manage access to many columns by controlling only a small number of data classification policy tags.
 
 For more information about policy tags in BigQuery, see:
 
-  - [Introduction to column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
-  - [Restricting access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security)
-  - [Introduction to dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
-  - [Mask column data by user role](https://docs.cloud.google.com/bigquery/docs/column-data-masking)
+- [Introduction to column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
+- [Restricting access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security)
+- [Introduction to dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
+- [Mask column data by user role](https://docs.cloud.google.com/bigquery/docs/column-data-masking)

@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Global queries
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for this preview feature, contact <bq-xregion-support@google.com> .
@@ -24,10 +24,10 @@ Verify that global queries are enabled for your project and ensure that you have
 
 To enable global queries for your project or organization, use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to change the [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
 
-  - To run global queries in a region, set the `enable_global_queries_execution` argument to `true` in that region for the project **running** the query.
-  - To allow global queries to copy data from a region, set the `enable_global_queries_data_access` argument to `true` in that region for the project **containing the data** .
-  - Any time your query accesses remote tables, these options are checked.
-  - Global queries can run in one project and pull data from other regions from another project.
+- To run global queries in a region, set the `enable_global_queries_execution` argument to `true` in that region for the project **running** the query.
+- To allow global queries to copy data from a region, set the `enable_global_queries_data_access` argument to `true` in that region for the project **containing the data** .
+- Any time your query accesses remote tables, these options are checked.
+- Global queries can run in one project and pull data from other regions from another project.
 
 ### Example: Cross-project configuration
 
@@ -35,22 +35,34 @@ The following example shows how to run a query in one project that accesses a ta
 
 Suppose you have a project `query_project` running jobs in the `us-central1` region, and you want to run a query that accesses a table `data_project.dataset.my_table` located in the `europe-west1` region:
 
-    SET @@location='us-central1';
-    SELECT
-      *
-    FROM
-      `query_project.dataset.my_table`
-      JOIN `data_project.dataset.my_other_table` USING id;
+```
+SET @@location='us-central1';
+SELECT
+  *
+FROM
+  `query_project.dataset.my_table`
+  JOIN `data_project.dataset.my_other_table` USING id;
+```
 
 To allow this global query to execute successfully, the following configuration is required:
 
 1.  You need to enable execution of global queries in the project ( `query_project` ) in the region running a global query ( `us-central1` ):
-    
-        ALTER PROJECT `query_project`SET OPTIONS (`region-us-central1.enable_global_queries_execution` = TRUE)
+
+    ```
+    ALTER PROJECT `query_project`
+    SET OPTIONS (
+    `region-us-central1.enable_global_queries_execution` = TRUE
+    )
+    ```
 
 2.  You need to enable copying data by global queries from the project containing the data ( `data_project` ) for its region ( `europe-west1` ):
-    
-        ALTER PROJECT `data_project`SET OPTIONS (`region-europe-west1.enable_global_queries_data_access` = TRUE)
+
+    ```
+    ALTER PROJECT `data_project`
+    SET OPTIONS (
+    `region-europe-west1.enable_global_queries_data_access` = TRUE
+    )
+    ```
 
 To create and use [views](https://docs.cloud.google.com/bigquery/docs/views-intro) that contain remote tables, the same principles apply: the project running the queries must have `enable_global_queries_execution` enabled.
 
@@ -70,28 +82,30 @@ To run a global query, you write a SQL query as you would if your data was in a 
 
 The following example runs as a global query that unions tables from two different datasets stored in two different locations:
 
-    SELECT id, tr_date, product_id, price FROM us_dataset.transactions
-    UNION ALL
-    SELECT id, tr_date, product_id, price FROM europe_dataset.transactions
+```
+SELECT id, tr_date, product_id, price FROM us_dataset.transactions
+UNION ALL
+SELECT id, tr_date, product_id, price FROM europe_dataset.transactions
+```
 
 ## Choose a location
 
 To configure where the global query will be run, [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . As you decide on an execution location for the global query, consider the following:
 
-  - **Data residency:** global queries temporarily copy data from one location to another. If your organization has requirements for data residency, and you don't want your data to leave a certain location, then set the query location to that location.
+- **Data residency:** global queries temporarily copy data from one location to another. If your organization has requirements for data residency, and you don't want your data to leave a certain location, then set the query location to that location.
 
-  - **Transfer costs and performance:** to minimize the amount of data transferred between locations and reduce the cost of the query, run your query in the region where most of the queried data is stored.
-    
-    For example, you have an online store and you keep a list of your products in location `us-central1` , but you keep your transactions in the `us-south1` region. If there are more transactions than products in your catalog, then you should run the query in the `us-south1` region.
+- **Transfer costs and performance:** to minimize the amount of data transferred between locations and reduce the cost of the query, run your query in the region where most of the queried data is stored.
 
-  - **Reservations and compute capacity:** specify the query location to control which regional reservations or slots process the query.
+  For example, you have an online store and you keep a list of your products in location `us-central1` , but you keep your transactions in the `us-south1` region. If there are more transactions than products in your catalog, then you should run the query in the `us-south1` region.
+
+- **Reservations and compute capacity:** specify the query location to control which regional reservations or slots process the query.
 
 If you don't manually specify a location, then BigQuery automatically determines the execution location based on the following criteria:
 
-  - For data modification language (DML) queries ( `INSERT` , `UPDATE` , and `DELETE` statements), the location of the target table is selected as the execution location.
-  - For data definition language (DDL) queries (such as `CREATE TABLE AS SELECT` statements), the location in which the resource is created or modified is selected as the execution location.
-  - For queries with a [specified destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) , the location of the destination table is selected as the execution location.
-  - For all other queries, the execution location is selected arbitrarily as one of the locations of the referenced datasets.
+- For data modification language (DML) queries ( `INSERT` , `UPDATE` , and `DELETE` statements), the location of the target table is selected as the execution location.
+- For data definition language (DDL) queries (such as `CREATE TABLE AS SELECT` statements), the location in which the resource is created or modified is selected as the execution location.
+- For queries with a [specified destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) , the location of the destination table is selected as the execution location.
+- For all other queries, the execution location is selected arbitrarily as one of the locations of the referenced datasets.
 
 ## Understand global queries
 
@@ -108,14 +122,16 @@ To use data that resides in different locations, it must be replicated to one lo
 
 BigQuery tries to minimize the amount of data transferred between regions. Consider the following example:
 
-    SET @@location = 'EU';
-    SELECT
-      t1.col1, t2.col2
-    FROM
-      eu_dataset.table1 t1
-      JOIN us_dataset.table2 t2 using col3
-    WHERE
-      t2.col4 = 'ABC'
+```
+SET @@location = 'EU';
+SELECT
+  t1.col1, t2.col2
+FROM
+  eu_dataset.table1 t1
+  JOIN us_dataset.table2 t2 using col3
+WHERE
+  t2.col4 = 'ABC'
+```
 
 BigQuery doesn't need to replicate all of table `t2` from the US to the EU. It is sufficient to transfer only the requested columns ( `col2` and `col3` ) and only the rows that match the `WHERE` condition ( `t2.col4 = 'ABC'` ). However, these mechanisms, known as *pushdowns* , depend on the query structure and sometimes the amount of data transferred might be large. We recommend that you test global queries on a small subset of data and confirm that data is only transferred when needed.
 
@@ -131,44 +147,59 @@ To see the query text sent to the remote region, check the [job history](https:/
 
 When you call the [`jobs.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) method, the returned [`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) resource contains the following fields in the [`JobStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics) object:
 
-  - `statistics.globalQueryRemoteRegions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
-  - `statistics.parentGlobalQueryJob` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
+- `statistics.globalQueryRemoteRegions` : An array of strings representing the remote regions from which a global query accesses data. This field is populated only for parent global query jobs in the primary execution region. It is empty for child global query jobs and single-region queries.
+- `statistics.parentGlobalQueryJob` : A [`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference) object ( `projectId` , `jobId` , `location` ) identifying the parent global query job. This field is populated only for child global query jobs (remote subqueries and cross-region copy jobs) executed in remote regions on behalf of a global query. It is unset for parent global query jobs and single-region queries.
 
 ### Audit logs
 
 In [Cloud Audit Logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) , the [`BigQueryAuditMetadata`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) object contains the following fields in the [`JobStats`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats) object:
 
-  - `jobStats.globalQueryRemoteRegions` : An array of strings representing the remote regions accessed by the query. This field is only populated for parent global query jobs in the primary execution region.
-  - `jobStats.parentGlobalQueryJobId` : The job ID of the parent global query job. This field is populated for child jobs executed in remote regions.
-  - `jobStats.parentGlobalQueryJobLocation` : The location of the parent global query job. This field is populated for child jobs executed in remote regions.
+- `jobStats.globalQueryRemoteRegions` : An array of strings representing the remote regions accessed by the query. This field is only populated for parent global query jobs in the primary execution region.
+- `jobStats.parentGlobalQueryJobId` : The job ID of the parent global query job. This field is populated for child jobs executed in remote regions.
+- `jobStats.parentGlobalQueryJobLocation` : The location of the parent global query job. This field is populated for child jobs executed in remote regions.
 
 #### Find remote child jobs for a global query
 
 To find all remote child jobs associated with a parent global query, you can query audit logs using [Log Analytics](https://docs.cloud.google.com/logging/docs/log-analytics) or an exported log sink dataset:
 
-    SELECT  timestamp,  proto_payload.audit_log.resource_name AS resource_name,  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobConfig.queryConfig.query) AS queryFROM  `PROJECT_ID.LOG_DATASET._AllLogs`WHERE  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobStats.parentGlobalQueryJobId) = 'PARENT_JOB_ID';
+```
+SELECT
+  timestamp,
+  proto_payload.audit_log.resource_name AS resource_name,
+  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobConfig.queryConfig.query) AS query
+FROM
+  `PROJECT_ID.LOG_DATASET._AllLogs`
+WHERE
+  JSON_VALUE(proto_payload.audit_log.metadata.jobChange.job.jobStats.parentGlobalQueryJobId) = 'PARENT_JOB_ID';
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : your Google Cloud project ID.
-  - `  LOG_DATASET  ` : the BigQuery linked dataset for Log Analytics or the log sink destination dataset.
-  - `  PARENT_JOB_ID  ` : the job ID of the parent global query job.
+- `PROJECT_ID` : your Google Cloud project ID.
+- `LOG_DATASET` : the BigQuery linked dataset for Log Analytics or the log sink destination dataset.
+- `PARENT_JOB_ID` : the job ID of the parent global query job.
 
 ## Turn off global queries
 
 To disable global queries for your project or organization, use the [`ALTER PROJECT SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to change the [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
 
-  - To turn off global queries in a region, set the `enable_global_queries_execution` argument to `false` or `NULL` in that region.
-  - To forbid global queries from copying data from a region, set the `enable_global_queries_data_access` argument to `false` or `NULL` in that region.
+- To turn off global queries in a region, set the `enable_global_queries_execution` argument to `false` or `NULL` in that region.
+- To forbid global queries from copying data from a region, set the `enable_global_queries_data_access` argument to `false` or `NULL` in that region.
 
 The following example shows how to disable global queries at the project level:
 
-    ALTER PROJECT PROJECT_IDSET OPTIONS (  `region-REGION.enable_global_queries_execution` = false,  `region-REGION.enable_global_queries_data_access` = false);
+```
+ALTER PROJECT PROJECT_ID
+SET OPTIONS (
+  `region-REGION.enable_global_queries_execution` = false,
+  `region-REGION.enable_global_queries_data_access` = false
+);
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the name of the project to alter
-  - `  REGION  ` : the name of the region in which to disable global queries
+- `PROJECT_ID` : the name of the project to alter
+- `REGION` : the name of the region in which to disable global queries
 
 It can take several minutes for the change to take effect.
 
@@ -176,10 +207,10 @@ It can take several minutes for the change to take effect.
 
 The cost of a global query consists of following components:
 
-  - The compute cost of every subquery in remote locations, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in these locations
-  - The compute cost of the final query in the region in which it's executed, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in that region
-  - The cost of copying data between different locations, according to [Data replication pricing](https://docs.cloud.google.com/bigquery/pricing#data_replication)
-  - The cost of storing data copied from remote regions to the primary region (for 24 hours), according to [Storage pricing](https://docs.cloud.google.com/bigquery/pricing#storage-pricing)
+- The compute cost of every subquery in remote locations, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in these locations
+- The compute cost of the final query in the region in which it's executed, based on your [pricing model](https://docs.cloud.google.com/bigquery/pricing#analysis_pricing_models) in that region
+- The cost of copying data between different locations, according to [Data replication pricing](https://docs.cloud.google.com/bigquery/pricing#data_replication)
+- The cost of storing data copied from remote regions to the primary region (for 24 hours), according to [Storage pricing](https://docs.cloud.google.com/bigquery/pricing#storage-pricing)
 
 ## Quotas
 
@@ -187,19 +218,19 @@ For information about quotas regarding global queries, see [Query jobs](https://
 
 ## Limitations
 
-  - Global queries are not supported in [Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) .
-  - Global queries are not supported when using [regional endpoints](https://docs.cloud.google.com/bigquery/docs/regional-endpoints) .
-  - Global queries are not supported in sandbox mode.
-  - Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
-  - Global queries don't use any cache to avoid transferring data between regions.
-  - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
-  - A single global query can access up to 10 remote tables per region.
-  - Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.
-  - Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location). Instead, create authorized views in the region where your data is located and query the authorized views through global queries.
-  - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) over global queries are not supported.
-  - You can't query `RANGE` type columns with global queries.
-  - You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.
-  - You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
-  - If your global query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the remote region that filters `STRUCT` columns and returns only the necessary fields as individual columns.
-  - A query's [execution details](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) and [execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) don't show the number of bytes processed and transferred from remote locations. This information appears in copy jobs that you can find in your job history. The job ID of a copy job created by a global query has the job ID of the query job as a prefix.
-  - Global queries are only supported in [Data Studio](https://docs.cloud.google.com/data-studio/welcome) when they are wrapped in a view and configured to use [Viewer's Credentials](https://docs.cloud.google.com/data-studio/data-credentials-article#viewers-credentials) .
+- Global queries are not supported in [Assured Workloads](https://docs.cloud.google.com/assured-workloads/docs/overview) .
+- Global queries are not supported when using [regional endpoints](https://docs.cloud.google.com/bigquery/docs/regional-endpoints) .
+- Global queries are not supported in sandbox mode.
+- Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
+- Global queries don't use any cache to avoid transferring data between regions.
+- Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
+- A single global query can access up to 10 remote tables per region.
+- Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.
+- Global [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) and [authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location). Instead, create authorized views in the region where your data is located and query the authorized views through global queries.
+- [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) over global queries are not supported.
+- You can't query `RANGE` type columns with global queries.
+- You can't query pseudocolumns, such `_PARTITIONTIME` , with global queries.
+- You can't query columns using [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with global queries.
+- If your global query references `STRUCT` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the remote region that filters `STRUCT` columns and returns only the necessary fields as individual columns.
+- A query's [execution details](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) and [execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) don't show the number of bytes processed and transferred from remote locations. This information appears in copy jobs that you can find in your job history. The job ID of a copy job created by a global query has the job ID of the query job as a prefix.
+- Global queries are only supported in [Data Studio](https://docs.cloud.google.com/data-studio/welcome) when they are wrapped in a view and configured to use [Viewer's Credentials](https://docs.cloud.google.com/data-studio/data-credentials-article#viewers-credentials) .

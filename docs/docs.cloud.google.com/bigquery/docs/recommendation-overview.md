@@ -12,8 +12,8 @@ Recommendation systems are one of the most successful and widespread application
 
 Machine learning algorithms in recommendation systems are typically classified into the following categories:
 
-  - Content-based filtering: uses similarity between items to provide recommendations. For example, if a user watches two cute cat videos, then the recommendation system can recommend more cute animal videos to that user.
-  - Collaborative filtering: uses similarities between users (based on user queries) to provide recommendations. For example, if user A searches for similar things to user B, and user B likes video 1, then the recommendation system can recommend video 1 to user A, even if user A hasn't watched any videos similar to video 1.
+- Content-based filtering: uses similarity between items to provide recommendations. For example, if a user watches two cute cat videos, then the recommendation system can recommend more cute animal videos to that user.
+- Collaborative filtering: uses similarities between users (based on user queries) to provide recommendations. For example, if user A searches for similar things to user B, and user B likes video 1, then the recommendation system can recommend video 1 to user A, even if user A hasn't watched any videos similar to video 1.
 
 ## Matrix factorization models
 
@@ -31,15 +31,15 @@ You can use a matrix factorization model with the [`ML.RECOMMEND` function](http
 
 To extend a collaborative filtering-based recommendation system beyond what is possible with a matrix factorization model, you can use [deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) and [Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) models with the [`ML.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make recommendations. These models can incorporate query and item features to improve the relevance of recommendations. For more information, see the following resources:
 
-  - [Recommendation using Deep Neural Network Models](https://developers.google.com/machine-learning/recommendation/dnn/softmax)
-  - [Deep Neural Networks for YouTube Recommendations](https://research.google/pubs/pub45530)
-  - [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792.pdf)
+- [Recommendation using Deep Neural Network Models](https://developers.google.com/machine-learning/recommendation/dnn/softmax)
+- [Deep Neural Networks for YouTube Recommendations](https://research.google/pubs/pub45530)
+- [Wide & Deep Learning for Recommender Systems](https://arxiv.org/pdf/1606.07792.pdf)
 
 ## Recommended knowledge
 
 By using the default settings in the `CREATE MODEL` statements and the inference functions, you can create and use a recommendation model even without much ML knowledge. However, having basic knowledge about ML development, and recommendation models in particular, helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
 
-  - [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
-  - [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
-  - [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning)
-  - [Recommendation Systems](https://developers.google.com/machine-learning/recommendation)
+- [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
+- [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
+- [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning)
+- [Recommendation Systems](https://developers.google.com/machine-learning/recommendation)

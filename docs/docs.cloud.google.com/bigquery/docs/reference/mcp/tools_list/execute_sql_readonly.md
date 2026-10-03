@@ -64,34 +64,24 @@ Query Execution Behavior: \* If the query completes within the synchronous timeo
 
 The following code sample shows how to use `curl` to call the `execute_sql_readonly` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;execute_sql_readonly&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquery.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "execute_sql_readonly",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -99,158 +89,74 @@ Runs a BigQuery SQL query synchronously and returns query results if the query c
 
 ### QueryRequest
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;projectId&quot;: string,
-  &quot;query&quot;: string,
-  &quot;dryRun&quot;: boolean,
-  &quot;labels&quot;: {
+**JSON representation**
+
+```
+{
+  "projectId": string,
+  "query": string,
+  "dryRun": boolean,
+  "labels": {
     string: string,
     ...
   },
-  &quot;jobTimeoutMs&quot;: string,
-  &quot;timeoutMs&quot;: integer
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jobTimeoutMs": string,
+  "timeoutMs": integer
+}
+```
 
-Fields
-
-`projectId`
-
-`string`
-
-Required. Project that will be used for query execution and billing.
-
-`query`
-
-`string`
-
-Required. The query to execute in the form of a GoogleSQL query.
-
-`dryRun`
-
-`boolean`
-
-Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
-
-`labels`
-
-`map (key: string, value: string)`
-
-Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the map must have a different key.
-
-An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
-
-`jobTimeoutMs`
-
-`string ( Int64Value format)`
-
-Optional. Optional: Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop the query job.
-
-`timeoutMs`
-
-`integer`
-
-Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 20 seconds (20,000 milliseconds).
+| Fields         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `projectId`    | `string` Required. Project that will be used for query execution and billing.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `query`        | `string` Required. The query to execute in the form of a GoogleSQL query.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `dryRun`       | `boolean` Optional. If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.                                                                                                                                                                                                                                                                            |
+| `labels`       | `map (key: string, value: string)` Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the map must have a different key. An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` . |
+| `jobTimeoutMs` | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Optional. Optional: Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop the query job.                                                                                                                                                                                                                                                                                                                |
+| `timeoutMs`    | `integer` Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 20 seconds (20,000 milliseconds).                                                                                                                                                                                                                                                                                                                           |
 
 ### LabelsEntry
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;key&quot;: string,
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "key": string,
+  "value": string
+}
+```
 
-`key`
-
-`string`
-
-`value`
-
-`string`
+| Fields  |          |
+|---------|----------|
+| `key`   | `string` |
+| `value` | `string` |
 
 ### Int64Value
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "value": string
+}
+```
 
-`value`
-
-`string ( int64 format)`
-
-The int64 value.
+| Fields  |                                                                                                         |
+|---------|---------------------------------------------------------------------------------------------------------|
+| `value` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` The int64 value. |
 
 ### UInt32Value
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: integer
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "value": integer
+}
+```
 
-`value`
-
-`integer ( uint32 format)`
-
-The uint32 value.
+| Fields  |                                                                                                            |
+|---------|------------------------------------------------------------------------------------------------------------|
+| `value` | `integer ( `[`uint32`](https://developers.google.com/discovery/v1/type-format)` format)` The uint32 value. |
 
 ## Output Schema
 
@@ -258,940 +164,628 @@ Response for a BigQuery SQL query.
 
 ### QueryResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;schema&quot;: {object (TableSchema)},&quot;rows&quot;: [{object}],&quot;jobComplete&quot;: boolean,&quot;errors&quot;: [{object (ErrorProto)}],&quot;queryId&quot;: string,&quot;totalBytesBilled&quot;: string,&quot;totalSlotMs&quot;: string,&quot;numDmlAffectedRows&quot;: string,&quot;totalBytesProcessed&quot;: string,&quot;jobId&quot;: string}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "schema": {
+    object (TableSchema)
+  },
+  "rows": [
+    {
+      object
+    }
+  ],
+  "jobComplete": boolean,
+  "errors": [
+    {
+      object (ErrorProto)
+    }
+  ],
+  "queryId": string,
+  "totalBytesBilled": string,
+  "totalSlotMs": string,
+  "numDmlAffectedRows": string,
+  "totalBytesProcessed": string,
+  "jobId": string
+}
+```
 
-`schema`
-
-` object ( TableSchema  ` )
-
-The schema of the results. Present only when the query completes successfully.
-
-`rows[]`
-
-` object ( Struct  ` format)
-
-An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above.
-
-`jobComplete`
-
-`boolean`
-
-Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.
-
-`errors[]`
-
-` object ( ErrorProto  ` )
-
-Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see [Error messages](https://cloud.google.com/bigquery/docs/error-messages) .
-
-`queryId`
-
-`string`
-
-Output only. The ID of the query.
-
-`totalBytesBilled`
-
-`string ( Int64Value format)`
-
-Output only. The total number of bytes billed for the query. Only applies if the project is configured to use on-demand pricing.
-
-`totalSlotMs`
-
-`string ( Int64Value format)`
-
-Output only. Number of slot ms the user is actually billed for.
-
-`numDmlAffectedRows`
-
-`string ( Int64Value format)`
-
-Output only. The number of rows affected by a DML statement.
-
-`totalBytesProcessed`
-
-`string ( Int64Value format)`
-
-Output only. The total number of bytes processed for this query.
-
-`jobId`
-
-`string`
-
-Output only. The ID of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this ID with `get_query_results` , `cancel_job` , or `get_job` .
+| Fields                |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `schema`              | `object ( `[`TableSchema`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TableSchema)` )` The schema of the results. Present only when the query completes successfully.                                                                                                                                                                                                                                                                                                   |
+| `rows[]`              | `object ( `[`Struct`](https://protobuf.dev/reference/protobuf/google.protobuf/#struct)` format)` An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above.                                                                                                                                                                                                                             |
+| `jobComplete`         | `boolean` Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.                                                                                                                                                                                                                                                                                                                                                               |
+| `errors[]`            | `object ( `[`ErrorProto`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.ErrorProto)` )` Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see [Error messages](https://cloud.google.com/bigquery/docs/error-messages) . |
+| `queryId`             | `string` Output only. The ID of the query.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `totalBytesBilled`    | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The total number of bytes billed for the query. Only applies if the project is configured to use on-demand pricing.                                                                                                                                                                                                                                                                                                   |
+| `totalSlotMs`         | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of slot ms the user is actually billed for.                                                                                                                                                                                                                                                                                                                                                                    |
+| `numDmlAffectedRows`  | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The number of rows affected by a DML statement.                                                                                                                                                                                                                                                                                                                                                                       |
+| `totalBytesProcessed` | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The total number of bytes processed for this query.                                                                                                                                                                                                                                                                                                                                                                   |
+| `jobId`               | `string` Output only. The ID of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this ID with `get_query_results` , `cancel_job` , or `get_job` .                                                                                                                                                                                                                                                                                    |
 
 ### TableSchema
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;foreignTypeInfo&quot;: {object (ForeignTypeInfo)}}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "fields": [
+    {
+      object (TableFieldSchema)
+    }
+  ],
+  "foreignTypeInfo": {
+    object (ForeignTypeInfo)
+  }
+}
+```
 
-`fields[]`
-
-` object ( TableFieldSchema  ` )
-
-Describes the fields in a table.
-
-`foreignTypeInfo`
-
-` object ( ForeignTypeInfo  ` )
-
-Optional. Specifies metadata of the foreign data type definition in field schema ( `TableFieldSchema.foreign_type_definition` ).
+| Fields            |                                                                                                                                                                                                                                                                                        |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields[]`        | `object ( `[`TableFieldSchema`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TableFieldSchema)` )` Describes the fields in a table.                                                                                               |
+| `foreignTypeInfo` | `object ( `[`ForeignTypeInfo`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.ForeignTypeInfo)` )` Optional. Specifies metadata of the foreign data type definition in field schema ( `TableFieldSchema.foreign_type_definition` ). |
 
 ### TableFieldSchema
 
+**JSON representation**
+
+```
+{
+  "name": string,
+  "type": string,
+  "mode": string,
+  "fields": [
+    {
+      object (TableFieldSchema)
+    }
+  ],
+  "description": string,
+  "policyTags": {
+    object (PolicyTagList)
+  },
+  "dataGovernanceTagsInfo": {
+    object (DataGovernanceTagsInfo)
+  },
+  "dataPolicies": [
+    {
+      object (DataPolicyOption)
+    }
+  ],
+  "dataPolicyList": {
+    object (DataPolicyList)
+  },
+  "maxLength": string,
+  "precision": string,
+  "scale": string,
+  "timestampPrecision": string,
+  "roundingMode": enum (RoundingMode),
+  "collation": string,
+  "defaultValueExpression": string,
+  "rangeElementType": {
+    object (FieldElementType)
+  },
+  "foreignTypeDefinition": string,
+  "generatedColumn": {
+    object (GeneratedColumn)
+  }
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: string,&quot;mode&quot;: string,&quot;fields&quot;: [{object (TableFieldSchema)}],&quot;description&quot;: string,&quot;policyTags&quot;: {object (PolicyTagList)},&quot;dataGovernanceTagsInfo&quot;: {object (DataGovernanceTagsInfo)},&quot;dataPolicies&quot;: [{object (DataPolicyOption)}],&quot;dataPolicyList&quot;: {object (DataPolicyList)},&quot;maxLength&quot;: string,&quot;precision&quot;: string,&quot;scale&quot;: string,&quot;timestampPrecision&quot;: string,&quot;roundingMode&quot;: enum (RoundingMode),&quot;collation&quot;: string,&quot;defaultValueExpression&quot;: string,&quot;rangeElementType&quot;: {object (FieldElementType)},&quot;foreignTypeDefinition&quot;: string,&quot;generatedColumn&quot;: {object (GeneratedColumn)}}</code></pre></td>
+<td><code>name</code></td>
+<td><p><code>string</code></p>
+<p>Required. The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 300 characters.</p></td>
+</tr>
+<tr class="even">
+<td><code>type</code></td>
+<td><p><code>string</code></p>
+<p>Required. The field data type. Possible values include:</p>
+<ul>
+<li>STRING</li>
+<li>BYTES</li>
+<li>INTEGER (or INT64)</li>
+<li>FLOAT (or FLOAT64)</li>
+<li>BOOLEAN (or BOOL)</li>
+<li>TIMESTAMP</li>
+<li>DATE</li>
+<li>TIME</li>
+<li>DATETIME</li>
+<li>GEOGRAPHY</li>
+<li>NUMERIC</li>
+<li>BIGNUMERIC</li>
+<li>JSON</li>
+<li>RECORD (or STRUCT)</li>
+<li>RANGE</li>
+</ul>
+<p>Use of RECORD/STRUCT indicates that the field contains a nested schema.</p></td>
+</tr>
+<tr class="odd">
+<td><code>mode</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The field mode. Possible values include NULLABLE, REQUIRED and REPEATED. The default value is NULLABLE.</p></td>
+</tr>
+<tr class="even">
+<td><code>fields[]</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TableFieldSchema"><code>TableFieldSchema</code></a><code> )</code></p>
+<p>Optional. Describes the nested schema fields if the type property is set to RECORD.</p></td>
+</tr>
+<tr class="odd">
+<td><code>description</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The field description. The maximum length is 1,024 characters.</p></td>
+</tr>
+<tr class="even">
+<td><code>policyTags</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.PolicyTagList"><code>PolicyTagList</code></a><code> )</code></p>
+<p>Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy_tags.</p></td>
+</tr>
+<tr class="odd">
+<td><code>dataGovernanceTagsInfo</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.DataGovernanceTagsInfo"><code>DataGovernanceTagsInfo</code></a><code> )</code></p>
+<p>Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:</p>
+<ul>
+<li><strong>Precedence</strong> : If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag.</li>
+<li><strong>Patching behavior</strong> : Describes how this field behaves during a <code>Table.patch</code> schema update:
+<ul>
+<li><strong>Unset</strong> : If the <code>data_governance_tags_info</code> field is omitted from the update request, the existing tags on the column are preserved.</li>
+<li><strong>Empty Field</strong> : To clear data governance tags from a column, send the <code>data_governance_tags_info</code> field as an empty object. This removes all tags from the column.</li>
+<li><strong>Updating tags</strong> : To replace an existing tag, send the field with the new tag.</li>
+</ul></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>dataPolicies[]</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.DataPolicyOption"><code>DataPolicyOption</code></a><code> )</code></p>
+<p>Optional. Data policies attached to this field, used for field-level access control.</p></td>
+</tr>
+<tr class="odd">
+<td><code>dataPolicyList</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.DataPolicyList"><code>DataPolicyList</code></a><code> )</code></p>
+<p>Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.</p></td>
+</tr>
+<tr class="even">
+<td><code>maxLength</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Optional. Maximum length of values of this field for STRINGS or BYTES.</p>
+<p>If max_length is not specified, no maximum length constraint is imposed on this field.</p>
+<p>If type = "STRING", then max_length represents the maximum UTF-8 length of strings in this field.</p>
+<p>If type = "BYTES", then max_length represents the maximum number of bytes in this field.</p>
+<p>It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES".</p></td>
+</tr>
+<tr class="odd">
+<td><code>precision</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC.</p>
+<p>It is invalid to set precision or scale if type ≠ "NUMERIC" and ≠ "BIGNUMERIC".</p>
+<p>If precision and scale are not specified, no value range constraint is imposed on this field insofar as values are permitted by the type.</p>
+<p>Values of this NUMERIC or BIGNUMERIC field must be in this range when:</p>
+<ul>
+<li>Precision ( <var translate="no"> P </var> ) and scale ( <var translate="no"> S </var> ) are specified: [-10 <sup><var translate="no"> P </var> - <var translate="no"> S </var></sup> + 10 <sup>- <var translate="no"> S </var></sup> , 10 <sup><var translate="no"> P </var> - <var translate="no"> S </var></sup> - 10 <sup>- <var translate="no"> S </var></sup> ]</li>
+<li>Precision ( <var translate="no"> P </var> ) is specified but not scale (and thus scale is interpreted to be equal to zero): [-10 <sup><var translate="no"> P </var></sup> + 1, 10 <sup><var translate="no"> P </var></sup> - 1].</li>
+</ul>
+<p>Acceptable values for precision and scale if both are specified:</p>
+<ul>
+<li>If type = "NUMERIC": 1 ≤ precision - scale ≤ 29 and 0 ≤ scale ≤ 9.</li>
+<li>If type = "BIGNUMERIC": 1 ≤ precision - scale ≤ 38 and 0 ≤ scale ≤ 38.</li>
+</ul>
+<p>Acceptable values for precision if only precision is specified but not scale (and thus scale is interpreted to be equal to zero):</p>
+<ul>
+<li>If type = "NUMERIC": 1 ≤ precision ≤ 29.</li>
+<li>If type = "BIGNUMERIC": 1 ≤ precision ≤ 38.</li>
+</ul>
+<p>If scale is specified but not precision, then it is invalid.</p></td>
+</tr>
+<tr class="even">
+<td><code>scale</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Optional. See documentation for precision.</p></td>
+</tr>
+<tr class="odd">
+<td><code>timestampPrecision</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>Int64Value</code></a><code> format)</code></p>
+<p>Optional. Precision (maximum number of total digits in base 10) for seconds of TIMESTAMP type.</p>
+<p>Possible values include: * 6 (Default, for TIMESTAMP type with microsecond precision) * 12 (For TIMESTAMP type with picosecond precision)</p></td>
+</tr>
+<tr class="even">
+<td><code>roundingMode</code></td>
+<td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.RoundingMode"><code>RoundingMode</code></a><code> )</code></p>
+<p>Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.</p></td>
+</tr>
+<tr class="odd">
+<td><code>collation</code></td>
+<td><p><code>string</code></p>
+<p>Optional. Field collation can be set only when the type of field is STRING. The following values are supported:</p>
+<ul>
+<li>'und:ci': undetermined locale, case insensitive.</li>
+<li>'': empty string. Default to case-sensitive behavior.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>defaultValueExpression</code></td>
+<td><p><code>string</code></p>
+<p>Optional. A SQL expression to specify the <a href="https://cloud.google.com/bigquery/docs/default-values">default value</a> for this field.</p></td>
+</tr>
+<tr class="odd">
+<td><code>rangeElementType</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.FieldElementType"><code>FieldElementType</code></a><code> )</code></p>
+<p>Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Values for the field element type can be the following:</p>
+<ul>
+<li>DATE</li>
+<li>DATETIME</li>
+<li>TIMESTAMP</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>foreignTypeDefinition</code></td>
+<td><p><code>string</code></p>
+<p>Optional. Definition of the foreign data type. Only valid for top-level schema fields (not nested fields). If the type is FOREIGN, this field is required.</p></td>
+</tr>
+<tr class="odd">
+<td><code>generatedColumn</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.GeneratedColumn"><code>GeneratedColumn</code></a><code> )</code></p>
+<p>Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).</p></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`name`
-
-`string`
-
-Required. The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_), and must start with a letter or underscore. The maximum length is 300 characters.
-
-`type`
-
-`string`
-
-Required. The field data type. Possible values include:
-
-  - STRING
-  - BYTES
-  - INTEGER (or INT64)
-  - FLOAT (or FLOAT64)
-  - BOOLEAN (or BOOL)
-  - TIMESTAMP
-  - DATE
-  - TIME
-  - DATETIME
-  - GEOGRAPHY
-  - NUMERIC
-  - BIGNUMERIC
-  - JSON
-  - RECORD (or STRUCT)
-  - RANGE
-
-Use of RECORD/STRUCT indicates that the field contains a nested schema.
-
-`mode`
-
-`string`
-
-Optional. The field mode. Possible values include NULLABLE, REQUIRED and REPEATED. The default value is NULLABLE.
-
-`fields[]`
-
-` object ( TableFieldSchema  ` )
-
-Optional. Describes the nested schema fields if the type property is set to RECORD.
-
-`description`
-
-`string`
-
-Optional. The field description. The maximum length is 1,024 characters.
-
-`policyTags`
-
-` object ( PolicyTagList  ` )
-
-Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy\_tags.
-
-`dataGovernanceTagsInfo`
-
-` object ( DataGovernanceTagsInfo  ` )
-
-Optional. Specifies the data governance tags on this field. This field works with other column-level security fields as follows:
-
-  - **Precedence** : If a data governance tag is attached to a column, it takes precedence over the policy tag attached to the column. However, if a data policy is attached to a column, it takes precedence over the data governance tag.
-  - **Patching behavior** : Describes how this field behaves during a `Table.patch` schema update:
-      - **Unset** : If the `data_governance_tags_info` field is omitted from the update request, the existing tags on the column are preserved.
-      - **Empty Field** : To clear data governance tags from a column, send the `data_governance_tags_info` field as an empty object. This removes all tags from the column.
-      - **Updating tags** : To replace an existing tag, send the field with the new tag.
-
-`dataPolicies[]`
-
-` object ( DataPolicyOption  ` )
-
-Optional. Data policies attached to this field, used for field-level access control.
-
-`dataPolicyList`
-
-` object ( DataPolicyList  ` )
-
-Optional. Specifies data policies attached to this field, used for field-level access control. When set, this will be the source of truth for data policy information.
-
-`maxLength`
-
-`string ( int64 format)`
-
-Optional. Maximum length of values of this field for STRINGS or BYTES.
-
-If max\_length is not specified, no maximum length constraint is imposed on this field.
-
-If type = "STRING", then max\_length represents the maximum UTF-8 length of strings in this field.
-
-If type = "BYTES", then max\_length represents the maximum number of bytes in this field.
-
-It is invalid to set this field if type ≠ "STRING" and ≠ "BYTES".
-
-`precision`
-
-`string ( int64 format)`
-
-Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC.
-
-It is invalid to set precision or scale if type ≠ "NUMERIC" and ≠ "BIGNUMERIC".
-
-If precision and scale are not specified, no value range constraint is imposed on this field insofar as values are permitted by the type.
-
-Values of this NUMERIC or BIGNUMERIC field must be in this range when:
-
-  - Precision ( P ) and scale ( S ) are specified: \[-10 <sup>P - S</sup> + 10 <sup>- S</sup> , 10 <sup>P - S</sup> - 10 <sup>- S</sup> \]
-  - Precision ( P ) is specified but not scale (and thus scale is interpreted to be equal to zero): \[-10 <sup>P</sup> + 1, 10 <sup>P</sup> - 1\].
-
-Acceptable values for precision and scale if both are specified:
-
-  - If type = "NUMERIC": 1 ≤ precision - scale ≤ 29 and 0 ≤ scale ≤ 9.
-  - If type = "BIGNUMERIC": 1 ≤ precision - scale ≤ 38 and 0 ≤ scale ≤ 38.
-
-Acceptable values for precision if only precision is specified but not scale (and thus scale is interpreted to be equal to zero):
-
-  - If type = "NUMERIC": 1 ≤ precision ≤ 29.
-  - If type = "BIGNUMERIC": 1 ≤ precision ≤ 38.
-
-If scale is specified but not precision, then it is invalid.
-
-`scale`
-
-`string ( int64 format)`
-
-Optional. See documentation for precision.
-
-`timestampPrecision`
-
-`string ( Int64Value format)`
-
-Optional. Precision (maximum number of total digits in base 10) for seconds of TIMESTAMP type.
-
-Possible values include: \* 6 (Default, for TIMESTAMP type with microsecond precision) \* 12 (For TIMESTAMP type with picosecond precision)
-
-`roundingMode`
-
-` enum ( RoundingMode  ` )
-
-Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
-
-`collation`
-
-`string`
-
-Optional. Field collation can be set only when the type of field is STRING. The following values are supported:
-
-  - 'und:ci': undetermined locale, case insensitive.
-  - '': empty string. Default to case-sensitive behavior.
-
-`defaultValueExpression`
-
-`string`
-
-Optional. A SQL expression to specify the [default value](https://cloud.google.com/bigquery/docs/default-values) for this field.
-
-`rangeElementType`
-
-` object ( FieldElementType  ` )
-
-Optional. The subtype of the RANGE, if the type of this field is RANGE. If the type is RANGE, this field is required. Values for the field element type can be the following:
-
-  - DATE
-  - DATETIME
-  - TIMESTAMP
-
-`foreignTypeDefinition`
-
-`string`
-
-Optional. Definition of the foreign data type. Only valid for top-level schema fields (not nested fields). If the type is FOREIGN, this field is required.
-
-`generatedColumn`
-
-` object ( GeneratedColumn  ` )
-
-Optional. Definition of how values are generated for the field. Only valid for top-level schema fields (not nested fields).
 
 ### StringValue
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "value": string
+}
+```
 
-`value`
-
-`string`
-
-The string value.
+| Fields  |                            |
+|---------|----------------------------|
+| `value` | `string` The string value. |
 
 ### PolicyTagList
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;names&quot;: [
+**JSON representation**
+
+```
+{
+  "names": [
     string
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`names[]`
-
-`string`
-
-A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed.
+| Fields    |                                                                                                                                                            |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `names[]` | `string` A list of policy tag resource names. For example, "projects/1/locations/eu/taxonomies/2/policyTags/3". At most 1 policy tag is currently allowed. |
 
 ### DataGovernanceTagsInfo
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;dataGovernanceTags&quot;: {
+**JSON representation**
+
+```
+{
+  "dataGovernanceTags": {
     string: string,
     ...
   }
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`dataGovernanceTags`
-
-`map (key: string, value: string)`
-
-Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost\_center": "sales"
-
-An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+| Fields               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dataGovernanceTags` | `map (key: string, value: string)` Optional. The data governance tags added to this field are used for field-level access control. Only one data governance tag is currently supported on a field. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "parent-id/pii" where parent-id is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "sensitive". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details. For example: "parent-id/pii": "sensitive", "myProject/cost_center": "sales" An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` . |
 
 ### DataGovernanceTagsEntry
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;key&quot;: string,
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "key": string,
+  "value": string
+}
+```
 
-`key`
-
-`string`
-
-`value`
-
-`string`
+| Fields  |          |
+|---------|----------|
+| `key`   | `string` |
+| `value` | `string` |
 
 ### DataPolicyOption
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field _name can be only one of the following:&quot;name&quot;: string// End of list of possible types for union field _name.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-Union field `_name` .
+  // Union field _name can be only one of the following:
+  "name": string
+  // End of list of possible types for union field _name.
+}
+```
 
-`_name` can be only one of the following:
-
-`name`
-
-`string`
-
-Data policy resource name in the form of projects/project\_id/locations/location\_id/dataPolicies/data\_policy\_id.
+| Fields                                                          |                                                                                                                          |
+|-----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Union field `_name` . `_name` can be only one of the following: |                                                                                                                          |
+| `name`                                                          | `string` Data policy resource name in the form of projects/project_id/locations/location_id/dataPolicies/data_policy_id. |
+|                                                                 |                                                                                                                          |
 
 ### DataPolicyList
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;dataPolicies&quot;: [{object (DataPolicyOption)}]}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "dataPolicies": [
+    {
+      object (DataPolicyOption)
+    }
+  ]
+}
+```
 
-`dataPolicies[]`
-
-` object ( DataPolicyOption  ` )
-
-Contains a list of data policy options. At most 9 data policies are allowed per field.
+| Fields           |                                                                                                                                                                                                                                                |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `dataPolicies[]` | `object ( `[`DataPolicyOption`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.DataPolicyOption)` )` Contains a list of data policy options. At most 9 data policies are allowed per field. |
 
 ### Int64Value
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "value": string
+}
+```
 
-`value`
-
-`string ( int64 format)`
-
-The int64 value.
+| Fields  |                                                                                                         |
+|---------|---------------------------------------------------------------------------------------------------------|
+| `value` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` The int64 value. |
 
 ### FieldElementType
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;type&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "type": string
+}
+```
 
-`type`
-
-`string`
-
-Required. The type of a field element. For more information, see `TableFieldSchema.type` .
+| Fields |                                                                                                     |
+|--------|-----------------------------------------------------------------------------------------------------|
+| `type` | `string` Required. The type of a field element. For more information, see `TableFieldSchema.type` . |
 
 ### GeneratedColumn
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field _generated_mode can be only one of the following:&quot;generatedMode&quot;: enum (GeneratedMode)// End of list of possible types for union field _generated_mode.// Union field definition can be only one of the following:&quot;generatedExpressionInfo&quot;: {object (GeneratedExpressionInfo)}// End of list of possible types for union field definition.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-Union field `_generated_mode` .
+  // Union field _generated_mode can be only one of the following:
+  "generatedMode": enum (GeneratedMode)
+  // End of list of possible types for union field _generated_mode.
 
-`_generated_mode` can be only one of the following:
+  // Union field definition can be only one of the following:
+  "generatedExpressionInfo": {
+    object (GeneratedExpressionInfo)
+  }
+  // End of list of possible types for union field definition.
+}
+```
 
-`generatedMode`
-
-` enum ( GeneratedMode  ` )
-
-Optional. Dictates when system generated values are used to populate the field.
-
-Union field `definition` .
-
-`definition` can be only one of the following:
-
-`generatedExpressionInfo`
-
-` object ( GeneratedExpressionInfo  ` )
-
-Definition of the expression used to generate the field.
+| Fields                                                                              |                                                                                                                                                                                                                                 |
+|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Union field `_generated_mode` . `_generated_mode` can be only one of the following: |                                                                                                                                                                                                                                 |
+| `generatedMode`                                                                     | `enum ( `[`GeneratedMode`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.GeneratedMode)` )` Optional. Dictates when system generated values are used to populate the field. |
+|                                                                                     |                                                                                                                                                                                                                                 |
+| Union field `definition` . `definition` can be only one of the following:           |                                                                                                                                                                                                                                 |
+| `generatedExpressionInfo`                                                           | `object ( `[`GeneratedExpressionInfo`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.GeneratedExpressionInfo)` )` Definition of the expression used to generate the field.  |
+|                                                                                     |                                                                                                                                                                                                                                 |
 
 ### GeneratedExpressionInfo
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field _generation_expression can be only one of the following:&quot;generationExpression&quot;: string// End of list of possible types for union field _generation_expression.// Union field _asynchronous can be only one of the following:&quot;asynchronous&quot;: boolean// End of list of possible types for union field _asynchronous.// Union field _stored can be only one of the following:&quot;stored&quot;: boolean// End of list of possible types for union field _stored.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-Union field `_generation_expression` .
+  // Union field _generation_expression can be only one of the following:
+  "generationExpression": string
+  // End of list of possible types for union field _generation_expression.
 
-`_generation_expression` can be only one of the following:
+  // Union field _asynchronous can be only one of the following:
+  "asynchronous": boolean
+  // End of list of possible types for union field _asynchronous.
 
-`generationExpression`
+  // Union field _stored can be only one of the following:
+  "stored": boolean
+  // End of list of possible types for union field _stored.
+}
+```
 
-`string`
-
-Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field.
-
-Union field `_asynchronous` .
-
-`_asynchronous` can be only one of the following:
-
-`asynchronous`
-
-`boolean`
-
-Optional. Whether the column generation is done asynchronously.
-
-Union field `_stored` .
-
-`_stored` can be only one of the following:
-
-`stored`
-
-`boolean`
-
-Optional. Whether the generated column is stored in the table.
+| Fields                                                                                            |                                                                                               |
+|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Union field `_generation_expression` . `_generation_expression` can be only one of the following: |                                                                                               |
+| `generationExpression`                                                                            | `string` Optional. The generation expression (e.g. AI.EMBED(...)) used to generate the field. |
+|                                                                                                   |                                                                                               |
+| Union field `_asynchronous` . `_asynchronous` can be only one of the following:                   |                                                                                               |
+| `asynchronous`                                                                                    | `boolean` Optional. Whether the column generation is done asynchronously.                     |
+|                                                                                                   |                                                                                               |
+| Union field `_stored` . `_stored` can be only one of the following:                               |                                                                                               |
+| `stored`                                                                                          | `boolean` Optional. Whether the generated column is stored in the table.                      |
+|                                                                                                   |                                                                                               |
 
 ### ForeignTypeInfo
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;typeSystem&quot;: enum (TypeSystem)}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "typeSystem": enum (TypeSystem)
+}
+```
 
-`typeSystem`
-
-` enum ( TypeSystem  ` )
-
-Required. Specifies the system which defines the foreign data type.
+| Fields       |                                                                                                                                                                                                               |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `typeSystem` | `enum ( `[`TypeSystem`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TypeSystem)` )` Required. Specifies the system which defines the foreign data type. |
 
 ### Struct
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;fields&quot;: {
+**JSON representation**
+
+```
+{
+  "fields": {
     string: value,
     ...
   }
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`fields`
-
-` map (key: string, value: value ( Value  ` format))
-
-Unordered map of dynamically typed values.
-
-An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` .
+| Fields   |                                                                                                                                                                                                                                                                                          |
+|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `fields` | `map (key: string, value: value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format))` Unordered map of dynamically typed values. An object containing a list of `"key": value` pairs. Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }` . |
 
 ### FieldsEntry
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;key&quot;: string,
-  &quot;value&quot;: value
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "key": string,
+  "value": value
+}
+```
 
-`key`
-
-`string`
-
-`value`
-
-` value ( Value  ` format)
+| Fields  |                                                                                               |
+|---------|-----------------------------------------------------------------------------------------------|
+| `key`   | `string`                                                                                      |
+| `value` | `value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format)` |
 
 ### Value
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// Union field kind can be only one of the following:&quot;nullValue&quot;: null,&quot;numberValue&quot;: number,&quot;stringValue&quot;: string,&quot;boolValue&quot;: boolean,&quot;structValue&quot;: {object},&quot;listValue&quot;: array// End of list of possible types for union field kind.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-Union field `kind` . The kind of value. `kind` can be only one of the following:
+  // Union field kind can be only one of the following:
+  "nullValue": null,
+  "numberValue": number,
+  "stringValue": string,
+  "boolValue": boolean,
+  "structValue": {
+    object
+  },
+  "listValue": array
+  // End of list of possible types for union field kind.
+}
+```
 
-`nullValue`
-
-`null`
-
-Represents a JSON `null` .
-
-`numberValue`
-
-`number`
-
-Represents a JSON number. Must not be `NaN` , `Infinity` or `-Infinity` , since those are not supported in JSON. This also cannot represent large Int64 values, since JSON format generally does not support them in its number type.
-
-`stringValue`
-
-`string`
-
-Represents a JSON string.
-
-`boolValue`
-
-`boolean`
-
-Represents a JSON boolean ( `true` or `false` literal in JSON).
-
-`structValue`
-
-` object ( Struct  ` format)
-
-Represents a JSON object.
-
-`listValue`
-
-` array ( ListValue  ` format)
-
-Represents a JSON array.
+| Fields                                                                           |                                                                                                                                                                                                                                                |
+|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Union field `kind` . The kind of value. `kind` can be only one of the following: |                                                                                                                                                                                                                                                |
+| `nullValue`                                                                      | `null` Represents a JSON `null` .                                                                                                                                                                                                              |
+| `numberValue`                                                                    | `number` Represents a JSON number. Must not be `NaN` , `Infinity` or `-Infinity` , since those are not supported in JSON. This also cannot represent large Int64 values, since JSON format generally does not support them in its number type. |
+| `stringValue`                                                                    | `string` Represents a JSON string.                                                                                                                                                                                                             |
+| `boolValue`                                                                      | `boolean` Represents a JSON boolean ( `true` or `false` literal in JSON).                                                                                                                                                                      |
+| `structValue`                                                                    | `object ( `[`Struct`](https://protobuf.dev/reference/protobuf/google.protobuf/#struct)` format)` Represents a JSON object.                                                                                                                     |
+| `listValue`                                                                      | `array ( `[`ListValue`](https://protobuf.dev/reference/protobuf/google.protobuf/#list-value)` format)` Represents a JSON array.                                                                                                                |
+|                                                                                  |                                                                                                                                                                                                                                                |
 
 ### ListValue
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;values&quot;: [
+**JSON representation**
+
+```
+{
+  "values": [
     value
   ]
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+}
+```
 
-Fields
-
-`values[]`
-
-` value ( Value  ` format)
-
-Repeated field of dynamically typed values.
+| Fields     |                                                                                                                                           |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `values[]` | `value ( `[`Value`](https://protobuf.dev/reference/protobuf/google.protobuf/#value)` format)` Repeated field of dynamically typed values. |
 
 ### BoolValue
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;value&quot;: boolean
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "value": boolean
+}
+```
 
-`value`
-
-`boolean`
-
-The bool value.
+| Fields  |                           |
+|---------|---------------------------|
+| `value` | `boolean` The bool value. |
 
 ### ErrorProto
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;reason&quot;: string,
-  &quot;location&quot;: string,
-  &quot;debugInfo&quot;: string,
-  &quot;message&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "reason": string,
+  "location": string,
+  "debugInfo": string,
+  "message": string
+}
+```
 
-`reason`
-
-`string`
-
-A short error code that summarizes the error.
-
-`location`
-
-`string`
-
-Specifies where the error occurred, if present.
-
-`debugInfo`
-
-`string`
-
-Debugging information. This property is internal to Google and should not be used.
-
-`message`
-
-`string`
-
-A human-readable description of the error.
+| Fields      |                                                                                             |
+|-------------|---------------------------------------------------------------------------------------------|
+| `reason`    | `string` A short error code that summarizes the error.                                      |
+| `location`  | `string` Specifies where the error occurred, if present.                                    |
+| `debugInfo` | `string` Debugging information. This property is internal to Google and should not be used. |
+| `message`   | `string` A human-readable description of the error.                                         |
 
 ### RoundingMode
 
 Rounding mode options that can be used when storing NUMERIC or BIGNUMERIC values.
 
-Enums
-
-`ROUNDING_MODE_UNSPECIFIED`
-
-Unspecified will default to using ROUND\_HALF\_AWAY\_FROM\_ZERO.
-
-`ROUND_HALF_AWAY_FROM_ZERO`
-
-ROUND\_HALF\_AWAY\_FROM\_ZERO rounds half values away from zero when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5, 1.6, 1.7, 1.8, 1.9 =\> 2
-
-`ROUND_HALF_EVEN`
-
-ROUND\_HALF\_EVEN rounds half values to the nearest even value when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5 =\> 2 1.6, 1.7, 1.8, 1.9 =\> 2 2.5 =\> 2
+| Enums                       |                                                                                                                                                                                                                                  |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ROUNDING_MODE_UNSPECIFIED` | Unspecified will default to using ROUND_HALF_AWAY_FROM_ZERO.                                                                                                                                                                     |
+| `ROUND_HALF_AWAY_FROM_ZERO` | ROUND_HALF_AWAY_FROM_ZERO rounds half values away from zero when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5, 1.6, 1.7, 1.8, 1.9 =\> 2                 |
+| `ROUND_HALF_EVEN`           | ROUND_HALF_EVEN rounds half values to the nearest even value when applying precision and scale upon writing of NUMERIC and BIGNUMERIC values. For Scale: 0 1.1, 1.2, 1.3, 1.4 =\> 1 1.5 =\> 2 1.6, 1.7, 1.8, 1.9 =\> 2 2.5 =\> 2 |
 
 ### GeneratedMode
 
 Dictates when system generated values are used to populate the field.
 
-Enums
-
-`GENERATED_MODE_UNSPECIFIED`
-
-Unspecified GeneratedMode will default to GENERATED\_ALWAYS.
-
-`GENERATED_ALWAYS`
-
-Field can only have system generated values. Users cannot manually insert values into the field.
-
-`GENERATED_BY_DEFAULT`
-
-Use system generated values only if the user does not explicitly provide a value.
+| Enums                        |                                                                                                  |
+|------------------------------|--------------------------------------------------------------------------------------------------|
+| `GENERATED_MODE_UNSPECIFIED` | Unspecified GeneratedMode will default to GENERATED_ALWAYS.                                      |
+| `GENERATED_ALWAYS`           | Field can only have system generated values. Users cannot manually insert values into the field. |
+| `GENERATED_BY_DEFAULT`       | Use system generated values only if the user does not explicitly provide a value.                |
 
 ### TypeSystem
 
 External systems, such as query engines or table formats, that have their own data types.
 
-Enums
-
-`TYPE_SYSTEM_UNSPECIFIED`
-
-TypeSystem not specified.
-
-`HIVE`
-
-Represents Hive data types.
+| Enums                     |                             |
+|---------------------------|-----------------------------|
+| `TYPE_SYSTEM_UNSPECIFIED` | TypeSystem not specified.   |
+| `HIVE`                    | Represents Hive data types. |
 
 ### NullValue
 
@@ -1201,11 +795,9 @@ Represents a JSON `null` .
 
 A field of type `NullValue` with any value other than `0` is considered invalid. Most ProtoJSON serializers will emit a `Value` with a `null_value` set as a JSON `null` regardless of the integer value, and so will round trip to a `0` value.
 
-Enums
-
-`NULL_VALUE`
-
-Null value.
+| Enums        |             |
+|--------------|-------------|
+| `NULL_VALUE` | Null value. |
 
 ### Tool Annotations
 
@@ -1213,9 +805,9 @@ Null value.
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ✅ \| Read Only Hint: ✅ \| Open World Hint: ❌

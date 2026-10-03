@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.STANDARD\_SCALER function
+# The ML.STANDARD_SCALER function
 
 This document describes the `ML.STANDARD_SCALER` function, which lets you scale a numerical expression by using [z-score](https://developers.google.com/machine-learning/data-prep/transform/normalization#z-score) .
 
@@ -14,8 +14,8 @@ When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/doc
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+- [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
@@ -27,7 +27,7 @@ ML.STANDARD_SCALER(numerical_expression) OVER()
 
 `ML.STANDARD_SCALER` takes the following argument:
 
-  - `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+- `numerical_expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
@@ -37,10 +37,12 @@ ML.STANDARD_SCALER(numerical_expression) OVER()
 
 The following example scales a set of numerical expressions to have a mean of `0` and standard deviation of `1` :
 
-    SELECT
-      f, ML.STANDARD_SCALER(f) OVER() AS output
-    FROM
-      UNNEST([1,2,3,4,5]) AS f;
+```
+SELECT
+  f, ML.STANDARD_SCALER(f) OVER() AS output
+FROM
+  UNNEST([1,2,3,4,5]) AS f;
+```
 
 The output looks similar to the following:
 
@@ -58,4 +60,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

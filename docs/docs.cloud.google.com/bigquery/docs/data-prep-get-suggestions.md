@@ -14,9 +14,9 @@ For more information, see [BigQuery data preparation overview](https://docs.clou
 
 ## Before you begin
 
-  - [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
+- [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
-  - Give the [required Identity and Access Management (IAM) roles and permissions](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations#required-roles) .
+- Give the [required Identity and Access Management (IAM) roles and permissions](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations#required-roles) .
 
 ## Start a data preparation session
 
@@ -37,9 +37,9 @@ To create a new data preparation in BigQuery, follow these steps:
 4.  Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
 
 5.  Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
-    
+
     ![Explore the data preparations toolbar.](https://docs.cloud.google.com/static/bigquery/images/code-assets-toolbar.png)
-    
+
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 ### Create from a table
@@ -52,14 +52,14 @@ To create a new data preparation from an existing table, follow these steps:
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  For your table name, click more\_vert **Actions \> Open in \> Data preparation** . The data preparation editor for the table opens, showing a preview of your data on the **Data** tab, and an initial set of data preparation suggestions from Gemini.
+4.  For your table name, click more_vert **Actions \> Open in \> Data preparation** . The data preparation editor for the table opens, showing a preview of your data on the **Data** tab, and an initial set of data preparation suggestions from Gemini.
 
 5.  Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
 
 6.  Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
-    
+
     ![Explore the data preparations toolbar.](https://docs.cloud.google.com/static/bigquery/images/code-assets-toolbar.png)
-    
+
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 ### Create from a file
@@ -75,12 +75,12 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
 3.  In the list of data sources, click **Google Cloud Storage** or **Google Drive** . The **Prepare data** dialog opens.
 
 4.  In the **Source** section, select your file:
-    
-      - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv ` . Wildcard searches, such as `*.csv` , are supported.
-      - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
-    
+
+    - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `STORAGE_BUCKET_NAME `` / `` FILE_NAME `` .csv` . Wildcard searches, such as `*.csv` , are supported.
+    - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
+
     > **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
-    
+
     The file format is automatically detected. Supported formats are Avro, CSV, JSONL, ORC, and Parquet. Other compatible file types, such as DAT, TSV, and TXT, are read as the CSV format. The Google Drive option also supports the Google Sheets format.
 
 5.  Define the external staging table where you'll upload files. In the **Staging table** section, enter the project, dataset, and table names for the new table.
@@ -98,9 +98,9 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
 10. Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
 
 11. Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
-    
+
     ![Explore the data preparations toolbar.](https://docs.cloud.google.com/static/bigquery/images/code-assets-toolbar.png)
-    
+
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 #### Prepare the file
@@ -131,9 +131,9 @@ To open the editor for an existing data preparation, follow these steps:
 6.  Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
 
 7.  Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
-    
+
     ![Explore the data preparations toolbar.](https://docs.cloud.google.com/static/bigquery/images/code-assets-toolbar.png)
-    
+
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 ## Add data preparation steps
@@ -153,15 +153,15 @@ To apply a suggestion by Gemini as a data preparation step, do the following:
 1.  In the data view, click a column name or a particular cell. Gemini generates suggestions for filtering and transforming the data.
 
 2.  Optional: To improve the suggestions, edit the values of one to three cells in the table to demonstrate what the values in a column should look like. For example, enter a date the way you want to format all dates. Gemini generates new suggestions based on your changes.
-    
+
     > **Note:** Your example change to the data isn't saved.
-    
+
     The following image shows how you can edit values to improve the steps suggested by Gemini:
-    
+
     ![Improve suggestions by editing values in the cells to demonstrate what the values in the column should look like.](https://docs.cloud.google.com/static/bigquery/images/data-prep-improve-suggestion.png)
 
 3.  Select a suggestion card.
-    
+
     1.  Optional: To preview the result of the suggestion card, click **Preview** .
     2.  Optional: To modify the suggestion card using natural language, click **Edit** .
 
@@ -178,7 +178,7 @@ If existing suggestions don't meet your needs, add a step. Choose columns or a s
 2.  In the **Description** field, enter a prompt, such as `Convert the state column to uppercase` .
 
 3.  Click send **Send** .
-    
+
     Gemini generates a SQL expression and a new description based on your prompt.
 
 4.  In the **Target column** list, select or enter a column name.
@@ -203,17 +203,17 @@ Gemini for BigQuery suggests operations that extract fields only from the top le
 
 Flattening has the following behaviors:
 
-  - The **Flatten** option appears in the data view after you select cells or columns containing JSON. It doesn't appear by default when you click **Add step** .
-  - If a JSON key isn't present in the selected rows, the generated suggestion doesn't contain that key. This issue might cause some columns to be left out when data is flattened.
-  - If column names collide during flattening, the repeated column names end in this format: `_<i>` . For example, if there's already a column named `address` , the new flattened column name is `address_1` .
-  - Flattened column names follow the BigQuery [column naming conventions](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
-  - If you leave the JSON key field empty, the default column name format is `f<i>_` .
+- The **Flatten** option appears in the data view after you select cells or columns containing JSON. It doesn't appear by default when you click **Add step** .
+- If a JSON key isn't present in the selected rows, the generated suggestion doesn't contain that key. This issue might cause some columns to be left out when data is flattened.
+- If column names collide during flattening, the repeated column names end in this format: `_<i>` . For example, if there's already a column named `address` , the new flattened column name is `address_1` .
+- Flattened column names follow the BigQuery [column naming conventions](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
+- If you leave the JSON key field empty, the default column name format is `f<i>_` .
 
 ### Flatten `RECORD` or `STRUCT` columns
 
 To make nested fields easier to access and analyze, flatten columns with the `RECORD` or `STRUCT` data type. For example, if you have an `event_log` record that contains the fields `timestamp` and `action` , flattening this record extracts `timestamp` and `action` into their own top-level columns so you can transform them directly.
 
-This process extracts all nested columns from the record, up to 10 levels deep, and creates a new column for each. The new column names are created by combining the parent column's name with the nested field name, separated by an underscore (for example, `  PARENT-COLUMN-NAME _ FIELD-NAME  ` ). The original column is dropped. To keep the original column, you can [delete](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-applied-step) the **Drop column** step from the **Applied steps** list.
+This process extracts all nested columns from the record, up to 10 levels deep, and creates a new column for each. The new column names are created by combining the parent column's name with the nested field name, separated by an underscore (for example, `PARENT-COLUMN-NAME `` _ `` FIELD-NAME` ). The original column is dropped. To keep the original column, you can [delete](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-applied-step) the **Drop column** step from the **Applied steps** list.
 
 To flatten records, follow these steps:
 
@@ -231,8 +231,8 @@ Unnesting expands each element in an array into its own row, duplicating the oth
 
 You can unnest the following column types:
 
-  - **`ARRAY` data type:** Unnests into elements of the array's base type. For example, an `ARRAY<STRUCT<...>>` unnesting results in elements of type `STRUCT` .
-  - **`JSON` columns:** Unnests JSON arrays within the column into elements of type `JSON` .
+- **`ARRAY` data type:** Unnests into elements of the array's base type. For example, an `ARRAY<STRUCT<...>>` unnesting results in elements of type `STRUCT` .
+- **`JSON` columns:** Unnests JSON arrays within the column into elements of type `JSON` .
 
 When you unnest an array, a new column is created that contains the unnested elements. By default, the original array column is dropped. To keep the original column, [delete](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#delete-applied-step) the **Drop column** step from the **Applied steps** list.
 
@@ -259,7 +259,7 @@ To add a filter that removes rows, follow these steps:
 
 #### Filter expression format
 
-SQL expressions for filters retain rows that match the specified condition. This is equivalent to a ` SELECT … WHERE SQL_EXPRESSION  ` statement.
+SQL expressions for filters retain rows that match the specified condition. This is equivalent to a `SELECT … WHERE `` SQL_EXPRESSION` statement.
 
 For example, to retain records where the column `year` is greater than or equal to `2000` , the condition is `year >= 2000` .
 
@@ -272,13 +272,13 @@ To remove duplicate rows from your data, follow these steps:
 1.  In the data or schema view, choose the **Deduplicate** option. Gemini provides an initial deduplication suggestion.
 2.  Optional: To refine the suggestion, enter a new description and click send **Send** .
 3.  Optional: To manually configure the deduplication step, use the following options:
-      - In the **Record choosing** list, select one of the following strategies:
-          - **First** : For each group of rows with the same deduplication key values, this strategy chooses the first row based on the `ORDER BY` expression and removes the rest.
-          - **Last** : For each group of rows with the same deduplication key values, this strategy chooses the last row based on the `ORDER BY` expression and removes the rest.
-          - **Any** : For each group of rows with the same deduplication key values, this strategy chooses any row from that group and removes the rest.
-          - **Distinct** : Removes all duplicate rows across all columns in the table.
-      - In the **Deduplication keys** field, choose one or more columns or expressions to identify duplicate rows. This field is applicable when the record choosing strategy is **First** , **Last** , or **Any** .
-      - In the **Order by expression** field, enter an expression that defines the row order. For example, to choose the most recent row, enter `datetime DESC` . To choose the first row alphabetically by name, enter a column name like `last_name` . The expression follows the same rules as the standard [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in BigQuery. This field is only applicable when the record choosing strategy is **First** or **Last** .
+    - In the **Record choosing** list, select one of the following strategies:
+      - **First** : For each group of rows with the same deduplication key values, this strategy chooses the first row based on the `ORDER BY` expression and removes the rest.
+      - **Last** : For each group of rows with the same deduplication key values, this strategy chooses the last row based on the `ORDER BY` expression and removes the rest.
+      - **Any** : For each group of rows with the same deduplication key values, this strategy chooses any row from that group and removes the rest.
+      - **Distinct** : Removes all duplicate rows across all columns in the table.
+    - In the **Deduplication keys** field, choose one or more columns or expressions to identify duplicate rows. This field is applicable when the record choosing strategy is **First** , **Last** , or **Any** .
+    - In the **Order by expression** field, enter an expression that defines the row order. For example, to choose the most recent row, enter `datetime DESC` . To choose the first row alphabetically by name, enter a column name like `last_name` . The expression follows the same rules as the standard [`ORDER BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) in BigQuery. This field is only applicable when the record choosing strategy is **First** or **Last** .
 4.  Optional: Click **Preview** and review the step.
 5.  Click **Apply** .
 
@@ -300,19 +300,19 @@ To add a join operation step between two sources in your data preparation, follo
 3.  Optional: Select the type of [join operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) that you want to perform, such as **Inner join** .
 
 4.  Review the Gemini-generated join key information in the following fields:
-    
-      - **Join description** : The natural language description of the SQL expression for the join operation. When you edit this description and click send **Send** , Gemini suggests new SQL join conditions.
-    
-      - **Join conditions** : The SQL expressions within the `ON` clause for the join operation. You can use the `L` and `R` qualifiers to refer to the left and right source tables, respectively. For example, to join the `customer_id` column from the left table to the `customer_id` column from the right table, enter `L.customerId = R.customerId` . These qualifiers aren't case-sensitive.
-        
-        > **Note:** If the **Join conditions** field is empty, the join operation type is automatically set to **Cross join** , even if you selected a different join type in the previous step.
+
+    - **Join description** : The natural language description of the SQL expression for the join operation. When you edit this description and click send **Send** , Gemini suggests new SQL join conditions.
+
+    - **Join conditions** : The SQL expressions within the `ON` clause for the join operation. You can use the `L` and `R` qualifiers to refer to the left and right source tables, respectively. For example, to join the `customer_id` column from the left table to the `customer_id` column from the right table, enter `L.customerId = R.customerId` . These qualifiers aren't case-sensitive.
+
+      > **Note:** If the **Join conditions** field is empty, the join operation type is automatically set to **Cross join** , even if you selected a different join type in the previous step.
 
 5.  Optional: To refine the suggestions from Gemini, edit the **Join description** field, and then click send **Send** .
 
 6.  Optional: To preview the join operation settings of your data preparation, click **Preview** .
 
 7.  Click **Apply** .
-    
+
     The join operation step is created. The source table that you selected (the right side of the join) and the join operation are reflected in the list of applied steps and in the nodes in the graph view of your data preparation.
 
 ### Aggregate data
@@ -322,15 +322,15 @@ To add a join operation step between two sources in your data preparation, follo
 2.  In the **Description** field, enter a prompt, such as `Find the total revenue for a region` .
 
 3.  Click **Send** .
-    
+
     Gemini generates grouping keys and aggregation expressions based on your prompt.
 
 4.  Optional: Edit the generated grouping keys or aggregation expressions, if needed.
 
 5.  Optional: You can manually add grouping keys and aggregation expressions.
-    
-      - In the **Grouping keys** field, enter a column name or expression. If you leave it blank, the resulting table has one row. If you enter an expression, it must have an alias (an `AS` clause)—for example `EXTRACT(YEAR FROM order_date) AS order_year` . No duplicates are allowed.
-      - In the **Aggregation expressions** field, enter an aggregation expression that has an alias (an `AS` clause)—for example `SUM(quantity) AS total_quantity` . You can enter multiple, comma-separated expressions. No duplicates are allowed. For a list of the supported aggregation expressions, see [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) .
+
+    - In the **Grouping keys** field, enter a column name or expression. If you leave it blank, the resulting table has one row. If you enter an expression, it must have an alias (an `AS` clause)—for example `EXTRACT(YEAR FROM order_date) AS order_year` . No duplicates are allowed.
+    - In the **Aggregation expressions** field, enter an aggregation expression that has an alias (an `AS` clause)—for example `SUM(quantity) AS total_quantity` . You can enter multiple, comma-separated expressions. No duplicates are allowed. For a list of the supported aggregation expressions, see [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) .
 
 6.  Optional: Click **Preview** and review the step.
 
@@ -385,11 +385,11 @@ To edit an applied step, do the following:
 
 1.  In the data preparation editor, go to the **Steps** list and click **Applied steps** .
 2.  Select a step.
-3.  Next to the step, click more\_vert **Menu \> Edit** .
+3.  Next to the step, click more_vert **Menu \> Edit** .
 4.  In the **Edit Applied Step** dialog, you can do the following:
-      - Edit the description of the step.
-      - Get suggestions from Gemini by editing the description and clicking send **Send** .
-      - Edit the SQL expression.
+    - Edit the description of the step.
+    - Get suggestions from Gemini by editing the description and clicking send **Send** .
+    - Edit the SQL expression.
 5.  In the **Target column** field, select a column.
 6.  Optional: Click **Preview** and review the step.
 7.  Click **Apply** .
@@ -400,7 +400,7 @@ To delete an applied step, do the following:
 
 1.  In the data preparation editor, go to the **Steps** list and click **Applied steps** .
 2.  Select a step.
-3.  Click more\_vert **Menu \> Delete** .
+3.  Click more_vert **Menu \> Delete** .
 
 ## Run the data preparation
 
@@ -412,6 +412,6 @@ Data in the sample isn't automatically refreshed. If data in the source tables f
 
 ## What's next
 
-  - Learn how to [schedule data preparations](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) .
-  - Learn about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .
-  - Review [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .
+- Learn how to [schedule data preparations](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) .
+- Learn about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .
+- Review [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) .

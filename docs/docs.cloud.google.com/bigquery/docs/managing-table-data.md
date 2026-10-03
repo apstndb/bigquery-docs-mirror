@@ -10,14 +10,14 @@ data_source: docs.cloud.google.com
 
 This document describes how to manage table data in BigQuery. You can work with BigQuery table data in the following ways:
 
-  - Load data into a table
-  - Append to or overwrite table data
-  - Browse (or preview) table data
-  - Query table data
-  - Modify table data using data manipulation language (DML)
-  - Copy table data
-  - Export table data
-  - Audit table data
+- Load data into a table
+- Append to or overwrite table data
+- Browse (or preview) table data
+- Query table data
+- Modify table data using data manipulation language (DML)
+- Copy table data
+- Export table data
+- Audit table data
 
 For information on managing table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
@@ -31,17 +31,17 @@ You can [load data](https://docs.cloud.google.com/bigquery/docs/loading-data) wh
 
 For more information on loading data, see the documentation for your source data's format and location:
 
-  - For more information on loading data from Cloud Storage, see:
-    
-      - [Load Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
-      - [Load CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
-      - [Load JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
-      - [Load Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
-      - [Load ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
-      - [Load data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
-      - [Load data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
+- For more information on loading data from Cloud Storage, see:
 
-  - For more information on loading data from a local source, see [Load data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
+  - [Load Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
+  - [Load CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+  - [Load JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
+  - [Load Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
+  - [Load ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+  - [Load data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
+  - [Load data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
+
+- For more information on loading data from a local source, see [Load data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
 
 ## Appending to and overwriting table data
 
@@ -49,22 +49,22 @@ You can overwrite table data using a load or query operation. You can append add
 
 For more information on appending to or overwriting a table when loading data, see the documentation for your source data format:
 
-  - [Appending to or overwriting a table with Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#appending_to_or_overwriting_a_table_with_avro_data)
-  - [Appending to or overwriting a table with CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#appending_to_or_overwriting_a_table_with_csv_data)
-  - [Appending to or overwriting a table with JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#appending_to_or_overwriting_a_table_with_json_data)
-  - [Appending to or overwriting a table with Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#appending_to_or_overwriting_a_table_with_parquet_data)
-  - [Appending to or overwriting a table with ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#append_to_or_overwrite_a_table_with_orc_data)
-  - [Appending to or overwriting a table with Datastore data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore#appending_to_or_overwriting_a_table_with_cloud_datastore_data)
+- [Appending to or overwriting a table with Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#appending_to_or_overwriting_a_table_with_avro_data)
+- [Appending to or overwriting a table with CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#appending_to_or_overwriting_a_table_with_csv_data)
+- [Appending to or overwriting a table with JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#appending_to_or_overwriting_a_table_with_json_data)
+- [Appending to or overwriting a table with Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#appending_to_or_overwriting_a_table_with_parquet_data)
+- [Appending to or overwriting a table with ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc#append_to_or_overwrite_a_table_with_orc_data)
+- [Appending to or overwriting a table with Datastore data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore#appending_to_or_overwriting_a_table_with_cloud_datastore_data)
 
 To append to or overwrite a table using query results, specify a destination table and set the write disposition to either:
 
-  - **Append to table** — Appends the query results to an existing table.
-  - **Overwrite table** — Overwrites an existing table with the same name using the query results.
+- **Append to table** — Appends the query results to an existing table.
+- **Overwrite table** — Overwrites an existing table with the same name using the query results.
 
 You can use the following query to append records from one table to another:
 
-``` 
-  INSERT INTO <projectID>.<datasetID>.<table1> (
+```
+INSERT INTO <projectID>.<datasetID>.<table1> (
     <column2>,
     <column3>) (SELECT * FROM <projectID>.<datasetID>.<table2>)
 ```
@@ -75,10 +75,10 @@ For more information on using query results to append to or overwrite data, see 
 
 You can browse or read table data by:
 
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `bq head` command
-  - Calling the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) API method
-  - Using the client libraries
+- Using the Google Cloud console
+- Using the bq command-line tool's `bq head` command
+- Calling the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) API method
+- Using the client libraries
 
 ### Required permissions
 
@@ -88,10 +88,10 @@ To read table and partition data, you need the `bigquery.tables.getData` Identit
 
 Each of the following predefined IAM roles includes the permissions that you need in order to browse table and partition data:
 
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.admin`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.admin`
 
 If you have the `bigquery.datasets.create` permission, you can browse data in the tables and partitions of the datasets you create.
 
@@ -106,10 +106,10 @@ To browse table data:
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -118,7 +118,7 @@ To browse table data:
 5.  Click **Details** and note the value in **Number of rows** . You may need this value to control the starting point for your results using the bq command-line tool or API.
 
 6.  Click **Preview** . A sample set of data is displayed.
-    
+
     ![Table preview](https://docs.cloud.google.com/static/bigquery/images/preview-table.png)
 
 ### Command-line
@@ -127,38 +127,46 @@ Issue the `bq head` command with the `--max_rows` flag to list all columns in a 
 
 To browse a subset of columns in the table (including nested and repeated columns), use the `--selected_fields` flag and enter the columns as a comma- separated list.
 
-To specify the number of rows to skip before displaying table data, use the ` --start_row= integer  ` flag (or the `-s` shortcut). The default value is `0` . You can retrieve the number of rows in a table by using the `bq show` command to [retrieve table information](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
+To specify the number of rows to skip before displaying table data, use the `--start_row= `` integer` flag (or the `-s` shortcut). The default value is `0` . You can retrieve the number of rows in a table by using the `bq show` command to [retrieve table information](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) .
 
-If the table you're browsing is in a project other than your default project, add the project ID to the command in the following format: `  project_id:dataset.table  ` .
+If the table you're browsing is in a project other than your default project, add the project ID to the command in the following format: `project_id:dataset.table` .
 
-    bq head \
-    --max_rows integer1 \
-    --start_row integer2 \
-    --selected_fields "columns" \
-    project_id:dataset.table
+```
+bq head \
+--max_rows integer1 \
+--start_row integer2 \
+--selected_fields "columns" \
+project_id:dataset.table
+```
 
 Where:
 
-  - integer1 is the number of rows to display.
-  - integer2 is the number of rows to skip before displaying data.
-  - columns is a comma-separated list of columns.
-  - project\_id is your project ID.
-  - dataset is the name of the dataset containing the table.
-  - table is the name of the table to browse.
+- ` integer1 ` is the number of rows to display.
+- ` integer2 ` is the number of rows to skip before displaying data.
+- ` columns ` is a comma-separated list of columns.
+- ` project_id ` is your project ID.
+- ` dataset ` is the name of the dataset containing the table.
+- ` table ` is the name of the table to browse.
 
 Examples:
 
 Enter the following command to list all columns in the first 10 rows in `mydataset.mytable` . `mydataset` is in your default project.
 
-    bq head --max_rows=10 mydataset.mytable
+```
+bq head --max_rows=10 mydataset.mytable
+```
 
 Enter the following command to list all columns in the first 100 rows in `mydataset.mytable` . `mydataset` is in `myotherproject` , not your default project.
 
-    bq head myotherproject:mydataset.mytable
+```
+bq head myotherproject:mydataset.mytable
+```
 
 Enter the following command to display only `field1` and `field2` in `mydataset.mytable` . The command uses the `--start_row` flag to skip to row 100. `mydataset.mytable` is in your default project.
 
-    bq head --start_row 100 --selected_fields "field1,field2" mydataset.mytable
+```
+bq head --start_row 100 --selected_fields "field1,field2" mydataset.mytable
+```
 
 Because the `bq head` command does not create a query job, `bq head` commands do not appear in your query history, and you are not charged for them.
 
@@ -168,51 +176,53 @@ Browse through a table's data by calling [`tabledata.list`](https://docs.cloud.g
 
 Configure these optional parameters to control the output:
 
-  - `maxResults` — Maximum number of results to return
-  - `selectedFields` — Comma-separated list of columns to return; If unspecified, all columns are returned
-  - `startIndex` — Zero-based index of the starting row to read
+- `maxResults` — Maximum number of results to return
+- `selectedFields` — Comma-separated list of columns to return; If unspecified, all columns are returned
+- `startIndex` — Zero-based index of the starting row to read
 
 > **Note:** If you request a `startIndex` beyond the last row, the method will return successfully but without a `rows` property. You can find out how many rows are in your table by calling the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method and examining the `numRows` property.
 
 Values are returned wrapped in a JSON object that you must parse, as described in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) reference documentation.
 
-### C\#
+### C#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    using Google.Api.Gax;
-    using Google.Apis.Bigquery.v2.Data;
-    using Google.Cloud.BigQuery.V2;
-    using System;
-    using System.Linq;
-    
-    public class BigQueryBrowseTable
+```csharp
+using Google.Api.Gax;
+using Google.Apis.Bigquery.v2.Data;
+using Google.Cloud.BigQuery.V2;
+using System;
+using System.Linq;
+
+public class BigQueryBrowseTable
+{
+    public void BrowseTable(
+        string projectId = "your-project-id"
+    )
     {
-        public void BrowseTable(
-            string projectId = "your-project-id"
-        )
+        BigQueryClient client = BigQueryClient.Create(projectId);
+        TableReference tableReference = new TableReference()
         {
-            BigQueryClient client = BigQueryClient.Create(projectId);
-            TableReference tableReference = new TableReference()
-            {
-                TableId = "shakespeare",
-                DatasetId = "samples",
-                ProjectId = "bigquery-public-data"
-            };
-            // Load all rows from a table
-            PagedEnumerable<TableDataList, BigQueryRow> result = client.ListRows(
-                tableReference: tableReference,
-                schema: null
-            );
-            // Print the first 10 rows
-            foreach (BigQueryRow row in result.Take(10))
-            {
-                Console.WriteLine($"{row["corpus"]}: {row["word_count"]}");
-            }
+            TableId = "shakespeare",
+            DatasetId = "samples",
+            ProjectId = "bigquery-public-data"
+        };
+        // Load all rows from a table
+        PagedEnumerable<TableDataList, BigQueryRow> result = client.ListRows(
+            tableReference: tableReference,
+            schema: null
+        );
+        // Print the first 10 rows
+        foreach (BigQueryRow row in result.Take(10))
+        {
+            Console.WriteLine($"{row["corpus"]}: {row["word_count"]}");
         }
     }
+}
+```
 
 ### Go
 
@@ -222,43 +232,45 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The [Cloud Client Libraries for Go](https://docs.cloud.google.com/bigquery/docs/reference/libraries) automatically paginates by default, so you do not need to implement pagination yourself, for example:
 
-    import (
-     "context"
-     "fmt"
-     "io"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    // browseTable demonstrates reading data from a BigQuery table directly without the use of a query.
-    // For large tables, we also recommend the BigQuery Storage API.
-    func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
-     // projectID := "my-project-id"
-     // datasetID := "mydataset"
-     // tableID := "mytable"
-     ctx := context.Background()
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         return fmt.Errorf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     table := client.Dataset(datasetID).Table(tableID)
-     it := table.Read(ctx)
-     for {
-         var row []bigquery.Value
-         err := it.Next(&row)
-         if err == iterator.Done {
-             break
-         }
-         if err != nil {
-             return err
-         }
-         fmt.Fprintln(w, row)
-     }
-     return nil
+```go
+import (
+    "context"
+    "fmt"
+    "io"
+
+    "cloud.google.com/go/bigquery"
+    "google.golang.org/api/iterator"
+)
+
+// browseTable demonstrates reading data from a BigQuery table directly without the use of a query.
+// For large tables, we also recommend the BigQuery Storage API.
+func browseTable(w io.Writer, projectID, datasetID, tableID string) error {
+    // projectID := "my-project-id"
+    // datasetID := "mydataset"
+    // tableID := "mytable"
+    ctx := context.Background()
+    client, err := bigquery.NewClient(ctx, projectID)
+    if err != nil {
+        return fmt.Errorf("bigquery.NewClient: %v", err)
     }
+    defer client.Close()
+
+    table := client.Dataset(datasetID).Table(tableID)
+    it := table.Read(ctx)
+    for {
+        var row []bigquery.Value
+        err := it.Next(&row)
+        if err == iterator.Done {
+            break
+        }
+        if err != nil {
+            return err
+        }
+        fmt.Fprintln(w, row)
+    }
+    return nil
+}
+```
 
 ### Java
 
@@ -266,50 +278,52 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQuery.TableDataListOption;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableResult;
-    
-    // Sample to directly browse a table with optional paging
-    public class BrowseTable {
-    
-      public static void runBrowseTable() {
-        // TODO(developer): Replace these variables before running the sample.
-        String table = "MY_TABLE_NAME";
-        String dataset = "MY_DATASET_NAME";
-        browseTable(dataset, table);
-      }
-    
-      public static void browseTable(String dataset, String table) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          // Identify the table itself
-          TableId tableId = TableId.of(dataset, table);
-    
-          // Page over 100 records. If you don't need pagination, remove the pageSize parameter.
-          TableResult result = bigquery.listTableData(tableId, TableDataListOption.pageSize(100));
-    
-          // Print the records
-          result
-              .iterateAll()
-              .forEach(
-                  row -> {
-                    row.forEach(fieldValue -> System.out.print(fieldValue.toString() + ", "));
-                    System.out.println();
-                  });
-    
-          System.out.println("Query ran successfully");
-        } catch (BigQueryException e) {
-          System.out.println("Query failed to run \n" + e.toString());
-        }
-      }
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQuery.TableDataListOption;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableResult;
+
+// Sample to directly browse a table with optional paging
+public class BrowseTable {
+
+  public static void runBrowseTable() {
+    // TODO(developer): Replace these variables before running the sample.
+    String table = "MY_TABLE_NAME";
+    String dataset = "MY_DATASET_NAME";
+    browseTable(dataset, table);
+  }
+
+  public static void browseTable(String dataset, String table) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      // Identify the table itself
+      TableId tableId = TableId.of(dataset, table);
+
+      // Page over 100 records. If you don't need pagination, remove the pageSize parameter.
+      TableResult result = bigquery.listTableData(tableId, TableDataListOption.pageSize(100));
+
+      // Print the records
+      result
+          .iterateAll()
+          .forEach(
+              row -> {
+                row.forEach(fieldValue -> System.out.print(fieldValue.toString() + ", "));
+                System.out.println();
+              });
+
+      System.out.println("Query ran successfully");
+    } catch (BigQueryException e) {
+      System.out.println("Query failed to run \n" + e.toString());
     }
+  }
+}
+```
 
 ### Node.js
 
@@ -319,28 +333,30 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 The [Cloud Client Libraries for Node.js](https://docs.cloud.google.com/bigquery/docs/reference/libraries) automatically paginates by default, so you do not need to implement pagination yourself, for example:
 
-    // Import the Google Cloud client library and create a client
-    const {BigQuery} = require('@google-cloud/bigquery');
-    const bigquery = new BigQuery();
-    
-    async function browseRows() {
-      // Displays rows from "my_table" in "my_dataset".
-    
-      /**
-       * TODO(developer): Uncomment the following lines before running the sample.
-       */
-      // const datasetId = "my_dataset";
-      // const tableId = "my_table";
-    
-      // List rows in the table
-      const [rows] = await bigquery
-        .dataset(datasetId)
-        .table(tableId)
-        .getRows();
-    
-      console.log('Rows:');
-      rows.forEach(row => console.log(row));
-    }
+```javascript
+// Import the Google Cloud client library and create a client
+const {BigQuery} = require('@google-cloud/bigquery');
+const bigquery = new BigQuery();
+
+async function browseRows() {
+  // Displays rows from "my_table" in "my_dataset".
+
+  /**
+   * TODO(developer): Uncomment the following lines before running the sample.
+   */
+  // const datasetId = "my_dataset";
+  // const tableId = "my_table";
+
+  // List rows in the table
+  const [rows] = await bigquery
+    .dataset(datasetId)
+    .table(tableId)
+    .getRows();
+
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
+}
+```
 
 ### PHP
 
@@ -350,34 +366,36 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Pagination happens automatically in the [Cloud Client Libraries for PHP](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using the generator function `rows` , which fetches the next page of results during iteration.
 
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    /** Uncomment and populate these variables in your code */
-    // $projectId = 'The Google project ID';
-    // $datasetId = 'The BigQuery dataset ID';
-    // $tableId   = 'The BigQuery table ID';
-    // $maxResults = 10;
-    
-    $maxResults = 10;
-    $startIndex = 0;
-    
-    $options = [
-        'maxResults' => $maxResults,
-        'startIndex' => $startIndex
-    ];
-    $bigQuery = new BigQueryClient([
-        'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $numRows = 0;
-    foreach ($table->rows($options) as $row) {
-        print('---');
-        foreach ($row as $column => $value) {
-            printf('%s: %s' . PHP_EOL, $column, $value);
-        }
-        $numRows++;
+```php
+use Google\Cloud\BigQuery\BigQueryClient;
+
+/** Uncomment and populate these variables in your code */
+// $projectId = 'The Google project ID';
+// $datasetId = 'The BigQuery dataset ID';
+// $tableId   = 'The BigQuery table ID';
+// $maxResults = 10;
+
+$maxResults = 10;
+$startIndex = 0;
+
+$options = [
+    'maxResults' => $maxResults,
+    'startIndex' => $startIndex
+];
+$bigQuery = new BigQueryClient([
+    'projectId' => $projectId,
+]);
+$dataset = $bigQuery->dataset($datasetId);
+$table = $dataset->table($tableId);
+$numRows = 0;
+foreach ($table->rows($options) as $row) {
+    print('---');
+    foreach ($row as $column => $value) {
+        printf('%s: %s' . PHP_EOL, $column, $value);
     }
+    $numRows++;
+}
+```
 
 ### Python
 
@@ -385,41 +403,43 @@ Before trying this sample, follow the Python setup instructions in the [BigQuery
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    from google.cloud import bigquery
-    
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
-    
-    # TODO(developer): Set table_id to the ID of the table to browse data rows.
-    # table_id = "your-project.your_dataset.your_table_name"
-    
-    # Download all rows from a table.
-    rows_iter = client.list_rows(table_id)  # Make an API request.
-    
-    # Iterate over rows to make the API requests to fetch row data.
-    rows = list(rows_iter)
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Download at most 10 rows.
-    rows_iter = client.list_rows(table_id, max_results=10)
-    rows = list(rows_iter)
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Specify selected fields to limit the results to certain columns.
-    table = client.get_table(table_id)  # Make an API request.
-    fields = table.schema[:2]  # First two columns.
-    rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
-    rows = list(rows_iter)
-    print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
-    print("Downloaded {} rows from table {}".format(len(rows), table_id))
-    
-    # Print row data in tabular format.
-    rows = client.list_rows(table, max_results=10)
-    format_string = "{!s:<16} " * len(rows.schema)
-    field_names = [field.name for field in rows.schema]
-    print(format_string.format(*field_names))  # Prints column headers.
-    for row in rows:
-        print(format_string.format(*row))  # Prints row data.
+```python
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+# TODO(developer): Set table_id to the ID of the table to browse data rows.
+# table_id = "your-project.your_dataset.your_table_name"
+
+# Download all rows from a table.
+rows_iter = client.list_rows(table_id)  # Make an API request.
+
+# Iterate over rows to make the API requests to fetch row data.
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Download at most 10 rows.
+rows_iter = client.list_rows(table_id, max_results=10)
+rows = list(rows_iter)
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Specify selected fields to limit the results to certain columns.
+table = client.get_table(table_id)  # Make an API request.
+fields = table.schema[:2]  # First two columns.
+rows_iter = client.list_rows(table_id, selected_fields=fields, max_results=10)
+rows = list(rows_iter)
+print("Selected {} columns from table {}.".format(len(rows_iter.schema), table_id))
+print("Downloaded {} rows from table {}".format(len(rows), table_id))
+
+# Print row data in tabular format.
+rows = client.list_rows(table, max_results=10)
+format_string = "{!s:<16} " * len(rows.schema)
+field_names = [field.name for field in rows.schema]
+print(format_string.format(*field_names))  # Prints column headers.
+for row in rows:
+    print(format_string.format(*row))  # Prints row data.
+```
 
 ### Ruby
 
@@ -429,39 +449,41 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 Pagination happens automatically in the [Cloud Client Libraries for Ruby](https://docs.cloud.google.com/bigquery/docs/reference/libraries) using `Table#data` and `Data#next` .
 
-    require "google/cloud/bigquery"
-    
-    def browse_table
-      bigquery = Google::Cloud::Bigquery.new project_id: "bigquery-public-data"
-      dataset  = bigquery.dataset "samples"
-      table    = dataset.table "shakespeare"
-    
-      # Load all rows from a table
-      rows = table.data
-    
-      # Load the first 10 rows
-      rows = table.data max: 10
-    
-      # Print row data
-      rows.each { |row| puts row }
-    end
+```ruby
+require "google/cloud/bigquery"
+
+def browse_table
+  bigquery = Google::Cloud::Bigquery.new project_id: "bigquery-public-data"
+  dataset  = bigquery.dataset "samples"
+  table    = dataset.table "shakespeare"
+
+  # Load all rows from a table
+  rows = table.data
+
+  # Load the first 10 rows
+  rows = table.data max: 10
+
+  # Print row data
+  rows.each { |row| puts row }
+end
+```
 
 ## Querying table data
 
 You can [query BigQuery data](https://docs.cloud.google.com/bigquery/docs/running-queries) by using one of the following query job types:
 
-  - **[Interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#queries)** . By default, BigQuery runs queries as interactive query jobs, which are intended to start executing as quickly as possible.
+- **[Interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#queries)** . By default, BigQuery runs queries as interactive query jobs, which are intended to start executing as quickly as possible.
 
-  - **[Batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#batch)** . Batch queries have lower priority than interactive queries. When a project or reservation is using all of its available compute resources, batch queries are more likely to be queued and remain in the queue. After a batch query starts running, the batch query runs the same as an interactive query. For more information, see [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
+- **[Batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#batch)** . Batch queries have lower priority than interactive queries. When a project or reservation is using all of its available compute resources, batch queries are more likely to be queued and remain in the queue. After a batch query starts running, the batch query runs the same as an interactive query. For more information, see [query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
 
-  - **[Continuous query jobs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction)** . With these jobs, the query runs continuously, letting you analyze incoming data in BigQuery in real time and then write the results to a BigQuery table, or export the results to Bigtable or Pub/Sub. You can use this capability to perform time sensitive tasks, such as creating and immediately acting on insights, applying real time machine learning (ML) inference, and building event-driven data pipelines.
+- **[Continuous query jobs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction)** . With these jobs, the query runs continuously, letting you analyze incoming data in BigQuery in real time and then write the results to a BigQuery table, or export the results to Bigtable or Pub/Sub. You can use this capability to perform time sensitive tasks, such as creating and immediately acting on insights, applying real time machine learning (ML) inference, and building event-driven data pipelines.
 
 You can run query jobs by using the following methods:
 
-  - Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
-  - Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
-  - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
-  - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
+- Compose and run a query in the [Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui#overview) .
+- Run the `bq query` command in the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+- Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
+- Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 For more information on querying BigQuery tables, see [Introduction to querying BigQuery data](https://docs.cloud.google.com/bigquery/docs/query-overview) .
 
@@ -477,10 +499,10 @@ The legacy SQL dialect does not support DML statements. To update or delete data
 
 You can copy a table by:
 
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `bq cp` command
-  - Calling the [`jobs.insert` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [copy job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy)
-  - Using the client libraries
+- Using the Google Cloud console
+- Using the bq command-line tool's `bq cp` command
+- Calling the [`jobs.insert` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [copy job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy)
+- Using the client libraries
 
 For more information on copying tables, see [Copying a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .
 
@@ -494,8 +516,8 @@ For more information, see [Exporting table data](https://docs.cloud.google.com/b
 
 To audit activity and track data modifications on a table, do one of the following:
 
-  - To track the history of changes made to a table during a specific time range, use [BigQuery change history](https://docs.cloud.google.com/bigquery/docs/change-history) . You can use GoogleSQL table functions to see particular types of changes, such as appends or mutations.
-  - To determine whether table data has been modified within a specific timeframe, query the `storage_last_modified_time` field in the [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view. This field returns the most recent time that data was written to the table.
+- To track the history of changes made to a table during a specific time range, use [BigQuery change history](https://docs.cloud.google.com/bigquery/docs/change-history) . You can use GoogleSQL table functions to see particular types of changes, such as appends or mutations.
+- To determine whether table data has been modified within a specific timeframe, query the `storage_last_modified_time` field in the [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view. This field returns the most recent time that data was written to the table.
 
 ## Table security
 
@@ -503,9 +525,9 @@ To control access to tables in BigQuery, see [Control access to resources with I
 
 ## What's next
 
-  - For more information on loading data, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
-  - For more information on querying data, see [Introduction to querying BigQuery data](https://docs.cloud.google.com/bigquery/docs/query-overview) .
-  - For more information on modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
-  - For more information on creating and using tables, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
-  - For more information on managing tables, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
-  - For more information on change history, see [Work with change history](https://docs.cloud.google.com/bigquery/docs/change-history) .
+- For more information on loading data, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
+- For more information on querying data, see [Introduction to querying BigQuery data](https://docs.cloud.google.com/bigquery/docs/query-overview) .
+- For more information on modifying table schemas, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+- For more information on creating and using tables, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
+- For more information on managing tables, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
+- For more information on change history, see [Work with change history](https://docs.cloud.google.com/bigquery/docs/change-history) .

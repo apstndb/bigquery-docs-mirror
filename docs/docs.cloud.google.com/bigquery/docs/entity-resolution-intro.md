@@ -20,15 +20,15 @@ Entity resolution provides operational and data-sharing advantages for both end 
 
 When you resolve entities in BigQuery, you gain the following end-user benefits:
 
-  - **In-place resolution** : you resolve entities in place without data transfer fees. An identity provider matches your data to their identity graph and writes the entity resolution results to a dataset in your Google Cloud project.
-  - **Simplified operations** : you avoid managing extract, transform, and load (ETL) pipelines or custom data replication workflows.
+- **In-place resolution** : you resolve entities in place without data transfer fees. An identity provider matches your data to their identity graph and writes the entity resolution results to a dataset in your Google Cloud project.
+- **Simplified operations** : you avoid managing extract, transform, and load (ETL) pipelines or custom data replication workflows.
 
 ### Identity provider benefits
 
 When you offer identity services in BigQuery, you gain the following identity provider benefits:
 
-  - **Marketplace integration** : you can offer entity resolution as a managed software as a service (SaaS) product on [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .
-  - **Intellectual property protection** : you use your proprietary identity graphs and matching logic without revealing them to end users. This architecture helps protect your intellectual property.
+- **Marketplace integration** : you can offer entity resolution as a managed software as a service (SaaS) product on [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .
+- **Intellectual property protection** : you use your proprietary identity graphs and matching logic without revealing them to end users. This architecture helps protect your intellectual property.
 
 ## Entity resolution architecture
 
@@ -51,27 +51,27 @@ To run this workflow, entity resolution relies on components across both your en
 
 Your Google Cloud project contains the following end-user components:
 
-  - **Remote function call** : a call that runs a procedure that the identity provider defines and implements. This call starts the entity resolution process.
-  - **Input dataset** : the source dataset that contains the data that you want to match. Optionally, the input dataset can contain a metadata table with additional parameters. Identity providers specify the schema requirements for input datasets.
-  - **Output dataset** : the destination dataset where the identity provider writes the matched results as an output table. Optionally, the identity provider can write a job status table with job details to this dataset. The output dataset can be the same dataset as the input dataset.
+- **Remote function call** : a call that runs a procedure that the identity provider defines and implements. This call starts the entity resolution process.
+- **Input dataset** : the source dataset that contains the data that you want to match. Optionally, the input dataset can contain a metadata table with additional parameters. Identity providers specify the schema requirements for input datasets.
+- **Output dataset** : the destination dataset where the identity provider writes the matched results as an output table. Optionally, the identity provider can write a job status table with job details to this dataset. The output dataset can be the same dataset as the input dataset.
 
 ### Identity provider components
 
 The identity provider's environment contains the following components:
 
-  - **Control plane** : contains a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) that orchestrates the matching process. The identity provider can implement this function as a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview) . The control plane can also contain authentication and authorization services.
-  - **Data plane** : contains the identity graph dataset and the stored procedure that runs the matching logic. An identity graph is a reference database of known entity identifiers and attributes. The identity provider can implement the stored procedure as a [SQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) or an [Apache Spark stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . The identity graph dataset contains the tables that the identity provider matches against your data.
+- **Control plane** : contains a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) that orchestrates the matching process. The identity provider can implement this function as a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview) . The control plane can also contain authentication and authorization services.
+- **Data plane** : contains the identity graph dataset and the stored procedure that runs the matching logic. An identity graph is a reference database of known entity identifiers and attributes. The identity provider can implement the stored procedure as a [SQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) or an [Apache Spark stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . The identity graph dataset contains the tables that the identity provider matches against your data.
 
 ## Considerations
 
 When you plan your entity resolution deployment, consider the following factors:
 
-  - **Identity provider coordination** : before you run matching jobs, you must coordinate with a supported identity provider to obtain their service account credentials and remote function signature.
-  - **External databases** : identity providers typically host identity graphs in BigQuery, but they can also store identity graphs in external databases.
+- **Identity provider coordination** : before you run matching jobs, you must coordinate with a supported identity provider to obtain their service account credentials and remote function signature.
+- **External databases** : identity providers typically host identity graphs in BigQuery, but they can also store identity graphs in external databases.
 
 ## What's next
 
-  - Learn how to [configure and use entity resolution](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
-  - Learn how to [work with remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
-  - Learn how to [work with SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
-  - Learn how to [share sensitive data with data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .
+- Learn how to [configure and use entity resolution](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
+- Learn how to [work with remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
+- Learn how to [work with SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
+- Learn how to [share sensitive data with data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .

@@ -16,11 +16,11 @@ A vector index is a data structure designed to let the [`VECTOR_SEARCH` function
 
 Vector indexes improve the efficiency of vector search, which is typically performed on text or multimodal embeddings of your data. BigQuery vector indexes help you perform the following tasks more efficiently:
 
-  - Perform semantic search
-  - Detect similar or duplicate images, audio, or videos
-  - Perform clustering, targeting, or classification
-  - Build recommendation systems
-  - Find the top K most similar images or reviews to a given input
+- Perform semantic search
+- Detect similar or duplicate images, audio, or videos
+- Perform clustering, targeting, or classification
+- Build recommendation systems
+- Find the top K most similar images or reviews to a given input
 
 For more information, see the [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
@@ -30,8 +30,8 @@ The `CREATE VECTOR INDEX` statement uses [BigQuery compute pricing](https://clou
 
 Storage is also a consideration for indexes. The amount of bytes stored as an index is subject to [active storage costs](https://cloud.google.com/bigquery/pricing#storage) .
 
-  - Vector indexes incur storage costs when they are active.
-  - You can find the index storage size by using the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `INFORMATION_SCHEMA.VECTOR_INDEXES` view.
+- Vector indexes incur storage costs when they are active.
+- You can find the index storage size by using the [`INFORMATION_SCHEMA.VECTOR_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes) . If the vector index is not yet at 100% coverage, you are still charged for whatever has been indexed. You can check index coverage by using the `INFORMATION_SCHEMA.VECTOR_INDEXES` view.
 
 ## Quotas and limits
 
@@ -39,5 +39,5 @@ For more information, see [Vector index limits](https://docs.cloud.google.com/bi
 
 ## What's next
 
-  - Learn more about [creating and managing vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
-  - Learn more about [embeddings and vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
+- Learn more about [creating and managing vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
+- Learn more about [embeddings and vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .

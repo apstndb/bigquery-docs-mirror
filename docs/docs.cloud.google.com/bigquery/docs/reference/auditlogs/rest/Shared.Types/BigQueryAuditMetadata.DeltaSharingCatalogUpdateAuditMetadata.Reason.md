@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the catalog was updated.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`DELTA_SHARING_CATALOG_UPDATE_REQUEST`
-
-Delta Sharing catalog was updated using the UpdateDeltaSharingCatalog API.
+| Enums                                  |                                                                            |
+|----------------------------------------|----------------------------------------------------------------------------|
+| `REASON_UNSPECIFIED`                   | Unknown.                                                                   |
+| `DELTA_SHARING_CATALOG_UPDATE_REQUEST` | Delta Sharing catalog was updated using the UpdateDeltaSharingCatalog API. |

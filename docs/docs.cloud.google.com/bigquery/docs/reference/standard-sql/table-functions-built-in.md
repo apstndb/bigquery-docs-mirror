@@ -12,48 +12,19 @@ This topic includes functions that produce columns of a table. You can only use 
 
 ## Function list
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends"><code dir="ltr" translate="no">APPENDS</code></a></td>
-<td>Returns all rows appended to a table for a given time range.<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">CHANGES</code></a></td>
-<td>Returns all rows that have changed in a table for a given time range.<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform"><code dir="ltr" translate="no">EXTERNAL_OBJECT_TRANSFORM</code></a></td>
-<td>Produces an object table with the original columns plus one or more additional columns.</td>
-</tr>
-<tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#gap_fill"><code dir="ltr" translate="no">GAP_FILL</code></a></td>
-<td>Finds and fills gaps in a time series.<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
-</tr>
-<tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">RANGE_SESSIONIZE</code></a></td>
-<td>Produces a table of sessionized ranges.<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions">Range functions</a> .</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                                 | Summary                                                                                                                                                                                                             |
+|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends)                                        | Returns all rows appended to a table for a given time range. For more information, see [Time series functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions) .          |
+| [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes)                                        | Returns all rows that have changed in a table for a given time range. For more information, see [Time series functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions) . |
+| [`EXTERNAL_OBJECT_TRANSFORM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#external_object_transform) | Produces an object table with the original columns plus one or more additional columns.                                                                                                                             |
+| [`GAP_FILL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#gap_fill)                                      | Finds and fills gaps in a time series. For more information, see [Time series functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions) .                                |
+| [`RANGE_SESSIONIZE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize)                            | Produces a table of sessionized ranges. For more information, see [Range functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions) .                                           |
 
 ## `EXTERNAL_OBJECT_TRANSFORM`
 
-    EXTERNAL_OBJECT_TRANSFORM(TABLE object_table_name, transform_types_array)
+```
+EXTERNAL_OBJECT_TRANSFORM(TABLE object_table_name, transform_types_array)
+```
 
 **Description**
 
@@ -73,14 +44,16 @@ TABLE
 
 Run the following query to return URIs and signed URLs for the objects in the `mydataset.myobjecttable` object table.
 
-    SELECT uri, signed_url
-    FROM EXTERNAL_OBJECT_TRANSFORM(TABLE mydataset.myobjecttable, ['SIGNED_URL']);
-    
-    --The preceding statement returns results similar to the following:
-    /*-----------------------------------------------------------------------------------------------------------------------------+
-     |  uri                                 | signed_url                                                                           |
-     +-----------------------------------------------------------------------------------------------------------------------------+
-     | gs://myobjecttable/1234_Main_St.jpeg | https://storage.googleapis.com/mybucket/1234_Main_St.jpeg?X-Goog-Algorithm=1234abcd… |
-     +-----------------------------------------------------------------------------------------------------------------------------+
-     | gs://myobjecttable/345_River_Rd.jpeg | https://storage.googleapis.com/mybucket/345_River_Rd.jpeg?X-Goog-Algorithm=2345bcde… |
-     +-----------------------------------------------------------------------------------------------------------------------------*/
+```
+SELECT uri, signed_url
+FROM EXTERNAL_OBJECT_TRANSFORM(TABLE mydataset.myobjecttable, ['SIGNED_URL']);
+
+--The preceding statement returns results similar to the following:
+/*-----------------------------------------------------------------------------------------------------------------------------+
+ |  uri                                 | signed_url                                                                           |
+ +-----------------------------------------------------------------------------------------------------------------------------+
+ | gs://myobjecttable/1234_Main_St.jpeg | https://storage.googleapis.com/mybucket/1234_Main_St.jpeg?X-Goog-Algorithm=1234abcd… |
+ +-----------------------------------------------------------------------------------------------------------------------------+
+ | gs://myobjecttable/345_River_Rd.jpeg | https://storage.googleapis.com/mybucket/345_River_Rd.jpeg?X-Goog-Algorithm=2345bcde… |
+ +-----------------------------------------------------------------------------------------------------------------------------*/
+```

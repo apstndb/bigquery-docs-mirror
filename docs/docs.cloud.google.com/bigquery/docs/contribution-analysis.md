@@ -22,14 +22,14 @@ Contribution analysis detects segments of data that show changes in a given metr
 
 A *metric* is the numerical value that contribution analysis models use to measure and compare the changes between the test and control data. You can specify the following types of metrics with a contribution analysis model:
 
-  - [*Summable*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) : sums the values of a metric column that you specify, and then determines a total for each segment of the data.
-  - [*Summable ratio*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) : sums the values of two numeric columns that you specify, and determines the ratio between them for each segment of the data.
-  - [*Summable by category*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) : sums the value of a numeric column and divides it by the number of distinct values from a categorical column.
+- [*Summable*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) : sums the values of a metric column that you specify, and then determines a total for each segment of the data.
+- [*Summable ratio*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) : sums the values of two numeric columns that you specify, and determines the ratio between them for each segment of the data.
+- [*Summable by category*](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) : sums the value of a numeric column and divides it by the number of distinct values from a categorical column.
 
 A *segment* is a slice of the data identified by a given combination of dimension values. For example, for a contribution analysis model based on the `store_number` , `customer_id` , and `day` dimensions, every unique combination of those dimension values represents a segment. In the following table, each row represents a different segment:
 
 | **`store_number`** | **`customer_id`** | **`day`** |
-| ------------------ | ----------------- | --------- |
+|--------------------|-------------------|-----------|
 | store 1            |                   |           |
 | store 1            | customer 1        |           |
 | store 1            | customer 1        | Monday    |
@@ -70,15 +70,15 @@ The following table describes the statements and functions you can use with cont
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers"><code dir="ltr" translate="no">AI.KEY_DRIVERS</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers"><code>AI.KEY_DRIVERS</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
 <td>N/A</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers#example">Example of contribution analysis on Iowa liquor sale data</a></td>
 </tr>
 <tr class="even">
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code dir="ltr" translate="no">CREATE MODEL</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis"><code>CREATE MODEL</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code dir="ltr" translate="no">ML.GET_INSIGHTS</code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights"><code>ML.GET_INSIGHTS</code></a></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights">Get data insights from a contribution analysis model using a summable metric</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio">Get data insights from a contribution analysis model using a summable ratio metric</a></li>
@@ -89,6 +89,6 @@ The following table describes the statements and functions you can use with cont
 
 ## What's next
 
-  - [Learn more about the `AI.KEY_DRIVES` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
-  - [Create a contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis)
-  - [Get data insights from a contribution analysis model](https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights)
+- [Learn more about the `AI.KEY_DRIVES` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers)
+- [Create a contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis)
+- [Get data insights from a contribution analysis model](https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights)

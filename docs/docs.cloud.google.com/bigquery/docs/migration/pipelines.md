@@ -12,7 +12,7 @@ This document describes how you can migrate your upstream data pipelines, which 
 
 ### What is a data pipeline?
 
-In computing, a [data pipeline](https://wikipedia.org/wiki/Pipeline_\(computing\)) is a type of application that processes data through a sequence of connected processing steps. As a general concept, data pipelines can be applied, for example, to data transfer between information systems, [extract, transform, and load](https://wikipedia.org/wiki/Extract,_transform,_load) (ETL), data enrichment, and real-time data analysis. Typically, data pipelines are operated as a *batch* process that executes and processes data when run, or as a *streaming* process that executes continuously and processes data as it becomes available to the pipeline.
+In computing, a [data pipeline](https://wikipedia.org/wiki/Pipeline_(computing)) is a type of application that processes data through a sequence of connected processing steps. As a general concept, data pipelines can be applied, for example, to data transfer between information systems, [extract, transform, and load](https://wikipedia.org/wiki/Extract,_transform,_load) (ETL), data enrichment, and real-time data analysis. Typically, data pipelines are operated as a *batch* process that executes and processes data when run, or as a *streaming* process that executes continuously and processes data as it becomes available to the pipeline.
 
 In the context of data warehousing, data pipelines are commonly used to read data from transactional systems, apply transformations, and then write data to the data warehouse. Each of the transformations is described by a function, and the input for any given function is the output of the previous function or functions. These connected functions are described as a graph, and this graph is often referred to as a [Directed Acyclic Graph](https://wikipedia.org/wiki/Directed_acyclic_graph) (DAG)—that is, the graph follows a direction (from source to destination), and is acyclic—the input for any function cannot be dependent on the output of another function downstream in the DAG. In other words, loops are not permitted. Each node of the graph is a function, and each edge represents the data flowing from one function to the next. The initial functions are *sources* , or connections to source data systems. The final functions are *sinks* , or connections to destination data systems.
 
@@ -30,9 +30,9 @@ On the other hand, when you fully migrate a use case, the upstream data pipeline
 
 During an iteration, you can choose one of the following options:
 
-  - Offload only your use case.
-  - Fully migrate a use case that was previously offloaded.
-  - Fully migrate a use case from scratch by offloading it first in the same iteration.
+- Offload only your use case.
+- Fully migrate a use case that was previously offloaded.
+- Fully migrate a use case from scratch by offloading it first in the same iteration.
 
 When all of your use cases are fully migrated, you can elect to switch off the old warehouse, which is an important step for reducing overhead and costs.
 
@@ -100,24 +100,26 @@ CDC works well with ELT because you want to store the original record before mak
 
 To make the EL part happen, you can process database logs by using CDC software such as [Datastream](https://docs.cloud.google.com/datastream) or open source tools like [Debezium](https://debezium.io/) and writing the records to BigQuery using [Dataflow](https://docs.cloud.google.com/dataflow) . Then you can use a SQL query to determine the latest version before you apply further transformations. Here's an example:
 
-    WITH ranked AS (
-      SELECT
-        *,
-        ROW_NUMBER() OVER (
-          PARTITION BY RECORD KEY
-          ORDER BY EVENT TIMESTAMP DESC
-        ) AS rank
-      FROM TABLE NAME
-    )
-    SELECT *
-    FROM ranked
-    WHERE rank = 1
+```
+WITH ranked AS (
+  SELECT
+    *,
+    ROW_NUMBER() OVER (
+      PARTITION BY RECORD KEY
+      ORDER BY EVENT TIMESTAMP DESC
+    ) AS rank
+  FROM TABLE NAME
+)
+SELECT *
+FROM ranked
+WHERE rank = 1
+```
 
 When you are refactoring or creating new data pipelines, consider using the CDC pattern applied as an ELT procedure. This approach ensures that you have a complete history of data changes upstream and provides a good segregation of responsibilities—for example:
 
-  - Source system teams ensure availability of their logs and publication of their data events.
-  - The data platform team ensures that ingestion collation of the original records includes timestamps in the data warehouse.
-  - Data engineering and analyst teams schedule a series of transformations to populate their data marts.
+- Source system teams ensure availability of their logs and publication of their data events.
+- The data platform team ensures that ingestion collation of the original records includes timestamps in the data warehouse.
+- Data engineering and analyst teams schedule a series of transformations to populate their data marts.
 
 ### Feedback loops with operational data pipelines
 
@@ -133,9 +135,9 @@ The operational data pipeline pattern is shown in the following diagram.
 
 The following example describes an operational data pipeline that writes product prices into a PCM system. A PCM system is the authoritative system for sales-related product information such as colors, sales channels, price, and seasonality. Here's the end-to-end flow of data:
 
-  - Price-related data is available from multiple sources. This data can include the current price by region from the PCM, competitor pricing from a third-party service, demand forecasting and supplier reliability from internal systems, and so on.
-  - An ETL pipeline pulls the data from the sources, transforms it, and writes the result into the data warehouse. The transformation in this case is a complex calculation involving all the sources with the goal of producing an optimal base price for each product in the PCM.
-  - Finally, the operational pipeline takes the base prices from the data warehouse, performs light transformations to adjust the prices for seasonal events and writes the final prices back into the PCM.
+- Price-related data is available from multiple sources. This data can include the current price by region from the PCM, competitor pricing from a third-party service, demand forecasting and supplier reliability from internal systems, and so on.
+- An ETL pipeline pulls the data from the sources, transforms it, and writes the result into the data warehouse. The transformation in this case is a complex calculation involving all the sources with the goal of producing an optimal base price for each product in the PCM.
+- Finally, the operational pipeline takes the base prices from the data warehouse, performs light transformations to adjust the prices for seasonal events and writes the final prices back into the PCM.
 
 ![PCM system feeding into ETL system.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-6-pattern-operational-ex.svg)
 
@@ -151,13 +153,13 @@ This section describes different approaches you can adopt to migrate your data p
 
 In the following conditions, you might consider whether a technology that you use offers a built-in BigQuery sink (write connector):
 
-  - The legacy data warehouse is fed by data pipelines executing an [ETL](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#etl) procedure.
-  - The transformation logic is executed before the data is stored in the data warehouse.
+- The legacy data warehouse is fed by data pipelines executing an [ETL](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#etl) procedure.
+- The transformation logic is executed before the data is stored in the data warehouse.
 
 Independent software vendors (ISV) offer data processing technologies with BigQuery connectors, including the following:
 
-  - Informatica: [BigQuery connector guide](https://docs.informatica.com/integration-cloud/data-integration-connectors/current-version/google-bigquery-connectors/preface.html)
-  - Talend: [Writing data in BigQuery](https://help.qlik.com/talend/en-US/components/8.0/google-bigquery/tbigqueryoutput-trowgenerator-tmysqlinput-tmap-writing-data-in-google-bigquery-standard-component-this)
+- Informatica: [BigQuery connector guide](https://docs.informatica.com/integration-cloud/data-integration-connectors/current-version/google-bigquery-connectors/preface.html)
+- Talend: [Writing data in BigQuery](https://help.qlik.com/talend/en-US/components/8.0/google-bigquery/tbigqueryoutput-trowgenerator-tmysqlinput-tmap-writing-data-in-google-bigquery-standard-component-this)
 
 > **Note:** It's important to check that the data processing software takes advantage of the BigQuery large-scale [ingestion mechanisms](https://docs.cloud.google.com/bigquery/docs/loading-data) , such as streaming inserts or batch loads from Cloud Storage. An approach that employs the [Magnitude Simba](https://www.simba.com) [JDBC](https://wikipedia.org/wiki/Java_Database_Connectivity) or [ODBC](https://wikipedia.org/wiki/Open_Database_Connectivity) BigQuery drivers isn't suitable for large-scale ingestion operations, because these drivers implement the query interface. While the drivers can perform inserts, this interface is intended for querying and data manipulation language (DML) statements on BigQuery, not for large-scale inserts or updates.
 
@@ -171,13 +173,13 @@ At a high level, the work involved concerns rewriting, or reconfiguring, the las
 
 **Functional**
 
-  - Data mappings: Given that the target database table schema might change, you might need to reconfigure these mappings.
-  - Metric validation: You must validate both historic and new reports, because both the schema and the queries might change.
+- Data mappings: Given that the target database table schema might change, you might need to reconfigure these mappings.
+- Metric validation: You must validate both historic and new reports, because both the schema and the queries might change.
 
 **Nonfunctional**
 
-  - Firewalls might need to be configured to allow outbound data transfer from on-premises to BigQuery.
-  - Network changes might be required to create additional bandwidth, to accommodate outbound data transfer.
+- Firewalls might need to be configured to allow outbound data transfer from on-premises to BigQuery.
+- Network changes might be required to create additional bandwidth, to accommodate outbound data transfer.
 
 ### Redirect data pipelines by using files as an intermediate vehicle
 
@@ -216,19 +218,19 @@ When you migrate your data pipeline to Google Cloud, you might want to migrate s
 
 Managed Service for Apache Spark makes it easy to create and delete clusters so that instead of using one monolithic cluster, you can use many ephemeral clusters. This approach has several advantages:
 
-  - You can use different cluster configurations for individual jobs, eliminating the administrative burden of managing tools across jobs.
-  - You can scale clusters to suit individual jobs or groups of jobs.
-  - You pay only for resources when your jobs are using them.
-  - You don't need to maintain clusters over time, because they are freshly configured every time you use them.
-  - You don't need to maintain separate infrastructure for development, testing, and production. You can use the same definitions to create as many different versions of a cluster as you need when you need them.
+- You can use different cluster configurations for individual jobs, eliminating the administrative burden of managing tools across jobs.
+- You can scale clusters to suit individual jobs or groups of jobs.
+- You pay only for resources when your jobs are using them.
+- You don't need to maintain clusters over time, because they are freshly configured every time you use them.
+- You don't need to maintain separate infrastructure for development, testing, and production. You can use the same definitions to create as many different versions of a cluster as you need when you need them.
 
 When you migrate your jobs, we recommend that you take an incremental approach. By migrating incrementally, you can do the following:
 
-  - Isolate individual jobs in your existing Hadoop infrastructure from the complexity that's inherent in a mature environment.
-  - Examine each job in isolation to evaluate its needs and to determine the best path for migration.
-  - Handle unexpected problems as they arise without delaying dependent tasks.
-  - Create a proof of concept for each complex process without affecting your production environment.
-  - Move your jobs to the recommended ephemeral model thoughtfully and deliberately.
+- Isolate individual jobs in your existing Hadoop infrastructure from the complexity that's inherent in a mature environment.
+- Examine each job in isolation to evaluate its needs and to determine the best path for migration.
+- Handle unexpected problems as they arise without delaying dependent tasks.
+- Create a proof of concept for each complex process without affecting your production environment.
+- Move your jobs to the recommended ephemeral model thoughtfully and deliberately.
 
 When you migrate your existing Hadoop and Spark jobs to Managed Service for Apache Spark, you can check that your jobs' dependencies are covered by the supported [Managed Service for Apache Spark versions](https://docs.cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions) . If you need to install custom software, you might consider [creating your own Managed Service for Apache Spark image](https://docs.cloud.google.com/dataproc/docs/guides/dataproc-images) , using some of the available [initialization actions](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/init-actions) (for example, for [Apache Flink](https://github.com/GoogleCloudDataproc/initialization-actions/tree/master/flink) ), writing your own initialization action, or [specifying custom Python package requirements](https://docs.cloud.google.com/dataproc/docs/tutorials/python-configuration) .
 
@@ -244,22 +246,22 @@ The following sections present some of these alternatives.
 
 At a high level, you have the following alternatives for executing your third-party software in Google Cloud, from least to most complex:
 
-  - Your software vendor has partnered with Google Cloud to offer their software in [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace) .
-  - Your third-party software vendor can run on [Kubernetes](https://kubernetes.io/) .
-  - Your third-party software runs on one or more virtual machines (VMs).
+- Your software vendor has partnered with Google Cloud to offer their software in [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace) .
+- Your third-party software vendor can run on [Kubernetes](https://kubernetes.io/) .
+- Your third-party software runs on one or more virtual machines (VMs).
 
 If your third-party software provides a Cloud Marketplace solution, the work involved is as follows:
 
-  - Deploy your third-party software from the [Cloud Marketplace console](https://console.cloud.google.com/marketplace/browse?filter=category:big-data) .
-  - Select and migrate your use cases following the iterative approach explained in [Migrating using an iterative approach](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#migrating-using-an-iterative-approach) .
+- Deploy your third-party software from the [Cloud Marketplace console](https://console.cloud.google.com/marketplace/browse?filter=category:big-data) .
+- Select and migrate your use cases following the iterative approach explained in [Migrating using an iterative approach](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#migrating-using-an-iterative-approach) .
 
 This alternative is the simplest because you onboard your data pipelines to the cloud using the familiar platform provided by your vendor. You might also be able to use proprietary tools from your vendor to facilitate migration between your original environment and your new environment on Google Cloud.
 
 If your vendor doesn't provide a Cloud Marketplace solution, but their product is able to run on top of Kubernetes, you can use [Google Kubernetes Engine](https://docs.cloud.google.com/kubernetes-engine) (GKE) to host your pipelines. The following work is involved:
 
-  - [Create a GKE cluster](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster) by following the recommendations from your vendor to make sure that the third-party product can take advantage of the task parallelization that Kubernetes offers.
-  - Install your third-party software on your GKE cluster by following the vendor recommendations.
-  - Select and migrate your use cases by following the iterative approach explained in [Migrating data warehouses to BigQuery: Overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview) .
+- [Create a GKE cluster](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster) by following the recommendations from your vendor to make sure that the third-party product can take advantage of the task parallelization that Kubernetes offers.
+- Install your third-party software on your GKE cluster by following the vendor recommendations.
+- Select and migrate your use cases by following the iterative approach explained in [Migrating data warehouses to BigQuery: Overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview) .
 
 This alternative provides a middle ground in terms of complexity. It takes advantage of your vendor-native support for Kubernetes in order to scale and parallelize the execution of your pipelines. However, it requires you to create and manage a GKE cluster.
 
@@ -273,9 +275,9 @@ Handling the parallelization of the work is nontrivial. If your vendor doesn't p
 
 In this diagram, each VM in the MIG executes the third-party pipeline software. You can trigger a pipeline execution in several ways:
 
-  - Automatically, by using [Cloud Scheduler](https://docs.cloud.google.com/scheduler) , [Managed Airflow](https://docs.cloud.google.com/composer) , or a [Cloud Storage trigger](https://docs.cloud.google.com/functions/docs/calling/storage) when new data arrives into a Cloud Storage bucket.
-  - Programmatically, by calling a [Cloud Endpoint](https://docs.cloud.google.com/endpoints) or [Cloud Function](https://docs.cloud.google.com/functions) , or by using the [Pub/Sub API](https://docs.cloud.google.com/pubsub/docs/apis) .
-  - Manually, by placing a new message in a Pub/Sub topic with the Google Cloud CLI.
+- Automatically, by using [Cloud Scheduler](https://docs.cloud.google.com/scheduler) , [Managed Airflow](https://docs.cloud.google.com/composer) , or a [Cloud Storage trigger](https://docs.cloud.google.com/functions/docs/calling/storage) when new data arrives into a Cloud Storage bucket.
+- Programmatically, by calling a [Cloud Endpoint](https://docs.cloud.google.com/endpoints) or [Cloud Function](https://docs.cloud.google.com/functions) , or by using the [Pub/Sub API](https://docs.cloud.google.com/pubsub/docs/apis) .
+- Manually, by placing a new message in a Pub/Sub topic with the Google Cloud CLI.
 
 In essence, all of these methods send a message to a predefined [Pub/Sub topic](https://docs.cloud.google.com/pubsub/architecture#the_basics_of_a_publishsubscribe_service) . You create a simple agent to be installed in each VM. The agent listens to the one or more Pub/Sub topics. Whenever a message arrives in the topic, the agent pulls the message from the topic, starts a pipeline in your third-party software, and listens for its completion. When the pipeline is completed, the agent retrieves the next message from the topics it's listening to.
 
@@ -317,8 +319,8 @@ For practical examples, see the Dataflow [quickstarts](https://docs.cloud.google
 
 At a high level, *orchestration* is the automated coordination of several systems, whereas *scheduling* refers to the automated triggering of orchestration work.
 
-  - Zooming in: A data pipeline is in itself an orchestration of data transformations described by a DAG, which is a *data processing DAG* .
-  - Zooming out: When a data pipeline depends on the output of other data pipelines, you need orchestration of multiple pipelines. Each pipeline constitutes a sub-DAG in a larger DAG, which is an *orchestration DAG* .
+- Zooming in: A data pipeline is in itself an orchestration of data transformations described by a DAG, which is a *data processing DAG* .
+- Zooming out: When a data pipeline depends on the output of other data pipelines, you need orchestration of multiple pipelines. Each pipeline constitutes a sub-DAG in a larger DAG, which is an *orchestration DAG* .
 
 This setup is typical in data warehousing. Figure 1 in the [ETL section](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#etl) shows an example setup. The following sections focus on the orchestration of several data pipelines.
 
@@ -354,43 +356,43 @@ The next section explains this method with a practical example.
 
 Suppose that an organization has two related pipelines:
 
-  - The first pipeline calculates the profits and losses (P\&L) for the whole organization. It's a complex pipeline involving many transformations. Part of the pipeline consists of calculating the monthly sales, which are used in subsequent transformation steps and eventually written to a table.
-  - The second pipeline calculates the year-over-year and month-over-month sales growth for different products so that the marketing department can tune its ad campaign efforts. This pipeline needs the monthly sales data previously calculated by the P\&L data pipeline.
+- The first pipeline calculates the profits and losses (P&L) for the whole organization. It's a complex pipeline involving many transformations. Part of the pipeline consists of calculating the monthly sales, which are used in subsequent transformation steps and eventually written to a table.
+- The second pipeline calculates the year-over-year and month-over-month sales growth for different products so that the marketing department can tune its ad campaign efforts. This pipeline needs the monthly sales data previously calculated by the P&L data pipeline.
 
-The organization considers the P\&L data pipeline to have higher priority than the marketing pipeline. Unfortunately, because P\&L is a complex data pipeline, it consumes a large amount of resources, preventing other pipelines from running concurrently. In addition, if the P\&L pipeline fails, the marketing pipeline and other dependent pipelines don't have the required data to be able to run, and must wait for a retry of P\&L. The following diagram illustrates this situation.
+The organization considers the P&L data pipeline to have higher priority than the marketing pipeline. Unfortunately, because P&L is a complex data pipeline, it consumes a large amount of resources, preventing other pipelines from running concurrently. In addition, if the P&L pipeline fails, the marketing pipeline and other dependent pipelines don't have the required data to be able to run, and must wait for a retry of P&L. The following diagram illustrates this situation.
 
-![The P\&L pipeline creates a 'monthly sales' artifact that's required for the marketing pipeline. The P\&L pipeline can experience delays and other issues.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-12-orchestration-ex-1-on-premises.svg)
+![The P&L pipeline creates a 'monthly sales' artifact that's required for the marketing pipeline. The P&L pipeline can experience delays and other issues.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-12-orchestration-ex-1-on-premises.svg)
 
 **Figure 12** . Complex data pipelines can prevent lower-priority pipelines from running.
 
-The organization is migrating to BigQuery. It has identified the two use cases—P\&L and marketing sales growth—and included them in the migration backlog. When planning the next iteration, the organization [prioritizes](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#prioritizing-use-cases) the P\&L use case and [includes it in the iteration backlog](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#execute) because it's severely limited by the current on-premises resources and regularly causes delays. Some of its dependent use cases are also included, among them the marketing use case.
+The organization is migrating to BigQuery. It has identified the two use cases—P&L and marketing sales growth—and included them in the migration backlog. When planning the next iteration, the organization [prioritizes](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#prioritizing-use-cases) the P&L use case and [includes it in the iteration backlog](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#execute) because it's severely limited by the current on-premises resources and regularly causes delays. Some of its dependent use cases are also included, among them the marketing use case.
 
-The migration team runs the first iteration. They choose to move both the P\&L and marketing use cases to Google Cloud by using a [redirect approach](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#redirect_data_pipelines_to_write_to_bigquery) . They make no changes to the pipeline steps or orchestration. An important difference is that now the P\&L pipeline can dispose almost unlimited compute power, and therefore executes much faster than on-premises. The pipeline writes the sales monthly data to a BigQuery table that the marketing growth pipeline uses. The following diagram illustrates these changes.
+The migration team runs the first iteration. They choose to move both the P&L and marketing use cases to Google Cloud by using a [redirect approach](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#redirect_data_pipelines_to_write_to_bigquery) . They make no changes to the pipeline steps or orchestration. An important difference is that now the P&L pipeline can dispose almost unlimited compute power, and therefore executes much faster than on-premises. The pipeline writes the sales monthly data to a BigQuery table that the marketing growth pipeline uses. The following diagram illustrates these changes.
 
-![The P\&L pipeline is the same as before but does not experience delays.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-13-orchestration-ex-2-on-cloud.svg)
+![The P&L pipeline is the same as before but does not experience delays.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-13-orchestration-ex-2-on-cloud.svg)
 
 **Figure 13** . Speeding up a complex data pipeline by using a redirect approach.
 
-Although Google Cloud has helped with the nonfunctional P\&L issues, functional issues still remain. Some unrelated tasks that precede the calculation of the monthly sales often cause errors that prevent that calculation from happening, and result in the dependent pipelines being unable to start.
+Although Google Cloud has helped with the nonfunctional P&L issues, functional issues still remain. Some unrelated tasks that precede the calculation of the monthly sales often cause errors that prevent that calculation from happening, and result in the dependent pipelines being unable to start.
 
-In a second iteration, the team hopes to improve performance by including both use cases in the iteration backlog. The team identifies the pipeline steps to calculate the monthly sales in the P\&L pipeline. The steps constitute a sub-DAG, as shown in the next diagram. The migration team copies the sub-DAG into the marketing pipeline so that that pipeline can run independently of P\&L. Having sufficient computing power in Google Cloud enables both pipelines to run concurrently.
+In a second iteration, the team hopes to improve performance by including both use cases in the iteration backlog. The team identifies the pipeline steps to calculate the monthly sales in the P&L pipeline. The steps constitute a sub-DAG, as shown in the next diagram. The migration team copies the sub-DAG into the marketing pipeline so that that pipeline can run independently of P&L. Having sufficient computing power in Google Cloud enables both pipelines to run concurrently.
 
-![The P\&L pipeline and marketing pipeline now run as separate sub DAGs, so the marketing pipeline no longer is affected if there are issues in the P\&L pipeline.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-14-orchestration-ex-3-duplicate.svg)
+![The P&L pipeline and marketing pipeline now run as separate sub DAGs, so the marketing pipeline no longer is affected if there are issues in the P&L pipeline.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-14-orchestration-ex-3-duplicate.svg)
 
 **Figure 14** . Pipelines running concurrently by using a sub-DAG.
 
 The downside is that duplicating the sub-DAG logic creates code management overhead, because now the team needs to keep both copies of the sub-DAG logic in sync.
 
-In a third iteration, the team revisits the use cases and extracts the monthly sales sub-DAG into an independent pipeline. When the new monthly sales pipeline is done, it triggers or fans out into the P\&L, marketing growth, and other dependent pipelines. This configuration creates a new overall orchestration DAG, with each of the pipelines being one of its sub-DAGs.
+In a third iteration, the team revisits the use cases and extracts the monthly sales sub-DAG into an independent pipeline. When the new monthly sales pipeline is done, it triggers or fans out into the P&L, marketing growth, and other dependent pipelines. This configuration creates a new overall orchestration DAG, with each of the pipelines being one of its sub-DAGs.
 
-![The monthly sales pipeline is now first, feeding the P\&L pipeline and the marketing pipeline.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-15-orchestration-ex-4-composer.svg)
+![The monthly sales pipeline is now first, feeding the P&L pipeline and the marketing pipeline.](https://docs.cloud.google.com/static/bigquery/images/dw2bq-data-pipelines-15-orchestration-ex-4-composer.svg)
 
 **Figure 15** . Overall orchestration DAG with each pipeline in its own sub-DAG.
 
 In subsequent iterations, the migration team can solve any remaining functional issues and migrate the pipelines to use the following [Google Cloud-managed services](https://docs.cloud.google.com/bigquery/docs/migration/pipelines#rewrite_data_pipelines_to_use_gcp-managed_services) , among others:
 
-  - [Dataflow](https://docs.cloud.google.com/dataflow) : Enables you to define each data pipeline as a self-contained DAG using the [Beam model](https://beam.apache.org/documentation/execution-model/) .
-  - [Managed Airflow](https://docs.cloud.google.com/composer) : Enables you to define the broader orchestration as one or more [Airflow DAGs](https://airflow.apache.org/concepts.html#dags) .
+- [Dataflow](https://docs.cloud.google.com/dataflow) : Enables you to define each data pipeline as a self-contained DAG using the [Beam model](https://beam.apache.org/documentation/execution-model/) .
+- [Managed Airflow](https://docs.cloud.google.com/composer) : Enables you to define the broader orchestration as one or more [Airflow DAGs](https://airflow.apache.org/concepts.html#dags) .
 
 Even though Airflow supports sub-DAGs natively, this functionality might limit its performance and is therefore [discouraged](https://docs.cloud.google.com/composer/docs/faq#using_operators) . In their place, use independent DAGs with the [`TriggerDagRunOperator`](https://github.com/apache/airflow/blob/main/providers/src/airflow/providers/standard/operators/trigger_dagrun.py) operator.
 
@@ -398,18 +400,18 @@ Even though Airflow supports sub-DAGs natively, this functionality might limit i
 
 Learn more about the following steps in data warehouse migration:
 
-  - [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
-  - [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
-  - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
-  - [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
-  - [Interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
-  - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
-  - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)
+- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+- [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
+- [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
+- [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
+- [Interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
+- [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
+- [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)
 
 You can also learn about moving from specific data warehouse technologies to BigQuery:
 
-  - [Migrating from Netezza](https://docs.cloud.google.com/architecture/dw2bq/netezza/netezza-bq-migration-guide)
-  - [Migrating from Oracle](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration)
-  - [Migrating from Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift-overview)
-  - [Migrating from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview)
-  - [Migrating from Snowflake](https://docs.cloud.google.com/architecture/dw2bq/snowflake/snowflake-bq-migration-guide)
+- [Migrating from Netezza](https://docs.cloud.google.com/architecture/dw2bq/netezza/netezza-bq-migration-guide)
+- [Migrating from Oracle](https://docs.cloud.google.com/bigquery/docs/migration/oracle-migration)
+- [Migrating from Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift-overview)
+- [Migrating from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview)
+- [Migrating from Snowflake](https://docs.cloud.google.com/architecture/dw2bq/snowflake/snowflake-bq-migration-guide)

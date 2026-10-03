@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# PROJECT\_OPTIONS\_CHANGES view
+# PROJECT_OPTIONS_CHANGES view
 
 You can query the `INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES` view to retrieve real-time metadata about BigQuery configuration changes of a project. This view reflects project-level configuration changes made after January 31, 2024.
 
@@ -23,7 +23,7 @@ When you query the `INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES` view, the query 
 The `INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES` view has the following schema:
 
 | Column name       | Data type   | Value                                                                                                                                   |
-| ----------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | `update_time`     | `TIMESTAMP` | The time the configuration change occurred.                                                                                             |
 | `username`        | `STRING`    | For first-party users, it's their user email. For third-party users, it's the name that users set in the third-party identity provider. |
 | `updated_options` | `JSON`      | A JSON object of the configuration options users updated in the change, containing the previous and the new values of updated fields.   |
@@ -40,13 +40,13 @@ This view contains sessions that are running and the history of sessions complet
 
 Queries against this view must have a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) .
 
-| View name                                                                         | Resource scope                                      | Region scope              |
-| --------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------- |
-| `` `region-         REGION        `.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES `` | Configuration changes within the specified project. | `         REGION        ` |
+| View name                                                                    | Resource scope                                      | Region scope |
+|------------------------------------------------------------------------------|-----------------------------------------------------|--------------|
+| `` `region-  ``` REGION ```  `.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES `` | Configuration changes within the specified project. | `REGION`     |
 
 Replace the following:
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `US` , or `us-west2` .
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `US` , or `us-west2` .
 
 > **Note:** To learn how to extract a JSON scalar value from the `updated_options` column and convert it to a SQL STRING value such as `JSON_VALUE()` , see [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#categories) .
 
@@ -54,19 +54,23 @@ Replace the following:
 
 The following example retrieves all columns from the `INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES` view.
 
-    SELECT
-      *
-    FROM
-      `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES;
+```
+SELECT
+  *
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.PROJECT_OPTIONS_CHANGES;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
-    | project_number | project_id | update_time             | username        | updated_options                                                                                                  |
-    |----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-    | 4471534625     | myproject1 | 2023-08-22 06:57:49 UTC | user1@gmail.com | {"default_query_job_timeout_ms":{"new":0,"old":1860369},"default_time_zone":{"new":"America/New_York","old":""}} |
-    |----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-    | 5027725474     | myproject2 | 2022-08-01 00:00:00 UTC | user2@gmail.com | {"default_interactive_query_queue_timeout_ms":{"new":1860369,"old":1860008}}                                     |
-    +----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
+```
++----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
+| project_number | project_id | update_time             | username        | updated_options                                                                                                  |
+|----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
+| 4471534625     | myproject1 | 2023-08-22 06:57:49 UTC | user1@gmail.com | {"default_query_job_timeout_ms":{"new":0,"old":1860369},"default_time_zone":{"new":"America/New_York","old":""}} |
+|----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
+| 5027725474     | myproject2 | 2022-08-01 00:00:00 UTC | user2@gmail.com | {"default_interactive_query_queue_timeout_ms":{"new":1860369,"old":1860008}}                                     |
++----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
+```

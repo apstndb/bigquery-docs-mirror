@@ -28,9 +28,9 @@ Enable the required API, and get the permissions needed to use a BigQuery SQL tr
 
 To get the permissions that you need to create translation jobs with the interactor translator, the translation API, or the batch SQL translator, ask your administrator to grant you the following IAM roles on the `parent` resource:
 
-  - Viewing and monitoring migration jobs: [MigrationWorkflow Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.viewer) ( `roles/bigquerymigration.viewer` )
-  - Submitting migration jobs: [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
-  - Access the Cloud Storage buckets for input and files: Storage Object Admin ( `roles/storage.objectAdmin` ) - on the source and destination Cloud Storage bucket.
+- Viewing and monitoring migration jobs: [MigrationWorkflow Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.viewer) ( `roles/bigquerymigration.viewer` )
+- Submitting migration jobs: [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
+- Access the Cloud Storage buckets for input and files: Storage Object Admin ( `roles/storage.objectAdmin` ) - on the source and destination Cloud Storage bucket.
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -40,15 +40,15 @@ These predefined roles contain the permissions required to create translation jo
 
 The following permissions are required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator:
 
-  - `bigquerymigration.workflows.create`
-  - `bigquerymigration.workflows.get`
-  - `bigquerymigration.workflows.list`
-  - `bigquerymigration.workflows.delete`
-  - `bigquerymigration.subtasks.get`
-  - `bigquerymigration.subtasks.list`
-  - `storage.objects.get`
-  - `storage.objects.list`
-  - `storage.objects.create`
+- `bigquerymigration.workflows.create`
+- `bigquerymigration.workflows.get`
+- `bigquerymigration.workflows.list`
+- `bigquerymigration.workflows.delete`
+- `bigquerymigration.subtasks.get`
+- `bigquerymigration.subtasks.list`
+- `storage.objects.get`
+- `storage.objects.list`
+- `storage.objects.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -92,21 +92,21 @@ Follow these steps to translate a query into GoogleSQL:
 5.  Click **Save** .
 
 6.  In the **Editor** pane, click **Tools** \> **Enable SQL translation** .
-    
+
     The **Editor** pane splits into two panes.
 
 7.  In the left pane, enter the query you want to translate.
 
 8.  Click **Translate** .
-    
+
     BigQuery translates your query into GoogleSQL and displays it in the right pane. For example, the following screenshot shows translated Teradata SQL:
-    
+
     ![Displays a Teradata SQL query translated into GoogleSQL](https://docs.cloud.google.com/static/bigquery/images/translated-teradata-query.png)
 
 9.  Optional: To run the translated GoogleSQL query, click **Run** .
 
 10. Optional: To return to the SQL editor, click **More** \> **Disable SQL translation** .
-    
+
     The **Editor** pane returns to a single pane.
 
 ## Use Gemini with the interactive SQL translator
@@ -134,23 +134,23 @@ Similarly, to create a Gemini-enhanced SQL translation rule for the output SQL, 
 When the **Customize** menu appears, continue with the following steps.
 
 1.  Use one or both of the following prompts to create a translation rule:
-    
-      - In the **Find and replace a pattern** prompt, specify a SQL pattern that you want to replace in the **Replace** field, and a SQL pattern to replace it in the **With** field.
-        
-        A SQL pattern can contain any number of statements, clauses, or functions in a SQL script. When you create a rule using this prompt, the Gemini enhanced SQL translation identifies any instances of that SQL pattern in the SQL query and dynamically replaces it with another SQL pattern. For example, you can use this prompt to create a rule that replaces all occurrences of `months_between (X,Y)` with `date_diff(X,Y,MONTH)` .
-    
-      - In the **Describe a change to the output** field, type a change to the SQL translation output in natural language.
-        
-        When you create a rule using this prompt, the Gemini-enhanced SQL translation identifies the request and makes the specified change to the SQL query.
+
+    - In the **Find and replace a pattern** prompt, specify a SQL pattern that you want to replace in the **Replace** field, and a SQL pattern to replace it in the **With** field.
+
+      A SQL pattern can contain any number of statements, clauses, or functions in a SQL script. When you create a rule using this prompt, the Gemini enhanced SQL translation identifies any instances of that SQL pattern in the SQL query and dynamically replaces it with another SQL pattern. For example, you can use this prompt to create a rule that replaces all occurrences of `months_between (X,Y)` with `date_diff(X,Y,MONTH)` .
+
+    - In the **Describe a change to the output** field, type a change to the SQL translation output in natural language.
+
+      When you create a rule using this prompt, the Gemini-enhanced SQL translation identifies the request and makes the specified change to the SQL query.
 
 2.  Click **Preview** .
 
 3.  In the **Suggestions generated by Gemini** dialog, review the changes made by the Gemini-enhanced SQL translation to the SQL query based on your rule.
-    
+
     ![Apply changes from Gemini-based configuration YAML file](https://docs.cloud.google.com/static/bigquery/images/gemini-suggested-changes-1.png)
 
 4.  Optional: To add this rule for use with future translations, select the **Save this prompt...** checkbox.
-    
+
     Rules are saved in the default configuration YAML file, or `__default.ai_config.yaml` . This configuration YAML file is saved to the Cloud Storage folder as specified in the **Translation Configuration Source Location** field in the [translation settings](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) . If the **Translation Configuration Source Location** isn't already set, a folder browser appears and lets you select one. A configuration YAML file is subject to [configuration file size limitations](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#config-limitations) .
 
 5.  To apply the suggested changes to the SQL query, click **Apply** .
@@ -168,7 +168,7 @@ Once you have uploaded a Gemini-enhanced SQL translation rule and uploaded it to
 3.  In the **Translation Configuration Source Location** field, specify the path to the Gemini-based YAML file stored in a Cloud Storage folder.
 
 4.  Click **Save** .
-    
+
     Once saved, run an interactive translation. The interactive translator suggests changes to your translations based on the rules in your configuration YAML file if one is available.
 
 If a Gemini suggestion is available for the input based on your rule, then the **Preview suggested changes** dialog appears and shows possible changes to the translation input. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
@@ -176,7 +176,7 @@ If a Gemini suggestion is available for the input based on your rule, then the *
 If a Gemini suggestion is available for the output based on your rule, a notification banner appears in the code editor. To review and apply these suggestions, do the following:
 
 1.  Click **Assist** \> **View suggestions** on either side of the code editor to revisit the suggested changes to the corresponding query.
-    
+
     ![Apply changes from Gemini-based configuration YAML file](https://docs.cloud.google.com/static/bigquery/images/gemini-suggested-changes-2.png)
 
 2.  In the **Suggestions generated by Gemini** dialog, review the changes made by Gemini to the SQL query based on your translation rule.
@@ -200,7 +200,7 @@ To update an existing configuration YAML file, do the following:
 ### Explain a translation
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** With Gemini-enhanced SQL translations, you can generate text explanation for your scripts by the Gemini model. Gemini-enhanced SQL translations are allowed a limited amount of Gemini usage at no charge. This usage is sufficient for most migration projects. To request an increase to this limit, or to get support and provide feedback for this Preview feature, contact <ai-sql-translation-help@google.com> .
@@ -210,7 +210,7 @@ After running an interactive translation, you can request a Gemini-generated tex
 To get Gemini-generate SQL translation explanation, do the following:
 
 1.  To create a Gemini-generated SQL translation explanation, click **Assist** , and then click **Explain this translation** .
-    
+
     ![Explain translation button.](https://docs.cloud.google.com/static/bigquery/images/int-translate-explain.png)
 
 ### Translate with a batch translation configuration ID
@@ -220,7 +220,7 @@ You can run an interactive query with the same translation configurations as a b
 1.  In the query editor, click **Tools** \> **Translation settings** .
 
 2.  In the **Translation Configuration ID** field, provide a batch translation configuration ID to apply the same translation configuration from a completed BigQuery batch migration job.
-    
+
     To find a job's batch translation configuration ID, select a batch translation job from the **SQL translation** page, and then click the **Translation Configuration** tab. The batch translation configuration ID is listed as **Resource name** .
 
 3.  Click **Save** .
@@ -234,7 +234,7 @@ To specify translation configurations by providing a location to the translation
 1.  In the query editor, click **Tools** \> **Translation settings** .
 
 2.  In the **Translation Configuration Source Location** field, specify the path to the translation configuration files stored in a Cloud Storage folder.
-    
+
     The BigQuery interactive SQL translator supports metadata ZIP files containing [translation metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) and [object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#json_file_format) . For information on how to upload files to Cloud Storage, see [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 3.  Click **Save** .
@@ -259,17 +259,19 @@ You can find failed translations by going to the **Translation details** page in
 
 To ensure the most accurate translation, you can enter the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;` , enter the following SQL statements into the interactive SQL translator:
 
-    create table schema1.table1 (id int, field1 int, field2 varchar(16));
-    create table schema1.table2 (id int, field1 varchar(30), field2 date);
-    
-    select table1.field1, table2.field1
-    from table1, table2
-    where table1.id = table2.id;
+```
+create table schema1.table1 (id int, field1 int, field2 varchar(16));
+create table schema1.table2 (id int, field1 varchar(30), field2 date);
+
+select table1.field1, table2.field1
+from table1, table2
+where table1.id = table2.id;
+```
 
 #### Fix translation issues with Gemini
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
@@ -290,10 +292,10 @@ There is no charge to use the interactive SQL translator. However, storage used 
 
 Learn more about the following steps in data warehouse migration:
 
-  - [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
-  - [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
-  - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
-  - [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
-  - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
-  - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
-  - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)
+- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+- [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
+- [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
+- [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
+- [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
+- [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
+- [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)

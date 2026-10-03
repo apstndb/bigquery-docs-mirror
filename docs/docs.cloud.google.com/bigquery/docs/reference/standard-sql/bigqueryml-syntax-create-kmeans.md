@@ -58,14 +58,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -73,7 +73,9 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-    MODEL_TYPE = { 'KMEANS' }
+```
+MODEL_TYPE = { 'KMEANS' }
+```
 
 **Description**
 
@@ -87,7 +89,7 @@ Specify `KMEANS` to use k-means clustering for data segmentation; for example, i
 
 **Syntax**
 
-`NUM_CLUSTERS = { int64_value | HPARAM_RANGE( range ) | HPARAM_CANDIDATES( [candidates] ) }`
+`NUM_CLUSTERS = { `` int64_value `` | HPARAM_RANGE( `` range `` ) | HPARAM_CANDIDATES( `` [candidates] `` ) }`
 
 **Description**
 
@@ -95,12 +97,12 @@ The number of clusters to identify in the input data.
 
 **Arguments**
 
-If you aren't running hyperparameter tuning, then you can specify an `INT64` value between `2` and `100` . The default value is `log 10 (n)` , where `n` is the number of training examples.
+If you aren't running hyperparameter tuning, then you can specify an `INT64` value between `2` and `100` . The default value is `log `<sub>`10`</sub>` (n)` , where `n` is the number of training examples.
 
 If you are running hyperparameter tuning, use one of the following options:
 
-  - The `HPARAM_RANGE` keyword and two `INT64` values that define the range of the hyperparameter. For example, `NUM_CLUSTERS = HPARAM_RANGE(2, 25)` .
-  - The `HPARAM_CANDIDATES` keyword and an array of `INT64` values that provide discrete values to use for the hyperparameter. For example, `NUM_CLUSTERS = HPARAM_CANDIDATES([5, 10, 50, 100])` .
+- The `HPARAM_RANGE` keyword and two `INT64` values that define the range of the hyperparameter. For example, `NUM_CLUSTERS = HPARAM_RANGE(2, 25)` .
+- The `HPARAM_CANDIDATES` keyword and an array of `INT64` values that provide discrete values to use for the hyperparameter. For example, `NUM_CLUSTERS = HPARAM_CANDIDATES([5, 10, 50, 100])` .
 
 When running hyperparameter tuning, the valid range is `[2, 100]` , the default range is `[2, 10]` , and the scale type is `LINEAR` .
 
@@ -108,7 +110,9 @@ When running hyperparameter tuning, the valid range is `[2, 100]` , the default 
 
 **Syntax**
 
-    KMEANS_INIT_METHOD = { 'RANDOM' | 'KMEANS++' | 'CUSTOM' }
+```
+KMEANS_INIT_METHOD = { 'RANDOM' | 'KMEANS++' | 'CUSTOM' }
+```
 
 **Description**
 
@@ -120,19 +124,19 @@ To use the same centroids in repeated `CREATE MODEL` queries, specify the option
 
 This option accepts the following values:
 
-  - `RANDOM` : Initializes the centroids by randomly selecting a number of data points equal to the [`NUM_CLUSTERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value from the input data. This is the default value.
+- `RANDOM` : Initializes the centroids by randomly selecting a number of data points equal to the [`NUM_CLUSTERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value from the input data. This is the default value.
 
-  - `KMEANS++` : Initializes a number of centroids equal to the [`NUM_CLUSTERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value by using the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) algorithm. Using this approach usually trains a better model than using random cluster initialization.
+- `KMEANS++` : Initializes a number of centroids equal to the [`NUM_CLUSTERS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value by using the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) algorithm. Using this approach usually trains a better model than using random cluster initialization.
 
-  - `CUSTOM` : Initializes the centroids using a provided column of type `BOOL` . BigQuery ML uses the rows with a value of `TRUE` as the initial centroids. You specify the column to use by using the [`KMEANS_INIT_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_col) option.
-    
-    When you use this option, if the values in the column identified by `'KMEANS_INIT_COL'` remain constant, then repeated `CREATE MODEL` queries use the same centroids.
+- `CUSTOM` : Initializes the centroids using a provided column of type `BOOL` . BigQuery ML uses the rows with a value of `TRUE` as the initial centroids. You specify the column to use by using the [`KMEANS_INIT_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_col) option.
+
+  When you use this option, if the values in the column identified by `'KMEANS_INIT_COL'` remain constant, then repeated `CREATE MODEL` queries use the same centroids.
 
 ### `KMEANS_INIT_COL`
 
 **Syntax**
 
-` KMEANS_INIT_COL = string_value  `
+`KMEANS_INIT_COL = `` string_value`
 
 **Description**
 
@@ -150,7 +154,9 @@ A `STRING` value.
 
 **Syntax**
 
-    DISTANCE_TYPE = { 'EUCLIDEAN' | 'COSINE' }
+```
+DISTANCE_TYPE = { 'EUCLIDEAN' | 'COSINE' }
+```
 
 **Description**
 
@@ -160,23 +166,25 @@ The type of metric to use to compute the distance between two points.
 
 This option accepts the following values:
 
-  - `EUCLIDEAN` : Use the following equation to calculate the distance between points `x` and `y` :
-    
-    $$ \\lVert x-y\\rVert\_{2} $$
-    
-    This is the default value.
+- `EUCLIDEAN` : Use the following equation to calculate the distance between points `x` and `y` :
 
-  - `COSINE` : Use the following equation to calculate the distance between points `x` and `y` :
-    
-    $$ \\sqrt{1-\\frac{x \\cdot y}{\\lVert x\\rVert\_{2}\\lVert y\\rVert\_{2}}} $$
-    
-    where \\( \\lVert x\\rVert\_{2} \\) represents the L2 norm for `x` .
+  \$\$ \lVert x-y\rVert\_{2} \$\$
+
+  This is the default value.
+
+- `COSINE` : Use the following equation to calculate the distance between points `x` and `y` :
+
+  \$\$ \sqrt{1-\frac{x \cdot y}{\lVert x\rVert\_{2}\lVert y\rVert\_{2}}} \$\$
+
+  where \\( \lVert x\rVert\_{2} \\) represents the L2 norm for `x` .
 
 ### `STANDARDIZE_FEATURES`
 
 **Syntax**
 
-    STANDARDIZE_FEATURES = { TRUE | FALSE }
+```
+STANDARDIZE_FEATURES = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -190,7 +198,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-` MAX_ITERATIONS = int64_value  `
+`MAX_ITERATIONS = `` int64_value`
 
 **Description**
 
@@ -204,7 +212,9 @@ An `INT64` value. The default value is `20` .
 
 **Syntax**
 
-    EARLY_STOP = { TRUE | FALSE }
+```
+EARLY_STOP = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -218,7 +228,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Syntax**
 
-` MIN_REL_PROGRESS = float64_value  `
+`MIN_REL_PROGRESS = `` float64_value`
 
 **Description**
 
@@ -232,7 +242,9 @@ A `FLOAT64` value. The default value is `0.01` .
 
 **Syntax**
 
-    WARM_START = { TRUE | FALSE }
+```
+WARM_START = { TRUE | FALSE }
+```
 
 **Description**
 
@@ -250,7 +262,7 @@ A `BOOL` value. The default value is `FALSE` .
 
 **Syntax**
 
-` NUM_TRIALS = int64_value  `
+`NUM_TRIALS = `` int64_value`
 
 **Description**
 
@@ -260,13 +272,13 @@ The maximum number of submodels to train. The tuning stops when `NUM_TRIALS` sub
 
 An `INT64` value between `1` and `100` , inclusive.
 
-> **Note:** We recommend using at least `( number_of_hyperparameters * 10)` trials to tune a model.
+> **Note:** We recommend using at least `( `` number_of_hyperparameters `` * 10)` trials to tune a model.
 
 ### `MAX_PARALLEL_TRIALS`
 
 **Syntax**
 
-` MAX_PARALLEL_TRIALS = int64_value  `
+`MAX_PARALLEL_TRIALS = `` int64_value`
 
 **Description**
 
@@ -282,7 +294,9 @@ An `INT64` value between `1` and `5` , inclusive. The default value is `1` .
 
 **Syntax**
 
-    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
+HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
+```
 
 **Description**
 
@@ -292,17 +306,19 @@ The algorithm used to tune the hyperparameters. If you specify a value for this 
 
 Specify one of the following values:
 
-  - `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+- `VIZIER_DEFAULT` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
-  - `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
+- `RANDOM_SEARCH` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
-  - `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
+- `GRID_SEARCH` : Use [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) to explore the search space. You can only use this algorithm when every hyperparameter's search space is discrete.
 
 ### `HPARAM_TUNING_OBJECTIVES`
 
 **Syntax**
 
-    HPARAM_TUNING_OBJECTIVES = { 'DAVIES_BOULDIN_INDEX' }
+```
+HPARAM_TUNING_OBJECTIVES = { 'DAVIES_BOULDIN_INDEX' }
+```
 
 **Description** The hyperparameter tuning objective for the model. If you specify a value for this option, you must also specify a value for [`NUM_TRIALS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_trials) .
 
@@ -332,7 +348,7 @@ You can only set the `VERTEX_AI_MODEL_VERSION_ALIASES` option when the `MODEL_RE
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -342,11 +358,13 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ### `query_statement`
 
-The ` AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
+The `AS `` query_statement` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `query_statement` clause.
 
 ## Hyperparameter tuning
 
@@ -368,15 +386,17 @@ The following examples create models named `mymodel` in `mydataset` in your defa
 
 This example creates a k-means model with four clusters using the default `distance_type` value of `euclidean_distance` .
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='KMEANS',
-        NUM_CLUSTERS=4 ) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='KMEANS',
+    NUM_CLUSTERS=4 ) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```
 
 > **Note:** Changing the order of columns in the `SELECT` statement can affect the centroids in the final model.
 
@@ -384,46 +404,52 @@ This example creates a k-means model with four clusters using the default `dista
 
 This example creates a k-means model with three clusters using the random cluster initialization method.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='KMEANS',
-        NUM_CLUSTERS=3,
-        KMEANS_INIT_METHOD='RANDOM') AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='KMEANS',
+    NUM_CLUSTERS=3,
+    KMEANS_INIT_METHOD='RANDOM') AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a k-means model with custom cluster initialization method
 
 This example creates a k-means model with three clusters using the custom cluster initialization method. `init_col` identifies the column of type `BOOL` that contains the values which specify whether a given row is an initial centroid. This column should only contain three rows with the value `TRUE` .
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='KMEANS',
-        NUM_CLUSTERS=3,
-        KMEANS_INIT_METHOD='CUSTOM',
-        KMEANS_INIT_COL='init_col') AS
-    SELECT
-      init_col,
-      features
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='KMEANS',
+    NUM_CLUSTERS=3,
+    KMEANS_INIT_METHOD='CUSTOM',
+    KMEANS_INIT_COL='init_col') AS
+SELECT
+  init_col,
+  features
+FROM
+  `mydataset.mytable`
+```
 
 ### Train a k-means model with hyperparameter tuning
 
 This example creates a k-means model and uses hyperparameter tuning to improve model performance.
 
-    CREATE MODEL
-      `mydataset.mymodel`
-    OPTIONS
-      ( MODEL_TYPE='KMEANS',
-        num_trials=10,
-        max_parallel_trials=2,
-        HPARAM_TUNING_OBJECTIVES=['DAVIES_BOULDIN_INDEX'] ) AS
-    SELECT
-      *
-    FROM
-      `mydataset.mytable`
+```
+CREATE MODEL
+  `mydataset.mymodel`
+OPTIONS
+  ( MODEL_TYPE='KMEANS',
+    num_trials=10,
+    max_parallel_trials=2,
+    HPARAM_TUNING_OBJECTIVES=['DAVIES_BOULDIN_INDEX'] ) AS
+SELECT
+  *
+FROM
+  `mydataset.mytable`
+```

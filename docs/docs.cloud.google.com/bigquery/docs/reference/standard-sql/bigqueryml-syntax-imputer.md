@@ -14,8 +14,8 @@ When used in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/doc
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+- [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
@@ -27,11 +27,11 @@ ML.IMPUTER(expression, strategy) OVER()
 
 `ML.IMPUTER` takes the following arguments:
 
-  - `expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) or `STRING` expression to impute.
-  - `strategy` : a `STRING` value that specifies how to replace `NULL` values. Valid values are as follows:
-      - `mean` : the mean of `expression` . You can only use this value with numerical expressions.
-      - `median` : the median of `expression` . You can only use this value with numerical expressions.
-      - `most_frequent` : the most frequent value in `expression` .
+- `expression` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) or `STRING` expression to impute.
+- `strategy` : a `STRING` value that specifies how to replace `NULL` values. Valid values are as follows:
+  - `mean` : the mean of `expression` . You can only use this value with numerical expressions.
+  - `median` : the median of `expression` . You can only use this value with numerical expressions.
+  - `most_frequent` : the most frequent value in `expression` .
 
 ## Output
 
@@ -43,10 +43,12 @@ ML.IMPUTER(expression, strategy) OVER()
 
 The following example imputes numerical expressions:
 
-    SELECT f, ML.IMPUTER(f, 'mean') OVER () AS output
-    FROM
-      UNNEST([NULL, -3, -3, -3, 1, 2, 3, 4, 5]) AS f
-    ORDER BY f;
+```
+SELECT f, ML.IMPUTER(f, 'mean') OVER () AS output
+FROM
+  UNNEST([NULL, -3, -3, -3, 1, 2, 3, 4, 5]) AS f
+ORDER BY f;
+```
 
 The output looks similar to the following:
 
@@ -70,10 +72,12 @@ The output looks similar to the following:
 
 The following example imputes string expressions:
 
-    SELECT f, ML.IMPUTER(f, 'most_frequent') OVER () AS output
-    FROM
-      UNNEST([NULL, NULL, NULL, NULL, 'a', 'a', 'b', 'b', 'c', 'c', 'c']) AS f
-    ORDER BY f;
+```
+SELECT f, ML.IMPUTER(f, 'most_frequent') OVER () AS output
+FROM
+  UNNEST([NULL, NULL, NULL, NULL, 'a', 'a', 'b', 'b', 'c', 'c', 'c']) AS f
+ORDER BY f;
+```
 
 The output looks similar to the following:
 
@@ -97,4 +101,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

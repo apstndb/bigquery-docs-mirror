@@ -16,16 +16,16 @@ For more information about data integrations, see [Introduction to loading, tran
 
 You can transform data in BigQuery in the following ways:
 
-  - Use [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-dml) to transform data in your BigQuery tables.
-  - Use [materialized views](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-mvs) to automatically cache the results of a query for increased performance and efficiency.
-  - Use [continuous queries](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-continuous-queries) to analyze incoming data in real time and continuously insert the output rows into a BigQuery table or export to Pub/Sub or Bigtable.
-  - Use [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-bq-pipelines) or [Dataform](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-dataform) to develop, test, control versions, and schedule pipelines in BigQuery.
-  - Use [data preparations](https://docs.cloud.google.com/bigquery/docs/transform-intro#data-preparation) with context-aware, AI-generated transformation recommendations to cleanse data for analysis. Data preparations are powered by the [Dataform API](https://docs.cloud.google.com/dataform/reference/rest) .
+- Use [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-dml) to transform data in your BigQuery tables.
+- Use [materialized views](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-mvs) to automatically cache the results of a query for increased performance and efficiency.
+- Use [continuous queries](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-continuous-queries) to analyze incoming data in real time and continuously insert the output rows into a BigQuery table or export to Pub/Sub or Bigtable.
+- Use [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-bq-pipelines) or [Dataform](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-dataform) to develop, test, control versions, and schedule pipelines in BigQuery.
+- Use [data preparations](https://docs.cloud.google.com/bigquery/docs/transform-intro#data-preparation) with context-aware, AI-generated transformation recommendations to cleanse data for analysis. Data preparations are powered by the [Dataform API](https://docs.cloud.google.com/dataform/reference/rest) .
 
 The following table shows the different characteristics of each transformation method.
 
 | Transform method                                                                                                    | Transformation target                                                                                                                                                                                                                                                  | Definition method                                                                                                                        | Transformation frequency    |
-| ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+|---------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
 | [Data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-dml)  | [Table (in place)](https://docs.cloud.google.com/bigquery/docs/tables-intro)                                                                                                                                                                                           | [SQL DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)                                                 | User-initiated or scheduled |
 | [Materialized views](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-mvs)                | [Materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro)                                                                                                                                                                              | [SQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)                                             | Automatic or manual refresh |
 | [Continuous queries](https://docs.cloud.google.com/bigquery/docs/transform-intro#transform-with-continuous-queries) | [Table](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [Pub/Sub topic](https://docs.cloud.google.com/bigquery/docs/continuous-queries#pubsub-example) , [Bigtable table](https://docs.cloud.google.com/bigquery/docs/continuous-queries#bigtable-example) | [SQL query with EXPORT DATA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) | Continuous                  |
@@ -50,7 +50,7 @@ Materialized views are precomputed in the background when the base tables change
 ### Transform data with continuous queries
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 [Continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can insert the output rows produced by a continuous query into a BigQuery table or export them to Pub/Sub or Bigtable.
@@ -79,9 +79,9 @@ To learn more about creating BigQuery pipelines, see [Create pipelines](https://
 
 To reduce the toil of data preparation, BigQuery lets you clean data with Gemini-generated transformation suggestions. Data preparation in BigQuery offers the following assistance:
 
-  - Applying transformations and data quality rules
-  - Standardizing and enriching data
-  - Automating schema mapping
+- Applying transformations and data quality rules
+- Standardizing and enriching data
+- Automating schema mapping
 
 You can validate the results in a preview of your data before executing the changes on all your data.
 
@@ -89,5 +89,5 @@ For more information, see [BigQuery data preparation overview](https://docs.clou
 
 ## What's next
 
-  - To learn more about DML, see [Transform data with data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) .
-  - To learn more about Dataform, see [Dataform overview](https://docs.cloud.google.com/dataform/docs/overview) .
+- To learn more about DML, see [Transform data with data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) .
+- To learn more about Dataform, see [Dataform overview](https://docs.cloud.google.com/dataform/docs/overview) .

@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# Forecast hierarchical time series with an ARIMA\_PLUS univariate model
+# Forecast hierarchical time series with an ARIMA_PLUS univariate model
 
 This tutorial teaches you how to use an [`ARIMA_PLUS` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast hierarchical time series. It forecasts the future value for a given column, based on the historical values for that column, and also calculates roll-up values for that column for one or more dimensions of interest.
 
@@ -20,19 +20,19 @@ Before reading this tutorial, we highly recommend that you read [Forecast multip
 
 ## Required Permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` IAM permission.
+- To create the dataset, you need the `bigquery.datasets.create` IAM permission.
 
-  - To create the model, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+- To create the model, you need the following permissions:
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.models.getData`
-      - `bigquery.jobs.create`
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.models.getData`
+  - `bigquery.jobs.create`
 
 For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
@@ -40,26 +40,26 @@ For more information about IAM roles and permissions in BigQuery, see [Introduct
 
 In this tutorial, you use the following:
 
-  - Creating a multiple time series model and a multiple hierarchical time series model to forecast bottle sales values by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Retrieving the forecasted bottle sales values from the models by using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+- Creating a multiple time series model and a multiple hierarchical time series model to forecast bottle sales values by using the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+- Retrieving the forecasted bottle sales values from the models by using the [`ML.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
 For more information about BigQuery ML costs, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) .
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Create a dataset
@@ -71,21 +71,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -95,25 +95,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a time series model
 
@@ -130,29 +136,31 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast`
-          OPTIONS (
-            MODEL_TYPE = 'ARIMA_PLUS',
-            TIME_SERIES_TIMESTAMP_COL = 'date',
-            TIME_SERIES_DATA_COL = 'total_bottles_sold',
-            TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
-            HOLIDAY_REGION = 'US')
-        AS
-        SELECT
-          store_number,
-          zip_code,
-          city,
-          county,
-          date,
-          SUM(bottles_sold) AS total_bottles_sold
-        FROM
-          `bigquery-public-data.iowa_liquor_sales.sales`
-        WHERE
-          date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
-          AND county IN ('POLK', 'LINN', 'SCOTT')
-        GROUP BY store_number, date, city, zip_code, county;
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast`
+      OPTIONS (
+        MODEL_TYPE = 'ARIMA_PLUS',
+        TIME_SERIES_TIMESTAMP_COL = 'date',
+        TIME_SERIES_DATA_COL = 'total_bottles_sold',
+        TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
+        HOLIDAY_REGION = 'US')
+    AS
+    SELECT
+      store_number,
+      zip_code,
+      city,
+      county,
+      date,
+      SUM(bottles_sold) AS total_bottles_sold
+    FROM
+      `bigquery-public-data.iowa_liquor_sales.sales`
+    WHERE
+      date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
+      AND county IN ('POLK', 'LINN', 'SCOTT')
+    GROUP BY store_number, date, city, zip_code, county;
+    ```
+
     The query takes approximately 37 seconds to complete, after which you can access the `liquor_forecast` model. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Use the model to forecast data
@@ -166,18 +174,20 @@ Follow these steps to forecast data with the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT *
-        FROM
-          ML.FORECAST(
-            MODEL `bqml_tutorial.liquor_forecast`,
-            STRUCT(20 AS horizon, 0.8 AS confidence_level))
-        ORDER BY store_number, county, city, zip_code, forecast_timestamp;
-    
+
+    ```
+    SELECT *
+    FROM
+      ML.FORECAST(
+        MODEL `bqml_tutorial.liquor_forecast`,
+        STRUCT(20 AS horizon, 0.8 AS confidence_level))
+    ORDER BY store_number, county, city, zip_code, forecast_timestamp;
+    ```
+
     The results should look similar to the following:
-    
+
     ![Multiple time series with a univariate model](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-regular-time-series.png)
-    
+
     The output starts with the forecasted data for the first time series; `store_number=2190` , `zip_code=50314` , `city=DES MOINES` , `county=POLK` . As you scroll through the data, you see the forecasts for each subsequent unique time series. In order to generate forecasts that aggregate totals for different dimensions, such as forecasts for a specific county, you must generate a hierarchical forecast.
 
 ## Create a hierarchical time series model
@@ -193,30 +203,32 @@ Follow these steps to create the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast_hierarchical`
-          OPTIONS (
-            MODEL_TYPE = 'ARIMA_PLUS',
-            TIME_SERIES_TIMESTAMP_COL = 'date',
-            TIME_SERIES_DATA_COL = 'total_bottles_sold',
-            TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
-            HIERARCHICAL_TIME_SERIES_COLS = ['zip_code', 'store_number'],
-            HOLIDAY_REGION = 'US')
-        AS
-        SELECT
-          store_number,
-          zip_code,
-          city,
-          county,
-          date,
-          SUM(bottles_sold) AS total_bottles_sold
-        FROM
-          `bigquery-public-data.iowa_liquor_sales.sales`
-        WHERE
-          date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
-          AND county IN ('POLK', 'LINN', 'SCOTT')
-        GROUP BY store_number, date, city, zip_code, county;
-    
+
+    ```
+    CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast_hierarchical`
+      OPTIONS (
+        MODEL_TYPE = 'ARIMA_PLUS',
+        TIME_SERIES_TIMESTAMP_COL = 'date',
+        TIME_SERIES_DATA_COL = 'total_bottles_sold',
+        TIME_SERIES_ID_COL = ['store_number', 'zip_code', 'city', 'county'],
+        HIERARCHICAL_TIME_SERIES_COLS = ['zip_code', 'store_number'],
+        HOLIDAY_REGION = 'US')
+    AS
+    SELECT
+      store_number,
+      zip_code,
+      city,
+      county,
+      date,
+      SUM(bottles_sold) AS total_bottles_sold
+    FROM
+      `bigquery-public-data.iowa_liquor_sales.sales`
+    WHERE
+      date BETWEEN DATE('2015-01-01') AND DATE('2015-12-31')
+      AND county IN ('POLK', 'LINN', 'SCOTT')
+    GROUP BY store_number, date, city, zip_code, county;
+    ```
+
     The query takes approximately 45 seconds to complete, after which the `bqml_tutorial.liquor_forecast_hierarchical` model can be accessed in the **Explorer** pane. Because the query uses a `CREATE MODEL` statement to create a model, there are no query results.
 
 ## Use the hierarchical model to forecast data
@@ -228,30 +240,32 @@ Follow these steps to forecast data with the model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        SELECT
-          *
-        FROM
-          ML.FORECAST(
-            MODEL `bqml_tutorial.liquor_forecast_hierarchical`,
-            STRUCT(30 AS horizon, 0.8 AS confidence_level))
-        WHERE city = 'LECLAIRE'
-        ORDER BY county, city, zip_code, store_number, forecast_timestamp;
-    
+
+    ```
+    SELECT
+      *
+    FROM
+      ML.FORECAST(
+        MODEL `bqml_tutorial.liquor_forecast_hierarchical`,
+        STRUCT(30 AS horizon, 0.8 AS confidence_level))
+    WHERE city = 'LECLAIRE'
+    ORDER BY county, city, zip_code, store_number, forecast_timestamp;
+    ```
+
     The results should look similar to the following:
-    
+
     ![Hierarchical Time Series Example.](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-time-series.png)
-    
+
     Notice how the aggregated forecast is displayed for the city of LeClaire, `store_number=NULL` , `zip_code=NULL` , `city=LECLAIRE` , `county=SCOTT` . As you look at the rest of the rows, notice the forecasts for the other subgroups. For example, the following image shows the forecasts aggregated for the zip code `52753` , `store_number=NULL` , `zip_code=52753` , `city=LECLAIRE` , `county=SCOTT` :
-    
+
     ![Hierarchical Time Series Example.](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-time-series-2.png)
 
 ## Clean up
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-  - You can delete the project you created.
-  - Or you can keep the project and delete the dataset.
+- You can delete the project you created.
+- Or you can keep the project and delete the dataset.
 
 ### Delete your dataset
 
@@ -259,7 +273,7 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
 
-2.  In the navigation, click the **bqml\_tutorial** dataset you created.
+2.  In the navigation, click the **bqml_tutorial** dataset you created.
 
 3.  Click **Delete dataset** on the right side of the window. This action deletes the dataset, the table, and all the data.
 
@@ -270,22 +284,20 @@ Deleting your project removes all datasets and all tables in the project. If you
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
-  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
-  - Learn how to [forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
+- Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
+- Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
+- Learn how to [forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
+- For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

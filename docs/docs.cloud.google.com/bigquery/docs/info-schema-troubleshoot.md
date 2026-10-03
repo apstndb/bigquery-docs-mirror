@@ -38,10 +38,10 @@ The following table summarizes useful information schema views categorized by ta
 <li>Analyze per-stage execution times and spilled bytes.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code dir="ltr" translate="no">JOBS_BY_PROJECT</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization"><code dir="ltr" translate="no">JOBS_BY_ORGANIZATION</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder"><code dir="ltr" translate="no">JOBS_BY_FOLDER</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user"><code dir="ltr" translate="no">JOBS_BY_USER</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code>JOBS_BY_PROJECT</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization"><code>JOBS_BY_ORGANIZATION</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder"><code>JOBS_BY_FOLDER</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user"><code>JOBS_BY_USER</code></a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -53,11 +53,11 @@ The following table summarizes useful information schema views categorized by ta
 <li>Verify project and folder reservation assignments.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline"><code dir="ltr" translate="no">JOBS_TIMELINE_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline"><code dir="ltr" translate="no">RESERVATIONS_TIMELINE_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-reservations"><code dir="ltr" translate="no">RESERVATIONS_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-assignments"><code dir="ltr" translate="no">ASSIGNMENTS_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments"><code dir="ltr" translate="no">CAPACITY_COMMITMENTS_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline"><code>JOBS_TIMELINE_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline"><code>RESERVATIONS_TIMELINE_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-reservations"><code>RESERVATIONS_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-assignments"><code>ASSIGNMENTS_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments"><code>CAPACITY_COMMITMENTS_BY_*</code></a></li>
 </ul></td>
 </tr>
 <tr class="odd">
@@ -69,10 +69,10 @@ The following table summarizes useful information schema views categorized by ta
 <li>Discover expired or deleted tables in time-travel windows.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage"><code dir="ltr" translate="no">TABLE_STORAGE_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-partitions"><code dir="ltr" translate="no">PARTITIONS</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-tables"><code dir="ltr" translate="no">TABLES</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-table-options"><code dir="ltr" translate="no">TABLE_OPTIONS</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage"><code>TABLE_STORAGE_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-partitions"><code>PARTITIONS</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-tables"><code>TABLES</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-table-options"><code>TABLE_OPTIONS</code></a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -83,8 +83,8 @@ The following table summarizes useful information schema views categorized by ta
 <li>Track cross-project dataset sharing and analytical usage.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges"><code dir="ltr" translate="no">OBJECT_PRIVILEGES</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage"><code dir="ltr" translate="no">SHARED_DATASET_USAGE</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges"><code>OBJECT_PRIVILEGES</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage"><code>SHARED_DATASET_USAGE</code></a></li>
 </ul></td>
 </tr>
 <tr class="odd">
@@ -95,8 +95,8 @@ The following table summarizes useful information schema views categorized by ta
 <li>Identify failing streams by stream type and error code.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-write-api"><code dir="ltr" translate="no">WRITE_API_TIMELINE_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-streaming"><code dir="ltr" translate="no">STREAMING_TIMELINE_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-write-api"><code>WRITE_API_TIMELINE_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-streaming"><code>STREAMING_TIMELINE_BY_*</code></a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -107,9 +107,9 @@ The following table summarizes useful information schema views categorized by ta
 <li>Troubleshoot stored procedure and Python UDF builds.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes"><code dir="ltr" translate="no">VECTOR_INDEXES</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-routines"><code dir="ltr" translate="no">ROUTINES</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code dir="ltr" translate="no">JOBS_BY_*</code></a> (filter on ML statement types)</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-vector-indexes"><code>VECTOR_INDEXES</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-routines"><code>ROUTINES</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-jobs"><code>JOBS_BY_*</code></a> (filter on ML statement types)</li>
 </ul></td>
 </tr>
 <tr class="odd">
@@ -119,8 +119,8 @@ The following table summarizes useful information schema views categorized by ta
 <li>Identify materialized view candidate tables.</li>
 </ul></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations"><code dir="ltr" translate="no">RECOMMENDATIONS_BY_*</code></a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-insights"><code dir="ltr" translate="no">INSIGHTS_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations"><code>RECOMMENDATIONS_BY_*</code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/information-schema-insights"><code>INSIGHTS_BY_*</code></a></li>
 </ul></td>
 </tr>
 </tbody>
@@ -130,21 +130,21 @@ The following table summarizes useful information schema views categorized by ta
 
 When you diagnose workload or environment issues in BigQuery, apply the following core principles:
 
-  - **Scope by region, dataset, and project.** BigQuery workload management and compute resources execute within regional boundaries. Consider the following:
-    
-      - Always specify the correct regional qualifier (for example, `region- REGION .INFORMATION_SCHEMA.JOBS_BY_PROJECT` ) or dataset qualifier.
-    
-      - Choose the appropriate hierarchy level ( [`BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user) , [`BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder) , or [`BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization) ) based on whether you are investigating a single user issue, a project-specific workload, or a tenant-wide issue.
+- **Scope by region, dataset, and project.** BigQuery workload management and compute resources execute within regional boundaries. Consider the following:
 
-  - **Correlate compute demand with capacity.** Slow query performance is often the result of slot contention rather than inefficient SQL alone. Compare job resource requests ( `period_estimated_runnable_units` ) against allocated reservation slots ( `period_slot_ms` ) over identical time windows to distinguish between query tuning opportunities and issues caused by insufficient capacity.
+  - Always specify the correct regional qualifier (for example, `region- `` REGION `` .INFORMATION_SCHEMA.JOBS_BY_PROJECT` ) or dataset qualifier.
 
-  - **Account for telemetry granularity and retention boundaries.** Different information schema views operate on distinct refresh intervals and data retention windows. Job metadata in the `JOBS` view is available for 180 days, whereas high-resolution timeline metrics in the [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) and [`RESERVATIONS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline) views are retained for shorter periods (typically 14 to 30 days). For long-term audit and trend analysis, you should export telemetry to partitioned tables.
+  - Choose the appropriate hierarchy level ( [`BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user) , [`BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder) , or [`BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization) ) based on whether you are investigating a single user issue, a project-specific workload, or a tenant-wide issue.
 
-  - **Avoid metric distortion in multi-statement queries.** Multi-statement scripts (procedural SQL containing `DECLARE` , `IF` , or `WHILE` ) generate a parent job with `statement_type = 'SCRIPT'` and individual child jobs for each statement. When aggregating metrics such as `total_slot_ms` or `total_bytes_billed` , filter out `statement_type = 'SCRIPT'` to prevent double-counting.
+- **Correlate compute demand with capacity.** Slow query performance is often the result of slot contention rather than inefficient SQL alone. Compare job resource requests ( `period_estimated_runnable_units` ) against allocated reservation slots ( `period_slot_ms` ) over identical time windows to distinguish between query tuning opportunities and issues caused by insufficient capacity.
 
-  - **Filter on partition columns.** To minimize query execution time and avoid unnecessary scan costs on on-demand analysis, always include restrictive time filters on partition columns such as `creation_time` , `job_start_time` , or `period_start` .
+- **Account for telemetry granularity and retention boundaries.** Different information schema views operate on distinct refresh intervals and data retention windows. Job metadata in the `JOBS` view is available for 180 days, whereas high-resolution timeline metrics in the [`JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) and [`RESERVATIONS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline) views are retained for shorter periods (typically 14 to 30 days). For long-term audit and trend analysis, you should export telemetry to partitioned tables.
+
+- **Avoid metric distortion in multi-statement queries.** Multi-statement scripts (procedural SQL containing `DECLARE` , `IF` , or `WHILE` ) generate a parent job with `statement_type = 'SCRIPT'` and individual child jobs for each statement. When aggregating metrics such as `total_slot_ms` or `total_bytes_billed` , filter out `statement_type = 'SCRIPT'` to prevent double-counting.
+
+- **Filter on partition columns.** To minimize query execution time and avoid unnecessary scan costs on on-demand analysis, always include restrictive time filters on partition columns such as `creation_time` , `job_start_time` , or `period_start` .
 
 ## What's next
 
-  - For more information about information schema syntax and a list of available views, see [Introduction to INFORMATION\_SCHEMA](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-  - To learn how to view job details, list active jobs, and cancel running jobs, see [Manage jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .
+- For more information about information schema syntax and a list of available views, see [Introduction to INFORMATION_SCHEMA](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+- To learn how to view job details, list active jobs, and cancel running jobs, see [Manage jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .

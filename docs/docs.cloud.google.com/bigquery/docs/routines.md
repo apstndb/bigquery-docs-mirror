@@ -10,9 +10,9 @@ data_source: docs.cloud.google.com
 
 In BigQuery, *routines* are a resource type that includes the following:
 
-  - [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#writing_a_procedure) .
-  - [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) (UDFs), including [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) and [user-defined aggregate functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) .
-  - [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) .
+- [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#writing_a_procedure) .
+- [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) (UDFs), including [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) and [user-defined aggregate functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) .
+- [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) .
 
 This document describes tasks that are common to all routine types in BigQuery.
 
@@ -30,10 +30,10 @@ To create a routine, you must have the `bigquery.routines.create` permission.
 
 Depending on the routine type, run one of the following DDL statements:
 
-  - [Stored procedure: `CREATE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
-  - [User-defined function: `CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
-  - [Table function: `CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
-  - [User-defined aggregate function: `CREATE AGGREGATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
+- [Stored procedure: `CREATE PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
+- [User-defined function: `CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
+- [Table function: `CREATE TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
+- [User-defined aggregate function: `CREATE AGGREGATE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
 
 ### API
 
@@ -48,10 +48,10 @@ To list the routines in a dataset, you must have the `bigquery.routines.get` and
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -64,52 +64,62 @@ Query the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/big
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT
-          COLUMN_LIST
-        FROM
-           { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES;
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      COLUMN_LIST
+    FROM
+       { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 Replace the following:
 
-  - COLUMN\_LIST : a comma-separated list of columns from the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) .
-  - DATASET : the name of a dataset in your project.
-  - REGION : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) .
+- ` COLUMN_LIST ` : a comma-separated list of columns from the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) .
+- ` DATASET ` : the name of a dataset in your project.
+- ` REGION ` : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) .
 
 Example:
 
-    SELECT
-      routine_name, routine_type, routine_body
-    FROM
-      mydataset.INFORMATION_SCHEMA.ROUTINES;
+```
+SELECT
+  routine_name, routine_type, routine_body
+FROM
+  mydataset.INFORMATION_SCHEMA.ROUTINES;
+```
 
-    +------------------+----------------+--------------+
-    |   routine_name   |  routine_type  | routine_body |
-    +------------------+----------------+--------------+
-    | AddFourAndDivide | FUNCTION       | SQL          |
-    | create_customer  | PROCEDURE      | SQL          |
-    | names_by_year    | TABLE FUNCTION | SQL          |
-    +------------------+----------------+--------------+
+```
++------------------+----------------+--------------+
+|   routine_name   |  routine_type  | routine_body |
++------------------+----------------+--------------+
+| AddFourAndDivide | FUNCTION       | SQL          |
+| create_customer  | PROCEDURE      | SQL          |
+| names_by_year    | TABLE FUNCTION | SQL          |
++------------------+----------------+--------------+
+```
 
 ### bq
 
 Use the [`bq ls` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the `--routines` flag:
 
-    bq ls --routines DATASET
+```
+bq ls --routines DATASET
+```
 
 Replace the following:
 
-  - DATASET : the name of a dataset in your project.
+- ` DATASET ` : the name of a dataset in your project.
 
 Example:
 
-    bq ls --routines mydataset
+```
+bq ls --routines mydataset
+```
 
-``` 
+```
          Id              Routine Type        Language    Creation Time    Last Modified Time
 ------------------ ----------------------- ---------- ----------------- --------------------
  AddFourAndDivide   SCALAR_FUNCTION         SQL        05 May 01:12:03   05 May 01:12:03
@@ -130,7 +140,7 @@ To view the body of a routine, you must have the `bigquery.routines.get` permiss
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -146,55 +156,65 @@ Select the `routine_definition` column of the [`INFORMATION_SCHEMA.ROUTINES` vie
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        SELECT
-          routine_definition
-        FROM
-          { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES
-        WHERE
-          routine_name = ROUTINE_NAME;
 
-3.  Click play\_circle **Run** .
+    ```
+    SELECT
+      routine_definition
+    FROM
+      { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES
+    WHERE
+      routine_name = ROUTINE_NAME;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 Replace the following:
 
-  - DATASET : the name of a dataset in your project.
-  - REGION : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) .
-  - ROUTINE\_NAME : the name of the routine.
+- ` DATASET ` : the name of a dataset in your project.
+- ` REGION ` : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) .
+- ` ROUTINE_NAME ` : the name of the routine.
 
 Example:
 
-    SELECT
-      routine_definition
-    FROM
-      mydataset.INFORMATION_SCHEMA.ROUTINES
-    WHERE
-      routine_name = 'AddFourAndDivide';
+```
+SELECT
+  routine_definition
+FROM
+  mydataset.INFORMATION_SCHEMA.ROUTINES
+WHERE
+  routine_name = 'AddFourAndDivide';
+```
 
-    +--------------------+
-    | routine_definition |
-    +--------------------+
-    | (x + 4) / y        |
-    +--------------------+
+```
++--------------------+
+| routine_definition |
++--------------------+
+| (x + 4) / y        |
++--------------------+
+```
 
 ### bq
 
 Use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) with the `--routine` flag:
 
-    bq show --routine DATASET.ROUTINE_NAME
+```
+bq show --routine DATASET.ROUTINE_NAME
+```
 
 Replace the following:
 
-  - DATASET : the name of a dataset in your project.
-  - ROUTINE\_NAME : the name of the routine.
+- ` DATASET ` : the name of a dataset in your project.
+- ` ROUTINE_NAME ` : the name of the routine.
 
 Example:
 
-    bq show --routine mydataset.AddFourAndDivide
+```
+bq show --routine mydataset.AddFourAndDivide
+```
 
-``` 
+```
          Id           Routine Type     Language             Signature             Definition     Creation Time    Last Modified Time
  ------------------ ----------------- ---------- ------------------------------- ------------- ----------------- --------------------
   AddFourAndDivide   SCALAR_FUNCTION   SQL        (x INT64, y INT64) -> FLOAT64   (x + 4) / y   05 May 01:12:03   05 May 01:12:03
@@ -213,7 +233,7 @@ To delete a routine, you must have the `bigquery.routines.delete` permission.
 1.  In the Google Cloud console, open the BigQuery page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -230,28 +250,34 @@ To delete a routine, you must have the `bigquery.routines.delete` permission.
 
 Depending on the routine type, run one of the following DDL statements:
 
-  - [Stored procedure: `DROP PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement)
-  - [User-defined function: `DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement)
-  - [Table function: `DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function)
+- [Stored procedure: `DROP PROCEDURE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement)
+- [User-defined function: `DROP FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement)
+- [Table function: `DROP TABLE FUNCTION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function)
 
 Example:
 
-    DROP FUNCTION IF EXISTS mydataset.AddFourAndDivide
+```
+DROP FUNCTION IF EXISTS mydataset.AddFourAndDivide
+```
 
 ### bq
 
 Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `--routine` flag:
 
-    bq rm --routine DATASET.ROUTINE_NAME
+```
+bq rm --routine DATASET.ROUTINE_NAME
+```
 
 Replace the following:
 
-  - DATASET : the name of a dataset in your project.
-  - ROUTINE\_NAME : the name of the routine.
+- ` DATASET ` : the name of a dataset in your project.
+- ` ROUTINE_NAME ` : the name of the routine.
 
 Example:
 
-    bq rm --routine mydataset.AddFourAndDivide
+```
+bq rm --routine mydataset.AddFourAndDivide
+```
 
 ### API
 

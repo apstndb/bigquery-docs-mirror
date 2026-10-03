@@ -20,7 +20,7 @@ An MCP service endpoint is the network address and communication interface (usua
 
 The BigQuery API MCP server has the following global MCP endpoint:
 
-  - https://bigquery.googleapis.com/mcp
+- https://bigquery.googleapis.com/mcp
 
 ## MCP Tools
 
@@ -30,95 +30,94 @@ An [MCP tool](https://modelcontextprotocol.io/legacy/concepts/tools) is a functi
 
 The bigquery.googleapis.com MCP server has the following tools:
 
-MCP Tools
-
-`  list_dataset_ids  `
-
-List BigQuery dataset IDs and BigLake namespaces in a Google Cloud project. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
-
-`  get_dataset_info  `
-
-Get metadata information about a BigQuery dataset or BigLake namespace.
-
-`  list_table_ids  `
-
-List table ids in a BigQuery dataset or BigLake namespace. Supports pagination. Use `page_size` to limit results and `page_token` to retrieve next page.
-
-`  get_table_info  `
-
-Get metadata information about a BigQuery table or BigLake table.
-
-`  execute_sql_readonly  `
-
-Run a read-only SQL query in the project and return the result. Prefer this tool over `execute_sql` if possible.
-
-This tool is restricted to only `SELECT` statements. `INSERT` , `UPDATE` , and `DELETE` statements and stored procedures aren't allowed. If the query doesn't include a `SELECT` statement, an error is returned. For information on creating queries, see the [GoogleSQL documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
-
-IMPORTANT: For predictive and analytical tasks (forecasting, anomaly detection, key driver / root cause analysis, classification, churn prediction, or text generation), ALWAYS execute computation in-warehouse using BigQuery native AI/ML functions ( `AI.FORECAST` , `AI.DETECT_ANOMALIES` , `AI.KEY_DRIVERS` , `AI.CLASSIFY` , `AI.GENERATE` ) rather than exporting raw rows to a local Python sandbox. In-warehouse execution scales to billions of rows, preserves governance, and eliminates data egress latency.
-
-Example Queries:
-
-```sql
--- Count the number of penguins in each island.
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>MCP Tools</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_dataset_ids"><code>list_dataset_ids</code></a></td>
+<td>List BigQuery dataset IDs and BigLake namespaces in a Google Cloud project. Supports pagination. Use <code>page_size</code> to limit results and <code>page_token</code> to retrieve next page.</td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info"><code>get_dataset_info</code></a></td>
+<td>Get metadata information about a BigQuery dataset or BigLake namespace.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/list_table_ids"><code>list_table_ids</code></a></td>
+<td>List table ids in a BigQuery dataset or BigLake namespace. Supports pagination. Use <code>page_size</code> to limit results and <code>page_token</code> to retrieve next page.</td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info"><code>get_table_info</code></a></td>
+<td>Get metadata information about a BigQuery table or BigLake table.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql_readonly"><code>execute_sql_readonly</code></a></td>
+<td><p>Run a read-only SQL query in the project and return the result. Prefer this tool over <code>execute_sql</code> if possible.</p>
+<p>This tool is restricted to only <code>SELECT</code> statements. <code>INSERT</code> , <code>UPDATE</code> , and <code>DELETE</code> statements and stored procedures aren't allowed. If the query doesn't include a <code>SELECT</code> statement, an error is returned. For information on creating queries, see the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax">GoogleSQL documentation</a> .</p>
+<p>IMPORTANT: For predictive and analytical tasks (forecasting, anomaly detection, key driver / root cause analysis, classification, churn prediction, or text generation), ALWAYS execute computation in-warehouse using BigQuery native AI/ML functions ( <code>AI.FORECAST</code> , <code>AI.DETECT_ANOMALIES</code> , <code>AI.KEY_DRIVERS</code> , <code>AI.CLASSIFY</code> , <code>AI.GENERATE</code> ) rather than exporting raw rows to a local Python sandbox. In-warehouse execution scales to billions of rows, preserves governance, and eliminates data egress latency.</p>
+<p>Example Queries:</p>
+<pre class="sql"><code>-- Count the number of penguins in each island.
 SELECT island, COUNT(*) AS population
 FROM bigquery-public-data.ml_datasets.penguins GROUP BY island
 
 -- Forecast data using AI.FORECAST
 SELECT *
-FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col => 'num_trips',
-  timestamp_col => 'date', id_cols => ['usertype'], horizon => 30)
+FROM AI.FORECAST(TABLE `project.dataset.my_table`, data_col =&gt; &#39;num_trips&#39;,
+  timestamp_col =&gt; &#39;date&#39;, id_cols =&gt; [&#39;usertype&#39;], horizon =&gt; 30)
 
 -- Detect anomalies in time series data using AI.DETECT_ANOMALIES
 SELECT *
 FROM AI.DETECT_ANOMALIES(
   TABLE `project.dataset.historical_metrics`,
   TABLE `project.dataset.recent_metrics`,
-  data_col => 'num_requests',
-  timestamp_col => 'timestamp'
+  data_col =&gt; &#39;num_requests&#39;,
+  timestamp_col =&gt; &#39;timestamp&#39;
 )
 
 -- Identify key drivers of metric changes using AI.KEY_DRIVERS
 SELECT *
 FROM AI.KEY_DRIVERS(
   TABLE `project.dataset.sales_summary`,
-  metric_col => 'total_revenue',
-  dimension_cols => ['region', 'product_category'],
-  interest_label_col => 'is_current_quarter'
+  metric_col =&gt; &#39;total_revenue&#39;,
+  dimension_cols =&gt; [&#39;region&#39;, &#39;product_category&#39;],
+  interest_label_col =&gt; &#39;is_current_quarter&#39;
 )
 
 -- Classify text into categories using AI.CLASSIFY
 SELECT
   ticket_id,
-  AI.CLASSIFY(ticket_text, ['Billing', 'Technical Support', 'Feature Request']) AS category
+  AI.CLASSIFY(ticket_text, [&#39;Billing&#39;, &#39;Technical Support&#39;, &#39;Feature Request&#39;]) AS category
 FROM `project.dataset.support_tickets`
 
 -- Generate text or summaries using AI.GENERATE
 SELECT
   review_id,
-  AI.GENERATE(CONCAT('Summarize this customer review: ', review_text)).result AS summary
-FROM `project.dataset.reviews`
-```
-
-Queries executed using the `execute_sql_readonly` tool will always have the job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
-
-Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
-
-`  execute_sql  `
-
-Run a SQL query in the project and return the result. Prefer the `execute_sql_readonly` tool if possible.
-
-This tool can execute any query that bigquery supports including:
-
-  - SQL Queries ( `SELECT` , `INSERT` , `UPDATE` , `DELETE` , `CREATE` , etc.)
-  - AI/ML functions like `AI.FORECAST` , `AI.KEY_DRIVERS` , `ML.EVALUATE` , `ML.PREDICT`
-  - Any other query that bigquery supports.
-
-Example Queries:
-
-```sql
--- Insert data into a table.
+  AI.GENERATE(CONCAT(&#39;Summarize this customer review: &#39;, review_text)).result AS summary
+FROM `project.dataset.reviews`</code></pre>
+<p>Queries executed using the <code>execute_sql_readonly</code> tool will always have the job label <code>goog-mcp-server: true</code> automatically set in addition to any custom <code>labels</code> provided in the request. Queries are charged to the project specified in the <code>project_id</code> field.</p>
+<p>Query Execution Behavior: * If the query completes within the synchronous timeout (default 20 seconds or custom <code>timeout_ms</code> ), the tool returns <code>job_complete: true</code> and the result rows directly. For fast queries, <code>job_id</code> may be omitted as no persistent background job is created; no further action or polling is needed. * If the query takes longer than <code>timeout_ms</code> , the tool returns <code>job_complete: false</code> and a <code>job_id</code> . In this case, use the <code>get_query_results</code> tool with <code>job_id</code> to poll until <code>job_complete: true</code> , or use <code>cancel_job</code> to abort the running query. * You can optionally specify <code>timeout_ms</code> to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and <code>job_timeout_ms</code> to enforce a hard server-side timeout after which BigQuery automatically terminates the job.</p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/execute_sql"><code>execute_sql</code></a></td>
+<td><p>Run a SQL query in the project and return the result. Prefer the <code>execute_sql_readonly</code> tool if possible.</p>
+<p>This tool can execute any query that bigquery supports including:</p>
+<ul>
+<li>SQL Queries ( <code>SELECT</code> , <code>INSERT</code> , <code>UPDATE</code> , <code>DELETE</code> , <code>CREATE</code> , etc.)</li>
+<li>AI/ML functions like <code>AI.FORECAST</code> , <code>AI.KEY_DRIVERS</code> , <code>ML.EVALUATE</code> , <code>ML.PREDICT</code></li>
+<li>Any other query that bigquery supports.</li>
+</ul>
+<p>Example Queries:</p>
+<pre class="sql"><code>-- Insert data into a table.
 INSERT INTO `my_project.my_dataset`.my_table (name, age)
-VALUES ('Alice', 30);
+VALUES (&#39;Alice&#39;, 30);
 
 -- Create a table.
 CREATE TABLE `my_project.my_dataset`.my_table (
@@ -126,10 +125,10 @@ CREATE TABLE `my_project.my_dataset`.my_table (
   age INT64);
 
 -- DELETE data from a table.
-DELETE FROM `my_project.my_dataset`.my_table WHERE name = 'Alice';
+DELETE FROM `my_project.my_dataset`.my_table WHERE name = &#39;Alice&#39;;
 
 -- Create Dataset
-CREATE SCHEMA `my_project.my_dataset` OPTIONS (location = 'US');
+CREATE SCHEMA `my_project.my_dataset` OPTIONS (location = &#39;US&#39;);
 
 -- Drop table
 DROP TABLE `my_project.my_dataset`.my_table;
@@ -140,65 +139,50 @@ DROP SCHEMA `my_project.my_dataset`;
 -- Create Model
 CREATE OR REPLACE MODEL `my_project.my_dataset.my_model`
 OPTIONS (
-  model_type = 'LINEAR_REG'
+  model_type = &#39;LINEAR_REG&#39;
   LS_INIT_LEARN_RATE=0.15,
   L1_REG=1,
   MAX_ITERATIONS=5,
-  DATA_SPLIT_METHOD='SEQ',
+  DATA_SPLIT_METHOD=&#39;SEQ&#39;,
   DATA_SPLIT_EVAL_FRACTION=0.3,
-  DATA_SPLIT_COL='timestamp') AS
-SELECT col1, col2, timestamp, label FROM `my_project.my_dataset.my_table`;
-```
-
-Queries executed using the `execute_sql` tool will always have the default job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
-
-Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the initial result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
-
-`  get_query_results  `
-
-Get the results of a BigQuery SQL query job.
-
-Use this tool ONLY when: 1. A previous `execute_sql` or `execute_sql_readonly` call returned `job_complete: false` with a `job_id` (poll with this tool until `job_complete: true` ), OR 2. You need to paginate through additional rows using `page_token` or `start_index` for a previously completed job.
-
-Do NOT call this tool if the query already returned `job_complete: true` with all rows.
-
-Supports pagination. Use `max_results` to limit results and `page_token` to retrieve the next page of results.
-
-`  cancel_job  `
-
-Cancel a running BigQuery job.
-
-Use this tool to cancel a query job that is currently executing (i.e. returned `job_complete: false` with a `job_id` from `execute_sql` or `execute_sql_readonly` ). Specify the `job_id` to abort.
-
-`  get_job  `
-
-Get information and status about a BigQuery job.
-
-Use this tool to check the status, statistics, or configuration of a job using its `job_id` .
+  DATA_SPLIT_COL=&#39;timestamp&#39;) AS
+SELECT col1, col2, timestamp, label FROM `my_project.my_dataset.my_table`;</code></pre>
+<p>Queries executed using the <code>execute_sql</code> tool will always have the default job label <code>goog-mcp-server: true</code> automatically set in addition to any custom <code>labels</code> provided in the request. Queries are charged to the project specified in the <code>project_id</code> field.</p>
+<p>Query Execution Behavior: * If the query completes within the synchronous timeout (default 20 seconds or custom <code>timeout_ms</code> ), the tool returns <code>job_complete: true</code> and the initial result rows directly. For fast queries, <code>job_id</code> may be omitted as no persistent background job is created; no further action or polling is needed. * If the query takes longer than <code>timeout_ms</code> , the tool returns <code>job_complete: false</code> and a <code>job_id</code> . In this case, use the <code>get_query_results</code> tool with <code>job_id</code> to poll until <code>job_complete: true</code> , or use <code>cancel_job</code> to abort the running query. * You can optionally specify <code>timeout_ms</code> to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and <code>job_timeout_ms</code> to enforce a hard server-side timeout after which BigQuery automatically terminates the job.</p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_query_results"><code>get_query_results</code></a></td>
+<td><p>Get the results of a BigQuery SQL query job.</p>
+<p>Use this tool ONLY when: 1. A previous <code>execute_sql</code> or <code>execute_sql_readonly</code> call returned <code>job_complete: false</code> with a <code>job_id</code> (poll with this tool until <code>job_complete: true</code> ), OR 2. You need to paginate through additional rows using <code>page_token</code> or <code>start_index</code> for a previously completed job.</p>
+<p>Do NOT call this tool if the query already returned <code>job_complete: true</code> with all rows.</p>
+<p>Supports pagination. Use <code>max_results</code> to limit results and <code>page_token</code> to retrieve the next page of results.</p></td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job"><code>cancel_job</code></a></td>
+<td><p>Cancel a running BigQuery job.</p>
+<p>Use this tool to cancel a query job that is currently executing (i.e. returned <code>job_complete: false</code> with a <code>job_id</code> from <code>execute_sql</code> or <code>execute_sql_readonly</code> ). Specify the <code>job_id</code> to abort.</p></td>
+</tr>
+<tr class="odd">
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_job"><code>get_job</code></a></td>
+<td><p>Get information and status about a BigQuery job.</p>
+<p>Use this tool to check the status, statistics, or configuration of a job using its <code>job_id</code> .</p></td>
+</tr>
+</tbody>
+</table>
 
 ### Get MCP tool specifications
 
 To get the MCP tool specifications for all tools in an MCP server, use the `tools/list` method. The following example demonstrates how to use `curl` to list all tools and their specifications currently available within the MCP server.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-    &quot;method&quot;: &quot;tools/list&quot;,
-    &quot;jsonrpc&quot;: &quot;2.0&quot;,
-    &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+**Curl Request**
+
+```
+curl --location 'https://bigquery.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+    "method": "tools/list",
+    "jsonrpc": "2.0",
+    "id": 1
+}'
+```

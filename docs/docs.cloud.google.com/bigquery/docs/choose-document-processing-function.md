@@ -12,74 +12,28 @@ This document provides a comparison of the document processing functions availab
 
 At a high level, the difference between these functions is as follows:
 
-  - `AI.GENERATE_TEXT` is a good choice for performing natural language processing (NLP) tasks where some of the content resides in documents. This function offers the following benefits:
-    
-      - Lower costs
-      - More language support
-      - Faster throughput
-      - Model tuning capability
-      - Availability of multimodal models
-    
-    For examples of document processing tasks that work best with this approach, see [Explore document processing capabilities with the Gemini API](https://ai.google.dev/gemini-api/docs/document-processing) .
+- `AI.GENERATE_TEXT` is a good choice for performing natural language processing (NLP) tasks where some of the content resides in documents. This function offers the following benefits:
 
-  - `ML.PROCESS_DOCUMENT` is a good choice for performing document processing tasks that require document parsing and a predefined, structured response.
+  - Lower costs
+  - More language support
+  - Faster throughput
+  - Model tuning capability
+  - Availability of multimodal models
+
+  For examples of document processing tasks that work best with this approach, see [Explore document processing capabilities with the Gemini API](https://ai.google.dev/gemini-api/docs/document-processing) .
+
+- `ML.PROCESS_DOCUMENT` is a good choice for performing document processing tasks that require document parsing and a predefined, structured response.
 
 ## Function comparison
 
 Use the following table to compare the `AI.GENERATE_TEXT` and `ML.PROCESS_DOCUMENT` functions:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><code dir="ltr" translate="no">AI.GENERATE_TEXT</code></th>
-<th><code dir="ltr" translate="no">ML.PROCESS_DOCUMENT</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Purpose</td>
-<td><p>Perform any document-related NLP task by passing a prompt to a <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">Gemini or partner model</a> or to an <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open">open model</a> .</p>
-<p>For example, given a financial document for a company, you can retrieve document information by providing a prompt such as <code dir="ltr" translate="no">What is the quarterly revenue for each division?</code> .</p></td>
-<td>Use the <a href="https://docs.cloud.google.com/document-ai">Document AI API</a> to perform specialized document processing for different document types, such as invoices, tax forms, and financial statements. You can also perform document chunking.</td>
-</tr>
-<tr class="even">
-<td>Billing</td>
-<td><p>Incurs BigQuery ML charges for data processed. For more information, see <a href="https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing">BigQuery ML pricing</a> .<br />
-<br />
-Incurs Gemini Enterprise Agent Platform charges for calls to the model. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/pricing">Cost of building and deploying AI models in Agent Platform</a> .</p></td>
-<td>Incurs BigQuery ML charges for data processed. For more information, see <a href="https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing">BigQuery ML pricing</a> .
-<p>Incurs charges for calls to the Document AI API. For more information, see <a href="https://docs.cloud.google.com/document-ai/pricing">Document AI API pricing</a> .</p></td>
-</tr>
-<tr class="odd">
-<td>Requests per minute (RPM)</td>
-<td>Not applicable for Gemini models. Between 25 and 60 for partner models. For more information, see <a href="https://docs.cloud.google.com/bigquery/quotas#requests_per_minute_limits">Requests per minute limits</a> .</td>
-<td>120 RPM per processor type, with an overall limit of 600 RPM per project. For more information, see <a href="https://docs.cloud.google.com/document-ai/quotas#quotas_list">Quotas list</a> .</td>
-</tr>
-<tr class="even">
-<td>Tokens per minute</td>
-<td>Ranges from 8,192 to over 1 million, depending on the model used.</td>
-<td>No token limit. However, this function does have different page limits depending on the processor you use. For more information, see <a href="https://docs.cloud.google.com/document-ai/limits">Limits</a> .</td>
-</tr>
-<tr class="odd">
-<td>Supervised tuning</td>
-<td><a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#languages-gemini">Supervised tuning</a> is supported for some models.</td>
-<td>Not supported.</td>
-</tr>
-<tr class="even">
-<td>Supported languages</td>
-<td>Support varies based on the LLM you choose.</td>
-<td>Language support depends on the document processor type; most only support English. For more information, see <a href="https://docs.cloud.google.com/document-ai/docs/processors-list">Processor list</a> .</td>
-</tr>
-<tr class="odd">
-<td>Supported regions</td>
-<td>Supported in all Generative AI for Agent Platform <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions">regions</a> .</td>
-<td>Supported in the <code dir="ltr" translate="no">EU</code> and <code dir="ltr" translate="no">US</code> multi-regions for all processors. Some processors are also available in certain single regions. For more information, see <a href="https://docs.cloud.google.com/document-ai/docs/regions">Regional and multi-regional support</a> .</td>
-</tr>
-</tbody>
-</table>
+|                           | `AI.GENERATE_TEXT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `ML.PROCESS_DOCUMENT`                                                                                                                                                                                                                                                                                                     |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Purpose                   | Perform any document-related NLP task by passing a prompt to a [Gemini or partner model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) or to an [open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) . For example, given a financial document for a company, you can retrieve document information by providing a prompt such as `What is the quarterly revenue for each division?` . | Use the [Document AI API](https://docs.cloud.google.com/document-ai) to perform specialized document processing for different document types, such as invoices, tax forms, and financial statements. You can also perform document chunking.                                                                              |
+| Billing                   | Incurs BigQuery ML charges for data processed. For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . Incurs Gemini Enterprise Agent Platform charges for calls to the model. If you are using a Gemini 2.0 or greater model, the call is billed at the batch API rate. For more information, see [Cost of building and deploying AI models in Agent Platform](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .                                 | Incurs BigQuery ML charges for data processed. For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . Incurs charges for calls to the Document AI API. For more information, see [Document AI API pricing](https://docs.cloud.google.com/document-ai/pricing) . |
+| Requests per minute (RPM) | Not applicable for Gemini models. Between 25 and 60 for partner models. For more information, see [Requests per minute limits](https://docs.cloud.google.com/bigquery/quotas#requests_per_minute_limits) .                                                                                                                                                                                                                                                                                                                | 120 RPM per processor type, with an overall limit of 600 RPM per project. For more information, see [Quotas list](https://docs.cloud.google.com/document-ai/quotas#quotas_list) .                                                                                                                                         |
+| Tokens per minute         | Ranges from 8,192 to over 1 million, depending on the model used.                                                                                                                                                                                                                                                                                                                                                                                                                                                         | No token limit. However, this function does have different page limits depending on the processor you use. For more information, see [Limits](https://docs.cloud.google.com/document-ai/limits) .                                                                                                                         |
+| Supervised tuning         | [Supervised tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#languages-gemini) is supported for some models.                                                                                                                                                                                                                                                                                                                                                                               | Not supported.                                                                                                                                                                                                                                                                                                            |
+| Supported languages       | Support varies based on the LLM you choose.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Language support depends on the document processor type; most only support English. For more information, see [Processor list](https://docs.cloud.google.com/document-ai/docs/processors-list) .                                                                                                                          |
+| Supported regions         | Supported in all Generative AI for Agent Platform [regions](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#available-regions) .                                                                                                                                                                                                                                                                                                                                                               | Supported in the `EU` and `US` multi-regions for all processors. Some processors are also available in certain single regions. For more information, see [Regional and multi-regional support](https://docs.cloud.google.com/document-ai/docs/regions) .                                                                  |

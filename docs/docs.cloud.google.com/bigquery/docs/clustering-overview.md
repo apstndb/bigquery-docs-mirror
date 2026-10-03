@@ -18,7 +18,7 @@ K-means models use [centroid-based clustering](https://developers.google.com/mac
 
 By using the default settings in the `CREATE MODEL` statements and the inference functions, you can create and use a clustering model even without much ML knowledge. However, having basic knowledge about ML development, and clustering models in particular, helps you optimize both your data and your model to deliver better results. We recommend using the following resources to develop familiarity with ML techniques and processes:
 
-  - [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
-  - [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
-  - [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning)
-  - [Clustering](https://developers.google.com/machine-learning/clustering)
+- [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
+- [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
+- [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning)
+- [Clustering](https://developers.google.com/machine-learning/clustering)

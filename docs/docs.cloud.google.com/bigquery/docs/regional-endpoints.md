@@ -20,50 +20,50 @@ Regional endpoints help to ensure data residency by keeping your at-rest and in-
 
 BigQuery includes multiple APIs. The following APIs are available for use with regional endpoint:
 
-| API                                | URL                                                                 | Reference                                                                                                                                                         |
-| ---------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BigQuery API                       | `bigquery.         LOCATION        .rep.googleapis.com`             | [REST](https://docs.cloud.google.com/bigquery/docs/reference/rest)                                                                                                |
-| BigQuery Storage API               | `bigquerystorage.         LOCATION        .rep.googleapis.com`      | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc)                                                                                          |
-| BigQuery Reservations API          | `bigqueryreservation.         LOCATION        .rep.googleapis.com`  | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest) |
-| BigQuery Migration API             | `bigquerymigration.         LOCATION        .rep.googleapis.com`    | [REST](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest)                                                                                      |
-| BigQuery Data Transfer Service API | `bigquerydatatransfer.         LOCATION        .rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest) |
+| API                                | URL                                                        | Reference                                                                                                                                                         |
+|------------------------------------|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BigQuery API                       | `bigquery. `` LOCATION `` .rep.googleapis.com`             | [REST](https://docs.cloud.google.com/bigquery/docs/reference/rest)                                                                                                |
+| BigQuery Storage API               | `bigquerystorage. `` LOCATION `` .rep.googleapis.com`      | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc)                                                                                          |
+| BigQuery Reservations API          | `bigqueryreservation. `` LOCATION `` .rep.googleapis.com`  | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest) |
+| BigQuery Migration API             | `bigquerymigration. `` LOCATION `` .rep.googleapis.com`    | [REST](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest)                                                                                      |
+| BigQuery Data Transfer Service API | `bigquerydatatransfer. `` LOCATION `` .rep.googleapis.com` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest) |
 
 ## Supported locations
 
 You can use regional endpoints to keep your data within the following locations:
 
-  - Asia-Pacific
-    
-      - Delhi `asia-south2`
-      - Mumbai `asia-south1`
+- Asia-Pacific
 
-  - Europe
-    
-      - Belgium `europe-west1`
-      - Frankfurt `europe-west3`
-      - London `europe-west2`
-      - Milan `europe-west8`
-      - Netherlands `europe-west4`
-      - Paris `europe-west9`
-      - Zürich `europe-west6`
+  - Delhi `asia-south2`
+  - Mumbai `asia-south1`
 
-  - Middle East
-    
-      - Dammam `me-central2`
+- Europe
 
-  - Americas
-    
-      - Columbus, Ohio `us-east5`
-      - Dallas `us-south1`
-      - Iowa `us-central1`
-      - Las Vegas `us-west4`
-      - Los Angeles `us-west2`
-      - Montréal `northamerica-northeast1`
-      - Northern Virginia `us-east4`
-      - Oregon `us-west1`
-      - Salt Lake City `us-west3`
-      - South Carolina `us-east1`
-      - Toronto `northamerica-northeast2`
+  - Belgium `europe-west1`
+  - Frankfurt `europe-west3`
+  - London `europe-west2`
+  - Milan `europe-west8`
+  - Netherlands `europe-west4`
+  - Paris `europe-west9`
+  - Zürich `europe-west6`
+
+- Middle East
+
+  - Dammam `me-central2`
+
+- Americas
+
+  - Columbus, Ohio `us-east5`
+  - Dallas `us-south1`
+  - Iowa `us-central1`
+  - Las Vegas `us-west4`
+  - Los Angeles `us-west2`
+  - Montréal `northamerica-northeast1`
+  - Northern Virginia `us-east4`
+  - Oregon `us-west1`
+  - Salt Lake City `us-west3`
+  - South Carolina `us-east1`
+  - Toronto `northamerica-northeast2`
 
 ## Supported operations
 
@@ -75,15 +75,15 @@ For example, when you use the regional endpoint `https://bigquery.us-central1.re
 
 Regional endpoints cannot be used to perform the following operations:
 
-  - Operations that access or mutate resources outside of the location specified by the endpoint
-  - Copying, replicating, or rewriting resources from one location to another.
+- Operations that access or mutate resources outside of the location specified by the endpoint
+- Copying, replicating, or rewriting resources from one location to another.
 
 Keep in mind the following restrictions when using regional endpoints:
 
-  - Regional endpoints don't support [mutual Transport Layer Security (mTLS)](https://docs.cloud.google.com/chrome-enterprise-premium/docs/understand-mtls) .
-  - Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](https://docs.cloud.google.com/resource-manager/docs/organization-policy/defining-locations) .
-  - [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) and [cross-region table copying](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
-  - Regional endpoints don't support running [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) .
+- Regional endpoints don't support [mutual Transport Layer Security (mTLS)](https://docs.cloud.google.com/chrome-enterprise-premium/docs/understand-mtls) .
+- Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](https://docs.cloud.google.com/resource-manager/docs/organization-policy/defining-locations) .
+- [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) and [cross-region table copying](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
+- Regional endpoints don't support running [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) .
 
 ## Tools for using regional endpoints
 
@@ -91,17 +91,17 @@ Keep in mind the following restrictions when using regional endpoints:
 
 To access BigQuery resources in a manner that's compliant with data residency or sovereignty requirements, use the jurisdictional Google Cloud console URLs:
 
-| Resource                   | URL                                                                                                                                                                                                               |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dataset list for a project | ` https://console.            JURISDICTION           .cloud.google.com/bigquery?project=            PROJECT_ID           `                                                                                        |
-| Table list for a dataset   | `https://console.            JURISDICTION           .cloud.google.com/bigquery/projects/            PROJECT_ID           /datasets/            DATASET_NAME           /tables`                                    |
-| Details for a table        | ` https://console.            JURISDICTION           .cloud.google.com/bigquery/projects/            PROJECT_ID           /datasets/            DATASET_NAME           /tables/            TABLE_NAME           ` |
+| Resource                   | URL                                                                                                                                              |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Dataset list for a project | `https://console. `` JURISDICTION `` .cloud.google.com/bigquery?project= `` PROJECT_ID`                                                          |
+| Table list for a dataset   | `https://console. `` JURISDICTION `` .cloud.google.com/bigquery/projects/ `` PROJECT_ID `` /datasets/ `` DATASET_NAME `` /tables`                |
+| Details for a table        | `https://console. `` JURISDICTION `` .cloud.google.com/bigquery/projects/ `` PROJECT_ID `` /datasets/ `` DATASET_NAME `` /tables/ `` TABLE_NAME` |
 
-Replace `  JURISDICTION  ` with one of the following values:
+Replace `JURISDICTION` with one of the following values:
 
-  - `eu` if the resource is located in the European Union
-  - `sa` if the resource is located in the Kingdom of Saudi Arabia
-  - `us` if the resource is located in the United States
+- `eu` if the resource is located in the European Union
+- `sa` if the resource is located in the Kingdom of Saudi Arabia
+- `us` if the resource is located in the United States
 
 > **Note:** You cannot use the jurisdictional Google Cloud console to upload files in `eu` , `sa` , or `us` .
 
@@ -112,16 +112,20 @@ To configure the Google Cloud CLI for use with regional endpoints, complete the 
 1.  Make sure you're using the Google Cloud CLI 402.0.0 or newer.
 
 2.  Set the `api_endpoint_overrides/bigquery` property to the regional endpoint you want to use:
-    
-        gcloud config set api_endpoint_overrides/bigquery https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/
-    
+
+    ```
+    gcloud config set api_endpoint_overrides/bigquery https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/
+    ```
+
     Alternatively, you can set the `CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY` environment variable to the endpoint:
-    
-        CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY=https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/ gcloud  alpha bq  datasets list
+
+    ```
+    CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY=https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/ gcloud  alpha bq  datasets list
+    ```
 
 ### REST APIs
 
-For REST API, instead of sending a REST request to a [service endpoint](https://docs.cloud.google.com/bigquery/docs/reference/rest#service-endpoint) , send the request to the regional endpoint in the following format: `https://bigquery. LOCATION .rep.googleapis.com` .
+For REST API, instead of sending a REST request to a [service endpoint](https://docs.cloud.google.com/bigquery/docs/reference/rest#service-endpoint) , send the request to the regional endpoint in the following format: `https://bigquery. `` LOCATION `` .rep.googleapis.com` .
 
 ## Restrict global API endpoint usage
 

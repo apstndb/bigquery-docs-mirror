@@ -12,10 +12,10 @@ BigQuery DataFrames helps you analyze and transform data in BigQuery using a pan
 
 This document describes the following ways to optimize performance:
 
-  - [Use partial ordering mode](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode) .
-  - [Cache results after expensive operations](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#cache) .
-  - [Preview data by using the `peek()` method](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#preview-peek) .
-  - [Defer the `repr()` data retrieval](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#defer) .
+- [Use partial ordering mode](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode) .
+- [Cache results after expensive operations](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#cache) .
+- [Preview data by using the `peek()` method](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#preview-peek) .
+- [Defer the `repr()` data retrieval](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#defer) .
 
 ## Use partial ordering mode
 
@@ -35,16 +35,20 @@ With both partial and strict ordering modes, you pay for the BigQuery resources 
 
 To use partial ordering, set the `ordering_mode` property to `partial` before performing any other operation with BigQuery DataFrames, as shown in the following code sample:
 
-    import bigframes.pandas as bpd
-    
-    bpd.options.bigquery.ordering_mode = "partial"
+```
+import bigframes.pandas as bpd
+
+bpd.options.bigquery.ordering_mode = "partial"
+```
 
 Partial ordering mode prevents implicit joins of unrelated BigQuery DataFrames objects because it lacks a sequential index. Instead, you must explicitly call the `DataFrame.merge` method to join two BigQuery DataFrames objects that derive from different table expressions.
 
 The `Series.unique()` and `Series.drop_duplicates()` features don't work with partial ordering mode. Instead, use the `groupby` method to find unique values, as shown in the following example:
 
-    # Avoid order dependency by using groupby instead of drop_duplicates.
-    unique_col = df.groupby(["column"], as_index=False).size().drop(columns="size")
+```
+# Avoid order dependency by using groupby instead of drop_duplicates.
+unique_col = df.groupby(["column"], as_index=False).size().drop(columns="size")
+```
 
 With partial ordering mode, the output of the `DataFrame.head(n)` and `Series.head(n)` functions might not be the same every time you run them. To download a small, random sample of the data, use the [`DataFrame.peek()` or `Series.peek()` methods](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#preview-peek) .
 
@@ -78,15 +82,17 @@ BigQuery DataFrames stores operations locally and defers running queries until c
 
 To avoid repeating costly operations, save intermediate results with the `cache()` method, as shown in the following example:
 
-    # Assume you have 3 large dataframes "users", "group" and "transactions"
-    
-    # Expensive join operations
-    final_df = users.join(groups).join(transactions)
-    final_df.cache()
-    # Subsequent derived results will reuse the cached join
-    print(final_df.peek())
-    print(len(final_df[final_df["completed"]]))
-    print(final_df.groupby("group_id")["amount"].mean().peek(30))
+```
+# Assume you have 3 large dataframes "users", "group" and "transactions"
+
+# Expensive join operations
+final_df = users.join(groups).join(transactions)
+final_df.cache()
+# Subsequent derived results will reuse the cached join
+print(final_df.peek())
+print(len(final_df[final_df["completed"]]))
+print(final_df.groupby("group_id")["amount"].mean().peek(30))
+```
 
 This method creates a temporary BigQuery table to store your results. You are charged for the storage of this temporary table in BigQuery.
 
@@ -94,18 +100,20 @@ This method creates a temporary BigQuery table to store your results. You are ch
 
 BigQuery DataFrames offers two API methods to preview data:
 
-  - `peek(n)` returns `n` rows of data, where `n` is the number of rows.
-  - `head(n)` returns the first `n` rows of data, depending on the context, where `n` is the number of rows.
+- `peek(n)` returns `n` rows of data, where `n` is the number of rows.
+- `head(n)` returns the first `n` rows of data, depending on the context, where `n` is the number of rows.
 
 Use the `head()` method only when the order of data is important, for example, when you want the five largest values in a column. In other cases, use the `peek()` method for more efficient data retrieval, as shown in the following code sample:
 
-    import bigframes.pandas as bpd
-    
-    # Read the "Penguins" table into a dataframe
-    df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
-    
-    # Preview 3 random rows
-    df.peek(3)
+```
+import bigframes.pandas as bpd
+
+# Read the "Penguins" table into a dataframe
+df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
+
+# Preview 3 random rows
+df.peek(3)
+```
 
 You can also use the `peek()` method to download a small, random sample of data while using [partial ordering mode](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#partial-enable) .
 
@@ -115,15 +123,17 @@ You can call the `repr()` method in BigQuery DataFrames with [notebooks](https:/
 
 To prevent the `repr()` method from retrieving data, set the `repr_mode` attribute to `"deferred"` , as shown in the following example:
 
-    import bigframes.pandas as bpd
-    
-    bpd.options.display.repr_mode = "deferred"
+```
+import bigframes.pandas as bpd
+
+bpd.options.display.repr_mode = "deferred"
+```
 
 In the deferred mode, you can only preview your data with explicit [`peek()` and `head()` calls](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#preview-peek) .
 
 ## What's next
 
-  - Learn about [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
-  - Learn how to [visualize BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
-  - Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .
-  - View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.
+- Learn about [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
+- Learn how to [visualize BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
+- Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .
+- View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.

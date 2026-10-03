@@ -14,10 +14,10 @@ BigQuery stores data in columnar format. Column-oriented databases are optimized
 
 BigQuery provides details about the storage consumption of your resources. To view the table storage metadata, query the following `INFORMATION_SCHEMA` views:
 
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage)
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization)
 
 ## Cluster table data
 
@@ -47,10 +47,12 @@ If your tables are partitioned by date, the dataset's default table expiration a
 
 For example, the following command expires partitions after three days:
 
-    bq mk \
-    --time_partitioning_type=DAY \
-    --time_partitioning_expiration=259200 \
-    project_id:dataset.table
+```
+bq mk \
+--time_partitioning_type=DAY \
+--time_partitioning_expiration=259200 \
+project_id:dataset.table
+```
 
 ## Aggregate long-term data
 
@@ -60,6 +62,6 @@ In many cases, details contained in transactional or row-level data are useful i
 
 ## What's next
 
-  - Learn how to [optimize cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
-  - Learn how to [optimize query](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
-  - Learn how to [optimize functions](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-functions) .
+- Learn how to [optimize cost](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
+- Learn how to [optimize query](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .
+- Learn how to [optimize functions](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-functions) .

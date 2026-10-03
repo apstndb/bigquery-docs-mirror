@@ -18,47 +18,47 @@ The ResNet 50 model input takes a tensor of [`DType`](https://www.tensorflow.org
 
 ## Required permissions
 
-  - To create the dataset, you need the `bigquery.datasets.create` permission.
+- To create the dataset, you need the `bigquery.datasets.create` permission.
 
-  - To create the connection resource, you need the following permissions:
-    
-      - `bigquery.connections.create`
-      - `bigquery.connections.get`
+- To create the connection resource, you need the following permissions:
 
-  - To grant permissions to the connection's service account, you need the following permission:
-    
-      - `resourcemanager.projects.setIamPolicy`
+  - `bigquery.connections.create`
+  - `bigquery.connections.get`
 
-  - To create the object table, you need the following permissions:
-    
-      - `bigquery.tables.create`
-      - `bigquery.tables.update`
-      - `bigquery.connections.delegate`
+- To grant permissions to the connection's service account, you need the following permission:
 
-  - To create the bucket, you need the `storage.buckets.create` permission.
+  - `resourcemanager.projects.setIamPolicy`
 
-  - To upload the model to Cloud Storage, you need the `storage.objects.create` and `storage.objects.get` permissions.
+- To create the object table, you need the following permissions:
 
-  - To load the model into BigQuery ML, you need the following permissions:
-    
-      - `bigquery.jobs.create`
-      - `bigquery.models.create`
-      - `bigquery.models.getData`
-      - `bigquery.models.updateData`
+  - `bigquery.tables.create`
+  - `bigquery.tables.update`
+  - `bigquery.connections.delegate`
 
-  - To run inference, you need the following permissions:
-    
-      - `bigquery.tables.getData` on the object table
-      - `bigquery.models.getData` on the model
-      - `bigquery.jobs.create`
+- To create the bucket, you need the `storage.buckets.create` permission.
+
+- To upload the model to Cloud Storage, you need the `storage.objects.create` and `storage.objects.get` permissions.
+
+- To load the model into BigQuery ML, you need the following permissions:
+
+  - `bigquery.jobs.create`
+  - `bigquery.models.create`
+  - `bigquery.models.getData`
+  - `bigquery.models.updateData`
+
+- To run inference, you need the following permissions:
+
+  - `bigquery.tables.getData` on the object table
+  - `bigquery.models.getData` on the model
+  - `bigquery.jobs.create`
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - **BigQuery** : You incur storage costs for the object table you create in BigQuery.
-  - **BigQuery ML** : You incur costs for the model you create and the inference you perform in BigQuery ML.
-  - **Cloud Storage** : You incur costs for the objects you store in Cloud Storage.
+- **BigQuery** : You incur storage costs for the object table you create in BigQuery.
+- **BigQuery ML** : You incur costs for the model you create and the inference you perform in BigQuery ML.
+- **Cloud Storage** : You incur costs for the objects you store in Cloud Storage.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -85,20 +85,24 @@ Create a dataset named `resnet_inference_test` :
 1.  Go to the **BigQuery** page.
 
 2.  In the **Editor** pane, run the following SQL statement:
-    
-        CREATE SCHEMA `PROJECT_ID.resnet_inference_test`;
-    
-    Replace `  PROJECT_ID  ` with your project ID.
+
+    ```
+    CREATE SCHEMA `PROJECT_ID.resnet_inference_test`;
+    ```
+
+    Replace `PROJECT_ID` with your project ID.
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
 
 2.  Run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
-    
-        bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
-    
-    Replace `  PROJECT_ID  ` with your project ID.
+
+    ```
+    bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
+    ```
+
+    Replace `PROJECT_ID` with your project ID.
 
 ## Create a connection
 
@@ -109,17 +113,17 @@ Create a connection named `lake-connection` :
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click add **Add data** .
-    
+
     The **Add data** dialog opens.
 
 4.  In the **Filter By** pane, in the **Data Source Type** section, select **Databases** .
-    
+
     Alternatively, in the **Search for data sources** field, you can enter `Vertex AI` .
 
 5.  In the **Featured data sources** section, click **Vertex AI** .
@@ -137,13 +141,17 @@ Create a connection named `lake-connection` :
 ### bq
 
 1.  In Cloud Shell, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) to create the connection:
-    
-        bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
-        lake-connection
+
+    ```
+    bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
+    lake-connection
+    ```
 
 2.  Run the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to retrieve information about the connection:
-    
-        bq show --connection us.lake-connection
+
+    ```
+    bq show --connection us.lake-connection
+    ```
 
 3.  From the `properties` column, copy the value of the `serviceAccountId` property and save it somewhere. You need this information to [grant permissions](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-resnet#grant-permissions) to the connection's service account.
 
@@ -158,7 +166,7 @@ Create a connection named `lake-connection` :
 1.  Go to the **IAM & Admin** page.
 
 2.  Click **Grant Access** .
-    
+
     The **Add principals** dialog opens.
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
@@ -171,11 +179,13 @@ Create a connection named `lake-connection` :
 
 In Cloud Shell, run the [`gcloud storage buckets add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/add-iam-policy-binding) :
 
-    gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
-    --member=serviceAccount:MEMBER \
-    --role=roles/storage.objectViewer
+```
+gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
+--member=serviceAccount:MEMBER \
+--role=roles/storage.objectViewer
+```
 
-Replace `  MEMBER  ` with the service account ID that you copied earlier. Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
+Replace `MEMBER` with the service account ID that you copied earlier. Replace `BUCKET_NAME` with the name of the bucket you previously created.
 
 For more information, see [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) .
 
@@ -190,22 +200,26 @@ Create an object table named `vision_images` based on the image files in the pub
 1.  Go to the **BigQuery** page.
 
 2.  In the **Editor** pane, run the following SQL statement:
-    
-        CREATE EXTERNAL TABLE resnet_inference_test.vision_images
-        WITH CONNECTION `us.lake-connection`
-        OPTIONS(
-          object_metadata = 'SIMPLE',
-          uris = ['gs://cloud-samples-data/vision/*.jpg']
-        );
+
+    ```
+    CREATE EXTERNAL TABLE resnet_inference_test.vision_images
+    WITH CONNECTION `us.lake-connection`
+    OPTIONS(
+      object_metadata = 'SIMPLE',
+      uris = ['gs://cloud-samples-data/vision/*.jpg']
+    );
+    ```
 
 ### bq
 
 In Cloud Shell, run the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) to create the connection:
 
-    bq mk --table \
-    --external_table_definition='gs://cloud-samples-data/vision/*.jpg@us.lake-connection' \
-    --object_metadata=SIMPLE \
-    resnet_inference_test.vision_images
+```
+bq mk --table \
+--external_table_definition='gs://cloud-samples-data/vision/*.jpg@us.lake-connection' \
+--object_metadata=SIMPLE \
+resnet_inference_test.vision_images
+```
 
 ## Upload the model to Cloud Storage
 
@@ -219,13 +233,15 @@ Get the model files and make them available in Cloud Storage:
 1.  Go to the **BigQuery** page.
 
 2.  In the **Editor** pane, run the following SQL statement:
-    
-        CREATE MODEL `resnet_inference_test.resnet`
-        OPTIONS(
-          model_type = 'TENSORFLOW',
-          model_path = 'gs://BUCKET_NAME/*');
-    
-    Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
+
+    ```
+    CREATE MODEL `resnet_inference_test.resnet`
+    OPTIONS(
+      model_type = 'TENSORFLOW',
+      model_path = 'gs://BUCKET_NAME/*');
+    ```
+
+    Replace `BUCKET_NAME` with the name of the bucket you previously created.
 
 ## Inspect the model
 
@@ -234,7 +250,7 @@ Inspect the uploaded model to see what its input and output fields are:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `resnet_inference_test` dataset.
@@ -256,39 +272,41 @@ Run inference on the `vision_images` object table using the `resnet` model:
 1.  Go to the **BigQuery** page.
 
 2.  In the **Editor** pane, run the following SQL statement:
-    
-        SELECT *
-        FROM ML.PREDICT(
-          MODEL `resnet_inference_test.resnet`,
-          (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS input_1
-          FROM resnet_inference_test.vision_images)
-        );
-    
+
+    ```
+    SELECT *
+    FROM ML.PREDICT(
+      MODEL `resnet_inference_test.resnet`,
+      (SELECT uri, ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data), 224, 224, FALSE) AS input_1
+      FROM resnet_inference_test.vision_images)
+    );
+    ```
+
     The results should look similar to the following:
-    
-        -------------------------------------------------------------------------------------------------------------------------------------
-        | activation_49           | uri                                                                                           | input_1 |
-        —------------------------------------------------------------------------------------------------------------------------------------
-        | 1.0254175464297077e-07  | gs://cloud-samples-data/vision/automl_classification/flowers/daisy/21652746_cc379e0eea_m.jpg  | 0.0     |
-        —------------------------------------------------------------------------------------------------------------------------------------
-        | 2.1671139620593749e-06  |                                                                                               | 0.0     |
-        —--------------------------                                                                                               -----------
-        | 8.346052027263795e-08   |                                                                                               | 0.0     |
-        —--------------------------                                                                                               -----------
-        | 1.159310958342985e-08   |                                                                                               | 0.0     |
-        —------------------------------------------------------------------------------------------------------------------------------------
+
+    ```
+    -------------------------------------------------------------------------------------------------------------------------------------
+    | activation_49           | uri                                                                                           | input_1 |
+    —------------------------------------------------------------------------------------------------------------------------------------
+    | 1.0254175464297077e-07  | gs://cloud-samples-data/vision/automl_classification/flowers/daisy/21652746_cc379e0eea_m.jpg  | 0.0     |
+    —------------------------------------------------------------------------------------------------------------------------------------
+    | 2.1671139620593749e-06  |                                                                                               | 0.0     |
+    —--------------------------                                                                                               -----------
+    | 8.346052027263795e-08   |                                                                                               | 0.0     |
+    —--------------------------                                                                                               -----------
+    | 1.159310958342985e-08   |                                                                                               | 0.0     |
+    —------------------------------------------------------------------------------------------------------------------------------------
+    ```
 
 ## Clean up
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.

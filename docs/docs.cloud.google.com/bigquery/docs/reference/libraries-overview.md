@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery APIs and libraries overview
 
-This page provides an overview of the various APIs associated with BigQuery. While you can use the APIs directly by making raw requests to the server, client libraries let you code in your preferred language and provide simplifications that significantly reduce the amount of code you need to write. BigQuery supports client libraries in C\#, Go, Java, Node.js, PHP, Python, and Ruby. For a more general overview of client libraries within Google Cloud, see [Client libraries explained](https://docs.cloud.google.com/apis/docs/client-libraries-explained) .
+This page provides an overview of the various APIs associated with BigQuery. While you can use the APIs directly by making raw requests to the server, client libraries let you code in your preferred language and provide simplifications that significantly reduce the amount of code you need to write. BigQuery supports client libraries in C#, Go, Java, Node.js, PHP, Python, and Ruby. For a more general overview of client libraries within Google Cloud, see [Client libraries explained](https://docs.cloud.google.com/apis/docs/client-libraries-explained) .
 
 For examples of using the various BigQuery libraries and APIs, see the [BigQuery Code Samples](https://docs.cloud.google.com/bigquery/docs/samples) .
 
@@ -20,45 +20,45 @@ See [Pricing](https://cloud.google.com/bigquery/pricing) for more information ab
 
 This is the main API that provides resources for creating, modifying, and deleting core resources such as datasets, tables, jobs, and routines.
 
-  - For information about installation and usage, see [BigQuery API client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
-  - For related quota information, see [BigQuery API quotas](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
+- For information about installation and usage, see [BigQuery API client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
+- For related quota information, see [BigQuery API quotas](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
 
 For links to the reference documentation and source code, select a language:
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.V2)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.V2)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview)
-  - [Source Code](https://github.com/googleapis/java-bigquery)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview)
+- [Source Code](https://github.com/googleapis/java-bigquery)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/nodejs-bigquery)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/nodejs-bigquery)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQuery)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQuery)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery)
 
 ## BigQuery Data Policy API
 
@@ -68,33 +68,33 @@ For information about this API and its usage, see [BigQuery Data Policy API](htt
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/datapolicies/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/datapolicies/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.DataPolicies.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.DataPolicies.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.DataPolicies.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.DataPolicies.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/datapolicies/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/datapolicies)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/datapolicies/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/datapolicies)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerydatapolicy/latest/overview)
-  - [Source Code](https://github.com/googleapis/java-bigquerydatapolicy)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerydatapolicy/latest/overview)
+- [Source Code](https://github.com/googleapis/java-bigquerydatapolicy)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-datapolicies/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryDataPolicies)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-datapolicies/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryDataPolicies)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_policies/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_policies)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_policies/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_policies)
 
 ## BigQuery Connection API
 
@@ -104,43 +104,43 @@ For more information about installation and usage, see [BigQuery Connection clie
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/connection/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/connection/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Connection.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Connection.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Connection.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Connection.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/connection/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/connection)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/connection/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/connection)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigqueryconnection/latest/overview)
-  - [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigqueryconnection)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigqueryconnection/latest/overview)
+- [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigqueryconnection)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-connection/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-connection)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-connection/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-connection)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-connection/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryConnection)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-connection/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryConnection)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigqueryconnection/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery-connection)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigqueryconnection/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery-connection)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-connection/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-connection)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-connection/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-connection)
 
 ## BigQuery Migration API
 
@@ -150,43 +150,43 @@ For more information about installation and usage, see [BigQuery Migration clien
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/migration/v2)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/migration/v2)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Migration.V2/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Migration.V2)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Migration.V2/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Migration.V2)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/migration/apiv2)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/migration)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/migration/apiv2)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/migration)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerymigration/latest/overview)
-  - [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquerymigration)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerymigration/latest/overview)
+- [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquerymigration)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-migration/latest)
-  - [Source Code](https://github.com/googleapis/nodejs-bigquery-migration)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-migration/latest)
+- [Source Code](https://github.com/googleapis/nodejs-bigquery-migration)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-migration/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryMigration)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-migration/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryMigration)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerymigration/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery-migration)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerymigration/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery-migration)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-migration)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-migration)
 
 ## BigQuery Storage API
 
@@ -196,43 +196,43 @@ For more information about installation and usage, see [BigQuery Storage client 
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/storage/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/storage/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Storage.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Storage.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Storage.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Storage.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/storage/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/storage)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/storage/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/storage)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/overview)
-  - [Source Code](https://github.com/googleapis/java-bigquerystorage)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerystorage/latest/overview)
+- [Source Code](https://github.com/googleapis/java-bigquerystorage)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-storage/latest)
-  - [Source Code](https://github.com/googleapis/nodejs-bigquery-storage)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-storage/latest)
+- [Source Code](https://github.com/googleapis/nodejs-bigquery-storage)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-storage/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryStorage)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-storage/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryStorage)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-python)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerystorage/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-python)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-storage/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-storage)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-storage/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-storage)
 
 ## BigQuery Reservation API
 
@@ -242,43 +242,43 @@ For more information about installation and usage, see [BigQuery Reservation cli
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/reservation/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/reservation/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Reservation.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Reservation.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.Reservation.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.Reservation.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/reservation/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/reservation/apiv1)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/reservation/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/reservation/apiv1)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigqueryreservation/latest/overview)
-  - [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigqueryreservation)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigqueryreservation/latest/overview)
+- [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigqueryreservation)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-reservation/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-reservation)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-reservation/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-reservation)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-reservation/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryReservation)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-reservation/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryReservation)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery-reservation)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigqueryreservation/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery-reservation)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-reservation)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-reservation)
 
 ## BigQuery sharing (formerly Analytics Hub)
 
@@ -288,43 +288,43 @@ For more information about this API and its usage, see [Analytics Hub API](https
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/analyticshub/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/analyticshub/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.AnalyticsHub.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.AnalyticsHub.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.AnalyticsHub.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.AnalyticsHub.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/analyticshub/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/analyticshub/apiv1)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/analyticshub/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/analyticshub/apiv1)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery-data-exchange/latest/overview)
-  - [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquery-data-exchange)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery-data-exchange/latest/overview)
+- [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquery-data-exchange)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-data-exchange/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-dataexchange)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-data-exchange/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-dataexchange)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-analyticshub/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryAnalyticsHub)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery-analyticshub/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryAnalyticsHub)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/analyticshub/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery-analyticshub)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/analyticshub/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery-analyticshub)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_exchange/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_exchange)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_exchange/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_exchange)
 
 ## BigQuery Data Transfer Service API
 
@@ -336,40 +336,40 @@ For more information about installation and usage, see [BigQuery Data Transfer S
 
 ### C++
 
-  - [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/datatransfer/v1)
+- [API Reference Documentation](https://docs.cloud.google.com/cpp/docs/reference/bigquery/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/bigquery/datatransfer/v1)
 
-### C\#
+### C#
 
-  - [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.DataTransfer.V1/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.DataTransfer.V1)
+- [API Reference Documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.DataTransfer.V1/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-dotnet/tree/main/apis/Google.Cloud.BigQuery.DataTransfer.V1)
 
 ### Go
 
-  - [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/datatransfer/apiv1)
-  - [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/datatransfer/apiv1)
+- [API Reference Documentation](https://docs.cloud.google.com/go/docs/reference/cloud.google.com/go/bigquery/latest/datatransfer/apiv1)
+- [Source Code](https://github.com/googleapis/google-cloud-go/tree/main/bigquery/datatransfer/apiv1)
 
 ### Java
 
-  - [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerydatatransfer/latest/overview)
-  - [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquerydatatransfer)
+- [API Reference Documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquerydatatransfer/latest/overview)
+- [Source Code](https://github.com/googleapis/google-cloud-java/tree/main/java-bigquerydatatransfer)
 
 ### Node.js
 
-  - [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datatransfer)
+- [API Reference Documentation](https://docs.cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-datatransfer)
 
 ### PHP
 
-  - [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquerydatatransfer/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryDataTransfer)
+- [API Reference Documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquerydatatransfer/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-php/tree/main/BigQueryDataTransfer)
 
 ### Python
 
-  - [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest)
-  - [Source Code](https://github.com/googleapis/python-bigquery-datatransfer)
+- [API Reference Documentation](https://docs.cloud.google.com/python/docs/reference/bigquerydatatransfer/latest)
+- [Source Code](https://github.com/googleapis/python-bigquery-datatransfer)
 
 ### Ruby
 
-  - [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer/latest)
-  - [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_transfer)
+- [API Reference Documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer/latest)
+- [Source Code](https://github.com/googleapis/google-cloud-ruby/tree/main/google-cloud-bigquery-data_transfer)

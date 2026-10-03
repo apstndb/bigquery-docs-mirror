@@ -22,9 +22,9 @@ For additional geo-redundancy, you can replicate any dataset. BigQuery creates a
 
 If you replicate a dataset, BigQuery stores the data in the region that you specify.
 
-  - **Primary region.** When you first create a dataset, BigQuery places the dataset in the primary region.
+- **Primary region.** When you first create a dataset, BigQuery places the dataset in the primary region.
 
-  - **Secondary region.** When you add a dataset replica, BigQuery places the replica in the secondary region.
+- **Secondary region.** When you add a dataset replica, BigQuery places the replica in the secondary region.
 
 Initially, the replica in the primary region is the *primary replica* , and the replica in the secondary region is the *secondary replica* .
 
@@ -48,8 +48,8 @@ Because of this behavior, frequent DML operations on replicated data can lead to
 
 You are billed for the following for replicated datasets:
 
-  - **Storage.** Storage bytes in the secondary region are billed as a separate copy in the secondary region. Tables and partitions in [long-term storage](https://cloud.google.com/bigquery/pricing#storage) aren't reset to active storage in the secondary replica.
-  - **Data replication.** For more information on how you are billed for data replication, see [Data replication pricing](https://cloud.google.com/bigquery/pricing#data_replication) .
+- **Storage.** Storage bytes in the secondary region are billed as a separate copy in the secondary region. Tables and partitions in [long-term storage](https://cloud.google.com/bigquery/pricing#storage) aren't reset to active storage in the secondary replica.
+- **Data replication.** For more information on how you are billed for data replication, see [Data replication pricing](https://cloud.google.com/bigquery/pricing#data_replication) .
 
 Data replication is managed by BigQuery and doesn't use your [slot resources](https://docs.cloud.google.com/bigquery/docs/slots) . You are billed for data replication separately.
 
@@ -79,168 +79,73 @@ Querying data on Cloud Storage requires that the Cloud Storage bucket is co-loca
 
 BigQuery dataset replication is subject to the following limitations:
 
-  - Streaming data written to the primary replica from the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) or the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) , which is then replicated into the secondary replica, is best-effort and may see high replication delay.
-  - Streaming upserts written to the primary replica from [Datastream](https://cloud.google.com/datastream-for-bigquery) or [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , which is then replicated into the secondary replica, is best-effort and may see high replication delay. Once replicated, the upserts in the secondary replica are merged into the secondary replica's table baseline as per the table's configured [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#manage_table_staleness) value.
-  - Cross-region replication is not supported for tables with [fine-grained DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml) enabled. While the system blocks the creation of replicated datasets that already contain such tables, it does not block enabling fine-grained DML on tables within existing replicated datasets. However, doing so may result in incorrect query results in the secondary for the fine-grained DML enabled table.
-  - Replication and switchover can be managed through the Google Cloud console or SQL [data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
-  - You are limited to one replica of each dataset for each region or multi-region. You cannot create two secondary replicas of the same dataset in the same destination region.
-  - Resources within replicas are subject to the limitations as described in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
-  - [Policy tags](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations) and associated data policies are not replicated to the secondary replica. Any query running outside of the primary region fails if there are policy tags on columns referenced in the query, unless the user has the `roles/datacatalog.categoryFineGrainedReader` role at the project, folder, or organization level. Promoting a replica doesn't automatically fix these bindings; you must update them to point to a valid taxonomy in the new primary region.
-  - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) is only available in the secondary replica after the creation of the secondary replica is completed.
-  - The destination region size limit (in logical bytes) for enabling cross-region replication on a dataset is 10 PB for `us` and `eu` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) and 500 TB for other [regions](https://docs.cloud.google.com/bigquery/docs/locations#regions) by default. These limits are configurable. For more information, reach out to [Google Cloud Support](https://cloud.google.com/support-hub) .
-  - The quota applies to logical resources.
-  - You can only replicate a dataset with fewer than 100,000 tables.
-  - You are limited to a maximum of 4 replicas added (then dropped) to the same region per dataset per day.
-  - You are limited by [bandwidth](https://docs.cloud.google.com/bigquery/quotas#bandwidth_limits) .
-  - Tables with [Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) (CMEK) applied are not queryable in the secondary region if the `replica_kms_key` value is not configured.
-  - BigLake tables are not supported.
-  - You can't replicate external or federated datasets.
-  - [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) aren't supported.
-  - You can't configure the following region pairs if you are configuring data replication for [disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) :
-      - `us-central1` - `us` multi-region
-      - `us-west1` - `us` multi-region
-      - `eu-west1` - `eu` multi-region
-      - `eu-west4` - `eu` multi-region
-  - Routine-level access controls can't be replicated, but you can replicate dataset-level access controls for routines.
-  - The following behavior applies to search indexes:
-      - Only the search index metadata is replicated to the secondary region, not index data itself.
-      - If you switch over to the replica, then your index is deleted from the previous primary region and regenerated in the promoted region.
-      - If you switch back and forth within 8 hours, then your index generation is delayed by 8 hours.
-  - [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to a new primary location if you promote a secondary replica. They remain bound to the region specified at the time of their creation.
-      - If the original primary replica becomes a read-only secondary replica after promotion, scheduled queries that attempt to write data to the dataset fail.
-      - If the original primary region becomes unavailable, scheduled queries fail, even if they only perform read operations.
-      - To ensure scheduled queries continue running against the promoted primary replica, you must manually recreate them in the new primary location.
-  - You can't replicate hidden datasets.
-  - Cross-region replication isn't supported for datasets that contain [conditional IAM policies](https://docs.cloud.google.com/bigquery/docs/conditions) . To identify if this error is disrupting your replication, you can check the `sync_status` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
+- Streaming data written to the primary replica from the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) or the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) , which is then replicated into the secondary replica, is best-effort and may see high replication delay.
+- Streaming upserts written to the primary replica from [Datastream](https://cloud.google.com/datastream-for-bigquery) or [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , which is then replicated into the secondary replica, is best-effort and may see high replication delay. Once replicated, the upserts in the secondary replica are merged into the secondary replica's table baseline as per the table's configured [`max_staleness`](https://docs.cloud.google.com/bigquery/docs/change-data-capture#manage_table_staleness) value.
+- Cross-region replication is not supported for tables with [fine-grained DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml) enabled. While the system blocks the creation of replicated datasets that already contain such tables, it does not block enabling fine-grained DML on tables within existing replicated datasets. However, doing so may result in incorrect query results in the secondary for the fine-grained DML enabled table.
+- Replication and switchover can be managed through the Google Cloud console or SQL [data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
+- You are limited to one replica of each dataset for each region or multi-region. You cannot create two secondary replicas of the same dataset in the same destination region.
+- Resources within replicas are subject to the limitations as described in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
+- [Policy tags](https://docs.cloud.google.com/bigquery/docs/managing-policy-tags-across-locations) and associated data policies are not replicated to the secondary replica. Any query running outside of the primary region fails if there are policy tags on columns referenced in the query, unless the user has the `roles/datacatalog.categoryFineGrainedReader` role at the project, folder, or organization level. Promoting a replica doesn't automatically fix these bindings; you must update them to point to a valid taxonomy in the new primary region.
+- [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) is only available in the secondary replica after the creation of the secondary replica is completed.
+- The destination region size limit (in logical bytes) for enabling cross-region replication on a dataset is 10 PB for `us` and `eu` [multi-regions](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) and 500 TB for other [regions](https://docs.cloud.google.com/bigquery/docs/locations#regions) by default. These limits are configurable. For more information, reach out to [Google Cloud Support](https://cloud.google.com/support-hub) .
+- The quota applies to logical resources.
+- You can only replicate a dataset with fewer than 100,000 tables.
+- You are limited to a maximum of 4 replicas added (then dropped) to the same region per dataset per day.
+- You are limited by [bandwidth](https://docs.cloud.google.com/bigquery/quotas#bandwidth_limits) .
+- Tables with [Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) (CMEK) applied are not queryable in the secondary region if the `replica_kms_key` value is not configured.
+- BigLake tables are not supported.
+- You can't replicate external or federated datasets.
+- [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) aren't supported.
+- You can't configure the following region pairs if you are configuring data replication for [disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) :
+  - `us-central1` - `us` multi-region
+  - `us-west1` - `us` multi-region
+  - `eu-west1` - `eu` multi-region
+  - `eu-west4` - `eu` multi-region
+- Routine-level access controls can't be replicated, but you can replicate dataset-level access controls for routines.
+- The following behavior applies to search indexes:
+  - Only the search index metadata is replicated to the secondary region, not index data itself.
+  - If you switch over to the replica, then your index is deleted from the previous primary region and regenerated in the promoted region.
+  - If you switch back and forth within 8 hours, then your index generation is delayed by 8 hours.
+- [Scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) don't automatically redirect to a new primary location if you promote a secondary replica. They remain bound to the region specified at the time of their creation.
+  - If the original primary replica becomes a read-only secondary replica after promotion, scheduled queries that attempt to write data to the dataset fail.
+  - If the original primary region becomes unavailable, scheduled queries fail, even if they only perform read operations.
+  - To ensure scheduled queries continue running against the promoted primary replica, you must manually recreate them in the new primary location.
+- You can't replicate hidden datasets.
+- Cross-region replication isn't supported for datasets that contain [conditional IAM policies](https://docs.cloud.google.com/bigquery/docs/conditions) . To identify if this error is disrupting your replication, you can check the `sync_status` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) .
 
 ### Resource behavior
 
 The following operations are not supported on resources within the secondary replica:
 
-  - [Creating a clone of a table](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement)
-  - [Creating a table snapshot](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement)
+- [Creating a clone of a table](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement)
+- [Creating a table snapshot](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement)
 
 The secondary replica is read-only. If you need to create a copy of a resource in a secondary replica, you must either copy the resource or query the resource first, and then materialize the results outside of the secondary replica. For example, use [CREATE TABLE AS SELECT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create a new resource from the secondary replica resource.
 
 Primary and secondary replicas are subject to the following differences:
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Region 1 primary replica</th>
-<th>Region 2 secondary replica</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Authorized dataset</td>
-<td>Authorized dataset</td>
-<td>You can't create an authorized dataset in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
-</tr>
-<tr class="even">
-<td>Authorized routine</td>
-<td>Authorized routine</td>
-<td>You can't create an authorized routine in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
-</tr>
-<tr class="odd">
-<td>Authorized view</td>
-<td>Authorized view</td>
-<td>You can't create an authorized view in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.</td>
-</tr>
-<tr class="even">
-<td>BigLake table</td>
-<td>BigLake table</td>
-<td>Not supported.</td>
-</tr>
-<tr class="odd">
-<td>BigLake Apache Iceberg table</td>
-<td>BigLake Apache Iceberg table</td>
-<td>See <a href="https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery">Lakehouse runtime catalog cross-region replication and disaster recovery</a> .</td>
-</tr>
-<tr class="even">
-<td>External table</td>
-<td>External table</td>
-<td>Only the external table definition is replicated. The query fails when the Cloud Storage bucket is not co-located in the same location as a replica.</td>
-</tr>
-<tr class="odd">
-<td>Logical view</td>
-<td>Logical view</td>
-<td>Logical views that reference a dataset or resource that is not located in the same location as the logical view fail when queried.</td>
-</tr>
-<tr class="even">
-<td>Managed table</td>
-<td>Managed table</td>
-<td>No difference.</td>
-</tr>
-<tr class="odd">
-<td>Materialized view</td>
-<td>Materialized view</td>
-<td>If a referenced table is not in the same region as the materialized view, the query fails. Replicated materialized views may see staleness above the view's <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness">max staleness</a> .</td>
-</tr>
-<tr class="even">
-<td>Model</td>
-<td>Model</td>
-<td>Stored as managed tables.<br />
-</td>
-</tr>
-<tr class="odd">
-<td>Remote function</td>
-<td>Remote function</td>
-<td>Connections are regional. Remote functions that reference a dataset or resource (connection) that is not located in the same location as the remote function fail when run.</td>
-</tr>
-<tr class="even">
-<td>Routines</td>
-<td>User-defined function (UDF) or stored procedure</td>
-<td>Routines that reference a dataset or resource that is not located in the same location as the routine fail when run. Any routine that references a connection, such as remote functions, does not work outside the source region.</td>
-</tr>
-<tr class="odd">
-<td>Row Access Policy</td>
-<td>Row Access Policy</td>
-<td>No difference.</td>
-</tr>
-<tr class="even">
-<td>Search index</td>
-<td>Search index</td>
-<td>Only index metadata is replicated. Index data only exists in primary region.</td>
-</tr>
-<tr class="odd">
-<td>Stored procedure</td>
-<td>Stored procedure</td>
-<td>Stored procedures that reference a dataset or resource that is not located in the same location as the stored procedure fail when run.</td>
-</tr>
-<tr class="even">
-<td>Table clone</td>
-<td>Managed table</td>
-<td>Billed as a deep copy in secondary replica.</td>
-</tr>
-<tr class="odd">
-<td>Table snapshot</td>
-<td>Table snapshot</td>
-<td>Billed as a deep copy in secondary replica.</td>
-</tr>
-<tr class="even">
-<td>Table-valued function (TVF)</td>
-<td>TVF</td>
-<td>TVFs that reference a dataset or resource that is not located in the same location as the TVF fail when run.</td>
-</tr>
-<tr class="odd">
-<td>UDF</td>
-<td>UDF</td>
-<td>UDFs that reference a dataset or resource that is not located in the same location as the UDF fail when run.</td>
-</tr>
-<tr class="even">
-<td>Data policy on a column</td>
-<td>Data policy on a column</td>
-<td>Custom data policies that reference a UDF that is not located in the same location as the policy fail when querying the table that the policy is attached to.</td>
-</tr>
-</tbody>
-</table>
+| Region 1 primary replica     | Region 2 secondary replica                      | Notes                                                                                                                                                                                                                                                              |
+|------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Authorized dataset           | Authorized dataset                              | You can't create an authorized dataset in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.                                                                                                      |
+| Authorized routine           | Authorized routine                              | You can't create an authorized routine in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.                                                                                                      |
+| Authorized view              | Authorized view                                 | You can't create an authorized view in a secondary replica. They must be created in the primary replica, and are then queryable from the secondary region.                                                                                                         |
+| BigLake table                | BigLake table                                   | Not supported.                                                                                                                                                                                                                                                     |
+| BigLake Apache Iceberg table | BigLake Apache Iceberg table                    | See [Lakehouse runtime catalog cross-region replication and disaster recovery](https://docs.cloud.google.com/biglake/docs/about-managed-disaster-recovery) .                                                                                                       |
+| External table               | External table                                  | Only the external table definition is replicated. The query fails when the Cloud Storage bucket is not co-located in the same location as a replica.                                                                                                               |
+| Logical view                 | Logical view                                    | Logical views that reference a dataset or resource that is not located in the same location as the logical view fail when queried.                                                                                                                                 |
+| Managed table                | Managed table                                   | No difference.                                                                                                                                                                                                                                                     |
+| Materialized view            | Materialized view                               | If a referenced table is not in the same region as the materialized view, the query fails. Replicated materialized views may see staleness above the view's [max staleness](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) . |
+| Model                        | Model                                           | Stored as managed tables.                                                                                                                                                                                                                                          |
+| Remote function              | Remote function                                 | Connections are regional. Remote functions that reference a dataset or resource (connection) that is not located in the same location as the remote function fail when run.                                                                                        |
+| Routines                     | User-defined function (UDF) or stored procedure | Routines that reference a dataset or resource that is not located in the same location as the routine fail when run. Any routine that references a connection, such as remote functions, does not work outside the source region.                                  |
+| Row Access Policy            | Row Access Policy                               | No difference.                                                                                                                                                                                                                                                     |
+| Search index                 | Search index                                    | Only index metadata is replicated. Index data only exists in primary region.                                                                                                                                                                                       |
+| Stored procedure             | Stored procedure                                | Stored procedures that reference a dataset or resource that is not located in the same location as the stored procedure fail when run.                                                                                                                             |
+| Table clone                  | Managed table                                   | Billed as a deep copy in secondary replica.                                                                                                                                                                                                                        |
+| Table snapshot               | Table snapshot                                  | Billed as a deep copy in secondary replica.                                                                                                                                                                                                                        |
+| Table-valued function (TVF)  | TVF                                             | TVFs that reference a dataset or resource that is not located in the same location as the TVF fail when run.                                                                                                                                                       |
+| UDF                          | UDF                                             | UDFs that reference a dataset or resource that is not located in the same location as the UDF fail when run.                                                                                                                                                       |
+| Data policy on a column      | Data policy on a column                         | Custom data policies that reference a UDF that is not located in the same location as the policy fail when querying the table that the policy is attached to.                                                                                                      |
 
 ## Outage scenarios
 
@@ -249,7 +154,7 @@ Cross-region replication is not intended for use as a disaster recovery plan dur
 The following table explains the impact of total-region outages on your replicated data:
 
 | Region 1        | Region 2          | Outage region | Impact                                                                                                                                                                                                  |
-| --------------- | ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------|-------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Primary replica | Secondary replica | Region 2      | Read-only jobs running in region 2 against the secondary replica fail.                                                                                                                                  |
 | Primary replica | Secondary replica | Region 1      | All jobs running in region 1 fail. Read-only jobs continue to run in region 2 where the secondary replica is located. The contents of region 2 are stale until it is successfully synced with region 1. |
 
@@ -276,7 +181,7 @@ To replicate a dataset, select one of the following options:
 4.  In the **Replicas** section, click **Create replica** .
 
 5.  In the **Create dataset replica** pane, do the following:
-    
+
     1.  In the **Location type** section, select a location type for the replica.
     2.  In the **Region** list, select a region for the replica.
     3.  Optional: To use customer-managed encryption keys (CMEK), expand the **Advanced options** section, and then select the **Customer-managed encryption key (CMEK)** option.
@@ -291,13 +196,15 @@ You can add a replica to any dataset that's located in a region or multi-region 
 
 The following example creates a dataset named `my_dataset` in the `us-central1` region and then adds a replica in the `us-east4` region:
 
-    -- Create the primary replica in the us-central1 region.
-    CREATE SCHEMA my_dataset OPTIONS(location='us-central1');
-    
-    -- Create a replica in the secondary region.
-    ALTER SCHEMA my_dataset
-    ADD REPLICA `my_replica`
-    OPTIONS(location='us-east4');
+```
+-- Create the primary replica in the us-central1 region.
+CREATE SCHEMA my_dataset OPTIONS(location='us-central1');
+
+-- Create a replica in the secondary region.
+ALTER SCHEMA my_dataset
+ADD REPLICA `my_replica`
+OPTIONS(location='us-east4');
+```
 
 To confirm when the secondary replica has successfully been created, you can query the `creation_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
@@ -309,8 +216,8 @@ If the primary region is online, you can promote the secondary replica. Promotio
 
 Note the following:
 
-  - All writes to tables return errors while promotion is in process. The old primary replica becomes non-writable immediately when the promotion begins.
-  - Tables that aren't fully replicated at the time the promotion is initiated return stale reads.
+- All writes to tables return errors while promotion is in process. The old primary replica becomes non-writable immediately when the promotion begins.
+- Tables that aren't fully replicated at the time the promotion is initiated return stale reads.
 
 To promote a replica to be the primary replica, select one of the following options:
 
@@ -332,11 +239,13 @@ To promote a replica to be the primary replica, use the [`ALTER SCHEMA SET OPTIO
 
 Note the following:
 
-  - You must explicitly set the job location to the secondary region in query settings. For more information, see [BigQuery specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
+- You must explicitly set the job location to the secondary region in query settings. For more information, see [BigQuery specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
 The following example promotes the `us-east4` replica to be the primary:
 
-    ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
+```
+ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
+```
 
 To confirm when the secondary replica has successfully been promoted, you can query the `replica_primary_assignment_complete` column in the [`INFORMATION_SCHEMA.SCHEMATA_REPLICAS`](https://docs.cloud.google.com/bigquery/docs/information-schema-schemata-replicas) view.
 
@@ -352,7 +261,7 @@ To remove a replica and stop replicating the dataset, select one of the followin
 
 3.  Click the **Details** tab.
 
-4.  In the **Replicas** section, find the replica that you want to remove, click more\_vert **More actions** , and then click **Delete** .
+4.  In the **Replicas** section, find the replica that you want to remove, click more_vert **More actions** , and then click **Delete** .
 
 5.  In the **Delete dataset replica?** dialog, type `delete` in the text field, and then click **Delete** .
 
@@ -362,12 +271,16 @@ To remove a replica and stop replicating the dataset, use the [`ALTER SCHEMA DRO
 
 The following example removes the `us` replica:
 
-    ALTER SCHEMA my_dataset
-    DROP REPLICA IF EXISTS `us`;
+```
+ALTER SCHEMA my_dataset
+DROP REPLICA IF EXISTS `us`;
+```
 
 You must first drop any secondary replicas to delete the entire dataset. If you delete the entire dataset—for example, by using the [`DROP SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement) —without dropping all secondary replicas, you receive the following error:
 
-    The dataset replica of the cross region dataset 'project_id:dataset_id' in region 'REGION' is not yet writable because the primary assignment is not yet complete.
+```
+The dataset replica of the cross region dataset 'project_id:dataset_id' in region 'REGION' is not yet writable because the primary assignment is not yet complete.
+```
 
 For more information, see [Promote the secondary replica](https://docs.cloud.google.com/bigquery/docs/data-replication#promote_the_secondary_replica) .
 
@@ -395,8 +308,8 @@ To view the replication status and latency for a dataset in the Google Cloud con
 
 BigQuery provides the following metrics in Monitoring to help you monitor replication status:
 
-  - **Replication latency** : The staleness of data in the secondary region replicated as part of cross-region replication or managed disaster recovery. This metric serves as a proxy for your recovery point objective (RPO).
-  - **Network egress bytes** : The billed volume of data (in bytes) replicated from the primary region to the secondary region. This metric helps you monitor bandwidth quota utilization.
+- **Replication latency** : The staleness of data in the secondary region replicated as part of cross-region replication or managed disaster recovery. This metric serves as a proxy for your recovery point objective (RPO).
+- **Network egress bytes** : The billed volume of data (in bytes) replicated from the primary region to the secondary region. This metric helps you monitor bandwidth quota utilization.
 
 To view these metrics in Monitoring, do the following:
 
@@ -412,7 +325,7 @@ To view these metrics in Monitoring, do the following:
 
 6.  In the **Aggregation** section, select an aggregation method. For the replication latency metric, we recommend selecting **99th percentile** . This aggregation better shows the worst-case performance compared to the average or other aggregations.
 
-7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset\_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
+7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
 
 ### View replication status with `INFORMATION_SCHEMA`
 
@@ -426,10 +339,12 @@ You can use cross-region dataset replication to migrate your datasets from one r
 
 To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset to the `EU` multi-region.
 
-    -- Create a replica in the secondary region.
-    ALTER SCHEMA my_migration
-    ADD REPLICA `eu`
-    OPTIONS(location='eu');
+```
+-- Create a replica in the secondary region.
+ALTER SCHEMA my_migration
+ADD REPLICA `eu`
+OPTIONS(location='eu');
+```
 
 This creates a secondary replica named `eu` in the `EU` multi-region. The primary replica is the `my_migration` dataset in the `US` multi-region.
 
@@ -437,7 +352,9 @@ This creates a secondary replica named `eu` in the `EU` multi-region. The primar
 
 To continue migrating the dataset to the `EU` multi-region, promote the secondary replica:
 
-    ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
+```
+ALTER SCHEMA my_migration SET OPTIONS(primary_replica = 'eu')
+```
 
 After the promotion is complete, `eu` is the primary replica. It is a writable replica.
 
@@ -445,8 +362,10 @@ After the promotion is complete, `eu` is the primary replica. It is a writable r
 
 To complete the migration from the `US` multi-region to the `EU` multi-region, delete the `us` replica. This step is not required but is useful if you don't need a dataset replica beyond your migration needs.
 
-    ALTER SCHEMA my_migration
-    DROP REPLICA IF EXISTS us;
+```
+ALTER SCHEMA my_migration
+DROP REPLICA IF EXISTS us;
+```
 
 Your dataset is located in the `EU` multi-region and there are no replicas of the `my_migration` dataset. You have successfully migrated your dataset to the `EU` multi-region. The complete list of resources that are migrated can be found in [Resource behavior](https://docs.cloud.google.com/bigquery/docs/data-replication#resource-behavior) .
 
@@ -456,43 +375,45 @@ Your dataset is located in the `EU` multi-region and there are no replicas of th
 
 Replicating datasets with CMEK behaves as described in the following scenarios:
 
-  - If the source dataset has a `default_kms_key` , you must provide a `replica_kms_key` that was created in the replica dataset's region when using the `ALTER SCHEMA ADD REPLICA` DDL statement.
+- If the source dataset has a `default_kms_key` , you must provide a `replica_kms_key` that was created in the replica dataset's region when using the `ALTER SCHEMA ADD REPLICA` DDL statement.
 
-  - If the source dataset doesn't have a value set for `default_kms_key` , you can't set the `replica_kms_key` .
+- If the source dataset doesn't have a value set for `default_kms_key` , you can't set the `replica_kms_key` .
 
-  - If you are using [Cloud KMS key rotation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_rotation) on either (or both) of the `default_kms_key` or the `replica_kms_key` the replicated dataset is still queryable after the key rotation.
-    
-      - Key rotation in the primary region updates the key version only in tables created after the rotation, tables that existed prior to the key rotation still use the key version that was set prior to the rotation.
-      - Key rotation in the secondary region updates all tables in the secondary replica to the new key version.
-      - Switching the primary replica to secondary replica updates all tables in the secondary replica (formerly the primary replica) to the new key version.
-      - If the key version set on tables in the primary replica prior to key rotation is deleted, any tables still using the key version set prior to key rotation cannot be queried until the key version is updated. In order to update the key version, the old key version must be active (not disabled or deleted).
+- If you are using [Cloud KMS key rotation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_rotation) on either (or both) of the `default_kms_key` or the `replica_kms_key` the replicated dataset is still queryable after the key rotation.
 
-  - If the source dataset doesn't have a value set for `default_kms_key` , but there are individual tables in the source dataset with CMEK applied, those tables aren't queryable in the replicated dataset. To query the tables, do the following:
-    
-      - Add a `default_kms_key` value for the source dataset.
-      - When you create a new replica using the `ALTER SCHEMA ADD REPLICA` DDL statement, set a value for the `replica_kms_key` option. The CMEK tables are queryable in the destination region.
-    
-    All the CMEK tables in the destination region use the same `replica_kms_key` , regardless of the key used in the source region.
+  - Key rotation in the primary region updates the key version only in tables created after the rotation, tables that existed prior to the key rotation still use the key version that was set prior to the rotation.
+  - Key rotation in the secondary region updates all tables in the secondary replica to the new key version.
+  - Switching the primary replica to secondary replica updates all tables in the secondary replica (formerly the primary replica) to the new key version.
+  - If the key version set on tables in the primary replica prior to key rotation is deleted, any tables still using the key version set prior to key rotation cannot be queried until the key version is updated. In order to update the key version, the old key version must be active (not disabled or deleted).
+
+- If the source dataset doesn't have a value set for `default_kms_key` , but there are individual tables in the source dataset with CMEK applied, those tables aren't queryable in the replicated dataset. To query the tables, do the following:
+
+  - Add a `default_kms_key` value for the source dataset.
+  - When you create a new replica using the `ALTER SCHEMA ADD REPLICA` DDL statement, set a value for the `replica_kms_key` option. The CMEK tables are queryable in the destination region.
+
+  All the CMEK tables in the destination region use the same `replica_kms_key` , regardless of the key used in the source region.
 
 ### Create a replica with CMEK
 
 The following example creates a replica in the `us-west1` region with a `replica_kms_key` value set. For CMEK key, grant the [BigQuery service account permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to encrypt and decrypt.
 
-    -- Create a replica in the secondary region.
-    ALTER SCHEMA my_dataset
-    ADD REPLICA `us-west1`
-    OPTIONS(location='us-west1',
-      replica_kms_key='my_us_west1_kms_key_name');
+```
+-- Create a replica in the secondary region.
+ALTER SCHEMA my_dataset
+ADD REPLICA `us-west1`
+OPTIONS(location='us-west1',
+  replica_kms_key='my_us_west1_kms_key_name');
+```
 
 ### CMEK limitations
 
 Replicating datasets with CMEK applied are subject to the following limitations:
 
-  - You can't update the replicated Cloud KMS key after the replica is created.
+- You can't update the replicated Cloud KMS key after the replica is created.
 
-  - You can't update the `default_kms_key` value on the source dataset after the dataset replicas have been created.
+- You can't update the `default_kms_key` value on the source dataset after the dataset replicas have been created.
 
-  - If the provided `replica_kms_key` is not valid in the destination region, the dataset won't be replicated.
+- If the provided `replica_kms_key` is not valid in the destination region, the dataset won't be replicated.
 
 ## Data policies assigned to a column or a data governance tag
 
@@ -506,7 +427,7 @@ Replicated data policies are read-only in secondary regions. You can't [update t
 
 ### Naming conflicts
 
-The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and its replica in the secondary regions, the IDs in the format of ` projects/ PROJECT_NUMBER /locations/ LOCATION_ID /dataPolicies/ DATA_POLICY_ID  ` are identical, except for the value of `  LOCATION_ID  ` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
+The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and its replica in the secondary regions, the IDs in the format of `projects/ `` PROJECT_NUMBER `` /locations/ `` LOCATION_ID `` /dataPolicies/ `` DATA_POLICY_ID` are identical, except for the value of `LOCATION_ID` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
 
 ### Custom masking policies
 
@@ -524,5 +445,5 @@ If you drop the replica, the attached data policies are not automatically delete
 
 ## What's next
 
-  - Learn how to work with [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
-  - Learn about [BigQuery reliability features](https://docs.cloud.google.com/bigquery/docs/reliability-intro) .
+- Learn how to work with [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- Learn about [BigQuery reliability features](https://docs.cloud.google.com/bigquery/docs/reliability-intro) .

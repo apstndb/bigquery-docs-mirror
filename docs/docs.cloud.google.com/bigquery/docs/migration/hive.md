@@ -20,27 +20,29 @@ The following sections describe how to collect information about table statistic
 
 Gather information about source Hive tables such as their number of rows, number of columns, column data types, size, input format of the data, and location. This information is useful in the migration process and also to validate the data migration. If you have a Hive table named `employees` in a database named `corp` , use the following commands to collect table information:
 
-    # Find the number of rows in the table
-    hive> SELECT COUNT(*) FROM corp.employees;
-    
-    # Output all the columns and their data types
-    hive> DESCRIBE corp.employees;
-    
-    # Output the input format and location of the table
-    hive> SHOW CREATE TABLE corp.employees;
-    Output:
-    …
-    STORED AS INPUTFORMAT
-      'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
-    OUTPUTFORMAT
-      'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
-    LOCATION
-      'hdfs://demo_cluster/user/hive/warehouse/corp/employees'
-    TBLPROPERTIES (
-    …
-    
-    # Get the total size of the table data in bytes
-    shell> hdfs dfs -du -s TABLE_LOCATION
+```
+# Find the number of rows in the table
+hive> SELECT COUNT(*) FROM corp.employees;
+
+# Output all the columns and their data types
+hive> DESCRIBE corp.employees;
+
+# Output the input format and location of the table
+hive> SHOW CREATE TABLE corp.employees;
+Output:
+…
+STORED AS INPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.avro.AvroContainerInputFormat'
+OUTPUTFORMAT
+  'org.apache.hadoop.hive.ql.io.avro.AvroContainerOutputFormat'
+LOCATION
+  'hdfs://demo_cluster/user/hive/warehouse/corp/employees'
+TBLPROPERTIES (
+…
+
+# Get the total size of the table data in bytes
+shell> hdfs dfs -du -s TABLE_LOCATION
+```
 
 ### Source table format conversion
 
@@ -48,20 +50,20 @@ Some of the formats that Hive supports cannot be ingested into BigQuery directly
 
 Hive supports storing data in the following formats:
 
-  - Text file
-  - RC file
-  - Sequence file
-  - Avro file
-  - ORC file
-  - Parquet file
+- Text file
+- RC file
+- Sequence file
+- Avro file
+- ORC file
+- Parquet file
 
 BigQuery supports loading data from Cloud Storage in any of the following file formats:
 
-  - CSV
-  - JSON (Newline delimited)
-  - Avro
-  - ORC
-  - Parquet
+- CSV
+- JSON (Newline delimited)
+- Avro
+- ORC
+- Parquet
 
 BigQuery can load data files in Avro, ORC, and Parquet formats directly without the need of schema files. For text files that are not formatted as CSV or JSON (Newline delimited), you can either copy the data to a Hive table in Avro format, or you can convert the table schema to a BigQuery [JSON schema](https://docs.cloud.google.com/bigquery/docs/schemas) to provide when ingesting.
 
@@ -69,23 +71,25 @@ BigQuery can load data files in Avro, ORC, and Parquet formats directly without 
 
 Hive and BigQuery have different access control mechanisms. Collect all the Hive access control settings such as roles, groups, members, and privileges granted to them. Map out a security model in BigQuery on a per-dataset level and implement a fine-grained ACL. For example, a Hive user can be mapped to a [Google account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) and an HDFS group can be mapped to a [Google group](https://docs.cloud.google.com/iam/docs/overview#google_group) . Access can be set on the dataset level. Use the following commands to collect access control settings in Hive:
 
-    # List all the users
-    > hdfs dfs -ls /user/ | cut -d/ -f3
-    
-    # Show all the groups that a specific user belongs to
-    > hdfs groups user_name
-    
-    # List all the roles
-    hive> SHOW ROLES;
-    
-    # Show all the roles assigned to a specific group
-    hive> SHOW ROLE GRANT GROUP group_name
-    
-    # Show all the grants for a specific role
-    hive> SHOW GRANT ROLE role_name;
-    
-    # Show all the grants for a specific role on a specific object
-    hive> SHOW GRANT ROLE role_name on object_type object_name;
+```
+# List all the users
+> hdfs dfs -ls /user/ | cut -d/ -f3
+
+# Show all the groups that a specific user belongs to
+> hdfs groups user_name
+
+# List all the roles
+hive> SHOW ROLES;
+
+# Show all the roles assigned to a specific group
+hive> SHOW ROLE GRANT GROUP group_name
+
+# Show all the grants for a specific role
+hive> SHOW GRANT ROLE role_name;
+
+# Show all the grants for a specific role on a specific object
+hive> SHOW GRANT ROLE role_name on object_type object_name;
+```
 
 In Hive, you may access the HDFS files behind the tables directly if you have the required permissions. In standard BigQuery tables, after the data is loaded into the table, the data gets stored in the BigQuery storage. You can read data by using the BigQuery Storage Read API but all IAM, row-, and column-level security is still enforced. If you are using BigQuery external tables to query the data in Cloud Storage, access to Cloud Storage is also controlled by IAM.
 
@@ -106,10 +110,12 @@ In Hive, data in partitioned tables is stored in a directory structure. Each par
 
 The following example shows that the source Hive table is partitioned on the columns `joining_date` and `department` . The data files under this table don't contain any data related to these two columns.
 
-    hive> SHOW PARTITIONS corp.employees_partitioned
-    joining_date="2018-10-01"/department="HR"
-    joining_date="2018-10-01"/department="Analyst"
-    joining_date="2018-11-01"/department="HR"
+```
+hive> SHOW PARTITIONS corp.employees_partitioned
+joining_date="2018-10-01"/department="HR"
+joining_date="2018-10-01"/department="Analyst"
+joining_date="2018-11-01"/department="HR"
+```
 
 One way to copy these columns is to convert the partitioned table into a non-partitioned table before loading into BigQuery:
 
@@ -124,16 +130,20 @@ The first step in data migration is to copy the data to Cloud Storage. Use [Hado
 
 After selecting the Cloud Storage bucket location, you can use the following command to list out all the data files present at the `employees` Hive table location:
 
-    > hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
+```
+> hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
+```
 
 Copy all the preceding files to Cloud Storage:
 
-    > hadoop distcp
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees
-    gs://hive_data/corp/employees
+```
+> hadoop distcp
+hdfs://demo_cluster/user/hive/warehouse/corp/employees
+gs://hive_data/corp/employees
+```
 
 Note that you are charged for storing the data in Cloud Storage according to the [Data storage pricing](https://cloud.google.com/storage/pricing#storage-pricing) .
 
@@ -145,15 +155,19 @@ BigQuery supports [batch loading data](https://docs.cloud.google.com/bigquery/do
 
 The following command shows the data copied from Hive for a non-ACID table:
 
-    > gcloud storage ls gs://hive_data/corp/employees/
-    gs://hive-migration/corp/employees/
-    gs://hive-migration/corp/employees/000000_0
-    gs://hive-migration/corp/employees/000001_0
-    gs://hive-migration/corp/employees/000002_0
+```
+> gcloud storage ls gs://hive_data/corp/employees/
+gs://hive-migration/corp/employees/
+gs://hive-migration/corp/employees/000000_0
+gs://hive-migration/corp/employees/000001_0
+gs://hive-migration/corp/employees/000002_0
+```
 
 To load your Hive data into BigQuery, use the [`bq load` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) . You can use a wildcard character \* in the URL to load data from multiple files that share a common object prefix. For example, use the following command to load all the files sharing the prefix `gs://hive_data/corp/employees/` :
 
-    bq load --source_format=AVRO corp.employees gs://hive_data/corp/employees/*
+```
+bq load --source_format=AVRO corp.employees gs://hive_data/corp/employees/*
+```
 
 Because jobs can take a long time to complete, you can execute them asynchronously by setting the `--sync` flag to `False` . Running the `bq load` command outputs the job ID of the created load job, so you can use this command to poll the job status. This data includes details such as the job type, the job state, and the user who ran the job.
 
@@ -177,30 +191,34 @@ Select an `INT64` , `TIMESTAMP` , or `DATE` type identifier column to distinguis
 
 The following table is an example of a table with no partitioning that uses a `TIMESTAMP` type for its incremental column:
 
-    +-----------------------------+-----------+-----------+-----------+-----------+
-    | timestamp_identifier        | column_2  | column_3  | column_4  | column_5  |
-    +-----------------------------+-----------+-----------+-----------+-----------+
-    | 2018-10-10 21\:56\:41       |           |           |           |           |
-    | 2018-10-11 03\:13\:25       |           |           |           |           |
-    | 2018-10-11 08\:25\:32       |           |           |           |           |
-    | 2018-10-12 05\:02\:16       |           |           |           |           |
-    | 2018-10-12 15\:21\:45       |           |           |           |           |
-    +-----------------------------+-----------+-----------+-----------+-----------+
+```
++-----------------------------+-----------+-----------+-----------+-----------+
+| timestamp_identifier        | column_2  | column_3  | column_4  | column_5  |
++-----------------------------+-----------+-----------+-----------+-----------+
+| 2018-10-10 21\:56\:41       |           |           |           |           |
+| 2018-10-11 03\:13\:25       |           |           |           |           |
+| 2018-10-11 08\:25\:32       |           |           |           |           |
+| 2018-10-12 05\:02\:16       |           |           |           |           |
+| 2018-10-12 15\:21\:45       |           |           |           |           |
++-----------------------------+-----------+-----------+-----------+-----------+
+```
 
 The following table is an example of a table partitioned on a `DATE` type column `partition_column` . It has an integer type incremental column `int_identifier` in each partition.
 
-    +---------------------+---------------------+----------+----------+-----------+
-    | partition_column    | int_identifier      | column_3 | column_4 | column_5  |
-    +---------------------+---------------------+----------+----------+-----------+
-    | 2018-10-01          | 1                   |          |          |           |
-    | 2018-10-01          | 2                   |          |          |           |
-    | ...                 | ...                 |          |          |           |
-    | 2018-10-01          | 1000                |          |          |           |
-    | 2018-11-01          | 1                   |          |          |           |
-    | 2018-11-01          | 2                   |          |          |           |
-    | ...                 | ...                 |          |          |           |
-    | 2018-11-01          | 2000                |          |          |           |
-    +---------------------+---------------------+----------+----------+-----------+
+```
++---------------------+---------------------+----------+----------+-----------+
+| partition_column    | int_identifier      | column_3 | column_4 | column_5  |
++---------------------+---------------------+----------+----------+-----------+
+| 2018-10-01          | 1                   |          |          |           |
+| 2018-10-01          | 2                   |          |          |           |
+| ...                 | ...                 |          |          |           |
+| 2018-10-01          | 1000                |          |          |           |
+| 2018-11-01          | 1                   |          |          |           |
+| 2018-11-01          | 2                   |          |          |           |
+| ...                 | ...                 |          |          |           |
+| 2018-11-01          | 2000                |          |          |           |
++---------------------+---------------------+----------+----------+-----------+
+```
 
 The following sections describe migrating Hive data based on whether or not it is partitioned and whether or not it has incremental columns.
 
@@ -208,21 +226,25 @@ The following sections describe migrating Hive data based on whether or not it i
 
 Assuming there are no file compactions in Hive, Hive creates new data files when ingesting new data. During the first run, store the list of files in the tracking table and complete the initial migration of the Hive table by copying these files to Cloud Storage and loading them into BigQuery.
 
-    > hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
-    Found 3 items
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
+```
+> hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
+Found 3 items
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
+```
 
 After the initial migration, some data is ingested in Hive. You only need to migrate this incremental data to BigQuery. In the subsequent migration runs, list out the data files again and compare them with the information from the tracking table to detect new data files that haven't been migrated.
 
-    > hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
-    Found 5 items
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000003_0
-    hdfs://demo_cluster/user/hive/warehouse/corp/employees/000004_0
+```
+> hdfs dfs -ls hdfs://demo_cluster/user/hive/warehouse/corp/employees
+Found 5 items
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000000_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000001_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000002_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000003_0
+hdfs://demo_cluster/user/hive/warehouse/corp/employees/000004_0
+```
 
 In this example, two new files are present at the table location. Migrate the data by copying these new data files to Cloud Storage and loading them into the existing BigQuery table.
 
@@ -230,18 +252,24 @@ In this example, two new files are present at the table location. Migrate the da
 
 In this case, you can use the maximum value of incremental columns to determine if any new data was added. While performing the initial migration, query the Hive table to fetch the maximum value of the incremental column and store it in the tracking table:
 
-    hive> SELECT MAX(timestamp_identifier) FROM corp.employees;
-    2018-12-31 22:15:04
+```
+hive> SELECT MAX(timestamp_identifier) FROM corp.employees;
+2018-12-31 22:15:04
+```
 
 In the subsequent runs of migration, repeat the same query again to fetch the present maximum value of the incremental column and compare it with the previous maximum value from the tracking table to check if incremental data exists:
 
-    hive> SELECT MAX(timestamp_identifier) FROM corp.employees;
-    2019-01-04 07:21:16
+```
+hive> SELECT MAX(timestamp_identifier) FROM corp.employees;
+2019-01-04 07:21:16
+```
 
 If the present maximum value is greater than the previous maximum value, it indicates that incremental data has been ingested into the Hive table as in the example. To migrate the incremental data, create a staging table and load only the incremental data into it.
 
-    hive> CREATE TABLE stage_employees LIKE corp.employees;
-    hive> INSERT INTO TABLE stage_employees SELECT * FROM corp.employees WHERE timestamp_identifier>"2018-12-31 22:15:04" and timestamp_identifier<="2019-01-04 07:21:16"
+```
+hive> CREATE TABLE stage_employees LIKE corp.employees;
+hive> INSERT INTO TABLE stage_employees SELECT * FROM corp.employees WHERE timestamp_identifier>"2018-12-31 22:15:04" and timestamp_identifier<="2019-01-04 07:21:16"
+```
 
 Migrate the staging table by listing out the HDFS data files, copying them to Cloud Storage, and loading them into the existing BigQuery table.
 
@@ -251,24 +279,28 @@ Ingestion of data into a partitioned table might create new partitions, append i
 
 While migrating the table for the first time, run the `SHOW PARTITIONS` command and store the information about the different partitions in the tracking table.
 
-    hive> SHOW PARTITIONS corp.employees
-    partition_column=2018-10-01
-    partition_column=2018-11-01
+```
+hive> SHOW PARTITIONS corp.employees
+partition_column=2018-10-01
+partition_column=2018-11-01
+```
 
 The following output shows that the table `employees` has two partitions. A simplified version of the tracking table is provided in the following table to show how this information can be stored.
 
-| **partition\_information**    | **file\_path** | **gcs\_copy\_status** | **gcs\_file\_path** | **bq\_job\_id** | **...** |
-| ----------------------------- | -------------- | --------------------- | ------------------- | --------------- | ------- |
-| partition\_column =2018-10-01 |                |                       |                     |                 |         |
-| partition\_column =2018-11-01 |                |                       |                     |                 |         |
+| **partition_information**    | **file_path** | **gcs_copy_status** | **gcs_file_path** | **bq_job_id** | **...** |
+|------------------------------|---------------|---------------------|-------------------|---------------|---------|
+| partition_column =2018-10-01 |               |                     |                   |               |         |
+| partition_column =2018-11-01 |               |                     |                   |               |         |
 
 In the subsequent migration runs, run the `SHOW PARTITIONS` command again to list all the partitions and compare these with the partition information from the tracking table to check if any new partitions are present which haven't been migrated.
 
-    hive> SHOW PARTITIONS corp.employees
-    partition_column=2018-10-01
-    partition_column=2018-11-01
-    partition_column=2018-12-01
-    partition_column=2019-01-01
+```
+hive> SHOW PARTITIONS corp.employees
+partition_column=2018-10-01
+partition_column=2018-11-01
+partition_column=2018-12-01
+partition_column=2019-01-01
+```
 
 If any new partitions are identified as in the example, create a staging table and load only the new partitions into it from the source table. Migrate the staging table by copying the files to Cloud Storage and loading them into the existing BigQuery table.
 
@@ -278,32 +310,36 @@ In this scenario, the Hive table is partitioned and an incremental column is pre
 
 When migrating the table for the first time, store the minimum and maximum values of the incremental column in each partition along with the information about the table partitions in the tracking table.
 
-    hive> SHOW PARTITIONS corp.employees
-    partition_column=2018-10-01
-    partition_column=2018-11-01
-    
-    hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-10-01";
-    1 1000
-    
-    hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-11-01";
-    1 2000
+```
+hive> SHOW PARTITIONS corp.employees
+partition_column=2018-10-01
+partition_column=2018-11-01
+
+hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-10-01";
+1 1000
+
+hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-11-01";
+1 2000
+```
 
 The following output shows that the table employees has two partitions and the minimum and maximum values of the incremental column in each partition. A simplified version of the tracking table is provided in the following table to show how this information can be stored.
 
-| **partition\_information**    | **inc\_col\_min** | **inc\_col\_max** | **file\_path** | **gcs\_copy\_status** | **...** |
-| ----------------------------- | ----------------- | ----------------- | -------------- | --------------------- | ------- |
-| partition\_column =2018-10-01 | 1                 | 1000              |                |                       |         |
-| partition\_column =2018-11-01 | 1                 | 2000              |                |                       |         |
+| **partition_information**    | **inc_col_min** | **inc_col_max** | **file_path** | **gcs_copy_status** | **...** |
+|------------------------------|-----------------|-----------------|---------------|---------------------|---------|
+| partition_column =2018-10-01 | 1               | 1000            |               |                     |         |
+| partition_column =2018-11-01 | 1               | 2000            |               |                     |         |
 
 In the subsequent runs, run the same queries to fetch the present maximum value in each partition and compare it with the previous maximum value from the tracking table.
 
-    hive> SHOW PARTITIONS corp.employees
-    partition_column=2018-10-01
-    partition_column=2018-11-01
-    partition_column=2018-12-01
-    partition_column=2019-01-01
-    
-    hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-10-01";
+```
+hive> SHOW PARTITIONS corp.employees
+partition_column=2018-10-01
+partition_column=2018-11-01
+partition_column=2018-12-01
+partition_column=2019-01-01
+
+hive> SELECT MIN(int_identifier),MAX(int_identifier) FROM corp.employees WHERE partition_column="2018-10-01";
+```
 
 In the example, two new partitions have been identified and some incremental data has been ingested in the existing partition `partition_column=2018-10-01` . If there is any incremental data, create a staging table, load only the incremental data into the staging table, copy the data to Cloud Storage, and load the data into the existing BigQuery table.
 
@@ -315,14 +351,14 @@ Access controls on [tables](https://docs.cloud.google.com/bigquery/docs/table-ac
 
 When you apply access controls, you can grant access to the following users and groups:
 
-  - User by email: gives an individual Google Account access to the dataset
-  - Group by email: gives all members of a Google group access to the dataset
-  - Domain: gives all users and groups in a [Google domain](https://support.google.com/a/answer/53295) access to the dataset
-  - All Authenticated Users: gives all Google Account holders access to the dataset (makes the dataset public)
-  - Project Owners: gives all project owners access to the dataset
-  - Project Viewers: gives all project viewers access to the dataset
-  - Project Editors: gives all project editors access to the dataset
-  - Authorized View: gives a view access to the dataset
+- User by email: gives an individual Google Account access to the dataset
+- Group by email: gives all members of a Google group access to the dataset
+- Domain: gives all users and groups in a [Google domain](https://support.google.com/a/answer/53295) access to the dataset
+- All Authenticated Users: gives all Google Account holders access to the dataset (makes the dataset public)
+- Project Owners: gives all project owners access to the dataset
+- Project Viewers: gives all project viewers access to the dataset
+- Project Editors: gives all project editors access to the dataset
+- Authorized View: gives a view access to the dataset
 
 ## Data pipeline changes
 
@@ -334,8 +370,8 @@ If your existing pipeline uses Sqoop to import data into HDFS or Hive for proces
 
 If you are importing data into HDFS, choose one of the following:
 
-  - Copy the Sqoop output files to Cloud Storage using [Hadoop DistCp](https://hadoop.apache.org/docs/current/hadoop-distcp/DistCp.html) .
-  - Output the files to Cloud Storage directly using the [Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage) . The [Cloud Storage](https://docs.cloud.google.com/storage) connector is an [open source Java library](https://github.com/GoogleCloudPlatform/bigdata-interop/tree/master/gcs) that lets you run [Apache Hadoop](https://hadoop.apache.org/) or [Apache Spark](https://spark.apache.org/) jobs directly on data in Cloud Storage. For more information, see [Installing the Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/install-storage-connector) .
+- Copy the Sqoop output files to Cloud Storage using [Hadoop DistCp](https://hadoop.apache.org/docs/current/hadoop-distcp/DistCp.html) .
+- Output the files to Cloud Storage directly using the [Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage) . The [Cloud Storage](https://docs.cloud.google.com/storage) connector is an [open source Java library](https://github.com/GoogleCloudPlatform/bigdata-interop/tree/master/gcs) that lets you run [Apache Hadoop](https://hadoop.apache.org/) or [Apache Spark](https://spark.apache.org/) jobs directly on data in Cloud Storage. For more information, see [Installing the Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/install-storage-connector) .
 
 If you want Sqoop to import data into Hive running on Google Cloud, point it to the Hive table directly and use Cloud Storage as the Hive warehouse instead of HDFS. To do this, set the property `hive.metastore.warehouse.dir` to a Cloud Storage bucket.
 
@@ -351,10 +387,10 @@ If you don't want to migrate your Apache Spark SQL or HiveQL to BigQuery, you ca
 
 If there are any existing ETL jobs in Hive, you can modify them in the following ways to migrate them from Hive:
 
-  - Convert the Hive ETL job to a BigQuery job by using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
-  - Use Apache Spark to read from and write to BigQuery by using the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery#dataproc_name_clusters) . You can use Managed Service for Apache Spark to run your Apache Spark jobs in a cost-efficient way with the help of ephemeral clusters.
-  - Rewrite your pipelines using the [Apache Beam](https://beam.apache.org/) SDK and run them on Dataflow.
-  - Use [Apache Beam SQL](https://beam.apache.org/documentation/dsls/sql/overview/) to rewrite your pipelines.
+- Convert the Hive ETL job to a BigQuery job by using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
+- Use Apache Spark to read from and write to BigQuery by using the [BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery#dataproc_name_clusters) . You can use Managed Service for Apache Spark to run your Apache Spark jobs in a cost-efficient way with the help of ephemeral clusters.
+- Rewrite your pipelines using the [Apache Beam](https://beam.apache.org/) SDK and run them on Dataflow.
+- Use [Apache Beam SQL](https://beam.apache.org/documentation/dsls/sql/overview/) to rewrite your pipelines.
 
 To manage your ETL pipeline, you can use [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer/docs) (Apache Airflow) and [Managed Service for Apache Spark Workflow Templates](https://docs.cloud.google.com/dataproc/docs/concepts/workflows/overview) . Managed Service for Apache Airflow provides a [tool](https://github.com/GoogleCloudPlatform/oozie-to-airflow/) for converting Oozie workflows to Managed Service for Apache Airflow workflows.
 

@@ -10,19 +10,19 @@ This tutorial shows you how to use the [`AI.IF`](https://docs.cloud.google.com/b
 
 ## Objectives
 
-  - Create a table that contains sample customer reviews for a device.
-  - Categorize overall sentiment of each review.
-  - Rate user sentiment based on how favorable a review is towards price, customer service, or quality.
-  - Categorize and filter reviews by their main emotion or topic.
-  - Identify semantically similar reviews.
-  - Create reusable prompt user-defined functions (UDFs).
+- Create a table that contains sample customer reviews for a device.
+- Categorize overall sentiment of each review.
+- Rate user sentiment based on how favorable a review is towards price, customer service, or quality.
+- Categorize and filter reviews by their main emotion or topic.
+- Identify semantically similar reviews.
+- Create reusable prompt user-defined functions (UDFs).
 
 ## Costs
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information on BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -31,23 +31,23 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 ## Before you begin
 
 1.  Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
     For new projects, the BigQuery API is automatically enabled.
 
 2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
-    
+
     > **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ### Required roles
 
 To get the permissions that you need to use AI functions, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run query jobs and load jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
+- Run query jobs and load jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -57,45 +57,51 @@ You might also be able to get the required permissions through [custom roles](ht
 
 To create a dataset called `my_dataset` for this tutorial, run the following query.
 
-    CREATE SCHEMA my_dataset OPTIONS (location = 'LOCATION');
+```
+CREATE SCHEMA my_dataset OPTIONS (location = 'LOCATION');
+```
 
 Next, create a table called `customer_feedback` that contains sample customer reviews for a device:
 
-    CREATE TABLE my_dataset.customer_feedback AS (
-      SELECT
-        *
-      FROM
-        UNNEST( [STRUCT<review_id INT64, review_text STRING> 
-          (1, "The battery life is incredible, and the screen is gorgeous! Best phone I've ever had. Totally worth the price."),
-          (2, "Customer support was a nightmare. It took three weeks for my order to arrive, and when it did, the box was damaged. Very frustrating!"),
-          (3, "The product does exactly what it says on the box. No complaints, but not exciting either."),
-          (4, "I'm so happy with this purchase! It arrived early and exceeded all my expectations. The quality is top-notch, although the setup was a bit tricky."),
-          (5, "The price is a bit too high for what you get. The material feels cheap and I'm worried it won't last. Service was okay."),
-          (6, "Absolutely furious! The item arrived broken, and getting a refund is proving impossible. I will never buy from them again."),
-          (7, "This new feature for account access is confusing. I can't find where to update my profile. Please fix this bug!"),
-          (8, "The shipping was delayed, but the support team was very helpful and kept me informed. The product itself is great, especially for the price.") 
-          ])
-    );
+```
+CREATE TABLE my_dataset.customer_feedback AS (
+  SELECT
+    *
+  FROM
+    UNNEST( [STRUCT<review_id INT64, review_text STRING> 
+      (1, "The battery life is incredible, and the screen is gorgeous! Best phone I've ever had. Totally worth the price."),
+      (2, "Customer support was a nightmare. It took three weeks for my order to arrive, and when it did, the box was damaged. Very frustrating!"),
+      (3, "The product does exactly what it says on the box. No complaints, but not exciting either."),
+      (4, "I'm so happy with this purchase! It arrived early and exceeded all my expectations. The quality is top-notch, although the setup was a bit tricky."),
+      (5, "The price is a bit too high for what you get. The material feels cheap and I'm worried it won't last. Service was okay."),
+      (6, "Absolutely furious! The item arrived broken, and getting a refund is proving impossible. I will never buy from them again."),
+      (7, "This new feature for account access is confusing. I can't find where to update my profile. Please fix this bug!"),
+      (8, "The shipping was delayed, but the support team was very helpful and kept me informed. The product itself is great, especially for the price.") 
+      ])
+);
+```
 
 ## Categorize overall sentiment
 
 It can be helpful to extract the overall sentiment expressed in text to support use cases such as the following:
 
-  - Gauge customer satisfaction from reviews.
-  - Monitor brand perception on social media.
-  - Prioritize support tickets based on how upset users are.
+- Gauge customer satisfaction from reviews.
+- Monitor brand perception on social media.
+- Prioritize support tickets based on how upset users are.
 
 The following query shows how to use the `AI.CLASSIFY` function to classify reviews from the `customer_feedback` table as *positive* , *negative* , or *neutral* :
 
-    SELECT
-      review_id,
-      review_text,
-      AI.CLASSIFY(
-        review_text,
-        categories => ['positive', 'negative', 'neutral'],
-        endpoint => 'gemini-2.5-pro') AS sentiment
-    FROM
-      my_dataset.customer_feedback;
+```
+SELECT
+  review_id,
+  review_text,
+  AI.CLASSIFY(
+    review_text,
+    categories => ['positive', 'negative', 'neutral'],
+    endpoint => 'gemini-2.5-pro') AS sentiment
+FROM
+  my_dataset.customer_feedback;
+```
 
 The result looks similar to the following:
 
@@ -148,24 +154,26 @@ If an overall sentiment such as *positive* or *negative* isn't sufficient for yo
 
 The following example shows how to use the `AI.SCORE` function to rate user sentiment from 1 to 10 based on how favorable each review in the `customer_feedback` table is toward price, customer service, and quality. The function returns the custom value -1 in cases where an aspect isn't mentioned in the review so that you can filter these out later.
 
-    SELECT
-      review_id,
-      review_text,
-      AI.SCORE(
-        ("Score 0.0 to 10 on positive sentiment about PRICE for review: ", review_text,
-        "If price is not mentioned, return -1.0"),
-        endpoint => 'gemini-2.5-pro') AS price_score,
-      AI.SCORE(
-        ("Score 0.0 to 10 on positive sentiment about CUSTOMER SERVICE for review: ", review_text,
-        "If customer service is not mentioned, return -1.0"),
-        endpoint => 'gemini-2.5-pro') AS service_score,
-      AI.SCORE(
-        ("Score 0.0 to 10 on positive sentiment about QUALITY for review: ", review_text,
-        "If quality is not mentioned, return -1.0"),
-        endpoint => 'gemini-2.5-pro') AS quality_score
-    FROM
-      my_dataset.customer_feedback
-    LIMIT 3;
+```
+SELECT
+  review_id,
+  review_text,
+  AI.SCORE(
+    ("Score 0.0 to 10 on positive sentiment about PRICE for review: ", review_text,
+    "If price is not mentioned, return -1.0"),
+    endpoint => 'gemini-2.5-pro') AS price_score,
+  AI.SCORE(
+    ("Score 0.0 to 10 on positive sentiment about CUSTOMER SERVICE for review: ", review_text,
+    "If customer service is not mentioned, return -1.0"),
+    endpoint => 'gemini-2.5-pro') AS service_score,
+  AI.SCORE(
+    ("Score 0.0 to 10 on positive sentiment about QUALITY for review: ", review_text,
+    "If quality is not mentioned, return -1.0"),
+    endpoint => 'gemini-2.5-pro') AS quality_score
+FROM
+  my_dataset.customer_feedback
+LIMIT 3;
+```
 
 The result looks similar to the following:
 
@@ -194,16 +202,18 @@ The result looks similar to the following:
 
 In addition to positive or negative sentiment, you can classify text based on specific emotions that you select. This is useful when you want to gain a better understanding of user responses, or to flag highly emotional feedback for review.
 
-    SELECT
-      review_id,
-      review_text,
-      AI.CLASSIFY(
-        review_text,
-        categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other'],
-        endpoint => 'gemini-2.5-pro'
-      ) AS emotion
-    FROM
-      my_dataset.customer_feedback;
+```
+SELECT
+  review_id,
+  review_text,
+  AI.CLASSIFY(
+    review_text,
+    categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other'],
+    endpoint => 'gemini-2.5-pro'
+  ) AS emotion
+FROM
+  my_dataset.customer_feedback;
+```
 
 The result looks similar to the following:
 
@@ -254,24 +264,26 @@ The result looks similar to the following:
 
 You can use the `AI.CLASSIFY` function to group reviews into predefined topics. For example, you can do the following:
 
-  - Discover common themes in customer feedback.
-  - Organize documents by subject matter.
-  - Route support tickets by topic.
+- Discover common themes in customer feedback.
+- Organize documents by subject matter.
+- Route support tickets by topic.
 
 The following example shows how to classify customer feedback into various types such as *billing issue* or *account access* and then count how many reviews belong to each category:
 
-    SELECT
-      AI.CLASSIFY(
-        review_text,
-        categories => ['Billing Issue', 'Account Access',
-                       'Product Bug', 'Feature Request',
-                       'Shipping Delay', 'Other'],
-        endpoint => 'gemini-2.5-pro') AS topic,
-        COUNT(*) AS number_of_reviews,
-    FROM
-      my_dataset.customer_feedback
-    GROUP BY topic
-    ORDER BY number_of_reviews DESC;
+```
+SELECT
+  AI.CLASSIFY(
+    review_text,
+    categories => ['Billing Issue', 'Account Access',
+                   'Product Bug', 'Feature Request',
+                   'Shipping Delay', 'Other'],
+    endpoint => 'gemini-2.5-pro') AS topic,
+    COUNT(*) AS number_of_reviews,
+FROM
+  my_dataset.customer_feedback
+GROUP BY topic
+ORDER BY number_of_reviews DESC;
+```
 
 The result looks similar to the following:
 
@@ -289,24 +301,26 @@ The result looks similar to the following:
 
 You can use the `AI.SCORE` function to assess how semantically similar two pieces of text are by asking it to rate similarity of meaning. This can help you with tasks such as the following:
 
-  - Find duplicate or near-duplicate entries.
-  - Group similar pieces of feedback.
-  - Power semantic search applications.
+- Find duplicate or near-duplicate entries.
+- Group similar pieces of feedback.
+- Power semantic search applications.
 
 The following query finds reviews that discuss difficulty setting up the product:
 
-    SELECT
-      review_id,
-      review_text,
-      AI.SCORE(
-        (
-          """How similar is the review to the concept of 'difficulty in setting up the product'?
-             A higher score indicates more similarity. Review: """,
-          review_text),
-        endpoint => 'gemini-2.5-pro') AS setup_difficulty
-    FROM my_dataset.customer_feedback
-    ORDER BY setup_difficulty DESC
-    LIMIT 2;
+```
+SELECT
+  review_id,
+  review_text,
+  AI.SCORE(
+    (
+      """How similar is the review to the concept of 'difficulty in setting up the product'?
+         A higher score indicates more similarity. Review: """,
+      review_text),
+    endpoint => 'gemini-2.5-pro') AS setup_difficulty
+FROM my_dataset.customer_feedback
+ORDER BY setup_difficulty DESC
+LIMIT 2;
+```
 
 The result looks similar to the following:
 
@@ -329,52 +343,58 @@ Even though the first review in the output is more positive, it specifically men
 
 You can also use the `AI.IF` function to find reviews that relate to text:
 
-    SELECT
-      review_id,
-      review_text
-    FROM my_dataset.customer_feedback
-    WHERE
-      AI.IF(
-        (
-          "Does this review discuss difficulty setting up the product? Review: ",
-          review_text),
-        endpoint => 'gemini-2.5-pro');
+```
+SELECT
+  review_id,
+  review_text
+FROM my_dataset.customer_feedback
+WHERE
+  AI.IF(
+    (
+      "Does this review discuss difficulty setting up the product? Review: ",
+      review_text),
+    endpoint => 'gemini-2.5-pro');
+```
 
 ## Combine functions
 
 It can be helpful to combine these functions in a single query. For example, the following query first filters reviews for negative sentiment, and then classifies them by the type of frustration:
 
-    SELECT
-      review_id,
-      review_text,
-      AI.CLASSIFY(
-        review_text,
-        categories => [
-          'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative'],
-        endpoint => 'gemini-2.5-pro') AS negative_topic
-    FROM my_dataset.customer_feedback
-    WHERE
-      AI.IF(
-        ("Does this review express a negative sentiment? Review: ", review_text),
-        endpoint => 'gemini-2.5-pro');
+```
+SELECT
+  review_id,
+  review_text,
+  AI.CLASSIFY(
+    review_text,
+    categories => [
+      'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative'],
+    endpoint => 'gemini-2.5-pro') AS negative_topic
+FROM my_dataset.customer_feedback
+WHERE
+  AI.IF(
+    ("Does this review express a negative sentiment? Review: ", review_text),
+    endpoint => 'gemini-2.5-pro');
+```
 
 ## Create reusable prompt UDFs
 
 To keep your queries readable, you can reuse your prompt logic by creating [user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) . The following query creates a function to detect negative sentiment by calling `AI.IF` with a custom prompt. Then, it calls that function to filter by negative review.
 
-    CREATE OR REPLACE FUNCTION my_dataset.is_negative_sentiment(review_text STRING)
-    RETURNS BOOL
-    AS (
-        AI.IF(
-          ("Does this review express a negative sentiment? Review: ", review_text),
-          endpoint => 'gemini-2.5-pro')
-    );
-    
-    SELECT
-      review_id,
-      review_text
-    FROM my_dataset.customer_feedback
-    WHERE my_dataset.is_negative_sentiment(review_text);
+```
+CREATE OR REPLACE FUNCTION my_dataset.is_negative_sentiment(review_text STRING)
+RETURNS BOOL
+AS (
+    AI.IF(
+      ("Does this review express a negative sentiment? Review: ", review_text),
+      endpoint => 'gemini-2.5-pro')
+);
+
+SELECT
+  review_id,
+  review_text
+FROM my_dataset.customer_feedback
+WHERE my_dataset.is_negative_sentiment(review_text);
+```
 
 ## Clean up
 
@@ -385,25 +405,25 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete your dataset
 
 To delete the dataset and all resources that it contains, including all tables and functions, run the following query:
 
-    DROP SCHEMA my_dataset CASCADE;
+```
+DROP SCHEMA my_dataset CASCADE;
+```
 
 ## What's next
 
-  - Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-  - Learn more about the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) , [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) , and [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) functions.
+- Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Learn more about the [`AI.IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) , [`AI.SCORE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) , and [`AI.CLASSIFY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) functions.

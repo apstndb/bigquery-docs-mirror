@@ -20,8 +20,8 @@ In this tutorial, you use Google Ads as your data source, but you can use any of
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
-  - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` )
+- [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` )
+- [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `roles/dataform.admin` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -40,19 +40,19 @@ In this tutorial, you use Google Ads as the example data source. For a full list
 3.  In the **Source type** section, for **Source** , choose **Google Ads** .
 
 4.  In the **Data source details** section:
-    
+
     1.  For **Customer ID** , enter your Google Ads customer ID.
     2.  For **Report type** , select **Standard** . The standard report includes the standard set of reports and fields as detailed in [Google Ads report transformation](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation) .
-          - For **Refresh window** , enter `5` .
+        - For **Refresh window** , enter `5` .
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
 
 6.  In the **Transfer config name** section, for **Display name** , enter `Marketing tutorial` .
 
 7.  In the **Schedule options** section:
-    
-      - For **Repeat frequency** , select **Days** .
-      - For **At** , enter `08:00` .
+
+    - For **Repeat frequency** , select **Days** .
+    - For **At** , enter `08:00` .
 
 8.  Click **Save** .
 
@@ -74,32 +74,34 @@ The following sample query analyzes Google Ads campaign performance for the past
 
 ### Console
 
-    SELECT
-      c.customer_id,
-      c.campaign_name,
-      c.campaign_status,
-      SUM(cs.metrics_impressions) AS Impressions,
-      SUM(cs.metrics_interactions) AS Interactions,
-      (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
-    FROM
-      `DATASET.ads_Campaign_CUSTOMER_ID` c
-    LEFT JOIN
-      `DATASET.ads_CampaignBasicStats_CUSTOMER_ID` cs
-    ON
-      (c.campaign_id = cs.campaign_id
-      AND cs._DATA_DATE BETWEEN
-      DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
-    WHERE
-      c._DATA_DATE = c._LATEST_DATE
-    GROUP BY
-      1, 2, 3
-    ORDER BY
-      Impressions DESC
+```
+SELECT
+  c.customer_id,
+  c.campaign_name,
+  c.campaign_status,
+  SUM(cs.metrics_impressions) AS Impressions,
+  SUM(cs.metrics_interactions) AS Interactions,
+  (SUM(cs.metrics_cost_micros) / 1000000) AS Cost
+FROM
+  `DATASET.ads_Campaign_CUSTOMER_ID` c
+LEFT JOIN
+  `DATASET.ads_CampaignBasicStats_CUSTOMER_ID` cs
+ON
+  (c.campaign_id = cs.campaign_id
+  AND cs._DATA_DATE BETWEEN
+  DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
+WHERE
+  c._DATA_DATE = c._LATEST_DATE
+GROUP BY
+  1, 2, 3
+ORDER BY
+  Impressions DESC
+```
 
 ### bq
 
-``` 
-  bq query --use_legacy_sql=false '
+```
+bq query --use_legacy_sql=false '
   SELECT
     c.customer_id,
     c.campaign_name,
@@ -125,8 +127,8 @@ The following sample query analyzes Google Ads campaign performance for the past
 
 Replace the following:
 
-  - `DATASET` : the name of the dataset that you created to store the transferred table
-  - `CUSTOMER_ID` : your Google Ads Customer ID.
+- ` ``DATASET`` ` : the name of the dataset that you created to store the transferred table
+- ` ``CUSTOMER_ID`` ` : your Google Ads Customer ID.
 
 ### Count of keywords
 
@@ -134,8 +136,8 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### Console
 
-``` 
-  SELECT
+```
+SELECT
     c.campaign_status AS CampaignStatus,
     a.ad_group_status AS AdGroupStatus,
     k.ad_group_criterion_status AS KeywordStatus,
@@ -159,8 +161,8 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### bq
 
-``` 
-  bq query --use_legacy_sql=false '
+```
+bq query --use_legacy_sql=false '
   SELECT
     c.campaign_status AS CampaignStatus,
     a.ad_group_status AS AdGroupStatus,
@@ -185,8 +187,8 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 Replace the following:
 
-  - `DATASET` : the name of the dataset that you created to store the transferred table
-  - `CUSTOMER_ID` : your Google Ads Customer ID.
+- ` ``DATASET`` ` : the name of the dataset that you created to store the transferred table
+- ` ``CUSTOMER_ID`` ` : your Google Ads Customer ID.
 
 ## Create a Dataform repository
 
@@ -199,7 +201,7 @@ Create a Dataform repository to store the [SQLX queries](https://docs.cloud.goog
 2.  Click add **Create repository** .
 
 3.  On the **Create repository** page, do the following:
-    
+
     1.  In the **Repository ID** field, enter `marketing-tutorial-repository` .
     2.  In the **Region** list, select a region.
     3.  Click **Create** .
@@ -219,10 +221,10 @@ Create a Dataform development workspace so that you can work on the transformati
 3.  Click add **Create development workspace** .
 
 4.  In the **Create development workspace** window, do the following:
-    
+
     1.  In the **Workspace ID** field, enter `marketing-tutorial-workspace` .
     2.  Click **Create** .
-    
+
     The development workspace page appears.
 
 5.  Click **Initialize workspace** .
@@ -250,7 +252,7 @@ In Dataform, you declare a data source destination by creating a SQLX file in th
 5.  Click **Create file** .
 
 6.  In the **Create new file** pane, do the following:
-    
+
     1.  In the **Add a file path** field, after `definitions/` , enter the name `definitions/googleads-declaration.sqlx` .
     2.  Click **Create file** .
 
@@ -261,9 +263,9 @@ Edit the `definitions/googleads-declaration.sqlx` to declare a transferred Googl
 1.  In your development workspace, in the **Files** pane, click your SQLX file for data source declaration.
 
 2.  In the file, enter the following code snippet:
-    
-    ``` 
-        config {
+
+    ```
+    config {
             type: "declaration",
             database: "PROJECT_ID",
             schema: "DATASET",
@@ -277,7 +279,7 @@ Define your data transformations by create a SQLX file in the `definitions/` dir
 
 ### Create the transformation SQLX file
 
-1.  In the **Files** pane, next to `definitions/` , click the more\_vert **More** menu, and then select **Create file** .
+1.  In the **Files** pane, next to `definitions/` , click the more_vert **More** menu, and then select **Create file** .
 2.  In the **Add a file path** field, enter `definitions/daily_performance.sqlx` .
 3.  Click **Create file** .
 
@@ -286,9 +288,9 @@ Define your data transformations by create a SQLX file in the `definitions/` dir
 1.  In the **Files** pane, expand the `definitions/` directory.
 
 2.  Select `daily_performance.sqlx` , then enter the following query:
-    
-    ``` 
-        config {
+
+    ```
+    config {
             type: "table",
             schema: "reporting",
             tags: ["daily", "google_ads"]
@@ -336,7 +338,7 @@ A production release in Dataform ensures that your environment is consistently u
 4.  Click **Create production release** .
 
 5.  In the **Create release configuration** pane, configure the following settings:
-    
+
     1.  In the **Release ID** field, enter `transformations` .
     2.  In the **Git commitish** field, leave the default value `main` .
     3.  In the **Schedule frequency** section, select **On-demand** .
@@ -362,11 +364,13 @@ Once you have created a production release, you can then create a workflow confi
 7.  Under **Authentication** , select **Execute with user credentials**
 
 8.  In the **Schedule frequency** section, do the following:
-    
-        1. Select **Repeat**.
-        1. For **Repeats**, select `Daily`.
-        1. For **At time**, enter `10:00 AM`.
-        1. For **Timezone**, select `Coordinated Universal Time (UTC)`.
+
+    ```
+    1. Select **Repeat**.
+    1. For **Repeats**, select `Daily`.
+    1. For **At time**, enter `10:00 AM`.
+    1. For **Timezone**, select `Coordinated Universal Time (UTC)`.
+    ```
 
 9.  Click **Selection of tags** .
 
@@ -388,7 +392,7 @@ To avoid incurring charges for BigQuery assets, delete the dataset called `dataf
 
 2.  In the **Explorer** panel, expand your project and select `dataform` .
 
-3.  Click the more\_vert **Actions** menu, and then select **Delete** .
+3.  Click the more_vert **Actions** menu, and then select **Delete** .
 
 4.  In the **Delete dataset** dialog, enter `delete` into the field, and then click **Delete** .
 
@@ -402,11 +406,11 @@ Dataform development workspace creation incurs no costs, but to delete the devel
 
 3.  Click the **Release & scheduling** tab.
 
-4.  Under the **Release configurations** section, click the more\_vert **More** menu next to the `production` configuration, and then click **Delete** .
+4.  Under the **Release configurations** section, click the more_vert **More** menu next to the `production` configuration, and then click **Delete** .
 
-5.  Under the **Workflow configurations** section, click the more\_vert **More** menu next to the `transformations` configuration, and then click **Delete** .
+5.  Under the **Workflow configurations** section, click the more_vert **More** menu next to the `transformations` configuration, and then click **Delete** .
 
-6.  In the **Development workspaces** tab, click the more\_vert **More** menu by `quickstart-workspace` , and then select **Delete** .
+6.  In the **Development workspaces** tab, click the more_vert **More** menu by `quickstart-workspace` , and then select **Delete** .
 
 7.  To confirm, click **Delete** .
 
@@ -416,7 +420,7 @@ Dataform repository creation incurs no costs, but to delete the repository you c
 
 1.  In the Google Cloud console, go to the **Dataform** page.
 
-2.  By `quickstart-repository` , click the more\_vert **More** menu, and then select **Delete** .
+2.  By `quickstart-repository` , click the more_vert **More** menu, and then select **Delete** .
 
 3.  In the **Delete repository** window, enter the name of the repository to confirm deletion.
 

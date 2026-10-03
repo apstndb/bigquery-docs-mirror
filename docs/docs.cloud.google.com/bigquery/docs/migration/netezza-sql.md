@@ -12,20 +12,20 @@ IBM Netezza data warehousing is designed to work with Netezza-specific SQL synta
 
 This document details the similarities and differences in SQL syntax between Netezza and BigQuery in the following areas:
 
-  - Data types
-  - SQL language elements
-  - Query syntax
-  - Data manipulation language (DML)
-  - Data definition language (DDL)
-  - Stored procedures
-  - Functions
+- Data types
+- SQL language elements
+- Query syntax
+- Data manipulation language (DML)
+- Data definition language (DDL)
+- Stored procedures
+- Functions
 
 You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries. IBM Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## Data types
 
 | **Netezza**                  | **BigQuery**                                                                                                                                                                                                   | **Notes**                                                                                                                                                                                                                                                                                  |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `INTEGER/INT/INT4`           | [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)                                                                                                         |                                                                                                                                                                                                                                                                                            |
 | `SMALLINT/INT2`              | [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)                                                                                                         |                                                                                                                                                                                                                                                                                            |
 | `BYTEINT/INT1`               | [`INT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)                                                                                                         |                                                                                                                                                                                                                                                                                            |
@@ -53,37 +53,11 @@ You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/
 
 When you convert date type formatting elements from Netezza to GoogleSQL, you must pay particular attention to time zone differences between `TIMESTAMP` and `DATETIME` , as summarized in the following table:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CURRENT_TIMESTAMP</code><br />
-<code dir="ltr" translate="no">CURRENT_TIME</code><br />
-<br />
-<code dir="ltr" translate="no">TIME</code> information in Netezza can have different time zone information, which is defined using the <code dir="ltr" translate="no">WITH TIME ZONE</code> syntax.</td>
-<td>If possible, use the <code dir="ltr" translate="no">CURRENT_TIMESTAMP</code> function, which is formatted correctly. However, the output format does not always show the UTC time zone (internally, BigQuery does not have a time zone). The <code dir="ltr" translate="no">DATETIME</code> object in the bq command-line tool and Google Cloud console is formatted using a <code dir="ltr" translate="no">T</code> separator according to RFC 3339. However, in Python and Java JDBC, a space is used as a separator. Use the explicit <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime"><code dir="ltr" translate="no">FORMAT_DATETIME</code></a> function to define the date format correctly. Otherwise, an explicit cast is made to a string, for example:<br />
-<code dir="ltr" translate="no">CAST(CURRENT_DATETIME() AS STRING)</code><br />
-This also returns a space separator.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">CURRENT_DATE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date"><code dir="ltr" translate="no">CURRENT_DATE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CURRENT_DATE-3</code></td>
-<td>BigQuery does not support arithmetic data operations. Instead, use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">DATE_ADD</code></a> function.</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**                                                                                                                                                    | **BigQuery**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CURRENT_TIMESTAMP` `CURRENT_TIME` `TIME` information in Netezza can have different time zone information, which is defined using the `WITH TIME ZONE` syntax. | If possible, use the `CURRENT_TIMESTAMP` function, which is formatted correctly. However, the output format does not always show the UTC time zone (internally, BigQuery does not have a time zone). The `DATETIME` object in the bq command-line tool and Google Cloud console is formatted using a `T` separator according to RFC 3339. However, in Python and Java JDBC, a space is used as a separator. Use the explicit [`FORMAT_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime) function to define the date format correctly. Otherwise, an explicit cast is made to a string, for example: `CAST(CURRENT_DATETIME() AS STRING)` This also returns a space separator. |
+| `CURRENT_DATE`                                                                                                                                                 | [`CURRENT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `CURRENT_DATE-3`                                                                                                                                               | BigQuery does not support arithmetic data operations. Instead, use the [`DATE_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add) function.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## `SELECT` statement
 
@@ -102,21 +76,21 @@ Generally, the Netezza `SELECT` statement is compatible with BigQuery. The follo
 </thead>
 <tbody>
 <tr class="odd">
-<td>A <code dir="ltr" translate="no">SELECT</code> statement without <code dir="ltr" translate="no">FROM</code> clause</td>
+<td>A <code>SELECT</code> statement without <code>FROM</code> clause</td>
 <td>Supports special case such as the following:
-<p><code dir="ltr" translate="no">SELECT 1 UNION ALL SELECT 2;</code></p></td>
+<p><code>SELECT 1 UNION ALL SELECT 2;</code></p></td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
+<td><pre data-fenced=""><code>SELECT
   (subquery) AS flag,
   CASE WHEN flag = 1 THEN ...</code></pre></td>
 <td>In BigQuery, columns cannot reference the output of other columns defined within the same query. You must duplicate the logic or move the logic into a nested query.
 <p>Option 1</p>
-<pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
+<pre data-fenced=""><code>SELECT
   (subquery) AS flag,
   CASE WHEN (subquery) = 1 THEN ...</code></pre>
 <p>Option 2</p>
-<pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
+<pre data-fenced=""><code>SELECT
   q.*,
   CASE WHEN flag = 1 THEN ...
 FROM (
@@ -130,59 +104,19 @@ FROM (
 
 ## Comparison operators
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">exp = exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp = exp2</code></a></td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">exp &lt;= exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp &lt;= exp2</code></a></td>
-<td>Less than or equal to</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">exp &lt; exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp &lt; exp2</code></a></td>
-<td>Less than</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">exp &lt;&gt; exp2</code><br />
-<code dir="ltr" translate="no">exp != exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp &lt;&gt; exp2</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp != exp2</code></a></td>
-<td>Not equal</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">exp &gt;= exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp &gt;= exp2</code></a></td>
-<td>Greater than or equal to</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">exp &gt; exp2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">exp &gt; exp2</code></a></td>
-<td>Greater than</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**                 | **BigQuery**                                                                                                                                                                                                                          | **Description**          |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------|
+| `exp = exp2`                | [`exp = exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                                                                     | Equal                    |
+| `exp <= exp2`               | [`exp <= exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                                                                    | Less than or equal to    |
+| `exp < exp2`                | [`exp < exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                                                                     | Less than                |
+| `exp <> exp2` `exp != exp2` | [`exp <> exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) [`exp != exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) | Not equal                |
+| `exp >= exp2`               | [`exp >= exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                                                                    | Greater than or equal to |
+| `exp > exp2`                | [`exp > exp2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                                                                                     | Greater than             |
 
 ## Built-in SQL functions
 
 | **Netezza**                              | **BigQuery**                                                                                                                                | **Description**                                                   |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
 | `CURRENT_DATE`                           | [`CURRENT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date)                            | Get the current date (year, month, and day).                      |
 | `CURRENT_TIME`                           | [`CURRENT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time)                            | Get the current time with fraction.                               |
 | `CURRENT_TIMESTAMP`                      | [`CURRENT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)             | Get the current system date and time, to the nearest full second. |
@@ -193,7 +127,7 @@ FROM (
 | `ADD_MONTHS(date_expr, num_expr)`        | [`DATE_ADD(date, INTERVAL k MONTH)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add)            | Add months to a date.                                             |
 | `DURATION_ADD(date, k)`                  | [`DATE_ADD(date, INTERVAL k DAY)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add)              | Perform addition on dates.                                        |
 | `DURATION_SUBTRACT(date, k)`             | [`DATE_SUB(date, INTERVAL k DAY)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub)              | Perform subtraction on dates.                                     |
-| `str1 \|\| str2`                         | [`CONCAT(str1, str2)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat)                          | Concatenate strings.                                              |
+| `str1 || str2`                           | [`CONCAT(str1, str2)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat)                          | Concatenate strings.                                              |
 
 ## Functions
 
@@ -201,592 +135,155 @@ This section compares Netezza and BigQuery functions.
 
 ### Aggregate functions
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value"><code dir="ltr" translate="no">ANY_VALUE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct"><code dir="ltr" translate="no">APPROX_COUNT_DISTINCT</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles"><code dir="ltr" translate="no">APPROX_QUANTILES</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count"><code dir="ltr" translate="no">APPROX_TOP_COUNT</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum"><code dir="ltr" translate="no">APPROX_TOP_SUM</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">AVG</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg"><code dir="ltr" translate="no">AVG</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNand</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and"><code dir="ltr" translate="no">BIT_AND</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNnot</code></td>
-<td>Bitwise not operator: <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators"><code dir="ltr" translate="no">~</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNor</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or"><code dir="ltr" translate="no">BIT_OR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNxor</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor"><code dir="ltr" translate="no">BIT_XOR</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNshl</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNshr</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CORR</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr"><code dir="ltr" translate="no">CORR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">COUNT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count"><code dir="ltr" translate="no">COUNT</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif"><code dir="ltr" translate="no">COUNTIF</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">COVAR_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop"><code dir="ltr" translate="no">COVAR_POP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">COVAR_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp"><code dir="ltr" translate="no">COVAR_SAMP</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">GROUPING</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and"><code dir="ltr" translate="no">LOGICAL_AND</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or"><code dir="ltr" translate="no">LOGICAL_OR</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">MAX</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max"><code dir="ltr" translate="no">MAX</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">MIN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min"><code dir="ltr" translate="no">MIN</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">MEDIAN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont"><code dir="ltr" translate="no">PERCENTILE_CONT</code></a> <code dir="ltr" translate="no">(x, 0.5)</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">STDDEV_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop"><code dir="ltr" translate="no">STDDEV_POP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">STDDEV_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp"><code dir="ltr" translate="no">STDDEV_SAMP</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev"><code dir="ltr" translate="no">STDDEV</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg"><code dir="ltr" translate="no">STRING_AGG</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">SUM</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum"><code dir="ltr" translate="no">SUM</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">VAR_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop"><code dir="ltr" translate="no">VAR_POP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">VAR_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp"><code dir="ltr" translate="no">VAR_SAMP</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">VARIANCE</code></a></td>
-</tr>
-</tbody>
-</table>
+| **Netezza**   | **BigQuery**                                                                                                                                                                                                                                          |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|               | [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)                                                                                                                                       |
+|               | [`APPROX_COUNT_DISTINCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_count_distinct)                                                                                                   |
+|               | [`APPROX_QUANTILES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles)                                                                                                             |
+|               | [`APPROX_TOP_COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)                                                                                                             |
+|               | [`APPROX_TOP_SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)                                                                                                                 |
+| `AVG`         | [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)                                                                                                                                                   |
+| `intNand`     | [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and)                                                                                                                                           |
+| `intNnot`     | Bitwise not operator: [`~`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                                                                                                                           |
+| `intNor`      | [`BIT_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or)                                                                                                                                             |
+| `intNxor`     | [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)                                                                                                                                           |
+| `intNshl`     |                                                                                                                                                                                                                                                       |
+| `intNshr`     |                                                                                                                                                                                                                                                       |
+| `CORR`        | [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)                                                                                                                                     |
+| `COUNT`       | [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)                                                                                                                                               |
+|               | [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif)                                                                                                                                           |
+| `COVAR_POP`   | [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)                                                                                                                           |
+| `COVAR_SAMP`  | [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)                                                                                                                         |
+| `GROUPING`    |                                                                                                                                                                                                                                                       |
+|               | [`LOGICAL_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and)                                                                                                                                   |
+|               | [`LOGICAL_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or)                                                                                                                                     |
+| `MAX`         | [`MAX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)                                                                                                                                                   |
+| `MIN`         | [`MIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)                                                                                                                                                   |
+| `MEDIAN`      | [`PERCENTILE_CONT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont) `(x, 0.5)`                                                                                                               |
+| `STDDEV_POP`  | [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)                                                                                                                         |
+| `STDDEV_SAMP` | [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev) |
+|               | [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)                                                                                                                                     |
+| `SUM`         | [`SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum)                                                                                                                                                   |
+| `VAR_POP`     | [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)                                                                                                                               |
+| `VAR_SAMP`    | [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp) [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)   |
 
 ### Analytical functions
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value"><code dir="ltr" translate="no">ANY_VALUE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg"><code dir="ltr" translate="no">ARRAY_AGG</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY_CONCAT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg"><code dir="ltr" translate="no">ARRAY_CONCAT_AGG</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ARRAY_COMBINE</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY_COUNT</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ARRAY_SPLIT</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ARRAY_TYPE</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">AVG</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg"><code dir="ltr" translate="no">AVG</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNand</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and"><code dir="ltr" translate="no">BIT_AND</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNnot</code></td>
-<td>Bitwise not operator: <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators"><code dir="ltr" translate="no">~</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNor</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or"><code dir="ltr" translate="no">BIT_OR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNxor</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor"><code dir="ltr" translate="no">BIT_XOR</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">intNshl</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">intNshr</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CORR</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr"><code dir="ltr" translate="no">CORR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">COUNT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count"><code dir="ltr" translate="no">COUNT</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif"><code dir="ltr" translate="no">COUNTIF</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">COVAR_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop"><code dir="ltr" translate="no">COVAR_POP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">COVAR_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp"><code dir="ltr" translate="no">COVAR_SAMP</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">CUME_DIST</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#cume_dist"><code dir="ltr" translate="no">CUME_DIST</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">DENSE_RANK</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#dense_rank"><code dir="ltr" translate="no">DENSE_RANK</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">FIRST_VALUE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#first_value"><code dir="ltr" translate="no">FIRST_VALUE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">LAG</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lag"><code dir="ltr" translate="no">LAG</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">LAST_VALUE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#last_value"><code dir="ltr" translate="no">LAST_VALUE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">LEAD</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead"><code dir="ltr" translate="no">LEAD</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">AND</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and"><code dir="ltr" translate="no">LOGICAL_AND</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">OR</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or"><code dir="ltr" translate="no">LOGICAL_OR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">MAX</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max"><code dir="ltr" translate="no">MAX</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">MIN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min"><code dir="ltr" translate="no">MIN</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#nth_value"><code dir="ltr" translate="no">NTH_VALUE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">NTILE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile"><code dir="ltr" translate="no">NTILE</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">PERCENT_RANK</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank"><code dir="ltr" translate="no">PERCENT_RANK</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">PERCENTILE_CONT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont"><code dir="ltr" translate="no">PERCENTILE_CONT</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">PERCENTILE_DISC</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc"><code dir="ltr" translate="no">PERCENTILE_DISC</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">RANK</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#rank"><code dir="ltr" translate="no">RANK</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ROW_NUMBER</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#row_number"><code dir="ltr" translate="no">ROW_NUMBER</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">STDDEV</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev"><code dir="ltr" translate="no">STDDEV</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">STDDEV_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop"><code dir="ltr" translate="no">STDDEV_POP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">STDDEV_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp"><code dir="ltr" translate="no">STDDEV_SAMP</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg"><code dir="ltr" translate="no">STRING_AGG</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">SUM</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum"><code dir="ltr" translate="no">SUM</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">VARIANCE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">VARIANCE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">VAR_POP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop"><code dir="ltr" translate="no">VAR_POP</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">VAR_SAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp"><code dir="ltr" translate="no">VAR_SAMP</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">VARIANCE</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">WIDTH_BUCKET</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Netezza**       | **BigQuery**                                                                                                                                                                                                                                        |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                   | [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)                                                                                                                                     |
+|                   | [`ARRAY_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)                                                                                                                                     |
+| `ARRAY_CONCAT`    | [`ARRAY_CONCAT_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)                                                                                                                       |
+| `ARRAY_COMBINE`   |                                                                                                                                                                                                                                                     |
+| `ARRAY_COUNT`     |                                                                                                                                                                                                                                                     |
+| `ARRAY_SPLIT`     |                                                                                                                                                                                                                                                     |
+| `ARRAY_TYPE`      |                                                                                                                                                                                                                                                     |
+| `AVG`             | [`AVG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#avg)                                                                                                                                                 |
+| `intNand`         | [`BIT_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_and)                                                                                                                                         |
+| `intNnot`         | Bitwise not operator: [`~`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators)                                                                                                                         |
+| `intNor`          | [`BIT_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_or)                                                                                                                                           |
+| `intNxor`         | [`BIT_XOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)                                                                                                                                         |
+| `intNshl`         |                                                                                                                                                                                                                                                     |
+| `intNshr`         |                                                                                                                                                                                                                                                     |
+| `CORR`            | [`CORR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)                                                                                                                                   |
+| `COUNT`           | [`COUNT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)                                                                                                                                             |
+|                   | [`COUNTIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif)                                                                                                                                         |
+| `COVAR_POP`       | [`COVAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)                                                                                                                         |
+| `COVAR_SAMP`      | [`COVAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)                                                                                                                       |
+| `CUME_DIST`       | [`CUME_DIST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#cume_dist)                                                                                                                                     |
+| `DENSE_RANK`      | [`DENSE_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#dense_rank)                                                                                                                                   |
+| `FIRST_VALUE`     | [`FIRST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#first_value)                                                                                                                                |
+| `LAG`             | [`LAG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lag)                                                                                                                                                |
+| `LAST_VALUE`      | [`LAST_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#last_value)                                                                                                                                  |
+| `LEAD`            | [`LEAD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead)                                                                                                                                              |
+| `AND`             | [`LOGICAL_AND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_and)                                                                                                                                 |
+| `OR`              | [`LOGICAL_OR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#logical_or)                                                                                                                                   |
+| `MAX`             | [`MAX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)                                                                                                                                                 |
+| `MIN`             | [`MIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)                                                                                                                                                 |
+|                   | [`NTH_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#nth_value)                                                                                                                                    |
+| `NTILE`           | [`NTILE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#ntile)                                                                                                                                             |
+| `PERCENT_RANK`    | [`PERCENT_RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank)                                                                                                                               |
+| `PERCENTILE_CONT` | [`PERCENTILE_CONT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont)                                                                                                                        |
+| `PERCENTILE_DISC` | [`PERCENTILE_DISC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc)                                                                                                                        |
+| `RANK`            | [`RANK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#rank)                                                                                                                                               |
+| `ROW_NUMBER`      | [`ROW_NUMBER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions#row_number)                                                                                                                                   |
+| `STDDEV`          | [`STDDEV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)                                                                                                                               |
+| `STDDEV_POP`      | [`STDDEV_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)                                                                                                                       |
+| `STDDEV_SAMP`     | [`STDDEV_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp)                                                                                                                     |
+|                   | [`STRING_AGG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)                                                                                                                                   |
+| `SUM`             | [`SUM`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#sum)                                                                                                                                                 |
+| `VARIANCE`        | [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)                                                                                                                           |
+| `VAR_POP`         | [`VAR_POP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)                                                                                                                             |
+| `VAR_SAMP`        | [`VAR_SAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp) [`VARIANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance) |
+| `WIDTH_BUCKET`    |                                                                                                                                                                                                                                                     |
 
 ### Date and time functions
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ADD_MONTHS</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">DATE_ADD</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add"><code dir="ltr" translate="no">TIMESTAMP_ADD</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">AGE</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CURRENT_DATE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date"><code dir="ltr" translate="no">CURRENT_DATE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#current_datetime"><code dir="ltr" translate="no">CURRENT_DATETIME</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CURRENT_TIME</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time"><code dir="ltr" translate="no">CURRENT_TIME</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">CURRENT_TIME(p)</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CURRENT_TIMESTAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp"><code dir="ltr" translate="no">CURRENT_TIMESTAMP</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">CURRENT_TIMESTAMP(p)</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date"><code dir="ltr" translate="no">DATE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">DATE_ADD</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff"><code dir="ltr" translate="no">DATE_DIFF</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date"><code dir="ltr" translate="no">DATE_FROM_UNIX_DATE</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub"><code dir="ltr" translate="no">DATE_SUB</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">DATE_TRUNC</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc"><code dir="ltr" translate="no">DATE_TRUNC</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">DATE_PART</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime"><code dir="ltr" translate="no">DATETIME</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_add"><code dir="ltr" translate="no">DATETIME_ADD</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_diff"><code dir="ltr" translate="no">DATETIME_DIFF</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_sub"><code dir="ltr" translate="no">DATETIME_SUB</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_trunc"><code dir="ltr" translate="no">DATETIME_TRUNC</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">DURATION_ADD</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">DURATION_SUBTRACT</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">EXTRACT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#extract"><code dir="ltr" translate="no">EXTRACT (DATE)</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract"><code dir="ltr" translate="no">EXTRACT (TIMESTAMP)</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date"><code dir="ltr" translate="no">FORMAT_DATE</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime"><code dir="ltr" translate="no">FORMAT_DATETIME</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time"><code dir="ltr" translate="no">FORMAT_TIME</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp"><code dir="ltr" translate="no">FORMAT_TIMESTAMP</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">LAST_DAY</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub"><code dir="ltr" translate="no">DATE_SUB</code></a> <code dir="ltr" translate="no">(</code> <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc"><code dir="ltr" translate="no">DATE_TRUNC</code></a> <code dir="ltr" translate="no">(</code> <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">DATE_ADD</code></a> <code dir="ltr" translate="no">(</code> <code dir="ltr" translate="no">date_expression, INTERVAL 1 MONTH ), MONTH ),</code> <code dir="ltr" translate="no">INTERVAL 1 DAY )</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">MONTHS_BETWEEN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff"><code dir="ltr" translate="no">DATE_DIFF</code></a> <code dir="ltr" translate="no">(date_expression,</code> <code dir="ltr" translate="no">date_expression, MONTH)</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">NEXT_DAY</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">NOW</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">OVERLAPS</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date"><code dir="ltr" translate="no">PARSE_DATE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime"><code dir="ltr" translate="no">PARSE_DATETIME</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#parse_time"><code dir="ltr" translate="no">PARSE_TIME</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp"><code dir="ltr" translate="no">PARSE_TIMESTAMP</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#string"><code dir="ltr" translate="no">STRING</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time"><code dir="ltr" translate="no">TIME</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_add"><code dir="ltr" translate="no">TIME_ADD</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_diff"><code dir="ltr" translate="no">TIME_DIFF</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_sub"><code dir="ltr" translate="no">TIME_SUB</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_trunc"><code dir="ltr" translate="no">TIME_TRUNC</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">TIMEOFDAY</code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">TIMESTAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime"><code dir="ltr" translate="no">DATETIME</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add"><code dir="ltr" translate="no">TIMESTAMP_ADD</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_diff"><code dir="ltr" translate="no">TIMESTAMP_DIFF</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros"><code dir="ltr" translate="no">TIMESTAMP_MICROS</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis"><code dir="ltr" translate="no">TIMESTAMP_MILLIS</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds"><code dir="ltr" translate="no">TIMESTAMP_SECONDS</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_sub"><code dir="ltr" translate="no">TIMESTAMP_SUB</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc"><code dir="ltr" translate="no">TIMESTAMP_TRUNC</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">TIMEZONE</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">TO_DATE</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date"><code dir="ltr" translate="no">PARSE_DATE</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">TO_TIMESTAMP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp"><code dir="ltr" translate="no">PARSE_TIMESTAMP</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#unix_date"><code dir="ltr" translate="no">UNIX_DATE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros"><code dir="ltr" translate="no">UNIX_MICROS</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis"><code dir="ltr" translate="no">UNIX_MILLIS</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds"><code dir="ltr" translate="no">UNIX_SECONDS</code></a></td>
-</tr>
-</tbody>
-</table>
+| **Netezza**            | **BigQuery**                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ADD_MONTHS`           | [`DATE_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add) [`TIMESTAMP_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add)                                                                                                                                                                              |
+| `AGE`                  |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `CURRENT_DATE`         | [`CURRENT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date)                                                                                                                                                                                                                                                                                              |
+|                        | [`CURRENT_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#current_datetime)                                                                                                                                                                                                                                                                                  |
+| `CURRENT_TIME`         | [`CURRENT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time)                                                                                                                                                                                                                                                                                              |
+| `CURRENT_TIME(p)`      |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `CURRENT_TIMESTAMP`    | [`CURRENT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)                                                                                                                                                                                                                                                                               |
+| `CURRENT_TIMESTAMP(p)` |                                                                                                                                                                                                                                                                                                                                                                                                               |
+|                        | [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date)                                                                                                                                                                                                                                                                                                              |
+|                        | [`DATE_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add)                                                                                                                                                                                                                                                                                                      |
+|                        | [`DATE_DIFF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff)                                                                                                                                                                                                                                                                                                    |
+|                        | [`DATE_FROM_UNIX_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date)                                                                                                                                                                                                                                                                                |
+|                        | [`DATE_SUB`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub)                                                                                                                                                                                                                                                                                                      |
+| `DATE_TRUNC`           | [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc)                                                                                                                                                                                                                                                                                                  |
+| `DATE_PART`            |                                                                                                                                                                                                                                                                                                                                                                                                               |
+|                        | [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime)                                                                                                                                                                                                                                                                                                  |
+|                        | [`DATETIME_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_add)                                                                                                                                                                                                                                                                                          |
+|                        | [`DATETIME_DIFF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_diff)                                                                                                                                                                                                                                                                                        |
+|                        | [`DATETIME_SUB`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_sub)                                                                                                                                                                                                                                                                                          |
+|                        | [`DATETIME_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_trunc)                                                                                                                                                                                                                                                                                      |
+| `DURATION_ADD`         |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `DURATION_SUBTRACT`    |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `EXTRACT`              | [`EXTRACT (DATE)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#extract) [`EXTRACT (TIMESTAMP)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract)                                                                                                                                                                         |
+|                        | [`FORMAT_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date)                                                                                                                                                                                                                                                                                                |
+|                        | [`FORMAT_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)                                                                                                                                                                                                                                                                                    |
+|                        | [`FORMAT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time)                                                                                                                                                                                                                                                                                                |
+|                        | [`FORMAT_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)                                                                                                                                                                                                                                                                                 |
+| `LAST_DAY`             | [`DATE_SUB`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub) `(` [`DATE_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc) `(` [`DATE_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add) `(` `date_expression, INTERVAL 1 MONTH ), MONTH ),` `INTERVAL 1 DAY )` |
+| `MONTHS_BETWEEN`       | [`DATE_DIFF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff) `(date_expression,` `date_expression, MONTH)`                                                                                                                                                                                                                                                      |
+| `NEXT_DAY`             |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `NOW`                  |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `OVERLAPS`             |                                                                                                                                                                                                                                                                                                                                                                                                               |
+|                        | [`PARSE_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date)                                                                                                                                                                                                                                                                                                  |
+|                        | [`PARSE_DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime)                                                                                                                                                                                                                                                                                      |
+|                        | [`PARSE_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#parse_time)                                                                                                                                                                                                                                                                                                  |
+|                        | [`PARSE_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp)                                                                                                                                                                                                                                                                                   |
+|                        | [`STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#string)                                                                                                                                                                                                                                                                                                     |
+|                        | [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time)                                                                                                                                                                                                                                                                                                              |
+|                        | [`TIME_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_add)                                                                                                                                                                                                                                                                                                      |
+|                        | [`TIME_DIFF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_diff)                                                                                                                                                                                                                                                                                                    |
+|                        | [`TIME_SUB`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_sub)                                                                                                                                                                                                                                                                                                      |
+|                        | [`TIME_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_trunc)                                                                                                                                                                                                                                                                                                  |
+| `TIMEOFDAY`            |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `TIMESTAMP`            | [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime)                                                                                                                                                                                                                                                                                                  |
+|                        | [`TIMESTAMP_ADD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add)                                                                                                                                                                                                                                                                                       |
+|                        | [`TIMESTAMP_DIFF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_diff)                                                                                                                                                                                                                                                                                     |
+|                        | [`TIMESTAMP_MICROS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros)                                                                                                                                                                                                                                                                                 |
+|                        | [`TIMESTAMP_MILLIS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis)                                                                                                                                                                                                                                                                                 |
+|                        | [`TIMESTAMP_SECONDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds)                                                                                                                                                                                                                                                                               |
+|                        | [`TIMESTAMP_SUB`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_sub)                                                                                                                                                                                                                                                                                       |
+|                        | [`TIMESTAMP_TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc)                                                                                                                                                                                                                                                                                   |
+| `TIMEZONE`             |                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `TO_DATE`              | [`PARSE_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date)                                                                                                                                                                                                                                                                                                  |
+| `TO_TIMESTAMP`         | [`PARSE_TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp)                                                                                                                                                                                                                                                                                   |
+|                        | [`UNIX_DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#unix_date)                                                                                                                                                                                                                                                                                                    |
+|                        | [`UNIX_MICROS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros)                                                                                                                                                                                                                                                                                           |
+|                        | [`UNIX_MILLIS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis)                                                                                                                                                                                                                                                                                           |
+|                        | [`UNIX_SECONDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds)                                                                                                                                                                                                                                                                                         |
 
 ### String functions
 
 | **Netezza**             | **BigQuery**                                                                                                                                                                                                                                 |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ASCII`                 | [`TO_CODE_POINTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#to_code_points) `(string_expr)[OFFSET(0)]`                                                                                            |
 |                         | [`BYTE_LENGTH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#byte_length)                                                                                                                             |
 |                         | [`TO_HEX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#to_hex)                                                                                                                                       |
@@ -857,193 +354,50 @@ This section compares Netezza and BigQuery functions.
 
 ### Math functions
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ABS</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#abs"><code dir="ltr" translate="no">ABS</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ACOS</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acos"><code dir="ltr" translate="no">ACOS</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acosh"><code dir="ltr" translate="no">ACOSH</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ASIN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#asin"><code dir="ltr" translate="no">ASIN</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#asinh"><code dir="ltr" translate="no">ASINH</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ATAN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atan"><code dir="ltr" translate="no">ATAN</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ATAN2</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atan2"><code dir="ltr" translate="no">ATAN2</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atanh"><code dir="ltr" translate="no">ATANH</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">CEIL</code><br />
-<code dir="ltr" translate="no">DCEIL</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ceil"><code dir="ltr" translate="no">CEIL</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ceiling"><code dir="ltr" translate="no">CEILING</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">COS</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cos"><code dir="ltr" translate="no">COS</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cosh"><code dir="ltr" translate="no">COSH</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">COT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cot"><code dir="ltr" translate="no">COT</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">DEGREES</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#div"><code dir="ltr" translate="no">DIV</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">EXP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#exp"><code dir="ltr" translate="no">EXP</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">FLOOR</code><br />
-<code dir="ltr" translate="no">DFLOOR</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#floor"><code dir="ltr" translate="no">FLOOR</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">GREATEST</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#greatest"><code dir="ltr" translate="no">GREATEST</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ieee_divide"><code dir="ltr" translate="no">IEEE_DIVIDE</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#is_inf"><code dir="ltr" translate="no">IS_INF</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#is_nan"><code dir="ltr" translate="no">IS_NAN</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">LEAST</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#least"><code dir="ltr" translate="no">LEAST</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">LN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ln"><code dir="ltr" translate="no">LN</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">LOG</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#log"><code dir="ltr" translate="no">LOG</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#log10"><code dir="ltr" translate="no">LOG10</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">MOD</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#mod"><code dir="ltr" translate="no">MOD</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif"><code dir="ltr" translate="no">NULLIF</code></a> <code dir="ltr" translate="no">(expr, 0)</code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">PI</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acos"><code dir="ltr" translate="no">ACOS</code></a> <code dir="ltr" translate="no">(-1)</code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">POW</code><br />
-<code dir="ltr" translate="no">FPOW</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#power"><code dir="ltr" translate="no">POWER</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#pow"><code dir="ltr" translate="no">POW</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">RADIANS</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">RANDOM</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#rand"><code dir="ltr" translate="no">RAND</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ROUND</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round"><code dir="ltr" translate="no">ROUND</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide"><code dir="ltr" translate="no">SAFE_DIVIDE</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">SETSEED</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">SIGN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sign"><code dir="ltr" translate="no">SIGN</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">SIN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sin"><code dir="ltr" translate="no">SIN</code></a></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sinh"><code dir="ltr" translate="no">SINH</code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">SQRT</code><br />
-<code dir="ltr" translate="no">NUMERIC_SQRT</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sqrt"><code dir="ltr" translate="no">SQRT</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">TAN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#tan"><code dir="ltr" translate="no">TAN</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#tanh"><code dir="ltr" translate="no">TANH</code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">TRUNC</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#trunc"><code dir="ltr" translate="no">TRUNC</code></a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull"><code dir="ltr" translate="no">IFNULL</code></a> <code dir="ltr" translate="no">(expr, 0)</code></td>
-</tr>
-</tbody>
-</table>
+| **Netezza**           | **BigQuery**                                                                                                                                                                                                      |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ABS`                 | [`ABS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#abs)                                                                                                            |
+| `ACOS`                | [`ACOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acos)                                                                                                          |
+|                       | [`ACOSH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acosh)                                                                                                        |
+| `ASIN`                | [`ASIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#asin)                                                                                                          |
+|                       | [`ASINH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#asinh)                                                                                                        |
+| `ATAN`                | [`ATAN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atan)                                                                                                          |
+| `ATAN2`               | [`ATAN2`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atan2)                                                                                                        |
+|                       | [`ATANH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#atanh)                                                                                                        |
+| `CEIL` `DCEIL`        | [`CEIL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ceil)                                                                                                          |
+|                       | [`CEILING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ceiling)                                                                                                    |
+| `COS`                 | [`COS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cos)                                                                                                            |
+|                       | [`COSH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cosh)                                                                                                          |
+| `COT`                 | [`COT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cot)                                                                                                            |
+| `DEGREES`             |                                                                                                                                                                                                                   |
+|                       | [`DIV`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#div)                                                                                                            |
+| `EXP`                 | [`EXP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#exp)                                                                                                            |
+| `FLOOR` `DFLOOR`      | [`FLOOR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#floor)                                                                                                        |
+| `GREATEST`            | [`GREATEST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#greatest)                                                                                                  |
+|                       | [`IEEE_DIVIDE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ieee_divide)                                                                                            |
+|                       | [`IS_INF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#is_inf)                                                                                                      |
+|                       | [`IS_NAN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#is_nan)                                                                                                      |
+| `LEAST`               | [`LEAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#least)                                                                                                        |
+| `LN`                  | [`LN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#ln)                                                                                                              |
+| `LOG`                 | [`LOG`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#log)                                                                                                            |
+|                       | [`LOG10`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#log10)                                                                                                        |
+| `MOD`                 | [`MOD`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#mod)                                                                                                            |
+|                       | [`NULLIF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif) `(expr, 0)`                                                                                         |
+| `PI`                  | [`ACOS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#acos) `(-1)`                                                                                                   |
+| `POW` `FPOW`          | [`POWER`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#power) [`POW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#pow) |
+| `RADIANS`             |                                                                                                                                                                                                                   |
+| `RANDOM`              | [`RAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#rand)                                                                                                          |
+| `ROUND`               | [`ROUND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round)                                                                                                        |
+|                       | [`SAFE_DIVIDE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide)                                                                                            |
+| `SETSEED`             |                                                                                                                                                                                                                   |
+| `SIGN`                | [`SIGN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sign)                                                                                                          |
+| `SIN`                 | [`SIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sin)                                                                                                            |
+|                       | [`SINH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sinh)                                                                                                          |
+| `SQRT` `NUMERIC_SQRT` | [`SQRT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#sqrt)                                                                                                          |
+| `TAN`                 | [`TAN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#tan)                                                                                                            |
+|                       | [`TANH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#tanh)                                                                                                          |
+| `TRUNC`               | [`TRUNC`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#trunc)                                                                                                        |
+|                       | [`IFNULL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) `(expr, 0)`                                                                                         |
 
 ## DML syntax
 
@@ -1064,24 +418,24 @@ This section compares Netezza and BigQuery DML syntax.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>INSERT INTO table VALUES (...);</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>INSERT INTO table (...) VALUES (...);</code></pre>
+<td><pre data-fenced=""><code>INSERT INTO table VALUES (...);</code></pre></td>
+<td><pre data-fenced=""><code>INSERT INTO table (...) VALUES (...);</code></pre>
 <br />
-Netezza offers a <code dir="ltr" translate="no">DEFAULT</code> keyword and other constraints for columns. In BigQuery, omitting column names in the <code dir="ltr" translate="no">INSERT</code> statement is valid only if all columns are given.</td>
+Netezza offers a <code>DEFAULT</code> keyword and other constraints for columns. In BigQuery, omitting column names in the <code>INSERT</code> statement is valid only if all columns are given.</td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>INSERT INTO table (...) VALUES (...);
+<td><pre data-fenced=""><code>INSERT INTO table (...) VALUES (...);
 INSERT INTO table (...) VALUES (...);</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>INSERT INTO table VALUES (), ();</code></pre>
+<td><pre data-fenced=""><code>INSERT INTO table VALUES (), ();</code></pre>
 <p>BigQuery imposes <a href="https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements">DML quotas</a> , which restrict the number of DML statements you can execute daily. To make the best use of your quota, consider the following approaches:</p>
 <ul>
-<li>Combine multiple rows in a single <code dir="ltr" translate="no">INSERT</code> statement, instead of one row per <code dir="ltr" translate="no">INSERT</code> statement.</li>
+<li>Combine multiple rows in a single <code>INSERT</code> statement, instead of one row per <code>INSERT</code> statement.</li>
 </ul>
 <ul>
-<li>Combine multiple DML statements (including an <code dir="ltr" translate="no">INSERT</code> statement) using a <code dir="ltr" translate="no">MERGE</code> statement.</li>
+<li>Combine multiple DML statements (including an <code>INSERT</code> statement) using a <code>MERGE</code> statement.</li>
 </ul>
 <ul>
-<li>Use a <code dir="ltr" translate="no">CREATE TABLE ... AS SELECT</code> statement to create and populate new tables.</li>
+<li>Use a <code>CREATE TABLE ... AS SELECT</code> statement to create and populate new tables.</li>
 </ul></td>
 </tr>
 </tbody>
@@ -1108,20 +462,20 @@ In Netezza, the `WHERE` clause is optional, but in BigQuery it is necessary.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE tbl
+<td><pre data-fenced=""><code>UPDATE tbl
 SET
 tbl.col1=val1;</code></pre></td>
-<td>Not supported without the <code dir="ltr" translate="no">WHERE</code> clause. Use a <code dir="ltr" translate="no">WHERE true</code> clause to update all rows.</td>
+<td>Not supported without the <code>WHERE</code> clause. Use a <code>WHERE true</code> clause to update all rows.</td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A
+<td><pre data-fenced=""><code>UPDATE A
 SET
   y = B.y,
   z = B.z + 1
 FROM B
 WHERE A.x = B.x
   AND A.y IS NULL;</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A
+<td><pre data-fenced=""><code>UPDATE A
 SET
   y = B.y,
   z = B.z + 1
@@ -1130,20 +484,20 @@ WHERE A.x = B.x
   AND A.y IS NULL;</code></pre></td>
 </tr>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A alias
+<td><pre data-fenced=""><code>UPDATE A alias
 SET x = x + 1
 WHERE f(x) IN (0, 1)</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A
+<td><pre data-fenced=""><code>UPDATE A
 SET x = x + 1
 WHERE f(x) IN (0, 1);</code></pre></td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A
+<td><pre data-fenced=""><code>UPDATE A
 SET z = B.z
 FROM B
 WHERE A.x = B.x
   AND A.y = B.y</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>UPDATE A
+<td><pre data-fenced=""><code>UPDATE A
 SET z = B.z
 FROM B
 WHERE A.x = B.x
@@ -1177,15 +531,15 @@ In BigQuery, the `DELETE` statement must have a `WHERE` clause. In Netezza, the 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>BEGIN;
+<td><pre data-fenced=""><code>BEGIN;
 LOCK TABLE A IN EXCLUSIVE MODE;
 DELETE FROM A;
 INSERT INTO A SELECT * FROM B;
 COMMIT;</code></pre></td>
-<td>Replacing the contents of a table with query output is the equivalent of a transaction. You can do this with either a <a href="https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query"><code dir="ltr" translate="no">query</code></a> or a <a href="https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table">copy ( <code dir="ltr" translate="no">cp</code> )</a> operation.<br />
+<td>Replacing the contents of a table with query output is the equivalent of a transaction. You can do this with either a <a href="https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query"><code>query</code></a> or a <a href="https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table">copy ( <code>cp</code> )</a> operation.<br />
 <br />
 
-<pre dir="ltr" data-is-upgraded="" translate="no"><code>bq query \
+<pre data-fenced=""><code>bq query \
 
 --replace \
 
@@ -1198,20 +552,20 @@ tableA \
 FROM tableB \
 
 WHERE ...&#39;</code></pre>
-<pre dir="ltr" data-is-upgraded="" translate="no"><code>bq cp \
+<pre data-fenced=""><code>bq cp \
 
 -f tableA tableB</code></pre></td>
 <td>Replace the contents of a table with the results of a query.</td>
 </tr>
 <tr class="even">
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>DELETE FROM database.table</code></pre></td>
-<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>DELETE FROM table WHERE TRUE;</code></pre></td>
-<td>In Netezza, when a delete statement is run, the rows are not deleted physically but only marked for deletion. Running the <code dir="ltr" translate="no">GROOM TABLE</code> or <code dir="ltr" translate="no">nzreclaim</code> commands later removes the rows marked for deletion and reclaims the corresponding disk space.</td>
+<td><pre data-fenced=""><code>DELETE FROM database.table</code></pre></td>
+<td><pre data-fenced=""><code>DELETE FROM table WHERE TRUE;</code></pre></td>
+<td>In Netezza, when a delete statement is run, the rows are not deleted physically but only marked for deletion. Running the <code>GROOM TABLE</code> or <code>nzreclaim</code> commands later removes the rows marked for deletion and reclaims the corresponding disk space.</td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">GROOM TABLE</code></td>
+<td><code>GROOM TABLE</code></td>
 <td></td>
-<td>Netezza uses the <code dir="ltr" translate="no">GROOM TABLE</code> command to reclaim disk space by removing rows marked for deletion.</td>
+<td>Netezza uses the <code>GROOM TABLE</code> command to reclaim disk space by removing rows marked for deletion.</td>
 </tr>
 </tbody>
 </table>
@@ -1226,107 +580,31 @@ This section compares Netezza and BigQuery DDL syntax.
 
 ### `CREATE TABLE` statement
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">TEMP</code><br />
-<code dir="ltr" translate="no">TEMPORARY</code></td>
-<td>With BigQuery's DDL support, you can create a table from the results of a query and specify its expiration at creation time. For example, for three days:<br />
-<br />
-<code dir="ltr" translate="no">CREATE TABLE</code> <code dir="ltr" translate="no">'my-project.public_dump.vtemp'</code><br />
-<code dir="ltr" translate="no">OPTIONS</code> (<br />
-<code dir="ltr" translate="no">expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(),</code><br />
-<code dir="ltr" translate="no">INTERVAL 3 DAY))</code></td>
-<td>Create tables temporary to a session.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ZONE MAPS</code></td>
-<td>Not supported.</td>
-<td>Quick search for <code dir="ltr" translate="no">WHERE</code> condition.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">DISTRIBUTE ON</code></td>
-<td><code dir="ltr" translate="no">PARTITION BY</code></td>
-<td>Partitioning. This is not a direct translation. <code dir="ltr" translate="no">DISTRIBUTE ON</code> shares data between nodes, usually with a unique key for even distribution, while <code dir="ltr" translate="no">PARTITION BY</code> prunes data into segments.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">ORGANIZE ON</code></td>
-<td><code dir="ltr" translate="no">CLUSTER BY</code></td>
-<td>Both Netezza and BigQuery support up to four keys for clustering. Netezza clustered base tables (CBT) provide equal precedence to each of the clustering columns. BigQuery gives precedence to the first column on which the table is clustered, followed by the second column, and so on.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">ROW SECURITY</code></td>
-<td><code dir="ltr" translate="no">Authorized View</code></td>
-<td>Row-level security.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">CONSTRAINT</code></td>
-<td>Not supported</td>
-<td>Check constraints.</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**        | **BigQuery**                                                                                                                                                                                                                                                                                       | **Description**                                                                                                                                                                                                                                                                            |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TEMP` `TEMPORARY` | With BigQuery's DDL support, you can create a table from the results of a query and specify its expiration at creation time. For example, for three days: `CREATE TABLE` `'my-project.public_dump.vtemp'` `OPTIONS` ( `expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(),` `INTERVAL 3 DAY))` | Create tables temporary to a session.                                                                                                                                                                                                                                                      |
+| `ZONE MAPS`        | Not supported.                                                                                                                                                                                                                                                                                     | Quick search for `WHERE` condition.                                                                                                                                                                                                                                                        |
+| `DISTRIBUTE ON`    | `PARTITION BY`                                                                                                                                                                                                                                                                                     | Partitioning. This is not a direct translation. `DISTRIBUTE ON` shares data between nodes, usually with a unique key for even distribution, while `PARTITION BY` prunes data into segments.                                                                                                |
+| `ORGANIZE ON`      | `CLUSTER BY`                                                                                                                                                                                                                                                                                       | Both Netezza and BigQuery support up to four keys for clustering. Netezza clustered base tables (CBT) provide equal precedence to each of the clustering columns. BigQuery gives precedence to the first column on which the table is clustered, followed by the second column, and so on. |
+| `ROW SECURITY`     | `Authorized View`                                                                                                                                                                                                                                                                                  | Row-level security.                                                                                                                                                                                                                                                                        |
+| `CONSTRAINT`       | Not supported                                                                                                                                                                                                                                                                                      | Check constraints.                                                                                                                                                                                                                                                                         |
 
 ### `DROP` statement
 
 | **Netezza**     | **BigQuery**    | **Description** |
-| --------------- | --------------- | --------------- |
+|-----------------|-----------------|-----------------|
 | `DROP TABLE`    | `DROP TABLE`    |                 |
 | `DROP DATABASE` | `DROP DATABASE` |                 |
 | `DROP VIEW`     | `DROP VIEW`     |                 |
 
 ### Column options and attributes
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">NULL</code><br />
-<code dir="ltr" translate="no">NOT NULL</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/schemas#modes"><code dir="ltr" translate="no">NULLABLE</code></a><br />
-<a href="https://docs.cloud.google.com/bigquery/docs/schemas#modes"><code dir="ltr" translate="no">REQUIRED</code></a></td>
-<td>Specify if the column is allowed to contain <code dir="ltr" translate="no">NULL</code> values.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">REFERENCES</code></td>
-<td>Not supported</td>
-<td>Specify column constraint.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">UNIQUE</code></td>
-<td>Not supported</td>
-<td>Each value in the column must be unique.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">DEFAULT</code></td>
-<td>Not supported</td>
-<td>Default value for all values in the column.</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**       | **BigQuery**                                                                                                                                    | **Description**                                            |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| `NULL` `NOT NULL` | [`NULLABLE`](https://docs.cloud.google.com/bigquery/docs/schemas#modes) [`REQUIRED`](https://docs.cloud.google.com/bigquery/docs/schemas#modes) | Specify if the column is allowed to contain `NULL` values. |
+| `REFERENCES`      | Not supported                                                                                                                                   | Specify column constraint.                                 |
+| `UNIQUE`          | Not supported                                                                                                                                   | Each value in the column must be unique.                   |
+| `DEFAULT`         | Not supported                                                                                                                                   | Default value for all values in the column.                |
 
 ### Temporary tables
 
@@ -1337,10 +615,12 @@ To build a temporary table in BigQuery, do the following:
 1.  Create a dataset that has a short time to live (for example, 12 hours).
 
 2.  Create the temporary table in the dataset, with a table name prefix of `temp` . For example, to create a table that expires in one hour, do this:
-    
-        CREATE TABLE temp.name (col1, col2, ...)
-        OPTIONS(expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
-        INTERVAL 1 HOUR));
+
+    ```
+    CREATE TABLE temp.name (col1, col2, ...)
+    OPTIONS(expiration_timestamp = TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
+    INTERVAL 1 HOUR));
+    ```
 
 3.  Start reading and writing from the temporary table.
 
@@ -1359,7 +639,7 @@ Netezza and BigQuery both support creating stored procedures by using the [`CREA
 ### Variable declaration and assignment
 
 | **Netezza**                                  | **BigQuery**                                                                                                | **Description**           |
-| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------- |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------------|---------------------------|
 | `DECLARE var datatype(len) [DEFAULT value];` | [`DECLARE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#declare) | Declare variable.         |
 | `SET var = value;`                           | [`SET`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#set)         | Assign value to variable. |
 
@@ -1368,7 +648,7 @@ Netezza and BigQuery both support creating stored procedures by using the [`CREA
 Netezza supports exception handlers that can be triggered for certain error conditions. BigQuery does not support condition handlers.
 
 | **Netezza** | **BigQuery**  | **Description**                                   |
-| ----------- | ------------- | ------------------------------------------------- |
+|-------------|---------------|---------------------------------------------------|
 | `EXCEPTION` | Not supported | Declare SQL exception handler for general errors. |
 
 ### Dynamic SQL statements
@@ -1376,73 +656,23 @@ Netezza supports exception handlers that can be triggered for certain error cond
 Netezza supports dynamic SQL queries inside stored procedures. BigQuery does not support dynamic SQL statements.
 
 | **Netezza**                    | **BigQuery**                                                                                                                               | **Description**      |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
 | `EXECUTE IMMEDIATE` `sql_str;` | [`EXECUTE IMMEDIATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#execute_immediate) `sql_str;` | Execute dynamic SQL. |
 
 ### Flow-of-control statements
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">IF THEN ELSE STATEMENT</code><br />
-<code dir="ltr" translate="no">IF</code> <em>condition</em><br />
-<code dir="ltr" translate="no">THEN ...</code><br />
-<code dir="ltr" translate="no">ELSE ...</code><br />
-<code dir="ltr" translate="no">END IF;</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#if"><code dir="ltr" translate="no">IF</code></a> <em>condition</em><br />
-<code dir="ltr" translate="no">THEN ...</code><br />
-<code dir="ltr" translate="no">ELSE ...</code><br />
-<code dir="ltr" translate="no">END IF;</code></td>
-<td>Execute conditionally.</td>
-</tr>
-<tr class="even">
-<td>Iterative Control<br />
-<code dir="ltr" translate="no">FOR var AS SELECT ...</code><br />
-<code dir="ltr" translate="no">DO</code> <em>stmts</em> <code dir="ltr" translate="no">END FOR;</code><br />
-<code dir="ltr" translate="no">FOR var AS cur CURSOR</code><br />
-<code dir="ltr" translate="no">FOR SELECT ...</code><br />
-<code dir="ltr" translate="no">DO stmts END FOR;</code></td>
-<td>Not supported</td>
-<td>Iterate over a collection of rows.</td>
-</tr>
-<tr class="odd">
-<td>Iterative Control<br />
-<code dir="ltr" translate="no">LOOP stmts END LOOP;</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loops"><code dir="ltr" translate="no">LOOP</code></a><br />
-<code dir="ltr" translate="no">sql_statement_list END LOOP;</code></td>
-<td>Loop block of statements.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">EXIT WHEN</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#break"><code dir="ltr" translate="no">BREAK</code></a></td>
-<td>Exit a procedure.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">WHILE *condition* LOOP</code></td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#while"><code dir="ltr" translate="no">WHILE</code></a> <em>condition</em><br />
-<code dir="ltr" translate="no">DO ...</code><br />
-<code dir="ltr" translate="no">END WHILE</code></td>
-<td>Execute a loop of statements until a while condition fails.</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**                                                                                                                    | **BigQuery**                                                                                                                                  | **Description**                                             |
+|--------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `IF THEN ELSE STATEMENT` `IF` *condition* `THEN ...` `ELSE ...` `END IF;`                                                      | [`IF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#if) *condition* `THEN ...` `ELSE ...` `END IF;` | Execute conditionally.                                      |
+| Iterative Control `FOR var AS SELECT ...` `DO` *stmts* `END FOR;` `FOR var AS cur CURSOR` `FOR SELECT ...` `DO stmts END FOR;` | Not supported                                                                                                                                 | Iterate over a collection of rows.                          |
+| Iterative Control `LOOP stmts END LOOP;`                                                                                       | [`LOOP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#loops) `sql_statement_list END LOOP;`         | Loop block of statements.                                   |
+| `EXIT WHEN`                                                                                                                    | [`BREAK`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#break)                                       | Exit a procedure.                                           |
+| `WHILE *condition* LOOP`                                                                                                       | [`WHILE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#while) *condition* `DO ...` `END WHILE`      | Execute a loop of statements until a while condition fails. |
 
 ### Other statements and procedural language elements
 
 | **Netezza**                 | **BigQuery**  | **Description**      |
-| --------------------------- | ------------- | -------------------- |
+|-----------------------------|---------------|----------------------|
 | `CALL` `proc(param,...)`    | Not supported | Execute a procedure. |
 | `EXEC` `proc(param,...)`    | Not supported | Execute a procedure. |
 | `EXECUTE` `proc(param,...)` | Not supported | Execute a procedure. |
@@ -1453,81 +683,18 @@ Both Netezza and BigQuery support transactions (sessions) and therefore support 
 
 ## Other SQL statements
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">GENERATE STATISTICS</code></td>
-<td></td>
-<td>Generate statistics for all the tables in the current database.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">GENERATE STATISTICS ON table_name</code></td>
-<td></td>
-<td>Generate statistics for a specific table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">GENERATE STATISTICS ON table_name(col1,col4)</code></td>
-<td>Either use <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions">statistical functions</a> like <code dir="ltr" translate="no">MIN, MAX, AVG,</code> etc., use the UI, or use the Cloud Data Loss Prevention API.</td>
-<td>Generate statistics for specific columns in a table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">GENERATE STATISTICS ON table_name</code></td>
-<td><code dir="ltr" translate="no">APPROX_COUNT_DISTINCT(col)</code></td>
-<td>Show the number of unique values for columns.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">INSERT INTO table_name</code></td>
-<td><code dir="ltr" translate="no">INSERT INTO table_name</code></td>
-<td>Insert a row.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">LOCK TABLE</code> <code dir="ltr" translate="no">table_name FOR</code> <code dir="ltr" translate="no">EXCLUSIVE;</code></td>
-<td>Not supported</td>
-<td>Lock row.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">SET SESSION</code> <code dir="ltr" translate="no">CHARACTERISTICS AS</code> <code dir="ltr" translate="no">TRANSACTION ISOLATION LEVEL</code> ...</td>
-<td>BigQuery always uses Snapshot Isolation. For details, see <a href="https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql#consistency_guarantees_and_transaction_isolation">Consistency guarantees and transaction isolation</a> .</td>
-<td>Define the transaction isolation level.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">BEGIN TRANSACTION</code><br />
-<code dir="ltr" translate="no">END TRANSACTION</code><br />
-<code dir="ltr" translate="no">COMMIT</code><br />
-</td>
-<td>BigQuery always uses Snapshot Isolation. For details, see <a href="https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql#consistency_guarantees_and_transaction_isolation">Consistency guarantees and transaction isolation</a> .</td>
-<td>Define the transaction boundary for multi-statement requests.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">EXPLAIN</code> ...</td>
-<td>Not supported. Similar features in the <a href="https://docs.cloud.google.com/bigquery/query-plan-explanation">query plan and timeline</a></td>
-<td>Show query plan for a <code dir="ltr" translate="no">SELECT</code> statement.</td>
-</tr>
-<tr class="even">
-<td>User Views metadata<br />
-System Views metadata</td>
-<td><code dir="ltr" translate="no">SELECT</code><br />
-<code dir="ltr" translate="no">* EXCEPT(is_typed)</code><br />
-<code dir="ltr" translate="no">FROM</code><br />
-<code dir="ltr" translate="no">mydataset.INFORMATION_SCHEMA.TABLES;</code><br />
-<br />
-BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-intro">Information Schema</a></td>
-<td>Query objects in the database</td>
-</tr>
-</tbody>
-</table>
+| **Netezza**                                                          | **BigQuery**                                                                                                                                                                                                                       | **Description**                                                 |
+|----------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| `GENERATE STATISTICS`                                                |                                                                                                                                                                                                                                    | Generate statistics for all the tables in the current database. |
+| `GENERATE STATISTICS ON table_name`                                  |                                                                                                                                                                                                                                    | Generate statistics for a specific table.                       |
+| `GENERATE STATISTICS ON table_name(col1,col4)`                       | Either use [statistical functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `MIN, MAX, AVG,` etc., use the UI, or use the Cloud Data Loss Prevention API.                      | Generate statistics for specific columns in a table.            |
+| `GENERATE STATISTICS ON table_name`                                  | `APPROX_COUNT_DISTINCT(col)`                                                                                                                                                                                                       | Show the number of unique values for columns.                   |
+| `INSERT INTO table_name`                                             | `INSERT INTO table_name`                                                                                                                                                                                                           | Insert a row.                                                   |
+| `LOCK TABLE` `table_name FOR` `EXCLUSIVE;`                           | Not supported                                                                                                                                                                                                                      | Lock row.                                                       |
+| `SET SESSION` `CHARACTERISTICS AS` `TRANSACTION ISOLATION LEVEL` ... | BigQuery always uses Snapshot Isolation. For details, see [Consistency guarantees and transaction isolation](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql#consistency_guarantees_and_transaction_isolation) . | Define the transaction isolation level.                         |
+| `BEGIN TRANSACTION` `END TRANSACTION` `COMMIT`                       | BigQuery always uses Snapshot Isolation. For details, see [Consistency guarantees and transaction isolation](https://docs.cloud.google.com/bigquery/docs/migration/netezza-sql#consistency_guarantees_and_transaction_isolation) . | Define the transaction boundary for multi-statement requests.   |
+| `EXPLAIN` ...                                                        | Not supported. Similar features in the [query plan and timeline](https://docs.cloud.google.com/bigquery/query-plan-explanation)                                                                                                    | Show query plan for a `SELECT` statement.                       |
+| User Views metadata System Views metadata                            | `SELECT` `* EXCEPT(is_typed)` `FROM` `mydataset.INFORMATION_SCHEMA.TABLES;` BigQuery [Information Schema](https://docs.cloud.google.com/bigquery/docs/information-schema-intro)                                                    | Query objects in the database                                   |
 
 ## Consistency guarantees and transaction isolation
 
@@ -1547,69 +714,17 @@ In BigQuery, you can use the [`ROLLBACK TRANSACTION` statement](https://docs.clo
 
 ## Database limits
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Limit</strong></th>
-<th><strong>Netezza</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tables per database</td>
-<td>32,000</td>
-<td>Unrestricted</td>
-</tr>
-<tr class="even">
-<td>Columns per table</td>
-<td>1600</td>
-<td>10000</td>
-</tr>
-<tr class="odd">
-<td>Maximum row size</td>
-<td>64 KB</td>
-<td>100 MB</td>
-</tr>
-<tr class="even">
-<td>Column and table name length</td>
-<td>128 bytes</td>
-<td>16,384 Unicode characters</td>
-</tr>
-<tr class="odd">
-<td>Rows per table</td>
-<td>Unlimited</td>
-<td>Unlimited</td>
-</tr>
-<tr class="even">
-<td>Maximum SQL request length</td>
-<td></td>
-<td>1 MB (maximum unresolved standard SQL query length).<br />
-<br />
-12 MB (maximum resolved legacy and standard SQL query length).<br />
-<br />
-Streaming:<br />
-10 MB (HTTP request size limit)<br />
-10,000 (maximum rows per request)</td>
-</tr>
-<tr class="odd">
-<td>Maximum request and response size</td>
-<td></td>
-<td>10 MB (request) and 10 GB (response) or virtually unlimited if using pagination or the Cloud Storage API.</td>
-</tr>
-<tr class="even">
-<td>Maximum number of concurrent sessions</td>
-<td>63 concurrent read-write transactions. 2000 concurrent connections to the server.</td>
-<td>100 concurrent queries (can be raised with <a href="https://docs.cloud.google.com/bigquery/docs/slots">slot reservation</a> ), 300 concurrent API requests per user.</td>
-</tr>
-</tbody>
-</table>
+| **Limit**                             | **Netezza**                                                                       | **BigQuery**                                                                                                                                                                                     |
+|---------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Tables per database                   | 32,000                                                                            | Unrestricted                                                                                                                                                                                     |
+| Columns per table                     | 1600                                                                              | 10000                                                                                                                                                                                            |
+| Maximum row size                      | 64 KB                                                                             | 100 MB                                                                                                                                                                                           |
+| Column and table name length          | 128 bytes                                                                         | 16,384 Unicode characters                                                                                                                                                                        |
+| Rows per table                        | Unlimited                                                                         | Unlimited                                                                                                                                                                                        |
+| Maximum SQL request length            |                                                                                   | 1 MB (maximum unresolved standard SQL query length). 12 MB (maximum resolved legacy and standard SQL query length). Streaming: 10 MB (HTTP request size limit) 10,000 (maximum rows per request) |
+| Maximum request and response size     |                                                                                   | 10 MB (request) and 10 GB (response) or virtually unlimited if using pagination or the Cloud Storage API.                                                                                        |
+| Maximum number of concurrent sessions | 63 concurrent read-write transactions. 2000 concurrent connections to the server. | 100 concurrent queries (can be raised with [slot reservation](https://docs.cloud.google.com/bigquery/docs/slots) ), 300 concurrent API requests per user.                                        |
 
 ## What's next
 
-  - Get step-by-step instructions to [Migrate from IBM Netezza to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/netezza) .
+- Get step-by-step instructions to [Migrate from IBM Netezza to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/netezza) .

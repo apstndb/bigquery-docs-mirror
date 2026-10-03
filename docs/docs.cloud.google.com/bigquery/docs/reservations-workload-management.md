@@ -28,27 +28,27 @@ Resources can be assigned to `None` to represent an absence of an assignment. Pr
 
 When you create an assignment, you specify the job type for that assignment:
 
-  - `QUERY` : Use this reservation for non-continuous query jobs, including SQL, DDL, DML, and BigQuery ML (built-in models) queries.
+- `QUERY` : Use this reservation for non-continuous query jobs, including SQL, DDL, DML, and BigQuery ML (built-in models) queries.
 
-  - `AUTOMATIC_MATERIALIZED_VIEW_REFRESH` : Use this reservation for [automatic materialized view refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) jobs.
+- `AUTOMATIC_MATERIALIZED_VIEW_REFRESH` : Use this reservation for [automatic materialized view refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) jobs.
 
-  - `BACKGROUND_CHANGE_DATA_CAPTURE` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery CDC ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) background jobs. `BACKGROUND_CHANGE_DATA_CAPTURE` reservations are not available in the Standard edition.
+- `BACKGROUND_CHANGE_DATA_CAPTURE` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery CDC ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) background jobs. `BACKGROUND_CHANGE_DATA_CAPTURE` reservations are not available in the Standard edition.
 
-  - `BACKGROUND_COLUMN_METADATA_INDEX` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigLake metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) background jobs. Also use this reservation when you replicate source databases to BigQuery with Datastream's background apply operations. `BACKGROUND_COLUMN_METADATA_INDEX` reservations are not available in the Standard edition.
+- `BACKGROUND_COLUMN_METADATA_INDEX` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigLake metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) background jobs. Also use this reservation when you replicate source databases to BigQuery with Datastream's background apply operations. `BACKGROUND_COLUMN_METADATA_INDEX` reservations are not available in the Standard edition.
 
-  - `BACKGROUND_SEARCH_INDEX_REFRESH` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery search](https://docs.cloud.google.com/bigquery/docs/search-intro) index management background jobs. `BACKGROUND_SEARCH_INDEX_REFRESH` reservations are not available in the Standard edition.
+- `BACKGROUND_SEARCH_INDEX_REFRESH` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to run your [BigQuery search](https://docs.cloud.google.com/bigquery/docs/search-intro) index management background jobs. `BACKGROUND_SEARCH_INDEX_REFRESH` reservations are not available in the Standard edition.
 
-  - `BACKGROUND` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to replicate source databases to BigQuery with Datastream's background apply operations. This reservation will also be used for the jobs described by `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , and `BACKGROUND_SEARCH_INDEX_REFRESH` as a fallback if a more specific reservation for those job types does not exist. `BACKGROUND` reservations are not available in the Standard edition.
+- `BACKGROUND` : Use this reservation when you choose to [use your own reservation](https://docs.cloud.google.com/bigquery/docs/search-index#use_your_own_reservation) to replicate source databases to BigQuery with Datastream's background apply operations. This reservation will also be used for the jobs described by `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , and `BACKGROUND_SEARCH_INDEX_REFRESH` as a fallback if a more specific reservation for those job types does not exist. `BACKGROUND` reservations are not available in the Standard edition.
 
-  - `CONTINUOUS` : Use this reservation for [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) jobs.
+- `CONTINUOUS` : Use this reservation for [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) jobs.
 
-  - `ML_EXTERNAL` : Use this reservation for BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) queries that use services that are external to BigQuery. For more information, see [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) . `ML_EXTERNAL` reservations are not available in the Standard edition.
+- `ML_EXTERNAL` : Use this reservation for BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) queries that use services that are external to BigQuery. For more information, see [Assign slots to BigQuery ML workloads](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign-ml-workload) . `ML_EXTERNAL` reservations are not available in the Standard edition.
 
-  - `PIPELINE` : Use this reservation for load and extract jobs.
-    
-    By default, load and extract jobs are [free](https://cloud.google.com/bigquery/pricing#free) and use a shared pool of slots. BigQuery does not guarantee capacity availability for this shared pool or the throughput you see. If you are loading large amounts of data, your job might wait for slots to become available.
-    
-    When load and extract jobs are assigned to a reservation, they lose access to the free pool. You should [Monitor resource utilization and jobs](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to ensure your reservations have enough capacity to meet your required job duration times.
+- `PIPELINE` : Use this reservation for load and extract jobs.
+
+  By default, load and extract jobs are [free](https://cloud.google.com/bigquery/pricing#free) and use a shared pool of slots. BigQuery does not guarantee capacity availability for this shared pool or the throughput you see. If you are loading large amounts of data, your job might wait for slots to become available.
+
+  When load and extract jobs are assigned to a reservation, they lose access to the free pool. You should [Monitor resource utilization and jobs](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to ensure your reservations have enough capacity to meet your required job duration times.
 
 You can't allocate individual slots to specific assignments. The BigQuery scheduler handles slot allocation for jobs using a reservation. For more information about how slots are used, see [fair scheduling in BigQuery](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) .
 
@@ -74,7 +74,7 @@ Projects with on-demand billing use capacity that's separate from your committed
 
 When you create commitments and reservations, they are associated with a Google Cloud project. This project manages the BigQuery reservations resources, and is the primary source of billing for these resources. This project does not have to be the same project that holds your BigQuery jobs or datasets.
 
-As a best practice, create a dedicated project for reservation resources. This project is called the *administration* project, because it centralizes the billing and management of your commitments. Give this project a descriptive name like `bq- COMPANY_NAME -admin` . Then create one or more separate projects to hold your BigQuery jobs.
+As a best practice, create a dedicated project for reservation resources. This project is called the *administration* project, because it centralizes the billing and management of your commitments. Give this project a descriptive name like `bq- `` COMPANY_NAME `` -admin` . Then create one or more separate projects to hold your BigQuery jobs.
 
 Only projects within the same [Organization resource](https://docs.cloud.google.com/resource-manager/docs/creating-managing-organization) as the administration project can be assigned to a reservation. If the administration project is not part of an Organization, then only that project can use the slots.
 
@@ -88,8 +88,8 @@ As a best practice, limit the number of administration projects. This helps to s
 
 In some cases, you might want to create more than one administration project:
 
-  - To separate costs from multiple reservations and commitments into different organizational units.
-  - To map one or more slot commitments to different sets of reservations.
+- To separate costs from multiple reservations and commitments into different organizational units.
+- To map one or more slot commitments to different sets of reservations.
 
 Idle slot capacity is not shared between reservations in different administration projects.
 
@@ -98,7 +98,7 @@ When you're on the **Workload management** page of the BigQuery Google Cloud con
 ## Project caps and scheduling policies
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
@@ -109,16 +109,16 @@ You can set project caps as default limits at the reservation level, which apply
 
 The following types of project caps are supported:
 
-  - **Maximum slots:** Limits the slot consumption of queries running for the assignee project within the reservation. The minimum allowed value is 100. This isn't a strict limit; it applies an approximate cap.
+- **Maximum slots:** Limits the slot consumption of queries running for the assignee project within the reservation. The minimum allowed value is 100. This isn't a strict limit; it applies an approximate cap.
 
-  - **Maximum concurrency:** Limits the number of simultaneous queries admitted for the assignee project within the reservation.
-    
-    The concurrency cap is only applied at query admission time and doesn't cause running queries to be cancelled. If you decrease the concurrency cap below the current number of running queries, new queries are queued until enough running queries have been completed.
+- **Maximum concurrency:** Limits the number of simultaneous queries admitted for the assignee project within the reservation.
+
+  The concurrency cap is only applied at query admission time and doesn't cause running queries to be cancelled. If you decrease the concurrency cap below the current number of running queries, new queries are queued until enough running queries have been completed.
 
 Changing these settings has the following limitations:
 
-  - Changes take up to one minute to apply.
-  - Modifying a per-project maximum slots override requires a new query to start before taking effect.
+- Changes take up to one minute to apply.
+- Modifying a per-project maximum slots override requires a new query to start before taking effect.
 
 For more information on configuring these policies, see [Manage workload assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) and [Manage workload reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
 
@@ -142,9 +142,9 @@ You can use BigQuery reservations to allocate capacity between workloads, teams,
 
 For example, you might have a total committed capacity of 1,000 slots and three workload types: data science, ELT, and BI.
 
-  - You can create a `ds` reservation with 500 slots, and assign all relevant Google Cloud projects to the `ds` reservation.
-  - You can create an `elt` reservation with 300 slots, and assign projects you use for ELT workloads to the `elt` reservation.
-  - You can create a `bi` reservation with 200 slots, and assign projects connected to your BI tools to the `bi` reservation.
+- You can create a `ds` reservation with 500 slots, and assign all relevant Google Cloud projects to the `ds` reservation.
+- You can create an `elt` reservation with 300 slots, and assign projects you use for ELT workloads to the `elt` reservation.
+- You can create a `bi` reservation with 200 slots, and assign projects connected to your BI tools to the `bi` reservation.
 
 ![Commitments delete.](https://docs.cloud.google.com/static/bigquery/images/reservations-reservations.svg)
 
@@ -182,9 +182,9 @@ To grant IAM conditions on reservations, see [Control access to reservations](ht
 
 A *slot commitment* is a purchase of slots for a specified period of time. You can purchase slots in 50 slot increments, up to your [regional slot quota](https://docs.cloud.google.com/bigquery/quotas#reservations) . Capacity commitments are optional, but can provide cost savings for steady-state workloads. Slot commitments are used to cover baseline slots for your reservations. Any unused slot capacity is then shared as idle slots across other reservations. Slot commitments don't apply to autoscaling slots. To ensure that you receive the discounted rate for your committed slots, make sure that your slot commitments are sufficient to cover your baseline slots. There is no limit on the number of commitments that you can create. You are charged from the moment that your commitment purchase is successful. For current pricing information, see [capacity commitment pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
-  - **Annual commitment** . You purchase a 365-day commitment. You can choose whether to renew or convert to a different type of commitment plan after 365 days.
+- **Annual commitment** . You purchase a 365-day commitment. You can choose whether to renew or convert to a different type of commitment plan after 365 days.
 
-  - **Three-year commitment** . You purchase a three-year commitment. You can choose whether to renew or convert to a different type of commitment plan after 3 years (1,095 days).
+- **Three-year commitment** . You purchase a three-year commitment. You can choose whether to renew or convert to a different type of commitment plan after 3 years (1,095 days).
 
 At the end of the commitment period, your commitment will renew based on the [selected renewal plan](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) .
 
@@ -200,16 +200,16 @@ We recommend assigning a non-zero baseline to your reservations for the most pre
 
 You select a renewal plan when you purchase a commitment. You can change the renewal plan for a commitment at any time until it expires. The following renewal plans are available:
 
-  - **None.** After the end of the commitment period, the commitment is removed. Reservations are not affected.
-  - **Annual.** After the end of the commitment period, your commitment renews for another year.
-  - **Three-Year.** After the end of the commitment period, your commitment renews for another three years.
+- **None.** After the end of the commitment period, the commitment is removed. Reservations are not affected.
+- **Annual.** After the end of the commitment period, your commitment renews for another year.
+- **Three-Year.** After the end of the commitment period, your commitment renews for another three years.
 
 For information about purchasing and renewing commitments, see [Create a capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#create_a_capacity_commitment) .
 
 For example, if you purchased an annual commitment at 6:00 PM on October 5, 2019, then you started being charged at that second. You can delete or renew the commitment after 6:00 PM on October 4, 2020, noting that 2020 is a leap year. You can change the renewal plans prior to 6:00 PM on October 4, 2020 as follows:
 
-  - If you choose to renew to an annual commitment, then at 6:00 PM on October 4, 2020, your commitment renews for another year.
-  - If you choose to renew to a three-year commitment, then at 6:00 PM on October 4, 2020, your commitment renews for three years.
+- If you choose to renew to an annual commitment, then at 6:00 PM on October 4, 2020, your commitment renews for another year.
+- If you choose to renew to a three-year commitment, then at 6:00 PM on October 4, 2020, your commitment renews for three years.
 
 **Note:** The renewal process can take up to roughly one hour after the commitment expires. For example, if a commitment expires at 6:00 PM on October 4, 2020, the renewed commitment record appears in the system between around 6:00 PM and 7:00 PM on October 4, 2020. No on-demand charges are applied within this data update period as the effective start time for the created commitment is 6:00 PM.
 
@@ -221,17 +221,17 @@ If you accidentally purchase a commitment or make a mistake when you configure y
 
 ## Reservation limitations
 
-  - Reservations in one organization can't be shared with other organizations.
-  - You must use separate reservations and separate administration projects for each organization.
-  - Each organization can have a maximum of 10 administration projects with active reservations in a single location.
-  - Idle capacity can't be shared between organizations or between different administration projects within a single organization.
-  - Idle capacity can't be shared across different regions.
-  - Commitments and reservations are [regional resources](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . Commitments purchased in one region or multi-region can't be used for reservations in any other regions or multi-regions, even when the single region location is co-located with the multi-region location. For example, you can't use a commitment purchased in the `EU` multi-region for a reservation in `europe-west4` .
-  - Commitments and reservations can't be moved from one region or multi-region to another.
-  - Commitments purchased in one administration project can't be moved to a different administration project.
-  - Commitments purchased with one [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) can't be used with reservations of another edition.
-  - Idle slots aren't shared between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
-  - [Autoscaled slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) aren't shareable as they scale down when no longer required.
+- Reservations in one organization can't be shared with other organizations.
+- You must use separate reservations and separate administration projects for each organization.
+- Each organization can have a maximum of 10 administration projects with active reservations in a single location.
+- Idle capacity can't be shared between organizations or between different administration projects within a single organization.
+- Idle capacity can't be shared across different regions.
+- Commitments and reservations are [regional resources](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . Commitments purchased in one region or multi-region can't be used for reservations in any other regions or multi-regions, even when the single region location is co-located with the multi-region location. For example, you can't use a commitment purchased in the `EU` multi-region for a reservation in `europe-west4` .
+- Commitments and reservations can't be moved from one region or multi-region to another.
+- Commitments purchased in one administration project can't be moved to a different administration project.
+- Commitments purchased with one [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) can't be used with reservations of another edition.
+- Idle slots aren't shared between reservations of different [editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- [Autoscaled slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) aren't shareable as they scale down when no longer required.
 
 ## Reservation predictability
 
@@ -245,15 +245,15 @@ The value of `ignore_idle_slots` must align with the scaling mode. If the scalin
 
 You can configure your reservations to consume only the following combinations of capacity resources up to the defined maximum:
 
-  - **Baseline slots + idle slots** : The reservation slot capacity is greater than zero, and the scaling mode is `IDLE_SLOTS_ONLY` . The reservation consumes the configured number of baseline and available idle slots up to the maximum number of slots. The reservation may not reach the maximum if there aren't sufficient idle slots available.
+- **Baseline slots + idle slots** : The reservation slot capacity is greater than zero, and the scaling mode is `IDLE_SLOTS_ONLY` . The reservation consumes the configured number of baseline and available idle slots up to the maximum number of slots. The reservation may not reach the maximum if there aren't sufficient idle slots available.
 
-  - **Baseline slots + idle slots + autoscaling slots** : The reservation slot capacity is greater than zero, and the scaling mode is `ALL_SLOTS` . The reservation first consumes the configured number of baseline slots, then all available idle slots, then autoscaling slots.
+- **Baseline slots + idle slots + autoscaling slots** : The reservation slot capacity is greater than zero, and the scaling mode is `ALL_SLOTS` . The reservation first consumes the configured number of baseline slots, then all available idle slots, then autoscaling slots.
 
-  - **Baseline slots + autoscaling slots** : The reservation slot capacity is greater than zero, and the scaling mode is `AUTOSCALE_ONLY` . The reservation first consumes the configured baseline slots, then autoscaling slots.
+- **Baseline slots + autoscaling slots** : The reservation slot capacity is greater than zero, and the scaling mode is `AUTOSCALE_ONLY` . The reservation first consumes the configured baseline slots, then autoscaling slots.
 
-  - **Idle slots + autoscaling slots** : The reservation slot capacity is zero, and the scaling mode is `ALL_SLOTS` . The reservation first consumes all available idle slots, then autoscaling slots.
+- **Idle slots + autoscaling slots** : The reservation slot capacity is zero, and the scaling mode is `ALL_SLOTS` . The reservation first consumes all available idle slots, then autoscaling slots.
 
-  - **Idle slots** : The reservation slot capacity is zero, and the scaling mode is `IDLE_SLOTS_ONLY` . The reservation consumes all available idle slots up to the configured maximum. The reservation may not reach the maximum if there aren't sufficient idle slots available.
+- **Idle slots** : The reservation slot capacity is zero, and the scaling mode is `IDLE_SLOTS_ONLY` . The reservation consumes all available idle slots up to the configured maximum. The reservation may not reach the maximum if there aren't sufficient idle slots available.
 
 The following diagram shows the different configuration options available:
 
@@ -265,13 +265,13 @@ In the diagram, the five configuration options show how BigQuery consumes slots 
 
 Reservation predictability is subject to the following limitations:
 
-  - Reservation predictability is only available with the Enterprise and Enterprise Plus editions, unless you choose the `AUTOSCALE_ONLY` option.
+- Reservation predictability is only available with the Enterprise and Enterprise Plus editions, unless you choose the `AUTOSCALE_ONLY` option.
 
-  - Reservation predictability is best-effort. The overall usage might still exceed the configured maximum.
+- Reservation predictability is best-effort. The overall usage might still exceed the configured maximum.
 
 ### What's next
 
-  - To learn more about working with reservation predictability, see [Create a reservation with dedicated slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
+- To learn more about working with reservation predictability, see [Create a reservation with dedicated slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
 
 ## Reservation groups
 
@@ -295,15 +295,15 @@ In the following example, there are three reservations and 1,200 idle slots. Wit
 
 Reservation groups are subject to the following limitations:
 
-  - Reservations sharing a reservation group must belong to the same project and same region.
+- Reservations sharing a reservation group must belong to the same project and same region.
 
-  - [Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the project.
+- [Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the project.
 
-  - Reservations within a group must have the same [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Reservations within a group must have the same [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-  - You cannot mix reservations with and without [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) configurations within the same group. All reservations in the group must have disaster recovery configured or all must have it disabled.
+- You cannot mix reservations with and without [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) configurations within the same group. All reservations in the group must have disaster recovery configured or all must have it disabled.
 
-  - If disaster recovery is enabled for the reservations in a group, all reservations must use the same pair of regions for their primary and secondary locations.
+- If disaster recovery is enabled for the reservations in a group, all reservations must use the same pair of regions for their primary and secondary locations.
 
 To learn more about working with reservation groups, see [Prioritize idle slots with reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) .
 
@@ -315,8 +315,8 @@ Use the following information to troubleshoot common issues with reservations, s
 
 If you encounter errors like `Failed to allocate slots for reservation in the current system state` or `Failed to update reservation: Failed to allocate slots for reservation` while trying to add more slots to your reservation, this is usually a transient issue. To mitigate the issue, do the following:
 
-  - Retry with a smaller number of slots.
-  - If trying with a smaller number of slots fails, wait 15 minutes and retry the operation.
+- Retry with a smaller number of slots.
+- If trying with a smaller number of slots fails, wait 15 minutes and retry the operation.
 
 If after retrying multiple times and waiting for 30 minutes you still receive the same error, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
@@ -326,8 +326,8 @@ If the error message states `There is insufficient quota to complete this reques
 
 To resolve this error, do one of the following:
 
-  - Add a smaller number of slots to the reservation so that the request doesn't exceed the quota limit.
-  - Request a quota increase in the corresponding region. For more information, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
+- Add a smaller number of slots to the reservation so that the request doesn't exceed the quota limit.
+- Request a quota increase in the corresponding region. For more information, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
 ### Reservation not used by BigQuery to run a job
 

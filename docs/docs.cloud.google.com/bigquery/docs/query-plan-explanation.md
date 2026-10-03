@@ -40,9 +40,9 @@ The **Execution graph** panel is organized as follows:
 
 ![The execution graph layout.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-layout.png)
 
-  - In the center is the **execution graph** . It shows stages as nodes and shuffle memory exchanged between stages as edges.
-  - The left panel has the **query text heatmap** . It shows the main query text that the query executed along with any referenced views.
-  - The right panel has the query or stage details.
+- In the center is the **execution graph** . It shows stages as nodes and shuffle memory exchanged between stages as edges.
+- The left panel has the **query text heatmap** . It shows the main query text that the query executed along with any referenced views.
+- The right panel has the query or stage details.
 
 #### Navigating the execution graph
 
@@ -50,14 +50,14 @@ The execution graph applies a color scheme to the nodes in the graph based on sl
 
 To navigate around the execution graph, you can:
 
-  - Click and hold on the graph background to pan to different areas of the graph.
-  - Use the mouse scroll wheel to zoom in and out of the graph.
-  - Click and hold on the **minimap** on the top-right to pan to different areas of the graph.
+- Click and hold on the graph background to pan to different areas of the graph.
+- Use the mouse scroll wheel to zoom in and out of the graph.
+- Click and hold on the **minimap** on the top-right to pan to different areas of the graph.
 
 Clicking on a stage in the graph shows the selected stage's details. The stage details have:
 
-  - Statistics. See [Stage overview](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#stage-overview) for details about the statistics.
-  - Step details. Steps describe the individual operations that execute the query's logic.
+- Statistics. See [Stage overview](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#stage-overview) for details about the statistics.
+- Step details. Steps describe the individual operations that execute the query's logic.
 
 #### Step details
 
@@ -69,7 +69,7 @@ The following image shows a stage's steps:
 
 Here is an example of a stage's steps:
 
-``` 
+```
   READ
   $30:l_orderkey, $31:l_quantity
   FROM lineitem
@@ -86,9 +86,9 @@ Here is an example of a stage's steps:
 
 The example's steps describe the following:
 
-  - The stage read the columns l\_orderkey and l\_quantity from the table lineitem and stored the values in the variables $30 and $31, respectively.
-  - The stage aggregated the variables $30 and $31, storing aggregations into the variables $100 and $70, respectively.
-  - The stage wrote the results of the variables $100 and $70 to shuffle. The stage ordered the results in shuffle memory based on $100.
+- The stage read the columns l_orderkey and l_quantity from the table lineitem and stored the values in the variables \$30 and \$31, respectively.
+- The stage aggregated the variables \$30 and \$31, storing aggregations into the variables \$100 and \$70, respectively.
+- The stage wrote the results of the variables \$100 and \$70 to shuffle. The stage ordered the results in shuffle memory based on \$100.
 
 See [Interpret and optimize steps](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#interpret-and-optimize-steps) for full details about the type of steps and how to optimize them.
 
@@ -123,7 +123,7 @@ If a query uses views, and the stage's steps have mappings to a view's query tex
 The overview fields for each stage can include the following:
 
 | API field                   | Description                                                                                                                                                                                                                                                             |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `id`                        | Unique numeric ID for the stage.                                                                                                                                                                                                                                        |
 | `name`                      | Simple summary name for the stage. The `steps` within the stage provide additional details about execution steps.                                                                                                                                                       |
 | `status`                    | Execution status of the stage. Possible states include PENDING, RUNNING, COMPLETE, FAILED, and CANCELLED.                                                                                                                                                               |
@@ -147,7 +147,7 @@ The Google Cloud console presents stage timing using the relative timing represe
 The stage timing information is reported as follows:
 
 | Relative timing   | Absolute timing | Ratio numerator                                        |
-| ----------------- | --------------- | ------------------------------------------------------ |
+|-------------------|-----------------|--------------------------------------------------------|
 | `waitRatioAvg`    | `waitMsAvg`     | Time the average worker spent waiting to be scheduled. |
 | `waitRatioMax`    | `waitMsMax`     | Time the slowest worker spent waiting to be scheduled. |
 | `readRatioAvg`    | `readMsAvg`     | Time the average worker spent reading input data.      |
@@ -162,7 +162,7 @@ The stage timing information is reported as follows:
 Steps contain the operations that each worker within a stage executes, presented as an ordered list of operations. Each step operation has a category, with some operations providing more detailed information. The operation categories present in the query plan include the following:
 
 | Step category           | Description                                                                                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `READ`                  | A read of one or more columns from an input table or from intermediate shuffle. Only the first sixteen columns that are read are returned in the step details.                       |
 | `WRITE`                 | A write of one or more columns to an output table or to intermediate shuffle. For `HASH` partitioned outputs from a stage, this also includes the columns used as the partition key. |
 | `COMPUTE`               | Expression evaluation and SQL functions.                                                                                                                                             |
@@ -188,39 +188,39 @@ The `READ` step means that a stage is accessing data for processing. Data can be
 
 #### Potential performance issues
 
-  - **Large scan of unpartitioned table:** if the query only needs a small portion of the data, then this might indicate that a table scan is inefficient. [Partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) could be a good optimization strategy.
-  - **Scan of a large table with a small filter ratio:** this suggests that the filter isn't effectively reducing the data scanned. Consider revising the filter conditions.
-  - **Shuffle bytes spilled over to disk:** this suggests that the data isn't stored effectively using optimization techniques such as clustering, which could maintain similar data in clusters.
+- **Large scan of unpartitioned table:** if the query only needs a small portion of the data, then this might indicate that a table scan is inefficient. [Partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) could be a good optimization strategy.
+- **Scan of a large table with a small filter ratio:** this suggests that the filter isn't effectively reducing the data scanned. Consider revising the filter conditions.
+- **Shuffle bytes spilled over to disk:** this suggests that the data isn't stored effectively using optimization techniques such as clustering, which could maintain similar data in clusters.
 
 #### Optimize
 
-  - **Targeted filtering:** use `WHERE` clauses strategically to filter out irrelevant data as early as possible in the query. This reduces the amount of data that needs to be processed by the query.
-  - **Partitioning and clustering:** BigQuery uses table partitioning and clustering to efficiently locate specific data segments. Ensure your tables are partitioned and clustered based on your typical query patterns to minimize data scanned during `READ` steps.
-  - **Select relevant columns:** avoid using `SELECT *` statements. Instead, select specific columns or use `SELECT * EXCEPT` to avoid reading unnecessary data.
-  - **Materialized views:** materialized views can precompute and store frequently used aggregations, potentially reducing the need to read base tables during `READ` steps for queries that use those views.
+- **Targeted filtering:** use `WHERE` clauses strategically to filter out irrelevant data as early as possible in the query. This reduces the amount of data that needs to be processed by the query.
+- **Partitioning and clustering:** BigQuery uses table partitioning and clustering to efficiently locate specific data segments. Ensure your tables are partitioned and clustered based on your typical query patterns to minimize data scanned during `READ` steps.
+- **Select relevant columns:** avoid using `SELECT *` statements. Instead, select specific columns or use `SELECT * EXCEPT` to avoid reading unnecessary data.
+- **Materialized views:** materialized views can precompute and store frequently used aggregations, potentially reducing the need to read base tables during `READ` steps for queries that use those views.
 
 ### `COMPUTE` step
 
 In the `COMPUTE` step, BigQuery performs the following actions on your data:
 
-  - Evaluates expressions in the query's `SELECT` , `WHERE` , `HAVING` , and other clauses, including calculations, comparisons, and logical operations.
-  - Executes built-in SQL functions and user-defined functions.
-  - Filters rows of data based on conditions in the query.
+- Evaluates expressions in the query's `SELECT` , `WHERE` , `HAVING` , and other clauses, including calculations, comparisons, and logical operations.
+- Executes built-in SQL functions and user-defined functions.
+- Filters rows of data based on conditions in the query.
 
 #### Optimize
 
 The query plan can reveal bottlenecks within the `COMPUTE` step. Look for stages with extensive computations or a high number of rows processed.
 
-  - **Correlate the `COMPUTE` step with data volume:** if a stage shows significant computation and processes a large volume of data, then it might be a good candidate for optimization.
-  - **Skewed data:** for stages where the compute maximum is significantly higher than the compute average, this indicates that the stage spent a disproportionate amount of time processing a few slices of data. Consider looking at the distribution of data to see if there is data skew.
-  - **Consider data types:** use appropriate data types for your columns. For example, using integers, datetimes, and timestamps instead of strings can improve performance.
+- **Correlate the `COMPUTE` step with data volume:** if a stage shows significant computation and processes a large volume of data, then it might be a good candidate for optimization.
+- **Skewed data:** for stages where the compute maximum is significantly higher than the compute average, this indicates that the stage spent a disproportionate amount of time processing a few slices of data. Consider looking at the distribution of data to see if there is data skew.
+- **Consider data types:** use appropriate data types for your columns. For example, using integers, datetimes, and timestamps instead of strings can improve performance.
 
 ### `WRITE` step
 
 `WRITE` steps happen for intermediate data and final output.
 
-  - **Writing to shuffle memory:** in a multi-stage query, the `WRITE` step often involves sending the processed data to another stage for further processing. This is typical for shuffle memory, which combines or aggregates data from multiple sources. The data written during this stage is typically an intermediate result, not the final output.
-  - **Final output:** the query result is written to either the destination or a temporary table.
+- **Writing to shuffle memory:** in a multi-stage query, the `WRITE` step often involves sending the processed data to another stage for further processing. This is typical for shuffle memory, which combines or aggregates data from multiple sources. The data written during this stage is typically an intermediate result, not the final output.
+- **Final output:** the query result is written to either the destination or a temporary table.
 
 #### Hash Partitioning
 
@@ -230,13 +230,13 @@ When a stage in the query plan writes data to a hash partitioned output, BigQuer
 
 While the `WRITE` step itself might not be directly optimized, understanding its role can help you identify potential bottlenecks in earlier stages:
 
-  - **Minimize data written:** focus on optimizing preceding stages with filtering and aggregation to reduce the amount of data written during this step.
+- **Minimize data written:** focus on optimizing preceding stages with filtering and aggregation to reduce the amount of data written during this step.
 
-  - **Partitioning:** writing benefits greatly from table partitioning. If the data that you write is confined to specific partitions, then BigQuery can perform faster writes.
-    
-    If the DML statement has a `WHERE` clause with a static condition against a table partition column, then BigQuery only modifies the relevant table partitions.
+- **Partitioning:** writing benefits greatly from table partitioning. If the data that you write is confined to specific partitions, then BigQuery can perform faster writes.
 
-  - **Denormalization trade-offs:** denormalization can sometimes lead to smaller result sets in intermediate `WRITE` step. However, there are drawbacks such as increased storage usage and data consistency challenges.
+  If the DML statement has a `WHERE` clause with a static condition against a table partition column, then BigQuery only modifies the relevant table partitions.
+
+- **Denormalization trade-offs:** denormalization can sometimes lead to smaller result sets in intermediate `WRITE` step. However, there are drawbacks such as increased storage usage and data consistency challenges.
 
 ### `JOIN` step
 
@@ -244,34 +244,34 @@ In the `JOIN` step, BigQuery combines data from two data sources. Joins can incl
 
 The query plan for the `JOIN` step typically reveals the following details:
 
-  - **Join pattern:** this indicates the type of join used. Each type defines how many rows from the joined tables are included in the result set.
-  - **Join columns:** these are the columns used to match rows between the sources of data. The choice of columns is crucial for join performance.
+- **Join pattern:** this indicates the type of join used. Each type defines how many rows from the joined tables are included in the result set.
+- **Join columns:** these are the columns used to match rows between the sources of data. The choice of columns is crucial for join performance.
 
 #### Join patterns
 
-  - **Broadcast join:** when one table, typically the smaller one, can fit in memory on a single worker node or slot, BigQuery can broadcast it to all other nodes to perform the join efficiently. Look for `JOIN EACH WITH ALL` in the step details.
-  - **Hash join:** when tables are large or a broadcast join isn't suitable, a hash join might be used. BigQuery uses hash and shuffle operations to shuffle the left and right tables so that the matching keys end up in the same slot to perform a local join. Hash joins are an expensive operation since the data needs to be moved, but they enable efficient matching of rows across hashes. Look for `JOIN EACH WITH EACH` in the step details.
-  - **Self join:** a SQL antipattern in which a table is joined to itself.
-  - **Cross join:** a SQL antipattern that can cause significant performance issues because it generates larger output data than the inputs.
-  - **Skewed join:** the data distribution across the join key in one table is very skewed and can lead to performance issues. Look for cases where the max compute time is much greater than the average compute time in the query plan. For more information, see [High cardinality join](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) and [Partition skew](https://docs.cloud.google.com/bigquery/docs/query-insights#partition_skew) .
+- **Broadcast join:** when one table, typically the smaller one, can fit in memory on a single worker node or slot, BigQuery can broadcast it to all other nodes to perform the join efficiently. Look for `JOIN EACH WITH ALL` in the step details.
+- **Hash join:** when tables are large or a broadcast join isn't suitable, a hash join might be used. BigQuery uses hash and shuffle operations to shuffle the left and right tables so that the matching keys end up in the same slot to perform a local join. Hash joins are an expensive operation since the data needs to be moved, but they enable efficient matching of rows across hashes. Look for `JOIN EACH WITH EACH` in the step details.
+- **Self join:** a SQL antipattern in which a table is joined to itself.
+- **Cross join:** a SQL antipattern that can cause significant performance issues because it generates larger output data than the inputs.
+- **Skewed join:** the data distribution across the join key in one table is very skewed and can lead to performance issues. Look for cases where the max compute time is much greater than the average compute time in the query plan. For more information, see [High cardinality join](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) and [Partition skew](https://docs.cloud.google.com/bigquery/docs/query-insights#partition_skew) .
 
 #### Debugging
 
-  - **Large data volume:** if the query plan shows a significant amount of data processed during the `JOIN` step, investigate the join condition and join keys. Consider filtering or using more selective join keys.
-  - **Skewed data distribution:** analyze the data distribution of join keys. If one table is very skewed, explore strategies such as splitting the query or prefiltering.
-  - **High cardinality joins:** joins that produce significantly more rows than the number of left and right input rows can drastically reduce query performance. Avoid joins that produce a very large number of rows.
-  - **Incorrect ordering of table:** Ensure you've chosen the appropriate join type, such as `INNER` or `LEFT` , and ordered tables from largest to smallest based on your query's requirements.
+- **Large data volume:** if the query plan shows a significant amount of data processed during the `JOIN` step, investigate the join condition and join keys. Consider filtering or using more selective join keys.
+- **Skewed data distribution:** analyze the data distribution of join keys. If one table is very skewed, explore strategies such as splitting the query or prefiltering.
+- **High cardinality joins:** joins that produce significantly more rows than the number of left and right input rows can drastically reduce query performance. Avoid joins that produce a very large number of rows.
+- **Incorrect ordering of table:** Ensure you've chosen the appropriate join type, such as `INNER` or `LEFT` , and ordered tables from largest to smallest based on your query's requirements.
 
 #### Optimize
 
-  - **Selective join keys:** for join keys, use `INT64` instead of `STRING` when possible. `STRING` comparisons are slower than `INT64` comparisons because they compare each character in a string. Integers only require a single comparison.
-  - **Filter before joining:** apply `WHERE` clause filters on individual tables before the join. This reduces the amount of data involved in the join operation.
-  - **Avoid functions on join columns:** avoid calling functions on join columns. Instead, standardize your table data during the ingestion or post-ingestion process using ELT SQL pipelines. This approach eliminates the need to modify join columns dynamically, which enables more efficient joins without compromising data integrity.
-  - **Avoid self joins:** self-joins are commonly used to compute row-dependent relationships. However, self-joins can potentially quadruple the number of output rows, leading to performance issues. Instead of relying on self-joins, consider using window (analytic) functions.
-  - **Large tables first:** even though the SQL query optimizer can determine which table should be on which side of the join, order your joined tables appropriately. The best practice is to place the largest table first, followed by the smallest, and then by decreasing size.
-  - **Denormalization:** in some cases, strategically denormalizing tables (adding redundant data) can eliminate joins altogether. However, this approach comes with storage and data consistency trade-offs.
-  - **Partitioning and clustering:** partitioning tables based on join keys and clustering colocated data can significantly speed up joins by letting BigQuery target relevant data partitions.
-  - **Optimizing skewed joins:** to avoid performance issues associated with skewed joins, pre-filter data from the table as early as possible or split the query into two or more queries.
+- **Selective join keys:** for join keys, use `INT64` instead of `STRING` when possible. `STRING` comparisons are slower than `INT64` comparisons because they compare each character in a string. Integers only require a single comparison.
+- **Filter before joining:** apply `WHERE` clause filters on individual tables before the join. This reduces the amount of data involved in the join operation.
+- **Avoid functions on join columns:** avoid calling functions on join columns. Instead, standardize your table data during the ingestion or post-ingestion process using ELT SQL pipelines. This approach eliminates the need to modify join columns dynamically, which enables more efficient joins without compromising data integrity.
+- **Avoid self joins:** self-joins are commonly used to compute row-dependent relationships. However, self-joins can potentially quadruple the number of output rows, leading to performance issues. Instead of relying on self-joins, consider using window (analytic) functions.
+- **Large tables first:** even though the SQL query optimizer can determine which table should be on which side of the join, order your joined tables appropriately. The best practice is to place the largest table first, followed by the smallest, and then by decreasing size.
+- **Denormalization:** in some cases, strategically denormalizing tables (adding redundant data) can eliminate joins altogether. However, this approach comes with storage and data consistency trade-offs.
+- **Partitioning and clustering:** partitioning tables based on join keys and clustering colocated data can significantly speed up joins by letting BigQuery target relevant data partitions.
+- **Optimizing skewed joins:** to avoid performance issues associated with skewed joins, pre-filter data from the table as early as possible or split the query into two or more queries.
 
 ### `AGGREGATE` step
 
@@ -279,29 +279,29 @@ In the `AGGREGATE` step, BigQuery aggregates and groups data.
 
 #### Debugging
 
-  - **Stage details:** check the number of input rows to and output rows from the aggregation, and the shuffle size to determine how much data reduction the aggregate step achieved and whether data shuffling was involved.
-  - **Shuffle size:** a large shuffle size might indicate that a significant amount of data was moved across worker nodes during the aggregation.
-  - **Check data distribution:** ensure the data is evenly distributed across partitions. Skewed data distribution can lead to imbalanced workloads in the aggregate step.
-  - **Review aggregations:** analyze the aggregation clauses to confirm they are necessary and efficient.
+- **Stage details:** check the number of input rows to and output rows from the aggregation, and the shuffle size to determine how much data reduction the aggregate step achieved and whether data shuffling was involved.
+- **Shuffle size:** a large shuffle size might indicate that a significant amount of data was moved across worker nodes during the aggregation.
+- **Check data distribution:** ensure the data is evenly distributed across partitions. Skewed data distribution can lead to imbalanced workloads in the aggregate step.
+- **Review aggregations:** analyze the aggregation clauses to confirm they are necessary and efficient.
 
 #### Optimize
 
-  - **Clustering:** cluster your tables on columns frequently used in `GROUP BY` , `COUNT` , or other aggregation clauses.
-  - **Partitioning:** choose a partitioning strategy that aligns with your query patterns. Consider using ingestion-time partitioned tables to reduce the amount of data scanned during the aggregation.
-  - **Aggregate earlier:** if possible, perform aggregations earlier in the query pipeline. This can reduce the amount of data that needs to be processed during the aggregation.
-  - **Shuffling optimization:** if shuffling is a bottleneck, explore ways to minimize it. For example, denormalize tables or use clustering to colocate relevant data.
+- **Clustering:** cluster your tables on columns frequently used in `GROUP BY` , `COUNT` , or other aggregation clauses.
+- **Partitioning:** choose a partitioning strategy that aligns with your query patterns. Consider using ingestion-time partitioned tables to reduce the amount of data scanned during the aggregation.
+- **Aggregate earlier:** if possible, perform aggregations earlier in the query pipeline. This can reduce the amount of data that needs to be processed during the aggregation.
+- **Shuffling optimization:** if shuffling is a bottleneck, explore ways to minimize it. For example, denormalize tables or use clustering to colocate relevant data.
 
 #### Edge cases
 
-  - **DISTINCT aggregates:** queries with `DISTINCT` aggregates can be computationally expensive, especially on large datasets. Consider alternatives like `APPROX_COUNT_DISTINCT` for approximate results.
-  - **Large number of groups:** if the query produces a vast number of groups, it might consume a substantial amount of memory. In such cases, think about limiting the number of groups or using a different aggregation strategy.
+- **DISTINCT aggregates:** queries with `DISTINCT` aggregates can be computationally expensive, especially on large datasets. Consider alternatives like `APPROX_COUNT_DISTINCT` for approximate results.
+- **Large number of groups:** if the query produces a vast number of groups, it might consume a substantial amount of memory. In such cases, think about limiting the number of groups or using a different aggregation strategy.
 
 ### `REPARTITION` step
 
 Both `REPARTITION` and `COALESCE` are optimization techniques that BigQuery applies directly to the shuffled data in the query.
 
-  - **`REPARTITION` :** this operation aims to rebalance data distribution across worker nodes. Suppose that after shuffling, one worker node ends up with a disproportionately large amount of data. The `REPARTITION` step redistributes the data more evenly, preventing any single worker from becoming a bottleneck. This is particularly important for computationally intensive operations like joins.
-  - **`COALESCE` :** this step happens when you have many small buckets of data after shuffling. The `COALESCE` step combines these buckets into larger ones, reducing the overhead associated with managing numerous small pieces of data. This can be especially beneficial when dealing with very small intermediate result sets.
+- **`REPARTITION` :** this operation aims to rebalance data distribution across worker nodes. Suppose that after shuffling, one worker node ends up with a disproportionately large amount of data. The `REPARTITION` step redistributes the data more evenly, preventing any single worker from becoming a bottleneck. This is particularly important for computationally intensive operations like joins.
+- **`COALESCE` :** this step happens when you have many small buckets of data after shuffling. The `COALESCE` step combines these buckets into larger ones, reducing the overhead associated with managing numerous small pieces of data. This can be especially beneficial when dealing with very small intermediate result sets.
 
 If you see `REPARTITION` or `COALESCE` steps in your query plan, it doesn't necessarily mean there's a problem with your query. It's often a sign that BigQuery is proactively optimizing data distribution for better performance. However, if you see these operations repeatedly, it might indicate that your data is inherently skewed or that your query is causing excessive data shuffling.
 
@@ -309,14 +309,14 @@ If you see `REPARTITION` or `COALESCE` steps in your query plan, it doesn't nece
 
 To reduce the number of `REPARTITION` steps, try the following:
 
-  - **Data distribution:** ensure that your tables are partitioned and clustered effectively. Well-distributed data reduces the likelihood of significant imbalances after shuffling.
-  - **Query structure:** analyze the query for potential sources of data skew. For example, are there highly selective filters or joins that result in a small subset of data being processed on a single worker?
-  - **Join strategies:** experiment with different join strategies to see if they lead to a more balanced data distribution.
+- **Data distribution:** ensure that your tables are partitioned and clustered effectively. Well-distributed data reduces the likelihood of significant imbalances after shuffling.
+- **Query structure:** analyze the query for potential sources of data skew. For example, are there highly selective filters or joins that result in a small subset of data being processed on a single worker?
+- **Join strategies:** experiment with different join strategies to see if they lead to a more balanced data distribution.
 
 To reduce the number of `COALESCE` steps, try the following:
 
-  - **Aggregation strategies:** consider performing aggregations earlier in the query pipeline. This can help reduce the number of small intermediate result sets that might cause `COALESCE` steps.
-  - **Data volume:** if you're dealing with very small datasets, `COALESCE` might not be a significant concern.
+- **Aggregation strategies:** consider performing aggregations earlier in the query pipeline. This can help reduce the number of small intermediate result sets that might cause `COALESCE` steps.
+- **Data volume:** if you're dealing with very small datasets, `COALESCE` might not be a significant concern.
 
 Don't over-optimize. Premature optimization might make your queries more complex without yielding significant benefits.
 
@@ -326,8 +326,8 @@ The `UPDATE` , `DELETE` , and `MERGE` steps appear in stages that execute data m
 
 The step details typically include the following substeps:
 
-  - **Columns:** the columns read from or written to the target table.
-  - **Target table ( `FROM` or `INTO` ):** the target table modified by the statement, using `FROM` for `UPDATE` and `DELETE` steps, and `INTO` for `MERGE` steps.
+- **Columns:** the columns read from or written to the target table.
+- **Target table ( `FROM` or `INTO` ):** the target table modified by the statement, using `FROM` for `UPDATE` and `DELETE` steps, and `INTO` for `MERGE` steps.
 
 ### `EXPORT` step
 
@@ -335,51 +335,57 @@ The `EXPORT` step writes output data to a destination table. This step commonly 
 
 The step details typically include the following substeps:
 
-  - **Output columns:** the list of variables written to the destination table.
-  - **Destination table ( `TO` ):** the destination table receiving the exported rows.
+- **Output columns:** the list of variables written to the destination table.
+- **Destination table ( `TO` ):** the destination table receiving the exported rows.
 
 ## Explanation for federated queries
 
 [Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) let you send a query statement to an external data source by using the [`EXTERNAL_QUERY` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) . Federated queries are subject to the optimization technique known as [SQL pushdowns](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#sql_pushdowns) and the query plan shows operations pushed down to the external data source, if any. For example, if you run the following query:
 
-    SELECT id, name
-    FROM EXTERNAL_QUERY("<connection>", "SELECT * FROM company")
-    WHERE country_code IN ('ee', 'hu') AND name like '%TV%'
+```
+SELECT id, name
+FROM EXTERNAL_QUERY("<connection>", "SELECT * FROM company")
+WHERE country_code IN ('ee', 'hu') AND name like '%TV%'
+```
 
 The query plan will show the following stage steps:
 
-    $1:id, $2:name, $3:country_code
-    FROM table_for_external_query_$_0(
-      SELECT id, name, country_code
-      FROM (
-        /*native_query*/
-        SELECT * FROM company
-      )
-      WHERE in(country_code, 'ee', 'hu')
-    )
-    WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
-    $1, $2
-    TO __stage00_output
+```
+$1:id, $2:name, $3:country_code
+FROM table_for_external_query_$_0(
+  SELECT id, name, country_code
+  FROM (
+    /*native_query*/
+    SELECT * FROM company
+  )
+  WHERE in(country_code, 'ee', 'hu')
+)
+WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
+$1, $2
+TO __stage00_output
+```
 
 In this plan, `table_for_external_query_$_0(...)` represents the `EXTERNAL_QUERY` function. In the parentheses you can see the query that the external data source executes. Based on that, you can notice that:
 
-  - An external data source returns only 3 selected columns.
-  - An external data source returns only rows for which `country_code` is either `'ee'` or `'hu'` .
-  - The `LIKE` operator is not push down and is evaluated by BigQuery.
+- An external data source returns only 3 selected columns.
+- An external data source returns only rows for which `country_code` is either `'ee'` or `'hu'` .
+- The `LIKE` operator is not push down and is evaluated by BigQuery.
 
 For comparison, if there are no pushdowns, the query plan will show the following stage steps:
 
-    $1:id, $2:name, $3:country_code
-    FROM table_for_external_query_$_0(
-      SELECT id, name, description, country_code, primary_address, secondary address
-      FROM (
-        /*native_query*/
-        SELECT * FROM company
-      )
-    )
-    WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
-    $1, $2
-    TO __stage00_output
+```
+$1:id, $2:name, $3:country_code
+FROM table_for_external_query_$_0(
+  SELECT id, name, description, country_code, primary_address, secondary address
+  FROM (
+    /*native_query*/
+    SELECT * FROM company
+  )
+)
+WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
+$1, $2
+TO __stage00_output
+```
 
 This time an external data source returns all the columns and all the rows from the `company` table and BigQuery performs filtering.
 
@@ -388,7 +394,7 @@ This time an external data source returns all the columns and all the rows from 
 The query timeline reports progress at specific points in time, providing snapshot views of overall query progress. The timeline is represented as a series of samples that report the following details:
 
 | Field            | Description                                                              |
-| ---------------- | ------------------------------------------------------------------------ |
+|------------------|--------------------------------------------------------------------------|
 | `elapsedMs`      | Milliseconds elapsed since the start of query execution.                 |
 | `totalSlotMs`    | A cumulative representation of the slot milliseconds used by the query.  |
 | `pendingUnits`   | Total units of work scheduled and waiting for execution.                 |
@@ -399,10 +405,12 @@ The query timeline reports progress at specific points in time, providing snapsh
 
 The following query counts the number of rows in the Shakespeare public dataset and has a second conditional count that restricts results to rows that reference 'hamlet':
 
-    SELECT
-      COUNT(1) as rowcount,
-      COUNTIF(corpus = 'hamlet') as rowcount_hamlet
-    FROM `publicdata.samples.shakespeare`
+```
+SELECT
+  COUNT(1) as rowcount,
+  COUNTIF(corpus = 'hamlet') as rowcount_hamlet
+FROM `publicdata.samples.shakespeare`
+```
 
 Click **Execution details** to see the query plan:
 
@@ -410,7 +418,7 @@ Click **Execution details** to see the query plan:
 
 The color indicators show the relative timings for all steps across all stages.
 
-To learn more about the steps of the execution stages, click arrow\_drop\_down to expand the details for the stage:
+To learn more about the steps of the execution stages, click arrow_drop_down to expand the details for the stage:
 
 ![The hamlet query plan step details.](https://docs.cloud.google.com/static/bigquery/images/queryplan_hamlet_steps.png)
 

@@ -16,49 +16,71 @@ Changing filters might require changing the paths to the fields you want to filt
 
 For example, the filter to select all the BigQuery-related records changes from:
 
-    resource.type = "bigquery_resource"
+```
+resource.type = "bigquery_resource"
+```
 
 to:
 
-    resource.type = ("bigquery_project" OR "bigquery_dataset")
+```
+resource.type = ("bigquery_project" OR "bigquery_dataset")
+```
 
 For the filter table inserts on the method name, the filter changes from:
 
-    protoPayload.methodName="tableservice.insert"
+```
+protoPayload.methodName="tableservice.insert"
+```
 
 to:
 
-    protoPayload.methodName = "google.cloud.bigquery.v2.TableService.InsertTable"
+```
+protoPayload.methodName = "google.cloud.bigquery.v2.TableService.InsertTable"
+```
 
 You can also easily select all table inserts regardless of the method:
 
-    protoPayload.metadata.tableCreation.reason != ""
+```
+protoPayload.metadata.tableCreation.reason != ""
+```
 
 Or filter on a specific reason for a table creation:
 
-    protoPayload.metadata.tableCreation.reason = "JOB"
+```
+protoPayload.metadata.tableCreation.reason = "JOB"
+```
 
 New logs have separate method names for patch and update, so
 
-    protoPayload.methodName = "tableservice.update"
+```
+protoPayload.methodName = "tableservice.update"
+```
 
 changes to:
 
-    protoPayload.methodName = ("google.cloud.bigquery.v2.TableService.UpdateTable" OR "google.cloud.bigquery.v2.TableService.PatchTable")
+```
+protoPayload.methodName = ("google.cloud.bigquery.v2.TableService.UpdateTable" OR "google.cloud.bigquery.v2.TableService.PatchTable")
+```
 
 However, you can find all the table updates by using the `protoPayload.metadata.tableChange.reason` field.
 
 Finally, with the new logs you can find all the records for a specific table by using the `protoPayload.methodName` field. For example:
 
-    protoPayload.resourceName = "projects/myproject/datasets/mydataset/tables/mytable"
+```
+protoPayload.resourceName = "projects/myproject/datasets/mydataset/tables/mytable"
+```
 
 If you're using a `resourceName` filter with the old logs to find all the side effects for a specific job ID, with the new logs you'll need to filter on a specific event instead. To find all the source tables read records for a specific job:
 
-    protoPayload.metadata.tableDataRead.jobName = "projects/myproject/jobs/myjob"
+```
+protoPayload.metadata.tableDataRead.jobName = "projects/myproject/jobs/myjob"
+```
 
 Or to find the destination table change:
 
-    protoPayload.metadata.tableChange.jobName = "projects/myproject/jobs/myjob"
+```
+protoPayload.metadata.tableChange.jobName = "projects/myproject/jobs/myjob"
+```
 
 Resources representations, such as Job or Table, in the new logs have the structure similar to the old logs. Hovewer, new logs represent events while the old logs focus more on the request and response.
 
@@ -66,18 +88,24 @@ You can compare the new [BigQueryAuditMetadata](https://docs.cloud.google.com/bi
 
 For example, to migrate a filter that finds all completed "CREATE TABLE AS SELECT" DDL jobs, change the filter from:
 
-    protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.statementType = "CREATE_TABLE_AS_SELECT"
+```
+protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.statementType = "CREATE_TABLE_AS_SELECT"
+```
 
 to:
 
-    protoPayload.metadata.jobChange.after = "DONE"
-    protoPayload.metadata.jobChange.job.jobConfig.queryConfig.statementType = "CREATE_TABLE_AS_SELECT"
+```
+protoPayload.metadata.jobChange.after = "DONE"
+protoPayload.metadata.jobChange.job.jobConfig.queryConfig.statementType = "CREATE_TABLE_AS_SELECT"
+```
 
 ## Logs routing (exports)
 
 For exporting all records for core BigQuery operations, use the metadata type filter:
 
-    protoPayload.metadata."@type"="type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+```
+protoPayload.metadata."@type"="type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+```
 
 ## Querying logs exported to BigQuery
 
@@ -87,7 +115,7 @@ In addition to the basic structure changes described earlier, there are addition
 
 For the previous example of filtering all the "CREATE TABLE AS SELECT" DDL jobs, the query over the old logs to count the number of jobs might look like this:
 
-``` 
+```
   #standardSQL
   SELECT COUNT(*)
   FROM
@@ -98,7 +126,7 @@ For the previous example of filtering all the "CREATE TABLE AS SELECT" DDL jobs,
 
 The same query over the new logs might look like this:
 
-``` 
+```
   SELECT
     COUNT(*)
   FROM
@@ -112,7 +140,7 @@ The same query over the new logs might look like this:
 
 Old query:
 
-``` 
+```
   #standardSQL
   SELECT
     TIMESTAMP_TRUNC(protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime, HOUR) AS time_window,
@@ -127,7 +155,7 @@ Old query:
 
 New query:
 
-``` 
+```
   SELECT
     TIMESTAMP_TRUNC(TIMESTAMP(JSON_EXTRACT_SCALAR(protopayload_auditlog.metadataJson,
           "$.jobChange.job.jobStats.endTime")), HOUR) AS time_window,

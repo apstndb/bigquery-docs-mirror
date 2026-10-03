@@ -15,7 +15,7 @@ Column-level access control requires a user to have read permission for columns 
 The following sections provide details about different types of write operations. The examples in this topic use `customers` tables with the following schema:
 
 | Field name     | Type    | Mode     | Policy tag     |
-| -------------- | ------- | -------- | -------------- |
+|----------------|---------|----------|----------------|
 | `user_id`      | STRING  | REQUIRED | `policy-tag-1` |
 | `credit_score` | INTEGER | NULLABLE | `policy-tag-2` |
 | `ssn`          | STRING  | NULLABLE | `policy-tag-3` |
@@ -46,106 +46,41 @@ For a copy operation, BigQuery checks whether the user has the Fine-Grained Read
 
 **Example:**
 
-    INSERT INTO customers VALUES('alice', 85, '123-456-7890');
+```
+INSERT INTO customers VALUES('alice', 85, '123-456-7890');
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>N/A</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td>N/A</td>
-<td><code dir="ltr" translate="no">user_id</code><br />
-<code dir="ltr" translate="no">credit_score</code><br />
-<code dir="ltr" translate="no">ssn</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns | Update columns                 |
+|----------------------------------------------|----------------|--------------------------------|
+| Policy tags checked for Fine-Grained Reader? | N/A            | No                             |
+| Columns checked                              | N/A            | `user_id` `credit_score` `ssn` |
 
 ### `UPDATE`
 
 **Example:**
 
-    UPDATE customers SET credit_score = 0
-      WHERE user_id LIKE 'alice%' AND credit_score < 30
+```
+UPDATE customers SET credit_score = 0
+  WHERE user_id LIKE 'alice%' AND credit_score < 30
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td><code dir="ltr" translate="no">user_id</code><br />
-<code dir="ltr" translate="no">credit_score</code></td>
-<td><code dir="ltr" translate="no">credit_score</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns           | Update columns |
+|----------------------------------------------|--------------------------|----------------|
+| Policy tags checked for Fine-Grained Reader? | Yes                      | No             |
+| Columns checked                              | `user_id` `credit_score` | `credit_score` |
 
 ### `DELETE`
 
 **Example:**
 
-    DELETE customers WHERE credit_score = 0
+```
+DELETE customers WHERE credit_score = 0
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td><code dir="ltr" translate="no">credit_score</code></td>
-<td><code dir="ltr" translate="no">user_id</code><br />
-<code dir="ltr" translate="no">credit_score</code><br />
-<code dir="ltr" translate="no">ssn</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns | Update columns                 |
+|----------------------------------------------|----------------|--------------------------------|
+| Policy tags checked for Fine-Grained Reader? | Yes            | No                             |
+| Columns checked                              | `credit_score` | `user_id` `credit_score` `ssn` |
 
 ## Load examples
 
@@ -153,38 +88,16 @@ For a copy operation, BigQuery checks whether the user has the Fine-Grained Read
 
 **Example:**
 
-    load --source_format=CSV samples.customers \
-      ./customers_data.csv \
-      ./customers_schema.json
+```
+load --source_format=CSV samples.customers \
+  ./customers_data.csv \
+  ./customers_schema.json
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>N/A</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td>N/A</td>
-<td><code dir="ltr" translate="no">user_id</code><br />
-<code dir="ltr" translate="no">credit_score</code><br />
-<code dir="ltr" translate="no">ssn</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns | Update columns                 |
+|----------------------------------------------|----------------|--------------------------------|
+| Policy tags checked for Fine-Grained Reader? | N/A            | No                             |
+| Columns checked                              | N/A            | `user_id` `credit_score` `ssn` |
 
 ### Streaming
 
@@ -196,75 +109,27 @@ No policy tags are checked when streaming with the BigQuery Storage Write API (R
 
 **Example:**
 
-    cp -a samples.customers samples.customers_dest
+```
+cp -a samples.customers samples.customers_dest
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td><code dir="ltr" translate="no">customers.user_id</code><br />
-<code dir="ltr" translate="no">customers.credit_score</code><br />
-<code dir="ltr" translate="no">customers.ssn</code></td>
-<td><code dir="ltr" translate="no">customers_dest.user_id</code><br />
-<code dir="ltr" translate="no">customers_dest.credit_score</code><br />
-<code dir="ltr" translate="no">customers_dest.ssn</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns                                               | Update columns                                                              |
+|----------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Policy tags checked for Fine-Grained Reader? | Yes                                                          | No                                                                          |
+| Columns checked                              | `customers.user_id` `customers.credit_score` `customers.ssn` | `customers_dest.user_id` `customers_dest.credit_score` `customers_dest.ssn` |
 
 ### Saving query results to a destination table
 
 **Example:**
 
-    query --use_legacy_sql=false \
-    --max_rows=0 \
-    --destination_table samples.customers_dest \
-    --append_table "SELECT * FROM samples.customers LIMIT 10;"
+```
+query --use_legacy_sql=false \
+--max_rows=0 \
+--destination_table samples.customers_dest \
+--append_table "SELECT * FROM samples.customers LIMIT 10;"
+```
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Source columns</th>
-<th>Update columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Policy tags checked for Fine-Grained Reader?</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Columns checked</td>
-<td><code dir="ltr" translate="no">customers.user_id</code><br />
-<code dir="ltr" translate="no">customers.credit_score</code><br />
-<code dir="ltr" translate="no">customers.ssn</code></td>
-<td><code dir="ltr" translate="no">customers_dest.user_id</code><br />
-<code dir="ltr" translate="no">customers_dest.credit_score</code><br />
-<code dir="ltr" translate="no">customers_dest.ssn</code></td>
-</tr>
-</tbody>
-</table>
+|                                              | Source columns                                               | Update columns                                                              |
+|----------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Policy tags checked for Fine-Grained Reader? | Yes                                                          | No                                                                          |
+| Columns checked                              | `customers.user_id` `customers.credit_score` `customers.ssn` | `customers_dest.user_id` `customers_dest.credit_score` `customers_dest.ssn` |

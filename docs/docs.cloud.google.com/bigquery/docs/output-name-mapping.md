@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Map SQL object names for batch translation
 
 > **Preview**
-> 
+>
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** Object name mapping using JSON is only supported by the legacy batch API. If you are using the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) or starting batch jobs from the Google Cloud console, use [YAML-based object name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
@@ -20,133 +20,48 @@ This document describes how to configure *name mapping* to rename SQL objects du
 
 Name mapping lets you identify the names of SQL objects in your source files, and specify target names for those objects in BigQuery. You can use some or all of the following components to configure name mapping for an object:
 
-  - A name mapping rule, composed of:
-      - Source [name parts](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#name_parts) that provide the fully qualified name of the object in the source system.
-      - A [type](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#object_types) that identifies the source object's type.
-      - Target name parts that provide the name of the object in BigQuery.
-  - A [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) name to use with any source objects that don't specify one.
-  - A [default schema](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) name to use with any source objects that don't specify one.
+- A name mapping rule, composed of:
+  - Source [name parts](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#name_parts) that provide the fully qualified name of the object in the source system.
+  - A [type](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#object_types) that identifies the source object's type.
+  - Target name parts that provide the name of the object in BigQuery.
+- A [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) name to use with any source objects that don't specify one.
+- A [default schema](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) name to use with any source objects that don't specify one.
 
 ### Name parts
 
 You provide the values for the source and target object names in a name mapping rule by using a combination of the following name parts:
 
-  - **Database** : The top level of the naming hierarchy. Your source platform might use an alternative term for this, for example *project* .
-  - **Schema** : The second level of the naming hierarchy. Your source platform might use an alternative term for this, for example *dataset* .
-  - **Relation** : The third level of the naming hierarchy. Your source platform might use an alternative term for this, for example *table* .
-  - **Attribute** : The lowest level of the naming hierarchy. Your source platform might use an alternative term for this, for example *column* .
+- **Database** : The top level of the naming hierarchy. Your source platform might use an alternative term for this, for example *project* .
+- **Schema** : The second level of the naming hierarchy. Your source platform might use an alternative term for this, for example *dataset* .
+- **Relation** : The third level of the naming hierarchy. Your source platform might use an alternative term for this, for example *table* .
+- **Attribute** : The lowest level of the naming hierarchy. Your source platform might use an alternative term for this, for example *column* .
 
 ### Object types
 
 You must also specify the type of source object you are renaming in a name mapping rule. The following object types are supported:
 
-  - `Database` : A top-level object in the object hierarchy, for example **`database`** `.schema.relation.attribute` . Your source platform might use an alternative term for this, for example *project* . Specifying `database` as the object type changes all references to the source string in both DDL and DML statements.
-  - `Schema` : A second-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *dataset* . Specifying `schema` as the object type changes all references to the source string in both DDL and DML statements.
-  - `Relation` : A third-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *table* . Specifying `relation` as the object type changes all references to the source string in DDL statements.
-  - `Relation alias` : An alias for a third-level object. For example, in the query `SELECT t.field1, t.field2 FROM myTable t;` , `t` is a relation alias. In the query `SELECT field1, field2 FROM schema1.table1` , `table1` is also a relation alias. Specifying `relation alias` as the object type creates aliases for all references to the source string in DML statements. For example, if `tableA` is specified as the target name, the preceding examples are translated as `SELECT tableA.field1, tableA.field2 FROM myTable AS tableA;` and `SELECT tableA.field1, tableA.field2 FROM schema1.table1 AS tableA` , respectively.
-  - `Function` : A procedure, for example `create procedure db.test.function1(a int)` . Specifying `function` as the object type changes all references to the source string in both DDL and DML statements.
-  - `Attribute` : A fourth-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *column* . Specifying `attribute` as the object type changes all references to the source string in DDL statements.
-  - `Attribute alias` : An alias for a fourth-level object. For example, in the query `SELECT field1 FROM myTable;` , `field1` is an attribute alias. Specifying `attribute alias` as the object type changes all references to the source string in DML statements.
+- `Database` : A top-level object in the object hierarchy, for example **`database`** `.schema.relation.attribute` . Your source platform might use an alternative term for this, for example *project* . Specifying `database` as the object type changes all references to the source string in both DDL and DML statements.
+- `Schema` : A second-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *dataset* . Specifying `schema` as the object type changes all references to the source string in both DDL and DML statements.
+- `Relation` : A third-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *table* . Specifying `relation` as the object type changes all references to the source string in DDL statements.
+- `Relation alias` : An alias for a third-level object. For example, in the query `SELECT t.field1, t.field2 FROM myTable t;` , `t` is a relation alias. In the query `SELECT field1, field2 FROM schema1.table1` , `table1` is also a relation alias. Specifying `relation alias` as the object type creates aliases for all references to the source string in DML statements. For example, if `tableA` is specified as the target name, the preceding examples are translated as `SELECT tableA.field1, tableA.field2 FROM myTable AS tableA;` and `SELECT tableA.field1, tableA.field2 FROM schema1.table1 AS tableA` , respectively.
+- `Function` : A procedure, for example `create procedure db.test.function1(a int)` . Specifying `function` as the object type changes all references to the source string in both DDL and DML statements.
+- `Attribute` : A fourth-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *column* . Specifying `attribute` as the object type changes all references to the source string in DDL statements.
+- `Attribute alias` : An alias for a fourth-level object. For example, in the query `SELECT field1 FROM myTable;` , `field1` is an attribute alias. Specifying `attribute alias` as the object type changes all references to the source string in DML statements.
 
 #### Required name parts for object types
 
 To describe an object in a name mapping rule, use the name parts identified for each object type in the following table:
 
-**Type**
-
-**Source object name**
-
-**Target object name**
-
-**Database name part**
-
-**Schema name part**
-
-**Relation name part**
-
-**Attribute name part**
-
-**Database name part**
-
-**Schema name part**
-
-**Relation name part**
-
-**Attribute name part**
-
-`Database`
-
-X
-
-X
-
-`Schema`
-
-X
-
-X
-
-X
-
-X
-
-`Relation`
-
-X
-
-X
-
-X
-
-X
-
-X
-
-X
-
-`Function`
-
-X
-
-X
-
-X
-
-X
-
-X
-
-X
-
-`Attribute`
-
-X
-
-X
-
-X
-
-X
-
-X
-
-`Attribute alias`
-
-X
-
-X
-
-X
-
-X
-
-X
-
-`Relation alias`
-
-X
-
-X
+| **Type**          | **Source object name** | **Target object name** |                        |                         |                        |                      |                        |                         |
+|-------------------|------------------------|------------------------|------------------------|-------------------------|------------------------|----------------------|------------------------|-------------------------|
+|                   | **Database name part** | **Schema name part**   | **Relation name part** | **Attribute name part** | **Database name part** | **Schema name part** | **Relation name part** | **Attribute name part** |
+| `Database`        | X                      |                        |                        |                         | X                      |                      |                        |                         |
+| `Schema`          | X                      | X                      |                        |                         | X                      | X                    |                        |                         |
+| `Relation`        | X                      | X                      | X                      |                         | X                      | X                    | X                      |                         |
+| `Function`        | X                      | X                      | X                      |                         | X                      | X                    | X                      |                         |
+| `Attribute`       | X                      | X                      | X                      | X                       |                        |                      |                        | X                       |
+| `Attribute alias` | X                      | X                      | X                      | X                       |                        |                      |                        | X                       |
+| `Relation alias`  |                        |                        | X                      |                         |                        |                      | X                      |                         |
 
 ### Default database
 
@@ -160,13 +75,13 @@ If you want to fully qualify all object names in the source files that don't use
 
 For example, if you specify the default database name `myproject` and the default schema name `myschema` , then the following source statements:
 
-  - `SELECT * FROM database.table`
-  - `SELECT * FROM table1`
+- `SELECT * FROM database.table`
+- `SELECT * FROM table1`
 
 Are translated to:
 
-  - `SELECT * FROM myproject.database.table` .
-  - `SELECT * FROM myproject.myschema.table1`
+- `SELECT * FROM myproject.database.table` .
+- `SELECT * FROM myproject.myschema.table1`
 
 ## Name mapping rule behavior
 
@@ -179,7 +94,7 @@ A name change that affects a higher-level object affects the target object, and 
 For example, if you specify the following name mapping rule with an object type of `schema` :
 
 | **Name part** | **Source**  | **Target** |
-| ------------- | ----------- | ---------- |
+|---------------|-------------|------------|
 | Database      | `sales_db`  | `sales`    |
 | Schema        | `cust_mgmt` | `cms`      |
 | Relation      |             |            |
@@ -192,7 +107,7 @@ Conversely, name changes that target lower-level objects don't affect higher- or
 For example, if you specify the following name mapping rule with an object type of `relation` :
 
 | **Name part** | **Source**  | **Target** |
-| ------------- | ----------- | ---------- |
+|---------------|-------------|------------|
 | Database      | `sales_db`  | `sales`    |
 | Schema        | `cust_mgmt` | `cms`      |
 | Relation      | `clients`   | `accounts` |
@@ -208,47 +123,13 @@ Only one name mapping rule is applied to an object. If multiple rules could affe
 
 You can't specify more than one name mapping rule with the same type and source values. For example, you can't specify both of the following name mapping rules:
 
-**Rule 1, type `attribute`**
-
-**Rule 2, type `attribute`**
-
-**Name part**
-
-**Source**
-
-**Target**
-
-**Source**
-
-**Target**
-
-Database
-
-`project`
-
-`project`
-
-Schema
-
-`dataset1`
-
-`dataset1`
-
-Relation
-
-`table1`
-
-`table1`
-
-Attribute
-
-`lname`
-
-`last_name`
-
-`lname`
-
-`lastname`
+|               | **Rule 1, type `attribute`** | **Rule 2, type `attribute`** |            |            |
+|---------------|------------------------------|------------------------------|------------|------------|
+| **Name part** | **Source**                   | **Target**                   | **Source** | **Target** |
+| Database      | `project`                    |                              | `project`  |            |
+| Schema        | `dataset1`                   |                              | `dataset1` |            |
+| Relation      | `table1`                     |                              | `table1`   |            |
+| Attribute     | `lname`                      | `last_name`                  | `lname`    | `lastname` |
 
 ### Create matching `attribute` and `attribute alias` name mapping rules
 
@@ -275,7 +156,7 @@ The following example renames the database name part from `td_project` to `bq_pr
 **Source and target name parts**
 
 | **Name part** | **Source**   | **Target**   |
-| ------------- | ------------ | ------------ |
+|---------------|--------------|--------------|
 | Database      | `td_project` | `bq_project` |
 | Schema        |              |              |
 | Relation      |              |              |
@@ -283,17 +164,17 @@ The following example renames the database name part from `td_project` to `bq_pr
 
 **Type**
 
-  - `database`
+- `database`
 
 **Example input**
 
-  - `SELECT * FROM td_project.schema.table;`
-  - `SELECT * FROM td_project.schema1.table1;`
+- `SELECT * FROM td_project.schema.table;`
+- `SELECT * FROM td_project.schema1.table1;`
 
 **Example output**
 
-  - `SELECT * FROM bq_project.schema.table;`
-  - `SELECT * FROM bq_project.schema1.table1`
+- `SELECT * FROM bq_project.schema.table;`
+- `SELECT * FROM bq_project.schema1.table1`
 
 ### Change the database name part for objects with varying levels of name completion
 
@@ -303,12 +184,12 @@ To do this, you must specify a default database value when configuring the trans
 
 **Default database value**
 
-  - `project`
+- `project`
 
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target**   |
-| ------------- | ---------- | ------------ |
+|---------------|------------|--------------|
 | Database      | `project`  | `bq_project` |
 | Schema        |            |              |
 | Relation      |            |              |
@@ -316,17 +197,17 @@ To do this, you must specify a default database value when configuring the trans
 
 **Type**
 
-  - `database`
+- `database`
 
 **Example input**
 
-  - `SELECT * FROM project.schema.table;`
-  - `SELECT * FROM schema1.table1;`
+- `SELECT * FROM project.schema.table;`
+- `SELECT * FROM schema1.table1;`
 
 **Example output**
 
-  - `SELECT * FROM bq_project.schema.table;`
-  - `SELECT * FROM bq_project.schema1.table1`
+- `SELECT * FROM bq_project.schema.table;`
+- `SELECT * FROM bq_project.schema1.table1`
 
 ### Change the database name part and the schema name part for fully qualified objects
 
@@ -337,7 +218,7 @@ You can also change the parts of a `relation` object name in the same manner, by
 **Source and target name parts**
 
 | **Name part** | **Source**   | **Target**  |
-| ------------- | ------------ | ----------- |
+|---------------|--------------|-------------|
 | Database      | `warehouse1` | `myproject` |
 | Schema        | `database1`  | `mydataset` |
 | Relation      |              |             |
@@ -345,17 +226,17 @@ You can also change the parts of a `relation` object name in the same manner, by
 
 **Type**
 
-  - `schema`
+- `schema`
 
 **Example input**
 
-  - `SELECT * FROM warehouse1.database1.table1;`
-  - `SELECT * FROM database2.table2;`
+- `SELECT * FROM warehouse1.database1.table1;`
+- `SELECT * FROM database2.table2;`
 
 **Example output**
 
-  - `SELECT * FROM myproject.mydataset.table1;`
-  - `SELECT * FROM __DEFAULT_DATABASE__.database2.table2;`
+- `SELECT * FROM myproject.mydataset.table1;`
+- `SELECT * FROM __DEFAULT_DATABASE__.database2.table2;`
 
 ### Change a fully qualified `relation` object name
 
@@ -364,7 +245,7 @@ The following example renames `mydb.myschema.mytable` to `mydb.myschema.table1` 
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target** |
-| ------------- | ---------- | ---------- |
+|---------------|------------|------------|
 | Database      | `mydb`     | `mydb`     |
 | Schema        | `myschema` | `myschema` |
 | Relation      | `mytable`  | `table1`   |
@@ -372,15 +253,15 @@ The following example renames `mydb.myschema.mytable` to `mydb.myschema.table1` 
 
 **Type**
 
-  - `relation`
+- `relation`
 
 **Example input**
 
-  - `CREATE table mydb.myschema.mytable(id int, name varchar(64));`
+- `CREATE table mydb.myschema.mytable(id int, name varchar(64));`
 
 **Example output**
 
-  - `CREATE table mydb.myschema.table1(id integer, name string(64));`
+- `CREATE table mydb.myschema.table1(id integer, name string(64));`
 
 ### Change a partially qualified `relation` object name
 
@@ -388,12 +269,12 @@ The following example renames `myschema.mytable` to `mydb.myschema.table1` .
 
 **Default database value**
 
-  - `mydb`
+- `mydb`
 
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target** |
-| ------------- | ---------- | ---------- |
+|---------------|------------|------------|
 | Database      | `mydb`     | `mydb`     |
 | Schema        | `myschema` | `myschema` |
 | Relation      | `mytable`  | `table1`   |
@@ -401,15 +282,15 @@ The following example renames `myschema.mytable` to `mydb.myschema.table1` .
 
 **Type**
 
-  - `relation`
+- `relation`
 
 **Example input**
 
-  - `CREATE table myschema.mytable(id int, name varchar(64));`
+- `CREATE table myschema.mytable(id int, name varchar(64));`
 
 **Example output**
 
-  - `CREATE table mydb.myschema.table1(id integer, name string(64));`
+- `CREATE table mydb.myschema.table1(id integer, name string(64));`
 
 ### Change a `relation alias` object name
 
@@ -418,7 +299,7 @@ The following example renames all instances of the `relation alias` object `tabl
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target** |
-| ------------- | ---------- | ---------- |
+|---------------|------------|------------|
 | Database      |            |            |
 | Schema        |            |            |
 | Relation      | `table`    | `t`        |
@@ -426,15 +307,15 @@ The following example renames all instances of the `relation alias` object `tabl
 
 **Type**
 
-  - `relation alias`
+- `relation alias`
 
 **Example input**
 
-  - `SELECT table.id, table.name FROM mydb.myschema.mytable table`
+- `SELECT table.id, table.name FROM mydb.myschema.mytable table`
 
 **Example output**
 
-  - `SELECT t.id, t.name FROM mydb.myschema.mytable AS t`
+- `SELECT t.id, t.name FROM mydb.myschema.mytable AS t`
 
 ### Change a `function` object name
 
@@ -443,7 +324,7 @@ The following example renames `mydb.myschema.myfunction` to `mydb.myschema.funct
 **Source and target name parts**
 
 | **Name part** | **Source**    | **Target**   |
-| ------------- | ------------- | ------------ |
+|---------------|---------------|--------------|
 | Database      | `mydb`        | `mydb`       |
 | Schema        | `myschema`    | `myschema`   |
 | Relation      | `myprocedure` | `procedure1` |
@@ -451,17 +332,17 @@ The following example renames `mydb.myschema.myfunction` to `mydb.myschema.funct
 
 **Type**
 
-  - `function`
+- `function`
 
 **Example input**
 
-  - `CREATE PROCEDURE mydb.myschema.myprocedure(a int) BEGIN declare i int; SET i = a + 1; END;`
-  - `CALL mydb.myschema.myprocedure(7)`
+- `CREATE PROCEDURE mydb.myschema.myprocedure(a int) BEGIN declare i int; SET i = a + 1; END;`
+- `CALL mydb.myschema.myprocedure(7)`
 
 **Example output**
 
-  - `CREATE PROCEDURE mydb.myschema.procedure1(a int) BEGIN declare i int; SET i = a + 1; END;`
-  - `CALL mydb.myschema.procedure1(7);`
+- `CREATE PROCEDURE mydb.myschema.procedure1(a int) BEGIN declare i int; SET i = a + 1; END;`
+- `CALL mydb.myschema.procedure1(7);`
 
 ### Change an `attribute` object name
 
@@ -470,7 +351,7 @@ The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target** |
-| ------------- | ---------- | ---------- |
+|---------------|------------|------------|
 | Database      | `mydb`     |            |
 | Schema        | `myschema` |            |
 | Relation      | `mytable`  |            |
@@ -478,15 +359,15 @@ The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.
 
 **Type**
 
-  - `attribute`
+- `attribute`
 
 **Example input**
 
-  - `CREATE table mydb.myschema.mytable(myfield int, name varchar(64), revenue int);`
+- `CREATE table mydb.myschema.mytable(myfield int, name varchar(64), revenue int);`
 
 **Example output**
 
-  - `CREATE table mydb.myschema.mytable(field1 int, name varchar(64), revenue int);`
+- `CREATE table mydb.myschema.mytable(field1 int, name varchar(64), revenue int);`
 
 ### Change an `attribute alias` object name
 
@@ -495,7 +376,7 @@ The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.
 **Source and target name parts**
 
 | **Name part** | **Source** | **Target** |
-| ------------- | ---------- | ---------- |
+|---------------|------------|------------|
 | Database      | `mydb`     |            |
 | Schema        | `myschema` |            |
 | Relation      | `mytable`  |            |
@@ -503,39 +384,41 @@ The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.
 
 **Type**
 
-  - `attribute alias`
+- `attribute alias`
 
 **Example input**
 
-  - `SELECT myfield, name FROM mydb.myschema.mytable;`
+- `SELECT myfield, name FROM mydb.myschema.mytable;`
 
 **Example output**
 
-  - `SELECT field1, name FROM mydb.myschema.mytable;`
+- `SELECT field1, name FROM mydb.myschema.mytable;`
 
 ## JSON file format
 
 If you choose to specify name mapping rules by using a JSON file rather than the Google Cloud console, the JSON file must follow this format:
 
+```
+{
+  "name_map": [
     {
-      "name_map": [
-        {
-          "source": {
-            "type": "string",
-            "database": "string",
-            "schema": "string",
-            "relation": "string",
-            "attribute": "string"
-          },
-          "target": {
-            "database": "string",
-            "schema": "string",
-            "relation": "string",
-            "attribute": "string"
-          }
-        }
-      ]
+      "source": {
+        "type": "string",
+        "database": "string",
+        "schema": "string",
+        "relation": "string",
+        "attribute": "string"
+      },
+      "target": {
+        "database": "string",
+        "schema": "string",
+        "relation": "string",
+        "attribute": "string"
+      }
     }
+  ]
+}
+```
 
 The file size must be less than 5 MB.
 
@@ -549,71 +432,71 @@ The following examples show how to specify name mapping rules by using JSON file
 
 The name mapping rules in this example make the following object name changes:
 
-  - Rename instances of the `project.dataset2.table2` `relation` object to `bq_project.bq_dataset2.bq_table2` .
-  - Renames all instances of the `project` `database` object to `bq_project` . For example, `project.mydataset.table2` becomes `bq_project.mydataset.table2` , and `CREATE DATASET project.mydataset` becomes `CREATE DATASET bq_project.mydataset` .
+- Rename instances of the `project.dataset2.table2` `relation` object to `bq_project.bq_dataset2.bq_table2` .
+- Renames all instances of the `project` `database` object to `bq_project` . For example, `project.mydataset.table2` becomes `bq_project.mydataset.table2` , and `CREATE DATASET project.mydataset` becomes `CREATE DATASET bq_project.mydataset` .
 
-<!-- end list -->
-
-    {
-      "name_map": [{
-        "source": {
-          "type": "RELATION",
-          "database": "project",
-          "schema": "dataset2",
-          "relation": "table2"
-        },
-        "target": {
-          "database": "bq_project",
-          "schema": "bq_dataset2",
-          "relation": "bq_table2"
-        }
-      }, {
-        "source": {
-          "type": "DATABASE",
-          "database": "project"
-        },
-        "target": {
-          "database": "bq_project"
-        }
-      }]
+```
+{
+  "name_map": [{
+    "source": {
+      "type": "RELATION",
+      "database": "project",
+      "schema": "dataset2",
+      "relation": "table2"
+    },
+    "target": {
+      "database": "bq_project",
+      "schema": "bq_dataset2",
+      "relation": "bq_table2"
     }
+  }, {
+    "source": {
+      "type": "DATABASE",
+      "database": "project"
+    },
+    "target": {
+      "database": "bq_project"
+    }
+  }]
+}
+```
 
 #### Example 2
 
 The name mapping rules in this example make the following object name changes:
 
-  - Rename instances of the `project.dataset2.table2.field1` `attribute` object to `bq_project.bq_dataset2.bq_table2.bq_field` in both DDL and DML statements.
+- Rename instances of the `project.dataset2.table2.field1` `attribute` object to `bq_project.bq_dataset2.bq_table2.bq_field` in both DDL and DML statements.
 
-<!-- end list -->
-
-    {
-      "name_map": [{
-        "source": {
-          "type": "ATTRIBUTE",
-          "database": "project",
-          "schema": "dataset2",
-          "relation": "table2",
-          "attribute": "field1"
-        },
-        "target": {
-          "database": "bq_project",
-          "schema": "bq_dataset2",
-          "relation": "bq_table2",
-          "attribute": "bq_field"
-        }
-      }, {
-        "source": {
-          "type": "ATTRIBUTE_ALIAS",
-          "database": "project",
-          "schema": "dataset2",
-          "relation": "table2",
-          "attribute": "field1"
-        },
-        "target": {
-          "database": "bq_project",
-          "schema": "bq_dataset2",
-          "relation": "bq_table2",
-          "attribute": "bq_field"
-        }
-      }]
+```
+{
+  "name_map": [{
+    "source": {
+      "type": "ATTRIBUTE",
+      "database": "project",
+      "schema": "dataset2",
+      "relation": "table2",
+      "attribute": "field1"
+    },
+    "target": {
+      "database": "bq_project",
+      "schema": "bq_dataset2",
+      "relation": "bq_table2",
+      "attribute": "bq_field"
     }
+  }, {
+    "source": {
+      "type": "ATTRIBUTE_ALIAS",
+      "database": "project",
+      "schema": "dataset2",
+      "relation": "table2",
+      "attribute": "field1"
+    },
+    "target": {
+      "database": "bq_project",
+      "schema": "bq_dataset2",
+      "relation": "bq_table2",
+      "attribute": "bq_field"
+    }
+  }]
+}
+```

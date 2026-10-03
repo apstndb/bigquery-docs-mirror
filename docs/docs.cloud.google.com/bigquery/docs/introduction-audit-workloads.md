@@ -22,8 +22,8 @@ Audit logs help you answer the question "Who did what, where, and when?" within 
 
 `INFORMATION_SCHEMA` views provide you information to perform a more detailed analysis about your BigQuery workloads, such as the following:
 
-  - What is the average slot utilization for all queries over the past seven days for a given project?
-  - What streaming errors occurred in the past 30 minutes, grouped by error code?
+- What is the average slot utilization for all queries over the past seven days for a given project?
+- What streaming errors occurred in the past 30 minutes, grouped by error code?
 
 BigQuery audit logs contain log entries for API calls, but they don't describe the impact of the API calls. A subset of API calls creates jobs (such as query and load) whose information is captured by `INFORMATION_SCHEMA` views. For example, you can find information about the time and slots that are utilized by a specific query in `INFORMATION_SCHEMA` views but not in the audit logs.
 
@@ -41,39 +41,41 @@ For operations on datasets, tables, and jobs, BigQuery writes audit logs in two 
 
 The older format includes the following fields and values:
 
-  - The value for the `resource.type` field is `bigquery_resource` .
-  - BigQuery writes the details about an operation in the `protoPayload.serviceData` field. The value of this field uses the [`AuditData`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData) log structure.
+- The value for the `resource.type` field is `bigquery_resource` .
+- BigQuery writes the details about an operation in the `protoPayload.serviceData` field. The value of this field uses the [`AuditData`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData) log structure.
 
 The newer format includes the following fields and values:
 
-  - The value for the `resource.type` field is either `bigquery_project` or `bigquery_dataset` . The `bigquery_project` resource has log entries about jobs, while the `bigquery_dataset` resource has log entries about storage.
-  - BigQuery writes the details about an operation in the `protoPayload.metadata` field. The value of this field uses the [`BigQueryAuditMetadata`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) structure.
+- The value for the `resource.type` field is either `bigquery_project` or `bigquery_dataset` . The `bigquery_project` resource has log entries about jobs, while the `bigquery_dataset` resource has log entries about storage.
+- BigQuery writes the details about an operation in the `protoPayload.metadata` field. The value of this field uses the [`BigQueryAuditMetadata`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) structure.
 
 We recommend consuming logs in the newer format. For more information, see [Audit logs migration guide](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/migration) .
 
 The following is an abbreviated example of a log entry that shows a failed operation:
 
-    {
-      "protoPayload": {
-        "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
-        "status": {
-          "code": 5,
-          "message": "Not found: Dataset myproject:mydataset was not found in location US"
-        },
-        "authenticationInfo": { ... },
-        "requestMetadata":  { ... },
-        "serviceName": "bigquery.googleapis.com",
-        "methodName": "google.cloud.bigquery.v2.JobService.InsertJob",
-        "metadata": {
-      },
-      "resource": {
-        "type": "bigquery_project",
-        "labels": { .. },
-      },
-      "severity": "ERROR",
-      "logName": "projects/myproject/logs/cloudaudit.googleapis.com%2Fdata_access",
-      ...
-    }
+```
+{
+  "protoPayload": {
+    "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+    "status": {
+      "code": 5,
+      "message": "Not found: Dataset myproject:mydataset was not found in location US"
+    },
+    "authenticationInfo": { ... },
+    "requestMetadata":  { ... },
+    "serviceName": "bigquery.googleapis.com",
+    "methodName": "google.cloud.bigquery.v2.JobService.InsertJob",
+    "metadata": {
+  },
+  "resource": {
+    "type": "bigquery_project",
+    "labels": { .. },
+  },
+  "severity": "ERROR",
+  "logName": "projects/myproject/logs/cloudaudit.googleapis.com%2Fdata_access",
+  ...
+}
+```
 
 For operations on BigQuery reservations, the `protoPayload` field uses the `AuditLog` structure, and the `protoPayload.request` and `protoPayload.response` fields contain more information. You can find the field definitions in [BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) . For more information, see [Monitoring BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) .
 
@@ -89,5 +91,5 @@ BigQuery audit logs can include information that users might consider sensitive,
 
 ## What's next
 
-  - To learn how to use Cloud Logging to audit activities that are related to policy tags, see [Audit policy tags](https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags) .
-  - To learn how to use BigQuery to analyze logged activity, see [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
+- To learn how to use Cloud Logging to audit activities that are related to policy tags, see [Audit policy tags](https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags) .
+- To learn how to use BigQuery to analyze logged activity, see [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .

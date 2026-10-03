@@ -14,11 +14,11 @@ The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs
 
 The BigQuery Data Transfer Service supports loading data from Cloud Storage in one of the following formats:
 
-  - Comma-separated values (CSV)
-  - JSON (newline-delimited)
-  - Avro
-  - Parquet
-  - ORC
+- Comma-separated values (CSV)
+- JSON (newline-delimited)
+- Avro
+- Parquet
+- ORC
 
 ## Supported compression types
 
@@ -36,16 +36,16 @@ A transfer configuration with an **`APPEND`** or **`WRITE_APPEND`** write prefer
 
 To demonstrate how incremental transfers work, consider the following Cloud Storage transfer example. A user creates a file in a Cloud Storage bucket at time 2023-07-01T00:00Z named `file_1` . The [`updated` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `file_1` is the time that the file was created. The user then creates an incremental transfer from the Cloud Storage bucket, scheduled to run once daily at time 03:00Z, starting from 2023-07-01T03:00Z.
 
-  - At 2023-07-01T03:00Z, the first transfer run starts. As this is the first transfer run for this configuration, BigQuery Data Transfer Service attempts to load all files matching the source URI into the destination BigQuery table. The transfer run succeeds and BigQuery Data Transfer Service successfully loads `file_1` into the destination BigQuery table.
-  - The next transfer run, at 2023-07-02T03:00Z, detects no files where the `updated` timestamp property is greater than the last successful transfer run (2023-07-01T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
+- At 2023-07-01T03:00Z, the first transfer run starts. As this is the first transfer run for this configuration, BigQuery Data Transfer Service attempts to load all files matching the source URI into the destination BigQuery table. The transfer run succeeds and BigQuery Data Transfer Service successfully loads `file_1` into the destination BigQuery table.
+- The next transfer run, at 2023-07-02T03:00Z, detects no files where the `updated` timestamp property is greater than the last successful transfer run (2023-07-01T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
 The preceding example shows how the BigQuery Data Transfer Service looks at the `updated` timestamp property of the source file to determine if any changes were made to the source files, and to transfer those changes if any were detected.
 
 Following the same example, suppose that the user then creates another file in the Cloud Storage bucket at time 2023-07-03T00:00Z, named `file_2` . The [`updated` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `file_2` is the time that the file was created.
 
-  - The next transfer run, at 2023-07-03T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). Suppose that when the transfer run starts it fails due to a transient error. In this scenario, `file_2` is not loaded into the destination BigQuery table. The last successful transfer run timestamp remains at 2023-07-01T03:00Z.
-  - The next transfer run, at 2023-07-04T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). This time, the transfer run completes without issue, so it successfully loads `file_2` into the destination BigQuery table.
-  - The next transfer run, at 2023-07-05T03:00Z, detects no files where the `updated` timestamp is greater than the last successful transfer run (2023-07-04T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
+- The next transfer run, at 2023-07-03T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). Suppose that when the transfer run starts it fails due to a transient error. In this scenario, `file_2` is not loaded into the destination BigQuery table. The last successful transfer run timestamp remains at 2023-07-01T03:00Z.
+- The next transfer run, at 2023-07-04T03:00Z, detects that `file_2` has an `updated` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). This time, the transfer run completes without issue, so it successfully loads `file_2` into the destination BigQuery table.
+- The next transfer run, at 2023-07-05T03:00Z, detects no files where the `updated` timestamp is greater than the last successful transfer run (2023-07-04T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
 The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
 
@@ -63,7 +63,7 @@ To load data from a Cloud Storage data source, you must provide the path to the 
 
 The Cloud Storage resource path contains your bucket name and your object (filename). For example, if the Cloud Storage bucket is named `mybucket` and the data file is named `myfile.csv` , the resource path would be `gs://mybucket/myfile.csv` .
 
-BigQuery does not support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, does not work in BigQuery: `gs:// bucket /my//object//name` .
+BigQuery does not support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, does not work in BigQuery: `gs:// `` bucket `` /my//object//name` .
 
 To retrieve the Cloud Storage resource path:
 
@@ -72,7 +72,7 @@ To retrieve the Cloud Storage resource path:
 2.  Browse to the location of the object (file) that contains the source data.
 
 3.  Click on the name of the object.
-    
+
     The **Object details** page opens.
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `gs://` .
@@ -102,7 +102,7 @@ The BigQuery Data Transfer Service uses load jobs to load Cloud Storage data int
 All BigQuery [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) on load jobs apply to recurring Cloud Storage load jobs, with the following additional considerations:
 
 | Value                                    | Limit        |
-| ---------------------------------------- | ------------ |
+|------------------------------------------|--------------|
 | Maximum size per load job transfer run   | 15 TB        |
 | Maximum number of files per transfer run | 10,000 files |
 
@@ -116,6 +116,6 @@ For more information about pricing, see [BigQuery pricing](https://cloud.google.
 
 ## What's next
 
-  - Learn about [setting up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
-  - Learn about [runtime parameters in Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) .
-  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+- Learn about [setting up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
+- Learn about [runtime parameters in Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) .
+- Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

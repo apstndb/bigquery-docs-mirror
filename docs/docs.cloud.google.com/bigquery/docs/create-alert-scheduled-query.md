@@ -14,8 +14,8 @@ This document describes how to set up an alert using a BigQuery scheduled query.
 
 Before you use Cloud Monitoring, ensure that you have the following:
 
-  - A Cloud Billing account.
-  - A BigQuery project with billing enabled.
+- A Cloud Billing account.
+- A BigQuery project with billing enabled.
 
 One way to ensure that you have both is to complete the [Quickstart using the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console#before-you-begin) .
 
@@ -44,8 +44,8 @@ All scheduled queries write their row count to this metric, using different labe
 3.  Go to the **Details** tab.
 
 4.  Check the last string in **Resource name** , as shown in the following screenshot:
-    
-    ![config\_id in resource name.](https://docs.cloud.google.com/static/bigquery/images/scheduled-query-config-id.png)
+
+    ![config_id in resource name.](https://docs.cloud.google.com/static/bigquery/images/scheduled-query-config-id.png)
 
 > **Note:** The last known value for the row count repeats continuously for 5 weeks. If you deactivate a scheduled query or the query fails, the metric remains constant at its last known value for 35 days. After 35 days, the metric disappears.
 
@@ -55,9 +55,9 @@ If a problem occurs with the scheduled query, an error message appears in the **
 
 Monitor scheduled queries to ensure successful executions:
 
-  - Look for errors in the **Run history** tab of the scheduled query.
-  - Check the final status of each scheduled execution that is stored in the `completion_state` field of the [`bigquerydatatransfer.googleapis.com/transfer_config/completed_runs` metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerydatatransfer) .
-  - Look for errors in the [BigQuery Data Transfer Service logs](https://docs.cloud.google.com/bigquery/docs/dts-monitor#logs) .
+- Look for errors in the **Run history** tab of the scheduled query.
+- Check the final status of each scheduled execution that is stored in the `completion_state` field of the [`bigquerydatatransfer.googleapis.com/transfer_config/completed_runs` metric](https://docs.cloud.google.com/monitoring/api/metrics_gcp_a_b#gcp-bigquerydatatransfer) .
+- Look for errors in the [BigQuery Data Transfer Service logs](https://docs.cloud.google.com/bigquery/docs/dts-monitor#logs) .
 
 ## Create an alert policy
 
@@ -66,21 +66,21 @@ Use a [metric-threshold alert](https://docs.cloud.google.com/monitoring/alerts/u
 To set up an alert on the number of rows a scheduled query returns, follow these steps:
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
-    
+
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 
 2.  Click **Create policy** .
 
-3.  Select the row count metric for the scheduled query. In the **Select a metric** menu, click **BigQuery DTS Config \> Transfer\_config \> Last executed job row count** .
+3.  Select the row count metric for the scheduled query. In the **Select a metric** menu, click **BigQuery DTS Config \> Transfer_config \> Last executed job row count** .
 
 4.  In **Add filters** , click **Add a filter** .
 
-5.  In the **Filter** menu, select **config\_id** .
+5.  In the **Filter** menu, select **config_id** .
 
 6.  In the **Value** menu, select the `config_id` of the scheduled query for which you want to create an alert:
-    
-    ![Set the config\_id filter.](https://docs.cloud.google.com/static/bigquery/images/config-id-filter.png)
-    
+
+    ![Set the config_id filter.](https://docs.cloud.google.com/static/bigquery/images/config-id-filter.png)
+
     If you don't set a filter, your alert tests the output of every scheduled query. To find the `config_id` of your scheduled query, see [Understand the row count metric](https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query#understand_the_row_count_metric) .
 
 7.  Keep the default **Transform data** settings and click **Next** .
@@ -88,7 +88,7 @@ To set up an alert on the number of rows a scheduled query returns, follow these
 8.  For **Condition types** , select **Threshold** .
 
 9.  Select the condition that you want. For example, to trigger when the query returns any rows, set the following condition:
-    
+
     1.  For **Alert trigger** , select **Any time series violates** .
     2.  For **Threshold position** , select **Above threshold** .
     3.  In **Threshold value** , enter `0` .
@@ -96,7 +96,7 @@ To set up an alert on the number of rows a scheduled query returns, follow these
 10. Keep the default **Advanced Options** and click **Next** .
 
 11. Optional: To configure notifications for your alert, click the **Use notification channel** toggle, and then set channels and subject line for your notifications. You can also set notifications for incident closure.
-    
+
     If you don't want notifications, deselect the **Use notification channel** toggle.
 
 12. Optional: If you have many alert policies, you can [annotate labels](https://docs.cloud.google.com/monitoring/alerts/labels) on them to indicate that they are derived from scheduled queries.
@@ -111,9 +111,9 @@ To set up an alert on the number of rows a scheduled query returns, follow these
 
 Alert policies for scheduled queries are subject to the following limitations:
 
-  - Scheduled query execution frequency and ingestion delay impact the total time from log emission to alert. For example, if your query runs every 30 minutes and you add a 15-minute lag for ingestion delay, your alert fires approximately 15 minutes after an offending log entry is emitted. In some cases, it might take up to 45 minutes.
-  - The configuration between a scheduled query and an alert policy isn't linked or synchronized. Editing the configuration in one place might break the relationship that enables the alert function.
+- Scheduled query execution frequency and ingestion delay impact the total time from log emission to alert. For example, if your query runs every 30 minutes and you add a 15-minute lag for ingestion delay, your alert fires approximately 15 minutes after an offending log entry is emitted. In some cases, it might take up to 45 minutes.
+- The configuration between a scheduled query and an alert policy isn't linked or synchronized. Editing the configuration in one place might break the relationship that enables the alert function.
 
 ## What's next
 
-  - Learn how to create and run [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
+- Learn how to create and run [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .

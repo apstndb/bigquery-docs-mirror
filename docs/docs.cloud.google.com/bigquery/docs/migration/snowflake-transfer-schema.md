@@ -16,14 +16,14 @@ The Snowflake connector can automatically detect your Snowflake table schema. To
 
 The following list shows how the Snowflake connector maps your Snowflake data types into BigQuery:
 
-  - The following data types are mapped as `STRING` in BigQuery:
-      - `TIMESTAMP_TZ`
-      - `TIMESTAMP_LTZ`
-      - `OBJECT`
-      - `VARIANT`
-      - `ARRAY`
-  - The following data types are mapped as `TIMESTAMP` in BigQuery:
-      - `TIMESTAMP_NTZ`
+- The following data types are mapped as `STRING` in BigQuery:
+  - `TIMESTAMP_TZ`
+  - `TIMESTAMP_LTZ`
+  - `OBJECT`
+  - `VARIANT`
+  - `ARRAY`
+- The following data types are mapped as `TIMESTAMP` in BigQuery:
+  - `TIMESTAMP_NTZ`
 
 All other Snowflake data types are mapped directly to their equivalent types in BigQuery.
 
@@ -35,27 +35,28 @@ To define your schema manually (for example, to override certain schema attribut
 
 ### Limitations
 
-  - Data is extracted from Snowflake in the Parquet data format before it is loaded into BigQuery:
-    
-      - The following Parquet data types are unsupported:
-        
-          - `TIMESTAMP_TZ` , `TIMESTAMP_LTZ`
-          - For more information, see [Assess Snowflake data](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#limitations) .
-    
-      - The following Parquet data types are unsupported, but can be converted:
-        
-          - `TIMESTAMP_NTZ`
-          - `OBJECT` , `VARIANT` , `ARRAY`
-        
-        Use the [global type conversion configuration YAML](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#global_type_conversion) to override the default behavior of these data types when you run translation engine.
-        
-        The configuration YAML might look similar to the following example:
-        
-            type: experimental_object_rewriter
-            global:
-              typeConvert:
-                datetime: TIMESTAMP
-                json: VARCHAR
+- Data is extracted from Snowflake in the Parquet data format before it is loaded into BigQuery:
+
+  - The following Parquet data types are unsupported:
+    - `TIMESTAMP_TZ` , `TIMESTAMP_LTZ`
+    - For more information, see [Assess Snowflake data](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#limitations) .
+
+  - The following Parquet data types are unsupported, but can be converted:
+
+    - `TIMESTAMP_NTZ`
+    - `OBJECT` , `VARIANT` , `ARRAY`
+
+    Use the [global type conversion configuration YAML](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#global_type_conversion) to override the default behavior of these data types when you run translation engine.
+
+    The configuration YAML might look similar to the following example:
+
+    ```
+    type: experimental_object_rewriter
+    global:
+      typeConvert:
+        datetime: TIMESTAMP
+        json: VARCHAR
+    ```
 
 ### Required service account permissions
 
@@ -74,12 +75,10 @@ You can manually define your schema mapping with the following steps:
 2.  Upload the generated `metadata.zip` file to a Cloud Storage bucket. The `metadata.zip` file is used as input for the translation engine.
 
 3.  Run the batch translation service, specifying the `target_types` field as `metadata` . For more information, see [Translate SQL queries with the translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) .
-    
-      - The following is an example of a command to run a batch translation for Snowflake:
-    
-    <!-- end list -->
-    
-    ``` 
+
+    - The following is an example of a command to run a batch translation for Snowflake:
+
+    ```
       curl -d "{
       \"name\": \"sf_2_bq_translation\",
       \"displayName\": \"Snowflake to BigQuery Translation\",
@@ -101,8 +100,8 @@ You can manually define your schema mapping with the following steps:
       -H "Content-Type:application/json" \
       -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/project_id/locations/location/workflows
     ```
-    
-      - You can check the status of this command in the [SQL Translation page](https://console.cloud.google.com/bigquery/migrations/batch-translation) in BigQuery. The output of the batch translation job is stored in `gs://translation_target_base_uri/metadata/config/` .
+
+    - You can check the status of this command in the [SQL Translation page](https://console.cloud.google.com/bigquery/migrations/batch-translation) in BigQuery. The output of the batch translation job is stored in `gs://translation_target_base_uri/metadata/config/` .
 
 ### Custom Schema File
 
@@ -114,52 +113,54 @@ A custom schema file is a JSON file that describes database objects. The schema 
 
 Columns have the following fields:
 
-  - `originalType` : indicates the column data type in Snowflake
+- `originalType` : indicates the column data type in Snowflake
 
-  - `type` : indicates the target data type for the column in BigQuery.
+- `type` : indicates the target data type for the column in BigQuery.
 
-  - `usageType` : information about the way the column is used by the system. The following usage types are supported:
-    
-      - `DEFAULT` : You can annotate multiple columns in one target table with this usage type. The `DEFAULT` usage type indicates that the column has no special use in the source system. This is the default value.
-      - `PRIMARY_KEY` : You can annotate columns in each target table with this usage type. Use the `PRIMARY_KEY` usage type to identify just one column as the primary key, or in the case of a composite key, use the same usage type on multiple columns to identify the unique entities of a table. These columns work together with `COMMIT_TIMESTAMP` to extract rows created or updated since the last transfer run.
+- `usageType` : information about the way the column is used by the system. The following usage types are supported:
+
+  - `DEFAULT` : You can annotate multiple columns in one target table with this usage type. The `DEFAULT` usage type indicates that the column has no special use in the source system. This is the default value.
+  - `PRIMARY_KEY` : You can annotate columns in each target table with this usage type. Use the `PRIMARY_KEY` usage type to identify just one column as the primary key, or in the case of a composite key, use the same usage type on multiple columns to identify the unique entities of a table. These columns work together with `COMMIT_TIMESTAMP` to extract rows created or updated since the last transfer run.
 
 The following example shows a custom schema file to transfer a Snowflake table called `orders` in the `my_db` database, to rename the `O_ORDERKEY` column to `ORDERKEY` , and to identify `O_ORDERSTATUS` as the primary key.
 
+```
+{
+  "databases": [
     {
-      "databases": [
+      "name": "my_db",
+      "originalName": "my_db",
+      "tables": [
         {
-          "name": "my_db",
-          "originalName": "my_db",
-          "tables": [
+          "name": "orders",
+          "originalName": "orders",
+          "columns": [
             {
-              "name": "orders",
-              "originalName": "orders",
-              "columns": [
-                {
-                  "name": "ORDERKEY",
-                  "originalName": "O_ORDERKEY",
-                  "type": "INT64",
-                  "originalType": "NUMERIC",
-                  "usageType": [
-                    "PRIMARY_KEY"
-                  ],
-                  "isRequired": true,
-                  "originalColumnLength": 4
-                },
-                {
-                  "name": "O_ORDERSTATUS",
-                  "originalName": "O_ORDERSTATUS",
-                  "type": "STRING",
-                  "originalType": "VARCHAR",
-                  "usageType": [
-                    "DEFAULT"
-                  ],
-                  "isRequired": true,
-                  "originalColumnLength": 1
-                }
-              ]
+              "name": "ORDERKEY",
+              "originalName": "O_ORDERKEY",
+              "type": "INT64",
+              "originalType": "NUMERIC",
+              "usageType": [
+                "PRIMARY_KEY"
+              ],
+              "isRequired": true,
+              "originalColumnLength": 4
+            },
+            {
+              "name": "O_ORDERSTATUS",
+              "originalName": "O_ORDERSTATUS",
+              "type": "STRING",
+              "originalType": "VARCHAR",
+              "usageType": [
+                "DEFAULT"
+              ],
+              "isRequired": true,
+              "originalColumnLength": 1
             }
           ]
         }
       ]
     }
+  ]
+}
+```

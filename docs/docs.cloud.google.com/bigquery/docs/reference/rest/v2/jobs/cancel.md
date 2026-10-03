@@ -6,14 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.PATH_PARAMETERS)
-  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.QUERY_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.request_body)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.response_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.JobCancelResponse.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.PATH_PARAMETERS)
+- [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.QUERY_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.request_body)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.response_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.JobCancelResponse.SCHEMA_REPRESENTATION)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/cancel#try-it)
 
 Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.
 
@@ -29,32 +29,36 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`projectId`
-
-`string`
-
-Required. Project ID of the job to cancel
-
-`jobId`
-
-`string`
-
-Required. Job ID of the job to cancel
+| Parameters  |                                                    |
+|-------------|----------------------------------------------------|
+| `projectId` | `string` Required. Project ID of the job to cancel |
+| `jobId`     | `string` Required. Job ID of the job to cancel     |
 
 ### Query parameters
 
-Parameters
-
-`location`
-
-`string`
-
-The geographic location of the job. You must [specify the location](https://cloud.google.com/bigquery/docs/locations#specify_locations) to run the job for the following scenarios:
-
-  - If the location to run a job is not in the `us` or the `eu` multi-regional location
-  - If the job's location is in a single region (for example, `us-central1` )
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameters</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>location</code></td>
+<td><p><code>string</code></p>
+<p>The geographic location of the job. You must <a href="https://cloud.google.com/bigquery/docs/locations#specify_locations">specify the location</a> to run the job for the following scenarios:</p>
+<ul>
+<li>If the location to run a job is not in the <code>us</code> or the <code>eu</code> multi-regional location</li>
+<li>If the job's location is in a single region (for example, <code>us-central1</code> )</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 ### Request body
 
@@ -66,41 +70,27 @@ Describes format of a jobs cancellation response.
 
 If successful, the response body contains data with the following structure:
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;kind&quot;: string,&quot;job&quot;: {object (Job)}}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "kind": string,
+  "job": {
+    object (Job)
+  }
+}
+```
 
-`kind`
-
-`string`
-
-The resource type of the response.
-
-`job`
-
-` object ( Job  ` )
-
-The final state of the job.
+| Fields |                                                                                                                       |
+|--------|-----------------------------------------------------------------------------------------------------------------------|
+| `kind` | `string` The resource type of the response.                                                                           |
+| `job`  | `object ( `[`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job)` )` The final state of the job. |
 
 ### Authorization scopes
 
 Requires one of the following OAuth scopes:
 
-  - `https://www.googleapis.com/auth/bigquery`
-  - `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

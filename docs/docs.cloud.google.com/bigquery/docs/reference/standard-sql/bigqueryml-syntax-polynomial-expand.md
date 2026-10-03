@@ -6,14 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# The ML.POLYNOMIAL\_EXPAND function
+# The ML.POLYNOMIAL_EXPAND function
 
 This document describes the `ML.POLYNOMIAL_EXPAND` function, which lets you calculate all polynomial combinations of the input features.
 
 You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+- [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+- [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
@@ -25,8 +25,8 @@ ML.POLYNOMIAL_EXPAND(struct_numerical_features [, degree])
 
 `ML.POLYNOMIAL_EXPAND` takes the following arguments:
 
-  - `struct_numerical_features` : a `STRUCT` value that contains the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) input features to expand. You can specify less than or equal to `10` input features. Don't specify unnamed features or duplicate features.
-  - `degree` : an `INT64` value that specifies the highest degree of all combinations in the range of `[1, 4]` . The default value is `2` .
+- `struct_numerical_features` : a `STRUCT` value that contains the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) input features to expand. You can specify less than or equal to `10` input features. Don't specify unnamed features or duplicate features.
+- `degree` : an `INT64` value that specifies the highest degree of all combinations in the range of `[1, 4]` . The default value is `2` .
 
 ## Output
 
@@ -36,8 +36,10 @@ ML.POLYNOMIAL_EXPAND(struct_numerical_features [, degree])
 
 The following example calculates the polynomial expansion of two numerical features:
 
-    SELECT
-      ML.POLYNOMIAL_EXPAND(STRUCT(2 AS f1, 3 AS f2)) AS output;
+```
+SELECT
+  ML.POLYNOMIAL_EXPAND(STRUCT(2 AS f1, 3 AS f2)) AS output;
+```
 
 The output looks similar to the following:
 
@@ -51,4 +53,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
+- For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

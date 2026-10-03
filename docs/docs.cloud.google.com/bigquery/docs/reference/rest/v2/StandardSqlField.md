@@ -6,36 +6,22 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlField#SCHEMA_REPRESENTATION)
+- [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlField#SCHEMA_REPRESENTATION)
 
 A field or a column.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;name&quot;: string,&quot;type&quot;: {object (StandardSqlDataType)}}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "name": string,
+  "type": {
+    object (StandardSqlDataType)
+  }
+}
+```
 
-`name`
-
-`string`
-
-Optional. The name of this field. Can be absent for struct fields.
-
-`type`
-
-` object ( StandardSqlDataType  ` )
-
-Optional. The type of this parameter. Absent if not explicitly specified (e.g., CREATE FUNCTION statement can omit the return type; in this case the output parameter does not have this "type" field).
+| Fields |                                                                                                                                                                                                                                                                                                                                   |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name` | `string` Optional. The name of this field. Can be absent for struct fields.                                                                                                                                                                                                                                                       |
+| `type` | `object ( `[`StandardSqlDataType`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType)` )` Optional. The type of this parameter. Absent if not explicitly specified (e.g., CREATE FUNCTION statement can omit the return type; in this case the output parameter does not have this "type" field). |

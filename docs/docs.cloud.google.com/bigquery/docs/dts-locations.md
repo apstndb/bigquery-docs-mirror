@@ -30,5 +30,5 @@ Redshift data warehouse migrations do not require a colocated Cloud Storage buck
 
 ## What's next
 
-  - View [all the Google Cloud services available in locations worldwide](https://cloud.google.com/about/locations/#region) .
-  - [Explore additional location-based concepts](https://docs.cloud.google.com/docs/geography-and-regions) , such as zones, that apply to other Google Cloud services.
+- View [all the Google Cloud services available in locations worldwide](https://cloud.google.com/about/locations/#region) .
+- [Explore additional location-based concepts](https://docs.cloud.google.com/docs/geography-and-regions) , such as zones, that apply to other Google Cloud services.

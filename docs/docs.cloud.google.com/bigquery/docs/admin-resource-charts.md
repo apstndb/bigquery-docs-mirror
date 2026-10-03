@@ -10,22 +10,22 @@ data_source: docs.cloud.google.com
 
 As a BigQuery administrator, you can monitor your organization's health, slots use, and jobs performance over time with operational health and resource utilization charts. BigQuery provides configurable charts to help you with the following:
 
-  - **[Monitor operational health of BigQuery](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor-operational-health) .** BigQuery real-time operational health monitoring is a centralized monitoring system that lets you observe BigQuery usage across the organization in multiple locations.
+- **[Monitor operational health of BigQuery](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor-operational-health) .** BigQuery real-time operational health monitoring is a centralized monitoring system that lets you observe BigQuery usage across the organization in multiple locations.
 
-  - **[View BigQuery resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) .** Use historical data to perform root-cause analysis, plan capacity, and diagnose performance changes.
+- **[View BigQuery resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) .** Use historical data to perform root-cause analysis, plan capacity, and diagnose performance changes.
 
 To monitor and troubleshoot individual query jobs or aggregate jobs by owner, project, or reservation, see [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
 
 ## Before you begin
 
-  - To view operational health, you must use [reservations](https://docs.cloud.google.com/bigquery/docs/admin-intro#manage_reservations) that you can access with an [administration project](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy#considerations) . This isn't a requirement for viewing resource utilization charts.
+- To view operational health, you must use [reservations](https://docs.cloud.google.com/bigquery/docs/admin-intro#manage_reservations) that you can access with an [administration project](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy#considerations) . This isn't a requirement for viewing resource utilization charts.
 
 ### Required roles
 
 To get the permissions that you need to view all data in the operational health and resource utilization charts, ask your administrator to grant you the following IAM roles on your organization:
 
-  - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` )
-  - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
+- [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` )
+- [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -35,16 +35,16 @@ These predefined roles contain the permissions required to view all data in the 
 
 The following permissions are required to view all data in the operational health and resource utilization charts:
 
-  - To view all data in the operational health and resource utilization charts for an organization:
-      - `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
-      - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
-      - `bigquery.capacityCommitments.list` on the administration project used to create the reservations
-  - As an on-demand user, to view all data in the resource utilization charts for an organization: `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
-  - To view operational health summary data for BigQuery table storage: `bigquery.tables.get or bigquery.tables.list` on the organization
-  - To view operational health and resource utilization charts at the reservation level:
-      - `bigquery.reservations.list` on the administration project used to create the reservations
-      - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
-  - To view resource utilization charts at the project level: `bigquery.jobs.listAll` on the project
+- To view all data in the operational health and resource utilization charts for an organization:
+  - `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
+  - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
+  - `bigquery.capacityCommitments.list` on the administration project used to create the reservations
+- As an on-demand user, to view all data in the resource utilization charts for an organization: `bigquery.jobs.listExecutionMetadata or bigquery.jobs.listAll` on the organization
+- To view operational health summary data for BigQuery table storage: `bigquery.tables.get or bigquery.tables.list` on the organization
+- To view operational health and resource utilization charts at the reservation level:
+  - `bigquery.reservations.list` on the administration project used to create the reservations
+  - `bigquery.reservationAssignments.list` on the administration project used to create the reservations
+- To view resource utilization charts at the project level: `bigquery.jobs.listAll` on the project
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -54,13 +54,13 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 The operational health dashboard displays key metrics for your organization and its reservations in all the locations where you have reservations. You can use this dashboard to monitor the following metrics:
 
-  - Slot usage
-  - Shuffle usage
-  - Job concurrency
-  - Errors
-  - Job duration
-  - Bytes processed
-  - Total storage
+- Slot usage
+- Shuffle usage
+- Job concurrency
+- Errors
+- Job duration
+- Bytes processed
+- Total storage
 
 > **Note:** The operational health dashboard doesn't monitor metrics for on-demand workloads. Other charts, such as resource utilization charts, display both on-demand and capacity-based workloads.
 
@@ -77,20 +77,20 @@ To view information about the operational health of your organization, follow th
 4.  Optional: To view real-time metrics, where queries run on fresh data every five minutes, click the **Live data** toggle. By default, this setting is turned off and the maximum staleness of the data is about an hour.
 
 5.  To filter the metrics, configure the following fields:
-    
-      - In the **Select location** list, select a region to monitor.
-      - In the **Select reservation** list, select the reservation.
-      - In the **Select project** list, select the project.
-      - In the **Time range** list, select a time range.
+
+    - In the **Select location** list, select a region to monitor.
+    - In the **Select reservation** list, select the reservation.
+    - In the **Select project** list, select the project.
+    - In the **Time range** list, select a time range.
 
 6.  Optional: To view more details about operational health with a [resource utilization chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) or [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) , click **Explore more** .
 
 BigQuery gathers the metrics by querying the following [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) :
 
-  - [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
-  - [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations)
-  - [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
+- [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+- [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
+- [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations)
+- [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage)
 
 For an example query that replicates the slot usage timeline chart found in administrative resource charts, see [Match slot usage behavior from administrative resource charts](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .
 
@@ -104,7 +104,7 @@ The summary view shows you the health of your organization's subsystems, includi
 
 To view the summary view, do the following:
 
-  - In the **Operational health** tab, in the **Select location** list, select **All locations** .
+- In the **Operational health** tab, in the **Select location** list, select **All locations** .
 
 #### Detailed view
 
@@ -112,12 +112,12 @@ The detailed view shows detailed timeline charts of different metrics at a locat
 
 To view the detailed view, do the following:
 
-  - In the **Operational health** tab, in the **Select location** list, select the region or edition.
+- In the **Operational health** tab, in the **Select location** list, select the region or edition.
 
 You can refine the data displayed in the detailed view using the following optional filters:
 
-  - In the **Select reservation** list, select the reservation name.
-  - In the **Select project** list, select the project.
+- In the **Select reservation** list, select the reservation name.
+- In the **Select project** list, select the project.
 
 ### Charts
 
@@ -127,12 +127,12 @@ BigQuery provides the following table and chart options, which let you explore y
 
 The summary tables display the following metrics:
 
-  - **Slot usage.** The average slot utilization. The total slot capacity equals baseline capacity and autoscaled max capacity.
-  - **Shuffle usage.** The maximum of all average reservation shuffle usage ratios.
-  - **Concurrency.** The maximum number of jobs running simultaneously.
-  - **Bytes processed.** The total bytes processed by completed jobs.
-  - **Job duration.** The average runtime of the jobs completed, calculated from the time when the job was created until the time when the job ended.
-  - **Total storage.** The total active logical bytes at the last updated time.
+- **Slot usage.** The average slot utilization. The total slot capacity equals baseline capacity and autoscaled max capacity.
+- **Shuffle usage.** The maximum of all average reservation shuffle usage ratios.
+- **Concurrency.** The maximum number of jobs running simultaneously.
+- **Bytes processed.** The total bytes processed by completed jobs.
+- **Job duration.** The average runtime of the jobs completed, calculated from the time when the job was created until the time when the job ended.
+- **Total storage.** The total active logical bytes at the last updated time.
 
 There are two summary tables presented in the view: **Location summary** and **Reservation summary** . Each table row represents usage for one location or one reservation.
 
@@ -140,8 +140,8 @@ The tables display metrics for the 30 minutes prior to the last update. If **Liv
 
 The table cell is color coded if the metric is greater than the predefined threshold and if there are an increased number of performance insights for repeated jobs:
 
-  - If the metric value over the 30 minutes prior to the last update is greater than the P99 value of the last week's usage for the same day, the table cell is marked with a dark blue background.
-  - If the metric value over the 30 minutes is between the P95 - P99 value of the last week's usage for the same day, the table cell is marked with a light blue background.
+- If the metric value over the 30 minutes prior to the last update is greater than the P99 value of the last week's usage for the same day, the table cell is marked with a dark blue background.
+- If the metric value over the 30 minutes is between the P95 - P99 value of the last week's usage for the same day, the table cell is marked with a light blue background.
 
 All thresholds are predefined and can't be customized. You can check a threshold by clicking info **Info** .
 
@@ -155,10 +155,10 @@ You can filter data in charts based on the following values:
 
 ![BigQuery administrative filter data.](https://docs.cloud.google.com/static/bigquery/images/admin-filter-data.png)
 
-  - **Location.** Regions where the organization has had activity within the past 30 days are available. The [summary view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#summary-view) presents a table summarizing usage in all active regions.
-  - **Reservation.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . All reservations owned by the administration project are available. You can only choose one reservation.
-  - **Project.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . All projects that have traffic in the organization are available. You can select only one project.
-  - **Time range.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . It affects the [Metrics timeline charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#metric-timeline-charts) and the [Error donut chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#error-donut-chart) in the detailed view. The data scale in the **Metrics timeline charts** is adjusted automatically according to the selected time range.
+- **Location.** Regions where the organization has had activity within the past 30 days are available. The [summary view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#summary-view) presents a table summarizing usage in all active regions.
+- **Reservation.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . All reservations owned by the administration project are available. You can only choose one reservation.
+- **Project.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . All projects that have traffic in the organization are available. You can select only one project.
+- **Time range.** This field is available only in the [detailed view](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#detailed-view) . It affects the [Metrics timeline charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#metric-timeline-charts) and the [Error donut chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#error-donut-chart) in the detailed view. The data scale in the **Metrics timeline charts** is adjusted automatically according to the selected time range.
 
 #### Top active queries chart
 
@@ -180,12 +180,12 @@ These charts display an aggregated value over a region or a reservation. Display
 
 The Metric timeline charts support the following metrics:
 
-  - **Slot usage.** The average slot usage in the selected time period. It displays the overall slot usage from all jobs and failed jobs separately.
-  - **Job concurrency.** The maximum number of jobs running simultaneously in the selected time period. It displays the count of running jobs and pending jobs separately and is shown as a stacked bar chart.
-  - **Bytes scanned.** The total bytes processed by completed jobs in the selected time period.
-  - **Shuffle.** The maximum of all reservation average shuffle usage ratios in the selected time period.
-  - **Job duration.** The average runtime of jobs completed in the selected time period, calculated from job creation time to job end time.
-  - **Error by type.** The [Error donut chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#error-donut-chart) shows the proportion of different causes of failure in the selected time period.
+- **Slot usage.** The average slot usage in the selected time period. It displays the overall slot usage from all jobs and failed jobs separately.
+- **Job concurrency.** The maximum number of jobs running simultaneously in the selected time period. It displays the count of running jobs and pending jobs separately and is shown as a stacked bar chart.
+- **Bytes scanned.** The total bytes processed by completed jobs in the selected time period.
+- **Shuffle.** The maximum of all reservation average shuffle usage ratios in the selected time period.
+- **Job duration.** The average runtime of jobs completed in the selected time period, calculated from job creation time to job end time.
+- **Error by type.** The [Error donut chart](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#error-donut-chart) shows the proportion of different causes of failure in the selected time period.
 
 Besides the metric trends, the charts display reference lines of the P95 and P99 metrics values of the last week's usage for the same day. The **Job concurrency** chart shows the threshold for the sum of pending and running jobs. Those referenced values are used as the color coding thresholds in the [summary table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#summary-view) .
 
@@ -211,9 +211,9 @@ BigQuery resource charts help you track past resource use to plan for future nee
 
 The charts gather metrics by querying the following `INFORMATION_SCHEMA` views:
 
-  - [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
-  - [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes)
+- [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+- [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline)
+- [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes)
 
 The data can be updated in real time, going back a maximum of 30 days.
 
@@ -221,22 +221,22 @@ For an example query that replicates the slot usage timeline chart found in admi
 
 When you view resource utilization, you can configure the following:
 
-  - The event timeline chart shows an overview of data over a maximum of 30 days. The default is 6 hours.
+- The event timeline chart shows an overview of data over a maximum of 30 days. The default is 6 hours.
 
-  - The main chart shows chosen metrics, such as slot usage or bytes processed, over time for your organization or administration project. A legend for the chart gives more details about the data shown.
+- The main chart shows chosen metrics, such as slot usage or bytes processed, over time for your organization or administration project. A legend for the chart gives more details about the data shown.
 
-  - The **Chart configuration** pane lets you select predefined views of your metrics or customize your own metrics for the views.
+- The **Chart configuration** pane lets you select predefined views of your metrics or customize your own metrics for the views.
 
 The resource utilization chart has the following elements:
 
-  - In the resource utilization tab, hold the pointer over the status chip at the top of the chart to display more information about a metric.
+- In the resource utilization tab, hold the pointer over the status chip at the top of the chart to display more information about a metric.
 
-  - The status chips also shows you the following:
-    
-      - If the metric is still loading, a loading icon is presented.
-      - If the metric uses stale data, a clock icon is presented.
-      - If the metric can't be loaded due to unsupported page-level filters, the metric is crossed out.
-      - If the metric fails to load, the status chip is highlighted.
+- The status chips also shows you the following:
+
+  - If the metric is still loading, a loading icon is presented.
+  - If the metric uses stale data, a clock icon is presented.
+  - If the metric can't be loaded due to unsupported page-level filters, the metric is crossed out.
+  - If the metric fails to load, the status chip is highlighted.
 
 ### View and configure resource utilization charts
 
@@ -251,11 +251,11 @@ To view and configure resource utilization charts, follow these steps:
 4.  Choose a time period for the metrics in this view, such as **1 day** . To view real-time metrics, where queries run on fresh data, click the **Live data** toggle. This setting is turned off by default to improve performance, and the maximum staleness of the data is about an hour.
 
 5.  In the **Chart configuration** pane, configure the following fields:
-    
-      - In the [**Metric view**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#metric-view) field, select one of the views.
-      - In the [**Metrics**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#chart-options) field, select a metric to view. You can add or edit a metric.
-      - In the [**Group by**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#group-by) field, select how to group the data.
-      - In the [**Filters**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#filter-search) field, select how to filter the data.
+
+    - In the [**Metric view**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#metric-view) field, select one of the views.
+    - In the [**Metrics**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#chart-options) field, select a metric to view. You can add or edit a metric.
+    - In the [**Group by**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#group-by) field, select how to group the data.
+    - In the [**Filters**](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#filter-search) field, select how to filter the data.
 
 6.  To save the changes you've made to the chart configuration, click **Apply** .
 
@@ -267,95 +267,41 @@ BigQuery provides pre-configured views of resource utilization metrics. The foll
 
 This view shows you metrics about the slot usage breakdown for the reservations in the administrative project. Each metric has the following default settings, which you can edit in the **Chart configuration** pane by clicking the metric's name:
 
-  - The default usage data is from the reservation resources.
-  - The default scope is the project.
-  - The default aggregation is by the average usage in the selected time period.
+- The default usage data is from the reservation resources.
+- The default scope is the project.
+- The default aggregation is by the average usage in the selected time period.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Metric name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Reservation - Slot usage</strong></td>
-<td>Monitors total slot usage for the selected time period.</td>
-</tr>
-<tr class="even">
-<td><strong>Reservation - Idle slot usage</strong></td>
-<td>Monitors slot usage in excess of the reservation's capacity in the selected time period. This metric lets you monitor the idle slots borrowed from other reservations and commitments, or the rounding imprecisions in the usage data. The latter may cause this metric to be a non-zero value, even if idle slots sharing is disabled.<br />
-The idle slots usage is an approximate value and is computed based on <strong>Slot Usage</strong> , <strong>Committed Slots</strong> , and <strong>Autoscaled Slots</strong> . If the slot usage value exceeds the <strong>Commitment Capacity</strong> and <strong>Autoscaled Slots</strong> , then the chart groups the remaining as idle slots.</td>
-</tr>
-<tr class="odd">
-<td><strong>Reservation - Baseline used slots</strong></td>
-<td>Monitors slots used from the reservation baseline.</td>
-</tr>
-<tr class="even">
-<td><strong>Reservation - Autoscaled used slots</strong></td>
-<td>Monitors slots used from reservation autoscaled slots.</td>
-</tr>
-</tbody>
-</table>
+| Metric name                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Reservation - Slot usage**            | Monitors total slot usage for the selected time period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Reservation - Idle slot usage**       | Monitors slot usage in excess of the reservation's capacity in the selected time period. This metric lets you monitor the idle slots borrowed from other reservations and commitments, or the rounding imprecisions in the usage data. The latter may cause this metric to be a non-zero value, even if idle slots sharing is disabled. The idle slots usage is an approximate value and is computed based on **Slot Usage** , **Committed Slots** , and **Autoscaled Slots** . If the slot usage value exceeds the **Commitment Capacity** and **Autoscaled Slots** , then the chart groups the remaining as idle slots. |
+| **Reservation - Baseline used slots**   | Monitors slots used from the reservation baseline.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Reservation - Autoscaled used slots** | Monitors slots used from reservation autoscaled slots.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ##### Edition utilization overview
 
 This view shows you metrics about slot usage and capacity for edition resources in the administrative project. Each metric has the following default settings, which you can edit in the **Chart configuration** pane by clicking the metric's name:
 
-  - The default usage data is from the reservation resource and the capacity data is from the edition resource.
-  - The default scope is the project.
+- The default usage data is from the reservation resource and the capacity data is from the edition resource.
+- The default scope is the project.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Metric name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Reservation - Slot usage</strong></td>
-<td>Monitors slot usage for the selected time period. The default aggregation is by the p99 slot usage in the selected time period.</td>
-</tr>
-<tr class="even">
-<td><strong>Reservation - Idle slot usage</strong></td>
-<td>Monitors slot usage in excess of the reservation's capacity in the selected time period. This metric lets you monitor the idle slots borrowed from other reservations and commitments, or the rounding imprecisions in the usage data. The latter can cause this metric to have a non-zero value, even if idle slot sharing is disabled.<br />
-The idle slot usage is an approximate value and is computed based on <strong>Slot Usage</strong> , <strong>Committed Slots</strong> , and <strong>Autoscaled Slots</strong> . If the slot usage value exceeds the <strong>Commitment Capacity</strong> and <strong>Autoscaled Slots</strong> , then the chart groups the remaining as idle slots.<br />
-The default aggregation is by the p99 resource usage in the selected time period.</td>
-</tr>
-<tr class="odd">
-<td><strong>Edition - Baseline capacity</strong></td>
-<td>Monitors the baseline size of reservations in this administration project.</td>
-</tr>
-<tr class="even">
-<td><strong>Edition - Maximum capacity</strong></td>
-<td>Monitors the maximum number of slots available in the selected time period. The metric is the sum of commitment capacity, baseline capacity, and autoscaled capacity. The default aggregation is by the maximum resource usage in the selected time period.</td>
-</tr>
-<tr class="odd">
-<td><strong>Edition - Assigned capacity</strong></td>
-<td>Monitors the actual number of slots assigned to your edition resources in the selected time period. The default aggregation is by the maximum resource usage in the selected time period.</td>
-</tr>
-</tbody>
-</table>
+| Metric name                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Reservation - Slot usage**      | Monitors slot usage for the selected time period. The default aggregation is by the p99 slot usage in the selected time period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Reservation - Idle slot usage** | Monitors slot usage in excess of the reservation's capacity in the selected time period. This metric lets you monitor the idle slots borrowed from other reservations and commitments, or the rounding imprecisions in the usage data. The latter can cause this metric to have a non-zero value, even if idle slot sharing is disabled. The idle slot usage is an approximate value and is computed based on **Slot Usage** , **Committed Slots** , and **Autoscaled Slots** . If the slot usage value exceeds the **Commitment Capacity** and **Autoscaled Slots** , then the chart groups the remaining as idle slots. The default aggregation is by the p99 resource usage in the selected time period. |
+| **Edition - Baseline capacity**   | Monitors the baseline size of reservations in this administration project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Edition - Maximum capacity**    | Monitors the maximum number of slots available in the selected time period. The metric is the sum of commitment capacity, baseline capacity, and autoscaled capacity. The default aggregation is by the maximum resource usage in the selected time period.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Edition - Assigned capacity**   | Monitors the actual number of slots assigned to your edition resources in the selected time period. The default aggregation is by the maximum resource usage in the selected time period.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 ##### Current project overview
 
 This view shows you metrics about job resources in the project where you run queries. Each metric has the following default settings, which you can edit in the **Chart configuration** pane by clicking the metric's name:
 
-  - The default resource is the job resource.
-  - The default scope is the project.
+- The default resource is the job resource.
+- The default scope is the project.
 
 | Metric name                         | Description                                                                                                                                                                                                          |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Job - Project - Slot usage**      | Monitors slot usage for the selected time period. The default aggregation is by the maximum resource usage in the selected time period.                                                                              |
 | **Job - Project - Bytes processed** | Monitors the total bytes processed by completed jobs in the selected time period. The default aggregation is by the sum of bytes processed in the selected time period.                                              |
 | **Job - Project - Job concurrency** | Monitors the number of jobs running simultaneously in the selected time period. The default aggregation is by the maximum resource usage in the selected time period.                                                |
@@ -365,11 +311,11 @@ This view shows you metrics about job resources in the project where you run que
 
 This view shows you metrics about job activity with reservation resources in the administrative project. Each metric has the following default settings, which you can edit in the **Chart configuration** pane by clicking the metric's name:
 
-  - The default resource is the reservation resource.
-  - The default scope is the project.
+- The default resource is the reservation resource.
+- The default scope is the project.
 
 | Metric name                       | Description                                                                                                                                                                                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Reservation - Slot usage**      | Monitors slot usage for the selected time period. The default aggregation is by the maximum resource usage in the selected time period.                                                                                                                |
 | **Reservation - Bytes processed** | Monitors the total bytes processed by completed jobs in the selected time period. The default aggregation is by the sum of bytes processed in the selected time period.                                                                                |
 | **Reservation - Job concurrency** | Monitors the number of jobs running simultaneously in the selected time period. The default aggregation is by the maximum resource usage in the selected time period.                                                                                  |
@@ -393,19 +339,19 @@ To configure resource utilization chart metrics, follow these steps:
 1.  In the Google Cloud console, [view the BigQuery resource utilization charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) .
 
 2.  In the **Chart configuration** pane, configure the **Metrics** field:
-    
+
     1.  Click **Add an item \> Select a metric** .
-    
+
     2.  In the **Select a metric** dialog, choose the following:
-        
+
         1.  The type of resource to monitor: **Job** , **Reservation** , or **Edition** .
         2.  The scope to monitor. For example, to monitor job metrics in the current project, select the **Project** scope.
         3.  Choose a metric to monitor. For example, to monitor the job slot usage, choose **Slot usage** .
-    
+
     3.  Click **Apply** .
-    
+
     4.  In the **New item** dialog, choose the aggregation. For example, to monitor the maximum slot usage in excess of the reservation's capacity in the selected time period, choose **Max** .
-    
+
     5.  Save the metric by clicking **Done** .
 
 3.  Optional: To change an existing metric, click the metrics name and edit its settings or delete it.
@@ -419,7 +365,7 @@ Resource utilization metrics are categorized by resource type and scope.
 You can monitor the following resource types:
 
 | Resource    | Description                                                                                                                                                                                                                                                                             |
-| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Job         | Metrics about BigQuery job details for a given scope and time period.                                                                                                                                                                                                                   |
 | Reservation | Metrics about BigQuery reservation usage for a given scope and time period. These metrics aggregate job details by reservation. If you have only partial data access at the reservation level, aggregated reservation usage metrics are available, without access to job-level details. |
 | Edition     | Metrics about BigQuery edition capacity for a given scope and time period.                                                                                                                                                                                                              |
@@ -428,8 +374,8 @@ You can monitor the following resource types:
 
 After you select a resource for a metric, you select a scope.
 
-  - The reservation and edition resources default to a project-level scope.
-  - The job resource can be set to project-, folder-, or organization-level scopes. Greater scopes require additional permissions.
+- The reservation and edition resources default to a project-level scope.
+- The job resource can be set to project-, folder-, or organization-level scopes. Greater scopes require additional permissions.
 
 #### Group by
 
@@ -438,10 +384,10 @@ To group data in your resource utilization chart, follow these steps:
 1.  In the Google Cloud console, [view the BigQuery resource utilization charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) .
 
 2.  In the **Chart configuration** pane, configure the **Group by** field by selecting one of the following options:
-    
-      - **None** : This option gives you a high-level overview of the chosen metrics, over time, across the entire organization.
-      - **Project** : This option groups chosen metrics by project. If more than 50 projects are available, only the top 50 projects with the highest slot usage are shown.
-      - **All other group-by options** : These options are similar to the project view, with data grouped by the respective dimension. If a group-by option isn't supported for all chosen metrics, the option can't be selected.
+
+    - **None** : This option gives you a high-level overview of the chosen metrics, over time, across the entire organization.
+    - **Project** : This option groups chosen metrics by project. If more than 50 projects are available, only the top 50 projects with the highest slot usage are shown.
+    - **All other group-by options** : These options are similar to the project view, with data grouped by the respective dimension. If a group-by option isn't supported for all chosen metrics, the option can't be selected.
 
 #### Filter
 
@@ -455,8 +401,8 @@ You can analyze project-level resource utilization using the same [configuration
 
 ### Resource utilization chart limitations
 
-  - The chart and table in the middle of the page display metrics that are relevant to the time period and granularity selected.
-  - Metrics with the same unit share the same scale. The chart supports up to two different scales.
+- The chart and table in the middle of the page display metrics that are relevant to the time period and granularity selected.
+- Metrics with the same unit share the same scale. The chart supports up to two different scales.
 
 ### Switch to the old UI
 
@@ -483,21 +429,21 @@ You can adjust the view of your resource charts by changing the following chart 
 
 BigQuery provides the following metric types to display in the charts:
 
-  - **Slot Usage.** Average slot usage. If the **Group by** option is set to **Overall** , or if **Filters** are either **None** or a single reservation, then capacity and borrowed slot usage metrics are also displayed.
-      - **Total Usage.** Average slot usage in the selected time period.
-      - **Borrowed Slot Usage.** Average usage in excess of the reservation's capacity. This is usually [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) borrowed from other reservations and commitments, or rounding imprecision in usage data. Additional idle slots appear in the resource utilization chart, even if idle slots sharing is disabled. The idle slots usage is an approximate value and is computed based on **Slot Usage** , **Committed Slots** , and **Autoscaled Slots** . If the slot usage value exceeds the **Commitment Capacity** , then the chart groups them as idle slots.
-      - **Commitment Capacity.** The edition commitment size.
-      - **Baseline Capacity.** The reservation baseline size.
-      - **Autoscale Capacity.** The autoscaled slot size.
-      - **Maximum Capacity.** The maximum number of slots the user can access.
+- **Slot Usage.** Average slot usage. If the **Group by** option is set to **Overall** , or if **Filters** are either **None** or a single reservation, then capacity and borrowed slot usage metrics are also displayed.
+  - **Total Usage.** Average slot usage in the selected time period.
+  - **Borrowed Slot Usage.** Average usage in excess of the reservation's capacity. This is usually [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) borrowed from other reservations and commitments, or rounding imprecision in usage data. Additional idle slots appear in the resource utilization chart, even if idle slots sharing is disabled. The idle slots usage is an approximate value and is computed based on **Slot Usage** , **Committed Slots** , and **Autoscaled Slots** . If the slot usage value exceeds the **Commitment Capacity** , then the chart groups them as idle slots.
+  - **Commitment Capacity.** The edition commitment size.
+  - **Baseline Capacity.** The reservation baseline size.
+  - **Autoscale Capacity.** The autoscaled slot size.
+  - **Maximum Capacity.** The maximum number of slots the user can access.
 
 > **Note:** BigQuery sometimes allocates additional slots to perform a job, resulting in a **Total Usage** value that exceeds the **Maximum capacity** value and a non-zero value for **Borrowed Slot Usage** in reservations that ignore idle slots. In these instances, no additional charges are billed for usage above the reservation's **Maximum Capacity** .
 
-  - **Job Concurrency.** Maximum number of jobs running simultaneously in the selected time period.
-  - **Job Performance.** Average job runtime of completed jobs, calculated from job creation time to job end time.
-  - **Failed Jobs.** Average slot usage in the selected time period from jobs that failed.
-  - **Bytes Processed.** Total bytes processed by completed jobs in the selected time period.
-  - **Shuffle Usage.** Average shuffle usage ratio in the selected time period ( [preview](https://cloud.google.com/products/#product-launch-stages) ).
+- **Job Concurrency.** Maximum number of jobs running simultaneously in the selected time period.
+- **Job Performance.** Average job runtime of completed jobs, calculated from job creation time to job end time.
+- **Failed Jobs.** Average slot usage in the selected time period from jobs that failed.
+- **Bytes Processed.** Total bytes processed by completed jobs in the selected time period.
+- **Shuffle Usage.** Average shuffle usage ratio in the selected time period ( [preview](https://cloud.google.com/products/#product-launch-stages) ).
 
 ##### Table component
 
@@ -507,16 +453,16 @@ The **Slot Usage** chart displays the **Average slot usage** for all of the jobs
 
 For the **Job Performance** chart, the table component displays the following metrics:
 
-  - **Number of jobs.** The number of completed jobs ran or partially ran within the selected time period.
-  - **Average job duration.** The average job duration for completed jobs that at least partially ran within the selected time period.
-  - **Median job duration.** The median job duration for completed jobs that at least partially ran within the selected time period.
-  - **Min job duration.** The minimum job duration for completed jobs that at least partially ran within the selected time period. This column is hidden by default, but you can enable it in **Column display options** .
-  - **Max job duration.** The maximum job duration for completed jobs that at least partially ran within the selected time period. This column is hidden by default, but you can enable it in **Column display options** .
+- **Number of jobs.** The number of completed jobs ran or partially ran within the selected time period.
+- **Average job duration.** The average job duration for completed jobs that at least partially ran within the selected time period.
+- **Median job duration.** The median job duration for completed jobs that at least partially ran within the selected time period.
+- **Min job duration.** The minimum job duration for completed jobs that at least partially ran within the selected time period. This column is hidden by default, but you can enable it in **Column display options** .
+- **Max job duration.** The maximum job duration for completed jobs that at least partially ran within the selected time period. This column is hidden by default, but you can enable it in **Column display options** .
 
 For the **Failed Jobs** chart, the table component displays the following data:
 
-  - **Average slot usage.** Same as the **Slot Usage** chart, but only for failed jobs.
-  - **Total failed jobs.** The number of jobs that failed within the selected time period.
+- **Average slot usage.** Same as the **Slot Usage** chart, but only for failed jobs.
+- **Total failed jobs.** The number of jobs that failed within the selected time period.
 
 > **Note:** In addition to resource charts, you can write your own queries or dashboards. For example queries and Data Studio templates, see [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/monitoring#information-schema) .
 
@@ -524,16 +470,16 @@ For the **Failed Jobs** chart, the table component displays the following data:
 
 Based on the type of chart, you can group data in the chart view by several dimensions:
 
-  - **Overall.** The overall view is a high-level overview of the selected metric, over time, across the entire organization. For slot usage, capacity and usage are shown on the same chart to give an idea of overall slot utilization over time.
-  - **Project.** The project view shows the selected metric grouped by project. If an organization has more than 10 projects, then only the top 10 projects with the highest slot usage, job concurrency, job duration, or failed jobs in the selected time period are shown. For slot usage, all other projects are grouped into the **Other** category at the bottom of the chart for easier comparison to overall capacity.
-  - All other group-by views are similar to the project view, with data grouped by the respective dimension.
+- **Overall.** The overall view is a high-level overview of the selected metric, over time, across the entire organization. For slot usage, capacity and usage are shown on the same chart to give an idea of overall slot utilization over time.
+- **Project.** The project view shows the selected metric grouped by project. If an organization has more than 10 projects, then only the top 10 projects with the highest slot usage, job concurrency, job duration, or failed jobs in the selected time period are shown. For slot usage, all other projects are grouped into the **Other** category at the bottom of the chart for easier comparison to overall capacity.
+- All other group-by views are similar to the project view, with data grouped by the respective dimension.
 
 ##### Timeframe option
 
 You can modify the time period in the following ways:
 
-  - Select and drag the time period into the event timeline chart.
-  - Select and drag the time period into the main chart.
+- Select and drag the time period into the event timeline chart.
+- Select and drag the time period into the main chart.
 
 The alignment period updates automatically as the selected timeframe changes. The smaller the alignment period, the more detailed the view. To better view resources that change frequently, for example the **Slot Usage** option, reduce the alignment period.
 
@@ -569,37 +515,41 @@ You may need to adjust your autoscaling `max_slots` to avoid higher costs. The f
 
 The following query provides details on your reservations past job performance:
 
-    SELECT
-        AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
-        SUM(total_bytes_processed) as total_bytes,
-        COUNT(*) as query_numbers,
-    FROM
-        `PROJECT_ID.region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-    WHERE creation_time >= START_TIME
-        AND creation_time < END_TIME
-        AND (statement_type != "SCRIPT" OR statement_type IS NULL)
-        AND reservation_id = RESERVATION_ID
+```
+SELECT
+    AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
+    SUM(total_bytes_processed) as total_bytes,
+    COUNT(*) as query_numbers,
+FROM
+    `PROJECT_ID.region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+WHERE creation_time >= START_TIME
+    AND creation_time < END_TIME
+    AND (statement_type != "SCRIPT" OR statement_type IS NULL)
+    AND reservation_id = RESERVATION_ID
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the ID of the project
-  - `  REGION_NAME  ` : the region for your project
-  - `  START_TIME  ` : the creation time you want to start viewing the data
-  - `  END_TIME  ` : the creation time you want to stop viewing the data
-  - `  RESERVATION_ID  ` : the reservation ID
+- `PROJECT_ID` : the ID of the project
+- `REGION_NAME` : the region for your project
+- `START_TIME` : the creation time you want to start viewing the data
+- `END_TIME` : the creation time you want to stop viewing the data
+- `RESERVATION_ID` : the reservation ID
 
 The following example gets the job details over a five day period:
 
-    SELECT
-        AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
-        SUM(total_bytes_processed) as total_bytes,
-        COUNT(*) as query_numbers,
-    FROM
-        `myproject.region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-    WHERE creation_time >= '2024-06-25 00:00:00-07'
-        AND creation_time < '2024-06-30 00:00:00-07'
-        AND (statement_type != "SCRIPT" OR statement_type IS NULL)
-        AND reservation_id = reservationID
+```
+SELECT
+    AVG(TIMESTAMP_DIFF(end_time, creation_time, MILLISECOND)) as avg_latency_ms,
+    SUM(total_bytes_processed) as total_bytes,
+    COUNT(*) as query_numbers,
+FROM
+    `myproject.region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
+WHERE creation_time >= '2024-06-25 00:00:00-07'
+    AND creation_time < '2024-06-30 00:00:00-07'
+    AND (statement_type != "SCRIPT" OR statement_type IS NULL)
+    AND reservation_id = reservationID
+```
 
 ## Troubleshoot slot contention
 
@@ -629,7 +579,7 @@ If jobs are taking significantly longer to complete, check the [detailed view](h
 
 ### Slot contention messages
 
-The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were NUMBER jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
+The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#insights-table) can display messages such as `There were `` NUMBER `` jobs detected with slot_contention in the reservation.` that indicate slot contention issues. Check the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to review details about the specific jobs flagged in these messages.
 
 **Best practice:** Optimize the identified queries or adjust your reservation's slot allocation.
 
@@ -637,7 +587,7 @@ The [insights table](https://docs.cloud.google.com/bigquery/docs/admin-resource-
 
 ## What's next
 
-  - Learn about [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
-  - Learn about [purchasing slots](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
-  - Learn how to [estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
-  - Learn how to [view slot recommendations and insight](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
+- Learn about [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- Learn about [purchasing slots](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
+- Learn how to [estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
+- Learn how to [view slot recommendations and insight](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .

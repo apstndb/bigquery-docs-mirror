@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Load Google Merchant Center data into BigQuery
 
 > **Preview**
-> 
+>
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
@@ -59,7 +59,7 @@ Enable the Product Targeting report when you set up a transfer to expose Ads tar
 The BigQuery Data Transfer Service for Google Merchant Center supports the following reporting options:
 
 | Reporting option | Support                                                                                                                                                              |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Schedule         | Configurable to daily, weekly, monthly, or custom. By default, this is set to daily when the transfer is created. The minimum interval between transfers is 6 hours. |
 
 ## Data ingestion
@@ -72,9 +72,9 @@ Existing customers with multiple Merchant IDs are encouraged to configure a pare
 
 Using Google Merchant Center MCAs provides several benefits over using individual Merchant IDs:
 
-  - You no longer need to manage multiple transfers to transfer reporting data for multiple Merchant IDs.
-  - Queries involving multiple Merchant IDs are much simpler to write because all Merchant ID data is stored in the same table.
-  - Using MCAs alleviates potential BigQuery load job quota issues because all your Merchant ID data is loaded in the same job.
+- You no longer need to manage multiple transfers to transfer reporting data for multiple Merchant IDs.
+- Queries involving multiple Merchant IDs are much simpler to write because all Merchant ID data is stored in the same table.
+- Using MCAs alleviates potential BigQuery load job quota issues because all your Merchant ID data is loaded in the same job.
 
 One possible disadvantage of using MCAs is that your subsequent query costs are likely to be higher. Because all of your data is stored in the same table, queries that retrieve data for an individual Merchant ID must still scan the entire table.
 
@@ -90,13 +90,13 @@ Some reports might have their own constraints, such as different windows of supp
 
 Not all reports support historical backfills in the same way. The following are a list of reports and the level of support for historical backfills.
 
-  - Products and Product Issues - 14 days
-  - Local Inventories - 14 days
-  - Regional Inventories - 14 days
-  - Performance - 2 years
-  - Best Sellers - 2 years
-  - Price Competitiveness - No backfill support
-  - Price Insights - No backfill support
+- Products and Product Issues - 14 days
+- Local Inventories - 14 days
+- Regional Inventories - 14 days
+- Performance - 2 years
+- Best Sellers - 2 years
+- Price Competitiveness - No backfill support
+- Price Insights - No backfill support
 
 ### Automatic Backfill Transfer Runs
 

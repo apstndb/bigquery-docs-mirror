@@ -12,12 +12,12 @@ BigQuery has built-in governance capabilities that simplify how you discover, ma
 
 Administrators, data stewards, data governance managers, and data custodians can use the governance capabilities in BigQuery to do the following:
 
-  - Discover data.
-  - Curate data.
-  - Gather and enrich metadata.
-  - Manage data quality.
-  - Ensure that data is used consistently and in compliance with organizational policies.
-  - Share data at scale and in a secure fashion.
+- Discover data.
+- Curate data.
+- Gather and enrich metadata.
+- Manage data quality.
+- Ensure that data is used consistently and in compliance with organizational policies.
+- Share data at scale and in a secure fashion.
 
 BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
 
@@ -33,10 +33,10 @@ You can also extract and catalog metadata from third-party data sources using cu
 
 BigQuery offers the following data discovery capabilities:
 
-  - **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in Knowledge Catalog.
-  - **[Automatic discovery of Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) .** Scan for data in Cloud Storage buckets to extract and then catalog metadata. Automatic discovery creates tables for both structured and unstructured data.
-  - **[Metadata import](https://docs.cloud.google.com/knowledge-catalog/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Knowledge Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
-  - **[Metadata export](https://docs.cloud.google.com/knowledge-catalog/docs/export-metadata) .** Export metadata at scale out of Knowledge Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
+- **Search.** Search for data and AI resources across projects and the organization. Within BigQuery in the Google Cloud console, use [semantic search](https://docs.cloud.google.com/bigquery/docs/search-resources) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search for resources by using everyday language. Or, find resources by using [keyword search](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) in Knowledge Catalog.
+- **[Automatic discovery of Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) .** Scan for data in Cloud Storage buckets to extract and then catalog metadata. Automatic discovery creates tables for both structured and unstructured data.
+- **[Metadata import](https://docs.cloud.google.com/knowledge-catalog/docs/managed-connectivity-overview) .** Import metadata at scale from third-party systems into Knowledge Catalog. You can build custom connectors to extract data from your data sources, and then run managed connectivity pipelines that orchestrate the metadata import workflow.
+- **[Metadata export](https://docs.cloud.google.com/knowledge-catalog/docs/export-metadata) .** Export metadata at scale out of Knowledge Catalog. You can analyze the exported metadata with BigQuery, or integrate the metadata into custom applications or programmatic processing workflows.
 
 ## Curation and data stewardship
 
@@ -44,11 +44,11 @@ To improve the discoverability and usability of data, data stewards and administ
 
 BigQuery offers the following data curation and stewardship capabilities:
 
-  - **[Business glossary](https://docs.cloud.google.com/knowledge-catalog/docs/create-glossary) .** Improve context, collaboration, and search by defining your organization's terminology in a glossary. Identify data stewards for the terms, and attach terms to data asset fields.
-  - **[Data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .** Gemini uses metadata to generate natural language questions about your table and the SQL queries to answer them. These data insights help you uncover patterns, assess data quality, and perform statistical analysis.
-  - **[Data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .** Identify common statistical characteristics of the columns in BigQuery tables to understand and analyze your data more effectively.
-  - **[Data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .** Define and run data quality checks across tables in BigQuery and Cloud Storage, and apply regular and ongoing data controls in BigQuery environments.
-  - **[Data lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) .** Track how data moves through your systems: where it comes from, where it's passed to, and what transformations are applied to it. BigQuery supports data lineage at the table- and column-levels.
+- **[Business glossary](https://docs.cloud.google.com/knowledge-catalog/docs/create-glossary) .** Improve context, collaboration, and search by defining your organization's terminology in a glossary. Identify data stewards for the terms, and attach terms to data asset fields.
+- **[Data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .** Gemini uses metadata to generate natural language questions about your table and the SQL queries to answer them. These data insights help you uncover patterns, assess data quality, and perform statistical analysis.
+- **[Data profiling](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .** Identify common statistical characteristics of the columns in BigQuery tables to understand and analyze your data more effectively.
+- **[Data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .** Define and run data quality checks across tables in BigQuery and Cloud Storage, and apply regular and ongoing data controls in BigQuery environments.
+- **[Data lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) .** Track how data moves through your systems: where it comes from, where it's passed to, and what transformations are applied to it. BigQuery supports data lineage at the table- and column-levels.
 
 ### Next steps for curation and data stewardship
 
@@ -90,12 +90,12 @@ Data access management is the process of defining, enforcing, and monitoring the
 
 BigQuery offers the following security and access control capabilities:
 
-  - **[Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) .** IAM lets you control who has access to your BigQuery resources, such as projects, datasets, tables, and views. You can grant IAM roles to users, groups, and service accounts. These roles define what they can do with your resources.
-  - **[Column-level access controls](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)** and **[row-level access controls](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .** Column-level and row-level access controls let you restrict access to specific columns and rows in a table, based on user attributes or data values. This control lets you implement fine-grained access to help protect sensitive data from unauthorized access.
-  - **[Data transfer management](https://docs.cloud.google.com/bigquery/docs/vpc-sc) .** VPC Service Controls lets you create perimeters around Google Cloud resources and control access to those resources based on your organization's policies.
-  - **[Audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .** Audit logs provide you with a detailed record of user activity and system events in your organization. These logs help you enforce data governance policies and identify potential security risks.
-  - **[Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .** Data masking lets you obscure sensitive data in a table while still permitting authorized users to access the surrounding data. Data masking can also obscure data that matches sensitive data patterns, safeguarding against accidental data disclosure.
-  - **[Encryption](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .** BigQuery automatically encrypts all data at rest and in transit, while letting you customize your encryption settings to meet your specific requirements.
+- **[Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) .** IAM lets you control who has access to your BigQuery resources, such as projects, datasets, tables, and views. You can grant IAM roles to users, groups, and service accounts. These roles define what they can do with your resources.
+- **[Column-level access controls](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)** and **[row-level access controls](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .** Column-level and row-level access controls let you restrict access to specific columns and rows in a table, based on user attributes or data values. This control lets you implement fine-grained access to help protect sensitive data from unauthorized access.
+- **[Data transfer management](https://docs.cloud.google.com/bigquery/docs/vpc-sc) .** VPC Service Controls lets you create perimeters around Google Cloud resources and control access to those resources based on your organization's policies.
+- **[Audit logs](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) .** Audit logs provide you with a detailed record of user activity and system events in your organization. These logs help you enforce data governance policies and identify potential security risks.
+- **[Data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .** Data masking lets you obscure sensitive data in a table while still permitting authorized users to access the surrounding data. Data masking can also obscure data that matches sensitive data patterns, safeguarding against accidental data disclosure.
+- **[Encryption](https://docs.cloud.google.com/bigquery/docs/encryption-at-rest) .** BigQuery automatically encrypts all data at rest and in transit, while letting you customize your encryption settings to meet your specific requirements.
 
 ### Next steps for security and access control
 
@@ -139,14 +139,14 @@ BigQuery lets you share data and insights at scale within and across organizatio
 
 BigQuery offers the following sharing capabilities:
 
-  - **[Share more than data](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .** You can share a wide range of data and AI assets such as BigQuery datasets, tables, views, real-time streams with Pub/Sub topics, SQL stored procedures, and BigQuery ML models.
-  - **[Access Google datasets](https://cloud.google.com/datasets) .** Augment your analytics and ML initiatives with Google datasets from Search Trends, DeepMind WeatherNext models, Google Maps Platform, Google Earth Engine, and more.
-  - **[Integrate with data governance principles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles) .** Data owners retain control over their data and have the ability to define and configure rules or policies to restrict access and usage.
-  - **[Live, zero-copy data sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#architecture) .** Data is shared in place with no integration, data movement, or replication needed, ensuring analysis is based on the latest information. Linked datasets created are a live pointer to the shared asset.
-  - **[Enhance security posture](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .** You can use access controls to reduce overprovisioning access, including built-in VPC Service Controls support.
-  - **[Increase visibility with provider usage metrics](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings) .** Data publishers can view and monitor usage for shared assets such as the number of jobs executed, total bytes scanned, and subscribers for each organization.
-  - **[Collaborate on sensitive data with data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .** Data clean rooms provide a security-enhanced environment in which multiple parties can share, join, and analyze their data assets without moving or revealing the underlying data.
-  - **[Built on BigQuery](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .** You can build on the scalability and massive processing capabilities in BigQuery, allowing for large scale collaborations.
+- **[Share more than data](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .** You can share a wide range of data and AI assets such as BigQuery datasets, tables, views, real-time streams with Pub/Sub topics, SQL stored procedures, and BigQuery ML models.
+- **[Access Google datasets](https://cloud.google.com/datasets) .** Augment your analytics and ML initiatives with Google datasets from Search Trends, DeepMind WeatherNext models, Google Maps Platform, Google Earth Engine, and more.
+- **[Integrate with data governance principles](https://docs.cloud.google.com/bigquery/docs/analytics-hub-grant-roles) .** Data owners retain control over their data and have the ability to define and configure rules or policies to restrict access and usage.
+- **[Live, zero-copy data sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#architecture) .** Data is shared in place with no integration, data movement, or replication needed, ensuring analysis is based on the latest information. Linked datasets created are a live pointer to the shared asset.
+- **[Enhance security posture](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .** You can use access controls to reduce overprovisioning access, including built-in VPC Service Controls support.
+- **[Increase visibility with provider usage metrics](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings) .** Data publishers can view and monitor usage for shared assets such as the number of jobs executed, total bytes scanned, and subscribers for each organization.
+- **[Collaborate on sensitive data with data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .** Data clean rooms provide a security-enhanced environment in which multiple parties can share, join, and analyze their data assets without moving or revealing the underlying data.
+- **[Built on BigQuery](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .** You can build on the scalability and massive processing capabilities in BigQuery, allowing for large scale collaborations.
 
 ### Next steps for sharing
 
@@ -184,8 +184,8 @@ The following table outlines next steps that you can take to learn more about sh
 
 ## What's next
 
-  - Learn about [authentication at Google](https://docs.cloud.google.com/docs/authentication) .
-  - Learn about [data deletion on Google Cloud](https://docs.cloud.google.com/docs/security/deletion) .
-  - Learn more about [IAM best practices](https://docs.cloud.google.com/iam/docs/using-iam-securely) .
-  - Learn the [resource hierarchy on Google Cloud](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) .
-  - Learn about [IAM on Google Cloud](https://docs.cloud.google.com/iam/docs/overview) .
+- Learn about [authentication at Google](https://docs.cloud.google.com/docs/authentication) .
+- Learn about [data deletion on Google Cloud](https://docs.cloud.google.com/docs/security/deletion) .
+- Learn more about [IAM best practices](https://docs.cloud.google.com/iam/docs/using-iam-securely) .
+- Learn the [resource hierarchy on Google Cloud](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) .
+- Learn about [IAM on Google Cloud](https://docs.cloud.google.com/iam/docs/overview) .

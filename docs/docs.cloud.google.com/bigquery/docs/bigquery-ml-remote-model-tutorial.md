@@ -14,19 +14,19 @@ You can use remote models when a model is too large to import into BigQuery. The
 
 ## Objectives
 
-  - Import a pretrained TensorFlow model into the Gemini Enterprise Agent Platform Model Registry.
-  - Deploy the model to a Gemini Enterprise Agent Platform endpoint.
-  - Create a Cloud resource connection.
-  - Use the `CREATE MODEL` statement to create a remote model in BigQuery.
-  - Use the `ML.PREDICT` function to make predictions with the remote model.
+- Import a pretrained TensorFlow model into the Gemini Enterprise Agent Platform Model Registry.
+- Deploy the model to a Gemini Enterprise Agent Platform endpoint.
+- Create a Cloud resource connection.
+- Use the `CREATE MODEL` statement to create a remote model in BigQuery.
+- Use the `ML.PREDICT` function to make predictions with the remote model.
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - [BigQuery](https://cloud.google.com/bigquery/pricing)
-  - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
-  - [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/pricing)
+- [BigQuery](https://cloud.google.com/bigquery/pricing)
+- [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
+- [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/pricing)
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
@@ -39,12 +39,14 @@ When you finish the tasks that are described in this document, you can avoid con
 1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery, Vertex AI, Cloud Storage, and BigQuery Connection APIs, if any are not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#required_permissions) to perform the tasks in this document.
+<!-- -->
+
+1.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 
@@ -54,9 +56,9 @@ If you are using an existing project do the following.
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
-  - [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
-  - [BigQuery Connection Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
+- [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `roles/bigquery.studioAdmin` )
+- [Agent Platform User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `roles/aiplatform.user` )
+- [BigQuery Connection Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.connectionAdmin) ( `roles/bigquery.connectionAdmin` )
 
 #### Check for the roles
 
@@ -74,7 +76,7 @@ Make sure that you have the following role or roles on the project:
 
 2.  Select the project.
 
-3.  Click person\_add **Grant access** .
+3.  Click person_add **Grant access** .
 
 4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
 
@@ -101,31 +103,31 @@ Follow these steps to import the model.
 2.  Click **Import** .
 
 3.  For **Step one: Name and region** , do the following:
-    
+
     1.  Select **Import as new model** .
-    
+
     2.  For **Name** , enter `bert_sentiment` .
-    
+
     3.  For **Description** , enter `BQML tutorial model` .
-    
+
     4.  For **Region** , select `us-central1` . You must choose a US-based region because the Cloud Storage bucket is in the `US` multi-region location.
-    
+
     5.  Click **Continue** .
 
 4.  For **Step two: Model settings** , do the following:
-    
+
     1.  Select **Import model artifacts into a new prebuilt container** .
-    
+
     2.  In the **Prebuilt container settings** section, do the following:
-        
+
         1.  For **Model framework** , choose **TensorFlow** .
-        
+
         2.  For **Model framework version** , choose **2.15** .
-        
+
         3.  For **Accelerator type** , choose **GPU** .
-        
+
         4.  For **Model artifact location** , enter `gs://cloud-samples-data/bigquery/ml/remote_model_tutorial/` .
-        
+
         5.  Leave the default values for all remaining options and click **Import** .
 
 After the import is complete, your model appears on the **Model Registry** page.
@@ -143,25 +145,25 @@ Follow these steps to deploy the model to an endpoint.
 4.  Click **Deploy to endpoint** .
 
 5.  For step one, **Define your endpoint** , do the following:
-    
+
     1.  Click **Create new endpoint** .
-    
+
     2.  For **Endpoint name** , enter **`bert sentiment endpoint`** .
-    
+
     3.  Leave the remaining default values and click **Continue** .
 
 6.  For step two, **Model settings** , do the following:
-    
+
     1.  In the **Compute settings** section, for **Minimum number of compute nodes** , enter `1` . This is the number of nodes that need to be available to the model at all times.
-        
+
         > **Note:** In production, you should set the maximum number of compute nodes. This option turns on the autoscaling capability in Gemini Enterprise Agent Platform, and it allows the endpoint to process more requests when your BigQuery table has a large number of rows.
-    
+
     2.  In the **Advanced scaling options** section, for **Machine type** , choose **Standard (n1-standard-2)** . Because you chose GPU as the accelerator type when you imported the model, after you choose the machine type, the accelerator type and accelerator count are set automatically.
-    
+
     3.  Leave the remaining default values and click **Deploy** .
-        
+
         When the model is deployed to the endpoint, the status changes to `Active` .
-    
+
     4.  Copy the numeric endpoint ID in the **ID** column and the value in the **Region** column. You'll need them later.
 
 ## Create a dataset
@@ -173,21 +175,21 @@ To create a BigQuery dataset, select one of the following options:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
 4.  On the **Datasets** page, click add **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
-    
-      - For **Dataset ID** , enter `bqml_tutorial` .
-    
-      - For **Data location** , select **US** .
-    
+
+    - For **Dataset ID** , enter `bqml_tutorial` .
+
+    - For **Data location** , select **US** .
+
     Leave the remaining default settings as they are.
 
 6.  Click **Create dataset** .
@@ -197,25 +199,31 @@ To create a BigQuery dataset, select one of the following options:
 To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
-    
-        bq mk --dataset \
-          --location=US \
-          --description "BigQuery ML tutorial dataset." \
-          bqml_tutorial
+
+    ```
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
+    ```
 
 2.  Confirm that the dataset was created:
-    
-        bq ls
+
+    ```
+    bq ls
+    ```
 
 ### API
 
 Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-    {
-      "datasetReference": {
-         "datasetId": "bqml_tutorial"
-      }
-    }
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
 ## Create a BigQuery Cloud resource connection
 
@@ -226,17 +234,17 @@ You must have a Cloud resource connection to connect to a Gemini Enterprise Agen
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click add **Add data** .
-    
+
     The **Add data** dialog opens.
 
 4.  In the **Filter By** pane, in the **Data Source Type** section, select **Databases** .
-    
+
     Alternatively, in the **Search for data sources** field, you can enter `Vertex AI` .
 
 5.  In the **Featured data sources** section, click **Vertex AI** .
@@ -258,26 +266,30 @@ You must have a Cloud resource connection to connect to a Gemini Enterprise Agen
 ### bq
 
 1.  Create a connection:
-    
-        bq mk --connection --location=US --project_id=PROJECT_ID \
-            --connection_type=CLOUD_RESOURCE bqml_tutorial
-    
-    Replace `  PROJECT_ID  ` with your Google Cloud project ID. The `--project_id` parameter overrides the default project.
-    
+
+    ```
+    bq mk --connection --location=US --project_id=PROJECT_ID \
+        --connection_type=CLOUD_RESOURCE bqml_tutorial
+    ```
+
+    Replace `PROJECT_ID` with your Google Cloud project ID. The `--project_id` parameter overrides the default project.
+
     When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
-    
+
     **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
-    
+
     ```console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
     ```
 
 2.  Retrieve and copy the service account ID for use in a later step:
-    
-        bq show --connection PROJECT_ID.us.bqml_tutorial
-    
+
+    ```
+    bq show --connection PROJECT_ID.us.bqml_tutorial
+    ```
+
     The output is similar to the following:
-    
+
     ```console
     name                          properties
     1234.REGION.CONNECTION_ID {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
@@ -293,7 +305,7 @@ To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person\_add **Grant Access** .
+2.  Click person_add **Grant Access** .
 
 3.  In the **New principals** field, enter the Cloud resource connection's service account ID that you copied previously.
 
@@ -316,49 +328,57 @@ When you create the remote model, you need the endpoint ID that was generated wh
 2.  For **Create new** , click **SQL query** .
 
 3.  In the query editor, enter this `CREATE MODEL` statement, and then click **Run** :
-    
-        CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
-        INPUT (text STRING)
-        OUTPUT(scores ARRAY<FLOAT64>)
-        REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
-        OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')
-    
+
+    ```
+    CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
+    INPUT (text STRING)
+    OUTPUT(scores ARRAY<FLOAT64>)
+    REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
+    OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')
+    ```
+
     Replace the following:
-    
-      - PROJECT\_ID : your project name.
-      - ENDPOINT\_ID : the endpoint ID that you copied previously.
-    
+
+    - ` PROJECT_ID ` : your project name.
+    - ` ENDPOINT_ID ` : the endpoint ID that you copied previously.
+
     When the operation is complete, you see a message similar to `Successfully created model named bert_sentiment` .
-    
+
     Your new model appears in the **Resources** panel. Models are indicated by the model icon: ![model icon](https://docs.cloud.google.com/static/bigquery/images/model-icon.png) .
-    
+
     If you select the new model in the **Resources** panel, information about the model appears below the **Query editor** .
 
 ### bq
 
 1.  Create the remote model by entering the following `CREATE MODEL` statement:
-    
-        bq query --use_legacy_sql=false \
-        "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
-        INPUT (text STRING)
-        OUTPUT(scores ARRAY<FLOAT64>)
-        REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
-        OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')"
-    
+
+    ```
+    bq query --use_legacy_sql=false \
+    "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
+    INPUT (text STRING)
+    OUTPUT(scores ARRAY<FLOAT64>)
+    REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
+    OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')"
+    ```
+
     Replace the following:
-    
-      - PROJECT\_ID : your project name.
-      - ENDPOINT\_ID : the endpoint ID that you copied previously.
+
+    - ` PROJECT_ID ` : your project name.
+    - ` ENDPOINT_ID ` : the endpoint ID that you copied previously.
 
 2.  After you create the model, verify that the model appears in the dataset:
-    
-        bq ls -m bqml_tutorial
-    
+
+    ```
+    bq ls -m bqml_tutorial
+    ```
+
     The output is similar to the following:
-    
-        Id               Model Type   Labels    Creation Time
-        ---------------- ------------ -------- -----------------
-        bert_sentiment                         28 Jan 17:39:43
+
+    ```
+    Id               Model Type   Labels    Creation Time
+    ---------------- ------------ -------- -----------------
+    bert_sentiment                         28 Jan 17:39:43
+    ```
 
 ## Get predictions using `ML.PREDICT`
 
@@ -373,35 +393,39 @@ In this example, 10,000 records are selected and sent for prediction. The remote
 2.  In the **Create new** section, click **SQL query** .
 
 3.  In the query editor, enter this query that uses the `ML.PREDICT` function, and then click **Run** .
-    
-        SELECT *
-        FROM ML.PREDICT (
-            MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
-            (
-                SELECT review as text
-                FROM `bigquery-public-data.imdb.reviews`
-                LIMIT 10000
-            )
+
+    ```
+    SELECT *
+    FROM ML.PREDICT (
+        MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
+        (
+            SELECT review as text
+            FROM `bigquery-public-data.imdb.reviews`
+            LIMIT 10000
         )
-    
+    )
+    ```
+
     The query results should look similar to the following:
-    
+
     ![Query results](https://docs.cloud.google.com/static/bigquery/images/bert-sentiment-predict.png)
 
 ### bq
 
 Enter this command to run the query that uses `ML.PREDICT` .
 
-    bq query --use_legacy_sql=false \
-    'SELECT *
-    FROM ML.PREDICT (
-    MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
-      (
-        SELECT review as text
-        FROM `bigquery-public-data.imdb.reviews`
-        LIMIT 10000
-      )
-    )'
+```
+bq query --use_legacy_sql=false \
+'SELECT *
+FROM ML.PREDICT (
+MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
+  (
+    SELECT review as text
+    FROM `bigquery-public-data.imdb.reviews`
+    LIMIT 10000
+  )
+)'
+```
 
 ## Clean up
 
@@ -412,30 +436,30 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 ### Console
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### gcloud
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 Delete a Google Cloud project:
 
-    gcloud projects delete PROJECT_ID
+```
+gcloud projects delete PROJECT_ID
+```
 
 ### Delete individual resources
 
@@ -453,10 +477,10 @@ Alternatively, to remove the individual resources used in this tutorial:
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-  - For more information about using the `CREATE MODEL` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
-  - For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
-  - For more information about BigQuery regions and multi-regions, see the [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) page.
-  - To learn more about importing models in Gemini Enterprise Agent Platform Model Registry, see [Import models to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/import-model) .
-  - To learn more about model versioning in Gemini Enterprise Agent Platform Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning) .
-  - For information on using Gemini Enterprise Agent Platform VPC Service Controls, see [VPC Service Controls with Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/vpc-service-controls) .
+- For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- For more information about using the `CREATE MODEL` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
+- For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- For more information about BigQuery regions and multi-regions, see the [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) page.
+- To learn more about importing models in Gemini Enterprise Agent Platform Model Registry, see [Import models to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/import-model) .
+- To learn more about model versioning in Gemini Enterprise Agent Platform Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning) .
+- For information on using Gemini Enterprise Agent Platform VPC Service Controls, see [VPC Service Controls with Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/vpc-service-controls) .

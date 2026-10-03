@@ -12,7 +12,7 @@ gcloud alpha bq tables insert - insert records specified into an existing table
 
 SYNOPSIS
 
-`gcloud alpha bq tables insert` ( `  TABLE  ` : `  --dataset  ` = `  DATASET  ` ) `  --data  ` = `  PATH_TO_FILE  ` \[ `  GCLOUD_WIDE_FLAG …  ` \]
+`gcloud alpha bq tables insert` ( [`TABLE`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/insert#TABLE) : [`--dataset`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/insert#--dataset) = `DATASET` ) [`--data`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/insert#--data) = `PATH_TO_FILE` \[ [`GCLOUD_WIDE_FLAG`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables/insert#GCLOUD-WIDE-FLAGS)` …` \]
 
 DESCRIPTION
 
@@ -22,7 +22,9 @@ EXAMPLES
 
 The following command inserts rows from `data_file.json` into `my-table` in `my-dataset` :
 
-    gcloud alpha bq tables insert --table /projects/myproject/datasets/my-dataset/tables/my-table --data data_file.json
+```
+gcloud alpha bq tables insert --table /projects/myproject/datasets/my-dataset/tables/my-table --data data_file.json
+```
 
 POSITIONAL ARGUMENTS
 
@@ -30,43 +32,43 @@ Table resource - The BigQuery table you want to insert data into. The arguments 
 
 To set the `project` attribute:
 
-  - provide the argument `table` on the command line with a fully specified name;
-  - provide the argument `--project` on the command line;
-  - set the property `core/project` .
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--project` on the command line;
+- set the property `core/project` .
 
 This must be specified.
 
-  - `  TABLE  `  
-    ID of the table or fully qualified identifier for the table.
-    
-    To set the `table` attribute:
-    
-      - provide the argument `table` on the command line.
-    
-    This positional argument must be specified if any of the other arguments in this group are specified.
+`TABLE`  
+ID of the table or fully qualified identifier for the table.
 
-  - `--dataset` = `  DATASET  `  
-    The id of the BigQuery dataset.
-    
-    To set the `dataset` attribute:
-    
-      - provide the argument `table` on the command line with a fully specified name;
-      - provide the argument `--dataset` on the command line.
+To set the `table` attribute:
+
+- provide the argument `table` on the command line.
+
+This positional argument must be specified if any of the other arguments in this group are specified.
+
+`--dataset` = `DATASET`  
+The id of the BigQuery dataset.
+
+To set the `dataset` attribute:
+
+- provide the argument `table` on the command line with a fully specified name;
+- provide the argument `--dataset` on the command line.
 
 REQUIRED FLAGS
 
-  - `--data` = `  PATH_TO_FILE  `  
-    The file containing the newline-delimited array of JSON objects representing rows to insert.
-    
-      - For example: \[ {"string\_col": "value1", "bool\_col": false}, {"string\_col": "value2", "bool\_col": true}, {"string\_col": "value3", "bool\_col": false}, {"string\_col": "value4", "bool\_col": true}, {"string\_col": "value5", "bool\_col": false}, \]
-    
-    Use a full or relative path to a local file containing the value of data.
+`--data` = `PATH_TO_FILE`  
+The file containing the newline-delimited array of JSON objects representing rows to insert.
+
+- For example: \[ {"string_col": "value1", "bool_col": false}, {"string_col": "value2", "bool_col": true}, {"string_col": "value3", "bool_col": false}, {"string_col": "value4", "bool_col": true}, {"string_col": "value5", "bool_col": false}, \]
+
+Use a full or relative path to a local file containing the value of data.
 
 GCLOUD WIDE FLAGS
 
-These flags are available to all commands: `  --access-token-file  ` , `  --account  ` , `  --billing-project  ` , `  --configuration  ` , `  --flags-file  ` , `  --flatten  ` , `  --format  ` , `  --help  ` , `  --impersonate-service-account  ` , `  --log-http  ` , `  --project  ` , `  --quiet  ` , `  --trace-token  ` , `  --user-output-enabled  ` , `  --verbosity  ` .
+These flags are available to all commands: [`--access-token-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--access-token-file) , [`--account`](https://docs.cloud.google.com/sdk/gcloud/reference#--account) , [`--billing-project`](https://docs.cloud.google.com/sdk/gcloud/reference#--billing-project) , [`--configuration`](https://docs.cloud.google.com/sdk/gcloud/reference#--configuration) , [`--flags-file`](https://docs.cloud.google.com/sdk/gcloud/reference#--flags-file) , [`--flatten`](https://docs.cloud.google.com/sdk/gcloud/reference#--flatten) , [`--format`](https://docs.cloud.google.com/sdk/gcloud/reference#--format) , [`--help`](https://docs.cloud.google.com/sdk/gcloud/reference#--help) , [`--impersonate-service-account`](https://docs.cloud.google.com/sdk/gcloud/reference#--impersonate-service-account) , [`--log-http`](https://docs.cloud.google.com/sdk/gcloud/reference#--log-http) , [`--project`](https://docs.cloud.google.com/sdk/gcloud/reference#--project) , [`--quiet`](https://docs.cloud.google.com/sdk/gcloud/reference#--quiet) , [`--trace-token`](https://docs.cloud.google.com/sdk/gcloud/reference#--trace-token) , [`--user-output-enabled`](https://docs.cloud.google.com/sdk/gcloud/reference#--user-output-enabled) , [`--verbosity`](https://docs.cloud.google.com/sdk/gcloud/reference#--verbosity) .
 
-Run ` $ gcloud help  ` for details.
+Run `$ `[`gcloud help`](https://docs.cloud.google.com/sdk/gcloud/reference) for details.
 
 API REFERENCE
 

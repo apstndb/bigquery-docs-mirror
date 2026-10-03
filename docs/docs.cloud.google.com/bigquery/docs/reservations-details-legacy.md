@@ -12,9 +12,9 @@ data_source: docs.cloud.google.com
 
 BigQuery offers the following capacity commitment plans:
 
-  - [Flex slots commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#flex_slots)
-  - [Monthly commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#monthly-commitments)
-  - [Annual commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#annual-commitments)
+- [Flex slots commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#flex_slots)
+- [Monthly commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#monthly-commitments)
+- [Annual commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#annual-commitments)
 
 The minimum commitment size is 100 slots, and commitments are available in 100-slot increments, up to your [slot quota](https://docs.cloud.google.com/bigquery/docs/slots#slot_quotas_and_limits) . There is no limit on the number of commitments that you can create. You are charged from the moment your commitment purchase is successful. For information about BigQuery costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
@@ -46,10 +46,10 @@ You select a renewal plan when you purchase an annual commitment plan, or when y
 
 If you are on a flat-rate capacity model, you can change the renewal plan before the plan expires to one of the following options:
 
-  - **None.** After 365 days, your plan expires and doesn't renew. It is removed.
-  - **Monthly.** After 365 days, your commitment converts to a monthly commitment. You are charged at the monthly rate, and you can delete the commitment after 30 days.
-  - **Flex.** After 365 days, your commitment converts to a flex slots commitment. You are charged at the flex slots rate, and you can delete the commitment at any time.
-  - **Annual.** After 365 days, your commitment renews for another year.
+- **None.** After 365 days, your plan expires and doesn't renew. It is removed.
+- **Monthly.** After 365 days, your commitment converts to a monthly commitment. You are charged at the monthly rate, and you can delete the commitment after 30 days.
+- **Flex.** After 365 days, your commitment converts to a flex slots commitment. You are charged at the flex slots rate, and you can delete the commitment at any time.
+- **Annual.** After 365 days, your commitment renews for another year.
 
 > **Note:** Starting on July 5, 2023, BigQuery customers will no longer be able to purchase flat-rate annual, flat-rate monthly, and flex slots commitments. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#flat-rate_compute_analysis_pricing) .
 
@@ -57,11 +57,11 @@ For information about purchasing and renewing commitments if you are not on a fl
 
 For example, suppose you purchased an annual commitment at 6:00 PM on October 5, 2019. You start being charged at that second. Expiration or renewal of the commitment happens after 6:00 PM on October 4, 2020, noting that 2020 is a leap year.
 
-  - If you choose to renew to a monthly commitment, then at 6:00 PM on October 4, 2020, your commitment converts into a monthly commitment. You are charged at the monthly commitment rate, and you cannot delete the commitment for 30 days after the monthly renewal plan.
+- If you choose to renew to a monthly commitment, then at 6:00 PM on October 4, 2020, your commitment converts into a monthly commitment. You are charged at the monthly commitment rate, and you cannot delete the commitment for 30 days after the monthly renewal plan.
 
-  - If you choose to renew to a flex slots commitment, then at 6:00 PM on October 4, 2020, your commitment converts into a flex slots commitment. You are charged at the flex slots rate and you can delete the commitment after 60 seconds.
+- If you choose to renew to a flex slots commitment, then at 6:00 PM on October 4, 2020, your commitment converts into a flex slots commitment. You are charged at the flex slots rate and you can delete the commitment after 60 seconds.
 
-  - If you choose to renew annually, then at 6:00 PM on October 4, 2020, your commitment renews for another year.
+- If you choose to renew annually, then at 6:00 PM on October 4, 2020, your commitment renews for another year.
 
 ### Expired commitments
 
@@ -103,7 +103,7 @@ If you accidentally purchased a commitment or made a mistake when you configured
 
 ## What's next
 
-  - Learn about [reservations, its limitations, quotas, and pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
-  - Learn about [slots](https://docs.cloud.google.com/bigquery/docs/slots) .
-  - Learn how to [purchase and manage slot capacity](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
-  - Learn about [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+- Learn about [reservations, its limitations, quotas, and pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- Learn about [slots](https://docs.cloud.google.com/bigquery/docs/slots) .
+- Learn how to [purchase and manage slot capacity](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
+- Learn about [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

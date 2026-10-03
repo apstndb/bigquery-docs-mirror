@@ -22,9 +22,9 @@ You also need the `bigquery.tables.create` BigQuery Identity and Access Manageme
 
 Each of the following predefined Identity and Access Management roles includes this permission:
 
-  - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
-  - BigQuery Data Owner ( `roles/bigquery.dataOwner` )
-  - BigQuery Admin ( `roles/bigquery.admin` )
+- BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+- BigQuery Data Owner ( `roles/bigquery.dataOwner` )
+- BigQuery Admin ( `roles/bigquery.admin` )
 
 If you are not a principal in any of these roles, ask your administrator to grant you access or to create the external table for you.
 
@@ -37,7 +37,7 @@ Before you create an external table, you must [create a dataset](https://docs.cl
 ### Plan your compute usage
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Determine the type of compute you want to use when you query your data. You specify that you want to use Data Boost or that you want to route to a dedicated cluster in your [app profile settings](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#app-profile) .
@@ -69,20 +69,20 @@ To create an external table for a Bigtable data source, you must provide the Big
 1.  Open the Bigtable page in the console.
 
 2.  Retrieve the following details about your Bigtable data source:
-    
-      - Your project ID.
-      - Your Bigtable instance ID.
-      - The ID of the Bigtable app profile that you plan to use. This can be either a standard app profile or a Data Boost app profile, depending on the [type of compute](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#compute) that you want to use. If you don't specify an app profile ID, the default app profile is used.
-      - The name of your Bigtable table.
+
+    - Your project ID.
+    - Your Bigtable instance ID.
+    - The ID of the Bigtable app profile that you plan to use. This can be either a standard app profile or a Data Boost app profile, depending on the [type of compute](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#compute) that you want to use. If you don't specify an app profile ID, the default app profile is used.
+    - The name of your Bigtable table.
 
 3.  Compose the Bigtable URI using the following format, where:
-    
-      - PROJECT\_ID is the project that contains your Bigtable instance
-      - INSTANCE\_ID is the Bigtable instance ID
-      - APP\_PROFILE (optional) is the identifier for the app profile that you want to use
-      - TABLE\_NAME is the name of the table you're querying
-    
-    ` https://googleapis.com/bigtable/projects/ PROJECT_ID /instances/ INSTANCE_ID [/appProfiles/ APP_PROFILE ]/tables/ TABLE_NAME  `
+
+    - ` PROJECT_ID ` is the project that contains your Bigtable instance
+    - ` INSTANCE_ID ` is the Bigtable instance ID
+    - ` APP_PROFILE ` (optional) is the identifier for the app profile that you want to use
+    - ` TABLE_NAME ` is the name of the table you're querying
+
+    `https://googleapis.com/bigtable/projects/ `` PROJECT_ID `` /instances/ `` INSTANCE_ID `` [/appProfiles/ `` APP_PROFILE `` ]/tables/ `` TABLE_NAME`
 
 > **Note:** Exactly one Bigtable URI can be specified, and it must be a fully specified, valid HTTPS URL for a Bigtable table. Wildcards are not supported for Bigtable external data sources.
 
@@ -90,8 +90,8 @@ To create an external table for a Bigtable data source, you must provide the Big
 
 When you create a permanent external table in BigQuery that is linked to a Bigtable data source, there are two options for specifying the format of the external table:
 
-  - If you are using the API or the bq command-line tool, you create a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) that defines the schema and metadata for the external table.
-  - If you are using SQL, you use the `uri` option of the `CREATE EXTERNAL TABLE` statement to specify the Bigtable table to pull data from, and the `bigtable_options` option to specify the table schema.
+- If you are using the API or the bq command-line tool, you create a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition) that defines the schema and metadata for the external table.
+- If you are using SQL, you use the `uri` option of the `CREATE EXTERNAL TABLE` statement to specify the Bigtable table to pull data from, and the `bigtable_options` option to specify the table schema.
 
 The external table data is not stored in the BigQuery table. Because the table is permanent, you can use dataset-level [access controls](https://docs.cloud.google.com/bigquery/docs/access-control) to share the table with others who also have access to the underlying Bigtable data source.
 
@@ -104,60 +104,66 @@ You can create a permanent external table by running the [`CREATE EXTERNAL TABLE
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE EXTERNAL TABLE DATASET.NEW_TABLE
-        OPTIONS (
-          format = 'CLOUD_BIGTABLE',
-          uris = ['URI'],
-          bigtable_options = BIGTABLE_OPTIONS );
-    
-    Replace the following:
-    
-      - `  DATASET  ` : the dataset in which to create the Bigtable external table.
-      - `  NEW_TABLE  ` : the name for the Bigtable external table.
-      - `  URI  ` : the URI for the Bigtable table you want to use as a data source. This URI must follow the format described in [Retrieving the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
-      - `  BIGTABLE_OPTIONS  ` : the schema for the Bigtable table in JSON format. For a list of Bigtable table definition options, see `  BigtableOptions  ` in the REST API reference.
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE EXTERNAL TABLE DATASET.NEW_TABLE
+    OPTIONS (
+      format = 'CLOUD_BIGTABLE',
+      uris = ['URI'],
+      bigtable_options = BIGTABLE_OPTIONS );
+    ```
+
+    Replace the following:
+
+    - `DATASET` : the dataset in which to create the Bigtable external table.
+    - `NEW_TABLE` : the name for the Bigtable external table.
+    - `URI` : the URI for the Bigtable table you want to use as a data source. This URI must follow the format described in [Retrieving the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
+    - `BIGTABLE_OPTIONS` : the schema for the Bigtable table in JSON format. For a list of Bigtable table definition options, see [`BigtableOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#bigtableoptions) in the REST API reference.
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 A statement to create an external Bigtable table might look similar to the following:
 
-    CREATE EXTERNAL TABLE mydataset.BigtableTable
-    OPTIONS (
-      format = 'CLOUD_BIGTABLE',
-      uris = ['https://googleapis.com/bigtable/projects/myproject/instances/myBigtableInstance/appProfiles/myAppProfile/tables/table1'],
-      bigtable_options =
-        """
+```
+CREATE EXTERNAL TABLE mydataset.BigtableTable
+OPTIONS (
+  format = 'CLOUD_BIGTABLE',
+  uris = ['https://googleapis.com/bigtable/projects/myproject/instances/myBigtableInstance/appProfiles/myAppProfile/tables/table1'],
+  bigtable_options =
+    """
+    {
+      columnFamilies: [
         {
-          columnFamilies: [
-            {
-              "familyId": "familyId1",
-              "type": "INTEGER",
-              "encoding": "BINARY"
-            }
-          ],
-          readRowkeyAsString: true
+          "familyId": "familyId1",
+          "type": "INTEGER",
+          "encoding": "BINARY"
         }
-        """
-    );
+      ],
+      readRowkeyAsString: true
+    }
+    """
+);
+```
 
 ### bq
 
 You create a table in the bq command-line tool using the [`bq mk` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) . When you use the bq command-line tool to create a table linked to an external data source, you identify the table's schema using a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) .
 
 1.  Use the `bq mk` command to create a permanent table.
-    
-        bq mk \
-        --external_table_definition=DEFINITION_FILE \
-        DATASET.TABLE
-    
+
+    ```
+    bq mk \
+    --external_table_definition=DEFINITION_FILE \
+    DATASET.TABLE
+    ```
+
     Replace the following:
-    
-      - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) on your local machine.
-      - `  DATASET  ` : the name of the dataset that contains the table.
-      - `  TABLE  ` : the name of the table you're creating.
+
+    - `DEFINITION_FILE` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) on your local machine.
+    - `DATASET` : the name of the dataset that contains the table.
+    - `TABLE` : the name of the table you're creating.
 
 ### API
 
@@ -173,106 +179,108 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.BigtableColumn;
-    import com.google.cloud.bigquery.BigtableColumnFamily;
-    import com.google.cloud.bigquery.BigtableOptions;
-    import com.google.cloud.bigquery.ExternalTableDefinition;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableId;
-    import com.google.cloud.bigquery.TableInfo;
-    import com.google.cloud.bigquery.TableResult;
-    import com.google.common.collect.ImmutableList;
-    import org.apache.commons.codec.binary.Base64;
-    
-    // Sample to queries an external bigtable data source using a permanent table
-    public class QueryExternalBigtablePerm {
-    
-      public static void main(String[] args) {
-        // TODO(developer): Replace these variables before running the sample.
-        String projectId = "MY_PROJECT_ID";
-        String bigtableInstanceId = "MY_INSTANCE_ID";
-        String bigtableTableName = "MY_BIGTABLE_NAME";
-        String bigqueryDatasetName = "MY_DATASET_NAME";
-        String bigqueryTableName = "MY_TABLE_NAME";
-        String sourceUri =
-            String.format(
-                "https://googleapis.com/bigtable/projects/%s/instances/%s/tables/%s",
-                projectId, bigtableInstanceId, bigtableTableName);
-        String query = String.format("SELECT * FROM %s ", bigqueryTableName);
-        queryExternalBigtablePerm(bigqueryDatasetName, bigqueryTableName, sourceUri, query);
-      }
-    
-      public static void queryExternalBigtablePerm(
-          String datasetName, String tableName, String sourceUri, String query) {
-        try {
-          // Initialize client that will be used to send requests. This client only needs to be created
-          // once, and can be reused for multiple requests.
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-    
-          BigtableColumnFamily.Builder statsSummary = BigtableColumnFamily.newBuilder();
-    
-          // Configuring Columns
-          BigtableColumn connectedCell =
-              BigtableColumn.newBuilder()
-                  .setQualifierEncoded(Base64.encodeBase64String("connected_cell".getBytes()))
-                  .setFieldName("connected_cell")
-                  .setType("STRING")
-                  .setEncoding("TEXT")
-                  .build();
-          BigtableColumn connectedWifi =
-              BigtableColumn.newBuilder()
-                  .setQualifierEncoded(Base64.encodeBase64String("connected_wifi".getBytes()))
-                  .setFieldName("connected_wifi")
-                  .setType("STRING")
-                  .setEncoding("TEXT")
-                  .build();
-          BigtableColumn osBuild =
-              BigtableColumn.newBuilder()
-                  .setQualifierEncoded(Base64.encodeBase64String("os_build".getBytes()))
-                  .setFieldName("os_build")
-                  .setType("STRING")
-                  .setEncoding("TEXT")
-                  .build();
-    
-          // Configuring column family and columns
-          statsSummary
-              .setColumns(ImmutableList.of(connectedCell, connectedWifi, osBuild))
-              .setFamilyID("stats_summary")
-              .setOnlyReadLatest(true)
-              .setEncoding("TEXT")
+```java
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryException;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.BigtableColumn;
+import com.google.cloud.bigquery.BigtableColumnFamily;
+import com.google.cloud.bigquery.BigtableOptions;
+import com.google.cloud.bigquery.ExternalTableDefinition;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableId;
+import com.google.cloud.bigquery.TableInfo;
+import com.google.cloud.bigquery.TableResult;
+import com.google.common.collect.ImmutableList;
+import org.apache.commons.codec.binary.Base64;
+
+// Sample to queries an external bigtable data source using a permanent table
+public class QueryExternalBigtablePerm {
+
+  public static void main(String[] args) {
+    // TODO(developer): Replace these variables before running the sample.
+    String projectId = "MY_PROJECT_ID";
+    String bigtableInstanceId = "MY_INSTANCE_ID";
+    String bigtableTableName = "MY_BIGTABLE_NAME";
+    String bigqueryDatasetName = "MY_DATASET_NAME";
+    String bigqueryTableName = "MY_TABLE_NAME";
+    String sourceUri =
+        String.format(
+            "https://googleapis.com/bigtable/projects/%s/instances/%s/tables/%s",
+            projectId, bigtableInstanceId, bigtableTableName);
+    String query = String.format("SELECT * FROM %s ", bigqueryTableName);
+    queryExternalBigtablePerm(bigqueryDatasetName, bigqueryTableName, sourceUri, query);
+  }
+
+  public static void queryExternalBigtablePerm(
+      String datasetName, String tableName, String sourceUri, String query) {
+    try {
+      // Initialize client that will be used to send requests. This client only needs to be created
+      // once, and can be reused for multiple requests.
+      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+
+      BigtableColumnFamily.Builder statsSummary = BigtableColumnFamily.newBuilder();
+
+      // Configuring Columns
+      BigtableColumn connectedCell =
+          BigtableColumn.newBuilder()
+              .setQualifierEncoded(Base64.encodeBase64String("connected_cell".getBytes()))
+              .setFieldName("connected_cell")
               .setType("STRING")
+              .setEncoding("TEXT")
               .build();
-    
-          // Configuring BigtableOptions is optional.
-          BigtableOptions options =
-              BigtableOptions.newBuilder()
-                  .setIgnoreUnspecifiedColumnFamilies(true)
-                  .setReadRowkeyAsString(true)
-                  .setColumnFamilies(ImmutableList.of(statsSummary.build()))
-                  .build();
-    
-          TableId tableId = TableId.of(datasetName, tableName);
-          // Create a permanent table linked to the Bigtable table
-          ExternalTableDefinition externalTable =
-              ExternalTableDefinition.newBuilder(sourceUri, options).build();
-          bigquery.create(TableInfo.of(tableId, externalTable));
-    
-          // Example query
-          TableResult results = bigquery.query(QueryJobConfiguration.of(query));
-    
-          results
-              .iterateAll()
-              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-    
-          System.out.println("Query on external permanent table performed successfully.");
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Query not performed \n" + e.toString());
-        }
-      }
+      BigtableColumn connectedWifi =
+          BigtableColumn.newBuilder()
+              .setQualifierEncoded(Base64.encodeBase64String("connected_wifi".getBytes()))
+              .setFieldName("connected_wifi")
+              .setType("STRING")
+              .setEncoding("TEXT")
+              .build();
+      BigtableColumn osBuild =
+          BigtableColumn.newBuilder()
+              .setQualifierEncoded(Base64.encodeBase64String("os_build".getBytes()))
+              .setFieldName("os_build")
+              .setType("STRING")
+              .setEncoding("TEXT")
+              .build();
+
+      // Configuring column family and columns
+      statsSummary
+          .setColumns(ImmutableList.of(connectedCell, connectedWifi, osBuild))
+          .setFamilyID("stats_summary")
+          .setOnlyReadLatest(true)
+          .setEncoding("TEXT")
+          .setType("STRING")
+          .build();
+
+      // Configuring BigtableOptions is optional.
+      BigtableOptions options =
+          BigtableOptions.newBuilder()
+              .setIgnoreUnspecifiedColumnFamilies(true)
+              .setReadRowkeyAsString(true)
+              .setColumnFamilies(ImmutableList.of(statsSummary.build()))
+              .build();
+
+      TableId tableId = TableId.of(datasetName, tableName);
+      // Create a permanent table linked to the Bigtable table
+      ExternalTableDefinition externalTable =
+          ExternalTableDefinition.newBuilder(sourceUri, options).build();
+      bigquery.create(TableInfo.of(tableId, externalTable));
+
+      // Example query
+      TableResult results = bigquery.query(QueryJobConfiguration.of(query));
+
+      results
+          .iterateAll()
+          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+
+      System.out.println("Query on external permanent table performed successfully.");
+    } catch (BigQueryException | InterruptedException e) {
+      System.out.println("Query not performed \n" + e.toString());
     }
+  }
+}
+```
 
 ## Query external tables
 
@@ -286,38 +294,44 @@ By default, BigQuery exposes the values in a column family as an array of column
 
 You are storing user profiles for a fictional social network. One data model for this might be a `profile` column family with individual columns for `gender` , `age` and `email` :
 
-    rowkey | profile:gender| profile:age| profile:email
-    -------| --------------| -----------| -------------
-    alice  | female        | 30         | alice@gmail.com
+```
+rowkey | profile:gender| profile:age| profile:email
+-------| --------------| -----------| -------------
+alice  | female        | 30         | alice@gmail.com
+```
 
 Using the default schema, a GoogleSQL query to count the number of male users over 30 is:
 
-    SELECT
-      COUNT(1)
-    FROM
-      `dataset.table`
-    OMIT
-      RECORD IF NOT SOME(profile.column.name = "gender"
-        AND profile.column.cell.value = "male")
-      OR NOT SOME(profile.column.name = "age"
-        AND INTEGER(profile.column.cell.value) > 30)
+```
+SELECT
+  COUNT(1)
+FROM
+  `dataset.table`
+OMIT
+  RECORD IF NOT SOME(profile.column.name = "gender"
+    AND profile.column.cell.value = "male")
+  OR NOT SOME(profile.column.name = "age"
+    AND INTEGER(profile.column.cell.value) > 30)
+```
 
 Querying the data is less challenging if `gender` and `age` are exposed as sub- fields. To expose them as sub-fields, list `gender` and `age` as named columns in the `profile` column family when defining the table. You can also instruct BigQuery to expose the latest values from this column family because typically, only the latest value (and possibly the only value) is of interest.
 
 After exposing the columns as sub-fields, the GoogleSQL query to count the number of male users over 30 is:
 
-    SELECT
-      COUNT(1)
-    FROM
-      `dataset.table`
-    WHERE
-      profile.gender.cell.value="male"
-      AND profile.age.cell.value > 30
+```
+SELECT
+  COUNT(1)
+FROM
+  `dataset.table`
+WHERE
+  profile.gender.cell.value="male"
+  AND profile.age.cell.value > 30
+```
 
 Notice how `gender` and `age` are referenced directly as fields. The JSON configuration for this setup is:
 
-``` 
-  "bigtableOptions": {
+```
+"bigtableOptions": {
     "readRowkeyAsString": "true",
     "columnFamilies": [
       {
@@ -350,8 +364,8 @@ Querying data in Bigtable is available in all supported Bigtable zones. For more
 
 ## Limitations
 
-  - You can't create external tables over Bigtable SQL-based objects, such as views and continuous materialized views.
-  - For more information about limitations that apply to external tables, see [External table limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) .
+- You can't create external tables over Bigtable SQL-based objects, such as views and continuous materialized views.
+- For more information about limitations that apply to external tables, see [External table limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) .
 
 ## Scopes for Compute Engine instances
 
@@ -363,5 +377,5 @@ For information on applying scopes to a Compute Engine instance, see [Changing t
 
 ## What's next
 
-  - [Learn more about Bigtable schema design.](https://docs.cloud.google.com/bigtable/docs/schema-design)
-  - [Review the introduction to external data sources.](https://docs.cloud.google.com/bigquery/docs/external-data-sources)
+- [Learn more about Bigtable schema design.](https://docs.cloud.google.com/bigtable/docs/schema-design)
+- [Review the introduction to external data sources.](https://docs.cloud.google.com/bigquery/docs/external-data-sources)

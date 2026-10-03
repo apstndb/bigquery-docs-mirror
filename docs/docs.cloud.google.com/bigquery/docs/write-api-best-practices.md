@@ -38,8 +38,8 @@ When you write to an application-created stream, you can specify the stream offs
 
 When you specify an offset, the write operation is idempotent, which makes it safe to retry due to network errors or unresponsiveness from the server. Handle the following errors related to offsets:
 
-  - `ALREADY_EXISTS` ( `StorageErrorCode.OFFSET_ALREADY_EXISTS` ): The row was already written. You can safely ignore this error.
-  - `OUT_OF_RANGE` ( `StorageErrorCode.OFFSET_OUT_OF_RANGE` ): A previous write operation failed. Retry from the last successful write.
+- `ALREADY_EXISTS` ( `StorageErrorCode.OFFSET_ALREADY_EXISTS` ): The row was already written. You can safely ignore this error.
+- `OUT_OF_RANGE` ( `StorageErrorCode.OFFSET_OUT_OF_RANGE` ): A previous write operation failed. Retry from the last successful write.
 
 Note that these errors can also happen if you set the wrong offset value, so you have to manage offsets carefully.
 
@@ -59,9 +59,9 @@ For data streaming scenarios, table schemas are usually managed outside of the s
 
 The Storage Write API (gRPC) supports table schemas as follows:
 
-  - The first write request includes the schema.
-  - You send each row of data as a binary protocol buffer. BigQuery maps the data to the schema.
-  - You can omit nullable fields, but you cannot include any fields that are not present in the current schema. If you send rows with extra fields, the Storage Write API (gRPC) returns a [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) with `StorageErrorCode.SCHEMA_MISMATCH_EXTRA_FIELD` .
+- The first write request includes the schema.
+- You send each row of data as a binary protocol buffer. BigQuery maps the data to the schema.
+- You can omit nullable fields, but you cannot include any fields that are not present in the current schema. If you send rows with extra fields, the Storage Write API (gRPC) returns a [`StorageError`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.StorageError) with `StorageErrorCode.SCHEMA_MISMATCH_EXTRA_FIELD` .
 
 If you want to send new fields in the payload, you should first update the table schema in BigQuery. The Storage Write API (gRPC) detects schema changes after a short time, on the order of minutes. When the Storage Write API (gRPC) detects the schema change, the [`AppendRowsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.AppendRowsResponse) response message contains a `TableSchema` object that describes the new schema.
 

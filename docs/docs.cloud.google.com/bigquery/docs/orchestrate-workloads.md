@@ -21,7 +21,7 @@ Scheduling tools assist with tasks that are involved in managing complex data wo
 We recommend using Dataform, Workflows, Managed Airflow, or Vertex AI Pipelines for most use cases. Consult the following chart for a side-by-side comparison:
 
 |                  | [Dataform](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#dataform)                 | [Workflows](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#workflows) | [Managed Airflow](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#composer) | [Vertex AI Pipelines](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#vertex) |
-| ---------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+|------------------|--------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | Focus            | Data transformation                                                                                    | Microservices                                                                            | ETL or ELT                                                                                    | Machine learning                                                                                |
 | Complexity       | \*                                                                                                     | \*\*                                                                                     | \*\*\*                                                                                        | \*\*                                                                                            |
 | User profile     | Data analyst or administrator                                                                          | Data architect                                                                           | Data engineer                                                                                 | Data analyst                                                                                    |
@@ -117,13 +117,13 @@ Many data workloads require additional messaging connections between decoupled m
 
 ## What's next
 
-  - Learn to [schedule recurring queries directly in BigQuery](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
-  - Get started with [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
-  - Get started with [Workflows](https://docs.cloud.google.com/workflows/docs/overview) .
-  - Get started with [Managed Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
-  - Get started with [Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) .
-  - Get started with [Apigee Integration](https://docs.cloud.google.com/apigee/docs/api-platform/integration/what-is-apigee-integration) .
-  - Get started with [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) .
-  - Get started with [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/overview) .
-  - Get started with [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) .
-  - Get started with [Eventarc](https://docs.cloud.google.com/eventarc/docs/overview) .
+- Learn to [schedule recurring queries directly in BigQuery](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
+- Get started with [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+- Get started with [Workflows](https://docs.cloud.google.com/workflows/docs/overview) .
+- Get started with [Managed Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
+- Get started with [Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction) .
+- Get started with [Apigee Integration](https://docs.cloud.google.com/apigee/docs/api-platform/integration/what-is-apigee-integration) .
+- Get started with [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) .
+- Get started with [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/overview) .
+- Get started with [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) .
+- Get started with [Eventarc](https://docs.cloud.google.com/eventarc/docs/overview) .

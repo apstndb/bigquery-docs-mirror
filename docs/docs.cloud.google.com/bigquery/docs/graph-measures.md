@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Work with measures
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request support or provide feedback for this feature, send email to <bq-graph-preview-support@google.com> .
@@ -22,12 +22,12 @@ This document shows you how to define and query measures on your graphs. You can
 
 A *measure* is an aggregate property defined within the `PROPERTIES` clause of a node or edge table. Measures are defined using the `MEASURE` keyword and one of the following supported aggregate functions:
 
-  - `SUM`
-  - `AVG`
-  - `COUNT`
-  - `COUNT(DISTINCT)`
-  - `MIN`
-  - `MAX`
+- `SUM`
+- `AVG`
+- `COUNT`
+- `COUNT(DISTINCT)`
+- `MIN`
+- `MAX`
 
 Measures define their aggregation in reference to the `KEY` of the node or edge table on which they're defined. This means that when you query a measure, the aggregation is performed correctly even if the underlying table is joined in a way that causes rows to be duplicated.
 
@@ -41,76 +41,80 @@ You define measures within the [`PROPERTIES` clause](https://docs.cloud.google.c
 
 The following example creates a dataset called `university` and tables for colleges, departments, and courses:
 
-    CREATE SCHEMA IF NOT EXISTS university;
-    
-    CREATE OR REPLACE TABLE university.College (
-      college_id INT64 PRIMARY KEY NOT ENFORCED,
-      college_name STRING
-    );
-    
-    CREATE OR REPLACE TABLE university.Department (
-      dept_id INT64 PRIMARY KEY NOT ENFORCED,
-      dept_name STRING,
-      college_id INT64,
-      budget FLOAT64,
-      FOREIGN KEY (college_id) REFERENCES university.College(college_id) NOT ENFORCED
-    );
-    
-    CREATE OR REPLACE TABLE university.Course (
-      course_id INT64 PRIMARY KEY NOT ENFORCED,
-      course_name STRING,
-      dept_id INT64,
-      credits INT64,
-      FOREIGN KEY (dept_id) REFERENCES university.Department(dept_id) NOT ENFORCED
-    );
-    
-    INSERT INTO university.College (college_id, college_name)
-    VALUES (101, 'College of Engineering'),
-          (102, 'College of Arts');
-    
-    INSERT INTO university.Department (dept_id, dept_name, college_id, budget)
-    VALUES (1001, 'Computer Science', 101, 500000),
-          (1002, 'Mechanical Engineering', 101, 400000),
-          (1003, 'Fine Arts', 102, 200000),
-          (1004, 'Research', 101, 50000);
-    
-    INSERT INTO university.Course (course_id, course_name, dept_id, credits)
-    VALUES (1, 'Intro to CS', 1001, 3),
-           (2, 'Data Structures', 1001, 4),
-           (3, 'Thermodynamics', 1002, 3),
-           (4, 'Oil Painting', 1003, 2);
+```
+CREATE SCHEMA IF NOT EXISTS university;
+
+CREATE OR REPLACE TABLE university.College (
+  college_id INT64 PRIMARY KEY NOT ENFORCED,
+  college_name STRING
+);
+
+CREATE OR REPLACE TABLE university.Department (
+  dept_id INT64 PRIMARY KEY NOT ENFORCED,
+  dept_name STRING,
+  college_id INT64,
+  budget FLOAT64,
+  FOREIGN KEY (college_id) REFERENCES university.College(college_id) NOT ENFORCED
+);
+
+CREATE OR REPLACE TABLE university.Course (
+  course_id INT64 PRIMARY KEY NOT ENFORCED,
+  course_name STRING,
+  dept_id INT64,
+  credits INT64,
+  FOREIGN KEY (dept_id) REFERENCES university.Department(dept_id) NOT ENFORCED
+);
+
+INSERT INTO university.College (college_id, college_name)
+VALUES (101, 'College of Engineering'),
+      (102, 'College of Arts');
+
+INSERT INTO university.Department (dept_id, dept_name, college_id, budget)
+VALUES (1001, 'Computer Science', 101, 500000),
+      (1002, 'Mechanical Engineering', 101, 400000),
+      (1003, 'Fine Arts', 102, 200000),
+      (1004, 'Research', 101, 50000);
+
+INSERT INTO university.Course (course_id, course_name, dept_id, credits)
+VALUES (1, 'Intro to CS', 1001, 3),
+       (2, 'Data Structures', 1001, 4),
+       (3, 'Thermodynamics', 1002, 3),
+       (4, 'Oil Painting', 1003, 2);
+```
 
 The following statement creates a graph called `SchoolGraph` that defines measures on some of the properties in the `Department` and `Course` nodes. You must provide an alias for properties defined by a measure.
 
-    CREATE OR REPLACE PROPERTY GRAPH university.SchoolGraph
-      NODE TABLES (
-        university.College
-          KEY(college_id)
-          PROPERTIES(college_id, college_name),
-        university.Department
-          KEY(dept_id)
-          PROPERTIES(dept_id, dept_name, college_id,
-            budget OPTIONS(description="Department budget in USD"),
-            MEASURE(SUM(budget)) AS total_budget),
-        university.Course
-          KEY(course_id)
-          PROPERTIES(
-            course_id,
-            course_name,
-            credits,
-            dept_id,
-            MEASURE(AVG(credits)) AS avg_credits,
-            MEASURE(SUM(credits)) AS total_credits,
-            MEASURE(COUNT(course_id)) AS course_count)
-      )
-      EDGE TABLES (
-        university.Department AS CollegeDept
-          SOURCE KEY (college_id) REFERENCES College (college_id)
-          DESTINATION KEY (dept_id) REFERENCES Department (dept_id),
-        university.Course AS DeptCourse
-          SOURCE KEY (dept_id) REFERENCES Department (dept_id)
-          DESTINATION KEY (course_id) REFERENCES Course (course_id)
-      );
+```
+CREATE OR REPLACE PROPERTY GRAPH university.SchoolGraph
+  NODE TABLES (
+    university.College
+      KEY(college_id)
+      PROPERTIES(college_id, college_name),
+    university.Department
+      KEY(dept_id)
+      PROPERTIES(dept_id, dept_name, college_id,
+        budget OPTIONS(description="Department budget in USD"),
+        MEASURE(SUM(budget)) AS total_budget),
+    university.Course
+      KEY(course_id)
+      PROPERTIES(
+        course_id,
+        course_name,
+        credits,
+        dept_id,
+        MEASURE(AVG(credits)) AS avg_credits,
+        MEASURE(SUM(credits)) AS total_credits,
+        MEASURE(COUNT(course_id)) AS course_count)
+  )
+  EDGE TABLES (
+    university.Department AS CollegeDept
+      SOURCE KEY (college_id) REFERENCES College (college_id)
+      DESTINATION KEY (dept_id) REFERENCES Department (dept_id),
+    university.Course AS DeptCourse
+      SOURCE KEY (dept_id) REFERENCES Department (dept_id)
+      DESTINATION KEY (course_id) REFERENCES Course (course_id)
+  );
+```
 
 ![A visualization of the SchoolGraph graph.](https://docs.cloud.google.com/static/bigquery/images/graph-university-example.png)
 
@@ -120,25 +124,27 @@ The `total_budget` measure is defined as `MEASURE(SUM(budget))` . The measure lo
 
 When you join tables, data is repeated every time there is a one-to-many relationship in your data. For example, if you join the `Course` , `Department` , and `College` tables, a department with multiple courses appears in multiple rows in the output:
 
-    SELECT
-      college_name,
-      dept_name,
-      course_name,
-      budget
-    FROM university.Course
-    LEFT JOIN university.Department
-      ON Course.dept_id = Department.dept_id
-    LEFT JOIN university.College
-      ON Department.college_id = College.college_id;
-    
-    /*------------------------+------------------------+-----------------+----------+
-     | college_name           | dept_name              | course_name     | budget   |
-     +------------------------+------------------------+-----------------+----------+
-     | College of Engineering | Computer Science       | Intro to CS     | 500000.0 |
-     | College of Engineering | Computer Science       | Data Structures | 500000.0 |
-     | College of Engineering | Mechanical Engineering | Thermodynamics  | 400000.0 |
-     | College of Arts        | Fine Arts              | Oil Painting    | 200000.0 |
-     +------------------------+------------------------+-----------------+----------*/
+```
+SELECT
+  college_name,
+  dept_name,
+  course_name,
+  budget
+FROM university.Course
+LEFT JOIN university.Department
+  ON Course.dept_id = Department.dept_id
+LEFT JOIN university.College
+  ON Department.college_id = College.college_id;
+
+/*------------------------+------------------------+-----------------+----------+
+ | college_name           | dept_name              | course_name     | budget   |
+ +------------------------+------------------------+-----------------+----------+
+ | College of Engineering | Computer Science       | Intro to CS     | 500000.0 |
+ | College of Engineering | Computer Science       | Data Structures | 500000.0 |
+ | College of Engineering | Mechanical Engineering | Thermodynamics  | 400000.0 |
+ | College of Arts        | Fine Arts              | Oil Painting    | 200000.0 |
+ +------------------------+------------------------+-----------------+----------*/
+```
 
 If you try to compute the total budget per college using `SUM(budget)` , the Computer Science department's budget is counted twice. You can avoid this problem by querying the `Department` table directly, but this approach doesn't work if you want to compute multiple aggregations from different tables that contribute to your joined data. The following section shows how measures solve this problem.
 
@@ -146,39 +152,43 @@ If you try to compute the total budget per college using `SUM(budget)` , the Com
 
 You can query a graph with measures using GQL, but your query can't directly reference any property defined by a measure. For example, the following query references nodes that have measure properties defined, but doesn't use or return any of the measure fields:
 
-    GRAPH university.SchoolGraph
-    MATCH (c:College)-[]-(d:Department)-[]->(course:Course)
-    RETURN c.college_name, d.dept_name, course.course_name;
-    
-    /*------------------------+------------------------+-----------------+
-     | college_name           | dept_name              | course_name     |
-     +------------------------+------------------------+-----------------+
-     | College of Engineering | Computer Science       | Intro to CS     |
-     | College of Engineering | Computer Science       | Data Structures |
-     | College of Engineering | Mechanical Engineering | Thermodynamics  |
-     | College of Arts        | Fine Arts              | Oil Painting    |
-     +------------------------+------------------------+-----------------*/
+```
+GRAPH university.SchoolGraph
+MATCH (c:College)-[]-(d:Department)-[]->(course:Course)
+RETURN c.college_name, d.dept_name, course.course_name;
+
+/*------------------------+------------------------+-----------------+
+ | college_name           | dept_name              | course_name     |
+ +------------------------+------------------------+-----------------+
+ | College of Engineering | Computer Science       | Intro to CS     |
+ | College of Engineering | Computer Science       | Data Structures |
+ | College of Engineering | Mechanical Engineering | Thermodynamics  |
+ | College of Arts        | Fine Arts              | Oil Painting    |
+ +------------------------+------------------------+-----------------*/
+```
 
 ### Work with measures
 
 To work with measures, you use the [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) table-valued function (TVF) to query your graph as a single flattened table. Columns in the output table are derived from the properties defined in the graph for each node and edge table. To prevent naming conflicts, columns are named by concatenating the node or edge table label and the property name—for example, `Course_course_name` or `Department_total_budget` . The following query shows some sample output from the `GRAPH_EXPAND` TVF:
 
-    SELECT
-      College_college_name,
-      Department_dept_name,
-      Department_budget,
-      Course_course_name
-    FROM
-      GRAPH_EXPAND("university.SchoolGraph");
-    
-    /*------------------------+------------------------+-------------------+--------------------+
-     | College_college_name   | Department_dept_name   | Department_budget | Course_course_name |
-     +------------------------+------------------------+-------------------+--------------------+
-     | College of Engineering | Computer Science       | 500000.0          | Intro to CS        |
-     | College of Engineering | Computer Science       | 500000.0          | Data Structures    |
-     | College of Engineering | Mechanical Engineering | 400000.0          | Thermodynamics     |
-     | College of Arts        | Fine Arts              | 200000.0          | Oil Painting       |
-     +------------------------+------------------------+-------------------+--------------------+
+```
+SELECT
+  College_college_name,
+  Department_dept_name,
+  Department_budget,
+  Course_course_name
+FROM
+  GRAPH_EXPAND("university.SchoolGraph");
+
+/*------------------------+------------------------+-------------------+--------------------+
+ | College_college_name   | Department_dept_name   | Department_budget | Course_course_name |
+ +------------------------+------------------------+-------------------+--------------------+
+ | College of Engineering | Computer Science       | 500000.0          | Intro to CS        |
+ | College of Engineering | Computer Science       | 500000.0          | Data Structures    |
+ | College of Engineering | Mechanical Engineering | 400000.0          | Thermodynamics     |
+ | College of Arts        | Fine Arts              | 200000.0          | Oil Painting       |
+ +------------------------+------------------------+-------------------+--------------------+
+```
 
 The `GRAPH_EXPAND` function produces the flattened table by applying a series of `LEFT JOIN` operations to node and edge tables. A valid input graph must have exactly one *root node table* , which is a table whose `KEY` value doesn't appear in any other table. Data that isn't reachable from the root node table through a series of joins doesn't appear in the output. In the previous example, the `Course` table is the root node table. The `Research` department is omitted from the output because it doesn't have any courses.
 
@@ -186,21 +196,23 @@ You can't directly select a column for a property defined by a measure. Instead,
 
 The following query simultaneously calculates the total budget and total number of courses for each college:
 
-    SELECT
-      College_college_name,
-      AGG(Department_total_budget) AS college_budget,
-      AGG(Course_course_count) AS total_courses
-    FROM
-      GRAPH_EXPAND("university.SchoolGraph")
-    GROUP BY
-      College_college_name;
-    
-    /*------------------------+----------------+---------------+
-     | College_college_name   | college_budget | total_courses |
-     +------------------------+----------------+---------------+
-     | College of Engineering | 900000.0       | 3             |
-     | College of Arts        | 200000.0       | 1             |
-     +------------------------+----------------+---------------*/
+```
+SELECT
+  College_college_name,
+  AGG(Department_total_budget) AS college_budget,
+  AGG(Course_course_count) AS total_courses
+FROM
+  GRAPH_EXPAND("university.SchoolGraph")
+GROUP BY
+  College_college_name;
+
+/*------------------------+----------------+---------------+
+ | College_college_name   | college_budget | total_courses |
+ +------------------------+----------------+---------------+
+ | College of Engineering | 900000.0       | 3             |
+ | College of Arts        | 200000.0       | 1             |
+ +------------------------+----------------+---------------*/
+```
 
 > **Caution:** Changes to the underlying graph don't invalidate [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) for queries that call the `GRAPH_EXPAND` function. To ensure correct output, disable the retrieval of cached results when you call this function.
 
@@ -224,38 +236,42 @@ Defining redundant properties on the edge table can cause the `GRAPH_EXPAND` fun
 
 A *many-to-many* (M:N) relationship occurs when a row in table `A` can correspond to multiple rows in table `B` , and a row in table `B` can correspond to multiple rows in table `A` . For example, one student can enroll in multiple courses and one course can have many students. You can separate a many-to-many relationship into two one-to-many relationships by using an *intermediate junction table* . For example, you can define an `Enrollment` table that contains foreign keys pointing to `Student` and `Course` tables. If you model an intermediate junction table as an edge table that connects two dimension node tables in your `CREATE PROPERTY GRAPH` statement, then the `GRAPH_EXPAND` function ignores these edges because their relationship is ambiguous: not clearly many-to-one or one-to-one.
 
-    CREATE PROPERTY GRAPH university.SchoolGraph
-      NODE TABLES (
-        university.Student,
-        university.Course
-      )
-      EDGE TABLES (
-        -- Modeling the junction table as a standalone edge causes ambiguity
-        university.Enrollment AS StudentEnrollment
-          SOURCE KEY (student_id) REFERENCES Student (student_id)
-          DESTINATION KEY (course_id) REFERENCES Course (course_id)
-      );
+```
+CREATE PROPERTY GRAPH university.SchoolGraph
+  NODE TABLES (
+    university.Student,
+    university.Course
+  )
+  EDGE TABLES (
+    -- Modeling the junction table as a standalone edge causes ambiguity
+    university.Enrollment AS StudentEnrollment
+      SOURCE KEY (student_id) REFERENCES Student (student_id)
+      DESTINATION KEY (course_id) REFERENCES Course (course_id)
+  );
+```
 
 The `GRAPH_EXPAND` function ignores these edges because they are ambiguous (not clearly many-to-one or one-to-one between the node tables themselves). If all edges in a graph are ignored, calls to `GRAPH_EXPAND` or `BQ.SHOW_GRAPH_EXPAND_SCHEMA` fail with an error.
 
 To correctly model an M:N relationship for measures, promote the intermediate junction table to a node table. In this structure, the junction node table serves as the single root node table (a node table with an in-degree of zero). Then, define two many-to-one (N:1) edge tables that share the junction table to connect N:1 to each of the dimension node tables:
 
-    CREATE PROPERTY GRAPH university.SchoolGraph
-      NODE TABLES (
-        university.Student KEY (student_id),
-        university.Course KEY (course_id),
-        -- Promote the junction table to a node table (acting as the single root node)
-        university.Enrollment KEY (enrollment_id)
-      )
-      EDGE TABLES (
-        -- Share (reuse) the Enrollment table to define N:1 edges to each dimension
-        university.Enrollment AS EnrollmentToStudent
-          SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
-          DESTINATION KEY (student_id) REFERENCES Student (student_id),
-        university.Enrollment AS EnrollmentToCourse
-          SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
-          DESTINATION KEY (course_id) REFERENCES Course (course_id)
-      );
+```
+CREATE PROPERTY GRAPH university.SchoolGraph
+  NODE TABLES (
+    university.Student KEY (student_id),
+    university.Course KEY (course_id),
+    -- Promote the junction table to a node table (acting as the single root node)
+    university.Enrollment KEY (enrollment_id)
+  )
+  EDGE TABLES (
+    -- Share (reuse) the Enrollment table to define N:1 edges to each dimension
+    university.Enrollment AS EnrollmentToStudent
+      SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
+      DESTINATION KEY (student_id) REFERENCES Student (student_id),
+    university.Enrollment AS EnrollmentToCourse
+      SOURCE KEY (enrollment_id) REFERENCES Enrollment (enrollment_id)
+      DESTINATION KEY (course_id) REFERENCES Course (course_id)
+  );
+```
 
 In this structure, `Enrollment` serves as the single root node table (in-degree of zero) connecting N:1 to the `Student` and `Course` dimension tables (in-degree of one). The `GRAPH_EXPAND` function can flatten this graph by traversing outwards from `Enrollment` to `Student` and `Course` . If you define measures on any of these tables, you can call the `AGG` function on the measure columns to correctly compute the aggregations without overcounting.
 
@@ -263,13 +279,15 @@ In this structure, `Enrollment` serves as the single root node table (in-degree 
 
 To view the schema of the table returned by the `GRAPH_EXPAND` function without calling the function, use the [`BQ.SHOW_GRAPH_EXPAND_SCHEMA` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqshow_graph_expand_schema) :
 
-    DECLARE schema STRING DEFAULT '';
-    CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('university.SchoolGraph', schema);
-    SELECT schema;
+```
+DECLARE schema STRING DEFAULT '';
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('university.SchoolGraph', schema);
+SELECT schema;
+```
 
 This procedure populates the `schema` variable with the name, type, and mode of each column. It also indicates whether the property referenced by the column is a measure, and lists any description or synonyms that you defined on it.
 
 ## What's next
 
-  - Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn about [graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
+- Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn about [graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .

@@ -14,18 +14,18 @@ To monitor capacity, slot commitments, and long-term reservation utilization acr
 
 With the jobs explorer, you can do the following:
 
-  - **Filter and identify jobs.** Search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria like job status, duration, owner, or slot usage.
-  - **Analyze timeline metrics.** Track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
-  - **Aggregate jobs by resource.** [Group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
-  - **Troubleshoot jobs.** Select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-  - **Compare performance.** [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
-  - **Get AI assistance.** [Use Gemini Code Assist directly from the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
+- **Filter and identify jobs.** Search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria like job status, duration, owner, or slot usage.
+- **Analyze timeline metrics.** Track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
+- **Aggregate jobs by resource.** [Group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
+- **Troubleshoot jobs.** Select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+- **Compare performance.** [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
+- **Get AI assistance.** [Use Gemini Code Assist directly from the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
 
 BigQuery provides the job details and insights from the following `INFORMATION_SCHEMA` views:
 
-  - [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
-  - [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
-  - [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
+- [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs)
+- [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization)
+- [`INFORMATION_SCHEMA.JOBS_BY_USER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user)
 
 > **Note:** If you use organization restrictions, see [Enable access to Google-owned resources](https://docs.cloud.google.com/resource-manager/docs/organization-restrictions/additional-considerations#google-owned-resources) .
 
@@ -37,10 +37,10 @@ To use Gemini Code Assist to [troubleshoot jobs in BigQuery (Preview)](https://d
 
 To get the permissions that you need to use the jobs explorer to monitor jobs, ask your administrator to grant you the following IAM roles:
 
-  - View jobs at the project level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project
-  - View jobs at the organization level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the organization
-  - View job details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project where the queries were run
-  - View system-level details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the administration project
+- View jobs at the project level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project
+- View jobs at the organization level: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the organization
+- View job details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the project where the queries were run
+- View system-level details: [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on the administration project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -50,8 +50,8 @@ These predefined roles contain the permissions required to use the jobs explorer
 
 The following permissions are required to use the jobs explorer to monitor jobs:
 
-  - View jobs at the project level: `bigquery.jobs.listAll` on the project
-  - View jobs at the organization level: `bigquery.jobs.listAll` on the organization
+- View jobs at the project level: `bigquery.jobs.listAll` on the project
+- View jobs at the organization level: `bigquery.jobs.listAll` on the organization
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -69,29 +69,29 @@ To filter jobs for queries that are contained in the `INFORMATION_SCHEMA.JOBS*` 
 
 3.  On the **Jobs explorer** page, in the **Location** field, select the location for which you want to view the jobs.
 
-4.  In the **Filters** pane, apply optional filters, as needed. If this pane isn't visible, click insert\_chart **Show filters** .
-    
+4.  In the **Filters** pane, apply optional filters, as needed. If this pane isn't visible, click insert_chart **Show filters** .
+
     The following filters are available:
-    
-      - **Job scope** : filters jobs by their visibility level—for example, the current project, organization, and your jobs. You can choose to view jobs from the current project, across your entire organization, or only jobs that you initiated.
-      - **Chart view** :
-          - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
-          - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
-      - **Group by** : groups displayed jobs by a specific resource, such as owner, project, or reservation. For more information, see [Group jobs by resource](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) .
-      - **Status** : filters jobs by their current execution state—for example, completed, error, active, and queued. Summary counts appear directly next to each faceted status filter option to indicate the number of jobs in that state.
-      - **Project ID** : filters jobs that ran in a specific project.
-      - **Reservation ID** : filters jobs that used slots from a specific reservation. This helps you monitor how different workloads are consuming reserved capacity.
-      - **Owner** : filters jobs by the email address of the user or service account that started the job.
-      - **Job ID** : filters for a specific job by its unique alphanumeric identifier.
-      - **Query hash** : filters for jobs with a specific query hash. A query hash identifies the logic of a query, ignoring differences in comments, parameter values, UDFs, and literals, which helps you find all executions of the same query logic. This field appears for successful [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) queries that are not cache hits.
-      - **Labels** : filters jobs based on custom metadata labels that you or your organization have attached to them. This lets you categorize and track jobs by department or application.
-      - **Query insights** : filters jobs that BigQuery has identified as having specific performance issues, such as slot contention, memory shuffle capacity exceeded, and data input scale change.
-      - **Slot time more than** : filters for jobs that consumed more than a specified amount of slot-milliseconds. This is a key metric for identifying resource-intensive queries.
-      - **Duration more than** : filters for jobs that took longer than a specified amount of time to complete. Use this to find queries that are running slower than expected.
-      - **Bytes processed more than** : filters for jobs that scanned more than a specified amount of data. This helps you identify queries that might be contributing to high data processing costs.
-      - **Job category** : filters jobs by the type of operation performed, such as standard SQL queries or continuous queries used for real-time data processing.
-      - **Job creation reason** : filters jobs based on why BigQuery created them, such as when a query exceeds a timeout or produces results too large for a single response.
-      - **Job priority** : filters jobs by their execution priority, such as interactive or batch jobs.
+
+    - **Job scope** : filters jobs by their visibility level—for example, the current project, organization, and your jobs. You can choose to view jobs from the current project, across your entire organization, or only jobs that you initiated.
+    - **Chart view** :
+      - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
+      - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
+    - **Group by** : groups displayed jobs by a specific resource, such as owner, project, or reservation. For more information, see [Group jobs by resource](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) .
+    - **Status** : filters jobs by their current execution state—for example, completed, error, active, and queued. Summary counts appear directly next to each faceted status filter option to indicate the number of jobs in that state.
+    - **Project ID** : filters jobs that ran in a specific project.
+    - **Reservation ID** : filters jobs that used slots from a specific reservation. This helps you monitor how different workloads are consuming reserved capacity.
+    - **Owner** : filters jobs by the email address of the user or service account that started the job.
+    - **Job ID** : filters for a specific job by its unique alphanumeric identifier.
+    - **Query hash** : filters for jobs with a specific query hash. A query hash identifies the logic of a query, ignoring differences in comments, parameter values, UDFs, and literals, which helps you find all executions of the same query logic. This field appears for successful [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) queries that are not cache hits.
+    - **Labels** : filters jobs based on custom metadata labels that you or your organization have attached to them. This lets you categorize and track jobs by department or application.
+    - **Query insights** : filters jobs that BigQuery has identified as having specific performance issues, such as slot contention, memory shuffle capacity exceeded, and data input scale change.
+    - **Slot time more than** : filters for jobs that consumed more than a specified amount of slot-milliseconds. This is a key metric for identifying resource-intensive queries.
+    - **Duration more than** : filters for jobs that took longer than a specified amount of time to complete. Use this to find queries that are running slower than expected.
+    - **Bytes processed more than** : filters for jobs that scanned more than a specified amount of data. This helps you identify queries that might be contributing to high data processing costs.
+    - **Job category** : filters jobs by the type of operation performed, such as standard SQL queries or continuous queries used for real-time data processing.
+    - **Job creation reason** : filters jobs based on why BigQuery created them, such as when a query exceeds a timeout or produces results too large for a single response.
+    - **Job priority** : filters jobs by their execution priority, such as interactive or batch jobs.
 
 ### View job timeline metrics
 
@@ -101,12 +101,12 @@ To configure the metrics chart in the jobs explorer, do the following:
 
 1.  Go to the **Jobs explorer** page.
 
-2.  Go to the **Filters** pane. If this pane isn't visible, click insert\_chart **Show filters** .
+2.  Go to the **Filters** pane. If this pane isn't visible, click insert_chart **Show filters** .
 
 3.  Select the metric you want to display in the chart:
-    
-      - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
-      - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
+
+    - **Finished jobs** : displays timeline data for completed queries, distinguishing between jobs that completed successfully and jobs that errored.
+    - **Concurrency** : displays timeline data for query concurrency, distinguishing between active jobs and queued jobs.
 
 ### Group jobs by resource
 
@@ -116,30 +116,30 @@ To group jobs, do the following:
 
 1.  Go to the **Jobs explorer** page.
 
-2.  Go to the **Filters** pane. If this pane isn't visible, click insert\_chart **Show filters** .
+2.  Go to the **Filters** pane. If this pane isn't visible, click insert_chart **Show filters** .
 
 3.  Click **Group by** and select one of the following options:
-    
-      - **None** (default): displays the unaggregated table of individual jobs.
-      - **Owner** : groups jobs by the email address of the user or service account that ran the job.
-      - **Project** : groups jobs by project ID.
-      - **Reservation** : groups jobs by reservation ID.
+
+    - **None** (default): displays the unaggregated table of individual jobs.
+    - **Owner** : groups jobs by the email address of the user or service account that ran the job.
+    - **Project** : groups jobs by project ID.
+    - **Reservation** : groups jobs by reservation ID.
 
 When you set **Group by** to **Owner** , **Project** , or **Reservation** , BigQuery displays an aggregated view with summary panels for each resource. Each panel displays the following summary statistics:
 
-  - **Active jobs** : the number of running jobs.
-  - **Queued jobs** : the number of jobs waiting in the query queue.
-  - **Errored jobs** : the number of jobs that failed to complete.
-  - **Completed jobs** : the number of jobs that completed successfully.
-  - **Slot time** : the total slot-milliseconds consumed by jobs for that resource.
-  - **Bytes processed** : the total volume of data scanned by jobs for that resource.
+- **Active jobs** : the number of running jobs.
+- **Queued jobs** : the number of jobs waiting in the query queue.
+- **Errored jobs** : the number of jobs that failed to complete.
+- **Completed jobs** : the number of jobs that completed successfully.
+- **Slot time** : the total slot-milliseconds consumed by jobs for that resource.
+- **Bytes processed** : the total volume of data scanned by jobs for that resource.
 
 To inspect the individual jobs associated with a specific resource, click the panel for that resource to expand it and display a filtered table of its jobs.
 
 ## Troubleshoot job performance
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
@@ -160,22 +160,22 @@ To view a job's details and analyze its query execution, do the following:
 
 To help you diagnose query performance, the **Performance** tab in the job details compiles the following information and metrics, when applicable:
 
-  - **Job details** : information about the job, including the job ID, creation time, bytes processed, and slot usage. For more information, see [View job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
+- **Job details** : information about the job, including the job ID, creation time, bytes processed, and slot usage. For more information, see [View job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
 
-  - **Execution history** : a list of historical executions of the query, grouped by query hash. You can select a job from this list to compare directly against your current job. For more information, see [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) .
+- **Execution history** : a list of historical executions of the query, grouped by query hash. You can select a job from this list to compare directly against your current job. For more information, see [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) .
 
-  - **Execution graph** : a visual representation of the query execution stages. Expand the **Execution graph** section to inspect slot contention, shuffle capacity, and data input scale. For more information, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) .
-    
-    The following example shows an execution graph with SQL text mapping enabled:
-    
-    ![Execution graph for jobs.](https://docs.cloud.google.com/static/bigquery/images/jobs-execution-graph.png)
+- **Execution graph** : a visual representation of the query execution stages. Expand the **Execution graph** section to inspect slot contention, shuffle capacity, and data input scale. For more information, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) .
 
-  - **System load during execution** : a summary of the compute resources and reservation settings allocated during job execution.
+  The following example shows an execution graph with SQL text mapping enabled:
+
+  ![Execution graph for jobs.](https://docs.cloud.google.com/static/bigquery/images/jobs-execution-graph.png)
+
+- **System load during execution** : a summary of the compute resources and reservation settings allocated during job execution.
 
 ## Diagnose performance regressions by comparing jobs and systems
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
@@ -188,9 +188,9 @@ The comparison tool evaluates performance across query-level metrics and system-
 
 Significant differences are color-coded to help you scan for issues:
 
-  - **Green** : the metric improved (for example, a shorter query duration in the target run).
-  - **Yellow** : the metric degraded by less than 20%.
-  - **Red** : the metric degraded by more than 20%.
+- **Green** : the metric improved (for example, a shorter query duration in the target run).
+- **Yellow** : the metric degraded by less than 20%.
+- **Red** : the metric degraded by more than 20%.
 
 ### Compare two jobs
 
@@ -216,9 +216,9 @@ To change the jobs being compared at any time, click **Browse** in the baseline 
 
 After comparing two jobs, you can view the **Query level analysis** section, which compares two job executions across three tabs:
 
-  - **Metrics** : compares core query metrics, such as job duration, slot time, bytes processed, and unused accelerators.
-  - **SQL text** : displays the SQL statements for both jobs and highlights text differences.
-  - **Execution graph** : compares the [execution graphs](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) of both jobs stage-by-stage to pinpoint where bottlenecks occurred.
+- **Metrics** : compares core query metrics, such as job duration, slot time, bytes processed, and unused accelerators.
+- **SQL text** : displays the SQL statements for both jobs and highlights text differences.
+- **Execution graph** : compares the [execution graphs](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) of both jobs stage-by-stage to pinpoint where bottlenecks occurred.
 
 ### Compare two system intervals
 
@@ -226,29 +226,29 @@ Administrators and analysts can analyze broader environment metrics by executing
 
 You can navigate to the system performance comparison view in any of the following ways:
 
-  - On the **Job details** page, after you [compare two jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-jobs) , click **View more** in the **System level outputs** section to view system comparison details.
-  - If you use Gemini Cloud Assist to perform a system comparison, then Gemini Cloud Assist generates a link that opens the system comparison results.
+- On the **Job details** page, after you [compare two jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-jobs) , click **View more** in the **System level outputs** section to view system comparison details.
+- If you use Gemini Cloud Assist to perform a system comparison, then Gemini Cloud Assist generates a link that opens the system comparison results.
 
 To perform a system-level comparison over separate time periods, do the following:
 
 1.  From the **System performance comparison** view, click **System** .
 2.  Select the system where you want to analyze performance by clicking **Browse** and selecting a reservation or project scope.
 3.  Define the comparison time frames:
-      - **Target Interval** : select the date and time window for the period experiencing performance issues, and click **Apply** .
-      - **Baseline Interval** : select the reference date and time window to act as your performance benchmark, and click **Apply** .
+    - **Target Interval** : select the date and time window for the period experiencing performance issues, and click **Apply** .
+    - **Baseline Interval** : select the reference date and time window to act as your performance benchmark, and click **Apply** .
 
 #### System-level analysis
 
 After comparing intervals, the view maps utilization shifts, concurrency variations, and setting differences across the selected environment against its parent group. This helps you determine if slot contention or configuration regressions are impacting your workload. The data is generated under three blocks:
 
-  - **Project** : compares job concurrency, queued concurrency, and total slot usage at the project level.
-  - **Reservation** : compares reservation utilization, idle slot sharing, and project concurrency across shared [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
-  - **Config analysis** : compares workload management settings between the two runs, such as max reservation size caps and idle slot borrowing rules.
+- **Project** : compares job concurrency, queued concurrency, and total slot usage at the project level.
+- **Reservation** : compares reservation utilization, idle slot sharing, and project concurrency across shared [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- **Config analysis** : compares workload management settings between the two runs, such as max reservation size caps and idle slot borrowing rules.
 
 ## Use agentic performance troubleshooting insights
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To provide feedback or request support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
@@ -262,25 +262,23 @@ The insights are access controlled; without sufficient permissions, the insights
 To initialize context-aware troubleshooting and act on performance insights, do the following:
 
 1.  To open the Gemini Cloud Assist chat pane and automatically load your relevant job or system context, do one of the following:
-    
-      - In the **Jobs explorer** or **Job history** pages, hover over a job and click astrophotography\_mode **Gemini** in that table row.
-      - In the **Workload management** page, hover over a reservation and click astrophotography\_mode **Gemini** in that table row.
-      - In the **Studio** , **Monitoring** or **Jobs explorer** , click astrophotography\_mode **Gemini** .
+    - In the **Jobs explorer** or **Job history** pages, hover over a job and click astrophotography_mode **Gemini** in that table row.
+    - In the **Workload management** page, hover over a reservation and click astrophotography_mode **Gemini** in that table row.
+    - In the **Studio** , **Monitoring** or **Jobs explorer** , click astrophotography_mode **Gemini** .
 
 2.  Submit a prompt in natural language. For example, ask Gemini to explain why a job is running slow, analyze specific job statistics, analyze specific reservation performance, troubleshoot system performance issues, or compare performance variances between two similar historical jobs.
 
 3.  If an organization-level or reservation-level threshold is breached, such as severe slot queuing due to an unexpected surge in active project concurrency, review the generated **Performance Insights** report. This report details critical bottlenecks such as the following:
-    
-      - **Increased Queued Concurrency** : spikes in concurrent query demands that exceed soft concurrency limits or reservation slot allotments.
-      - **Increased Project Concurrency** : tracking the exact high-concurrency projects or top user accounts driving the system load across shared reservations or on-demand quotas.
+    - **Increased Queued Concurrency** : spikes in concurrent query demands that exceed soft concurrency limits or reservation slot allotments.
+    - **Increased Project Concurrency** : tracking the exact high-concurrency projects or top user accounts driving the system load across shared reservations or on-demand quotas.
 
 4.  Observe the **Key Metrics Comparison** table to trace precise numeric differences, such as shifts in average project concurrency, queue slots, or maximum reservation slot caps.
 
 5.  Execute inline solutions directly through actionable handoff links generated by Gemini Cloud Assist. These shortcuts redirect you to specific in-product tools with pre-populated context to answer your questions and resolve issues:
-    
-      - **Edit reservation** : opens the workload management side panel to adjust maximum reservation sizes or activate advanced scale capabilities.
-      - **View job performance in Job explorer** : opens the performance details tab for the particular job.
-      - **Compare job performance in Job explorer** : compare the performance of two jobs side by side.
+
+    - **Edit reservation** : opens the workload management side panel to adjust maximum reservation sizes or activate advanced scale capabilities.
+    - **View job performance in Job explorer** : opens the performance details tab for the particular job.
+    - **Compare job performance in Job explorer** : compare the performance of two jobs side by side.
 
 ## Pricing
 
@@ -288,7 +286,7 @@ Jobs explorer is available at no additional cost. Queries that are used to popul
 
 ## What's next
 
-  - Learn about [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
-  - Learn about [purchasing slots](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
-  - Learn how to [estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
-  - Learn how to [view slot recommendations and insights](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
+- Learn about [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- Learn about [purchasing slots](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
+- Learn how to [estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
+- Learn how to [view slot recommendations and insights](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .

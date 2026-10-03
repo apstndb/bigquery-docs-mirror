@@ -9,7 +9,7 @@ data_source: docs.cloud.google.com
 # Visualize graphs
 
 > **Preview**
-> 
+>
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, send an email to <bq-graph-preview-support@google.com> .
@@ -24,18 +24,20 @@ A visualization helps you understand how data points (nodes) are connected (edge
 
 You can use the Google Cloud console to visualize BigQuery Graph query results in BigQuery Studio. To visualize a query with BigQuery Graph, the query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function. We recommend that you return graph paths instead of returning nodes and edges individually. Returning paths offers the following benefits:
 
-  - Paths contain complete data of nodes and edges. Some intermediate nodes and edges in a visualization of a complex query might not be available if you return individual nodes and edges.
+- Paths contain complete data of nodes and edges. Some intermediate nodes and edges in a visualization of a complex query might not be available if you return individual nodes and edges.
 
-  - If you return paths, your `RETURN` statement can be less complex than if you return nodes and edges individually.
+- If you return paths, your `RETURN` statement can be less complex than if you return nodes and edges individually.
 
 The following sample query returns the paths of account transfers, which you can visualize:
 
-    GRAPH graph_db.FinGraph
-    MATCH
-      p = (person:Person {name: "Dana"})-[own:Owns]->
-      (account:Account)-[transfer:Transfers]->(account2:Account)<-[own2:Owns]-(person2:Person)
-    RETURN
-      TO_JSON(p) AS path;
+```
+GRAPH graph_db.FinGraph
+MATCH
+  p = (person:Person {name: "Dana"})-[own:Owns]->
+  (account:Account)-[transfer:Transfers]->(account2:Account)<-[own2:Owns]-(person2:Person)
+RETURN
+  TO_JSON(p) AS path;
+```
 
 To visualize your results, in the **Query results** pane click **Graph** . The detail panel shows a summary of node and edge labels with counts for each. Click a node or an edge to navigate the graph and view properties, neighbors, and connections. Alternatively, you can view the query results as a table or [toggle to a visualization of the underlying graph schema](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualize-schema) .
 
@@ -53,20 +55,20 @@ Query result display updates are for your current query result visualization ses
 
 The menu on the visualization panel provides the following layout options:
 
-  - **Force layout (default)** : Presents nodes as points that repel each other, while connected nodes pull together, simulating physical forces to create a visually intuitive layout.
+- **Force layout (default)** : Presents nodes as points that repel each other, while connected nodes pull together, simulating physical forces to create a visually intuitive layout.
 
-  - **Hierarchical** : Positions nodes to create a visual hierarchy based on connectivity.
+- **Hierarchical** : Positions nodes to create a visual hierarchy based on connectivity.
 
-  - **Sequential** : Positions nodes to create a visual sequence based on connectivity.
+- **Sequential** : Positions nodes to create a visual sequence based on connectivity.
 
-  - **Show labels** : Displays all node and edge labels on the graph at all zoom levels.
+- **Show labels** : Displays all node and edge labels on the graph at all zoom levels.
 
 #### Choose the node or edge property to display
 
 By default, a node or edge displays its first property. If you want a node or edge to display a different property, do the following:
 
 1.  When you [view a visualization of the results of a BigQuery Graph query](https://docs.cloud.google.com/bigquery/docs/graph-visualization#visualization-results) , click **Switch to schema view** on the **Results** tab of the query results panel.
-    
+
     ![Switch to schema view button.](https://docs.cloud.google.com/static/bigquery/images/graph-results-schema.png)
 
 2.  In the schema visualization, click a node or edge of the type you want to update.
@@ -90,16 +92,16 @@ To choose which nodes display in a visualization, do the following:
 1.  In the query visualization, right-click a node.
 
 2.  Click one of the following menu options to modify the visible graph state:
-    
-      - **Expand** renders adjacent nodes by traversing all incoming edges, outgoing edges, or filtering by a specific edge type.
-    
-      - **Collapse** prunes the current view by hiding all nodes connected to the target node using incoming edges, outgoing edges, or a specific edge type.
-    
-      - **Hide node** removes the target node from the current view.
-    
-      - **Show only neighbors** hides all nodes in the graph except for the target node and those directly connected to it.
-    
-      - **Highlight node** highlights the target node.
+
+    - **Expand** renders adjacent nodes by traversing all incoming edges, outgoing edges, or filtering by a specific edge type.
+
+    - **Collapse** prunes the current view by hiding all nodes connected to the target node using incoming edges, outgoing edges, or a specific edge type.
+
+    - **Hide node** removes the target node from the current view.
+
+    - **Show only neighbors** hides all nodes in the graph except for the target node and those directly connected to it.
+
+    - **Highlight node** highlights the target node.
 
 ### Visualize a BigQuery Graph schema
 
@@ -124,22 +126,24 @@ To visualize query results in a notebook, follow these steps:
 1.  In your notebook environment, ensure you have the BigQuery Graph client library installed.
 
 2.  In a notebook cell, use the `%%bigquery --graph` magic command followed by your GQL query. The query must return graph elements in JSON format using the [`TO_JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json) function. We recommend returning graph paths instead of individual nodes and edges. Returning paths provides the following benefits:
-    
-      - Paths contain complete data of nodes and edges. If you return individual nodes and edges, some intermediate nodes and edges in a complex query's visualization might not be available.
-    
-      - If you return paths, your `RETURN` statement is less complex than if you return individual nodes and edges.
+
+    - Paths contain complete data of nodes and edges. If you return individual nodes and edges, some intermediate nodes and edges in a complex query's visualization might not be available.
+
+    - If you return paths, your `RETURN` statement is less complex than if you return individual nodes and edges.
 
 3.  Run the cell. The visualization is displayed in the output area of the cell.
 
 The following sample query finds a person, their accounts, and transfers between accounts, and then returns the results in a notebook:
 
-    %%bigquery --graph
-    GRAPH graph_db.FinGraph
-    MATCH
-      p = ((person:Person {name: "Dana"})-[own:Owns]->
-      (account:Account)-[transfer:Transfers]->(account2:Account)<-[own2:Owns]-(person2:Person))
-    RETURN
-      TO_JSON(p) AS path;
+```
+%%bigquery --graph
+GRAPH graph_db.FinGraph
+MATCH
+  p = ((person:Person {name: "Dana"})-[own:Owns]->
+  (account:Account)-[transfer:Transfers]->(account2:Account)<-[own2:Owns]-(person2:Person))
+RETURN
+  TO_JSON(p) AS path;
+```
 
 After you run a query, the output area displays the visualization. The detail panel shows a summary of node and edge labels with counts for each. Click a node or an edge to navigate the graph and view properties, neighbors, and connections. The following image shows properties, neighbors, and connections.
 
@@ -172,9 +176,11 @@ The following information can help you troubleshoot and understand BigQuery Grap
 
 For example, the following query can't be visualized because it returns property values instead of graph elements in JSON format:
 
-    GRAPH graph_db.FinGraph
-    MATCH (person:Person {name: "Dana"})-[owns:Owns]->(account:Account)
-    RETURN owns.create_time, account.nick_name;
+```
+GRAPH graph_db.FinGraph
+MATCH (person:Person {name: "Dana"})-[owns:Owns]->(account:Account)
+RETURN owns.create_time, account.nick_name;
+```
 
 **Solution** :
 
@@ -198,6 +204,6 @@ Return graph elements in JSON format using [`TO_JSON`](https://docs.cloud.google
 
 ## What's next
 
-  - Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
-  - Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
-  - Learn about [graph visualization tools and integrations](https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations) .
+- Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
+- Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn about [graph visualization tools and integrations](https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations) .

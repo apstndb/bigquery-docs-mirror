@@ -6,15 +6,15 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.PATH_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.request_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.request_body.SCHEMA_REPRESENTATION)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.response_body)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.PATH_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.request_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.request_body.SCHEMA_REPRESENTATION)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.response_body)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/scheduleRuns#try-it)
 
-> This item is deprecated\!
+> This item is deprecated!
 
 **Full name** : projects.locations.transferConfigs.scheduleRuns
 
@@ -33,69 +33,63 @@ The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`parent`
-
-`string`
-
-Required. Transfer configuration name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{projectId}/transferConfigs/{configId}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{projectId}/locations/{locationId}/transferConfigs/{configId}`
-
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
-
-  - `bigquery.transfers.update`
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameters</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>parent</code></td>
+<td><p><code>string</code></p>
+<p>Required. Transfer configuration name. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{projectId}/transferConfigs/{configId}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{projectId}/locations/{locationId}/transferConfigs/{configId}</code></li>
+</ul>
+<p>Authorization requires the following <a href="https://cloud.google.com/iam/docs/">IAM</a> permission on the specified resource <code>parent</code> :</p>
+<ul>
+<li><code>bigquery.transfers.update</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 ### Request body
 
 The request body contains data with the following structure:
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;startTime&quot;: string,
-  &quot;endTime&quot;: string
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "startTime": string,
+  "endTime": string
+}
+```
 
-`startTime`
-
-` string ( Timestamp  ` format)
-
-Required. Start time of the range of transfer runs. For example, `"2017-05-25T00:00:00+00:00"` .
-
-`endTime`
-
-` string ( Timestamp  ` format)
-
-Required. End time of the range of transfer runs. For example, `"2017-05-30T00:00:00+00:00"` .
+| Fields      |                                                                                                                                                                                                         |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `startTime` | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Required. Start time of the range of transfer runs. For example, `"2017-05-25T00:00:00+00:00"` . |
+| `endTime`   | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Required. End time of the range of transfer runs. For example, `"2017-05-30T00:00:00+00:00"` .   |
 
 ### Response body
 
-If successful, the response body contains an instance of `  ScheduleTransferRunsResponse  ` .
+If successful, the response body contains an instance of [`ScheduleTransferRunsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ScheduleTransferRunsResponse) .
 
 ### Authorization scopes
 
 Requires the following OAuth scope:
 
-  - `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

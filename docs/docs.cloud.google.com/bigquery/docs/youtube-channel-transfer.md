@@ -14,44 +14,12 @@ You can load data from YouTube Channel to BigQuery using the [BigQuery Data Tran
 
 The BigQuery Data Transfer Service for the YouTube Channel connector supports the following options for your data transfer.
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data transfer options</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Supported reports</td>
-<td>The YouTube Channel connector supports the transfer of data from <a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports">Channel reports</a> .
-<p>The YouTube Channel connector supports the <a href="https://developers.google.com/youtube/reporting/revision_history#june-18,-2018">June 18, 2018</a> API version.</p>
-<p>For information about how YouTube Channel reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation">YouTube Channel report transformation</a> .</p></td>
-</tr>
-<tr class="even">
-<td>Repeat frequency</td>
-<td>The YouTube Channel connector supports daily data transfers.<br />
-<br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer">set up your data transfer</a> .</td>
-</tr>
-<tr class="odd">
-<td>Refresh window</td>
-<td>The YouTube Channel connector retrieves YouTube Channel data from up to 1 day at the time the data transfer is run.<br />
-<br />
-For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#refresh">Refresh windows</a> .</td>
-</tr>
-<tr class="even">
-<td>Backfill data availability</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
-<br />
-YouTube reports containing historical data are available for 30 days from the time that they are generated. (Reports that contain non-historical data are available for 60 days.) For more information, see <a href="https://developers.google.com/youtube/reporting/v1/reports/#historical-data">Historical data</a> .</td>
-</tr>
-</tbody>
-</table>
+| Data transfer options      | Support                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Supported reports          | The YouTube Channel connector supports the transfer of data from [Channel reports](https://developers.google.com/youtube/reporting/v1/reports/channel_reports) . The YouTube Channel connector supports the [June 18, 2018](https://developers.google.com/youtube/reporting/revision_history#june-18,-2018) API version. For information about how YouTube Channel reports are transformed into BigQuery tables and views, see [YouTube Channel report transformation](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transformation) .                                    |
+| Repeat frequency           | The YouTube Channel connector supports daily data transfers. By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer) .                                                                                                                                                                                                                                         |
+| Refresh window             | The YouTube Channel connector retrieves YouTube Channel data from up to 1 day at the time the data transfer is run. For more information, see [Refresh windows](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#refresh) .                                                                                                                                                                                                                                                                                                                                         |
+| Backfill data availability | [Run a data backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows. YouTube reports containing historical data are available for 30 days from the time that they are generated. (Reports that contain non-historical data are available for 60 days.) For more information, see [Historical data](https://developers.google.com/youtube/reporting/v1/reports/#historical-data) . |
 
 ## Data ingestion from YouTube Channel transfers
 
@@ -67,17 +35,17 @@ To retrieve data outside the refresh window, such as historical data, or to reco
 
 ## Limitations
 
-  - The minimum frequency that you can schedule a data transfer for is once every 24 hours. By default, a data transfer starts at the time that you create the transfer. However, you can configure the data transfer start time when you [set up your transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer) .
-  - The BigQuery Data Transfer Service does not support incremental data transfers during a YouTube Content Owner transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
-  - You cannot create a YouTube Channel data transfer if you are signed in as a federated identity. You can only create a YouTube Channel transfer while signed in using a Google Account.
-  - You can only transfer data from the YouTube Channel associated to the Google Account that creates the data transfer. For more information, see [Authorization considerations for YouTube Channel transfers](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#youtube_channel_transfers) .
+- The minimum frequency that you can schedule a data transfer for is once every 24 hours. By default, a data transfer starts at the time that you create the transfer. However, you can configure the data transfer start time when you [set up your transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer) .
+- The BigQuery Data Transfer Service does not support incremental data transfers during a YouTube Content Owner transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
+- You cannot create a YouTube Channel data transfer if you are signed in as a federated identity. You can only create a YouTube Channel transfer while signed in using a Google Account.
+- You can only transfer data from the YouTube Channel associated to the Google Account that creates the data transfer. For more information, see [Authorization considerations for YouTube Channel transfers](https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization#youtube_channel_transfers) .
 
 ## Before you begin
 
 Before you create a YouTube Channel data transfer:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the YouTube data.
+- Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the YouTube data.
 
 ## Required permissions
 
@@ -93,15 +61,15 @@ This predefined role contains the permissions required to create a BigQuery Data
 
 The following permissions are required to create a BigQuery Data Transfer Service data transfer:
 
-  - BigQuery Data Transfer Service permissions:
-      - `bigquery.transfers.update`
-      - `bigquery.transfers.get`
-  - BigQuery permissions:
-      - `bigquery.datasets.get`
-      - `bigquery.datasets.getIamPolicy`
-      - `bigquery.datasets.update`
-      - `bigquery.datasets.setIamPolicy`
-      - `bigquery.jobs.create`
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -115,7 +83,7 @@ You must have ownership of the YouTube Channel.
 
 Setting up a YouTube Channel data transfer requires a:
 
-  - **Table Suffix** : A user-friendly name for the channel provided by you when you set up the data transfer. The suffix is appended to the job ID to create the table name, for example reportTypeId\_suffix . The suffix is used to prevent separate transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
+- **Table Suffix** : A user-friendly name for the channel provided by you when you set up the data transfer. The suffix is appended to the job ID to create the table name, for example ` reportTypeId_suffix ` . The suffix is used to prevent separate transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
 
 If you use the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/) and have existing reporting jobs, the BigQuery Data Transfer Service loads your report data. If you don't have existing reporting jobs, setting up the transfer automatically enables YouTube reporting jobs.
 
@@ -128,35 +96,35 @@ To create a YouTube Channel data transfer:
 2.  Click add **Create transfer** .
 
 3.  On the **Create Transfer** page:
-    
-      - In the **Source type** section, for **Source** , choose **YouTube Channel** .
-        
-        ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/youtube-channel-transfer-source.png)
-    
-      - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-        
-        ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
-    
-      - In the **Schedule options** section:
-        
-          - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
-          - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
-    
-      - In the **Destination settings** section, for **Destination dataset** , choose the dataset you created to store your data.
-        
-        ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
-    
-      - In the **Data source details** section:
-        
-          - For **Table suffix** , enter a suffix such as `MT` .
-          - Check the box for **Configure jobs** to allow BigQuery to manage YouTube reporting jobs for you. If there are YouTube reports that don't yet exist for your account, new reporting jobs are created to enable them.
-        
-        ![YouTube Channel source details](https://docs.cloud.google.com/static/bigquery/images/youtube-channel-source-details-console.png)
-    
-      - (Optional) In the **Notification options** section:
-        
-          - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-          - For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your data transfer.
+
+    - In the **Source type** section, for **Source** , choose **YouTube Channel** .
+
+      ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/youtube-channel-transfer-source.png)
+
+    - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `My Transfer` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+
+      ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
+
+    - In the **Schedule options** section:
+
+      - For **Repeat frequency** , choose an option for how often to run the data transfer. If you select **Days** , provide a valid time in UTC.
+      - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
+
+    - In the **Destination settings** section, for **Destination dataset** , choose the dataset you created to store your data.
+
+      ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
+
+    - In the **Data source details** section:
+
+      - For **Table suffix** , enter a suffix such as `MT` .
+      - Check the box for **Configure jobs** to allow BigQuery to manage YouTube reporting jobs for you. If there are YouTube reports that don't yet exist for your account, new reporting jobs are created to enable them.
+
+      ![YouTube Channel source details](https://docs.cloud.google.com/static/bigquery/images/youtube-channel-source-details-console.png)
+
+    - (Optional) In the **Notification options** section:
+
+      - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
+      - For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your data transfer.
 
 4.  Click **Save** .
 
@@ -164,28 +132,28 @@ To create a YouTube Channel data transfer:
 
 Enter the `bq mk` command and supply the transfer creation flag — `--transfer_config` . The following flags are also required:
 
-  - `--data_source`
-  - `--target_dataset`
-  - `--display_name`
-  - `--params`
+- `--data_source`
+- `--target_dataset`
+- `--display_name`
+- `--params`
 
-<!-- end list -->
-
-    bq mk \
-    --transfer_config \
-    --project_id=project_id \
-    --target_dataset=dataset \
-    --display_name=name \
-    --params='parameters' \
-    --data_source=data_source
+```
+bq mk \
+--transfer_config \
+--project_id=project_id \
+--target_dataset=dataset \
+--display_name=name \
+--params='parameters' \
+--data_source=data_source
+```
 
 Where:
 
-  - project\_id is your project ID.
-  - dataset is the target dataset for the transfer configuration.
-  - name is the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For YouTube Channel data transfers, you must supply the `table_suffix` parameter. You may optionally set the `configure_jobs` parameter to `true` to allow the BigQuery Data Transfer Service to manage YouTube reporting jobs for you. If there are YouTube reports that don't exist for your channel, new reporting jobs are created to enable them.
-  - data\_source is the data source — `youtube_channel` .
+- ` project_id ` is your project ID.
+- ` dataset ` is the target dataset for the transfer configuration.
+- ` name ` is the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- ` parameters ` contains the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . For YouTube Channel data transfers, you must supply the `table_suffix` parameter. You may optionally set the `configure_jobs` parameter to `true` to allow the BigQuery Data Transfer Service to manage YouTube reporting jobs for you. If there are YouTube reports that don't exist for your channel, new reporting jobs are created to enable them.
+- ` data_source ` is the data source — `youtube_channel` .
 
 > **Caution:** You cannot configure notifications using the command-line tool.
 
@@ -193,12 +161,14 @@ You can also supply the `--project_id` flag to specify a particular project. If 
 
 For example, the following command creates a YouTube Channel data transfer named `My Transfer` using table suffix `MT` , and target dataset `mydataset` . The data transfer is created in the default project:
 
-    bq mk \
-    --transfer_config \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --params='{"table_suffix":"MT","configure_jobs":"true"}' \
-    --data_source=youtube_channel
+```
+bq mk \
+--transfer_config \
+--target_dataset=mydataset \
+--display_name='My Transfer' \
+--params='{"table_suffix":"MT","configure_jobs":"true"}' \
+--data_source=youtube_channel
+```
 
 > **Caution:** When you create a YouTube Channel transfer using the command-line tool, the transfer configuration is set up using the [default value](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#connector_overview) for **Schedule** .
 
@@ -212,53 +182,55 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-    import com.google.api.gax.rpc.ApiException;
-    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-    import com.google.protobuf.Struct;
-    import com.google.protobuf.Value;
-    import java.io.IOException;
-    import java.util.HashMap;
-    import java.util.Map;
-    
-    // Sample to create youtube channel transfer config.
-    public class CreateYoutubeChannelTransfer {
-    
-      public static void main(String[] args) throws IOException {
-        // TODO(developer): Replace these variables before running the sample.
-        final String projectId = "MY_PROJECT_ID";
-        String datasetId = "MY_DATASET_ID";
-        String tableSuffix = "_test";
-        Map<String, Value> params = new HashMap<>();
-        params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
-        TransferConfig transferConfig =
-            TransferConfig.newBuilder()
-                .setDestinationDatasetId(datasetId)
-                .setDisplayName("Your Youtube Channel Config Name")
-                .setDataSourceId("youtube_channel")
-                .setParams(Struct.newBuilder().putAllFields(params).build())
-                .build();
-        createYoutubeChannelTransfer(projectId, transferConfig);
-      }
-    
-      public static void createYoutubeChannelTransfer(String projectId, TransferConfig transferConfig)
-          throws IOException {
-        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-          ProjectName parent = ProjectName.of(projectId);
-          CreateTransferConfigRequest request =
-              CreateTransferConfigRequest.newBuilder()
-                  .setParent(parent.toString())
-                  .setTransferConfig(transferConfig)
-                  .build();
-          TransferConfig config = client.createTransferConfig(request);
-          System.out.println("Youtube channel transfer created successfully :" + config.getName());
-        } catch (ApiException ex) {
-          System.out.print("Youtube channel transfer was not created." + ex.toString());
-        }
-      }
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+import com.google.protobuf.Struct;
+import com.google.protobuf.Value;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+// Sample to create youtube channel transfer config.
+public class CreateYoutubeChannelTransfer {
+
+  public static void main(String[] args) throws IOException {
+    // TODO(developer): Replace these variables before running the sample.
+    final String projectId = "MY_PROJECT_ID";
+    String datasetId = "MY_DATASET_ID";
+    String tableSuffix = "_test";
+    Map<String, Value> params = new HashMap<>();
+    params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
+    TransferConfig transferConfig =
+        TransferConfig.newBuilder()
+            .setDestinationDatasetId(datasetId)
+            .setDisplayName("Your Youtube Channel Config Name")
+            .setDataSourceId("youtube_channel")
+            .setParams(Struct.newBuilder().putAllFields(params).build())
+            .build();
+    createYoutubeChannelTransfer(projectId, transferConfig);
+  }
+
+  public static void createYoutubeChannelTransfer(String projectId, TransferConfig transferConfig)
+      throws IOException {
+    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+      ProjectName parent = ProjectName.of(projectId);
+      CreateTransferConfigRequest request =
+          CreateTransferConfigRequest.newBuilder()
+              .setParent(parent.toString())
+              .setTransferConfig(transferConfig)
+              .build();
+      TransferConfig config = client.createTransferConfig(request);
+      System.out.println("Youtube channel transfer created successfully :" + config.getName());
+    } catch (ApiException ex) {
+      System.out.print("Youtube channel transfer was not created." + ex.toString());
     }
+  }
+}
+```
 
 > **Note:** If you are setting up YouTube reporting jobs for the first time, you will experience a delay of up to 48 hours before your first reports are ready. For more information, see [Create a reporting job](https://developers.google.com/youtube/reporting/v1/reports/#step-3-create-a-reporting-job) in the YouTube Reporting API documentation.
 

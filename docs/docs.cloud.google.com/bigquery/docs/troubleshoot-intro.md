@@ -25,9 +25,9 @@ To troubleshoot an issue in BigQuery effectively, consider the following diagnos
 
 When you work with BigQuery, it's important to distinguish between troubleshooting, performance optimization, and best practices:
 
-  - **Troubleshooting.** Focuses on diagnosing and resolving unexpected failures, runtime errors, broken pipelines, quota exhaustion, or unintended behavior that prevents jobs from completing successfully.
-  - **Performance optimization.** Focuses on improving the execution speed, latency, or resource efficiency of queries and workloads that are already running successfully. For more information, see [Optimize query performance](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
-  - **Best practices.** Focuses on architectural and design patterns for data modeling, storage, security, and cost management. For more information, see [Introduction to best practices](https://docs.cloud.google.com/bigquery/docs/best-practices) .
+- **Troubleshooting.** Focuses on diagnosing and resolving unexpected failures, runtime errors, broken pipelines, quota exhaustion, or unintended behavior that prevents jobs from completing successfully.
+- **Performance optimization.** Focuses on improving the execution speed, latency, or resource efficiency of queries and workloads that are already running successfully. For more information, see [Optimize query performance](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
+- **Best practices.** Focuses on architectural and design patterns for data modeling, storage, security, and cost management. For more information, see [Introduction to best practices](https://docs.cloud.google.com/bigquery/docs/best-practices) .
 
 ## Diagnostic tools
 
@@ -37,40 +37,40 @@ The following sections describe several BigQuery interfaces and automated tools 
 
 The following tools help you troubleshoot BigQuery from Google Cloud console.
 
-  - **Jobs Explorer.** Search, filter, and inspect past and running jobs across projects or organizations without writing SQL queries. You can view error messages, slot usage, execution timelines, and job metadata. For more information, see [Monitor jobs in Jobs Explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
-  - **Query execution graph.** Inspect the visual stage-by-stage execution plan for a query. The execution graph helps you identify bottlenecks such as shuffle spills to disk, compute-bound stages, data skew, or input/output delays. For more information, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) .
-  - **Query Insights and resource charts.** View real-time and historical graphs of slot utilization, job concurrency, and reservation allocations to diagnose capacity constraints. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
-  - **Gemini Cloud Assist in BigQuery.** Get contextual, AI-assisted analysis of failed queries and performance bottlenecks. Gemini Cloud Assist explains error codes, highlights problematic SQL syntax, and suggests remediation steps directly in the Google Cloud console. For more information, see [Troubleshoot queries using Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#cloud-assist) .
+- **Jobs Explorer.** Search, filter, and inspect past and running jobs across projects or organizations without writing SQL queries. You can view error messages, slot usage, execution timelines, and job metadata. For more information, see [Monitor jobs in Jobs Explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
+- **Query execution graph.** Inspect the visual stage-by-stage execution plan for a query. The execution graph helps you identify bottlenecks such as shuffle spills to disk, compute-bound stages, data skew, or input/output delays. For more information, see [Get query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) .
+- **Query Insights and resource charts.** View real-time and historical graphs of slot utilization, job concurrency, and reservation allocations to diagnose capacity constraints. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
+- **Gemini Cloud Assist in BigQuery.** Get contextual, AI-assisted analysis of failed queries and performance bottlenecks. Gemini Cloud Assist explains error codes, highlights problematic SQL syntax, and suggests remediation steps directly in the Google Cloud console. For more information, see [Troubleshoot queries using Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#cloud-assist) .
 
 ### Command-line and automated diagnostic tools
 
 The following tools can help you diagnose BigQuery issues from a command-line interface.
 
-  - **bq command-line tool.** Inspect detailed error structures, request IDs, and job metadata by using the `bq show -j <var>JOB_ID</var>` command or by adding the `--format=prettyjson` flag to query commands. For more information, see [Troubleshooting CLI commands](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#troubleshooting-bq) .
-  - **`gcpdiag` tool.** Run automated diagnostics from the command line to detect common Google Cloud configuration issues, including IAM permission gaps, network restrictions, and service account errors. For more information, see [Troubleshoot query failure using `gcpdiag`](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#failed-query-gcpdiag) .
+- **bq command-line tool.** Inspect detailed error structures, request IDs, and job metadata by using the `bq show -j <var>JOB_ID</var>` command or by adding the `--format=prettyjson` flag to query commands. For more information, see [Troubleshooting CLI commands](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#troubleshooting-bq) .
+- **`gcpdiag` tool.** Run automated diagnostics from the command line to detect common Google Cloud configuration issues, including IAM permission gaps, network restrictions, and service account errors. For more information, see [Troubleshoot query failure using `gcpdiag`](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#failed-query-gcpdiag) .
 
 ### Metadata and telemetry views
 
 Information schema views let you query real-time and historical metadata about jobs, capacity, streaming ingestion, and datasets using standard SQL. These views include the following:
 
-  - **Job execution telemetry.** Query [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) to analyze slot-millisecond consumption, spilled bytes, queue times, and error codes across jobs.
-  - **Reservations and capacity.** Query [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) and [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments) to diagnose slot allocation, reservation limits, and autoscaling behaviors.
-  - **Streaming and ingestion.** Query [`INFORMATION_SCHEMA.STREAMING_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) to identify ingestion latency and streaming rate limits.
-  - **Storage and partition health.** Query [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to inspect physical table sizes, active versus long-term storage, and partition distribution.
+- **Job execution telemetry.** Query [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) to analyze slot-millisecond consumption, spilled bytes, queue times, and error codes across jobs.
+- **Reservations and capacity.** Query [`INFORMATION_SCHEMA.RESERVATIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) and [`INFORMATION_SCHEMA.CAPACITY_COMMITMENTS`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments) to diagnose slot allocation, reservation limits, and autoscaling behaviors.
+- **Streaming and ingestion.** Query [`INFORMATION_SCHEMA.STREAMING_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) to identify ingestion latency and streaming rate limits.
+- **Storage and partition health.** Query [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to inspect physical table sizes, active versus long-term storage, and partition distribution.
 
 For more information, see [Introduction to BigQuery `INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
 
 ### Cloud Monitoring and Cloud Audit Logs
 
-  - **Cloud Audit Logs.** Review Admin Activity and Data Access audit logs to trace who initiated specific operations, inspect caller identities, and diagnose `PERMISSION_DENIED` errors. For more information, see [BigQuery audit logging reference](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
-  - **Cloud Monitoring.** Track metrics such as slot usage, query execution durations, and uploaded bytes, and configure alert policies to notify your team when thresholds or quotas are exceeded. For more information, see [Monitor BigQuery using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) .
+- **Cloud Audit Logs.** Review Admin Activity and Data Access audit logs to trace who initiated specific operations, inspect caller identities, and diagnose `PERMISSION_DENIED` errors. For more information, see [BigQuery audit logging reference](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
+- **Cloud Monitoring.** Track metrics such as slot usage, query execution durations, and uploaded bytes, and configure alert policies to notify your team when thresholds or quotas are exceeded. For more information, see [Monitor BigQuery using Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) .
 
 ### Defensive SQL functions and debugging statements
 
 To prevent queries from failing unexpectedly due to runtime data errors, use the following:
 
-  - **Safe expressions.** Use `SAFE_CAST()` , `SAFE_DIVIDE()` , `SAFE_OFFSET()` , and `SAFE_ORDINAL()` to return `NULL` instead of generating runtime errors when data types or array bounds don't match. Most scalar functions support the `SAFE.` prefix. For more information, see [Debugging functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging_functions) and [`SAFE.` prefix](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) .
-  - **SQL assertions.** Use the `ASSERT` statement in multi-statement transactions or scripts to enforce data validation conditions and fail with custom error messages before downstream operations execute. For more information, see [Debugging statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements) .
+- **Safe expressions.** Use `SAFE_CAST()` , `SAFE_DIVIDE()` , `SAFE_OFFSET()` , and `SAFE_ORDINAL()` to return `NULL` instead of generating runtime errors when data types or array bounds don't match. Most scalar functions support the `SAFE.` prefix. For more information, see [Debugging functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging_functions) and [`SAFE.` prefix](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix) .
+- **SQL assertions.** Use the `ASSERT` statement in multi-statement transactions or scripts to enforce data validation conditions and fail with custom error messages before downstream operations execute. For more information, see [Debugging statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements) .
 
 ## Troubleshoot by issue category
 
@@ -80,68 +80,68 @@ Select a category from the following sections to view detailed error codes, root
 
 Diagnose queries that fail to run, time out, encounter resource constraints, or experience unexpected delays.
 
-  - **[Troubleshoot query issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .** Resolve `resourcesExceeded` errors, slow query execution, shuffle spill, out-of-memory conditions, and scheduled query failures.
-  - **[Troubleshoot long query queue times](https://docs.cloud.google.com/bigquery/docs/query-queues#troubleshooting_long_queue_times) .** Diagnose concurrency bottlenecks and queries queued due to interactive or batch queue limits.
-  - **[Error messages reference](https://docs.cloud.google.com/bigquery/docs/error-messages) .** Look up specific HTTP error codes, error reason strings, and recommended actions.
+- **[Troubleshoot query issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .** Resolve `resourcesExceeded` errors, slow query execution, shuffle spill, out-of-memory conditions, and scheduled query failures.
+- **[Troubleshoot long query queue times](https://docs.cloud.google.com/bigquery/docs/query-queues#troubleshooting_long_queue_times) .** Diagnose concurrency bottlenecks and queries queued due to interactive or batch queue limits.
+- **[Error messages reference](https://docs.cloud.google.com/bigquery/docs/error-messages) .** Look up specific HTTP error codes, error reason strings, and recommended actions.
 
 ### Identity and Access Management (IAM) and security
 
 Diagnose access control failures, missing role assignments, and data governance policy blocks.
 
-  - **[Troubleshoot IAM permissions in BigQuery](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control) .** Diagnose permission denied errors, grant missing IAM roles, and use Policy Troubleshooter.
-  - **[Troubleshoot VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting) .** Identify and resolve perimeter violations and ingress or egress rule blocks.
-  - **[Troubleshoot row-level and column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security#troubleshoot) .** Resolve access issues related to data policies, policy tags, and row-access filters.
+- **[Troubleshoot IAM permissions in BigQuery](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control) .** Diagnose permission denied errors, grant missing IAM roles, and use Policy Troubleshooter.
+- **[Troubleshoot VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting) .** Identify and resolve perimeter violations and ingress or egress rule blocks.
+- **[Troubleshoot row-level and column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security#troubleshoot) .** Resolve access issues related to data policies, policy tags, and row-access filters.
 
 ### Quotas, rate limits, and reservations
 
 Resolve issues when workloads exceed BigQuery service limits or capacity allocations.
 
-  - **[Troubleshoot quota and limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) .** Identify adjustable versus non-adjustable quotas, handle concurrent query limits, and resolve API rate-limit errors.
-  - **[Troubleshoot BigQuery workload management](https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management) .** Diagnose slot starvation, reservation assignment mismatches, capacity commitment delays, slot contention, and reservation monitoring issues.
+- **[Troubleshoot quota and limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas) .** Identify adjustable versus non-adjustable quotas, handle concurrent query limits, and resolve API rate-limit errors.
+- **[Troubleshoot BigQuery workload management](https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management) .** Diagnose slot starvation, reservation assignment mismatches, capacity commitment delays, slot contention, and reservation monitoring issues.
 
 ### Data ingestion, streaming, and transfers
 
 Diagnose failures when loading data, streaming records, or syncing external sources.
 
-  - **[Troubleshoot data transfers](https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers) .** Diagnose BigQuery Data Transfer Service issues, network connectivity for private transfers, and CSV data loading errors.
-  - **[Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .** Resolve BigQuery Data Transfer Service configuration errors across sources like Amazon Simple Storage Service (Amazon S3), Salesforce, Google Ads, and Cloud Storage.
-  - **[Troubleshoot BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api) .** Debug BigQuery Storage Read API, BigQuery Storage Write API (gRPC), and BigQuery Storage Write API (REST) streaming ingestion failures, row-level insertion errors, and throughput quotas.
+- **[Troubleshoot data transfers](https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers) .** Diagnose BigQuery Data Transfer Service issues, network connectivity for private transfers, and CSV data loading errors.
+- **[Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .** Resolve BigQuery Data Transfer Service configuration errors across sources like Amazon Simple Storage Service (Amazon S3), Salesforce, Google Ads, and Cloud Storage.
+- **[Troubleshoot BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api) .** Debug BigQuery Storage Read API, BigQuery Storage Write API (gRPC), and BigQuery Storage Write API (REST) streaming ingestion failures, row-level insertion errors, and throughput quotas.
 
 ### Data warehouse migration
 
 Diagnose issues when assessing, translating, or migrating external data warehouses to BigQuery.
 
-  - **[Troubleshoot migration issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations) .** Resolve migration assessment errors, interactive and batch SQL translation issues, and metadata extraction failures.
+- **[Troubleshoot migration issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations) .** Resolve migration assessment errors, interactive and batch SQL translation issues, and metadata extraction failures.
 
 ### External data sources and federated queries
 
 Diagnose connectivity, authentication, and execution errors when querying data outside BigQuery.
 
-  - **[Troubleshoot Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .** Resolve connection timeouts, instance configuration issues, and credential failures.
+- **[Troubleshoot Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .** Resolve connection timeouts, instance configuration issues, and credential failures.
 
 ### Billing and cost discrepancies
 
 Investigate unexpected charges and billing discrepancies across compute and storage.
 
-  - **[Troubleshoot BigQuery cost discrepancies](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#troubleshooting-bigquery-cost-discrepancies-and-unexpected-charges) .** Identify the origin of unexpected charges, analyze on-demand bytes billed, and verify capacity commitment usage.
+- **[Troubleshoot BigQuery cost discrepancies](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#troubleshooting-bigquery-cost-discrepancies-and-unexpected-charges) .** Identify the origin of unexpected charges, analyze on-demand bytes billed, and verify capacity commitment usage.
 
 ### Data loss mitigation
 
 To recover historical data that was changed or deleted, or to maintain business continuity during a regional outage, use the following disaster recovery and data retention tools:
 
-  - **Restore data.** Query or restore table data that was changed or deleted within your time travel window. For more information, see [Restore data](https://docs.cloud.google.com/bigquery/docs/access-historical-data) .
-  - **Time travel.** Retain updated or deleted data in a dataset for a configured retention period to help protect against accidental modifications. For more information, see [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
-  - **Regional failover.** Promote a secondary replica to the primary role during a regional outage when using BigQuery-managed disaster recovery. For more information, see [Regional failover](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#initiate_a_failover) .
+- **Restore data.** Query or restore table data that was changed or deleted within your time travel window. For more information, see [Restore data](https://docs.cloud.google.com/bigquery/docs/access-historical-data) .
+- **Time travel.** Retain updated or deleted data in a dataset for a configured retention period to help protect against accidental modifications. For more information, see [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+- **Regional failover.** Promote a secondary replica to the primary role during a regional outage when using BigQuery-managed disaster recovery. For more information, see [Regional failover](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#initiate_a_failover) .
 
 ### Using APIs
 
 When you interact with BigQuery programmatically, use the following resources to optimize request latency and manage upload workflows:
 
-  - **API performance tips.** Follow best practices for making API calls, such as managing connection pools, using batch operations, and handling retries. For more information, see [API performance tips](https://docs.cloud.google.com/bigquery/docs/api-performance) .
-  - **API uploads.** Troubleshoot and manage data ingestion using REST API resumable and multipart upload requests. For more information, see [API uploads](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads) .
+- **API performance tips.** Follow best practices for making API calls, such as managing connection pools, using batch operations, and handling retries. For more information, see [API performance tips](https://docs.cloud.google.com/bigquery/docs/api-performance) .
+- **API uploads.** Troubleshoot and manage data ingestion using REST API resumable and multipart upload requests. For more information, see [API uploads](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads) .
 
 ## What's next
 
-  - Learn more about [monitoring BigQuery](https://docs.cloud.google.com/bigquery/docs/monitoring) .
-  - Explore the [BigQuery `INFORMATION_SCHEMA` reference](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-  - Contact [Cloud Customer Care](https://cloud.google.com/support) for support with persistent or critical production issues.
+- Learn more about [monitoring BigQuery](https://docs.cloud.google.com/bigquery/docs/monitoring) .
+- Explore the [BigQuery `INFORMATION_SCHEMA` reference](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+- Contact [Cloud Customer Care](https://cloud.google.com/support) for support with persistent or critical production issues.

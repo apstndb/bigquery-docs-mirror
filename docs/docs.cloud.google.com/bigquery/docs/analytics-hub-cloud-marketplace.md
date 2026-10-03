@@ -23,14 +23,14 @@ Before you continue, familiarize yourself with [BigQuery sharing data exchanges]
 
 To get the permissions that you need to use Cloud Marketplace-integrated listings, ask your administrator to grant you the following IAM roles:
 
-  - Create and manage BigQuery sharing listings:
-      - [Analytics Hub Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.admin) ( `roles/analyticshub.admin` )
-      - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
-      - [Service Management Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/servicemanagement#servicemanagement.admin) ( `roles/servicemanagement.admin` )
-  - Create and manage data product listings on Cloud Marketplace: [Commerce Producer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/commerceproducer#commerceproducer.admin) ( `roles/commerceproducer.admin` )
-  - Subscribe to paid BigQuery sharing listings on Cloud Marketplace:
-      - [Billing Account Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/billing#billing.admin) ( `roles/billing.admin` )
-      - [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `roles/analyticshub.viewer` )
+- Create and manage BigQuery sharing listings:
+  - [Analytics Hub Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.admin) ( `roles/analyticshub.admin` )
+  - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` )
+  - [Service Management Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/servicemanagement#servicemanagement.admin) ( `roles/servicemanagement.admin` )
+- Create and manage data product listings on Cloud Marketplace: [Commerce Producer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/commerceproducer#commerceproducer.admin) ( `roles/commerceproducer.admin` )
+- Subscribe to paid BigQuery sharing listings on Cloud Marketplace:
+  - [Billing Account Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/billing#billing.admin) ( `roles/billing.admin` )
+  - [Analytics Hub Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/analyticshub#analyticshub.viewer) ( `roles/analyticshub.viewer` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -48,7 +48,9 @@ Go to the **Analytics Hub API** page and enable the Analytics Hub API for your G
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
-    gcloud services enable analyticshub.googleapis.com
+```
+gcloud services enable analyticshub.googleapis.com
+```
 
 You can access the [**Sharing (Analytics Hub)** page](https://console.cloud.google.com/bigquery/analytics-hub) in the Google Cloud console after you enable the Analytics Hub API.
 
@@ -56,11 +58,11 @@ You can access the [**Sharing (Analytics Hub)** page](https://console.cloud.goog
 
 Cloud Marketplace-integrated listings have the following limitations:
 
-  - All [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
-  - BigQuery sharing publishers and subscribers must be located in a supported [Cloud Marketplace Agency Jurisdiction](https://cloud.google.com/terms/marketplace-agency-jurisdictions) .
-  - Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , but you can't specifically filter for its resource type.
-  - Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-  - Data clean rooms and Pub/Sub topics aren't supported for Cloud Marketplace integration.
+- All [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
+- BigQuery sharing publishers and subscribers must be located in a supported [Cloud Marketplace Agency Jurisdiction](https://cloud.google.com/terms/marketplace-agency-jurisdictions) .
+- Cloud Marketplace-integrated listings are indexed in [Data Catalog](https://docs.cloud.google.com/bigquery/docs/data-catalog) (deprecated) and [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , but you can't specifically filter for its resource type.
+- Billing usage metrics for Cloud Marketplace-integrated listings aren't captured in provider usage metrics or in [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
+- Data clean rooms and Pub/Sub topics aren't supported for Cloud Marketplace integration.
 
 ## Architecture and terminology
 
@@ -89,10 +91,10 @@ To create a BigQuery sharing listing and publish it on Cloud Marketplace, do the
 2.  Create a new [sharing data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) . Alternatively, choose an existing data exchange to retain existing subscriptions.
 
 3.  Create [listings in the data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) . Alternatively, choose existing listings to retain existing subscriptions.
-    
+
     > **Note:** Both requesting access and Cloud Marketplace-integrated flows are supported on a single BigQuery sharing listing. This means that you can create a Cloud Marketplace-integrated listing from an existing (offline) commercial listing, without any disruptions to existing subscriptions.
 
-4.  In the row of your data exchange, click more\_vert **More actions \> List on Marketplace** . You are redirected to the Cloud Marketplace Producer Portal.
+4.  In the row of your data exchange, click more_vert **More actions \> List on Marketplace** . You are redirected to the Cloud Marketplace Producer Portal.
 
 5.  Follow the instructions on the Cloud Marketplace Producer Portal to onboard your BigQuery sharing listing as a [data product](https://docs.cloud.google.com/marketplace/docs/partners/data) .
 
@@ -121,7 +123,7 @@ Offboarding removes the commercial traits from a listing and converts it to a st
 To offboard a Cloud Marketplace-integrated listing, do the following:
 
 1.  In the Producer Portal, [request deprecation of your listing](https://docs.cloud.google.com/marketplace/docs/partners/deprecate-product#product-deprecation) .
-    
+
     > **Note:** Standard product deprecation requires a notice period of at least 180 days for existing customers.
 
 2.  Wait for the deprecation date to pass. After the deprecation date passes, the Cloud Marketplace listing is permanently deleted.
@@ -153,15 +155,15 @@ To subscribe to a BigQuery sharing listing on Cloud Marketplace, do the followin
 4.  Click the listing.
 
 5.  If your organization has already purchased the listing, which means the **Subscribe** button and purchase date are visible, do the following:
-    
+
     1.  Click **Subscribe** .
     2.  Specify the project and linked dataset name.
     3.  Click **Save** .
-    
+
     If you don't have permission to subscribe to listings, click **Request access** and submit the request form.
 
 6.  If your organization hasn't purchased the listing (the **Purchase via Marketplace** button is visible), do the following:
-    
+
     1.  Click **Purchase via Marketplace** .
     2.  Click **Subscribe** .
     3.  In the **Order summary** page, specify your subscription plan, purchase details, and accept the terms if you agree with them.
@@ -170,7 +172,7 @@ To subscribe to a BigQuery sharing listing on Cloud Marketplace, do the followin
     6.  Click **Subscribe** on the BigQuery sharing listing page.
     7.  Specify the project and linked dataset name.
     8.  Click **Save** .
-    
+
     For some listings, to get a quote, you might have to contact the sales team by submitting a form.
 
 Any project with the same billing account can also subscribe to the listing.
@@ -181,5 +183,5 @@ Standard [BigQuery sharing pricing](https://docs.cloud.google.com/bigquery/docs/
 
 ## What's next
 
-  - Learn more about [Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs) .
-  - If you're a VPC Service Controls user, see [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service-controls) .
+- Learn more about [Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs) .
+- If you're a VPC Service Controls user, see [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#vpc-service-controls) .

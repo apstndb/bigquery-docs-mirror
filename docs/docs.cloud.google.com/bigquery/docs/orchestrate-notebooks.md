@@ -26,19 +26,22 @@ Before you begin, [create a notebook](https://docs.cloud.google.com/bigquery/doc
 
 To schedule notebooks, you must grant the following roles to the custom service account that you plan to use for notebook schedules:
 
-  - [Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
-    Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to your service account on the selected project.
-  - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
-    Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add your service account as a principal to the Cloud Storage bucket that you plan to use for storing the output of scheduled notebook runs, and grant the Storage Admin role to this principal.
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
-    Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
+[Notebook Executor User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookExecutorUser) ( `roles/aiplatform.notebookExecutorUser` )  
+Follow [Grant a single role on a project](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) to grant the Notebook Executor User role to your service account on the selected project.
+
+[Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )  
+Follow [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add your service account as a principal to the Cloud Storage bucket that you plan to use for storing the output of scheduled notebook runs, and grant the Storage Admin role to this principal.
+
+[Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
+Follow [Grant a single role on a service account](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) to add your service account as a principal to itself. In other words, add the service account as a principal to the same service account. Then, grant the Service Account User role to this principal.
 
 Additionally, you must grant the following roles to the default Dataform service agent:
 
-  - [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `roles/iam.serviceAccountTokenCreator` )  
-    Follow [Grant token creation access to a custom Dataform service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
-  - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
-    Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
+[Service Account Token Creator](https://docs.cloud.google.com/iam/docs/service-account-permissions#token-creator-role) ( `roles/iam.serviceAccountTokenCreator` )  
+Follow [Grant token creation access to a custom Dataform service account](https://docs.cloud.google.com/dataform/docs/access-control#grant-token-creation-access) to add the default Dataform service agent as a principal to your service account, and grant the Service Account Token Creator role to this principal.
+
+[Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )  
+Follow [Grant or revoke multiple IAM roles using Google Cloud console](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#multiple-roles-console) to grant the Service Account User role to the default Dataform service agent on the custom service account.
 
 To learn more about service accounts in Dataform, see [About service accounts in Dataform](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) .
 
@@ -46,9 +49,9 @@ To learn more about service accounts in Dataform, see [About service accounts in
 
 If you use VPC Service Controls to protect your notebooks, you should be aware that scheduled runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
 
-  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
-  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
-  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+- You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+- Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+- To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
 
 For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
 
@@ -56,10 +59,10 @@ For detailed configuration steps and security considerations, see [Configure VPC
 
 To create notebook schedules, you need the following roles:
 
-  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` )
-  - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
-  - [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
+- [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `roles/dataform.admin` )
+- [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `roles/bigquery.studioUser` )
+- [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+- [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` ) on the custom service account
 
 To use notebook runtime templates when scheduling notebooks, you need the [Notebook Runtime User ( `roles/aiplatform.notebookRuntimeUser` )](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) role.
 
@@ -84,38 +87,38 @@ To create a notebook schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Click the name of the notebook that you want to schedule. You can use the search feature or filters to find your notebook.
 
 5.  In the **Notebook** toolbar, click **Schedule** .
-    
-    Alternatively, click calendar\_month **Schedule** , and then click **Create schedule** .
+
+    Alternatively, click calendar_month **Schedule** , and then click **Create schedule** .
 
 6.  In the **Schedule Notebook** pane, in the **Schedule name** field, enter a name for the schedule.
 
 7.  In the **Authentication** section, authorize the notebook with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-      - To use a service account, select **Execute with selected service account** , then select a service account.
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+    - To use a service account, select **Execute with selected service account** , then select a service account.
 
 8.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the notebook.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
 
 9.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
-    
+
     The selected service account must be granted the [Storage Admin ( `roles/storage.admin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
 
 10. In the **Schedule frequency** section, do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of scheduled notebook runs.
     2.  In the **At time** field, enter the time for scheduled notebook runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -137,22 +140,22 @@ The latest deployed version of the notebook runs at the selected time and freque
 4.  In the **Schedule name** field, enter a name for the schedule.
 
 5.  In the **Authentication** section, authorize the notebook with your Google Account user credentials or a service account.
-    
-      - To use your Google Account user credentials, select **Execute with my user credentials** .
-      - To use a service account, select **Execute with selected service account** , and then select a service account.
+
+    - To use your Google Account user credentials, select **Execute with my user credentials** .
+    - To use a service account, select **Execute with selected service account** , and then select a service account.
 
 6.  In the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
     > **Note:** A notebook runtime template must be in the same region as the notebook.
-    
+
     > **Note:** If you don't have the [required role](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#required_permissions) for using notebook runtime templates, you can still run and schedule notebooks with the default runtime specifications.
 
 7.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket.
-    
+
     The selected service account must be granted the [Storage Admin ( `roles/storage.admin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) IAM role on the selected bucket. For more information, see [Enable notebook scheduling](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#enable-scheduling) .
 
 8.  In the **Schedule frequency** section, do the following:
-    
+
     1.  In the **Repeats** menu, select the frequency of scheduled notebook runs.
     2.  In the **At time** field, enter the time for scheduled notebook runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
@@ -192,7 +195,7 @@ To deploy a notebook, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -221,7 +224,7 @@ To view all notebook schedules in your project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  Optional: To display additional columns with notebook schedule details, click view\_column **Column display options** , and then select columns and click **OK** .
+2.  Optional: To display additional columns with notebook schedule details, click view_column **Column display options** , and then select columns and click **OK** .
 
 ## View schedule details
 
@@ -234,7 +237,7 @@ To view schedule details for a selected notebook, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -242,9 +245,9 @@ To view schedule details for a selected notebook, follow these steps:
 4.  Click the name of the selected notebook.
 
 5.  In the **Notebook** toolbar, click **Schedule** .
-    
-    Alternatively, click calendar\_month **Schedule** :
-    
+
+    Alternatively, click calendar_month **Schedule** :
+
     ![Notebook schedule panel.](https://docs.cloud.google.com/static/bigquery/images/notebook-schedule-panel.png)
 
 ### **Scheduling** page
@@ -264,7 +267,7 @@ To view past executions of a selected notebook schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -294,7 +297,7 @@ To disable a schedule for a selected notebook, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -302,9 +305,9 @@ To disable a schedule for a selected notebook, follow these steps:
 4.  Click the name of the selected notebook.
 
 5.  In the **Notebook** toolbar, click **Schedule** .
-    
-    Alternatively, click calendar\_month **Schedule** :
-    
+
+    Alternatively, click calendar_month **Schedule** :
+
     ![Notebook schedule panel.](https://docs.cloud.google.com/static/bigquery/images/notebook-schedule-panel.png)
 
 6.  In the schedule details table, in the **Schedule state** row, click the **Schedule is enabled** toggle.
@@ -326,7 +329,7 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -334,8 +337,8 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 4.  Click the name of the selected notebook.
 
 5.  In the **Notebook** toolbar, click **Schedule** .
-    
-    Alternatively, click calendar\_month **Schedule** .
+
+    Alternatively, click calendar_month **Schedule** .
 
 6.  In the schedule details table, in the **Schedule state** row, click the **Schedule is disabled** toggle.
 
@@ -358,7 +361,7 @@ To edit a schedule, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
@@ -388,14 +391,14 @@ To permanently delete a schedule for a selected notebook, follow these steps:
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
 2.  Do either of the following:
-    
-      - Click the name of the selected schedule, and then on the **Schedule details** page, click **Delete** .
-    
-      - In the row that contains the selected schedule, click more\_vert **View actions** in the **Actions** column, and then click **Delete** .
+
+    - Click the name of the selected schedule, and then on the **Schedule details** page, click **Delete** .
+
+    - In the row that contains the selected schedule, click more_vert **View actions** in the **Actions** column, and then click **Delete** .
 
 3.  In the dialog that appears, click **Delete** .
 
 ## What's next
 
-  - Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
-  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+- Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .

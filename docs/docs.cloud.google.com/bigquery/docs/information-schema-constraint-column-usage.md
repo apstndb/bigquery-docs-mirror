@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# CONSTRAINT\_COLUMN\_USAGE view
+# CONSTRAINT_COLUMN_USAGE view
 
 The `CONSTRAINT_COLUMN_USAGE` view contains all columns used by [constraints](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . For `PRIMARY KEY` constraints, these are the columns from the `KEY_COLUMN_USAGE` view. For `FOREIGN KEY` constraints, these are the columns of the referenced tables.
 
@@ -20,8 +20,8 @@ This predefined role contains the permissions required to query the `INFORMATION
 
 The following permissions are required to query the `INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE` view:
 
-  - Viewing primary and foreign key definitions: `bigquery.tables.get`
-  - Viewing table information schemas: `bigquery.tables.list`
+- Viewing primary and foreign key definitions: `bigquery.tables.get`
+- Viewing table information schemas: `bigquery.tables.list`
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
@@ -32,7 +32,7 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 The `INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE` view has the following schema:
 
 | Column Name          | Data type | Value                                                                                                                                                                  |
-| -------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|----------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `table_catalog`      | `STRING`  | The name of the project that contains the dataset.                                                                                                                     |
 | `table_schema`       | `STRING`  | The name of the dataset that contains the table. Also referred to as the `datasetId` .                                                                                 |
 | `table_name`         | `STRING`  | The name of the table. Also referred to as the `tableId` .                                                                                                             |
@@ -47,46 +47,54 @@ For stability, we recommend that you explicitly list columns in your information
 
 Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table shows the region and resource scopes for this view:
 
-| View name                                                                                            | Resource scope | Region scope     |
-| ---------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
-| `[         PROJECT_ID        .]         DATASET        .INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE;` | Dataset level  | Dataset location |
+| View name                                                                          | Resource scope | Region scope     |
+|------------------------------------------------------------------------------------|----------------|------------------|
+| `[ `` PROJECT_ID `` .] `` DATASET `` .INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE;` | Dataset level  | Dataset location |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
 ## Examples
 
 The following query shows the constraints for a single table in a dataset:
 
-    SELECT *
-    FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE
-    WHERE table_name = TABLE;
+```
+SELECT *
+FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE
+WHERE table_name = TABLE;
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : Optional. The name of your cloud project. If not specified, this command uses the default project.
-  - `  DATASET  ` : The name of your dataset.
-  - `  TABLE  ` : The name of the table.
+- `PROJECT_ID` : Optional. The name of your cloud project. If not specified, this command uses the default project.
+- `DATASET` : The name of your dataset.
+- `TABLE` : The name of the table.
 
 Conversely, the following query shows the constraints for all tables in a single dataset.
 
-    SELECT *
-    FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE;
+```
+SELECT *
+FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE;
+```
 
 With existing constraints, the query results are similar to the following:
 
-    +-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
-    | row |    table_catalog    | table_schema | table_name | column_name | constraint_catalog  | constraint_schema |     constraint_name     |
-    +-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
-    |   1 | myConstraintCatalog | myDataset    | orders     | o_okey      | myConstraintCatalog | myDataset         | orders.pk$              |
-    |   2 | myConstraintCatalog | myDataset    | orders     | o_okey      | myConstraintCatalog | myDataset         | lineitem.lineitem_order |
-    +-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
+```
++-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
+| row |    table_catalog    | table_schema | table_name | column_name | constraint_catalog  | constraint_schema |     constraint_name     |
++-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
+|   1 | myConstraintCatalog | myDataset    | orders     | o_okey      | myConstraintCatalog | myDataset         | orders.pk$              |
+|   2 | myConstraintCatalog | myDataset    | orders     | o_okey      | myConstraintCatalog | myDataset         | lineitem.lineitem_order |
++-----+---------------------+--------------+------------+-------------+---------------------+-------------------+-------------------------+
+```
 
 > **Note:** `lineitem.lineitem_order` is the foreign key defined in the `lineitem` table.
 
 If the table or dataset has no constraints, the query results look like this:
 
-    +-----------------------------+
-    | There is no data to display |
-    +-----------------------------+
+```
++-----------------------------+
+| There is no data to display |
++-----------------------------+
+```

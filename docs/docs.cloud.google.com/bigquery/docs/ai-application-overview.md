@@ -10,11 +10,11 @@ data_source: docs.cloud.google.com
 
 This document describes the artificial intelligence (AI) features that BigQuery ML supports. These features let you develop task-specific solutions in BigQuery ML by using Cloud AI APIs. Supported tasks include the following:
 
-  - [Natural language processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#natural_language_processing)
-  - [Machine translation](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#machine_translation)
-  - [Audio transcription](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#audio_transcription)
-  - [Document processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#document_processing)
-  - [Computer vision](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#computer_vision)
+- [Natural language processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#natural_language_processing)
+- [Machine translation](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#machine_translation)
+- [Audio transcription](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#audio_transcription)
+- [Document processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#document_processing)
+- [Computer vision](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#computer_vision)
 
 You access a Cloud AI API to perform one of these functions by creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) in BigQuery ML that represents the API endpoint. Once you have created a remote model over the AI resource that you want to use, you access that resource's capabilities by running a BigQuery ML function against the remote model.
 
@@ -70,5 +70,5 @@ To learn more, try [annotating object table images with the `ML.ANNOTATE_IMAGE` 
 
 ## What's next
 
-  - For more information about performing inference over machine learning models, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
+- For more information about performing inference over machine learning models, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+- For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

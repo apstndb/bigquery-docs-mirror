@@ -12,12 +12,12 @@ This document describes your options for making [features](https://docs.cloud.go
 
 ## Point-in-time correctness
 
-The data used to train a model often has time dependencies built into it. When you create a feature table for time sensitive features, include a timestamp column to represent the feature values as they existed at a given time for each row. You can then use point-in-time lookup functions when querying data from these feature tables in order to ensure that there is no [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) between training and serving. This process enables point-in-time correctness.
+The data used to train a model often has time dependencies built into it. When you create a feature table for time sensitive features, include a timestamp column to represent the feature values as they existed at a given time for each row. You can then use point-in-time lookup functions when querying data from these feature tables in order to ensure that there is no [data leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning)) between training and serving. This process enables point-in-time correctness.
 
 Use the following functions to specify point-in-time cutoffs when retrieving time sensitive features:
 
-  - [`ML.FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time)
-  - [`ML.ENTITY_FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time)
+- [`ML.FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time)
+- [`ML.ENTITY_FEATURES_AT_TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time)
 
 ## Serve features in BigQuery ML
 

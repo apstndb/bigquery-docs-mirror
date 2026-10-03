@@ -14,12 +14,12 @@ This document provides an overview of optimization techniques that can improve q
 
 Evaluating query performance in BigQuery involves several factors:
 
-  - [Input data and data sources (I/O)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) : How many bytes does your query read?
-  - [Communication between nodes (shuffling)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) : How many bytes does your query pass to the next stage? How many bytes does your query pass to each slot?
-  - [Computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#optimize-query-operations) : How much CPU work does your query require?
-  - [Outputs (materialization)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-query-output) : How many bytes does your query write?
-  - [Capacity and concurrency](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview#capacity-and-concurrency) : How many slots are available and how many other queries are running at the same time?
-  - [Query patterns](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-patterns) : Are your queries following SQL best practices?
+- [Input data and data sources (I/O)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) : How many bytes does your query read?
+- [Communication between nodes (shuffling)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) : How many bytes does your query pass to the next stage? How many bytes does your query pass to each slot?
+- [Computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#optimize-query-operations) : How much CPU work does your query require?
+- [Outputs (materialization)](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-query-output) : How many bytes does your query write?
+- [Capacity and concurrency](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview#capacity-and-concurrency) : How many slots are available and how many other queries are running at the same time?
+- [Query patterns](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-patterns) : Are your queries following SQL best practices?
 
 To evaluate specific queries or whether you are experiencing resource contention, you can use [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) or the [BigQuery administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) to monitor how your BigQuery jobs consume resources over time. You can also use Gemini Cloud Assist to [analyze your jobs](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#analyze_jobs) . If you identify a slow or resource-intensive query, you can focus your performance optimizations on that query.
 
@@ -37,8 +37,8 @@ The performance of queries that are run repeatedly on the same data can vary, an
 
 During SQL query processing, BigQuery breaks down the computational capacity required to execute each stage of a query into slots. BigQuery automatically determines the number of queries that can run concurrently as follows:
 
-  - On-demand model: number of slots available in the project
-  - Capacity-based model: number of slots available in the reservation
+- On-demand model: number of slots available in the project
+- Capacity-based model: number of slots available in the reservation
 
 Queries that require more slots than are available are [queued](https://docs.cloud.google.com/bigquery/docs/query-queues) until processing resources become available. After a query begins execution, BigQuery calculates how many slots each query stage uses based on the stage size and complexity and the number of slots available. BigQuery uses a technique called [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) to ensure that each query has enough capacity to progress.
 
@@ -58,7 +58,7 @@ The query execution graph can help you understand how BigQuery executes queries 
 
 ## What's next
 
-  - Learn how to troubleshoot query execution issues using the [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
-  - Learn other [cost-controlling techniques](https://docs.cloud.google.com/bigquery/docs/controlling-costs) for BigQuery.
-  - View near real-time metadata about BigQuery jobs using the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
-  - Learn how to monitor your BigQuery usage using the [BigQuery System Tables Reports](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/dashboards/system_tables) .
+- Learn how to troubleshoot query execution issues using the [BigQuery audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
+- Learn other [cost-controlling techniques](https://docs.cloud.google.com/bigquery/docs/controlling-costs) for BigQuery.
+- View near real-time metadata about BigQuery jobs using the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
+- Learn how to monitor your BigQuery usage using the [BigQuery System Tables Reports](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/dashboards/system_tables) .

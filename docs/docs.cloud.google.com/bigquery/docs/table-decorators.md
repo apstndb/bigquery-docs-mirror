@@ -22,11 +22,13 @@ Time decorators (formerly known as *snapshot decorators* ) reference a table's h
 
 ### Syntax
 
-    @<time>
+```
+@<time>
+```
 
-  - References a table's historical data at `  <time>  ` , in milliseconds since the epoch.
-  - `  <time>  ` must be within the last seven days and greater than or equal to the table's creation time, but less than the table's deletion or expiration time.
-  - `@0` is a special case that references the oldest data available for the table.
+- References a table's historical data at *`<time>`* , in milliseconds since the epoch.
+- *`<time>`* must be within the last seven days and greater than or equal to the table's creation time, but less than the table's deletion or expiration time.
+- `@0` is a special case that references the oldest data available for the table.
 
 Time decorators are also used outside of legacy SQL. You can use them in the [`bq cp` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) to [restore deleted tables](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) within seven days of table deletion.
 
@@ -36,30 +38,38 @@ To get the historical data for a table at one hour ago:
 
 **Relative value example**
 
-    #legacySQL
-    SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-3600000]
+```
+#legacySQL
+SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-3600000]
+```
 
 **Absolute value example**
 
-1.  Get `  <time>  ` for one hour ago:
-    
-        #legacySQL
-        SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -1, 'HOUR')/1000)
+1.  Get *`<time>`* for one hour ago:
 
-2.  Then, replace `  <time>  ` in the following query:
-    
-        #legacySQL
-        SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@time]
+    ```
+    #legacySQL
+    SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -1, 'HOUR')/1000)
+    ```
+
+2.  Then, replace *`<time>`* in the following query:
+
+    ```
+    #legacySQL
+    SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@time]
+    ```
 
 ## Range decorators
 
 ### Syntax
 
-    @<time1>-<time2>
+```
+@<time1>-<time2>
+```
 
-  - References table data added between `  <time1>  ` and `  <time2>  ` , in milliseconds since the epoch.
-  - `  <time1>  ` and `  <time2>  ` must be within the last seven days.
-  - `  <time2>  ` is optional and defaults to 'now'.
+- References table data added between *`<time1>`* and *`<time2>`* , in milliseconds since the epoch.
+- *`<time1>`* and *`<time2>`* must be within the last seven days.
+- *`<time2>`* is optional and defaults to 'now'.
 
 ### Examples
 
@@ -67,29 +77,39 @@ To get the historical data for a table at one hour ago:
 
 To get table data added between one hour and half an hour ago:
 
-    #legacySQL
-    SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-3600000--1800000]
+```
+#legacySQL
+SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-3600000--1800000]
+```
 
 To get data from the last 10 minutes:
 
-    #legacySQL
-    SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-600000-]
+```
+#legacySQL
+SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@-600000-]
+```
 
 **Absolute value example**
 
 To get table data added between one hour and half an hour ago:
 
-1.  Get `  <time1>  ` for one hour ago:
-    
-        #legacySQL
-        SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -1, 'HOUR')/1000)
+1.  Get *`<time1>`* for one hour ago:
 
-2.  Get `  <time2>  ` for a half hour ago:
-    
-        #legacySQL
-        SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -30, 'MINUTE')/1000)
+    ```
+    #legacySQL
+    SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -1, 'HOUR')/1000)
+    ```
 
-3.  Replace `  <time1>  ` and `  <time2>  ` in the following query:
-    
-        #legacySQL
-        SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@time1-time2]
+2.  Get *`<time2>`* for a half hour ago:
+
+    ```
+    #legacySQL
+    SELECT INTEGER(DATE_ADD(USEC_TO_TIMESTAMP(NOW()), -30, 'MINUTE')/1000)
+    ```
+
+3.  Replace *`<time1>`* and *`<time2>`* in the following query:
+
+    ```
+    #legacySQL
+    SELECT COUNT(*) FROM [PROJECT_ID:DATASET.TABLE@time1-time2]
+    ```

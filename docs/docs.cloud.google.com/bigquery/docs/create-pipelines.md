@@ -16,9 +16,9 @@ This document describes how to create [pipelines in BigQuery](https://docs.cloud
 
 If you use VPC Service Controls to protect your pipelines, you should be aware that pipeline runs are powered by Dataform. When you configure VPC Service Controls for scheduled runs, ensure that the following requirements are met:
 
-  - You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
-  - Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
-  - To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
+- You must set the [`dataform.restrictGitRemotes` Organization Policy Service](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
+- Dataform and BigQuery must be restricted by the same VPC Service Controls service perimeter.
+- To allow users to authenticate with the user credentials for their Google Account when scheduling or manually triggering runs, you must add their user identities to your ingress rules. For more information, see [Updating ingress and egress policies for a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies#updating) and [Ingress rules reference](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#ingress-rules-reference) .
 
 For detailed configuration steps and security considerations, see [Configure VPC Service Controls for Dataform](https://docs.cloud.google.com/dataform/docs/vpc-service-controls) .
 
@@ -26,16 +26,16 @@ For detailed configuration steps and security considerations, see [Configure VPC
 
 To get the permissions that you need to create pipelines, ask your administrator to grant you the following IAM roles:
 
-  - To create pipelines: [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
-  - To edit and run pipelines: [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
-  - To create pipelines in user folders:
-      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
-      - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
-      - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
-  - To create pipelines in team folders:
-      - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
-      - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
-  - To connect a Git repository for Git folders: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
+- To create pipelines: [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
+- To edit and run pipelines: [Dataform Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.editor) ( `roles/dataform.editor` ) on the project
+- To create pipelines in user folders:
+  - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` ) on the project
+  - [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `roles/dataform.codeOwner` ) on the folder
+  - [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `roles/dataform.codeEditor` ) on the folder
+- To create pipelines in team folders:
+  - [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `roles/dataform.teamFolderContributor` ) on the team folder
+  - [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `roles/dataform.teamFolderOwner` ) on the team folder
+- To connect a Git repository for Git folders: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -61,8 +61,8 @@ If you don't have this role, you can select the default notebook runtime specifi
 
 Because code assets in BigQuery are powered by Dataform, you should consider the following security implications for users with access to these assets:
 
-  - Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
-  - Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
+- Visibility for code assets is governed by project-level Dataform permissions. Users with the `dataform.repositories.list` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `dataform.repositories.list` permission.
+- Any secrets shared with the Dataform service agent can potentially be accessed by users who can edit these assets. To secure your credentials, restrict creation and edit access to trusted users, and limit the secrets accessible to the Dataform service agent. For more information, see [Secrets access during package installation](https://docs.cloud.google.com/dataform/docs/access-control#secret-access-risk) .
 
 For more information, see [Security considerations for Dataform permissions](https://docs.cloud.google.com/dataform/docs/access-control#security-considerations-permissions) .
 
@@ -77,10 +77,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -92,10 +92,10 @@ For a list of supported regions, see [BigQuery Studio locations](https://docs.cl
 
 You can create and store pipelines in the following ways:
 
-  - **In folders** : organize pipelines inside personal or team folders in the **Files** pane of BigQuery Studio.
-  - **In BigQuery Studio Git folders** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): host, version control, and manage multiple independent pipelines or root-level pipelines within a folder with a Git repository connected using Developer Connect.
-  - **From the editor tab bar** : create a pipeline from the **+** menu in the query editor.
-  - **From the Pipelines & Connections page** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): create a pipeline using a streamlined, BigQuery-specific workflow.
+- **In folders** : organize pipelines inside personal or team folders in the **Files** pane of BigQuery Studio.
+- **In BigQuery Studio Git folders** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): host, version control, and manage multiple independent pipelines or root-level pipelines within a folder with a Git repository connected using Developer Connect.
+- **From the editor tab bar** : create a pipeline from the **+** menu in the query editor.
+- **From the Pipelines & Connections page** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): create a pipeline using a streamlined, BigQuery-specific workflow.
 
 ### Create a pipeline in a folder
 
@@ -106,14 +106,14 @@ To create a pipeline in a folder, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser.
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  Do one of the following to create a pipeline:
-    
-      - Select the user folder or team folder where you want to place the pipeline, click the **+** (Create) button on the toolbar, and select **Pipeline** .
-      - In the file tree, click more\_vert **View actions** next to a folder name, select **Create** \> **Pipeline** .
-      - Open a folder to view its contents in the main panel, and click **Create Pipeline** .
+
+    - Select the user folder or team folder where you want to place the pipeline, click the **+** (Create) button on the toolbar, and select **Pipeline** .
+    - In the file tree, click more_vert **View actions** next to a folder name, select **Create** \> **Pipeline** .
+    - Open a folder to view its contents in the main panel, and click **Create Pipeline** .
 
 4.  In the creation dialog, enter a name for the pipeline.
 
@@ -124,7 +124,7 @@ To create a pipeline in a folder, follow these steps:
 ### Create a pipeline in a Git repository
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or request support for this feature, send an email to <cloud-pipelines-ui@google.com> .
@@ -141,14 +141,14 @@ To create a pipeline in a Git folder, follow these steps:
 
 4.  In the file tree, locate your connected Git repository folder or a nested directory within it.
 
-5.  Click more\_vert **View actions** next to the folder name, and select **Create** \> **Pipeline** .
+5.  Click more_vert **View actions** next to the folder name, and select **Create** \> **Pipeline** .
 
 6.  In the dialog, enter the pipeline name and click **Save** .
-    
+
     A new pipeline directory is created, initialized with the default files:
-    
-      - `workflow_settings.yaml` : Pipeline configuration.
-      - `definitions/actions.yaml` : Empty task definitions.
+
+    - `workflow_settings.yaml` : Pipeline configuration.
+    - `definitions/actions.yaml` : Empty task definitions.
 
 7.  Click the pipeline directory in the file browser to open the **Pipeline Viewer** .
 
@@ -160,7 +160,7 @@ To create a pipeline from the editor tab bar, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the tab bar of the editor pane, click the arrow\_drop\_down arrow next to the **+** sign, and then click **Pipeline** .
+2.  In the tab bar of the editor pane, click the arrow_drop_down arrow next to the **+** sign, and then click **Pipeline** .
 
 3.  Optional: To rename the pipeline, click the pipeline name, and then type a new name.
 
@@ -177,33 +177,33 @@ For instructions on how to create a pipeline from the BigQuery **Pipelines & Con
 To configure settings for your pipeline, open the pipeline in the **Pipeline Viewer** , click the **Settings** tab, and configure the following sections:
 
 1.  In the **Authentication** section, choose to authorize the pipeline with the user credentials for your Google Account or a service account.
-    
-      - To use the user credentials for your Google Account, select **Run with my user credentials** .
-        
-        Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
-        
-          - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
-        
-          - **Google Drive** : Allows read-only access to Google Drive files.
-        
-          - **Bigtable** : Allows read-only access to Google Bigtable data.
-            
-            > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
-    
-      - To use a service account, select **Run with selected service account** , and then select a service account. If you need to create a service account, click **New service account** .
+
+    - To use the user credentials for your Google Account, select **Run with my user credentials** .
+
+      Optional: In the **Extended access options** section, select the additional services that your pipeline requires:
+
+      - **Knowledge Catalog** : Allows Google Cloud Knowledge Catalog metadata updates.
+
+      - **Google Drive** : Allows read-only access to Google Drive files.
+
+      - **Bigtable** : Allows read-only access to Google Bigtable data.
+
+        > **Note:** Authenticating API-based runs with user credentials isn't supported. To [run all the tasks in a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#run-pipeline-all-tasks) using the Dataform API, you must configure the pipeline to use a service account.
+
+    - To use a service account, select **Run with selected service account** , and then select a service account. If you need to create a service account, click **New service account** .
 
 2.  In the **Processing location** section, select a processing location for the pipeline.
-    
-      - To enable the automatic selection of a location, select **Automatic location selection** . This option selects a location based on the datasets referenced in the request. The selection process is as follows:
-        
-          - If your query references datasets from the same location, BigQuery uses that location.
-          - If your query references datasets from two or more different locations, an error occurs. For details about this limitation, see [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) .
-          - If your query doesn't reference any datasets, BigQuery defaults to the `US` multi-region.
-    
-      - To pick a specific region, select **Region** , then choose a region in the **Region** menu. Alternatively, you can use the [`@@location` system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) in your query. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
-    
-      - To pick a multi-region, select **Multi-region** , then choose a multi-region in the **Multi-region** menu.
-    
+
+    - To enable the automatic selection of a location, select **Automatic location selection** . This option selects a location based on the datasets referenced in the request. The selection process is as follows:
+
+      - If your query references datasets from the same location, BigQuery uses that location.
+      - If your query references datasets from two or more different locations, an error occurs. For details about this limitation, see [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) .
+      - If your query doesn't reference any datasets, BigQuery defaults to the `US` multi-region.
+
+    - To pick a specific region, select **Region** , then choose a region in the **Region** menu. Alternatively, you can use the [`@@location` system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) in your query. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
+
+    - To pick a multi-region, select **Multi-region** , then choose a multi-region in the **Multi-region** menu.
+
     The pipeline processing location doesn't need to match your default storage location for code assets.
 
 ### SQLX options
@@ -211,11 +211,11 @@ To configure settings for your pipeline, open the pipeline in the **Pipeline Vie
 To configure the SQLX settings for your pipeline, do the following in the **SQLX options** section:
 
 1.  In the **Default project** field, enter the name of an existing Google Cloud project. This value is used for `defaultProject` in the `workflow_settings.yaml` file and for `defaultDatabase` in the `dataform.json` file. The default project is used by pipeline tasks during their execution.
-    
+
     > **Note:** The project name isn't validated, so it's possible to enter any non-empty string. However, if the project doesn't exist, the pipeline execution fails.
 
 2.  Optional: In the **Default dataset** field, search for and select an existing dataset. The list of available datasets is filtered based on the selected project and processing location. This value is used for `defaultDataset` in the `workflow_settings.yaml` file. The default dataset is used by pipeline tasks during their execution.
-    
+
     > **Note:** Setting the default dataset and then changing the pipeline's region invalidates the dataset selection. Changing the project can also invalidate the dataset selection. If a given dataset doesn't exist in the selected project, it is created.
 
 ### Notebook options
@@ -223,18 +223,18 @@ To configure the SQLX settings for your pipeline, do the following in the **SQLX
 To add a notebook to your pipeline, do the following in the **Notebook options** section:
 
 1.  In the **Runtime template field** , either accept the default notebook runtime, or search for and select an existing runtime.
-    
-      - To view specifications for the default runtime, click the adjacent arrow.
-      - To create a new runtime, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
-    
+
+    - To view specifications for the default runtime, click the adjacent arrow.
+    - To create a new runtime, see [Create a runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) .
+
     > **Note:** A notebook runtime template must be located in the same region as the pipeline that specifies it.
-    
+
     > **Note:** When you include a notebook in a BigQuery pipeline, you can't change the network of the Gemini Enterprise Agent Platform runtime instance. The runtime is restricted to the default network, and selecting a different network isn't supported.
 
 2.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
 
 3.  Follow the steps in [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) to add your custom Dataform service account as a principal to the Cloud Storage bucket that you plan to use for storing output of scheduled pipeline runs, and grant the [Storage Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` ) to this principal.
-    
+
     The selected custom Dataform service account must be granted the Storage Admin IAM role on the selected bucket.
 
 ## Add a pipeline task
@@ -243,21 +243,21 @@ You can add multiple tasks to a pipeline that executes code assets in a specific
 
 Supported code assets inside pipelines include:
 
-  - SQL queries
-  - Notebooks
-  - Data preparations
-  - Tables and Views (SQLX tasks)
+- SQL queries
+- Notebooks
+- Data preparations
+- Tables and Views (SQLX tasks)
 
 ### Task naming conventions
 
 When you name a pipeline task, follow these naming conventions:
 
-  - Task names can only contain letters (a-z, A-Z), numbers (0-9), underscores ( `_` ), and hyphens ( `-` ).
-  - Task names must start with a letter, number, or underscore.
-  - Periods ( `.` ) are prohibited in task names. When naming or renaming a task, don't include file extensions such as `.sql` or `.py` . If a task name contains a period, the **Run** button is deactivated.
-  - Task names can contain characters with a total of up to 1,024 UTF-8 bytes.
-  - Task names must be unique within the pipeline container.
-  - Task names are case-sensitive.
+- Task names can only contain letters (a-z, A-Z), numbers (0-9), underscores ( `_` ), and hyphens ( `-` ).
+- Task names must start with a letter, number, or underscore.
+- Periods ( `.` ) are prohibited in task names. When naming or renaming a task, don't include file extensions such as `.sql` or `.py` . If a task name contains a period, the **Run** button is deactivated.
+- Task names can contain characters with a total of up to 1,024 UTF-8 bytes.
+- Task names must be unique within the pipeline container.
+- Task names are case-sensitive.
 
 ### Add a task
 
@@ -266,10 +266,10 @@ To add a task to a pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -280,18 +280,18 @@ To add a task to a pipeline, follow these steps:
 You can either create a new query or import an existing one.
 
 1.  Do one of the following:
-    
-      - Click **Add task** , and then select **Query** . You can either create a new query or import an existing one.
-    
-      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Query** .
-    
-      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+    - Click **Add task** , and then select **Query** . You can either create a new query or import an existing one.
+
+    - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Query** .
+
+    - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
 
 2.  Optional: In the **Query task details** pane, in the **Run after** menu, select a task to precede your query.
 
 **Create a new query**
 
-1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
+1.  Click the arrow_drop_down arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
 
 2.  Search for an existing query.
 
@@ -303,7 +303,7 @@ You can either create a new query or import an existing one.
 
 **Import an existing query**
 
-1.  Click the arrow\_drop\_down arrow menu next to **Edit Query** and click **Import a copy** .
+1.  Click the arrow_drop_down arrow menu next to **Edit Query** and click **Import a copy** .
 
 2.  Search for an existing query to import or select an existing query from the search pane. When you import a query, the original remains unchanged because the query's source file is copied into the pipeline.
 
@@ -316,20 +316,18 @@ You can either create a new query or import an existing one.
 You can either create a new notebook or import an existing one. To change settings for notebook runtime templates, see [Notebook options](https://docs.cloud.google.com/bigquery/docs/create-pipelines#notebook_options) .
 
 1.  Do one of the following:
-    
-      - Click **Add task** , and then select **Notebook** .
-    
-      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Notebook** .
-    
-      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
-    
-    <!-- end list -->
-    
+
+    - Click **Add task** , and then select **Notebook** .
+
+    - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Notebook** .
+
+    - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
     1.  Optional: In the **Notebook task details** pane, in the **Run after** menu, select a task to precede your notebook.
-    
+
     **Create a new notebook**
 
-2.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
+2.  Click the arrow_drop_down arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
 
 3.  Search for an existing notebook.
 
@@ -341,7 +339,7 @@ You can either create a new notebook or import an existing one. To change settin
 
 **Import an existing notebook**
 
-1.  Click the arrow\_drop\_down arrow menu next to **Edit Notebook** and click **Import a copy** .
+1.  Click the arrow_drop_down arrow menu next to **Edit Notebook** and click **Import a copy** .
 
 2.  Search for an existing notebook to import or select an existing notebook from the search pane. When you import a notebook, the original remains unchanged because the notebook's source file is copied into the pipeline.
 
@@ -354,18 +352,18 @@ You can either create a new notebook or import an existing one. To change settin
 You can either create a new data preparation or import an existing one.
 
 1.  Do one of the following:
-    
-      - Click **Add task** , and then select **Data preparation** .
-    
-      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Data preparation** .
-    
-      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+    - Click **Add task** , and then select **Data preparation** .
+
+    - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Data preparation** .
+
+    - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
 
 2.  Optional: In the **Data preparation task details** pane, in the **Run after** menu, select a task to precede your data preparation.
 
 **Create a new data preparation**
 
-1.  Click the arrow\_drop\_down arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
+1.  Click the arrow_drop_down arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
 
 2.  Search for an existing data preparation.
 
@@ -377,7 +375,7 @@ You can either create a new data preparation or import an existing one.
 
 **Import an existing data preparation**
 
-1.  Click the arrow\_drop\_down arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
+1.  Click the arrow_drop_down arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
 
 2.  Search for an existing data preparation to import or select an existing data preparation from the search pane. When you import a data preparation, the original remains unchanged because the data preparation's source file is copied into the pipeline.
 
@@ -388,22 +386,18 @@ You can either create a new data preparation or import an existing one.
 ### Table
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
 
 1.  Do one of the following:
 
-<!-- end list -->
+- Click **Add task** , and then select **Table** .
 
-  - Click **Add task** , and then select **Table** .
+- When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Table** .
 
-  - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create Table** .
-
-  - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
-
-<!-- end list -->
+- When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
 
 1.  In the **Create new** pane, select **Table** or **Incremental table** .
 
@@ -429,14 +423,12 @@ The editor validates your code and displays the validation status.
 
 1.  Use the `metadata` key to specify information for Knowledge Catalog. This enrichment process supports the following metadata constructs:
 
-<!-- end list -->
-
-  - Overview: documentation and summary text for the entry.
-  - Generic aspects: semantic details such as table system and type information.
+- Overview: documentation and summary text for the entry.
+- Generic aspects: semantic details such as table system and type information.
 
 The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
 
-```` 
+````
        ```javascript
        config {
        type: "table",
@@ -462,18 +454,18 @@ The following example configuration shows you how to add an overview and generic
 ### View
 
 > **Preview**
-> 
+>
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 > **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
 
 1.  Do one of the following:
-    
-      - Click **Add task** , and then select **View** .
-    
-      - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create View** .
-    
-      - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
+
+    - Click **Add task** , and then select **View** .
+
+    - When working with pipelines in folders or Git folders, right-click the pipeline folder in the **Files** pane, and select **Create View** .
+
+    - When working with pipelines in folders or Git folders, click the **Add task** button in the **Pipeline Viewer** .
 
 2.  In the **Create new** pane, select **View** or **Materialized view** .
 
@@ -499,14 +491,12 @@ The editor validates your code and displays the validation status.
 
 1.  Use the `metadata` key to specify information for Knowledge Catalog. This enrichment process supports the following metadata constructs:
 
-<!-- end list -->
-
-  - Overview: documentation and summary text for the entry.
-  - Generic aspects: semantic details such as table system and type information.
+- Overview: documentation and summary text for the entry.
+- Generic aspects: semantic details such as table system and type information.
 
 The following example configuration shows you how to add an overview and generic metadata aspects to a table configuration for Knowledge Catalog:
 
-```` 
+````
        ```javascript
        config {
        type: "view",
@@ -544,9 +534,9 @@ The following example configuration shows you how to add an overview and generic
 6.  In the declare source task details pane, click **Open** to open the task.
 
 7.  Configure the data source using the settings in **Details \> Configuration** or in the `config` block of the code editor.
-    
+
     For more information about configuring a data source, see [Declare a data source](https://docs.cloud.google.com/dataform/docs/declare-source) .
-    
+
     The editor validates your code and displays the validation status.
 
 ### Assertion data test
@@ -564,11 +554,11 @@ The following example configuration shows you how to add an overview and generic
 6.  In the data quality test task details pane, click **Open** to open the task.
 
 7.  Configure assertions for the test using the settings in **Details \> Configuration** or in the `config` block of the code editor.
-    
+
     For more information about configuring assertions, see [Test data quality](https://docs.cloud.google.com/dataform/docs/test-data#assertions) .
-    
+
     Optional: In the **Run after** menu, select a task to precede your data quality test in the pipeline sequence.
-    
+
     The editor validates your code and displays the validation status.
 
 8.  Click **Run** to run the data quality test as part of your pipeline sequence.
@@ -586,7 +576,7 @@ The following example configuration shows you how to add an overview and generic
 5.  In the task details pane, click **Open** to open the unit test.
 
 6.  Configure inputs and the expected output rows for the unit test.
-    
+
     For more information about configuring unit tests, see [Test data quality](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) .
 
 7.  Optional: To ensure that the inputs and outputs are what you expect, click **Run task** and select expected or actual statements.
@@ -600,10 +590,10 @@ To edit a pipeline task, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -622,10 +612,10 @@ To delete a task from a pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -644,10 +634,10 @@ To share a pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -666,10 +656,10 @@ To share a pipeline, follow these steps:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -690,14 +680,14 @@ To run all the tasks in a pipeline, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play\_circle\_filled **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) .
+4.  Click play_circle_filled **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) .
 
 5.  Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
@@ -708,43 +698,47 @@ To run all the tasks in a pipeline, do the following:
 To run a pipeline manually, compile the default workspace and use the compilation result to create a workflow invocation.
 
 1.  To create a compilation result for the default workspace, use the [`projects.locations.repositories.compilationResults.create` method](https://docs.cloud.google.com/dataform/reference/rest/v1/projects.locations.repositories.compilationResults/create) .
-    
+
     Run the API request with the following information:
-    
-        curl -X POST \
-           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-           -H "Content-Type: application/json" \
-           -d '{
-              "workspace": "projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/workspaces/default"
-           }' \
-           "https://dataform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/compilationResults"
-    
+
+    ```
+    curl -X POST \
+       -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+       -H "Content-Type: application/json" \
+       -d '{
+          "workspace": "projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/workspaces/default"
+       }' \
+       "https://dataform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/compilationResults"
+    ```
+
     Replace the following:
-    
-      - `  LOCATION  ` : the Google Cloud region for your repository, for example, `us-central1` . You can find the repository location in the Google Cloud console by navigating to the **Explorer** pane, selecting the pipeline, opening the **Settings** tab, and clicking **Open pipeline in Dataform** . The location is in the URL in the format of `/locations/ LOCATION /` .
-      - `  PROJECT_ID  ` : the unique identifier of your Google Cloud project.
-      - `  REPOSITORY_ID  ` : the unique identifier for your Dataform repository, for example, `my-secure-repo` . You can find the repository ID in the Google Cloud console by navigating to the **Explorer** pane, selecting the pipeline, opening the **Settings** tab, and viewing the **Dataform repository ID** field.
+
+    - `LOCATION` : the Google Cloud region for your repository, for example, `us-central1` . You can find the repository location in the Google Cloud console by navigating to the **Explorer** pane, selecting the pipeline, opening the **Settings** tab, and clicking **Open pipeline in Dataform** . The location is in the URL in the format of `/locations/ `` LOCATION `` /` .
+    - `PROJECT_ID` : the unique identifier of your Google Cloud project.
+    - `REPOSITORY_ID` : the unique identifier for your Dataform repository, for example, `my-secure-repo` . You can find the repository ID in the Google Cloud console by navigating to the **Explorer** pane, selecting the pipeline, opening the **Settings** tab, and viewing the **Dataform repository ID** field.
 
 2.  In the response body, locate the `name` field and copy its value, for example, `projects/my-project/locations/us-central1/repositories/my-repo/compilationResults/12345-67890` .
 
 3.  Trigger the pipeline run using the [`projects.locations.repositories.workflowInvocations.create` method](https://docs.cloud.google.com/dataform/reference/rest/v1/projects.locations.repositories.workflowInvocations/create) .
-    
+
     Run the API request with the following information:
-    
-        curl -X POST \
-           -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-           -H "Content-Type: application/json" \
-           -d '{
-              "compilationResult": "COMPILATION_RESULT"
-           }' \
-           "https://dataform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/workflowInvocations"
-    
+
+    ```
+    curl -X POST \
+       -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+       -H "Content-Type: application/json" \
+       -d '{
+          "compilationResult": "COMPILATION_RESULT"
+       }' \
+       "https://dataform.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/repositories/REPOSITORY_ID/workflowInvocations"
+    ```
+
     Replace the following:
-    
-      - `  COMPILATION_RESULT  ` : the full resource name of the compilation result that you copied in the previous step.
-      - `  LOCATION  ` : the Google Cloud region for your repository, for example, `us-central1` .
-      - `  PROJECT_ID  ` : the unique identifier of your Google Cloud project.
-      - `  REPOSITORY_ID  ` : the unique identifier for your Dataform repository, for example, `my-secure-repo` .
+
+    - `COMPILATION_RESULT` : the full resource name of the compilation result that you copied in the previous step.
+    - `LOCATION` : the Google Cloud region for your repository, for example, `us-central1` .
+    - `PROJECT_ID` : the unique identifier of your Google Cloud project.
+    - `REPOSITORY_ID` : the unique identifier for your Dataform repository, for example, `my-secure-repo` .
 
 ### Run selected tasks in a pipeline
 
@@ -753,45 +747,47 @@ To run selected tasks in a pipeline, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play\_circle\_filled **Run** \> **Select tasks to run** .
+4.  Click play_circle_filled **Run** \> **Select tasks to run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
-    
-      - To use the user credentials for your Google Account, select **Run with user credentials** .
-        
-            Optional: In the **Extended access options** section, select the
-            additional services that your pipeline requires:
-            
-            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
-            - **Google Drive**: Allows read-only access to Google Drive files.
-            - **Bigtable**: Allows read-only access to Google
-              Bigtable data.
-    
-      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
-        
-        > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
-        
-        If you need to create a service account, click **New service account** .
+
+    - To use the user credentials for your Google Account, select **Run with user credentials** .
+
+      ```
+      Optional: In the **Extended access options** section, select the
+      additional services that your pipeline requires:
+
+      - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive**: Allows read-only access to Google Drive files.
+      - **Bigtable**: Allows read-only access to Google
+        Bigtable data.
+      ```
+
+    - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+
+      > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+
+      If you need to create a service account, click **New service account** .
 
 6.  Ensure **Selection of tasks** is selected.
 
 7.  In the **Select tasks to run** menu, search for specific tasks and select the tasks that you want to run.
-    
+
     The **Tasks** table lists the tasks that you've selected. Click a task name to open it directly in the SQL editor.
 
 8.  Optional: Configure the following execution options:
-    
-      - **Include dependencies** : select this option to run the selected tasks and their dependencies.
-      - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
-      - **Run with full refresh** : select this option to rebuild all tables from scratch.
-      - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+
+    - **Include dependencies** : select this option to run the selected tasks and their dependencies.
+    - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
+    - **Run with full refresh** : select this option to rebuild all tables from scratch.
+    - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
 9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
@@ -804,48 +800,50 @@ To run tasks with selected tags in a pipeline, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play\_circle\_filled **Run** \> **Run by tag** , then do either of the following:
-    
-      - Click a tag that you want to run.
-      - Click checklist **Select tags to run** .
+4.  Click play_circle_filled **Run** \> **Run by tag** , then do either of the following:
+
+    - Click a tag that you want to run.
+    - Click checklist **Select tags to run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
-    
-      - To use the user credentials for your Google Account, select **Run with user credentials** .
-        
-            Optional: In the **Extended access options** section, select the
-            additional services that your pipeline requires:
-            
-            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
-            - **Google Drive**: Allows read-only access to Google Drive files.
-            - **Bigtable**: Allows read-only access to Google
-              Bigtable data.
-    
-      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
-        
-        > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
-        
-        If you need to create a service account, click **New service account** .
+
+    - To use the user credentials for your Google Account, select **Run with user credentials** .
+
+      ```
+      Optional: In the **Extended access options** section, select the
+      additional services that your pipeline requires:
+
+      - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive**: Allows read-only access to Google Drive files.
+      - **Bigtable**: Allows read-only access to Google
+        Bigtable data.
+      ```
+
+    - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+
+      > **Note:** To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+
+      If you need to create a service account, click **New service account** .
 
 6.  Ensure **Selection of tags** is selected.
 
 7.  In the **Select tags to run** menu, search for specific tags and select the tags that you want to run.
-    
+
     The **Tasks** table lists the tasks that you've selected. Click a task name to open it directly in the SQL editor.
 
 8.  Optional: Configure the following execution options:
-    
-      - **Include dependencies** : select this option to run the selected tasks and their dependencies.
-      - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
-      - **Run with full refresh** : select this option to rebuild all tables from scratch.
-      - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+
+    - **Include dependencies** : select this option to run the selected tasks and their dependencies.
+    - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
+    - **Run with full refresh** : select this option to rebuild all tables from scratch.
+    - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
 9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
@@ -860,43 +858,45 @@ To run unit tests in a pipeline, do the following:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the left pane, click explore **Explorer** :
-    
+
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-    
-    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play\_circle\_filled **Run** .
+4.  Click play_circle_filled **Run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account:
-    
-      - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
-        
-            Optional: In the **Extended access options** section, select the
-            additional services that your pipeline requires:
-            
-            - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
-            - **Google Drive**: Allows read-only access to Google Drive files.
-            - **Bigtable**: Allows read-only access to Google
-              Bigtable data.
-    
-      - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
-        
-        To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
-        
-        If you need to create a service account, click **New service account** .
+
+    - To use the user credentials for your Google Account ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Run with user credentials** .
+
+      ```
+      Optional: In the **Extended access options** section, select the
+      additional services that your pipeline requires:
+
+      - **Knowledge Catalog**: Allows Google Cloud Knowledge Catalog metadata updates.
+      - **Google Drive**: Allows read-only access to Google Drive files.
+      - **Bigtable**: Allows read-only access to Google
+        Bigtable data.
+      ```
+
+    - To use a custom service account, select **Run with selected service account** , and then select a custom service account.
+
+      To see service accounts in the menu, you must have the `iam.serviceAccounts.list` permission at the project level, which is available in the [View Service Accounts role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountViewer) ( `roles/iam.serviceAccountViewer` ). If you don't have this permission, you can select the service account by clicking **Enter manually** and entering the service account ID.
+
+      If you need to create a service account, click **New service account** .
 
 6.  In the **Execution mode** section, select **Unit tests** .
 
 7.  Select one of the following execution scope options:
-    
-      - **Select unit tests** : search for and select specific unit tests from your pipeline.
-      - **Select unit test tags** : filter and execute unit tests assigned specific tags.
-      - **All Unit Tests** : execute all unit tests defined in the pipeline.
+
+    - **Select unit tests** : search for and select specific unit tests from your pipeline.
+    - **Select unit test tags** : filter and execute unit tests assigned specific tags.
+    - **All Unit Tests** : execute all unit tests defined in the pipeline.
 
 8.  Optional: In the **Execution options** sections, select the **Execute as interactive job with high priority** checkbox to run unit tests immediately, prioritizing execution speed.
-    
+
     If you don't select the **Execute as interactive job with high priority** checkbox, Dataform runs unit tests using batch resources by default, prioritizing compute costs savings.
 
 9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
@@ -923,9 +923,9 @@ If your pipeline contains a notebook, you must also manually grant permission fo
 
 ## What's next
 
-  - Learn more about [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
-  - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
-  - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
-  - Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
-  - Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
-  - Learn how to [test data quality with unit tests](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) .
+- Learn more about [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) .
+- Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
+- Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
+- Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
+- Learn how to [organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
+- Learn how to [test data quality with unit tests](https://docs.cloud.google.com/dataform/docs/test-data#unit-tests) .

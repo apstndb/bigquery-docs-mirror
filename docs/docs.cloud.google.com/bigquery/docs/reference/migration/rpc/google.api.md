@@ -8,16 +8,16 @@ data_source: docs.cloud.google.com
 
 ## Index
 
-  - `  Distribution  ` (message)
-  - `  Distribution.BucketOptions  ` (message)
-  - `  Distribution.BucketOptions.Explicit  ` (message)
-  - `  Distribution.BucketOptions.Exponential  ` (message)
-  - `  Distribution.BucketOptions.Linear  ` (message)
-  - `  Distribution.Exemplar  ` (message)
-  - `  Distribution.Range  ` (message)
-  - `  MetricDescriptor  ` (message)
-  - `  MetricDescriptor.MetricKind  ` (enum)
-  - `  MetricDescriptor.ValueType  ` (enum)
+- [`Distribution`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution) (message)
+- [`Distribution.BucketOptions`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions) (message)
+- [`Distribution.BucketOptions.Explicit`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Explicit) (message)
+- [`Distribution.BucketOptions.Exponential`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Exponential) (message)
+- [`Distribution.BucketOptions.Linear`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Linear) (message)
+- [`Distribution.Exemplar`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.Exemplar) (message)
+- [`Distribution.Range`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.Range) (message)
+- [`MetricDescriptor`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.MetricDescriptor) (message)
+- [`MetricDescriptor.MetricKind`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.MetricDescriptor.MetricKind) (enum)
+- [`MetricDescriptor.ValueType`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.MetricDescriptor.ValueType) (enum)
 
 ## Distribution
 
@@ -27,59 +27,60 @@ The summary statistics are the count, mean, sum of the squared deviation from th
 
 Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the `mean` and `sum_of_squared_deviation` fields meaningless.
 
-Fields
-
-`count`
-
-`int64`
-
-The number of values in the population. Must be non-negative. This value must equal the sum of the values in `bucket_counts` if a histogram is provided.
-
-`mean`
-
-`double`
-
-The arithmetic mean of the values in the population. If `count` is zero then this field must be zero.
-
-`sum_of_squared_deviation`
-
-`double`
-
-The sum of squared deviations from the mean of the values in the population. For values x\_i this is:
-
-    Sum[i=1..n]((x_i - mean)^2)
-
-Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.
-
-If `count` is zero then this field must be zero.
-
-`range`
-
-`  Range  `
-
-If specified, contains the range of the population values. The field must not be present if the `count` is zero.
-
-`bucket_options`
-
-`  BucketOptions  `
-
-Defines the histogram bucket boundaries. If the distribution does not contain a histogram, then omit this field.
-
-`bucket_counts[]`
-
-`int64`
-
-The number of values in each bucket of the histogram, as described in `bucket_options` . If the distribution does not have a histogram, then omit this field. If there is a histogram, then the sum of the values in `bucket_counts` must equal the value in the `count` field of the distribution.
-
-If present, `bucket_counts` should contain N values, where N is the number of buckets specified in `bucket_options` . If you supply fewer than N values, the remaining values are assumed to be 0.
-
-The order of the values in `bucket_counts` follows the bucket numbering schemes described for the three bucket types. The first value must be the count for the underflow bucket (number 0). The next N-2 values are the counts for the finite buckets (number 1 through N-2). The N'th value in `bucket_counts` is the count for the overflow bucket (number N-1).
-
-`exemplars[]`
-
-`  Exemplar  `
-
-Must be in increasing order of `value` field.
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fields</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>count</code></td>
+<td><p><code>int64</code></p>
+<p>The number of values in the population. Must be non-negative. This value must equal the sum of the values in <code>bucket_counts</code> if a histogram is provided.</p></td>
+</tr>
+<tr class="even">
+<td><code>mean</code></td>
+<td><p><code>double</code></p>
+<p>The arithmetic mean of the values in the population. If <code>count</code> is zero then this field must be zero.</p></td>
+</tr>
+<tr class="odd">
+<td><code>sum_of_squared_deviation</code></td>
+<td><p><code>double</code></p>
+<p>The sum of squared deviations from the mean of the values in the population. For values x_i this is:</p>
+<pre data-fenced=""><code>Sum[i=1..n]((x_i - mean)^2)</code></pre>
+<p>Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.</p>
+<p>If <code>count</code> is zero then this field must be zero.</p></td>
+</tr>
+<tr class="even">
+<td><code>range</code></td>
+<td><p><a href="https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.Range"><code>Range</code></a></p>
+<p>If specified, contains the range of the population values. The field must not be present if the <code>count</code> is zero.</p></td>
+</tr>
+<tr class="odd">
+<td><code>bucket_options</code></td>
+<td><p><a href="https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions"><code>BucketOptions</code></a></p>
+<p>Defines the histogram bucket boundaries. If the distribution does not contain a histogram, then omit this field.</p></td>
+</tr>
+<tr class="even">
+<td><code>bucket_counts[]</code></td>
+<td><p><code>int64</code></p>
+<p>The number of values in each bucket of the histogram, as described in <code>bucket_options</code> . If the distribution does not have a histogram, then omit this field. If there is a histogram, then the sum of the values in <code>bucket_counts</code> must equal the value in the <code>count</code> field of the distribution.</p>
+<p>If present, <code>bucket_counts</code> should contain N values, where N is the number of buckets specified in <code>bucket_options</code> . If you supply fewer than N values, the remaining values are assumed to be 0.</p>
+<p>The order of the values in <code>bucket_counts</code> follows the bucket numbering schemes described for the three bucket types. The first value must be the count for the underflow bucket (number 0). The next N-2 values are the counts for the finite buckets (number 1 through N-2). The N'th value in <code>bucket_counts</code> is the count for the overflow bucket (number N-1).</p></td>
+</tr>
+<tr class="odd">
+<td><code>exemplars[]</code></td>
+<td><p><a href="https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.Exemplar"><code>Exemplar</code></a></p>
+<p>Must be in increasing order of <code>value</code> field.</p></td>
+</tr>
+</tbody>
+</table>
 
 ## BucketOptions
 
@@ -87,27 +88,12 @@ Must be in increasing order of `value` field.
 
 A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i \> 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.
 
-Fields
-
-Union field `options` . Exactly one of these three fields must be set. `options` can be only one of the following:
-
-`linear_buckets`
-
-`  Linear  `
-
-The linear bucket.
-
-`exponential_buckets`
-
-`  Exponential  `
-
-The exponential buckets.
-
-`explicit_buckets`
-
-`  Explicit  `
-
-The explicit buckets.
+| Fields                                                                                                             |                                                                                                                                                                            |
+|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Union field `options` . Exactly one of these three fields must be set. `options` can be only one of the following: |                                                                                                                                                                            |
+| `linear_buckets`                                                                                                   | [`Linear`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Linear) The linear bucket.                 |
+| `exponential_buckets`                                                                                              | [`Exponential`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Exponential) The exponential buckets. |
+| `explicit_buckets`                                                                                                 | [`Explicit`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution.BucketOptions.Explicit) The explicit buckets.          |
 
 ## Explicit
 
@@ -119,13 +105,9 @@ Upper bound (0 \<= i \< N-1): bounds\[i\] Lower bound (1 \<= i \< N); bounds\[i 
 
 The `bounds` field must contain at least one element. If `bounds` has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.
 
-Fields
-
-`bounds[]`
-
-`double`
-
-The values must be monotonically increasing.
+| Fields     |                                                       |
+|------------|-------------------------------------------------------|
+| `bounds[]` | `double` The values must be monotonically increasing. |
 
 ## Exponential
 
@@ -133,29 +115,15 @@ Specifies an exponential sequence of buckets that have a width that is proportio
 
 There are `num_finite_buckets + 2` (= N) buckets. Bucket `i` has the following boundaries:
 
-Upper bound (0 \<= i \< N-1): scale \* (growth\_factor ^ i).
+Upper bound (0 \<= i \< N-1): scale \* (growth_factor ^ i).
 
-Lower bound (1 \<= i \< N): scale \* (growth\_factor ^ (i - 1)).
+Lower bound (1 \<= i \< N): scale \* (growth_factor ^ (i - 1)).
 
-Fields
-
-`num_finite_buckets`
-
-`int32`
-
-Must be greater than 0.
-
-`growth_factor`
-
-`double`
-
-Must be greater than 1.
-
-`scale`
-
-`double`
-
-Must be greater than 0.
+| Fields               |                                  |
+|----------------------|----------------------------------|
+| `num_finite_buckets` | `int32` Must be greater than 0.  |
+| `growth_factor`      | `double` Must be greater than 1. |
+| `scale`              | `double` Must be greater than 0. |
 
 ## Linear
 
@@ -167,75 +135,30 @@ Upper bound (0 \<= i \< N-1): offset + (width \* i).
 
 Lower bound (1 \<= i \< N): offset + (width \* (i - 1)).
 
-Fields
-
-`num_finite_buckets`
-
-`int32`
-
-Must be greater than 0.
-
-`width`
-
-`double`
-
-Must be greater than 0.
-
-`offset`
-
-`double`
-
-Lower bound of the first bucket.
+| Fields               |                                           |
+|----------------------|-------------------------------------------|
+| `num_finite_buckets` | `int32` Must be greater than 0.           |
+| `width`              | `double` Must be greater than 0.          |
+| `offset`             | `double` Lower bound of the first bucket. |
 
 ## Exemplar
 
 Exemplars are example points that may be used to annotate aggregated distribution values. They are metadata that gives information about a particular value added to a Distribution bucket, such as a trace ID that was active when a value was added. They may contain further information, such as a example values and timestamps, origin, etc.
 
-Fields
-
-`value`
-
-`double`
-
-Value of the exemplar point. This value determines to which bucket the exemplar belongs.
-
-`timestamp`
-
-`  Timestamp  `
-
-The observation (sampling) time of the above value.
-
-`attachments[]`
-
-`  Any  `
-
-Contextual information about the example value. Examples are:
-
-Trace: type.googleapis.com/google.monitoring.v3.SpanContext
-
-Literal string: type.googleapis.com/google.protobuf.StringValue
-
-Labels dropped during aggregation: type.googleapis.com/google.monitoring.v3.DroppedLabels
-
-There may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.
+| Fields          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `value`         | `double` Value of the exemplar point. This value determines to which bucket the exemplar belongs.                                                                                                                                                                                                                                                                                                                                                                                   |
+| `timestamp`     | [`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp) The observation (sampling) time of the above value.                                                                                                                                                                                                                                                                                                                                               |
+| `attachments[]` | [`Any`](https://protobuf.dev/reference/protobuf/google.protobuf/#any) Contextual information about the example value. Examples are: Trace: type.googleapis.com/google.monitoring.v3.SpanContext Literal string: type.googleapis.com/google.protobuf.StringValue Labels dropped during aggregation: type.googleapis.com/google.monitoring.v3.DroppedLabels There may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system. |
 
 ## Range
 
 The range of the population values.
 
-Fields
-
-`min`
-
-`double`
-
-The minimum of the population values.
-
-`max`
-
-`double`
-
-The maximum of the population values.
+| Fields |                                                |
+|--------|------------------------------------------------|
+| `min`  | `double` The minimum of the population values. |
+| `max`  | `double` The maximum of the population values. |
 
 ## MetricDescriptor
 
@@ -247,54 +170,23 @@ Defines a metric type and its schema. Once a metric descriptor is created, delet
 
 The kind of measurement. It describes how the data is reported. For information on setting the start time and end time based on the MetricKind, see \[TimeInterval\]\[google.monitoring.v3.TimeInterval\].
 
-Enums
-
-`METRIC_KIND_UNSPECIFIED`
-
-Do not use this default value.
-
-`GAUGE`
-
-An instantaneous measurement of a value.
-
-`DELTA`
-
-The change in a value during a time interval.
-
-`CUMULATIVE`
-
-A value accumulated over a time interval. Cumulative measurements in a time series should have the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points.
+| Enums                     |                                                                                                                                                                                                                                                     |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `METRIC_KIND_UNSPECIFIED` | Do not use this default value.                                                                                                                                                                                                                      |
+| `GAUGE`                   | An instantaneous measurement of a value.                                                                                                                                                                                                            |
+| `DELTA`                   | The change in a value during a time interval.                                                                                                                                                                                                       |
+| `CUMULATIVE`              | A value accumulated over a time interval. Cumulative measurements in a time series should have the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points. |
 
 ## ValueType
 
 The value type of a metric.
 
-Enums
-
-`VALUE_TYPE_UNSPECIFIED`
-
-Do not use this default value.
-
-`BOOL`
-
-The value is a boolean. This value type can be used only if the metric kind is `GAUGE` .
-
-`INT64`
-
-The value is a signed 64-bit integer.
-
-`DOUBLE`
-
-The value is a double precision floating point number.
-
-`STRING`
-
-The value is a text string. This value type can be used only if the metric kind is `GAUGE` .
-
-`DISTRIBUTION`
-
-The value is a `  Distribution ` .
-
-`MONEY`
-
-The value is money.
+| Enums                    |                                                                                                                                           |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `VALUE_TYPE_UNSPECIFIED` | Do not use this default value.                                                                                                            |
+| `BOOL`                   | The value is a boolean. This value type can be used only if the metric kind is `GAUGE` .                                                  |
+| `INT64`                  | The value is a signed 64-bit integer.                                                                                                     |
+| `DOUBLE`                 | The value is a double precision floating point number.                                                                                    |
+| `STRING`                 | The value is a text string. This value type can be used only if the metric kind is `GAUGE` .                                              |
+| `DISTRIBUTION`           | The value is a [`Distribution`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc/google.api#google.api.Distribution) . |
+| `MONEY`                  | The value is money.                                                                                                                       |

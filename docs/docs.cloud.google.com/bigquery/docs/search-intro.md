@@ -22,12 +22,12 @@ BigQuery stores and manages your indexes, so that when data becomes available in
 
 BigQuery search indexes help you perform the following tasks:
 
-  - Search system, network, or application logs stored in BigQuery tables.
-  - Identify data elements for deletion to comply with regulatory processes.
-  - Support developer troubleshooting.
-  - Perform security audits.
-  - Create a dashboard that requires highly selective search filters.
-  - Search pre-processed data for exact matches.
+- Search system, network, or application logs stored in BigQuery tables.
+- Identify data elements for deletion to comply with regulatory processes.
+- Support developer troubleshooting.
+- Perform security audits.
+- Create a dashboard that requires highly selective search filters.
+- Search pre-processed data for exact matches.
 
 For more information, see [Create a search index](https://docs.cloud.google.com/bigquery/docs/search-index) and [Search with an index](https://docs.cloud.google.com/bigquery/docs/search) .
 
@@ -39,52 +39,52 @@ There is no charge for the processing required to build and refresh your search 
 
 To create a search index, you need the [`bigquery.tables.createIndex` IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) on the table where you're creating the index. To drop a search index, you need the `bigquery.tables.deleteIndex` permission. Each of the following predefined IAM roles includes the permissions that you need to work with search indexes:
 
-  - BigQuery Data Owner ( `roles/bigquery.dataOwner` )
-  - BigQuery Data Editor ( `roles/bigquery.dataEditor` )
-  - BigQuery Admin ( `roles/bigquery.admin` )
+- BigQuery Data Owner ( `roles/bigquery.dataOwner` )
+- BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+- BigQuery Admin ( `roles/bigquery.admin` )
 
 ## Limitations
 
-  - You can't create a search index directly on a view or materialized view, but calling the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) on a view of an indexed table makes use of the underlying search index.
+- You can't create a search index directly on a view or materialized view, but calling the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) on a view of an indexed table makes use of the underlying search index.
 
-  - You can't create a search index on an external table.
+- You can't create a search index on an external table.
 
-  - If you rename a table after you create a search index on it, the index becomes invalid.
+- If you rename a table after you create a search index on it, the index becomes invalid.
 
-  - The `SEARCH` function is designed for point lookups. Fuzzy searching, typo correction, wildcards, and other types of document searches are not available.
+- The `SEARCH` function is designed for point lookups. Fuzzy searching, typo correction, wildcards, and other types of document searches are not available.
 
-  - If the search index is not yet at 100% coverage, you are still charged for all index storage that is reported in the [`INFORMATION_SCHEMA.SEARCH_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes) .
+- If the search index is not yet at 100% coverage, you are still charged for all index storage that is reported in the [`INFORMATION_SCHEMA.SEARCH_INDEXES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes) .
 
-  - Queries that use the `SEARCH` function or are optimized by search indexes are not accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
+- Queries that use the `SEARCH` function or are optimized by search indexes are not accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
-  - Search indexes are not used when the indexed table is modified by a DML statement, but they can be used when the predicate that is optimizable by search indexes is part of a subquery in a DML statement.
-    
-      - A search index is not used in the following query:
-    
-    <!-- end list -->
-    
-        DELETE FROM my_dataset.indexed_table
-        WHERE SEARCH(user_id, '123');
-    
-      - A search index can be used in the following query:
-    
-    <!-- end list -->
-    
-        DELETE FROM my_dataset.other_table
-        WHERE
-          user_id IN (
-            SELECT user_id
-            FROM my_dataset.indexed_table
-            WHERE SEARCH(user_id, '123')
-          );
+- Search indexes are not used when the indexed table is modified by a DML statement, but they can be used when the predicate that is optimizable by search indexes is part of a subquery in a DML statement.
 
-  - Search indexes are not used when the query references [Materialized Views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+  - A search index is not used in the following query:
 
-  - Search indexes are not used in a [multi-statement transaction query](https://docs.cloud.google.com/bigquery/docs/transactions) .
+  ```
+  DELETE FROM my_dataset.indexed_table
+  WHERE SEARCH(user_id, '123');
+  ```
 
-  - Search indexes are not used in a [time-travel query](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+  - A search index can be used in the following query:
+
+  ```
+  DELETE FROM my_dataset.other_table
+  WHERE
+    user_id IN (
+      SELECT user_id
+      FROM my_dataset.indexed_table
+      WHERE SEARCH(user_id, '123')
+    );
+  ```
+
+- Search indexes are not used when the query references [Materialized Views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+
+- Search indexes are not used in a [multi-statement transaction query](https://docs.cloud.google.com/bigquery/docs/transactions) .
+
+- Search indexes are not used in a [time-travel query](https://docs.cloud.google.com/bigquery/docs/time-travel) .
 
 ## What's next
 
-  - Learn more about [creating a search index](https://docs.cloud.google.com/bigquery/docs/search-index) .
-  - Learn more about [searching in a table with a search index](https://docs.cloud.google.com/bigquery/docs/search) .
+- Learn more about [creating a search index](https://docs.cloud.google.com/bigquery/docs/search-index) .
+- Learn more about [searching in a table with a search index](https://docs.cloud.google.com/bigquery/docs/search) .

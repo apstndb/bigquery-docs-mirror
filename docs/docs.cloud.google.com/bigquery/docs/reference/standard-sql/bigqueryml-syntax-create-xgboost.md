@@ -40,14 +40,14 @@ Creates and trains a model and replaces an existing model with the same name in 
 
 The name of the model you're creating or replacing. The model name must be unique in the dataset: no other model or table can have the same name. The model name must follow the same naming rules as a BigQuery table. A model name can:
 
-  - Contain up to 1,024 characters
-  - Contain letters (upper or lower case), numbers, and underscores
+- Contain up to 1,024 characters
+- Contain letters (upper or lower case), numbers, and underscores
 
 `model_name` is case-sensitive.
 
 If you don't have a default project configured, then you must prepend the project ID to the model name in the following format, including backticks:
 
-\`\[PROJECT\_ID\].\[DATASET\].\[MODEL\]\`
+\`\[PROJECT_ID\].\[DATASET\].\[MODEL\]\`
 
 For example, \`myproject.mydataset.mymodel\`.
 
@@ -69,14 +69,18 @@ Use `field_type` to specify the data type of an input feature or a model output.
 
 **Example**
 
-    INPUT(f1 INT64, f2 FLOAT64, f3 FLOAT64)
-    OUTPUT(predicted_label FLOAT64)
+```
+INPUT(f1 INT64, f2 FLOAT64, f3 FLOAT64)
+OUTPUT(predicted_label FLOAT64)
+```
 
 ### `MODEL_TYPE`
 
 **Syntax**
 
-    MODEL_TYPE = 'XGBOOST'
+```
+MODEL_TYPE = 'XGBOOST'
+```
 
 **Description**
 
@@ -86,7 +90,9 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-    MODEL_PATH = string_value
+```
+MODEL_PATH = string_value
+```
 
 **Description**
 
@@ -100,13 +106,15 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Example**
 
-    MODEL_PATH = 'gs://bucket/path/to/xgboost_model/*'
+```
+MODEL_PATH = 'gs://bucket/path/to/xgboost_model/*'
+```
 
 ### `KMS_KEY_NAME`
 
 **Syntax**
 
-` KMS_KEY_NAME = string_value  `
+`KMS_KEY_NAME = `` string_value`
 
 **Description**
 
@@ -116,7 +124,9 @@ The Cloud Key Management Service [customer-managed encryption key (CMEK)](https:
 
 A `STRING` value containing the fully-qualified name of the CMEK. For example,
 
-    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
+'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
+```
 
 ## Locations
 
@@ -126,17 +136,17 @@ For information about supported locations, see [Locations for non-remote models]
 
 Imported XGBoost models have the following limitations:
 
-  - The XGBoost model must already exist before it can be imported into BigQuery.
-  - Models must be stored in Cloud Storage.
-  - XGBoost models must be in `BST` , `UBJ` or `JSON` format.
-  - You can only use XGBoost models with the [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) and [`ML.FEATURE_IMPORTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance) functions.
-  - Models are limited to 250 MB in size.
-  - The memory limit to load and run the XGBoost model is 840 MB. You can reduce the model size by using fewer trees or shallower tree depth, or by using the XGBoost library's default `save_model` method to save the models.
-  - BigQuery ML uses the [XGBoost 3.1.0](https://xgboost.readthedocs.io/en/release_3.1.0/index.html) library to load and make predictions on XGBoost models. Forward compatibility for models saved with XGBoost version 3.2.0 or newer is not guaranteed.
-  - BigQuery XGBoost models only support [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) as input data types and [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) as the output data type.
-  - Categorical features that use XGBoost built-in [categorical data](https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html) support are treated as integer inputs.
-  - BigQuery XGBoost models only support a single scalar or array output. [Multiple outputs](https://xgboost.readthedocs.io/en/stable/tutorials/multioutput.html) aren't supported.
-  - You can only use an imported XGBoost model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
+- The XGBoost model must already exist before it can be imported into BigQuery.
+- Models must be stored in Cloud Storage.
+- XGBoost models must be in `BST` , `UBJ` or `JSON` format.
+- You can only use XGBoost models with the [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) and [`ML.FEATURE_IMPORTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance) functions.
+- Models are limited to 250 MB in size.
+- The memory limit to load and run the XGBoost model is 840 MB. You can reduce the model size by using fewer trees or shallower tree depth, or by using the XGBoost library's default `save_model` method to save the models.
+- BigQuery ML uses the [XGBoost 3.1.0](https://xgboost.readthedocs.io/en/release_3.1.0/index.html) library to load and make predictions on XGBoost models. Forward compatibility for models saved with XGBoost version 3.2.0 or newer is not guaranteed.
+- BigQuery XGBoost models only support [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) as input data types and [`FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) as the output data type.
+- Categorical features that use XGBoost built-in [categorical data](https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html) support are treated as integer inputs.
+- BigQuery XGBoost models only support a single scalar or array output. [Multiple outputs](https://xgboost.readthedocs.io/en/stable/tutorials/multioutput.html) aren't supported.
+- You can only use an imported XGBoost model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
 
 ## Examples
 
@@ -146,34 +156,34 @@ The following examples show how to create different types of imported XGBoost mo
 
 The following example imports a XGBoost model into BigQuery as a BigQuery model. The example assumes the following:
 
-  - There is an existing XGBoost model located at `gs://bucket-name/xgboost-model/*` .
-  - The model file is in `BST` , `JSON` or `UBJ` format.
-  - The model file doesn't contain information about input `feature_names` and `feature_types` .
+- There is an existing XGBoost model located at `gs://bucket-name/xgboost-model/*` .
+- The model file is in `BST` , `JSON` or `UBJ` format.
+- The model file doesn't contain information about input `feature_names` and `feature_types` .
 
-<!-- end list -->
-
-    CREATE OR REPLACE
-      MODEL
-        `project_id.mydataset.mymodel`
-          INPUT(f1 float64, f2 float64, f3 float64, f4 float64)
-          OUTPUT(predicted_label float64)
-      OPTIONS (
-        MODEL_TYPE = 'XGBOOST',
-        MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
+```
+CREATE OR REPLACE
+  MODEL
+    `project_id.mydataset.mymodel`
+      INPUT(f1 float64, f2 float64, f3 float64, f4 float64)
+      OUTPUT(predicted_label float64)
+  OPTIONS (
+    MODEL_TYPE = 'XGBOOST',
+    MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
+```
 
 ### Import a model that already contains input and output columns
 
 The following example imports a XGBoost model into BigQuery as a BigQuery model. The example assumes the following:
 
-  - There is an existing XGBoost model located at `gs://bucket-name/xgboost-model/*` .
-  - The model file is in `BST` , `JSON` or `UBJ` format.
-  - The model file contains information about input `feature_names` and `feature_types` .
+- There is an existing XGBoost model located at `gs://bucket-name/xgboost-model/*` .
+- The model file is in `BST` , `JSON` or `UBJ` format.
+- The model file contains information about input `feature_names` and `feature_types` .
 
-<!-- end list -->
-
-    CREATE OR REPLACE
-      MODEL
-        `project_id.mydataset.mymodel`
-      OPTIONS (
-        MODEL_TYPE = 'XGBOOST',
-        MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
+```
+CREATE OR REPLACE
+  MODEL
+    `project_id.mydataset.mymodel`
+  OPTIONS (
+    MODEL_TYPE = 'XGBOOST',
+    MODEL_PATH = 'gs://bucket-name/xgboost-model/*')
+```

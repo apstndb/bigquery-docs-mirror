@@ -22,29 +22,29 @@ ML.CENTROIDS(
 
 `ML.CENTROIDS` takes the following arguments:
 
-  - `  PROJECT_ID  ` : your project ID.
-  - `  DATASET  ` : the BigQuery dataset that contains the model.
-  - `  MODEL  ` : the name of the model.
-  - `  STANDARDIZE  ` : a `BOOL` value that specifies whether the centroid features should be standardized to assume that all features have a mean of `0` and a standard deviation of `1` . Standardizing the features allows the absolute magnitude of the values to be compared to each other. The default value is `FALSE` .
+- `PROJECT_ID` : your project ID.
+- `DATASET` : the BigQuery dataset that contains the model.
+- `MODEL` : the name of the model.
+- `STANDARDIZE` : a `BOOL` value that specifies whether the centroid features should be standardized to assume that all features have a mean of `0` and a standard deviation of `1` . Standardizing the features allows the absolute magnitude of the values to be compared to each other. The default value is `FALSE` .
 
 ## Output
 
 `ML.CENTROIDS` returns the following columns:
 
-  - `trial_id` : an `INT64` value that contains the hyperparameter tuning trial ID. This column is only returned if you ran hyperparameter tuning when creating the model.
+- `trial_id` : an `INT64` value that contains the hyperparameter tuning trial ID. This column is only returned if you ran hyperparameter tuning when creating the model.
 
-  - `centroid_id` : an `INT64` value that contains the centroid ID.
+- `centroid_id` : an `INT64` value that contains the centroid ID.
 
-  - `feature` : a `STRING` value that contains the feature column name.
+- `feature` : a `STRING` value that contains the feature column name.
 
-  - `numerical_value` : a `FLOAT64` value that contains the feature value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is numeric. Otherwise, `numerical_value` is `NULL` .
+- `numerical_value` : a `FLOAT64` value that contains the feature value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is numeric. Otherwise, `numerical_value` is `NULL` .
 
-  - `categorical_value` : an `ARRAY<STRUCT>` value that contains information about categorical features. Each struct contains the following fields:
-    
-      - `categorical_value.category` : a `STRING` value that contains the name of each category.
-      - `categorical_value.value` : a `STRING` value that contains the value of `categorical_value.category` for the centroid that `centroid_id` identifies.
+- `categorical_value` : an `ARRAY<STRUCT>` value that contains information about categorical features. Each struct contains the following fields:
 
-  - `geography_value` : a `STRING` value that contains the `categorical_value.category` value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is of type `GEOGRAPHY` . Otherwise, `geography_value` value is `NULL` .
+  - `categorical_value.category` : a `STRING` value that contains the name of each category.
+  - `categorical_value.value` : a `STRING` value that contains the value of `categorical_value.category` for the centroid that `centroid_id` identifies.
+
+- `geography_value` : a `STRING` value that contains the `categorical_value.category` value for the centroid that `centroid_id` identifies if the column identified by the `feature` value is of type `GEOGRAPHY` . Otherwise, `geography_value` value is `NULL` .
 
 The output contains one row per feature per centroid.
 
@@ -58,10 +58,12 @@ The following examples show how to use `ML.CENTROIDS` with and without the `stan
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model only contains numerical features.
 
-    SELECT
-      *
-    FROM
-      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
+```
+SELECT
+  *
+FROM
+  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
+```
 
 This query returns results like the following:
 
@@ -84,12 +86,14 @@ This query returns results like the following:
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. This model contains categorical features.
 
-    SELECT
-      *
-    FROM
-      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
-    ORDER BY
-      centroid_id;
+```
+SELECT
+  *
+FROM
+  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`)
+ORDER BY
+  centroid_id;
+```
 
 This query returns results like the following:
 
@@ -129,13 +133,15 @@ The following are the results from the same query against a k-means model with b
 
 The following example retrieves centroid information from the model `mydataset.my_kmeans_model` in your default project. The query in this example assumes that all features have a mean of `0` and a standard deviation of `1` .
 
-    SELECT
-      *
-    FROM
-      ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`,
-        STRUCT(TRUE AS standardize))
+```
+SELECT
+  *
+FROM
+  ML.CENTROIDS(MODEL `mydataset.my_kmeans_model`,
+    STRUCT(TRUE AS standardize))
+```
 
 ## What's next
 
-  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
+- For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
+- For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

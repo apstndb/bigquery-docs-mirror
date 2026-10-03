@@ -12,91 +12,32 @@ Schedule queries or transfer external data from SaaS applications to Google BigQ
 
 The Service name `bigquerydatatransfer.googleapis.com` is needed to create RPC client stubs.
 
-## `        google.cloud.bigquery.datatransfer.v1.DataTransferService       `
+## [`google.cloud.bigquery.datatransfer.v1.DataTransferService`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService)
 
-Methods
+| Methods                                                                                                                                                                                                                                    |                                                                                              |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| [`CheckValidCreds`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.CheckValidCreds)                                | Returns true if valid credentials exist for the given data source and requesting user.       |
+| [`CreateTransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.CreateTransferConfig)                      | Creates a new data transfer configuration.                                                   |
+| [`DeleteTransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferConfig)                      | Deletes a data transfer configuration, including any associated transfer runs and logs.      |
+| [`DeleteTransferRun`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.DeleteTransferRun)                            | Deletes the specified transfer run.                                                          |
+| [`EnrollDataSources`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.EnrollDataSources)                            | Enroll data sources in a user project.                                                       |
+| [`GetDataSource`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.GetDataSource)                                    | Retrieves a supported data source and returns its settings.                                  |
+| [`GetTransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferConfig)                            | Returns information about a data transfer config.                                            |
+| [`GetTransferResource`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferResource)                        | Returns a transfer resource.                                                                 |
+| [`GetTransferRun`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.GetTransferRun)                                  | Returns information about the particular transfer run.                                       |
+| [`ListDataSources`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ListDataSources)                                | Lists supported data sources and returns their settings.                                     |
+| [`ListTransferConfigs`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferConfigs)                        | Returns information about all transfer configs owned by a project in the specified location. |
+| [`ListTransferLogs`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferLogs)                              | Returns log messages for the transfer run.                                                   |
+| [`ListTransferResources`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferResources)                    | Returns information about transfer resources.                                                |
+| [`ListTransferRuns`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ListTransferRuns)                              | Returns information about running and completed transfer runs.                               |
+| [`ScheduleTransferRuns`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.ScheduleTransferRuns)` `**`(deprecated)`** | Creates transfer runs for a time range \[start_time, end_time\].                             |
+| [`StartManualTransferRuns`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.StartManualTransferRuns)                | Manually initiates transfer runs.                                                            |
+| [`UnenrollDataSources`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.UnenrollDataSources)                        | Unenroll data sources in a user project.                                                     |
+| [`UpdateTransferConfig`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.bigquery.datatransfer.v1#google.cloud.bigquery.datatransfer.v1.DataTransferService.UpdateTransferConfig)                      | Updates a data transfer configuration.                                                       |
 
-`  CheckValidCreds  `
+## [`google.cloud.location.Locations`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.location#google.cloud.location.Locations)
 
-Returns true if valid credentials exist for the given data source and requesting user.
-
-`  CreateTransferConfig  `
-
-Creates a new data transfer configuration.
-
-`  DeleteTransferConfig  `
-
-Deletes a data transfer configuration, including any associated transfer runs and logs.
-
-`  DeleteTransferRun  `
-
-Deletes the specified transfer run.
-
-`  EnrollDataSources  `
-
-Enroll data sources in a user project.
-
-`  GetDataSource  `
-
-Retrieves a supported data source and returns its settings.
-
-`  GetTransferConfig  `
-
-Returns information about a data transfer config.
-
-`  GetTransferResource  `
-
-Returns a transfer resource.
-
-`  GetTransferRun  `
-
-Returns information about the particular transfer run.
-
-`  ListDataSources  `
-
-Lists supported data sources and returns their settings.
-
-`  ListTransferConfigs  `
-
-Returns information about all transfer configs owned by a project in the specified location.
-
-`  ListTransferLogs  `
-
-Returns log messages for the transfer run.
-
-`  ListTransferResources  `
-
-Returns information about transfer resources.
-
-`  ListTransferRuns  `
-
-Returns information about running and completed transfer runs.
-
-`  ScheduleTransferRuns  `  
-**(deprecated)**
-
-Creates transfer runs for a time range \[start\_time, end\_time\].
-
-`  StartManualTransferRuns  `
-
-Manually initiates transfer runs.
-
-`  UnenrollDataSources  `
-
-Unenroll data sources in a user project.
-
-`  UpdateTransferConfig  `
-
-Updates a data transfer configuration.
-
-## `        google.cloud.location.Locations       `
-
-Methods
-
-`  GetLocation  `
-
-Gets information about a location.
-
-`  ListLocations  `
-
-Lists information about the supported locations for this service.
+| Methods                                                                                                                                                       |                                                                   |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| [`GetLocation`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.location#google.cloud.location.Locations.GetLocation)     | Gets information about a location.                                |
+| [`ListLocations`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc/google.cloud.location#google.cloud.location.Locations.ListLocations) | Lists information about the supported locations for this service. |

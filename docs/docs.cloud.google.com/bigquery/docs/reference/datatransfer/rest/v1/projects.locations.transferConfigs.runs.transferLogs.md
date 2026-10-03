@@ -6,75 +6,42 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [Resource: TransferMessage](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.SCHEMA_REPRESENTATION)
-      - [MessageSeverity](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.MessageSeverity)
-  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#METHODS_SUMMARY)
+- [Resource: TransferMessage](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.SCHEMA_REPRESENTATION)
+  - [MessageSeverity](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.MessageSeverity)
+- [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#METHODS_SUMMARY)
 
 ## Resource: TransferMessage
 
 Represents a user facing message for a particular data transfer run.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;messageTime&quot;: string,&quot;severity&quot;: enum (MessageSeverity),&quot;messageText&quot;: string}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "messageTime": string,
+  "severity": enum (MessageSeverity),
+  "messageText": string
+}
+```
 
-`messageTime`
-
-` string ( Timestamp  ` format)
-
-Time when message was logged.
-
-`severity`
-
-` enum ( MessageSeverity  ` )
-
-Message severity.
-
-`messageText`
-
-`string`
-
-Message text.
+| Fields        |                                                                                                                                                                                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `messageTime` | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Time when message was logged.                                                                                |
+| `severity`    | `enum ( `[`MessageSeverity`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.MessageSeverity)` )` Message severity. |
+| `messageText` | `string` Message text.                                                                                                                                                                                              |
 
 ### MessageSeverity
 
 Represents data transfer user facing message severity.
 
-Enums
+| Enums                          |                        |
+|--------------------------------|------------------------|
+| `MESSAGE_SEVERITY_UNSPECIFIED` | No severity specified. |
+| `INFO`                         | Informational message. |
+| `WARNING`                      | Warning message.       |
+| `ERROR`                        | Error message.         |
 
-`MESSAGE_SEVERITY_UNSPECIFIED`
-
-No severity specified.
-
-`INFO`
-
-Informational message.
-
-`WARNING`
-
-Warning message.
-
-`ERROR`
-
-Error message.
-
-## Methods
-
-### `            list           `
-
-Returns log messages for the transfer run.
+| Methods                                                                                                                                        |                                            |
+|------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| [`list`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs/list) | Returns log messages for the transfer run. |

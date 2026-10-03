@@ -14,12 +14,12 @@ This document describes the data manipulation capabilities available with BigQue
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
-  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
-  - Use BigQuery DataFrames in a BigQuery notebook:
-      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
-      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
-      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )
+- [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` )
+- [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `roles/bigquery.readSessionUser` )
+- Use BigQuery DataFrames in a BigQuery notebook:
+  - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `roles/aiplatform.notebookRuntimeUser` )
+  - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `roles/dataform.codeCreator` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -37,28 +37,30 @@ To check which pandas APIs are supported by BigQuery DataFrames, see [Supported 
 
 You can use the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) API to perform data inspection and calculation operations. The following code sample uses the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
 
-    import bigframes.pandas as bpd
-    
-    # Load data from BigQuery
-    query_or_table = "bigquery-public-data.ml_datasets.penguins"
-    bq_df = bpd.read_gbq(query_or_table)
-    
-    # Inspect one of the columns (or series) of the DataFrame:
+```
+import bigframes.pandas as bpd
+
+# Load data from BigQuery
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+bq_df = bpd.read_gbq(query_or_table)
+
+# Inspect one of the columns (or series) of the DataFrame:
+bq_df["body_mass_g"]
+
+# Compute the mean of this series:
+average_body_mass = bq_df["body_mass_g"].mean()
+print(f"average_body_mass: {average_body_mass}")
+
+# Find the heaviest species using the groupby operation to calculate the
+# mean body_mass_g:
+(
     bq_df["body_mass_g"]
-    
-    # Compute the mean of this series:
-    average_body_mass = bq_df["body_mass_g"].mean()
-    print(f"average_body_mass: {average_body_mass}")
-    
-    # Find the heaviest species using the groupby operation to calculate the
-    # mean body_mass_g:
-    (
-        bq_df["body_mass_g"]
-        .groupby(by=bq_df["species"])
-        .mean()
-        .sort_values(ascending=False)
-        .head(10)
-    )
+    .groupby(by=bq_df["species"])
+    .mean()
+    .sort_values(ascending=False)
+    .head(10)
+)
+```
 
 ## BigQuery library
 
@@ -68,16 +70,18 @@ The BigQuery library provides BigQuery SQL functions that might not have a panda
 
 You can use the [`bigframes.bigquery.array_agg()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_agg.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to aggregate values after a [`groupby`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.groupby.html) operation:
 
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    s = bpd.Series([0, 1, 2, 3, 4, 5])
-    
-    # Group values by whether they are divisble by 2 and aggregate them into arrays
-    bbq.array_agg(s.groupby(s % 2 == 0))
-    # False    [1 3 5]
-    # True     [0 2 4]
-    # dtype: list<item: int64>[pyarrow]
+```
+import bigframes.bigquery as bbq
+import bigframes.pandas as bpd
+
+s = bpd.Series([0, 1, 2, 3, 4, 5])
+
+# Group values by whether they are divisble by 2 and aggregate them into arrays
+bbq.array_agg(s.groupby(s % 2 == 0))
+# False    [1 3 5]
+# True     [0 2 4]
+# dtype: list<item: int64>[pyarrow]
+```
 
 You can also use the [`array_length()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_length.html) and [`array_to_string()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.array_to_string.html) array functions.
 
@@ -85,43 +89,47 @@ You can also use the [`array_length()`](https://dataframes.bigquery.dev/referenc
 
 You can use the [`bigframes.bigquery.struct()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.struct.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to create a new struct [`Series`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.Series.html) object with subfields for each column in a [`DataFrame`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.DataFrame.html) :
 
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    # Load data from BigQuery
-    query_or_table = "bigquery-public-data.ml_datasets.penguins"
-    bq_df = bpd.read_gbq(query_or_table)
-    
-    # Create a new STRUCT Series with subfields for each column in a DataFrames.
-    lengths = bbq.struct(
-        bq_df[["culmen_length_mm", "culmen_depth_mm", "flipper_length_mm"]]
-    )
-    
-    lengths.peek()
-    # 146   {'culmen_length_mm': 51.1, 'culmen_depth_mm': ...
-    # 278   {'culmen_length_mm': 48.2, 'culmen_depth_mm': ...
-    # 337   {'culmen_length_mm': 36.4, 'culmen_depth_mm': ...
-    # 154   {'culmen_length_mm': 46.5, 'culmen_depth_mm': ...
-    # 185   {'culmen_length_mm': 50.1, 'culmen_depth_mm': ...
-    # dtype: struct[pyarrow]
+```
+import bigframes.bigquery as bbq
+import bigframes.pandas as bpd
+
+# Load data from BigQuery
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+bq_df = bpd.read_gbq(query_or_table)
+
+# Create a new STRUCT Series with subfields for each column in a DataFrames.
+lengths = bbq.struct(
+    bq_df[["culmen_length_mm", "culmen_depth_mm", "flipper_length_mm"]]
+)
+
+lengths.peek()
+# 146   {'culmen_length_mm': 51.1, 'culmen_depth_mm': ...
+# 278   {'culmen_length_mm': 48.2, 'culmen_depth_mm': ...
+# 337   {'culmen_length_mm': 36.4, 'culmen_depth_mm': ...
+# 154   {'culmen_length_mm': 46.5, 'culmen_depth_mm': ...
+# 185   {'culmen_length_mm': 50.1, 'culmen_depth_mm': ...
+# dtype: struct[pyarrow]
+```
 
 ### Convert timestamps to Unix epochs
 
 You can use the [`bigframes.bigquery.unix_micros()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_micros.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to convert timestamps into Unix microseconds:
 
-    import pandas as pd
-    
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    # Create a series that consists of three timestamps: [1970-01-01, 1970-01-02, 1970-01-03]
-    s = bpd.Series(pd.date_range("1970-01-01", periods=3, freq="d", tz="UTC"))
-    
-    bbq.unix_micros(s)
-    # 0               0
-    # 1     86400000000
-    # 2    172800000000
-    # dtype: Int64
+```
+import pandas as pd
+
+import bigframes.bigquery as bbq
+import bigframes.pandas as bpd
+
+# Create a series that consists of three timestamps: [1970-01-01, 1970-01-02, 1970-01-03]
+s = bpd.Series(pd.date_range("1970-01-01", periods=3, freq="d", tz="UTC"))
+
+bbq.unix_micros(s)
+# 0               0
+# 1     86400000000
+# 2    172800000000
+# dtype: Int64
+```
 
 You can also use the [`unix_seconds()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_seconds.html) and [`unix_millis()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.unix_millis.html) time functions.
 
@@ -129,37 +137,39 @@ You can also use the [`unix_seconds()`](https://dataframes.bigquery.dev/referenc
 
 You can use the [`bigframes.bigquery.sql_scalar()`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.sql_scalar.html) function in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library to access arbitrary SQL syntax representing a single-column expression:
 
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    # Load data from BigQuery
-    query_or_table = "bigquery-public-data.ml_datasets.penguins"
-    
-    # The sql_scalar function can be used to inject SQL syntax that is not supported
-    # or difficult to express with the bigframes.pandas APIs.
-    bq_df = bpd.read_gbq(query_or_table)
-    shortest = bbq.sql_scalar(
-        "LEAST({0}, {1}, {2})",
-        columns=[
-            bq_df["culmen_depth_mm"],
-            bq_df["culmen_length_mm"],
-            bq_df["flipper_length_mm"],
-        ],
-    )
-    
-    shortest.peek()
-    #         0
-    # 149   18.9
-    # 33    16.3
-    # 296   17.2
-    # 287   17.0
-    # 307   15.0
-    # dtype: Float64
+```
+import bigframes.bigquery as bbq
+import bigframes.pandas as bpd
+
+# Load data from BigQuery
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+
+# The sql_scalar function can be used to inject SQL syntax that is not supported
+# or difficult to express with the bigframes.pandas APIs.
+bq_df = bpd.read_gbq(query_or_table)
+shortest = bbq.sql_scalar(
+    "LEAST({0}, {1}, {2})",
+    columns=[
+        bq_df["culmen_depth_mm"],
+        bq_df["culmen_length_mm"],
+        bq_df["flipper_length_mm"],
+    ],
+)
+
+shortest.peek()
+#         0
+# 149   18.9
+# 33    16.3
+# 296   17.2
+# 287   17.0
+# 307   15.0
+# dtype: Float64
+```
 
 ## What's next
 
-  - Learn about [custom Python functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions) for BigQuery DataFrames.
-  - Learn how to [generate BigQuery DataFrames code with Gemini](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#dataframe) .
-  - Learn how to [analyze package downloads from PyPI with BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/dataframes/pypi.ipynb) .
-  - View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.
-  - Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .
+- Learn about [custom Python functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions) for BigQuery DataFrames.
+- Learn how to [generate BigQuery DataFrames code with Gemini](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#dataframe) .
+- Learn how to [analyze package downloads from PyPI with BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/dataframes/pypi.ipynb) .
+- View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.
+- Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .

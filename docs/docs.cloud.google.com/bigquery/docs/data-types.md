@@ -58,8 +58,8 @@ Your data can include the following data types:
 <tr class="odd">
 <td>BOOLEAN</td>
 <td><ul>
-<li><strong>CSV format:</strong> <code dir="ltr" translate="no">1</code> or <code dir="ltr" translate="no">0</code> , <code dir="ltr" translate="no">true</code> or <code dir="ltr" translate="no">false</code> , <code dir="ltr" translate="no">t</code> or <code dir="ltr" translate="no">f</code> , <code dir="ltr" translate="no">yes</code> or <code dir="ltr" translate="no">no</code> , or <code dir="ltr" translate="no">y</code> or <code dir="ltr" translate="no">n</code> (all case-insensitive).</li>
-<li><strong>JSON format:</strong> <code dir="ltr" translate="no">true</code> or <code dir="ltr" translate="no">false</code> (case-insensitive).</li>
+<li><strong>CSV format:</strong> <code>1</code> or <code>0</code> , <code>true</code> or <code>false</code> , <code>t</code> or <code>f</code> , <code>yes</code> or <code>no</code> , or <code>y</code> or <code>n</code> (all case-insensitive).</li>
+<li><strong>JSON format:</strong> <code>true</code> or <code>false</code> (case-insensitive).</li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -72,7 +72,7 @@ Your data can include the following data types:
 <p><strong>UNIX timestamps</strong></p>
 <p>A positive or negative decimal number. A positive number specifies the number of seconds since the epoch (1970-01-01 00:00:00 UTC), and a negative number specifies the number of seconds before the epoch. Up to 6 decimal places (microsecond precision) are preserved.</p>
 <p><strong>Date and time strings</strong></p>
-<p>A date and time string in the format <code dir="ltr" translate="no">YYYY-MM-DD HH:MM:SS</code> . The <code dir="ltr" translate="no">UTC</code> and <code dir="ltr" translate="no">Z</code> specifiers are supported.</p>
+<p>A date and time string in the format <code>YYYY-MM-DD HH:MM:SS</code> . The <code>UTC</code> and <code>Z</code> specifiers are supported.</p>
 <p>You can supply a timezone offset in your date and time strings, but BigQuery doesn't preserve the offset after converting the value to its internal format. If you need to preserve the original timezone data, store the timezone offset in a separate column. The leading zero is required when you specify a single-digit timezone offset.</p>
 <p>Date and time strings must be quoted when using JSON format.</p>
 <p><strong>Examples</strong></p>
@@ -93,26 +93,26 @@ Your data can include the following data types:
 <tbody>
 <tr class="odd">
 <td>Minor (M4.2) earthquake near Oklahoma City</td>
-<td><div class="sourceCode" id="cb1" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">1408452095.220</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">1408452095.220000</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb2" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">2014-08-19</span> 07:41:35.220 -05:00</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">2014-08-19</span> 12:41:35.220 UTC</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">2014-08-19</span> 12:41:35.220</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="ex">2014-08-19</span> 12:41:35.220000</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">2014-08-19T12</span>:41:35.220Z</span></code></pre></div></td>
+<td><pre class="sh"><code>1408452095.220
+1408452095.220000</code></pre></td>
+<td><pre class="sh"><code>2014-08-19 07:41:35.220 -05:00
+2014-08-19 12:41:35.220 UTC
+2014-08-19 12:41:35.220
+2014-08-19 12:41:35.220000
+2014-08-19T12:41:35.220Z</code></pre></td>
 </tr>
 <tr class="even">
 <td>Neil Armstrong sets foot on the moon</td>
-<td><div class="sourceCode" id="cb3" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">-14182916</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb4" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">1969-07-20</span> 20:18:04</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">1969-07-20</span> 20:18:04 UTC</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">1969-07-20T20</span>:18:04</span></code></pre></div></td>
+<td><pre class="sh"><code>-14182916</code></pre></td>
+<td><pre class="sh"><code>1969-07-20 20:18:04
+1969-07-20 20:18:04 UTC
+1969-07-20T20:18:04</code></pre></td>
 </tr>
 <tr class="odd">
 <td>Deadline for fixing <a href="https://en.wikipedia.org/wiki/Year_10,000_problem">Y10k bug</a></td>
-<td><div class="sourceCode" id="cb5" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">253402300800</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">2.53402300800e11</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb6" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">10000-01-01</span> 00:00</span></code></pre></div></td>
+<td><pre class="sh"><code>253402300800
+2.53402300800e11</code></pre></td>
+<td><pre class="sh"><code>10000-01-01 00:00</code></pre></td>
 </tr>
 </tbody>
 </table></td>
@@ -138,10 +138,10 @@ You can read NUMERIC or BIGNUMERIC values in non-modifying clauses such as `SELE
 
 The following cast and conversion functions are supported in legacy SQL:
 
-  - `CAST(<numeric> AS STRING)`
-  - `CAST(<bignumeric> AS STRING)`
-  - `CAST(<string> AS NUMERIC)`
-  - `CAST(<string> AS BIGNUMERIC)`
+- `CAST(<numeric> AS STRING)`
+- `CAST(<bignumeric> AS STRING)`
+- `CAST(<string> AS NUMERIC)`
+- `CAST(<string> AS BIGNUMERIC)`
 
 ## Civil time in legacy SQL
 
@@ -149,12 +149,12 @@ You can read civil time data types—DATE, TIME, and DATETIME—and process them
 
 The following casts and conversion functions are supported in legacy SQL:
 
-  - `CAST(<date> AS STRING)`
-  - `CAST(<time> AS STRING)`
-  - `CAST(<datetime> AS STRING)`
-  - `CAST(<string> AS DATE)`
-  - `CAST(<string> AS TIME)`
-  - `CAST(<string> AS DATETIME)`
+- `CAST(<date> AS STRING)`
+- `CAST(<time> AS STRING)`
+- `CAST(<datetime> AS STRING)`
+- `CAST(<string> AS DATE)`
+- `CAST(<string> AS TIME)`
+- `CAST(<string> AS DATETIME)`
 
 In practice, legacy SQL interprets civil time values as integers, and operations on integers that you think are civil time values produce unexpected results.
 
@@ -162,5 +162,5 @@ To compute values using civil time data types, consider [GoogleSQL](https://docs
 
 ## What's next
 
-  - To set a field's data type using the API, see [`schema.fields.type`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
-  - For GoogleSQL data types, see [data types](https://docs.cloud.google.com/bigquery/sql-reference/data-types) .
+- To set a field's data type using the API, see [`schema.fields.type`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
+- For GoogleSQL data types, see [data types](https://docs.cloud.google.com/bigquery/sql-reference/data-types) .

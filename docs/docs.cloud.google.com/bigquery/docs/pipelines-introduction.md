@@ -16,10 +16,10 @@ Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/
 
 A pipeline consists of one or more of the following code assets:
 
-  - [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
-  - [SQL queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
-  - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
-  - SQLX tasks, including tables, views, sources, and data quality tests
+- [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+- [SQL queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+- [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
+- SQLX tasks, including tables, views, sources, and data quality tests
 
 You can use pipelines to schedule the execution of code assets. For example, you can schedule a SQL query to run daily and update a table with the most recent source data, which can then power a dashboard.
 
@@ -35,19 +35,19 @@ When you trigger a pipeline run, BigQuery executes the actions in the order defi
 
 You can do the following in a pipeline:
 
-  - [Create new or import existing](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries, notebooks, data preparations, or SQLX tasks into a pipeline.
-  - [Schedule a pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) to automatically run at a specified time and frequency.
-  - [Share a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_pipeline) with users or groups you specify.
-  - [Share a link to a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_link_to_a_pipeline) .
+- [Create new or import existing](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries, notebooks, data preparations, or SQLX tasks into a pipeline.
+- [Schedule a pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) to automatically run at a specified time and frequency.
+- [Share a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_pipeline) with users or groups you specify.
+- [Share a link to a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_link_to_a_pipeline) .
 
 ## Limitations
 
 Pipelines are subject to the following limitations:
 
-  - Pipelines are available only in the Google Cloud console.
-  - You can't change the region for storing a pipeline after it is created.
-  - You can grant users or groups access to a selected pipeline, but you can't grant them access to individual tasks within the pipeline.
-  - If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
+- Pipelines are available only in the Google Cloud console.
+- You can't change the region for storing a pipeline after it is created.
+- You can grant users or groups access to a selected pipeline, but you can't grant them access to individual tasks within the pipeline.
+- If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
 ## Set the default region for code assets
 
@@ -60,10 +60,10 @@ To set the default region for new code assets, do the following:
 1.  Go to the **BigQuery** page.
 
 2.  In the left pane, click folder **Files** to open the file browser:
-    
+
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -87,6 +87,6 @@ Each BigQuery pipeline run is logged using [Cloud Logging](https://docs.cloud.go
 
 ## What's next
 
-  - Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
-  - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
-  - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
+- Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
+- Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
+- Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .

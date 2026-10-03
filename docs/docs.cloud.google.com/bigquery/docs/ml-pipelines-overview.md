@@ -14,9 +14,9 @@ An ML pipeline is a representation of an MLOps workflow that is composed of a se
 
 You can use any of the following services to create BigQuery ML ML pipelines:
 
-  - Use Vertex AI Pipelines to create portable, extensible ML pipelines.
-  - Use GoogleSQL queries to create less complex SQL-based ML pipelines.
-  - Use Dataform to create more complex SQL-based ML pipelines, or ML pipelines where you need to use version control.
+- Use Vertex AI Pipelines to create portable, extensible ML pipelines.
+- Use GoogleSQL queries to create less complex SQL-based ML pipelines.
+- Use Dataform to create more complex SQL-based ML pipelines, or ML pipelines where you need to use version control.
 
 ## Vertex AI Pipelines
 
@@ -24,16 +24,16 @@ In [Vertex AI Pipelines](https://docs.cloud.google.com/gemini-enterprise-agent-p
 
 Use the [BigQuery ML components](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/bigqueryml-component) of the Google Cloud Pipeline Components SDK to compose ML pipelines in Vertex AI Pipelines. To get started with BigQuery ML components, see the following notebooks:
 
-  - [Get started with BigQuery ML pipeline components](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/ml_ops/stage3/get_started_with_bqml_pipeline_components.ipynb)
-  - [Train and evaluate a demand forecasting model](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/pipelines/google_cloud_pipeline_components_bqml_pipeline_demand_forecasting.ipynb)
+- [Get started with BigQuery ML pipeline components](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/ml_ops/stage3/get_started_with_bqml_pipeline_components.ipynb)
+- [Train and evaluate a demand forecasting model](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/pipelines/google_cloud_pipeline_components_bqml_pipeline_demand_forecasting.ipynb)
 
 ## GoogleSQL queries
 
 You can use [GoogleSQL procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) to execute multiple statements in a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) . You can use a multi-statement query to:
 
-  - Run multiple statements in a sequence, with shared state.
-  - Automate management tasks such as creating or dropping tables.
-  - Implement complex logic using programming constructs such as `IF` and `WHILE` .
+- Run multiple statements in a sequence, with shared state.
+- Automate management tasks such as creating or dropping tables.
+- Implement complex logic using programming constructs such as `IF` and `WHILE` .
 
 After creating a multi-statement query, you can [save](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) and [schedule](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) the query to automate model training, inference, and monitoring.
 

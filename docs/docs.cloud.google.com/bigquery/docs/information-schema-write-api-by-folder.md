@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-# WRITE\_API\_TIMELINE\_BY\_FOLDER view
+# WRITE_API_TIMELINE_BY_FOLDER view
 
 The `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view contains per minute aggregated BigQuery Storage Write API (gRPC) ingestion statistics for the parent folder of the current project, including its subfolders.
 
@@ -18,13 +18,13 @@ To query the `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view, you need th
 
 Each of the following predefined IAM roles includes the preceding permission:
 
-  - `roles/bigquery.admin`
-  - `roles/bigquery.user`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.resourceAdmin`
+- `roles/bigquery.admin`
+- `roles/bigquery.user`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.resourceAdmin`
 
 > **Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
 
@@ -37,7 +37,7 @@ When you query the `INFORMATION_SCHEMA` BigQuery Storage Write API (gRPC) views,
 The `INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER` view has the following schema:
 
 | Column name         | Data type          | Value                                                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|---------------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `start_timestamp`   | `TIMESTAMP`        | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                                                                                                                                                                                                                    |
 | `folder_numbers`    | `REPEATED INTEGER` | Number IDs of folders that contain the project, starting with the folder that immediately contains the project, followed by the folder that contains the child folder, and so forth. For example, if `folder_numbers` is `[1, 2, 3]` , then folder `1` immediately contains the project, folder `2` contains `1` , and folder `3` contains `2` . This column is only populated in `WRITE_API_TIMELINE_BY_FOLDER` . |
 | `project_id`        | `STRING`           | *(Clustering column)* ID of the project.                                                                                                                                                                                                                                                                                                                                                                           |
@@ -60,23 +60,23 @@ This view contains the BigQuery Storage Write API (gRPC) ingestion history of th
 
 Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-| View name                                                                                                          | Resource scope                             | Region scope |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | ------------ |
-| ``[         PROJECT_ID        .]`region-         REGION        `.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`` | Folder that contains the specified project | REGION       |
+| View name                                                                                              | Resource scope                             | Region scope |
+|--------------------------------------------------------------------------------------------------------|--------------------------------------------|--------------|
+| `[ `` PROJECT_ID ```  .]`region-  ``` REGION ```  `.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER `` | Folder that contains the specified project | ` REGION `   |
 
 Replace the following:
 
-  - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
+- Optional: `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
-    
-    > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
+- `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `` `region-us` `` .
+
+  > **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `INFORMATION_SCHEMA` views. The location of the query execution must match the region of the `INFORMATION_SCHEMA` view.
 
 **Example**
 
-  - To query data in the US multi-region, use `region-us.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
-  - To query data in the EU multi-region, use `region-eu.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
-  - To query data in the asia-northeast1 region, use `region-asia-northeast1.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
+- To query data in the US multi-region, use `region-us.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
+- To query data in the EU multi-region, use `region-eu.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
+- To query data in the asia-northeast1 region, use `region-asia-northeast1.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER`
 
 For a list of available regions, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
@@ -86,119 +86,131 @@ For a list of available regions, see [Dataset locations](https://docs.cloud.goog
 
 The following example calculates the per minute breakdown of total failed requests for all tables in the project's folder in the last 30 minutes, split by stream type and error code:
 
-    SELECT
-      start_timestamp,
-      stream_type,
-      error_code,
-      SUM(total_requests) AS num_failed_requests
-    FROM
-      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
-    WHERE
-      error_code != 'OK'
-      AND start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 30 MINUTE)
-    GROUP BY
-      start_timestamp,
-      stream_type,
-      error_code
-    ORDER BY
-      start_timestamp DESC;
+```
+SELECT
+  start_timestamp,
+  stream_type,
+  error_code,
+  SUM(total_requests) AS num_failed_requests
+FROM
+  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
+WHERE
+  error_code != 'OK'
+  AND start_timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP, INTERVAL 30 MINUTE)
+GROUP BY
+  start_timestamp,
+  stream_type,
+  error_code
+ORDER BY
+  start_timestamp DESC;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------+-------------+------------------+---------------------+
-    |   start_timestamp   | stream_type |    error_code    | num_failed_requests |
-    +---------------------+-------------+------------------+---------------------+
-    | 2023-02-24 00:25:00 | PENDING     | NOT_FOUND        |                   5 |
-    | 2023-02-24 00:25:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
-    | 2023-02-24 00:25:00 | DEFAULT     | DEADLINE_EXCEEDED|                   4 |
-    | 2023-02-24 00:24:00 | PENDING     | INTERNAL         |                   3 |
-    | 2023-02-24 00:24:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
-    | 2023-02-24 00:24:00 | DEFAULT     | DEADLINE_EXCEEDED|                   2 |
-    +---------------------+-------------+------------------+---------------------+
+```
++---------------------+-------------+------------------+---------------------+
+|   start_timestamp   | stream_type |    error_code    | num_failed_requests |
++---------------------+-------------+------------------+---------------------+
+| 2023-02-24 00:25:00 | PENDING     | NOT_FOUND        |                   5 |
+| 2023-02-24 00:25:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
+| 2023-02-24 00:25:00 | DEFAULT     | DEADLINE_EXCEEDED|                   4 |
+| 2023-02-24 00:24:00 | PENDING     | INTERNAL         |                   3 |
+| 2023-02-24 00:24:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
+| 2023-02-24 00:24:00 | DEFAULT     | DEADLINE_EXCEEDED|                   2 |
++---------------------+-------------+------------------+---------------------+
+```
 
 ##### Example 2: Per minute breakdown for all requests with error codes
 
 The following example calculates a per minute breakdown of successful and failed append requests in the project's folder, split into error code categories. This query could be used to populate a dashboard.
 
-    SELECT
-      start_timestamp,
-      SUM(total_requests) AS total_requests,
-      SUM(total_rows) AS total_rows,
-      SUM(total_input_bytes) AS total_input_bytes,
-      SUM(
-        IF(
-          error_code IN (
-            'INVALID_ARGUMENT', 'NOT_FOUND', 'CANCELLED', 'RESOURCE_EXHAUSTED',
-            'ALREADY_EXISTS', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
-            'FAILED_PRECONDITION', 'OUT_OF_RANGE'),
-          total_requests,
-          0)) AS user_error,
-      SUM(
-        IF(
-          error_code IN (
-            'DEADLINE_EXCEEDED','ABORTED', 'INTERNAL', 'UNAVAILABLE',
-            'DATA_LOSS', 'UNKNOWN'),
-          total_requests,
-          0)) AS server_error,
-      SUM(IF(error_code = 'OK', 0, total_requests)) AS total_error,
-    FROM
-      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
-    GROUP BY
-      start_timestamp
-    ORDER BY
-      start_timestamp DESC;
+```
+SELECT
+  start_timestamp,
+  SUM(total_requests) AS total_requests,
+  SUM(total_rows) AS total_rows,
+  SUM(total_input_bytes) AS total_input_bytes,
+  SUM(
+    IF(
+      error_code IN (
+        'INVALID_ARGUMENT', 'NOT_FOUND', 'CANCELLED', 'RESOURCE_EXHAUSTED',
+        'ALREADY_EXISTS', 'PERMISSION_DENIED', 'UNAUTHENTICATED',
+        'FAILED_PRECONDITION', 'OUT_OF_RANGE'),
+      total_requests,
+      0)) AS user_error,
+  SUM(
+    IF(
+      error_code IN (
+        'DEADLINE_EXCEEDED','ABORTED', 'INTERNAL', 'UNAVAILABLE',
+        'DATA_LOSS', 'UNKNOWN'),
+      total_requests,
+      0)) AS server_error,
+  SUM(IF(error_code = 'OK', 0, total_requests)) AS total_error,
+FROM
+  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
+GROUP BY
+  start_timestamp
+ORDER BY
+  start_timestamp DESC;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
-    |   start_timestamp   | total_requests | total_rows | total_input_bytes | user_error | server_error | total_error |
-    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
-    | 2020-04-15 22:00:00 |         441854 |     441854 |       23784853118 |          0 |           17 |          17 |
-    | 2020-04-15 21:59:00 |         355627 |     355627 |       26101982742 |          8 |            0 |          13 |
-    | 2020-04-15 21:58:00 |         354603 |     354603 |       26160565341 |          0 |            0 |           0 |
-    | 2020-04-15 21:57:00 |         298823 |     298823 |       23877821442 |          2 |            0 |           2 |
-    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+```
++---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+|   start_timestamp   | total_requests | total_rows | total_input_bytes | user_error | server_error | total_error |
++---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+| 2020-04-15 22:00:00 |         441854 |     441854 |       23784853118 |          0 |           17 |          17 |
+| 2020-04-15 21:59:00 |         355627 |     355627 |       26101982742 |          8 |            0 |          13 |
+| 2020-04-15 21:58:00 |         354603 |     354603 |       26160565341 |          0 |            0 |           0 |
+| 2020-04-15 21:57:00 |         298823 |     298823 |       23877821442 |          2 |            0 |           2 |
++---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+```
 
 ##### Example 3: Tables with the most incoming traffic
 
 The following example returns the BigQuery Storage Write API (gRPC) ingestion statistics for the 10 tables in the project's folder with the most incoming traffic:
 
-    SELECT
-      project_id,
-      dataset_id,
-      table_id,
-      SUM(total_rows) AS num_rows,
-      SUM(total_input_bytes) AS num_bytes,
-      SUM(total_requests) AS num_requests
-    FROM
-      `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
-    GROUP BY
-      project_id,
-      dataset_id,
-      table_id
-    ORDER BY
-      num_bytes DESC
-    LIMIT 10;
+```
+SELECT
+  project_id,
+  dataset_id,
+  table_id,
+  SUM(total_rows) AS num_rows,
+  SUM(total_input_bytes) AS num_bytes,
+  SUM(total_requests) AS num_requests
+FROM
+  `region-us`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_FOLDER
+GROUP BY
+  project_id,
+  dataset_id,
+  table_id
+ORDER BY
+  num_bytes DESC
+LIMIT 10;
+```
 
 > **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
-    +----------------------+------------+-------------------------------+------------+----------------+--------------+
-    |      project_id      | dataset_id |           table_id            |  num_rows  |   num_bytes    | num_requests |
-    +----------------------+------------+-------------------------------+------------+----------------+--------------+
-    | my-project1          | dataset1   | table1                        | 8016725532 | 73787301876979 |   8016725532 |
-    | my-project2          | dataset1   | table2                        |   26319580 | 34199853725409 |     26319580 |
-    | my-project1          | dataset2   | table1                        |   38355294 | 22879180658120 |     38355294 |
-    | my-project3          | dataset1   | table3                        |  270126906 | 17594235226765 |    270126906 |
-    | my-project2          | dataset2   | table2                        |   95511309 | 17376036299631 |     95511309 |
-    | my-project2          | dataset2   | table3                        |   46500443 | 12834920497777 |     46500443 |
-    | my-project3          | dataset2   | table4                        |   25846270 |  7487917957360 |     25846270 |
-    | my-project4          | dataset1   | table4                        |   18318404 |  5665113765882 |     18318404 |
-    | my-project4          | dataset1   | table5                        |   42829431 |  5343969665771 |     42829431 |
-    | my-project4          | dataset1   | table6                        |    8771021 |  5119004622353 |      8771021 |
-    +----------------------+------------+-------------------------------+------------+----------------+--------------+
+```
++----------------------+------------+-------------------------------+------------+----------------+--------------+
+|      project_id      | dataset_id |           table_id            |  num_rows  |   num_bytes    | num_requests |
++----------------------+------------+-------------------------------+------------+----------------+--------------+
+| my-project1          | dataset1   | table1                        | 8016725532 | 73787301876979 |   8016725532 |
+| my-project2          | dataset1   | table2                        |   26319580 | 34199853725409 |     26319580 |
+| my-project1          | dataset2   | table1                        |   38355294 | 22879180658120 |     38355294 |
+| my-project3          | dataset1   | table3                        |  270126906 | 17594235226765 |    270126906 |
+| my-project2          | dataset2   | table2                        |   95511309 | 17376036299631 |     95511309 |
+| my-project2          | dataset2   | table3                        |   46500443 | 12834920497777 |     46500443 |
+| my-project3          | dataset2   | table4                        |   25846270 |  7487917957360 |     25846270 |
+| my-project4          | dataset1   | table4                        |   18318404 |  5665113765882 |     18318404 |
+| my-project4          | dataset1   | table5                        |   42829431 |  5343969665771 |     42829431 |
+| my-project4          | dataset1   | table6                        |    8771021 |  5119004622353 |      8771021 |
++----------------------+------------+-------------------------------+------------+----------------+--------------+
+```

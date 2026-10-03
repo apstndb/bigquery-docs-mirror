@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 Describes how the catalog was deleted.
 
-Enums
-
-`REASON_UNSPECIFIED`
-
-Unknown.
-
-`DELTA_SHARING_CATALOG_DELETE_REQUEST`
-
-Delta Sharing catalog was deleted using the DeleteDeltaSharingCatalog API.
+| Enums                                  |                                                                            |
+|----------------------------------------|----------------------------------------------------------------------------|
+| `REASON_UNSPECIFIED`                   | Unknown.                                                                   |
+| `DELTA_SHARING_CATALOG_DELETE_REQUEST` | Delta Sharing catalog was deleted using the DeleteDeltaSharingCatalog API. |

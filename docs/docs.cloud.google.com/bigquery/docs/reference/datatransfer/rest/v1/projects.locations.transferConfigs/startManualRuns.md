@@ -6,13 +6,13 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.HTTP_TEMPLATE)
-  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.PATH_PARAMETERS)
-  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.request_body)
-      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.request_body.SCHEMA_REPRESENTATION)
-  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.response_body)
-  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.aspect)
-  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#try-it)
+- [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.HTTP_TEMPLATE)
+- [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.PATH_PARAMETERS)
+- [Request body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.request_body)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.request_body.SCHEMA_REPRESENTATION)
+- [Response body](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.response_body)
+- [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#body.aspect)
+- [Try it!](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/startManualRuns#try-it)
 
 **Full name** : projects.locations.transferConfigs.startManualRuns
 
@@ -36,70 +36,71 @@ The URLs use [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Path parameters
 
-Parameters
-
-`parent`
-
-`string`
-
-Required. Transfer configuration name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{projectId}/transferConfigs/{configId}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{projectId}/locations/{locationId}/transferConfigs/{configId}`
-
-Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `parent` :
-
-  - `bigquery.transfers.update`
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameters</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>parent</code></td>
+<td><p><code>string</code></p>
+<p>Required. Transfer configuration name. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{projectId}/transferConfigs/{configId}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{projectId}/locations/{locationId}/transferConfigs/{configId}</code></li>
+</ul>
+<p>Authorization requires the following <a href="https://cloud.google.com/iam/docs/">IAM</a> permission on the specified resource <code>parent</code> :</p>
+<ul>
+<li><code>bigquery.transfers.update</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 ### Request body
 
 The request body contains data with the following structure:
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{// The following is a list of mutually exclusive fields. At most one of the// fields will be set in a response:&quot;requestedTimeRange&quot;: {object (TimeRange)},&quot;requestedRunTime&quot;: string// End of mutually exclusive fields.}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
 
-The requested time specification - this can be a time range or a specific run\_time. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:
+  // The following is a list of mutually exclusive fields. At most one of the
+  // fields will be set in a response:
+  "requestedTimeRange": {
+    object (TimeRange)
+  },
+  "requestedRunTime": string
+  // End of mutually exclusive fields.
+}
+```
 
-`requestedTimeRange`
-
-` object ( TimeRange  ` )
-
-A time\_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedTimeRange must be a past time and cannot include future time values.
-
-`requestedRunTime`
-
-` string ( Timestamp  ` format)
-
-A runTime timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedRunTime must be a past time and cannot include future time values.
-
-End of mutually exclusive fields.
+| Fields                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The requested time specification - this can be a time range or a specific run_time. The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: |                                                                                                                                                                                                                                                                                                                                                |
+| `requestedTimeRange`                                                                                                                                                                           | `object ( `[`TimeRange`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/TimeRange)` )` A time_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedTimeRange must be a past time and cannot include future time values. |
+| `requestedRunTime`                                                                                                                                                                             | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` A runTime timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requestedRunTime must be a past time and cannot include future time values.                                |
+| End of mutually exclusive fields.                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                |
 
 ### Response body
 
-If successful, the response body contains an instance of `  StartManualTransferRunsResponse  ` .
+If successful, the response body contains an instance of [`StartManualTransferRunsResponse`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/StartManualTransferRunsResponse) .
 
 ### Authorization scopes
 
 Requires the following OAuth scope:
 
-  - `https://www.googleapis.com/auth/cloud-platform`
+- `https://www.googleapis.com/auth/cloud-platform`
 
 For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

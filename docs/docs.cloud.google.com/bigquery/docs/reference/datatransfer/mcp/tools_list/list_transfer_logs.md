@@ -16,34 +16,24 @@ The following example shows a MCP call to list transfer logs for a transfer run.
 
 The following code sample shows how to use `curl` to call the `list_transfer_logs` MCP tool.
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Curl Request</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
---header &#39;content-type: application/json&#39; \
---header &#39;accept: application/json, text/event-stream&#39; \
---data &#39;{
-  &quot;method&quot;: &quot;tools/call&quot;,
-  &quot;params&quot;: {
-    &quot;name&quot;: &quot;list_transfer_logs&quot;,
-    &quot;arguments&quot;: {
+**Curl Request**
+
+```
+curl --location 'https://bigquerydatatransfer.googleapis.com/mcp' \
+--header 'content-type: application/json' \
+--header 'accept: application/json, text/event-stream' \
+--data '{
+  "method": "tools/call",
+  "params": {
+    "name": "list_transfer_logs",
+    "arguments": {
       // Provide these details according to the MCP tool specification.
     }
   },
-  &quot;jsonrpc&quot;: &quot;2.0&quot;,
-  &quot;id&quot;: 1
-}&#39;</code></pre></td>
-</tr>
-</tbody>
-</table>
+  "jsonrpc": "2.0",
+  "id": 1
+}'
+```
 
 ## Input Schema
 
@@ -51,75 +41,71 @@ A request to get user facing log messages associated with data transfer run.
 
 ### ListTransferLogsRequest
 
+**JSON representation**
+
+```
+{
+  "parent": string,
+  "pageToken": string,
+  "pageSize": integer,
+  "messageTypes": [
+    enum (MessageSeverity)
+  ]
+}
+```
+
 <table>
 <colgroup>
-<col style="width: 100%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>JSON representation</th>
+<th>Fields</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;parent&quot;: string,&quot;pageToken&quot;: string,&quot;pageSize&quot;: integer,&quot;messageTypes&quot;: [enum (MessageSeverity)]}</code></pre></td>
+<td><code>parent</code></td>
+<td><p><code>string</code></p>
+<p>Required. Transfer run name. If you are using the regionless method, the location must be <code>US</code> and the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}</code></li>
+</ul>
+<p>If you are using the regionalized method, the name should be in the following form:</p>
+<ul>
+<li><code>projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}</code></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>pageToken</code></td>
+<td><p><code>string</code></p>
+<p>Pagination token, which can be used to request a specific page of <code>ListTransferLogsRequest</code> list results. For multiple-page results, <code>ListTransferLogsResponse</code> outputs a <code>next_page</code> token, which can be used as the <code>page_token</code> value to request the next page of list results.</p></td>
+</tr>
+<tr class="odd">
+<td><code>pageSize</code></td>
+<td><p><code>integer</code></p>
+<p>Page size. The default page size is the maximum value of 1000 results.</p></td>
+</tr>
+<tr class="even">
+<td><code>messageTypes[]</code></td>
+<td><p><code>enum ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_logs#Input.Schema.MessageSeverity"><code>MessageSeverity</code></a><code> )</code></p>
+<p>Message types to return. If not populated - INFO, WARNING and ERROR messages are returned.</p></td>
 </tr>
 </tbody>
 </table>
-
-Fields
-
-`parent`
-
-`string`
-
-Required. Transfer run name. If you are using the regionless method, the location must be `US` and the name should be in the following form:
-
-  - `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
-
-If you are using the regionalized method, the name should be in the following form:
-
-  - `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
-
-`pageToken`
-
-`string`
-
-Pagination token, which can be used to request a specific page of `ListTransferLogsRequest` list results. For multiple-page results, `ListTransferLogsResponse` outputs a `next_page` token, which can be used as the `page_token` value to request the next page of list results.
-
-`pageSize`
-
-`integer`
-
-Page size. The default page size is the maximum value of 1000 results.
-
-`messageTypes[]`
-
-` enum ( MessageSeverity  ` )
-
-Message types to return. If not populated - INFO, WARNING and ERROR messages are returned.
 
 ### MessageSeverity
 
 Represents data transfer user facing message severity.
 
-Enums
-
-`MESSAGE_SEVERITY_UNSPECIFIED`
-
-No severity specified.
-
-`INFO`
-
-Informational message.
-
-`WARNING`
-
-Warning message.
-
-`ERROR`
-
-Error message.
+| Enums                          |                        |
+|--------------------------------|------------------------|
+| `MESSAGE_SEVERITY_UNSPECIFIED` | No severity specified. |
+| `INFO`                         | Informational message. |
+| `WARNING`                      | Warning message.       |
+| `ERROR`                        | Error message.         |
 
 ## Output Schema
 
@@ -127,132 +113,68 @@ The returned list transfer run messages.
 
 ### ListTransferLogsResponse
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;transferMessages&quot;: [{object (TransferMessage)}],&quot;nextPageToken&quot;: string}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "transferMessages": [
+    {
+      object (TransferMessage)
+    }
+  ],
+  "nextPageToken": string
+}
+```
 
-`transferMessages[]`
-
-` object ( TransferMessage  ` )
-
-Output only. The stored pipeline transfer messages.
-
-`nextPageToken`
-
-`string`
-
-Output only. The next-pagination token. For multiple-page list results, this token can be used as the `GetTransferRunLogRequest.page_token` to request the next page of list results.
+| Fields               |                                                                                                                                                                                                                            |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `transferMessages[]` | `object ( `[`TransferMessage`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_logs#Output.Schema.TransferMessage)` )` Output only. The stored pipeline transfer messages. |
+| `nextPageToken`      | `string` Output only. The next-pagination token. For multiple-page list results, this token can be used as the `GetTransferRunLogRequest.page_token` to request the next page of list results.                             |
 
 ### TransferMessage
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{&quot;messageTime&quot;: string,&quot;severity&quot;: enum (MessageSeverity),&quot;messageText&quot;: string}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "messageTime": string,
+  "severity": enum (MessageSeverity),
+  "messageText": string
+}
+```
 
-`messageTime`
-
-` string ( Timestamp  ` format)
-
-Time when message was logged.
-
-Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` .
-
-`severity`
-
-` enum ( MessageSeverity  ` )
-
-Message severity.
-
-`messageText`
-
-`string`
-
-Message text.
+| Fields        |                                                                                                                                                                                                                                                                                                                                                                                                     |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `messageTime` | `string ( `[`Timestamp`](https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp)` format)` Time when message was logged. Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 6 or 9 fractional digits. Offsets other than "Z" are also accepted. Examples: `"2014-10-02T15:01:23Z"` , `"2014-10-02T15:01:23.045123456Z"` or `"2014-10-02T15:01:23+05:30"` . |
+| `severity`    | `enum ( `[`MessageSeverity`](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/list_transfer_logs#Input.Schema.MessageSeverity)` )` Message severity.                                                                                                                                                                                                               |
+| `messageText` | `string` Message text.                                                                                                                                                                                                                                                                                                                                                                              |
 
 ### Timestamp
 
-<table>
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>JSON representation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
-  &quot;seconds&quot;: string,
-  &quot;nanos&quot;: integer
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
+**JSON representation**
 
-Fields
+```
+{
+  "seconds": string,
+  "nanos": integer
+}
+```
 
-`seconds`
-
-`string ( int64 format)`
-
-Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).
-
-`nanos`
-
-`integer`
-
-Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive.
+| Fields    |                                                                                                                                                                                                                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `seconds` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be between -62135596800 and 253402300799 inclusive (which corresponds to 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z).                            |
+| `nanos`   | `integer` Non-negative fractions of a second at nanosecond resolution. This field is the nanosecond portion of the duration, not an alternative to seconds. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be between 0 and 999,999,999 inclusive. |
 
 ### MessageSeverity
 
 Represents data transfer user facing message severity.
 
-Enums
-
-`MESSAGE_SEVERITY_UNSPECIFIED`
-
-No severity specified.
-
-`INFO`
-
-Informational message.
-
-`WARNING`
-
-Warning message.
-
-`ERROR`
-
-Error message.
+| Enums                          |                        |
+|--------------------------------|------------------------|
+| `MESSAGE_SEVERITY_UNSPECIFIED` | No severity specified. |
+| `INFO`                         | Informational message. |
+| `WARNING`                      | Warning message.       |
+| `ERROR`                        | Error message.         |
 
 ### Tool Annotations
 
@@ -260,9 +182,9 @@ Error message.
 
 Along with the title string, the following boolean hints are defined as follows:
 
-  - `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
-  - `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
-  - `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
-  - `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
+- `readOnlyHint` : If true, the tool doesn't modify its environment. Default: false.
+- `destructiveHint` : If true, then the tool can perform destructive actions. If false, then the tool can only perform additive actions. Default: true.
+- `idempotentHint` : If true, then calling the tool repeatedly with the same arguments will have no additional effect on its environment. Default: false.
+- `openWorldHint` : If true, then the tool can interact with an 'open world' of external entities. If false, then the tool can only interact with internal entities. For example, a web search tool would be open world, while a memory tool would not be open world.
 
-Destructive Hint: ❌ | Idempotent Hint: ✅ | Read Only Hint: ✅ | Open World Hint: ❌
+Destructive Hint: ❌ \| Idempotent Hint: ✅ \| Read Only Hint: ✅ \| Open World Hint: ❌

@@ -79,6 +79,7 @@ To create a new service account, see [Create service accounts](https://docs.clou
 1.  The service account that is syncing the taxonomy must have the Data Catalog Policy Tag Admin role. For more information, see [The Data Catalog Policy Tag Admin role](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) .
 
 2.  
+
 ### Setting up a taxonomy sync with Cloud Scheduler
 
 To sync a replicated taxonomy across locations with Cloud Scheduler:
@@ -102,13 +103,13 @@ Next, add the authentication needed for the scheduled sync.
 4.  For the **Scope** , enter "https://www.googleapis.com/auth/cloud-platform".
 
 5.  Click **Create** to save the scheduled sync.
-    
+
     ![Create a scheduler job part 2](https://docs.cloud.google.com/static/bigquery/images/create-scheduler-job2.png)
 
 Now, test that the job is configured correctly.
 
 1.  After the job is created, click **Run now** to test the job is configured correctly. Subsequently, the Cloud Scheduler triggers the HTTP request based on the schedule that you specified.
-    
+
     ![Test a scheduler job](https://docs.cloud.google.com/static/bigquery/images/test-scheduler-job.png)
 
 > **Key Point:** For future on-demand (unscheduled) syncing of the replicated taxonomy, click **Run now** in the [Cloud Scheduler](https://console.cloud.google.com/cloudscheduler) page in the Google Cloud console.
@@ -117,9 +118,8 @@ Now, test that the job is configured correctly.
 
 Syntax:
 
-``` 
-  gcloud scheduler jobs create http "JOB_ID" --schedule="FREQUENCY" --uri="URI" --oath-service-account-email="CLIENT_SERVICE_ACCOUNT_EMAIL" --time-zone="TIME_ZONE" --message-body-from-file="MESSAGE_BODY"
-  
+```
+gcloud scheduler jobs create http "JOB_ID" --schedule="FREQUENCY" --uri="URI" --oath-service-account-email="CLIENT_SERVICE_ACCOUNT_EMAIL" --time-zone="TIME_ZONE" --message-body-from-file="MESSAGE_BODY"
 ```
 
 Replace the following:
@@ -135,14 +135,13 @@ Other option parameters are available, which are described in the [Google Cloud 
 
 Example:
 
-``` 
-  gcloud scheduler jobs create http cross_regional_copy_to_eu_scheduler --schedule="0 0 1 * *" --uri="https://datacatalog.googleapis.com/v1/projects/my-project/locations/eu/taxonomies:import" --oauth-service-account-email="policytag-manager-service-acou@my-project.iam.gserviceaccount.com" --time-zone="America/Los_Angeles" --message-body-from-file=request_body.json
-  
+```
+gcloud scheduler jobs create http cross_regional_copy_to_eu_scheduler --schedule="0 0 1 * *" --uri="https://datacatalog.googleapis.com/v1/projects/my-project/locations/eu/taxonomies:import" --oauth-service-account-email="policytag-manager-service-acou@my-project.iam.gserviceaccount.com" --time-zone="America/Los_Angeles" --message-body-from-file=request_body.json
 ```
 
 ## What's next
 
-  - For an overview of column-level security with policy tags, see [Introduction to BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .
-  - For more information about creating and applying policy tags, see [Restricting access with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
-  - To learn about the impact to writes when you use BigQuery column-level security, see [Impact on writes with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-writes) .
-  - For information about best practices for using policy tags, see [Using policy tags in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-policy-tags) .
+- For an overview of column-level security with policy tags, see [Introduction to BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .
+- For more information about creating and applying policy tags, see [Restricting access with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
+- To learn about the impact to writes when you use BigQuery column-level security, see [Impact on writes with BigQuery column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-writes) .
+- For information about best practices for using policy tags, see [Using policy tags in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-policy-tags) .

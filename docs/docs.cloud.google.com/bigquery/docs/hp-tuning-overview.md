@@ -14,14 +14,14 @@ Hyperparameter tuning lets you spend less time manually iterating hyperparameter
 
 You can specify hyperparameter tuning options for the following model types:
 
-  - [Linear and logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-  - [K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
-  - [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
-  - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
-  - [Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [Deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Wide & Deep network](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+- [Linear and logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+- [K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+- [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+- [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+- [Boosted trees](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+- [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+- [Deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+- [Wide & Deep network](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
 
 For these types of models, hyperparameter tuning is enabled when you specify a value for the [`NUM_TRIALS` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#num_trials) in the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) .
 
@@ -29,8 +29,8 @@ To try running hyperparameter tuning on a linear regression model, see [Use the 
 
 The following models also support hyperparameter tuning but don't allow you to specify particular values:
 
-  - [AutoML Tables models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) have automatic hyperparameter tuning embedded in the model training by default.
-  - [ARIMA\_PLUS models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) let you set the [`AUTO_ARIMA` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima) to perform hyperparameter tuning using the auto.ARIMA algorithm. This algorithm performs hyperparameter tuning for the trend module. Hyperparameter tuning isn't supported for the entire [modeling pipeline](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) .
+- [AutoML Tables models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) have automatic hyperparameter tuning embedded in the model training by default.
+- [ARIMA_PLUS models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) let you set the [`AUTO_ARIMA` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima) to perform hyperparameter tuning using the auto.ARIMA algorithm. This algorithm performs hyperparameter tuning for the trend module. Hyperparameter tuning isn't supported for the entire [modeling pipeline](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) .
 
 ## Locations
 
@@ -40,727 +40,39 @@ For information about which locations support hyperparameter tuning, see [BigQue
 
 To tune a hyperparameter, you must specify a range of values for that hyperparameter that the model can use for a set of trials. You can do this by using one of the following keywords when setting the hyperparameter in the `CREATE MODEL` statement, instead of providing a single value:
 
-  - `HPARAM_RANGE` : A two-element `ARRAY(FLOAT64)` value that defines the minimum and maximum bounds of the search space of continuous values for a hyperparameter. Use this option to specify a range of values for a hyperparameter, for example `LEARN_RATE = HPARAM_RANGE(0.0001, 1.0)` .
+- `HPARAM_RANGE` : A two-element `ARRAY(FLOAT64)` value that defines the minimum and maximum bounds of the search space of continuous values for a hyperparameter. Use this option to specify a range of values for a hyperparameter, for example `LEARN_RATE = HPARAM_RANGE(0.0001, 1.0)` .
 
-  - `HPARAM_CANDIDATES` : A `ARRAY(STRUCT)` value that specifies the set of discrete values for the hyperparameter. Use this option to specify a set of values for a hyperparameter, for example `OPTIMIZER = HPARAM_CANDIDATES(['ADAGRAD', 'SGD', 'FTRL'])` .
+- `HPARAM_CANDIDATES` : A `ARRAY(STRUCT)` value that specifies the set of discrete values for the hyperparameter. Use this option to specify a set of values for a hyperparameter, for example `OPTIMIZER = HPARAM_CANDIDATES(['ADAGRAD', 'SGD', 'FTRL'])` .
 
 ## Hyperparameters and objectives
 
 The following table lists the supported hyperparameters and objectives for each model type that supports hyperparameter tuning:
 
-Model type
-
-Hyperparameter objectives
-
-Hyperparameter
-
-Valid range
-
-Default range
-
-Scale type
-
-`LINEAR_REG`
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`MEAN_SQUARED_LOG_ERROR`  
-  
-`MEDIAN_ABSOLUTE_ERROR`  
-  
-`R2_SCORE` (default)  
-  
-`EXPLAINED_VARIANCE`
-
-`L1_REG`  
-  
-`L2_REG`
-
-`(0, ∞]`  
-  
-`(0, ∞]`
-
-`(0, 10]`  
-  
-`(0, 10]`
-
-`LOG`  
-  
-`LOG`
-
-`LOGISTIC_REG`
-
-`PRECISION`  
-  
-`RECALL`  
-  
-`ACCURACY`  
-  
-`F1_SCORE`  
-  
-`LOG_LOSS`  
-  
-`ROC_AUC` (default)
-
-`L1_REG`  
-  
-`L2_REG`
-
-`(0, ∞]`  
-  
-`(0, ∞]`
-
-`(0, 10]`  
-  
-`(0, 10]`
-
-`LOG`  
-  
-`LOG`
-
-`KMEANS`
-
-`DAVIES_BOULDIN_INDEX`
-
-`NUM_CLUSTERS`
-
-`[2, 100]`
-
-`[2, 10]`
-
-`LINEAR`
-
-`MATRIX_ FACTORIZATION` (explicit)
-
-`MEAN_SQUARED_ERROR`
-
-`NUM_FACTORS`  
-  
-`L2_REG`
-
-`[2, 200]`  
-  
-`(0, ∞)`
-
-`[2, 20]`  
-  
-`(0, 10]`
-
-`LINEAR`  
-  
-`LOG`
-
-`MATRIX_ FACTORIZATION` (implicit)
-
-`MEAN_AVERAGE_PRECISION` (default)  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN`  
-  
-`AVERAGE_RANK`
-
-`NUM_FACTORS`  
-  
-`L2_REG`  
-  
-`WALS_ALPHA`
-
-`[2, 200]`  
-  
-`(0, ∞)`  
-  
-`[0, ∞)`
-
-`[2, 20]`  
-  
-`(0, 10]`  
-  
-`[0, 100]`
-
-`LINEAR`  
-  
-`LOG`  
-  
-`LINEAR`
-
-`AUTOENCODER`
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR` (default)  
-  
-`MEAN_SQUARED_LOG_ERROR`
-
-`LEARN_RATE`  
-  
-`BATCH_SIZE`  
-  
-`L1_REG`  
-  
-`L2_REG`  
-  
-`L1_REG_ACTIVATION`  
-  
-`DROPOUT`  
-  
-`HIDDEN_UNITS`  
-  
-  
-`OPTIMIZER`  
-  
-  
-  
-`ACTIVATION_FN`
-
-`[0, 1]`  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-  
-`[0, 1)`  
-  
-Array of `[1, ∞)`  
-  
-{ `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` }  
-  
-{ `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }
-
-`[0, 1]`  
-  
-`[16, 1024]`  
-  
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-  
-`[0, 0.8]`  
-  
-N/A  
-  
-{ `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` }  
-  
-N/A
-
-`LOG`  
-  
-`LOG`  
-  
-`LOG`  
-  
-`LOG`  
-  
-`LOG`  
-  
-  
-`LINEAR`  
-  
-N/A  
-  
-N/A  
-  
-  
-  
-N/A
-
-`DNN_CLASSIFIER`
-
-`PRECISION`  
-  
-`RECALL`  
-  
-`ACCURACY`  
-  
-`F1_SCORE`  
-  
-`LOG_LOSS`  
-  
-`ROC_AUC` (default)
-
-`BATCH_SIZE`  
-  
-`DROPOUT`  
-  
-`HIDDEN_UNITS`  
-  
-`LEARN_RATE`  
-  
-`OPTIMIZER`  
-  
-  
-  
-`L1_REG`  
-  
-`L2_REG`  
-  
-`ACTIVATION_FN`
-
-`(0, ∞)`  
-  
-`[0, 1)`  
-  
-Array of `[1, ∞)`  
-  
-`[0, 1]`  
-  
-{ `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` }  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-{ `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }
-
-`[16, 1024]`  
-  
-`[0, 0.8]`  
-  
-N/A  
-  
-`[0, 1]`  
-  
-{ `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` }  
-  
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-N/A
-
-`LOG`  
-  
-`LINEAR`  
-  
-N/A  
-  
-`LINEAR`  
-  
-N/A  
-  
-  
-  
-`LOG`  
-  
-`LOG`  
-  
-N/A
-
-`DNN_REGRESSOR`
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`MEAN_SQUARED_LOG_ERROR`  
-  
-`MEDIAN_ABSOLUTE_ERROR`  
-  
-`R2_SCORE` (default)  
-  
-`EXPLAINED_VARIANCE`
-
-`DNN_LINEAR_ COMBINED_ CLASSIFIER`
-
-`PRECISION`  
-  
-`RECALL`  
-  
-`ACCURACY`  
-  
-`F1_SCORE`  
-  
-`LOG_LOSS`  
-  
-`ROC_AUC` (default)
-
-`BATCH_SIZE`  
-  
-`DROPOUT`  
-  
-`HIDDEN_UNITS`  
-  
-`L1_REG`  
-  
-`L2_REG`  
-  
-`ACTIVATION_FN`
-
-`(0, ∞)`  
-  
-`[0, 1)`  
-  
-Array of `[1, ∞)`  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-{ `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }
-
-`[16, 1024]`  
-  
-`[0, 0.8]`  
-  
-N/A  
-  
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-N/A
-
-`LOG`  
-  
-`LINEAR`  
-  
-N/A  
-  
-`LOG`  
-  
-`LOG`  
-  
-N/A
-
-`DNN_LINEAR_ COMBINED_ REGRESSOR`
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`MEAN_SQUARED_LOG_ERROR`  
-  
-`MEDIAN_ABSOLUTE_ERROR`  
-  
-`R2_SCORE` (default)  
-  
-`EXPLAINED_VARIANCE`
-
-`BOOSTED_TREE_ CLASSIFIER`
-
-`PRECISION`  
-  
-`RECALL`  
-  
-`ACCURACY`  
-  
-`F1_SCORE`  
-  
-`LOG_LOSS`  
-  
-`ROC_AUC` (default)
-
-`LEARN_RATE`  
-  
-`L1_REG`  
-  
-`L2_REG`  
-  
-`DROPOUT`  
-  
-`MAX_TREE_DEPTHMAX_TREE_DEPTH`  
-  
-`SUBSAMPLE`  
-  
-`MIN_SPLIT_LOSS`  
-  
-`NUM_PARALLEL_TREE`  
-  
-`MIN_TREE_CHILD_WEIGHT`  
-  
-`COLSAMPLE_BYTREE`  
-  
-`COLSAMPLE_BYLEVEL`  
-  
-`COLSAMPLE_BYNODE`  
-  
-`BOOSTER_TYPE`  
-  
-`DART_NORMALIZE_TYPE`  
-  
-`TREE_METHOD`
-
-`[0, ∞)`  
-  
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-`[0, 1]`  
-  
-`[1, 20]`  
-  
-  
-  
-`(0, 1]`  
-  
-`[0, ∞)`  
-  
-`[1, ∞)`  
-  
-  
-`[0, ∞)`  
-  
-  
-`[0, 1]`  
-  
-  
-`[0, 1]`  
-  
-  
-`[0, 1]`  
-  
-  
-{ `GBTREE` , `DART` }  
-  
-{ `TREE` , `FOREST` }  
-  
-{ `AUTO` , `EXACT` , `APPROX` , `HIST` }
-
-`[0, 1]`  
-  
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-N/A  
-  
-`[1, 10]`  
-  
-  
-  
-`(0, 1]`  
-  
-N/A  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-N/A  
-  
-N/A
-
-`LINEAR`  
-  
-`LOG`  
-  
-`LOG`  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-N/A  
-  
-N/A  
-  
-N/A
-
-`BOOSTED_TREE_ REGRESSOR`  
-  
-  
-  
-  
-  
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`MEAN_SQUARED_LOG_ERROR`  
-  
-`MEDIAN_ABSOLUTE_ERROR`  
-  
-`R2_SCORE` (default)  
-  
-`EXPLAINED_VARIANCE`
-
-`RANDOM_FOREST_ CLASSIFIER`
-
-`PRECISION`  
-  
-`RECALL`  
-  
-`ACCURACY`  
-  
-`F1_SCORE`  
-  
-`LOG_LOSS`  
-  
-`ROC_AUC` (default)
-
-`L1_REG`  
-  
-`L2_REG`  
-  
-`MAX_TREE_DEPTH`  
-  
-`SUBSAMPLE`  
-  
-`MIN_SPLIT_LOSS`  
-  
-`NUM_PARALLEL_TREE`  
-  
-`MIN_TREE_CHILD_WEIGHT`  
-  
-`COLSAMPLE_BYTREE`  
-  
-`COLSAMPLE_BYLEVEL`  
-  
-`COLSAMPLE_BYNODE`  
-  
-`TREE_METHOD`
-
-`(0, ∞)`  
-  
-`(0, ∞)`  
-  
-`[1, 20]`  
-  
-`(0, 1)`  
-  
-`[0, ∞)`  
-  
-`[2, ∞)`  
-  
-  
-`[0, ∞)`  
-  
-  
-`[0, 1]`  
-  
-  
-`[0, 1]`  
-  
-  
-`[0, 1]`  
-  
-{ `AUTO` , `EXACT` , `APPROX` , `HIST` }
-
-`(0, 10]`  
-  
-`(0, 10]`  
-  
-`[1, 20]`  
-  
-`(0, 1)`  
-  
-N/A  
-  
-`[2, 200]`  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A  
-  
-  
-N/A
-
-`LOG`  
-  
-`LOG`  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-`LINEAR`  
-  
-  
-N/A
-
-`RANDOM_FOREST_ REGRESSOR`  
-  
-  
-  
-  
-  
-
-`MEAN_ABSOLUTE_ERROR`  
-  
-`MEAN_SQUARED_ERROR`  
-  
-`MEAN_SQUARED_LOG_ERROR`  
-  
-`MEDIAN_ABSOLUTE_ERROR`  
-  
-`R2_SCORE` (default)  
-  
-`EXPLAINED_VARIANCE`
+| Model type                         | Hyperparameter objectives                                                                                                             | Hyperparameter                                                                                                                                                                                                                                                | Valid range                                                                                                                                                                                       | Default range                                                                                                              | Scale type                                                                                                        |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `LINEAR_REG`                       | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` `MEAN_SQUARED_LOG_ERROR` `MEDIAN_ABSOLUTE_ERROR` `R2_SCORE` (default) `EXPLAINED_VARIANCE` | `L1_REG` `L2_REG`                                                                                                                                                                                                                                             | `(0, ∞]` `(0, ∞]`                                                                                                                                                                                 | `(0, 10]` `(0, 10]`                                                                                                        | `LOG` `LOG`                                                                                                       |
+| `LOGISTIC_REG`                     | `PRECISION` `RECALL` `ACCURACY` `F1_SCORE` `LOG_LOSS` `ROC_AUC` (default)                                                             | `L1_REG` `L2_REG`                                                                                                                                                                                                                                             | `(0, ∞]` `(0, ∞]`                                                                                                                                                                                 | `(0, 10]` `(0, 10]`                                                                                                        | `LOG` `LOG`                                                                                                       |
+| `KMEANS`                           | `DAVIES_BOULDIN_INDEX`                                                                                                                | `NUM_CLUSTERS`                                                                                                                                                                                                                                                | `[2, 100]`                                                                                                                                                                                        | `[2, 10]`                                                                                                                  | `LINEAR`                                                                                                          |
+| `MATRIX_ FACTORIZATION` (explicit) | `MEAN_SQUARED_ERROR`                                                                                                                  | `NUM_FACTORS` `L2_REG`                                                                                                                                                                                                                                        | `[2, 200]` `(0, ∞)`                                                                                                                                                                               | `[2, 20]` `(0, 10]`                                                                                                        | `LINEAR` `LOG`                                                                                                    |
+| `MATRIX_ FACTORIZATION` (implicit) | `MEAN_AVERAGE_PRECISION` (default) `MEAN_SQUARED_ERROR` `NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN` `AVERAGE_RANK`                        | `NUM_FACTORS` `L2_REG` `WALS_ALPHA`                                                                                                                                                                                                                           | `[2, 200]` `(0, ∞)` `[0, ∞)`                                                                                                                                                                      | `[2, 20]` `(0, 10]` `[0, 100]`                                                                                             | `LINEAR` `LOG` `LINEAR`                                                                                           |
+| `AUTOENCODER`                      | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` (default) `MEAN_SQUARED_LOG_ERROR`                                                         | `LEARN_RATE` `BATCH_SIZE` `L1_REG` `L2_REG` `L1_REG_ACTIVATION` `DROPOUT` `HIDDEN_UNITS` `OPTIMIZER` `ACTIVATION_FN`                                                                                                                                          | `[0, 1]` `(0, ∞)` `(0, ∞)` `(0, ∞)` `(0, ∞)` `[0, 1)` Array of `[1, ∞)` { `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` } { `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }  | `[0, 1]` `[16, 1024]` `(0, 10]` `(0, 10]` `(0, 10]` `[0, 0.8]` N/A { `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` } N/A | `LOG` `LOG` `LOG` `LOG` `LOG` `LINEAR` N/A N/A N/A                                                                |
+| `DNN_CLASSIFIER`                   | `PRECISION` `RECALL` `ACCURACY` `F1_SCORE` `LOG_LOSS` `ROC_AUC` (default)                                                             | `BATCH_SIZE` `DROPOUT` `HIDDEN_UNITS` `LEARN_RATE` `OPTIMIZER` `L1_REG` `L2_REG` `ACTIVATION_FN`                                                                                                                                                              | `(0, ∞)` `[0, 1)` Array of `[1, ∞)` `[0, 1]` { `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` } `(0, ∞)` `(0, ∞)` { `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }           | `[16, 1024]` `[0, 0.8]` N/A `[0, 1]` { `ADAM` , `ADAGRAD` , `FTRL` , `RMSPROP` , `SGD` } `(0, 10]` `(0, 10]` N/A           | `LOG` `LINEAR` N/A `LINEAR` N/A `LOG` `LOG` N/A                                                                   |
+| `DNN_REGRESSOR`                    | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` `MEAN_SQUARED_LOG_ERROR` `MEDIAN_ABSOLUTE_ERROR` `R2_SCORE` (default) `EXPLAINED_VARIANCE` |                                                                                                                                                                                                                                                               |                                                                                                                                                                                                   |                                                                                                                            |                                                                                                                   |
+| `DNN_LINEAR_ COMBINED_ CLASSIFIER` | `PRECISION` `RECALL` `ACCURACY` `F1_SCORE` `LOG_LOSS` `ROC_AUC` (default)                                                             | `BATCH_SIZE` `DROPOUT` `HIDDEN_UNITS` `L1_REG` `L2_REG` `ACTIVATION_FN`                                                                                                                                                                                       | `(0, ∞)` `[0, 1)` Array of `[1, ∞)` `(0, ∞)` `(0, ∞)` { `RELU` , `RELU6` , `CRELU` , `ELU` , `SELU` , `SIGMOID` , `TANH` }                                                                        | `[16, 1024]` `[0, 0.8]` N/A `(0, 10]` `(0, 10]` N/A                                                                        | `LOG` `LINEAR` N/A `LOG` `LOG` N/A                                                                                |
+| `DNN_LINEAR_ COMBINED_ REGRESSOR`  | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` `MEAN_SQUARED_LOG_ERROR` `MEDIAN_ABSOLUTE_ERROR` `R2_SCORE` (default) `EXPLAINED_VARIANCE` |                                                                                                                                                                                                                                                               |                                                                                                                                                                                                   |                                                                                                                            |                                                                                                                   |
+| `BOOSTED_TREE_ CLASSIFIER`         | `PRECISION` `RECALL` `ACCURACY` `F1_SCORE` `LOG_LOSS` `ROC_AUC` (default)                                                             | `LEARN_RATE` `L1_REG` `L2_REG` `DROPOUT` `MAX_TREE_DEPTHMAX_TREE_DEPTH` `SUBSAMPLE` `MIN_SPLIT_LOSS` `NUM_PARALLEL_TREE` `MIN_TREE_CHILD_WEIGHT` `COLSAMPLE_BYTREE` `COLSAMPLE_BYLEVEL` `COLSAMPLE_BYNODE` `BOOSTER_TYPE` `DART_NORMALIZE_TYPE` `TREE_METHOD` | `[0, ∞)` `(0, ∞)` `(0, ∞)` `[0, 1]` `[1, 20]` `(0, 1]` `[0, ∞)` `[1, ∞)` `[0, ∞)` `[0, 1]` `[0, 1]` `[0, 1]` { `GBTREE` , `DART` } { `TREE` , `FOREST` } { `AUTO` , `EXACT` , `APPROX` , `HIST` } | `[0, 1]` `(0, 10]` `(0, 10]` N/A `[1, 10]` `(0, 1]` N/A N/A N/A N/A N/A N/A N/A N/A N/A                                    | `LINEAR` `LOG` `LOG` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` N/A N/A N/A |
+| `BOOSTED_TREE_ REGRESSOR`          | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` `MEAN_SQUARED_LOG_ERROR` `MEDIAN_ABSOLUTE_ERROR` `R2_SCORE` (default) `EXPLAINED_VARIANCE` |                                                                                                                                                                                                                                                               |                                                                                                                                                                                                   |                                                                                                                            |                                                                                                                   |
+| `RANDOM_FOREST_ CLASSIFIER`        | `PRECISION` `RECALL` `ACCURACY` `F1_SCORE` `LOG_LOSS` `ROC_AUC` (default)                                                             | `L1_REG` `L2_REG` `MAX_TREE_DEPTH` `SUBSAMPLE` `MIN_SPLIT_LOSS` `NUM_PARALLEL_TREE` `MIN_TREE_CHILD_WEIGHT` `COLSAMPLE_BYTREE` `COLSAMPLE_BYLEVEL` `COLSAMPLE_BYNODE` `TREE_METHOD`                                                                           | `(0, ∞)` `(0, ∞)` `[1, 20]` `(0, 1)` `[0, ∞)` `[2, ∞)` `[0, ∞)` `[0, 1]` `[0, 1]` `[0, 1]` { `AUTO` , `EXACT` , `APPROX` , `HIST` }                                                               | `(0, 10]` `(0, 10]` `[1, 20]` `(0, 1)` N/A `[2, 200]` N/A N/A N/A N/A N/A                                                  | `LOG` `LOG` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` `LINEAR` N/A                           |
+| `RANDOM_FOREST_ REGRESSOR`         | `MEAN_ABSOLUTE_ERROR` `MEAN_SQUARED_ERROR` `MEAN_SQUARED_LOG_ERROR` `MEDIAN_ABSOLUTE_ERROR` `R2_SCORE` (default) `EXPLAINED_VARIANCE` |                                                                                                                                                                                                                                                               |                                                                                                                                                                                                   |                                                                                                                            |                                                                                                                   |
 
 Most `LOG` scale hyperparameters use the open lower boundary of `0` . You can still set `0` as the lower boundary by using the `HPARAM_RANGE` keyword to set the hyperparameter range. For example, in a boosted tree classifier model, you could set the range for the [`L1_REG` hyperparameter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#l1_reg) as `L1_REG = HPARAM_RANGE(0, 5)` . A value of `0` gets converted to `1e-14` .
 
 Conditional hyperparameters are supported. For example, in a boosted tree regressor model, you can only tune the [`DART_NORMALIZE_TYPE` hyperparameter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#dart_normalize_type) when the value of the [`BOOSTER_TYPE` hyperparameter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#booster_type) is `DART` . In this case, you specify both search spaces and the conditions are handled automatically, as shown in the following example:
 
-    BOOSTER_TYPE = HPARAM_CANDIDATES(['DART', 'GBTREE'])
-    DART_NORMALIZE_TYPE = HPARAM_CANDIDATES(['TREE', 'FOREST'])
+```
+BOOSTER_TYPE = HPARAM_CANDIDATES(['DART', 'GBTREE'])
+DART_NORMALIZE_TYPE = HPARAM_CANDIDATES(['TREE', 'FOREST'])
+```
 
 Another example is the interaction between `BOOSTER_TYPE` and `DROPOUT` in boosted tree models. The `DROPOUT` parameter can only be tuned when `BOOSTER_TYPE` includes `'DART'` as a candidate. If you define a search space for `DROPOUT` but limit `BOOSTER_TYPE` to only `HPARAM_CANDIDATES(['GBTREE'])` , then the tuning job fails.
 
@@ -770,8 +82,8 @@ If you don't specify a search space for a hyperparameter by using `HPARAM_RANGE`
 
 If you specify a search space for a hyperparameter by using `HPARAM_RANGE` or `HPARAM_CANDIDATES` , the search starting points depends on whether the specified search space includes the default value for that hyperparameter, as documented in the `CREATE MODEL` topic for that model type:
 
-  - If the specified range contains the default value, that's where the search starts. For example, if you are running hyperparameter tuning for an implicit [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) , and you specify the value `[20, 30, 40, 50]` for the [`WALS_ALPHA` hyperparameter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#wals_alpha) , then the search starts at `40` , the default value.
-  - If the specified range doesn't contain the default value, the search starts from the point in the specified range that is closest to the default value. For example, if you specify the value `[10, 20, 30]` for the `WALS_ALPHA` hyperparameter, then the search starts from `30` , which is the closest value to the default value of `40` .
+- If the specified range contains the default value, that's where the search starts. For example, if you are running hyperparameter tuning for an implicit [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) , and you specify the value `[20, 30, 40, 50]` for the [`WALS_ALPHA` hyperparameter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#wals_alpha) , then the search starts at `40` , the default value.
+- If the specified range doesn't contain the default value, the search starts from the point in the specified range that is closest to the default value. For example, if you specify the value `[10, 20, 30]` for the `WALS_ALPHA` hyperparameter, then the search starts from `30` , which is the closest value to the default value of `40` .
 
 ## Data split
 
@@ -785,8 +97,8 @@ If you want to use only training and evaluation sets, specify `0` for the [`DATA
 
 The metrics from models that are generated from a normal training job and those from a hyperparameter tuning training job are only comparable when the data split fractions are equal. For example, the following models are comparable:
 
-  - Non-hyperparameter tuning: `DATA_SPLIT_METHOD='RANDOM', DATA_SPLIT_EVAL_FRACTION=0.2`
-  - Hyperparameter tuning: `DATA_SPLIT_METHOD='RANDOM', DATA_SPLIT_EVAL_FRACTION=0.2, DATA_SPLIT_TEST_FRACTION=0`
+- Non-hyperparameter tuning: `DATA_SPLIT_METHOD='RANDOM', DATA_SPLIT_EVAL_FRACTION=0.2`
+- Hyperparameter tuning: `DATA_SPLIT_METHOD='RANDOM', DATA_SPLIT_EVAL_FRACTION=0.2, DATA_SPLIT_TEST_FRACTION=0`
 
 ## Performance
 
@@ -798,9 +110,9 @@ To confirm the model performance improvements provided by hyperparameter tuning,
 
 Transfer learning is enabled by default when you set the [`HPARAM_TUNING_ALGORITHM` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#hparam_tuning_algorithm) in the `CREATE MODEL` statement to `VIZIER_DEFAULT` . The hyperparameter tuning for a model benefits by learning from previously tuned models if it meets the following requirements:
 
-  - It has the same model type as previously tuned models.
-  - It resides in the same project as previously tuned models.
-  - It use the same hyperparameter search space OR a *subset* of the hyperparameter search space of previously tuned models. A subset uses the same hyperparameter names and types, but doesn't have to have the same ranges. For example, `(a:[0, 10])` is considered as a subset of `(a:[-1, 1], b:[0, 1])` .
+- It has the same model type as previously tuned models.
+- It resides in the same project as previously tuned models.
+- It use the same hyperparameter search space OR a *subset* of the hyperparameter search space of previously tuned models. A subset uses the same hyperparameter names and types, but doesn't have to have the same ranges. For example, `(a:[0, 10])` is considered as a subset of `(a:[-1, 1], b:[0, 1])` .
 
 Transfer learning doesn't require that the input data be the same.
 
@@ -812,33 +124,33 @@ Transfer learning helps hyperparameter tuning converge faster, instead of helpin
 
 Hyperparameter tuning handles errors in the following ways:
 
-  - Cancellation: If a training job is canceled while running, then all successful trials remain usable.
+- Cancellation: If a training job is canceled while running, then all successful trials remain usable.
 
-  - Invalid input: If the user input is invalid, then the service returns a user error.
+- Invalid input: If the user input is invalid, then the service returns a user error.
 
-  - Invalid hyperparameters: If the hyperparameters are invalid for a trial, then the trial is skipped and marked as `INFEASIBLE` in the output from the `ML.TRIAL_INFO` function.
+- Invalid hyperparameters: If the hyperparameters are invalid for a trial, then the trial is skipped and marked as `INFEASIBLE` in the output from the `ML.TRIAL_INFO` function.
 
-  - Trial internal error: If more than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , then the training job stops and returns a user error.
+- Trial internal error: If more than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , then the training job stops and returns a user error.
 
-  - If less than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , the training continues with the failed trials marked as `FAILED` in the output from the `ML.TRIAL_INFO` function.
+- If less than 50% of the `NUM_TRIALS` value fail due to `INTERNAL_ERROR` , the training continues with the failed trials marked as `FAILED` in the output from the `ML.TRIAL_INFO` function.
 
 ## Model serving functions
 
 You can use output models from hyperparameter tuning with a number of existing model serving functions. To use these functions, follow these rules:
 
-  - When the function takes input data, only the result from one trial is returned. By default this is the optimal trial, but you can also choose a particular trial by specifying the `TRIAL_ID` as an argument for the given function. You can get the `TRIAL_ID` from the output of the `ML.TRIAL_INFO` function. The following functions are supported:
-    
-      - [`ML.CONFUSION_MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion)
-      - [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
-      - [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
-      - [`ML.RECOMMEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend)
-      - [`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc)
+- When the function takes input data, only the result from one trial is returned. By default this is the optimal trial, but you can also choose a particular trial by specifying the `TRIAL_ID` as an argument for the given function. You can get the `TRIAL_ID` from the output of the `ML.TRIAL_INFO` function. The following functions are supported:
 
-  - When the function doesn't take input data, all trial results are returned, and the first output column is `TRIAL_ID` . The following functions are supported:
-    
-      - [`ML.CENTROIDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-centroids)
-      - [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
-      - [`ML.WEIGHTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
+  - [`ML.CONFUSION_MATRIX`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-confusion)
+  - [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+  - [`ML.PREDICT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict)
+  - [`ML.RECOMMEND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend)
+  - [`ML.ROC_CURVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc)
+
+- When the function doesn't take input data, all trial results are returned, and the first output column is `TRIAL_ID` . The following functions are supported:
+
+  - [`ML.CENTROIDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-centroids)
+  - [`ML.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate)
+  - [`ML.WEIGHTS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights)
 
 The output from [`ML.FEATURE_INFO`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) doesn't change, because all trials share the same input data.
 
@@ -862,7 +174,7 @@ This section provides answers to some frequently asked questions about hyperpara
 
 ### How many trials do I need to tune a model?
 
-We recommend using at least 10 trials for one hyperparameter, so the total number of trials should be at least ` 10 * num_hyperparameters  ` . If you are using the default search space, refer to the **Hyperparameters** column in the [Hyperparameters and objectives](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#hyperparameters_and_objectives) table for the number of hyperparameters tuned by default for a given model type.
+We recommend using at least 10 trials for one hyperparameter, so the total number of trials should be at least `10 * `` num_hyperparameters` . If you are using the default search space, refer to the **Hyperparameters** column in the [Hyperparameters and objectives](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#hyperparameters_and_objectives) table for the number of hyperparameters tuned by default for a given model type.
 
 ### What if I don't see performance improvements by using hyperparameter tuning?
 
@@ -876,13 +188,13 @@ Train a new hyperparameter tuning model with the same search space. The built-in
 
 It depends on the following factors:
 
-  - K-means models already use all data as the training data, so there's no need to retrain the model.
+- K-means models already use all data as the training data, so there's no need to retrain the model.
 
-  - For matrix factorization models, you can retrain the model with the selected hyperparameters and all input data for better coverage of users and items.
+- For matrix factorization models, you can retrain the model with the selected hyperparameters and all input data for better coverage of users and items.
 
-  - For all other model types, retraining is usually unnecessary. The service already keeps 80% of the input data for training during the default random data split. You can still retrain the model with more training data and the selected hyperparameters if your dataset is small, but leaving little evaluation data for early stop might worsen overfitting.
+- For all other model types, retraining is usually unnecessary. The service already keeps 80% of the input data for training during the default random data split. You can still retrain the model with more training data and the selected hyperparameters if your dataset is small, but leaving little evaluation data for early stop might worsen overfitting.
 
 ## What's next
 
-  - To try running hyperparameter tuning, see [Use the BigQuery ML hyperparameter tuning to improve model performance](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
+- To try running hyperparameter tuning, see [Use the BigQuery ML hyperparameter tuning to improve model performance](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
+- For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

@@ -18,39 +18,39 @@ In this tutorial, you create a Standard edition reservation with 100 autoscaling
 
 > **Caution:** This tutorial incurs charges. Before purchasing slots, understand [reservation pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . To avoid incurring charges after you complete this tutorial, make sure to delete the reservation as described in [Clean up](https://docs.cloud.google.com/bigquery/docs/reservations-get-started#clean-up) .
 
------
+------------------------------------------------------------------------
 
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
 
------
+------------------------------------------------------------------------
 
 ## Before you begin
 
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
+
     **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
+    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
+    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
     > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-    
-    You can create a separate Google Cloud project to administer the reservation and give it a descriptive name like `bq- COMPANY_NAME -admin` .
+
+    You can create a separate Google Cloud project to administer the reservation and give it a descriptive name like `bq- `` COMPANY_NAME `` -admin` .
 
 2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery Reservation API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-    
+
     For more information, see [Enable the BigQuery Reservation API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) .
 
 4.  In the Google Cloud console, view your slot quotas:
-    
+
     To purchase slots, you must have enough slot quota for the region in which you want to purchase slots.
-    
+
     If your slot quota for the region is less than the number of slots you want to purchase, see [Request a quota increase](https://docs.cloud.google.com/bigquery/quotas#requesting_a_quota_increase) .
 
 ### Required roles
@@ -93,8 +93,8 @@ You can assign any project that's in the same organization and region as the adm
 
 3.  Click the **Slot reservations** tab.
 
-4.  In the **Actions** column for the reservation named **`test`** , click more\_vert **Actions** .
-    
+4.  In the **Actions** column for the reservation named **`test`** , click more_vert **Actions** .
+
     ![Assignments project picker.](https://docs.cloud.google.com/static/bigquery/images/reservations-assignments.png)
 
 5.  Click **Create assignment** .
@@ -120,17 +120,15 @@ The easiest way to eliminate billing is to delete the project that you created f
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete the reservation
 
@@ -146,7 +144,7 @@ When you delete a reservation, any jobs that are currently executing with slots 
 
 5.  For each assignment in that reservation, click **Actions** , and then click **Delete** .
 
-6.  In the **Actions** column for the reservation named **`test`** , click more\_vert **Actions** .
+6.  In the **Actions** column for the reservation named **`test`** , click more_vert **Actions** .
 
 7.  Click **Delete** .
 
@@ -154,10 +152,10 @@ To learn how to delete a reservation using SQL or the bq tool, see [Delete a res
 
 ## What's next
 
-  - To learn how to use BigQuery reservations to manage your workloads, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
+- To learn how to use BigQuery reservations to manage your workloads, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
-  - To learn more about slots, see [Understand slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
+- To learn more about slots, see [Understand slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
-  - To learn how to use BigQuery assignments to organize your workloads, see [Manage workload assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
+- To learn how to use BigQuery assignments to organize your workloads, see [Manage workload assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
-  - To learn how to purchase a commitment, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
+- To learn how to purchase a commitment, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .

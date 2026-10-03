@@ -23,7 +23,7 @@ You can switch between on-demand and capacity-based billing models at any time. 
 Consider the following when choosing a workload management model:
 
 |                            | **On-demand**                                                      | **Capacity-based**                                                                                                   |
-| -------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+|----------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **Usage model**            | Data scanned or processed by your queries                          | Dedicated slots or autoscaling slots                                                                                 |
 | **Unit of metering**       | TiB                                                                | slot-hours                                                                                                           |
 | **Minimum capacity**       | Up to 2,000 slots per project                                      | 50 slots per reservation                                                                                             |
@@ -66,9 +66,9 @@ For more information about BI Engine, see [Introduction to BI Engine](https://do
 
 ## What's next
 
-  - [Understand slots](https://docs.cloud.google.com/bigquery/docs/slots)
-  - [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management)
-  - Learn about [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
-  - Learn about [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
-  - [Estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs)
-  - [Create custom cost controls](https://docs.cloud.google.com/bigquery/docs/custom-quotas)
+- [Understand slots](https://docs.cloud.google.com/bigquery/docs/slots)
+- [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management)
+- Learn about [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing)
+- Learn about [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)
+- [Estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs)
+- [Create custom cost controls](https://docs.cloud.google.com/bigquery/docs/custom-quotas)

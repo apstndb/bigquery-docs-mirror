@@ -12,18 +12,18 @@ This document describes how to get information about and control access to clust
 
 For more information, see the following:
 
-  - To learn about clustered table support in BigQuery, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
-  - To learn how to create clustered tables, see [Create clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+- To learn about clustered table support in BigQuery, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
+- To learn how to create clustered tables, see [Create clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
 ## Before you begin
 
 To get information about tables, you must have the `bigquery.tables.get` permission. The following predefined IAM roles include `bigquery.tables.get` permissions:
 
-  - `roles/bigquery.metadataViewer`
-  - `roles/bigquery.dataViewer`
-  - `roles/bigquery.dataOwner`
-  - `roles/bigquery.dataEditor`
-  - `roles/bigquery.admin`
+- `roles/bigquery.metadataViewer`
+- `roles/bigquery.dataViewer`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.admin`
 
 In addition, if a user has the `bigquery.datasets.create` permission, when that user creates a dataset, they are granted `bigquery.dataOwner` access to it. `bigquery.dataOwner` access gives the user the ability to get information about tables in a dataset.
 
@@ -33,15 +33,15 @@ For more information about IAM roles and permissions in BigQuery, see [Predefine
 
 To configure access to tables and views, you can grant an IAM role to an entity at the following levels, which are listed in order of the range of resources allowed (largest to smallest):
 
-  - A high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
-  - The dataset level
-  - The table or view level
+- A high level in the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) such as the project, folder, or organization level
+- The dataset level
+- The table or view level
 
 You can also restrict data access within tables, by using the following methods:
 
-  - [Column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
-  - [Column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
-  - [Row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
+- [Column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro)
+- [Column data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro)
+- [Row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro)
 
 Access to any resource protected by IAM is additive. For example, if an entity does not have access at a high level such as a project, you can grant the entity access at the dataset level, and the entity then has access to the tables and views in the dataset. Similarly, if the entity does not have access at the high level or the dataset level, you can grant the entity access at the table or view level.
 
@@ -68,9 +68,9 @@ Select one of the following options:
 2.  Click your dataset name to expand it, and then click the table name that you want to view.
 
 3.  Click **Details** .
-    
+
     The table's details are displayed, including the clustering columns.
-    
+
     ![Table details.](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
 
 ### SQL
@@ -80,15 +80,17 @@ For clustered tables, you can query the `CLUSTERING_ORDINAL_POSITION` column in 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, enter the following statement:
-    
-        CREATE TABLE mydataset.data (column1 INT64, column2 INT64)
-        CLUSTER BY column1, column2;
-        SELECT
-          column_name, clustering_ordinal_position
-        FROM
-          mydataset.INFORMATION_SCHEMA.COLUMNS;
 
-3.  Click play\_circle **Run** .
+    ```
+    CREATE TABLE mydataset.data (column1 INT64, column2 INT64)
+    CLUSTER BY column1, column2;
+    SELECT
+      column_name, clustering_ordinal_position
+    FROM
+      mydataset.INFORMATION_SCHEMA.COLUMNS;
+    ```
+
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -98,24 +100,28 @@ The clustering ordinal position is 1 for `column1` and 2 for `column2` . More ta
 
 Issue the `bq show` command to display all table information. Use the `--schema` flag to display only table schema information. The `--format` flag can be used to control the output.
 
-If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `  project_id:dataset  ` .
+If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
 
-    bq show \
-        --schema \
-        --format=prettyjson \
-        PROJECT_ID:DATASET.TABLE
+```
+bq show \
+    --schema \
+    --format=prettyjson \
+    PROJECT_ID:DATASET.TABLE
+```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : your project ID
-  - `  DATASET  ` : the name of the dataset
-  - `  TABLE  ` : the name of the table
+- `PROJECT_ID` : your project ID
+- `DATASET` : the name of the dataset
+- `TABLE` : the name of the table
 
 Examples:
 
 Enter the following command to display all information about `myclusteredtable` in `mydataset` . `mydataset` in your default project.
 
-    bq show --format=prettyjson mydataset.myclusteredtable
+```
+bq show --format=prettyjson mydataset.myclusteredtable
+```
 
 The output should look like the following:
 
@@ -145,27 +151,29 @@ You can change or remove a table's clustering specifications, or change the set 
 Follow these steps to apply a new clustering specification to unpartitioned or partitioned tables.
 
 1.  In the bq tool, update the clustering specification of your table to match the new clustering:
-    
-    ``` 
-     bq update --clustering_fields=CLUSTER_COLUMN DATASET.ORIGINAL_TABLE 
+
     ```
-    
+     bq update --clustering_fields=CLUSTER_COLUMN DATASET.ORIGINAL_TABLE
+    ```
+
     Replace the following:
-    
-      - `  CLUSTER_COLUMN  ` : the column you are clustering on—for example, `mycolumn`
-      - `  DATASET  ` : the name of the dataset containing the table—for example, `mydataset`
-      - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `mytable`
-    
+
+    - `CLUSTER_COLUMN` : the column you are clustering on—for example, `mycolumn`
+    - `DATASET` : the name of the dataset containing the table—for example, `mydataset`
+    - `ORIGINAL_TABLE` : the name of your original table—for example, `mytable`
+
     You can also call the `tables.update` or `tables.patch` API method to [modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
 2.  To cluster all rows according to the new clustering specification, run the following `UPDATE` statement:
-    
-        UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
-    
+
+    ```
+    UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
+    ```
+
     > **Note:** If a new clustering specification is applied to a table that is in long-term storage, then the table reverts to active storage pricing. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 ## What's next
 
-  - For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
-  - For an overview of partitioned table support in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
-  - To learn how to create partitioned tables, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
+- For information about querying clustered tables, see [Query clustered tables](https://docs.cloud.google.com/bigquery/docs/querying-clustered-tables) .
+- For an overview of partitioned table support in BigQuery, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
+- To learn how to create partitioned tables, see [Create partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .

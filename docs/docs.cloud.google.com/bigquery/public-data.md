@@ -25,11 +25,11 @@ You can find more details about each individual dataset by clicking the dataset'
 To get started using a BigQuery public dataset, you must create or select a project. The first terabyte of data processed per month is free, so you can start querying public datasets without enabling billing. If you intend to go beyond the [free tier](https://cloud.google.com/bigquery/pricing#free-tier) , you must also enable billing.
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project,
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Public dataset locations
@@ -40,9 +40,9 @@ Each public dataset is stored in a specific location like `US` or `EU` . Current
 
 You can access public datasets in the [Google Cloud console](https://console.cloud.google.com/bigquery) through the following methods:
 
-  - In the [**Explorer**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) pane, view the `bigquery-public-data` project. For more information, see [Open a public dataset](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console#open_a_public_dataset) .
+- In the [**Explorer**](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) pane, view the `bigquery-public-data` project. For more information, see [Open a public dataset](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console#open_a_public_dataset) .
 
-  - Use Sharing to [view and subscribe to public datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
+- Use Sharing to [view and subscribe to public datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
 
 To find out when a data table was last updated, go to the table's **Details** section as described in [Get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) , and view the **Last modified** field.
 
@@ -50,9 +50,9 @@ To find out when a data table was last updated, go to the table's **Details** se
 
 There are many other public datasets available for you to query, some of which are also hosted by Google, but many more that are hosted by third parties. Other datasets include:
 
-  - [NIH chest x-ray dataset](https://docs.cloud.google.com/healthcare-api/docs/resources/public-datasets/nih-chest)
-  - [The Cancer Imaging Archive (TCIA) dataset](https://docs.cloud.google.com/healthcare-api/docs/resources/public-datasets/tcia)
-  - [Dataset of release notes for the majority of generally available Google Cloud products.](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=google_cloud_release_notes&t=release_notes&page=table)
+- [NIH chest x-ray dataset](https://docs.cloud.google.com/healthcare-api/docs/resources/public-datasets/nih-chest)
+- [The Cancer Imaging Archive (TCIA) dataset](https://docs.cloud.google.com/healthcare-api/docs/resources/public-datasets/tcia)
+- [Dataset of release notes for the majority of generally available Google Cloud products.](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=google_cloud_release_notes&t=release_notes&page=table)
 
 ## Share a dataset with the public
 
@@ -60,8 +60,8 @@ You can share any of your datasets with the public by changing the dataset's acc
 
 When you share a dataset with the public:
 
-  - Storage charges are incurred by the billing account attached to the project that contains the publicly-shared dataset.
-  - Query charges are incurred by the billing account attached to the project where the query jobs are run.
+- Storage charges are incurred by the billing account attached to the project that contains the publicly-shared dataset.
+- Query charges are incurred by the billing account attached to the project where the query jobs are run.
 
 For more information, see [Overview of BigQuery pricing](https://cloud.google.com/bigquery/pricing#overview_of_pricing) .
 
@@ -74,7 +74,7 @@ The requirements for querying the BigQuery sample tables are the same as the req
 The `bigquery-public-data:samples` dataset includes the following tables:
 
 | Name                                                                                                                         | Description                                                                                                                               |
-| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | [`gsod`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=samples&t=gsod&page=table)                       | Contains weather information collected by NOAA, such as precipitation amounts and wind speeds from late 1929 to early 2010.               |
 | [`github_nested`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=samples&t=github_nested&page=table)     | Contains a timeline of actions such as pull requests and comments on GitHub repositories with a nested schema. Created in September 2012. |
 | [`github_timeline`](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=samples&t=github_timeline&page=table) | Contains a timeline of actions such as pull requests and comments on GitHub repositories with a flat schema. Created in May 2012.         |

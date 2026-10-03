@@ -78,15 +78,15 @@ To improve the quality of insights, generate [data profile scan](https://docs.cl
 
 To get the permissions that you need to generate, manage, and retrieve dataset insights, ask your administrator to grant you the following IAM roles:
 
-  - To generate, manage, and retrieve insights:
-      - Dataplex DataScan Editor ( `roles/dataplex.dataScanEditor` ) or Dataplex DataScan Administrator ( `roles/dataplex.dataScanAdmin` ) on project
-      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on tables
-      - BigQuery User ( `roles/bigquery.user` ) or BigQuery Studio User ( `roles/bigquery.studioUser` ) on project
-      - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on project
-  - To view insights:
-      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on project
-      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on dataset
-  - To publish insights to Knowledge Catalog: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.entryOwner) ( `roles/dataplex.entryOwner` ) on entry group
+- To generate, manage, and retrieve insights:
+  - Dataplex DataScan Editor ( `roles/dataplex.dataScanEditor` ) or Dataplex DataScan Administrator ( `roles/dataplex.dataScanAdmin` ) on project
+  - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on tables
+  - BigQuery User ( `roles/bigquery.user` ) or BigQuery Studio User ( `roles/bigquery.studioUser` ) on project
+  - [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `roles/bigquery.resourceViewer` ) on project
+- To view insights:
+  - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `roles/dataplex.dataScanDataViewer` ) on project
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on dataset
+- To publish insights to Knowledge Catalog: [Dataplex Entry and EntryLink Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.entryOwner) ( `roles/dataplex.entryOwner` ) on entry group
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -96,24 +96,24 @@ To see the exact permissions that are required to generate insights, expand the 
 
 #### Required permissions
 
-  - `bigquery.datasets.get` : read dataset metadata
-  - `bigquery.jobs.create` : create jobs
-  - `bigquery.jobs.listAll` : list all jobs in the project
-  - `bigquery.tables.get` : get table metadata
-  - `bigquery.tables.getData` : get table data and metadata
-  - `dataplex.datascans.create` : create data scan resource
-  - `dataplex.datascans.get` : read data scan resource metadata
-  - `dataplex.datascans.getData` : read data scan execution results
-  - `dataplex.datascans.run` : run on-demand data scan
-  - `dataplex.entryGroups.useSchemaJoinEntryLink` : use `schema-join` entry links
-  - `dataplex.entryGroups.useSchemaJoinAspect` : use schema join aspects
-  - `dataplex.entryLinks.create` : create entry links
-  - `dataplex.entryLinks.update` : update entry links
-  - `dataplex.entryLinks.delete` : delete entry links
-  - `dataplex.entries.link` : link entries
-  - `dataplex.entries.update` : update entries
-  - `dataplex.entryGroups.useDescriptionsAspect` : use description aspects
-  - `dataplex.entryGroups.useQueriesAspect` : use query aspects
+- `bigquery.datasets.get` : read dataset metadata
+- `bigquery.jobs.create` : create jobs
+- `bigquery.jobs.listAll` : list all jobs in the project
+- `bigquery.tables.get` : get table metadata
+- `bigquery.tables.getData` : get table data and metadata
+- `dataplex.datascans.create` : create data scan resource
+- `dataplex.datascans.get` : read data scan resource metadata
+- `dataplex.datascans.getData` : read data scan execution results
+- `dataplex.datascans.run` : run on-demand data scan
+- `dataplex.entryGroups.useSchemaJoinEntryLink` : use `schema-join` entry links
+- `dataplex.entryGroups.useSchemaJoinAspect` : use schema join aspects
+- `dataplex.entryLinks.create` : create entry links
+- `dataplex.entryLinks.update` : update entry links
+- `dataplex.entryLinks.delete` : delete entry links
+- `dataplex.entries.link` : link entries
+- `dataplex.entries.update` : update entries
+- `dataplex.entryGroups.useDescriptionsAspect` : use description aspects
+- `dataplex.entryGroups.useQueriesAspect` : use query aspects
 
 ## Generate dataset insights
 
@@ -126,13 +126,13 @@ To see the exact permissions that are required to generate insights, expand the 
 3.  Click the **Insights** tab.
 
 4.  To generate insights and publish them to Knowledge Catalog, click **Generate and publish** .
-    
+
     To generate insights without publishing them to Knowledge Catalog, click **Generate without publishing** .
-    
+
     For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#modes-dataset-insights) .
 
 5.  If your dataset is in a multi-region, you might be prompted to select a region to generate insights. Select a region corresponding to the multi-region where the insights scan is going to be created.
-    
+
     It takes a few minutes for the insights to be populated. The quality of insights improves if the tables in the dataset have [data profiling results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .
 
 After insights are generated, BigQuery displays a dataset description, a relationship graph, a relationship table, and sample cross-table queries.
@@ -148,41 +148,45 @@ To generate insights programmatically, use the Knowledge Catalog [DataScans API]
 ### Generate a data documentation data scan for the BigQuery dataset
 
 1.  Create a data documentation data scan using the [`dataScans.create` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/create) . Optionally, you can publish these insights to Knowledge Catalog by setting the `catalog_publishing_enabled` parameter to `true` .
-    
+
     For example:
-    
-        alias gcurl='curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json"'
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans?dataScanId=DATASCAN_ID \
-        -d '{
-          "data": {
-            "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID"
-          },
-          "executionSpec": {
-            "trigger": { "onDemand": {} }
-          },
-          "type": "DATA_DOCUMENTATION",
-          "dataDocumentationSpec": {
-            "catalog_publishing_enabled": true
-          }
-        }'
-    
+
+    ```
+    alias gcurl='curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json"'
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans?dataScanId=DATASCAN_ID \
+    -d '{
+      "data": {
+        "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID"
+      },
+      "executionSpec": {
+        "trigger": { "onDemand": {} }
+      },
+      "type": "DATA_DOCUMENTATION",
+      "dataDocumentationSpec": {
+        "catalog_publishing_enabled": true
+      }
+    }'
+    ```
+
     Replace the following:
-    
-      - PROJECT\_ID : the ID of your Google Cloud project where the dataset resides
-      - LOCATION : the region where the data scan runs
-      - DATASCAN\_ID : a unique name you provide for this scan
-      - DATASET\_ID : the ID of the BigQuery dataset being scanned
+
+    - ` PROJECT_ID ` : the ID of your Google Cloud project where the dataset resides
+    - ` LOCATION ` : the region where the data scan runs
+    - ` DATASCAN_ID ` : a unique name you provide for this scan
+    - ` DATASET_ID ` : the ID of the BigQuery dataset being scanned
 
 2.  Start the data documentation scan job using the [`dataScans.run` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.dataScans/run) .
-    
+
     For example:
-    
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans/DATASCAN_ID:run
-    
+
+    ```
+    gcurl -X POST \
+    https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+    dataScans/DATASCAN_ID:run
+    ```
+
     This request returns a unique job ID along with the initial state.
 
 ### Check the data documentation scan status
@@ -191,7 +195,9 @@ Check completion of the scan job run using the [`dataScans.get` method](https://
 
 Use the job ID to fetch the status of the job. For example:
 
-    gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans/DATASCAN_ID/jobs/JOB_ID?view=FULL
+```
+gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataScans/DATASCAN_ID/jobs/JOB_ID?view=FULL
+```
 
 The job completes when the status is either `SUCCEEDED` or `FAILURE` .
 
@@ -205,22 +211,24 @@ While insights are generated from the dataset-level data scan, the resulting ent
 
 To retrieve metadata for your BigQuery dataset, use the [`entries.get` method](https://docs.cloud.google.com/knowledge-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries/get) . To include all aspects, set the `view` parameter to `FULL` . For example:
 
-    gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/entryGroups/@bigquery/entries/bigquery.googleapis.com/projects/DATASET_PROJECT_ID/datasets/DATASET_ID?view=FULL
+```
+gcurl -X GET https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/entryGroups/@bigquery/entries/bigquery.googleapis.com/projects/DATASET_PROJECT_ID/datasets/DATASET_ID?view=FULL
+```
 
 Replace the following:
 
-  - PROJECT\_ID : the ID of your Google Cloud project where the data scan was configured
-  - LOCATION : the region where the entry group resides
-  - DATASET\_PROJECT\_ID : the ID of the Google Cloud project where the BigQuery dataset resides
-  - DATASET : the ID of the BigQuery dataset
+- ` PROJECT_ID ` : the ID of your Google Cloud project where the data scan was configured
+- ` LOCATION ` : the region where the entry group resides
+- ` DATASET_PROJECT_ID ` : the ID of the Google Cloud project where the BigQuery dataset resides
+- ` DATASET ` : the ID of the BigQuery dataset
 
 > **Note:** The entry group for BigQuery is always `@bigquery` . The portion of the URL following `entries/` is the Fully Qualified Name of the BigQuery resource, which Knowledge Catalog uses as a unique identifier.
 
 If publishing to Knowledge Catalog is successful, the following aspects are attached to the BigQuery dataset:
 
-  - Descriptions: contains AI-generated descriptions of the dataset
-  - Queries: contains relevant SQL queries related to the dataset
-  - Relationships: persisted as entry links between the tables present in the dataset
+- Descriptions: contains AI-generated descriptions of the dataset
+- Queries: contains relevant SQL queries related to the dataset
+- Relationships: persisted as entry links between the tables present in the dataset
 
 ### View and save the dataset description
 
@@ -232,16 +240,16 @@ You can edit the description before saving the details.
 
 The **Relationships** graph provides a visual representation of how tables in the dataset relate to each other. It displays the top 10 most connected tables as nodes, with lines representing relationships between them.
 
-  - To see relationship details, such as the columns that join two tables, hover over the edge connecting the table nodes.
-  - To rearrange the graph for better visibility, drag the table nodes.
+- To see relationship details, such as the columns that join two tables, hover over the edge connecting the table nodes.
+- To rearrange the graph for better visibility, drag the table nodes.
 
 ### Use the relationship table
 
 The **Relationship table** lists the discovered relationships in a tabular format. Each row represents a relationship between two tables, showing the source table and column, and the destination table and column. The **Source** column indicates how the relationship was determined:
 
-  - **LLM inferred.** Relationships inferred by Gemini, based on table and column names and descriptions across the dataset.
-  - **Usage based.** Relationships extracted from query logs, based on frequent joins.
-  - **Schema-defined.** Relationships derived from existing primary key and foreign key mappings in the table schema.
+- **LLM inferred.** Relationships inferred by Gemini, based on table and column names and descriptions across the dataset.
+- **Usage based.** Relationships extracted from query logs, based on frequent joins.
+- **Schema-defined.** Relationships derived from existing primary key and foreign key mappings in the table schema.
 
 You can filter the relationships for a specific table or provide feedback on the quality of detected relationships. To export the generated dataset description and relationships to a JSON file, click **Export to JSON** .
 
@@ -261,6 +269,6 @@ After you generate insights for a dataset, you can manage, update, or delete the
 
 ## What's next
 
-  - Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
-  - Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
-  - Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
+- Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+- Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+- Learn more about [Knowledge Catalog data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .

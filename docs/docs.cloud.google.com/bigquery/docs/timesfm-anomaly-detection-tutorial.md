@@ -18,8 +18,8 @@ This tutorial guides you through using the `AI.DETECT_ANOMALIES` function with t
 
 This tutorial uses billable components of Google Cloud, including the following:
 
-  - BigQuery
-  - BigQuery ML
+- BigQuery
+- BigQuery ML
 
 For more information about BigQuery costs, see the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page.
 
@@ -28,11 +28,11 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
 ## Before you begin
 
 1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project,
-    
+
     Enable the BigQuery API, if it is not already enabled.
-    
+
     **Roles required to enable APIs**
-    
+
     To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 ## Detect anomalies in a single bike share trips time series
@@ -46,33 +46,35 @@ Follow these steps to detect anomalies with the TimesFM model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** , the query takes 1-2 minutes to complete:
-    
-        WITH
-          bike_share_trips AS (
-            SELECT
-              TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips
-            FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-            GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
-          )
-        SELECT *
-        FROM
-          AI.DETECT_ANOMALIES(
-            (
-              SELECT *
-              FROM bike_share_trips
-              WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
-            ),
-            (
-              SELECT *
-              FROM bike_share_trips
-              WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
-            ),
-            anomaly_prob_threshold => 0.95,
-            timestamp_col => 'trip_hour',
-            data_col => 'num_trips');
-    
+
+    ```
+    WITH
+      bike_share_trips AS (
+        SELECT
+          TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+        GROUP BY TIMESTAMP_TRUNC(start_date, HOUR)
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        (
+          SELECT *
+          FROM bike_share_trips
+          WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
+        ),
+        (
+          SELECT *
+          FROM bike_share_trips
+          WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
+        ),
+        anomaly_prob_threshold => 0.95,
+        timestamp_col => 'trip_hour',
+        data_col => 'num_trips');
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+
     | time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound         | anomaly_probability | ai_detect_anomalies_status|
@@ -86,9 +88,9 @@ Follow these steps to detect anomalies with the TimesFM model:
     ```
 
 3.  When the query is finished running, click the **Visualization** tab. The resulting chart looks similar to the following:
-    
-    ![Graph one month timepoints of input data along with the AI.DETECT\_ANOMALIES function output data to show anomalies.](https://docs.cloud.google.com/static/bigquery/images/ai-detect-anomalies.png)
-    
+
+    ![Graph one month timepoints of input data along with the AI.DETECT_ANOMALIES function output data to show anomalies.](https://docs.cloud.google.com/static/bigquery/images/ai-detect-anomalies.png)
+
     You can identify the anomalies where the `time_series_data` value falls outside the `lower_bound` and `upper_bound` range.
 
 ## Detect anomalies in multiple bike share trips time series
@@ -100,34 +102,36 @@ Follow these steps to detect anomalies with the TimesFM model:
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  In the query editor, paste in the following query and click **Run** :
-    
-        WITH
-          bike_share_trips AS (
-            SELECT
-              TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips, subscriber_type
-            FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
-            GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
-          )
-        SELECT *
-        FROM
-          AI.DETECT_ANOMALIES(
-            (
-              SELECT *
-              FROM bike_share_trips
-              WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
-            ),
-            (
-              SELECT *
-              FROM bike_share_trips
-              WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
-            ),
-            anomaly_prob_threshold => 0.95,
-            timestamp_col => 'trip_hour',
-            data_col => 'num_trips',
-            id_cols => ['subscriber_type']);
-    
+
+    ```
+    WITH
+      bike_share_trips AS (
+        SELECT
+          TIMESTAMP_TRUNC(start_date, HOUR) AS trip_hour, COUNT(*) AS num_trips, subscriber_type
+        FROM `bigquery-public-data.san_francisco_bikeshare.bikeshare_trips`
+        GROUP BY TIMESTAMP_TRUNC(start_date, HOUR), subscriber_type
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        (
+          SELECT *
+          FROM bike_share_trips
+          WHERE trip_hour >= TIMESTAMP('2017-07-01') AND trip_hour < TIMESTAMP('2017-08-01')
+        ),
+        (
+          SELECT *
+          FROM bike_share_trips
+          WHERE trip_hour >= TIMESTAMP('2017-08-01') AND trip_hour < TIMESTAMP('2017-09-01')
+        ),
+        anomaly_prob_threshold => 0.95,
+        timestamp_col => 'trip_hour',
+        data_col => 'num_trips',
+        id_cols => ['subscriber_type']);
+    ```
+
     The results look similar to the following:
-    
+
     ```console
     +-----------------+-------------------------+------------------+------------+--------------------+---------------------+---------------------+---------------------------+
     | subscriber_type | time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound         | anomaly_probability | ai_detect_anomalies_status|
@@ -155,18 +159,16 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 To delete the project:
 
 > **Caution** : Deleting a project has the following effects:
-> 
->   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
->   - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
-> 
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
 > If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
-
-In the project list, select the project that you want to delete, and then click **Delete** .
-
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+1.  In the Google Cloud console, go to the **Manage resources** page.
+2.  In the project list, select the project that you want to delete, and then click **Delete** .
+3.  In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
