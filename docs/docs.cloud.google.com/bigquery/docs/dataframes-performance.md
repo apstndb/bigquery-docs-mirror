@@ -119,7 +119,7 @@ You can also use the `peek()` method to download a small, random sample of data 
 
 ## Defer the `repr()` data retrieval
 
-You can call the `repr()` method in BigQuery DataFrames with [notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) or your IDE debugger. This call triggers the `head()` call that retrieves the actual data. This retrieval can slow down your iterative coding and debugging process and also incur costs.
+You can call the `repr()` method in BigQuery DataFrames with [notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) or your IDE debugger. This call triggers the `head()` call that retrieves the actual data. This retrieval can slow down your iterative coding and debugging process and also incur costs.
 
 To prevent the `repr()` method from retrieving data, set the `repr_mode` attribute to `"deferred"` , as shown in the following example:
 

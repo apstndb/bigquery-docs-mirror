@@ -121,7 +121,7 @@ The following services are enabled by default for every new Google Cloud project
 <ul>
 <li><a href="https://docs.cloud.google.com/dataform/docs/quickstart-create-workflow">BigQuery pipelines</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries">Saved queries</a></li>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/programmatic-analysis">Colab notebooks</a></li>
 <li><a href="https://docs.cloud.google.com/dataform/docs">Dataform</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-prep-introduction">Data preparation</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/data-canvas">Data canvas</a></li>
@@ -193,7 +193,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 <tr class="odd">
 <td><code>aiplatform.googleapis.com</code></td>
 <td><ul>
-<li><a href="https://docs.cloud.google.com/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/programmatic-analysis">Colab notebooks</a></li>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">BigQuery ML remote models</a></li>
 </ul></td>
 <td><ul>

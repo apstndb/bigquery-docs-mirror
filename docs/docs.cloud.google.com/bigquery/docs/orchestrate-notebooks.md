@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Schedule notebooks
 
-This document describes how to schedule and deploy [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) to automate various tasks. For example, you can run notebooks at a specified time and frequency to automate training machine learning models, call external APIs, or run BigQuery DataFrames code.
+This document describes how to schedule and deploy [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) to automate various tasks. For example, you can run notebooks at a specified time and frequency to automate training machine learning models, call external APIs, or run BigQuery DataFrames code.
 
 Changes that you make to a notebook are automatically saved, but are available only to you and to users who have [access to the notebook](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#grant_access_to_notebooks) . To update the schedule with a new version of the notebook, you need to [deploy the notebook](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks#deploy) . By deploying a notebook, you update its schedule with your current version of the notebook. Schedules run the latest deployed version of the notebook.
 
@@ -400,5 +400,5 @@ To permanently delete a schedule for a selected notebook, follow these steps:
 
 ## What's next
 
-- Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage notebooks
 
-This document describes how to manage [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) , including how to view, compare, restore, and delete notebooks.
+This document describes how to manage [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) , including how to view, compare, restore, and delete notebooks.
 
 This document also describes how to view and manage notebook metadata in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
 

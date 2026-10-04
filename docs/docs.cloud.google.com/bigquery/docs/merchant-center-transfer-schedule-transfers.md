@@ -136,7 +136,7 @@ bq mk \
 --project_id=project_id \
 --target_dataset=dataset \
 --display_name=name \
---params=&#39;parameters' \
+--params='parameters' \
 --data_source=data_source
 --service_account_name=service_account_name
 ```
@@ -167,7 +167,7 @@ bq mk \
 --transfer_config \
 --target_dataset=mydataset \
 --display_name='My Transfer' \
---params='{"merchant_id":"1234","export_products":"true","export_regional_inventories":"true","export_local_inventories":"true",&quot;export_price_benchmarks":"true","export_best_sellers":"true"}' \
+--params='{"merchant_id":"1234","export_products":"true","export_regional_inventories":"true","export_local_inventories":"true","export_price_benchmarks":"true","export_best_sellers":"true"}' \
 --data_source=merchant_center
 ```
 

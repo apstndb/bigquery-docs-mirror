@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 BigQuery DataFrames brings scalable Python analytics and machine learning (ML) to BigQuery. Computations execute in BigQuery with server-side processing, which lets you analyze and model large datasets without being constrained by local or notebook memory. You can use syntax similar to pandas ( `bigframes.pandas` ) and BigQuery ML ( `bigframes.bigquery` ) without writing SQL.
 
-Use this quickstart to perform the following analysis and ML tasks by using the [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
+Use this quickstart to perform the following analysis and ML tasks by using the [BigQuery DataFrames API](https://dataframes.bigquery.dev/reference/index.html) in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) :
 
 - Create a DataFrame over the `bigquery-public-data.ml_datasets.penguins` public dataset.
 - Calculate the average body mass of a penguin.

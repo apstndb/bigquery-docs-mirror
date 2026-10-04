@@ -13,7 +13,7 @@ This tutorial shows how to generate multimodal embeddings for images and text us
 This tutorial covers the following tasks:
 
 - Creating a [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) over image data in a Cloud Storage bucket.
-- Exploring the image data by using a [Colab Enterprise notebook in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- Exploring the image data by using a [Colab Enterprise notebook in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 - Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that targets the [Gemini Enterprise Agent Platform `multimodalembedding` foundation model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#foundation_model_apis) .
 - Using the remote model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from the images in the object table.
 - Correct any embedding generation errors.

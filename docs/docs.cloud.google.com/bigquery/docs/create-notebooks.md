@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create notebooks
 
-This document describes how to create [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+This document describes how to create [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
 ## Before you begin
 

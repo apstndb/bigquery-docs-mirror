@@ -249,6 +249,11 @@ In addition to [external table limitations](https://docs.cloud.google.com/bigque
 
 - Only Apache Parquet data files are supported.
 
+- [Flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) :
+
+  - If an Iceberg external table is partitioned on a column containing non-alphanumeric characters, BigQuery might be unable to extract partition metadata from the manifest, which can result in a full table scan.
+  - Iceberg tables containing structural characters (such as dots `.` , dollar signs `$` , brackets `[]` , parentheses `()` , or slashes `/` ) can't be queried directly by BigQuery. If your workflow requires registering such tables in Lakehouse runtime catalog or catalog services for use exclusively with external engines (such as Spark or Trino), contact [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) to request project-level enablement.
+
 - The following [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) features aren't supported:
 
   - New data types: nanosecond timestamp(tz), unknown, variant, geometry, geography

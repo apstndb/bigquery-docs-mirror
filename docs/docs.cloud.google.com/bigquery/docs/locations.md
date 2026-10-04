@@ -116,7 +116,7 @@ The following table lists the multi-regions where BigQuery is available. When yo
 
 ## BigQuery Studio code asset locations
 
-BigQuery Studio lets you save, share, and manage versions of code assets such as [notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
+BigQuery Studio lets you save, share, and manage versions of code assets such as [notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) .
 
 The following table lists the regions where BigQuery Studio is available:
 

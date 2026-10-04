@@ -20,7 +20,7 @@ You can work with BigQuery ML capabilities by using the following:
 - The Google Cloud console query editor, to work with models by using SQL queries.
 - The bq command-line tool
 - The BigQuery REST API
-- Integrated [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+- Integrated [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis)
 - External tools such as a Jupyter notebook or business intelligence platform
 
 ## Advantages of BigQuery ML

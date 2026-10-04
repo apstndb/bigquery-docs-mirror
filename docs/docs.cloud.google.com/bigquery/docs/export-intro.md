@@ -50,7 +50,7 @@ As you take these factors into consideration, we recommend performing a test exp
 
 ## Export BigQuery code assets
 
-You can download [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets, such as [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) or [notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) to maintain a local copy of your assets. For more information on downloading your BigQuery code assets, see the following:
+You can download [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets, such as [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) or [notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) to maintain a local copy of your assets. For more information on downloading your BigQuery code assets, see the following:
 
 - [Download saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#download_saved_queries)
 - [Download notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#download_a_notebook)

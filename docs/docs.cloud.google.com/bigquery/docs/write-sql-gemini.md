@@ -22,13 +22,13 @@ Gemini for Google Cloud doesn't use your prompts or its responses as data to tra
 
 Only English language prompts are supported for Gemini in BigQuery.
 
-This document is intended for data analysts, data scientists, and data developers who work with SQL queries and [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . It assumes that you know how to query data in the BigQuery Studio environment or how to work with Python notebooks to analyze BigQuery data.
+This document is intended for data analysts, data scientists, and data developers who work with SQL queries and [notebooks and programmatic analysis tools](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . It assumes that you know how to query data in the BigQuery Studio environment or how to work with Python notebooks to analyze BigQuery data.
 
 ## Before you begin
 
-1.  Ensure that [Gemini in BigQuery is set up for your Google Cloud project](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) . This step is normally done by an administrator. Gemini in BigQuery features might be turned off or unavailable until you complete the remaining steps in this section.
+1.  Ensure that you [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) for your Google Cloud project. This step is normally done by an administrator. Gemini in BigQuery features might be turned off or unavailable until you complete the remaining steps in this section.
 
-2.  To use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/overview) , to write code in the Gemini Cloud Assist pane, you must also follow the steps in [Set up Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/set-up-gemini) .
+2.  To use [Gemini Cloud Assist](https://cloud.google.com/cloud-assist/overview) , you must also follow the steps in [Set up Gemini Cloud Assist](https://cloud.google.com/cloud-assist/set-up-gemini) .
 
 3.  To use Gemini to explain and fix Python code in your Colab Enterprise notebooks in BigQuery, you must also follow the steps in [Set up Gemini in Colab Enterprise for a project](https://docs.cloud.google.com/colab/docs/gemini-in-colab/set-up-gemini) .
 
@@ -397,9 +397,9 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
 
     The new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
-3.  To insert a new code cell, in the toolbar, click add **Code** . The new code cell contains the message **Start coding or generate with AI.**
+3.  To insert a new code cell, in the toolbar, click add **Code** . The new code cell contains the message **Start coding or generate with AI** .
 
-4.  In the new code cell, click **generate** .
+4.  In the new code cell, click **Generate** .
 
 5.  In the **Generate** editor, enter the following natural language prompt:
 
@@ -487,7 +487,7 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
 
 3.  To insert a new code cell, in the toolbar, click add **Code** .
 
-4.  The new code cell contains the message **Start coding or generate with AI.** In the new code cell, click **generate** .
+4.  The new code cell contains the message **Start coding or generate with AI.** In the new code cell, click **Generate** .
 
 5.  In the **Generate** editor, enter the following natural language prompt:
 
@@ -618,9 +618,9 @@ You can ask Gemini Code Assist to generate PySpark code in your notebook. Gemini
 
 To generate Gemini Code Assist code in your notebook, do the following:
 
-1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `Start coding or generate with AI` . Click **generate** .
+1.  Insert a new code cell by clicking **+ Code** in the toolbar. The new code cell displays `Start coding or generate with AI` . Click **Generate** .
 
-2.  In the Generate editor, enter a natural language prompt, and then click `enter` . **Make sure to include the keyword `spark` or `pyspark` in your prompt.** .
+2.  In the Generate editor, enter a natural language prompt, and then click `enter` . **Make sure to include the keyword `spark` or `pyspark` in your prompt.**
 
     Sample prompt:
 

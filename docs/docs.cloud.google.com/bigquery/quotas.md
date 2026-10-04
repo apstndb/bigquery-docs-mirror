@@ -974,7 +974,7 @@ The following limits apply for [BigQuery stored procedures for Apache Spark](htt
 
 ## Notebooks
 
-All [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quotas) and [Colab Enterprise quotas and limits](https://docs.cloud.google.com/colab/docs/quotas) apply to [notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . The following limits also apply:
+All [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quotas) and [Colab Enterprise quotas and limits](https://docs.cloud.google.com/colab/docs/quotas) apply to [notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . The following limits also apply:
 
 | **Limit**                                         | **Default** | **Notes**                                                                                                                                                                                                                                                                                     |
 |---------------------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

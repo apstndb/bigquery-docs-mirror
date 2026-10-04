@@ -16,7 +16,7 @@ Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/
 
 A pipeline consists of one or more of the following code assets:
 
-- [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+- [Notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis)
 - [SQL queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
 - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
 - SQLX tasks, including tables, views, sources, and data quality tests

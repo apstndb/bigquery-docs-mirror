@@ -222,5 +222,5 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 ## What's next
 
 - Learn about the [capabilities of the Data Science Agent](https://docs.cloud.google.com/colab/docs/use-data-science-agent#capabilities) .
-- Read more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- Read more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 - Read the documentation on [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .

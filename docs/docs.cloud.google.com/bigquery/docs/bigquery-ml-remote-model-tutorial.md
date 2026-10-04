@@ -479,7 +479,7 @@ Alternatively, to remove the individual resources used in this tutorial:
 
 - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
 - For more information about using the `CREATE MODEL` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
-- For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+- For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 - For more information about BigQuery regions and multi-regions, see the [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) page.
 - To learn more about importing models in Gemini Enterprise Agent Platform Model Registry, see [Import models to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/import-model) .
 - To learn more about model versioning in Gemini Enterprise Agent Platform Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/versioning) .

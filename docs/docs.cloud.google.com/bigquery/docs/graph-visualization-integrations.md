@@ -12,7 +12,7 @@ The notebook and third-party tools listed on this page are integrated with BigQu
 
 ## BigQuery Studio notebooks
 
-BigQuery Studio notebooks let you visualize your BigQuery Graph query results by using SQL, Python, and other common packages and APIs. For more information, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+BigQuery Studio notebooks let you visualize your BigQuery Graph query results by using SQL, Python, and other common packages and APIs. For more information, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) .
 
 ## G.V()
 

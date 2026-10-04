@@ -161,7 +161,7 @@ BigQuery supports both descriptive and predictive analytics and helps you explor
 BigQuery Studio helps you discover, analyze, and run inference on data in BigQuery with the following features:
 
 - A robust [SQL editor](https://docs.cloud.google.com/bigquery/docs/running-queries) that provides code completion and generation, query validation, and estimation of bytes processed.
-- Embedded [Python notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) built using [Colab Enterprise](https://docs.cloud.google.com/colab/docs/introduction) . Notebooks provide one-click Python development runtimes, and built-in support for [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
+- Embedded [Python notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) built using [Colab Enterprise](https://docs.cloud.google.com/colab/docs/introduction) . Notebooks provide one-click Python development runtimes, and built-in support for [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 - A [PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) that lets you create stored Python procedures for Apache Spark.
 - Asset management and version history for code assets such as notebooks and [saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) , built on top of [Dataform](https://docs.cloud.google.com/dataform) .
 - Assistive code development in the SQL editor and in notebooks, built on top of [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).

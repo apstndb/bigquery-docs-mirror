@@ -392,5 +392,5 @@ Alternatively, remove the individual resources used in this tutorial:
   - [Update model metadata](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata)
   - [Manage models](https://docs.cloud.google.com/bigquery/docs/managing-models)
 - For more information on using the BigQuery DataFrames API in a BigQuery notebook, see:
-  - [Introduction to BigQuery notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+  - [Introduction to BigQuery notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis)
   - [Overview of BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest)

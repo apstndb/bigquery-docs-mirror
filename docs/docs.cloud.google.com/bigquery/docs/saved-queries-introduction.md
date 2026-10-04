@@ -14,7 +14,7 @@ This document provides an introduction to saved queries in BigQuery. You can use
 - Review the query version history.
 - Revert to or branch from previous versions of the query.
 
-Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
+Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
 
 Saved query capabilities are available only in the Google Cloud console.
 

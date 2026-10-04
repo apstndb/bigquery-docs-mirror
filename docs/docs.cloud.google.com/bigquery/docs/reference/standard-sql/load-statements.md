@@ -729,7 +729,7 @@ The following example creates a new table with a description and an expiration t
 LOAD DATA INTO mydataset.table1
   OPTIONS(
     description="my table",
-    expiration_timestamp="2025-01-01 00:00:00 UTC&quot;
+    expiration_timestamp="2025-01-01 00:00:00 UTC"
   )
   FROM FILES(
     format='AVRO',
@@ -784,7 +784,7 @@ The following example loads data into a selected partition of an ingestion-time 
 
 ```
 LOAD DATA INTO mydataset.table1
-PARTITIONS(_PARTITIONTIME = TIMESTAMP '2016-01-01&#39;)
+PARTITIONS(_PARTITIONTIME = TIMESTAMP '2016-01-01')
   PARTITION BY _PARTITIONTIME
   FROM FILES(
     format = 'AVRO',

@@ -1280,7 +1280,10 @@ In this example, `item_name_column` and `item_description_column` are placeholde
 
 #### Limitations
 
-- Flexible column names are not supported with [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
+- Flexible column names are supported by default for Iceberg managed tables and [Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) . For other [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) (such as Parquet, ORC, Avro, CSV, or Delta Lake), flexible column names aren't enabled by default. To request project-level enablement, contact [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+  - For Delta Lake tables, you must also enable [column mapping](https://docs.delta.io/latest/delta-column-mapping.html) in `id` or `name` mode.
+- Exporting external tables with flexible column names to open file formats (such as Parquet or Avro using `EXPORT DATA` or extract jobs) maps unsupported column names to generated internal hash names ( `col_...` ) because third-party formats don't carry BigQuery display name metadata.
+- Flexible column names aren't supported in legacy SQL. You must use GoogleSQL.
 
 ### `NULL` values
 

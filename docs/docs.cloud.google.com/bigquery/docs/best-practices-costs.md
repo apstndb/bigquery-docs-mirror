@@ -654,7 +654,7 @@ Read through the [Troubleshooting issues with reservations](https://docs.cloud.g
 
 #### Unexpected charges for pay-as-you go (PAYG) slots for the BigQuery Standard edition
 
-In the Cloud Billing report, apply a filter with the label `goog-bq-feature-type` with the value `BQ_STUDIO_NOTEBOOK` . The usage you will see is metered as pay-as-you go slots under the [BigQuery Standard edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) . These are charges for using the [BigQuery Studio notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction#monitor_slot_usage) . Read more about the [BigQuery Studio notebook pricing](https://cloud.google.com/bigquery/pricing?e=48754805#notebook-runtime-pricing) .
+In the Cloud Billing report, apply a filter with the label `goog-bq-feature-type` with the value `BQ_STUDIO_NOTEBOOK` . The usage you will see is metered as pay-as-you go slots under the [BigQuery Standard edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) . These are charges for using the [BigQuery Studio notebook](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#monitor) . Read more about the [BigQuery Studio notebook pricing](https://cloud.google.com/bigquery/pricing?e=48754805#notebook-runtime-pricing) .
 
 #### Unexpected charges for pay-as-you go (PAYG) slots for the BigQuery Enterprise edition
 

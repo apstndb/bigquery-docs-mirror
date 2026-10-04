@@ -23,7 +23,7 @@ BigQuery offers various AI capabilities that let you do the following:
 
 With BigQuery ML, you can train, evaluate, and run inference on models for tasks such as time series forecasting, anomaly detection, classification, regression, clustering, dimensionality reduction, and recommendations.
 
-You can work with BigQuery ML capabilities through the Google Cloud console, the bq command-line tool, the REST API, or in [Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . Because BigQuery ML lets SQL practitioners use existing SQL tools and skills to build and evaluate models, it democratizes ML and speeds up model development by bringing ML to the data instead of requiring data movement. You can use BigQuery ML to help you with the following types of ML tasks:
+You can work with BigQuery ML capabilities through the Google Cloud console, the bq command-line tool, the REST API, or in [Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . Because BigQuery ML lets SQL practitioners use existing SQL tools and skills to build and evaluate models, it democratizes ML and speeds up model development by bringing ML to the data instead of requiring data movement. You can use BigQuery ML to help you with the following types of ML tasks:
 
 - [Create and run ML models](https://docs.cloud.google.com/bigquery/docs/model-overview) by using GoogleSQL queries.
 - [Create Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) to perform ML workflows. Notebooks let you use SQL and Python interchangeably, and use any AI or ML Python libraries for your development.
