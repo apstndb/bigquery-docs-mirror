@@ -182,7 +182,7 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/t
 </tr>
 <tr class="even">
 <td>rateLimitExceeded</td>
-<td>403</td>
+<td>403, 429</td>
 <td><p>This error returns if your project exceeds a short-term rate limit by sending too many requests too quickly. For example, see the <a href="https://docs.cloud.google.com/bigquery/quota-policy#query_jobs">rate limits for query jobs</a> and <a href="https://docs.cloud.google.com/bigquery/quota-policy#api_requests">rate limits for API requests</a> .</p></td>
 <td><p>Slow down the request rate.<br />
 If you believe that your project did not exceed one of these limits, <a href="https://cloud.google.com/support">contact support</a> .<br />

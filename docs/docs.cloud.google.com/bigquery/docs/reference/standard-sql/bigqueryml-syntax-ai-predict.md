@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** For support during the preview, contact <bqml-feedback@google.com> .
 
-This document describes the `AI.PREDICT` function, which uses a pre-trained foundation model for tabular data, [TabFM](https://research.google/blog/introducing-tabfm-a-zero-shot-foundation-model-for-tabular-data/) , to perform regression and classification tasks on structured data.
+This document describes the `AI.PREDICT` function, which uses a pre-trained foundation model for tabular data, [TabFM](https://docs.cloud.google.com/bigquery/docs/tabfm-model) , to perform regression and classification tasks on structured data.
 
 ## Syntax
 

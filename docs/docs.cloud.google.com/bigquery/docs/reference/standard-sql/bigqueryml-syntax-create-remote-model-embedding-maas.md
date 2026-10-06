@@ -104,6 +104,7 @@ A `STRING` value that contains the model name of the target Agent Platform embed
 
 The following [text embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models) are supported:
 
+- `gemini-embedding-2`
 - `gemini-embedding-001` , which supports both English and multilingual input.
 - `text-embedding-004`
 - `text-embedding-005`
@@ -113,9 +114,12 @@ After you create a remote model based on an embedding model, you can use the mod
 
 ### multimodal embedding models
 
-The `multimodalembedding@001` [embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#supported-models) is supported.
+The following [multimodal embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#supported-models) are supported:
 
-After you create a remote model based on a `multimodalembedding` embedding model, you can use the model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table or from visual content in a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+- `gemini-embedding-2`
+- `multimodalembedding@001`
+
+After you create a remote model based on a multimodal embedding model, you can use the model with the [`AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table or from visual content in a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models) .
 

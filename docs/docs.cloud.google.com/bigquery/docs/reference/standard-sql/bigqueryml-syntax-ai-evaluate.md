@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # The AI.EVALUATE function
 
-This document describes the `AI.EVALUATE` function, which lets you evaluate [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) forecasted data against a reference time series based on historical data, or TabFM predicted data against ground truth data.
+This document describes the `AI.EVALUATE` function, which lets you evaluate [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) forecasted data against a reference time series based on historical data, or [TabFM](https://docs.cloud.google.com/bigquery/docs/tabfm-model) predicted data against ground truth data.
 
 For example, suppose you have tables that contain data about car rentals each day. The following query returns statistics about how well the model predicts car rentals in the current year based on the previous year:
 

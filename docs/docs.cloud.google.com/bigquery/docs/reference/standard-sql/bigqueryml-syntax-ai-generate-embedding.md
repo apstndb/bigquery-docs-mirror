@@ -99,7 +99,7 @@ AI.GENERATE_EMBEDDING(
 
 - `DATASET` : the BigQuery dataset that contains the resource.
 
-- `MODEL_NAME` : the name of a remote model over a supported [Agent Platform-hosted open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding#vertex-open-models) or a [self-deployed open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
+- `MODEL_NAME` : the name of a [self-deployed open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
 
   You can confirm the type of model by opening the Google Cloud console and looking at the **Model type** field in the model details page.
 
@@ -144,7 +144,7 @@ AI.GENERATE_EMBEDDING(
 
 - `DATASET` : the BigQuery dataset that contains the resource.
 
-- `MODEL_NAME` : the name of a remote model over an Gemini Enterprise Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+- `MODEL_NAME` : the name of a remote model over an Gemini Enterprise Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2` .
 
   You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -154,7 +154,7 @@ AI.GENERATE_EMBEDDING(
 
   - If you are creating embeddings for visual content using data from an an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
 
-  - If you use the `gemini-embedding-2-preview` model ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
+  - If you use the `gemini-embedding-2` model, you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
 
 - `QUERY_STATEMENT` : the GoogleSQL query that generates the input data for the function.
 
@@ -287,7 +287,7 @@ AI.GENERATE_EMBEDDING(
 
 - Additional output fields depend on which embedding model you use:
 
-  - The `gemini-embedding-2-preview` model also outputs the following field:
+  - The `gemini-embedding-2` model also outputs the following field:
 
     - `statistics` : a `JSON` value that contains information about the token count for each modality of input that you provide.
 
@@ -393,17 +393,17 @@ FROM AI.GENERATE_EMBEDDING(
   TABLE `mydataset.my_object_table`);
 ```
 
-The following example creates a remote model using the `gemini-embedding-2-preview` endpoint and then embeds the combination of a text description and an image:
+The following example creates a remote model using the `gemini-embedding-2` endpoint and then embeds the combination of a text description and an image:
 
 ```
-CREATE OR REPLACE MODEL `mydataset.gemini-embedding-2-preview`
+CREATE OR REPLACE MODEL `mydataset.gemini-embedding-2`
 REMOTE WITH CONNECTION `us.example_connection`
-OPTIONS(ENDPOINT = 'gemini-embedding-2-preview');
+OPTIONS(ENDPOINT = 'gemini-embedding-2');
 
 SELECT *
 FROM
   AI.GENERATE_EMBEDDING(
-    MODEL `mydataset.gemini-embedding-2-preview`,
+    MODEL `mydataset.gemini-embedding-2`,
     (
       SELECT
         ('Made of tempered glass',
@@ -538,39 +538,25 @@ FROM
 
 ## Supported text embedding models
 
-The following tables show the available Google and open text embedding models.
-
-### Google models
-
 You can get text embeddings by using the following models:
 
-| Model name                        | Description                                                                                                                                                                                                                                                                                                                                        | Output Dimensions | Max sequence length | Supported text languages                                                                                                                            |
-|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `gemini-embedding-001`            | State-of-the-art performance across English, multilingual and code tasks. It unifies the previously specialized models like `text-embedding-005` and `text-multilingual-embedding-002` and achieves better performance in their respective domains. Read our [Tech Report](https://deepmind.google/research/publications/157741/) for more detail. | up to 3072        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) |
-| `text-embedding-005`              | Specialized in English and code tasks.                                                                                                                                                                                                                                                                                                             | up to 768         | 2048 tokens         | English                                                                                                                                             |
-| `text-multilingual-embedding-002` | Specialized in multilingual tasks.                                                                                                                                                                                                                                                                                                                 | up to 768         | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#supported_text_languages) |
+| Model name                        | Description                                                                                                                                                                                                                                                                                                                                        | Output Dimensions | Max sequence length | Supported text languages                                                                                                                                 |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `gemini-embedding-001`            | State-of-the-art performance across English, multilingual and code tasks. It unifies the previously specialized models like `text-embedding-005` and `text-multilingual-embedding-002` and achieves better performance in their respective domains. Read our [Tech Report](https://deepmind.google/research/publications/157741/) for more detail. | up to 3072        | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api#supported_text_languages) |
+| `gemini-embedding-2`              | Best for embedding long strings, including multilingual and unstructured data. Supports a mix of text, images, audio, video, and PDF files.                                                                                                                                                                                                        | up to 3072        | 8192 tokens         | [Supported text languages](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api#supported_text_languages) |
+| `text-embedding-005`              | Specialized in English and code tasks.                                                                                                                                                                                                                                                                                                             | up to 768         | 2048 tokens         | English                                                                                                                                                  |
+| `text-multilingual-embedding-002` | Specialized in multilingual tasks.                                                                                                                                                                                                                                                                                                                 | up to 768         | 2048 tokens         | [Supported text languages](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api#supported_text_languages) |
 
 For superior embedding quality, `gemini-embedding-001` is our large model designed to provide the highest performance.
-
-### Open models
-
-You can get text embeddings by using the following models:
-
-| Model name              | Description                                                                       | Output dimensions | Max sequence length | Supported text languages                                                                         |
-|-------------------------|-----------------------------------------------------------------------------------|-------------------|---------------------|--------------------------------------------------------------------------------------------------|
-| `multilingual-e5-small` | Part of the E5 family of text embedding models. Small variant contains 12 layers. | Up to 384         | 512 tokens          | [Supported languages](https://huggingface.co/intfloat/multilingual-e5-small#supported-languages) |
-| `multilingual-e5-large` | Part of the E5 family of text embedding models. Large variant contains 24 layers. | Up to 1024        | 512 tokens          | [Supported languages](https://huggingface.co/intfloat/multilingual-e5-small#supported-languages) |
-
-To get started, see the E5 family [model card](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/multilingual-e5-large-instruct-maas) . For more information on open models, see [Open models for MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/maas/use-open-models)
 
 ## Supported multimodal content
 
 You can use the `AI.GENERATE_EMBEDDING` function to generate embeddings for different modalities that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
 
-| Model name                                                                                          | Supported data types           | Output dimensions | Description                                                   |
-|-----------------------------------------------------------------------------------------------------|--------------------------------|-------------------|---------------------------------------------------------------|
-| `gemini-embedding-2-preview` (\[Preview\](https://cloud.google.com/products#product-launch-stages)) | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. (Preview) |
-| `multimodalembedding@001`                                                                           | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.             |
+| Model name                | Supported data types           | Output dimensions | Description                                         |
+|---------------------------|--------------------------------|-------------------|-----------------------------------------------------|
+| `gemini-embedding-2`      | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. |
+| `multimodalembedding@001` | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.   |
 
 There is no limitation on the length of the video files you can use with this function. However, the function only processes the first two minutes of a video. If a video is longer than two minutes, the `AI.GENERATE_EMBEDDING` function only returns embeddings for the first two minutes.
 
@@ -588,11 +574,23 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 ## Locations
 
-The `AI.GENERATE_EMBEDDING` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Embedding models are also available in the `US` multi-region.
+The `AI.GENERATE_EMBEDDING` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) .
+
+The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
+
+- If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+- If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+- For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+
+To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+
+- `https:// `**`aiplatform.us.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`us`**` /publishers/google/models/gemini-embedding-2`
+- `https:// `**`aiplatform.eu.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`eu`**` /publishers/google/models/gemini-embedding-2`
+- `https:// `**`aiplatform.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`global`**` /publishers/google/models/gemini-embedding-2`
 
 ## Quotas
 
-Quotas apply when you use the `AI.GENERATE_EMBEDDING` function with remote models. For more information, see [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+Quotas apply when you use the `AI.GENERATE_EMBEDDING` function with remote models. For more information, see [generative AI functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
 
 For the `multimodalembedding` model, the default requests per minute (RPM) for non- `EU` regions is 600. The default RPM for `EU` regions is 120. However, you can request a quota increase in order to increase throughput.
 

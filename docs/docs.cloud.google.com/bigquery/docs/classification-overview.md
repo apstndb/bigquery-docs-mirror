@@ -19,7 +19,7 @@ You can use any of the following models in combination with the [`ML.PREDICT` fu
 - [Wide & Deep models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) : use [wide & deep learning](https://dl.acm.org/doi/10.1145/2988450.2988454) by setting the `MODEL_TYPE` option to `DNN_LINEAR_COMBINED_CLASSIFIER` .
 - [AutoML models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl) : use an [AutoML classification model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/tabular-data/classification-regression/overview) by setting the `MODEL_TYPE` option to `AUTOML_CLASSIFIER` .
 
-Alternatively, you can use the [`AI.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) to classify data using the built-in TabFM model. You can evaluate the performance of the model by using the [`AI.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) .
+Alternatively, you can use the [`AI.PREDICT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) to classify data using the built-in [TabFM model](https://docs.cloud.google.com/bigquery/docs/tabfm-model) . You can evaluate the performance of the model by using the [`AI.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) .
 
 ## Recommended knowledge
 

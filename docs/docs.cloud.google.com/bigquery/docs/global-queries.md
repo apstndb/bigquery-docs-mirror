@@ -116,7 +116,7 @@ To use data that resides in different locations, it must be replicated to one lo
 1.  Determine where the query must be executed, either from [user's declaration](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) or automatically. This location is called the *primary* location, and all other locations referenced by the query are *remote* .
 2.  Run a sub-query in each remote region to collect the data that is needed to finish the query in the primary region.
 3.  Copy this data from remote locations to the primary location.
-4.  Save the data in temporary tables in the primary location for 24 hours.
+4.  Save the data in temporary tables in the primary location for 24 hours. For subquery results smaller than 10 GiB, the data might be cached for reuse to avoid transferring the data between regions.
 5.  Run a final query with all data collected in the primary location.
 6.  Return the query results.
 
@@ -222,7 +222,6 @@ For information about quotas regarding global queries, see [Query jobs](https://
 - Global queries are not supported when using [regional endpoints](https://docs.cloud.google.com/bigquery/docs/regional-endpoints) .
 - Global queries are not supported in sandbox mode.
 - Global queries incur higher latency than single-region queries due to the time required to transfer data between regions.
-- Global queries don't use any cache to avoid transferring data between regions.
 - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
 - A single global query can access up to 10 remote tables per region.
 - Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.

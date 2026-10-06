@@ -1864,7 +1864,7 @@ This document lists the partner solutions that have been validated as part of th
 </tbody>
 </table>
 
-### Treasure Data
+### Treasure AI
 
 <table>
 <colgroup>
@@ -1874,7 +1874,7 @@ This document lists the partner solutions that have been validated as part of th
 <thead>
 <tr class="header">
 <th><strong>Solution</strong></th>
-<th><a href="https://www.treasuredata.com/product/">Treasure Data CDP Platform</a></th>
+<th><a href="https://www.treasure.ai/product">Treasure AI Agentic Experience Platform</a></th>
 </tr>
 </thead>
 <tbody>
@@ -1884,14 +1884,16 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>Treasure Data provides an enterprise Customer Data Platform (CDP) to help businesses collect, unify, and manage customer data, enabling personalized experiences and AI-driven insights across marketing, sales, and customer service. Unlike other CDPs, only Treasure Data combines batch and real-time data to personalize journeys with Al, resulting in increased conversions and optimized spending across channels.</td>
+<td>Treasure AI's Agentic Experience Platform combines customer data, governed AI, and marketing activation to help organizations create personalized customer experiences. With Composable Audience Studio, Treasure AI sends audience SQL to BigQuery for execution, so audience-query processing runs on BigQuery compute against data in the customer's warehouse. The underlying source tables aren't copied into Treasure AI. Supported BigQuery integrations also let teams import or export data when needed, helping them put customer insights into action while building on their BigQuery data foundation.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
 <td><ul>
-<li><a href="https://docs.treasuredata.com/articles/#!int/google-bigquery-export-integration/q/bigquery/qid/69885/qp/1">BigQuery Export Integration</a></li>
-<li><a href="https://docs.treasuredata.com/articles/#!int/google-bigquery-import-integration/q/bigquery/qid/69885/qp/2">BigQuery Import Integration</a></li>
-<li><a href="https://docs.treasuredata.com/articles/#!int/google-bigquery-export-integration-v2/q/bigquery/qid/69885/qp/3">BigQuery Version 2 Export</a></li>
+<li><a href="https://docs.treasure.ai/int/google-bigquery-export-integration">BigQuery Export Integration</a></li>
+<li><a href="https://docs.treasure.ai/int/google-bigquery-import-integration">BigQuery Import Integration</a></li>
+<li><a href="https://docs.treasure.ai/int/google-bigquery-export-integration-v2">BigQuery Version 2 Export</a></li>
+<li><a href="https://docs.treasure.ai/int/google-bigquery-import-integration-v2">BigQuery Version 2 Import</a></li>
+<li><a href="https://docs.treasure.ai/products/customer-data-platform/composable-cdp/audience-studio/bigquery">BigQuery Composable Audience Studio</a></li>
 </ul></td>
 </tr>
 <tr class="even">

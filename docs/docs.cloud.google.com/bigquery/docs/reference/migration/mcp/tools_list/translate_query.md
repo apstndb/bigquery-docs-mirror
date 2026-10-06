@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `translate_query`
 
-Translates a single query into BigQuery SQL syntax.
+Translates a single query into BigQuery SQL syntax. The translation runs asynchronously: use the `get_translation` tool with the returned translation ID to poll its state until it is `SUCCEEDED` or `FAILED` . Wait at least 2 seconds before rechecking the state.
 
 The following code sample shows how to use `curl` to call the `translate_query` MCP tool.
 

@@ -56,75 +56,7 @@ Depending on the task, the `ML.GENERATE_EMBEDDING` function works in one of the 
 
 `ML.GENERATE_EMBEDDING` syntax differs depending on the BigQuery ML model you choose. If you use a remote model, it also differs depending on the Agent Platform model that your remote models targets. Choose the option appropriate for your use case.
 
-### `gemini-embedding-001`
-
-```
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [FLATTEN_JSON_OUTPUT AS flatten_json_output]
-    [, TASK_TYPE AS task_type]
-    [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
-)
-```
-
-### Arguments
-
-`ML.GENERATE_EMBEDDING` takes the following arguments:
-
-- `PROJECT_ID` : the project that contains the resource.
-
-- `DATASET` : the BigQuery dataset that contains the resource.
-
-- `MODEL_NAME` : the name of a remote model over a supported open model.
-
-  You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
-
-`QUERY_STATEMENT` : a query whose result contains a `STRING` column that's named `content` . For information about the supported SQL syntax of the `QUERY_STATEMENT` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
-
-`FLATTEN_JSON_OUTPUT` : a `BOOL` value that determines whether the `JSON` content returned by the function is parsed into separate columns. The default is `TRUE` .
-
-`TASK_TYPE` : a `STRING` literal that specifies the intended downstream application to help the model produce better quality embeddings. The `TASK_TYPE` argument accepts the following values:
-
-- `RETRIEVAL_QUERY` : specifies that the given text is a query in a search or retrieval setting.
-
-- `RETRIEVAL_DOCUMENT` : specifies that the given text is a document in a search or retrieval setting.
-
-  When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `title` or aliased as `title` , for example:
-
-  ```
-  SELECT *
-  FROM
-  ML.GENERATE_EMBEDDING(
-    MODEL `mydataset.embedding_model`,
-    (SELECT abstract as content, header as title, publication_number
-    FROM `mydataset.publications`),
-    STRUCT(TRUE AS flatten_json_output, 'RETRIEVAL_DOCUMENT' as task_type)
-  );
-  ```
-
-  Specifying the title column in the input query populates the [`title` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `title` value when using any other task type, that input is ignored and has no effect on the embedding results.
-
-- `SEMANTIC_SIMILARITY` : specifies that the given text will be used for Semantic Textual Similarity (STS).
-
-- `CLASSIFICATION` : specifies that the embeddings will be used for classification.
-
-- `CLUSTERING` : specifies that the embeddings will be used for clustering.
-
-- `QUESTION_ANSWERING` : specifies that the embeddings will be used for question answering.
-
-- `FACT_VERIFICATION` : specifies that the embeddings will be used for fact verification.
-
-- `CODE_RETRIEVAL_QUERY` : specifies that the embeddings will be used for code retrieval.
-
-`OUTPUT_DIMENSIONALITY` : an `INT64` value in the range `[1, 3072]` that specifies the number of dimensions to use when generating embeddings. For example, if you specify `256 AS output_dimensionality` , then the `ml_generate_embedding_result` output column contains 256 embeddings for each input value. The default value is `3072` .
-
-### Details
-
-The model and input table must be in the same region.
-
-### `text-embedding`
+### Text embedding
 
 ```
 ML.GENERATE_EMBEDDING(
@@ -261,7 +193,7 @@ ML.GENERATE_EMBEDDING(
 
 - `DATASET` : the BigQuery dataset that contains the resource.
 
-- `MODEL_NAME` : the name of a remote model over an Gemini Enterprise Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2-preview` ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+- `MODEL_NAME` : the name of a remote model over an Gemini Enterprise Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2` .
 
   You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
@@ -271,7 +203,7 @@ ML.GENERATE_EMBEDDING(
 
   - If you are creating embeddings for visual content using data from an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
 
-  - If you use the `gemini-embedding-2-preview` model ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
+  - If you use the `gemini-embedding-2` model, you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
 
 - `QUERY_STATEMENT` : the GoogleSQL query that generates the input data for the function.
 
@@ -387,20 +319,7 @@ ML.GENERATE_EMBEDDING(
 
 ## Output
 
-### `gemini-embedding-001`
-
-`ML.GENERATE_EMBEDDING` returns the input table and the following columns:
-
-- `ml_generate_embedding_result` :
-
-  - If `flatten_json_output` is `FALSE` , this is the [JSON response](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`projects.locations.endpoints.predict`](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `values` element.
-  - If `flatten_json_output` is `TRUE` , this is an `ARRAY<FLOAT64>` value that contains the generated embeddings.
-
-- `ml_generate_embedding_statistics` : a `JSON` value that contains a `token_count` field with the number of tokens in the content, and a `truncated` field that indicates whether the content was truncated. This column is returned when `flatten_json_output` is `TRUE` .
-
-- `ml_generate_embedding_status` : a `STRING` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
-
-### `text-embedding`
+### Text embedding
 
 `ML.GENERATE_EMBEDDING` returns the input table and the following columns:
 
@@ -437,7 +356,7 @@ ML.GENERATE_EMBEDDING(
 
 - Additional output fields depend on which embedding model you use:
 
-  - The `gemini-embedding-2-preview` model also outputs the following field:
+  - The `gemini-embedding-2` model also outputs the following field:
 
     - `ml_generate_embedding_statistics` : a `JSON` value that contains information about the token count for each modality of input that you provide.
 
@@ -473,10 +392,10 @@ ML.GENERATE_EMBEDDING(
 
 You can use the `ML.GENERATE_EMBEDDING` function to generate embeddings for different modalities that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
 
-| Model name                                                                                          | Supported data types           | Output dimensions | Description                                                   |
-|-----------------------------------------------------------------------------------------------------|--------------------------------|-------------------|---------------------------------------------------------------|
-| `gemini-embedding-2-preview` (\[Preview\](https://cloud.google.com/products#product-launch-stages)) | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. (Preview) |
-| `multimodalembedding@001`                                                                           | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.             |
+| Model name                | Supported data types           | Output dimensions | Description                                         |
+|---------------------------|--------------------------------|-------------------|-----------------------------------------------------|
+| `gemini-embedding-2`      | Text, image, video, audio, PDF | Up to 3072        | Multimodal model supporting a wide range of inputs. |
+| `multimodalembedding@001` | Text, image, video             | Up to 1408        | Generates embeddings for text, images, and video.   |
 
 There is no limitation on the length of the video files you can use with this function. However, the function only processes the first two minutes of a video. If a video is longer than two minutes, the `ML.GENERATE_EMBEDDING` function only returns embeddings for the first two minutes.
 
@@ -494,9 +413,9 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 ## Examples
 
-### `text-embedding`
+### Text embedding
 
-This example shows how to generate an embedding of a single piece of sample text by using a remote model that references a `text-embedding` model.
+This example shows how to generate an embedding of a single piece of sample text by using a remote model that references a text embedding model.
 
 Create the remote model:
 
@@ -518,9 +437,9 @@ FROM
 );
 ```
 
-### `multimodalembedding`
+### Multimodal embedding
 
-This example shows how to generate embeddings from visual content by using a remote model that references a `multimodalembedding` model.
+This example shows how to generate embeddings from visual content by using a remote model that references a multimodal embedding model.
 
 Create the remote model:
 
@@ -683,13 +602,23 @@ FROM
 
 ## Locations
 
-The `ML.GENERATE_EMBEDDING` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Embedding models are also available in the `US` multi-region.
+The `ML.GENERATE_EMBEDDING` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) .
 
-The `gemini-embedding-2-preview` model is only supported in the `US` and `us-central1` regions.
+The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
+
+- If your query is run in the `us` region, or any single region in the US, then BigQuery uses the `us` endpoint.
+- If your query is run in the `eu` region, or any single region in the EU other than `europe-west2` or `europe-west6` , then BigQuery uses the `eu` endpoint.
+- For all other locations, including `europe-west2` and `europe-west6` , BigQuery uses the `global` endpoint.
+
+To specify a specific endpoint, use a fully qualified multi-regional endpoint name in one of the following formats:
+
+- `https:// `**`aiplatform.us.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`us`**` /publishers/google/models/gemini-embedding-2`
+- `https:// `**`aiplatform.eu.rep.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`eu`**` /publishers/google/models/gemini-embedding-2`
+- `https:// `**`aiplatform.googleapis.com`**` /v1/projects/ `` PROJECT_ID `` /locations/ `**`global`**` /publishers/google/models/gemini-embedding-2`
 
 ## Quotas
 
-Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [Agent Platform and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
+Quotas apply when you use the `ML.GENERATE_EMBEDDING` function with remote models. For more information, see [generative AI functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#generative_ai_functions) .
 
 To request more quota for the Agent Platform models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
 

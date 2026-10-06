@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `generate_ddl_suggestion`
 
-Suggests Data Definition Language (DDL) statements for an input query. For example, `CREATE TABLE` or `CREATE VIEW` . The generated DDL provides schema definitions for tables and views that are used in the query. To get DDL suggestions, call this tool, and then use the `fetch_ddl_suggestion` tool with the returned suggestion ID to retrieve the DDL. You can then prepend the retrieved DDL to the original input query and translate it again to improve translation quality.
+Suggests Data Definition Language (DDL) statements for an input query. For example, `CREATE TABLE` or `CREATE VIEW` . The generated DDL provides schema definitions for tables and views that are used in the query. To get DDL suggestions, call this tool, and then use the `fetch_ddl_suggestion` tool with the returned suggestion ID to poll its state until it is `SUCCEEDED` or `FAILED` and retrieve the DDL. Wait at least 2 seconds before rechecking the state. You can then prepend the retrieved DDL to the original input query and translate it again to improve translation quality.
 
 The following code sample shows how to use `curl` to call the `generate_ddl_suggestion` MCP tool.
 

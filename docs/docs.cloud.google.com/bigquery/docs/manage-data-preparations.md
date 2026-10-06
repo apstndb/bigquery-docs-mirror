@@ -92,16 +92,6 @@ To configure the way your prepared data is written into a destination table, fol
 
 6.  Click **Save** .
 
-## Help improve suggestions
-
-You can help improve Gemini suggestions by sharing with Google the prompt data that you submit to features in [Preview](https://cloud.google.com/products?#product-launch-stages) . To share your prompt data, follow these steps:
-
-1.  [Open the data preparation editor in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) .
-2.  In the data preparation toolbar, click settings **More** .
-3.  Select **Share data to improve Gemini in BigQuery** .
-
-Data sharing settings apply to the entire project and can only be set by a project administrator with the `serviceusage.services.enable` and `serviceusage.services.list` IAM permissions. For more information about data use in the Trusted Tester Program, see [Gemini for Google Cloud Trusted Tester Program](https://cloud.google.com/gemini-for-cloud/ttp/welcome) .
-
 ## Data preparation versions
 
 You can choose to create a data preparation either inside of or outside of a [repository](https://docs.cloud.google.com/bigquery/docs/repository-intro) . Data preparation versioning is handled differently based on where the data preparation is located.

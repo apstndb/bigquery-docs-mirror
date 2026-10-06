@@ -695,7 +695,7 @@ Row key definition based on fields from the message.
 
 | Fields        |                                                                                                                                                                                                                                                                                                            |
 |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `keyFields[]` | `string` Optional. The key fields to construct from the row key. The fields must be present in the message as a top-level field, i.e. JSON path expressions will not traverse into nested objects.                                                                                                         |
+| `keyFields[]` | `string` Required. The key fields to construct from the row key. The fields must be present in the message as a top-level field, i.e. JSON path expressions will not traverse into nested objects.                                                                                                         |
 | `delimiter`   | `string ( `[`bytes`](https://developers.google.com/discovery/v1/type-format)` format)` Optional. Byte sequence used to delimit concatenated fields. Must be specified if multiple key fields are used. The delimiter must contain at least 1 character and at most 50 characters. A base64-encoded string. |
 
 ## ExpirationPolicy

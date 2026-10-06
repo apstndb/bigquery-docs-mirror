@@ -128,7 +128,7 @@ After you create the connection, copy the connection ID and service account ID, 
 
 ##### Create a remote function
 
-To pass schema mappings and configuration metadata to the TransUnion service orchestrator endpoint, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create-a-remote-function) . When you create the remote function, specify the connection ID from your external connection and the Cloud Run function endpoint URL that the TransUnion customer delivery team shared with you.
+To pass schema mappings and configuration metadata to the TransUnion service orchestrator endpoint, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) . When you create the remote function, specify the connection ID from your external connection and the Cloud Run function endpoint URL that the TransUnion customer delivery team shared with you.
 
 ##### Create a TransUnion input table
 
@@ -299,7 +299,7 @@ To process entity resolution requests from end users, deploy an orchestrator end
 
     3.  In the **General Information** pane, find and record the service account email address for the remote function.
 
-3.  In your control plane dataset, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create-a-remote-function) that connects to your Cloud Run job or Cloud Run function endpoint.
+3.  In your control plane dataset, [create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) that connects to your Cloud Run job or Cloud Run function endpoint.
 
 ### Share the entity resolution remote function
 

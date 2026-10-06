@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `translate_batch_queries`
 
-Translates a batch of SQL queries stored in Google Cloud Storage. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+Translates a batch of SQL queries stored in Google Cloud Storage. The translation runs asynchronously: use the `fetch_batch_translation` tool with the returned translation ID to poll its state until it is `SUCCEEDED` or `FAILED` . Wait at least 10 seconds before rechecking the state.
 
 The following code sample shows how to use `curl` to call the `translate_batch_queries` MCP tool.
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `fetch_batch_translation`
 
-Retrieves the status and logs of a batch translation workflow. **NOTE: This feature is experimental and in active development. It may not work correctly and should be used with caution.**
+Retrieves the state and logs of a batch translation workflow. If the state is not yet `SUCCEEDED` or `FAILED` , wait at least 10 seconds before rechecking the state.
 
 The following code sample shows how to use `curl` to call the `fetch_batch_translation` MCP tool.
 
