@@ -71,6 +71,42 @@ Replace the following:
 - `PROJECT_ID` : the Google Cloud project ID of the project that contains the subscriptions that you want to list.
 - `LOCATION` : the location of the subscriptions that you want to list. For more information about locations that support sharing, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
 
+### Refresh a subscription
+
+A data exchange or data clean room can become stale when a publisher or data contributor adds or removes data. When this happens, your existing linked dataset isn't automatically updated, and you must refresh your subscription to access the new resources.
+
+To refresh a subscription, select one of the following options:
+
+### Console
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click add_box **Add data** .
+
+3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
+
+4.  Find and click the data clean room or data exchange that you're subscribed to.
+
+5.  Click **Subscribe** . Because you already have an active subscription, the console presents a **Refresh** option.
+
+6.  Click **Refresh** to update your linked dataset with the latest resources.
+
+### API
+
+To refresh a subscription, use the [`projects.locations.subscriptions.refresh` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/refresh) :
+
+```
+POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/subscriptions/SUBSCRIPTION_ID:refresh
+```
+
+Replace the following:
+
+- `PROJECT_ID` : the project ID for the subscription that you want to refresh.
+- `LOCATION` : the location of the subscription that you want to refresh.
+- `SUBSCRIPTION_ID` : the ID of the subscription that you want to refresh.
+
+The request body must be empty. If successful, the response body contains an operation instance.
+
 ### Delete a subscription
 
 To delete a subscription, call the [`projects.locations.subscriptions.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/delete) :

@@ -34,10 +34,14 @@ To schedule a query, you need the following IAM permissions:
 
 - To run a scheduled query, you must have:
 
-  - `bigquery.datasets.get` permissions on the target dataset
-  - `bigquery.jobs.create`
+  - `bigquery.datasets.get` permission on the target dataset.
+  - `bigquery.jobs.create` permission on the project.
 
-To modify or delete a scheduled query, you must either have the `bigquery.transfers.update` and `bigquery.transfers.get` permissions, or the `bigquery.jobs.create` permission and ownership over the scheduled query.
+To modify or delete a scheduled query, you must have one of the following:
+
+- The `bigquery.transfers.update` and `bigquery.transfers.get` permissions on the project.
+- If you're running a scheduled query using user credentials, the user needs ownership of the scheduled query, and you need the `bigquery.jobs.create` permission on the project.
+- If you're running a scheduled query as a service account, the user that calls the scheduled query must have the `bigquery.transfers.update` and `bigquery.transfers.get` permissions on the project. Granting the [IAM Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `iam.serviceAccountUser` ) role lets a user run jobs as the service account, but it does not grant management permissions over the scheduled query configuration.
 
 The predefined [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) IAM role includes the permissions that you need in order to schedule or modify a query.
 
@@ -945,7 +949,14 @@ If you try to update a scheduled query you don't own, the update might fail with
 
 `Cannot modify restricted parameters without taking ownership of the transfer configuration.`
 
-The owner of the scheduled query is the user associated with the scheduled query or the user who has access to the service account associated with the scheduled query. The associated user can be seen in the configuration details of the scheduled query. For information on how to update the scheduled query to take ownership, see [Update scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#update_scheduled_query_credentials) . To grant users access to a service account, you must have the [Service Account user role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) .
+The owner of a scheduled query is the identity whose credentials are used to run it:
+
+- **User credentials:** If the query runs as a user, that user is the owner.
+- **Service account credentials:** If the query runs as a service account, the service account is the owner.
+
+> **Important:** If the scheduled query is configured to run as a service account, the service account owns the query, but it cannot manage the scheduled query's configuration. To manage or delete the scheduled query, you must be granted the `bigquery.transfers.update` permission on the project.
+
+The associated user can be seen in the configuration details of the scheduled query. For information on how to update the scheduled query to take ownership, see [Update scheduled query credentials](https://docs.cloud.google.com/bigquery/docs/scheduling-queries#update_scheduled_query_credentials) . To grant users access to a service account, you must have the [Service Account user role](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) .
 
 The owner restricted parameters for scheduled queries are:
 

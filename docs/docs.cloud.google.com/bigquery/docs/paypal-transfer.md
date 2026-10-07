@@ -20,20 +20,20 @@ The PayPal connector supports production and sandbox PayPal accounts.
 
 ## Supported objects
 
-| PayPal object types                   | BigQuery-supported objects | Date filter support |
-|---------------------------------------|----------------------------|---------------------|
-| Transactions                          | TransactionReports         | Supported           |
-| TransactionReportsCartInfoItemDetails | Supported                  |                     |
-| TransactionReportsIncentiveDetails    | Supported                  |                     |
-| Disputes                              | Disputes                   | Supported           |
-| DisputeDetails                        | Supported                  |                     |
-| DisputeTransactions                   | Supported                  |                     |
-| Payments                              | Payments                   | Supported           |
-| PaymentTransactions                   | Supported                  |                     |
-| Balance                               | Balance                    | Not supported       |
-| Products                              | Products                   | Not supported       |
-| ProductDetails                        | Not supported              |                     |
-| Invoices                              | Invoices                   | Supported           |
+| PayPal object types                   | BigQuery-supported objects | Date filter support | Transfer limit    |
+|---------------------------------------|----------------------------|---------------------|-------------------|
+| Transactions                          | TransactionReports         | Supported           | Past 3 years      |
+| TransactionReportsCartInfoItemDetails | Supported                  |                     |                   |
+| TransactionReportsIncentiveDetails    | Supported                  |                     |                   |
+| Disputes                              | Disputes                   | Supported           | Past 6 months     |
+| DisputeDetails                        | Supported                  |                     |                   |
+| DisputeTransactions                   | Supported                  |                     |                   |
+| Payments                              | Payments                   | Supported           | None              |
+| PaymentTransactions                   | Supported                  |                     |                   |
+| Balance                               | Balance                    | Not supported       | None              |
+| Products                              | Products                   | Not supported       | 2,000,000 records |
+| ProductDetails                        | Not supported              |                     |                   |
+| Invoices                              | Invoices                   | Supported           | 100,000 records   |
 
 ## Limitations
 
@@ -43,6 +43,8 @@ PayPal data transfers are subject to the following limitations:
   - We recommend scheduling subsequent data transfers at longer intervals (no more than one every hour) to prevent missing data.
 - The PayPal connector only supports [transactions data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 3 years.
 - The PayPal connector only supports [disputes data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) from the past 6 months.
+- The PayPal connector can only transfer up to 100,000 records for [invoices data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) . If the invoice count in PayPal exceeds this limit, the transfer fails.
+- The PayPal connector can only transfer up to 2,000,000 records for catalog [products data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) . If the product count in PayPal exceeds this limit, the transfer fails.
 - PayPal APIs use different page size limits for each data object. The PayPal connector uses the maximum page size allowed by PayPal in a data transfer.
   - However, some objects like `Payments` or `Payment Transactions` use smaller page size limits. This can lead to slower data transfers, especially when dealing with large datasets.
 

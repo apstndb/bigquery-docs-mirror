@@ -625,7 +625,7 @@ The following limits apply to BigQuery [datasets](https://docs.cloud.google.com/
 
 The following limits apply to all BigQuery tables.
 
-> **Note:** Quotas and limits are associated with table names. Therefore, when you truncate the table, or drop the table and then recreate it, the quota/limit doesn't reset, because the table name hasn't changed.
+> **Note:** Quotas and limits are associated with table names. Therefore, when you truncate the table, or drop the table and then recreate it, the quota or limit doesn't reset because the table name hasn't changed.
 
 | Limit                                  | Default           | Notes                                                                                                                                                                                                                        |
 |----------------------------------------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -658,8 +658,10 @@ The following limits apply to BigQuery standard (built-in) [tables](https://docs
 <td>Table modifications per day</td>
 <td>1,500 modifications</td>
 <td><p>Your project can make up to 1,500 table modifications per table per day. A <a href="https://docs.cloud.google.com/bigquery/quotas#load_jobs">load job</a> , <a href="https://docs.cloud.google.com/bigquery/quotas#copy_jobs">copy job</a> , or <a href="https://docs.cloud.google.com/bigquery/quotas#query_jobs">query job</a> that appends or overwrites table data counts as one modification to the table. This limit cannot be changed.</p>
-<p>DML statements are excluded and <em>don't</em> count toward the number of table modifications per day.</p>
-<p>Streaming data is excluded and <em>doesn't</em> count toward the number of table modifications per day.</p></td>
+<p>This limit is enforced as a rate limit throughout the day, not as a single quota allocated all at once. BigQuery replenishes the available quota periodically. High-frequency bursts of operations can exhaust the available quota, resulting in <code>quotaExceeded</code> errors even if your total daily volume is well below the daily limit of 1,500 modifications.</p>
+<p>To optimize high-frequency ingestion, consider batching operations, spacing out jobs evenly over time, or migrating to the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">BigQuery Storage Write API (gRPC)</a> .</p>
+<p>DML statements are excluded and don't count toward the number of table modifications per day.</p>
+<p>Streaming data is excluded and doesn't count toward the number of table modifications per day.</p></td>
 </tr>
 <tr class="even">
 <td>Maximum rate of table metadata update operations per table</td>
@@ -710,7 +712,7 @@ Partition limits apply to the combined total of all [load jobs](https://docs.clo
 
 A single job can affect multiple partitions. For example, query jobs and load jobs can write to multiple partitions.
 
-BigQuery uses the number of partitions affected by a job when determining how much of the limit the job consumes. Streaming inserts do not affect this limit.
+BigQuery uses the number of partitions affected by a job when determining how much of the limit the job consumes. Streaming inserts don't affect this limit.
 
 For information about strategies to stay within the limits for partitioned tables, see [Troubleshooting quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-number-column-partition-quota) .
 
@@ -749,8 +751,8 @@ For information about strategies to stay within the limits for partitioned table
 <td>Number of partition modifications per column-partitioned table per day</td>
 <td>30,000 modifications</td>
 <td><p>Your project can make up to 30,000 partition modifications per day for a column-partitioned table.</p>
-<p>DML statements <em>do not</em> count toward the number of partition modifications per day.</p>
-<p>Streaming data <em>does not</em> count toward the number of partition modifications per day.</p></td>
+<p>DML statements don't count toward the number of partition modifications per day.</p>
+<p>Streaming data doesn't count toward the number of partition modifications per day.</p></td>
 </tr>
 <tr class="odd">
 <td>Maximum rate of table metadata update operations per partitioned table</td>

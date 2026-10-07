@@ -441,7 +441,7 @@ This table provides syntax examples for some common custom constraints.
     methodTypes:
     - CREATE
     - UPDATE
-    condition: &quot;resource.slotCapa&gt;city  200&quot;
+    condition: &quot;resource.slotCapacity &gt; 200&quot;
     actionType: DENY
     displayName: Deny BigQuery reservations with more than 200
     slots.
@@ -470,7 +470,7 @@ This table provides syntax examples for some common custom constraints.
     methodTypes:
     - CREATE
     - UPDATE
-    condition: &quot;resource.plan == &#39;&amp;&amp;;ANNUAL&#39;  resource.renewalPlan == &#39;ANNUAL&#39;&quot;
+    condition: &quot;resource.plan == &#39;ANNUAL&#39; &amp;&amp; resource.renewalPlan == &#39;ANNUAL&#39;&quot;
     actionType: ALLOW
     displayName: Only allow BigQuery capacity commitments with an
     annual commitment plan and renewal cadence.
@@ -485,7 +485,7 @@ This table provides syntax examples for some common custom constraints.
     methodTypes:
     - CREATE
     - UPDATE
-    condition: &quot;resource.&gt;size  5368709120&quot; # 5GB in Bytes
+    condition: &quot;resource.size &gt; 5368709120&quot; # 5GB in Bytes
     actionType: DENY
     displayName: Limit BigQuery BI reservations to a maximum of
     5 GB.

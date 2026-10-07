@@ -191,7 +191,7 @@ SELECT s.start_time, s.autoscale_current_slots
 FROM `region-us.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` m
 JOIN m.per_second_details s
 WHERE period_start BETWEEN '2025-09-28' AND '2025-09-29'
-  AND reservation_id = ';YOUR_RESERVATION_ID'
+  AND reservation_id = 'YOUR_RESERVATION_ID'
 ORDER BY period_start, s.start_time
 ```
 
@@ -242,7 +242,7 @@ WHERE
   AND res.period_start
     BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
         AND CURRENT_TIMESTAMP()
-  AND res.reservation_id = &#39;YOUR_RESERVATION_ID'
+  AND res.reservation_id = 'YOUR_RESERVATION_ID'
   AND (jobs.statement_type != "SCRIPT" OR jobs.statement_type IS NULL)  -- Avoid duplicate byte counting in parent and children jobs.
 GROUP BY
   period_start

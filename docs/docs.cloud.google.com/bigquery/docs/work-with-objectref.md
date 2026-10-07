@@ -141,11 +141,12 @@ SELECT AI.GENERATE(
   connection_id => "us.connection2");
 ```
 
-Inside a [VPC Service Controls](https://docs.cloud.google.com/bigquery/docs/vpc-sc) perimeter, AI functions can't process `ObjectRef` values that use delegated access. Delegated access generates a signed HTTPS URL for the object, and Gemini Enterprise Agent Platform blocks HTTP and HTTPS fetches for projects inside a perimeter. The function writes the following error to the `status` column in the result:
+Inside a VPC Service Controls perimeter, AI functions can't process `ObjectRef` values that use delegated access. Delegated access generates a signed HTTPS URL for the object, and signed URLs cannot cross perimeter boundaries. The function writes one of the following errors to the `status` column in the result:
 
-`INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.`
+- `INVALID_ARGUMENT: HTTP links are not supported for requests restricted by VPCSC.` This error occurs if your perimeter restricts Agent Platform.
+- `Cannot fetch content from the provided URL` This error occurs if your perimeter restricts Cloud Storage.
 
-Because the `ref` column of an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) always uses the object table's connection as the authorizer, passing `ref` to an AI function inside a perimeter always returns this error. To analyze the object, pass a single-argument `OBJ.MAKE_REF(uri)` value instead, which uses [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) and sends the Cloud Storage URI to the model without generating a signed URL.
+Because the `ref` column of an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) always uses the object table's connection as the authorizer, passing `ref` to an AI function inside a perimeter always returns this error. To analyze the object, pass a single argument `OBJ.MAKE_REF(uri)` value instead, which uses [direct access](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#direct-access) and sends the Cloud Storage URI to the model without generating a signed URL.
 
 ### Best practices
 

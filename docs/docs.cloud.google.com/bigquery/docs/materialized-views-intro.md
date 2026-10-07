@@ -103,7 +103,7 @@ BigQuery materialized views are subject to the functional and operational limita
 - **Parameterized data types** . Materialized views can't inherit or explicitly define [parameterized data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) , such as `STRING(n)` , because parameterized data types are only supported for base table columns and script variables.
 - **Column descriptions** . You can set descriptions for materialized views, but not for individual columns in the materialized view.
 - **Query modifications** . You can't update the query for a materialized view after you create it.
-- **Data modifications** . You can't directly update or manipulate materialized view data using operations such as `COPY` , `EXPORT` , `LOAD` , `WRITE` , or data manipulation language (DML) statements.
+- **Data modifications** . You can't directly update or manipulate materialized view data using operations such as `COPY` , `EXPORT` , `LOAD` , `WRITE` , or data manipulation language (DML) statements. **CPU-intensive operators** . CPU-intensive operators (like `UNPIVOT` or heavy `UNNEST` transformations) can cause refresh failures under on-demand billing. To resolve this, you can switch to capacity-based pricing, materialize the transformed data in the base table before creating the view, or use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
 
 ### Base table and nesting limitations
 
