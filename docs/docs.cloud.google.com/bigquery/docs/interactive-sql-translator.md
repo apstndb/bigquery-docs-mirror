@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Translate queries with the interactive SQL translator
 
-This document describes how to translate a query from a different SQL dialect into a GoogleSQL query by using the BigQuery interactive SQL translator. The interactive SQL translator can help reduce time and effort when you migrate workloads to BigQuery. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
+This document describes how to translate a query from a different SQL dialect into a GoogleSQL query by using the BigQuery interactive SQL translator. The interactive SQL translator can help reduce time and effort when you migrate workloads to BigQuery. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) or the Google Cloud CLI.
+
+> **Note:** To build a custom software integration, an automated CI/CD pipeline, or another programmatic workflow, see the [BigQuery Migration API guide](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) .
 
 You can use the [translation rule feature](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#customize) to customize the way the interactive SQL translator translates SQL.
 
@@ -79,6 +81,10 @@ The interactive SQL translator is only available in select processing locations.
 
 ## Translate a query into GoogleSQL
 
+You can translate a query with the Google Cloud console or the Google Cloud CLI.
+
+### Console
+
 Follow these steps to translate a query into GoogleSQL:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
@@ -108,6 +114,46 @@ Follow these steps to translate a query into GoogleSQL:
 10. Optional: To return to the SQL editor, click **More** \> **Disable SQL translation** .
 
     The **Editor** pane returns to a single pane.
+
+### gcloud
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To translate a query from the Google Cloud CLI, use the [`gcloud alpha bq translation translate` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate) :
+
+```
+gcloud alpha bq translation translate \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --input-file=INPUT_FILE
+```
+
+Replace the following:
+
+- `SOURCE_DIALECT` : the SQL dialect that you want to translate, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `TARGET_DIALECT` : the dialect to translate the query into. For example, `bigquery` .
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, specify the `eu` region.
+- `INPUT_FILE` : the local file that contains the query that you want to translate.
+
+The command prints the translated query to the gcloud CLI. To write the translated query to a file instead, add the `--output-file` flag.
+
+To translate a query without creating a file, pipe it through standard input and omit the `--input-file` flag:
+
+```
+echo 'SELECT 1;' | gcloud alpha bq translation translate \
+  --source-dialect=teradata \
+  --target-dialect=bigquery \
+  --location=us
+```
+
+To apply the customizations that you would otherwise set in **Translation settings** , use the following flags:
+
+- `--translation-config-files` : a comma-separated list of [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) . File names must end with `.config.yaml` .
+- `--metadata-gcs-uri` : the Cloud Storage URI of a metadata ZIP file.
+- `--explanation-output-file` : a local file that receives a Gemini-generated explanation of the translation.
 
 ## Use Gemini with the interactive SQL translator
 

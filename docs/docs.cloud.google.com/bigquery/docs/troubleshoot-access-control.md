@@ -1,14 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/troubleshoot-access-control
 uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control
-title: Troubleshoot IAM permissions in BigQuery
-description: How to troubleshoot issues with IAM permissions in BigQuery.
+title: Troubleshoot access control issues
+description: How to troubleshoot security issues with IAM permissions, column-level access control, and customer-managed encryption keys (CMEK) in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Troubleshoot IAM permissions in BigQuery
+# Troubleshoot access control issues
 
-This document shows you how to troubleshoot issues with Identity and Access Management (IAM) permissions in BigQuery. IAM permission issues typically result in `Access Denied` errors like the following:
+This document shows you how to troubleshoot security issues with Identity and Access Management (IAM) permissions, column-level access control, and customer-managed encryption keys (CMEK) in BigQuery. IAM permission issues typically result in `Access Denied` errors like the following:
 
 - `Access Denied: Project `` PROJECT_ID `` : User does not have bigquery.jobs.create permission in project `` PROJECT_ID `` .`
 - `Access Denied: Project `` PROJECT_ID `` : User does not have bigquery.datasets.get permission on dataset `` DATASET `` .`
@@ -135,9 +135,74 @@ To find the correct predefined IAM role, follow these steps.
 
 4.  Grant the principal the appropriate role. For information about how to grant an IAM role to a BigQuery resource, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
+## Troubleshoot column-level access control
+
+The following sections explain how to troubleshoot issues with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) and Data Catalog policy tags.
+
+### I can't see the Data Catalog roles
+
+If you can't see roles such as Data Catalog Fine-Grained Reader, it's possible that you haven't enabled the Data Catalog API in your project. To learn how to enable the Data Catalog API, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/column-level-security#before_you_begin) . The Data Catalog roles appear several minutes after you enable the Data Catalog API.
+
+### I can't view the Taxonomies page
+
+You need additional permissions to view the **Policy tag taxonomies** page in the Google Cloud console. For example, the Data Catalog [Policy Tag Admin](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) role has access to the **Taxonomies** page.
+
+### I enforced policy tags, but it doesn't seem to work
+
+If you're still receiving query results for an account that shouldn't have access, it's possible that the account is receiving cached results. Specifically, if you previously ran the query successfully and then enforced policy tags, you might be getting results from the [query result cache](https://docs.cloud.google.com/bigquery/docs/cached-results) . By default, query results are cached for 24 hours. The query fails immediately if you [disable the result cache](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) . For more details about caching, see [Impact of column-level access control](https://docs.cloud.google.com/bigquery/docs/cached-results#security) .
+
+In general, IAM updates take about 30 seconds to propagate. Changes in the policy tag hierarchy can take up to 30 minutes to propagate.
+
+### I don't have the permission to read from a table with column-level security
+
+You need either the [Fine-Grained Reader role](https://docs.cloud.google.com/bigquery/docs/column-level-security#fine_grained_reader) or the [Masked Reader role](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) at different levels, such as organization, folder, project, and policy tag. The Fine-Grained Reader role grants raw data access, while the Masked Reader role grants access to [masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . You can use the [IAM Policy Troubleshooter](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) to check this permission at the project level.
+
+### I set fine-grained access control in policy tag taxonomy, but users see protected data
+
+To troubleshoot this issue, confirm the following details:
+
+- On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) of the BigQuery **Security center** , confirm that the **Enforce access control** toggle is in the **On** position.
+
+- Ensure that your queries aren't using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use the bq command-line tool to test your queries, then use the `--nouse_cache` flag to disable the query cache. For example:
+
+  ```
+  bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
+  ```
+
+### Project migration considerations
+
+Policy tags and taxonomies are homed within a specific Google Cloud organization and aren't automatically re-associated when a project is migrated to a new organization. If you migrate a project that uses policy tags for column-level access control to a different organization, the following issues occur:
+
+- The policy tags are no longer manageable in the Google Cloud console within the migrated project.
+- You can't apply these policy tags to new columns in the migrated project.
+- Existing column-level access controls might appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
+
+Resolving this issue requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](https://docs.cloud.google.com/support) .
+
+## Troubleshoot customer-managed encryption keys
+
+The following list describes common errors and recommended resolutions when you use customer-managed encryption keys (CMEK) with Cloud Key Management Service:
+
+Error: `Please grant Cloud KMS CryptoKey Encrypter/Decrypter role`  
+**Resolution:** The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. To grant the required IAM permission, follow the instructions in the error message or in [Grant encryption and decryption permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) .
+
+Error: `Existing table encryption settings don't match encryption settings specified in the request`  
+**Resolution:** This error can occur when the destination table has encryption settings that don't match the encryption settings in your request. To resolve this issue, use the `TRUNCATE` write disposition to replace the table, or specify a different destination table.
+
+Error: `This region is not supported`  
+**Resolution:** The region of the Cloud KMS key doesn't match the region of the BigQuery dataset for the destination table. To resolve this issue, select a key in a region that matches your dataset, or load data into a dataset that matches the key region.
+
+Error: `Your administrator requires that you specify an encryption key for queries in project `` PROJECT_ID `` .`  
+**Resolution:** An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Require CMEKs for all resources](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#services_constraint) .
+
+Error: `Your administrator prevents using KMS keys from project `` KMS_PROJECT_ID `` to protect resources in project `` PROJECT_ID `` .`  
+**Resolution:** An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Restrict Cloud KMS keys for a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#projects_constraint) .
+
 ## What's next
 
 - For a list of all BigQuery IAM roles and permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
-- For more information on troubleshooting allow and deny policies in IAM, see [Troubleshoot policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies) .
-- For more information on the Policy Intelligence Policy Analyzer, see [Policy Analyzer for allow policies](https://docs.cloud.google.com/policy-intelligence/docs/policy-analyzer-overview) .
-- For more information on the Policy Troubleshooter, see [Use Policy Troubleshooter](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#troubleshooter) .
+- For more information about column-level security, see [Restrict access with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) .
+- For more information about customer-managed encryption keys, see [Protect data with Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
+- For more information about troubleshooting allow and deny policies in IAM, see [Troubleshoot policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies) .
+- For more information about the Policy Intelligence Policy Analyzer, see [Policy Analyzer for allow policies](https://docs.cloud.google.com/policy-intelligence/docs/policy-analyzer-overview) .
+- For more information about the Policy Troubleshooter, see [Use Policy Troubleshooter](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#troubleshooter) .

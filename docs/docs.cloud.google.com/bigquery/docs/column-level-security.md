@@ -943,31 +943,33 @@ To enforce VPC for policy tags and data policies for column-level access control
 
 ## Troubleshoot
 
-### I cannot see the Data Catalog roles
+The following sections explain how to troubleshoot issues with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) and Data Catalog policy tags.
 
-If you cannot see roles such as Data Catalog Fine-Grained Reader, it is possible that you have not enabled the Data Catalog API in your project. To learn how to enable the Data Catalog API, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/column-level-security#before_you_begin) . The Data Catalog roles should appear several minutes after you enable the Data Catalog API.
+### I can't see the Data Catalog roles
 
-### I cannot view the Taxonomies page
+If you can't see roles such as Data Catalog Fine-Grained Reader, it's possible that you haven't enabled the Data Catalog API in your project. To learn how to enable the Data Catalog API, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/column-level-security#before_you_begin) . The Data Catalog roles appear several minutes after you enable the Data Catalog API.
 
-You need additional permissions in order to view the **Taxonomies** page. For example, the Data Catalog [Policy Tags Admin](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) role has access to the **Taxonomies** page.
+### I can't view the Taxonomies page
+
+You need additional permissions to view the **Policy tag taxonomies** page in the Google Cloud console. For example, the Data Catalog [Policy Tag Admin](https://docs.cloud.google.com/bigquery/docs/column-level-security#policy_tags_admin) role has access to the **Taxonomies** page.
 
 ### I enforced policy tags, but it doesn't seem to work
 
-If you are still receiving query results for an account that shouldn't have access, it is possible the account is receiving cached results. Specifically, if you previously ran the query successfully and then you enforced policy tags, you could be getting results from the [query result cache](https://docs.cloud.google.com/bigquery/docs/cached-results) . By default, query results are cached for 24 hours. The query should fail immediately if you [disable the result cache](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) . For more details about caching, see [Impact of column-level access control](https://docs.cloud.google.com/bigquery/docs/cached-results#security) .
+If you're still receiving query results for an account that shouldn't have access, it's possible that the account is receiving cached results. Specifically, if you previously ran the query successfully and then enforced policy tags, you might be getting results from the [query result cache](https://docs.cloud.google.com/bigquery/docs/cached-results) . By default, query results are cached for 24 hours. The query fails immediately if you [disable the result cache](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) . For more details about caching, see [Impact of column-level access control](https://docs.cloud.google.com/bigquery/docs/cached-results#security) .
 
 In general, IAM updates take about 30 seconds to propagate. Changes in the policy tag hierarchy can take up to 30 minutes to propagate.
 
 ### I don't have the permission to read from a table with column-level security
 
-You need either the [Fine-Grained Reader role](https://docs.cloud.google.com/bigquery/docs/column-level-security#fine_grained_reader) or the [Masked Reader role](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) at different levels, such as organization, folder, project, and policy tag. The Fine-Grained Reader role grants raw data access, while the Masked Reader role grants access to [masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . You can use the [IAM Troubleshooter](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) to check this permission at the project level.
+You need either the [Fine-Grained Reader role](https://docs.cloud.google.com/bigquery/docs/column-level-security#fine_grained_reader) or the [Masked Reader role](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) at different levels, such as organization, folder, project, and policy tag. The Fine-Grained Reader role grants raw data access, while the Masked Reader role grants access to [masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) . You can use the [IAM Policy Troubleshooter](https://docs.cloud.google.com/policy-intelligence/docs/troubleshoot-access) to check this permission at the project level.
 
 ### I set fine-grained access control in policy tag taxonomy, but users see protected data
 
 To troubleshoot this issue, confirm the following details:
 
-- On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) , confirm that the **Enforce access control** toggle is in the **On** position.
+- On the [**Policy tag taxonomies** page](https://console.cloud.google.com/bigquery/security/secure/policy-tags) of the BigQuery **Security center** , confirm that the **Enforce access control** toggle is in the **On** position.
 
-- Ensure that your queries are not using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use `bq` command-line interface tool to test your queries, then you should use the `--nouse_cache flag` to disable the query cache. For example:
+- Ensure that your queries aren't using [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) . If you use the bq command-line tool to test your queries, then use the `--nouse_cache` flag to disable the query cache. For example:
 
   ```
   bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
@@ -975,10 +977,10 @@ To troubleshoot this issue, confirm the following details:
 
 ### Project migration considerations
 
-Policy tags and taxonomies are homed within a specific Google Cloud organization and are not automatically re-associated when a project is migrated to a new organization. If you migrate a project that uses policy tags for column-level access control to a different organization, the following issues will occur:
+Policy tags and taxonomies are homed within a specific Google Cloud organization and aren't automatically re-associated when a project is migrated to a new organization. If you migrate a project that uses policy tags for column-level access control to a different organization, the following issues occur:
 
-- The policy tags will no longer be manageable in the Google Cloud console UI within the migrated project.
-- You won't be able to apply these policy tags to new columns in the migrated project.
-- Existing column-level access controls may appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
+- The policy tags are no longer manageable in the Google Cloud console within the migrated project.
+- You can't apply these policy tags to new columns in the migrated project.
+- Existing column-level access controls might appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
 
-Resolving this requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you have migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](https://docs.cloud.google.com/support) .
+Resolving this issue requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](https://docs.cloud.google.com/support) .

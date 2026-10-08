@@ -335,6 +335,11 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <td><code>RECORD</code></td>
 <td>An array of information about the external service costs for a query job.</td>
 </tr>
+<tr class="odd">
+<td><code>ml_statistics.model_type</code></td>
+<td><code>STRING</code></td>
+<td>If the job is a BigQuery ML model creation query, then this field specifies the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelType">type of model</a> being created. For all other jobs, the value is <code>NULL</code> .</td>
+</tr>
 </tbody>
 </table>
 
@@ -433,6 +438,23 @@ AS (
   AND isBillable(error_result)
 );
 
+-- Built-in BigQuery ML models apply a 50x billing multiplier to
+-- total_bytes_billed for on-demand CREATE_MODEL queries.
+CREATE TEMP FUNCTION isNativeBqmlModel(model_type STRING)
+AS (
+  model_type IN (
+    'LINEAR_REGRESSION',
+    'LOGISTIC_REGRESSION',
+    'KMEANS',
+    'MATRIX_FACTORIZATION',
+    'PCA',
+    'ARIMA',
+    'ARIMA_PLUS',
+    'ARIMA_PLUS_XREG',
+    'CONTRIBUTION_ANALYSIS',
+    'TRANSFORM_ONLY')
+);
+
 WITH
   query_params AS (
     SELECT
@@ -447,10 +469,14 @@ WITH
       -- Jobs are billed by end_time in PST8PDT timezone, regardless of where
       -- the job ran.
       EXTRACT(date FROM end_time AT TIME ZONE 'PST8PDT') billing_date,
-      total_bytes_billed / 1024 / 1024 / 1024 / 1024 total_tib_billed,
+      total_bytes_billed / 1024 / 1024 / 1024 / 1024
+        * IF(
+          statement_type = 'CREATE_MODEL'
+            AND isNativeBqmlModel(ml_statistics.model_type),
+          50,
+          1) AS total_tib_billed,
       CASE statement_type
         WHEN 'SCRIPT' THEN 0
-        WHEN 'CREATE_MODEL' THEN 50 * PRICE_PER_TIB
         ELSE PRICE_PER_TIB
         END AS multiplier,
     FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
@@ -477,7 +503,7 @@ ORDER BY billing_date;
 
 - BigQuery [hides some statistics](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) for queries over tables with row-level security. The provided query counts the number of jobs impacted as `jobs_using_row_level_security` , but does not have access to the billable usage.
 
-- BigQuery ML [pricing for on-demand queries](https://cloud.google.com/bigquery/pricing#ml_on_demand_pricing) depends on the type of model being created. `INFORMATION_SCHEMA.JOBS` does not track which type of model was created, so the provided query assumes all CREATE_MODEL statements were creating the higher billed model types.
+- BigQuery ML [pricing for on-demand queries](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) depends on the [type of model](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelType) being created. The `isNativeBqmlModel` function in the example query checks `ml_statistics.model_type` and applies the 50x multiplier only to built-in models. For external Vertex AI models, `total_bytes_billed` already includes the converted external training costs at a 1x rate.
 
 - Apache Spark procedures use a [similar pricing model](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pricing) , but charges are reported as [BigQuery Enterprise edition pay-as-you-go SKU](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . `INFORMATION_SCHEMA.JOBS` tracks this usage as `total_bytes_billed` , but cannot determine which SKU the usage represents.
 

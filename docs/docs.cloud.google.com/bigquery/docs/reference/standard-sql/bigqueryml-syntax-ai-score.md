@@ -130,8 +130,7 @@ SELECT
     """
     On a scale from 1 to 10, rate how much the reviewer liked the movie.
     Review:
-    """, review),
-    endpoint => 'gemini-2.5-pro') AS ai_rating,
+    """, review)) AS ai_rating,
   reviewer_rating AS human_rating,
   review
 FROM
@@ -164,8 +163,7 @@ SELECT
     """
     On a scale from 1 to 10, rate how much the reviewer liked the movie.
     Review:
-    """, review),
-    endpoint => 'gemini-2.5-pro') AS ai_rating,
+    """, review)) AS ai_rating,
   reviewer_rating AS human_rating,
   review
 FROM
@@ -173,8 +171,7 @@ FROM
 WHERE
   title = 'The English Patient' AND
   AI.IF(
-    ("This review mentions at least one of the film's main cast members: ", review),
-    endpoint => 'gemini-2.5-pro')
+    ("This review mentions at least one of the film's main cast members: ", review))
 ORDER BY ai_rating DESC
 LIMIT 10;
 ```
@@ -200,8 +197,7 @@ SELECT
   OBJ.GET_READ_URL(ref).url AS signed_url,
   AI.SCORE(
     ('Rate the product from 1-10 based on how fun it looks for a pet: ',
-     ref),
-     endpoint => 'gemini-2.5-pro') AS fun_score
+     ref)) AS fun_score
 FROM
   `cymbal_pets.product_images`
 ORDER BY
@@ -220,7 +216,6 @@ SELECT
     On a scale from 1 to 10, rate how much the reviewer liked the movie.
     Review:
     """, review),
-    endpoint => 'gemini-2.5-pro',
     max_error_ratio => 0.05) AS ai_rating,
   reviewer_rating AS human_rating,
   review

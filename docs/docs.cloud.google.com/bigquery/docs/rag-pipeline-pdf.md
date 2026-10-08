@@ -691,8 +691,7 @@ Perform a vector search on the embeddings to identify semantically similar PDF c
       AI.GENERATE(
         CONCAT('Did the typical family net worth change? How does this compare the SCF survey a decade earlier? Be concise and use the following context:',
                 STRING_AGG(FORMAT("context: %s", base.content), ',\n')
-        ),
-        endpoint => 'gemini-2.5-pro'
+        )
       ).result AS response
     FROM
       VECTOR_SEARCH(

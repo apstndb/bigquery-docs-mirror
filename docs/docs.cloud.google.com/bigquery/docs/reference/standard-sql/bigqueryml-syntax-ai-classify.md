@@ -174,7 +174,6 @@ SELECT
   body,
   AI.CLASSIFY(
     body,
-    endpoint => 'gemini-2.5-pro',
     categories => ['tech', 'sport', 'business', 'politics', 'entertainment', 'other']) AS category
 FROM
   `bigquery-public-data.bbc_news.fulltext`
@@ -204,7 +203,6 @@ SELECT
   body,
   AI.CLASSIFY(
     body,
-    endpoint => 'gemini-2.5-pro',
     categories => article_types) AS category
 FROM
   `bigquery-public-data.bbc_news.fulltext`
@@ -230,7 +228,6 @@ SELECT
   article_text,
   AI.CLASSIFY(
     ('Main topics of this news article: ', article_text),
-    endpoint => 'gemini-2.5-pro',
     categories => ['Politics', 'Finance', 'Technology', 'Sports', 'Entertainment'],
     output_mode => 'multi',
     examples => [
@@ -281,7 +278,6 @@ The following query classifies movie reviews of The English Patient by sentiment
 SELECT
   AI.CLASSIFY(
     ('Classify the review by sentiment: ', review),
-    endpoint => 'gemini-2.5-pro',
     categories =>
          [('green', 'The review is positive.'),
           ('yellow', 'The review is neutral.'),
@@ -315,8 +311,7 @@ SELECT
   OBJ.GET_READ_URL(ref).url AS signed_url,
   AI.CLASSIFY(
     images.ref,
-    ['box', 'ball', 'bottle', 'stand', 'other'],
-    endpoint => 'gemini-2.5-pro') AS category
+    ['box', 'ball', 'bottle', 'stand', 'other']) AS category
 FROM
   `cymbal_pets.product_images` AS images
 LIMIT 10;
@@ -366,7 +361,6 @@ SELECT
   AI.CLASSIFY(
     body,
     categories => ['tech', 'sport', 'business', 'politics', 'entertainment', 'other'],
-    endpoint => 'gemini-2.5-pro',
     max_error_ratio => 0.05) AS category
 FROM
   `bigquery-public-data.bbc_news.fulltext`

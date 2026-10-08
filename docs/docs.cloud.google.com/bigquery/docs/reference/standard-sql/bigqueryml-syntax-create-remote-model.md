@@ -95,7 +95,7 @@ ENDPOINT = 'vertex_ai_llm_endpoint'
 
 **Description**
 
-The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-2.5-pro` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-pro` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
+The Agent Platform endpoint for the remote model to use. You can specify the name of the Agent Platform model, for example `gemini-3.5-flash-lite` , or you can specify the Agent Platform model's endpoint URL, for example `https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-3.5-flash-lite` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Agent Platform model based on the location of the dataset in which you create the model.
 
 **Arguments**
 

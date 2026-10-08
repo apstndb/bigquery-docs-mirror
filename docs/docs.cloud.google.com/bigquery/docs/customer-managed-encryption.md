@@ -1775,14 +1775,21 @@ BigQuery relies on Cloud KMS for CMEK functionality. Cloud KMS uses [Tink](https
 
 If you have questions that are not answered here, see [BigQuery support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
-## Troubleshooting errors
+## Troubleshoot errors
 
-The following describes common errors and recommended mitigations.
+The following list describes common errors and recommended resolutions when you use customer-managed encryption keys (CMEK) with Cloud Key Management Service:
 
-| Error                                                                                                                       | Recommendation                                                                                                                                                                                                                                                                                                                            |
-|-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Please grant Cloud KMS CryptoKey Encrypter/Decrypter role                                                                   | The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. Follow the instructions in the error or [in this documentation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to grant the proper IAM permission. |
-| Existing table encryption settings don't match encryption settings specified in the request                                 | This can occur in scenarios where the destination table has encryption settings that don't match the encryption settings in your request. As mitigation, use write disposition `TRUNCATE` to replace the table, or specify a different destination table.                                                                                 |
-| This region is not supported                                                                                                | The region of the Cloud KMS key does not match the region of the BigQuery dataset of the destination table. As a mitigation, select a key in a region that matches your dataset, or load into a dataset that matches the key region.                                                                                                      |
-| Your administrator requires that you specify an encryption key for queries in project ` PROJECT_ID. `                       | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Requiring CMEKs for all resources in a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#services_constraint) .                                                                    |
-| Your administrator prevents using KMS keys from project ` KMS_PROJECT_ID ` to protect resources in project ` PROJECT_ID ` . | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Restrict Cloud KMS keys for a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#projects_constraint) .                                                                             |
+Error: `Please grant Cloud KMS CryptoKey Encrypter/Decrypter role`  
+**Resolution:** The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. To grant the required IAM permission, follow the instructions in the error message or in [Grant encryption and decryption permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) .
+
+Error: `Existing table encryption settings don't match encryption settings specified in the request`  
+**Resolution:** This error can occur when the destination table has encryption settings that don't match the encryption settings in your request. To resolve this issue, use the `TRUNCATE` write disposition to replace the table, or specify a different destination table.
+
+Error: `This region is not supported`  
+**Resolution:** The region of the Cloud KMS key doesn't match the region of the BigQuery dataset for the destination table. To resolve this issue, select a key in a region that matches your dataset, or load data into a dataset that matches the key region.
+
+Error: `Your administrator requires that you specify an encryption key for queries in project `` PROJECT_ID `` .`  
+**Resolution:** An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Require CMEKs for all resources](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#services_constraint) .
+
+Error: `Your administrator prevents using KMS keys from project `` KMS_PROJECT_ID `` to protect resources in project `` PROJECT_ID `` .`  
+**Resolution:** An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Restrict Cloud KMS keys for a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#projects_constraint) .

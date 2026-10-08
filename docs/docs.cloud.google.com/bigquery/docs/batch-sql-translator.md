@@ -68,7 +68,42 @@ To generate metadata information by using the `dwh-migration-dumper` tool, see [
 
 You can optionally create and use configuration [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to customize your batch translations. These files can be used to transform your translation output in various ways. For example, you can [create a configuration YAML file to change the case of a SQL object](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_object-name_case) during translation.
 
-To use a configuration YAML file, [upload it to the Cloud Storage bucket containing the source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) .
+Use one of the following options to include a configuration YAML file in your translation job.
+
+### Console
+
+[Upload the configuration YAML file to the Cloud Storage directory that contains your source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) . When you select that directory as an input location, the translation job includes the configuration YAML file automatically.
+
+### gcloud
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+The flags that you use with the [`gcloud alpha bq translation translate-batch` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-batch) depend on where the configuration YAML file is stored:
+
+- If the configuration YAML file is in the same directory as your source files, then you don't need any additional flags. When you set that directory in the `--source-gcs-uris` or `--source-local-dirs` flag, the job includes the configuration YAML file automatically.
+- If the configuration YAML file is stored separately on your local machine, then use the `--source-local-files` flag to upload it and add it to the job.
+- If the configuration YAML file is stored separately in Cloud Storage, then use the `--source-gcs-files` flag to add it to the job.
+
+For example, the following command uploads your source files and a separately stored configuration YAML file from your local machine, and then runs the translation job:
+
+```
+gcloud alpha bq translation translate-batch \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --source-local-dirs=LOCAL_DIR=SOURCE_URI \
+  --source-local-files=LOCAL_CONFIG_YAML=CONFIG_YAML_URI \
+  --target-gcs-path=TARGET_URI
+```
+
+Replace the following:
+
+- `LOCAL_CONFIG_YAML` : the local path to the configuration YAML file, such as `./configs/change-case.config.yaml` .
+- `CONFIG_YAML_URI` : the Cloud Storage URI that the command uploads the configuration YAML file to, such as `gs://my_data_bucket/teradata/configs/change-case.config.yaml` . This URI must be outside the `SOURCE_URI` directory.
+
+For descriptions of the other placeholders, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
 ### Upload input files to Cloud Storage
 
@@ -78,11 +113,11 @@ Upload the source files containing the queries and scripts that you want to tran
 
 You have two options for submitting a batch translation job:
 
-- **Google Cloud console** : Configure and submit a job using a user interface.
+- **Google Cloud console** : Configure and submit a job using a user interface. This approach requires you to upload source files to Cloud Storage.
 
-- **Command-line tools** : Describe the job in a translation configuration file, and submit it with the Google Cloud CLI or the bq command-line tool command-line tool.
+- **Google Cloud CLI** : Submit a job from the command line using the gcloud CLI. The `translate-batch` command accepts your source and target locations as flags, and can upload local directories and files to Cloud Storage for you. For more information, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
-Both options require you to upload your source files to Cloud Storage, and both create the same kind of translation job. A job that you submit from the command line still appears in the translation jobs list in the Google Cloud console.
+Both options require your source files to be accessible in Cloud Storage, and both create the same kind of translation job. A job that you submit from the command line still appears in the translation jobs list in the Google Cloud console.
 
 ## Submit a translation job
 
@@ -123,146 +158,66 @@ To use the Google Cloud console to submit a batch translation job, do the follow
 
     After you create the translation job, you can see its status in the translation jobs list.
 
-### bq
+### gcloud
 
-To use the gcloud CLI or the bq command-line tool command-line tool to submit a batch translation job, do the following steps.
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-These steps assume that you uploaded source files to a Cloud Storage bucket.
+To submit a batch translation job, use the [`gcloud alpha bq translation translate-batch` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-batch) . The flags that you use to identify your source files depend on whether the files are in Cloud Storage or on your local machine.
 
-#### Create a translation configuration file
+#### Translate SQL files in Cloud Storage
 
-A translation configuration file defines the path to the source files, the output destination, and the source and target dialects of your translation. You can write this file in either YAML or JSON.
-
-> **Note:** A translation configuration file is not the same as a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) . A translation configuration file defines the job itself. A configuration YAML file customizes how the translator transforms your SQL.
-
-The following example shows a translation configuration YAML file for a Teradata to BigQuery translation:
+To translate SQL files that you already [uploaded to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) , identify the source directories with the `--source-gcs-uris` flag. If you want to include files that are not in `--source-gcs-uris` , you can use the `--source-gcs-files` flag:
 
 ```
-tasks:
-  translation_task:
-    type: Teradata2BigQuery_Translation
-    translationDetails:
-      sourceTargetMapping:
-      - sourceSpec:
-          baseUri: gs://bq-translations/input
-        targetSpec:
-          relativePath: output
-      targetBaseUri: gs://bq-translations
-      targetTypes:
-      - sql
-      sourceEnvironment:
-        defaultDatabase: default_db
-        schemaSearchPath:
-        - foo
-```
-
-The following example shows a translation configuration JSON file for a Teradata to BigQuery translation:
-
-```
-{
-  "tasks": {
-    "translation_task": {
-      "type": "Teradata2BigQuery_Translation",
-      "translationDetails": {
-        "sourceTargetMapping": [
-          {
-            "sourceSpec": {
-              "literal": {
-                "literalString": "sel 1",
-                "relativePath": "my_input_1"
-              },
-              "encoding": "UTF-8"
-            }
-          },
-          {
-            "sourceSpec": {
-              "literal": {
-                "literalString": "sel 2",
-                "relativePath": "my_input_2"
-              },
-              "encoding": "UTF-8"
-            }
-          }
-        ],
-        "targetReturnLiterals": [
-          "sql/my_input_1",
-          "sql/my_input_2"
-        ]
-      }
-    }
-  }
-}
-```
-
-#### Submit the job with the Google Cloud CLI
-
-To create a translation job and run the workflow, use the following command:
-
-```
-gcloud bq migration-workflows create --location=LOCATION --config-file=CONFIG_FILE
-```
-
-To create and run the workflow and return immediately with a link to the workflow, add the `--async` flag:
-
-```
-gcloud bq migration-workflows create --location=LOCATION --config-file=CONFIG_FILE --async
-```
-
-To list your translation jobs, use the following command:
-
-```
-gcloud bq migration-workflows list --location=LOCATION
-```
-
-To see the details of a specific translation job, use the following command:
-
-```
-gcloud bq migration-workflows describe projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
+gcloud alpha bq translation translate-batch \
+    --source-dialect=SOURCE_DIALECT \
+    --target-dialect=TARGET_DIALECT \
+    --location=LOCATION \
+    --source-gcs-uris=SOURCE_URI \
+    --target-gcs-path=TARGET_URI
 ```
 
 Replace the following:
 
-- `LOCATION` : the location of the Google Cloud project that is running this translation job.
-- `CONFIG_FILE` : the path to your translation configuration file.
-- `PROJECT_ID` : the ID of the Google Cloud project that is running this translation job.
-- `WORKFLOW_ID` : the ID of the translation job.
+- `SOURCE_DIALECT` : the dialect of the source SQL files, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `TARGET_DIALECT` : the dialect to translate the source files into. For example, `bigquery` .
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
+- `SOURCE_URI` : the Cloud Storage directory that contains the source files, such as `gs://my_data_bucket/teradata/input/` .
+- `TARGET_URI` : the Cloud Storage directory that receives the translated files, such as `gs://my_data_bucket/teradata/output/` .
 
-#### Submit the job with the bq command-line tool command-line tool
+#### Translate SQL files on your local machine
 
-To run the translation job, use the following command:
-
-```
-bq mk --migration_workflow --location=LOCATION --config_file=CONFIG_FILE
-```
-
-To list all your translation jobs, use the following command:
+To translate files that are on your local machine, map each local directory to a Cloud Storage URI with the `--source-local-dirs` flag. The command uploads the directory to that URI and then includes the URI in the translation job, so you don't need to upload the files yourself:
 
 ```
-bq ls --migration_workflow --location=LOCATION
+gcloud alpha bq translation translate-batch \
+    --source-dialect=SOURCE_DIALECT \
+    --target-dialect=TARGET_DIALECT \
+    --location=LOCATION \
+    --source-local-dirs=LOCAL_DIR=SOURCE_URI \
+    --target-gcs-path=TARGET_URI
 ```
 
-To view details about a specific translation job, use the following command:
+Replace `LOCAL_DIR` with the local directory that contains the source files, such as `./teradata_queries` . For descriptions of the other placeholders, see [Translate SQL files in Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#translate-gcs-files) .
+
+To map individual files instead of directories, use the `--source-local-files` flag.
+
+#### Add optional flags
+
+To generate Gemini suggestions alongside the translated SQL, add the `--enable-ai-suggestion` flag.
+
+By default, the command waits for the translation job to finish. To submit the job and return immediately, add the `--async` flag. The command then prints a translation ID that you can pass to the [`gcloud alpha bq translation describe` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/describe) to check the job status:
 
 ```
-bq show --migration_workflow projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
+gcloud alpha bq translation describe TRANSLATION_ID \
+    --location=LOCATION
 ```
-
-To remove a translation job from the list, use the following command:
-
-```
-bq rm --migration_workflow projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
-```
-
-Replace the following:
-
-- `LOCATION` : the location of the Google Cloud project that is running this translation job.
-- `CONFIG_FILE` : the path to your translation configuration file.
-- `PROJECT_ID` : the ID of the Google Cloud project that is running this translation job.
-- `WORKFLOW_ID` : the ID of the translation job.
 
 #### Retrieve the output files
 
-The translation job writes its results to the Cloud Storage directory that you set in the `targetBaseUri` field of the translation configuration file. This target directory holds the translated files, the translation summary report, and any AI suggestion files.
+The translation job writes its results to the Cloud Storage directory that you set in the `--target-gcs-path` flag. This target directory holds the translated files, the translation summary report, and any AI suggestion files.
 
 To copy the output to your local machine, use the following command:
 
@@ -276,6 +231,116 @@ Replace the following:
 - `LOCAL_DIRECTORY` : the local directory that receives the files.
 
 Your job also appears in the translation jobs list in the Google Cloud console, even though you submitted it from the command line. To review the quality of a translation output, see [Explore the translation output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
+
+## Translate metadata
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+As well as translating SQL scripts, you can translate the metadata that describes your source data warehouse. A metadata translation job reads the metadata files that you extracted from your source system and writes GoogleSQL data definition language (DDL) statements that recreate those objects in BigQuery.
+
+The input is one or more metadata ZIP files. To learn how to produce these files with the `dwh-migration-dumper` tool, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+
+You can translate metadata using either the Google Cloud console or the gcloud CLI. Select one of the following options:
+
+### Console
+
+Metadata translation is an output option on a regular translation job:
+
+1.  Follow the steps in [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) to configure a job, using the Cloud Storage directory that holds your metadata ZIP files as an input location.
+2.  In **Optional settings** , select **DDL** .
+3.  Click **Create** to create the job.
+
+The job writes the translated DDL statements to your output directory, alongside any translated SQL.
+
+### gcloud
+
+You can translate metadata either as a job of its own, or as an extra output of a batch SQL translation job.
+
+**Translate metadata on its own**
+
+Use the [`gcloud alpha bq translation translate-metadata` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate-metadata) when your inputs are metadata ZIP files and you don't have SQL to translate:
+
+```
+gcloud alpha bq translation translate-metadata \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --source-gcs-uris=SOURCE_URI \
+  --target-gcs-path=TARGET_URI
+```
+
+Replace the following:
+
+- `SOURCE_DIALECT` : the dialect of the source metadata, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `TARGET_DIALECT` : the dialect of the target tables. For example, `bigquery` .
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
+- `SOURCE_URI` : the Cloud Storage directory that contains the metadata ZIP files, such as `gs://my_data_bucket/teradata/metadata/` .
+- `TARGET_URI` : the Cloud Storage directory that receives the translated DDL statements, such as `gs://my_data_bucket/teradata/ddl_output/` .
+
+To point at individual metadata ZIP files rather than a directory, use the `--source-gcs-files` flag. To upload metadata files from your local machine as part of the job, use the `--source-local-dirs` or `--source-local-files` flag.
+
+As with a batch translation job, the command waits for the job to finish. Add the `--async` flag to submit the job and return a translation ID immediately.
+
+**Translate metadata as part of a batch SQL translation**
+
+If your batch translation inputs already include your metadata ZIP files, then you don't need a second job. Add `metadata` to the translation outputs of the batch job with the `--target-types` flag, and the job writes the translated SQL and the DDL statements in a single run:
+
+```
+gcloud alpha bq translation translate-batch \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --source-gcs-uris=SOURCE_URI \
+  --target-gcs-path=TARGET_URI \
+  --target-types=sql,metadata
+```
+
+For the other flags that the [`translate-batch` command](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) accepts, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+## Generate source DDL
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+When your source SQL references tables whose definitions you don't have, the translator can't always resolve the objects, which leads to `RelationNotFound` or `AttributeNotFound` issues.
+
+The best way to resolve these issues is to supply the real definitions of your source objects. Run the `dwh-migration-dumper` tool against your source system and include the resulting metadata ZIP file in the translation inputs. For instructions, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) . Extracted metadata describes your objects exactly, so the translator resolves them with no guesswork.
+
+If you can't extract metadata, for example when you no longer have access to the source system, then you can ask Gemini to infer the missing DDL statements from your source SQL instead. Gemini infers these DDL statements from how the objects are used in your queries, so always review and verify these statements before using them.
+
+You can generate source DDL for your translations using either the Google Cloud console or the gcloud CLI. Select one of the following options:
+
+### Console
+
+Gemini generates source DDL suggestions as part of a regular translation job:
+
+1.  Follow the steps in [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) to configure a job.
+2.  In **Optional settings** , select **Gemini AI suggestions** .
+3.  Click **Create** to create the job.
+
+If the translation produces `RelationNotFound` or `AttributeNotFound` issues, then the job generates suggested source DDL statements for the unresolved objects. The job also translates your SQL, so you don't need a separate job.
+
+### gcloud
+
+The [`gcloud alpha bq translation generate-source-ddl` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/generate-source-ddl) reads your source SQL and returns suggested source DDL statements:
+
+```
+gcloud alpha bq translation generate-source-ddl \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --source-gcs-uris=SOURCE_URI \
+  --target-gcs-path=TARGET_URI
+```
+
+Replace `SOURCE_URI` with the Cloud Storage directory that contains the source SQL files, and `TARGET_URI` with the Cloud Storage directory that receives the generated DDL statements. The other placeholders are the same as those described in [Translate metadata](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#translate_metadata) .
+
+To generate suggestions as part of a translation job instead, add the `--enable-ai-suggestion` flag to the [`translate-batch` command](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+You can then supply the generated DDL statements as input to a later translation job to improve translation quality. For more information, see [`RelationNotFound` or `AttributeNotFound` translation issues](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#batch-relation-attribute-not-found) .
 
 ## Explore the translation output
 
@@ -417,6 +482,10 @@ This section describes how to debug individual queries and how to resolve the mo
 
 You can use the BigQuery interactive SQL translator to review or debug a SQL query using the same metadata or object mapping information as your source database. After you complete a batch translation job, BigQuery generates a translation configuration ID that contains information about the job's metadata, the object mapping, or the schema search path, as applicable to the query. You use the batch translation configuration ID with the interactive SQL translator to run SQL queries with the specified configuration.
 
+You can debug batch translated SQL queries using either the Google Cloud console or the gcloud CLI. Select one of the following options:
+
+### Console
+
 To start an interactive SQL translation by using a batch translation configuration ID, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
@@ -440,6 +509,34 @@ To debug a batch translation file in the interactive SQL translator, follow thes
     You see the input and output files populated in the interactive SQL translator that now uses the corresponding batch translation configuration ID.
 
 6.  To save the edited output file back to Cloud Storage, in the interactive SQL translator click **Save \> Save To GCS** .
+
+### gcloud
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+To re-translate and inspect a single query without opening the Google Cloud console, use the [`gcloud alpha bq translation translate` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate) . This is useful when you have narrowed a batch translation problem down to one query and want to iterate on it locally.
+
+```
+gcloud alpha bq translation translate \
+  --source-dialect=SOURCE_DIALECT \
+  --target-dialect=TARGET_DIALECT \
+  --location=LOCATION \
+  --input-file=INPUT_FILE \
+  --output-file=OUTPUT_FILE \
+  --translation-log-file=LOG_FILE \
+  --explanation-output-file=EXPLANATION_FILE
+```
+
+Replace the following:
+
+- `INPUT_FILE` : the local file containing the query to translate. If you omit this flag, the command reads the query from standard input.
+- `OUTPUT_FILE` : the local file that receives the translated query. If you omit this flag, the command writes the query to standard output.
+- `LOG_FILE` : the local YAML file that receives the translation logs, which contain the same issue messages that the Google Cloud console shows in the **Log Messages** tab.
+- `EXPLANATION_FILE` : the local file that receives a Gemini-generated explanation of the translation.
+
+To reuse the metadata from your batch job so that the query resolves the same objects, add the `--metadata-gcs-uri` flag. For more information, see [Translate a query into GoogleSQL](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) .
 
 ### Troubleshoot translation errors
 
@@ -489,6 +586,151 @@ To fix failed translation jobs with the `RelationNotFound` or `AttributeNotFound
 ## Pricing
 
 There is no charge to use the batch SQL translator. However, storage used to store input and output files incurs the normal fees. For more information, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
+
+## Alternative migration workflows command-line tools
+
+You can also submit a batch translation job by using a translation configuration file with the Google Cloud CLI ( `gcloud bq migration-workflows` ) or with the bq command-line tool command-line tool.
+
+These steps assume that you uploaded source files to a Cloud Storage bucket.
+
+### Create a translation configuration file
+
+A translation configuration file defines the path to the source files, the output destination, and the source and target dialects of your translation. You can write this file in either YAML or JSON.
+
+> **Note:** A translation configuration file is not the same as a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) . A translation configuration file defines the job itself. A configuration YAML file customizes how the translator transforms your SQL.
+
+The following example shows a translation configuration YAML file for a Teradata to BigQuery translation:
+
+```
+tasks:
+  translation_task:
+    type: Teradata2BigQuery_Translation
+    translationDetails:
+      sourceTargetMapping:
+      - sourceSpec:
+          baseUri: gs://bq-translations/input
+        targetSpec:
+          relativePath: output
+      targetBaseUri: gs://bq-translations
+      targetTypes:
+      - sql
+      sourceEnvironment:
+        defaultDatabase: default_db
+        schemaSearchPath:
+        - foo
+```
+
+The following example shows a translation configuration JSON file for a Teradata to BigQuery translation:
+
+```
+{
+  "tasks": {
+    "translation_task": {
+      "type": "Teradata2BigQuery_Translation",
+      "translationDetails": {
+        "sourceTargetMapping": [
+          {
+            "sourceSpec": {
+              "literal": {
+                "literalString": "sel 1",
+                "relativePath": "my_input_1"
+              },
+              "encoding": "UTF-8"
+            }
+          },
+          {
+            "sourceSpec": {
+              "literal": {
+                "literalString": "sel 2",
+                "relativePath": "my_input_2"
+              },
+              "encoding": "UTF-8"
+            }
+          }
+        ],
+        "targetReturnLiterals": [
+          "sql/my_input_1",
+          "sql/my_input_2"
+        ]
+      }
+    }
+  }
+}
+```
+
+### Submit and manage translation jobs
+
+Use one of the following command-line tools to submit and manage your translation jobs.
+
+### gcloud
+
+To create a translation job and run the workflow, use the following command:
+
+```
+gcloud bq migration-workflows create --location=LOCATION --config-file=CONFIG_FILE
+```
+
+To create and run the workflow and return immediately with a link to the workflow, add the `--async` flag:
+
+```
+gcloud bq migration-workflows create --location=LOCATION --config-file=CONFIG_FILE --async
+```
+
+To list your translation jobs, use the following command:
+
+```
+gcloud bq migration-workflows list --location=LOCATION
+```
+
+To see the details of a specific translation job, use the following command:
+
+```
+gcloud bq migration-workflows describe projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
+```
+
+Replace the following:
+
+- `LOCATION` : the location of the Google Cloud project that is running this translation job.
+- `CONFIG_FILE` : the path to your translation configuration file.
+- `PROJECT_ID` : the ID of the Google Cloud project that is running this translation job.
+- `WORKFLOW_ID` : the ID of the translation job.
+
+### bq
+
+To run the translation job, use the following command:
+
+```
+bq mk --migration_workflow --location=LOCATION --config_file=CONFIG_FILE
+```
+
+To list all your translation jobs, use the following command:
+
+```
+bq ls --migration_workflow --location=LOCATION
+```
+
+To view details about a specific translation job, use the following command:
+
+```
+bq show --migration_workflow projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
+```
+
+To remove a translation job from the list, use the following command:
+
+```
+bq rm --migration_workflow projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
+```
+
+Replace the following:
+
+- `LOCATION` : the location of the Google Cloud project that is running this translation job.
+- `CONFIG_FILE` : the path to your translation configuration file.
+- `PROJECT_ID` : the ID of the Google Cloud project that is running this translation job.
+- `WORKFLOW_ID` : the ID of the translation job.
+
+### Retrieve output files
+
+To download the output files after the job completes, use `gcloud storage cp` as described in [Retrieve the output files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#retrieve-output-files) . To review the job in the Google Cloud console, see [Explore the translation output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
 
 ## What's next
 

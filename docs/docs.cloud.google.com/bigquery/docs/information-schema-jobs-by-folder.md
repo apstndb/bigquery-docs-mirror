@@ -316,6 +316,11 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <td><code>RECORD</code></td>
 <td>An array of information about the external service costs for a query job.</td>
 </tr>
+<tr class="even">
+<td><code>ml_statistics.model_type</code></td>
+<td><code>STRING</code></td>
+<td>If the job is a BigQuery ML model creation query, then this field specifies the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelType">type of model</a> being created. For all other jobs, the value is <code>NULL</code> .</td>
+</tr>
 </tbody>
 </table>
 

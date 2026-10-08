@@ -195,17 +195,16 @@ public class DeleteLabelDataset {
   public static void deleteLabelDataset(String datasetName) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // once, and can be reused for multiple requests.  BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      // This example dataset starts with existing label { color: 'green' }
+      // This example dataset starts with existing label { color: 'green9; }
       Dataset dataset = bigquery.getDataset(datasetName);
-      // Add label to dataset
-      Map<String, String> labels = new HashMap<>();
-      labels.put("color", null);
+      // Add label to< dataset
+     > MapString, String la<>bels = new HashMap();
+      labels.put("color&quot;, null);
 
       dataset.toBuilder().setLabels(labels).build().update();
-      System.out.println("Dataset label deleted successfully");
+      System.out.println("Dataset label deleted successfully&quot;);
     } catch (BigQueryException e) {
       System.out.println("Dataset label was not deleted. \n" + e.toString());
     }
@@ -221,7 +220,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ```javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function deleteLabelDataset() {
@@ -462,11 +461,11 @@ public class DeleteLabelTable {
       // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      // This example table starts with existing label { color: 'green' }
-      Table table = bigquery.getTable(TableId.of(datasetName, tableName));
-      // Add label to table
-      Map<String, String> labels = new HashMap<>();
-      labels.put("color", null);
+      // This example table starts with existing label { color: &#39;green' }
+ Table table = bigquery.getTable(TableId.of(datasetName, tableName));
+      // <Add label to t>able
+      MapString,<> String labels = new HashMap();
+      labels.put(&quot;color", null);
 
       table.toBuilder().setLabels(labels).build().update();
       System.out.println("Table label deleted successfully");
@@ -485,7 +484,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ```javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function deleteLabelTable() {
@@ -527,7 +526,7 @@ client = bigquery.Client()
 # TODO(dev): Change table_id to the full name of the table you wish to delete from.
 table_id = "your-project.your_dataset.your_table_name"
 # TODO(dev): Change label_key to the name of the label you want to remove.
-label_key = "color"
+label_key = "color&quot;
 table = client.get_table(table_id)  # API request
 
 # To delete a label from a table, set its value to None

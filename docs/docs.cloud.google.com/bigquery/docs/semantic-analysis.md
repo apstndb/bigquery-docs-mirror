@@ -97,8 +97,7 @@ SELECT
   review_text,
   AI.CLASSIFY(
     review_text,
-    categories => ['positive', 'negative', 'neutral'],
-    endpoint => 'gemini-2.5-pro') AS sentiment
+    categories => ['positive', 'negative', 'neutral']) AS sentiment
 FROM
   my_dataset.customer_feedback;
 ```
@@ -160,16 +159,13 @@ SELECT
   review_text,
   AI.SCORE(
     ("Score 0.0 to 10 on positive sentiment about PRICE for review: ", review_text,
-    "If price is not mentioned, return -1.0"),
-    endpoint => 'gemini-2.5-pro') AS price_score,
+    "If price is not mentioned, return -1.0")) AS price_score,
   AI.SCORE(
     ("Score 0.0 to 10 on positive sentiment about CUSTOMER SERVICE for review: ", review_text,
-    "If customer service is not mentioned, return -1.0"),
-    endpoint => 'gemini-2.5-pro') AS service_score,
+    "If customer service is not mentioned, return -1.0")) AS service_score,
   AI.SCORE(
     ("Score 0.0 to 10 on positive sentiment about QUALITY for review: ", review_text,
-    "If quality is not mentioned, return -1.0"),
-    endpoint => 'gemini-2.5-pro') AS quality_score
+    "If quality is not mentioned, return -1.0")) AS quality_score
 FROM
   my_dataset.customer_feedback
 LIMIT 3;
@@ -208,8 +204,7 @@ SELECT
   review_text,
   AI.CLASSIFY(
     review_text,
-    categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other'],
-    endpoint => 'gemini-2.5-pro'
+    categories => ['joy', 'anger', 'sadness', 'surprise', 'fear', 'disgust', 'neutral', 'other']
   ) AS emotion
 FROM
   my_dataset.customer_feedback;
@@ -276,8 +271,7 @@ SELECT
     review_text,
     categories => ['Billing Issue', 'Account Access',
                    'Product Bug', 'Feature Request',
-                   'Shipping Delay', 'Other'],
-    endpoint => 'gemini-2.5-pro') AS topic,
+                   'Shipping Delay', 'Other']) AS topic,
     COUNT(*) AS number_of_reviews,
 FROM
   my_dataset.customer_feedback
@@ -315,8 +309,7 @@ SELECT
     (
       """How similar is the review to the concept of 'difficulty in setting up the product'?
          A higher score indicates more similarity. Review: """,
-      review_text),
-    endpoint => 'gemini-2.5-pro') AS setup_difficulty
+      review_text)) AS setup_difficulty
 FROM my_dataset.customer_feedback
 ORDER BY setup_difficulty DESC
 LIMIT 2;
@@ -352,8 +345,7 @@ WHERE
   AI.IF(
     (
       "Does this review discuss difficulty setting up the product? Review: ",
-      review_text),
-    endpoint => 'gemini-2.5-pro');
+      review_text));
 ```
 
 ## Combine functions
@@ -367,13 +359,11 @@ SELECT
   AI.CLASSIFY(
     review_text,
     categories => [
-      'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative'],
-    endpoint => 'gemini-2.5-pro') AS negative_topic
+      'Poor Quality', 'Bad Customer Service', 'High Price', 'Other Negative']) AS negative_topic
 FROM my_dataset.customer_feedback
 WHERE
   AI.IF(
-    ("Does this review express a negative sentiment? Review: ", review_text),
-    endpoint => 'gemini-2.5-pro');
+    ("Does this review express a negative sentiment? Review: ", review_text));
 ```
 
 ## Create reusable prompt UDFs
@@ -385,8 +375,7 @@ CREATE OR REPLACE FUNCTION my_dataset.is_negative_sentiment(review_text STRING)
 RETURNS BOOL
 AS (
     AI.IF(
-      ("Does this review express a negative sentiment? Review: ", review_text),
-      endpoint => 'gemini-2.5-pro')
+      ("Does this review express a negative sentiment? Review: ", review_text))
 );
 
 SELECT

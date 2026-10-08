@@ -149,8 +149,7 @@ SELECT
 FROM
   `bigquery-public-data.bbc_news.fulltext`
 WHERE
-  AI.IF(('The following news story is about a natural disaster: ', body),
-    endpoint => 'gemini-2.5-pro');
+  AI.IF(('The following news story is about a natural disaster: ', body));
 ```
 
 The result is similar to the following:
@@ -194,7 +193,6 @@ SELECT
   review,
   AI.IF(
     ("The review is emotional:", review),
-    endpoint => 'gemini-2.5-pro',
     examples => [
       ("I really love this product", TRUE),
       ("The product performed extremely well", FALSE)]) AS is_emotional
@@ -237,7 +235,7 @@ SELECT
 FROM
   `cymbal_pets.product_images`
 WHERE
-  AI.IF(('The image contains a ball.', ref), endpoint => 'gemini-2.5-pro');
+  AI.IF(('The image contains a ball.', ref));
 ```
 
 ### Join tables based on image content
@@ -275,8 +273,7 @@ ON
       Determine if the image is of the following pet toy: """,
       products.product_name,
       images.ref
-    ),
-    endpoint => 'gemini-2.5-pro')
+    ))
 WHERE
   products.category = "Toys" AND
   products.brand = "Fluffy Buns";
@@ -304,8 +301,7 @@ SELECT
 FROM
   `audio_repo.prompt_audio`
 WHERE
-  AI.IF(('Does the audio talk about large language models? ', ref),
-    endpoint => 'gemini-2.5-pro');
+  AI.IF(('Does the audio talk about large language models? ', ref));
 ```
 
 ### Handle inference errors
@@ -318,8 +314,7 @@ SELECT
 FROM
   `bigquery-public-data.bbc_news.fulltext`
 WHERE
-  AI.IF(('The following news story is about a natural disaster: ', body),
-    endpoint => 'gemini-2.5-pro'
+  AI.IF(('The following news story is about a natural disaster: ', body)
     max_error_ratio => 0.05);
 ```
 

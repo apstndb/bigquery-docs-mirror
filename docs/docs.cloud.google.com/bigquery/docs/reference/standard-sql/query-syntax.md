@@ -3281,7 +3281,7 @@ When evaluating the results for a particular grouping set, expressions that aren
 
 You can filter results for specific groupable items. To learn more, see the [`GROUPING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping)
 
-`GROUPING SETS` allows up to 4096 groupable items.
+`GROUPING SETS` allows up to 4096 groupable items from at most 50 unique columns.
 
 **Examples**
 
@@ -3535,7 +3535,7 @@ When evaluating the results for a particular grouping set, expressions that aren
 
 You can filter results by specific groupable items. To learn more, see the [`GROUPING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping)
 
-`ROLLUP` allows up to 4095 groupable items (equivalent to 4096 grouping sets).
+`ROLLUP` allows up to 4095 groupable items (equivalent to 4096 grouping sets) from at most 50 unique columns.
 
 **Examples**
 

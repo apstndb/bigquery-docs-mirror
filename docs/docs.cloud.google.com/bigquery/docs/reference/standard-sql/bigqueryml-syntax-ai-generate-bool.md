@@ -75,7 +75,7 @@ AI.GENERATE_BOOL(
 
 <!-- -->
 
-- `ENDPOINT` : a `STRING` value that specifies the Agent Platform endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML selects a recent stable version of Gemini to use. Currently, the default endpoint is `gemini-2.5-flash` . You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, specify the following endpoint:
+- `ENDPOINT` : a `STRING` value that specifies the Agent Platform endpoint to use for the model. You can specify any [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `ENDPOINT` value, BigQuery ML selects a recent stable version of Gemini to use. The default endpoint is `gemini-3.5-flash-lite` . You can also specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, specify the following endpoint:
 
   ```
   https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT

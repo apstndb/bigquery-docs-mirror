@@ -6,7 +6,7 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-2.5-pro` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
+This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`gemini-3.5-flash-lite` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
 
 ## Costs
 
@@ -455,7 +455,7 @@ Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/s
 ```
 CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
   REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
-  OPTIONS (ENDPOINT = 'gemini-2.5-pro');
+  OPTIONS (ENDPOINT = 'gemini-3.5-flash-lite');
 ```
 
 Replace the following:
