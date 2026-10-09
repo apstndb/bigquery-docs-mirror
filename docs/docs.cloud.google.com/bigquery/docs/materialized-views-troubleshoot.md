@@ -263,6 +263,46 @@ Materialized views over external tables have specific architectural requirements
 2.  Configure `max_staleness` on the materialized view to a value higher than the metadata cache interval of the base tables. For example, if the base table cache interval is 30 minutes, set the materialized view's `max_staleness` to at least 45 minutes to allow a buffer for refresh execution.
 3.  Don't mix external tables and managed tables in a materialized view definition.
 
+### Reference to an `INFORMATION_SCHEMA` view
+
+**Error message:**
+
+```
+Illegal operation on INFORMATION_SCHEMA view: PROJECT_ID:DATASET_OR_REGION.INFORMATION_SCHEMA.VIEW_NAME
+```
+
+Depending on the `INFORMATION_SCHEMA` view that you query and the options that you specify, you might instead receive a general materialized view validation error, such as the following:
+
+```
+Unsupported operator in materialized view: KEYWORD
+```
+
+or
+
+```
+Materialized view queries do not support FEATURE
+```
+
+or
+
+```
+Materialized views cannot reference logical views.
+```
+
+**Cause:**
+
+You can't create an incremental or non-incremental materialized view that directly or indirectly references an [`INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) . `INFORMATION_SCHEMA` views are system-generated metadata views rather than supported base tables, so BigQuery can't attach materialized view metadata or track base table changes for them.
+
+Because BigQuery expands `INFORMATION_SCHEMA` views into their underlying internal view and system table definitions during query planning, you might observe the following behaviors when creation fails:
+
+- In the `Illegal operation on INFORMATION_SCHEMA view` error message, `VIEW_NAME` might display an internal system table name (for example, `_ `` HASH `` _JOBS_DELETE` ) instead of the `INFORMATION_SCHEMA` view name that you specified in your query.
+- For incremental materialized views, BigQuery validates the expanded internal SQL definition of the `INFORMATION_SCHEMA` view before checking base table support. If that internal definition contains SQL syntax or functions that aren't supported in incremental materialized views, the query fails with an [unsupported SQL operator or syntax](https://docs.cloud.google.com/bigquery/docs/materialized-views-troubleshoot#unsupported_operator) error first.
+
+**Resolution:**
+
+- Query the `INFORMATION_SCHEMA` view directly, or create a standard [logical view](https://docs.cloud.google.com/bigquery/docs/views) over the `INFORMATION_SCHEMA` view if you don't need precomputed storage.
+- If you need to materialize `INFORMATION_SCHEMA` metadata (for example, to retain historical metadata or improve query performance), write the query results to a standard BigQuery table by using a [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) or a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) . You can then query that standard table directly or create a materialized view over it.
+
 ## Troubleshoot refresh issues
 
 This section describes common causes of refresh failures and performance delays for materialized views.

@@ -43,6 +43,7 @@ The following table lists the BigQuery resources that you can reference in custo
 | bigquerymigration.googleapis.com/MigrationWorkflow                                         | `resource.displayName` |
 | `resource.tasks[*].assessmentTaskDetails.dataSource`                                       |                        |
 | `resource.tasks[*].assessmentTaskDetails.featureHandle.addShareableDataset`                |                        |
+| `resource.tasks[*].assessmentTaskDetails.featureHandle.generateTcoReport`                  |                        |
 | `resource.tasks[*].assessmentTaskDetails.inputPath`                                        |                        |
 | `resource.tasks[*].assessmentTaskDetails.outputDataset`                                    |                        |
 | `resource.tasks[*].assessmentTaskDetails.querylogsPath`                                    |                        |
@@ -69,6 +70,7 @@ The following table lists the BigQuery resources that you can reference in custo
 | `resource.tasks[*].translationDetails.sourceEnvironment.schemaSearchPath`                  |                        |
 | `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.baseUri`              |                        |
 | `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.encoding`             |                        |
+| `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.gcsFilePath`          |                        |
 | `resource.tasks[*].translationDetails.sourceTargetMapping.sourceSpec.literal.relativePath` |                        |
 | `resource.tasks[*].translationDetails.sourceTargetMapping.targetSpec.relativePath`         |                        |
 | `resource.tasks[*].translationDetails.suggestionConfig.skipSuggestionSteps.rewriteTarget`  |                        |

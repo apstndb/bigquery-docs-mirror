@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `explain_translation`
 
-Explains the SQL translation for a given translation ID.
+Explains the SQL translation for a given translation ID started by `translate_query` , what was changed between the source and the translated query, and why it was changed. Use it to understand the translation and its `WARNING` or `ERROR` logs. It doesn't change the translated query.
 
 The following code sample shows how to use `curl` to call the `explain_translation` MCP tool.
 

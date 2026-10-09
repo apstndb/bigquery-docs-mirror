@@ -274,9 +274,9 @@ To use natural language SQL generation, follow these steps:
 
 4.  Highlight the SQL query, including the natural language expression, that you want Gemini to convert. In the previous example, you would highlight the entire SQL sample.
 
-    ![Gemini icon highlighted in margin of BigQuery query editor and the full SQL statement selected.](https://docs.cloud.google.com/static/bigquery/images/gemini-query-editor.png)
+    ![Gemini icon highlighted near the selected text in the BigQuery query editor.](https://docs.cloud.google.com/static/bigquery/images/gemini-bq-editor.png)
 
-5.  To generate SQL code, in the margin or the query editor you can click auto_awesome **Gemini** , and then click pen_spark **Convert comments to SQL** .
+5.  To generate SQL code, click the floating inline **Gemini** button near your highlighted text, then click pen_spark **Convert comments to SQL** . Alternatively, you can press <span class="kbd"> Control+Shift+P </span> ( <span class="kbd"> Command+Shift+P </span> on macOS) to directly open the Transform prompt on your highlighted text.
 
 6.  Review the generated SQL. The **Transform SQL with Gemini** output shows the difference between the original text and the generated text. The generated SQL query should be similar to the following:
 
@@ -351,9 +351,9 @@ To get an explanation for a SQL query, follow these steps:
 
 3.  Highlight the query that you want Gemini in BigQuery to explain.
 
-4.  Click astrophotography_mode **Gemini** , and then click **Explain this query** .
+4.  Click the floating inline astrophotography_mode **Gemini** button that appears by the highlighted text, and then click **Explain this query** .
 
-    ![The Explain this query icon and text highlighted in the BigQuery query editor.](https://docs.cloud.google.com/static/bigquery/images/duet-ai-explain.png)
+    ![The Explain this query icon and text highlighted in the BigQuery query editor.](https://docs.cloud.google.com/static/bigquery/images/gemini-explain.png)
 
     The SQL explanation appears in the **Cloud** panel.
 

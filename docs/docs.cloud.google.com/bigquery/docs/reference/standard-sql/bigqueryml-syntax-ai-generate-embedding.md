@@ -356,14 +356,14 @@ The result is similar to the following:
 
 ### Multimodal embedding
 
-This example shows how to generate embeddings from visual content by using a remote model that references a `multimodalembedding` model.
+This example shows how to generate embeddings from visual content by using a remote model that references a multimodal embedding model.
 
 Create the remote model:
 
 ```
 CREATE OR REPLACE MODEL `mydataset.multimodalembedding`
   REMOTE WITH CONNECTION `us.test_connection`
-  OPTIONS(ENDPOINT = 'multimodalembedding@001')
+  OPTIONS(ENDPOINT = 'gemini-embedding-2')
 ```
 
 **Use an `ObjectRef` value**

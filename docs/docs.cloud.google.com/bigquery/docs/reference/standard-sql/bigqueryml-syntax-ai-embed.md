@@ -269,7 +269,7 @@ SELECT
   OBJ.GET_READ_URL(ref).url AS signed_url,
   AI.EMBED(
     ref,
-    endpoint => 'multimodalembedding@001') AS embedding
+    endpoint => 'gemini-embedding-2') AS embedding
 FROM
   `cymbal_pets.product_images`
 LIMIT 2;

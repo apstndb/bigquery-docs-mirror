@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `get_translation`
 
-Gets the SQL translation for a given translation ID. If the state is not yet `SUCCEEDED` or `FAILED` , wait at least 2 seconds before rechecking the state.
+Gets the SQL translation for a given translation ID. If the state is not yet `SUCCEEDED` or `FAILED` , wait at least two seconds before rechecking the state. When it is `SUCCEEDED` , check `translation_logs` for entries with severity `ERROR` before using `translated_query` . For information on what the errors mean and how to resolve them, see `translate_query` .
 
 The following code sample shows how to use `curl` to call the `get_translation` MCP tool.
 
@@ -77,11 +77,11 @@ Response message for `FetchTranslation` .
 }
 ```
 
-| Fields              |                                                                                                                                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `translation`       | `object ( `[`Translation`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/get_translation#Output.Schema.Translation)` )` The translation resource.                |
-| `translationLogs[]` | `object ( `[`Log`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query#Output.Schema.Log)` )` A list of logs generated during the translation process. |
-| `errorInfo`         | `object ( `[`ErrorInfo`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query#Output.Schema.ErrorInfo)` )` The error information.                       |
+| Fields              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `translation`       | `object ( `[`Translation`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/get_translation#Output.Schema.Translation)` )` The translation resource.                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `translationLogs[]` | `object ( `[`Log`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query#Output.Schema.Log)` )` A list of logs generated during the translation process. Entries with severity `ERROR` mean the translated query contains unresolved, best-effort parts; `effect` says why: `COMPLETENESS` means the schema of a referenced object was missing (see `metadata_file_path` of `translate_query` ), `CORRECTNESS` means the translator could not process part of the input, and `COMPATIBILITY` means a feature was approximated for BigQuery. |
+| `errorInfo`         | `object ( `[`ErrorInfo`](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query#Output.Schema.ErrorInfo)` )` The error information.                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ### Translation
 
@@ -95,11 +95,11 @@ Response message for `FetchTranslation` .
 }
 ```
 
-| Fields            |                                                                                                |
-|-------------------|------------------------------------------------------------------------------------------------|
-| `translation`     | `string` The ID of the translation.                                                            |
-| `translatedQuery` | `string` The translated query.                                                                 |
-| `state`           | `string` The current state of the translation workflow, for example, `SUCCEEDED` or `FAILED` . |
+| Fields            |                                                                                                                                                  |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `translation`     | `string` The ID of the translation.                                                                                                              |
+| `translatedQuery` | `string` The translated query. It is not validated against BigQuery; check `translation_logs` for entries with severity `ERROR` before using it. |
+| `state`           | `string` The current state of the translation workflow, for example, `SUCCEEDED` or `FAILED` .                                                   |
 
 ### Log
 

@@ -140,6 +140,10 @@ When you interact with BigQuery programmatically, use the following resources to
 - **API performance tips.** Follow best practices for making API calls, such as managing connection pools, using batch operations, and handling retries. For more information, see [API performance tips](https://docs.cloud.google.com/bigquery/docs/api-performance) .
 - **API uploads.** Troubleshoot and manage data ingestion using REST API resumable and multipart upload requests. For more information, see [API uploads](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads) .
 
+### Authentication and ADC
+
+For help troubleshooting common problems that you might encounter when using Application Default Credentials (ADC), see [Troubleshoot your ADC setup](https://docs.cloud.google.com/docs/authentication/troubleshoot-adc) .
+
 ## What's next
 
 - Learn more about [monitoring BigQuery](https://docs.cloud.google.com/bigquery/docs/monitoring) .

@@ -36,7 +36,7 @@ Features
 
 ### Built-in predictive analytics and AI inferencing
 
-Connect your data to AI with [BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction). Train, evaluate, and deploy [predictive analytics](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) models directly within BigQuery using SQL. Easily integrate your models with [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) for advanced MLOps. Use generative AI in your workflows with [AI functions](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions) for text summarization, sentiment analysis, and data enrichment. Beyond traditional tables, use [BigQuery Graph](https://cloud.google.com/bigquery/docs/graph-overview) to uncover complex relationships and patterns in your data. Build sophisticated context-retrieval and RAG applications with embeddings and [vector, text, or hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-search) to find information based on meaning, not just keywords.
+Connect your data to AI with [BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction). Train, evaluate, and deploy [predictive analytics](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) models directly within BigQuery using SQL. Easily integrate your models with [Gemini platform](https://docs.cloud.google.com/vertex-ai/docs/model-registry/introduction) for advanced MLOps. Use generative AI in your workflows with [AI functions](https://docs.cloud.google.com/bigquery/docs/ai-introduction#ai_functions) for text summarization, sentiment analysis, and data enrichment. Beyond traditional tables, use [BigQuery Graph](https://cloud.google.com/bigquery/docs/graph-overview) to uncover complex relationships and patterns in your data. Build sophisticated context-retrieval and RAG applications with embeddings and [vector, text, or hybrid search](https://docs.cloud.google.com/bigquery/docs/vector-search) to find information based on meaning, not just keywords.
 
 [![](https://img.youtube.com/vi/vr-PK1_4QKE/hqdefault.jpg) From raw data to inferencing in the fast lane 1:49](https://www.youtube.com/watch?v=vr-PK1_4QKE)
 
@@ -48,7 +48,7 @@ Get [AI-powered assistance and automation](https://cloud.google.com/use-cases/da
 
 ### Agent development and analysis tools
 
-Embed natural-language query functionality in your workflows using [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview). Publish your agent in Gemini Enterprise app, enabling all users to gain instant insights by simply asking questions in natural language. Manage data assets, run queries, and deploy data pipelines directly from your preferred IDE using the OSS [Data Agent Kit](https://cloud.google.com/use-cases/data-cloud-agents#data-agent-kit). Stream detailed agent interactions to BigQuery for performance and cost optimization with a single line of code using [BigQuery agent ops plugins](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/) for frameworks like ADK, LangGraph, and UCP.
+Embed natural-language query functionality in your workflows using [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview). Publish your agent in Gemini, enabling all users to gain instant insights by simply asking questions in natural language. Manage data assets, run queries, and deploy data pipelines directly from your preferred IDE using the OSS [Data Agent Kit](https://cloud.google.com/use-cases/data-cloud-agents#data-agent-kit). Stream detailed agent interactions to BigQuery for performance and cost optimization with a single line of code using [BigQuery agent ops plugins](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/) for frameworks like ADK, LangGraph, and UCP.
 
 [![Conversational Analytics API](https://www.gstatic.com/bricks/image/6f8cc249-d4a1-4ba9-8320-9adb4d436981.jpg) Ground your agents with enterprise data 3:30](https://youtu.be/c3WSg0Bpmt4)
 
@@ -96,7 +96,7 @@ Common Uses
 
 ##### Simplify data to AI workflows
 
-Streamline end-to-end [data science](https://cloud.google.com/data-science) workflows on Colab Enterprise notebooks with built-in agents or open source Python libraries through [BigQuery DataFrames](https://cloud.google.com/bigquery/docs/programmatic-analysis#bigquery-dataframes). Bring your preferred processing engine—SQL, [serverless Spark](https://cloud.google.com/products/serverless-spark), and additional open source frameworks. Train, evaluate, and deploy ML models directly within BigQuery or use pre-trained models like [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) using SQL. Conveniently store features for models built and used in BigQuery. Version, evaluate, and deploy the models by registering them in [Gemini Enterprise Agent Platform](https://cloud.google.com/bigquery/docs/managing-models-vertex) for online prediction by using a single interface.
+Streamline end-to-end [data science](https://cloud.google.com/data-science) workflows on Colab Enterprise notebooks with built-in agents or open source Python libraries through [BigQuery DataFrames](https://cloud.google.com/bigquery/docs/programmatic-analysis#bigquery-dataframes). Bring your preferred processing engine—SQL, [serverless Spark](https://cloud.google.com/products/serverless-spark), and additional open source frameworks. Train, evaluate, and deploy ML models directly within BigQuery or use pre-trained models like [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) using SQL. Conveniently store features for models built and used in BigQuery. Version, evaluate, and deploy the models by registering them in [Gemini platform](https://cloud.google.com/bigquery/docs/managing-models-vertex) for online prediction by using a single interface.
 
 [View end-to-end ML model flow](https://cloud.google.com/bigquery/docs/e2e-journey)
 
@@ -112,7 +112,7 @@ Streamline end-to-end [data science](https://cloud.google.com/data-science) work
 
 ##### Simplify data to AI workflows
 
-Streamline end-to-end [data science](https://cloud.google.com/data-science) workflows on Colab Enterprise notebooks with built-in agents or open source Python libraries through [BigQuery DataFrames](https://cloud.google.com/bigquery/docs/programmatic-analysis#bigquery-dataframes). Bring your preferred processing engine—SQL, [serverless Spark](https://cloud.google.com/products/serverless-spark), and additional open source frameworks. Train, evaluate, and deploy ML models directly within BigQuery or use pre-trained models like [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) using SQL. Conveniently store features for models built and used in BigQuery. Version, evaluate, and deploy the models by registering them in [Gemini Enterprise Agent Platform](https://cloud.google.com/bigquery/docs/managing-models-vertex) for online prediction by using a single interface.
+Streamline end-to-end [data science](https://cloud.google.com/data-science) workflows on Colab Enterprise notebooks with built-in agents or open source Python libraries through [BigQuery DataFrames](https://cloud.google.com/bigquery/docs/programmatic-analysis#bigquery-dataframes). Bring your preferred processing engine—SQL, [serverless Spark](https://cloud.google.com/products/serverless-spark), and additional open source frameworks. Train, evaluate, and deploy ML models directly within BigQuery or use pre-trained models like [TimesFM](https://docs.cloud.google.com/bigquery/docs/timesfm-model) using SQL. Conveniently store features for models built and used in BigQuery. Version, evaluate, and deploy the models by registering them in [Gemini platform](https://cloud.google.com/bigquery/docs/managing-models-vertex) for online prediction by using a single interface.
 
 [View end-to-end ML model flow](https://cloud.google.com/bigquery/docs/e2e-journey)
 
@@ -512,12 +512,12 @@ Mattel saves time and money by connecting its data to AI in BigQuery.
 
 TJ Allard, Lead Data Scientist, Mattel
 
-"BigQuery and Vertex AI \[now Gemini Enterprise Agent Platform\] bring all our data and AI together into a single platform. This has transformed how we take action on customer feedback from a lengthy manual process to a simple natural language query in seconds, allowing us to get to customer insights in minutes instead of months.”
+"BigQuery and Gemini platform bring all our data and AI together into a single platform. This has transformed how we take action on customer feedback from a lengthy manual process to a simple natural language query in seconds, allowing us to get to customer insights in minutes instead of months.”
 
 ### Read more customer stories
 
 - [Deutsche Telekom designs the telco of tomorrow with BigQuery Read the blog](https://cloud.google.com/blog/topics/telecommunications/deutsche-telekom-designs-the-telco-of-tomorrow-with-bigquery)
-- [10 months to innovation: Definity's leap to data agility with BigQuery and Vertex AI Read the blog](https://cloud.google.com/blog/products/databases/definitys-leap-to-data-agility-with-bigquery-and-vertex-ai)
+- [10 months to innovation: Definity's leap to data agility with BigQuery and Gemini platform Read the blog](https://cloud.google.com/blog/products/databases/definitys-leap-to-data-agility-with-bigquery-and-vertex-ai)
 - [Yassir migrated from Databricks to BigQuery and improved the performance and efficiency of its machine learning processes Read the blog](https://cloud.google.com/blog/products/data-analytics/african-super-app-delivers-on-data-with-bigquery-migration)
 
 See the BigQuery difference
@@ -790,7 +790,7 @@ FAQ
 
 #### What makes BigQuery different from other enterprise data warehouse alternatives?
 
-BigQuery is Google Cloud’s fully managed and completely serverless enterprise data warehouse. BigQuery supports all data types, works across clouds, and has built-in machine learning and business intelligence, all within a unified platform. With native Gemini Enterprise Agent Platform integration, you can easily connect your data to Google's industry leading AI without leaving BigQuery.
+BigQuery is Google Cloud’s fully managed and completely serverless enterprise data warehouse. BigQuery supports all data types, works across clouds, and has built-in machine learning and business intelligence, all within a unified platform. With native Gemini platform integration, you can easily connect your data to Google's industry leading AI without leaving BigQuery.
 
 #### What is an enterprise data warehouse?
 

@@ -65,7 +65,7 @@ Request for getting query results of a job.
 | `pageToken`  | `string` Optional. Page token, returned by a previous call, to request the next page of results.                                             |
 | `maxResults` | `integer` Optional. Maximum number of results to read.                                                                                       |
 | `timeoutMs`  | `integer` Optional. Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete.     |
-| `location`   | `string` Optional. The geographic location of the job.                                                                                       |
+| `location`   | `string` Required. The geographic location of the job.                                                                                       |
 
 ### UInt64Value
 

@@ -53,7 +53,7 @@ Request for cancelling a job.
 |-------------|--------------------------------------------------------|
 | `projectId` | `string` Required. Project ID of the job to cancel.    |
 | `jobId`     | `string` Required. Job ID of the job to cancel.        |
-| `location`  | `string` Optional. The geographic location of the job. |
+| `location`  | `string` Required. The geographic location of the job. |
 
 ## Output Schema
 

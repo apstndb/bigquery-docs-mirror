@@ -53,7 +53,7 @@ Request for getting information about a job.
 |-------------|--------------------------------------------------------|
 | `projectId` | `string` Required. Project ID of the requested job.    |
 | `jobId`     | `string` Required. Job ID of the requested job.        |
-| `location`  | `string` Optional. The geographic location of the job. |
+| `location`  | `string` Required. The geographic location of the job. |
 
 ## Output Schema
 

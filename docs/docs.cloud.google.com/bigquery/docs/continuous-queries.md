@@ -304,6 +304,8 @@ Replace the following:
 
 This section describes how to run a continuous query by using a service account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by using a service account can run for up to 150 days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#retry) .
 
+If you're using a service account to run a continuous query across projects, you must update your organization policy to allow attaching service accounts in one project to resources in another project. For more information, see [Enable service accounts to be attached across projects](https://docs.cloud.google.com/iam/docs/attach-service-accounts#cross-project) .
+
 Follow these steps to use a service account to run a continuous query:
 
 ### Console

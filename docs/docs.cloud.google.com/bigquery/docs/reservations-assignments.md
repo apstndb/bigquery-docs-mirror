@@ -354,7 +354,7 @@ To assign a project to a reservation, use the [`CREATE ASSIGNMENT` DDL statement
 
     - `PROJECT_ID` : the ID of the project to assign to the reservation
 
-    - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
+    - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
     - Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity. The `principal` field supports only the following [IAM principal identifier](https://docs.cloud.google.com/iam/docs/principal-identifiers) formats:
 
@@ -393,7 +393,7 @@ Replace the following:
 
 - `PROJECT_ID` : the ID of the project to assign to this reservation
 
-- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND_CHANGE_DATA_CAPTURE` , `BACKGROUND_COLUMN_METADATA_INDEX` , `BACKGROUND_SEARCH_INDEX_REFRESH` , `BACKGROUND` , or `ML_EXTERNAL`
+- `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
 - Optional: `PRINCIPAL` : the identity format specifying the user, service account, or third-party identity.
 

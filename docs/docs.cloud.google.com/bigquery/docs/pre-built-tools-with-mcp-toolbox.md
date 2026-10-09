@@ -90,7 +90,7 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/linux/amd64/toolbox
     ```
 
-    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+    Replace `VERSION` with the MCP Toolbox version—for example `v1.14.0` .
 
     ### macOS darwin/arm64
 
@@ -98,7 +98,7 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/arm64/toolbox
     ```
 
-    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+    Replace `VERSION` with the MCP Toolbox version—for example `v1.14.0` .
 
     ### macOS darwin/amd64
 
@@ -106,7 +106,7 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/darwin/amd64/toolbox
     ```
 
-    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+    Replace `VERSION` with the MCP Toolbox version—for example `v1.14.0` .
 
     ### windows/amd64
 
@@ -114,7 +114,7 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     curl -O https://storage.googleapis.com/mcp-toolbox-for-databases/VERSION/windows/amd64/toolbox
     ```
 
-    Replace `VERSION` with the MCP Toolbox version—for example `v0.7.0` .
+    Replace `VERSION` with the MCP Toolbox version—for example `v1.14.0` .
 
 2.  Make the binary executable:
 

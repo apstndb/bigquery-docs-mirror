@@ -446,7 +446,7 @@ Create the remote model:
 ```
 CREATE OR REPLACE MODEL `mydataset.multimodalembedding`
 REMOTE WITH CONNECTION DEFAULT
-OPTIONS(ENDPOINT = 'multimodalembedding@001')
+OPTIONS(ENDPOINT = 'gemini-embedding-2')
 ```
 
 **Use an `ObjectRef` value**

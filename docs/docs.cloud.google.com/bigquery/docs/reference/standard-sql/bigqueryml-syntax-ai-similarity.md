@@ -243,7 +243,7 @@ SELECT
   ai.similarity(
     "aquarium device",
     ref,
-    endpoint => 'multimodalembedding@001',
+    endpoint => 'gemini-embedding-2',
     connection_id => 'us.example_connection') AS similarity_score
 FROM cymbal_pets.product_images
 ORDER BY similarity_score DESC

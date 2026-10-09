@@ -90,6 +90,6 @@ INNER JOIN
 ON
   (assignment.reservation_name = reservation.reservation_name)
 WHERE
-   assignment.assignee_id = &quot;PROJECT_ID"
+   assignment.assignee_id = "PROJECT_ID"
   AND job_type = "QUERY";
 ```

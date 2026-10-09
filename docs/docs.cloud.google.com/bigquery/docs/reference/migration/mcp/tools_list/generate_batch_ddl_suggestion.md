@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 ## Tool: `generate_batch_ddl_suggestion`
 
-Generates Data Definition Language (DDL) suggestions for a batch translation. The suggestion runs asynchronously: use the `fetch_batch_ddl_suggestion` tool with the returned suggestion ID to poll its state until it is `SUCCEEDED` or `FAILED` . Wait at least 10 seconds before rechecking the state.
+Generates Data Definition Language (DDL) suggestions for a batch of queries stored in Cloud Storage. This is a fallback for when no metadata .ZIP file is available from the source system. The suggested columns and types are inferred from how the queries use them, so they are approximate. The suggestion runs asynchronously. Use the `fetch_batch_ddl_suggestion` tool with the returned suggestion ID to poll its state until it is `SUCCEEDED` or `FAILED` . Wait at least 10 seconds before rechecking the state.
 
 The following code sample shows how to use `curl` to call the `generate_batch_ddl_suggestion` MCP tool.
 
