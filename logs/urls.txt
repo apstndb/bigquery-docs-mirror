@@ -7,7 +7,7 @@ https://docs.cloud.google.com/bigquery/docs/access-historical-data	2026-10-02T03
 https://docs.cloud.google.com/bigquery/docs/adding-labels	2026-10-02T03:43:47Z
 https://docs.cloud.google.com/bigquery/docs/admin-intro	2026-10-02T03:43:47Z
 https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer	2026-09-30T22:26:52Z
-https://docs.cloud.google.com/bigquery/docs/admin-resource-charts	2026-10-01T21:48:30Z
+https://docs.cloud.google.com/bigquery/docs/admin-resource-charts	2026-10-09T16:58:25Z
 https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts	2026-10-02T03:43:47Z
 https://docs.cloud.google.com/bigquery/docs/agent-skills-overview	2026-10-02T03:43:47Z
 https://docs.cloud.google.com/bigquery/docs/ai-application-overview	2026-10-02T03:43:47Z
@@ -131,7 +131,7 @@ https://docs.cloud.google.com/bigquery/docs/continuous-query-joins	2026-10-02T03
 https://docs.cloud.google.com/bigquery/docs/contribution-analysis	2026-10-02T03:51:49Z
 https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam	2026-10-02T03:51:49Z
 https://docs.cloud.google.com/bigquery/docs/control-genai-costs	2026-10-05T23:02:55Z
-https://docs.cloud.google.com/bigquery/docs/conversational-analytics	2026-10-06T18:35:49Z
+https://docs.cloud.google.com/bigquery/docs/conversational-analytics	2026-10-09T15:10:19Z
 https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query	2026-10-02T03:51:49Z
 https://docs.cloud.google.com/bigquery/docs/create-authorized-views	2026-10-02T03:51:49Z
 https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table	2026-10-02T03:51:49Z
@@ -414,7 +414,7 @@ https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv	2026-
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc	2026-10-09T00:21:18Z
 https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet	2026-10-09T00:21:18Z
-https://docs.cloud.google.com/bigquery/docs/locations	2026-10-06T20:07:32Z
+https://docs.cloud.google.com/bigquery/docs/locations	2026-10-09T16:58:25Z
 https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/looker	2026-10-02T03:43:46Z
@@ -542,6 +542,7 @@ https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys	2026-10-02T03:4
 https://docs.cloud.google.com/bigquery/docs/procedures	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/process-document	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/programmatic-analysis	2026-10-04T03:52:06Z
+https://docs.cloud.google.com/bigquery/docs/prompt-analytics-opt-out	2026-10-09T15:10:19Z
 https://docs.cloud.google.com/bigquery/docs/protobuf-export	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/python-libraries	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/query-aws-data	2026-10-02T03:43:15Z
@@ -1068,7 +1069,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/testIamPerm
 https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update	2026-05-30T12:26:19Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions	2026-10-02T03:48:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions	2026-10-02T03:48:01Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls	2026-10-02T03:48:01Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls	2026-10-09T20:07:39Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions	2026-10-02T03:48:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions	2026-10-02T03:48:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions	2026-10-02T03:48:01Z
@@ -1204,7 +1205,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax	2026-10-02T03:48:05Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements	2026-10-02T03:48:05Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions	2026-10-02T03:48:05Z
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements	2026-10-02T03:48:05Z
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements	2026-10-09T22:30:01Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all	2026-09-30T23:24:20Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference	2026-10-02T03:48:05Z
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions	2026-10-06T18:36:23Z
@@ -1262,7 +1263,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-10-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-10-02T03:48:01Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-10-05T17:07:36Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-10-08T21:28:27Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-10-09T13:54:53Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-10-02T03:49:42Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-10-02T03:43:15Z
@@ -1375,7 +1376,7 @@ https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations	2026-10-02T0
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-10-02T03:43:43Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-10-02T03:43:43Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api	2026-10-02T03:43:43Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management	2026-10-01T21:48:30Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management	2026-10-09T16:58:25Z
 https://docs.cloud.google.com/bigquery/docs/tune-evaluate	2026-10-02T03:43:43Z
 https://docs.cloud.google.com/bigquery/docs/understand-text	2026-10-02T03:43:43Z
 https://docs.cloud.google.com/bigquery/docs/updating-datasets	2026-10-02T03:43:43Z

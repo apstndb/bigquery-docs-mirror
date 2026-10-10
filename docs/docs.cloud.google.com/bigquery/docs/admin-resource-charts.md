@@ -553,7 +553,7 @@ WHERE creation_time >= '2024-06-25 00:00:00-07'
 
 ## Troubleshoot slot contention
 
-Slot contention can happen when there aren't enough slots to run all of your jobs, causing performance issues. To analyze whether performance degradation stems from workload increases or environment configuration changes, you can [compare two system intervals](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-two-system-intervals) across reservations and projects.
+Slot contention can happen when there aren't enough slots to run all of your jobs, causing performance issues. To analyze whether performance degradation stems from workload increases or environment configuration changes, you can [compare two system intervals](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare_two_system_intervals) across reservations and projects.
 
 To troubleshoot slot contention issues, use the following steps and best practices.
 

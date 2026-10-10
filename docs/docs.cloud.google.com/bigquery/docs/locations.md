@@ -728,7 +728,7 @@ Colocate your BigQuery dataset with your [analysis tools](https://docs.cloud.goo
 
 Managed Service for Apache Spark is supported in all [Compute Engine locations](https://docs.cloud.google.com/compute/docs/regions-zones#available) .
 
-- [Vertex AI Workbench](https://docs.cloud.google.com/vertex-ai/docs/workbench/introduction) : When you query BigQuery datasets using [Jupyter notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#jupyter_notebooks) in Vertex AI Workbench, your BigQuery dataset should be colocated with your Vertex AI Workbench instance.
+- [Vertex AI Workbench](https://docs.cloud.google.com/vertex-ai/docs/workbench/introduction) : When you query BigQuery datasets using [Jupyter notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#other_programmatic_analysis_solutions) in Vertex AI Workbench, your BigQuery dataset should be colocated with your Vertex AI Workbench instance.
 
 View the [supported Vertex AI Workbench locations](https://docs.cloud.google.com/vertex-ai/docs/general/locations#vertex-ai-workbench-locations) .
 

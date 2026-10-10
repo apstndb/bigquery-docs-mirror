@@ -18,6 +18,15 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 Feature
 
+The following table types now support [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) by default:
+
+- [Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) and [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) in BigQuery
+- [Apache Iceberg tables managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/manage-tables)
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
 You can use Gemini assistance in the BigQuery Studio SQL editor through an inline action button when you select text. For more information, see [Write SQL with Gemini assistance](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
 
 This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
@@ -45,15 +54,6 @@ Feature
 [Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) now supports the [`AI.CAUSAL_EFFECT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-causal-effect) to quantify the impact of specific interventions on time series data. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 05, 2026
-
-Feature
-
-The following table types now support [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) by default:
-
-- [Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) and [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) in BigQuery
-- [Apache Iceberg tables managed by the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/manage-tables)
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
