@@ -75,7 +75,7 @@ https://docs.cloud.google.com/bigquery/docs/biglake-intro	2026-10-02T03:43:30Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics	2026-10-02T03:43:30Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-cud	2026-10-02T03:43:30Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction	2026-10-02T03:43:30Z
-https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial	2026-10-04T03:48:10Z
+https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial	2026-10-11T03:47:14Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview	2026-10-02T03:43:30Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners	2026-10-05T21:22:03Z
 https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui	2026-09-30T16:43:47Z
@@ -239,7 +239,7 @@ https://docs.cloud.google.com/bigquery/docs/filtering-labels	2026-10-02T03:50:23
 https://docs.cloud.google.com/bigquery/docs/forecasting-overview	2026-10-02T03:50:23Z
 https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters	2026-10-02T03:50:23Z
 https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data	2026-10-02T03:50:23Z
-https://docs.cloud.google.com/bigquery/docs/gemini-locations	2026-10-02T03:50:23Z
+https://docs.cloud.google.com/bigquery/docs/gemini-locations	2026-10-10T13:48:59Z
 https://docs.cloud.google.com/bigquery/docs/gemini-overview	2026-09-30T17:11:59Z
 https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance	2026-10-02T03:50:23Z
 https://docs.cloud.google.com/bigquery/docs/gemini-set-up	2026-10-02T03:50:23Z
@@ -1263,7 +1263,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/system-procedures	2026-10-
 https://docs.cloud.google.com/bigquery/docs/reference/system-variables	2026-10-02T03:48:01Z
 https://docs.cloud.google.com/bigquery/docs/regional-endpoints	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/regression-overview	2026-10-05T17:07:36Z
-https://docs.cloud.google.com/bigquery/docs/release-notes	2026-10-09T13:54:53Z
+https://docs.cloud.google.com/bigquery/docs/release-notes	2026-10-10T13:51:09Z
 https://docs.cloud.google.com/bigquery/docs/release-notes-archive	2026-10-02T03:49:42Z
 https://docs.cloud.google.com/bigquery/docs/reliability-intro	2026-10-02T03:43:15Z
 https://docs.cloud.google.com/bigquery/docs/remote-functions	2026-10-02T03:43:15Z

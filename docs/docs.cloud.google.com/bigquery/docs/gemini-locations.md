@@ -47,11 +47,11 @@ For more information on verifying the default location configuration, see [Retri
 
 ## BigQuery Data Engineering Agent
 
-The [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) supports jurisdiction-level regionalization that provides dedicated service endpoints for the `us` , `eu` , and global regions. The regional preference is automatically assigned based on the associated Dataform workspace location.
+The [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) supports jurisdiction-level regionalization that provides dedicated service endpoints for the `us` , `eu` , `asia-northeast1` (Tokyo), and global regions. The regional preference is automatically assigned based on the associated Dataform workspace location.
 
 When interacting with the agent in the Google Cloud console, all internal processing—including the reasoning engine and temporary storage of conversation context—is maintained strictly within the jurisdictional boundary defined by the Dataform workspace region.
 
-When interacting with the agent using the public API, select `us` or `eu` to ensure that all processing, reasoning, and downstream service calls remain within that jurisdiction. If the specified API region does not align with the workspace region, the system returns an error.
+When interacting with the agent using the public API, select `us` , `eu` , or `asia-northeast1` (Tokyo) to ensure that all processing, reasoning, and downstream service calls remain within that jurisdiction. If the specified API region does not align with the workspace region, the system returns an error.
 
 To change your processing region, you must [create a new Dataform repository](https://docs.cloud.google.com/dataform/docs/create-repository) and configure it to the updated region.
 

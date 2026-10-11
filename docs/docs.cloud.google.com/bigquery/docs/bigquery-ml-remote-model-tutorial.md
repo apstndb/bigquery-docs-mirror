@@ -356,7 +356,7 @@ When you create the remote model, you need the endpoint ID that was generated wh
     bq query --use_legacy_sql=false \
     "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
     INPUT (text STRING)
-    OUTPUT(scores ARRAY<FLOAT64>)
+    OUTPUT(scores <ARRAYFLOAT64>)
     REMOTE WITH CONNECTION `PROJECT_ID.us.bqml_tutorial`
     OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/us-central1/endpoints/ENDPOINT_ID')"
     ```
