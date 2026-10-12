@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/css-center-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/css-center-transfer
 title: Load CSS Center data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how the BigQuery Data Transfer Service loads reporting data from Comparison Shopping Service (CSS) Center into BigQuery.
 data_source: docs.cloud.google.com
 ---
 

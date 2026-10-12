@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-query-your-data
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-query-your-data
 title: Query your Google Merchant Center Transfers data
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Query ingestion-time partitioned tables created by Google Merchant Center data transfers in BigQuery.
 data_source: docs.cloud.google.com
 ---
 

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/s3-transfer-intro
 uri: https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro
 title: Introduction to Amazon S3 data transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how the BigQuery Data Transfer Service automates recurring load jobs from Amazon Simple Storage Service (Amazon S3) into BigQuery.
 data_source: docs.cloud.google.com
 ---
 

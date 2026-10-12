@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters
 uri: https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters
 title: Runtime parameters in Blob Storage transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Customize destination table partitioning and container paths with runtime parameters in Azure Blob Storage transfers to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

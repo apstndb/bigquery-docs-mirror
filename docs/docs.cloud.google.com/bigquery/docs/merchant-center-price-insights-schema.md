@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema
 title: Google Merchant Center Price Insights table
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View the BigQuery table names and schema for transferred Google Merchant Center price insights data.
 data_source: docs.cloud.google.com
 ---
 

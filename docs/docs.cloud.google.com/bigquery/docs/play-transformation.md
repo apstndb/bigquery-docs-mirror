@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/play-transformation
 uri: https://docs.cloud.google.com/bigquery/docs/play-transformation
 title: Google Play report transformation
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: See how Google Play reports map and transform into BigQuery tables and views during scheduled transfers.
 data_source: docs.cloud.google.com
 ---
 

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/s3-transfer-parameters
 uri: https://docs.cloud.google.com/bigquery/docs/s3-transfer-parameters
 title: Runtime parameters in Amazon S3 transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Customize destination table partitioning and source URIs with runtime parameters in Amazon Simple Storage Service (Amazon S3) transfers to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

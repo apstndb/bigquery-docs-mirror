@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transformation
 uri: https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transformation
 title: Campaign Manager report transformation
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: See how Campaign Manager data transfer files are transformed into BigQuery tables and views during scheduled transfers.
 data_source: docs.cloud.google.com
 ---
 

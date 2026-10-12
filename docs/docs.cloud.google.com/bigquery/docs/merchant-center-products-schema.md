@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-products-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema
 title: Google Merchant Center products table schema
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View the BigQuery table names and schema for transferred Google Merchant Center products and product issues data.
 data_source: docs.cloud.google.com
 ---
 

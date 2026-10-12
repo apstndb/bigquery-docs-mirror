@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/display-video-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/display-video-transfer
 title: Load Display & Video 360 data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule recurring data transfers from Display & Video 360 into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

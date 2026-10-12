@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/display-video-transformation
 uri: https://docs.cloud.google.com/bigquery/docs/display-video-transformation
 title: Display & Video 360 data transformation
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: See how Display & Video 360 resources and reports are transformed into BigQuery tables and views during scheduled transfers.
 data_source: docs.cloud.google.com
 ---
 

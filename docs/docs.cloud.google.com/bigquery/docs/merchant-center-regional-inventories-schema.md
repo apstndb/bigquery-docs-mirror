@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-regional-inventories-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-regional-inventories-schema
 title: Google Merchant Center regional inventories table
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View the BigQuery table names and schema for transferred Google Merchant Center regional inventories data.
 data_source: docs.cloud.google.com
 ---
 

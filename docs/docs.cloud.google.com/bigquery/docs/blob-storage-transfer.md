@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/blob-storage-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer
 title: Load Blob Storage data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule recurring data transfers from Azure Blob Storage into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

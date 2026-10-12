@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters
 uri: https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters
 title: Runtime parameters in Cloud Storage transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Customize destination table partitioning and bucket URIs with runtime parameters in Cloud Storage transfers to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

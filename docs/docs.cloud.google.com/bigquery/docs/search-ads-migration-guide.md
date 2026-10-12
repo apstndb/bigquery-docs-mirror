@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/search-ads-migration-guide
 uri: https://docs.cloud.google.com/bigquery/docs/search-ads-migration-guide
 title: Search Ads 360 migration guide
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Migrate existing Search Ads 360 transfer configurations in the BigQuery Data Transfer Service to the new reporting API.
 data_source: docs.cloud.google.com
 ---
 

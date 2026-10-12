@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers
 uri: https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers
 title: Schedule a Comparison Shopping Service Center Transfer
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule and manage recurring data transfers from Comparison Shopping Service (CSS) Center into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

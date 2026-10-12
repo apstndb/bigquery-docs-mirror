@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/play-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/play-transfer
 title: Load Google Play data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule recurring data transfers from Google Play into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

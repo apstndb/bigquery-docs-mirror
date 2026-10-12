@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/s3-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/s3-transfer
 title: Load Amazon S3 data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule recurring data transfers from Amazon Simple Storage Service (Amazon S3) into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 
