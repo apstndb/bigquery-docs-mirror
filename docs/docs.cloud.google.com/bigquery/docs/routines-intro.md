@@ -45,13 +45,12 @@ The following table shows the type of tasks you can perform for each type of rou
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><p><strong>Task</strong></p></th>
 <th><p><strong>Routine resource type</strong></p></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><p>Create functions that perform general-purpose tasks in BigQuery.</p></td>
 <td><p>SQL or Javascript UDF</p>
@@ -161,14 +160,13 @@ UDFs and UDAFs have the following differences:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><p><strong>Attribute</strong></p></th>
 <th><p><strong>UDFs</strong></p></th>
 <th><p><strong>UDAFs</strong></p></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><p>Definition</p></td>
 <td><p>User-defined functions (UDFs) accept columns of input, perform actions on the input, and return the result of those actions as a value.</p></td>

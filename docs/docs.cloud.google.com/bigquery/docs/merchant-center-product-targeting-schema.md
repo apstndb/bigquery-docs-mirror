@@ -34,15 +34,14 @@ The Product Targeting table has the following schema:
 <col style="width: 25%" />
 <col style="width: 25%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Name</th>
 <th>Type</th>
 <th>Description</th>
 <th>Example data</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>product_id</code></td>
 <td><code>STRING</code></td>

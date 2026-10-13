@@ -39,14 +39,13 @@ The `INFORMATION_SCHEMA.TABLES` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>table_catalog</code></td>
 <td><code>STRING</code></td>

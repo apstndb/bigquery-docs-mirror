@@ -34,15 +34,14 @@ BigQuery ML provides the following functions to calculate evaluation metrics for
 <col style="width: 25%" />
 <col style="width: 25%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Model category</th>
 <th>Model types</th>
 <th>Model evaluation functions</th>
 <th>What the function does</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>Supervised learning</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm">Linear regression</a><br />

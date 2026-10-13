@@ -34,14 +34,13 @@ The `INFORMATION_SCHEMA.RESERVATIONS` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>ddl</code></td>
 <td><code>STRING</code></td>

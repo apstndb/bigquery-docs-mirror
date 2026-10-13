@@ -24,7 +24,7 @@ This document describes the `AI.CAUSAL_EFFECT` function, which lets you quantify
 
 ```googlesql
 AI.CAUSAL_EFFECT(
-  {TABLE TABLE | (query_statement)},
+  {TABLE TABLE_NAME | (query_statement)},
   data_col => DATA_COL,
   timestamp_col => TIMESTAMP_COL,
   intervention_timestamp => INTERVENTION_TIMESTAMP
@@ -37,7 +37,7 @@ AI.CAUSAL_EFFECT(
 
 ### Arguments
 
-- `TABLE` or `query_statement` : the table or GoogleSQL query that contains the time series data. This input must include data from before and after the intervention.
+- `TABLE_NAME` or `query_statement` : the table or GoogleSQL query that contains the time series data. This input must include data from before and after the intervention.
 
 - `DATA_COL` : a `STRING` value that specifies the name of the column with the time series values to analyze. The data column must use one of the following data types:
 

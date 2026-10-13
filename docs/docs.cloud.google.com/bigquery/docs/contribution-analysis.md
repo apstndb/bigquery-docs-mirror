@@ -60,15 +60,14 @@ The following table describes the statements and functions you can use with cont
 <col style="width: 25%" />
 <col style="width: 25%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Statement or function</th>
 <th><a href="https://docs.cloud.google.com/bigquery/docs/preprocess-overview">Feature preprocessing</a></th>
 <th>Insights generation</th>
 <th>Tutorials</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-key-drivers"><code>AI.KEY_DRIVERS</code></a></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/manual-preprocessing">Manual preprocessing</a></td>

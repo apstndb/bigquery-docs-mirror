@@ -74,14 +74,13 @@ The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION` view has the following sc
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>project_id</code></td>
 <td><code>STRING</code></td>

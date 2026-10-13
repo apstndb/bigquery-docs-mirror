@@ -1695,7 +1695,7 @@ For more information on the CSV format, see [RFC 4180](https://tools.ietf.org/ht
 <col style="width: 20%" />
 <col style="width: 20%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>CSV option</th>
 <th>Console option</th>
@@ -1703,8 +1703,7 @@ For more information on the CSV format, see [RFC 4180](https://tools.ietf.org/ht
 <th>BigQuery API property</th>
 <th>Description</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>Field delimiter</td>
 <td>Field delimiter: Comma, Tab, Pipe, Custom</td>

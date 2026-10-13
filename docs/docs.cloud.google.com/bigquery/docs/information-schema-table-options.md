@@ -65,13 +65,12 @@ For external tables, the following options are possible:
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Options</th>
 <th></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>allow_jagged_rows</code></td>
 <td><p><code>BOOL</code></p>

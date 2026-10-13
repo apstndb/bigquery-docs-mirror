@@ -44,13 +44,11 @@ These sections describe the data ingestion options for setting up a ServiceNow d
 
 ### Full or incremental transfers
 
-You specify how data loads into BigQuery by selecting the **Full** or **Incremental** write preference in the transfer configuration when you [set up a ServiceNow transfer](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#servicenow_transfer_setup) . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+You specify how data loads into BigQuery by selecting the **Full** or **Incremental** write preference in the transfer configuration when you [set up a ServiceNow transfer](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#servicenow_transfer_setup) .
 
 You can configure a *full* data transfer to transfer all data from your ServiceNow datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Upsert write mode
 
@@ -158,7 +156,7 @@ Add ServiceNow data into BigQuery by setting up a transfer configuration using o
     - For **Client secret** , enter the client secret from your OAuth credentials.
     - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-servicenow) .
     - For **Ingestion type** , select **Full** or **Incremental** .
-      - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select **Upsert** . For more information about write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#full_or_incremental_transfers) .
+      - If you select **Incremental** , for **Write mode** , select **Upsert** . For more information about write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#full_or_incremental_transfers) .
     - For **ServiceNow tables to transfer** , click **Browse** :
       - Select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
       - If you have selected **Upsert** as your incremental write mode, you must select a column as the watermark column, and then select one or more columns as the primary key.
@@ -214,14 +212,13 @@ Replace the following:
   <col style="width: 33%" />
   <col style="width: 33%" />
   </colgroup>
-  <thead>
+  <tbody>
   <tr class="header">
   <th>ServiceNow parameter</th>
   <th>Required or optional</th>
   <th>Description</th>
   </tr>
-  </thead>
-  <tbody>
+
   <tr class="odd">
   <td><code>connector.networkAttachment</code></td>
   <td>Optional</td>

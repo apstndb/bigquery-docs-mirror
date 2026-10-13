@@ -678,13 +678,12 @@ You can grant the following IAM predefined roles access to a dataset.
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Role</th>
 <th>Description</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code>roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a dataset, this role grants these permissions:<br />
@@ -1969,13 +1968,12 @@ The following predefined IAM roles have permissions on tables or views.
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Role</th>
 <th>Description</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code>roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a table or view, this role grants these permissions:<br />
@@ -2799,13 +2797,12 @@ The following predefined IAM roles have permissions on routines.
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Role</th>
 <th>Description</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner">BigQuery Data Owner</a> ( <code>roles/bigquery.dataOwner</code> )</td>
 <td>When granted on a routine, this role grants these permissions:<br />

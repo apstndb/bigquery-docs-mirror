@@ -44,14 +44,13 @@ The `INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION` view has the following 
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>recommendation_id</code></td>
 <td><code>STRING</code></td>

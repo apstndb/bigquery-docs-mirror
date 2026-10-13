@@ -194,15 +194,14 @@ The following metrics are available, time delayed up to several hours.
 <col style="width: 25%" />
 <col style="width: 25%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><strong>Resource type</strong></th>
 <th><strong>Name</strong></th>
 <th><strong>Units</strong></th>
 <th><strong>Description</strong></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>BigQuery</td>
 <td>Scanned bytes</td>

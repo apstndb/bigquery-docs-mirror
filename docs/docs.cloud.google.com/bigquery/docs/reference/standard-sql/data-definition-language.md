@@ -305,14 +305,13 @@ The following options are supported:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>default_kms_key_name</code></td>
 <td><code>STRING</code></td>
@@ -677,14 +676,13 @@ Specify a table option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>expiration_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>
@@ -833,14 +831,13 @@ Specify a column option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>description</code></td>
 <td><p><code>STRING</code></p></td>
@@ -2000,14 +1997,13 @@ Specify a view option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>expiration_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>
@@ -2079,13 +2075,12 @@ The following policies are available in the [`privacy_policy` view option](https
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Policy</th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><p><code>aggregation_threshold_policy</code></p></td>
 <td><p>The aggregation threshold policy to enforce when a view is queried.</p>
@@ -2644,13 +2639,12 @@ The option list specifies options for creating the external table. The `format` 
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Options</th>
 <th></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>allow_jagged_rows</code></td>
 <td><p><code>BOOL</code></p>
@@ -3803,14 +3797,13 @@ The `procedure_option_list` lets you specify procedure options. Procedure option
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>strict_mode</code></td>
 <td><p><code>BOOL</code></p></td>
@@ -4715,14 +4708,13 @@ The following options are supported:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>default_kms_key_name</code></td>
 <td><code>STRING</code></td>
@@ -4955,14 +4947,13 @@ Specify a table option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>expiration_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>
@@ -5810,14 +5801,13 @@ Specify a column option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>description</code></td>
 <td><p><code>STRING</code></p></td>
@@ -6277,14 +6267,13 @@ Specify a view option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>expiration_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>
@@ -6469,14 +6458,13 @@ The following options are supported:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>default_kms_key_name</code></td>
 <td><code>STRING</code></td>
@@ -6625,14 +6613,13 @@ The following options are supported:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>default_kms_key_name</code></td>
 <td><code>STRING</code></td>

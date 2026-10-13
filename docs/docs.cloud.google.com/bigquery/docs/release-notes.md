@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 12, 2026
+
+Feature
+
+Incremental data transfers for the BigQuery Data Transfer Service for [PostgreSQL](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer-intro#full-incremental-transfers) and [ServiceNow](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer#full_or_incremental_transfers) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## October 09, 2026
 
 Feature
@@ -27,6 +33,22 @@ Feature
 Lakehouse now supports change data capture (CDC) ingestion from Delta Lake and Apache Iceberg tables ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 You can now synchronize CDC transaction logs (inserts, updates, deletes) from Delta Lake and Apache Iceberg tables into Lakehouse Apache Iceberg tables using Dataflow batch jobs (for Delta Lake) or batch and streaming jobs (for Apache Iceberg). For more information, see [Migrate Delta Lake CDC data into Lakehouse using Dataflow](https://docs.cloud.google.com/lakehouse/docs/migrate-delta-lake-cdc) and [Migrate Apache Iceberg CDC data into Lakehouse using Dataflow](https://docs.cloud.google.com/lakehouse/docs/migrate-iceberg-cdc) .
+
+## October 07, 2026
+
+Feature
+
+BigQuery offers [`TimesFM 3.0`](https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/) , a built-in time series forecasting model that implements Google Research's open source TimesFM model. You can use `TimesFM 3.0` with the following functions:
+
+- Use [`AI.FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) to perform time series forecasting. In addition to univariate forecasting, you can now perform multivariate forecasting that predicts values for multiple time series based on historical values and additional covariates.
+- Use [`AI.EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) to perform univariate time series evaluation.
+- Use [`AI.DETECT_ANOMALIES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) to perform univariate time series anomaly detection.
+
+[Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) also supports using `TimesFM 3.0` with these functions.
+
+To try using the `TimesFM 3.0` model for multivariate forecasting with the `AI.FORECAST` function, see [Forecast a single time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-single-time-series-forecasting-tutorial) and [Forecast multiple time series with a TimesFM multivariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-multivariate-multi-time-series-forecasting-tutorial) .
+
+The `TimesFM 3.0` model is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
 
 ## October 06, 2026
 

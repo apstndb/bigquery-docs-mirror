@@ -68,14 +68,13 @@ Notice there are no parentheses in the Oracle formats because the formats ( `CUR
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Oracle</th>
 <th>BigQuery</th>
 <th>Notes</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.oracle.com/cd/B19306_01/server.102/b14200/functions037.htm"><code>CURRENT_TIMESTAMP</code></a></td>
 <td><code>TIMESTAMP</code> information in Oracle can have different time zone information, which is defined using <code>WITH TIME ZONE</code> in column definition or setting <a href="https://docs.oracle.com/cd/E11882_01/server.112/e10729/ch4datetime.htm#NLSPG004"><code>TIME_ZONE</code></a> variable.</td>
@@ -733,13 +732,12 @@ DML scripts in BigQuery have slightly different consistency semantics than the e
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Oracle</th>
 <th>BigQuery</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><a href="https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/INSERT.html"><code>INSERT INTO</code></a><code> </code><em><code>table</code></em><code> VALUES (...);</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement"><code>INSERT INTO</code></a><code> </code><em><code>table</code></em><code> (...) VALUES (...);</code>
@@ -1028,14 +1026,13 @@ Check [BigQuery latest quotas and limits](https://docs.cloud.google.com/bigquery
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Limit</th>
 <th>Oracle</th>
 <th>BigQuery</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>Tables per database</td>
 <td>Unrestricted</td>

@@ -72,14 +72,13 @@ The `INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>folder_numbers</code></td>
 <td><code>REPEATED INTEGER</code></td>

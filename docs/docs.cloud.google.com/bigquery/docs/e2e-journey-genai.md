@@ -30,7 +30,7 @@ The following table describes the statements and functions you can use to create
 <col style="width: 16%" />
 <col style="width: 16%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Model category</th>
 <th>Model type</th>
@@ -39,8 +39,7 @@ The following table describes the statements and functions you can use to create
 <th><a href="https://docs.cloud.google.com/bigquery/docs/inference-overview">Inference</a></th>
 <th>Tutorials</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>Generative AI remote models</td>
 <td>Remote model over a Gemini text generation model <sup>1</sup></td>

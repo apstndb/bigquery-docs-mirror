@@ -27,7 +27,7 @@ The following table describes the statements and functions you can use to create
 <col style="width: 16%" />
 <col style="width: 16%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Model type</th>
 <th>Model creation</th>
@@ -36,8 +36,7 @@ The following table describes the statements and functions you can use to create
 <th><a href="https://docs.cloud.google.com/bigquery/docs/weights-overview">Model weights</a></th>
 <th>Tutorials</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>ARIMA_PLUS</code></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series"><code>CREATE MODEL</code></a></td>

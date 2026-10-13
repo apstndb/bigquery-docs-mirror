@@ -70,13 +70,12 @@ The following types of data are supported when they're written to Bigtable:
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>BigQuery type</th>
 <th>Bigtable value written</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>BYTES</code></td>
 <td>Exported as is.</td>

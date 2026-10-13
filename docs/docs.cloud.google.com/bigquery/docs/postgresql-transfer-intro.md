@@ -54,13 +54,11 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 ### Full or incremental transfers
 
-You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a PostgreSQL transfer](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#set-up) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To request feedback or support for incremental transfers, send an email to <dts-preview-support@google.com> .
+You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a PostgreSQL transfer](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#set-up) .
 
 You can configure a *full* data transfer to transfer all data from your PostgreSQL datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 

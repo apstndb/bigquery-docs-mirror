@@ -26,15 +26,14 @@ The following table describes the statements and functions you can use to create
 <col style="width: 25%" />
 <col style="width: 25%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Model types</th>
 <th>Model creation</th>
 <th><a href="https://docs.cloud.google.com/bigquery/docs/inference-overview">Inference</a></th>
 <th>Tutorials</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td>TensorFlow</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow"><code>CREATE MODEL</code></a></td>

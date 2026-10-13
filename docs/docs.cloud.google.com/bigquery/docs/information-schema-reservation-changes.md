@@ -34,14 +34,13 @@ The `INFORMATION_SCHEMA.RESERVATION_CHANGES` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>change_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>

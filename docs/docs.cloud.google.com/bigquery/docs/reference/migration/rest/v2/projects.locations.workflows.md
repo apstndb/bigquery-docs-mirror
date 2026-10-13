@@ -200,7 +200,7 @@ A single task for a migration which has details about the configuration of the t
 <li><code>Assessment_Hadoop</code> - Assessment for Hadoop.</li>
 <li><code>Assessment_Informatica</code> - Assessment for Informatica.</li>
 </ul>
-<p>Translation: See <a href="https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types">Supported Task Types</a> for a list of supported task types.</p></td>
+<p>Translation: See <a href="https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects">Supported SQL dialects</a> for a list of supported task types.</p></td>
 </tr>
 <tr class="odd">
 <td><code>state</code></td>

@@ -140,13 +140,12 @@ The option list specifies options for exporting to Bigtable.
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Options</th>
 <th></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>format</code></td>
 <td><p><code>STRING</code></p>

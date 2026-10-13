@@ -589,14 +589,13 @@ GoogleSQL supports [casting](https://docs.cloud.google.com/bigquery/docs/referen
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>From</th>
 <th>To</th>
 <th>Rule(s) when casting <code>x</code></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>STRUCT</code></td>
 <td><code>STRUCT</code></td>

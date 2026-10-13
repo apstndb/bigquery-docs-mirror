@@ -1475,14 +1475,13 @@ The `INFORMATION_SCHEMA.TABLES` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>table_catalog</code></td>
 <td><code>STRING</code></td>
@@ -1765,13 +1764,12 @@ For external tables, the following options are possible:
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Options</th>
 <th></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>allow_jagged_rows</code></td>
 <td><p><code>BOOL</code></p>
@@ -2122,14 +2120,13 @@ The `INFORMATION_SCHEMA.COLUMNS` view has the following schema:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>table_catalog</code></td>
 <td><code>STRING</code></td>
@@ -2401,14 +2398,13 @@ The `TABLE_STORAGE` and `TABLE_STORAGE_BY_ORGANIZATION` views have the following
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Column name</th>
 <th>Data type</th>
 <th>Value</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>project_id</code></td>
 <td><code>STRING</code></td>

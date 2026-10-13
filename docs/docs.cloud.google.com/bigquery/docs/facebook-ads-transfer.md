@@ -162,13 +162,12 @@ When this data transfer runs, the BigQuery Data Transfer Service automatically p
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Table Name</th>
 <th>Description</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>AdAccounts</code></td>
 <td>The ad accounts available for a user.</td>

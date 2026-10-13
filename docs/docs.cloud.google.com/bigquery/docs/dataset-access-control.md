@@ -128,14 +128,13 @@ The following table shows the required permission and API response for the diffe
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Parameter value</th>
 <th>Permissions required</th>
 <th>API response</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>DATASET_VIEW_UNSPECIFIED</code> (or empty)</td>
 <td><ul>
@@ -201,14 +200,13 @@ The following table shows the required permission and API response for the diffe
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Parameter value</th>
 <th>Permissions required</th>
 <th>API response</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
 <td><ul>
@@ -275,14 +273,13 @@ The following table shows the required permission and API response for the diffe
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Parameter value</th>
 <th>Permissions required</th>
 <th>API response</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>UPDATE_MODE_UNSPECIFIED</code> (or empty)</td>
 <td><ul>

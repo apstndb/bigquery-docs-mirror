@@ -187,14 +187,13 @@ Specify a column option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>description</code></td>
 <td><p><code>STRING</code></p></td>
@@ -293,14 +292,13 @@ Specify a table option list in the following format:
 <col style="width: 33%" />
 <col style="width: 33%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th><code>NAME</code></th>
 <th><code>VALUE</code></th>
 <th>Details</th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>expiration_timestamp</code></td>
 <td><code>TIMESTAMP</code></td>
@@ -435,13 +433,12 @@ Specifies options for loading data from external files. The `format` and `uris` 
 <col style="width: 50%" />
 <col style="width: 50%" />
 </colgroup>
-<thead>
+<tbody>
 <tr class="header">
 <th>Options</th>
 <th></th>
 </tr>
-</thead>
-<tbody>
+
 <tr class="odd">
 <td><code>allow_jagged_rows</code></td>
 <td><p><code>BOOL</code></p>
