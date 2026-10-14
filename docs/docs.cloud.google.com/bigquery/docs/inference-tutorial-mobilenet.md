@@ -160,7 +160,7 @@ Create a connection named `lake-connection` :
 ## Create a Cloud Storage bucket
 
 1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
-2.  [Create two folders](https://cloud.google.com/storage/docs/folders#tools) in the bucket, one named `mobilenet` for the model files and one named `flowers` for the dataset.
+2.  [Create two folders](https://docs.cloud.google.com/storage/docs/objects#namespace) in the bucket, one named `mobilenet` for the model files and one named `flowers` for the dataset.
 
 ## Grant permissions to the connection's service account
 

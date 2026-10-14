@@ -18,19 +18,19 @@ To better understand differential privacy, let's look at a simple example.
 
 This bar chart shows the busyness of a small restaurant on one particular evening. Lots of guests come at 7 PM, and the restaurant is completely empty at 1 AM:
 
-![Chart shows busyness of a small restaurant by mapping visitors at specific hours of the day.](https://cloud.google.com/docs/images/googlesql-dp-chart-a.png)
+![Chart shows busyness of a small restaurant by mapping visitors at specific hours of the day.](https://docs.cloud.google.com/docs/images/googlesql-dp-chart-a.png)
 
 This chart looks useful, but there's a catch. When a new guest arrives, this fact is immediately revealed by the bar chart. In the following chart, it's clear that there's a new guest, and that this guest arrived at roughly 1 AM:
 
-![Chart shows outlier arrival.](https://cloud.google.com/docs/images/googlesql-dp-chart-b.png)
+![Chart shows outlier arrival.](https://docs.cloud.google.com/docs/images/googlesql-dp-chart-b.png)
 
 Showing this detail isn't great from a privacy perspective, as anonymized statistics shouldn't reveal individual contributions. Putting those two charts side by side makes it even more apparent: the orange bar chart has one extra guest that has arrived around 1 AM:
 
-![Chart comparison highlights an individual contribution.](https://cloud.google.com/docs/images/googlesql-dp-chart-c.png)
+![Chart comparison highlights an individual contribution.](https://docs.cloud.google.com/docs/images/googlesql-dp-chart-c.png)
 
 Again, that's not great. To avoid this kind privacy issue, you can add random noise to the bar charts by using differential privacy. In the following comparison chart, the results are anonymized and no longer reveal individual contributions.
 
-![Differential privacy is applied to comparisons.](https://cloud.google.com/docs/images/googlesql-dp-chart-d.gif)
+![Differential privacy is applied to comparisons.](https://docs.cloud.google.com/docs/images/googlesql-dp-chart-d.gif)
 
 ## How differential privacy works on queries
 

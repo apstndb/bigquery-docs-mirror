@@ -10,56 +10,13 @@ data_source: docs.cloud.google.com
 
 You can load data from MySQL to BigQuery by using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](https://docs.cloud.google.com/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
 
-## Before you begin
-
-- [Create a user](https://dev.mysql.com/doc/mysql-monitor/8.0/en/mem-acl-creating-user-roles-tasks.html) in the MySQL database.
-- Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-- Verify that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#required-roles) to complete the tasks in this document.
-
-### Required roles
-
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-The following permissions are required to create a BigQuery Data Transfer Service data transfer:
-
-- BigQuery Data Transfer Service permissions:
-  - `bigquery.transfers.update`
-  - `bigquery.transfers.get`
-- BigQuery permissions:
-  - `bigquery.datasets.get`
-  - `bigquery.datasets.getIamPolicy`
-  - `bigquery.datasets.update`
-  - `bigquery.datasets.setIamPolicy`
-  - `bigquery.jobs.create`
-
-You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
-
-For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
-
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
-
-### Network connections
-
-If a public IP address is not available for the MySQL database connection, you must [set up a network attachment](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments) .
-
-For detailed instructions on the required network setup, refer to the following documents:
-
-- If you're transferring from Cloud SQL, see [Configure Cloud SQL instance access](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access) .
-- If you're transferring from AWS, see [Set up the AWS-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment) .
-- If you're transferring from Azure, see [Set up the Azure-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment) .
-
 ## Limitations
 
 MySQL data transfers are subject to following limitations:
 
 - The maximum number of simultaneous connections to a MySQL database is determined by the MySQL configuration parameter `max_connections` . By default, this is set to 151 connections, but it can be configured to a higher limit as needed. As a result, the number of simultaneous transfer runs to a single MySQL database is limited to that maximum amount. This limitation also means that the number of concurrent transfer jobs should be limited to a value less than the maximum number of concurrent connections supported by the MySQL database.
 - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
-  - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
+  - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** option.
 - During a data transfer, the MySQL connector identifies indexed and partitioned key columns to transfer your data in parallel batches. For this reason, we recommend that you specify primary key columns or use indexed columns in your table to improve the performance and reduce the error rate in your data transfers.
   - If you have indexed or primary key constraints, only the following column types are supported for creating parallel batches:
     - `INTEGER`
@@ -187,6 +144,49 @@ When you make changes to the table schema in your data source, incremental data 
 | Deleting a column                  | The deleted column remains in the destination BigQuery table. New entries to this deleted column are populated with null values.                                                                                                                                                                                                                                                                 |
 | Changing the data type in a column | The connector only supports [data type conversions that are supported by the `ALTER COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) . Any other data type conversion causes the data transfer to fail. If you encounter any issues, we recommend creating a new transfer configuration. |
 | Renaming a column                  | The original column remains in the destination BigQuery table as is, while a new column is added to the destination table with the updated name.                                                                                                                                                                                                                                                 |
+
+## Before you begin
+
+- [Create a user](https://dev.mysql.com/doc/mysql-monitor/8.0/en/mem-acl-creating-user-roles-tasks.html) in the MySQL database.
+- Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+- Verify that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#required-roles) to complete the tasks in this document.
+
+### Required roles
+
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to create a BigQuery Data Transfer Service data transfer:
+
+- BigQuery Data Transfer Service permissions:
+  - `bigquery.transfers.update`
+  - `bigquery.transfers.get`
+- BigQuery permissions:
+  - `bigquery.datasets.get`
+  - `bigquery.datasets.getIamPolicy`
+  - `bigquery.datasets.update`
+  - `bigquery.datasets.setIamPolicy`
+  - `bigquery.jobs.create`
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `pubsub.topics.setIamPolicy` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+
+### Network connections
+
+If a public IP address is not available for the MySQL database connection, you must [set up a network attachment](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments) .
+
+For detailed instructions on the required network setup, refer to the following documents:
+
+- If you're transferring from Cloud SQL, see [Configure Cloud SQL instance access](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access) .
+- If you're transferring from AWS, see [Set up the AWS-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment) .
+- If you're transferring from Azure, see [Set up the Azure-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment) .
 
 ## Load MySQL data into BigQuery
 

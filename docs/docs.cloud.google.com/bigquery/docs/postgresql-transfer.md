@@ -141,7 +141,7 @@ Add PostgreSQL data into BigQuery by setting up a transfer configuration using o
     - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer-intro#data-type-mapping) . Select **false** to use the updated data type mapping. If you are making an incremental transfer, this value must be **false** . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-postgresql) . database server.
 
     - For **Ingestion type** , select **Full** or **Incremental** .
-      - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer-intro#full-incremental-transfers) .
+      - If you select **Incremental** , for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer-intro#full-incremental-transfers) .
 
     - For **PostgreSQL objects to transfer** , click **Browse** .
 

@@ -81,7 +81,7 @@ BigQuery data clean rooms have the following limitations:
 - While [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) provide privacy controls, they aren't guaranteed to block every unauthorized query designed to extract raw data. To help secure your information, use [query templates](https://docs.cloud.google.com/bigquery/docs/query-templates) in data clean rooms to review and approve queries, which helps block unauthorized attempts.
 - Because data clean rooms use the BigQuery sharing platform, all [BigQuery sharing limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) apply.
 - Data clean rooms are available only in [BigQuery sharing regions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#supported-regions) .
-- As a data clean room subscriber, you can't search for shared resources in Knowledge Catalog or Data Catalog.
+- As a data clean room subscriber, you can't search for shared resources in Knowledge Catalog.
 - As a data clean room subscriber, you can't query [`INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) on linked datasets.
 - As a data contributor, you can't publish an entire dataset directly to a data clean room.
 - As a data contributor, you can't publish models or routines (outside of query templates) to a data clean room.

@@ -1739,14 +1739,14 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>Tableau integrates seamlessly with the entire Google Cloud platform to ensure maximum efficiency for all of your analytics needs. Google Cloud is the enterprise solution of choice for many organizations with large and complex data problems. With Tableau, any user can visually explore that data in real time. Tableau captures the entire spectrum by connecting natively to <a href="https://analytics.google.com/">Google Analytics</a> , <a href="https://adwords.google.com/">Google Adwords</a> , <a href="https://cloud.google.com/bigquery/">Google BigQuery</a> , and <a href="https://cloud.google.com/sql">Cloud SQL</a> to analyze billions of rows in seconds without writing a single line of code. With no need to move data to in-memory storage, you can analyze data in-place to take full advantage of Google Cloud's computing capacity, providing an end-to-end analytics solution.</td>
+<td>Tableau integrates seamlessly with the entire Google Cloud platform to ensure maximum efficiency for all of your analytics needs. Google Cloud is the enterprise solution of choice for many organizations with large and complex data problems. With Tableau, any user can visually explore that data in real time. Tableau captures the entire spectrum by connecting natively to <a href="https://analytics.google.com/">Google Analytics</a> , <a href="https://adwords.google.com/">Google Adwords</a> , <a href="https://cloud.google.com/bigquery">Google BigQuery</a> , and <a href="https://cloud.google.com/sql">Cloud SQL</a> to analyze billions of rows in seconds without writing a single line of code. With no need to move data to in-memory storage, you can analyze data in-place to take full advantage of Google Cloud's computing capacity, providing an end-to-end analytics solution.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
 <td><ul>
 <li><a href="https://www.tableau.com/learn/whitepapers/google-bigquery-tableau-best-practices">BigQuery and Tableau best practices</a></li>
 <li><a href="https://www.tableau.com/solutions/workbook/explore-your-big-data-cloud">Making Sense of Google BigQuery Data with Tableau</a></li>
-<li><a href="https://cloud.google.com/bigquery/docs/analyze-data-tableau">Analyze BigQuery data by using BI Engine and Tableau</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau">Analyze BigQuery data by using BI Engine and Tableau</a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -2257,7 +2257,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Partner profile</strong></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">Direct link</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">Direct link</a></td>
 </tr>
 </tbody>
 </table>
@@ -2294,7 +2294,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Partner profile</strong></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">Direct link</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers">Direct link</a></td>
 </tr>
 </tbody>
 </table>
@@ -5251,7 +5251,7 @@ This document lists the partner solutions that have been validated as part of th
 <td><strong>Partner references</strong></td>
 <td><ul>
 <li><a href="https://www.striim.com/google-cloud-and-striim/">Striim for Google Cloud</a></li>
-<li><a href="https://cloud.google.com/architecture/partners/continuous-data-replication-bigquery-striim">Continuous data replication to BigQuery using Striim</a></li>
+<li><a href="https://docs.cloud.google.com/architecture/partners/continuous-data-replication-bigquery-striim">Continuous data replication to BigQuery using Striim</a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -5399,7 +5399,7 @@ This document lists the partner solutions that have been validated as part of th
 <thead>
 <tr class="header">
 <th><strong>Solution</strong></th>
-<th><a href="https://cloud.google.com/dataprep">Dataprep by Trifacta</a></th>
+<th><a href="https://cloud.google.com/bigquery">Dataprep by Trifacta</a></th>
 </tr>
 </thead>
 <tbody>

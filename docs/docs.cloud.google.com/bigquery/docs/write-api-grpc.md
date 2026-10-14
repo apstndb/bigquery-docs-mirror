@@ -32,7 +32,7 @@ Using the Storage Write API (gRPC) requires one of the following OAuth scopes:
 - `https://www.googleapis.com/auth/cloud-platform`
 - `https://www.googleapis.com/auth/bigquery.insertdata`
 
-For more information, see the [Authentication Overview](https://cloud.google.com/docs/authentication/) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication) .
 
 ## Overview of the Storage Write API (gRPC)
 
@@ -124,7 +124,7 @@ The Java and Go clients support arbitrary protocol buffers, because the client l
 
 #### FinalizeWriteStream
 
-The `FinalizeWriteStream` method finalizes the stream so that no new data can be appended to it. This method is required in [`Pending`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) type and optional in [`Committed`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) and [`Buffered`](https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) types. The default stream does not support this method.
+The `FinalizeWriteStream` method finalizes the stream so that no new data can be appended to it. This method is required in [`Pending`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) type and optional in [`Committed`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) and [`Buffered`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.WriteStream.Type) types. The default stream does not support this method.
 
 #### Error handling
 

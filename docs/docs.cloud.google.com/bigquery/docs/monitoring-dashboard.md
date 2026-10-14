@@ -222,7 +222,7 @@ The following metrics are available, time delayed up to several hours.
 </tr>
 <tr class="even">
 <td>BigQuery</td>
-<td>BI Engine Query Fallback Count ( <a href="https://cloud.google.com/products/#product-launch-stages">Preview</a> )</td>
+<td>BI Engine Query Fallback Count ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 <td>Queries</td>
 <td>The amount of queries that did not use BI Engine as a rate. You can set the <strong>Group By</strong> option to <code>reason</code> to separate the count into different fallback reasons, including:
 <ul>
@@ -241,7 +241,7 @@ The following metrics are available, time delayed up to several hours.
 </tr>
 <tr class="even">
 <td>BigQuery</td>
-<td>Query execution count ( <a href="https://cloud.google.com/products/#product-launch-stages">Preview</a> )</td>
+<td>Query execution count ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 <td>Queries</td>
 <td>The number of queries executed.</td>
 </tr>
@@ -266,7 +266,7 @@ The following metrics are available, time delayed up to several hours.
 <td>BigQuery</td>
 <td>Slots used by project and job type</td>
 <td>Slots</td>
-<td>Number of slots allocated to the project at any time separated by <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs">job type</a> . This can also be thought of as the number of slots being utilized by that project. Load and extract jobs are free operations, and they run in a public pool of resources.
+<td>Number of slots allocated to the project at any time separated by <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs">job type</a> . This can also be thought of as the number of slots being utilized by that project. Load and extract jobs are free operations, and they run in a public pool of resources.
 <p>Slots are allocated per billing account and multiple projects can share the same reservation of slots.</p></td>
 </tr>
 <tr class="even">

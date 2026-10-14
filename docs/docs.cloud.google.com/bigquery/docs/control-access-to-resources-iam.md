@@ -24,7 +24,6 @@ This document assumes familiarity with the [Identity and Access Management (IAM)
 - Routine access controls can't be set with Terraform.
 - Routine access controls can't be set with the Google Cloud SDK.
 - Routine access controls can't be set using the [BigQuery data control language (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) .
-- Data Catalog doesn't support routine access controls. If a user has conditionally granted routine-level access, they won't see their routines in the BigQuery side panel. As a workaround, grant dataset-level access instead.
 - The [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
 
 ## Before you begin

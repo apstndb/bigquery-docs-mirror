@@ -57,7 +57,7 @@ To change your processing region, you must [create a new Dataform repository](ht
 
 ## BigQuery Data Science Agent
 
-The BigQuery Data Science Agent is available in a limited number of Colab Enterprise regions. The region is automatically determined by the location of your Colab Enterprise notebook. For more information, see [Colab Enterprise locations](https://cloud.google.com/colab/docs/locations) .
+The BigQuery Data Science Agent is available in a limited number of Colab Enterprise regions. The region is automatically determined by the location of your Colab Enterprise notebook. For more information, see [Colab Enterprise locations](https://docs.cloud.google.com/colab/docs/locations) .
 
 When you interact with the Data Science Agent in the Google Cloud console, session data—including conversation history and temporary storage of conversation context—is stored in the same region as your notebook. Data stored at rest in your notebook is also stored in the notebook's location.
 
@@ -92,6 +92,6 @@ The following limitations apply when you identify where Gemini in BigQuery proce
 - Read the [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
 - Learn how to [set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 - Learn how to [write queries with Gemini assistance](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
-- Learn more about [Google Cloud compliance](https://cloud.google.com/security/compliance) .
+- Learn more about [Google Cloud compliance](https://cloud.google.com/compliance) .
 - Learn about [security, privacy, and compliance for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-security-privacy-compliance) .
 - Learn more about [how Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .

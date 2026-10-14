@@ -434,7 +434,7 @@ If the `image_embedding` column has a blocking error, the result is similar to t
     "column_name": "image_embedding",
     "async_generation_status": {
       "blocking_error": {
-        "message": "<service_account> does not have the permission to access resources used by AI.EMBED. Please follow https://cloud.google.com/bigquery/docs/permissions-for-ai-functions to set up permissions.",
+        "message": "<service_account> does not have the permission to access resources used by AI.EMBED. Please follow https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions to set up permissions.",
         ...
       }
     }

@@ -12,6 +12,28 @@ You can load data from Amazon S3 to BigQuery using the [BigQuery Data Transfer S
 
 To learn about how an Amazon S3 transfer works, see [Introduction to Amazon S3 data transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
 
+## Limitations
+
+Amazon S3 data transfers are subject to the following limitations:
+
+- The bucket portion of the Amazon S3 URI can't be parameterized.
+
+- Data transfers from Amazon S3 with the **Write disposition** parameter set to `WRITE_TRUNCATE` will transfer all matching files to Google Cloud during each run. This may result in additional Amazon S3 outbound data transfer costs. For more information on which files are transferred during a run, see [Impact of prefix matching versus wildcard matching](https://docs.cloud.google.com/bigquery/docs/s3-transfer#matching) .
+
+- Data transfers from AWS GovCloud ( `us-gov` ) regions aren't supported.
+
+- Data transfers to [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) aren't supported.
+
+- Depending on the format of your Amazon S3 source data, there may be additional limitations. For more information, see the following resources:
+
+  - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
+  - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
+  - [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
+
+- The minimum interval time between recurring data transfers is 1 hour. The default interval for a recurring data transfer is 24 hours.
+
+- Amazon S3 data transfers are supported by the same Amazon S3 region limitations as the Storage Transfer Service. For more information, see [Supported regions](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#supported_regions) .
+
 ## Before you begin
 
 Before you create an Amazon S3 data transfer:
@@ -22,28 +44,6 @@ Before you create an Amazon S3 data transfer:
 - Retrieve your Amazon S3 URI, your access key ID, and your secret access key. For information on managing your access keys, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) .
 - If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer#CMEK) .
-
-## Limitations
-
-Amazon S3 data transfers are subject to the following limitations:
-
-- The bucket portion of the Amazon S3 URI cannot be parameterized.
-
-- Data transfers from Amazon S3 with the **Write disposition** parameter set to `WRITE_TRUNCATE` will transfer all matching files to Google Cloud during each run. This may result in additional Amazon S3 outbound data transfer costs. For more information on which files are transferred during a run, see [Impact of prefix matching versus wildcard matching](https://docs.cloud.google.com/bigquery/docs/s3-transfer#matching) .
-
-- Data transfers from AWS GovCloud ( `us-gov` ) regions are not supported.
-
-- Data transfers to [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) are not supported.
-
-- Depending on the format of your Amazon S3 source data, there may be additional limitations. For more information, see:
-
-  - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
-  - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
-  - [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
-
-- The minimum interval time between recurring data transfers is 1 hour. The default interval for a recurring data transfer is 24 hours.
-
-- Amazon S3 data transfers are supported by the same Amazon S3 region limitations as the Storage Transfer Service. For more information, see [Supported regions](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#supported_regions) .
 
 ## Required permissions
 

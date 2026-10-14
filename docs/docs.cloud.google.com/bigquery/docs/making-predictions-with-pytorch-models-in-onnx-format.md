@@ -624,7 +624,7 @@ Alternatively, to remove the individual resources used in this tutorial, do the 
 
 3.  [Delete the Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#delete-connections) .
 
-4.  [Delete the Cloud Storage bucket](https://cloud.google.com/storage/docs/deleting-buckets#delete-bucket) .
+4.  [Delete the Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/deleting-buckets#delete-bucket) .
 
 ## What's next
 

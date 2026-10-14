@@ -12,36 +12,26 @@ You can load data from Cloud Storage to BigQuery using the [BigQuery Data Transf
 
 To learn about how a Cloud Storage transfer works, see [Introduction to Cloud Storage data transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) .
 
-## Before you begin
-
-Before you create a Cloud Storage data transfer, do the following:
-
-- Verify that you have completed all actions required in [Enabling the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
-- Retrieve your [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#google-cloud-storage-uri) .
-- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
-- [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. You can create a BigQuery table or [create Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
-- If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#CMEK) .
-
 ## Limitations
 
 Recurring data transfers from Cloud Storage to BigQuery are subject to the following limitations:
 
-- All files matching the patterns defined by either a wildcard or by runtime parameters for your data transfer **must** share the same schema you defined for the destination table, or the transfer will fail. Table schema changes between runs also causes the transfer to fail.
+- All files matching the patterns defined by either a wildcard or by runtime parameters for your data transfer *must* share the same schema you defined for the destination table, or the transfer will fail. Table schema changes between runs also causes the transfer to fail.
 
-- Because [Cloud Storage objects can be versioned](https://docs.cloud.google.com/storage/docs/object-versioning) , it's important to note that archived Cloud Storage objects are not supported for BigQuery data transfers. Objects must be live to be transferred.
+- Because [Cloud Storage objects can be versioned](https://docs.cloud.google.com/storage/docs/object-versioning) , it's important to note that archived Cloud Storage objects aren't supported for BigQuery data transfers. Objects must be live to be transferred.
 
-- Unlike [individual loads of data from Cloud Storage to BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage) , for ongoing data transfers you must create the destination table before setting up the transfer. For CSV and JSON files, you must also define the [table schema](https://docs.cloud.google.com/bigquery/docs/schemas) in advance. BigQuery cannot create the table as part of the recurring data transfer process.
+- Unlike [individual loads of data from Cloud Storage to BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage) , for ongoing data transfers, you must create the destination table before setting up the transfer. For CSV and JSON files, you must also define the [table schema](https://docs.cloud.google.com/bigquery/docs/schemas) in advance. BigQuery can't create the table as part of the recurring data transfer process.
 
 - Data transfers from Cloud Storage set the **Write preference** parameter to `APPEND` by default. In this mode, an unmodified file can only be loaded into BigQuery once. If the file's `last modification time` property is updated, then the file will be reloaded.
 
-- BigQuery Data Transfer Service does not guarantee all files will be transferred or transferred only once if Cloud Storage files are modified during a data transfer.
+- BigQuery Data Transfer Service doesn't guarantee all files will be transferred or transferred only once if Cloud Storage files are modified during a data transfer.
 
-- You are subject to the following limitations when you load data into BigQuery from a Cloud Storage bucket:
+- You're subject to the following limitations when you load data into BigQuery from a Cloud Storage bucket:
 
-  - BigQuery does not guarantee data consistency for external data sources. Changes to the underlying data while a query is running can result in unexpected behavior.
+  - BigQuery doesn't guarantee data consistency for external data sources. Changes to the underlying data while a query is running can result in unexpected behavior.
   - BigQuery doesn't support [Cloud Storage object versioning](https://docs.cloud.google.com/storage/docs/object-versioning) . If you include a generation number in the Cloud Storage URI, then the load job fails.
 
-- Depending on the format of your Cloud Storage source data, there might be additional limitations. For more information, see:
+- Depending on the format of your Cloud Storage source data, there might be additional limitations. For more information, see the following resources:
 
   - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
   - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
@@ -55,6 +45,16 @@ Recurring data transfers from Cloud Storage to BigQuery are subject to the follo
 - Source files are picked up for data transfer immediately, with no minimum file age.
 - The minimum interval time between recurring data transfers is 15 minutes. The default interval for a recurring data transfer is every 24 hours.
 - You can set up an [Event driven transfer](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) to automatically schedule data transfers at lower intervals.
+
+## Before you begin
+
+Before you create a Cloud Storage data transfer, do the following:
+
+- Verify that you have completed all actions required in [Enabling the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+- Retrieve your [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#google-cloud-storage-uri) .
+- [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+- [Create the destination table](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) for your data transfer and specify the schema definition. You can create a BigQuery table or [create Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) .
+- If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#CMEK) .
 
 ## Required permissions
 

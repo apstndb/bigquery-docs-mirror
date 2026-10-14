@@ -193,7 +193,7 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
 
 - BigLake tables on object stores are subject to the same limitations as BigQuery tables. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#external_tables) .
 
-- BigLake does not support downscoped credentials from [Managed Service for Apache Spark Personal Cluster Authentication](https://docs.cloud.google.com/dataproc/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://cloud.google.com/dataproc/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `--access-boundary=<(echo -n "{}")` flag. For example, the following command enables a credential propagation session in a project named `myproject` for the cluster named `mycluster` :
+- BigLake does not support downscoped credentials from [Managed Service for Apache Spark Personal Cluster Authentication](https://docs.cloud.google.com/dataproc/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://docs.cloud.google.com/managed-spark/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `--access-boundary=<(echo -n "{}")` flag. For example, the following command enables a credential propagation session in a project named `myproject` for the cluster named `mycluster` :
 
   ```
   gcloud dataproc clusters enable-personal-auth-session \

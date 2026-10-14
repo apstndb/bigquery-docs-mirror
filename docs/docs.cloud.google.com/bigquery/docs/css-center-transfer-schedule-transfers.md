@@ -16,6 +16,20 @@ data_source: docs.cloud.google.com
 
 This document shows you how to schedule and manage recurring load jobs for CSS Center reporting data using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
 
+## Limitations
+
+Some reports might have their own constraints, such as different windows of support for historical backfills. The products and product issues report does not support backfills.
+
+Products and product issues data in BigQuery doesn't represent the real-time view of Google Merchant Center accounts associated with your CSS Center account. The products and product issues data in BigQuery can have a latency of up to one hour.
+
+Data exported for a CSS Center account will only contain information about the merchants who have agreed to share their information with their associated CSS. For more information, see [How a CSS can access your Merchant Center account](https://support.google.com/merchants/answer/13438603) .
+
+### CSS Center data access and authorization
+
+A user of a CSS Center can only access information from Merchant Center accounts based on the level of access provided to that user by the Merchant Center account. As a result, a CSS Center transfer only includes merchant data that a user of the CSS Center has access to. For more information, see [How a CSS can access your Merchant Center account](https://support.google.com/merchants/answer/13438603) .
+
+You can configure the access rights of a CSS user by [configuring the user's access in the CSS Center as a CSS admin](https://support.google.com/css-center/answer/9773473) .
+
 ## Before you begin
 
 Before you create a CSS Center data transfer:

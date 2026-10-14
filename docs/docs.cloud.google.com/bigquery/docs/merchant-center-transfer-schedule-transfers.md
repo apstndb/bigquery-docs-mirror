@@ -16,6 +16,40 @@ data_source: docs.cloud.google.com
 
 You can load data from Google Merchant Center to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Merchant Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest Merchant Center data to BigQuery.
 
+## Limitations
+
+Some reports might have their own constraints, such as different windows of support for historical backfills. The following sections describe the limitations for each report.
+
+### Historical backfills support
+
+Not all reports support historical backfills in the same way. The following table lists the historical backfill support for each report:
+
+| Report                      | Historical backfill support |
+|-----------------------------|-----------------------------|
+| Products and product issues | 14 days                     |
+| Local inventories           | 14 days                     |
+| Regional inventories        | 14 days                     |
+| Performance                 | 2 years                     |
+| Best sellers                | 2 years                     |
+| Price competitiveness       | No backfill support         |
+| Price insights              | No backfill support         |
+
+### Automatic Backfill Transfer Runs
+
+The Performance report can have latencies in "today's" data. Therefore, when a data export is requested, data might update up to 3 days in the past to account for corrections.
+
+To support this functionality, whenever a transfer is triggered on any report, two more transfer runs are created for `today - 1` and `today - 2` . These transfer runs only affect the Performance table; other tables are not impacted.
+
+The automatic backfills can't be disabled.
+
+### Quotas
+
+The BigQuery Data Transfer Service for Merchant Center limits transfers to 1,500 total runs per day. This limit includes automatic backfill transfer runs. Because each scheduled transfer triggers two additional backfill runs, the effective limit for your configured transfers is 500 runs per day.
+
+Contact [Google Cloud Support](https://cloud.google.com/support) or [Google Merchant Center Support](https://support.google.com/merchants/?#topic=12158920) if this limit is insufficient for your use case.
+
+> **Note:** To maintain system stability and prevent service degradation, Google might temporarily reduce the daily transfer limit without prior notice.
+
 ## Before you begin
 
 Before you create a Merchant Center data transfer:

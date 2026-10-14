@@ -150,7 +150,7 @@ from flask import jsonify
 
 # Max INT64 value encoded as a number in JSON by TO_JSON_STRING. Larger values are encoded as
 # strings.
-# See https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
+# See https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
 _MAX_LOSSLESS=9007199254740992
 
 @functions_framework.http
@@ -181,7 +181,7 @@ from flask import Flask, request, jsonify
 
 # Max INT64 value encoded as a number in JSON by TO_JSON_STRING. Larger values are encoded as
 # strings.
-# See https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
+# See https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings
 _MAX_LOSSLESS=9007199254740992
 
 app = Flask(__name__)
@@ -791,7 +791,7 @@ For either a single-region location or multi-region location, you can only creat
 
 - Standard [BigQuery pricing](https://cloud.google.com/bigquery/pricing) applies.
 
-- In addition, costs may be incurred for Cloud Run functions and Cloud Run by using this feature. Please review the [Cloud Run functions](https://cloud.google.com/functions/pricing) and [Cloud Run](https://cloud.google.com/run/pricing) pricing pages for details.
+- In addition, costs may be incurred for Cloud Run functions and Cloud Run by using this feature. Please review the [Cloud Run functions](https://cloud.google.com/functions/pricing-overview) and [Cloud Run](https://cloud.google.com/run/pricing) pricing pages for details.
 
 ## Using VPC Service Controls
 

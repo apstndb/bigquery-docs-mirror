@@ -18,6 +18,21 @@ To schedule recurring data transfers from Klaviyo to BigQuery, create a transfer
 
 To learn about how a Klaviyo transfer works, see [Introduction to Klaviyo data transfers](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer-intro) .
 
+## Limitations
+
+Incremental Klaviyo transfers are subject to the following limitations:
+
+- You can only choose `TIMESTAMP` columns as watermark columns.
+- Incremental ingestion is only supported for assets with valid watermark columns.
+- Values in a watermark column must be monotonically increasing.
+- Incremental transfers cannot sync delete operations in the source table.
+- A single transfer configuration can only support either incremental or full ingestion.
+- You cannot update objects in the `asset` list after the first incremental ingestion run.
+- You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
+- You cannot change the watermark column or the primary key after the first incremental ingestion run.
+- The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
+- When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
+
 ## Before you begin
 
 The following sections describe the prerequisites that you need to do before you create a Klaviyo data transfer.

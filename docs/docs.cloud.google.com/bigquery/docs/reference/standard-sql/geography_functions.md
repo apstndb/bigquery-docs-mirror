@@ -144,7 +144,7 @@ WITH data AS (
 )
 SELECT id,
        SAFE.S2_CELLIDFROMPOINT(geo) cell30,
-       SAFE.S2_CELLIDFR>OMPOINT(geo, level = 10) cell10
+       SAFE.S2_CELLIDFROMPOINT(geo, level => 10) cell10
 FROM data;
 
 /*----+---------------------+---------------------+
@@ -195,7 +195,7 @@ WITH data AS (
   UNION ALL
   SELECT 3 AS id, ST_GEOGFROMTEXT('LINESTRING(-122.12 47.67, -122.19 47.69)') AS geo
 )
-SELECT id, S2_COVERINGCELLIDS(>geo, min_level = 12) cells
+SELECT id, S2_COVERINGCELLIDS(geo, min_level => 12) cells
 FROM data;
 
 /*----+--------------------------------------------------------------------------------------+
@@ -440,7 +440,7 @@ WITH data AS (
   UNION ALL
   SELECT 3 id, ST_GEOGFROMTEXT('POINT EMPTY') g
   UNION ALL
-  SELECT 4 id, ST_GEOGFROMTEXT('POLYGON((172 53, -141 70, -1>30 55, 172 53))', oriented = TRUE)
+  SELECT 4 id, ST_GEOGFROMTEXT('POLYGON((172 53, -141 70, -130 55, 172 53))', oriented => TRUE)
 )
 SELECT id, ST_BOUNDINGBOX(g) AS box
 FROM data
@@ -1309,8 +1309,8 @@ The following query reads the WKT string `POLYGON((0 0, 0 2, 2 2, 0 2, 0 0))` bo
 WITH polygon AS (SELECT 'POLYGON((0 0, 0 2, 2 2, 2 0, 0 0))' AS p)
 SELECT
   ST_CONTAINS(ST_GEOGFROMTEXT(p), ST_GEOGPOINT(1, 1)) AS fromtext_default,
-  ST_CONTAINS(ST_GEOGFROMTEXT(p, or>iented = FALSE), ST_GEOGPOINT(1, 1)) AS non_oriented,
-  ST_CONTAINS(ST_GEOGFROMTEXT(p, or>iented = TRUE),  ST_GEOGPOINT(1, 1)) AS oriented
+  ST_CONTAINS(ST_GEOGFROMTEXT(p, oriented => FALSE), ST_GEOGPOINT(1, 1)) AS non_oriented,
+  ST_CONTAINS(ST_GEOGFROMTEXT(p, oriented => TRUE),  ST_GEOGPOINT(1, 1)) AS oriented
 FROM polygon;
 
 /*-------------------+---------------+-----------+
@@ -1327,7 +1327,7 @@ WITH data AS (
   SELECT 'POLYGON((0 -1, 2 1, 2 -1, 0 1))' wkt)
 SELECT
   SAFE.ST_GEOGFROMTEXT(wkt) as geom,
-  SAFE.ST_GEOGFROMTEXT(wkt, make>_valid = TRUE) as valid_geom
+  SAFE.ST_GEOGFROMTEXT(wkt, make_valid => TRUE) as valid_geom
 FROM data
 
 /*------+-----------------------------------------------------------------+
@@ -1398,8 +1398,8 @@ WITH wkb_data AS (
   SELECT '010200000002000000feffffffffffef3f000000000000f03f01000000000008400000000000000040' geo
 )
 SELECT
-  ST_GeogFromWkb(geo,> planar=TRUE) AS from_planar,
-  ST_GeogFromWkb(geo,> planar=FALSE) AS from_geodesic,
+  ST_GeogFromWkb(geo, planar=>TRUE) AS from_planar,
+  ST_GeogFromWkb(geo, planar=>FALSE) AS from_geodesic,
 FROM wkb_data
 
 /*---------------------------------------+----------------------+
@@ -1571,7 +1571,7 @@ WITH data AS (
     ST_GEOGFROMTEXT('LINESTRING(20 70, 70 60, 10 70, 70 70)') AS geo1,
     ST_GEOGFROMTEXT('LINESTRING(20 90, 30 90, 60 10, 90 10)') AS geo2
 )
-SELECT ST_HAUSDORFFDISTANCE(geo1,> geo2, directed=TRUE) AS distance
+SELECT ST_HAUSDORFFDISTANCE(geo1, geo2, directed=>TRUE) AS distance
 FROM data;
 
 /*--------------------+
@@ -1589,7 +1589,7 @@ WITH data AS (
     ST_GEOGFROMTEXT('LINESTRING(20 70, 70 60, 10 70, 70 70)') AS geo1,
     ST_GEOGFROMTEXT('LINESTRING(20 90, 30 90, 60 10, 90 10)') AS geo2
 )
-SELECT ST_HAUSDORFFDISTANCE(geo2,> geo1, directed=TRUE) AS distance
+SELECT ST_HAUSDORFFDISTANCE(geo2, geo1, directed=>TRUE) AS distance
 FROM data;
 
 /*--------------------+
@@ -1607,7 +1607,7 @@ WITH data AS (
     ST_GEOGFROMTEXT('LINESTRING(20 70, 70 60, 10 70, 70 70)') AS geo1,
     ST_GEOGFROMTEXT('LINESTRING(20 90, 30 90, 60 10, 90 10)') AS geo2
 )
-SELECT ST_HAUSDORFFDISTANCE(geo1,> geo2, directed=FALSE) AS distance
+SELECT ST_HAUSDORFFDISTANCE(geo1, geo2, directed=>FALSE) AS distance
 FROM data;
 
 /*--------------------+

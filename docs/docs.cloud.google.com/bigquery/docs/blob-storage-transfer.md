@@ -12,6 +12,17 @@ You can load data from Blob Storage to BigQuery using the [BigQuery Data Transfe
 
 To learn about how a Blob Storage transfer works, see [Introduction to Blob Storage data transfers](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro) .
 
+## Limitations
+
+Blob Storage data transfers are subject to the following limitations:
+
+- The minimum interval time between recurring data transfers is 1 hour. The default interval is 24 hours.
+- Depending on the format of your Blob Storage source data, there may be additional limitations. For more information, see the following resources:
+  - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
+  - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
+  - [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
+- Data transfers to [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) aren't supported.
+
 ## Before you begin
 
 Before you create a Blob Storage data transfer, do the following:
@@ -54,17 +65,6 @@ For more information, see [Grant `bigquery.admin` access](https://docs.cloud.goo
 ### Required Blob Storage roles
 
 For information about the required permissions in Blob Storage to enable the data transfer, see [Shared access signature (SAS)](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro#shared-access-signature) .
-
-## Limitations
-
-Blob Storage data transfers are subject to the following limitations:
-
-- The minimum interval time between recurring data transfers is 1 hour. The default interval is 24 hours.
-- Depending on the format of your Blob Storage source data, there may be additional limitations:
-  - [CSV limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#limitations)
-  - [JSON limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#limitations)
-  - [Limitations on nested and repeated data](https://docs.cloud.google.com/bigquery/docs/nested-repeated#limitations)
-- Data transfers to [BigQuery Omni locations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) are not supported.
 
 ## Set up a Blob Storage data transfer
 

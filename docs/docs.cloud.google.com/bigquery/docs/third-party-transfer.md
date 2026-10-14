@@ -10,6 +10,13 @@ data_source: docs.cloud.google.com
 
 Third party transfers for BigQuery Data Transfer Service allow you to automatically schedule and manage recurring load jobs for external data sources such as Salesforce CRM, Adobe Analytics, and Facebook Ads.
 
+## Limitations
+
+Third party transfers are subject to the following limitations:
+
+- You must create or update a third party transfer using the Google Cloud console.
+- You can't configure or update a third party transfers using the bq command-line tool.
+
 ## Before you begin
 
 Before you create a third party data transfer:
@@ -42,13 +49,6 @@ The following permissions are required to create a BigQuery Data Transfer Servic
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information, see [Grant `bigquery.admin` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
-
-## Limitations
-
-Third party transfers are subject to the following limitations:
-
-- You must create or update a third party transfer using the Google Cloud console.
-- You cannot configure or update a third party transfers using the bq command-line tool.
 
 ## Set up a third party data transfer
 

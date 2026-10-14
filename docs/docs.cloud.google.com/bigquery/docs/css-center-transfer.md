@@ -28,20 +28,6 @@ This report contains data that merchants associated with your CSS Center have up
 
 When you transfer data from CSS Center into BigQuery, the data is loaded into BigQuery tables that are partitioned by date. The table partition that the data is loaded into corresponds to the date from the data source. If you schedule multiple transfers for the same date, BigQuery Data Transfer Service overwrites the partition for that specific date with the latest data. Multiple transfers in the same day or running backfills don't result in duplicate data, and partitions for other dates are not affected.
 
-## Limitations
-
-Some reports might have their own constraints, such as different windows of support for historical backfills. The products and product issues report does not support backfills.
-
-Products and product issues data in BigQuery doesn't represent the real-time view of Merchant Center accounts associated with your CSS Center account. The products and product issues data in BigQuery can have a latency of up to one hour.
-
-Data exported for a CSS Center account will only contain information about the merchants who have agreed to share their information with their associated CSS. For more information, see [How a CSS can access your Merchant Center account](https://support.google.com/merchants/answer/13438603) .
-
-### CSS Center data access and authorization
-
-A user of a CSS Center can only access information from Merchant Center accounts based on the level of access provided to that user by the Merchant Center account. As a result, a CSS Center transfer only includes merchant data that a user of the CSS Center has access to. For more information, see [How a CSS can access your Merchant Center account](https://support.google.com/merchants/answer/13438603) .
-
-You can configure the access rights of a CSS user by [configuring the user's access in the CSS Center as a CSS admin](https://support.google.com/css-center/answer/9773473) .
-
 ## Query your data
 
 When your data is transferred to BigQuery, the data is written to [ingestion-time partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .

@@ -26,7 +26,7 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 BigQuery data canvas lets you do the following:
 
-- Use natural language queries or [keyword search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) with Knowledge Catalog metadata to find assets such as tables, views, or materialized views.
+- Use [natural language search](https://docs.cloud.google.com/knowledge-catalog/docs/about-search) with Knowledge Catalog metadata to find assets such as tables, views, or materialized views.
 
 - Use natural language for basic SQL queries such as the following:
 

@@ -268,7 +268,7 @@ rows_to_insert = [
 #]
 
 # Throw errors if encountered.
-# https://cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_insert_rows
+# https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_insert_rows
 
 errors = client.insert_rows(table=table_obj, rows=rows_to_insert)
 if errors == []:

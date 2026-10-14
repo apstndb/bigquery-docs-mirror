@@ -69,7 +69,7 @@ The key type determines the [encryption mode](https://docs.cloud.google.com/bigq
 
 Encrypting plaintext more than once using the same keyset generally returns different ciphertext values due to different [initialization vectors (IVs)](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#block_cipher_modes) , which are chosen using the pseudo-random number generator provided by OpenSSL.
 
-> **Note:** If you attempt to pass keysets in plaintext as part of queries, the query text may be logged, and with them the plaintext keyset. You can use BigQuery's [parameterized queries](https://cloud.google.com/bigquery/docs/parameterized-queries) to avoid logging the plaintext keyset.
+> **Note:** If you attempt to pass keysets in plaintext as part of queries, the query text may be logged, and with them the plaintext keyset. You can use BigQuery's [parameterized queries](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) to avoid logging the plaintext keyset.
 
 ### Wrapped keysets
 
@@ -131,7 +131,7 @@ The [`KEYS.ROTATE_KEYSET`](https://docs.cloud.google.com/bigquery/docs/reference
 
 ### Cloud KMS keys
 
-GoogleSQL supports [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) with [Cloud KMS keys](https://cloud.google.com/kms/docs/resource-hierarchy) to further secure your data. This additional layer of protection encrypts your data encryption key (DEK) with a key encryption key (KEK). The KEK is a symmetric encryption keyset that is stored securely in the Cloud Key Management Service and managed using [Cloud KMS permissions and roles](https://cloud.google.com/kms/docs/reference/permissions-and-roles#predefined) .
+GoogleSQL supports [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) with [Cloud KMS keys](https://docs.cloud.google.com/kms/docs/resource-hierarchy) to further secure your data. This additional layer of protection encrypts your data encryption key (DEK) with a key encryption key (KEK). The KEK is a symmetric encryption keyset that is stored securely in the Cloud Key Management Service and managed using [Cloud KMS permissions and roles](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles#predefined) .
 
 At query execution time, use the [`KEYS.KEYSET_CHAIN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#keyskeyset_chain) function to provide the KMS resource path of the KEK and the ciphertext from the wrapped DEK. BigQuery calls Cloud KMS to unwrap the DEK, and then uses that key to decrypt the data in your query. The unwrapped version of the DEK is only stored in memory for the duration of the query, and then destroyed.
 

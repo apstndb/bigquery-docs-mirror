@@ -60,11 +60,11 @@ You can use the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigq
 
 Try this feature by using either the [Generate text by using the `ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text) how-to topic, or the [BigFrames Gemini 2.0 Text Generation Simple Example](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/generative_ai/bq_dataframes_llm_gemini_2.ipynb) notebook.
 
-This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now replicate a dataset from the source region to one or more other regions with [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now replicate a dataset from the source region to one or more other regions with [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
@@ -74,7 +74,7 @@ Feature
 
 Feature
 
-You can [create a search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) on columns containing `INT64` or `TIMESTAMP` data and BigQuery can [optimize predicates](https://docs.cloud.google.com/bigquery/docs/search#numeric-predicates-seo) that use those columns. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can [create a search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) on columns containing `INT64` or `TIMESTAMP` data and BigQuery can [optimize predicates](https://docs.cloud.google.com/bigquery/docs/search#numeric-predicates-seo) that use those columns. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 14, 2024
 
@@ -88,7 +88,7 @@ The following BigQuery ML features are now available:
 
 Try these features with the [Generate text by using the `ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text) how-to topic.
 
-These features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Announcement
 
@@ -110,7 +110,7 @@ The following BigQuery ML features are now available:
 
 Try tuning and evaluating an LLM with the [Customize an LLM by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) how-to topic or the [Use tuning and evaluation to improve model performance](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) tutorial.
 
-These BigQuery ML features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These BigQuery ML features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 06, 2024
 
@@ -164,7 +164,7 @@ You can now use [fine-grained DML](https://docs.cloud.google.com/bigquery/docs/d
 
 Feature
 
-Use the [BigQuery migration assessment for Oracle](https://docs.cloud.google.com/bigquery/docs/migration-assessment) to assess the complexity of migrating data from your Oracle data warehouse to BigQuery. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+Use the [BigQuery migration assessment for Oracle](https://docs.cloud.google.com/bigquery/docs/migration-assessment) to assess the complexity of migrating data from your Oracle data warehouse to BigQuery. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 10, 2024
 
@@ -186,7 +186,7 @@ You can now use [pipe syntax](https://docs.cloud.google.com/bigquery/docs/pipe-s
 
 Feature
 
-You can now create an [external dataset](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) in BigQuery that links to an existing database in [Spanner](https://docs.cloud.google.com/spanner/docs) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now create an [external dataset](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) in BigQuery that links to an existing database in [Spanner](https://docs.cloud.google.com/spanner/docs) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -199,7 +199,7 @@ Feature
 
 Feature
 
-You can now [enable, disable, and analyze history-based optimizations for queries](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [enable, disable, and analyze history-based optimizations for queries](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
@@ -207,11 +207,11 @@ You can now use the [operational health dashboard](https://docs.cloud.google.com
 
 Feature
 
-You can now use [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with BigQuery tables and views for extracting, loading, streaming, and querying data. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+You can now [create a materialized view replica](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-create#create) directly from the Google Cloud console. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can now [create a materialized view replica](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-create#create) directly from the Google Cloud console. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) with BigQuery tables and views for extracting, loading, streaming, and querying data. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 26, 2024
 
@@ -223,7 +223,24 @@ Feature
 
 Feature
 
-You can now use [Cloud KMS Autokey](https://docs.cloud.google.com/kms/docs/autokey-overview) to automate the creation and use of [customer-managed encryption keys (CMEKs)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) , including the [Cloud HSM](https://docs.cloud.google.com/kms/docs/hsm) service. This feature is [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery ML now offers the following expanded embedding support features:
+
+- Using the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` large language model (LLM](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#models) ) to create multimodal embeddings, which embed text, image, and video into the same semantic space.
+- Using the `ML.GENERATE_EMBEDDING` function with a [principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) model or [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) model to create embeddings for structured [independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) data.
+- Using the `ML.GENERATE_EMBEDDING` function with a [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) model to create embeddings for user or item data.
+
+Try these capabilities with the following tutorials:
+
+- [Generate image embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
+- [Generate video embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding)
+- [Generate text embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
+- [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
+
+These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use [Cloud KMS Autokey](https://docs.cloud.google.com/kms/docs/autokey-overview) to automate the creation and use of [customer-managed encryption keys (CMEKs)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) , including the [Cloud HSM](https://docs.cloud.google.com/kms/docs/hsm) service. This feature is [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -243,24 +260,7 @@ BigQuery ML now offers the following AI features:
 
   Try this feature with the [Transcribe audio files with the `ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/transcribe) how-to.
 
-These BigQuery ML feature are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
-BigQuery ML now offers the following expanded embedding support features:
-
-- Using the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` large language model (LLM](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#models) ) to create multimodal embeddings, which embed text, image, and video into the same semantic space.
-- Using the `ML.GENERATE_EMBEDDING` function with a [principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) model or [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) model to create embeddings for structured [independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) data.
-- Using the `ML.GENERATE_EMBEDDING` function with a [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) model to create embeddings for user or item data.
-
-Try these capabilities with the following tutorials:
-
-- [Generate image embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
-- [Generate video embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding)
-- [Generate text embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
-- [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
-
-These features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These BigQuery ML feature are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 23, 2024
 
@@ -272,7 +272,7 @@ You can now create [workflows](https://docs.cloud.google.com/bigquery/docs/workf
 
 Feature
 
-You can perform [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) in BigQuery ML. The following model monitoring functions are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+You can perform [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) in BigQuery ML. The following model monitoring functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data) : compute descriptive statistics for a set of training or serving data.
 - [`ML.VALIDATE_DATA_SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew) : compute the statistics for a set of serving data, and then compare them to the statistics for the data used to train a BigQuery ML model in order to identify anomalous differences between the two data sets.
@@ -314,7 +314,7 @@ You can now use Terraform to [manage IAM tags on datasets and tables](https://do
 
 Feature
 
-The BigQuery Data Transfer Service can now [transfer campaign reporting and configuration data from Display & Video 360](https://docs.cloud.google.com/bigquery/docs/display-video-transfer) into BigQuery, including `Creative` , `Partner` , and `Advertiser` tables. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The BigQuery Data Transfer Service can now [transfer campaign reporting and configuration data from Display & Video 360](https://docs.cloud.google.com/bigquery/docs/display-video-transfer) into BigQuery, including `Creative` , `Partner` , and `Advertiser` tables. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 04, 2024
 
@@ -328,17 +328,17 @@ You can use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-
 
 You can try the vector search and vector index capabilities by using the [Search embeddings with vector search](https://docs.cloud.google.com/bigquery/docs/vector-search) tutorial.
 
-The BigQuery vector search and vector index features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The BigQuery vector search and vector index features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 29, 2024
 
 Feature
 
-The BigQuery Data Transfer Service now supports [incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#incremental) when you migrate your data from your Teradata data warehouses to BigQuery. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Delta Lake BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Delta Lake is an open source, tabular data storage format that supports petabyte scale data tables.
 
 Feature
 
-[Delta Lake BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Delta Lake is an open source, tabular data storage format that supports petabyte scale data tables.
+The BigQuery Data Transfer Service now supports [incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#incremental) when you migrate your data from your Teradata data warehouses to BigQuery. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 28, 2024
 
@@ -367,13 +367,9 @@ You can now use the `GROUP BY` clause and the `SELECT DISTINCT` clause with the 
 
 Feature
 
-You can now [query data in AlloyDB using a federated query](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [query data in AlloyDB using a federated query](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 26, 2024
-
-Feature
-
-You can now use `EXPORT DATA` statements to [directly export BigQuery data to Bigtable (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Feature
 
@@ -381,7 +377,11 @@ You can now create [remote models](https://docs.cloud.google.com/bigquery/docs/r
 
 Use the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with these remote models to perform generative natural language tasks for text stored in BigQuery tables. Try this feature with the [Generate text by using the `ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text) how-to topic.
 
-This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now use `EXPORT DATA` statements to [directly export BigQuery data to Bigtable (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 21, 2024
 
@@ -393,7 +393,7 @@ Feature
 
 Feature
 
-You can now perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with BigQuery ML [multivariate time series ( `ARIMA_PLUS_XREG` ) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) . This feature lets you detect anomalies in historical time series data or in new data with multiple feature columns. You can try this feature by using the [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial) tutorial. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with BigQuery ML [multivariate time series ( `ARIMA_PLUS_XREG` ) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) . This feature lets you detect anomalies in historical time series data or in new data with multiple feature columns. You can try this feature by using the [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial) tutorial. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 19, 2024
 
@@ -443,10 +443,6 @@ An updated version of [JDBC driver for BigQuery](https://docs.cloud.google.com/b
 
 Feature
 
-When you translate SQL queries from your source database, you can use configuration YAML files to [optimize and improve the performance of your translated SQL](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#optimize_and_improve_the_performance_of_translated_sql) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
 [Workload management](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) now provides the following benefits:
 
 - The autoscaler now scales up immediately.
@@ -457,11 +453,15 @@ Feature
 
 These features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
+Feature
+
+When you translate SQL queries from your source database, you can use configuration YAML files to [optimize and improve the performance of your translated SQL](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#optimize_and_improve_the_performance_of_translated_sql) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## July 30, 2024
 
 Feature
 
-You can now use the `output_dimensionality` argument of the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding#multimodalembedding) when you use the function with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) . The `output_dimensionality` argument lets you specify the number of dimensions to use when generating embeddings. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use the `output_dimensionality` argument of the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding#multimodalembedding) when you use the function with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) . The `output_dimensionality` argument lets you specify the number of dimensions to use when generating embeddings. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 29, 2024
 
@@ -471,11 +471,11 @@ The `RANGE` data type is now a supported [JSON encoding](https://docs.cloud.goog
 
 Feature
 
-You can now use the [administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to help you quickly monitor jobs activity across your organization. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Vector indexes support the [TreeAH index type](https://docs.cloud.google.com/bigquery/docs/vector-index#tree-ah-index) , which uses Google's ScaNN algorithm. The TreeAH index is optimized for batch queries that process hundreds or more query vectors. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Vector indexes support the [TreeAH index type](https://docs.cloud.google.com/bigquery/docs/vector-index#tree-ah-index) , which uses Google's ScaNN algorithm. The TreeAH index is optimized for batch queries that process hundreds or more query vectors. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+You can now use the [administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) to help you quickly monitor jobs activity across your organization. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## July 25, 2024
 
@@ -491,7 +491,7 @@ You can now use [table explorer](https://docs.cloud.google.com/bigquery/docs/tab
 
 Feature
 
-[Manifest files](https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files) are now supported for Amazon S3 and Azure Blob Storage. This feature is [generally available](https://cloud.google.com/products) (GA).
+[Manifest files](https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files) are now supported for Amazon S3 and Azure Blob Storage. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Announcement
 
@@ -505,7 +505,11 @@ You can now [configure SAP Datasphere connections with network attachments](http
 
 Feature
 
-The BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use BigQuery Omni Virtual Private Cloud (VPC) allowlists to restrict access to [AWS S3 buckets](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#allow-vpc) and [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#allow-vpc) from specific BigQuery Omni VPCs. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Continuous queries let you build long-lived, continuously processing SQL statements that can analyze, process, and perform machine learning (ML) inference on incoming data in BigQuery in real time. You can configure continuous queries to replicate query results to a Pub/Sub topic, Bigtable instance, or another BigQuery table, a process also known as Reverse ETL.
 
@@ -520,15 +524,11 @@ To try BigQuery continuous queries, see [Create continuous queries](https://docs
 
 Feature
 
-You can now use BigQuery Omni Virtual Private Cloud (VPC) allowlists to restrict access to [AWS S3 buckets](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#allow-vpc) and [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#allow-vpc) from specific BigQuery Omni VPCs. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+You can use data manipulation language (DML) to [modify rows that have been recently written to a BigQuery table](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) by the Storage Write API. This is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can use data manipulation language (DML) to [modify rows that have been recently written to a BigQuery table](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) by the Storage Write API. This is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
-The [`CHANGES` change history function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#changes) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . This table-valued function provides a history of table changes over a window of time and captures the following operations:
+The [`CHANGES` change history function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions-built-in#changes) is now in [preview](https://cloud.google.com/products#product-launch-stages) . This table-valued function provides a history of table changes over a window of time and captures the following operations:
 
 - [`CREATE TABLE` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement)
 - [`INSERT` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
@@ -545,7 +545,7 @@ The [`CHANGES` change history function](https://docs.cloud.google.com/bigquery/d
 
 Feature
 
-The following [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - When you [run a migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run_the_migration_assessment) , the migration assessment now automatically creates a BigQuery dataset to store the assessment results. You can also choose to store assessment results in an existing empty dataset or manually create a dataset with a custom name.
 - While a migration assessment is running, you can view the assessment report with partial data. You can also view its progress and estimated completion time in the status icon tooltip.
@@ -567,7 +567,7 @@ When you run a migration assessment for Amazon Redshift, Teradata, or Snowflake,
 
 Feature
 
-You can now use [EXPORT DATA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements) statements to [reverse ETL BigQuery data to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [EXPORT DATA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements) statements to [reverse ETL BigQuery data to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 01, 2024
 
@@ -581,11 +581,11 @@ The following [Analytics Hub features](https://docs.cloud.google.com/bigquery/do
 
 Feature
 
-**Cloud console updates** : You can now [drag a tab](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#details_panel) in the details pane to open a new column and compare tabs. You can also drag the tab to a new position in the current or an adjacent column. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+Data publishers can now [share Pub/Sub topics and manage subscriptions in Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Data publishers can now [share Pub/Sub topics and manage subscriptions in Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+**Cloud console updates** : You can now [drag a tab](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#details_panel) in the details pane to open a new column and compare tabs. You can also drag the tab to a new position in the current or an adjacent column. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 27, 2024
 
@@ -603,7 +603,7 @@ You can now use the [BigQuery JupyterLab plugin](https://docs.cloud.google.com/b
 
 Feature
 
-The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) for Amazon Redshift is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can use this feature to assess the complexity of migrating from your Amazon Redshift data warehouse to BigQuery.
+The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) for Amazon Redshift is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use this feature to assess the complexity of migrating from your Amazon Redshift data warehouse to BigQuery.
 
 ## June 18, 2024
 
@@ -619,7 +619,7 @@ Announcement
 
 Feature
 
-You can now perform [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#supervised_tuning) on a BigQuery ML remote model based on a [`gemini-1.0-pro-002` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/gemini) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) . To try this feature, see [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
+You can now perform [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#supervised_tuning) on a BigQuery ML remote model based on a [`gemini-1.0-pro-002` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/gemini) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) . To try this feature, see [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
 
 You can also perform supervised tuning by using the [BigQuery DataFrames Python API](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) . Use the `fit()` and `score()` methods in the [`bigframes.ml.llm.GeminiTextGenerator` model class](https://docs.cloud.google.com/python/docs/reference/bigframes/latest/bigframes.ml.llm.GeminiTextGenerator) to perform supervised tuning.
 
@@ -647,7 +647,7 @@ The BigQuery ML [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com
 
 Feature
 
-You can now use [IAM conditions](https://docs.cloud.google.com/bigquery/docs/conditions) to control access to BigQuery resources. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use [IAM conditions](https://docs.cloud.google.com/bigquery/docs/conditions) to control access to BigQuery resources. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 30, 2024
 
@@ -665,7 +665,7 @@ The [maximum number of partitions per partitioned table](https://docs.cloud.goog
 
 Feature
 
-The following Generative AI features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following Generative AI features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Creating [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on the [Vertex AI gemini-1.5-flash foundation model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) .
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with these remote models to perform generative natural language tasks for text stored in BigQuery tables.
@@ -688,7 +688,7 @@ BigQuery ML now offers the following Generative AI features:
   - Use the `ground_with_google_search` argument to perform grounding. Grounding lets the Gemini model use additional information from the internet when generating a response, in order to make model responses more specific and factual.
   - Use the `safety_settings` argument to configure safety attributes.The Gemini model filters the responses it returns based on the attributes you specify.
 
-- Video embedding ( [Preview](https://cloud.google.com/products/#product-launch-stages) ). You can use the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#models) to create multimodal embeddings that include video embeddings.
+- Video embedding ( [Preview](https://cloud.google.com/products#product-launch-stages) ). You can use the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#models) to create multimodal embeddings that include video embeddings.
 
   To try the new video embedding functionality, see [Generate video embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) .
 
@@ -696,7 +696,7 @@ BigQuery ML now offers the following Generative AI features:
 
 Feature
 
-You can now [query data in AlloyDB using a federated query](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now [query data in AlloyDB using a federated query](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -706,13 +706,13 @@ The [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/int
 - Greenplum SQL
 - SQLite
 
-These features are in [preview](https://cloud.google.com/products/#product-launch-stages) .
+These features are in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 21, 2024
 
 Feature
 
-The following Generative AI features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following Generative AI features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Creating [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on the [Vertex AI `gemini-1.5-pro` foundation model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) .
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with these remote models to perform generative natural language tasks for text stored in BigQuery tables.
@@ -724,17 +724,17 @@ Try these features with the [Generate text by using the `ML.GENERATE_TEXT` funct
 
 Feature
 
-You can now use a [search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) to optimize lookups on the `INT64` and `TIMESTAMP` data types. The feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can use [DLP functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions) to support encryption and decryption between [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection/docs) , using AES-SIV. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can use [DLP functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions) to support encryption and decryption between [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection/docs) , using AES-SIV. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use a [search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) to optimize lookups on the `INT64` and `TIMESTAMP` data types. The feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 14, 2024
 
 Feature
 
-You can now [create Gemini-enhanced translation rules](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#create_a_translation_rule) to use with the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) . Translation rules let you customize and adjust the results of the interactive translator according to your SQL migration needs. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now [create Gemini-enhanced translation rules](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#create_a_translation_rule) to use with the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) . Translation rules let you customize and adjust the results of the interactive translator according to your SQL migration needs. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 13, 2024
 
@@ -780,17 +780,13 @@ Feature
 
 Feature
 
-[AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) are now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+[AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) are now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 An AWS Glue federated dataset is a connection at the dataset level between BigQuery and an existing database in AWS Glue.
 
 Feature
 
-You can now specify translation configurations in the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_with_additional_configurations) and use it to [debug batch SQL translator jobs](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#debug-interactive-translator) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
-The following BigQuery ML data preprocessing features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following BigQuery ML data preprocessing features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - The [`ML.TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) , which you can use to preprocess feature data. This function processes input data by applying the data transformations captured in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of an existing model.
 - [Transform-only models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform) , which you can use to apply [preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
@@ -798,6 +794,10 @@ The following BigQuery ML data preprocessing features are now [generally availab
 Feature
 
 You can now reference [Iceberg tables in materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#iceberg) instead of migrating that data to BigQuery-managed storage. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can now specify translation configurations in the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_with_additional_configurations) and use it to [debug batch SQL translator jobs](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#debug-interactive-translator) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 29, 2024
 
@@ -865,27 +865,9 @@ Feature
 
 Feature
 
-BigQuery now supports [subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) in [row level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create_or_update_a_row-level_access_policy) . This feature is now in public [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports [subqueries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) in [row level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create_or_update_a_row-level_access_policy) . This feature is now in public [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 09, 2024
-
-Feature
-
-You can now create a [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) in BigQuery Studio. A data canvas lets you discover, transform, query, and visualize data using natural language. It provides a graphic interface for your analysis that lets you work with data sources, queries, and visualizations in a directed acyclic graph (DAG), giving you a graphical view of your analysis workflow that maps to your mental model. You can iterate on query results and work with multiple branches of inquiry in a single place. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) and access can be requested [here](http://goo.gle/bqdc-request-access) .
-
-Feature
-
-BigQuery ML now offers the following expanded embedding support features in [preview](https://cloud.google.com/products/#product-launch-stages) :
-
-- Using the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` large language model (LLM)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#imagen-models) to create multimodal embeddings, which embed text and images into the same semantic space.
-- Using the `ML.GENERATE_EMBEDDING` function with a [principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) model or [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) model to create embeddings for structured [independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) data.
-- Using the `ML.GENERATE_EMBEDDING` function with a [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) model to create embeddings for user or item data.
-
-Try the new multimodal embedding functionality:
-
-- [Generate image embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
-- [Generate text embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
-- [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
 
 Feature
 
@@ -898,6 +880,24 @@ The following [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/big
 - [Autotune](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/autotuning) and [troubleshoot](https://docs.cloud.google.com/dataproc-serverless/docs/guides/monitor-troubleshoot-batches#advanced-troubleshooting) serverless Spark: optimize and explain Spark workloads.
 
 To learn how to enable and activate Gemini in BigQuery features, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .
+
+Feature
+
+You can now create a [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) in BigQuery Studio. A data canvas lets you discover, transform, query, and visualize data using natural language. It provides a graphic interface for your analysis that lets you work with data sources, queries, and visualizations in a directed acyclic graph (DAG), giving you a graphical view of your analysis workflow that maps to your mental model. You can iterate on query results and work with multiple branches of inquiry in a single place. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) and access can be requested [here](http://goo.gle/bqdc-request-access) .
+
+Feature
+
+BigQuery ML now offers the following expanded embedding support features in [preview](https://cloud.google.com/products#product-launch-stages) :
+
+- Using the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI `multimodalembedding` large language model (LLM)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#imagen-models) to create multimodal embeddings, which embed text and images into the same semantic space.
+- Using the `ML.GENERATE_EMBEDDING` function with a [principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) model or [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) model to create embeddings for structured [independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) data.
+- Using the `ML.GENERATE_EMBEDDING` function with a [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) model to create embeddings for user or item data.
+
+Try the new multimodal embedding functionality:
+
+- [Generate image embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
+- [Generate text embeddings by using the `ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
+- [Generate and search multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/generate-multimodal-embeddings)
 
 ## April 08, 2024
 
@@ -915,19 +915,23 @@ BigQuery DataFrames is a set of open source Python libraries that implements the
 
 Feature
 
-The [BigQuery materialized view recommender](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) analyzes your past query jobs to identify opportunities to apply materialized views to your queries for potential cost savings. You can view all available materialized view recommendations through the BigQuery UI or Recommender API. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [BigQuery materialized view recommender](https://docs.cloud.google.com/bigquery/docs/manage-materialized-recommendations) analyzes your past query jobs to identify opportunities to apply materialized views to your queries for potential cost savings. You can view all available materialized view recommendations through the BigQuery UI or Recommender API. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 05, 2024
 
 Feature
 
-[Differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) is now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+You can now use BigLake to access Delta Lake tables. For more information, see [Create Delta Lake BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) . This feature is available in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now use BigLake to access Delta Lake tables. For more information, see [Create Delta Lake BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table) . This feature is available in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 04, 2024
+
+Feature
+
+[BigQuery data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) with analysis rules and enhanced usage metrics are now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) . Data clean rooms provide a security-enhanced and privacy-preserving environment for multiple parties to share and augment data without moving or revealing the underlying data.
 
 Feature
 
@@ -935,21 +939,17 @@ Feature
 
 Feature
 
-[BigQuery data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) with analysis rules and enhanced usage metrics are now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) . Data clean rooms provide a security-enhanced and privacy-preserving environment for multiple parties to share and augment data without moving or revealing the underlying data.
+The [`allow_non_incremental_definition` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) and [`max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) for materialized views are now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) . The `allow_non_incremental_definition` option supports an expanded range of SQL queries to create materialized views, and the `max_staleness` option provides consistently high performance with controlled costs when processing large, frequently changing datasets.
 
 Feature
 
-You can now perform [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) in BigQuery ML. The following model monitoring functions are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+You can now perform [model monitoring](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) in BigQuery ML. The following model monitoring functions are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - [`ML.DESCRIBE_DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-describe-data) : compute descriptive statistics for a set of training or serving data.
 - [`ML.VALIDATE_DATA_SKEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-skew) : compute the statistics for a set of serving data, and then compare them to the statistics for the data used to train a BigQuery ML model in order to identify anomalous differences between the two data sets.
 - [`ML.VALIDATE_DATA_DRIFT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-validate-data-drift) : compute and compare the statistics for two sets of serving data in order to identify anomalous differences between the two data sets.
 - [`ML.TFDV_DESCRIBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe) : compute fine-grained descriptive statistics for a set of training or serving data. This function provides the same behavior as the [TensorFlow `tfdv.generate_statistics_from_csv` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/generate_statistics_from_csv) .
 - [`ML.TFDV_VALIDATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate) : compute and compare the statistics for training and serving data, or two sets of serving data, in order to identify anomalous differences between the two data sets. This function provides the same behavior as the [TensorFlow `validate_statistics` API](https://www.tensorflow.org/tfx/data_validation/api_docs/python/tfdv/validate_statistics) .
-
-Feature
-
-The [`allow_non_incremental_definition` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) and [`max_staleness` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) for materialized views are now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) . The `allow_non_incremental_definition` option supports an expanded range of SQL queries to create materialized views, and the `max_staleness` option provides consistently high performance with controlled costs when processing large, frequently changing datasets.
 
 ## April 03, 2024
 
@@ -959,7 +959,7 @@ You can now configure materialized views with tables enabled for [change data ca
 
 Feature
 
-[Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) now supports the following [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) features:
+[Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) now supports the following [generally available](https://cloud.google.com/products#product-launch-stages) (GA) features:
 
 - The underscore in the [`LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) .
 - Comparison support for the [`STRUCT` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_data_types) with the following operators and conditional expressions: `=` , `!=` , `IN` and `CASE` .
@@ -968,7 +968,7 @@ Feature
 
 Feature
 
-The following BigQuery ML features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following BigQuery ML features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Performing [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#supervised_tuning) on a remote model based on a [Vertex AI `text-bison` large language model (LLM)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#palm-models) .
 - Evaluate a Vertex AI LLM using the [`ML.EVALUATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . Pre-trained [`text-bison` , `text unicorn` , or `gemini-pro`](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) models and tuned `text-bison` models are supported for evaluation.
@@ -979,11 +979,11 @@ Try tuning and evaluating an LLM with the [Customize an LLM by using supervised 
 
 Feature
 
-You can now enable, disable, and analyze [history-based optimizations for queries](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now enable, disable, and analyze [history-based optimizations for queries](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The [BigQuery Data Transfer Service for Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) now supports the new Search Ads 360 Reporting API. You can use the Search Ads 360 connector to specify custom Floodlight variables and custom columns when transferring Search Ads 360 data to BigQuery. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [BigQuery Data Transfer Service for Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) now supports the new Search Ads 360 Reporting API. You can use the Search Ads 360 connector to specify custom Floodlight variables and custom columns when transferring Search Ads 360 data to BigQuery. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Announcement
 
@@ -993,11 +993,11 @@ BigQuery Studio is now available in the [South Carolina (us-east1) region](https
 
 Feature
 
-[Query optimization using search indexes](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) is now applied to comparisons of string literals and indexed data, including the equal ( `=` ), `IN` , and `LIKE` operators and the `STARTS_WITH` function. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+You can now [query data in SAP Datasphere using a federated query](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now [query data in SAP Datasphere using a federated query](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Query optimization using search indexes](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) is now applied to comparisons of string literals and indexed data, including the equal ( `=` ), `IN` , and `LIKE` operators and the `STARTS_WITH` function. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 27, 2024
 
@@ -1007,22 +1007,22 @@ An updated version of [JDBC driver for BigQuery](https://docs.cloud.google.com/b
 
 ## March 26, 2024
 
+Announcement
+
+Duet AI in BigQuery is now Gemini for BigQuery. See our [blog post](https://blog.google/technology/ai/google-gemini-update-sundar-pichai-2024/) for more information.
+
 Feature
 
-The [Help me code tool](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai#use_the_help_me_code_tool) lets you use natural language to generate a SQL query that can then be run in BigQuery. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [Help me code tool](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai#use_the_help_me_code_tool) lets you use natural language to generate a SQL query that can then be run in BigQuery. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The following Generative AI features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following Generative AI features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) based on a [Vertex AI gemini-pro-vision large vision model (VLM)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) .
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with this remote model to perform Vision Generative AI tasks, such as image or video captioning and visual Q&A, for visual content stored in BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 Try these features with the [Generate text that describes visual content](https://docs.cloud.google.com/bigquery/docs/generate-text#generate_text_that_describes_visual_content) how-to topic.
-
-Announcement
-
-Duet AI in BigQuery is now Gemini for BigQuery. See our [blog post](https://blog.google/technology/ai/google-gemini-update-sundar-pichai-2024/) for more information.
 
 ## March 22, 2024
 
@@ -1034,21 +1034,21 @@ The [March 20, 2024 release notes](https://docs.cloud.google.com/bigquery/docs/r
 
 Feature
 
-You can now add [Salesforce Data Cloud](https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart) data to BigQuery. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now add [Salesforce Data Cloud](https://docs.cloud.google.com/bigquery/docs/salesforce-quickstart) data to BigQuery. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-Incremental materialized views now support [`LEFT OUTER JOIN` and `UNION ALL`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+Incremental materialized views now support [`LEFT OUTER JOIN` and `UNION ALL`](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 20, 2024
 
 Feature
 
-The [maximum notebook size](https://docs.cloud.google.com/bigquery/quotas#notebook_limits) has been increased from 10 MB to 20 MB. Notebooks are available in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [maximum notebook size](https://docs.cloud.google.com/bigquery/quotas#notebook_limits) has been increased from 10 MB to 20 MB. Notebooks are available in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now view lists of [all saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#view_all_saved_queries) and [all notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#view_all_notebooks) in your project. These features are available in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now view lists of [all saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#view_all_saved_queries) and [all notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks#view_all_notebooks) in your project. These features are available in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 19, 2024
 
@@ -1064,15 +1064,11 @@ The minimum duration between [scheduled queries](https://docs.cloud.google.com/b
 
 Feature
 
-You can now perform hierarchical forecasts in BigQuery ML [time series models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#hierarchical_time_series_cols) , which let you aggregate and roll up values for all time series in the model. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [undelete a dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#undelete_datasets) that is within your time travel window to recover it to the state that it was in when it was deleted. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now [undelete a dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#undelete_datasets) that is within your time travel window to recover it to the state that it was in when it was deleted. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-These BigQuery features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+These BigQuery features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 [Text analysis configuration options](https://docs.cloud.google.com/bigquery/docs/text-analysis-search) for the following:
 
@@ -1090,27 +1086,31 @@ The following advanced processing functions:
 - [`EUCLIDEAN_DISTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#euclidean_distance)
 - [`EDIT_DISTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#edit_distance)
 
+Feature
+
+You can now perform hierarchical forecasts in BigQuery ML [time series models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#hierarchical_time_series_cols) , which let you aggregate and roll up values for all time series in the model. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## March 06, 2024
 
 Feature
 
-[Duet AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai#generate_python_code) can now assist with Python code generation and code completion. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Duet AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai#generate_python_code) can now assist with Python code generation and code completion. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The [INFORMATION_SCHEMA.WRITE_API_TIMELINE\*](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) views, containing per minute aggregated BigQuery Storage Write API ingestion statistics, are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [INFORMATION_SCHEMA.WRITE_API_TIMELINE\*](https://docs.cloud.google.com/bigquery/docs/information-schema-write-api) views, containing per minute aggregated BigQuery Storage Write API ingestion statistics, are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 04, 2024
 
 Feature
 
-You can now selectively refresh the metadata cache for BigLake tables by using the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now selectively refresh the metadata cache for BigLake tables by using the [`BQ.REFRESH_EXTERNAL_METADATA_CACHE` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 29, 2024
 
 Feature
 
-The following BigQuery cross-cloud features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following BigQuery cross-cloud features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - You can take advantage of the benefits of [materialized views over Amazon S3 metadata cache-enabled BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
 - You can create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_view_replicas) of materialized views over Amazon S3 metadata cache-enabled Biglake tables. Materialized view replicas let you use the materialized view data in queries while avoiding data egress costs and improving query performance.
@@ -1125,7 +1125,11 @@ The [SQL translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-tr
 
 Feature
 
-The following statements are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) with billing enabled:
+Materialized views can now [reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The following statements are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) with billing enabled:
 
 - `CREATE TABLE AS SELECT`
 - `CREATE TABLE IF NOT EXISTS AS SELECT`
@@ -1136,17 +1140,13 @@ These statements let you [filter data from files in Amazon S3 and Azure Blob Sto
 
 Feature
 
-Materialized views can now [reference logical views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#reference_logical_views) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
-
-Feature
-
-The ability to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with BigQuery ML [multivariate time series ( `ARIMA_PLUS_XREG` ) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . This feature enables you to detect anomalies in historical time series data or in new data with multiple feature columns. Try this new feature by using the [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial) tutorial.
+The ability to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with BigQuery ML [multivariate time series ( `ARIMA_PLUS_XREG` ) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) is now in [preview](https://cloud.google.com/products#product-launch-stages) . This feature enables you to detect anomalies in historical time series data or in new data with multiple feature columns. Try this new feature by using the [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial) tutorial.
 
 ## February 27, 2024
 
 Feature
 
-You can now [use data manipulation language (DML) statements to efficiently delete entire partitions](https://cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#using_dml_delete_to_delete_partitions) . If a `DELETE` statement targets all rows in a partition, then the entire partition is deleted without scanning bytes or consuming slots. This feature is now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+You can now [use data manipulation language (DML) statements to efficiently delete entire partitions](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables#using_dml_delete_to_delete_partitions) . If a `DELETE` statement targets all rows in a partition, then the entire partition is deleted without scanning bytes or consuming slots. This feature is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -1182,7 +1182,7 @@ Transfers from these data sources are supported in [preview](https://cloud.googl
 
 Feature
 
-The following BigQuery text embedding features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following BigQuery text embedding features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - Creating a BigQuery ML remote model that references a Vertex AI `textembedding-gecko*` text embedding model.
 - Using the [`ML.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding) with the remote model to [embed text stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
@@ -1196,7 +1196,7 @@ After you run a query in the query editor, in the **Chart** tab, you can now see
 
 Feature
 
-The following Generative AI features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following Generative AI features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#remote_service_type) based on the [`gemini-pro`](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#gemini-models) Vertex AI large language model (LLM).
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with a remote model based upon `gemini-pro` to perform generative natural language tasks on text stored in BigQuery tables.
@@ -1216,7 +1216,7 @@ Feature
 
 Feature
 
-You can now view query plans to see [details of SQL pushdowns in federated queries](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#explanation_for_federated_queries) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) .
+You can now view query plans to see [details of SQL pushdowns in federated queries](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#explanation_for_federated_queries) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 06, 2024
 
@@ -1228,6 +1228,15 @@ Announcement
 
 Feature
 
+The following information schema views display the history of configuration changes to the options of your organization and projects:
+
+- [`ORGANIZATION_OPTIONS_CHANGES view`](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options-changes) displays the configuration changes to an organization, including all organization and project-level changes.
+- [`PROJECT_OPTIONS_CHANGES view`](https://docs.cloud.google.com/bigquery/docs/information-schema-project-options-changes) displays the configuration changes to a project.
+
+This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
 BigQuery now supports vector search and vector indexes. These features are in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 You can use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to search embeddings in order to identify semantically similar entities.
@@ -1236,20 +1245,11 @@ You can use [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-
 
 Try the new vector search and vector index capabilities with the [Search embeddings with vector search](https://docs.cloud.google.com/bigquery/docs/vector-search) tutorial.
 
-Feature
-
-The following information schema views display the history of configuration changes to the options of your organization and projects:
-
-- [`ORGANIZATION_OPTIONS_CHANGES view`](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options-changes) displays the configuration changes to an organization, including all organization and project-level changes.
-- [`PROJECT_OPTIONS_CHANGES view`](https://docs.cloud.google.com/bigquery/docs/information-schema-project-options-changes) displays the configuration changes to a project.
-
-This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
 ## January 29, 2024
 
 Feature
 
-You can now use [tags](https://docs.cloud.google.com/bigquery/docs/tags) on BigQuery tables to conditionally grant or deny access with Identity and Access Management (IAM) policies. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [tags](https://docs.cloud.google.com/bigquery/docs/tags) on BigQuery tables to conditionally grant or deny access with Identity and Access Management (IAM) policies. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -1259,7 +1259,7 @@ Feature
 
 Feature
 
-BigQuery now natively supports the Delta Lake format for [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#delta-lake-tables) and [Azure](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#delta-lake-tables) tables. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now natively supports the Delta Lake format for [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#delta-lake-tables) and [Azure](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#delta-lake-tables) tables. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -1271,7 +1271,7 @@ BigQuery ML has added a new `residual` column to the output of the [`ML.EXPLAIN_
 
 Feature
 
-BigQuery now supports the [`ST_LINEINTERPOLATEPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_lineinterpolatepoint) geography function, which gets a point at a specific fraction in a linestring. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports the [`ST_LINEINTERPOLATEPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_lineinterpolatepoint) geography function, which gets a point at a specific fraction in a linestring. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## January 22, 2024
 
@@ -1283,35 +1283,35 @@ BigQuery is now available in the [Berlin (europe-west10) region](https://docs.cl
 
 Feature
 
-You can now use [cross-cloud joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) to run queries that span both Google Cloud and BigQuery Omni regions. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [cross-cloud joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) to run queries that span both Google Cloud and BigQuery Omni regions. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## January 02, 2024
 
 Feature
 
-[Analytics Hub listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) can now include data encrypted with customer-managed encryption keys (CMEK). This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Analytics Hub listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) can now include data encrypted with customer-managed encryption keys (CMEK). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## December 18, 2023
 
 Feature
 
-[Operational Health administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor-operational-health) are now in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use charts to view slot and shuffle usage, job concurrency, errors, and other metrics.
+[Operational Health administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#monitor-operational-health) are now in [preview](https://cloud.google.com/products#product-launch-stages) . You can use charts to view slot and shuffle usage, job concurrency, errors, and other metrics.
 
 ## December 14, 2023
 
 Feature
 
-The BigQuery Data Transfer Service now supports [federated workforce identities](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) when creating a data transfer from most data sources. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The BigQuery Data Transfer Service now supports [federated workforce identities](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) when creating a data transfer from most data sources. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-The [Apache Hive connector](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#apache_hadoop_apache_spark_and_apache_hive) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for data analytics pipeline migration.
+The [Apache Hive connector](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis#apache_hadoop_apache_spark_and_apache_hive) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for data analytics pipeline migration.
 
 ## December 12, 2023
 
 Feature
 
-The following BigQuery cross-cloud features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following BigQuery cross-cloud features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - You can now take advantage of the benefits of [materialized views over Amazon S3 metadata cache-enabled BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
 - You can create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_view_replicas) of materialized views over Amazon S3 metadata cache-enabled BigLake tables. Materialized view replicas let you use the materialized view data in queries while avoiding data egress costs and improving query performance.
@@ -1320,7 +1320,7 @@ The following BigQuery cross-cloud features are now in [preview](https://cloud.g
 
 Feature
 
-The following BigQuery ML data preprocessing features are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following BigQuery ML data preprocessing features are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - The [`ML.TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) , which you can use to preprocess feature data. This function processes input data by applying the data transformations captured in the [`TRANSFORM` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of an existing model.
 - [Transform-only models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-transform) which you can use to apply [preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
@@ -1329,17 +1329,17 @@ The following BigQuery ML data preprocessing features are now in [preview](https
 
 Feature
 
-The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) now supports project level cost-optimal commitment and autoscale [recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) for on-demand workloads. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) now supports project level cost-optimal commitment and autoscale [recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) for on-demand workloads. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can use [configuration YAML files to transform SQL code](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) when you translate SQL queries from your source database. Configuration YAML files can be used with the batch SQL translator, the interactive SQL translator, and the batch translation Python client. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can use [configuration YAML files to transform SQL code](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) when you translate SQL queries from your source database. Configuration YAML files can be used with the batch SQL translator, the interactive SQL translator, and the batch translation Python client. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 16, 2023
 
 Feature
 
-The following BigQuery ML features for Vertex AI large language models (LLMs) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following BigQuery ML features for Vertex AI large language models (LLMs) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - The SQL syntax for [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) has been updated to provide access to all text generation and text embedding LLMs (for example, `text-bison-32k` and `textembedding-gecko-multilingual` ) and also to provide support for different LLM [versions](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/model-versioning) .
 
@@ -1359,20 +1359,13 @@ The following BigQuery ML features for Vertex AI large language models (LLMs) ar
 
 Feature
 
-You can now see query performance insights about [partition skew](https://docs.cloud.google.com/bigquery/docs/query-insights#partition_skew) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now see query performance insights about [partition skew](https://docs.cloud.google.com/bigquery/docs/query-insights#partition_skew) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 13, 2023
 
 Feature
 
-The following BigQuery ML point-in-time lookup functions are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://www.kaggle.com/code/dansbecker/data-leakage/notebook) .
-
-- Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
-- Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
-
-Feature
-
-The following AI features in BigQuery are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following AI features in BigQuery are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - The ability to process documents from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) by doing the following:
 
@@ -1389,17 +1382,24 @@ The following AI features in BigQuery are now in [preview](https://cloud.google.
       
     Try this feature with the [Transcribe audio files with the `ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/transcribe) how-to.
 
+Feature
+
+The following BigQuery ML point-in-time lookup functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://www.kaggle.com/code/dansbecker/data-leakage/notebook) .
+
+- Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
+- Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
+
 ## November 07, 2023
 
 Feature
 
-The batch SQL translator has added enhancements when viewing SQL translation reports. You can now see a [log summary of all issues during a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#console-output) , as well as a [code tab](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#code-tab) that displays a side-by-side comparison of your input and output files from a translation. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The batch SQL translator has added enhancements when viewing SQL translation reports. You can now see a [log summary of all issues during a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#console-output) , as well as a [code tab](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#code-tab) that displays a side-by-side comparison of your input and output files from a translation. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 06, 2023
 
 Feature
 
-The following BigQuery ML features for time series forecasting are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following BigQuery ML features for time series forecasting are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - Ensure forecasted values fall within specified limits. The [`FORECAST_LIMIT_LOWER_BOUND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#forecast_limit_lower_bound) and [`FORECAST_LIMIT_UPPER_BOUND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#forecast_limit_upper_bound) options of the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement let you set the lower and upper bounds of the forecasted values returned by the model.
 
@@ -1437,40 +1437,40 @@ BigQuery now also provides support for the following advanced processing functio
 - [`EUCLIDEAN_DISTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#euclidean_distance)
 - [`EDIT_DISTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#edit_distance)
 
-These features are now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+These features are now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 01, 2023
 
 Feature
 
-You can now use [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) from the same query issued by other users in the same project when you use Enterprise or Enterprise Plus edition. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
-The following `INFORMATION_SCHEMA` views that show metadata for table storage usage are now in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following `INFORMATION_SCHEMA` views that show metadata for table storage usage are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Use the [`TABLE_STORAGE_USAGE_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) to get total billable bytes per table per day at the project level.
 - Use the [`TABLE_STORAGE_USAGE_TIMELINE_BY_ORGANIZATION` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage-by-organization) to get total billable bytes per table per day at the organization level.
+
+Feature
+
+You can now use [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) from the same query issued by other users in the same project when you use Enterprise or Enterprise Plus edition. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## October 31, 2023
 
 Feature
 
-BigQuery support for [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) by processing and applying streamed changes in real-time to existing data using the BigQuery Storage Write API is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use data manipulation language (DML) to [modify rows that have been recently written](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) by the Storage Write API. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now use data manipulation language (DML) to [modify rows that have been recently written](https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) by the Storage Write API. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery support for [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) by processing and applying streamed changes in real-time to existing data using the BigQuery Storage Write API is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## October 30, 2023
 
 Feature
 
-The BigQuery Data Transfer Service can now [transfer data from Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro) into BigQuery. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The BigQuery Data Transfer Service can now [transfer data from Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-intro) into BigQuery. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-The [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) now supports the following features in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) now supports the following features in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - View your [resource utilization chart at the project level](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view_project_level_administrative_charts_data) .
 - [Filter your resource utilization data](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) based on different billing models.
@@ -1485,34 +1485,30 @@ Feature
 
 Feature
 
-[Stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) are now available without enrollment. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) are now available without enrollment. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 18, 2023
 
 Feature
 
-The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Apache Hive in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use this feature to assess the complexity of migrating data from your Apache Hive data warehouse to BigQuery.
+The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Apache Hive in [preview](https://cloud.google.com/products#product-launch-stages) . You can use this feature to assess the complexity of migrating data from your Apache Hive data warehouse to BigQuery.
 
 ## October 16, 2023
 
 Feature
 
-You can now use [DLP functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions) to support encryption and decryption between BigQuery and DLP, using AES-SIV. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [DLP functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dlp_functions) to support encryption and decryption between BigQuery and DLP, using AES-SIV. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 12, 2023
 
 Feature
 
-The following geography functions are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following geography functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - [`ST_LINESUBSTRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_linesubstring) : Gets a segment of a single linestring at a specific starting and ending fraction.
 - [`ST_HAUSDORFFDISTANCE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_hausdorffdistance) : Gets the discrete Hausdorff distance between two geometries.
 
 ## October 09, 2023
-
-Feature
-
-Adding descriptions to the columns of a view is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Use the [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) or [`ALTER COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements to add descriptions.
 
 Feature
 
@@ -1523,7 +1519,7 @@ Queries now support additional ways to work with grouping sets, which include:
 - [`GROUP BY ROLLUP` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_rollup) (update): You can now include groupable items sets in this clause.
 - [`GROUPING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#grouping) (new): Check if a groupable value in the `GROUP BY` clause is aggregated.
 
-This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -1537,23 +1533,27 @@ Change
 
 BigQuery Data Transfer Service is now available in the [Dammam (me-central2)](https://docs.cloud.google.com/bigquery-transfer/docs/locations#regional-locations) region.
 
+Feature
+
+Adding descriptions to the columns of a view is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Use the [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) or [`ALTER COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements to add descriptions.
+
 ## October 05, 2023
 
 Feature
 
-The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Snowflake in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use this feature to assess the complexity of migrating data from your Snowflake data warehouse to BigQuery.
+The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Snowflake in [preview](https://cloud.google.com/products#product-launch-stages) . You can use this feature to assess the complexity of migrating data from your Snowflake data warehouse to BigQuery.
 
 ## October 04, 2023
 
 Feature
 
-You can now [copy tables across regions](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now [copy tables across regions](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 03, 2023
 
 Feature
 
-The following Google Cloud Blockchain Analytics datasets are now available in [Preview](https://cloud.google.com/products/#product-launch-stages) and available through the [Public Datasets Program](https://docs.cloud.google.com/bigquery/public-data) and [Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view_listings) :
+The following Google Cloud Blockchain Analytics datasets are now available in [Preview](https://cloud.google.com/products#product-launch-stages) and available through the [Public Datasets Program](https://docs.cloud.google.com/bigquery/public-data) and [Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view_listings) :
 
 - [Google Cloud's Tron Mainnet data](https://console.cloud.google.com/bigquery/analytics-hub/exchanges;cameo=analyticshub;pageName=listing-detail;pageResource=938420344946.us.preview_google_cloud_blockchain_analytics_189b1d89e86.public_preview_blockchain_analytics_tron_mainnet_18a66110122?)
 
@@ -1573,36 +1573,36 @@ The following Google Cloud Blockchain Analytics datasets are now available in [P
 
 Feature
 
-[BigQuery native integration in Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio#looker-studio-integration) enables monitoring features for Looker Studio queries, improves query performance, and supports many BigQuery features. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[BigQuery native integration in Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio#looker-studio-integration) enables monitoring features for Looker Studio queries, improves query performance, and supports many BigQuery features. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 29, 2023
 
 Feature
 
-As a BigQuery administrator, to monitor your organization's slots utilization and BigQuery jobs' performance over time, use can now use [administrative query inspector](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#query-inspector-admin-jobs) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) .
+As a BigQuery administrator, to monitor your organization's slots utilization and BigQuery jobs' performance over time, use can now use [administrative query inspector](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#query-inspector-admin-jobs) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 28, 2023
 
 Feature
 
-The following BigQuery ML point-in-time lookup functions are now in [preview](https://cloud.google.com/products/#product-launch-stages) . These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning)) .
+The following BigQuery ML point-in-time lookup functions are now in [preview](https://cloud.google.com/products#product-launch-stages) . These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning)) .
 
 - Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
 - Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
 
 Feature
 
-You can now use [IAM conditions](https://docs.cloud.google.com/bigquery/docs/conditions) to control access to BigQuery resources. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [IAM conditions](https://docs.cloud.google.com/bigquery/docs/conditions) to control access to BigQuery resources. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 25, 2023
 
 Feature
 
-[Materialized views over BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) can reference structured data stored in Cloud Storage. These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Authorized stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). This feature lets you share stored procedures with users or groups without giving them direct access to the underlying tables.
 
 Feature
 
-[Authorized stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). This feature lets you share stored procedures with users or groups without giving them direct access to the underlying tables.
+[Materialized views over BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) can reference structured data stored in Cloud Storage. These materialized views function like materialized views over BigQuery-managed storage tables, including the benefits of automatic refresh and smart tuning. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Deprecated
 
@@ -1621,35 +1621,35 @@ The maximum number of rows for results returned in [Connected Sheets](https://wo
 
 Feature
 
-The BigQuery Data Transfer Service now supports [transfers from Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) using the [new Search Ads 360 reporting API](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) . Customers with existing Search Ads 360 transfers should [migrate their workflows](https://docs.cloud.google.com/bigquery/docs/search-ads-migration-guide) to be compatible with the new Search Ads 360. The BigQuery Data Transfer Service will stop its support for the old Search Ads 360 reporting API on May 31st, 2024.
+The BigQuery Data Transfer Service now supports [transfers from Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) using the [new Search Ads 360 reporting API](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/overview) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) . Customers with existing Search Ads 360 transfers should [migrate their workflows](https://docs.cloud.google.com/bigquery/docs/search-ads-migration-guide) to be compatible with the new Search Ads 360. The BigQuery Data Transfer Service will stop its support for the old Search Ads 360 reporting API on May 31st, 2024.
 
 ## September 13, 2023
 
 Feature
 
-You can now [create a federated dataset in BigQuery](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) that federates to an existing database in AWS Glue. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now [create a federated dataset in BigQuery](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) that federates to an existing database in AWS Glue. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 12, 2023
 
 Feature
 
-The [array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) now returns a value in an array directly by index. Previously, only offset and ordinal were available. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) has been added. With this operator, you can access a `STRUCT` field by index, offset, or ordinal. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-The [struct subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#struct_subscript_operator) has been added. With this operator, you can access a `STRUCT` field by index, offset, or ordinal. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator) now returns a value in an array directly by index. Previously, only offset and ordinal were available. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 30, 2023
 
 Feature
 
-You can now use [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements) statements to [directly export BigQuery data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements) statements to [directly export BigQuery data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 29, 2023
 
 Feature
 
-The following Generative AI features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) in BigQuery ML:
+The following Generative AI features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in BigQuery ML:
 
 - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#remote_service_type) based on the [Vertex AI large language model (LLM) text-bison](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_models) .
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with an LLM-based remote model to perform generative natural language tasks on text stored in BigQuery tables.
@@ -1658,45 +1658,37 @@ Try these features with the [Generate text by using a remote model and the ML.GE
 
 Feature
 
-[BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . BigQuery Studio offers features to make it easier for you to discover, explore, analyze, and run inference on data in BigQuery, including:
+[BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) is now in [preview](https://cloud.google.com/products#product-launch-stages) . BigQuery Studio offers features to make it easier for you to discover, explore, analyze, and run inference on data in BigQuery, including:
 
 - Python notebooks, powered by [Colab Enterprise](https://docs.cloud.google.com/colab/docs/introduction) . Notebooks provide one-click Python development runtimes, and built-in support for [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 - Asset management and version history for notebooks and saved queries, powered by [Dataform](https://docs.cloud.google.com/dataform) .
 
 Feature
 
-[Data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . Data clean rooms provide a secure environment in which multiple parties can share, join, and analyze their data assets without moving or revealing the underlying data. To learn more, see the following topics:
-
-- [Use data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms)
-- [Aggregation threshold for queries and views](https://docs.cloud.google.com/bigquery/docs/privacy-policies)
-- [Aggregation threshold clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause)
-
-Feature
-
-[Duet AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai) , an AI-powered collaborator in Google Cloud, can help you complete, generate, and explain SQL queries. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-[BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . BigQuery DataFrames is a Python API that you can use to analyze data and perform machine learning tasks in BigQuery. BigQuery DataFrames consists of the following parts:
+[BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) is now in [preview](https://cloud.google.com/products#product-launch-stages) . BigQuery DataFrames is a Python API that you can use to analyze data and perform machine learning tasks in BigQuery. BigQuery DataFrames consists of the following parts:
 
 - `bigframes.pandas` implements a DataFrame API (with partial Pandas compatibility) on top of BigQuery.
 - `bigframes.ml` implements a Python API for BigQuery ML (with partial scikit-learn compatibility).
 
 Get started with BigQuery DataFrames by using the [BigQuery DataFrames quickstart](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .
 
+Feature
+
+[Duet AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-duet-ai) , an AI-powered collaborator in Google Cloud, can help you complete, generate, and explain SQL queries. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+[Data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) is now in [preview](https://cloud.google.com/products#product-launch-stages) . Data clean rooms provide a secure environment in which multiple parties can share, join, and analyze their data assets without moving or revealing the underlying data. To learn more, see the following topics:
+
+- [Use data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms)
+- [Aggregation threshold for queries and views](https://docs.cloud.google.com/bigquery/docs/privacy-policies)
+- [Aggregation threshold clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause)
+
 ## August 24, 2023
 
 Feature
 
-The following BigQuery ML inference features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
-
-- Importing [ONNX](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [XGBoost](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) , and [TensorFlow Lite](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) models so that you can run them within the BigQuery ML inference engine.
-- Hosting [models remotely on Vertex AI Prediction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#with_endpoint) so you can do inference with BigQuery ML, removing the need to build data pipelines manually.
-- Using BigQuery ML functions to perform inference on Vertex AI pretrained models so that you can accomplish [natural language processing](https://docs.cloud.google.com/bigquery/docs/inference-overview#natural_language_processing) , [translation](https://docs.cloud.google.com/bigquery/docs/inference-overview#machine_translation) , and [computer vision](https://docs.cloud.google.com/bigquery/docs/inference-overview#computer_vision) tasks in BigQuery. These functions work with the Cloud Vision, Cloud Natural Language, and Cloud Translation APIs.
-
-Feature
-
-The following text embedding features are now available in [preview](https://cloud.google.com/products/#product-launch-stages) :
+The following text embedding features are now available in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - Creating a BigQuery ML remote model that references the Vertex AI PaLM APIs for embeddings ( [`textembedding-gecko`](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/embeddings/get-text-embeddings) ).
 - Using the [`ML.GENERATE_TEXT_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text-embedding) with the remote embedding model to [embed text stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
@@ -1705,27 +1697,35 @@ The following text embedding features are now available in [preview](https://clo
 
 For more information, see the tutorial for performing [basic semantic search with text embeddings](https://docs.cloud.google.com/bigquery/docs/text-embedding-semantic-search) .
 
+Feature
+
+The following BigQuery ML inference features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
+
+- Importing [ONNX](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [XGBoost](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) , and [TensorFlow Lite](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) models so that you can run them within the BigQuery ML inference engine.
+- Hosting [models remotely on Vertex AI Prediction](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#with_endpoint) so you can do inference with BigQuery ML, removing the need to build data pipelines manually.
+- Using BigQuery ML functions to perform inference on Vertex AI pretrained models so that you can accomplish [natural language processing](https://docs.cloud.google.com/bigquery/docs/inference-overview#natural_language_processing) , [translation](https://docs.cloud.google.com/bigquery/docs/inference-overview#machine_translation) , and [computer vision](https://docs.cloud.google.com/bigquery/docs/inference-overview#computer_vision) tasks in BigQuery. These functions work with the Cloud Vision, Cloud Natural Language, and Cloud Translation APIs.
+
 ## August 22, 2023
 
 Feature
 
-BigQuery now allows you to [create your own masking routines](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask) for your data. You can use the `REGEX_REPLACE` scalar function to create custom masking rules to obfuscate your sensitive data. This feature is currently in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now allows you to [create your own masking routines](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#custom-mask) for your data. You can use the `REGEX_REPLACE` scalar function to create custom masking rules to obfuscate your sensitive data. This feature is currently in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 21, 2023
 
 Feature
 
-You can now scan tables to [create data profiles](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [monitor data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) . These features help you better understand your data and ensure it is accurate and reliable. These features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now scan tables to [create data profiles](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) and [monitor data quality](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) . These features help you better understand your data and ensure it is accurate and reliable. These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-Analytics Hub now lets you [manage subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions) . The subscription resource stores relevant information about the subscriber and represents the connection between the shared resource and linked dataset. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+Analytics Hub now lets you [manage subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions) . The subscription resource stores relevant information about the subscriber and represents the connection between the shared resource and linked dataset. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 17, 2023
 
 Feature
 
-You can now replicate a dataset from the source region to one or more other regions with [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now replicate a dataset from the source region to one or more other regions with [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 14, 2023
 
@@ -1735,23 +1735,23 @@ Starting September 15, 2023, prices will apply for network egress from a BigQuer
 
 ## August 10, 2023
 
+Feature
+
+You can now use user-defined functions to [export BigQuery data as Protocol Buffer (Protobuf) columns](https://docs.cloud.google.com/bigquery/docs/protobuf-export) . This feature is [generally-available](https://cloud.google.com/products#product-launch-stages) .
+
 Change
 
 The [September 14, 2022 release notes](https://docs.cloud.google.com/bigquery/docs/release-notes#September_14_2022) announced that you could configure the connector to authenticate the connection using an external account with workload identity federation for [ODBC driver update release 2.5.0 1001](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#odbc_release_2501001) , but workload identity federation is not supported. Workforce identity federation is still supported.
 
 Feature
 
-You can now use user-defined functions to [export BigQuery data as Protocol Buffer (Protobuf) columns](https://docs.cloud.google.com/bigquery/docs/protobuf-export) . This feature is [generally-available](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-You can now see query performance insights about [high cardinality joins](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now see query performance insights about [high cardinality joins](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 08, 2023
 
 Feature
 
-The following features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) in queries and [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#aggregate_requirements) :
+The following features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in queries and [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#aggregate_requirements) :
 
 - `HAVING MAX` and `HAVING MIN` clauses for the [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value) function.
 
@@ -1760,6 +1760,10 @@ The following features are now [generally available](https://cloud.google.com/pr
 - [`MIN_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by) function, which is a synonym for `ANY_VALUE(x HAVING MIN y)` .
 
 ## August 07, 2023
+
+Feature
+
+[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) now supports the use of routines in linked datasets. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -1779,11 +1783,7 @@ The following JSON functions are now [generally available](https://cloud.google.
 
 Feature
 
-[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) now supports the use of routines in linked datasets. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-The [quantitive `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . With this operator, you can check a search value for matches against several patterns, using one of these conditions:
+The [quantitive `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) is now in [preview](https://cloud.google.com/products#product-launch-stages) . With this operator, you can check a search value for matches against several patterns, using one of these conditions:
 
 - `LIKE ANY` : Checks if at least one pattern matches.
 - `LIKE SOME` : Synonym for `LIKE ANY` .
@@ -1802,7 +1802,7 @@ BigQuery now supports the ability to deny access to principals via [deny policie
 
 Feature
 
-BigQuery now supports [using manifest files for external tables](https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports [using manifest files for external tables](https://docs.cloud.google.com/bigquery/docs/query-open-table-format-using-manifest-files) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 03, 2023
 
@@ -1820,7 +1820,7 @@ You can now [`GRANT`](https://docs.cloud.google.com/bigquery/docs/control-access
 
 Feature
 
-**Cloud console updates** : The following features are now available in [preview](https://cloud.google.com/products/#product-launch-stages) :
+**Cloud console updates** : The following features are now available in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - On the **Welcome** page, in the **Recently accessed** section, you can view your 10 most [recently accessed resources](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#view_recently_accessed_resources) .
 - After you run a query in the query editor, in the **Chart** tab, you can see the [visualization of your query results](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
@@ -1862,37 +1862,25 @@ Now you can also use [Vertex Explainable AI](https://docs.cloud.google.com/verte
 
 Feature
 
-BigQuery can now use search indexes to [optimize](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) some queries that contain the equal operator ( `=` ), `IN` operator, `LIKE` operator, or `STARTS_WITH` function to compare string literals with indexed data. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery can now use search indexes to [optimize](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) some queries that contain the equal operator ( `=` ), `IN` operator, `LIKE` operator, or `STARTS_WITH` function to compare string literals with indexed data. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 17, 2023
 
 Feature
 
-Primary and foreign key table constraints are now [generally available](https://cloud.google.com/products/#product-launch-stages) . In addition to the [features available in preview](https://docs.cloud.google.com/bigquery/docs/release-notes#February_22_2023) , you can now also [manage constraints through the BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#tableconstraints) and [view constraints in the BigQuery console](https://cloud.google.com/blog/products/data-analytics/join-optimizations-with-bigquery-primary-and-foreign-keys/) .
+Primary and foreign key table constraints are now [generally available](https://cloud.google.com/products#product-launch-stages) . In addition to the [features available in preview](https://docs.cloud.google.com/bigquery/docs/release-notes#February_22_2023) , you can now also [manage constraints through the BigQuery API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#tableconstraints) and [view constraints in the BigQuery console](https://cloud.google.com/blog/products/data-analytics/join-optimizations-with-bigquery-primary-and-foreign-keys/) .
 
 Deprecated
 
 The [google.cloud.bigquery.storage.v1beta2 API package](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1beta2#bigquerywrite) for BigQueryWrite operations is deprecated and will be removed on July 17, 2024. After that date, requests to that package version for use with the BigQuery Storage Write API will fail. Data written to BigQuery using the [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) is accessible by using the [google.cloud.bigquery.storage.v1 package](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1) .
 
-**Next steps** : If you call the API directly, switch to [google.cloud.bigquery.storage.v1](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1) , the [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) version of the API, to prevent any impact on your workflow.
+**Next steps** : If you call the API directly, switch to [google.cloud.bigquery.storage.v1](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1) , the [generally available](https://cloud.google.com/products#product-launch-stages) (GA) version of the API, to prevent any impact on your workflow.
 
 ## July 12, 2023
 
 Feature
 
-Custom holiday modeling for time series forecasting is now in [preview](https://cloud.google.com/products/#product-launch-stages) . This release offers the following features to improve the transparency, flexibility, and explainability of time series forecasting in BigQuery ML:
-
-- New [CREATE MODEL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#as) to specify [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) for time series models.
-- The new [ML.HOLIDAY_INFO function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) , which returns the list of holidays being modeled by an [ARIMA_PLUS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) or [ARIMA_PLUS_XREG](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) time series forecasting model.
-- An updated [ML.EXPLAIN_FORECAST function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , which includes an explanation of the holiday effect for each holiday included in the model.
-
-A new public table, `bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting` , has also been added to provide easy look-up of the built-in holidays used in time series forecasting models.
-
-Try these features with the [Use custom holidays in a time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-forecasting-holidays-tutorial) tutorial.
-
-Feature
-
-The following BigQuery ML feature preprocessing functionality is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The following BigQuery ML feature preprocessing functionality is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 You can [export](https://docs.cloud.google.com/bigquery/docs/exporting-models#export_model_trained_with_transform) models that use the [TRANSFORM](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) clause for feature preprocessing to [the TensorFlow SavedModel format](https://docs.cloud.google.com/bigquery/docs/exporting-models#export_model_trained_with_transform) . There are 13 [data types](https://docs.cloud.google.com/bigquery/docs/exporting-models#export-transform-types) supported for TRANSFORM clause input, and 127 [SQL functions](https://docs.cloud.google.com/bigquery/docs/exporting-models#export-transform-functions) supported for use within the TRANSFORM clause.
 
@@ -1908,11 +1896,23 @@ Use the following functions to perform feature preprocessing:
 - [ML.ONE_HOT_ENCODER](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-one-hot-encoder)
 - [ML.ROBUST_SCALER](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-robust-scaler)
 
+Feature
+
+Custom holiday modeling for time series forecasting is now in [preview](https://cloud.google.com/products#product-launch-stages) . This release offers the following features to improve the transparency, flexibility, and explainability of time series forecasting in BigQuery ML:
+
+- New [CREATE MODEL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#as) to specify [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) for time series models.
+- The new [ML.HOLIDAY_INFO function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) , which returns the list of holidays being modeled by an [ARIMA_PLUS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) or [ARIMA_PLUS_XREG](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) time series forecasting model.
+- An updated [ML.EXPLAIN_FORECAST function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , which includes an explanation of the holiday effect for each holiday included in the model.
+
+A new public table, `bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting` , has also been added to provide easy look-up of the built-in holidays used in time series forecasting models.
+
+Try these features with the [Use custom holidays in a time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-forecasting-holidays-tutorial) tutorial.
+
 ## July 06, 2023
 
 Feature
 
-Spanner [Data Boost](https://docs.cloud.google.com/bigquery/docs/cloud-spanner-federated-queries#data_boost) lets you execute analytics queries and data exports with near-zero impact to existing workloads on your provisioned [Spanner](https://docs.cloud.google.com/spanner/docs) instance. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) in the following regions:
+Spanner [Data Boost](https://docs.cloud.google.com/bigquery/docs/cloud-spanner-federated-queries#data_boost) lets you execute analytics queries and data exports with near-zero impact to existing workloads on your provisioned [Spanner](https://docs.cloud.google.com/spanner/docs) instance. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in the following regions:
 
 - asia-northeast1 (Tokyo)
 - us-central1 (Iowa)
@@ -1925,7 +1925,19 @@ Spanner [Data Boost](https://docs.cloud.google.com/bigquery/docs/cloud-spanner-f
 
 Feature
 
-You can use the [`LOAD DATA` SQL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) to load data from Avro, CSV, newline delimited JSON, JSON, ORC, or Parquet files into a table. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) period is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). The fail-safe period offers an additional seven days of data storage after the time travel window, so that the data is available for emergency recovery. Billed costs won't include the bytes used for [fail-safe storage](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) until July 17th, 2023.
+
+Feature
+
+The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) now provides cost-optimal commitment and autoscale [recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) based on editions pricing and historical performance metrics. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can use the [`LOAD DATA` SQL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) to load data from Avro, CSV, newline delimited JSON, JSON, ORC, or Parquet files into a table. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+The ability to [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can specify the duration of the time travel window from a minimum of two days to a maximum of seven days.
 
 Change
 
@@ -1933,7 +1945,7 @@ BigQuery is now available in the [Turin (europe-west12) and Doha (me-central1)](
 
 Feature
 
-The ability to use physical bytes for storage billing is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). When you set your dataset's storage billing model to use physical bytes, the total [active storage](https://cloud.google.com/bigquery/pricing#storage/bigquery/pricing#storage) costs you are billed for includes the bytes used for [time travel and fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel) storage. For more information, see [Dataset storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
+The ability to use physical bytes for storage billing is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). When you set your dataset's storage billing model to use physical bytes, the total [active storage](https://cloud.google.com/bigquery/pricing#storage/bigquery/pricing#storage) costs you are billed for includes the bytes used for [time travel and fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel) storage. For more information, see [Dataset storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
 
 Announcement
 
@@ -1944,31 +1956,19 @@ BigQuery capacity commitments have changed as follows:
 
 Feature
 
-The ability to [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can specify the duration of the time travel window from a minimum of two days to a maximum of seven days.
-
-Feature
-
-The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) now provides cost-optimal commitment and autoscale [recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) based on editions pricing and historical performance metrics. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-The [fail-safe](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) period is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). The fail-safe period offers an additional seven days of data storage after the time travel window, so that the data is available for emergency recovery. Billed costs won't include the bytes used for [fail-safe storage](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) until July 17th, 2023.
-
-Feature
-
-You can now restrict [data egress](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress) on Analytics Hub listings. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now restrict [data egress](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress) on Analytics Hub listings. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 30, 2023
 
 Feature
 
-[Metadata caching](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) is now available for BigLake tables that reference Amazon S3 data. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) . Using cached metadata might improve query performance for BigLake tables.
+[Metadata caching](https://docs.cloud.google.com/bigquery/docs/omni-introduction#metadata_caching_for_performance) is now available for BigLake tables that reference Amazon S3 data. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) . Using cached metadata might improve query performance for BigLake tables.
 
 ## June 29, 2023
 
 Feature
 
-Support for the following compliance programs is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+Support for the following compliance programs is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - [EU Regions and Support with Sovereignty Controls](https://docs.cloud.google.com/assured-workloads/docs/compliance-programs#eu-sovereignty-controls)
 - [Sovereign Controls by Partners](https://docs.cloud.google.com/sovereign-controls-by-partners)
@@ -1978,19 +1978,19 @@ Support for the following compliance programs is now [generally available](https
 
 Feature
 
-You can now create [stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) using Java or Scala. You can also use the [Google Cloud console PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) to add options for stored Python procedures for Apache Spark. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now create [stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) using Java or Scala. You can also use the [Google Cloud console PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) to add options for stored Python procedures for Apache Spark. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 21, 2023
 
 Feature
 
-`TRUNCATE TABLE` is now supported for [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions#statements_supported_in_transactions) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+`TRUNCATE TABLE` is now supported for [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions#statements_supported_in_transactions) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## June 20, 2023
 
 Feature
 
-[Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Using cached metadata might improve query performance for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that reference large numbers of objects, by allowing the query to avoid listing objects from Cloud Storage.
+[Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Using cached metadata might improve query performance for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that reference large numbers of objects, by allowing the query to avoid listing objects from Cloud Storage.
 
 This release includes support for the following new features:
 
@@ -2002,13 +2002,13 @@ Metadata cache usage is billed going forward. For more information, see [Costs](
 
 Feature
 
-BigQuery now supports [querying Apache Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) that are created by open source engines. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports [querying Apache Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) that are created by open source engines. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## June 15, 2023
 
 Feature
 
-The following Generative AI features are now in [preview](https://cloud.google.com/products/#product-launch-stages) with allowlist:
+The following Generative AI features are now in [preview](https://cloud.google.com/products#product-launch-stages) with allowlist:
 
 - Creating a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#remote_service_type) based on the [Vertex AI large language model (LLM) `text-bison`](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models#foundation_models) .
 - Using the [`ML.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text) with an LLM-based remote model to perform generative natural language tasks on text stored in BigQuery tables.
@@ -2019,30 +2019,30 @@ Try these features with the [Generate text by using a remote model and the ML.GE
 
 Feature
 
-BigQuery now provides information about the [fail-safe period](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) . The fail-safe period offers an additional seven days of data storage after the time travel window, so that the data is available for emergency recovery. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-[BigLake Metastore](https://docs.cloud.google.com/bigquery/docs/manage-open-source-metadata) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can use BigLake Metastore to access and manage Iceberg table metadata from multiple sources.
-
-Feature
-
-The `INFORMATION_SCHEMA` views that show table storage metadata are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The `INFORMATION_SCHEMA` views that show table storage metadata are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - Use the [`TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to get a snapshot of current storage usage for tables at the project level.
 - Use the [`TABLE_STORAGE_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization) view to get a snapshot of current storage usage for tables at the organization level.
+
+Feature
+
+[BigLake Metastore](https://docs.cloud.google.com/bigquery/docs/manage-open-source-metadata) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use BigLake Metastore to access and manage Iceberg table metadata from multiple sources.
+
+Feature
+
+BigQuery now provides information about the [fail-safe period](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) . The fail-safe period offers an additional seven days of data storage after the time travel window, so that the data is available for emergency recovery. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 12, 2023
 
 Feature
 
-The [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can use the query execution graph to diagnose query performance issues, and to receive query performance insights.
+The [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use the query execution graph to diagnose query performance issues, and to receive query performance insights.
 
 ## May 25, 2023
 
 Feature
 
-The BigQuery partitioning and clustering recommender is now in [preview](https://cloud.google.com/products/#product-launch-stages) . The recommender analyzes your BigQuery tables to identify partitioning or clustering opportunities for potential cost savings. You can [view partition or cluster recommendations](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) through the BigQuery UI or recommender API. You can also [apply recommendations](https://docs.cloud.google.com/bigquery/docs/apply-partition-cluster-recommendations) directly to your BigQuery tables.
+The BigQuery partitioning and clustering recommender is now in [preview](https://cloud.google.com/products#product-launch-stages) . The recommender analyzes your BigQuery tables to identify partitioning or clustering opportunities for potential cost savings. You can [view partition or cluster recommendations](https://docs.cloud.google.com/bigquery/docs/view-partition-cluster-recommendations) through the BigQuery UI or recommender API. You can also [apply recommendations](https://docs.cloud.google.com/bigquery/docs/apply-partition-cluster-recommendations) directly to your BigQuery tables.
 
 ## May 23, 2023
 
@@ -2054,13 +2054,13 @@ Change
 
 Feature
 
-[`EXTERNAL_QUERY` SQL pushdown](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) optimizes data retrieval from external sources like Cloud SQL or Cloud Spanner databases. Transferring less data reduces execution time and cost. SQL pushdown encompasses both column pruning ( `SELECT` clauses) and filter pushdowns ( `WHERE` clauses). SQL pushdown applies to `SELECT * FROM T` queries, a significant percentage of all federated queries. Not all data types are supported for filter pushdowns. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[`EXTERNAL_QUERY` SQL pushdown](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) optimizes data retrieval from external sources like Cloud SQL or Cloud Spanner databases. Transferring less data reduces execution time and cost. SQL pushdown encompasses both column pruning ( `SELECT` clauses) and filter pushdowns ( `WHERE` clauses). SQL pushdown applies to `SELECT * FROM T` queries, a significant percentage of all federated queries. Not all data types are supported for filter pushdowns. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 18, 2023
 
 Feature
 
-You can now sort your query results by using the sort menu next to a column name. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now sort your query results by using the sort menu next to a column name. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 16, 2023
 
@@ -2078,7 +2078,7 @@ BigQuery Omni is now available in the [AWS - Asia Pacific (Seoul) (aws-ap-northe
 
 Feature
 
-[Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Object tables are read-only tables containing metadata for unstructured data stored in Cloud Storage. They enable you to [analyze](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function) and [perform inference](https://docs.cloud.google.com/bigquery/docs/object-table-inference) on images, audio files, documents and other file types by using BigQuery ML and BigQuery remote functions. Object tables extend the data security and governance best practices currently applied to structured data to unstructured data as well.
 
@@ -2101,17 +2101,17 @@ BigQuery is now available in the [Dallas (us-south1)](https://docs.cloud.google.
 
 Feature
 
-[EXTERNAL_QUERY SQL pushdown](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) optimizes data retrieval from external sources like Cloud SQL or Cloud Spanner databases. Transferring less data reduces execution time and cost. SQL pushdown encompasses both column pruning ( `SELECT` clauses) and filter pushdowns ( `WHERE` clauses). SQL pushdown applies to `SELECT * FROM T` queries, a significant percentage of all federated queries. Pushdowns have limitations, for example not all data types are supported for filter pushdowns. This feature is [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+You can now view [BI Engine Top Tables Cached Bytes](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor#metrics) , [BI Engine Query Fallback Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) , and [Query Execution Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) as dashboard metrics for BigQuery. This feature is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now view [BI Engine Top Tables Cached Bytes](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor#metrics) , [BI Engine Query Fallback Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) , and [Query Execution Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) as dashboard metrics for BigQuery. This feature is now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+[EXTERNAL_QUERY SQL pushdown](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) optimizes data retrieval from external sources like Cloud SQL or Cloud Spanner databases. Transferring less data reduces execution time and cost. SQL pushdown encompasses both column pruning ( `SELECT` clauses) and filter pushdowns ( `WHERE` clauses). SQL pushdown applies to `SELECT * FROM T` queries, a significant percentage of all federated queries. Pushdowns have limitations, for example not all data types are supported for filter pushdowns. This feature is [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 08, 2023
 
 Feature
 
-[Differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy) is now in [preview](https://cloud.google.com/products/#product-launch-stages) and includes four differential privacy aggregate functions that can be used to anonymize data: `AVG` , `COUNT` , `SUM` , and `PERCENTILE_CONT` . To learn more, see the following topics:
+[Differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy) is now in [preview](https://cloud.google.com/products#product-launch-stages) and includes four differential privacy aggregate functions that can be used to anonymize data: `AVG` , `COUNT` , `SUM` , and `PERCENTILE_CONT` . To learn more, see the following topics:
 
 - [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy)
 - [Differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause)
@@ -2120,25 +2120,25 @@ Feature
 
 Feature
 
-[INFORMATION_SCHEMA.MATERIALIZED_VIEW view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) and enhanced job statistics now let you [monitor materialized view usage and refresh jobs](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[INFORMATION_SCHEMA.MATERIALIZED_VIEW view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) and enhanced job statistics now let you [monitor materialized view usage and refresh jobs](https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 05, 2023
 
 Feature
 
-The [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) now lets you filter data from files in Amazon S3 and Azure Blob Storage and append it into BigQuery tables. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`INSERT INTO SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) now lets you filter data from files in Amazon S3 and Azure Blob Storage and append it into BigQuery tables. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 04, 2023
 
 Feature
 
-You can now [use configuration YAML files to transform SQL code](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) when you translate SQL queries from your source database. Configuration YAML files can be used with the batch SQL translator, the interactive SQL translator, and the batch translation Python client. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now [use configuration YAML files to transform SQL code](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) when you translate SQL queries from your source database. Configuration YAML files can be used with the batch SQL translator, the interactive SQL translator, and the batch translation Python client. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 03, 2023
 
 Feature
 
-The [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) feature of BigQuery is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) feature of BigQuery is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 01, 2023
 
@@ -2148,43 +2148,43 @@ If you use query queues, then you can set the interactive and batch queue timeou
 
 Feature
 
-You can now add descriptions to the columns of a view. To do this, use the [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) or [`ALTER COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now add descriptions to the columns of a view. To do this, use the [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) or [`ALTER COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) DDL statements. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 27, 2023
 
 Feature
 
-[`JSON` data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping) is now available for Cloud Spanner federated queries. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[`JSON` data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping) is now available for Cloud Spanner federated queries. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 26, 2023
 
 Feature
 
-[BigLake and non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/locations#query-storage-data-location) now support [Cloud Storage custom dual-regions](https://docs.cloud.google.com/storage/docs/use-dual-regions#create-dr-bucket) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[BigLake and non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/locations#query-storage-data-location) now support [Cloud Storage custom dual-regions](https://docs.cloud.google.com/storage/docs/use-dual-regions#create-dr-bucket) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 25, 2023
 
 Feature
 
-[Dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) has been updated to allow masking on `RECORD` columns that have been set to `REPEATED` mode. Previously, querying such columns when data masking had been applied would return internal errors. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) has been updated to allow masking on `RECORD` columns that have been set to `REPEATED` mode. Previously, querying such columns when data masking had been applied would return internal errors. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 24, 2023
 
 Feature
 
-The [BigQuery Data Transfer Service for Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) supports the new [Google Ads API](https://developers.google.com/google-ads/api/docs/start) . The Google Ads connector supports [PMax](https://support.google.com/google-ads/answer/10724817) and Discovery campaigns, a limit of 8000 leaf accounts per transfer, the [`--table_filter`](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) flag, and [backwards compatibility](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#backwards_compatibility) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [BigQuery Data Transfer Service for Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) supports the new [Google Ads API](https://developers.google.com/google-ads/api/docs/start) . The Google Ads connector supports [PMax](https://support.google.com/google-ads/answer/10724817) and Discovery campaigns, a limit of 8000 leaf accounts per transfer, the [`--table_filter`](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) flag, and [backwards compatibility](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#backwards_compatibility) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 19, 2023
 
 Feature
 
-[Updates to preferred tables for existing BI engine reservations](https://docs.cloud.google.com/bigquery/docs/bi-engine-preferred-tables#specify_preferred_tables_for_existing_reservations) now take up to ten seconds to propagate, down from five minutes. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Updates to preferred tables for existing BI engine reservations](https://docs.cloud.google.com/bigquery/docs/bi-engine-preferred-tables#specify_preferred_tables_for_existing_reservations) now take up to ten seconds to propagate, down from five minutes. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 13, 2023
 
 Feature
 
-BigQuery supports setting the [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) to `ROUND_HALF_EVEN` or `ROUND_HALF_AWAY_FROM_ZERO` for parameterized `NUMERIC` or `BIGNUMERIC` columns at the column level. You can specify a default rounding mode at the table or dataset level that is automatically attached to any columns added within those entities. The [ROUND() function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round) also accepts the rounding mode as an optional argument. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) GA.
+BigQuery supports setting the [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) to `ROUND_HALF_EVEN` or `ROUND_HALF_AWAY_FROM_ZERO` for parameterized `NUMERIC` or `BIGNUMERIC` columns at the column level. You can specify a default rounding mode at the table or dataset level that is automatically attached to any columns added within those entities. The [ROUND() function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round) also accepts the rounding mode as an optional argument. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) GA.
 
 ## April 10, 2023
 
@@ -2194,7 +2194,7 @@ The results for queries against [table snapshots](https://docs.cloud.google.com/
 
 Feature
 
-The limit for maximum result size (20 GiB logical bytes) when querying [Azure](https://docs.cloud.google.com/bigquery/docs/query-azure-data) or [Amazon Simple Storage service (S3)](https://docs.cloud.google.com/bigquery/docs/query-aws-data) data is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Querying Azure and Amazon S3 data are now subject to the following quotas and limitations:
+The limit for maximum result size (20 GiB logical bytes) when querying [Azure](https://docs.cloud.google.com/bigquery/docs/query-azure-data) or [Amazon Simple Storage service (S3)](https://docs.cloud.google.com/bigquery/docs/query-aws-data) data is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Querying Azure and Amazon S3 data are now subject to the following quotas and limitations:
 
 - The maximum row size is 10 MiB. For more information, see [Quotas for query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
 
@@ -2204,13 +2204,13 @@ The limit for maximum result size (20 GiB logical bytes) when querying [Azure](h
 
 Feature
 
-The [add data demo guide](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#run_add_data_demo_guide) walks you through the process of adding data to BigQuery through popular sources and is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [add data demo guide](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#run_add_data_demo_guide) walks you through the process of adding data to BigQuery through popular sources and is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 05, 2023
 
 Feature
 
-[Non-incremental materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) support most SQL queries, including `OUTER JOIN` , `UNION` , and `HAVING` clauses, as well as analytic functions. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Non-incremental materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental) support most SQL queries, including `OUTER JOIN` , `UNION` , and `HAVING` clauses, as well as analytic functions. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 04, 2023
 
@@ -2222,7 +2222,7 @@ BigQuery is now available in the [Israel (me-west1)](https://docs.cloud.google.c
 
 Feature
 
-[BigQuery Partner Center](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview#partner_center) , which can be used to discover and try validated partner applications, is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). In addition, the [Google Cloud Ready - BigQuery](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) initiative has added 14 new partners.
+[BigQuery Partner Center](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview#partner_center) , which can be used to discover and try validated partner applications, is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). In addition, the [Google Cloud Ready - BigQuery](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) initiative has added 14 new partners.
 
 Announcement
 
@@ -2237,11 +2237,11 @@ Announcement
 
 Feature
 
-Compute (analysis) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) in three new [BigQuery editions](http://cloud.google.com/bigquery/docs/editions-intro) : Standard, Enterprise, and Enterprise Plus. These editions support the slots autoscaling model to meet your organizations' needs and budgets.
+[Autoscaling slots](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Autoscaling slot reservations and commitments created during the feature's preview have been set to [BigQuery Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 Feature
 
-[Autoscaling slots](http://cloud.google.com/bigquery/docs/slots-autoscaling-intro) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Autoscaling slot reservations and commitments created during the feature's preview have been set to [BigQuery Enterprise edition](http://cloud.google.com/bigquery/docs/editions-intro) .
+Compute (analysis) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in three new [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) : Standard, Enterprise, and Enterprise Plus. These editions support the slots autoscaling model to meet your organizations' needs and budgets.
 
 ## March 28, 2023
 
@@ -2253,7 +2253,7 @@ You can also host [models remotely on Vertex AI Prediction](https://docs.cloud.g
 
 You can do inference with Google Cloud's state of the art pretrained models using [Cloud AI service table-valued functions (TVFs)](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-cloud-ai-service-tvfs-overview) to get insights from your data. The TVFs work with Cloud Vision API, Cloud Natural Language API and Cloud Translation API.
 
-These features are [in preview](https://cloud.google.com/products/#product-launch-stages) . To enroll to use this feature, complete the [enrollment form](https://forms.gle/q97oMuz8Muigp3cT7) .
+These features are [in preview](https://cloud.google.com/products#product-launch-stages) . To enroll to use this feature, complete the [enrollment form](https://forms.gle/q97oMuz8Muigp3cT7) .
 
 Feature
 
@@ -2267,19 +2267,19 @@ You can now use the [`instance_weight_col`](https://docs.cloud.google.com/bigque
 
 Feature
 
-BigQuery now supports [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) by processing and applying streamed changes in real-time to existing data using the BigQuery Storage Write API. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports [change data capture (CDC)](https://docs.cloud.google.com/bigquery/docs/change-data-capture) by processing and applying streamed changes in real-time to existing data using the BigQuery Storage Write API. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 22, 2023
 
 Feature
 
-BigQuery now supports [Unicode column naming](http://cloud.google.com/bigquery/docs/schemas#flexible-column-names) using international character sets, alphanumeric and special characters. Existing columns can use these new capabilities using the `RENAME` command. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports [Unicode column naming](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) using international character sets, alphanumeric and special characters. Existing columns can use these new capabilities using the `RENAME` command. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 20, 2023
 
 Feature
 
-The following [AutoML Tables model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-automl) features are now [generally available](https://cloud.google.com/products/#product-launch-stages) :
+The following [AutoML Tables model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-automl) features are now [generally available](https://cloud.google.com/products#product-launch-stages) :
 
 - Availability in [additional regions](https://docs.cloud.google.com/bigquery-ml/docs/locations#regional-locations) .
 - [CMEK](https://docs.cloud.google.com/bigquery-ml/docs/customer-managed-encryption-key) support in available regions except multi-regions US and EU.
@@ -2291,25 +2291,25 @@ The following [AutoML Tables model](https://docs.cloud.google.com/bigquery-ml/do
 
 Feature
 
-The [Lineage tab](https://docs.cloud.google.com/bigquery/docs/data-catalog#data_lineage) in the table properties page lets you track how your data moves and transforms through BigQuery. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [Lineage tab](https://docs.cloud.google.com/bigquery/docs/data-catalog#data_lineage) in the table properties page lets you track how your data moves and transforms through BigQuery. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 13, 2023
 
 Feature
 
-You can now specify translation configurations in the [BigQuery Interactive SQL Translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) and use it to [debug Batch SQL translator jobs](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now specify translation configurations in the [BigQuery Interactive SQL Translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) and use it to [debug Batch SQL translator jobs](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 10, 2023
 
 Feature
 
-The [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) now lets you filter data from files in Amazon S3 and Azure Blob Storage before transferring results into BigQuery tables This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`CREATE TABLE AS SELECT` statement](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) now lets you filter data from files in Amazon S3 and Azure Blob Storage before transferring results into BigQuery tables This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 07, 2023
 
 Feature
 
-[Case-insensitive collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) support is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). In addition to features available in the preview, the GA release includes:
+[Case-insensitive collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) support is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). In addition to features available in the preview, the GA release includes:
 
 - [MIN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min) , [MAX](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max) , [COUNT with DISTINCT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) , and [PERCENTILE_DISC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc) windows functions
 - [ORDER BY and PARTITION BY in the WINDOWS clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls)
@@ -2323,7 +2323,7 @@ Feature
 
 Feature
 
-The [`WITH RECURSIVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) clause is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). This clause lets you include one or more [recursive common table expressions (CTEs)](https://docs.cloud.google.com/bigquery/docs/recursive-ctes) in a query.
+The [`WITH RECURSIVE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) clause is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). This clause lets you include one or more [recursive common table expressions (CTEs)](https://docs.cloud.google.com/bigquery/docs/recursive-ctes) in a query.
 
 ## February 27, 2023
 
@@ -2333,19 +2333,19 @@ The multivariate time-series forecasting model [`ARIMA_PLUS_XREG`](https://docs.
 
 Feature
 
-You can set [default values](https://docs.cloud.google.com/bigquery/docs/default-values) on columns in your BigQuery tables. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can set [default values](https://docs.cloud.google.com/bigquery/docs/default-values) on columns in your BigQuery tables. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 23, 2023
 
 Feature
 
-[Authorized stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) are now in [preview](https://cloud.google.com/products/#product-launch-stages) . This feature lets you share stored procedures with users or groups without giving them direct access to the underlying tables.
+[Authorized stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#authorize_routines) are now in [preview](https://cloud.google.com/products#product-launch-stages) . This feature lets you share stored procedures with users or groups without giving them direct access to the underlying tables.
 
 ## February 22, 2023
 
 Feature
 
-[Primary and foreign key table constraints](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) are now available in [preview](https://cloud.google.com/products/#product-launch-stages) . You can define table constraints using the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , the [`ALTER TABLE ADD PRIMARY KEY` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement) , or the [`ALTER TABLE ADD CONSTRAINT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_constraint_statement) .
+[Primary and foreign key table constraints](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) are now available in [preview](https://cloud.google.com/products#product-launch-stages) . You can define table constraints using the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , the [`ALTER TABLE ADD PRIMARY KEY` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement) , or the [`ALTER TABLE ADD CONSTRAINT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_constraint_statement) .
 
 Fixed
 
@@ -2355,41 +2355,41 @@ Fixed linked datasets querying shared dataset that has data ingested through str
 
 Feature
 
-The [ALTER TABLE RENAME COLUMN statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) and the [ALTER TABLE DROP COLUMN statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [ALTER TABLE RENAME COLUMN statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) and the [ALTER TABLE DROP COLUMN statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 15, 2023
 
 Feature
 
-You can now [run `bq` commands using service account impersonation](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#bq_service_account) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [run `bq` commands using service account impersonation](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#bq_service_account) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-In the **Explorer** pane, you can now see all the [resources in the searched resource's level](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#explorer_panel) by clicking **Show more** . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In the **Explorer** pane, the [resource corresponding to the focused tab](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#details_panel) is now selected. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can now make a dataset and the tables in that dataset [case-insensitive](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) when you [create a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) or [alter a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In the **Explorer** pane, you can now see all the [resources in the searched resource's level](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#explorer_panel) by clicking **Show more** . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-In the **Explorer** pane, the [resource corresponding to the focused tab](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#details_panel) is now selected. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now make a dataset and the tables in that dataset [case-insensitive](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) when you [create a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) or [alter a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 13, 2023
 
 Feature
 
-You can now create [materialized views over BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) to reference structured data stored in Cloud Storage. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now create [materialized views over BigLake metadata cache-enabled tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) to reference structured data stored in Cloud Storage. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 09, 2023
 
-Feature
-
-You can now apply four new types of [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#masking_options) to table columns in BigQuery. These new data masking types include **date year** , **email** , **first four characters** , and **last four characters** masks. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
 Change
 
-Autoscaling slot reservations are now available in [preview](https://cloud.google.com/products/#product-launch-stages) . You can create autoscaling reservations and associated commitments using [slots autoscaling](http://cloud.google.com/bigquery/docs/slots-autoscaling-intro) .
+Autoscaling slot reservations are now available in [preview](https://cloud.google.com/products#product-launch-stages) . You can create autoscaling reservations and associated commitments using [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) .
+
+Feature
+
+You can now apply four new types of [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#masking_options) to table columns in BigQuery. These new data masking types include **date year** , **email** , **first four characters** , and **last four characters** masks. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
@@ -2399,7 +2399,7 @@ Feature
 
 Feature
 
-You can now view information related to query processing to monitor and optimize queries with the `query_info` column in [`INFORMATION_SCHEMA.JOBS`](https://cloud.google.com/bigquery/docs/information-schema-jobs) , [`JOBS_BY_FOLDER`](https://cloud.google.com/bigquery/docs/information-schema-jobs-by-folder) and [`JOBS_BY_ORGANIZATION`](https://cloud.google.com/bigquery/docs/information-schema-jobs-by-organization) views. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now view information related to query processing to monitor and optimize queries with the `query_info` column in [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) , [`JOBS_BY_FOLDER`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-folder) and [`JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization) views. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
@@ -2413,13 +2413,13 @@ The BigQuery Data Transfer Service can now [transfer data from Azure Blob Storag
 
 ## January 31, 2023
 
-Change
-
-**Cloud console updates** : When you create datasets, select locations to run specific queries, or create exchanges in [Analytics Hub](https://cloud.google.com/bigquery/docs/analytics-hub-introduction) , you now see separate options for multi-region and specific regions. Based on your selection, you see a list with more options.
-
 Feature
 
-[Azure workload identity federation](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for BigQuery Omni connections. You can now [create a connection for federated identity](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#creating-azure-connection) using Google Cloud console.
+[Azure workload identity federation](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for BigQuery Omni connections. You can now [create a connection for federated identity](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#creating-azure-connection) using Google Cloud console.
+
+Change
+
+**Cloud console updates** : When you create datasets, select locations to run specific queries, or create exchanges in [Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) , you now see separate options for multi-region and specific regions. Based on your selection, you see a list with more options.
 
 ## January 30, 2023
 
@@ -2441,10 +2441,6 @@ The following functions have been added for BigQuery ML:
 - [ML.LABEL_ENCODER](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-preprocessing-functions#mllabel_encoder)
 
 These features are now available in [preview](https://cloud.google.com/products#product-launch-stages) .
-
-Feature
-
-You can now attach [Resource Manager tags](https://docs.cloud.google.com/bigquery/docs/tags) to datasets, which let you conditionally apply Identity and Access Management (IAM) policies to your resources. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Feature
 
@@ -2471,6 +2467,10 @@ Major Google Cloud pipeline components available in Vertex AI are.
 - [BigqueryExplainPredictModelJobOp](https://google-cloud-pipeline-components.readthedocs.io/en/google-cloud-pipeline-components-1.0.14/google_cloud_pipeline_components.v1.bigquery.html#google_cloud_pipeline_components.v1.bigquery.BigqueryExplainPredictModelJobOp)
 - [BigqueryForecastModelJobOp](https://google-cloud-pipeline-components.readthedocs.io/en/google-cloud-pipeline-components-1.0.14/google_cloud_pipeline_components.v1.bigquery.html#google_cloud_pipeline_components.v1.bigquery.BigqueryPredictModelJobOp)
 
+Feature
+
+You can now attach [Resource Manager tags](https://docs.cloud.google.com/bigquery/docs/tags) to datasets, which let you conditionally apply Identity and Access Management (IAM) policies to your resources. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## January 17, 2023
 
 Feature
@@ -2479,19 +2479,19 @@ Feature
 
 Feature
 
-BigQuery ML support for multivariate time-series forecasting with the [`ARIMA_PLUS_XREG` model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) is now available in [preview](https://cloud.google.com/products/#product-launch-stages) . This feature lets you perform time-series forecasting with extra feature columns. For more information, see the `ARIMA_PLUS_XREG` sections in the [end-to-end user journey](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) and the [multivariate time-series forecasting from Seattle air quality data tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-plus-xreg-single-time-series-forecasting-tutorial) .
+BigQuery ML support for multivariate time-series forecasting with the [`ARIMA_PLUS_XREG` model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) is now available in [preview](https://cloud.google.com/products#product-launch-stages) . This feature lets you perform time-series forecasting with extra feature columns. For more information, see the `ARIMA_PLUS_XREG` sections in the [end-to-end user journey](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) and the [multivariate time-series forecasting from Seattle air quality data tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-plus-xreg-single-time-series-forecasting-tutorial) .
 
 ## January 10, 2023
 
 Feature
 
-The [`ALTER CAPACITY SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_capacity_set_options_statement) and [`ALTER RESERVATION SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Additionally, the [`CREATE CAPACITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement) , [`CREATE RESERVATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) , and [`CREATE ASSIGNMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) statements now support the `OPTIONS` clause.
+The [`ALTER CAPACITY SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_capacity_set_options_statement) and [`ALTER RESERVATION SET OPTIONS` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Additionally, the [`CREATE CAPACITY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement) , [`CREATE RESERVATION`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) , and [`CREATE ASSIGNMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement) statements now support the `OPTIONS` clause.
 
 ## January 09, 2023
 
 Feature
 
-The following [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) features have been added for [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries) :
+The following [generally available](https://cloud.google.com/products#product-launch-stages) (GA) features have been added for [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries) :
 
 - In a session, [temporary functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) are now maintained until the session ends.
 
@@ -2501,7 +2501,7 @@ The following [generally available](https://cloud.google.com/products/#product-l
 
 Feature
 
-BigQuery ML support for image analytics with vision models is available in [preview](https://cloud.google.com/products/#product-launch-stages) . Customers can import vision models to perform inference modeling with images to detect objects, perform optical character recognition (OCR), and more. To request access to these features, complete the [BigQuery ML interest sign up form](https://bit.ly/bqml-interest-form) .
+BigQuery ML support for image analytics with vision models is available in [preview](https://cloud.google.com/products#product-launch-stages) . Customers can import vision models to perform inference modeling with images to detect objects, perform optical character recognition (OCR), and more. To request access to these features, complete the [BigQuery ML interest sign up form](https://bit.ly/bqml-interest-form) .
 
 This new capability uses BigQuery object tables to access image data stored in Cloud Storage and predict results from machine learning models. You can now generate insights from structured and unstructured data with the following steps:
 
@@ -2548,19 +2548,19 @@ The [Lineage tab](https://docs.cloud.google.com/bigquery/docs/data-catalog#data_
 
 Feature
 
-You can now access and query Cloud SQL data over a [private connection](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#before_you_begin) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now access and query Cloud SQL data over a [private connection](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#before_you_begin) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## December 08, 2022
 
 Feature
 
-The [demo query guide](https://cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console#run_demo_query_guide) helps you query a public dataset from Google Trends and is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [demo query guide](https://docs.cloud.google.com/bigquery/docs/sandbox#run_demo_query_guide) helps you query a public dataset from Google Trends and is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## December 01, 2022
 
 Feature
 
-BigQuery now supports [querying Apache Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) that are created by open source engines. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports [querying Apache Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) that are created by open source engines. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 28, 2022
 
@@ -2577,23 +2577,23 @@ These features are [generally available](https://cloud.google.com/products#produ
 
 Feature
 
-[Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) are now in [preview](https://cloud.google.com/products/#product-launch-stages) . Object tables are read-only tables containing metadata for unstructured data stored in Cloud Storage. These tables enable you to [analyze](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function) and [perform inference](https://docs.cloud.google.com/bigquery/docs/object-table-inference) on images, audio files, documents, and other file types by using BigQuery ML and BigQuery remote functions. Object tables extend structured data features such as data security and governance best practices to unstructured data.
+[Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) is now in [preview](https://cloud.google.com/products#product-launch-stages) . Using cached metadata might improve query performance for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that reference large numbers of objects, by allowing the query to avoid listing objects from Cloud Storage.
 
 Feature
 
-[Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . Using cached metadata might improve query performance for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that reference large numbers of objects, by allowing the query to avoid listing objects from Cloud Storage.
+[Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) are now in [preview](https://cloud.google.com/products#product-launch-stages) . Object tables are read-only tables containing metadata for unstructured data stored in Cloud Storage. These tables enable you to [analyze](https://docs.cloud.google.com/bigquery/docs/object-table-remote-function) and [perform inference](https://docs.cloud.google.com/bigquery/docs/object-table-inference) on images, audio files, documents, and other file types by using BigQuery ML and BigQuery remote functions. Object tables extend structured data features such as data security and governance best practices to unstructured data.
 
 ## November 14, 2022
 
 Feature
 
-The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) helps you manage slot capacity based on historical performance metrics. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) helps you manage slot capacity based on historical performance metrics. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 09, 2022
 
 Feature
 
-You can now transfer data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-cross-cloud-transfer) and [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-cross-cloud-transfer) to BigQuery using the `LOAD DATA` statement. This feature is [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) and includes support for the following features:
+You can now transfer data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-cross-cloud-transfer) and [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-cross-cloud-transfer) to BigQuery using the `LOAD DATA` statement. This feature is [generally available (GA)](https://cloud.google.com/products#product-launch-stages) and includes support for the following features:
 
 - Transfer files that are hive partitioned.
 - Load semi-structured JSON source data into BigQuery without providing a schema by using [JSON columns](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json-data) in the destination table.
@@ -2604,17 +2604,17 @@ You can now transfer data from [Amazon S3](https://docs.cloud.google.com/bigquer
 
 Change
 
-In the **Explorer** pane, you can now [star](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#star_resources) your projects, datasets, and tables. This feature replaces the pin feature, which formerly allowed you to pin projects to the **Explorer** pane. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In the **Explorer** pane, you can now [star](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#star_resources) your projects, datasets, and tables. This feature replaces the pin feature, which formerly allowed you to pin projects to the **Explorer** pane. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-In the Cloud console, the **Add data** feature lets you access popular ways to search for and ingest data sources that work with BigQuery. For an example, see [viewing listings in Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view_listings) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In the Cloud console, the **Add data** feature lets you access popular ways to search for and ingest data sources that work with BigQuery. For an example, see [viewing listings in Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#view_listings) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 03, 2022
 
 Feature
 
-SQL functions for managing [wrapped keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) are [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) . You can now perform the following actions natively in BigQuery with fewer risks and steps:
+SQL functions for managing [wrapped keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) are [generally available (GA)](https://cloud.google.com/products#product-launch-stages) . You can now perform the following actions natively in BigQuery with fewer risks and steps:
 
 - [Create a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#wrap-keyset)
 - [Rotate a wrapped keyset](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt#rotate-wrapped-keyset)
@@ -2631,35 +2631,35 @@ Included with this release are the following new key management functions:
 
 Feature
 
-The [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use the query execution graph to diagnose query performance issues, and to receive query performance insights.
+The [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) is now in [preview](https://cloud.google.com/products#product-launch-stages) . You can use the query execution graph to diagnose query performance issues, and to receive query performance insights.
 
 ## November 01, 2022
 
 Feature
 
-The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Amazon Redshift in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use this feature to assess the complexity of migrating from your Amazon Redshift data warehouse to BigQuery.
+The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available for Amazon Redshift in [preview](https://cloud.google.com/products#product-launch-stages) . You can use this feature to assess the complexity of migrating from your Amazon Redshift data warehouse to BigQuery.
 
 ## October 31, 2022
 
 Feature
 
-[Column-level data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can use data masking to selectively obscure column data for groups of users, while still allowing access to the column.
+The [`max_staleness` materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option helps you achieve consistently high performance with controlled costs when processing large, frequently changing datasets. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The [`max_staleness` materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option helps you achieve consistently high performance with controlled costs when processing large, frequently changing datasets. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Column-level data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use data masking to selectively obscure column data for groups of users, while still allowing access to the column.
 
 ## October 27, 2022
 
 Feature
 
-[Search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) and the [SEARCH() function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). These enable you to use Google Standard SQL to efficiently pinpoint specific data elements in unstructured text and semi-structured data.
+[Search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) and the [SEARCH() function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). These enable you to use Google Standard SQL to efficiently pinpoint specific data elements in unstructured text and semi-structured data.
 
 ## October 26, 2022
 
 Feature
 
-The following geography functions are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA):
+The following geography functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - [`ST_ISCLOSED`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_isclosed) : Returns `TRUE` for a non-empty geography, where each element in the geography has an empty boundary.
 - [`ST_ISRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_isring) : Checks if a geography is a linestring and if the linestring is both closed and simple.
@@ -2668,13 +2668,13 @@ The following geography functions are now [generally available](https://cloud.go
 
 Feature
 
-You can now view [BI Engine Top Tables Cached Bytes](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor#metrics) , [BI Engine Query Fallback Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) , and [Query Execution Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) as dashboard metrics for BigQuery. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now view [BI Engine Top Tables Cached Bytes](https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor#metrics) , [BI Engine Query Fallback Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) , and [Query Execution Count](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) as dashboard metrics for BigQuery. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 18, 2022
 
 Feature
 
-[Remote functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions) , which let you invoke functions from Cloud Functions or Cloud Run in your Google Standard SQL queries, are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Remote functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions) , which let you invoke functions from Cloud Functions or Cloud Run in your Google Standard SQL queries, are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## October 12, 2022
 
@@ -2686,69 +2686,69 @@ The reporting process for the [`tabledata.list bytes per minute` quota](https://
 
 Feature
 
-[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) is now [generally available](https://cloud.google.com/products/#product-launch-stages) . As an Analytics Hub publisher, you can now [view all subscriptions to your listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#view_all_subscriptions) and [remove a subscription from your listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) .
+[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) is now [generally available](https://cloud.google.com/products#product-launch-stages) . As an Analytics Hub publisher, you can now [view all subscriptions to your listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#view_all_subscriptions) and [remove a subscription from your listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) .
 
 Feature
 
-You can now use [stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use [stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 10, 2022
 
 Feature
 
-The ability to use physical bytes for storage billing is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Dataset storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
+[Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/transactions) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-[Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/transactions) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The ability to use physical bytes for storage billing is now in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Dataset storage billing models](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
 
 ## October 05, 2022
+
+Feature
+
+You can now [explore query results in Colab](https://docs.cloud.google.com/bigquery/docs/explore-data-colab) using Python libraries. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
 [Concurrent connections quotas](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) are now based on the project that initiates the Storage Write API request, not the project containing the BigQuery dataset resource.
 
-Feature
-
-You can now [explore query results in Colab](https://docs.cloud.google.com/bigquery/docs/explore-data-colab) using Python libraries. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
 ## October 03, 2022
 
 Feature
 
-BigQuery supports JSON as a [native column type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery supports JSON as a [native column type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 29, 2022
 
 Feature
 
-In addition to standard rounding, BigQuery now supports the [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) `ROUND_HALF_EVEN` for parameterized `NUMERIC` or `BIGNUMERIC` columns. The [`ROUND()` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round) also accepts the rounding mode as an optional argument. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+In addition to standard rounding, BigQuery now supports the [rounding mode](https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode) `ROUND_HALF_EVEN` for parameterized `NUMERIC` or `BIGNUMERIC` columns. The [`ROUND()` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#round) also accepts the rounding mode as an optional argument. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 28, 2022
 
 Feature
 
-With [Datastream for BigQuery](https://docs.cloud.google.com/datastream-for-bigquery) , you can now replicate data and schema updates from operational databases directly into BigQuery. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+With [Datastream for BigQuery](https://docs.cloud.google.com/datastream-for-bigquery) , you can now replicate data and schema updates from operational databases directly into BigQuery. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 26, 2022
 
-Change
-
-The `totalItems` field returned by the [`projects.list`](https://cloud.google.com/bigquery/docs/reference/rest/v2/projects/list) API method now returns the number of items per page, rather than an approximate total number of projects across all pages.
-
 Feature
 
-In the **Explorer** pane, you can now [open tables in Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets#open-tables-sheets) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In the **Explorer** pane, you can now [open tables in Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets#open-tables-sheets) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Change
+
+The `totalItems` field returned by the [`projects.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list) API method now returns the number of items per page, rather than an approximate total number of projects across all pages.
 
 ## September 21, 2022
 
 Feature
 
-[BigQuery Omni](https://cloud.google.com/bigquery/docs/omni-introduction) has introduced support for on-demand pricing model [(GA)](https://cloud.google.com/products#product-launch-stages) for a limited duration. For more information, see [BigQuery Omni Pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
+You can now view shuffle usage ratios in the [admin resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#main_chart_view) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now view shuffle usage ratios in the [admin resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#main_chart_view) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) has introduced support for on-demand pricing model [(GA)](https://cloud.google.com/products#product-launch-stages) for a limited duration. For more information, see [BigQuery Omni Pricing](https://cloud.google.com/bigquery/pricing#bqomni) .
 
 ## September 16, 2022
 
@@ -2757,23 +2757,23 @@ Feature
 [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) now supports the following quota and limit:
 
 - The quota for total query result sizes for a project is now 1 TB per day. For more information, see [Query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) .
-- The limit for maximum result size for a query has been increased from 2 MB to 10 GB ( [preview](https://cloud.google.com/products/#product-launch-stages) ).
+- The limit for maximum result size for a query has been increased from 2 MB to 10 GB ( [preview](https://cloud.google.com/products#product-launch-stages) ).
 
 For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
 ## September 15, 2022
 
-Change
-
-BigQuery is now available in the [Madrid (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regions) , [Milan (europe-west8)](https://docs.cloud.google.com/bigquery/docs/locations#regions) , and [Paris (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regions) regions. The Madrid and Paris regions have the [lowest carbon impact](https://docs.cloud.google.com/sustainability/region-carbon) .
-
 Feature
 
-The [BigQuery Data Transfer Service for Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) now supports the new [Google Ads API](https://developers.google.com/google-ads/api/docs/start) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [BigQuery Data Transfer Service for Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) now supports the new [Google Ads API](https://developers.google.com/google-ads/api/docs/start) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
-BigQuery ML is now available in the [Madrid (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regional-locations) , [Milan (europe-west8)](https://docs.cloud.google.com/bigquery/docs/locations#regional-locations) , and \[Paris (europe-southwest1)\]https://cloud.google.com/bigquery/docs/locations#regional-locations) regions. The Madrid and Paris regions have the [lowest carbon impact](https://docs.cloud.google.com/sustainability/region-carbon) .
+BigQuery ML is now available in the [Madrid (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regional-locations) , [Milan (europe-west8)](https://docs.cloud.google.com/bigquery/docs/locations#regional-locations) , and \[Paris (europe-southwest1)\]/bigquery/docs/locations#regional-locations) regions. The Madrid and Paris regions have the [lowest carbon impact](https://cloud.google.com/sustainability/region-carbon) .
+
+Change
+
+BigQuery is now available in the [Madrid (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regions) , [Milan (europe-west8)](https://docs.cloud.google.com/bigquery/docs/locations#regions) , and [Paris (europe-southwest1)](https://docs.cloud.google.com/bigquery/docs/locations#regions) regions. The Madrid and Paris regions have the [lowest carbon impact](https://cloud.google.com/sustainability/region-carbon) .
 
 ## September 14, 2022
 
@@ -2805,13 +2805,13 @@ Feature
 
 Feature
 
-The [`is_case_insensitive` schema option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) , which allows you to make a dataset and its table names case-insensitive, is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`is_case_insensitive` schema option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) , which allows you to make a dataset and its table names case-insensitive, is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 13, 2022
 
 Feature
 
-In [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits) , you can view metrics for quota usage and limits of the Storage Write API's [concurrent connections and throughput quotas](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+In [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view_quota_usage_and_limits) , you can view metrics for quota usage and limits of the Storage Write API's [concurrent connections and throughput quotas](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 09, 2022
 
@@ -2840,29 +2840,33 @@ The [Random Forest model](https://docs.cloud.google.com/bigquery-ml/docs/referen
 
 Feature
 
-[Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) are now integrated with [CMEK organization policies](https://docs.cloud.google.com/kms/docs/cmek-org-policy) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [slot recommender](https://docs.cloud.google.com/bigquery/docs/slot-recommender) creates recommendations for customers using on-demand billing and is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-The [slot recommender](https://docs.cloud.google.com/bigquery/docs/slot-recommender) creates recommendations for customers using on-demand billing and is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) are now integrated with [CMEK organization policies](https://docs.cloud.google.com/kms/docs/cmek-org-policy) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 29, 2022
 
 Feature
 
-[Community contributed UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions#community-contributed_functions) are now [generally available](https://cloud.google.com/products/#product-launch-stages) in the `bigquery-utils` GitHub repository and the `bigquery-public-data.persistent_udfs` public dataset.
+**Cloud console updates** : In the query editor, when you select a function signature from the autocomplete list, you can remove the parameter names quickly by pressing the <span class="kbd"> Backspace </span> or <span class="kbd"> Delete </span> key.
 
 Feature
 
-**Cloud console updates** : In the query editor, when you select a function signature from the autocomplete list, you can remove the parameter names quickly by pressing the <span class="kbd"> Backspace </span> or <span class="kbd"> Delete </span> key.
+[Community contributed UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions#community-contributed_functions) are now [generally available](https://cloud.google.com/products#product-launch-stages) in the `bigquery-utils` GitHub repository and the `bigquery-public-data.persistent_udfs` public dataset.
 
 ## August 19, 2022
 
 Feature
 
-The [`ALTER TABLE RENAME COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) , which allows you to rename the columns of a table, is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`ALTER TABLE RENAME COLUMN` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_column_statement) , which allows you to rename the columns of a table, is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 17, 2022
+
+Feature
+
+You can now set [default values](https://docs.cloud.google.com/bigquery/docs/default-values) on columns in your BigQuery tables. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -2871,10 +2875,6 @@ Feature
 - In the **Schema** view, to copy a table's schema, select any fields, and then click content_copy **Copy** .
 
 - In the **Explorer** pane, to copy the ID of a resource, click more_vert **View actions** , and then click **Copy ID** .
-
-Feature
-
-You can now set [default values](https://docs.cloud.google.com/bigquery/docs/default-values) on columns in your BigQuery tables. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 Feature
 
@@ -2896,17 +2896,17 @@ Feature
 
 Feature
 
-[Workforce identity federation](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) lets you authenticate and authorize users from external identity providers to access supported Google Cloud products, including [BigQuery resources](https://docs.cloud.google.com/iam/docs/federated-identity-supported-services#products_and_limitations) . This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Workforce identity federation](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) lets you authenticate and authorize users from external identity providers to access supported Google Cloud products, including [BigQuery resources](https://docs.cloud.google.com/iam/docs/federated-identity-supported-services#products_and_limitations) . This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 15, 2022
+
+Feature
+
+[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) now supports [reservation DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and [access control DCL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Change
 
 Previously, you could commit up to 100 GB in streaming bytes for every Storage Write API pending mode commit that you triggered in regions other than the US and EU multi-regions. This limit is now 1 TB. For more information, see [Storage Write API quotas](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) .
-
-Feature
-
-[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) now supports [reservation DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and [access control DCL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Issue
 
@@ -2916,33 +2916,33 @@ An issue was identified in the `max_staleness` materialized view option. This fe
 
 Feature
 
-You can now [manage query execution priority for Cloud Spanner federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-spanner-federated-queries#manage_query_execution_priority) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now set [default configurations](https://docs.cloud.google.com/bigquery/docs/default-configuration) at a project or organization level. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can now set [default configurations](https://docs.cloud.google.com/bigquery/docs/default-configuration) at a project or organization level. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [manage query execution priority for Cloud Spanner federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-spanner-federated-queries#manage_query_execution_priority) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 09, 2022
 
 Feature
 
-[Querying Google Cloud Bigtable external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-bigtable) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Querying Google Cloud Bigtable external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-bigtable) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 03, 2022
 
 Feature
 
-The [`max_staleness` materialized view option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) helps you achieve consistently high performance with controlled costs when processing large, frequently changing datasets. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`max_staleness` materialized view option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) helps you achieve consistently high performance with controlled costs when processing large, frequently changing datasets. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 01, 2022
 
 Feature
 
-The trigonometric SQL function [CBRT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cbrt) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). With this function, you can compute the cube root of a value.
+The trigonometric SQL function [CBRT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cbrt) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). With this function, you can compute the cube root of a value.
 
 Feature
 
-The [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement is now available for [Preview](https://cloud.google.com/products/#product-launch-stages) in Google Standard SQL for BigQuery. You can use the `LOAD DATA` statement to load data from one or more files into a table.
+The [`LOAD DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement) statement is now available for [Preview](https://cloud.google.com/products#product-launch-stages) in Google Standard SQL for BigQuery. You can use the `LOAD DATA` statement to load data from one or more files into a table.
 
 ## July 28, 2022
 
@@ -2954,7 +2954,7 @@ You can now create [BigQuery subscriptions](https://docs.cloud.google.com/pubsub
 
 Feature
 
-Inverse trigonometric SQL functions are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). These functions include:
+Inverse trigonometric SQL functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). These functions include:
 
 - [COT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#cot) : Compute the cotangent for an angle.
 - [COTH](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#coth) : Compute the hyperbolic cotangent for an angle.
@@ -2965,13 +2965,13 @@ Inverse trigonometric SQL functions are now [generally available](https://cloud.
 
 ## July 25, 2022
 
-Announcement
-
-The new **Migrate** section in the BigQuery documentation helps you migrate to BigQuery. This includes high-level guidance with a [migration overview](https://cloud.google.com/bigquery/docs/migration/migration-overview) , an [introduction to free-to-use tools](https://cloud.google.com/bigquery/docs/migration-intro) that help you with each phase of migration, and platform-specific migration guides.
-
 Feature
 
-[BigLake](https://docs.cloud.google.com/bigquery/docs/biglake-intro) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). You can now create [BigQuery ML](https://docs.cloud.google.com/bigquery-ml/docs/introduction) models using data in Cloud Storage by using BigLake and publish BigLake tables as [Analytics Hub listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
+[BigLake](https://docs.cloud.google.com/bigquery/docs/biglake-intro) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can now create [BigQuery ML](https://docs.cloud.google.com/bigquery-ml/docs/introduction) models using data in Cloud Storage by using BigLake and publish BigLake tables as [Analytics Hub listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
+
+Announcement
+
+The new **Migrate** section in the BigQuery documentation helps you migrate to BigQuery. This includes high-level guidance with a [migration overview](https://docs.cloud.google.com/bigquery/docs/migration-intro) , an [introduction to free-to-use tools](https://docs.cloud.google.com/bigquery/docs/migration-intro) that help you with each phase of migration, and platform-specific migration guides.
 
 ## July 20, 2022
 
@@ -2989,7 +2989,7 @@ Previously, the Storage Write API had a maximum concurrent connection limit of 1
 
 Feature
 
-You can now [select a job type](https://cloud.google.com/bigquery/docs/reservations-assignments#console) when assigning a folder, organization, or project to a reservation in the Cloud console. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [select a job type](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#console) when assigning a folder, organization, or project to a reservation in the Cloud console. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## July 11, 2022
 
@@ -3007,13 +3007,13 @@ The google.cloud.bigquery.reservation.v1beta1.api package is deprecated and will
 
 Feature
 
-[Azure workload identity federation](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#federated-identity) is now available in [preview](https://cloud.google.com/products/#product-launch-stages) for BigQuery Omni connections. This feature helps you secure data by allowing you to grant Google access to an application you manage in your Azure tenant so that neither you nor Google must manage application client secrets.
+[Azure workload identity federation](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#federated-identity) is now available in [preview](https://cloud.google.com/products#product-launch-stages) for BigQuery Omni connections. This feature helps you secure data by allowing you to grant Google access to an application you manage in your Azure tenant so that neither you nor Google must manage application client secrets.
 
 ## July 06, 2022
 
 Feature
 
-The [`APPENDS` change history TVF](https://docs.cloud.google.com/bigquery/docs/change-history) is now in [preview](https://cloud.google.com/products/#product-launch-stages) . This table-valued function provides a history of table appends over a window of time.
+The [`APPENDS` change history TVF](https://docs.cloud.google.com/bigquery/docs/change-history) is now in [preview](https://cloud.google.com/products#product-launch-stages) . This table-valued function provides a history of table appends over a window of time.
 
 ## July 01, 2022
 
@@ -3035,35 +3035,35 @@ You can now set the [`view` field](https://docs.cloud.google.com/bigquery/docs/r
 
 Feature
 
-The [BI Engine preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-preferred-tables) feature lets you limit BI Engine acceleration to a specified set of tables. This feature is now in [preview](https://cloud.google.com/products/#product-launch-stages) .
+The [BI Engine preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-preferred-tables) feature lets you limit BI Engine acceleration to a specified set of tables. This feature is now in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 21, 2022
 
 Feature
 
-[Query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) are now available in [preview](https://cloud.google.com/products/#product-launch-stages) for on-demand and flat-rate customers. When query queues are enabled, BigQuery automatically determines the query concurrency rather than setting a fixed limit. Flat-rate customers can override this setting with a custom concurrency target. Additional queries beyond the concurrency target are queued until processing resources become available.
+[Query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) are now available in [preview](https://cloud.google.com/products#product-launch-stages) for on-demand and flat-rate customers. When query queues are enabled, BigQuery automatically determines the query concurrency rather than setting a fixed limit. Flat-rate customers can override this setting with a custom concurrency target. Additional queries beyond the concurrency target are queued until processing resources become available.
 
 ## June 15, 2022
 
 Feature
 
-[Deterministic encryption SQL functions](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). New AEAD encryption functions include [`DETERMINISTIC_ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_encrypt) , [`DETERMINISTIC_DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_bytes) , and [`DETERMINISTIC_DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_string) . These functions allow column-level encryption and decryption of data while supporting aggregation and table joins.
+[Deterministic encryption SQL functions](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). New AEAD encryption functions include [`DETERMINISTIC_ENCRYPT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_encrypt) , [`DETERMINISTIC_DECRYPT_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_bytes) , and [`DETERMINISTIC_DECRYPT_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#deterministic_decrypt_string) . These functions allow column-level encryption and decryption of data while supporting aggregation and table joins.
 
 ## June 14, 2022
 
 Feature
 
-You can now [explore data in Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-data-studio) by using links from your BigQuery query results in the Cloud console. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now [explore data in Data Studio](https://docs.cloud.google.com/bigquery/docs/visualize-data-studio) by using links from your BigQuery query results in the Cloud console. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can now use the Cloud console to [set up VPC service control perimeters](https://docs.cloud.google.com/bigquery/docs/omni-vpc-sc) to restrict access from [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) to external clouds. You can also specify whether you want to grant read or write permission on your external resource. This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+You can now use the Cloud console to [set up VPC service control perimeters](https://docs.cloud.google.com/bigquery/docs/omni-vpc-sc) to restrict access from [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) to external clouds. You can also specify whether you want to grant read or write permission on your external resource. This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## June 13, 2022
 
 Feature
 
-A new system variable, [`@@dataset_project_id`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) , is now [generally available](https://cloud.google.com/products/#product-launch-stages) . `@@dataset_project_id` allows you to set a default project where one is not specified for a dataset in your query. This variable is also available as a [Connection Property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) .
+A new system variable, [`@@dataset_project_id`](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) , is now [generally available](https://cloud.google.com/products#product-launch-stages) . `@@dataset_project_id` allows you to set a default project where one is not specified for a dataset in your query. This variable is also available as a [Connection Property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) .
 
 ## June 10, 2022
 
@@ -3075,13 +3075,13 @@ Change
 
 Feature
 
-[Batch](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) and [interactive](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) translation services are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA), and include support for most major SQL dialects. This release also includes [preview](https://cloud.google.com/products/#product-launch-stages) availability of [SQL object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) and [metadata extraction](https://docs.cloud.google.com/bigquery/docs/generate-metadata) tools that you can use to increase the accuracy of your batch translation jobs.
+[Batch](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) and [interactive](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) translation services are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA), and include support for most major SQL dialects. This release also includes [preview](https://cloud.google.com/products#product-launch-stages) availability of [SQL object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) and [metadata extraction](https://docs.cloud.google.com/bigquery/docs/generate-metadata) tools that you can use to increase the accuracy of your batch translation jobs.
 
 ## June 06, 2022
 
 Feature
 
-You can now attach [Resource Manager tags](https://docs.cloud.google.com/bigquery/docs/tags) to datasets. This feature is supported in [Preview](https://cloud.google.com/products/#product-launch-stages) . Tags let you conditionally apply Identity and Access Management (IAM) policies to resources.
+You can now attach [Resource Manager tags](https://docs.cloud.google.com/bigquery/docs/tags) to datasets. This feature is supported in [Preview](https://cloud.google.com/products#product-launch-stages) . Tags let you conditionally apply Identity and Access Management (IAM) policies to resources.
 
 Change
 
@@ -3096,19 +3096,19 @@ For more information, see [Storage Read API quotas and limits](https://docs.clou
 
 Feature
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) now supports [Reservation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and [Access Control DCL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) now supports [Reservation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement) and [Access Control DCL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 31, 2022
 
 Feature
 
-[Column-level data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) is now available in [preview](https://cloud.google.com/products/#product-launch-stages) . You can use data masking to selectively obscure column data for groups of users, while still allowing access to the column. When you use data masking in combination with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you can configure a range of access to column data, from full access to no access, based on the requirements of different groups of users.
+[Column-level data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) is now available in [preview](https://cloud.google.com/products#product-launch-stages) . You can use data masking to selectively obscure column data for groups of users, while still allowing access to the column. When you use data masking in combination with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you can configure a range of access to column data, from full access to no access, based on the requirements of different groups of users.
 
 ## May 24, 2022
 
 Feature
 
-You can now [load data into BigQuery using Informatica Data Loader](https://docs.cloud.google.com/bigquery/docs/load-data-third-party) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) . [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) provides connectors that can ingest data into BigQuery.
+You can now [load data into BigQuery using Informatica Data Loader](https://docs.cloud.google.com/bigquery/docs/load-data-third-party) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) . [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) provides connectors that can ingest data into BigQuery.
 
 ## May 23, 2022
 
@@ -3126,7 +3126,7 @@ Updated versions of [ODBC and JDBC drivers for BigQuery](https://docs.cloud.goog
 
 Feature
 
-The new format element [`%J`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements) is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) , [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions) , [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions) , and [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) functions. This format element lets you use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 1-based day of the year.
+The new format element [`%J`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements) is [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for [`DATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) , [`TIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions) , [`DATETIME`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions) , and [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) functions. This format element lets you use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 1-based day of the year.
 
 Change
 
@@ -3136,7 +3136,7 @@ Change
 
 Feature
 
-The following new features are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for [`ARIMA_PLUS` models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) :
+The following new features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for [`ARIMA_PLUS` models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) :
 
 - You can use [ML.EVALUATE](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to calculate new forecasting accuracy metrics such as [MAPE](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) , [SMAPE](https://en.wikipedia.org/wiki/Symmetric_mean_absolute_percentage_error) , and [MSE](https://en.wikipedia.org/wiki/Mean_squared_error) .
 - You can perform fast model training with little or no loss of forecasting accuracy by using the [`TIME_SERIES_LENGTH_FRACTION`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_length_fraction) , [`MIN_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#min_time_series_length) and [`MAX_TIME_SERIES_LENGTH`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#max_time_series_length) options.
@@ -3147,7 +3147,7 @@ To learn how to achieve one hundred times higher scalability with the `ARIMA_PLU
 
 Feature
 
-[Case-insensitive collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) support for BigQuery is now available for [Preview](https://cloud.google.com/products/#product-launch-stages) . Collation determines how strings are sorted and compared in collation-supported operations. If case-insensitive collation is used, case is ignored in comparison and sorting operations.
+[Case-insensitive collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) support for BigQuery is now available for [Preview](https://cloud.google.com/products#product-launch-stages) . Collation determines how strings are sorted and compared in collation-supported operations. If case-insensitive collation is used, case is ignored in comparison and sorting operations.
 
 These [operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_operations) support collation:
 
@@ -3160,35 +3160,35 @@ These [operations](https://docs.cloud.google.com/bigquery/docs/reference/standar
 
 Feature
 
-The [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_ddl) clause is now available for [Preview](https://cloud.google.com/products/#product-launch-stages) . With this clause, a collation specification is applied to a specific column in a table. You can use the `COLLATE` clause in the following DDL statements:
-
-- [`ALTER TABLE ADD COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement)
-- [`ALTER COLUMN SET DATA TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement)
+The [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate) function is now available for [Preview](https://cloud.google.com/products#product-launch-stages) in Google Standard SQL for BigQuery. With the `COLLATE` function, you can pass in a `STRING` and return a `STRING` with a collation specification.
 
 Feature
 
-The [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate) function is now available for [Preview](https://cloud.google.com/products/#product-launch-stages) in Google Standard SQL for BigQuery. With the `COLLATE` function, you can pass in a `STRING` and return a `STRING` with a collation specification.
-
-Feature
-
-The [`DEFAULT COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_ddl) clause is now available for [Preview](https://cloud.google.com/products/#product-launch-stages) . With this clause, the default collation specification is applied to all column data types supporting collation. You can use the `DEFAULT COLLATE` clause in the following DDL statements:
+The [`DEFAULT COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_ddl) clause is now available for [Preview](https://cloud.google.com/products#product-launch-stages) . With this clause, the default collation specification is applied to all column data types supporting collation. You can use the `DEFAULT COLLATE` clause in the following DDL statements:
 
 - [`CREATE SCHEMA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) and [`ALTER SCHEMA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_collate_statement)
 - [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) and [`ALTER TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_collate_statement)
+
+Feature
+
+The [`COLLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_ddl) clause is now available for [Preview](https://cloud.google.com/products#product-launch-stages) . With this clause, a collation specification is applied to a specific column in a table. You can use the `COLLATE` clause in the following DDL statements:
+
+- [`ALTER TABLE ADD COLUMN`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement)
+- [`ALTER COLUMN SET DATA TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement)
 
 ## April 25, 2022
 
 Feature
 
-[BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for on-demand users, enabling administrators to monitor key metrics and troubleshoot issues across the entire organization. Previously, it was only available for reservation users. A new permission, [bigquery.jobs.listExecutionMetadata](https://docs.cloud.google.com/bigquery/docs/access-control) , has been added to make it easier to gain access to the full UI.
+Use the [`TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to get a snapshot of current storage usage for tables and materialized views. This feature is now in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Use the [`TABLE_STORAGE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) to get a snapshot of current storage usage for tables and materialized views. This feature is now in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+The [ability to configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) is now in [Preview](https://cloud.google.com/products#product-launch-stages) . You can specify the duration of the time travel window, from a minimum of two days to a maximum of seven days.
 
 Feature
 
-The [ability to configure the time travel window](https://cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . You can specify the duration of the time travel window, from a minimum of two days to a maximum of seven days.
+[BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for on-demand users, enabling administrators to monitor key metrics and troubleshoot issues across the entire organization. Previously, it was only available for reservation users. A new permission, [bigquery.jobs.listExecutionMetadata](https://docs.cloud.google.com/bigquery/docs/access-control) , has been added to make it easier to gain access to the full UI.
 
 ## April 11, 2022
 
@@ -3200,35 +3200,35 @@ Starting in July 2022, the [`projects.list`](https://docs.cloud.google.com/bigqu
 
 Feature
 
-[BigLake](https://docs.cloud.google.com/biglake) is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) . BigLake is a storage engine that allows you to query and unify cross-cloud data lakes and warehouses. Additionally, it provides fine-grained access controls to your tables, allowing you to set access policies on a column or row basis.
+[BigLake](https://docs.cloud.google.com/biglake) is now available in [Preview](https://cloud.google.com/products#product-launch-stages) . BigLake is a storage engine that allows you to query and unify cross-cloud data lakes and warehouses. Additionally, it provides fine-grained access controls to your tables, allowing you to set access policies on a column or row basis.
 
 Feature
 
-BigQuery now supports the creation of [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) and a [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) function. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) . This enables you to use Google Standard SQL to efficiently find data elements in unstructured text and semi-structured data.
+BigQuery now supports the creation of [search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) and a [`SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) function. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . This enables you to use Google Standard SQL to efficiently find data elements in unstructured text and semi-structured data.
 
 ## April 06, 2022
 
 Feature
 
-[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) . Analytics Hub is a new service in BigQuery that lets you create secure data exchanges and share analytics assets within and across organizations. This platform allows data providers to publish listings that reference shared datasets. Analytics Hub subscribers can then view and subscribe to these listings.
+[Analytics Hub](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) is now available in [Preview](https://cloud.google.com/products#product-launch-stages) . Analytics Hub is a new service in BigQuery that lets you create secure data exchanges and share analytics assets within and across organizations. This platform allows data providers to publish listings that reference shared datasets. Analytics Hub subscribers can then view and subscribe to these listings.
 
 ## April 05, 2022
 
 Feature
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs/introduction) now supports cross-cloud transfer. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Cross-cloud transfer (AWS)](https://docs.cloud.google.com/bigquery-omni/docs/aws/omni-load-data) and [Cross-cloud transfer (Azure)](https://docs.cloud.google.com/bigquery-omni/docs/azure/omni-load-data) .
+[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs/introduction) now supports cross-cloud transfer. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Cross-cloud transfer (AWS)](https://docs.cloud.google.com/bigquery-omni/docs/aws/omni-load-data) and [Cross-cloud transfer (Azure)](https://docs.cloud.google.com/bigquery-omni/docs/azure/omni-load-data) .
 
 ## April 01, 2022
 
 Feature
 
-[BigQuery ML and Vertex AI Model Registry](http://cloud.google.com/bigquery-ml/docs/managing-models-vertex) integration is available in [preview](https://cloud.google.com/products/#product-launch-stages) . With this integration, BigQuery ML models can be sent to the [Vertex AI Model Registry](http://cloud.google.com/vertex-ai/docs/model-registry/introduction) where you can manage the lifecycle of all your ML models. From the Vertex AI Model Registry, you can organize your BigQuery ML models and deploy directly to endpoints.
+[BigQuery ML and Vertex AI Model Registry](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex) integration is available in [preview](https://cloud.google.com/products#product-launch-stages) . With this integration, BigQuery ML models can be sent to the [Vertex AI Model Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-registry/introduction) where you can manage the lifecycle of all your ML models. From the Vertex AI Model Registry, you can organize your BigQuery ML models and deploy directly to endpoints.
 
 ## March 31, 2022
 
 Feature
 
-The international public dataset for Data Signals for Google Search Trends is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) and [Analytics Hub](https://console.cloud.google.com/bigquery(analyticshub:projects/1057666841514/locations/us/dataExchanges/google_cloud_public_datasets_17e74966199/listings/17561ab059154c988f72c7ae52d6a3c4)?project=subscriber-project-316517) .
+The international public dataset for Data Signals for Google Search Trends is now available in [Preview](https://cloud.google.com/products#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) and [Analytics Hub](https://console.cloud.google.com/bigquery(analyticshub:projects/1057666841514/locations/us/dataExchanges/google_cloud_public_datasets_17e74966199/listings/17561ab059154c988f72c7ae52d6a3c4)?project=subscriber-project-316517) .
 
 ## March 28, 2022
 
@@ -3240,7 +3240,7 @@ The [Wide-and-Deep model](https://docs.cloud.google.com/bigquery-ml/docs/referen
 
 Feature
 
-The BigQuery [slot recommender](https://docs.cloud.google.com/bigquery/docs/slot-recommender) is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) . The slot recommender creates recommendations for customers using on-demand billing. These recommendations help you to understand the cost and performance tradeoffs of purchasing different amounts of slot capacity.
+The BigQuery [slot recommender](https://docs.cloud.google.com/bigquery/docs/slot-recommender) is now available in [Preview](https://cloud.google.com/products#product-launch-stages) . The slot recommender creates recommendations for customers using on-demand billing. These recommendations help you to understand the cost and performance tradeoffs of purchasing different amounts of slot capacity.
 
 ## March 16, 2022
 
@@ -3252,7 +3252,7 @@ You can now explicitly specify a schema for BigQuery [external tables](https://d
 
 Feature
 
-[Session support for BigQuery](https://docs.cloud.google.com/bigquery/docs/sessions-intro) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). In addition to the [features available in the preview](https://docs.cloud.google.com/bigquery/docs/release-notes#September_08_2021) , you can:
+[Session support for BigQuery](https://docs.cloud.google.com/bigquery/docs/sessions-intro) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). In addition to the [features available in the preview](https://docs.cloud.google.com/bigquery/docs/release-notes#September_08_2021) , you can:
 
 - [Terminate a session automatically or manually](https://docs.cloud.google.com/bigquery/docs/sessions-terminating) .
 - [Set a label for all queries in a session](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_labels) .
@@ -3262,13 +3262,13 @@ Feature
 
 Feature
 
-[Remote functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions) are now available for [preview](https://cloud.google.com/products/#product-launch-stages) . Remote functions allow you to implement your function in other languages than SQL and Javascript, or with libraries or services which are not allowed in BigQuery user-defined functions.
+[Remote functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions) are now available for [preview](https://cloud.google.com/products#product-launch-stages) . Remote functions allow you to implement your function in other languages than SQL and Javascript, or with libraries or services which are not allowed in BigQuery user-defined functions.
 
 ## February 15, 2022
 
 Feature
 
-The [table clones feature](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) in BigQuery is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . A table clone is a lightweight, writable copy of a table. You are only charged for storing the data in a table clone that differs from its base table.
+The [table clones feature](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) in BigQuery is now in [Preview](https://cloud.google.com/products#product-launch-stages) . A table clone is a lightweight, writable copy of a table. You are only charged for storing the data in a table clone that differs from its base table.
 
 ## February 14, 2022
 
@@ -3287,23 +3287,19 @@ BigQuery ML time series [ARIMA_PLUS](https://docs.cloud.google.com/bigquery-ml/d
 
 Feature
 
-The [`QUALIFY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) , which lets you filter the results of analytic functions in Google Standard SQL, is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [`INFORMATION_SCHEMA.STREAMING_TIMELINE_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) views are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-The [`INFORMATION_SCHEMA.STREAMING_TIMELINE_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) views are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+The [`QUALIFY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) , which lets you filter the results of analytic functions in Google Standard SQL, is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 10, 2022
 
 Feature
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs/introduction) now supports `INFORMATION_SCHEMA.JOBS_*` and `INFORMATION_SCHEMA.RESERVATION*` views. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [View resource metadata (AWS)](https://docs.cloud.google.com/bigquery-omni/docs/aws/create-external-table#view_resource_metadata_with_information_schema) and [View resource metadata (Azure)](https://docs.cloud.google.com/bigquery-omni/docs/azure/create-external-table#view_resource_metadata_with_information_schema) .
+[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs/introduction) now supports `INFORMATION_SCHEMA.JOBS_*` and `INFORMATION_SCHEMA.RESERVATION*` views. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [View resource metadata (AWS)](https://docs.cloud.google.com/bigquery-omni/docs/aws/create-external-table#view_resource_metadata_with_information_schema) and [View resource metadata (Azure)](https://docs.cloud.google.com/bigquery-omni/docs/azure/create-external-table#view_resource_metadata_with_information_schema) .
 
 ## February 03, 2022
-
-Feature
-
-The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) . Use this feature to assess the complexity of migrating from your current data warehouse to BigQuery.
 
 Feature
 
@@ -3315,6 +3311,10 @@ To learn more, check out the following topics:
 - [Using the BigQuery ML Hyperparameter Tuning to improve model performance](https://docs.cloud.google.com/bigquery-ml/docs/hyperparameter-tuning-tutorial)
 - [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
 
+Feature
+
+The [BigQuery migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment) is now available in [Preview](https://cloud.google.com/products#product-launch-stages) . Use this feature to assess the complexity of migrating from your current data warehouse to BigQuery.
+
 ## February 02, 2022
 
 Feature
@@ -3325,7 +3325,7 @@ The [`WITH RECURSIVE`](https://docs.cloud.google.com/bigquery/docs/reference/sta
 
 Feature
 
-BigQuery now supports [materialized views without aggregation](https://docs.cloud.google.com/bigquery/docs/materialized-views#without_aggr) and [materialized views with inner join](https://docs.cloud.google.com/bigquery/docs/materialized-views#inner_joins) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports [materialized views without aggregation](https://docs.cloud.google.com/bigquery/docs/materialized-views#without_aggr) and [materialized views with inner join](https://docs.cloud.google.com/bigquery/docs/materialized-views#inner_joins) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## January 25, 2022
 
@@ -3341,7 +3341,7 @@ Explainable AI in BigQuery ML is now [generally available](https://cloud.google.
 
 Feature
 
-BigQuery standard SQL now supports the [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) data type for storing JSON data. The `JSON` data type is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Working with JSON data in Standard SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json-data) .
+BigQuery standard SQL now supports the [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) data type for storing JSON data. The `JSON` data type is in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Working with JSON data in Standard SQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json-data) .
 
 ## December 23, 2021
 
@@ -3386,7 +3386,7 @@ For more information, see the PCA and autoencoder sections in the [end-to-end us
 
 Feature
 
-BigQuery Data Transfer Service now supports [Audit Logging](https://docs.cloud.google.com/bigquery-transfer/docs/audit-logging) , [Cloud Logging](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-logging) , and [Cloud Monitoring](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-monitoring) . These features are in [preview status](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery Data Transfer Service now supports [Audit Logging](https://docs.cloud.google.com/bigquery-transfer/docs/audit-logging) , [Cloud Logging](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-logging) , and [Cloud Monitoring](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-monitoring) . These features are in [preview status](https://cloud.google.com/products#product-launch-stages) .
 
 ## November 19, 2021
 
@@ -3430,7 +3430,7 @@ The following scripting statements have been added to Google Standard SQL for Bi
 - [REPEAT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#repeat) : Repeatedly executes a list of SQL statements until the boolean condition at the end of the list is `TRUE` .
 - [FOR...IN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#for-in) : Loops over every row in a table expression.
 
-These features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 08, 2021
 
@@ -3442,7 +3442,7 @@ The following INFORMATION_SCHEMA views now support a `DDL` column. The value of 
 - [`SCHEMATA`](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_view)
 - [`TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#tables_view)
 
-This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## November 02, 2021
 
@@ -3455,37 +3455,37 @@ BigQuery now supports [parameterized types](https://docs.cloud.google.com/bigque
 - [NUMERIC(P) / NUMERIC(P, S)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_decimal_type)
 - [BIGNUMERIC(P) / BIGNUMERIC(P, S)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_decimal_type)
 
-This feature is generally available [GA](https://cloud.google.com/products/#product-launch-stages) .
+This feature is generally available [GA](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 28, 2021
 
 Feature
 
-The [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). It includes the Cloud console interface and support for creating a table snapshot in a different project from its base table.
+The [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). It includes the Cloud console interface and support for creating a table snapshot in a different project from its base table.
 
 ## October 27, 2021
 
 Feature
 
-[SQL column-level encryption](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt) using Cloud Key Management Service (KMS) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA), letting you encrypt keysets within [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) .
+[SQL column-level encryption](https://docs.cloud.google.com/bigquery/docs/column-key-encrypt) using Cloud Key Management Service (KMS) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA), letting you encrypt keysets within [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) .
 
 ## October 25, 2021
 
 Feature
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs) , a multi-cloud analytics solution, is now [generally available](https://cloud.google.com/products/#product-launch-stages) .
+[BigQuery Omni](https://docs.cloud.google.com/bigquery-omni/docs) , a multi-cloud analytics solution, is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 12, 2021
 
 Feature
 
-The BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). The Storage Write API combines the functionality of high-throughput streaming ingestion and batch loading into a single API.
+The BigQuery [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). The Storage Write API combines the functionality of high-throughput streaming ingestion and batch loading into a single API.
 
 ## October 04, 2021
 
 Feature
 
-[BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-intro) is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . It includes the following features:
+[BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-intro) is now in [Preview](https://cloud.google.com/products#product-launch-stages) . It includes the following features:
 
 - [Interactive SQL Translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
 - [Batch SQL Translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
@@ -3500,13 +3500,13 @@ BigQuery now supports the following geospatial data functions:
 
 - [ST_BUFFERWITHTOLERANCE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_bufferwithtolerance) : Returns a `GEOGRAPHY` that represents the buffer around the input `GEOGRAPHY` . You specify the tolerance to determine how much the resulting geography can deviate from the ideal buffer radius.
 
-These functions are available as a [preview](https://cloud.google.com/products/#product-launch-stages) .
+These functions are available as a [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Announcement
 
 BigQuery pricing has changed as follows:
 
-1.  [BigQuery Storage Read API](https://cloud.google.com/bigquery/docs/reference/storage) has moved from a single regional SKU to a set of regional SKUs for bytes scanned. All BigQuery Storage Read API users can now read up to 300 TB of data per month at no charge. For more information, see [BigQuery data extraction pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) .
+1.  [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) has moved from a single regional SKU to a set of regional SKUs for bytes scanned. All BigQuery Storage Read API users can now read up to 300 TB of data per month at no charge. For more information, see [BigQuery data extraction pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) .
 
 2.  BigQuery now charges BigQuery Storage Read API users for network egress. For more information, see [BigQuery Storage Read API Network Egress Within Google Cloud](https://cloud.google.com/bigquery/pricing#bigquery_storage_read_api_network_egress_within_google_cloud) .
 
@@ -3514,7 +3514,7 @@ BigQuery pricing has changed as follows:
 
 Feature
 
-[Table functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions) are now [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA). With the GA release, [authorized table functions](https://docs.cloud.google.com/bigquery/docs/authorized-functions) are now supported.
+[Table functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions) are now [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA). With the GA release, [authorized table functions](https://docs.cloud.google.com/bigquery/docs/authorized-functions) are now supported.
 
 ## September 27, 2021
 
@@ -3530,7 +3530,7 @@ BigQuery now supports the following geospatial data functions:
 
 - [S2_CELLIDFROMPOINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#s2_cellidfrompoint) : Returns the S2 cell ID covering a point geography.
 
-These functions are [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+These functions are [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 ## September 21, 2021
 
@@ -3556,7 +3556,7 @@ BigQuery now supports the following geospatial data functions:
 
 - [ST_GEOMETRYTYPE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geometrytype) : Returns the Open Geospatial Consortium (OGC) geometry type that describes a geography as a string.
 
-These functions are [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+These functions are [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 ## September 16, 2021
 
@@ -3579,7 +3579,7 @@ BigQuery ML documentation has been updated with the following improvements:
 
 Feature
 
-[Session support for BigQuery](https://docs.cloud.google.com/bigquery/docs/sessions-intro) is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . With sessions:
+[Session support for BigQuery](https://docs.cloud.google.com/bigquery/docs/sessions-intro) is now in [Preview](https://cloud.google.com/products#product-launch-stages) . With sessions:
 
 - You can associate your SQL activities in a session across scripts and multi-statement transactions in BigQuery with a unique session identifier.
 - You can use session variables (for example, default timezone or dataset) and temporary tables throughout the life of the session and also across scripts and transactions
@@ -3587,7 +3587,7 @@ Feature
 
 Feature
 
-[Deleting the metadata for a specific job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) using the `bq` command-line tool is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Deleting the metadata for a specific job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) using the `bq` command-line tool is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 31, 2021
 
@@ -3599,31 +3599,35 @@ An updated version of [ODBC driver for BigQuery](https://docs.cloud.google.com/b
 
 Feature
 
-Exporting table data in [Parquet format](https://docs.cloud.google.com/bigquery/docs/exporting-data#parquet_export_details) is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Exporting table data in [Parquet format](https://docs.cloud.google.com/bigquery/docs/exporting-data#parquet_export_details) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 23, 2021
 
 Feature
 
-[BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA) for reservation users, enabling administrators to more easily monitor and troubleshoot their BigQuery environment. They provide visibility into key metrics such as slot consumption, job concurrency, job execution time, job errors, and bytes processed across the entire organization.
+BigQuery [Slot Estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) is now in [Preview](https://cloud.google.com/products#product-launch-stages) for reservation users. This tool analyzes slot utilization data to help administrators estimate the right number of slots to purchase, and provides insights on how job performance might be impacted by adding or reducing slot capacity for the entire organization or specific reservations.
 
 Feature
 
-BigQuery [Slot Estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) is now in [Preview](https://cloud.google.com/products/#product-launch-stages) for reservation users. This tool analyzes slot utilization data to help administrators estimate the right number of slots to purchase, and provides insights on how job performance might be impacted by adding or reducing slot capacity for the entire organization or specific reservations.
+[BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) for reservation users, enabling administrators to more easily monitor and troubleshoot their BigQuery environment. They provide visibility into key metrics such as slot consumption, job concurrency, job execution time, job errors, and bytes processed across the entire organization.
 
 ## August 19, 2021
 
 Feature
 
-[Cloud Spanner federated queries](https://cloud.google.com/bigquery/docs/cloud-spanner-federated-queries) are now generally available [(GA)](https://docs.cloud.google.com/terms/launch-stages) .
+[Cloud Spanner federated queries](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) are now generally available [(GA)](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 06, 2021
 
 Feature
 
-The principal component analysis (PCA) model is now available for [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [CREATE MODEL statement for PCA models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-pca) and the PCA details in the [end-to-end user journey](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
+The principal component analysis (PCA) model is now available for [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [CREATE MODEL statement for PCA models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-pca) and the PCA details in the [end-to-end user journey](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey) .
 
 ## August 03, 2021
+
+Feature
+
+BigQuery now supports the [ALTER COLUMN SET DATA TYPE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) data definition language (DDL) statement. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Change
 
@@ -3643,16 +3647,12 @@ BigQuery ML is now available in the [Toronto (northamerica-northeast2)](https://
 
 Feature
 
-BigQuery now supports the [ALTER COLUMN SET DATA TYPE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement) data definition language (DDL) statement. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
-
-Feature
-
 BigQuery now supports the following data definition language (DDL) statement:
 
 - [CREATE TABLE LIKE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like)
 - [CREATE TABLE COPY](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy)
 
-This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 02, 2021
 
@@ -3664,17 +3664,17 @@ An updated version of [JDBC driver for BigQuery](https://docs.cloud.google.com/b
 
 Feature
 
-The [Wide-and-Deep model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) is now available for [preview](https://cloud.google.com/products/#product-launch-stages) . `'DNN_LINEAR_COMBINED_CLASSIFIER'` and `'DNN_LINEAR_COMBINED_REGRESSOR'` create Wide-and-Deep Classifier and Regressor models, respectively.
+The [Wide-and-Deep model](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models) is now available for [preview](https://cloud.google.com/products#product-launch-stages) . `'DNN_LINEAR_COMBINED_CLASSIFIER'` and `'DNN_LINEAR_COMBINED_REGRESSOR'` create Wide-and-Deep Classifier and Regressor models, respectively.
 
 ## July 27, 2021
 
 Feature
 
-[Explainable artificial intelligence](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) (XAI) helps you understand the results that your predictive machine-learning model generates for classification and regression tasks by defining how each feature in a row of data contributed to the predicted result. This feature is now available for [preview](https://cloud.google.com/products/#product-launch-stages) .
+[Explainable artificial intelligence](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) (XAI) helps you understand the results that your predictive machine-learning model generates for classification and regression tasks by defining how each feature in a row of data contributed to the predicted result. This feature is now available for [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-BigQuery now supports the [`INTERVAL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type) type, which represents a duration or an amount of time. This type is in [Preview](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+BigQuery now supports the [`INTERVAL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type) type, which represents a duration or an amount of time. This type is in [Preview](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 ## July 26, 2021
 
@@ -3684,18 +3684,9 @@ Time series models now support [holiday effects](https://docs.cloud.google.com/b
 
 Feature
 
-DML query jobs now return statistics about the number of rows that were inserted, deleted, or updated. For more information, see [`DmlStats`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats) in the [`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) resource type. In addition, DML statistics are now available in the [`INFORMATION_SCHEMA.JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) views. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+DML query jobs now return statistics about the number of rows that were inserted, deleted, or updated. For more information, see [`DmlStats`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats) in the [`Job`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) resource type. In addition, DML statistics are now available in the [`INFORMATION_SCHEMA.JOBS_BY_*`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) views. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## July 19, 2021
-
-Feature
-
-BigQuery now supports the following SQL query operators:
-
-- [PIVOT operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator)
-- [UNPIVOT operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
-
-This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
 
 Feature
 
@@ -3708,7 +3699,7 @@ BigQuery now supports workload management data control language (DCL) statements
 - [DROP RESERVATION](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#drop_reservation_statement)
 - [DROP ASSIGNMENT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#drop_assignment_statement)
 
-This feature is generally available [GA](https://cloud.google.com/products/#product-launch-stages) .
+This feature is generally available [GA](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -3716,13 +3707,22 @@ The [end-to-end user journey](https://docs.cloud.google.com/bigquery-ml/docs/ref
 
 Feature
 
-BigQuery standard SQL now supports the [`CONTAINS_SUBSTR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#contains_substr) function. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports the following SQL query operators:
+
+- [PIVOT operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#pivot_operator)
+- [UNPIVOT operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+BigQuery standard SQL now supports the [`CONTAINS_SUBSTR`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#contains_substr) function. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## July 07, 2021
 
 Feature
 
-BigQuery now supports [materialized views without aggregation](https://docs.cloud.google.com/bigquery/docs/materialized-views#without_aggr) and [materialized views with inner join](https://docs.cloud.google.com/bigquery/docs/materialized-views#inner_joins) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports [materialized views without aggregation](https://docs.cloud.google.com/bigquery/docs/materialized-views#without_aggr) and [materialized views with inner join](https://docs.cloud.google.com/bigquery/docs/materialized-views#inner_joins) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 01, 2021
 
@@ -3736,6 +3736,10 @@ An updated version of [ODBC driver for BigQuery](https://docs.cloud.google.com/b
 
 ## June 29, 2021
 
+Feature
+
+BigQuery now supports [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/transactions) . These allow you to perform mutating operations, such as inserting or deleting rows, on one or more tables, and either commit or roll back the changes atomically. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 Change
 
 BigQuery ML is now available in the [Delhi (asia-south2) region](https://docs.cloud.google.com/bigquery-ml/docs/locations#regional-locations) .
@@ -3748,10 +3752,6 @@ Change
 
 BigQuery BI Engine is now available in the [Delhi (asia-south2) region](https://docs.cloud.google.com/bi-engine/docs/locations#regional-locations) .
 
-Feature
-
-BigQuery now supports [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/transactions) . These allow you to perform mutating operations, such as inserting or deleting rows, on one or more tables, and either commit or roll back the changes atomically. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
-
 Change
 
 BigQuery Data Transfer Service is now available in the [Delhi (asia-south2) region](https://docs.cloud.google.com/bigquery-transfer/docs/locations#regional-locations) .
@@ -3760,23 +3760,21 @@ BigQuery Data Transfer Service is now available in the [Delhi (asia-south2) regi
 
 Feature
 
-[Table functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions) are now available in [Preview](https://cloud.google.com/products/#product-launch-stages) . These user-defined functions, commonly known as table-valued functions (TVFs), return a table value.
+BigQuery now supports access management data control language (DCL) statements and corresponding views:
+
+- [GRANT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement)
+- [REVOKE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement)
+- [INFORMATION_SCHEMA.OBJECT_PRIVILEGES view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
+
+GRANT and REVOKE statements are [generally available](https://cloud.google.com/products#product-launch-stages) (GA). OBJECT_PRIVILEGES table is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-[Audit logging](https://docs.cloud.google.com/bigquery-transfer/docs/audit-logging) , [Cloud Logging](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-logging) , and [Cloud Monitoring](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-monitoring) for the BigQuery Data Transfer Service are now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+The Google Trends dataset is now in [Preview](https://cloud.google.com/products#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) .
 
 Feature
 
-The Google Trends dataset is now in [Preview](https://cloud.google.com/products/#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) .
-
-Feature
-
-The Google Trends dataset is now available in [Preview](https://cloud.google.com/products/#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) .
-
-Feature
-
-BigQuery now supports the [ALTER COLUMN SET OPTIONS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) data definition language (DDL) statement. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+[Table functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/table-functions) are now available in [Preview](https://cloud.google.com/products#product-launch-stages) . These user-defined functions, commonly known as table-valued functions (TVFs), return a table value.
 
 Feature
 
@@ -3795,29 +3793,31 @@ BigQuery now supports the following casting features:
 - [Numeric type INT64 aliases](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) (INT, SMALLINT, INTEGER, BIGINT, TINYINT, BYTEINT)
 - [ST_GEOGFROM](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfrom)
 
-These features are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-BigQuery now supports access management data control language (DCL) statements and corresponding views:
+BigQuery now supports the [ALTER COLUMN SET OPTIONS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_options_statement) data definition language (DDL) statement. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
-- [GRANT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement)
-- [REVOKE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement)
-- [INFORMATION_SCHEMA.OBJECT_PRIVILEGES view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges)
+Feature
 
-GRANT and REVOKE statements are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). OBJECT_PRIVILEGES table is available in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+[Audit logging](https://docs.cloud.google.com/bigquery-transfer/docs/audit-logging) , [Cloud Logging](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-logging) , and [Cloud Monitoring](https://docs.cloud.google.com/bigquery-transfer/docs/cloud-monitoring) for the BigQuery Data Transfer Service are now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The Google Trends dataset is now available in [Preview](https://cloud.google.com/products#product-launch-stages) and available in the [Google Cloud Marketplace](https://console.cloud.google.com/marketplace/product/bigquery-public-datasets/google-search-trends) .
 
 ## June 25, 2021
 
 Feature
 
-BigQuery table snapshots are now in [Preview](https://cloud.google.com/products/#product-launch-stages) . A table snapshot is a low-cost, read-only copy of a table's data as it was at a particular time. For more information, see [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+BigQuery table snapshots are now in [Preview](https://cloud.google.com/products#product-launch-stages) . A table snapshot is a low-cost, read-only copy of a table's data as it was at a particular time. For more information, see [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## June 22, 2021
 
 Feature
 
-BigQuery ML is releasing the following features for [preview](https://cloud.google.com/products/#product-launch-stages) :
+BigQuery ML is releasing the following features for [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - The [`ML.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) is now available. This function provides anomaly detection for BigQuery ML. The function runs against time-series data using `ARIMA_PLUS` models. The function runs against [independent and identically distributed (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) random variables data using [`AUTOENCODER`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) and [`KMEANS`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) models.
 - The [`AUTOENCODER` model type](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) is now available for CREATE MODEL statements. This is a TensorFlow-based, deep-learning model that supports sparse data representations, and is commonly used in ML tasks such as feature embedding, unsupervised anomaly detection, and non-linear dimensionality reduction. The [ML.PREDICT function](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-predict#predicting_an_outcome_with_a_model_trained_with_the_transform_clause) can use previously built AUTOENCODER models to reduce the dimensionality of query results.
@@ -3860,7 +3860,7 @@ BigQuery now supports [parameterized types](https://docs.cloud.google.com/bigque
 - [NUMERIC(P) / NUMERIC(P, S)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_decimal_type)
 - [BIGNUMERIC(P) / BIGNUMERIC(P, S)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_decimal_types)
 
-This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 25, 2021
 
@@ -3872,7 +3872,7 @@ The free trial period for BigQuery BI Engine's [SQL interface](https://docs.clou
 
 Feature
 
-BigQuery GIS now supports the following functions. These functions are [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+BigQuery GIS now supports the following functions. These functions are [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 - [`ST_STARTPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_startpoint)
 - [`ST_ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_endpoint)
@@ -3882,19 +3882,19 @@ These functions return a point of a linestring geography as a point geography.
 
 Feature
 
-BigQuery GIS now supports loading geography data from newline-delimited GeoJSON files. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). For more information, see [Loading GeoJSON data](https://docs.cloud.google.com/bigquery/docs/gis-data#loading_geojson_data) .
+BigQuery GIS now supports loading geography data from newline-delimited GeoJSON files. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see [Loading GeoJSON data](https://docs.cloud.google.com/bigquery/docs/gis-data#loading_geojson_data) .
 
 ## May 19, 2021
 
 Feature
 
-BigQuery now supports the ability to rename tables using SQL. See [ALTER TABLE RENAME TO](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery now supports the ability to rename tables using SQL. See [ALTER TABLE RENAME TO](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 18, 2021
 
 Feature
 
-The `CREATE MODEL` statement for training AutoML Tables models is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). AutoML Tables enable you to automatically build state-of-the-art machine learning models on structured data at massively increased speed and scale. For more information, see [`CREATE MODEL` statement for training AutoML Tables models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-automl) .
+The `CREATE MODEL` statement for training AutoML Tables models is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). AutoML Tables enable you to automatically build state-of-the-art machine learning models on structured data at massively increased speed and scale. For more information, see [`CREATE MODEL` statement for training AutoML Tables models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-automl) .
 
 ## May 11, 2021
 
@@ -3916,7 +3916,7 @@ BigQuery now supports the following SQL query clauses and operators:
 - [UNPIVOT operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unpivot_operator)
 - [QUALIFY clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause)
 
-This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 30, 2021
 
@@ -3927,7 +3927,7 @@ BigQuery now supports the following data definition language (DDL) statements:
 - [CREATE VIEW with column name list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_column_name_list)
 - [ALTER COLUMN DROP NOT NULL constraint](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_drop_not_null_statement)
 
-This feature is in [GA](https://cloud.google.com/products/#product-launch-stages) .
+This feature is in [GA](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 21, 2021
 
@@ -3941,9 +3941,9 @@ Feature
 
 BigQuery ML is introducing new ARIMA_PLUS models and deprecating the ARIMA model type. While the underlying modeling technique has not changed, the following improvements are now available in ARIMA_PLUS:
 
-- Explainable forecasting via [`ML.EXPLAIN_FORECAST`](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) ( [tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-multiple-time-series-forecasting-tutorial#step_four_forecast_the_time_series_and_visualize_the_results) ).
+- Explainable forecasting via [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) ( [tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-multiple-time-series-forecasting-tutorial#step_four_forecast_the_time_series_and_visualize_the_results) ).
 
-- More comprehensive evaluation via [`ML.ARIMA_EVALUATE`](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) ( [tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-multiple-time-series-forecasting-tutorial#step_six_inspect_the_evaluation_metrics_of_the_set_of_time_series_models) ).
+- More comprehensive evaluation via [`ML.ARIMA_EVALUATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-arima-evaluate) ( [tutorial](https://docs.cloud.google.com/bigquery-ml/docs/arima-multiple-time-series-forecasting-tutorial#step_six_inspect_the_evaluation_metrics_of_the_set_of_time_series_models) ).
 
 - Multiple ID columns are specifiable via [`time_series_id_col`](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_id_col) .
 
@@ -3957,7 +3957,7 @@ BigQuery ML is introducing new ARIMA_PLUS models and deprecating the ARIMA model
 
 Feature
 
-The [BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) [Preview](https://cloud.google.com/products/#product-launch-stages) is now available for [Reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) users, enabling administrators to more easily monitor and troubleshoot their BigQuery environment. It provides visibility into key metrics such as slot consumption, job concurrency, and job execution time across the entire organization.
+The [BigQuery Admin Resource Charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) [Preview](https://cloud.google.com/products#product-launch-stages) is now available for [Reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro) users, enabling administrators to more easily monitor and troubleshoot their BigQuery environment. It provides visibility into key metrics such as slot consumption, job concurrency, and job execution time across the entire organization.
 
 ## April 09, 2021
 
@@ -3974,19 +3974,19 @@ For more information, see [Loading Parquet data from Cloud Storage](https://docs
 
 Announcement
 
-Beginning in early Q3 2021, [BigQuery Storage Read API](https://cloud.google.com/bigquery/docs/reference/storage) will start charging for [network egress](https://docs.cloud.google.com/storage/pricing#network-pricing) . In addition, BigQuery Storage Read API will become available in all locations, with appropriate pricing. Another release note will be issued when these changes take effect.
+Beginning in early Q3 2021, [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) will start charging for [network egress](https://docs.cloud.google.com/storage/pricing#network-pricing) . In addition, BigQuery Storage Read API will become available in all locations, with appropriate pricing. Another release note will be issued when these changes take effect.
 
 ## April 06, 2021
 
 Feature
 
-The BigQuery Storage Write API is now in [Preview](https://cloud.google.com/products/#product-launch-stages) . The Storage Write API is a stream-based API for ingesting data into BigQuery at low cost and high throughput. It provides exactly-once delivery semantics with real-time latency. For more information, see [Using the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
+The BigQuery Storage Write API is now in [Preview](https://cloud.google.com/products#product-launch-stages) . The Storage Write API is a stream-based API for ingesting data into BigQuery at low cost and high throughput. It provides exactly-once delivery semantics with real-time latency. For more information, see [Using the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 ## April 02, 2021
 
 Feature
 
-BigQuery standard SQL now supports the [ALTER TABLE DROP COLUMN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery standard SQL now supports the [ALTER TABLE DROP COLUMN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_column_statement) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -3996,21 +3996,21 @@ The maximum length has been increased from 128 characters to 300 characters for 
 
 Feature
 
-The [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) view now includes a `DDL` column that can be used to recreate the table. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-`INFORMATION_SCHEMA` views for [table partitions](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#partitions_view) are now available. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
 BigQuery standard SQL now supports the following JSON functions:
 
 - [`JSON_EXTRACT_STRING_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_extract_string_array)
 - [`JSON_QUERY_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_query_array)
 - [`JSON_VALUE_ARRAY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value_array)
 
-These statements are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These statements are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+`INFORMATION_SCHEMA` views for [table partitions](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#partitions_view) are now available. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+BigQuery standard SQL now supports the `TABLESAMPLE` operator, which lets you query random subsets of data from large BigQuery tables. For more information, see [Table sampling](https://docs.cloud.google.com/bigquery/docs/table-sampling) . This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -4020,15 +4020,15 @@ BigQuery standard SQL now supports the following statements for creating, config
 - [`ALTER SCHEMA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement)
 - [`DROP SCHEMA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement)
 
-These statements are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+These statements are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-BigQuery standard SQL now supports the `TABLESAMPLE` operator, which lets you query random subsets of data from large BigQuery tables. For more information, see [Table sampling](https://docs.cloud.google.com/bigquery/docs/table-sampling) . This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+The [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) view now includes a `DDL` column that can be used to recreate the table. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Support for the [BigNumeric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) type in BigQuery standard SQL is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Support for the [BigNumeric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) type in BigQuery standard SQL is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 24, 2021
 
@@ -4068,11 +4068,11 @@ Updated version of [Magnitude Simba JDBC](https://docs.cloud.google.com/bigquery
 
 Feature
 
-BigQuery materialized views are now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). BigQuery materialized views are now generally available (GA). Materialized views are precomputed views that periodically cache the results of a query, enhancing performance and efficiency, and reducing costs, particularly for aggregated queries. For more information, see [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+BigQuery BI Engine now interacts with popular BI tools such as Looker, Tableau, and more, by means of an [SQL interface](https://docs.cloud.google.com/bi-engine/docs/sql-interface-overview) . You must [enroll](https://docs.cloud.google.com/bi-engine/docs/sql-interface-overview#requesting_access_to_the_preview) to participate in the [preview](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-BigQuery BI Engine now interacts with popular BI tools such as Looker, Tableau, and more, by means of an [SQL interface](https://docs.cloud.google.com/bi-engine/docs/sql-interface-overview) . You must [enroll](https://docs.cloud.google.com/bi-engine/docs/sql-interface-overview#requesting_access_to_the_preview) to participate in the [preview](https://cloud.google.com/products#product-launch-stages) .
+BigQuery materialized views are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). BigQuery materialized views are now generally available (GA). Materialized views are precomputed views that periodically cache the results of a query, enhancing performance and efficiency, and reducing costs, particularly for aggregated queries. For more information, see [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 
 ## February 24, 2021
 
@@ -4090,7 +4090,7 @@ The BigQuery Data Transfer Service's minimum interval time between recurring tra
 
 Feature
 
-BigQuery now supports exporting table data in Parquet format. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Parquet export details](https://docs.cloud.google.com/bigquery/docs/exporting-data#parquet_export_details) .
+BigQuery now supports exporting table data in Parquet format. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Parquet export details](https://docs.cloud.google.com/bigquery/docs/exporting-data#parquet_export_details) .
 
 ## February 12, 2021
 
@@ -4132,13 +4132,13 @@ The BigQuery Data Transfer Service is now available in the [Iowa (us-central1) r
 
 Change
 
-BigQuery's Cloud console UI has been updated with many usability improvements for analyzing data, including multi-tab navigation, a new resource panel, and a new SQL editor. These updates are in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Using the Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
+BigQuery's Cloud console UI has been updated with many usability improvements for analyzing data, including multi-tab navigation, a new resource panel, and a new SQL editor. These updates are in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Using the Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
 
 ## December 21, 2020
 
 Feature
 
-BigQuery standard SQL now supports the [BigNumeric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) data type for high-precision computations. The BigNumeric data type is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery standard SQL now supports the [BigNumeric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type) data type for high-precision computations. The BigNumeric data type is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## December 16, 2020
 
@@ -4160,19 +4160,19 @@ Updated version of [Magnitude Simba ODBC](https://docs.cloud.google.com/bigquery
 
 Feature
 
-BigQuery ML integration with [AI Platform](https://docs.cloud.google.com/ai-platform) for Deep Neural Network (DNN) models is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). For more information, see [`CREATE MODEL` statement for Deep Neural Network (DNN) models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) .
-
-Feature
-
 Exporting BigQuery ML models to Cloud Storage and using them for online prediction is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see [Exporting models](https://docs.cloud.google.com/bigquery-ml/docs/exporting-models) and the [`EXPORT MODEL` statement](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-export-model) .
 
 Feature
 
-BigQuery ML integration with [AI Platform](https://docs.cloud.google.com/ai-platform) for Boosted Tree models is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). For more information, see the following documentation:
+BigQuery ML integration with [AI Platform](https://docs.cloud.google.com/ai-platform) for Boosted Tree models is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see the following documentation:
 
 - [`CREATE MODEL` statement for Boosted Tree models using XGBoost](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
 - [`ML.FEATURE_IMPORTANCE` function](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-importance)
+
+Feature
+
+BigQuery ML integration with [AI Platform](https://docs.cloud.google.com/ai-platform) for Deep Neural Network (DNN) models is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see [`CREATE MODEL` statement for Deep Neural Network (DNN) models](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) .
 
 ## November 17, 2020
 
@@ -4184,7 +4184,7 @@ BigQuery column-level security is now [generally available](https://cloud.google
 
 Feature
 
-BigQuery standard SQL now supports the [SUBSTRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substring) function. This function is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery standard SQL now supports the [SUBSTRING](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substring) function. This function is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## October 22, 2020
 
@@ -4194,7 +4194,7 @@ The [`ST_GEOGFROMGEOJSON`](https://docs.cloud.google.com/bigquery/docs/reference
 
 The [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext_signature2) function also supports a new `planar` parameter. If set to `TRUE` , the function treats imported WKT geometries as having planar edges.
 
-These new function parameters are in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+These new function parameters are in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -4210,11 +4210,11 @@ BigQuery Audit Logs stopped using the following checks for redacting resource na
 
 Feature
 
-Dynamic SQL is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Dynamic SQL lets you generate and execute SQL statements dynamically at runtime. For more information, see [EXECUTE IMMEDIATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#execute_immediate) .
+Dynamic SQL is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). Dynamic SQL lets you generate and execute SQL statements dynamically at runtime. For more information, see [EXECUTE IMMEDIATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#execute_immediate) .
 
 Feature
 
-BigQuery standard SQL now supports the following new functions. These functions are [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery standard SQL now supports the following new functions. These functions are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 - [ASCII](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#ascii)
 - [CHR](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#chr)
@@ -4233,7 +4233,7 @@ BigQuery standard SQL now supports the following new functions. These functions 
 
 Feature
 
-BigQuery now supports the following new statements. These statements are [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+BigQuery now supports the following new statements. These statements are [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 - [`CREATE EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement)
 - [`DROP EXTERNAL TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_external_table_statement)
@@ -4251,11 +4251,7 @@ BigQuery now supports Unicode table names. For more information, see [Table nami
 
 Feature
 
-Queries can now have [duplicate column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#duplicate_aliases) .
-
-Feature
-
-The following [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views are now [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+The following [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views are now [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 - [TABLES](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#tables_view)
 - [TABLE_OPTIONS](https://docs.cloud.google.com/bigquery/docs/information-schema-tables#table_options_view)
@@ -4268,11 +4264,15 @@ The following [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs
 - [SCHEMATA](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_view)
 - [SCHEMATA_OPTIONS](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets#schemata_options_view)
 
+Feature
+
+Queries can now have [duplicate column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#duplicate_aliases) .
+
 ## October 06, 2020
 
 Feature
 
-Authorized user-defined functions (UDFs) are now [generally available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA). Authorized UDFs let you share query results without giving access to the underlying tables. For more information, see [Authorized UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions#authorized_udfs) .
+Authorized user-defined functions (UDFs) are now [generally available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA). Authorized UDFs let you share query results without giving access to the underlying tables. For more information, see [Authorized UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions#authorized_udfs) .
 
 Feature
 
@@ -4294,7 +4294,7 @@ Time series models now let you change `DATA_FREQUENCY` from the default value ( 
 
 Feature
 
-The following [time-unit partitioning](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions#daily_partitioning_vs_hourly_partitioning) features are now [Generally Available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA):
+The following [time-unit partitioning](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions#daily_partitioning_vs_hourly_partitioning) features are now [Generally Available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA):
 
 - Creating partitions using hourly, monthly, and yearly time-unit granularities.
 - Using a `DATETIME` column as the partitioning column.
@@ -4327,7 +4327,7 @@ Updated version of [Magnitude Simba JDBC](https://docs.cloud.google.com/bigquery
 
 Feature
 
-Time series model support is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA). This release includes a new training option: [AUTO_ARIMA_MAX_ORDER](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) .
+Time series model support is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA). This release includes a new training option: [AUTO_ARIMA_MAX_ORDER](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) .
 
 For more information about time series model support, see the following documentation:
 
@@ -4345,7 +4345,7 @@ For more information about time series model support, see the following document
 
 Feature
 
-`INFORMATION_SCHEMA` views for [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) are now [Generally Available](https://cloud.google.com/products/?hl=EN#product-launch-stages) (GA).
+`INFORMATION_SCHEMA` views for [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) are now [Generally Available](https://cloud.google.com/products?hl=EN#product-launch-stages) (GA).
 
 ## August 25, 2020
 
@@ -4357,7 +4357,7 @@ Feature
 
 Feature
 
-BigQuery support for using service account credentials with scheduled queries is [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA).
+BigQuery support for using service account credentials with scheduled queries is [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## August 19, 2020
 
@@ -4378,7 +4378,7 @@ You can now explicitly assign projects to use on-demand pricing with Reservation
 
 Feature
 
-Matrix Factorization model support is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA). For more information, see the following documentation:
+Matrix Factorization model support is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see the following documentation:
 
 - [`CREATE MODEL` statement for Matrix Factorization](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
 
@@ -4428,7 +4428,7 @@ Updated version of [Magnitude Simba ODBC](https://docs.cloud.google.com/bigquery
 
 Feature
 
-`INFORMATION_SCHEMA` views for [streaming metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) are now in [alpha](https://cloud.google.com/products/?hl=EN#product-launch-stages) . You can use these views to retrieve historical and real-time information about streaming data into BigQuery.
+`INFORMATION_SCHEMA` views for [streaming metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-streaming) are now in [alpha](https://cloud.google.com/products?hl=EN#product-launch-stages) . You can use these views to retrieve historical and real-time information about streaming data into BigQuery.
 
 ## July 24, 2020
 
@@ -4475,7 +4475,7 @@ BigQuery ML now supports time series models as a [beta](https://cloud.google.com
 
 Feature
 
-[Flex slots](https://docs.cloud.google.com/bigquery/docs/reservations-concepts#commitment_plans) are now [generally available (GA)](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+[Flex slots](https://docs.cloud.google.com/bigquery/docs/reservations-concepts#commitment_plans) are now [generally available (GA)](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 Change
 
@@ -4485,7 +4485,7 @@ The [BigQuery SLA](https://cloud.google.com/bigquery/sla) has been updated to \>
 
 Feature
 
-[Region qualified `INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) are now in [beta](https://cloud.google.com/products/#product-launch-stages) .
+[Region qualified `INFORMATION_SCHEMA` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) are now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -4495,11 +4495,11 @@ Starting in mid-August, unqualified `INFORMATION_SCHEMA` queries for `SCHEMATA` 
 
 Feature
 
-The [Top Brands report](https://docs.cloud.google.com/bigquery-transfer/docs/merchant-center-top-brands-schema) for Google Merchant Center Best Sellers exports is now in [beta](https://cloud.google.com/products/#product-launch-stages) .
+[`INFORMATION_SCHEMA` views for jobs](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) are now [generally available (GA)](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 Feature
 
-[`INFORMATION_SCHEMA` views for jobs](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) are now [generally available (GA)](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+The [Top Brands report](https://docs.cloud.google.com/bigquery-transfer/docs/merchant-center-top-brands-schema) for Google Merchant Center Best Sellers exports is now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -4545,11 +4545,11 @@ BigQuery Table ACL is now available as a [beta](https://cloud.google.com/product
 
 Feature
 
-You can now [purchase BigQuery slots](https://cloud.google.com/bigquery/docs/reservations-workload-management#getting_started_with_reservations) using the `bq` command-line tool. BigQuery Reservations allows you to purchase slots to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
+A new GIS function, [`ST_Simplify`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_simplify) , is available. [`ST_Simplify`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_simplify) returns a simplified version of the input `GEOGRAPHY` by replacing sections with straight lines.
 
 Feature
 
-A new GIS function, [`ST_Simplify`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_simplify) , is available. [`ST_Simplify`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_simplify) returns a simplified version of the input `GEOGRAPHY` by replacing sections with straight lines.
+You can now [purchase BigQuery slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#getting_started_with_reservations) using the `bq` command-line tool. BigQuery Reservations allows you to purchase slots to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
 
 Change
 
@@ -4573,7 +4573,7 @@ Happy 10th birthday, BigQuery!
 
 Feature
 
-[Cloud SQL federated queries](https://cloud.google.com/bigquery/docs/cloud-sql-federated-queries) are now generally available [(GA)](https://docs.cloud.google.com/terms/launch-stages) .
+[Hourly partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions) are now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -4581,11 +4581,11 @@ Feature
 
 Feature
 
-[Hourly partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions) are now in [beta](https://cloud.google.com/products/#product-launch-stages) .
+[Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) are now generally available [(GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Dynamic SQL is now available as a [beta](https://cloud.google.com/products/#product-launch-stages) release in all BigQuery regions. Dynamic SQL lets you generate and execute SQL statements dynamically at runtime. For more information, see [EXECUTE IMMEDIATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#execute_immediate) .
+Dynamic SQL is now available as a [beta](https://cloud.google.com/products#product-launch-stages) release in all BigQuery regions. Dynamic SQL lets you generate and execute SQL statements dynamically at runtime. For more information, see [EXECUTE IMMEDIATE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting#execute_immediate) .
 
 ## May 13, 2020
 
@@ -4603,7 +4603,7 @@ Updated versions of [Magnitude Simba ODBC](https://docs.cloud.google.com/bigquer
 
 Feature
 
-[Next generation BigQuery streaming](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) is now [Generally Available (GA)](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+[Next generation BigQuery streaming](https://docs.cloud.google.com/bigquery/quotas#streaming_inserts) is now [Generally Available (GA)](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 ## May 01, 2020
 
@@ -4657,15 +4657,15 @@ BigQuery ML now supports Matrix Factorization models for recommendations, as a [
 
 ## April 16, 2020
 
+Feature
+
+[BigQuery Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) is now [Generally Available (GA)](https://cloud.google.com/products?hl=EN#product-launch-stages) . BigQuery Reservations allows you to purchase BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
+
 Change
 
 Around the end of April 2020, [`INFORMATION_SCHEMA` (Beta) views for dataset metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets) will return metadata about all datasets in a region. Currently, these views return metadata about all datasets in the project across all regions. This upcoming change will also provide support for querying a specific region's metadata (for example, `region-us.INFORMATION_SCHEMA.SCHEMATA` instead of `INFORMATION_SCHEMA.SCHEMATA` ).
 
 You can replicate this future behavior now by filtering on the `SCHEMATA` view's `LOCATION` column (for example, `LOCATION = 'US'` ).
-
-Feature
-
-[BigQuery Reservations](https://cloud.google.com/bigquery/docs/reservations-intro) is now [Generally Available (GA)](https://cloud.google.com/products/?hl=EN#product-launch-stages) . BigQuery Reservations allows you to purchase BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
 
 ## April 14, 2020
 
@@ -4695,13 +4695,13 @@ Feature
 
 Feature
 
-`INFORMATION_SCHEMA` views for [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) are now in public [alpha](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+`INFORMATION_SCHEMA` views for [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) are now in public [alpha](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 ## March 30, 2020
 
 Feature
 
-[Scripting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting) and [stored procedures](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) are now [Generally Available](https://cloud.google.com/products/#product-launch-stages) .
+[Scripting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting) and [stored procedures](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) are now [Generally Available](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 27, 2020
 
@@ -4737,15 +4737,15 @@ BigQuery Data Transfer Service now supports the [Zürich region](https://docs.cl
 
 Feature
 
-The BigQuery Storage API is now [generally available](https://cloud.google.com/terms/launch-stages) . For more information, see [the Storage API overview](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
+The BigQuery Storage API is now [generally available](https://cloud.google.com/products#product-launch-stages) . For more information, see [the Storage API overview](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
 
 Feature
 
-Support for [loading](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) and [querying](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) externally partitioned data that is stored on Cloud Storage using a default hive partitioning layout is now [Generally Available](https://docs.cloud.google.com/terms/launch-stages) . The data must be in Avro, Parquet, ORC, CSV, or JSON format.
+Support for [querying Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) in ORC and Parquet format is now [Generally Available](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Support for [querying Cloud Storage data](https://cloud.google.com/bigquery/external-data-cloud-storage) in ORC and Parquet format is now [Generally Available](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [loading](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) and [querying](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) externally partitioned data that is stored on Cloud Storage using a default hive partitioning layout is now [Generally Available](https://cloud.google.com/products#product-launch-stages) . The data must be in Avro, Parquet, ORC, CSV, or JSON format.
 
 Change
 
@@ -4773,7 +4773,7 @@ BigQuery [Flex slots](https://cloud.google.com/bigquery/pricing#flex-slots-prici
 
 Feature
 
-Support for data transfers from [Amazon S3](https://cloud.google.com/bigquery/docs/s3-transfer-intro) to BigQuery is now [generally available](https://docs.cloud.google.com/terms/launch-stages) .
+Support for data transfers from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) to BigQuery is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 24, 2020
 
@@ -4793,13 +4793,13 @@ BigQuery is now available in the [Salt Lake City (us-west3) region](https://docs
 
 Feature
 
-Support for [Amazon Redshift data warehouse migrations](https://docs.cloud.google.com/bigquery-transfer/docs/redshift-migration) to BigQuery is now [generally available](https://cloud.google.com/products/#product-launch-stages) .
+Support for [Amazon Redshift data warehouse migrations](https://docs.cloud.google.com/bigquery-transfer/docs/redshift-migration) to BigQuery is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
-Support for [migrating Amazon Redshift private instances](https://docs.cloud.google.com/bigquery-transfer/docs/redshift-vpc-migration) to BigQuery with VPC is also now [generally available](https://cloud.google.com/products/#product-launch-stages) .
+Support for [migrating Amazon Redshift private instances](https://docs.cloud.google.com/bigquery-transfer/docs/redshift-vpc-migration) to BigQuery with VPC is also now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
-[BigQuery BI Engine](https://cloud.google.com/bi-engine/docs) is now [GA](https://docs.cloud.google.com/terms/launch-stages) .
+[BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs) is now [GA](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -4813,19 +4813,19 @@ Added support for custom queries and views from Data Studio.
 
 Feature
 
-Support for tables partitioned on an integer column is now [GA](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Creating and using integer range partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) .
+Support for tables partitioned on an integer column is now [GA](https://cloud.google.com/products#product-launch-stages) . For more information, see [Creating and using integer range partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) .
 
 ## February 14, 2020
 
 Feature
 
-`INFORMATION_SCHEMA` views for [live and historical jobs metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) are now in [beta](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+`INFORMATION_SCHEMA` views for [live and historical jobs metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) are now in [beta](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 ## February 13, 2020
 
 Change
 
-The [BigQuery sandbox](https://cloud.google.com/bigquery/docs/sandbox) is now [GA](https://docs.cloud.google.com/terms/launch-stages) .
+The [BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) is now [GA](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 11, 2020
 
@@ -4863,13 +4863,13 @@ Feature
 
 Change
 
-There is no longer a charge to use Google's ads management connectors and YouTube connectors for the [BigQuery Data Transfer Service](https://cloud.google.com/bigquery-transfer/pricing) . Normal [BigQuery analysis and storage pricing](https://cloud.google.com/bigquery/pricing) will continue to apply after any transfers.
+There is no longer a charge to use Google's ads management connectors and YouTube connectors for the [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/pricing) . Normal [BigQuery analysis and storage pricing](https://cloud.google.com/bigquery/pricing) will continue to apply after any transfers.
 
 ## December 20, 2019
 
 Feature
 
-The `ALTER TABLE` and `ALTER VIEW` Data Definition Language statements are now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA). These statements let you set options on [tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) and [views](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
+The `ALTER TABLE` and `ALTER VIEW` Data Definition Language statements are now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA). These statements let you set options on [tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) and [views](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) .
 
 Feature
 
@@ -4879,27 +4879,27 @@ Feature
 
 Feature
 
-Support for transferring [Google Play reports](https://cloud.google.com/bigquery/docs/play-transfer) is now generally available [GA](https://docs.cloud.google.com/terms/launch-stages) .
+[Third party transfers](https://docs.cloud.google.com/bigquery/docs/third-party-transfer) for loading data from external data sources are now generally available [GA](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-[Third party transfers](https://cloud.google.com/bigquery/docs/third-party-transfer) for loading data from external data sources are now generally available [GA](https://docs.cloud.google.com/terms/launch-stages) .
+Support for transferring [Google Play reports](https://docs.cloud.google.com/bigquery/docs/play-transfer) is now generally available [GA](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-BigQuery ML data preprocessing is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA). Read about the [preprocessing functions](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-preprocessing-functions) and walk through [how to use the TRANSFORM clause for feature engineering](https://docs.cloud.google.com/bigquery-ml/docs/bigqueryml-transform) .
+BigQuery ML data preprocessing is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA). Read about the [preprocessing functions](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-preprocessing-functions) and walk through [how to use the TRANSFORM clause for feature engineering](https://docs.cloud.google.com/bigquery-ml/docs/bigqueryml-transform) .
 
 ## December 13, 2019
 
 Feature
 
-[BigQuery Reservations](https://cloud.google.com/bigquery/docs/reservations-intro) is now in beta in US and EU regions. BigQuery Reservations allows you to purchase BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
+[BigQuery Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) is now in beta in US and EU regions. BigQuery Reservations allows you to purchase BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) to take advantage of BigQuery [flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) and allocate slots for workload management.
 
 ## December 11, 2019
 
 Feature
 
-Support for tables partitioned on an integer column is now in [Beta](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Creating and using integer range partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) .
+Support for tables partitioned on an integer column is now in [Beta](https://cloud.google.com/products#product-launch-stages) . For more information, see [Creating and using integer range partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-integer-range-partitions) .
 
 ## December 10, 2019
 
@@ -4911,7 +4911,7 @@ For users billed on the [on-demand](https://cloud.google.com/bigquery/pricing#on
 
 Feature
 
-Support for [Cloud Storage Transfers](https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer-overview) is now generally available [GA](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [Cloud Storage Transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview) is now generally available [GA](https://cloud.google.com/products#product-launch-stages) .
 
 ## December 04, 2019
 
@@ -4923,7 +4923,7 @@ You can now [use KMEANS++](https://docs.cloud.google.com/bigquery-ml/docs/refere
 
 Change
 
-[`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) now has updated permissions checks. `INFORMATION_SCHEMA` is currently in [beta](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+[`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) now has updated permissions checks. `INFORMATION_SCHEMA` is currently in [beta](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 Previously, queries against `INFORMATION_SCHEMA` views filtered the results based on the IAM permissions needed to get metadata about the resource. Now, queries return accessDenied (403) errors if users have insufficient IAM permissions to get metadata.
 
@@ -4931,11 +4931,11 @@ Previously, queries against `INFORMATION_SCHEMA` views filtered the results base
 
 Feature
 
-Support for [persistent standard SQL UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Support for [persistent standard SQL UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
-You can now use `INFORMATION_SCHEMA` views to [get routine metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) in BigQuery. `INFORMATION_SCHEMA` is currently in [beta](https://cloud.google.com/products/?hl=EN#product-launch-stages) .
+You can now use `INFORMATION_SCHEMA` views to [get routine metadata](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) in BigQuery. `INFORMATION_SCHEMA` is currently in [beta](https://cloud.google.com/products?hl=EN#product-launch-stages) .
 
 ## November 21, 2019
 
@@ -4945,7 +4945,7 @@ BigQuery ML [data preprocessing](https://docs.cloud.google.com/bigquery-ml/docs/
 
 Feature
 
-BigQuery now supports using service account credentials with scheduled queries. This feature is in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now supports using service account credentials with scheduled queries. This feature is in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -4955,7 +4955,7 @@ BigQuery ML now supports customer-managed encryption keys (CMEK). You can [use y
 
 Change
 
-BigQuery ML is now available in the South Carolina (us-east1) [region](https://cloud.google.com/bigquery-ml/pricing#bqml) .
+BigQuery ML is now available in the South Carolina (us-east1) [region](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) .
 
 Change
 
@@ -4965,17 +4965,17 @@ BigQuery is now available in the South Carolina (us-east1) [region](https://docs
 
 Feature
 
-Support for omitting column names in [INSERT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) and [MERGE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) statements is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Support for omitting column names in [INSERT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) and [MERGE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) statements is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## October 31, 2019
 
 Feature
 
-Support for [querying Cloud Storage data](https://cloud.google.com/bigquery/external-data-cloud-storage) in ORC and Parquet format is now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [querying Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) in ORC and Parquet format is now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-Support for [loading](https://cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) and [querying](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) externally partitioned data that is stored on Cloud Storage using a default hive partitioning layout is now in [beta](https://docs.cloud.google.com/terms/launch-stages) . The data must be in Avro, Parquet, ORC, CSV, or JSON format.
+Support for [loading](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) and [querying](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) externally partitioned data that is stored on Cloud Storage using a default hive partitioning layout is now in [beta](https://cloud.google.com/products#product-launch-stages) . The data must be in Avro, Parquet, ORC, CSV, or JSON format.
 
 ## October 23, 2019
 
@@ -5032,36 +5032,36 @@ Updated versions of [Magnitude Simba JDBC and ODBC](https://docs.cloud.google.co
 
 Feature
 
-BigQuery Data Transfer Service now supports [Search Ads 360 data transfers](https://docs.cloud.google.com/bigquery-transfer/docs/sa360-transfer) . Search Ad 360 transfers are in [beta](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery Data Transfer Service now supports [Search Ads 360 data transfers](https://docs.cloud.google.com/bigquery-transfer/docs/sa360-transfer) . Search Ad 360 transfers are in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The ability to use [scripting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting) , [stored procedures](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) , and [temporary tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#temporary_tables) is now in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+The ability to use [scripting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting) , [stored procedures](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) , and [temporary tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#temporary_tables) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 30, 2019
 
 Feature
 
-[Importing TensorFlow](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) models is now [GA](https://docs.cloud.google.com/terms/launch-stages) .
+[Importing TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) models is now [GA](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 27, 2019
 
 Change
 
 - The maximum size of a BI Engine reservation is now 50 GB per project per location. For more information, see [Capacity limits](https://docs.cloud.google.com/bigquery/quotas#capacity_limits) .
-- We added more options for BI Engine capacity that is bundled with flat-rate pricing. For more information, see [Flat-rate pricing](https://cloud.google.com/bi-engine/pricing#flat_rate_pricing) .
+- We added more options for BI Engine capacity that is bundled with flat-rate pricing. For more information, see [Flat-rate pricing](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) .
 
 ## September 26, 2019
 
 Change
 
-BigQuery Data Transfer Service support for data & schema migration from a Teradata data warehouse to BigQuery has been upgraded. On-demand, one-time transfers are now generally available ( [GA](https://cloud.google.com/products/#product-launch-stages) ). Incremental, recurring transfers are in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery Data Transfer Service support for data & schema migration from a Teradata data warehouse to BigQuery has been upgraded. On-demand, one-time transfers are now generally available ( [GA](https://cloud.google.com/products#product-launch-stages) ). Incremental, recurring transfers are in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 23, 2019
 
 Feature
 
-Support for k-means clustering models is now [GA](https://cloud.google.com/terms/launch-stages) . For more information, see [Creating a k-means clustering model](https://docs.cloud.google.com/bigquery-ml/docs/kmeans-tutorial) .
+Support for k-means clustering models is now [GA](https://cloud.google.com/products#product-launch-stages) . For more information, see [Creating a k-means clustering model](https://docs.cloud.google.com/bigquery-ml/docs/kmeans-tutorial) .
 
 ## September 17, 2019
 
@@ -5081,13 +5081,13 @@ BigQuery ML is now available in the Frankfurt (europe-west3) [region](https://do
 
 Change
 
-Billing is now enabled for BigQuery BI Engine. You are charged according to the information on the [Pricing](https://cloud.google.com/bi-engine/pricing) page.
+Billing is now enabled for BigQuery BI Engine. You are charged according to the information on the [Pricing](https://cloud.google.com/bigquery/pricing) page.
 
 ## August 30, 2019
 
 Feature
 
-Support for [copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets) , including across regions, is now in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+Support for [copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets) , including across regions, is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 27, 2019
 
@@ -5109,7 +5109,7 @@ Updated version of [Magnitude Simba ODBC driver](https://docs.cloud.google.com/b
 
 Change
 
-If you stream data into BigQuery without populating the `insertId` field, you get the following higher quotas in the `US` multi-region location. These higher quotas are currently in [beta](https://cloud.google.com/terms/launch-stages) .
+If you stream data into BigQuery without populating the `insertId` field, you get the following higher quotas in the `US` multi-region location. These higher quotas are currently in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 - Maximum rows per second: 1,000,000
 - Maximum bytes per second: 1 GB
@@ -5120,13 +5120,13 @@ For more information, see the [Quotas and limits](https://docs.cloud.google.com/
 
 Feature
 
-You can now query data in BigQuery and Cloud SQL with a federated query. [Cloud SQL federated queries](https://cloud.google.com/bigquery/docs/cloud-sql-federated-queries) are now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+You can now query data in BigQuery and Cloud SQL with a federated query. [Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) are now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 05, 2019
 
 Feature
 
-The BigQuery Storage API now supports reading data from BigQuery Storage in [ARROW](https://cloud.google.com/bigquery/docs/reference/storage/#arrow_schema_details) format. The [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) is currently in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+The BigQuery Storage API now supports reading data from BigQuery Storage in [ARROW](https://docs.cloud.google.com/bigquery/docs/reference/storage#arrow_schema_details) format. The [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) is currently in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 25, 2019
 
@@ -5138,29 +5138,29 @@ Updated version of [Magnitude Simba ODBC driver](https://docs.cloud.google.com/b
 
 Feature
 
-The [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) feature is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) .
+The [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) feature is now [Generally Available](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 02, 2019
 
 Feature
 
-[Importing TensorFlow](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) models is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+[Importing TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) models is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 01, 2019
 
 Feature
 
-Support for [persistent user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) (UDFs) is now in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+Support for [persistent user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) (UDFs) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-BigQuery Data Transfer Service now supports [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer) data transfers. Merchant Center transfers are in the [beta](https://cloud.google.com/products/#product-launch-stages) stage.
+BigQuery Data Transfer Service now supports [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer) data transfers. Merchant Center transfers are in the [beta](https://cloud.google.com/products#product-launch-stages) stage.
 
 ## June 17, 2019
 
 Feature
 
-Support for [Amazon Redshift data warehouse migrations](https://docs.cloud.google.com/bigquery/docs/redshift-migration) to BigQuery is now in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+Support for [Amazon Redshift data warehouse migrations](https://docs.cloud.google.com/bigquery/docs/redshift-migration) to BigQuery is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 13, 2019
 
@@ -5178,13 +5178,13 @@ BigQuery is moving to the [Cloud console](https://docs.cloud.google.com/bigquery
 
 Feature
 
-Support for omitting column names in [`INSERT` and `MERGE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) is now in [Beta](https://cloud.google.com/products/#product-launch-stages) .
+Support for omitting column names in [`INSERT` and `MERGE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 29, 2019
 
 Feature
 
-[BigQuery ML](https://cloud.google.com/bigquery/docs/bqml-introduction) is now [Generally Available](https://docs.cloud.google.com/terms/launch-stages) (GA).
+[BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 28, 2019
 
@@ -5196,7 +5196,7 @@ The [maximum response size](https://docs.cloud.google.com/bigquery/quotas#query_
 
 Feature
 
-Support for clustering a table by using a `GEOGRAPHY` column is now [Generally Available](https://cloud.google.com/products/#product-launch-stages) (GA).
+Support for clustering a table by using a `GEOGRAPHY` column is now [Generally Available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 14, 2019
 
@@ -5259,37 +5259,37 @@ BigQuery standard SQL now supports [AEAD encryption functions](https://docs.clou
 
 Feature
 
+[BigQuery BI Engine](https://docs.cloud.google.com/bi-engine/docs) is now in [beta](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+Support for [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+[Third party transfers](https://docs.cloud.google.com/bigquery/docs/third-party-transfer) for loading data from external data sources are now in [beta](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The BigQuery Data Transfer Service now supports transferring data into BigQuery from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) . Amazon S3 transfers are now in [beta](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
 BigQuery ML now supports the [k-means](https://docs.cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create#model_option_list) model type for clustering and customer segmentation.
 
 Feature
 
-The [BigQuery web UI in the Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) is now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-The BigQuery Data Transfer Service now supports transferring data into BigQuery from [Amazon S3](https://cloud.google.com/bigquery/docs/s3-transfer-intro) . Amazon S3 transfers are now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
-
-Feature
-
-[Third party transfers](https://cloud.google.com/bigquery/docs/third-party-transfer) for loading data from external data sources are now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
-
-Feature
-
-[BigQuery BI Engine](https://docs.cloud.google.com/bi-engine/docs) is now in [beta](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-Support for [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) is now [generally available (GA)](https://cloud.google.com/products/#product-launch-stages) .
+The [BigQuery web UI in the Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 05, 2019
 
-Feature
-
-The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts) is now available in [beta](https://cloud.google.com/products/#product-launch-stages) in the [Cloud console](https://console.cloud.google.com/bigquery/transfers) .
-
 Change
 
-BigQuery now allows you to purchase as few as 500 slots when you enroll in a [flat-rate pricing plan](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) . You are also now able to choose either a monthly or a yearly flat-rate pricing plan. The new flat-rate pricing plans are currently in [alpha](https://cloud.google.com/products/#product-launch-stages) .
+BigQuery now allows you to purchase as few as 500 slots when you enroll in a [flat-rate pricing plan](https://cloud.google.com/bigquery/pricing#flat_rate_pricing) . You are also now able to choose either a monthly or a yearly flat-rate pricing plan. The new flat-rate pricing plans are currently in [alpha](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts) is now available in [beta](https://cloud.google.com/products#product-launch-stages) in the [Cloud console](https://console.cloud.google.com/bigquery/transfers) .
 
 ## April 04, 2019
 
@@ -5299,7 +5299,7 @@ The BigQuery Data Transfer Service for Google Ads has been updated to support [v
 
 Feature
 
-[BigQuery Geographic Information Systems](https://cloud.google.com/bigquery/docs/gis-intro) is now [generally available (GA)](https://docs.cloud.google.com/terms/launch-stages) .
+[BigQuery Geographic Information Systems](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -5309,7 +5309,7 @@ During the beta period, Table permissions were automatically applied to models f
 
 Feature
 
-Combined with a special migration agent, the BigQuery Data Transfer Service now provides a [database migration service](https://docs.cloud.google.com/bigquery/docs/data-warehouse-migration-overview) from an on-premises data warehouse system to BigQuery. Support for [Teradata](https://docs.cloud.google.com/bigquery/docs/teradata-migration) migrations is now in [beta](https://cloud.google.com/products/#product-launch-stages) .
+Combined with a special migration agent, the BigQuery Data Transfer Service now provides a [database migration service](https://docs.cloud.google.com/bigquery/docs/data-warehouse-migration-overview) from an on-premises data warehouse system to BigQuery. Support for [Teradata](https://docs.cloud.google.com/bigquery/docs/teradata-migration) migrations is now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 18, 2019
 
@@ -5347,17 +5347,17 @@ When you create a [scheduled query](https://docs.cloud.google.com/bigquery/docs/
 
 Feature
 
-You can now [save query results to Google Drive](https://cloud.google.com/bigquery/docs/writing-results#saving_query_results_to_google_drive) by using the BigQuery web UI in the Cloud console. Saving query results to Google Drive is currently in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for DML [MERGE statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) is now generally available (GA).
 
 Feature
 
-Support for DML [MERGE statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) is now generally available (GA).
+You can now [save query results to Google Drive](https://docs.cloud.google.com/bigquery/docs/writing-results#saving_query_results_to_google_drive) by using the BigQuery web UI in the Cloud console. Saving query results to Google Drive is currently in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 22, 2019
 
 Feature
 
-The [BigQuery Storage API](https://cloud.google.com/bigquery/docs/reference/storage/) is now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+The [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) is now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 15, 2019
 
@@ -5386,21 +5386,21 @@ The following DML quotas have changed:
 
 Feature
 
-The Data Definition Language now supports `ALTER TABLE` statements to set options on [tables](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) and [views](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) . `ALTER TABLE` statements are currently in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+The Data Definition Language now supports `ALTER TABLE` statements to set options on [tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) and [views](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement) . `ALTER TABLE` statements are currently in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-You can now use [`INFORMATION_SCHEMA`](https://cloud.google.com/bigquery/docs/information-schema-intro) views to retrieve resource metadata in BigQuery. `INFORMATION_SCHEMA` is currently in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+You can now use [`INFORMATION_SCHEMA`](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views to retrieve resource metadata in BigQuery. `INFORMATION_SCHEMA` is currently in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## January 31, 2019
+
+Feature
+
+You can now try BigQuery without providing a credit card or attaching a billing account to your project by using the BigQuery [sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) . The sandbox is now in [beta](https://cloud.google.com/products#product-launch-stages) and is available to all Google Cloud customers.
 
 Change
 
 The [daily export quota](https://docs.cloud.google.com/bigquery/quotas#export_jobs) has been changed to measure the actual export file size in bytes, when counted toward your daily export quota. Usage is no longer measured by rounding up to the nearest GB.
-
-Feature
-
-You can now try BigQuery without providing a credit card or attaching a billing account to your project by using the BigQuery [sandbox](https://cloud.google.com/bigquery/docs/sandbox) . The sandbox is now in [beta](https://docs.cloud.google.com/terms/launch-stages) and is available to all Google Cloud customers.
 
 Change
 
@@ -5484,7 +5484,7 @@ BigQuery is now available in the Singapore (asia-southeast1) [region](https://do
 
 Change
 
-BigQuery ML [pricing](https://cloud.google.com/bigquery-ml/pricing) is now available.
+BigQuery ML [pricing](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) is now available.
 
 ## October 29, 2018
 
@@ -5508,7 +5508,7 @@ The BigQuery ML [`CREATE MODEL`](https://docs.cloud.google.com/bigquery-ml/docs/
 
 Feature
 
-You can now try BigQuery without providing a credit card or attaching a billing account to your project by using the BigQuery [sandbox](https://cloud.google.com/bigquery/docs/sandbox) for Firebase. The sandbox is now in [beta](https://docs.cloud.google.com/terms/launch-stages) .
+You can now try BigQuery without providing a credit card or attaching a billing account to your project by using the BigQuery [sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox) for Firebase. The sandbox is now in [beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 11, 2018
 
@@ -5522,7 +5522,7 @@ Providing input data to the [`ML.EVALUATE`](https://docs.cloud.google.com/bigque
 
 Feature
 
-Support for [using DML statements against partitioned tables](https://cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) is also [generally available (GA)](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [using DML statements against partitioned tables](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) is also [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
@@ -5530,7 +5530,7 @@ BigQuery is now available in the London (europe-west2) [region](https://docs.clo
 
 Feature
 
-Support for tables [partitioned on a `DATE` or `TIMESTAMP` column](https://cloud.google.com/bigquery/docs/creating-column-partitions) is now [generally available (GA)](https://docs.cloud.google.com/terms/launch-stages) .
+Support for tables [partitioned on a `DATE` or `TIMESTAMP` column](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) is now [generally available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 09, 2018
 
@@ -5542,7 +5542,7 @@ The [location](https://docs.cloud.google.com/bigquery/docs/locations#specifying_
 
 Feature
 
-Support for [Cloud Storage Transfers](https://cloud.google.com/bigquery/docs/cloud-storage-transfer) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [Cloud Storage Transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 25, 2018
 
@@ -5560,7 +5560,7 @@ Updated versions of [Simba ODBC and JDBC drivers](https://docs.cloud.google.com/
 
 Feature
 
-BigQuery ML is now available in the Tokyo (asia-northeast1) [region](https://docs.cloud.google.com/about/locations) .
+BigQuery ML is now available in the Tokyo (asia-northeast1) [region](https://cloud.google.com/about/locations) .
 
 ## September 13, 2018
 
@@ -5572,17 +5572,17 @@ BigQuery ML now supports [multiclass logistic regression models](https://docs.cl
 
 Feature
 
-[Scheduling queries](https://cloud.google.com/bigquery/docs/scheduling-queries) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+[Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## September 10, 2018
 
 Feature
 
-[Loading data in ORC format](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) is now [GA (Generally Available)](https://docs.cloud.google.com/terms/launch-stages) .
+[BigQuery Geographic Information Systems](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-[BigQuery Geographic Information Systems](https://cloud.google.com/bigquery/docs/gis-intro) is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+[Loading data in ORC format](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) is now [GA (Generally Available)](https://cloud.google.com/products#product-launch-stages) .
 
 ## August 27, 2018
 
@@ -5594,11 +5594,11 @@ Updated version of the [Simba JDBC driver](https://docs.cloud.google.com/bigquer
 
 Feature
 
-BigQuery now supports [loading Cloud Firestore export data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore) and [querying Cloud Firestore data](https://docs.cloud.google.com/bigquery/external-data-cloud-storage) stored in Cloud Storage.
+The [`NUMERIC` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric-type) is now [generally available](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The [`NUMERIC` data type](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric-type) is now [generally available](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery now supports [loading Cloud Firestore export data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore) and [querying Cloud Firestore data](https://docs.cloud.google.com/bigquery/external-data-cloud-storage) stored in Cloud Storage.
 
 ## July 31, 2018
 
@@ -5610,17 +5610,17 @@ The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs
 
 Feature
 
-BigQuery support for [clustered tables](https://cloud.google.com/bigquery/docs/clustered-tables) is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery support for [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 25, 2018
 
 Feature
 
-[Data Definition Language (DDL)](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) support in BigQuery is now [Generally Available (GA)](https://docs.cloud.google.com/terms/launch-stages) .
+[BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-[BigQuery ML](https://cloud.google.com/bigquery/docs/bqml-introduction) is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+[Data Definition Language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) support in BigQuery is now [Generally Available (GA)](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -5630,17 +5630,17 @@ BigQuery has achieved approximately 5x improvement in [TPC-DS](http://www.tpc.or
 
 Feature
 
-BigQuery support for [clustered tables](https://cloud.google.com/bigquery/docs/clustered-tables) is now [Alpha](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery support for [clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) is now [Alpha](https://cloud.google.com/products#product-launch-stages) .
 
 Feature
 
-The [BigQuery web UI](https://cloud.google.com/bigquery/docs/bigquery-web-ui) in the Cloud console is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+The [BigQuery web UI](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) in the Cloud console is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 18, 2018
 
 Feature
 
-Support for [Google Play reports](https://cloud.google.com/bigquery/docs/play-transfer) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [Google Play reports](https://docs.cloud.google.com/bigquery/docs/play-transfer) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## July 11, 2018
 
@@ -5650,7 +5650,7 @@ Google Ads transfers now support API version [v201806](https://developers.google
 
 Feature
 
-BigQuery Data Transfer Service for [Google Ads](https://cloud.google.com/bigquery/docs/adwords-transfer) is now [GA](https://docs.cloud.google.com/terms/launch-stages) (generally available).
+BigQuery Data Transfer Service for [Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) is now [GA](https://cloud.google.com/products#product-launch-stages) (generally available).
 
 ## June 28, 2018
 
@@ -5670,17 +5670,17 @@ BigQuery standard SQL now supports the functions [`FROM_BASE32`](https://docs.cl
 
 Feature
 
-BigQuery Data Transfer Service support for [YouTube Channel](https://cloud.google.com/bigquery/docs/youtube-channel-transfer) reports and [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer) reports is now [GA](https://docs.cloud.google.com/terms/launch-stages) (generally available).
+BigQuery Data Transfer Service support for [YouTube Channel](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer) reports and [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer) reports is now [GA](https://cloud.google.com/products#product-launch-stages) (generally available).
 
 ## June 18, 2018
 
 Feature
 
-[Loading data in Parquet format](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) is now [GA](https://docs.cloud.google.com/terms/launch-stages) (generally available).
+[Loading data in Parquet format](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) is now [GA](https://cloud.google.com/products#product-launch-stages) (generally available).
 
 Feature
 
-[Loading data in ORC format](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) is now [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+[Loading data in ORC format](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc) is now [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## June 06, 2018
 
@@ -5701,7 +5701,7 @@ The following quotas have changed for load jobs:
 
 Feature
 
-Support for the [`NUMERIC` data type](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric-type) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for the [`NUMERIC` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric-type) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## May 04, 2018
 
@@ -5742,7 +5742,7 @@ By default, the number of [export jobs](https://docs.cloud.google.com/bigquery/q
 
 Feature
 
-Support for DML [`MERGE` statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for DML [`MERGE` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## April 06, 2018
 
@@ -5764,17 +5764,17 @@ BigQuery standard SQL now supports: the [ERROR function to return errors](https:
 
 Feature
 
-BigQuery support for [using DML statements with partitioned tables](https://cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery [data definition language](https://docs.cloud.google.com/bigquery/docs/data-definition-language) now supports creating a table from the result of a query.
 
 Feature
 
-BigQuery [data definition language](https://docs.cloud.google.com/bigquery/docs/data-definition-language) now supports creating a table from the result of a query.
+BigQuery support for [using DML statements with partitioned tables](https://docs.cloud.google.com/bigquery/docs/using-dml-with-partitioned-tables) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## March 01, 2018
 
 Feature
 
-Support for [loading Parquet files](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+Support for [loading Parquet files](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 Change
 
@@ -5794,7 +5794,7 @@ Google Ads transfers now support [API version 201710](https://docs.cloud.google.
 
 Feature
 
-BigQuery Data Transfer Service [run notifications](https://cloud.google.com/bigquery/docs/transfer-run-notifications) are now in [Alpha](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery Data Transfer Service [run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) are now in [Alpha](https://cloud.google.com/products#product-launch-stages) .
 
 ## February 08, 2018
 
@@ -5815,13 +5815,13 @@ Added documentation on [manually changing table schemas](https://docs.cloud.goog
 
 Feature
 
-BigQuery support for [tables partitioned using a `TIMESTAMP` or `DATE` column](https://cloud.google.com/bigquery/docs/creating-column-partitions) is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery support for [tables partitioned using a `TIMESTAMP` or `DATE` column](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## January 17, 2018
 
 Feature
 
-BigQuery [data definition language](https://cloud.google.com/bigquery/docs/data-definition-language) support is now in [Beta](https://docs.cloud.google.com/terms/launch-stages) .
+BigQuery [data definition language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) support is now in [Beta](https://cloud.google.com/products#product-launch-stages) .
 
 ## January 08, 2018
 
@@ -6647,7 +6647,7 @@ Feature
 
 Feature
 
-API: New [batch queries](https://cloud.google.com/bigquery/docs/developers_guide#batchqueries) feature allows for queries to be executed between 30 minutes to 3 hours later, but are charged at a lower [cost](https://docs.cloud.google.com/bigquery/docs/pricing) than interactive queries which execute immediately
+API: New [batch queries](https://docs.cloud.google.com/bigquery/docs/introduction) feature allows for queries to be executed between 30 minutes to 3 hours later, but are charged at a lower [cost](https://docs.cloud.google.com/bigquery/docs/pricing) than interactive queries which execute immediately
 
 ## August 17, 2012
 

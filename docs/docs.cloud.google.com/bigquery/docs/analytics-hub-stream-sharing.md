@@ -66,7 +66,7 @@ Stream sharing with Pub/Sub has the following limitations:
 
 - A shared topic supports a maximum of 10,000 Pub/Sub subscriptions. This limit includes linked Pub/Sub subscriptions and Pub/Sub subscriptions created outside of Sharing, for example, those created directly from Pub/Sub.
 
-- Shared topics are indexed in Data Catalog (deprecated) and Knowledge Catalog, but you cannot filter specifically for their resource type.
+- Shared topics are indexed in Knowledge Catalog, but you cannot filter specifically for their resource type.
 
 - Usage metrics are captured and displayed in the Metrics dashboard for shared Pub/Sub topics and subscriptions, but are not available in `INFORMATION_SCHEMA.SHARED_DATASET_USAGE` .
 
