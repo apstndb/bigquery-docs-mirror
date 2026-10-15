@@ -162,7 +162,7 @@ There are two key restrictions around idle slot sharing:
 
 ### Reservation-based fairness
 
-> **Note:** You must [enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) before you can [create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
+> **Note:** For administration projects created after October 10, 2026, reservation-based fairness is enabled by default. For projects created before October 10, 2026, you must [enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) before you can [create a predictable reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#predictable) .
 
 With reservation-based fairness, BigQuery prioritizes and allocates idle slots equally across all reservations within the same [admin project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , regardless of the number of projects running jobs in each reservation. Each reservation receives a similar share of available capacity in the idle slot pool, and then its slots are distributed fairly within its projects. This feature is only supported with the Enterprise or Enterprise Plus editions.
 
@@ -197,6 +197,7 @@ You don't need to purchase slot commitments before creating autoscaling reservat
 When you create autoscaling reservations, consider the following:
 
 - BigQuery scales reservations almost instantly until it has reached the number of slots needed to execute the jobs, or it reaches the maximum number of slots available to the reservation. Slots always autoscale to a multiple of 50.
+- Unlike baseline slots, BigQuery doesn't reserve autoscaling slots in advance. This capacity, which bridges your baseline slots and the maximum reservation size, depends on current system availability. During periods of high demand, capacity constraints might delay scaling up.
 - Scaling up is based on actual usage, and is rounded up to the nearest 50 slot increment.
 - Your autoscaled slots are charged at [capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) for your associated edition while scaling up. You are charged for the number of scaled slots, not the number of slots used. This charge applies even if the job that causes BigQuery to scale up fails. For this reason, don't use the [jobs information schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to match the billing. Instead, see [Monitor autoscaling with information schema](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#monitor_autoscaling_with_information_schema) .
 - While the number of slots always scales by multiples of 50, it might scale more than 50 slots within one step. For example, if your workload requires an additional 450 slots, BigQuery can attempt to scale by 450 slots at once to meet the capacity requirement.
@@ -226,9 +227,9 @@ To learn how to work with autoscaling, see [Manage workload reservations](https:
 
 In addition to specifying the maximum reservation size, you can **optionally** specify a baseline number of slots per reservation. The baseline is the minimum number of slots that will always be allocated to the reservation, and you will always be charged for them. Autoscaling slots are only added after all of the baseline slots (and idle slots if applicable) are consumed. You can share idle baseline slots in one reservation with other reservations that need capacity.
 
-You can increase the number of baseline slots in a reservation every few minutes. If you want to decrease your baseline slots, you are limited to once an hour if you have recently changed your baseline slot capacity and your baseline slots exceed your committed slots. Otherwise, you can decrease your baseline slots every few minutes.
+You can increase the number of baseline slots in a reservation every few minutes, as long as BigQuery has available capacity when you make the request. If you want to decrease your baseline slots, you're limited to once an hour if you have recently changed your baseline slot capacity and your baseline slots exceed your committed slots. Otherwise, you can decrease your baseline slots every few minutes.
 
-Baseline and autoscaling slots are intended to provide capacity based on your recent workload. If you anticipate a large workload that is very different from your workloads in the recent past, we recommend increasing your baseline capacity ahead of the event rather than rely on autoscaling slots to cover the workload capacity. If you encounter an issue with increasing your baseline capacity, retry the request after waiting 15 minutes.
+Baseline and autoscaling slots are intended to provide capacity based on your recent workload. If you anticipate an unusually large workload, we recommend increasing your baseline capacity well in advance of the event rather than relying on autoscaling slots. Because baseline increases depend on BigQuery having available capacity, planning ahead gives you the best chance of securing the slots you need. If your request to increase capacity fails, wait 15 minutes and retry.
 
 If the reservation doesn't have baseline slots or is not configured to borrow [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) from other reservations, then BigQuery attempts to scale. Otherwise, baseline slots must be fully utilized before scaling.
 

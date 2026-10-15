@@ -40,6 +40,7 @@ You can use regional endpoints to keep your data within the following locations:
 - Europe
 
   - Belgium `europe-west1`
+  - Berlin `europe-west10`
   - Frankfurt `europe-west3`
   - London `europe-west2`
   - Milan `europe-west8`

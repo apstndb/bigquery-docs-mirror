@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity
 uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity
 title: Configure private connectivity for Snowflake transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Configure private connectivity to transfer data from Snowflake into BigQuery over a private network.
 data_source: docs.cloud.google.com
 ---
 

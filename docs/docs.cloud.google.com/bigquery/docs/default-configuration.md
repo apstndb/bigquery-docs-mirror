@@ -14,11 +14,23 @@ The following sections describe how to specify default configuration settings. D
 
 ## Required roles
 
-To get the permission that you need to specify a configuration setting, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to specify or retrieve configuration settings, ask your administrator to grant you the following IAM roles:
 
-This predefined role contains the `bigquery.config.update` permission, which is required to specify a configuration setting.
+- Specify configuration settings: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) on your organization or project
+- Retrieve configuration settings: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the specified project
 
-You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to specify or retrieve configuration settings. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to specify or retrieve configuration settings:
+
+- Specify configuration settings: `bigquery.config.update` on your organization or project
+- Retrieve configuration settings: `bigquery.config.get` on the specified project
+
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
@@ -409,16 +421,6 @@ You can view the configuration settings for an organization or project by using 
 
 It may take a few minutes for new configurations to become effective and reflected within the `INFORMATION_SCHEMA` view.
 
-### Required roles
-
-To get the permission that you need to retrieve configuration settings, ask your administrator to grant you the [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) IAM role on the specified project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-This predefined role contains the `bigquery.config.get` permission, which is required to retrieve configuration settings.
-
-You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
-
-For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
-
 ### Examples
 
 Use the following query examples to retrieve your project and organization settings from the `INFORMATION_SCHEMA` views.
@@ -508,7 +510,7 @@ Use the following settings to control how queries are executed, timed, and queue
 
 - `default_location` : The [`default_location` configuration setting](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) is used to run jobs when the [location isn't set or can't be determined](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . If `default_location` isn't set, the job runs in the `US` multi-region.
 
-- `enable_reservation_based_fairness` : The option that determines how idle slots are shared. The default value is false, which means idle slots are equally distributed across all query projects. If enabled, the idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see [reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) . This option is only supported at the project level. You can't specify it at the organization or job level.
+- `enable_reservation_based_fairness` : The option that determines how idle slots are shared. For administration projects created after October 10, 2026, this option is enabled by default. For projects created before October 10, 2026 where this option is disabled ( `false` ), idle slots are equally distributed across all query projects. If enabled ( `true` ), idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see [reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) . This option is only supported at the project level. You can't specify it at the organization or job level.
 
 - `default_time_zone` : The default time zone to use in time zone-dependent GoogleSQL functions, when a time zone is not specified as an argument. This configuration does not apply to [time-unit column partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) (which use UTC as the time zone), the [Storage Transfer Service schedule transfers](https://docs.cloud.google.com/storage-transfer/docs/schedule-transfer-jobs) , or [loading data with the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#loading_data) . For more information, see [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .
 

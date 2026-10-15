@@ -232,7 +232,7 @@ Using Cloud Run functions, create a function that translates input text into Spa
     Flask==3.1.3; python_version >= '3.9'
     functions-framework==3.9.2
     google-cloud-translate==3.18.0
-    Werkzeug==3.1.8; python_version >= '3.9'
+    Werkzeug==3.1.9; python_version >= '3.10'
     ```
 
 4.  Click **Deploy** and wait for the function to deploy.

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/enable-transfer-service
 uri: https://docs.cloud.google.com/bigquery/docs/enable-transfer-service
 title: Enable the BigQuery Data Transfer Service
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Enable the BigQuery Data Transfer Service, configure the service agent, and grant the required Identity and Access Management roles for data transfers.
 data_source: docs.cloud.google.com
 ---
 

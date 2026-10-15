@@ -296,11 +296,11 @@ print(f"Created reservation: {reservation.name}")
 
 ### Create a predictable reservation
 
-Before you create a reservation with a [maximum number of slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) , you must first enable [reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) .
+Before you create a reservation with a [maximum number of slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) , reservation-based fairness must be enabled on the administration project. For administration projects created after October 10, 2026, reservation-based fairness is enabled by default.
 
 #### Enable reservation-based fairness
 
-To enable reservation-based fairness, set the [`enable_reservation_based_fairness` flag](https://docs.cloud.google.com/bigquery/docs/default-configuration) to `true` .
+For administration projects created before October 10, 2026 without reservation-based fairness enabled, set the [`enable_reservation_based_fairness` flag](https://docs.cloud.google.com/bigquery/docs/default-configuration) to `true` .
 
 To update the reservation-based fairness on a project, you need the `bigquery.config.update` permission on the [project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the reservations. The predefined `BigQuery Admin` role includes this permission.
 

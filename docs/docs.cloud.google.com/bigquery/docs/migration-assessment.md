@@ -181,6 +181,8 @@ You can also generate multiple zip files containing query logs covering non-over
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
+> **Note:** Extracting metadata from Cloudera Manager captures cluster-level utilization and Apache Hadoop YARN and Apache Spark workloads, but it doesn't extract Apache Hive table schemas or SQL query logs. If your Cloudera cluster runs Hive workloads, you must also complete the metadata and query log extraction steps. For more information, see [Use Hive in your Cloudera cluster](https://docs.cloud.google.com/bigquery/docs/migration-assessment#use-hive-cloudera) .
+
 ### Requirements
 
 You must have the following to extract metadata from Cloudera:
@@ -229,6 +231,29 @@ You must have the following to extract metadata from Cloudera:
     - ` ``PAGE_SIZE`` ` (optional): the number of records per Cloudera response. The default value is `1000` .
     - ` ``START_DATE`` ` (optional): the start date for your history dump in ISO 8601 format, for example `2025-05-29` . The default value is 90 days before the current date.
     - ` ``END_DATE`` ` (optional): the end date for your history dump in ISO 8601 format, for example `2025-05-30` . The default value is the current date.
+
+#### Extract HDFS storage metadata
+
+You can also analyze storage footprints, directory structures, and file permissions on the Apache Hadoop Distributed File System (HDFS) by running the `dwh-migration-dumper` tool with the `hdfs` connector on a node with access to the HDFS NameNode.
+
+```
+dwh-migration-dumper \
+    --connector hdfs \
+    --host HDFS_NAMENODE_HOST \
+    --port 8020 \
+    --kerberos-auth-for-hadoop \
+    --hadoop-core-site-xml CORE_SITE_XML_PATH \
+    --hadoop-hdfs-site-xml HDFS_SITE_XML_PATH \
+    --assessment
+```
+
+Replace the following:
+
+- ` ``HDFS_NAMENODE_HOST`` ` : the hostname or IP address of your active HDFS NameNode. The default port is `8020` .
+- ` ``CORE_SITE_XML_PATH`` ` : the path to your cluster's `core-site.xml` file. For example, `/etc/hadoop/conf/core-site.xml` .
+- ` ``HDFS_SITE_XML_PATH`` ` : the path to your cluster's `hdfs-site.xml` file. For example, `/etc/hadoop/conf/hdfs-site.xml` .
+
+Upload the generated `dwh-migration-hdfs-*.zip` file to the same Cloud Storage bucket as your Cloudera Manager metadata zip file.
 
 #### Use Oozie in your Cloudera cluster
 
@@ -292,7 +317,7 @@ Replace the following:
 
 #### Use Hive in your Cloudera cluster
 
-To use the Hive connector, see the Apache Hive tab.
+If your Cloudera cluster runs Hive workloads, extract Hive metastore schemas ( `--connector hiveql` ) and query logs ( `hadoop-migration-assessment` logging hook) by completing the steps in the Hive tab.
 
 ### Teradata
 
@@ -700,7 +725,7 @@ To generate the metadata zip file, run the following command on a machine that h
 ```
 dwh-migration-dumper \
   --connector hiveql \
-  --database DATABASES \
+  --database DATABASE \
   --host hive.cluster.host \
   --port 9083 \
   --assessment
@@ -714,7 +739,7 @@ To authenticate to the metastore, sign in as a user that has access to the Apach
 JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
   dwh-migration-dumper \
   --connector hiveql \
-  --database DATABASES \
+  --database DATABASE \
   --host hive.cluster.host \
   --port 9083 \
   --hive-kerberos-url PRINCIPAL/HOST \
@@ -724,7 +749,7 @@ JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
 
 Replace the following:
 
-- `DATABASES` : the comma-separated list of database names to extract. If not provided, all databases are extracted.
+- `DATABASE` (optional): the comma-separated list of database names to extract—for example, `--database db1,db2` . You can omit the `--database` flag to extract all databases in the cluster. Extracting the entire cluster catalog ensures that all tables and cross-database dependencies are captured, letting you perform a more comprehensive migration assessment.
 - `PRINCIPAL` : the kerberos principal that the ticket is issued to
 - `HOST` : the kerberos hostname that the ticket is issued to
 - `hadoop.rpc.protection` : the Quality of Protection (QOP) of the Simple Authentication and Security Layer (SASL) configuration level, equal to the value of `hadoop.rpc.protection` parameter inside the `/etc/hadoop/conf/core-site.xml` file, with one of the following values:
@@ -733,6 +758,11 @@ Replace the following:
   - `privacy`
 
 ### Extract query logs with the `hadoop-migration-assessment` logging hook
+
+The `hadoop-migration-assessment` logging hook ( `MigrationAssessmentLoggingHook` ) intercepts and records queries as they run in real time. It doesn't extract historical queries that ran before you installed the logging hook.
+
+- For an initial test or report generation, we recommend that you run the logging hook for a few hours to confirm that `.avro` files are generated in the configured base directory, for example, in `hdfs://tmp/logs/` or `/tmp/logs/hive/` .
+- For a production migration assessment, we recommend that you run the logging hook for one to two weeks to capture a full business cycle, including weekly or month-end batch jobs, for accurate workload concurrency, query frequency, and compute sizing insights.
 
 To extract query logs, follow these steps:
 
@@ -795,8 +825,6 @@ is '2023-12-25T10:15:30'
 ```
 
 Rollover happens at the specified intervals or when the day changes. When the date changes, the logging hook also creates a new subfolder for that date.
-
-Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights.
 
 You can also generate folders containing query logs from different Hive clusters and provide all of them for a single assessment.
 
@@ -1846,7 +1874,15 @@ The `hadoop-migration-assessment` query logs extraction logging hook writes debu
 
 #### Handle the `ClassNotFoundException` error
 
-This error might be caused by misplacement of the logging hook JAR file. Ensure that you added the JAR file to the `auxlib` folder on the Hive cluster. Alternatively, you can specify the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// `` AUXLIB_PATH `` /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
+This error occurs when the `hive-server2` process can't locate `com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook` during query compilation.
+
+Ensure that you added the logging hook JAR file to the `auxlib` folder on the Hive cluster, or that you specified the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// `` AUXLIB_PATH `` /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
+
+If the error persists, do the following:
+
+- **Verify the JAR location on Cloudera (CDP or CDH):** In Cloudera environments, auxiliary JAR properties ( `hive.aux.jars.path` ) might not reliably load into the root query compilation classloader. To resolve this issue, copy the logging hook JAR file directly into the core Hive library directory on all HiveServer2 hosts—for example, `/opt/cloudera/parcels/CDH/lib/hive/lib/` .
+
+- **Verify the configuration scope:** If you use Cloudera Manager, ensure that you place the logging hook configuration properties (for example, `hive.exec.pre.hooks` , `hive.exec.post.hooks` , `hive.exec.failure.hooks` , and `dwhassessment.hook.base-directory` ) in the active execution engine configuration snippet. For example, if your cluster uses Tez execution, add the XML properties to Hive on Tez Advanced Configuration Snippet (Safety Valve) fields for `hive-site.xml` , or on the service-wide Hive safety valve, rather than in the standalone HiveServer2 configuration snippets. After you save the changes, restart the Hive service, including the HiveServer2 and Hive Metastore roles.
 
 #### Subfolders don't appear in the configured folder
 

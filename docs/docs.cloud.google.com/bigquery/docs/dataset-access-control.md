@@ -70,7 +70,7 @@ If you opt into enforcement of the permission changes, any custom roles that gra
 
 Any custom roles that only include the `bigquery.datasets.get` , `bigquery.datasets.update` , or `bigquery.datasets.create` permission must be updated to include the `bigquery.datasets.getIamPolicy` or `bigquery.datasets.setIamPolicy` permission, if you want to maintain the existing functionality of the custom roles. If your custom roles need to view or update only a dataset's metadata, use the new `dataset_view` and `update_mode` parameters.
 
-BigQuery predefined roles are *not* affected by this change. All predefined roles that grant the `bigquery.datasets.get` permission also grant the `bigquery.datasets.getIamPolicy` permission. All predefined roles that grant the `bigquery.datasets.update` permission also grant the `bigquery.datasets.setIamPolicy` permission.
+Standard BigQuery predefined user roles aren't affected by this change. Specifically, `roles/bigquery.admin` , `roles/bigquery.dataOwner` , `roles/bigquery.dataEditor` , `roles/bigquery.dataViewer` , `roles/bigquery.metadataViewer` , `roles/bigquery.user` , `roles/bigquery.studioAdmin` , and `roles/bigquery.securityAdmin` already grant the corresponding `bigquery.datasets.getIamPolicy` or `bigquery.datasets.setIamPolicy` permissions. However, other predefined roles that need only dataset metadata access don't include the `bigquery.datasets.getIamPolicy` or `bigquery.datasets.setIamPolicy` permission. These roles include [authorized routine roles](https://docs.cloud.google.com/bigquery/docs/authorized-routines) , metadata roles for other services, and some [service agent roles](https://docs.cloud.google.com/iam/docs/service-agent-roles) .
 
 ## Changes to bq command-line tool commands
 

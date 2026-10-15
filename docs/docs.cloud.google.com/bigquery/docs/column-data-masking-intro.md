@@ -423,6 +423,11 @@ The following sections describe the categories of restrictions and limitations t
 
 - The project containing the policy tag taxonomy must belong to an organization.
 
+- Policy tag taxonomies are scoped to an organization. If you migrate a project to a different organization, the project loses access to its original Data Catalog taxonomy. Stale policy tags might still appear on table columns in the schema editor, but they are removed from the policy tag UI in the Google Cloud console and cannot be applied to new tables. If you migrate a project to a new organization, you must do the following:
+  - Manually re-create your policy tag taxonomies, policy tags, and associated data policies in a project within the destination organization.
+  - Explicitly grant the folder-level BigQuery Admin ( `roles/bigquery.admin` ) and Data Catalog Admin ( `roles/datacatalog.admin` or `roles/datacatalog.categoryAdmin` ) roles in the destination organization.
+  - Update the table columns in the migrated project to reference the newly created policy tags in the destination organization.
+
 - A policy tag hierarchy can be no more than five levels deep from the root node to the lowest-level subtag, as shown in the following screenshot:
 
   ![Policy tag depth.](https://docs.cloud.google.com/static/bigquery/images/policy-tag-depth.png)

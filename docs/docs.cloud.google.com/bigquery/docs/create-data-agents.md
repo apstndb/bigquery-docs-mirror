@@ -533,38 +533,33 @@ To send an email notification that informs recipients of their access to an agen
 
 ## Publish a data agent in Gemini Enterprise
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
-
 You can publish a BigQuery data agent in Gemini Enterprise so that business users can query and analyze data using natural language directly within Gemini Enterprise. This process typically involves collaboration between data analysts, Gemini Enterprise administrators, and business users. For more information about the roles required for these users, see [Required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) .
 
 To publish a data agent in Gemini Enterprise, complete the following steps:
 
-1.  Review prerequisites and region mapping.
+1.  Review prerequisites.
 2.  Create and publish the data agent in BigQuery.
-3.  Configure the Agent Gateway in Gemini Enterprise.
-4.  Provision the agent in Gemini Enterprise.
-5.  Discover and chat with the agent.
+3.  Provision the agent in Gemini Enterprise.
+4.  Discover and chat with the agent.
 
-### Before you begin
+### Review prerequisites
 
-Before you publish a data agent, review the requirements based on your project setup and region.
+The recommended way to publish BigQuery conversational analytics agents is by using [Agent Registry](https://docs.cloud.google.com/bigquery/docs/create-data-agents#import-from-agent-registry) . Follow the prerequisites in this section to ensure that the agent is discoverable in Gemini Enterprise.
 
-There are two different workflows for publishing a data agent, depending on whether the BigQuery data agent and Gemini Enterprise application are in the same Google Cloud project.
+Alternatively, you can publish the agent by using the [A2A card JSON](https://docs.cloud.google.com/bigquery/docs/create-data-agents#import-using-a2a-json) . If you use this method, see [Create and publish the data agent in BigQuery](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-bigquery) .
 
-- If BigQuery and Gemini Enterprise are in the same Google Cloud project, you can register the agent with Agent Registry during publishing, and import the agent into Gemini Enterprise using Google-managed credentials. You don't need to copy JSON data or configure OAuth client credentials manually.
-- If BigQuery and Gemini Enterprise are in different Google Cloud projects, you must copy the Agent-to-Agent (A2A) JSON card from BigQuery and paste it into Gemini Enterprise. However, you can still select **Default Google-managed credentials** , so you don't need to create or enter an OAuth client ID and client secret.
-
-If you use Agent Registry, the storage region for the BigQuery data agent and the [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) registry binding in Gemini Enterprise must match.
+To use Agent Registry, you must first configure the [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) with the appropriate region mapping. The storage region for the BigQuery data agent and the Agent Gateway registry binding in Gemini Enterprise must match.
 
 You configure the storage region for the agent in the **Region** section of the [agent editor](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) in the BigQuery web UI. You can't change the region after the agent is saved.
 
 The following image shows the available region options in Agent Gateway:
 
 ![Available region options in Agent Gateway for agent registries.](https://docs.cloud.google.com/static/bigquery/images/agent-region.png)
+
+As the Gemini Enterprise administrator, configure an Agent Gateway for your Gemini Enterprise application by completing the following steps:
+
+1.  [Set up an Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/set-up-agent-gateway) that includes the Agent Registry binding matching your data agent's region. Options include **US** , **EU** , or **Global** .
+2.  In Gemini Enterprise, open your application, go to **Security** \> **Configuration** , and then enter the gateway resource name in the **Agent Gateway configuration** section. For detailed instructions, see [Route Gemini Enterprise traffic through Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-ge-deploy) .
 
 ### Create and publish the data agent in BigQuery
 
@@ -576,16 +571,9 @@ As a data analyst, you create, configure, and publish an agent in BigQuery by co
 4.  In the **Publishing channels** pane, under **Additional channels** , choose your publishing method:
     - If your BigQuery and Gemini Enterprise are in the same project, in the **Agent Registry** section, select the **Register this agent** checkbox.
       - If you want to remove the agent from the registry, click **Unregister** .
-    - If your BigQuery and Gemini Enterprise are in different projects, in the **Integrate via A2A (Agent2Agent)** section, click **Copy JSON** to copy the A2A endpoint JSON data, and then share the JSON data with your Gemini Enterprise administrator.
+    - If your BigQuery and Gemini Enterprise are in different projects, in the **Integrate via A2A (Agent2Agent)** section, click **Copy JSON** to copy the A2A endpoint JSON data, and then share the JSON data with your Gemini Enterprise administrator. This JSON data is used when you [provision the agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#provision-agent-gemini-enterprise) section.
 5.  Click **Publish** or **Publish updates** .
 6.  [Share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with the users and groups who need access, granting them the Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ) role.
-
-### Configure the Agent Gateway in Gemini Enterprise
-
-As the Gemini Enterprise administrator, if you import agents from Agent Registry, you must configure an [Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-overview) for your Gemini Enterprise application by completing the following steps:
-
-1.  [Set up an Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/set-up-agent-gateway) that includes the Agent Registry binding matching your data agent's region. Options include **US** , **EU** , or **Global** .
-2.  In Gemini Enterprise, open your application, go to **Security** \> **Configuration** , and then enter the gateway resource name in the **Agent Gateway configuration** section. For detailed instructions, see [Route Gemini Enterprise traffic through Agent Gateway](https://docs.cloud.google.com/gemini-enterprise-agent-platform/govern/gateways/agent-gateway-ge-deploy) .
 
 ### Provision the agent in Gemini Enterprise
 
@@ -593,22 +581,31 @@ As the Gemini Enterprise administrator, make the data agent available to users i
 
 #### Option 1: Import from Agent Registry
 
-If BigQuery and Gemini Enterprise are in the same project, follow these steps to import the registered agent:
+Follow these steps to import the registered agent:
 
-1.  In Gemini Enterprise, click the name of the app where you want to add the agent.
-2.  In the navigation menu, click **Agents** \> click add **Add agent** .
-3.  In the **Choose an agent type** pane, locate **Agents from Agent Registry** and click **Add** .
-4.  In the **Add agent** pane, search for the agent by name, Agent Registry ID, type, producer, or use case, or locate the agent card in the list.
-5.  On the agent card, click **Add agent** .
-6.  In the **Review agent details** step, review the agent metadata populated from the agent's A2A card including name, description, agent URL, capabilities, and skills, and then click **Next** .
-7.  In the **Authenticate agent** step, select how Gemini Enterprise authenticates against the agent provider:
+1.  If Gemini Enterprise is in a different project from the BigQuery project, complete the following steps to [manually register the agent](https://docs.cloud.google.com/agent-registry/manual-registration#register-remote-agent) in Agent Registry. Otherwise, skip this step:
+    1.  In the Google Cloud console, go to **Agent Registry** in the same project as Gemini Enterprise, select the **Agents** tab, and then click **Add agent** .
+    2.  In the **Agent details** pane, for **Type** , select **A2A** .
+    3.  For **Region** , select the region that matches your data agent and Agent Gateway configuration.
+    4.  Select **Paste JSON** , paste the A2A endpoint JSON data from BigQuery, and then click **Save** .
+2.  In Gemini Enterprise, click the name of the app where you want to add the agent.
+3.  In the navigation menu, click **Agents** \> click add **Add agent** .
+4.  In the **Choose an agent type** pane, locate **Agents from Agent Registry** and click **Add** .
+5.  In the **Add agent** pane, search for the agent by name, Agent Registry ID, type, producer, or use case, or locate the agent card in the list.
+6.  On the agent card, click **Add agent** .
+7.  In the **Review agent details** step, review the agent metadata populated from the agent's A2A card including name, description, agent URL, capabilities, and skills, and then click **Next** .
+8.  In the **Authenticate agent** step, select how Gemini Enterprise authenticates against the agent provider:
     - **Default Google-managed credentials** : Google manages the OAuth credentials automatically. You don't need to manually configure or enter client credentials.
     - **Custom OAuth** : Select this option only if your organization requires custom OAuth client credentials, and enter the Client ID, Client secret, Authorization URL, and Token URL.
-8.  Click **Finish** .
-9.  The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
-10. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
+9.  Click **Finish** .
+10. The agent appears in the **Agents table** with the state **Enabled** and agent type **A2A (Custom)** .
+11. [Share the agent](https://docs.cloud.google.com/gemini/enterprise/docs/share-custom-agents#share_an_agent) with the users or groups who need access.
 
 #### Option 2: Import using A2A card JSON
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 If BigQuery and Gemini Enterprise are in different projects, follow these steps to import the agent using the A2A card JSON:
 
@@ -674,6 +671,9 @@ To enable agent observability, you must have the following permissions on your p
 - `cloudaicompanion.gibqObservabilitySettings.create`
 - `cloudaicompanion.gibqObservabilitySettings.list`
 - `cloudaicompanion.gibqObservabilitySettings.update`
+- `cloudaicompanion.settingBindings.gibqObservabilitySettingsCreate`
+- `cloudaicompanion.settingBindings.gibqObservabilitySettingsList`
+- `cloudaicompanion.settingBindings.gibqObservabilitySettingsUse`
 - `geminidataanalytics.dataAgents.create`
 - `geminidataanalytics.operations.get`
 - `observability.traceScopes.create`

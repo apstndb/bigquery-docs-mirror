@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/sfmc-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/sfmc-transfer
 title: Load Salesforce Marketing Cloud data into BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule recurring data transfers from Salesforce Marketing Cloud into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

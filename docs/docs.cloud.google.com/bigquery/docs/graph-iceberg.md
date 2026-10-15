@@ -408,6 +408,6 @@ To avoid ongoing charges, remove the resources that you created.
 ## What's next
 
 - Learn more about [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
-- Learn more about [borderless Lakehouse concepts](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) .
-- Learn how to [use borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/use-borderless-lakehouse) .
+- Learn more about [cross-cloud data access concepts](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) .
+- Learn how to [query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
 - Refer to the [GQL query statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-query-statements) .

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/transfer-custom-constraints
 uri: https://docs.cloud.google.com/bigquery/docs/transfer-custom-constraints
 title: Use custom organization policies
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Create and enforce Organization Policy Service custom constraints to restrict operations on transfer configurations in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

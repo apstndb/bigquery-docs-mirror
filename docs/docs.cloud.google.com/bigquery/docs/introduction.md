@@ -8,13 +8,20 @@ data_source: docs.cloud.google.com
 
 # BigQuery overview
 
-BigQuery is a fully managed, AI-ready data platform that helps you manage and analyze your data with built-in features like machine learning, search, geospatial analysis, and business intelligence. BigQuery's serverless architecture lets you use languages like SQL and Python to answer your organization's biggest questions with zero infrastructure management.
+BigQuery is a fully managed, AI-ready data platform that helps you manage and analyze your data. Its serverless architecture lets you use languages like SQL and Python to answer your organization's biggest questions with zero infrastructure management.
 
-BigQuery provides a uniform way to work with both structured and unstructured data and supports open table formats like Apache Iceberg, Delta, and Apache Hudi. BigQuery streaming supports continuous data ingestion and analysis while BigQuery's scalable, distributed analysis engine lets you query terabytes in seconds and petabytes in minutes.
+As a data analyst, data engineer, data warehouse administrator, or data scientist, you can use BigQuery for the following key use cases:
 
-BigQuery offers built-in governance capabilities that let you discover and curate data, and manage metadata and data quality. Through features like semantic search and data lineage, you can find and validate relevant data for analysis. You can share data and AI assets across your organization with the benefits of access control. These features are powered by Knowledge Catalog, which is a unified, intelligent governance solution for data and AI assets in Google Cloud.
+- **AI-assisted workflows:** leverage generative AI, vector search, and Gemini assistive features to explore, transform, and integrate large language models (LLMs) into your data workflows.
+- **Machine learning and predictive analytics:** build, train, and deploy models on your data using SQL or Python.
+- **Business intelligence and ad hoc analysis:** query terabytes in seconds and petabytes in minutes to inform critical business decisions.
+- **Geospatial analysis:** analyze and visualize location-based data using geographic information systems (GIS).
+- **Data governance and semantic search:** discover, curate, and validate data and AI assets using built-in features powered by Knowledge Catalog.
+- **Continuous data ingestion:** stream both structured and unstructured data in real-time, with support for open table formats like Apache Iceberg, Delta, and Apache Hudi.
 
-BigQuery's architecture consists of two parts: a storage layer that ingests, stores, and optimizes data and a compute layer that provides analytics capabilities. These compute and storage layers efficiently operate independently of each other thanks to Google's petabit-scale network that enables the necessary communication between them.
+## BigQuery architecture
+
+BigQuery architecture consists of two parts: a storage layer that ingests, stores, and optimizes data and a compute layer that provides analytics capabilities. These compute and storage layers efficiently operate independently of each other thanks to Google's petabit-scale network that enables the necessary communication between them.
 
 Legacy databases usually have to share resources between read and write operations and analytical operations. This can result in resource conflicts and can slow queries while data is written to or read from storage. Shared resource pools can become further strained when resources are required for database management tasks such as assigning or revoking permissions. BigQuery's separation of compute and storage layers lets each layer dynamically allocate resources without impacting the performance or availability of the other.
 
@@ -23,8 +30,6 @@ Legacy databases usually have to share resources between read and write operatio
 This separation principle lets BigQuery innovate faster because storage and compute improvements can be deployed independently, without downtime or negative impact on system performance. It is also essential to offering a fully managed serverless data warehouse in which the BigQuery engineering team handles updates and maintenance. The result is that you don't need to provision or manually scale resources, leaving you free to focus on delivering value instead of traditional database management tasks.
 
 BigQuery interfaces include Google Cloud console interface and the BigQuery command-line tool. Developers and data scientists can use client libraries with familiar programming including Python, Java, JavaScript, and Go, as well as BigQuery's REST API and RPC API to transform and manage data. ODBC and JDBC drivers provide interaction with existing applications including third-party tools and utilities.
-
-As a data analyst, data engineer, data warehouse administrator, or data scientist, BigQuery helps you load, process, and analyze data to inform critical business decisions.
 
 ## Get started with BigQuery
 

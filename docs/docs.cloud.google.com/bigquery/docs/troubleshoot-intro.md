@@ -12,6 +12,8 @@ This document provides an overview of the diagnostic tools, telemetry interfaces
 
 When you encounter query failures, performance bottlenecks, permission errors, quota limits, or data ingestion issues, BigQuery provides built-in tools to help you identify root causes and resolve issues quickly.
 
+> **Note:** If you have a specific HTTP status code, `ErrorProto` reason string, or API error message, see [Error messages](https://docs.cloud.google.com/bigquery/docs/error-messages) for descriptions and recommended actions.
+
 ## Troubleshooting workflow
 
 To troubleshoot an issue in BigQuery effectively, consider the following diagnostic criteria:

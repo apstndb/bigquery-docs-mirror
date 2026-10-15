@@ -28,7 +28,15 @@ The `hadoop-migration-assessment` query logs extraction logging hook writes debu
 
 #### Handle the `ClassNotFoundException` error
 
-This error might be caused by misplacement of the logging hook JAR file. Ensure that you added the JAR file to the `auxlib` folder on the Hive cluster. Alternatively, you can specify the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// `` AUXLIB_PATH `` /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
+This error occurs when the `hive-server2` process can't locate `com.google.cloud.bigquery.dwhassessment.hooks.MigrationAssessmentLoggingHook` during query compilation.
+
+Ensure that you added the logging hook JAR file to the `auxlib` folder on the Hive cluster, or that you specified the full path to the JAR file in the `hive.aux.jars.path` property—for example, `file:// `` AUXLIB_PATH `` /HiveMigrationAssessmentQueryLogsHooks_deploy.jar` .
+
+If the error persists, do the following:
+
+- **Verify the JAR location on Cloudera (CDP or CDH):** In Cloudera environments, auxiliary JAR properties ( `hive.aux.jars.path` ) might not reliably load into the root query compilation classloader. To resolve this issue, copy the logging hook JAR file directly into the core Hive library directory on all HiveServer2 hosts—for example, `/opt/cloudera/parcels/CDH/lib/hive/lib/` .
+
+- **Verify the configuration scope:** If you use Cloudera Manager, ensure that you place the logging hook configuration properties (for example, `hive.exec.pre.hooks` , `hive.exec.post.hooks` , `hive.exec.failure.hooks` , and `dwhassessment.hook.base-directory` ) in the active execution engine configuration snippet. For example, if your cluster uses Tez execution, add the XML properties to Hive on Tez Advanced Configuration Snippet (Safety Valve) fields for `hive-site.xml` , or on the service-wide Hive safety valve, rather than in the standalone HiveServer2 configuration snippets. After you save the changes, restart the Hive service, including the HiveServer2 and Hive Metastore roles.
 
 #### Subfolders don't appear in the configured folder
 

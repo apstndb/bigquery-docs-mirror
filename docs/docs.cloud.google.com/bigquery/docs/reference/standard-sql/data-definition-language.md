@@ -6689,7 +6689,7 @@ The following options are supported:
 <tr class="even">
 <td><code>enable_reservation_based_fairness</code></td>
 <td><code>BOOL</code></td>
-<td><p>Determines how idle slots are shared. If <code>false</code> (default), idle slots are equally distributed across all query projects. If <code>true</code> , idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/slots#fairness">reservation-based fairness</a> .</p>
+<td><p>Determines how idle slots are shared. For administration projects created after October 10, 2026, reservation-based fairness is enabled ( <code>true</code> ) by default. For projects created before October 10, 2026 where this option is <code>false</code> , idle slots are equally distributed across all query projects. If <code>true</code> , idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/slots#fairness">reservation-based fairness</a> .</p>
 <p>Example: <code>`region-us.enable_reservation_based_fairness` = true</code> . Enables reservation-based fairness.</p></td>
 </tr>
 <tr class="odd">

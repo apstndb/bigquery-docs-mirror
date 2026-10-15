@@ -52,6 +52,7 @@ Use the `format` option to specify the format of the exported data. The followin
 - You cannot export nested and repeated data in CSV format.
 - If you export data in JSON format, `INT64` data types are encoded as JSON strings to preserve 64-bit precision.
 - If your `query_statement` includes an `ORDER BY` clause and you export to multiple files using a wildcard, the globally sorted result set is distributed sequentially across the generated files.
+- You can only export data to Amazon S3 or Blob Storage from queries that run against [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) in a supported [BigQuery Omni location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) . For more information, see [Export query results to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) and [Export query results to Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) .
 
 You are not billed for the export operation, but you are billed for running the query and for storing data in Cloud Storage, Amazon S3, or Blob Storage. For more information, see [Cloud Storage pricing](https://cloud.google.com/storage/pricing) , [Amazon S3 pricing](https://aws.amazon.com/s3/pricing) , or [Blob Storage pricing](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/) .
 
@@ -113,11 +114,13 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Amazon S3 in JSON format
 
-The following example [exports query results](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) that run against a BigLake table based on Amazon S3 to your Amazon S3 bucket:
+You can only export data to Amazon S3 from queries that run against BigLake tables based on Amazon S3. The connection and the dataset for the BigLake table must be in the same supported [BigQuery Omni location](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) as the target Amazon S3 bucket. For more information about export requirements and limitations, see [Export query results to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) .
+
+The following example exports query results from the BigLake table `mydataset.table1` to an Amazon S3 bucket using a connection in the `aws-us-east-1` location:
 
 ```
 EXPORT DATA
-  WITH CONNECTION myproject.us.myconnection
+  WITH CONNECTION `myproject.aws-us-east-1.myconnection`
   OPTIONS(
   uri='s3://bucket/folder/*',
   format='JSON',

@@ -720,7 +720,6 @@ If you prefer, you can specify the schema using a JSON schema file instead of us
 - Optional: The column's [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) (if unspecified, mode defaults to `NULLABLE` )
 - Optional: The column's fields if it is a [`STRUCT` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)
 - Optional: The column's [description](https://docs.cloud.google.com/bigquery/docs/schemas#column_descriptions)
-- Optional: The column's [policy tags](https://docs.cloud.google.com/data-catalog/docs/policy-tags) , used for field-level access control
 - Optional: The column's maximum length of values for `STRING` or `BYTES` types
 - Optional: The column's [precision](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) for `NUMERIC` or `BIGNUMERIC` types
 - Optional: The column's [scale](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) for `NUMERIC` or `BIGNUMERIC` types

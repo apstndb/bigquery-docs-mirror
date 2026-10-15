@@ -95,14 +95,24 @@ You can also grant `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` p
 
 ## Fail-safe
 
-BigQuery provides a fail-safe period. During the fail-safe period, deleted data is automatically retained for an additional seven days after the time travel window, so that the data is available for emergency recovery. Data is recoverable at the table level. Data is recovered for a table from the point in time represented by the timestamp of when that table was deleted. The fail-safe period is not configurable and can't be extended.
+BigQuery provides a fail-safe period. During the fail-safe period, deleted data is automatically retained for an additional seven days after the time travel window, so that the data is available for emergency recovery. Data is recoverable at the table level from the point in time represented by the timestamp of when that data was deleted.
+
+The fail-safe period isn't configurable and can't be extended. You must start and complete the table recovery before the seven-day fail-safe period expires, allowing enough time for the copy job to finish based on the size of your table.
 
 When you perform the following operations, the data that is replaced or removed can be recovered through the time travel window. After the time travel window ends, this data then enters the fail-safe period for extended recovery time:
 
 - **Table deletion or replacement:** When a table is deleted, or when its data is fully replaced (for example, by using the [`WRITE_TRUNCATE`](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) write disposition in a load job or by using the [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement), the previous contents of the table are retained.
-- **Partition deletion:** If a specific partition is deleted from a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , the data belonging to that specific partition is retained. Other partitions in the table aren't affected.
+- **Partition deletion or expiration:** If a specific partition is deleted or expires from a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , the data belonging to that specific partition is retained. Other partitions in the table aren't affected. Because you can't restore an individual partition, you must restore the entire table from a timestamp before the partition was deleted or expired. If the original table has a partition expiration, that setting is copied to the restored table. To query restored partitions that are older than the partition expiration time, [update the partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#update_the_partition_expiration) on the restored table.
 
-You can't query or directly recover data in fail-safe storage. To recover data from fail-safe storage, contact [Cloud Customer Care](https://cloud.google.com/support-hub) .
+### Recover data from fail-safe storage
+
+You can't query data in fail-safe storage directly, and you can't copy a table from fail-safe storage until [Cloud Customer Care](https://cloud.google.com/support-hub) grants temporary fail-safe recovery access on the dataset. To recover a table from fail-safe storage, contact [Cloud Customer Care](https://cloud.google.com/support-hub) to request fail-safe recovery access for your dataset, and then [restore the table](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#restore_a_table) yourself by running a table copy job with a `@ `` TIME` timestamp decorator.
+
+Unlike time travel recovery, which only updates metadata pointers, fail-safe recovery must physically restore and replicate archived storage blocks before the table copy job finishes. When you restore a large or heavily partitioned table from fail-safe storage, keep the following behaviors in mind:
+
+- **Longer copy times and timeouts:** Restoring a multi-terabyte table or a table with many partitions from fail-safe storage can take significantly longer than a standard table copy. A single copy job might time out or fail with a transient internal error before all storage blocks are restored.
+- **Incremental progress across retries:** Fail-safe restoration progress is saved incrementally. Any storage blocks that are restored before a copy job times out or fails remain restored. If a `bq cp` command fails, retry the command using the exact same source table and `@ `` TIME` timestamp decorator. Each retry skips the blocks that were already restored and continues restoring the remaining data until the copy job succeeds.
+- **Time-sensitive recovery window:** Contact [Cloud Customer Care](https://cloud.google.com/support-hub) as early as possible within the seven-day fail-safe period, especially for large tables, so that you have enough time to run retries before the fail-safe period expires.
 
 > **Warning:** Once the fail-safe period has passed, Cloud Customer Care can't recover any of your deleted data.
 

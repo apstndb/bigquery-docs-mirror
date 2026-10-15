@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/event-driven-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/event-driven-transfer
 title: Event-Driven Transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Set up event-driven transfers in the BigQuery Data Transfer Service to automatically load data from Cloud Storage based on Pub/Sub notifications.
 data_source: docs.cloud.google.com
 ---
 

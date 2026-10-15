@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer
 title: Migrate Apache Hive Metastore tables to Google Cloud
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Migrate Apache Hive Metastore tables to {{dynamic_data.site_values.cloud_name}} by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

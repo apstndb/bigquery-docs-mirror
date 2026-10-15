@@ -24,16 +24,9 @@ To enable APIs, you need the `serviceusage.services.enable` permission. If you c
 
 To get the permissions that you need to manage and monitor security settings from the BigQuery **Security center** page, ask your administrator to grant you the following IAM roles:
 
-- Browse and search resources on the **Resources** tab, and view data masking routines: [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` ) on the project
-- Manage row-level access policies, data policies (column-level security), and table and dataset security: [BigQuery Security Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.securityAdmin) ( `roles/bigquery.securityAdmin` ) on the project
-- Attach policy tags to columns:
-  - [BigQuery Data Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `roles/bigquery.dataOwner` ) on the table
-  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) on the project
-- Create and manage data policies without dataset ownership: [BigQuery Data Policy Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.admin) ( `roles/bigquerydatapolicy.admin` ) on the project
-- Run query jobs and view security insights (including `INFORMATION_SCHEMA` views): [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
-- Manage data governance tags: [Tag Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagAdmin) ( `roles/resourcemanager.tagAdmin` ) on the organization
-- Create and manage policy tag taxonomies: [Policy Tag Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categoryAdmin) ( `roles/datacatalog.categoryAdmin` ) on the taxonomy or organization
-- Query columns protected by policy tags: [Fine-Grained Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categoryFineGrainedReader) ( `roles/datacatalog.categoryFineGrainedReader` ) on the taxonomy or policy tag
+- [BigQuery Security Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.securityAdmin) ( `roles/bigquery.securityAdmin` ) on the project
+- Manage data governance tags: [Tag Administrator](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.tagAdmin) ( `roles/resourcemanager.tagAdmin` ) on the organization or project
+- Create and manage policy tag taxonomies: [Policy Tag Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categoryAdmin) ( `roles/datacatalog.categoryAdmin` ) on the taxonomy, project, or organization
 - Use Gemini Cloud Assist in the Security center: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) on the project
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .

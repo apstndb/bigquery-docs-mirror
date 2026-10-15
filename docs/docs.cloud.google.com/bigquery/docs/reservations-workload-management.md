@@ -14,7 +14,9 @@ This page describes how to use slot reservations to manage your BigQuery workloa
 
 In BigQuery, [slots](https://docs.cloud.google.com/bigquery/docs/slots) are allocated in pools called *reservations* . Reservations let you manage capacity and isolate workloads in ways that make sense for your organization. For example, you might create a reservation named `prod` for production workloads, and a separate reservation named `test` for testing, so that test jobs don't compete for resources with production jobs. Or, you might create reservations for different departments in your organization to allocate compute costs.
 
-Reservations also let administrators configure slot capacity based on the workloads assigned to them. For example, if you have production-level, time-sensitive workloads, create a reservation with adequate baseline slots. Baseline slots are always available and ensure the reservation always has sufficient capacity. However, if you use autoscaling reservations, the capacity in a reservation isn't necessarily reserved. When you use [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) , the capacity is automatically scaled up and down based on the demand. Autoscaling reservations are billed per second with a one-minute minimum duration by default. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration. In addition, [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) can be shared across reservations.
+Reservations also let administrators configure slot capacity based on the workloads assigned to them. For example, if you have production-level, time-sensitive workloads, create a reservation with adequate baseline slots.
+
+Once allocated, baseline slots remain constantly available to your reservation, though increasing this baseline depends on current system capacity. In contrast, when you use autoscaling reservations, BigQuery doesn't reserve the capacity between your baseline and the maximum reservation size in advance. Instead, BigQuery automatically scales this capacity up and down based on your demand and system availability. Autoscaling reservations are billed per second with a one-minute minimum duration by default. You can opt in to [BigQuery fluid scaling](https://docs.cloud.google.com/bigquery/docs/slots#fluid-scaling) at the reservation level for per-second billing with no minimum duration. In addition, [idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) can be shared across reservations.
 
 ## Reservation assignments
 
@@ -125,6 +127,8 @@ For more information on configuring these policies, see [Manage workload assignm
 ## Sizing slot reservations
 
 BigQuery is architected to scale linearly with increased resources. Depending on the workload, incremental capacity is likely to give you incremental performance. However, adding capacity also increases your costs. Therefore, choosing the optimal number of slots to purchase depends on your requirements for performance, throughput, and utility.
+
+When you add baseline slots or raise autoscaling limits, the BigQuery scheduler assigns more slots to individual queries to maximize parallelism. While this reduces query runtime, concurrent worker overhead can cause the total slot time ( `total_slot_ms` ) consumed by a query to increase.
 
 You can experiment with baseline and autoscaling slots to determine the best configuration of slots. For example, you can test your workload with 500 baseline slots, then 1,000, then 1,500, and 2,000, and observe the impact on performance.
 

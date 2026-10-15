@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer
 title: Schedule a Snowflake transfer
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Schedule and manage automated transfer jobs to migrate data from Snowflake into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

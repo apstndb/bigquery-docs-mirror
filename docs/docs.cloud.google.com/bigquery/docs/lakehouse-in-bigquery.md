@@ -123,7 +123,7 @@ Instead of creating a table containing data, you can create an empty Lakehouse t
 
 > **Note:** For support during the preview, email <biglake-help@google.com> .
 
-The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-borderless-lakehouse) lets you query data stored with other cloud providers directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/use-borderless-lakehouse) .
+The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) lets you query data stored with other cloud providers directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
 
 ## What's next
 

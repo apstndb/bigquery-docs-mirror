@@ -456,6 +456,8 @@ When you delete a dataset by using the Google Cloud console, tables and views in
 
 If you attempt to delete a non-empty dataset without the proper flags or parameters, the operation fails with the following error: `Dataset project:dataset is still in use` .
 
+If you attempt to delete a dataset that doesn't exist, the operation fails with a `Not found` error unless you specify an option to ignore missing datasets, such as `IF EXISTS` in GoogleSQL or the `-f` ( `--force` ) flag in the bq command-line tool.
+
 Deleting a dataset creates one [audit log](https://docs.cloud.google.com/bigquery/docs/introduction-audit-workloads) entry for the dataset deletion. It doesn't create separate log entries for each deleted table within the dataset.
 
 To delete a dataset, select one of the following options:
@@ -490,7 +492,9 @@ The following example deletes a dataset named `mydataset` :
     DROP SCHEMA IF EXISTS mydataset;
     ```
 
-    By default, this only works to delete an empty dataset. To delete a dataset and all of its contents, use the `CASCADE` keyword:
+    The `IF EXISTS` clause prevents an error if the dataset doesn't exist. Without `IF EXISTS` , attempting to delete a dataset that doesn't exist returns a `Not found` error.
+
+    By default, `DROP SCHEMA` only deletes an empty dataset. To delete a dataset and all of its contents, use the `CASCADE` keyword:
 
     ```
     DROP SCHEMA IF EXISTS mydataset CASCADE;
@@ -504,7 +508,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 Use the [`bq rm` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) with the `--dataset` or `-d` flag, which is optional. If your dataset contains tables, you must use the `-r` flag to remove all tables in the dataset. If you use the `-r` flag, then you can omit the `--dataset` or `-d` flag.
 
-After you run the command, the system asks for confirmation. You can use the `-f` flag to skip the confirmation.
+After you run the command, the system asks for confirmation. You can use the `-f` (or `--force` ) flag to skip the confirmation and ignore `Not found` errors if the dataset doesn't exist. Without the `-f` flag, attempting to delete a dataset that doesn't exist fails with a `Not found` error.
 
 If you are deleting a table in a project other than your default project, add the project ID to the dataset name in the following format: `PROJECT_ID `` : `` DATASET` .
 
@@ -537,7 +541,7 @@ You can use the `bq ls` command to confirm that the dataset was deleted.
 
 ### API
 
-Call the [`datasets.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete) method to delete the dataset and set the `deleteContents` parameter to `true` to delete the tables in it.
+Call the [`datasets.delete`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete) method to delete the dataset and set the `deleteContents` parameter to `true` to delete the tables in it. If the specified dataset doesn't exist, the method returns a `404 Not Found` error.
 
 ### C#
 

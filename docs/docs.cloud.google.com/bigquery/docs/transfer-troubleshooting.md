@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/transfer-troubleshooting
 uri: https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting
 title: Troubleshoot transfer configurations
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Troubleshoot common configuration, authorization, permission, and scheduling errors in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 
@@ -120,7 +120,10 @@ A Cloud Storage transfer fails with an access denied error for table creation, e
 
 2.  **Grant Required IAM Permissions:** Grant the service account or user identity running the transfer the `bigquery.tables.create` permission on the destination dataset. This permission is included in the BigQuery Data Editor ( `roles/bigquery.dataEditor` ) and BigQuery Admin ( `roles/bigquery.admin` ) roles. If you continue to see failures after granting the necessary permissions, you may need to [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to confirm your allowlist status.
 
-    **Alternative:** If you can't grant the required permissions or increase the quota, you must reduce the number of files per transfer run to 10,000 or fewer; for example, by using more specific URI wildcards or splitting the transfer into multiple smaller configurations.
+    **Alternatives:** If you can't grant the required permissions or wait for a quota increase and configuration change, consider the following options:
+
+    - Reduce the number of files per transfer run to 10,000 or fewer—for example, by using more specific URI wildcards or splitting the transfer into multiple smaller configurations.
+    - For one-off transfers or urgent loads, use a BigQuery [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) or the [`LOAD DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_data_statement) , both of which support a higher [maximum number of files per load job](https://docs.cloud.google.com/bigquery/quotas#load_jobs) .
 
 ## Authorization and permission issues
 

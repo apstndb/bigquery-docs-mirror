@@ -8,13 +8,11 @@ data_source: docs.cloud.google.com
 
 # Choose a natural language processing function
 
-This document provides a comparison of the natural language processing functions available in BigQuery ML, which are [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) , [`ML.TRANSLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate) , and [`ML.UNDERSTAND_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) . You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
+You can analyze and transform large amounts of text data directly within BigQuery by using machine learning (ML) functions. These functions let you gain insights from text without moving your data, which can streamline your workflow. BigQuery ML offers the following natural language processing (NLP) functions for working with text:
 
-At a high level, the difference between these functions is as follows:
-
-- `AI.GENERATE_TEXT` is a good choice for performing customized natural language processing (NLP) tasks at a lower cost. This function offers more language support, faster throughput, and model tuning capability, and also works with multimodal models.
-- `ML.TRANSLATE` is a good choice for performing translation-specific NLP tasks where you need to support a high rate of queries per minute.
-- `ML.UNDERSTAND_TEXT` is a good choice for performing NLP tasks that are supported by the Cloud Natural Language API.
+- [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) : perform customized NLP tasks using any combination of text and unstructured data from BigQuery standard tables, or unstructured data from BigQuery object tables.
+- [`ML.TRANSLATE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate) : perform translation-specific NLP tasks where you need to support a high rate of queries per minute.
+- [`ML.UNDERSTAND_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-understand-text) : perform NLP tasks that are supported by the Cloud Natural Language API.
 
 ## Function comparison
 

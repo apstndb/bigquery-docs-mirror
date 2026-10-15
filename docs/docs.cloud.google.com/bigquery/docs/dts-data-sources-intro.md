@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/dts-data-sources-intro
 uri: https://docs.cloud.google.com/bigquery/docs/dts-data-sources-intro
 title: BigQuery Data Transfer Service data sources
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Explore the SaaS, marketing, payment, database, and cloud storage data sources supported by the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

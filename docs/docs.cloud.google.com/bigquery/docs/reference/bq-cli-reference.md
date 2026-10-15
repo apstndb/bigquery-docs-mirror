@@ -2131,7 +2131,7 @@ To delete a capacity commitment, set to `true` , specify the location of the com
 To delete a dataset, set to `true` . The default value is `false` .
 
 **`--force={true|false}` or `-f={true|false}`**  
-To delete a resource without prompting, set to `true` . The default value is `false` .
+To delete a resource without prompting, set to `true` . When deleting a dataset, table, job, model, routine, connection, or transfer configuration, setting this flag to `true` also ignores `Not found` errors if the resource doesn't exist. The default value is `false` .
 
 **`--job={true|false}` or `-j={true|false}`**  
 To delete a job, set to true. The default value is false.

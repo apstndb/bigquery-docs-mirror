@@ -86,7 +86,7 @@ How It Works
 
 [Try BigQuery free](https://console.cloud.google.com/freetrial?redirectPath=/bigquery)
 
-[Demo: Learn how you can connect your multimodal data in BigQuery with Gemini](https://youtu.be/T0XttEMF4IM)
+[Demo: Learn how you can connect your multimodal data in BigQuery with Gemini, 16 minutes 06 seconds](https://youtu.be/T0XttEMF4IM)
 
 Demo: Learn how you can connect your multimodal data in BigQuery with Gemini
 

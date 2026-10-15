@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-network-policies
 uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-network-policies
 title: Configure network policies for Snowflake transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Configure network policies to allow the BigQuery Data Transfer Service Snowflake connector to connect to your account.
 data_source: docs.cloud.google.com
 ---
 

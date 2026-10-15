@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/dts-locations
 uri: https://docs.cloud.google.com/bigquery/docs/dts-locations
 title: Data location and transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how source data locations and destination dataset locations interact with transfer configurations in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

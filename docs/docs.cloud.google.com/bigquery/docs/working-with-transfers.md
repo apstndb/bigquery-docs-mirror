@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/working-with-transfers
 uri: https://docs.cloud.google.com/bigquery/docs/working-with-transfers
 title: Manage transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View, update, disable, or delete transfer configurations, inspect run logs, and schedule backfill runs in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

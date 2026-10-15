@@ -439,7 +439,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
     If you are not prompted and encounter an error that is related to the classpath during this walkthrough, do the following:
 
-    1.  Click **File \> Preferences \> Open Settings (UI)** .
+    1.  Click **File \> Preferences \> Settings (UI)** .
     2.  Click **Extensions \> Java** .
     3.  Scroll to **Configuration: Update Build Configuration** and select **automatic** .
 

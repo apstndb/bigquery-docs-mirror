@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/transfer-run-notifications
 uri: https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications
 title: BigQuery Data Transfer Service run notifications
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Configure Pub/Sub and email notifications to monitor completed or failed transfer runs in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

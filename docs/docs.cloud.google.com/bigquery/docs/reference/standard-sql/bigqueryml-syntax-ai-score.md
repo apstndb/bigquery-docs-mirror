@@ -87,12 +87,13 @@ AI.SCORE(
 
   BigQuery supports the following models:
 
-  - `gemini-3.1-flash-lite`
-  - `gemini-3.5-flash`
-  - `gemini-3.5-flash-lite`
-  - `gemini-3.6-flash`
-  - `gemini-3.7-flash`
+  - `gemini-4-argon`
   - `gemini-3.8-flash`
+  - `gemini-3.7-flash`
+  - `gemini-3.6-flash`
+  - `gemini-3.5-flash-lite`
+  - `gemini-3.5-flash`
+  - `gemini-3.1-flash-lite`
 
   Agent Platform only supports multi-regional endpoints for these models. Regional endpoints aren't supported. If you specify a short endpoint name that omits the region, such as `gemini-3.5-flash` , then BigQuery selects an endpoint according to the following rules:
 

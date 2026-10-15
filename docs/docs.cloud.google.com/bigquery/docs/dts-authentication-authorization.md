@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/dts-authentication-authorization
 uri: https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization
 title: Authorize accounts for data transfer
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to authenticate and authorize user accounts, service accounts, and service agents for transfers in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

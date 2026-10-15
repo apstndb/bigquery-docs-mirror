@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/paypal-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/paypal-transfer
 title: Load PayPal data into BigQuery
-description: Load and transfer data from PayPal to BigQuery
+description: Schedule recurring data transfers from PayPal into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

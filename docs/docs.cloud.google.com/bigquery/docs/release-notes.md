@@ -14,6 +14,42 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 14, 2026
+
+Feature
+
+The Apache Hive catalog endpoint in the Lakehouse runtime catalog is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). This integration lets you use the metastore as a serverless, central metadata layer, enabling seamless data sharing and unified querying across Apache Spark, Apache Hive, and BigQuery.
+
+For more information, see [About the Hive catalog endpoint](https://docs.cloud.google.com/lakehouse/docs/about-spark-hive-metastore) and [Set up Spark and Hive with the Lakehouse runtime catalog](https://docs.cloud.google.com/lakehouse/docs/use-spark-hive-metastore) .
+
+Feature
+
+Metadata migration from Dataproc Metastore to Lakehouse is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can perform a one-time backfill migration or dry run to migrate metadata from a Dataproc Metastore service to an Apache Iceberg REST catalog endpoint or a Hive catalog endpoint using the Google Cloud console, the gcloud CLI, or the REST API.
+
+For more information, see [Migrate metadata from Dataproc Metastore to Lakehouse](https://docs.cloud.google.com/lakehouse/docs/migrate-dataproc-metastore) .
+
+Feature
+
+Conversational analytics now lets you [create a conversation](https://docs.cloud.google.com/bigquery/docs/create-conversations#converse_with_a_data_source_using_the_agents_page) with all of the data sources in multiple projects, or create a conversation with a [dataset](https://docs.cloud.google.com/bigquery/docs/create-conversations#datasets) . These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can publish a [BigQuery Conversational Analytics agent in Gemini Enterprise](https://docs.cloud.google.com/bigquery/docs/create-data-agents#publish-agent-gemini-enterprise) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+Feature
+
+The [`AI.AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) now supports the `output_schema` argument, which lets you specify the schema of the function output as a comma-separated list of fields. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+## October 13, 2026
+
+Feature
+
+The [`AI.AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) is [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can use this function to semantically aggregate unstructured input data based on natural language instructions.
+
+Feature
+
+BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-4-argon` model. This model is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## October 12, 2026
 
 Feature

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/iceberg-ingestion
 uri: https://docs.cloud.google.com/bigquery/docs/iceberg-ingestion
 title: Transfer data into Iceberg managed table
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Use the BigQuery Data Transfer Service to ingest data from external sources such as Cloud Storage or Amazon Simple Storage Service (Amazon S3) into Apache Iceberg managed tables.
 data_source: docs.cloud.google.com
 ---
 

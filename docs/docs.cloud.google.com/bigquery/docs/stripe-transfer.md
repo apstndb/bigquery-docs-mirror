@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/stripe-transfer
 uri: https://docs.cloud.google.com/bigquery/docs/stripe-transfer
 title: Load Stripe data into BigQuery
-description: Load and transfer data from Stripe to BigQuery
+description: Schedule recurring data transfers from Stripe into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

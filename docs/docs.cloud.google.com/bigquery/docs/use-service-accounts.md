@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/use-service-accounts
 uri: https://docs.cloud.google.com/bigquery/docs/use-service-accounts
 title: Use service accounts with BigQuery Data Transfer Service
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Authenticate data transfers and update transfer configuration credentials by using service accounts in the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

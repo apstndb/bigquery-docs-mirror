@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
 
-Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response.
+Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response. Agents can use existing embeddings of your column values to match your question to the right data. For example, asking about "Texas" would find rows stored as "TX."
 
 The chat response returned to you provides the following features:
 
@@ -48,7 +48,7 @@ Additionally, in the following situations, you must have the following roles:
 - If a table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you need the [Fine-Grained Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categoryFineGrainedReader) ( `roles/datacatalog.categoryFineGrainedReader` ) role. This role is assigned to principals as part of configuring a policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
 - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must be granted access through the role-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
 - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , you must be granted the [Masked Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.maskedReader) ( `roles/bigquerydatapolicy.maskedReader` ) role through the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
-- To converse with a dataset, you need the [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` ) on the project.
+- To converse with a dataset or project, you need the [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` ) on the project.
 
 If you don't have appropriate roles on the source data tables used by the data agent, the system returns the following error when you chat with the data agent:
 
@@ -95,16 +95,15 @@ You can create a direct conversation with these BigQuery data sources (also refe
 
 You can create a conversation with the following data sources:
 
-- Table
-- View
-- Dataset ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) )
-- Graph
+- Tables
+- Views
+- Datasets
+- Projects
+- Graphs
 
 ### Converse with a data source using the Agents page
 
-To create a conversation with a data source using the **Agents** page in the Google Cloud console, follow these steps:
-
-To create a direct conversation with a data source from the **Agents** page, follow these steps:
+To create a direct conversation with a table, view, or graph from the **Agents** page, follow these steps:
 
 1.  Go to the BigQuery **Agents** page.
 
@@ -113,6 +112,18 @@ To create a direct conversation with a data source from the **Agents** page, fol
 3.  In the **Chat with your data** pane, click the **Knowledge sources** tab. If your data source doesn't appear in the list, you can search for it.
 
 4.  Select one or more data sources and click **Chat** .
+
+To create a direct conversation with multiple projects, follow these steps:
+
+1.  Go to the BigQuery **Agents** page.
+
+2.  In the **Ask a question** field, enter a question. By default, the conversation references all data sources in your current project.
+
+3.  To select other projects, click the project name drop-down menu and select one or more projects. The conversation references all data sources in the selected projects.
+
+4.  Click send_spark **Send** .
+
+    A new conversation opens with the selected projects.
 
 ### Converse with a data source using BigQuery Studio
 
@@ -149,12 +160,6 @@ To create a direct conversation with a dataset, table, view, or graph, follow th
     3.  Click chat_spark **Chat** .
 
 ##### Datasets
-
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support, send an email to <bqca-feedback-external@google.com> .
 
 Creating a conversation with a dataset lets you ask questions about your data without having to list data sources explicitly. When you create a conversation with a dataset, the data agent has access to all the tables in that dataset. When you ask a question, the data agent looks for relevant tables and joins them if necessary to produce an answer.
 

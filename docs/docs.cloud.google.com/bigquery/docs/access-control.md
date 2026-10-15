@@ -357,6 +357,18 @@ For information on granting predefined roles on BigQuery resources like datasets
 <li><code>dataform. workspaces. setIamPolicy</code></li>
 <li><code>dataform.workspaces.writeFile</code></li>
 </ul>
+<p><code>dataplex.agentTasks.*</code></p>
+<ul>
+<li><code>dataplex.agentTasks.create</code></li>
+<li><code>dataplex.agentTasks.delete</code></li>
+<li><code>dataplex.agentTasks.get</code></li>
+<li><code>dataplex.agentTasks.getData</code></li>
+<li><code>dataplex. agentTasks. getIamPolicy</code></li>
+<li><code>dataplex.agentTasks.list</code></li>
+<li><code>dataplex.agentTasks.run</code></li>
+<li><code>dataplex. agentTasks. setIamPolicy</code></li>
+<li><code>dataplex.agentTasks.update</code></li>
+</ul>
 <p><code>dataplex.datascans.*</code></p>
 <ul>
 <li><code>dataplex.datascans.cancel</code></li>
@@ -512,6 +524,14 @@ For information on granting predefined roles on BigQuery resources like datasets
 </ul>
 <p><code>cloudkms.operations.get</code></p>
 <p><code>cloudkms. projects. showEffectiveAutokeyConfig</code></p>
+<p><code>dataplex.agentTasks.create</code></p>
+<p><code>dataplex.agentTasks.delete</code></p>
+<p><code>dataplex.agentTasks.get</code></p>
+<p><code>dataplex.agentTasks.getData</code></p>
+<p><code>dataplex. agentTasks. getIamPolicy</code></p>
+<p><code>dataplex.agentTasks.list</code></p>
+<p><code>dataplex.agentTasks.run</code></p>
+<p><code>dataplex.agentTasks.update</code></p>
 <p><code>dataplex.datascans.cancel</code></p>
 <p><code>dataplex.datascans.create</code></p>
 <p><code>dataplex.datascans.delete</code></p>
@@ -658,6 +678,18 @@ For information on granting predefined roles on BigQuery resources like datasets
 </ul>
 <p><code>cloudkms.operations.get</code></p>
 <p><code>cloudkms. projects. showEffectiveAutokeyConfig</code></p>
+<p><code>dataplex.agentTasks.*</code></p>
+<ul>
+<li><code>dataplex.agentTasks.create</code></li>
+<li><code>dataplex.agentTasks.delete</code></li>
+<li><code>dataplex.agentTasks.get</code></li>
+<li><code>dataplex.agentTasks.getData</code></li>
+<li><code>dataplex. agentTasks. getIamPolicy</code></li>
+<li><code>dataplex.agentTasks.list</code></li>
+<li><code>dataplex.agentTasks.run</code></li>
+<li><code>dataplex. agentTasks. setIamPolicy</code></li>
+<li><code>dataplex.agentTasks.update</code></li>
+</ul>
 <p><code>dataplex.datascans.*</code></p>
 <ul>
 <li><code>dataplex.datascans.cancel</code></li>
@@ -729,6 +761,10 @@ For information on granting predefined roles on BigQuery resources like datasets
 <p><code>bigquery.tables.getIamPolicy</code></p>
 <p><code>bigquery.tables.list</code></p>
 <p><code>bigquery.tables.replicateData</code></p>
+<p><code>dataplex.agentTasks.get</code></p>
+<p><code>dataplex.agentTasks.getData</code></p>
+<p><code>dataplex. agentTasks. getIamPolicy</code></p>
+<p><code>dataplex.agentTasks.list</code></p>
 <p><code>dataplex.datascans.get</code></p>
 <p><code>dataplex.datascans.getData</code></p>
 <p><code>dataplex. datascans. getIamPolicy</code></p>
@@ -1407,6 +1443,18 @@ For information on granting predefined roles on BigQuery resources like datasets
 <li><code>dataform. workspaces. setIamPolicy</code></li>
 <li><code>dataform.workspaces.writeFile</code></li>
 </ul>
+<p><code>dataplex.agentTasks.*</code></p>
+<ul>
+<li><code>dataplex.agentTasks.create</code></li>
+<li><code>dataplex.agentTasks.delete</code></li>
+<li><code>dataplex.agentTasks.get</code></li>
+<li><code>dataplex.agentTasks.getData</code></li>
+<li><code>dataplex. agentTasks. getIamPolicy</code></li>
+<li><code>dataplex.agentTasks.list</code></li>
+<li><code>dataplex.agentTasks.run</code></li>
+<li><code>dataplex. agentTasks. setIamPolicy</code></li>
+<li><code>dataplex.agentTasks.update</code></li>
+</ul>
 <p><code>dataplex.datascans.*</code></p>
 <ul>
 <li><code>dataplex.datascans.cancel</code></li>
@@ -1822,6 +1870,9 @@ For information on granting predefined roles on BigQuery resources like datasets
 <p><code>bigquery.datasets.setIamPolicy</code></p>
 <p><code>bigquery.datasets.update</code></p>
 <p><code>bigquery.datasets.updateTag</code></p>
+<p><code>bigquery.jobs.create</code></p>
+<p><code>bigquery.routines.get</code></p>
+<p><code>bigquery.routines.list</code></p>
 <p><code>bigquery. rowAccessPolicies. create</code></p>
 <p><code>bigquery. rowAccessPolicies. delete</code></p>
 <p><code>bigquery.rowAccessPolicies.get</code></p>
@@ -1840,7 +1891,9 @@ For information on granting predefined roles on BigQuery resources like datasets
 <p><code>bigquery.tables.setIamPolicy</code></p>
 <p><code>bigquery.tables.update</code></p>
 <p><code>bigquery.tables.updateTag</code></p>
-<p><code>dataplex.projects.search</code></p></td>
+<p><code>dataplex.projects.search</code></p>
+<p><code>resourcemanager.projects.get</code></p>
+<p><code>resourcemanager.projects.list</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -3627,6 +3680,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.siteReliabilityEngineer">Site Reliability Engineer</a> ( <code>roles/ iam.siteReliabilityEngineer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/securedlandingzone#securedlandingzone.bqdwProjectRemediator">SLZ BQDW Blueprint Project Level Remediator</a> ( <code>roles/ securedlandingzone.bqdwProjectRemediator</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.cloudInventoryViewer">Wiz Cloud Inventory Viewer</a> ( <code>roles/ wiz.cloudInventoryViewer</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .
@@ -3919,12 +3973,14 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser">BigQuery Studio User</a> ( <code>roles/ bigquery.studioUser</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user">BigQuery User</a> ( <code>roles/ bigquery.user</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.editor">BigQuery Data Policy Editor</a> ( <code>roles/ bigquerydatapolicy.editor</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.securityAdmin">BigQuery Security Admin</a> ( <code>roles/ bigquery.securityAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/datastream#datastream.bigqueryWriter">Datastream Bigquery Writer</a> ( <code>roles/ datastream.bigqueryWriter</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.orgdriver">DLP Organization Data Profiles Driver</a> ( <code>roles/ dlp.orgdriver</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.projectdriver">DLP Project Data Profiles Driver</a> ( <code>roles/ dlp.projectdriver</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.dataScientist">Data Scientist</a> ( <code>roles/ iam.dataScientist</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.databasesAdmin">Databases Admin</a> ( <code>roles/ iam.databasesAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.dataSecurityScanner">Wiz Data Security Manager</a> ( <code>roles/ wiz.dataSecurityScanner</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .
@@ -5311,6 +5367,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineDataEditor">BigQuery Authorized Routine Data Editor</a> ( <code>roles/ bigquery.routineDataEditor</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineDataViewer">BigQuery Authorized Routine Data Viewer</a> ( <code>roles/ bigquery.routineDataViewer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineMetadataViewer">BigQuery Authorized Routine Metadata Viewer</a> ( <code>roles/ bigquery.routineMetadataViewer</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.securityAdmin">BigQuery Security Admin</a> ( <code>roles/ bigquery.securityAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.storageDataOwner">Dataplex Storage Data Owner</a> ( <code>roles/ dataplex.storageDataOwner</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.storageDataReader">Dataplex Storage Data Reader</a> ( <code>roles/ dataplex.storageDataReader</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.orgdriver">DLP Organization Data Profiles Driver</a> ( <code>roles/ dlp.orgdriver</code> )</p>
@@ -5357,6 +5414,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineDataEditor">BigQuery Authorized Routine Data Editor</a> ( <code>roles/ bigquery.routineDataEditor</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineDataViewer">BigQuery Authorized Routine Data Viewer</a> ( <code>roles/ bigquery.routineDataViewer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.routineMetadataViewer">BigQuery Authorized Routine Metadata Viewer</a> ( <code>roles/ bigquery.routineMetadataViewer</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.securityAdmin">BigQuery Security Admin</a> ( <code>roles/ bigquery.securityAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.storageDataOwner">Dataplex Storage Data Owner</a> ( <code>roles/ dataplex.storageDataOwner</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.storageDataReader">Dataplex Storage Data Reader</a> ( <code>roles/ dataplex.storageDataReader</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.orgdriver">DLP Organization Data Profiles Driver</a> ( <code>roles/ dlp.orgdriver</code> )</p>
@@ -6078,6 +6136,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.securityAuditor">Security Auditor</a> ( <code>roles/ iam.securityAuditor</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.siteReliabilityEngineer">Site Reliability Engineer</a> ( <code>roles/ iam.siteReliabilityEngineer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.dataSecurityScanner">Wiz Data Security Manager</a> ( <code>roles/ wiz.dataSecurityScanner</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .
@@ -6138,6 +6197,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.mlEngineer">ML Engineer</a> ( <code>roles/ iam.mlEngineer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.siteReliabilityEngineer">Site Reliability Engineer</a> ( <code>roles/ iam.siteReliabilityEngineer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.dataSecurityScanner">Wiz Data Security Manager</a> ( <code>roles/ wiz.dataSecurityScanner</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .
@@ -6241,6 +6301,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.securityAuditor">Security Auditor</a> ( <code>roles/ iam.securityAuditor</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.siteReliabilityEngineer">Site Reliability Engineer</a> ( <code>roles/ iam.siteReliabilityEngineer</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.dataSecurityScanner">Wiz Data Security Manager</a> ( <code>roles/ wiz.dataSecurityScanner</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .
@@ -6636,6 +6697,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.projectdriver">DLP Project Data Profiles Driver</a> ( <code>roles/ dlp.projectdriver</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.databasesAdmin">Databases Admin</a> ( <code>roles/ iam.databasesAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.supportUser">Support User</a> ( <code>roles/ iam.supportUser</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/wiz#wiz.cloudInventoryViewer">Wiz Cloud Inventory Viewer</a> ( <code>roles/ wiz.cloudInventoryViewer</code> )</p>
 <p>Service agent roles</p>
 <blockquote>
 <strong>Warning:</strong> Don't grant service agent roles to any principals except <a href="https://docs.cloud.google.com/iam/docs/service-agents">service agents</a> .

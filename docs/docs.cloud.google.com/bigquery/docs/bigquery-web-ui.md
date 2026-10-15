@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Explore BigQuery in the Google Cloud console
 
-The BigQuery Google Cloud console is a graphical interface where you can create and manage your BigQuery resources. You can use the Google Cloud console to view tables and datasets, create and run SQL queries, build pipelines, and perform other tasks to help you manage your BigQuery workflows.
+BigQuery in the Google Cloud console is a graphical interface where you can create and manage your BigQuery resources. You can use the Google Cloud console to view tables and datasets, create and run SQL queries, build pipelines, and perform other tasks to help you manage your BigQuery workflows.
 
 ## Before you begin
 
@@ -120,7 +120,7 @@ To explore the **Studio** page, follow these steps:
 
     BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) are stored in BigQuery and made available to the general public through the Google Cloud Public Dataset Program.
 
-4.  In the list, click the `austin_crime` dataset.
+4.  In the list, click the `america_health_rankings` dataset.
 
 5.  On the **Overview** tab, view the resources stored in the dataset such as tables, models, and routines.
 

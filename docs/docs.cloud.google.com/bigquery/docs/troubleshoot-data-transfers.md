@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers
 uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers
 title: Troubleshoot data transfers
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to troubleshoot data transfers, private network connectivity, and CSV load jobs in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
