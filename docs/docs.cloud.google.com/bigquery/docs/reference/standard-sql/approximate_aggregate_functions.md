@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 GoogleSQL for BigQuery supports approximate aggregate functions. To learn about the syntax for aggregate function calls, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-Approximate aggregate functions are scalable in terms of memory usage and time, but produce approximate results instead of exact results. These functions typically require less memory than [exact aggregation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `COUNT(DISTINCT ...)` , but also introduce statistical uncertainty. This makes approximate aggregation appropriate for large data streams for which linear memory usage is impractical, as well as for data that is already approximate.
+Approximate aggregate functions are scalable in terms of time and resource usage, but produce approximate results instead of exact results. These functions typically use fewer resources than [exact aggregation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) like `COUNT(DISTINCT ...)` , but also introduce statistical uncertainty. This makes approximate aggregation appropriate for large data streams for which linear memory usage is impractical, as well as for data that's already approximate.
 
-The approximate aggregate functions in this section work directly on the input data, rather than an intermediate estimation of the data. These functions *don't allow* users to specify the precision for the estimation with sketches.
+The approximate aggregate functions in this section compute an estimate directly from the input data. These functions don't return a [*sketch*](https://docs.cloud.google.com/bigquery/docs/sketches) , which is a compact summary of the data that you can store and merge later, and they don't let you specify the precision of the estimate.
 
 To specify precision with sketches, use the following functions:
 

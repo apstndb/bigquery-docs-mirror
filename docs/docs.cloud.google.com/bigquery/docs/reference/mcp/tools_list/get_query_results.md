@@ -124,7 +124,8 @@ Response for a BigQuery SQL query.
   "totalSlotMs": string,
   "numDmlAffectedRows": string,
   "totalBytesProcessed": string,
-  "jobId": string
+  "jobId": string,
+  "location": string
 }
 ```
 
@@ -140,6 +141,7 @@ Response for a BigQuery SQL query.
 | `numDmlAffectedRows`  | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The number of rows affected by a DML statement.                                                                                                                                                                                                                                                                                                                                                                       |
 | `totalBytesProcessed` | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The total number of bytes processed for this query.                                                                                                                                                                                                                                                                                                                                                                   |
 | `jobId`               | `string` Output only. The ID of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this ID with `get_query_results` , `cancel_job` , or `get_job` .                                                                                                                                                                                                                                                                                    |
+| `location`            | `string` Output only. The geographic location of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this location with `get_query_results` , `cancel_job` , or `get_job` .                                                                                                                                                                                                                                                             |
 
 ### TableSchema
 

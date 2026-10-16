@@ -14,6 +14,20 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 15, 2026
+
+Feature
+
+You can [copy tables across regions](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) . This feature is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+Feature
+
+You can now use [column aliases](https://docs.cloud.google.com/bigquery/docs/column-aliases) in GoogleSQL. This feature lets you define an alias for an expression in the `SELECT` clause of a SQL query and immediately reference that alias within the same `SELECT` list or in the `WHERE` clause of the same query block.
+
+Column aliases also streamline the migration of workloads from other data warehouses such as Snowflake and Teradata, by supporting their syntax.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) , and is opt-in only. To use column aliases, you must first [enable the feature](https://docs.cloud.google.com/bigquery/docs/column-aliases#enabling_column_aliases) .
+
 ## October 14, 2026
 
 Feature

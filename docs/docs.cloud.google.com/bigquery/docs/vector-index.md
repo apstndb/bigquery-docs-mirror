@@ -221,7 +221,7 @@ Pre-filtering and post-filtering are defined as follows:
 
 The placement of your `WHERE` clause determines whether a filter acts as a pre-filter or a post-filter.
 
-To create a pre-filter, the `WHERE` clause of the query must apply to the base table argument of the search function. The predicate must apply to a stored column, otherwise it effectively becomes a post-filter.
+To create a pre-filter, the `WHERE` clause of the query must apply to the base table argument of the search function. For pre-filtering to prune data and optimize index search, the predicate must apply to a [stored column](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) or a [partitioning column](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) . If the predicate applies to any other column, including a non-stored [clustered column](https://docs.cloud.google.com/bigquery/docs/clustered-tables) , it acts as a post-filter and results in a full scan.
 
 The following example shows how to create a pre-filter:
 
@@ -447,6 +447,9 @@ OPTIONS(index_type='TREE_AH', distance_type='COSINE');
 
 - You can't use [logical views](https://docs.cloud.google.com/bigquery/docs/views-intro) in your pre-filter.
 - If your pre-filter contains a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries) , it might interfere with index usage.
+- Pre-filtering data pruning is only optimized when filtering on [partitioned columns](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) or [stored columns](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) , not on [clustered columns](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
+
+> **Warning:** Filtering on [clustered columns](https://docs.cloud.google.com/bigquery/docs/clustered-tables) that aren't also [stored columns](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) in the vector index in the pre-filter subquery doesn't prune clustered blocks and results in a full table scan.
 
 ## Understanding when data is indexed
 

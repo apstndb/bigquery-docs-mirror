@@ -6537,12 +6537,18 @@ The following options are supported:
 <p>Example: <code>`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
 </tr>
 <tr class="odd">
+<td><code>reusable_column_aliases_mode</code></td>
+<td><code>STRING</code></td>
+<td><p>Determines whether reusable column aliases are enabled for the organization in the region. Set to <code>on</code> to enable reusable column aliases. The default value is <code>off</code> .</p>
+<p>Example: <code>`region-us.reusable_column_aliases_mode` = "on"</code></p></td>
+</tr>
+<tr class="even">
 <td><code>disable_on_demand_billing</code> (Preview)</td>
 <td><code>BOOL</code></td>
 <td><p>Determines whether on-demand billing is disabled for the organization in the region. If <code>true</code> , all queries must use an assigned reservation or they fail.</p>
 <p>Example: <code>`region-us.disable_on_demand_billing` = true</code></p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>default_location</code></td>
 <td><code>STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
@@ -6716,10 +6722,10 @@ The following options are supported:
 <p>Example: <code>`region-us.reservation_override_mode` = 'ALLOW_ANY_OVERRIDE'</code></p></td>
 </tr>
 <tr class="even">
-<td><code>disable_on_demand_billing</code> (Preview)</td>
-<td><code>BOOL</code></td>
-<td><p>Determines whether on-demand billing is disabled for the project in the region. If <code>true</code> , all queries must use an assigned reservation or they fail.</p>
-<p>Example: <code>`region-us.disable_on_demand_billing` = true</code></p></td>
+<td><code>reusable_column_aliases_mode</code></td>
+<td><code>STRING</code></td>
+<td><p>Determines whether reusable column aliases are enabled for the project in the region. Set to <code>on</code> to enable reusable column aliases. The default value is <code>off</code> .</p>
+<p>Example: <code>`region-us.reusable_column_aliases_mode` = "on"</code></p></td>
 </tr>
 <tr class="odd">
 <td><code>default_location</code></td>

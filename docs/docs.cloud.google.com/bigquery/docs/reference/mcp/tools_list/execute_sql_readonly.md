@@ -60,7 +60,7 @@ Example Queries:
 
 Queries executed using the `execute_sql_readonly` tool will always have the job label `goog-mcp-server: true` automatically set in addition to any custom `labels` provided in the request. Queries are charged to the project specified in the `project_id` field.
 
-Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` . In this case, use the `get_query_results` tool with `job_id` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
+Query Execution Behavior: \* If the query completes within the synchronous timeout (default 20 seconds or custom `timeout_ms` ), the tool returns `job_complete: true` and the result rows directly. For fast queries, `job_id` may be omitted as no persistent background job is created; no further action or polling is needed. \* If the query takes longer than `timeout_ms` , the tool returns `job_complete: false` and a `job_id` and `location` . In this case, use the `get_query_results` tool with `job_id` and `location` to poll until `job_complete: true` , or use `cancel_job` to abort the running query. \* You can optionally specify `timeout_ms` to configure the maximum synchronous wait time in milliseconds (defaults to 20,000 ms), and `job_timeout_ms` to enforce a hard server-side timeout after which BigQuery automatically terminates the job.
 
 The following code sample shows how to use `curl` to call the `execute_sql_readonly` MCP tool.
 
@@ -187,7 +187,8 @@ Response for a BigQuery SQL query.
   "totalSlotMs": string,
   "numDmlAffectedRows": string,
   "totalBytesProcessed": string,
-  "jobId": string
+  "jobId": string,
+  "location": string
 }
 ```
 
@@ -203,6 +204,7 @@ Response for a BigQuery SQL query.
 | `numDmlAffectedRows`  | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The number of rows affected by a DML statement.                                                                                                                                                                                                                                                                                                                                                                       |
 | `totalBytesProcessed` | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The total number of bytes processed for this query.                                                                                                                                                                                                                                                                                                                                                                   |
 | `jobId`               | `string` Output only. The ID of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this ID with `get_query_results` , `cancel_job` , or `get_job` .                                                                                                                                                                                                                                                                                    |
+| `location`            | `string` Output only. The geographic location of the BigQuery job created for this query, if any. Present when a query job is created (e.g. for long-running operations, DML, scripts). Use this location with `get_query_results` , `cancel_job` , or `get_job` .                                                                                                                                                                                                                                                             |
 
 ### TableSchema
 

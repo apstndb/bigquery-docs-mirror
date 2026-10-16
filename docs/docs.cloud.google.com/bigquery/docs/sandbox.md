@@ -24,7 +24,7 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 ### Enable the BigQuery sandbox
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to **BigQuery Studio** .
 
     You can also open BigQuery in the Google Cloud console by entering the following URL in your browser:
 
@@ -88,7 +88,7 @@ The BigQuery sandbox is subject to the following limits:
 
 BigQuery public datasets are available by default in BigQuery Studio in a project named `bigquery-public-data` . In this tutorial you query the NYC Citi Bike Trips dataset. Citi Bike is a large bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013.
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to **BigQuery Studio** .
 
 2.  In the left pane, click explore **Explorer** :
 
@@ -112,7 +112,7 @@ In the following steps, you query the `citibike_trips` table to determine the 10
 
 The query uses the [ST_GEOGPOINT function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint) to create a point from each station's longitude and latitude parameters and returns that point in a `GEOGRAPHY` column. The `GEOGRAPHY` column is used to generate a heatmap in the integrated geography data viewer.
 
-1.  In the Google Cloud console, open the **BigQuery** page.
+1.  In the Google Cloud console, open **BigQuery Studio** .
 
 2.  Click add_box **SQL query** .
 

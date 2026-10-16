@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data with conversations
 
-This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
+This document describes how to create, edit, export, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
 
 Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response. Agents can use existing embeddings of your column values to match your question to the right data. For example, asking about "Texas" would find rows stored as "TX."
 
@@ -217,6 +217,20 @@ To create a data agent from a conversation, follow these steps:
 5.  After you've made changes, click **Save draft** .
 
 6.  Click **Publish** .
+
+## Export a data agent's answer
+
+To export an answer provided by a data agent as a PDF or CSV file, complete the following steps:
+
+1.  Navigate to the agent answer that you want to save.
+
+2.  Click the file_download **Download** button. Select from the following options:
+
+    - **PDF** : Includes up to 20 rows for each table.
+    - **Detailed PDF** : Includes up to 1,000 rows for each table.
+    - **CSV** : Includes up to 5,000 rows for each table.
+
+The file downloads through your browser.
 
 ## Manage conversations
 

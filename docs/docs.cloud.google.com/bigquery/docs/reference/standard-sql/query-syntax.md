@@ -5589,6 +5589,8 @@ GROUP BY item;
 
 An alias is a temporary name given to a table, column, or expression present in a query. You can introduce explicit aliases in the `SELECT` list or `FROM` clause, or GoogleSQL infers an implicit alias for some expressions. Expressions with neither an explicit nor implicit alias are anonymous and the query can't reference them by name.
 
+If you enable [reusable column aliases](https://cloud.google.com/bigquery/docs/column-aliases) , you can introduce an explicit or implicit alias in a `SELECT` clause and then use it in a subsequent `SELECT` or `WHERE` clause.
+
 ### Explicit aliases
 
 You can introduce explicit aliases in either the `FROM` clause or the `SELECT` list.

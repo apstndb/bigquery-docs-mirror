@@ -19,7 +19,7 @@ Consider a table with the following data:
 | Product A | 500 million     | 10 minutes            |
 | Product B | 20 million      | 2 minutes             |
 
-Computing the total number of users for both products isn't possible because we don't know how many users used both products in the table. Likewise, computing the median visit duration isn't possible because the distribution of the visit durations has been lost.
+Computing the total number of users for both products isn't possible because the table doesn't show how many users used both products. Likewise, computing the median visit duration isn't possible because the distribution of the visit durations has been lost.
 
 A solution is to store sketches in the table instead. Each sketch is an approximate and compact representation of a particular input property, such as cardinality, that you can store, merge (or re-aggregate), and query for near-exact results. In the previous example, you can estimate the number of distinct users for Product A and Product B by creating and merging (re-aggregating) the sketches for each product. You can also estimate the median visit duration with quantile sketches that you can likewise merge and query.
 
@@ -87,7 +87,7 @@ In summary, a sketch has these main properties:
 
 ## Re-aggregation with sketch merging
 
-Sketches let you store and merge data for efficient re-aggregation. This makes sketches particularly useful for materialized views of data sets. You can merge sketches to construct a summary of multiple data streams based on partial sketches created for each stream.
+Sketches let you store and merge data for efficient re-aggregation. This makes sketches particularly useful for storing precomputed summaries of data sets, known as *materialized views* . You can merge sketches to construct a summary of multiple data streams based on partial sketches created for each stream.
 
 For example, if you create a sketch for the estimated number of distinct users every day, you can get the number of distinct users during the last seven days by merging daily sketches. Re-aggregating the merged daily sketches helps you avoid reading the full input of the data set.
 

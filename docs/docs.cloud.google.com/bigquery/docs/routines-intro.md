@@ -257,3 +257,7 @@ Some stored procedures are built into BigQuery and don't need to be created. The
 Stored procedures for [Spark in BigQuery](https://docs.cloud.google.com/bigquery/docs/spark-procedures) are also supported. These procedures have [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#spark-procedure) .
 
 To learn more about stored procedures, see [SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
+
+## Use routines with AI agents
+
+If you build AI agents that work with BigQuery data, the agents can retrieve routine metadata from Knowledge Catalog, including the routine's arguments, return type, and source code, to understand what a routine does and how to call it. For more information, see [Retrieve context for routines](https://docs.cloud.google.com/knowledge-catalog/docs/retrieve-data-context#retrieve-routine-context) .

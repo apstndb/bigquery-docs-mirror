@@ -1420,10 +1420,6 @@ print("The tables {} have been appended to {}".format(table_ids, dest_table_id))
 
 ### Copy tables across regions
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 You can copy a table, [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) from one [BigQuery region](https://docs.cloud.google.com/bigquery/docs/locations) or multi-region to another. This includes any tables that have customer-managed Cloud KMS (CMEK) applied.
 
 Copying a table across regions incurs additional data transfer charges according to [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data_replication) . Additional charges are incurred even if you cancel the cross-region table copy job before it has been completed.
@@ -1750,13 +1746,14 @@ Copying a table across regions is subject to the following limitations:
 
 - You can't copy a table using the Google Cloud console or the [`TABLE COPY DDL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) statement.
 - You can't copy a table if there are any policy tags on the source table.
-- You can't copy a table if the source table is larger than 20 physical TiB. See [get information about tables](https://docs.cloud.google.com/bigquery/docs/tables#get_information_about_tables) for the source table physical size. Additionally, copying source tables that are larger than 1 physical TiB across regions may need multiple retries to successfully copy them.
 - You can't copy IAM policies associated with the tables. You can apply the same policies to the destination after the copy is completed.
+- You can't copy a table if there are any [table tags](https://docs.cloud.google.com/bigquery/docs/tags#tag_tables) on the source table.
 - If the copy operation overwrites an existing table, [tags](https://docs.cloud.google.com/bigquery/docs/tags) on the existing table are removed.
 - You can't copy multiple source tables into a single destination table.
 - You can't copy tables in append mode. If you use `write_empty` mode, the destination table must not exist.
 - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) information is not copied to the destination region.
 - When you copy a table clone or snapshot to a new region, a full copy of the table is created. This incurs additional storage costs.
+- The [replication bandwidth](https://docs.cloud.google.com/bigquery/quotas#bandwidth_limits) is 2 physical GiBps per region per project.
 - Expiration time from the source table is copied to the destination table.
 
 ### View current quota usage

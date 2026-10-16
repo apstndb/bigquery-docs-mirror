@@ -204,9 +204,11 @@ We recommend assigning a non-zero baseline to your reservations for the most pre
 
 You select a renewal plan when you purchase a commitment. You can change the renewal plan for a commitment at any time until it expires. The following renewal plans are available:
 
-- **None.** After the end of the commitment period, the commitment is removed. Reservations are not affected.
+- **None.** After the end of the commitment period, the commitment is removed. Reservations aren't affected.
 - **Annual.** After the end of the commitment period, your commitment renews for another year.
 - **Three-Year.** After the end of the commitment period, your commitment renews for another three years.
+
+> **Warning:** Canceling or allowing a slot commitment to expire doesn't delete or de-provision the associated reservations or assignments. Any reservation with configured baseline slots continues to incur baseline slot-hour charges at the [pay-as-you-go rate](https://cloud.google.com/bigquery/pricing#on_demand_pricing) . To stop baseline slot-hour charges and transition back to on-demand billing, you must manually [delete all reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#delete_reservations) and [delete all reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) in the Google Cloud console.
 
 For information about purchasing and renewing commitments, see [Create a capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#create_a_capacity_commitment) .
 

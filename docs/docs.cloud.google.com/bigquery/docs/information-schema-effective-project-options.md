@@ -97,6 +97,7 @@ The `INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS` view has the following schema
 | `default_interactive_query_queue_timeout_ms` | `STRING`      | The effective default timeout in milliseconds for queued interactive queries for this project. |
 | `default_batch_query_queue_timeout_ms`       | `STRING`      | The effective default timeout in milliseconds for queued batch queries for this project.       |
 | `enable_reservation_based_fairness`          | `BOOL`        | Use reservation-based fairness as opposed to project-based fairness.                           |
+| `reusable_column_aliases_mode`               | `STRING`      | Whether reusable column aliases are enabled in this project.                                   |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 

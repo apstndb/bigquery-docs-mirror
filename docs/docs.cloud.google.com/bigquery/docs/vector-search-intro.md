@@ -94,7 +94,8 @@ For more information, see [Vector index limits](https://docs.cloud.google.com/bi
 
 ## Limitations
 
-Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
+- Queries that contain the `VECTOR_SEARCH` or `AI.SEARCH` function aren't accelerated by [BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
+- Pre-filtering data pruning in `VECTOR_SEARCH` and `AI.SEARCH` queries is only optimized when filtering on [partitioned columns](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) or [stored columns](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) , not on [clustered columns](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . Using non-stored clustered columns in a pre-filter subquery results in a full table scan. For more information, see [Pre-filtering limitations](https://docs.cloud.google.com/bigquery/docs/vector-index#pre-filtering_limitations) .
 
 ## What's next
 

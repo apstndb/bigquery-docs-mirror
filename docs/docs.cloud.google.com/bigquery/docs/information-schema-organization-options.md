@@ -44,6 +44,7 @@ The `INFORMATION_SCHEMA.ORGANIZATION_OPTIONS` view has the following schema:
 | `default_query_job_timeout_ms`               | `STRING`      | The default query timeout in milliseconds for this organization.                          |
 | `default_interactive_query_queue_timeout_ms` | `STRING`      | The default timeout in milliseconds for queued interactive queries for this organization. |
 | `default_batch_query_queue_timeout_ms`       | `STRING`      | The default timeout in milliseconds for queued batch queries for this organization.       |
+| `reusable_column_aliases_mode`               | `STRING`      | Whether reusable column aliases are enabled in this organization.                         |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 

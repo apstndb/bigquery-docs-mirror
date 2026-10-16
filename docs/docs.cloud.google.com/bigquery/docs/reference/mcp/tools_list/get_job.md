@@ -3276,6 +3276,12 @@ Request for getting information about a job.
   "vectorSearchStatistics": {
     object (VectorSearchStatistics)
   },
+  "searchIndexingStats": {
+    object (SearchIndexingStats)
+  },
+  "vectorSearchIndexingStats": {
+    object (VectorSearchIndexingStats)
+  },
   "performanceInsights": {
     object (PerformanceInsights)
   },
@@ -3590,6 +3596,16 @@ Request for getting information about a job.
 <td><code>vectorSearchStatistics</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job#Output.Schema.VectorSearchStatistics"><code>VectorSearchStatistics</code></a><code> )</code></p>
 <p>Output only. Vector Search query specific statistics.</p></td>
+</tr>
+<tr class="even">
+<td><code>searchIndexingStats</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job#Output.Schema.SearchIndexingStats"><code>SearchIndexingStats</code></a><code> )</code></p>
+<p>Output only. Search indexing specific statistics.</p></td>
+</tr>
+<tr class="odd">
+<td><code>vectorSearchIndexingStats</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/cancel_job#Output.Schema.VectorSearchIndexingStats"><code>VectorSearchIndexingStats</code></a><code> )</code></p>
+<p>Output only. Vector Search indexing specific statistics.</p></td>
 </tr>
 <tr class="even">
 <td><code>performanceInsights</code></td>
@@ -5293,6 +5309,42 @@ Request for getting information about a job.
 | Union field `_message` . `_message` can be only one of the following: |                                                                                                                                                                                                                               |
 | `message`                                                             | `string` Specifies the detailed description for the scenario.                                                                                                                                                                 |
 |                                                                       |                                                                                                                                                                                                                               |
+
+### SearchIndexingStats
+
+**JSON representation**
+
+```
+{
+  "baseTable": {
+    object (TableReference)
+  },
+  "indexName": string
+}
+```
+
+| Fields      |                                                                                                                                                                                                                                             |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `baseTable` | `object ( `[`TableReference`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.TableReference)` )` Output only. The base table for which the search index is being created or refreshed. |
+| `indexName` | `string` Output only. The name of the search index.                                                                                                                                                                                         |
+
+### VectorSearchIndexingStats
+
+**JSON representation**
+
+```
+{
+  "baseTable": {
+    object (TableReference)
+  },
+  "indexName": string
+}
+```
+
+| Fields      |                                                                                                                                                                                                                                             |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `baseTable` | `object ( `[`TableReference`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_dataset_info#Output.Schema.TableReference)` )` Output only. The base table for which the vector index is being created or refreshed. |
+| `indexName` | `string` Output only. The name of the vector index.                                                                                                                                                                                         |
 
 ### PerformanceInsights
 
