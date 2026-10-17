@@ -145,10 +145,10 @@ If you are migrating to a Apache Iceberg REST catalog, you must create a secret 
 
 Replace the following:
 
-- `CLIENT_ID` : the OAuth2.0 client ID
-- `CLIENT_SECRET` : the OAuth2.0 client secret
+- `CLIENT_ID` : the OAuth 2.0 client ID
+- `CLIENT_SECRET` : the OAuth 2.0 client secret
 - `POLARIS_REALM` : the realm for the Polaris catalog. This field is required only for Apache Polaris. For example, `FINANCE` .
-- `SCOPE` : (Optional) the OAuth2.0 scope. Default value is `PRINCIPAL_ROLE:ALL` .
+- `SCOPE` : (Optional) the OAuth 2.0 scope. Default value is `PRINCIPAL_ROLE:ALL` .
 
 ## Create a Lakehouse catalog
 

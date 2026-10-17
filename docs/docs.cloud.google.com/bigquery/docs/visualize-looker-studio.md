@@ -140,7 +140,7 @@ Deleting your project prevents Data Studio from querying the data because the da
 
 ### View BigQuery job details
 
-When data source credentials are set to the current user, the user is called *datasource credential owner* . When viewed by a data source credential owner, most dashboard elements display a BigQuery icon. To navigate to **Job details** in BigQuery, click the BigQuery icon.
+When data source credentials are set to the current user, the user is called *data source credential owner* . When viewed by a data source credential owner, most dashboard elements display a BigQuery icon. To navigate to **Job details** in BigQuery, click the BigQuery icon.
 
 ### View Data Studio information schema details
 

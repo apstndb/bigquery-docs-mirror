@@ -115,7 +115,7 @@ The following types of project caps are supported:
 
 - **Maximum concurrency:** Limits the number of simultaneous queries admitted for the assignee project within the reservation.
 
-  The concurrency cap is only applied at query admission time and doesn't cause running queries to be cancelled. If you decrease the concurrency cap below the current number of running queries, new queries are queued until enough running queries have been completed.
+  The concurrency cap is only applied at query admission time and doesn't cause running queries to be canceled. If you decrease the concurrency cap below the current number of running queries, new queries are queued until enough running queries have been completed.
 
 Changing these settings has the following limitations:
 
@@ -232,7 +232,7 @@ If you accidentally purchase a commitment or make a mistake when you configure y
 - Each organization can have a maximum of 10 administration projects with active reservations in a single location.
 - Idle capacity can't be shared between organizations or between different administration projects within a single organization.
 - Idle capacity can't be shared across different regions.
-- Commitments and reservations are [regional resources](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . Commitments purchased in one region or multi-region can't be used for reservations in any other regions or multi-regions, even when the single region location is co-located with the multi-region location. For example, you can't use a commitment purchased in the `EU` multi-region for a reservation in `europe-west4` .
+- Commitments and reservations are [regional resources](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . Commitments purchased in one region or multi-region can't be used for reservations in any other regions or multi-regions, even when the single region location is colocated with the multi-region location. For example, you can't use a commitment purchased in the `EU` multi-region for a reservation in `europe-west4` .
 - Commitments and reservations can't be moved from one region or multi-region to another.
 - Commitments purchased in one administration project can't be moved to a different administration project.
 - Commitments purchased with one [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) can't be used with reservations of another edition.

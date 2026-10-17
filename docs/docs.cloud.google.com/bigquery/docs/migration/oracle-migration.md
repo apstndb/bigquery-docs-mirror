@@ -494,7 +494,7 @@ This is the incremental ETL approach in which SQL queries continuously poll the 
 
 To overcome such issues, you can use higher precision in timestamp columns such as six fractional digits (microseconds, which is the maximum supported precision in BigQuery, or you can add deduplication tasks in your ETL/ELT pipeline, depending on the business keys and data characteristics.
 
-There should be an index on the key or timestamp column for better extract performance and less impact on the source database. Delete operations are a challenge for this methodology because they should be handled in the source application in a soft delete way, such as puttint a deleted flag and updating `last_modified_date` . An alternative solution can be logging these operations in another table using a trigger.
+There should be an index on the key or timestamp column for better extract performance and less impact on the source database. Delete operations are a challenge for this methodology because they should be handled in the source application in a soft delete way, such as putting a deleted flag and updating `last_modified_date` . An alternative solution can be logging these operations in another table using a trigger.
 
 #### Triggers
 

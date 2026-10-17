@@ -59,7 +59,7 @@ The configuration of your Cloud Storage bucket and its connection with BigQuery 
 
 - Select a name that clearly indicates that the bucket is only meant for Iceberg managed tables.
 
-- Choose [single-region Cloud Storage buckets](https://docs.cloud.google.com/storage/docs/locations#available-locations) that are co-located in the same region as your BigQuery dataset. This coordination improves performance and lowers costs by avoiding data transfer charges.
+- Choose [single-region Cloud Storage buckets](https://docs.cloud.google.com/storage/docs/locations#available-locations) that are colocated in the same region as your BigQuery dataset. This coordination improves performance and lowers costs by avoiding data transfer charges.
 
 - By default, Cloud Storage stores data in the Standard storage class, which provides sufficient performance. To optimize data storage costs, you can enable [Autoclass](https://docs.cloud.google.com/storage/docs/autoclass) to automatically manage [storage class](https://docs.cloud.google.com/storage/docs/storage-classes) transitions. Autoclass starts with the Standard storage class and moves objects that aren't accessed to progressively colder classes in order to reduce storage costs. When the object is read again, it's moved back to the Standard class.
 

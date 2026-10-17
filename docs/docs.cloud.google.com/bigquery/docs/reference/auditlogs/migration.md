@@ -82,7 +82,7 @@ Or to find the destination table change:
 protoPayload.metadata.tableChange.jobName = "projects/myproject/jobs/myjob"
 ```
 
-Resources representations, such as Job or Table, in the new logs have the structure similar to the old logs. Hovewer, new logs represent events while the old logs focus more on the request and response.
+Resources representations, such as Job or Table, in the new logs have the structure similar to the old logs. However, new logs represent events while the old logs focus more on the request and response.
 
 You can compare the new [BigQueryAuditMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata) and the old [AuditData](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData) formats. BigQuery-specific information moved from the `serviceData` to the `metadata` field.
 

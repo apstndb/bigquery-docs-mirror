@@ -14,7 +14,7 @@ Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud S
 
 ## Supported data stores
 
-You can use federated queries with the following data stores:
+You can use federated queries with the following datastores:
 
 - [Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries)
 - [Cloud SQL](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries)

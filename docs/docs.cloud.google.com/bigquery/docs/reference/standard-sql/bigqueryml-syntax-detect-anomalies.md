@@ -97,7 +97,7 @@ Anomaly detection with autoencoder, k-means, or PCA models has the following req
 - `time_series_data` : a `STRING` value that contains the data column for a time series. The column name is inherited from the `TIME_SERIES_DATA_COL` option as specified in the `CREATE MODEL` statement. The column has a type of `FLOAT64` , regardless of the [`TIME_SERIES_DATA_COL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_data_col) input column data type.
 - `is_anomaly` : a `BOOL` value that indicates whether the value at a specific timestamp is an anomaly. If the `anomaly_probability` value is above the `anomaly_prob_threshold` value, then the `time_series_data` value is out of the range for the lower and upper bounds and the `is_anomaly` value is `TRUE` .
 - `lower_bound` : a `FLOAT64` value that contains the lower bound of the prediction result.
-- `upper_bound` : a `FLOAT64` value that that contains the upper bound of the prediction result.
+- `upper_bound` : a `FLOAT64` value that contains the upper bound of the prediction result.
 - `anomaly_probability` : a `FLOAT64` value that contains the probability that this point is an anomaly. For example, an `anomaly_probability` value of `0.95` means that, among all possible values at the given timestamp, there is a 95% chance that the value is closer to the predicted value than it is to the given time series data value. This indicates a 95% probability that the given time series data value is an anomaly.
 
 `ML.DETECT_ANOMALIES` output for time series models has the following properties:

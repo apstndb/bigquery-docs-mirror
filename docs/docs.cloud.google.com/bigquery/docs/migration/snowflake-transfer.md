@@ -165,7 +165,7 @@ For public connectivity, the Snowflake account allows public connection with dat
 
 ### Schema detection and mapping
 
-To define your schema, you can use the BigQuery Data Transfer Service to automatically detect schema and data-type mapping when transferring data from Snowflake to BigQuery. Alternatively, you can use the translation engine to define your schema and data types manually.
+To define your schema, you can use the BigQuery Data Transfer Service to automatically detect schema and data type mapping when transferring data from Snowflake to BigQuery. Alternatively, you can use the translation engine to define your schema and data types manually.
 
 For more information, see [Schema detection and mapping for Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema) .
 

@@ -823,16 +823,52 @@ To learn more about the literal representation of a JSON type, see [JSON literal
 |-----------|--------------------------------------------------|
 | `MEASURE` | An aggregate calculation that doesn't overcount. |
 
-A measure is a special type that aggregates data without overcounting. The measure type is used by only the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . Measures are useful for defining business metrics that you can query using the `AGG` function instead of complex aggregation queries.
+A measure is a special type that aggregates data without overcounting. The measure type is used by only the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . Measures are useful for defining business metrics that you can query using the `AGG` function instead of complex aggregation queries. For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) .
 
-A measure is defined by a graph property, an aggregate function, and the key of the graph element. When you call the `AGG` function on the measure, the aggregation function is applied to the graph property once per unique key. For information about how to define a measure, see the [element properties definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) .
+A measure is defined by a measure expression, and the key of the graph element. A measure expression is an aggregate function over an expression, a scalar calculation over aggregates, or a composition of measures using `AGG` . When you call the `AGG` function on a measure, the calculation is evaluated once per unique key. For information about where to define a measure, see the [element properties definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) .
 
-For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) .
+A measure expression can include the following:
+
+- Aggregate function calls using the following functions: `SUM` , `AVG` , `MIN` , `MAX` , `COUNT` , and `AGG` . You can use the `DISTINCT` modifier with these functions, except for `AGG` .
+
+- Expressions within aggregate functions. For example, you can aggregate multiple columns:
+
+  - `MEASURE(SUM(principal + interest)) AS debt`
+
+- Conditional logic within aggregate functions:
+
+  - `MEASURE(AVG(CASE WHEN rate > 5.0 THEN balance ELSE 0.0 END)) AS high_rate_balance`
+
+- Conditional distinct counting:
+
+  - `MEASURE(COUNT(DISTINCT CASE WHEN is_active = TRUE THEN user_id ELSE NULL END)) AS active_user_count`
+
+- Scalar operations and expressions outside of aggregate function calls:
+
+  - `MEASURE(SUM(net_sales) * 1.15) AS sales_with_tax`
+
+- Combinations of measures wrapped in the `AGG` function that are defined on the same element table, also called *derived measures* :
+
+  - `MEASURE(AGG(total_revenue) - AGG(total_cost)) AS gross_profit`
+
+The following restrictions apply to measure expressions:
+
+- `COUNT(*)` / `COUNT(1)` is not allowed. You must explicitly specify a column or expression.
+
+- `GROUP BY` clauses, window functions ( `OVER (...)` ), and subqueries aren't allowed in a measure expression.
+
+- Aggregate function calls that contain a `WHERE` clause aren't supported.
+
+- Graph properties can only be referenced within aggregate function calls.
+
+- Compositions of measures can't contain circular dependencies.
+
+- User-defined aggregate functions aren't supported.
 
 The measure type has the following limitations:
 
-- Supported by only the `AGG` function on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
-- Can't be a member type of non-measure container types, such as `STRUCT` , `ARRAY` , or `MAP` types.
+- Supported by only the `AGG` function, either on output from the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) or inside derived measure definitions in `CREATE PROPERTY GRAPH` .
+- Can't be explicitly defined as a member type of container types, such as a `STRUCT` or `ARRAY` type. When you query the output of the `GRAPH_EXPAND` function with `flatten_results => FALSE` , measures appear inside the resulting `STRUCT` columns.
 - Defined only as a property in a graph. For more information and examples, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 ## Numeric types

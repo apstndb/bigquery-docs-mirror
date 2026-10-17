@@ -38,7 +38,7 @@ Common use cases include the following:
 
 - **Real-time fraud detection:** Check a credit card swipe against a graph of known fraudulent devices and accounts within milliseconds.
 - **Autonomous network operations:** Build a digital twin of your network for real-time performance monitoring and optimization.
-- **Entity resolution:** Build clusters of linked identities as a source of truth from different PIIs (email, phone, vemo id). Use the canonical profiles for identity lookup before serving ads, perform real-time fraud detection, and train feature stores.
+- **Entity resolution:** Build clusters of linked identities as a source of truth from different PIIs (email, phone, Venmo ID). Use the canonical profiles for identity lookup before serving ads, perform real-time fraud detection, and train feature stores.
 
 ## How BigQuery Graph and Spanner Graph work together
 

@@ -12,7 +12,7 @@ This tutorial shows you how to create an object table based on the images from a
 
 ## The ResNet 50 model
 
-The ResNet 50 model analyzes image files and outputs a batch of vectors representing the likelihood that an image belongs the corresponding class (logits). For more information, see the **Usage** section on the [model's TensorFlow Hub page](https://tfhub.dev/tensorflow/resnet_50/classification/1) .
+The ResNet 50 model analyzes image files and outputs a batch of vectors representing the likelihood that an image belongs to the corresponding class (logits). For more information, see the **Usage** section on the [model's TensorFlow Hub page](https://tfhub.dev/tensorflow/resnet_50/classification/1) .
 
 The ResNet 50 model input takes a tensor of [`DType`](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType) = `float32` in the shape `[-1, 224, 224, 3]` . The output is an array of tensors of `tf.float32` in the shape `[-1, 1024]` .
 

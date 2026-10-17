@@ -84,7 +84,7 @@ You are charged only once for the storage of the underlying tables used to defin
 
 ## What's next
 
-- Learn how to [create and query a property graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
+- Learn how to [create and query a graph](https://docs.cloud.google.com/bigquery/docs/graph-create) .
 - Learn about [graph schemas](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview) .
 - Learn how to [write graph queries](https://docs.cloud.google.com/bigquery/docs/graph-query-overview) .
 - Learn how to [visualize graphs](https://docs.cloud.google.com/bigquery/docs/graph-visualization) .

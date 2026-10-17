@@ -193,7 +193,7 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 
 13. Click **Create policy** .
 
-You can test your alert by running a continuous query with the custom job ID prefix that you selected and then cancelling it. It might take a few minutes for the alert to reach your notification channel.
+You can test your alert by running a continuous query with the custom job ID prefix that you selected and then canceling it. It might take a few minutes for the alert to reach your notification channel.
 
 ## Retry failed queries
 

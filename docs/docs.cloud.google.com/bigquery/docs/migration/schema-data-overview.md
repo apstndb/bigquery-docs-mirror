@@ -94,7 +94,7 @@ Depending on how far you want to go with the evolution, you might stop at an int
 
 5.  Transform upstream processes.
 
-    You can transform some of your upstream processes to write into the new schema. Because views are read only, you create tables based on the new schema, and you then modify the query definition of the facade views. Some views will still query the source schema, while others will query the newly created tables, or perform a SQL `UNION` operation on both, as shown in the following diagram:
+    You can transform some of your upstream processes to write into the new schema. Because views are read-only, you create tables based on the new schema, and you then modify the query definition of the facade views. Some views will still query the source schema, while others will query the newly created tables, or perform a SQL `UNION` operation on both, as shown in the following diagram:
 
     ![Upstream processes feed into BigQuery tables, but they no longer feed into downstream processes. Instead, the BigQuery tables feed into facade views, which in turn feed into evolved downstream processes.](https://docs.cloud.google.com/static/bigquery/images/dw-bq-schema-and-data-transfer-overview-evolve-transform-upstream.svg)
 

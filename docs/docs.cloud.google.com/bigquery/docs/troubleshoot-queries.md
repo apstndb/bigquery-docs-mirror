@@ -435,13 +435,54 @@ AND query = "my query string";
 
 If previous runs of the query have taken significantly less time, use [query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights) to determine and address the underlying issue.
 
+## Query exceeds maximum bytes billed limit
+
+Error string: `Query exceeded limit for bytes billed: `` LIMIT_BYTES `` . `` REQUIRED_BYTES `` or higher required.`
+
+This HTTP `400 Bad Request` error ( `reason: bytesBilledLimitExceeded` ) occurs when the pre-execution estimate of bytes to be billed for a query ( `REQUIRED_BYTES` ) exceeds the byte limit configured in [`maximumBytesBilled`](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#restrict-bytes-billed) ( `LIMIT_BYTES` ). BigQuery fails the job before execution and doesn't charge for the query.
+
+Because [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) enforces a 10 MB ( `10,485,760` bytes) minimum per referenced table and pre-execution estimation for clustered tables calculates an upper bound across all matching partitions before cluster pruning occurs, `REQUIRED_BYTES` can be higher than the actual bytes scanned when the query runs.
+
+To resolve this issue, do one of the following:
+
+- **Preview estimated bytes with a dry run.** Run a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) ( `bq query --dry_run` in the bq CLI or `configuration.dryRun = true` in the API) or check the query validator in the Google Cloud console to inspect `totalBytesProcessed` before running the query.
+- **Optimize the query to scan fewer bytes.** Select only the columns that your query needs instead of running `SELECT *` , and filter on partitioned columns so BigQuery can prune partitions during pre-execution estimation. Filtering on clustered columns reduces the actual bytes billed when the query runs, but doesn't reduce the pre-execution upper-bound estimate checked against `maximumBytesBilled` . For more information, see [Reduce data processed](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) .
+- **Increase the `maximumBytesBilled` limit.** Set the [`maximumBytesBilled`](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#restrict-bytes-billed) byte limit to a value at or above the `REQUIRED_BYTES` value reported in the error message by using **Maximum bytes billed** (under **Query settings \> Advanced options** ) in the Google Cloud console, the `--maximum_bytes_billed` flag in the bq CLI, or the `configuration.query.maximumBytesBilled` job configuration property in the API.
+
 ## Query response is too large
 
 Error string: `responseTooLarge`
 
-This error occurs when your query's results are larger than the [maximum response size](https://docs.cloud.google.com/bigquery/quota-policy#query_jobs) .
+This error occurs when your query's results are larger than the [maximum response size](https://docs.cloud.google.com/bigquery/quotas#query_jobs) , or when a single row exceeds the REST API row-size limit.
 
-To address this error, follow the guidance provided for the `responseTooLarge` error message in the [error table](https://docs.cloud.google.com/bigquery/docs/error-messages#errortable) .
+Some queries execute in multiple stages, and this error occurs when any stage returns a response size that's too large, even if the final result is smaller than the maximum. This error commonly occurs when queries use an `ORDER BY` clause. Removing the `ORDER BY` clause or adding a `LIMIT` clause can sometimes help. To ensure that large results can return, specify a destination table in your job configuration. For legacy SQL queries, you must also set the `configuration.query.allowLargeResults` property to `true` . For more information, see [Writing large query results](https://docs.cloud.google.com/bigquery/docs/writing-results#large-results) .
+
+### Single-row response size limit exceeded
+
+Error strings:
+
+- `Response too large to return. Message before conversion exceeds max row limit, limit: `` LIMIT `` actual: `` ACTUAL`
+- `Response too large to return. single row too big to return due to byte limit, actual: `` ACTUAL `` limit: `` LIMIT`
+
+This HTTP `403 Forbidden` error ( `reason: responseTooLarge` ) occurs when you read query results or table rows by using the [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) or [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) REST API methods (including displaying results in the Google Cloud console or bq command-line tool), and a single unnested, serialized row exceeds the maximum row size supported by the REST pagination endpoint ( [20 MB for `jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/quotas#jobs.getQueryResults_max_row_size) , or [100 MB for `tabledata.list`](https://docs.cloud.google.com/bigquery/quotas#tabledata.list_max_row_size) ). This commonly happens on tables with wide schemas, deeply nested repeated `ARRAY` or `STRUCT` fields, or large `STRING` or `BYTES` values.
+
+To read rows that exceed REST API row-size limits, do one of the following:
+
+- **Use the BigQuery Storage Read API.** Read the table or temporary query destination table by using the [Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) , which streams data in binary Apache Arrow or Avro format and supports high-throughput reads of large and complex row structures.
+- **Export the table to Cloud Storage.** Export the table or query results to Cloud Storage by using an [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) or an [extract job](https://docs.cloud.google.com/bigquery/docs/exporting-data) (for example, in Avro, Parquet, or JSON format) and read the exported files from Cloud Storage.
+- **Project or aggregate fewer columns.** Instead of running `SELECT *` , select only the specific columns or subfields required by your application, or unnest repeated arrays in your query so that individual output rows stay under the size limit.
+
+## Required parameter is missing
+
+Error string: `Required parameter is missing: `` PARAMETER_NAME`
+
+This HTTP `400 Bad Request` error ( `reason: required` ) is a pre-execution API validation error that occurs when a required field in an API request payload or URL isn't provided, or when a required property on a client library configuration object is `null` or `None` .
+
+To resolve this error, do the following:
+
+- **Check the REST API reference.** Inspect the `PARAMETER_NAME` in the error message, and review the required request body and query parameters for the method in the [BigQuery REST API reference](https://docs.cloud.google.com/bigquery/docs/reference/rest) to ensure your code populates all required fields.
+- **Verify client library parameters.** If you use a BigQuery client library (such as the Java or Python client library), check the [client library documentation](https://docs.cloud.google.com/bigquery/docs/reference/libraries) for the required parameters of the method you are calling.
+- **Inspect the configuration object before calling the API.** Use a debugger or log statement to inspect the job or request configuration object immediately before the API call executes, and check for `None` or `null` values assigned to required properties such as `destinationTable` .
 
 ## Reservation not found or is missing slots
 
@@ -608,9 +649,14 @@ The following issues result when BigQuery has insufficient resources to complete
 
 ### Query exceeds CPU resources
 
-Error string: `Query exceeded resource limits`
+Error string: `Query exceeded resource limits. This query used `` CPU_SECONDS_USED `` CPU seconds but would charge only `` ANALYSIS_MEGABYTES_BILLED `` M Analysis bytes. This exceeds the ratio supported by the on-demand pricing model. Please consider moving this workload to a capacity-based pricing model, which does not have this limit. `` CPU_SECONDS_USED `` CPU seconds were used, and this query must use less than `` CPU_SECONDS_LIMIT `` CPU seconds.`
 
-This error occurs when on-demand queries use too much CPU relative to the amount of data scanned. For information on how to resolve these issues, see [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) .
+This error ( `billingTierLimitExceeded` ) occurs when a query using on-demand pricing exceeds the [maximum CPU usage per scanned data limit](https://docs.cloud.google.com/bigquery/quotas#max_cpu_usage_on-demand) of approximately 256 CPU seconds per MiB of scanned data. This happens when an on-demand query performs CPU-intensive operations—such as unconstrained `CROSS JOIN` operations, inexact join conditions, complex regular expressions, unpartitioned analytic window functions, or computationally heavy JavaScript UDFs—over a relatively small amount of scanned data.
+
+To resolve this error, do one of the following:
+
+- **Optimize the query.** Refactor your SQL to reduce compute overhead relative to scanned data, such as by removing unintended Cartesian products ( `CROSS JOIN` operations without filtering), replacing inexact join predicates, simplifying complex regular expressions, adding `PARTITION BY` clauses to window functions over large unpartitioned windows, or optimizing JavaScript UDFs. For more information, see [Avoid anti-SQL patterns](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-anti-sql-patterns) , [Introduction to optimizing query performance](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) , and [Troubleshoot resources exceeded issues](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-resources-exceeded) .
+- **Switch to capacity-based pricing.** Run the workload using [capacity-based (slots) pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro) . In capacity-based pricing, queries aren't subject to the on-demand CPU-to-byte ratio limit.
 
 ### Query exceeds memory resources
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage external Hive partitioned data
 
-You can use BigQuery external tables to query partitioned data in the following data stores:
+You can use BigQuery external tables to query partitioned data in the following datastores:
 
 - [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake#create-biglake-partitioned-data)
 - [Amazon Simple Storage Service (Amazon S3)](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#create-biglake-table-partitioned)

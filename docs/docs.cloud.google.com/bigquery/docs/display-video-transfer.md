@@ -95,7 +95,7 @@ To retrieve your Display & Video 360 ID, navigate to the Cloud Storage **Buckets
 
 ### Finding your filename prefix
 
-In some cases, the files in your Cloud Storage bucket might have custom, nonstandard file names that were set up for you by the Google Marketing Platform services team. For example:
+In some cases, the files in your Cloud Storage bucket might have custom, nonstandard filenames that were set up for you by the Google Marketing Platform services team. For example:
 
 In a file named `dbm_partner123456custom_activity_*` , the prefix is `dbm_partner123456custom` .
 
@@ -156,7 +156,7 @@ Where:
 - ` PROJECT_ID ` : your project ID.
 - ` DATASET ` : the target dataset for the data transfer configuration.
 - ` NAME ` : the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-- ` PARAMETERS ` : the parameters for the created data transfer configuration in JSON format. For example— `--params='{"param":"param_value"}'` . For Display & Video 360 transfers, the `bucket` and `displayvideo_id` parameters are required. The `file_name_prefix` parameter is optional and used for rare, custom file names only.
+- ` PARAMETERS ` : the parameters for the created data transfer configuration in JSON format. For example— `--params='{"param":"param_value"}'` . For Display & Video 360 transfers, the `bucket` and `displayvideo_id` parameters are required. The `file_name_prefix` parameter is optional and used for rare, custom filenames only.
 - ` DATA_SOURCE ` : the data source — `displayvideo` .
 
 For example, the following command creates a Display & Video 360 data transfer named `My Transfer` using Display & Video 360 ID `123456` , Cloud Storage bucket `dcdt_-dbm_partner123456` , and target dataset `mydataset` .

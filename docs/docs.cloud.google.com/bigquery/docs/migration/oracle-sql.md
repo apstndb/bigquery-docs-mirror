@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Oracle SQL translation guide
 
-This document details the similarities and differences in SQL syntax between Oracle and BigQuery to help you plan your migration. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries.
+This document details the similarities and differences in SQL syntax between Oracle and BigQuery to help you plan your migration. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries.
 
 > **Note:** In some cases, there is no direct mapping between a SQL element in Oracle and BigQuery. However, in most cases, you can achieve the same functionality in BigQuery that you can in Oracle using an alternative means, as shown in the examples in this document.
 
@@ -937,7 +937,7 @@ The sections that follow describe ways to convert existing Oracle procedural sta
 
 ### `CREATE TRIGGER` statement
 
-Triggers are not used in BigQuery. Row based application logic should be handled on the application layer. Trigger functionality can be achieved utilising the ingestion tool, Pub/Sub and/or Cloud Run functions during the ingestion time or utilising regular scans.
+Triggers are not used in BigQuery. Row based application logic should be handled on the application layer. Trigger functionality can be achieved utilizing the ingestion tool, Pub/Sub and/or Cloud Run functions during the ingestion time or utilizing regular scans.
 
 ### Variable declaration and assignment
 

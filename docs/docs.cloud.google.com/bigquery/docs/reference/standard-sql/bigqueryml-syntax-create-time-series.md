@@ -562,7 +562,7 @@ A `BOOL` value. The default value is `TRUE` .
 
 **Description**
 
-The lower bound of the forecasting values. When you specify the `FORECAST_LIMIT_LOWER_BOUND` option, all of the forecast values must be greater than the specified value. For example, if you set `FORECAST_LIMIT_LOWER_BOUND` to `0` , then all of the forecast values are larger than `0` . Also, all values less than or equal to the `FORECAST_LIMIT_LOWER_BOUND` value are excluded from modelling. The forecasting limit [ensures that forecasts stay within limits](https://otexts.com/fpp2/limits.html) .
+The lower bound of the forecasting values. When you specify the `FORECAST_LIMIT_LOWER_BOUND` option, all of the forecast values must be greater than the specified value. For example, if you set `FORECAST_LIMIT_LOWER_BOUND` to `0` , then all of the forecast values are larger than `0` . Also, all values less than or equal to the `FORECAST_LIMIT_LOWER_BOUND` value are excluded from modeling. The forecasting limit [ensures that forecasts stay within limits](https://otexts.com/fpp2/limits.html) .
 
 If you specify a value for the `FORECAST_LIMIT_UPPER_BOUND` option, the `FORECAST_LIMIT_UPPER_BOUND` value must be greater than the `FORECAST_LIMIT_LOWER_BOUND` value.
 
@@ -578,13 +578,13 @@ A `FLOAT_64` value greater than or equal to `-1.7976931348623157E+308` .
 
 **Description**
 
-The upper bound of the forecasting values. When you specify the `FORECAST_LIMIT_UPPER_BOUND` option, all of the forecast values must be less than the specified value. For example, if you set `FORECAST_LIMIT_UPPER_BOUND` to `100` , then all of the forecast values are less than `100` . Also, all values greater than or equal to the `FORECAST_LIMIT_UPPER_BOUND` value are excluded from modelling. The forecasting limit ensures that [forecasts stay within limits](https://otexts.com/fpp2/limits.html) .
+The upper bound of the forecasting values. When you specify the `FORECAST_LIMIT_UPPER_BOUND` option, all of the forecast values must be less than the specified value. For example, if you set `FORECAST_LIMIT_UPPER_BOUND` to `100` , then all of the forecast values are less than `100` . Also, all values greater than or equal to the `FORECAST_LIMIT_UPPER_BOUND` value are excluded from modeling. The forecasting limit ensures that [forecasts stay within limits](https://otexts.com/fpp2/limits.html) .
 
 If you specify a value for the `FORECAST_LIMIT_LOWER_BOUND` option, the `FORECAST_LIMIT_LOWER_BOUND` value must be less than the `FORECAST_LIMIT_UPPER_BOUND` value.
 
 **Arguments**
 
-A `FLOAT_64` value less thanor equal to `1.7976931348623157E+308` .
+A `FLOAT_64` value less than or equal to `1.7976931348623157E+308` .
 
 ### `SEASONALITIES`
 

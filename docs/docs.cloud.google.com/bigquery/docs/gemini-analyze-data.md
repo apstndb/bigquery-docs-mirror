@@ -58,7 +58,7 @@ Before you get started, consider that you want to learn more about how BigQuery 
 
 - "How do I get started with BigQuery?"
 - "What are the benefits of using BigQuery for data analysis?"
-- "How does BigQuery handle auto-scaling for queries?"
+- "How does BigQuery handle autoscaling for queries?"
 
 Gemini in BigQuery can also provide information about how to analyze your data. For that type of help, you might send prompts such as the following:
 

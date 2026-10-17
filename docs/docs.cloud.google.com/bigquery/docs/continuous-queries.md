@@ -417,7 +417,7 @@ The following SQL examples show common use cases for continuous queries.
 
 ### Export data to a Pub/Sub topic
 
-The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data for cancelled rides to a Pub/Sub topic in real time with message attributes:
+The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data for canceled rides to a Pub/Sub topic in real time with message attributes:
 
 ```
 EXPORT DATA
@@ -681,7 +681,7 @@ Follow these steps to modify the SQL used in a continuous query:
 
 ## Cancel a continuous query
 
-You can [cancel](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) a continuous query job just like any other job. It might take up to a minute for the query to stop running after the job is cancelled.
+You can [cancel](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) a continuous query job just like any other job. It might take up to a minute for the query to stop running after the job is canceled.
 
 If you cancel and then restart a query, the restarted query behaves like a new, independent query. The restarted query doesn't start processing data where the previous job stopped and can't reference the previous query's results. See [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
 

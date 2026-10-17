@@ -145,7 +145,7 @@ For example:
 
 ### Finding your filename prefix
 
-In rare cases, the files in your Cloud Storage bucket may have custom, nonstandard file names that were set up for you by the Google Marketing Platform services team.
+In rare cases, the files in your Cloud Storage bucket may have custom, nonstandard filenames that were set up for you by the Google Marketing Platform services team.
 
 For example:
 
@@ -225,7 +225,7 @@ Where:
 
 You can also supply the `--project_id` flag to specify a particular project. If `--project_id` isn't specified, the default project is used.
 
-For example, the following command creates a Campaign Manager data transfer named `My Transfer` using Campaign Manager ID `123456` , Cloud Storage bucket `dcdt_-dcm_account123456` , and target dataset `mydataset` . The parameter `file_name_prefix` is optional and used for rare, custom file names only.
+For example, the following command creates a Campaign Manager data transfer named `My Transfer` using Campaign Manager ID `123456` , Cloud Storage bucket `dcdt_-dcm_account123456` , and target dataset `mydataset` . The parameter `file_name_prefix` is optional and used for rare, custom filenames only.
 
 The data transfer is created in the default project:
 

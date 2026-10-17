@@ -140,7 +140,7 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 
 6.  Optional: Use other Python functions or packages to explore and analyze the data.
 
-The following code sample shows using [`bigframes.pandas`](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to analyze data, and [`bigframes.ml`](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai) to create a linear regression model from **penguins** data in a BigQuery DataFrame:
+The following example uses [`bigframes.pandas`](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to analyze data, and [`bigframes.ml`](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai) to create a linear regression model from **penguins** data in a BigQuery DataFrame. This example calculates the model's R <sup>2</sup> score and returns it as a statistical metric table. It doesn't generate a chart.
 
 ```
 import bigframes.pandas as bpd

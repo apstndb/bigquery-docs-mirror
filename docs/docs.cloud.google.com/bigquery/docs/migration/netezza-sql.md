@@ -20,7 +20,7 @@ This document details the similarities and differences in SQL syntax between Net
 - Stored procedures
 - Functions
 
-You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries. IBM Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
+You can also use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries. IBM Netezza SQL/NZPLSQL is supported by both tools in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## Data types
 

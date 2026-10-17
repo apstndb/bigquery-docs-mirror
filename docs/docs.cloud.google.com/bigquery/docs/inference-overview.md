@@ -43,7 +43,7 @@ BigQuery ML supports the following types of imported models:
 - [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
 - [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
 
-Use this approach to make use of custom models developed with a range of ML frameworks while taking advantage of BigQuery ML's inference speed and co-location with data.
+Use this approach to make use of custom models developed with a range of ML frameworks while taking advantage of BigQuery ML's inference speed and colocation with data.
 
 To learn more, try one of the following tutorials:
 

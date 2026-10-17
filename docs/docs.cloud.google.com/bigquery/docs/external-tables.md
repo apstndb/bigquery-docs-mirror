@@ -19,7 +19,7 @@ External tables let you query structured data in external data stores. To query 
 
 ## Supported data stores
 
-You can use non-BigLake external tables with the following data stores:
+You can use non-BigLake external tables with the following datastores:
 
 - [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage)
 - [Bigtable](https://docs.cloud.google.com/bigquery/docs/external-data-bigtable)

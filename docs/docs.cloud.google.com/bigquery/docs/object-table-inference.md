@@ -26,6 +26,8 @@ To do this, you must first choose an appropriate model, upload it to Cloud Stora
 
 - The combined size of the image files associated with the object table must be less than 1 TB.
 
+- For optimal listing and query performance, specify a maximum of 10 source URIs in the `uris` option of the object table. Specifying more than 10 bucket URIs reduces the total number of files that the object table can support and can cause queries to fail with a `Resources exceeded during query execution` memory error when listing a large number of files. If you need to reference more than 10 buckets, split them across multiple object tables.
+
 - The model must be one of the following:
 
   - A [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) model in [SavedModel](https://www.tensorflow.org/guide/saved_model) format.

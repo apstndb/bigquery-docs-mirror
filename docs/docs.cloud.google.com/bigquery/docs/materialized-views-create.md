@@ -806,7 +806,7 @@ If you stream data into the base tables of a materialized view with the `max_sta
 
 While BigQuery datasets have a default [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) of 7 days, the **streaming storage buffer** only retains data for 3 days. This creates the following limitation for materialized views:
 
-- **Query failure:** If a materialized view uses the `max_staleness` option and hasn't been refreshed for more than 3 days, queries against the view fail with the the error message `Streaming data from <materialized_view_name> is temporarily unavailable` .
+- **Query failure:** If a materialized view uses the `max_staleness` option and hasn't been refreshed for more than 3 days, queries against the view fail with the error message `Streaming data from <materialized_view_name> is temporarily unavailable` .
 
 - **Cause:** The failure occurs because the query rewrite process attempts to read incremental changes (deltas) from the streaming storage buffer. If the required data is older than the 3-day retention period, the system can't retrieve the deltas needed for the incremental rewrite.
 

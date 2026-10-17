@@ -189,7 +189,7 @@ The results look similar to the following:
 
 ### Create a column based on image data
 
-The following example shows how to to create and populate an `image_description` column by analyzing a product image that is stored as an `ObjectRef` value in a standard table:
+The following example shows how to create and populate an `image_description` column by analyzing a product image that is stored as an `ObjectRef` value in a standard table:
 
 ```
 CREATE OR REPLACE TABLE

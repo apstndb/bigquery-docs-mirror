@@ -20,7 +20,7 @@ BigLake tables let you query structured data in external data stores with access
 
 ## Supported data stores
 
-You can use BigLake tables with the following data stores:
+You can use BigLake tables with the following datastores:
 
 - [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)
 - [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)

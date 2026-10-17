@@ -76,7 +76,7 @@ First, make sure that you meet the requirements for accessing BigQuery data in S
 
 If you don't have a Google Cloud project that is set up for billing, follow these steps:
 
-1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project, go to
+1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
 
     Enable the BigQuery API, if it is not already enabled.
 

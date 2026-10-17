@@ -434,7 +434,7 @@ Rapid Cache provides an SSD-backed zonal read cache for your Cloud Storage bucke
 
 ## Control workload costs
 
-This section describes best practices for controlling costs within a workload. **A workload is a set of related queries** . For example, a workload can be a data transformation pipeline that runs daily, a set of dashboards run by a group of business analysts, or several ad-hoc queries run by a set of data scientists.
+This section describes best practices for controlling costs within a workload. **A workload is a set of related queries** . For example, a workload can be a data transformation pipeline that runs daily, a set of dashboards run by a group of business analysts, or several ad hoc queries run by a set of data scientists.
 
 ### Use the Google Cloud pricing calculator
 

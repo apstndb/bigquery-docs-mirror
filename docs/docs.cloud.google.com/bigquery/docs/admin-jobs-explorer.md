@@ -233,7 +233,7 @@ To perform a system-level comparison over separate time periods, do the followin
 
 1.  From the **System performance comparison** view, click **System** .
 2.  Select the system where you want to analyze performance by clicking **Browse** and selecting a reservation or project scope.
-3.  Define the comparison time frames:
+3.  Define the comparison timeframes:
     - **Target Interval** : select the date and time window for the period experiencing performance issues, and click **Apply** .
     - **Baseline Interval** : select the reference date and time window to act as your performance benchmark, and click **Apply** .
 

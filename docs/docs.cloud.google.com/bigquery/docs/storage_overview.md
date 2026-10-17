@@ -42,7 +42,7 @@ The majority of the data that you store in BigQuery is table data. Table data in
 
 In addition, [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) are stored as temporary tables. You aren't charged for cached query results stored in temporary tables.
 
-[External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) are a special type of table, where the data resides in a data store that is external to BigQuery, such as Cloud Storage. An external table has a table schema, just like a standard table, but the table definition points to the external data store. In this case, only the table metadata is kept in BigQuery storage. BigQuery does not charge for external table storage, although the external data store might charge for storage.
+[External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) are a special type of table, where the data resides in a datastore that is external to BigQuery, such as Cloud Storage. An external table has a table schema, just like a standard table, but the table definition points to the external datastore. In this case, only the table metadata is kept in BigQuery storage. BigQuery does not charge for external table storage, although the external datastore might charge for storage.
 
 BigQuery organizes tables and other resources into logical containers called *datasets* . How you group your BigQuery resources affects permissions, quotas, billing, and other aspects of your BigQuery workloads. For more information and best practices, see [Introduction to the resource hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
 

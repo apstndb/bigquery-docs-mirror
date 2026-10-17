@@ -15,7 +15,7 @@ Object tables and some types of BigLake tables can cache metadata information ab
 - Amazon S3 BigLake tables
 - Cloud Storage BigLake tables
 
-The metadata includes file names, partitioning information, and metadata for files such as row counts. You can choose whether to enable metadata caching on a table. Queries with a large number of files and with Hive partition filters benefit the most from metadata caching.
+The metadata includes filenames, partitioning information, and metadata for files such as row counts. You can choose whether to enable metadata caching on a table. Queries with a large number of files and with Hive partition filters benefit the most from metadata caching.
 
 If you don't enable metadata caching, queries on the table must read the external data source to get object metadata. Reading this data increases the query latency; listing millions of files from the external data source can take several minutes. If you enable metadata caching, queries can avoid listing files from the external data source and can partition and prune files more quickly.
 

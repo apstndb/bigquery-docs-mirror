@@ -157,7 +157,7 @@ To authorize a view, the view is granted read permissions to the dataset the sou
 
 To perform this authorization, you need the following permissions on the dataset that contains the source data:
 
-> **Note:** To create or update an authorized view in a authorized dataset, you don't need the `bigquery.datasets.update` permission.
+> **Note:** To create or update an authorized view in an authorized dataset, you don't need the `bigquery.datasets.update` permission.
 
 - `bigquery.datasets.update`
 - `datasets.getIamPolicy`

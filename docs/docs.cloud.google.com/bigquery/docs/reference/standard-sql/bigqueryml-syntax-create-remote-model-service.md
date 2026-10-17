@@ -149,7 +149,7 @@ The `CREATE MODEL` statement fails if any of the following are true:
 
 ### `SPEECH_RECOGNIZER`
 
-This option identifies the [speech recognizer](https://docs.cloud.google.com/speech-to-text/v2/docs/recognizers) to optionally use when the `REMOTE_SERVICE_TYPE` value is `CLOUD_AI_SPEECH_TO_TEXT_V2` . If you don't specify this option, a default recogniser is used. In that case, you must specify a value for the [`recognition_config` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe#arguments) of the `ML.TRANSCRIBE` function when you reference the remote model. The `recognition_config` argument value provides a configuration for the default recognizer.
+This option identifies the [speech recognizer](https://docs.cloud.google.com/speech-to-text/v2/docs/recognizers) to optionally use when the `REMOTE_SERVICE_TYPE` value is `CLOUD_AI_SPEECH_TO_TEXT_V2` . If you don't specify this option, a default recognizer is used. In that case, you must specify a value for the [`recognition_config` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe#arguments) of the `ML.TRANSCRIBE` function when you reference the remote model. The `recognition_config` argument value provides a configuration for the default recognizer.
 
 You can only use the `chirp` [transcription model](https://docs.cloud.google.com/speech-to-text/v2/docs/transcription-model#transcription_models) in the speech recognizer or `recognition_config` value that you provide.
 

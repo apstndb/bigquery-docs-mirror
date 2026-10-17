@@ -88,7 +88,7 @@ The model type. This option is required.
 
 **Description**
 
-The L1 regularizer to apply a penalty on the activations at the latent space. This is a common approach to to achieve high sparsity of data representations after dimensionality reduction.
+The L1 regularizer to apply a penalty on the activations at the latent space. This is a common approach to achieve high sparsity of data representations after dimensionality reduction.
 
 **Arguments**
 

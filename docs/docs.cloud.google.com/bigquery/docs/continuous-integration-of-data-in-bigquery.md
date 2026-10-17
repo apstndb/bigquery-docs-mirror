@@ -84,7 +84,7 @@ The consumers of the data can connect to and read data from the DWH access layer
 - Business intelligence (BI) dashboards
 - Data science notebooks
 - Operational systems that rely on data calculated in the DWH
-- Human users for ad-hoc queries
+- Human users for ad hoc queries
 
 The data consumers rely heavily on the DWH for providing consistent schemas and on the business logic that the DWH encapsulates. These schemas and business logic can be considered as the service level agreements (SLAs) of the DWH platform. Any change to the business logic, to the schema, or to the completeness of data might have large implications downstream. Given the ever-changing nature of modern data platforms, the DWH team might be required to make those changes while nevertheless strictly adhering to the SLAs. In order for the team to meet these SLAs and also keep the DWH up to date, they need a workflow that allows data integration while minimizing the friction that these changes might create.
 

@@ -384,7 +384,7 @@ To subscribe to a listing with a shared topic, select one of the following optio
     - **Delivery type** : select how the message data is delivered.
     - **Message retention duration** : set the message retention duration.
     - **Expiration period** : set when the subscription expires after inactivity, if ever.
-    - **Acknowledgement deadline** : set the acknowledgement deadline time.
+    - **Acknowledgement deadline** : set the acknowledgment deadline time.
     - **Subscription filter** : set filter syntax for messages.
     - **Exactly once delivery** : enable exactly once delivery.
     - **Message ordering** : enable message ordering with an order key.

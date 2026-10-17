@@ -151,7 +151,7 @@ echo 'SELECT 1;' | gcloud alpha bq translation translate \
 
 To apply the customizations that you would otherwise set in **Translation settings** , use the following flags:
 
-- `--translation-config-files` : a comma-separated list of [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) . File names must end with `.config.yaml` .
+- `--translation-config-files` : a comma-separated list of [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) . Filenames must end with `.config.yaml` .
 - `--metadata-gcs-uri` : the Cloud Storage URI of a metadata ZIP file.
 - `--explanation-output-file` : a local file that receives a Gemini-generated explanation of the translation.
 

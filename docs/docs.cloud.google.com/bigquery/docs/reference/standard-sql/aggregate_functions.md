@@ -56,19 +56,20 @@ GoogleSQL for BigQuery supports the following general aggregate functions. To le
 
 ## `AGG`
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bq-graph-preview-support@google.com> .
-
 ```
 AGG(measure_expression)
 ```
 
 **Description**
 
-Aggregates a [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) . A measure type encapsulates an aggregate calculation to perform, locked to a specific granularity defined by a key. The `AGG` function invokes the calculation exactly once per key with the guarantee of avoiding overcounting. Measures are useful for defining business metrics. You can perform aggregation using the `AGG` function instead of complex aggregation queries. For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) . For more information and examples of using the `AGG` function with measures, see [work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+Aggregates a [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) . A measure type encapsulates an aggregate calculation to perform, locked to a specific granularity defined by a key. The `AGG` function invokes the calculation exactly once per key with the guarantee of avoiding overcounting. Measures are useful for defining business metrics. You can perform aggregation using the `AGG` function instead of complex aggregation queries.
+
+The `AGG` function is used in two contexts:
+
+- In SQL queries to aggregate measure columns or sub-fields of a `STRUCT` column returned by the `GRAPH_EXPAND` TVF.
+- In `CREATE PROPERTY GRAPH` statements to define derived measures that compose multiple measures within the same element table, such as `MEASURE(AGG(total_revenue) - AGG(total_cost)) AS gross_profit` .
+
+For more information about overcounting with aggregations, see [multi-level aggregation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls#multi_level_aggregation_overcounting) . For more information and examples of using the `AGG` function with measures, see [work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 **Supported Argument Types**
 

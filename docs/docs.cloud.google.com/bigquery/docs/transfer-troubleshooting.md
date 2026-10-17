@@ -353,7 +353,7 @@ Error: `Unexpected fields found: [ `` FIELD_NAMES `` ]; Table: ' `` TABLE_NAME `
 The following are common errors encountered when [creating a Google Ads transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) .
 
 Issue: Transfer run succeeds but some accounts aren't showing up in the destination table.  
-**Resolution:** There could be many reasons that a account doesn't show up in report, some common causes are:
+**Resolution:** There could be many reasons that an account doesn't show up in report, some common causes are:
 
 - This can occur if there isn't any report activity for the requested day, resulting in no data rows being generated.
 

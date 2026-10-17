@@ -269,7 +269,7 @@ Errors thrown by the OAuth token generation system return the following JSON obj
 
 `{"error" : "_description_string_"}`
 
-The error is accompanied by either an HTTP `400` Bad Request error or an HTTP `401` Unauthorized error. `_description_string_` is one of the error codes defined by the OAuth2 specification. For example:
+The error is accompanied by either an HTTP `400` Bad Request error or an HTTP `401` Unauthorized error. `_description_string_` is one of the error codes defined by the OAuth 2.0 specification. For example:
 
 `{"error":"invalid_client"}`
 

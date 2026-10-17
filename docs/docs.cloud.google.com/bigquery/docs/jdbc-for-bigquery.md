@@ -49,7 +49,7 @@ The JDBC driver for BigQuery is subject to the following limitations:
 
 ## Install and configure the JDBC driver
 
-You can install and configure the JDBC driver for BigQuery by either direcly downloading the uber-JAR file or by using Maven.
+You can install and configure the JDBC driver for BigQuery by either directly downloading the uber-JAR file or by using Maven.
 
 ### Direct download configuration
 

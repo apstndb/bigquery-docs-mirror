@@ -153,7 +153,7 @@ The following instructions show you how to set up Looker with BigQuery.
 
 4.  Generate a LookML model and project for your dataset. For more information, see the [instructions for connecting Looker to your database](https://docs.cloud.google.com/looker/docs/connecting-to-your-db) .
 
-5.  Using the **Explore** menu, navigate to an explore associated with the new model file name **Explore 311_service_requests_copy** (or whatever you named your explore).
+5.  Using the **Explore** menu, navigate to an explore associated with the new model filename **Explore 311_service_requests_copy** (or whatever you named your explore).
 
 You have successfully connected Looker to BigQuery. You can use the System Activity feature in Looker to generate a Looker usage report and analyze the performance of your queries against BigQuery-specific performance metrics. To explore various BigQuery BI Engine query performance metrics, see [BigQuery BI Engine metrics](https://docs.cloud.google.com/looker/docs/query-performance-metrics#bigquery_bi_engine_metrics) .
 

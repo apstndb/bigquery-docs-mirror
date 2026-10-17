@@ -8,15 +8,15 @@ data_source: docs.cloud.google.com
 
 # Restore table snapshots
 
-This document describes how to create a writeable table from a table snapshot by using the Google Cloud console, a `CREATE TABLE CLONE` query, a `bq cp` command, or the `jobs.insert` API. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+This document describes how to create a writable table from a table snapshot by using the Google Cloud console, a `CREATE TABLE CLONE` query, a `bq cp` command, or the `jobs.insert` API. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to create a writeable table from a table snapshot, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
+This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to create a writable table from a table snapshot, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
 
 ### Permissions
 
-To create a writeable table from a table snapshot, you need the following permissions:
+To create a writable table from a table snapshot, you need the following permissions:
 
 | **Permission**                                                                                          | **Resource**                                                     |
 |---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
@@ -34,7 +34,7 @@ The predefined BigQuery roles that provide the required permissions are as follo
 
 ## Restore a table snapshot
 
-To create a writeable table from a snapshot, specify the table snapshot that you want to copy and the destination table. The destination table can be a new table, or you can overwrite an existing table with the table snapshot.
+To create a writable table from a snapshot, specify the table snapshot that you want to copy and the destination table. The destination table can be a new table, or you can overwrite an existing table with the table snapshot.
 
 ### Restore to a new table
 

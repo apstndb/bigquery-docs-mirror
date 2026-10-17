@@ -256,7 +256,7 @@ Each node displays an icon, which indicates the node's properties:
 - cached : a table that is always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
 - cached : a table that is not always fully refreshed (truncated, and then rewritten). Click the icon to view scripts adjacent to this table.
 - timer : a table that was short lived. Hold the pointer over the icon to view the duration for which the table existed.
-- snowflake : a table that was last written more more than seven days ago, which suggests a table with static or infrequently-written data.
+- snowflake : a table that was last written more than seven days ago, which suggests a table with static or infrequently-written data.
 
 To review the objects in the **Data Flow** graph, do the following:
 

@@ -760,7 +760,7 @@ Feature
 
 Feature
 
-You can now create [AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) using the the Google Cloud console. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+You can now create [AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) using the Google Cloud console. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## May 02, 2024
 
@@ -2527,7 +2527,7 @@ Key features include:
 - Revision alias for different model versions, and User specified model ID
 - List the models by type (custom model, BigQuery ML, AutoML)
 - BigQuery ML models can be registered with Vertex AI Model Registry to help you explore, manage, and govern your BigQuery ML models
-- Ability to deploy BigQuery ML models to Vertex AI end points
+- Ability to deploy BigQuery ML models to Vertex AI endpoints
 - BigQuery ML models deployed on Vertex AI endpoints can use MLOps features such as model monitoring
 
 Change
@@ -6427,6 +6427,10 @@ Change
 
 ## March 23, 2016
 
+Feature
+
+Added support for [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro) source format for load operations and as a federated data source in the BigQuery API or command-line tool.
+
 Change
 
 Updated the interface for [creating tables](https://docs.cloud.google.com/bigquery/docs/tables) in the BigQuery web UI.
@@ -6442,10 +6446,6 @@ Announced availability of [BigQuery Public Datasets](https://docs.cloud.google.c
 Feature
 
 Announced [Long Term Storage pricing](https://cloud.google.com/bigquery/pricing.html#long-term-storage) .
-
-Feature
-
-Added support for [Avro](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro) source format for load operations and as an federated data source in the BigQuery API or command-line tool.
 
 Feature
 
@@ -6643,7 +6643,7 @@ API: New [quota limits](https://docs.cloud.google.com/bigquery/docs/quota-policy
 
 Feature
 
-**New tool release:** [BigQuery Connector for Excel](https://docs.cloud.google.com/bigquery/docs/bigquery_connector_for_excel) now allows you to make queries to Google BigQuery from Microsft Excel!
+**New tool release:** [BigQuery Connector for Excel](https://docs.cloud.google.com/bigquery/docs/bigquery_connector_for_excel) now allows you to make queries to Google BigQuery from Microsoft Excel!
 
 Feature
 
@@ -6814,7 +6814,7 @@ Feature
 - Support for loading gzip compressed files from Google Cloud Storage
 - Error handling
   - Faster detection of unreadable files
-  - Improvements in handline multibyte UTF-8 characters
+  - Improvements in handling multibyte UTF-8 characters
 
 ## November 01, 2011
 
@@ -6824,10 +6824,10 @@ Change
 
 - The default `configuration.load.createDisposition` for load jobs is now `CREATE_IF_NEEDED`
 - "load" jobs now allow users to specify a number of rows to skip
-  - This is useful for skipping header rows or other metadata that is not parseable when you import CSV files.
+  - This is useful for skipping header rows or other metadata that is not parsable when you import CSV files.
   - This value applies to all files in the source list.
 - BigQuery can now load data from files that contain delimiters other than the comma
-  - Delimiters may be any character expressable as a single Latin-1 byte other than `"` , , and .
+  - Delimiters may be any character expressible as a single Latin-1 byte other than `"` , , and .
   - Example (using the [bq command line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool-quickstart) ): `bq load --field_delimiter=: newtable gs://bucket/input.txt`
 
 Feature

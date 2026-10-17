@@ -135,6 +135,159 @@ To find the correct predefined IAM role, follow these steps.
 
 4.  Grant the principal the appropriate role. For information about how to grant an IAM role to a BigQuery resource, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
+## BigQuery Terms of Service not accepted
+
+Error string: `BigQuery Terms of Service have not been accepted`
+
+This HTTP `403 Forbidden` error ( `reason: termsOfServiceNotAccepted` ) occurs when the BigQuery Terms of Service haven't been accepted. The error isn't caused by missing IAM permissions. It can be returned for requests such as creating a dataset or loading data.
+
+To resolve this issue, do the following:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  If the welcome page appears, select your country, select the **Terms of Service** checkbox, and then click **Agree and continue** . For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
+
+After the Terms of Service are accepted, retry the request.
+
+## Troubleshoot policy violation errors
+
+When you receive an HTTP `403 PERMISSION_DENIED` error in BigQuery with the `policyViolation` error reason, it indicates a failure driven by organizational policies, data perimeters, or VPC Service Controls.
+
+The following sections describe the most common error messages associated with this error reason, what causes them, and how to resolve them.
+
+### Request is prohibited by organization's policy
+
+Error string: `VPC Service Controls: Request is prohibited by organization's policy. vpcServiceControlsUniqueIdentifier: `` VPC_SERVICE_CONTROLS_UNIQUE_IDENTIFIER`
+
+#### Diagnosis
+
+Your request originated from a network address or client that is outside the designated VPC Service Controls perimeter, or the request violated the defined ingress and egress rules for your workspace. This frequently occurs when your query spans multiple projects. For example, the query billing project is outside the data project's secure perimeter.
+
+#### Resolution
+
+1.  **Find the Unique ID.** Retrieve the `vpcServiceControlsUniqueIdentifier` included in the error message. Use this ID to filter your Google Cloud Logs Explorer to find the corresponding VPC Service Controls log with the details of the reason:
+
+    ```
+    protoPayload.metadata.@type="type.googleapis.com/google.cloud.audit.VpcServiceControlAuditMetadata"
+    protoPayload.metadata.vpcServiceControlsUniqueId="VPC_SERVICE_CONTROLS_UNIQUE_IDENTIFIER"
+    ```
+
+    Look for the `violationReason` value under `protoPayload.metadata.violationReason` . Once identified, study the additional details in the log entry and follow the existing [VPC Service Controls troubleshooting guide](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting#debugging) . Additionally, consider using the [Violation Analyzer](https://docs.cloud.google.com/vpc-service-controls/docs/violation-analyzer) .
+
+2.  **Fix Cross-Project Billing.** For cross-project queries, ensure the billing project that executes the query resides in the same perimeter as the queried data within the perimeter. If needed, specify a compliant billing project manually using the Google Cloud console project picker, the [`--project_id` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#project_id_flag) in the bq command-line tool, or your [API or client library request](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
+3.  **Verify Access Levels.** Make sure your client network, IP, or user account is permitted using [Access Context Manager](https://docs.cloud.google.com/access-context-manager/docs/overview) . The Google Cloud console requires ingress rules specifically configured to allow user access to protected environments.
+
+### Export to Google Drive is blocked for projects with VPC Service Controls enabled
+
+Error string: `Export to Google Drive is blocked for projects with VPC-SC enabled`
+
+#### Diagnosis
+
+Google Drive doesn't support VPC Service Controls. Because Google Drive can't enforce the security perimeter, BigQuery automatically disables exporting API extracts to Google Drive for any request originating inside a VPC Service Controls boundary to prevent data exfiltration.
+
+#### Resolution
+
+Instead of exporting directly to Google Drive, extract your query results to a Cloud Storage bucket located inside the same VPC Service Controls perimeter, or save the results as a local file.
+
+### Google Drive external tables are blocked for projects with VPC Service Controls enabled
+
+Error string: `Google Drive external tables are blocked for projects with VPC-SC enabled`
+
+#### Diagnosis
+
+By default, VPC Service Controls does not block querying Google Drive external tables (such as Connected Sheets). However, this error appears because your Google Cloud organization has explicitly requested that Google Cloud enforce a strict blocking configuration for your project to override the default permissive behavior, preventing any inbound queries to Google Drive data from within a VPC Service Controls perimeter.
+
+#### Resolution
+
+Import the data from the Google Sheet or Google Drive file directly into a standard BigQuery table inside your VPC Service Controls perimeter, rather than querying it dynamically as an external federated table. Alternatively, contact your internal Cloud Administrator to discuss your organization's data export boundaries.
+
+### Export to Google Drive is blocked for your project
+
+Error string: `Export to Google Drive is blocked for your project.`
+
+#### Diagnosis
+
+Even without a VPC Service Controls perimeter, your Google Cloud administrators have requested a specific, strict organizational configuration to be applied to your project denying all data extraction capabilities to Google Drive.
+
+#### Resolution
+
+Choose an alternative extraction destination such as a Cloud Storage bucket or a local file, or contact your internal Cloud Administrator to discuss your organization's data export boundaries.
+
+### Location violates organization policy constraint
+
+Error string: `LOCATION `` violates constraint `` CONSTRAINT_NAME `` on the resource projects/ `` PROJECT_ID` or `LOCATION `` violates constraint `` CONSTRAINT_NAME `` on the resource projects/ `` PROJECT_ID `` /datasets/ `` DATASET_ID`
+
+#### Diagnosis
+
+Your Cloud Administrator has configured an [Organization Policy Constraint](https://docs.cloud.google.com/organization-policy/reference/org-policy-constraints) to restrict exactly where resources can be created or analyzed. This error commonly appears when:
+
+- Creating a dataset in an unauthorized geographic region (for example, restricted by `constraints/gcp.resourceLocations` ).
+- Attempting to use BigQuery Omni across external clouds when it isn't allowed (for example, blocked by `constraints/bigquery.disableBQOmniAWS` or `constraints/bigquery.disableBQOmniAzure` ).
+
+#### Resolution
+
+1.  Check the exact `CONSTRAINT_NAME` provided in the error message to understand what action is being blocked.
+2.  Select a different, unblocked region for your data, or work with your Google Cloud organization administrator to review the organizational policy at the Folder or Organization level. See [structuring and defining resource locations](https://docs.cloud.google.com/organization-policy/restrict-locations) for more details.
+
+## Troubleshoot unauthenticated errors
+
+When you receive an HTTP `401 Unauthorized` (gRPC `UNAUTHENTICATED` ) error in BigQuery with the `unauthenticated` error reason, the request lacks valid authentication credentials, the OAuth 2.0 access token has expired, or the caller can't authenticate as the specified identity.
+
+The following sections describe the most common `unauthenticated` scenarios, what causes them, and how to resolve them.
+
+### Invalid or expired credentials
+
+Error strings:
+
+- `Invalid credential`
+- `User credential was invalid.`
+- `Credentials expired`
+- `Credentials missing required scope.`
+- `Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential.`
+
+#### Diagnosis
+
+The access token, service account key, or Application Default Credentials (ADC) supplied with the request are expired, revoked, or missing required OAuth 2.0 scopes. This error also occurs when the request is signed with a system clock that has drifted from Network Time Protocol (NTP) time.
+
+#### Resolution
+
+- **Refresh your credentials.** If you are authenticating from a local development environment, run `gcloud auth application-default login` (for ADC) or `gcloud auth login` to obtain a fresh token.
+- **Verify service account keys and OAuth scopes.** If your application uses `GOOGLE_APPLICATION_CREDENTIALS` , verify that the variable points to a valid, unrevoked JSON key file, that the service account is enabled in the Google Cloud console, and that the credential includes the required `https://www.googleapis.com/auth/bigquery` or `https://www.googleapis.com/auth/cloud-platform` scope.
+- **Use current client libraries and synchronize system clocks.** Update your [BigQuery client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) or [ODBC](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) or [JDBC](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) driver to the latest version so that OAuth 2.0 token refreshes and federated credentials are handled automatically. Also ensure that the host machine's system clock is synchronized using NTP.
+
+### Missing end-user credentials or service account impersonation permission
+
+Error strings:
+
+- `Current user can not act as user for service account `` SERVICE_ACCOUNT_EMAIL`
+- `No end user credentials found when accessing `` PROJECT_ID `` : `` DATASET_ID `` . `` TABLE_ID `` . Please use end user credentials to call BigQuery APIs.`
+
+#### Diagnosis
+
+The job or continuous query is configured to run as a custom service account that the caller doesn't have permission to act as, or the target table or security policy requires end-user credentials (EUC) so that BigQuery can evaluate access against an interactive user identity.
+
+#### Resolution
+
+- **Grant service account impersonation permissions.** When running a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries) or job configured with a custom service account, grant the caller the Service Account User role ( `roles/iam.serviceAccountUser` , which includes the `iam.serviceAccounts.actAs` permission) on that service account. When impersonating a service account or exchanging federated credentials for a short-lived token, grant the caller the Service Account Token Creator role ( `roles/iam.serviceAccountTokenCreator` ) on the target service account.
+- **Authenticate with end-user credentials.** When the target resource requires end-user credentials, authenticate the request using an interactive user's OAuth 2.0 credentials (for example, by running `gcloud auth application-default login` or configuring user OAuth in your BI tool) rather than standalone service account credentials.
+- **Verify VPC Service Controls ingress and egress rules.** If the request crosses a VPC Service Controls boundary, verify that the perimeter's ingress and egress rules permit the caller identity and target resource.
+
+### Account restricted, suspended, or deleted
+
+Error strings:
+
+- `The account was restricted due to `` REASON`
+- `Account deleted`
+
+#### Diagnosis
+
+The Google Account or Google Workspace account issuing the request has been suspended, disabled, restricted, or deleted by an administrator or account security policy.
+
+#### Resolution
+
+Contact your Google Workspace or Cloud Identity administrator to review the account status in the Google Admin console and restore or un-suspend the user account, or update the workload to authenticate with an active service account.
+
 ## Troubleshoot column-level access control
 
 The following sections explain how to troubleshoot issues with [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security) and Data Catalog policy tags.

@@ -153,7 +153,7 @@ Replace the following:
 
 The [job views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-user) contain the column `reservation_id` . If your job ran in a project with a reservation assigned to it, `reservation_id` would follow this format: `reservation-admin-project `` : `` reservation-location `` . `` reservation-name` .
 
-To join between the reservation views and the job views, you can join between the job views column `reservation_id` and the reservation views columns `project_id` and `reservation_name` . The following example shows an example of a using the `JOIN` clause between the reservation and the job views.
+To join between the reservation views and the job views, you can join between the job views column `reservation_id` and the reservation views columns `project_id` and `reservation_name` . The following example shows an example of using the `JOIN` clause between the reservation and the job views.
 
 ## Example
 

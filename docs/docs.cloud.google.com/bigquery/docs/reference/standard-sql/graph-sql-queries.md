@@ -18,22 +18,30 @@ GoogleSQL for BigQuery supports the following syntax to use graphs within SQL qu
 ## `GRAPH_EXPAND`
 
 ```
-GRAPH_EXPAND(graph_name)
+GRAPH_EXPAND(
+  graph_name
+  [, start_node => start_node_name ]
+  [, flatten_results => { TRUE | FALSE } ]
+)
 ```
 
 #### Description
 
-Provides a flattened table representation of the data in the input graph.
+Provides a relational table representation of the data in the input graph. By default, `GRAPH_EXPAND` returns a flattened table with prefixed column names. You can specify `flatten_results => FALSE` to return a hierarchical relation with nested `STRUCT` columns.
 
 The `GRAPH_EXPAND` TVF also supports querying graph properties defined by a measure. For more information and examples of how to use this function, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
 #### Definitions
 
 - `graph_name` : A `STRING` value that contains the name of the graph to expand.
+- `start_node_name` : An optional `STRING` value that specifies the starting node table name for traversal. This field is required if the graph has multiple root node tables.
+- `flatten_results` : An optional `BOOL` value that controls the output schema structure. The default value is `TRUE` .
+  - `TRUE` : Flattens all node and edge properties into top-level columns with `<label>_<property>` prefixes.
+  - `FALSE` : Retains hierarchical structure by returning root node properties as un-prefixed top-level columns and joined neighbor tables as nested `STRUCT` columns.
 
 #### Details
 
-The `GRAPH_EXPAND` function produces a flattened table by applying a series of `LEFT JOIN` operations to node and edge tables. Because of this join behavior, the function only accepts certain types of property graphs.
+The `GRAPH_EXPAND` function produces a relational table by applying a series of `LEFT JOIN` operations to node and edge tables. Because of this join behavior, the function only accepts certain types of property graphs.
 
 > **Caution:** Changes to the underlying graph don't invalidate [cached results](https://docs.cloud.google.com/bigquery/docs/cached-results) for queries that call the `GRAPH_EXPAND` function. To ensure correct output, disable the retrieval of cached results when you call this function.
 
@@ -62,37 +70,34 @@ A property graph is valid input to the `GRAPH_EXPAND` function if it meets the f
 
 - Every node or edge table uses the default label.
 
-- The following conditions hold for the schema relationship graph of the property graph:
+- The following conditions hold for the schema relationship graph of the property graph, or the subgraph reachable from `start_node_name` when `start_node` is specified:
 
-  - There is a single *root node* , defined as a node table with in-degree zero.
-  - The graph is acyclic.
-  - Every node is reachable from the root node.
-  - The in-degree of every node is at most one.
+  - If `start_node` is not specified, there is a single *root node* , defined as a node table with in-degree zero. If the property graph has multiple root node tables, you must specify `start_node` .
+  - The graph, or subgraph reachable from `start_node` , is acyclic.
+  - Every node in the graph or subgraph is reachable from the `start_node` or root node.
+  - The in-degree of every node in the graph or subgraph is at most one.
 
 #### Output
 
-The `GRAPH_EXPAND` TVF returns a table that generally contains one column for each property in the graph. However, if an edge table's properties are identical to the properties of one of its adjacent node tables, then the redundant columns are omitted.
+The `GRAPH_EXPAND` TVF returns a table derived from properties in the graph.
 
-The output column names are constructed by concatenating the label name and property name with an underscore ( `_` ). For example, if a node table has the label `Person` and a property called `age` , then the column name corresponding to that property is `Person_age` .
+- If an edge table shares the same underlying table as its source node table or destination table and contributes no additional properties, then the edge is inlined and omitted from the output. Unless you specifically need to store custom properties on the edge, we recommend designing your schema so that edge tables satisfy the inlining criteria. This prevents unexpected and costly self-joins between your node and edge tables.
+
+- When `flatten_results` is `TRUE` , output column names are constructed by concatenating the label name and property name with an underscore ( `_` ). For example, if a node table has the label `Person` and a property called `age` , then the column name corresponding to that property is `Person_age` .
+
+- When `flatten_results` is `FALSE` , properties of the `start_node` table appear as un-prefixed top-level columns, and properties of joined adjacent tables appear as nested `STRUCT` columns named after the element table. If an element table has a property with the same name as an adjacent node or edge table, `flatten_results => FALSE` is not supported.
+
+  Measures are accessed using dot notation within `AGG()` , such as `AGG(ElementStruct.measure_name)` .
 
 To select columns that correspond to properties defined by a measure, you must wrap them in the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . You can't directly select columns that correspond to properties defined by a measure.
 
-> **Warning:** The output table is created by performing a sequence of `LEFT JOIN` operations on the graph's input tables. Depending on the relationships between your data, nodes might appear in your property graph that aren't reflected in the flattened output table.
+> **Warning:** The output table is created by performing a sequence of `LEFT JOIN` operations on the graph's input tables. Depending on the relationships between your data, nodes might appear in your property graph that aren't reflected in the output table.
 
 #### Examples
 
 The following example creates a graph called `StoreGraph` based on the `Stores` and `Locations` tables.
 
 ```
-CREATE OR REPLACE TABLE mydataset.Stores (
-  name STRING PRIMARY KEY NOT ENFORCED,
-  location_id INT64 REFERENCES mydataset.Locations(id) NOT ENFORCED
-) AS (
-  SELECT 'Store 1' AS name, 101 AS location_id
-  UNION ALL
-  SELECT 'Store 2' AS name, 101 AS location_id
-);
-
 CREATE OR REPLACE TABLE mydataset.Locations (
   id INT64 PRIMARY KEY NOT ENFORCED,
   name STRING,
@@ -101,6 +106,15 @@ CREATE OR REPLACE TABLE mydataset.Locations (
   SELECT 101 AS id, 'Anytown' AS name, 1000 AS population
   UNION ALL
   SELECT 102 AS id, 'Sometown' AS name, 500 AS population
+);
+
+CREATE OR REPLACE TABLE mydataset.Stores (
+  name STRING PRIMARY KEY NOT ENFORCED,
+  location_id INT64 REFERENCES mydataset.Locations(id) NOT ENFORCED
+) AS (
+  SELECT 'Store 1' AS name, 101 AS location_id
+  UNION ALL
+  SELECT 'Store 2' AS name, 101 AS location_id
 );
 
 CREATE OR REPLACE PROPERTY GRAPH mydataset.StoreGraph
@@ -153,6 +167,25 @@ GROUP BY S_location_id;
  +---------------+-----------------------+------------------------+
  | 101           | 1000                  | 2000                   |
  +---------------+-----------------------+------------------------*/
+```
+
+The following query calls the `GRAPH_EXPAND` function with `flatten_results => FALSE` . Properties of the root node table `S` appear as un-prefixed top-level columns, and properties of the joined `L` node table appear inside a nested `STRUCT` :
+
+```
+SELECT
+  name,
+  location_id,
+  L.name AS location_name,
+  AGG(L.total_population) AS true_total_population
+FROM GRAPH_EXPAND('mydataset.StoreGraph', flatten_results => FALSE)
+GROUP BY name, location_id, location_name;
+
+/*---------+-------------+---------------+-----------------------+
+ | name    | location_id | location_name | true_total_population |
+ +---------+-------------+---------------+-----------------------+
+ | Store 1 | 101         | Anytown       | 1000                  |
+ | Store 2 | 101         | Anytown       | 1000                  |
+ +---------+-------------+---------------+-----------------------*/
 ```
 
 ## `GRAPH_TABLE` operator

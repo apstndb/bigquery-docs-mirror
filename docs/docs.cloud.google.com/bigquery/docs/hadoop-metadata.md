@@ -156,7 +156,7 @@ Replace the following:
 - `CLOUDERA-PASSWORD` : the password of the Cloudera user
 - `MIGRATION-BUCKET` : the Cloud Storage bucket that you are using to store the migration files.
 - `APPLICATION-TYPES` : (Optional) list of all existing application types from Hadoop YARN. For example, `SPARK, MAPREDUCE` .
-- `PAGE-SIZE` : (Optional) specify how much data is fetched from 3rd party services, like the Hadoop YARN API. The default value is `1000` , which represents 1000 entities per request.
+- `PAGE-SIZE` : (Optional) specify how much data is fetched from third-party services, like the Hadoop YARN API. The default value is `1000` , which represents 1000 entities per request.
 
 This command extracts metadata from Cloudera to a file named `dwh-migration-cloudera.zip` in the `MIGRATION-BUCKET` directory.
 

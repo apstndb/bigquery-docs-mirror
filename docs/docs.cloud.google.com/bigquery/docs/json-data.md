@@ -240,7 +240,7 @@ row.json_col = json.dumps(10)
 
 ### Use the Storage Write API (REST)
 
-The following example loads JSON data from a local file and streams it to a BigQuery table with a JSON data-type column named `json_data` using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+The following example loads JSON data from a local file and streams it to a BigQuery table with a JSON data type column named `json_data` using the [Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
 ```
 from google.cloud import bigquery

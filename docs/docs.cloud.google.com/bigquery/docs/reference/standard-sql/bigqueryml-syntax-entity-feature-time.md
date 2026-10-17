@@ -114,8 +114,8 @@ Because you can specify multiple points in time from which to retrieve features 
 
 If either of the following conditions are true:
 
-- No entity ids from the entity time table are found in the feature table.
-- The rows in the feature table whose entity ids match those in the entity time table don't meet the point-in-time criteria.
+- No entity IDs from the entity time table are found in the feature table.
+- The rows in the feature table whose entity IDs match those in the entity time table don't meet the point-in-time criteria.
 
 Then the function doesn't return any output for that entity time table row.
 

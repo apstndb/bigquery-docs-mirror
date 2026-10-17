@@ -241,6 +241,7 @@ options_clause:
   OPTIONS (
     [ description = description_string ]
     [, synonyms = synonym_array ]
+    [, extensions = extension_array ]
   )
 ```
 
@@ -274,6 +275,8 @@ Adds a list of labels and properties to an element.
 
 - `synonym_array` : An array of string literals that provides alternative names for the label to improve accuracy for natural language querying interfaces.
 
+- `extension_array` : An array of string pairs ( `ARRAY<STRUCT<STRING, STRING>>` ) that represents additional metadata. You can use extensions to provide custom metadata, units, or formatting rules, such as `[('currency', 'USD')]` . This option provides context and improves discoverability for natural language querying interfaces.
+
 ### Element properties definition
 
 ```
@@ -300,6 +303,7 @@ options_clause:
   OPTIONS (
     [ description = description_string ]
     [, synonyms = synonym_array ]
+    [, extensions = extension_array ]
   )
 ```
 
@@ -353,9 +357,9 @@ Adds properties associated with a label.
 
   - `value_expression` : An expression that can be represented by simple constructs such as column references and functions. Subqueries are excluded.
 
-  - `measure_expression` : An aggregation expression in the format `MEASURE(AGGREGATE_FUNCTION(property_name))` , where `property_name` refers to a property already defined on the graph element. A [measure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) uses the `KEY` of the node or edge table on which the measure is defined to ensure that aggregations on `property_name` are performed at the correct level. For example, if `amount` is a property on the `Account` node, then you can define another property as `MEASURE(SUM(amount)) AS total_account_amount` .
+  - `measure_expression` : An expression wrapped in the `MEASURE()` keyword that defines an aggregate calculation or metric. A [measure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) locks its aggregation to the `KEY` of the node or edge table on which the measure is defined to ensure that aggregations are performed at the correct level without overcounting. For example, if `amount` is a property on the `Account` node, then you can define another property as `MEASURE(SUM(amount)) AS total_account_amount` . For more information about supported measure expression, read about the [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) .
 
-    Supported aggregate functions include `SUM` , `AVG` , `MIN` , `MAX` , `COUNT` , and `COUNT(DISTINCT)` . You can't use GQL to access a property that you defined using a measure. You can use the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) to transform your graph into a flattened table that lets you access the measure by calling it with the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . For limitations on the types of graphs that you can use with `GRAPH_EXPAND` , read the [input limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#input_limitations) . For more information, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
+    You can't use GQL to access a property that you defined using a measure. You can use the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) to transform your graph into a relational table that lets you access the measure by calling it with the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . For limitations on the types of graphs that you can use with `GRAPH_EXPAND` , read the [input limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#input_limitations) . For more information, see [Work with measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) .
 
   - `AS property_name` : Alias to assign to the value expression. This is optional unless `value_expression` is a function or the property is defined by a measure.
 
@@ -366,6 +370,8 @@ Adds properties associated with a label.
 - `description_string` : A string literal that describes the property to provide context and improve discoverability for natural language querying interfaces.
 
 - `synonym_array` : An array of string literals that provides alternative names for the property to improve accuracy for natural language querying interfaces.
+
+- `extension_array` : An array of string pairs ( `ARRAY<STRUCT<STRING, STRING>>` ) that represents additional metadata. You can use extensions to provide custom metadata, units, or formatting rules, such as `[('currency', 'USD')]` . This option provides context and improves discoverability for natural language querying interfaces.
 
 ### `FinGraph` example
 

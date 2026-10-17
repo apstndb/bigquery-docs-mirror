@@ -41,7 +41,7 @@ The following diagram provides an overview of the migration process.
 Hive Metastore table transfers are subject to the following limitations:
 
 - Hive Metastore transfers must have a minimum of 30 minutes between 2 scheduled runs. On demand runs can still be triggered at any interval.
-- File names must comply with [Cloud Storage object naming requirements](https://docs.cloud.google.com/storage/docs/objects#naming) .
+- Filenames must comply with [Cloud Storage object naming requirements](https://docs.cloud.google.com/storage/docs/objects#naming) .
 - Cloud Storage has a 5 TiB limit for single objects. Files within your Hive Metastore tables larger than 5 TiB will fail to transfer.
 - Storage Transfer Service has specific behaviors if data is changed at the source while a transfer is in progress. We don't recommend writing to tables while the table is being actively migrated. For a list of other Storage Transfer Service limitations, see [known limitations](https://docs.cloud.google.com/storage-transfer/docs/known-limitations-transfer) .
 
@@ -183,7 +183,7 @@ Select one of the following options:
 
 ### HDFS
 
-An storage transfer agent is required for on-premises or HDFS transfers.
+A storage transfer agent is required for on-premises or HDFS transfers.
 
 To set up the agent, do the following:
 

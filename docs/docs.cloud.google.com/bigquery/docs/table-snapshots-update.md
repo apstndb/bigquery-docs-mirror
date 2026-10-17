@@ -32,7 +32,7 @@ The predefined BigQuery roles that provide the required permission are as follow
 
 ## Limitations
 
-You can update a table snapshot's metadata, but you can't update its data because table snapshot data is read only. To update a table snapshot's data, you must first restore the table snapshot to a standard table, and then update the standard table's data. For more information, see [Restoring table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore) .
+You can update a table snapshot's metadata, but you can't update its data because table snapshot data is read-only. To update a table snapshot's data, you must first restore the table snapshot to a standard table, and then update the standard table's data. For more information, see [Restoring table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore) .
 
 ## Update a table snapshot's metadata
 
@@ -164,7 +164,7 @@ You can give a user access to view the data in a table snapshot by using one of 
 
 6.  In the **Add principals** pane that appears, enter the identifier of the [principal](https://docs.cloud.google.com/iam/docs/principals-overview) you want to give access to the table snapshot.
 
-7.  In the **Select a role** dropdown, choose **BigQuery** , then **BigQuery Data Viewer** .
+7.  In the **Select a role** drop-down, choose **BigQuery** , then **BigQuery Data Viewer** .
 
 8.  Click **Save** .
 

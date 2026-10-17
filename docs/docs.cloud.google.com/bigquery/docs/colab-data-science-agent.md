@@ -83,7 +83,7 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, expand your project, and then click click **Notebooks** .
+2.  In the left pane, expand your project, and then click **Notebooks** .
 
 3.  Click **New notebook \> Empty notebook** .
 
@@ -117,7 +117,7 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, expand your project, and then click click **Notebooks** .
+2.  In the left pane, expand your project, and then click **Notebooks** .
 
 3.  Click **New notebook \> Empty notebook** .
 

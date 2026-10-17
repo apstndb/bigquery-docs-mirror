@@ -73,7 +73,7 @@ Using dataset replication is dependent on the following colocation requirements.
 
 #### Cloud Storage
 
-Querying data on Cloud Storage requires that the Cloud Storage bucket is co-located with the replica. Use the [external tables location considerations](https://docs.cloud.google.com/bigquery/docs/external-tables#data-locations) when deciding where to place your replica.
+Querying data on Cloud Storage requires that the Cloud Storage bucket is colocated with the replica. Use the [external tables location considerations](https://docs.cloud.google.com/bigquery/docs/external-tables#data-locations) when deciding where to place your replica.
 
 ## Limitations
 

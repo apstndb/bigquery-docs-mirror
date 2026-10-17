@@ -91,7 +91,7 @@ When you enable the BigQuery Data Transfer Service API through the Google Cloud 
 
 #### Limitation
 
-You can't use the Google Cloud console to to attach a cross-project service account to a data transfer. Instead, you can attach the cross-project service account with the following Google Cloud CLI command:
+You can't use the Google Cloud console to attach a cross-project service account to a data transfer. Instead, you can attach the cross-project service account with the following Google Cloud CLI command:
 
 ```
 bq update

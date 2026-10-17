@@ -69,7 +69,7 @@ To open the *Introduction to notebooks in BigQuery Studio* template in notebook 
 
 2.  Click the arrow_drop_down arrow drop-down and then choose **Notebook \> All templates** .
 
-3.  Alternatively, from from the BigQuery Studio home page, click **View notebook gallery** .
+3.  Alternatively, from the BigQuery Studio home page, click **View notebook gallery** .
 
     ![The View notebook gallery link on the BigQuery Studio home page.](https://docs.cloud.google.com/bigquery/images/template-gallery.png)
 

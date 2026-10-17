@@ -3084,7 +3084,7 @@ Routine names must contain only letters, numbers, and underscores, and be at mos
 
   - `DETERMINISTIC` : The function always returns the same result when passed the same arguments. The query result is potentially cacheable. For example, if the function `add_one(i)` always returns `i + 1` , the function is deterministic.
 
-  - `NOT DETERMINISTIC` : The function does not always return the same result when passed the same arguments, and therefore is not cacheable. For example, if the functionj `add_random(i)` returns `i + rand()` , the function is not deterministic and BigQuery does not use cached results.
+  - `NOT DETERMINISTIC` : The function does not always return the same result when passed the same arguments, and therefore is not cacheable. For example, if the function `add_random(i)` returns `i + rand()` , the function is not deterministic and BigQuery does not use cached results.
 
     If all of the invoked functions are `DETERMINISTIC` , BigQuery tries to cache the result, unless the results can't be cached for other reasons. For more information, see [Using cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
 
@@ -5537,7 +5537,7 @@ DROP COLUMN [IF EXISTS] column_name [, ...]
 
 ### Details
 
-Dropping a column is a metadata-only operation and does not immediately free up the storage that is associated with the dropped column. The storage is freed up the next time the table is written to, typically when you perform a DML operation on it or when a background optimzation job happens. Since `DROP COLUMN` is not a data cleanup operation, there is no guaranteed time window within which the data will be deleted.
+Dropping a column is a metadata-only operation and does not immediately free up the storage that is associated with the dropped column. The storage is freed up the next time the table is written to, typically when you perform a DML operation on it or when a background optimization job happens. Since `DROP COLUMN` is not a data cleanup operation, there is no guaranteed time window within which the data will be deleted.
 
 There are two options for immediately reclaiming storage:
 

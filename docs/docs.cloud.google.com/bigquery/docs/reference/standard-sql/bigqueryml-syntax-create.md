@@ -313,7 +313,7 @@ BigQuery uses a `CLOUD_RESOURCE` [connection](https://docs.cloud.google.com/bigq
 
 See examples in [remote model `CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#connection) .
 
-To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify specify `DEFAULT` instead of the connection name.
+To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `DEFAULT` instead of the connection name.
 
 ### `model_option_list`
 

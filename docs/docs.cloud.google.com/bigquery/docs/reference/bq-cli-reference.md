@@ -549,7 +549,7 @@ To overwrite the destination table, if it exists, without prompting, set to `tru
 To disallow overwriting the destination table, if it exists, set to `true` . The default value is `false` ; if the destination table exists, then it is overwritten.
 
 **`--restore={true|false}`**  
-This flag is being deprecated. To create a writeable table from a table snapshot, use the `bq cp` command or the `bq cp --clone` command.
+This flag is being deprecated. To create a writable table from a table snapshot, use the `bq cp` command or the `bq cp --clone` command.
 
 **`--snapshot={true|false}`**  
 To create a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the table that's specified in the `SOURCE_TABLE` argument, set to `true` . The base table can be a standard table, a table clone, or another table snapshot. The default is `false` ; if neither `--clone=true` nor `--snapshot=true` is specified, then the destination table is the same type of table as the base table. Requires the `--no_clobber` flag.

@@ -27,7 +27,7 @@ Before creating a configuration YAML file, review the following information to e
 - The file size for a single configuration YAML file must not exceed 1 MB.
 - The total file size of all configuration YAML files used in a single SQL translation job must not exceed 4 MB.
 - If you are using `regex` syntax for name matching, use [RE2/J](https://github.com/google/re2j) .
-- All configuration YAML file names must include a `.config.yaml` extension—for example, `change-case.config.yaml` . `config.yaml` alone is not a valid name for the configuration file.
+- All configuration YAML filenames must include a `.config.yaml` extension—for example, `change-case.config.yaml` . `config.yaml` alone is not a valid name for the configuration file.
 
 ## Guidelines to create a configuration YAML file
 

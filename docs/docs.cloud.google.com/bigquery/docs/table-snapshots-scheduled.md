@@ -133,7 +133,7 @@ To give the `snapshot-bot` service account the permissions that it needs to take
 
 8.  In **New principals** , enter the email address of the service account: **snapshot-bot@ ` PROJECT ` .iam.gserviceaccount.com** .
 
-9.  From the **Select a role** dropdown, select the [**BigQuery Data Editor**](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) role.
+9.  From the **Select a role** drop-down, select the [**BigQuery Data Editor**](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) role.
 
 10. Click **Save** .
 
@@ -175,7 +175,7 @@ Give the `snapshot-bot` service account the permissions that it needs to create 
 
 6.  Click **Add principal** . In the **New principals** field, enter the service account's email address: **snapshot-bot@ ` PROJECT ` .iam.gserviceaccount.com** .
 
-7.  From the **Select a role** dropdown, select the [**BigQuery Data Owner**](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) role.
+7.  From the **Select a role** drop-down, select the [**BigQuery Data Owner**](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) role.
 
 8.  Click **Save** .
 

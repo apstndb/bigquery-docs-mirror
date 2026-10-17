@@ -201,7 +201,7 @@ Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigque
 
       You can use one asterisk ( `*` ) wildcard character in each path to limit the objects included in the object table. For example, if the bucket contains several types of unstructured data, you could create the object table over only PDF objects by specifying `['gs://bucket_name/*.pdf']` . For more information, see [Wildcard support for Cloud Storage URIs](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#wildcard-support) .
 
-      You can specify multiple buckets for the `uris` option by providing multiple paths, for example `['gs://mybucket1/*', 'gs://mybucket2/folder5/*']` .
+      You can specify multiple buckets for the `uris` option by providing multiple paths, for example `['gs://mybucket1/*', 'gs://mybucket2/folder5/*']` . For optimal performance, specify a maximum of 10 URIs per object table. Providing more than 10 bucket URIs reduces the total number of files that the object table can support.
 
       For more information about using Cloud Storage URIs in BigQuery, see [Cloud Storage resource path](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#google-cloud-storage-uri) .
 

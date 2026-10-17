@@ -173,7 +173,7 @@ In this tutorial, you predict census respondent income based on values of the fo
 - `age` : the age of the respondent.
 - `workclass` : class of work performed. For example local government, private, or self-employed.
 - `marital_status`
-- `education_num` : the respondent's higheset level of education.
+- `education_num` : the respondent's highest level of education.
 - `occupation`
 - `hours_per_week` : hours worked per week.
 

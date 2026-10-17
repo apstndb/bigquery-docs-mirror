@@ -153,7 +153,7 @@ Conversational analytics uses built-in SQL templates to help it return an accura
 
 ## Graph support
 
-Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs queries to answer them. Agents can use [descriptions and synonyms](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If the response includes graph paths, then graph visualizations are provided.
+Conversational analytics supports using a [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a data source. When you ask questions about your graph, the agent constructs queries to answer them. Agents can use [descriptions, synonyms, and extensions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) that you define on your graph labels and properties to improve the quality of the results. Agents can also take advantage of [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to perform multi-level aggregation. If the response includes graph paths, then graph visualizations are provided.
 
 Depending on your graph schema and the question that you ask, the agent queries a graph by using either Graph Query Language (GQL) or the [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) table-valued function in SQL. GQL queries require a [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) reservation. In projects with on-demand pricing, GQL queries fail with an error. Queries that contain the `GRAPH_EXPAND` function can run using on-demand pricing, but the function doesn't support all types of graphs. For requirements and limitations, see [`GRAPH_EXPAND`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) .
 
@@ -178,14 +178,18 @@ Conversational analytics includes the following security features and safeguards
 
 ## Locations
 
-Conversational analytics supports three locations that govern the storage of agent and conversation resources, and the location used for ML processing:
+Conversational analytics supports the following locations, which determine where agent and conversation resources are stored and where ML processing happens:
 
 - US MREP
 - EU MREP
+- `northamerica-northeast1` (Montréal)
+- `northamerica-northeast2` (Toronto)
+- `us-east4` (Northern Virginia)
 - Global
 
 The following default behaviors apply when you create agents and conversations:
 
+- If all of your knowledge sources come from the same supported region, such as `us-east4` , then that region is used.
 - If all of your knowledge sources come from regions in the US, then the US MREP is used.
 - If all of your knowledge sources come from regions in the EU, then the EU MREP is used.
 - Otherwise, the global location is used.

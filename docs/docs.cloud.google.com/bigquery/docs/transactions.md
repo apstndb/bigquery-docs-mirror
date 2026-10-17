@@ -144,7 +144,7 @@ COMMIT TRANSACTION;
 
 ## Transaction concurrency
 
-If a transaction mutates (update or deletes) rows in a table, then other transactions or DML statements that mutate rows in the same table cannot run concurrently. Conflicting transactions are cancelled. Conflicting DML statements that run outside of a transaction are queued to run later, subject to [queuing limits](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
+If a transaction mutates (update or deletes) rows in a table, then other transactions or DML statements that mutate rows in the same table cannot run concurrently. Conflicting transactions are canceled. Conflicting DML statements that run outside of a transaction are queued to run later, subject to [queuing limits](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
 
 Operations that read or append new rows can run concurrently with the transaction. For example, any of the following operations can be performed concurrently on a table while a transaction mutates data in the same table:
 
