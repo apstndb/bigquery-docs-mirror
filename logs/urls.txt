@@ -43,7 +43,7 @@ https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-l
 https://docs.cloud.google.com/bigquery/docs/arrays	2026-10-02T03:43:03Z
 https://docs.cloud.google.com/bigquery/docs/audit-logging	2026-10-02T03:43:03Z
 https://docs.cloud.google.com/bigquery/docs/auditing-policy-tags	2026-10-02T03:43:03Z
-https://docs.cloud.google.com/bigquery/docs/authentication	2026-10-02T03:43:03Z
+https://docs.cloud.google.com/bigquery/docs/authentication	2026-10-15T03:57:15Z
 https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed	2026-10-02T03:43:39Z
 https://docs.cloud.google.com/bigquery/docs/authentication/getting-started	2026-10-02T03:44:00Z
 https://docs.cloud.google.com/bigquery/docs/authorized-datasets	2026-10-02T03:43:03Z
@@ -798,7 +798,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference	2026-10-1
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/libraries	2025-12-17T03:15:19Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp	2026-09-03T19:02:31Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/check_valid_creds	2026-08-28T02:57:40Z
-https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/create_transfer_config	2026-09-03T19:02:31Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_config	2026-08-28T02:57:40Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/delete_transfer_run	2026-08-28T02:57:40Z
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/mcp/tools_list/get_data_source	2026-09-03T19:02:31Z
