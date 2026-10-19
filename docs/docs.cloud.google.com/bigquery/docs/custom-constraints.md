@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use organization policies to apply custom constraints to BigQuery resources
 
-> **Preview — Constraints on tables, data access policies, row access polcies, routines, reservations, assignments, capacity commitments, and BI reservations**
+> **Preview — Constraints on tables, data access policies, row access policies, routines, reservations, assignments, capacity commitments, and BI reservations**
 >
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 

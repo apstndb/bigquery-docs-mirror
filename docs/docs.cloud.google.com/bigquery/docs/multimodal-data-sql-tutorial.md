@@ -150,7 +150,7 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
 6.  In the **Connection info** pane, copy the **Service account ID** value. It is required for the following steps.
 
-### Grant permissions on to use Agent Platform models
+### Grant permissions to use Agent Platform models
 
 Grant the connection's service account the Agent Platform User role to access remote models in Agent Platform. You must grant this role in the same project you created or selected previously. Granting the roles in a different project results in the error `bqcx-1234567890-abcd@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 

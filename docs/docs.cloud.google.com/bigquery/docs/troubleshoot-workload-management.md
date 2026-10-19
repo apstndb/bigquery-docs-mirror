@@ -110,6 +110,20 @@ Do one of the following:
 - Purchase more capacity commitments to cover the slot increases.
 - Choose baseline and maximum slots that are increments of 50.
 
+### Cannot use max slots without enabling reservation-based fairness
+
+**Error message**
+
+- `Cannot use max slots without enabling reservation-based fairness.`
+
+**Cause**
+
+You are attempting to configure a maximum reservation capacity, for example, `max_slots` or predictable reservations, which requires reservation-based fairness to be enabled on the project that owns the reservation.
+
+**Resolution**
+
+You must [enable reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#fairness) on the project.
+
 ## Troubleshoot capacity commitments
 
 This section describes troubleshooting steps that you might find helpful if you run into issues with BigQuery capacity commitments.

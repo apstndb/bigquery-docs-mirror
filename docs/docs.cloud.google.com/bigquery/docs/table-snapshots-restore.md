@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/table-snapshots-restore
 uri: https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore
 title: Restore table snapshots
-description: Shows how to create a writeable BigQuery table from a table snapshot using the Console, the bq cp command, or the jobs.insert API method.
+description: Shows how to create a writable BigQuery table from a table snapshot using the Console, the bq cp command, or the jobs.insert API method.
 data_source: docs.cloud.google.com
 ---
 
@@ -18,19 +18,19 @@ This section describes the [Identity and Access Management (IAM) permissions](ht
 
 To create a writable table from a table snapshot, you need the following permissions:
 
-| **Permission**                                                                                          | **Resource**                                                     |
-|---------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| All of the following: `bigquery.tables.get` `bigquery.tables.getData` `bigquery.tables.restoreSnapshot` | The table snapshot that you want to copy into a writeable table. |
-| `bigquery.tables.create`                                                                                | The dataset that contains the destination table.                 |
+| **Permission**                                                                                          | **Resource**                                                    |
+|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| All of the following: `bigquery.tables.get` `bigquery.tables.getData` `bigquery.tables.restoreSnapshot` | The table snapshot that you want to copy into a writable table. |
+| `bigquery.tables.create`                                                                                | The dataset that contains the destination table.                |
 
 ### Roles
 
 The predefined BigQuery roles that provide the required permissions are as follows:
 
-| **Role**                                                                          | **Resource**                                                     |
-|-----------------------------------------------------------------------------------|------------------------------------------------------------------|
-| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The table snapshot that you want to copy into a writeable table. |
-| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The dataset that contains the destination table.                 |
+| **Role**                                                                          | **Resource**                                                    |
+|-----------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The table snapshot that you want to copy into a writable table. |
+| Any of the following: `bigquery.dataEditor` `bigquery.dataOwner` `bigquery.admin` | The dataset that contains the destination table.                |
 
 ## Restore a table snapshot
 
