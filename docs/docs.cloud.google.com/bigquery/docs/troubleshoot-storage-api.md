@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api
 uri: https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api
 title: Troubleshoot the BigQuery Storage API errors
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to troubleshoot errors and quotas for the BigQuery Storage Read API, the BigQuery Storage Write API (gRPC), and streaming inserts in BigQuery.
 data_source: docs.cloud.google.com
 ---
 

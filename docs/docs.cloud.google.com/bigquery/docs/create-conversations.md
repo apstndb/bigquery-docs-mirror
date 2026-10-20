@@ -10,7 +10,12 @@ data_source: docs.cloud.google.com
 
 This document describes how to create, edit, export, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
 
-Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can determine which data sources to query and take advantage of optimizations, such as table partitions or search indexes, when it constructs a response. Agents can use existing embeddings of your column values to match your question to the right data. For example, asking about "Texas" would find rows stored as "TX."
+Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
+
+- Determine which data sources to query.
+- Take advantage of optimizations, such as table partitions or search indexes.
+- Use existing embeddings of your column values to match your question to the right data. For example, asking about "Texas" would find rows stored as "TX."
+- Take into account all of the context about a data source stored in Knowledge Catalog.
 
 The chat response returned to you provides the following features:
 

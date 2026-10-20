@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace
 title: Commercialize listings on Google Cloud Marketplace
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes BigQuery commercial listings on Google Cloud Marketplace.
 data_source: docs.cloud.google.com
 ---
 

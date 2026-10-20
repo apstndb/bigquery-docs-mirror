@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/data-clean-rooms
 uri: https://docs.cloud.google.com/bigquery/docs/data-clean-rooms
 title: Share sensitive data with data clean rooms
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Share and analyze sensitive datasets while enforcing analysis rules with data clean rooms in BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

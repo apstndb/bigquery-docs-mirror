@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules
 title: Sharing VPC Service Controls rules
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes the VPC Service Controls rules for BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

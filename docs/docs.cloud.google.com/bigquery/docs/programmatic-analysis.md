@@ -28,6 +28,28 @@ Colab Enterprise notebooks offer the following benefits:
 - **Integrated visualizations:** use interactive DataFrame visualizations or libraries like `matplotlib` and `seaborn` directly in your workflow.
 - **SQL-Python interoperability:** execute SQL in cells that reference Python variables.
 
+### Understand cells
+
+A notebook is made up of cells that you can edit. The following types of cells are supported in Colab Enterprise notebooks:
+
+- **Text cell** : use a text cell to add explanations and images to your notebook in Markdown.
+
+- **Code cell** : use a code cell to add Python to your notebook. You can run each code cell individually. A code cell can reference any variables created in another cell that you've already run.
+
+- **SQL cell** : use a [SQL cell](https://docs.cloud.google.com/colab/docs/sql-cells) to run GoogleSQL queries. The output of the query is automatically saved as a DataFrame with the same name as the title of the cell. You can run multiple SQL statements in a single SQL cell, but only the results of the last statement are saved to a DataFrame.
+
+  You can refer to Python variables in expressions or use BigQuery DataFrames as tables in your query by enclosing the variable name in braces ( `{ }` ):
+
+  ```
+  # Refer to the Python variable my_threshold in a SQL expression.
+  SELECT * FROM my_dataset.my_table WHERE x > {my_threshold};
+
+  # Reference previous query results to iterate on your queries.
+  SELECT * FROM {df};
+  ```
+
+- **Visualization cell** : use a [visualization cell](https://docs.cloud.google.com/colab/docs/visualization-cells) to automatically generate a visualization of any DataFrame in your notebook. You can modify which columns are displayed and select from various chart types and aggregations. You can also choose custom colors, data labels, and titles.
+
 ### Notebook gallery
 
 The notebook gallery is a central hub for discovering and using prebuilt notebook templates. It includes fundamental templates for SQL, Python, Apache Spark, and DataFrames to help you perform common tasks like data preparation, analysis, and visualization.

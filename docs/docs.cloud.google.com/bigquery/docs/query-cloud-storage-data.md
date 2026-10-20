@@ -41,7 +41,7 @@ After creating a Cloud Storage external table, you can [query it using GoogleSQL
 
 ## Query temporary external tables
 
-Querying an external data source using a temporary table is useful for one-time, ad-hoc queries over external data, or for extract, transform, and load (ETL) processes.
+Querying an external data source using a temporary table is useful for one-time, ad hoc queries over external data, or for extract, transform, and load (ETL) processes.
 
 To query an external data source without creating a permanent table, you provide a table definition for the temporary table, and then use that table definition in a command or call to query the temporary table. You can provide the table definition in any of the following ways:
 

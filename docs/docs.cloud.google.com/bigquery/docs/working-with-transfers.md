@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage transfers
 
-This document shows how to manage existing data transfer configurations.
-
-You can also [manually trigger an existing transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) , also known as starting a *backfill run* .
+BigQuery Data Transfer Service lets you inspect run logs, update configuration settings and credentials, or disable and delete transfers to keep your data pipelines current. To load past files outside of your regular schedule, you can also [manually trigger an existing transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) , also known as starting a *backfill run* .
 
 ## View your transfers
 

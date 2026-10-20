@@ -24,7 +24,7 @@ You can find more details about each individual dataset by clicking the dataset'
 
 To get started using a BigQuery public dataset, you must create or select a project. The first terabyte of data processed per month is free, so you can start querying public datasets without enabling billing. If you intend to go beyond the [free tier](https://cloud.google.com/bigquery/pricing#free-tier) , you must also enable billing.
 
-1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project,
+1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project,
 
     Enable the BigQuery API, if it is not already enabled.
 

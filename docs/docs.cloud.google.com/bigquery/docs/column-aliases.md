@@ -47,7 +47,7 @@ To enable reusable column aliases at the organization level, enter the following
 ```
 ALTER ORGANIZATION
 SET OPTIONS (
-  `region-<code><var>REGION</var></code>.reusable_column_aliases_mode` = "on"
+  `region-REGION.reusable_column_aliases_mode` = "on"
 );
 ```
 
@@ -56,9 +56,9 @@ Replace ` REGION ` with your region.
 To enable reusable column aliases at the project level, enter the following DDL statement:
 
 ```
-ALTER PROJECT <code><var>PROJECT_ID</var></code>
+ALTER PROJECT PROJECT_ID
 SET OPTIONS (
-  `region-<code><var>REGION</var></code>.reusable_column_aliases_mode` = "on"
+  `region-REGION.reusable_column_aliases_mode` = "on"
 );
 ```
 

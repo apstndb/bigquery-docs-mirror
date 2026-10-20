@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers
 uri: https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers
 title: Use the Simba ODBC and JDBC drivers for BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Use the Simba Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers for BigQuery to connect your applications to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/lakehouse-in-bigquery
 uri: https://docs.cloud.google.com/bigquery/docs/lakehouse-in-bigquery
 title: Interact with borderless Lakehouse data in BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Introduction to Lakehouse tables and how they work in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -116,7 +116,7 @@ Use the following table to compare capabilities between Apache Iceberg tables ma
 | BigQuery Authorized Views                                                  | Not supported                                               | Not supported                                      |
 | BigQuery column level security                                             | Not supported                                               | Supported (GA)                                     |
 | BigQuery data masking and policy tags                                      | Not supported                                               | Supported (GA)                                     |
-| BigQuery row level security                                                | Not supported                                               | Not supported                                      |
+| BigQuery row level security                                                | Not supported                                               | Supported (GA)                                     |
 | Analytics Hub integration                                                  | Not supported                                               | Supported                                          |
 | **Knowledge catalog capabilities**                                         |                                                             |                                                    |
 | Metadata cataloging, search and discovery                                  | Supported                                                   | Supported                                          |

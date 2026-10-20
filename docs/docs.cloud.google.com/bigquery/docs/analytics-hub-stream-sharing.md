@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-stream-sharing
 title: Stream sharing with Pub/Sub
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Create, update, share, and subscribe to Pub/Sub topics using BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

@@ -505,6 +505,21 @@ Summary of schema changes:
 - **Data type changes:** Revenue fields change from `INTEGER` to `FLOAT` in BigQuery to accurately represent floating-point micro values as returned by the API.
 - **New table and field naming convention:** Field names in new tables use `camelCase` (for example, `eventCount` ) for consistency with the Google Analytics API, replacing the previous `snake_case` (for example, `event_count` ).
 
+## Google Merchant Center
+
+The BigQuery Data Transfer Service for Google Merchant Center connector periodically updates to support new columns and adapt to changes introduced by Google Merchant Center reporting.
+
+The following sections outline the changes organized by release date.
+
+### October 28, 2026
+
+On October 28, 2026, the [Google Merchant Center connector](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer) is updating the [Product Performance table](https://docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema) to align with the Google Merchant Center performance reporting updates:
+
+- **New `network` column:** The `network` column is now segmenting product performance metrics by the network to which the metrics apply, such as `SEARCH` , `SEARCH_PARTNERS` , `CONTENT` , and `YOUTUBE` .
+- **New `destination` value:** Performance events from products featured in the YouTube Shopping Affiliate program are now reporting separately under the `destination` value `AFFILIATE` , instead of being included in `FREE` .
+
+Existing data transfers continue to run. New rows that are transferred after this date will include the new `network` column and the `AFFILIATE` destination value. For more details, see the Merchant Help Center article [Google Merchant Center performance reporting updates](https://support.google.com/merchants/answer/17103877) .
+
 ## Microsoft SQL Server
 
 The BigQuery Data Transfer Service for Microsoft SQL Server connector periodically updates to adapt to new changes introduced by Microsoft SQL Server.

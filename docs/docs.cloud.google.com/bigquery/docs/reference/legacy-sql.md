@@ -850,9 +850,9 @@ SELECT country, SUM(clicks) FROM table GROUP BY country;
 
 | URL functions                                                                         |                                                                               |
 |---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| [`HOST()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)     | Given a URL, returns the host name as a string.                               |
+| [`HOST()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)     | Given a URL, returns the hostname as a string.                                |
 | [`DOMAIN()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#domain) | Given a URL, returns the domain as a string.                                  |
-| [`TLD()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)       | Given a URL, returns the top level domain plus any country domain in the URL. |
+| [`TLD()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)       | Given a URL, returns the top-level domain plus any country domain in the URL. |
 
 | Window functions                                                                                                                                        |                                                                                                                                                                                                           |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -2668,9 +2668,9 @@ Matches the following tables:
 
 | URL functions                                                                         |                                                                               |
 |---------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| [`HOST()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)     | Given a URL, returns the host name as a string.                               |
+| [`HOST()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)     | Given a URL, returns the hostname as a string.                                |
 | [`DOMAIN()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#domain) | Given a URL, returns the domain as a string.                                  |
-| [`TLD()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)       | Given a URL, returns the top level domain plus any country domain in the URL. |
+| [`TLD()`](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)       | Given a URL, returns the top-level domain plus any country domain in the URL. |
 
 `HOST(' `*`url_str`*` ')`  
 Given a URL, returns the host name as a string. **Example:** HOST('http://www.google.com:80/index.html') returns 'www.google.com'

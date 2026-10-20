@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery
 uri: https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery
 title: Use the JDBC driver for BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Use the Java Database Connectivity (JDBC) driver for BigQuery to connect your Java applications to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

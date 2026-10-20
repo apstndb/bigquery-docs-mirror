@@ -29,7 +29,7 @@ You can use non-BigLake external tables with the following datastores:
 
 You can query an external data source in BigQuery by using a permanent table or a temporary table. A permanent table is a table that is created in a dataset and is linked to your external data source. Because the table is permanent, you can use [access controls](https://docs.cloud.google.com/bigquery/docs/access-control) to share the table with others who also have access to the underlying external data source, and you can query the table at any time.
 
-When you query an external data source using a temporary table, you submit a command that includes a query and creates a non-permanent table linked to the external data source. When you use a temporary table, you do not create a table in one of your BigQuery datasets. Because the table is not permanently stored in a dataset, it cannot be shared with others. Querying an external data source using a temporary table is useful for one-time, ad-hoc queries over external data, or for extract, transform, and load (ETL) processes.
+When you query an external data source using a temporary table, you submit a command that includes a query and creates a non-permanent table linked to the external data source. When you use a temporary table, you do not create a table in one of your BigQuery datasets. Because the table is not permanently stored in a dataset, it cannot be shared with others. Querying an external data source using a temporary table is useful for one-time, ad hoc queries over external data, or for extract, transform, and load (ETL) processes.
 
 ## Multiple source files
 

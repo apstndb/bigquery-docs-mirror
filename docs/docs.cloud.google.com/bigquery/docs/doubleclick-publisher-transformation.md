@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation
 uri: https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation
 title: Google Ad Manager report transformation
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how Google Ad Manager (formerly DoubleClick for Publishers) data transfer files and match tables are transformed into BigQuery tables and views.
 data_source: docs.cloud.google.com
 ---
 

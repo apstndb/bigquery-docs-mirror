@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Troubleshoot transfer configurations
 
-This document is intended to help you troubleshoot the most common issues encountered when setting up a BigQuery Data Transfer Service transfer. This document does not encompass all possible error messages or issues.
+Inspect the BigQuery Data Transfer Service run history and logs to diagnose and resolve common setup, permission, quota, and scheduling errors. You can address general configuration issues, fix authorization failures, and recover failed transfers across your data sources.
 
-If you are experiencing issues that are not covered in this document, you can [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
-
-Before contacting Cloud Customer Care, capture transfer configuration and transfer run details. For information on how to get these details, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) and [View transfer run details and log messages](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_transfer_run_details_and_log_messages) .
+If you encounter a problem that isn't covered in this document, you can [request support](https://docs.cloud.google.com/bigquery/docs/getting-support) . Before contacting Cloud Customer Care, record your transfer configuration and run information. For more information, see [Get transfer details](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#get_transfer_details) and [View transfer run details and log messages](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#view_transfer_run_details_and_log_messages) .
 
 ## Examine errors
 
@@ -499,7 +497,7 @@ The following are common issues that you might encounter when [creating a Micros
 Error: `FAILED PRECONDITION: A TLS/SSL handshake error occurred: unable to find valid certification path to requested target. Please check your TLS/SSL configuration and certificate validity.`  
 **Resolution:** Verify the validity of your certificate with the following steps:
 
-1.  Replace the SSL/TLS certificate on SQL Server with a certificate issued by a trusted Public Certificate Authority. For more information, see [TLS configuration](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#tls_configuration) .
+1.  Replace the SSL/TLS certificate on SQL Server with a certificate issued by a trusted Public Certificate Authority. For more information, see [TLS configuration](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer-intro#tls-configuration) .
 2.  Verify that the new certificate includes the complete certificate chain, including all intermediate and root certificates.
 3.  After updating the certificate, restart the SQL Server service to apply the new SSL/TLS configuration.
 4.  Once the server has restarted, create the transfer configuration again to verify that the updated certificate is trusted and the TLS/SSL handshake completes successfully.

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/managed-disaster-recovery
 uri: https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery
 title: Managed disaster recovery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to implement and manage disaster recovery in BigQuery to help protect your data and maintain business continuity during regional outages.
 data_source: docs.cloud.google.com
 ---
 

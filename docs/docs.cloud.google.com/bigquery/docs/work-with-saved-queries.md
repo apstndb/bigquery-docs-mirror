@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/work-with-saved-queries
 uri: https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries
 title: Create saved queries
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to create, manage, and share saved queries in BigQuery Studio.
 data_source: docs.cloud.google.com
 ---
 

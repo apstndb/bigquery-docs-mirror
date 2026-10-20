@@ -112,7 +112,7 @@ To follow step-by-step guidance for this task directly in the Cloud Shell Editor
         1.  For **Dataset** , select the dataset in which you want to create the table.
         2.  In the **Table** field, enter the name of the table that you want to create.
         3.  Verify that the **Table type** field is set to **Native table** .
-    3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
+    3.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
         - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
 
           ```
@@ -1010,7 +1010,7 @@ If you load data into an existing table, the load job can append the data or ove
     2.  In the **Table** field, enter the name of the table that you want to create.
     3.  Verify that the **Table type** field is set to **Native table** .
 
-2.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
+2.  In the **Schema** section, enter the [schema](https://docs.cloud.google.com/bigquery/docs/schemas) definition. To enable the [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) of a schema, select **Auto detect** . You can enter schema information manually by using one of the following methods:
 
     - Option 1: Click **Edit as text** and paste the schema in the form of a JSON array. When you use a JSON array, you generate the schema using the same process as [creating a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) . You can view the schema of an existing table in JSON format by entering the following command:
 

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings
 title: View and subscribe to listings and data exchanges
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View and subscribe to listings and data exchanges, manage linked datasets, and view metadata in BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

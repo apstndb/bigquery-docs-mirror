@@ -8,14 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery Data Transfer Service run notifications
 
-This page provides an overview of run notifications for the BigQuery Data Transfer Service.
-
-There are two types of run notifications you can configure for the BigQuery Data Transfer Service:
-
-- **Pub/Sub notifications** : machine-readable notifications sent when a transfer run succeeds or fails
-- **Email notifications** : human-readable notifications sent when a transfer run fails
-
-You can configure each type individually, or you can use both Pub/Sub and email run notifications.
+BigQuery Data Transfer Service run notifications let you automatically track the status of your scheduled data transfers. You can configure Pub/Sub to send machine-readable messages when a transfer run succeeds or fails, configure email alerts to receive human-readable details when a run fails, or use both options together.
 
 ## Pub/Sub notifications
 

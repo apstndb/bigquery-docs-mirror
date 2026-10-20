@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings
 title: Monitor listings
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Track the usage metrics of BigQuery sharing listings in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -199,9 +199,9 @@ The output is similar to the following:
 +---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-### Get usage metrics for shared table valued functions
+### Get usage metrics for shared table-valued functions
 
-The following query displays the usage metrics for all of the shared table valued functions present in a project:
+The following query displays the usage metrics for all of the shared table-valued functions present in a project:
 
 ```
 SELECT

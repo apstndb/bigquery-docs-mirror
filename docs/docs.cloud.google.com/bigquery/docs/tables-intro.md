@@ -32,9 +32,9 @@ BigQuery has the following table types:
 
   For information about how to create tables, see [Create tables](https://docs.cloud.google.com/bigquery/docs/tables#create-table) .
 
-- [Table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , which are lightweight, writeable copies of BigQuery tables. BigQuery only stores the delta between a table clone and its base table.
+- [Table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , which are lightweight, writable copies of BigQuery tables. BigQuery only stores the delta between a table clone and its base table.
 
-  For information about how to create table clone, see [Create table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-create) .
+  For information about how to create table clones, see [Create table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-create) .
 
 - [Table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , which are point-in-time copies of tables. They are read-only, but you can restore a table from a table snapshot. BigQuery stores bytes that are different between a snapshot and its base table, so a table snapshot typically uses less storage than a full copy of the table.
 

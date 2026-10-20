@@ -422,7 +422,7 @@ To address this issue, specify the location of the dataset in the query or confi
 
 ## Query exceeds execution time limit
 
-Error string: `Query fails due to reaching the execution time limit`
+Error string: `Query fails due to reaching the execution time limit` or `Operation timed out after 6.0 hours. Consider reducing the amount of work performed by your operation so that it can complete within this limit.`
 
 If your query is hitting the [query execution time limit](https://docs.cloud.google.com/bigquery/quotas#query_jobs) , check the execution time of previous runs of the query by querying the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) with a query similar to the following example:
 

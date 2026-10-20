@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/entity-resolution-intro
 uri: https://docs.cloud.google.com/bigquery/docs/entity-resolution-intro
 title: Introduction to the BigQuery entity resolution framework
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Match records across datasets and augment data with identity providers in BigQuery entity resolution.
 data_source: docs.cloud.google.com
 ---
 

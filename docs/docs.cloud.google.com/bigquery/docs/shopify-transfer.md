@@ -42,7 +42,7 @@ The following sections describe the prerequisites that you need to do before you
 
 - You must have a Shopify account and a Shopify store.
 - You must have a custom Shopify App for your Shopify store. For more information, see [Custom apps](https://help.shopify.com/en/manual/apps/app-types/custom-apps) .
-- You must have access to all the required access scopes. For a list of all required access scopes, see [Authenticated access scopes](https://shopify.dev/docs/api/usage/access-scopes#authenticated-access-scopes) .
+- You must have access to the required scope for the Shopify data object that you want to transfer to BigQuery. For a list of required scopes for each object, see [Supported objects and required scopes](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#supported-objects-and-scopes) .
 
 ### BigQuery prerequisites
 
@@ -157,56 +157,123 @@ When you save the transfer configuration, the Shopify connector automatically tr
 
 To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
-## Supported tables
+## Supported objects and required scopes
 
-The Shopify connector supports the following data objects:
+The following table lists the Shopify data objects that can be transferred to BigQuery and the required scopes for each object.
 
-- `AppFeedbacks`
-- `AppSubscriptionLineItems` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `AppSubscriptions` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `Catalogs`
-- `Collections`
-- `Companies`
-- `CompanyContactRoleAssignments`
-- `CompanyContacts`
-- `CompanyLocations`
-- `Customers`
-- `DeliveryProfiles`
-- `DiscountsAutomaticApp` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `DiscountsAutomaticBasic` (Requires a [discount function](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `DiscountsAutomaticBxgy`
-- `DiscountsCodeApp`
-- `DiscountsCodeBasic`
-- `DiscountsCodeBxgy`
-- `DraftOrders`
-- `Files`
-- `FulfillmentEvents`
-- `FulfillmentOrders`
-- `Fulfillments`
-- `FulfillmentServices`
-- `FulfillmentTrackingInfo`
-- `GiftCards` (Requires a [ShopifyPlus subscription](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `InventoryItems`
-- `Locations`
-- [`Metafield` objects](https://help.shopify.com/en/manual/custom-data/metafields) , such as `metafield_product` or `metafield_order` .
-- `OrderRiskAssessments`
-- `Orders`
-- `OrderTransactions`
-- `PriceLists`
-- `ProductMediaImages`
-- `ProductOptions`
-- `ProductOptionValues`
-- `ProductResourceFeedbacks` (Requires a [sales channel app](https://docs.cloud.google.com/bigquery/docs/shopify-transfer#limitations) )
-- `Products`
-- `ProductVariants`
-- `Publications`
-- `Refunds`
-- `Returns`
-- `ScriptTags`
-- `Segments`
-- `SellingPlanGroups`
-- `StorefrontAccessTokens`
-- `UrlRedirects`
+| Data object                                                                                                               | Required scope                             |     |
+|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|-----|
+| [AppFeedbacks](https://shopify.dev/docs/api/admin-graphql/latest/objects/AppFeedback)                                     | No scope required                          |     |
+| [AppSubscriptionLineItems](https://shopify.dev/docs/api/admin-graphql/latest/objects/AppSubscriptionLineItem)             | No scope required                          |     |
+| [AppSubscriptions](https://shopify.dev/docs/api/admin-graphql/latest/objects/AppSubscription)                             | No scope required                          |     |
+| [Catalogs](https://shopify.dev/docs/api/admin-graphql/latest/interfaces/Catalog)                                          | `read_products` or `read_product_listings` |     |
+| `read_publications`                                                                                                       |                                            |     |
+| [Collections](https://shopify.dev/docs/api/admin-graphql/latest/objects/Collection)                                       | `read_products`                            |     |
+| `read_publications`                                                                                                       |                                            |     |
+| [Companies](https://shopify.dev/docs/api/admin-graphql/latest/objects/Company)                                            | `read_customers` or `read_companies`       |     |
+| [CompanyContactRoleAssignments](https://shopify.dev/docs/api/admin-graphql/latest/objects/CompanyContactRoleAssignment)   | `read_customers` or `read_companies`       |     |
+| [CompanyContacts](https://shopify.dev/docs/api/admin-graphql/latest/objects/CompanyContact)                               | `read_customers` or `read_companies`       |     |
+| [CompanyLocations](https://shopify.dev/docs/api/admin-graphql/latest/objects/CompanyLocation)                             | `read_customers` or `read_companies`       |     |
+| [Customers](https://shopify.dev/docs/api/admin-graphql/latest/objects/Customer)                                           | `read_customers`                           |     |
+| `write_customers`                                                                                                         |                                            |     |
+| `read_customer_merge`                                                                                                     |                                            |     |
+| `read_locations` or `read_inventory`                                                                                      |                                            |     |
+| `read_markets`                                                                                                            |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| [DeliveryProfiles](https://shopify.dev/docs/api/admin-graphql/latest/objects/DeliveryProfile)                             | `read_products`                            |     |
+| `read_shipping`                                                                                                           |                                            |     |
+| [DiscountsAutomaticApp](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountAutomaticApp)                   | `read_discounts`                           |     |
+| [DiscountsAutomaticBasic](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountAutomaticBasic)               | `read_discounts`                           |     |
+| [DiscountsAutomaticBxgy](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountAutomaticBxgy)                 | `read_discounts`                           |     |
+| [DiscountsCodeApp](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountCodeApp)                             | `read_discounts`                           |     |
+| [DiscountsCodeBasic](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountCodeBasic)                         | `read_discounts`                           |     |
+| [DiscountsCodeBxgy](https://shopify.dev/docs/api/admin-graphql/latest/objects/DiscountCodeBxgy)                           | `read_discounts`                           |     |
+| [DraftOrders](https://shopify.dev/docs/api/admin-graphql/latest/objects/DraftOrder)                                       | `read_customers`                           |     |
+| `read_draft_orders`                                                                                                       |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_payment_terms`                                                                                                      |                                            |     |
+| [Files](https://shopify.dev/docs/api/admin-graphql/latest/interfaces/File)                                                | `read_files`                               |     |
+| [FulfillmentEvents](https://shopify.dev/docs/api/admin-graphql/latest/objects/FulfillmentEvent)                           | `read_orders`                              |     |
+| [FulfillmentOrders](https://shopify.dev/docs/api/admin-graphql/latest/objects/FulfillmentOrder)                           | `read_locations`                           |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_assigned_fulfillment_orders` or `read_merchant_managed_fulfillment_orders` or `read_third_party_fulfillment_orders` |                                            |     |
+| [Fulfillments](https://shopify.dev/docs/api/admin-graphql/latest/objects/Fulfillment)                                     | `read_fulfillments` or `read_products`     |     |
+| `read_locations`                                                                                                          |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| [FulfillmentServices](https://shopify.dev/docs/api/admin-graphql/latest/objects/FulfillmentService)                       | `read_locations` or `read_inventory`       |     |
+| `read_fulfillments` or `read_products` or `read_custom_fulfillment_services` or `assigned_fulfillment_orders`             |                                            |     |
+| [FulfillmentTrackingInfo](https://shopify.dev/docs/api/admin-graphql/latest/objects/FulfillmentTrackingInfo)              | `read_fulfillments` or `read_products`     |     |
+| `read_locations`                                                                                                          |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| [GiftCards](https://shopify.dev/docs/api/admin-graphql/latest/objects/GiftCard)                                           | `read_gift_cards`                          |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_customers`                                                                                                          |                                            |     |
+| [InventoryItems](https://shopify.dev/docs/api/admin-graphql/latest/objects/InventoryItem)                                 | `read_inventory`                           |     |
+| `read_products`                                                                                                           |                                            |     |
+| [Locations](https://shopify.dev/docs/api/admin-graphql/latest/objects/Location)                                           | `read_locations`                           |     |
+| `read_fulfillments`                                                                                                       |                                            |     |
+| Metafields_Article                                                                                                        | `read_content`                             |     |
+| Metafields_Blog                                                                                                           | `read_content`                             |     |
+| Metafields_Collection                                                                                                     | `read_products`                            |     |
+| `read_publications`                                                                                                       |                                            |     |
+| Metafields_Customer                                                                                                       | `read_customers`                           |     |
+| `write_customers`                                                                                                         |                                            |     |
+| `read_customer_merge`                                                                                                     |                                            |     |
+| `read_locations` or `read_inventory`                                                                                      |                                            |     |
+| `read_markets`                                                                                                            |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| Metafields_Draft_Order                                                                                                    | `read_customers`                           |     |
+| `read_draft_orders`                                                                                                       |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_payment_terms`                                                                                                      |                                            |     |
+| Metafields_Order                                                                                                          | `read_customers`                           |     |
+| `read_inventory`                                                                                                          |                                            |     |
+| `read_locations`                                                                                                          |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_payment_terms`                                                                                                      |                                            |     |
+| Metafields_Page                                                                                                           | `read_content`                             |     |
+| Metafields_Product                                                                                                        | `read_products`                            |     |
+| `read_product_listings`                                                                                                   |                                            |     |
+| `read_publications`                                                                                                       |                                            |     |
+| Metafields_Selling_Plan                                                                                                   | `read_products`                            |     |
+| Metafields_Shop                                                                                                           | No scope required                          |     |
+| Metafields_Variant                                                                                                        | `read_products`                            |     |
+| `read_shipping`                                                                                                           |                                            |     |
+| [OrderLineItems](https://shopify.dev/docs/api/admin-graphql/latest/objects/LineItem)                                      | `read_orders`                              |     |
+| `read_products`                                                                                                           |                                            |     |
+| [OrderRiskAssessments](https://shopify.dev/docs/api/admin-graphql/latest/objects/OrderRiskAssessment)                     | `read_orders`                              |     |
+| [Orders](https://shopify.dev/docs/api/admin-graphql/latest/objects/Order)                                                 | `read_customers`                           |     |
+| `read_inventory`                                                                                                          |                                            |     |
+| `read_locations`                                                                                                          |                                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_payment_terms`                                                                                                      |                                            |     |
+| `read_draft_orders`                                                                                                       |                                            |     |
+| `read_products` or `read_fulfillments`                                                                                    |                                            |     |
+| [OrderTransactions](https://shopify.dev/docs/api/admin-graphql/latest/objects/OrderTransaction)                           | `read_orders`                              |     |
+| `read_products`                                                                                                           |                                            |     |
+| [PriceLists](https://shopify.dev/docs/api/admin-graphql/latest/objects/PriceList)                                         | `read_products`                            |     |
+| [ProductMediaImages](https://shopify.dev/docs/api/admin-graphql/latest/objects/MediaImage)                                | `read_products`                            |     |
+| [ProductOptions](https://shopify.dev/docs/api/admin-graphql/latest/objects/ProductOption)                                 | `read_products`                            |     |
+| [ProductOptionValues](https://shopify.dev/docs/api/admin-graphql/latest/objects/ProductOptionValue)                       | `read_products`                            |     |
+| [ProductResourceFeedbacks](https://shopify.dev/docs/api/admin-graphql/latest/objects/ProductResourceFeedback)             | `read_resource_feedbacks`                  |     |
+| `read_products`                                                                                                           |                                            |     |
+| [Products](https://shopify.dev/docs/api/admin-graphql/latest/objects/Product)                                             | `read_products`                            |     |
+| `read_product_listings`                                                                                                   |                                            |     |
+| `read_publications`                                                                                                       |                                            |     |
+| [ProductVariants](https://shopify.dev/docs/api/admin-graphql/latest/objects/ProductVariant)                               | `read_products`                            |     |
+| `read_shipping`                                                                                                           |                                            |     |
+| [Publications](https://shopify.dev/docs/api/admin-graphql/latest/objects/Publication)                                     | `read_products`                            |     |
+| `read_publications`                                                                                                       |                                            |     |
+| [Refunds](https://shopify.dev/docs/api/admin-graphql/latest/objects/Refund)                                               | `read_products`                            |     |
+| `read_orders`                                                                                                             |                                            |     |
+| `read_returns`                                                                                                            |                                            |     |
+| [Returns](https://shopify.dev/docs/api/admin-graphql/latest/objects/Return)                                               | `read_orders`                              |     |
+| `read_returns`                                                                                                            |                                            |     |
+| [ScriptTags](https://shopify.dev/docs/api/admin-graphql/latest/objects/ScriptTag)                                         | `read_script_tags`                         |     |
+| [Segments](https://shopify.dev/docs/api/admin-graphql/latest/objects/Segment)                                             | `read_customers`                           |     |
+| [SellingPlanGroups](https://shopify.dev/docs/api/admin-graphql/latest/objects/SellingPlanGroup)                           | `read_products`                            |     |
+| [StorefrontAccessTokens](https://shopify.dev/docs/api/admin-graphql/latest/objects/StorefrontAccessToken)                 | No scope required                          |     |
+| [UrlRedirects](https://shopify.dev/docs/api/admin-graphql/latest/objects/UrlRedirect)                                     | `read_online_store_navigation`             |     |
 
 ## Data type mapping
 

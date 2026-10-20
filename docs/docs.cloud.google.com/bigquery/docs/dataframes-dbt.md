@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/dataframes-dbt
 uri: https://docs.cloud.google.com/bigquery/docs/dataframes-dbt
 title: Use BigQuery DataFrames in dbt
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Configure and use BigQuery DataFrames for Python-based data transformations within dbt models.
 data_source: docs.cloud.google.com
 ---
 

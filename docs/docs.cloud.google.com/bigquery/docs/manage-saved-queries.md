@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/manage-saved-queries
 uri: https://docs.cloud.google.com/bigquery/docs/manage-saved-queries
 title: Manage saved queries
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to manage, share, and track versions of saved queries and classic saved queries in BigQuery Studio.
 data_source: docs.cloud.google.com
 ---
 

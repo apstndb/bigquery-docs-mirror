@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/graph-visualization-integrations
 uri: https://docs.cloud.google.com/bigquery/docs/graph-visualization-integrations
 title: Work with BigQuery Graph visualization tools and integrations
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Explore third-party and open-source tools integrated with BigQuery Graph for visualizing query results and analyzing graph data.
 data_source: docs.cloud.google.com
 ---
 

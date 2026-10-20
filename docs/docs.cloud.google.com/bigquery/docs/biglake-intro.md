@@ -256,7 +256,7 @@ You can use cached metadata to improve query performance on some types of BigLak
 
 BigQuery uses CMETA as a distributed metadata system to handle large tables efficiently. CMETA provides fine-grained metadata at the column and block level, accessible through system tables. This system helps improve query performance by optimizing data access and processing. To further accelerate query performance on large tables, BigQuery maintains a metadata cache. CMETA refresh jobs keep this cache up-to-date.
 
-The metadata includes file names, partitioning information, and physical metadata from files such as row counts. You can choose whether or not to enable metadata caching on a table. Queries with a large number of files and with Apache Hive partition filters benefit the most from metadata caching.
+The metadata includes filenames, partitioning information, and physical metadata from files such as row counts. You can choose whether or not to enable metadata caching on a table. Queries with a large number of files and with Apache Hive partition filters benefit the most from metadata caching.
 
 If you don't enable metadata caching, queries on the table must read the external data source to get object metadata. Reading this data increases the query latency; listing millions of files from the external data source can take several minutes. If you enable metadata caching, queries can avoid listing files from the external data source and can partition and prune files more quickly.
 

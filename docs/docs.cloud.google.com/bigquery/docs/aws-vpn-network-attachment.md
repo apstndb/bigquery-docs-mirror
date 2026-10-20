@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Set up AWS VPN and network attachments
 
-This document provides detailed steps for setting up a VPN connection between Amazon Web Services (AWS) and Google Cloud. The goal is to establish a reliable and security-enhanced connection between the two cloud environments.
+A VPN and network attachment let you establish a reliable, security-enhanced connection between Amazon Web Services (AWS) and Google Cloud. By configuring gateways, tunnels, and routes across both cloud environments, you can direct traffic between your deployed databases and instances.
 
 ## Before you begin
 

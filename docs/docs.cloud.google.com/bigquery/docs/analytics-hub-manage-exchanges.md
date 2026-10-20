@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges
 title: Manage data exchanges
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: BigQuery sharing admins can create, update, delete, and set access policies for data exchanges.
 data_source: docs.cloud.google.com
 ---
 

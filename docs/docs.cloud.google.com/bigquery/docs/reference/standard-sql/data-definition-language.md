@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language
 title: Data definition language (DDL) statements in GoogleSQL
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Manage BigQuery resources using Data Definition Language (DDL) statements. DDL statements can be used to create, alter, and delete resources using SQL.
 data_source: docs.cloud.google.com
 ---
 
@@ -6677,14 +6677,14 @@ The following options are supported:
 <tr class="even">
 <td><code>default_sql_dialect_option</code></td>
 <td><code>STRING</code></td>
-<td><p>The default sql query dialect for executing query jobs using the bq command-line tool or BigQuery API. Changing this setting doesn't affect the default dialect in the console. This option can be one of the following:</p>
+<td><p>The default SQL query dialect for executing query jobs using the bq command-line tool or BigQuery API. Changing this setting doesn't affect the default dialect in the console. This option can be one of the following:</p>
 <ul>
 <li><code>'default_legacy_sql'</code> (default): Use legacy SQL if the query dialect isn't specified at the job level.</li>
 <li><code>'default_google_sql'</code> : Use GoogleSQL if the query dialect isn't specified at the job level.</li>
 <li><code>'only_google_sql'</code> : Use GoogleSQL if the query dialect is not specified at the job level. Reject jobs with query dialect set to legacy SQL.</li>
 <li><code>'NULL'</code> : Use the default query dialect setting, which is equivalent to <code>'default_legacy_sql'</code> .</li>
 </ul>
-<p>Example: <code>`region-us.default_sql_dialect_option` = 'default_google_sql'</code> . Use google SQL if the query dialect isn't specified at the job level.</p></td>
+<p>Example: <code>`region-us.default_sql_dialect_option` = 'default_google_sql'</code> . Use GoogleSQL if the query dialect isn't specified at the job level.</p></td>
 </tr>
 <tr class="odd">
 <td><code>query_runtime</code></td>

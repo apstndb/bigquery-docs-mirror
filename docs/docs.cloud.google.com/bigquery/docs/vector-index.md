@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/vector-index
 uri: https://docs.cloud.google.com/bigquery/docs/vector-index
 title: Manage vector indexes
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: '"Create'
 data_source: docs.cloud.google.com
 ---
 

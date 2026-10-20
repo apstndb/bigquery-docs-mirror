@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/admin-jobs-explorer
 uri: https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer
 title: Monitor jobs
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Monitor and troubleshoot BigQuery jobs across your organization using the jobs explorer, which provides filters, sorting options, and detailed job information.
 data_source: docs.cloud.google.com
 ---
 

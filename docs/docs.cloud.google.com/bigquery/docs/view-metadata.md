@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/view-metadata
 uri: https://docs.cloud.google.com/bigquery/docs/view-metadata
 title: Get information about views
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how to list, get information about, and see metadata for views in BigQuery.
 data_source: docs.cloud.google.com
 ---
 

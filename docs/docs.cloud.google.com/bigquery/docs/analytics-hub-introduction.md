@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-introduction
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction
 title: Introduction to BigQuery sharing
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: BigQuery sharing lets you share data within and across organizations. Data providers create listings that consumers can discover and subscribe to.
 data_source: docs.cloud.google.com
 ---
 

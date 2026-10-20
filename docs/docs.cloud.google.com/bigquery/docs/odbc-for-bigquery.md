@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/odbc-for-bigquery
 uri: https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery
 title: Use the ODBC driver for BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Use the Open Database Connectivity (ODBC) driver for BigQuery to connect your applications to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

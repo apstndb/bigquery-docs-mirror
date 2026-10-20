@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/config-yaml-translation
 uri: https://docs.cloud.google.com/bigquery/docs/config-yaml-translation
 title: Transform SQL translations with YAML
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use configuration YAML files to customize and transform SQL translations when migrating to BigQuery.
 data_source: docs.cloud.google.com
 ---
 

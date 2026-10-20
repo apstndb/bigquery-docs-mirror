@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions
 title: Manage subscriptions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: View, list, and delete subscriptions in BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

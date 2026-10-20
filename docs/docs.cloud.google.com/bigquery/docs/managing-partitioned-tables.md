@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/managing-partitioned-tables
 uri: https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables
 title: Manage partitioned tables
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to get partition metadata, set partition expiration, require partition filters, and copy or delete partition data in BigQuery.
 data_source: docs.cloud.google.com
 ---
 

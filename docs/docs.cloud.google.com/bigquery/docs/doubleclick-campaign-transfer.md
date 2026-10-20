@@ -184,7 +184,7 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
 
       - For **Cloud Storage bucket** , enter or browse for the name of the Cloud Storage bucket that stores your Data Transfer V2.0 files. When you enter the bucket name, don't include `gs://` .
       - For **DoubleClick ID** , enter the appropriate Campaign Manager ID.
-      - (Optional) If your files have [standard names like these examples](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#find-id) , leave the **File name prefix** field blank. Specify a [filename prefix](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#filename-prefix) if the files in your Cloud Storage bucket have custom file names.
+      - (Optional) If your files have [standard names like these examples](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#find-id) , leave the **File name prefix** field blank. Specify a [filename prefix](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#filename-prefix) if the files in your Cloud Storage bucket have custom filenames.
 
       ![Campaign Manager source details](https://docs.cloud.google.com/static/bigquery/images/dcm-source-details-console.png)
 

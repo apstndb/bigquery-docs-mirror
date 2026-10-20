@@ -18,7 +18,7 @@ Iceberg managed tables support the following features:
 - *Schema evolution* , which lets you add, drop, and rename columns to suit your needs. This feature also lets you change an existing column's [data type](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_data_type) and [mode](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_mode) . For more information, see [Conversion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 - *Automatic storage optimization* , including adaptive file sizing, automatic clustering, garbage collection, and metadata optimization.
 - [*Time travel*](https://docs.cloud.google.com/bigquery/docs/time-travel) for historical data access in BigQuery.
-- [*Column-level security*](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [*data masking*](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
+- [*Column-level security*](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , [*row-level security*](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , and [*data masking*](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) .
 - [*Multi-statement transactions*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_multi-statement_transactions) .
 - [*Table partitioning*](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#use_partitioning) .
 - [*Table creation in Dataform workflows*](https://docs.cloud.google.com/dataform/docs/create-tables#create-iceberg-table) .
@@ -450,9 +450,8 @@ Iceberg managed tables have the following limitations:
   - Adding new nested fields to an existing `RECORD` columns using SQL DDL statements
 - Iceberg managed tables display a 0-byte storage size when queried by the console or APIs.
 - Iceberg managed tables don't support [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-- Iceberg managed tables don't support [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , but [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) is supported.
+- Iceberg managed tables don't support [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) , but [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) are supported.
 - Iceberg managed tables don't support [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery)
-- Iceberg managed tables don't support [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
 - Iceberg managed tables don't support [fail-safe windows](https://docs.cloud.google.com/bigquery/docs/time-travel#fail-safe) .
 - Iceberg managed tables don't support extract jobs.
 - The `INFORMATION_SCHEMA.TABLE_STORAGE` view doesn't include Iceberg managed tables.

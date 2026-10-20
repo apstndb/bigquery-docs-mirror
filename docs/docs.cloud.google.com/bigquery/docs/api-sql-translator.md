@@ -31,7 +31,7 @@ Enable the required BigQuery Migration API. For more information, see [Enable SQ
 
 ### Required permissions
 
-To get the permissions that you need to create translation jobs with the interactor translator, the translation API, or the batch SQL translator, ask your administrator to grant you the following IAM roles on the `parent` resource:
+To get the permissions that you need to create translation jobs with the interactive translator, the translation API, or the batch SQL translator, ask your administrator to grant you the following IAM roles on the `parent` resource:
 
 - Viewing and monitoring migration jobs: [MigrationWorkflow Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.viewer) ( `roles/bigquerymigration.viewer` )
 - Submitting migration jobs: [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `roles/bigquerymigration.editor` )
@@ -39,11 +39,11 @@ To get the permissions that you need to create translation jobs with the interac
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-These predefined roles contain the permissions required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator. To see the exact permissions that are required, expand the **Required permissions** section:
+These predefined roles contain the permissions required to create translation jobs with the interactive translator, the translation API, or the batch SQL translator. To see the exact permissions that are required, expand the **Required permissions** section:
 
 #### Required permissions
 
-The following permissions are required to create translation jobs with the interactor translator, the translation API, or the batch SQL translator:
+The following permissions are required to create translation jobs with the interactive translator, the translation API, or the batch SQL translator:
 
 - `bigquerymigration.workflows.create`
 - `bigquerymigration.workflows.get`

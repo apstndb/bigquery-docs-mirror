@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/create-bigtable-external-table
 uri: https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table
 title: Create a Bigtable external table
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Describes how to create a BigQuery permanent external table to query data stored in Bigtable.
 data_source: docs.cloud.google.com
 ---
 

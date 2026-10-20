@@ -16,7 +16,7 @@ When auto-detection is enabled, BigQuery infers the data type for each column. B
 
 If you don't enable schema auto-detection for CSV, JSON, or Google Sheets data, then you must provide the schema manually when creating the table.
 
-You don't need to enable schema auto-detection for Avro, Parquet, ORC, Firestore export, or Datastore export files. These file formats are self-describing, so BigQuery automatically infers the table schema from the source data. For Parquet, Avro, and Orc files, you can optionally provide an explicit schema to override the inferred schema.
+You don't need to enable schema auto-detection for Avro, Parquet, ORC, Firestore export, or Datastore export files. These file formats are self-describing, so BigQuery automatically infers the table schema from the source data. For Parquet, Avro, and ORC files, you can optionally provide an explicit schema to override the inferred schema.
 
 You can see the detected schema for a table in the following ways:
 

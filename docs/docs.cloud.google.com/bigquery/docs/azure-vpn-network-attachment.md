@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Set up the Azure-Google Cloud VPN network attachment
 
-This document provides high-level guidance on how to establish a VPN connection between Google Cloud and Microsoft Azure. The document also includes instructions for creating a network attachment in Google Cloud.
+A site-to-site VPN connection and network attachment let you establish private connectivity between Google Cloud and Microsoft Azure. You can then configure Private Service Connect in Google Cloud and route traffic so that VMs can communicate across both cloud environments.
 
 ## Before you begin
 

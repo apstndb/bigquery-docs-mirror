@@ -44,7 +44,7 @@ The `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view has the following schema:
 | `data_type`          | `STRING`        | The column's GoogleSQL [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .                                                                                                                                                                                                                     |
 | `description`        | `STRING`        | The column's description.                                                                                                                                                                                                                                                                                                               |
 | `collation_name`     | `STRING`        | The name of the [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) if it exists; otherwise, `NULL` . If a `STRING` , `ARRAY<STRING>` , or `STRING` field in a `STRUCT` is passed in, the collation specification is returned if it exists; otherwise, `NULL` is returned. |
-| `rounding_mode`      | `STRING`        | The mode of rounding that's used when applying precision and scale to+ parameterized `NUMERIC` or `BIGNUMERIC` values; otherwise, the value is `NULL` .                                                                                                                                                                                 |
+| `rounding_mode`      | `STRING`        | The mode of rounding that's used when applying precision and scale to parameterized `NUMERIC` or `BIGNUMERIC` values; otherwise, the value is `NULL` .                                                                                                                                                                                  |
 | `data_policies.name` | `STRING`        | The list of data policies that are attached to the column to control access and masking. This field is in ( [Preview](https://cloud.google.com/products#product-launch-stages) ).                                                                                                                                                       |
 | `policy_tags`        | `ARRAY<STRING>` | The list of policy tags that are attached to the column.                                                                                                                                                                                                                                                                                |
 
@@ -75,7 +75,7 @@ The following example retrieves metadata from the `INFORMATION_SCHEMA.COLUMN_FIE
 
 Because the table you're querying is in another project, the `bigquery-public-data` project, you add the project ID to the dataset in the following format: `` `  ``` project_id ```  `.  ``` dataset `` .INFORMATION_SCHEMA. `` view` ; for example, `` `bigquery-public-data`.github_repos.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS `` .
 
-The `commits` table contains the following nested and nested and repeated columns:
+The `commits` table contains the following nested and repeated columns:
 
 - `author` : nested `RECORD` column
 - `committer` : nested `RECORD` column

@@ -217,9 +217,9 @@ The output is similar to the following:
 +---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-### Get usage metrics for shared table valued functions
+### Get usage metrics for shared table-valued functions
 
-The following query displays the usage metrics for all of the shared table valued functions present in a project:
+The following query displays the usage metrics for all of the shared table-valued functions present in a project:
 
 ```
 SELECT

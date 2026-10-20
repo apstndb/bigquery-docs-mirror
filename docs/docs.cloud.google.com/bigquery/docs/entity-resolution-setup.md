@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/entity-resolution-setup
 uri: https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup
 title: Configure and use entity resolution in BigQuery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Configure BigQuery entity resolution with datasets and remote functions for end users and identity providers.
 data_source: docs.cloud.google.com
 ---
 

@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings
 uri: https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings
 title: Manage listings
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Create, update, share, and delete shared dataset listings across data exchanges for subscribers in BigQuery sharing.
 data_source: docs.cloud.google.com
 ---
 

@@ -75,7 +75,7 @@ A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-se
 4.  Grant the Storage Transfer Service service agent ( `project- `` PROJECT_NUMBER `` @storage-transfer-service.iam.gserviceaccount.com` ) the following roles in the project:
 
     - `roles/storage.admin`
-    - If you are migrating from on-prem/HDFS, you must also grant the `roles/storagetransfer.serviceAgent` role.
+    - If you're migrating from on-premises or HDFS, you must also grant the `roles/storagetransfer.serviceAgent` role.
 
     You can also configure more granular permissions. For more information, see the following guide:
 

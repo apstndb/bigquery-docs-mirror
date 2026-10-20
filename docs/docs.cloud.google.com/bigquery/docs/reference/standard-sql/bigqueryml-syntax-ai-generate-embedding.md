@@ -152,7 +152,7 @@ AI.GENERATE_EMBEDDING(
 
   - If you are creating embeddings for text in a standard table, the name of the BigQuery table that contains the content. The content must be in a `STRING` column named `content` . If your table does not have a `content` column, use the `QUERY_STATEMENT` argument instead and provide a `SELECT` statement that includes an alias for an existing table column. An error occurs if no `content` column is available.
 
-  - If you are creating embeddings for visual content using data from an an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
+  - If you are creating embeddings for visual content using data from an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
 
   - If you use the `gemini-embedding-2` model, you can also specify a `STRUCT` column that contains a combination of `STRING` , `ARRAY<STRING>` , `ObjectRef` , and `ARRAY<ObjectRef>` values.
 

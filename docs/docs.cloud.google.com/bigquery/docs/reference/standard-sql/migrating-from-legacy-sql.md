@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql
 uri: https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql
 title: Migrating to GoogleSQL
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Migration instructions from legacy SQL to GoogleSQL including syntax, functions, and semantics.
 data_source: docs.cloud.google.com
 ---
 

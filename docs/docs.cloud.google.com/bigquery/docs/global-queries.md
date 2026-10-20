@@ -179,6 +179,56 @@ Replace the following:
 - `LOG_DATASET` : the BigQuery linked dataset for Log Analytics or the log sink destination dataset.
 - `PARENT_JOB_ID` : the job ID of the parent global query job.
 
+### INFORMATION_SCHEMA views
+
+You can query the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [`INFORMATION_SCHEMA.JOBS_TIMELINE`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views to inspect metadata for global queries. The `global_query_info` column contains the following fields:
+
+- `parent_job_id` : The ID of the parent global query job in the primary region. This field is populated for child subqueries and copy jobs executed in remote regions.
+- `parent_job_location` : The location of the parent global query job.
+- `remote_regions` : An array of remote regions referenced by the query. This field is populated for the parent global query job in the primary region.
+
+#### Identify global queries in a primary region
+
+To find all global queries executed in a primary region and see which remote regions were referenced, query the `INFORMATION_SCHEMA.JOBS` view in the primary region:
+
+```
+SELECT
+  job_id,
+  creation_time,
+  query,
+  total_bytes_billed,
+  global_query_info.remote_regions
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.JOBS
+WHERE
+  ARRAY_LENGTH(global_query_info.remote_regions) > 0;
+```
+
+Replace `REGION` with the region where the global query was executed, such as `us-central1` .
+
+#### Find remote child jobs for a global query
+
+To find all remote child jobs associated with a parent global query, query the `INFORMATION_SCHEMA.JOBS` view in the remote region:
+
+```
+SELECT
+  job_id,
+  project_id,
+  job_type,
+  statement_type,
+  total_bytes_billed,
+  total_slot_ms
+FROM
+  `region-REMOTE_REGION`.INFORMATION_SCHEMA.JOBS
+WHERE
+  global_query_info.parent_job_id = 'PARENT_JOB_ID';
+```
+
+Replace the following:
+
+- `REMOTE_REGION` : the remote region where the child subquery or copy job ran, such as `europe-west1` .
+- `PARENT_JOB_ID` : the job ID of the parent global query job.
+
 ## Turn off global queries
 
 To disable global queries for your project or organization, use the [`ALTER PROJECT SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`ALTER ORGANIZATION SET OPTIONS statement`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to change the [default configuration](https://docs.cloud.google.com/bigquery/docs/default-configuration) .

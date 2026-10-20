@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/information-schema-failover-history
 uri: https://docs.cloud.google.com/bigquery/docs/information-schema-failover-history
 title: FAILOVER_HISTORY view
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn about the INFORMATION_SCHEMA.FAILOVER_HISTORY view, which lists managed disaster recovery failover events for your reservations.
 data_source: docs.cloud.google.com
 ---
 

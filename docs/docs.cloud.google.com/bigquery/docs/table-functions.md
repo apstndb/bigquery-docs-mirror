@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/table-functions
 uri: https://docs.cloud.google.com/bigquery/docs/table-functions
 title: Table functions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to create, use, authorize, and delete table functions (also called table-valued functions or TVFs) in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
