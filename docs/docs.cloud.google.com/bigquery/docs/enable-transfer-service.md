@@ -8,12 +8,9 @@ data_source: docs.cloud.google.com
 
 # Enable the BigQuery Data Transfer Service
 
-To use the BigQuery Data Transfer Service, you must complete the following steps as a project [Owner](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) :
+The BigQuery Data Transfer Service lets you automate scheduled data transfers into BigQuery after you configure your project and required permissions.
 
-- Create a project and enable the BigQuery API.
-- Enable the BigQuery Data Transfer Service.
-
-For more information on Identity and Access Management (IAM) roles, see [Roles and permissions](https://docs.cloud.google.com/iam/docs/roles-overview) in the IAM documentation.
+To set up the service as a project [owner](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) , you create or select a project, enable the BigQuery API and the BigQuery Data Transfer Service, and grant the required Identity and Access Management (IAM) roles for managing transfers. For more information about IAM roles, see [Roles and permissions](https://docs.cloud.google.com/iam/docs/roles-overview) .
 
 > **Note:** If you call the BigQuery Data Transfer Service API immediately after you enable BigQuery Data Transfer Service programmatically, you should implement a retry mechanism with backoff delays between consecutive calls. This is necessary because API enablement is asynchronous and subject to propagation delays caused by eventual consistency.
 
@@ -54,6 +51,8 @@ To enable the BigQuery Data Transfer Service:
 2.  From the drop-down menu, select the appropriate project.
 
 3.  Click the ENABLE button.
+
+> **Note:** If you call the BigQuery Data Transfer Service API immediately after you enable BigQuery Data Transfer Service programmatically, you should implement a retry mechanism with backoff delays between consecutive calls. This is necessary because API enablement is asynchronous and subject to propagation delays caused by eventual consistency.
 
 ## Service Agent
 

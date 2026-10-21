@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
 uri: https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer-schema
 title: Schema detection and mapping for Snowflake
-description: Define your schema and data-type mappings when transferring data from Snowflake into BigQuery by using the BigQuery Data Transfer Service.
+description: Define your schema and data type mappings when transferring data from Snowflake into BigQuery by using the BigQuery Data Transfer Service.
 data_source: docs.cloud.google.com
 ---
 

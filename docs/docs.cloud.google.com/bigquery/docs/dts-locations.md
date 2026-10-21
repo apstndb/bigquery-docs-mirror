@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Data location and transfers
 
-This page explains the concepts of transfer configuration location and source data location, and also describes how locations and transfers interact.
-
-For more information about BigQuery locations more generally, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
+The BigQuery Data Transfer Service lets you transfer data from external sources into BigQuery regardless of where your source data is stored. Your transfer configuration automatically uses the location of your destination dataset to stage and process data, while certain data warehouse migrations require colocated staging resources. For more information about BigQuery locations, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## Transfer location
 

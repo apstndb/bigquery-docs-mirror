@@ -44,7 +44,7 @@ BigQuery has the following table types:
 
 External tables are stored outside of BigQuery storage and refer to data that's stored outside of BigQuery. For more information, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-sources) . External tables include the following types:
 
-- [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , which reference structured data stored in data stores such as Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Azure Blob Storage. These tables let you enforce fine-grained security at the table level.
+- [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , which reference structured data stored in datastores such as Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Azure Blob Storage. These tables let you enforce fine-grained security at the table level.
 
   For information about how to create BigLake tables, see the following topics:
 
@@ -52,11 +52,11 @@ External tables are stored outside of BigQuery storage and refer to data that's 
   - [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table)
   - [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table)
 
-- [Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , which reference unstructured data stored in data stores such as Cloud Storage.
+- [Object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , which reference unstructured data stored in datastores such as Cloud Storage.
 
   For information about how to create object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) .
 
-- [Non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) , which reference structured data stored in data stores such as Cloud Storage, Google Drive, and Bigtable. Unlike BigLake tables, these tables don't let you enforce fine-grained security at the table level.
+- [Non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) , which reference structured data stored in datastores such as Cloud Storage, Google Drive, and Bigtable. Unlike BigLake tables, these tables don't let you enforce fine-grained security at the table level.
 
   For information about how to create non-BigLake external tables, see the following topics:
 

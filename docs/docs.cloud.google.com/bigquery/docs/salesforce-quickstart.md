@@ -81,7 +81,7 @@ The following datasets store additional objects:
 - `aws_data`
 - `us_data`
 
-### Run ad-hoc queries
+### Run ad hoc queries
 
 Using BigQuery Omni, you can run ad hoc queries to analyze the Data 360 data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data 360.
 

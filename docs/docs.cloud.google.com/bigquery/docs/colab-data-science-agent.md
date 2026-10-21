@@ -24,37 +24,19 @@ If you're new to Colab Enterprise in BigQuery, see the setup steps on the [Creat
 
 ## Limitations
 
-- The Data Science Agent is only available within the Colab Enterprise environment.
-- The Data Science Agent supports the following data sources:
+- The DSA is only available within the Colab Enterprise environment.
+- The DSA supports the following data sources:
   - CSV files
   - BigQuery tables
-- The code produced by the Data Science Agent only runs in your notebook's runtime.
+- The code produced by the DSA only runs in your notebook's runtime.
 - Searching for BigQuery tables using the `@mention` function is limited to your current project. Use the table selector to search across projects.
 - The `@mention` function only searches for BigQuery tables. To search for data files that you can upload, use the `+` symbol.
-- PySpark in the Data Science Agent only generates Managed Service for Apache Spark 4.0 code. The DSA can help you upgrade to Managed Service for Apache Spark 4.0, but users who require earlier versions shouldn't use the Data Science Agent.
-- [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) are not supported.
-
-## When to use the Data Science Agent
-
-The Data Science Agent helps you with tasks ranging from exploratory data analysis to generating machine learning predictions and forecasts. You can use the DSA for:
-
-- **Large-scale data processing** : Use BigQuery ML, BigQuery DataFrames, or Managed Service for Apache Spark to perform distributed data processing on large datasets. This lets you efficiently clean, transform, and analyze data that's too large to fit into memory on a single machine.
-- **Generating a plan** : Generate and modify a plan to complete a particular task using common tools such as Python, SQL, Managed Service for Apache Spark, and BigQuery DataFrames.
-- **Data exploration** : Explore a dataset to understand its structure, identify potential issues like missing values and outliers, and examine the distribution of key variables using Python or SQL.
-- **Data cleaning** : Clean your data. For example, remove data points that are outliers.
-- **Data wrangling** : Convert categorical features into numerical representations using techniques like one-hot encoding or label encoding or by using BigQuery ML [feature transformation tools](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) . Create new features for analysis.
-- **Data analysis** : Analyze the relationships between different variables. Calculate correlations between numerical features and explore distributions of categorical features. Look for patterns and trends in the data.
-- **Data visualization** : Create visualizations such as histograms, box plots, scatter plots, and bar charts that represent the distributions of individual variables and the relationships between them. You can also create visualizations in Python for tables stored in BigQuery.
-- **Feature engineering** : Engineer new features from a cleaned dataset.
-- **Data splitting** : Split an engineered dataset into training, validation, and testing datasets.
-- **Model training** : Train a model by using the training data in a pandas DataFrame ( `X_train` , `y_train` ), [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#train-models) , a [PySpark DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.html) , or by using the BigQuery ML [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) with BigQuery tables.
-- **Model optimization** : Optimize a model by using the validation set. Explore alternative models like `DecisionTreeRegressor` and `RandomForestRegressor` and compare their performance.
-- **Model evaluation** : Evaluate model performance on a test dataset using a pandas DataFrame, BigQuery DataFrames, or a PySpark DataFrame. You can also assess model quality and compare models by using BigQuery ML [model evaluation functions](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) for models trained using BigQuery ML.
-- **Model inference** : Perform inference with BigQuery ML trained models, imported models, and remote models using BigQuery ML [inference functions](https://docs.cloud.google.com/bigquery/docs/inference-overview) . You can also use the BigFrames `model.predict()` method or PySpark [transformers](https://spark.apache.org/docs/latest/ml-pipeline.html#transformers) to make predictions.
+- PySpark in the DSA only generates Managed Service for Apache Spark 4.0 code. The DSA can help you upgrade to Managed Service for Apache Spark 4.0. If you require earlier versions, [write and run PySpark code directly in your notebook](https://docs.cloud.google.com/bigquery/docs/use-spark) instead.
+- [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) aren't supported.
 
 ## Use the Data Science Agent in BigQuery
 
-The following steps show you how to use the Data Science Agent in BigQuery.
+The following steps show you how to use the DSA in BigQuery.
 
 1.  Create or open a Colab Enterprise notebook.
 
@@ -65,13 +47,11 @@ The following steps show you how to use the Data Science Agent in BigQuery.
     - Reference a BigQuery table name in your prompt in this format: `project_id `` : `` dataset `` . `` table` .
     - Type the `@` symbol to search for a BigQuery table name using the `@mention` function.
 
-3.  Enter a prompt that describes the data analysis you want to perform or the prototype you want to build. The Data Science Agent's default behavior is to generate Python code using open source libraries such as sklearn to accomplish complex machine learning tasks. To use a specific tool, include the following keywords in your prompt:
+3.  Enter a [prompt](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent#sample-prompts) that describes the data analysis you want to perform or the prototype you want to build. The default behavior is to generate Python code using open source libraries such as sklearn to accomplish complex machine learning tasks. To use a specific tool, include the following keywords in your prompt:
 
     - If you want to use BigQuery ML, include the "SQL" keyword.
     - If you want to use "BigQuery DataFrames", specify the "BigFrames" or "BigQuery DataFrames" keywords.
     - If you want to use PySpark, include the "Apache Spark" or "PySpark" keywords.
-
-    For help, see the [sample prompts](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent#sample-prompts) .
 
 4.  Choose your model. The default model is Gemini 3.0 Flash.
 
@@ -79,7 +59,7 @@ The following steps show you how to use the Data Science Agent in BigQuery.
 
 ### Analyze a CSV file
 
-To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
+To analyze a CSV using the DSA in BigQuery, follow these steps.
 
 1.  Go to the **BigQuery** page.
 
@@ -157,7 +137,7 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
 ## Sample prompts
 
-Regardless of the complexity of the prompt that you use, the Data Science Agent generates a plan that you can refine to meet your needs.
+Regardless of the complexity of the prompt that you use, the DSA generates a plan that you can refine to meet your needs.
 
 The following examples show the types of prompts that you can use with the DSA.
 

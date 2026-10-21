@@ -90,7 +90,7 @@ Notice there are no parentheses in the Oracle formats because the formats ( `CUR
 <li>type 12</li>
 <li>type 13</li>
 </ul>
-Oracle uses type 12 when storing dates. Internally, these are numbers with fixed-length. Oracle uses type 13 when a is returned by <code>SYSDATE or CURRENT_DATE</code></td>
+Oracle uses type 12 when storing dates. Internally, these are numbers with fixed-length. Oracle uses type 13 when a date is returned by <code>SYSDATE or CURRENT_DATE</code></td>
 <td>BigQuery has a separate <code>DATE</code> format that always returns a date in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format.
 <p><code>DATE_FROM_UNIX_DATE</code> can't be used because it is 1970-based.</p></td>
 </tr>

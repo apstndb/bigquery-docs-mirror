@@ -219,7 +219,7 @@ Error: `Data Transfer Service is not authorized to pull message from the provide
 
 4.  In the **Permissions** tab, verify that the BigQuery Data Transfer Service [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) has the [`pubsub.subscriber` role](https://docs.cloud.google.com/iam/docs/roles-permissions/pubsub#pubsub.subscriber)
 
-![Verify if the service agent has pubsub.subscirber on the subscription.](https://docs.cloud.google.com/static/bigquery/images/dts-event-driven-verify-pubsub-subscriber-permission.png)
+![Verify if the service agent has pubsub.subscriber on the subscription.](https://docs.cloud.google.com/static/bigquery/images/dts-event-driven-verify-pubsub-subscriber-permission.png)
 
 If the service agent doesn't have the `pubsub.subscriber` role granted. Click person_add **Add principal** to grant the `pubsub.subscriber` role to `service- `` PROJECT_NUMBER `` @gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`
 

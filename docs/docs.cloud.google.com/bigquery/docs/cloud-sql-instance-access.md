@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 # Configure Cloud SQL instance access
 
-This document provides detailed steps for setting up Virtual Private Cloud peering, installing a Cloud SQL proxy, and connecting to an internal Cloud SQL IP address across different Google Cloud projects. This setup ensures security-enhanced and efficient communication between your Cloud SQL instance and the following connectors:
-
-- [The BigQuery Data Transfer Service MySQL connector](https://docs.cloud.google.com/bigquery/docs/mysql-transfer)
-- [The BigQuery Data Transfer Service PostgreSQL connector](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer) .
-
-This document also covers the creation of a network attachment in the BigQuery Data Transfer Service connector project.
+BigQuery Data Transfer Service lets you transfer data from a private Cloud SQL instance across different Google Cloud projects over an internal IP address. To establish this private connection for the [BigQuery Data Transfer Service MySQL connector](https://docs.cloud.google.com/bigquery/docs/mysql-transfer) or the [BigQuery Data Transfer Service PostgreSQL connector](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer) , you configure Virtual Private Cloud peering, a Cloud SQL proxy, and a network attachment.
 
 ## Architecture overview
 

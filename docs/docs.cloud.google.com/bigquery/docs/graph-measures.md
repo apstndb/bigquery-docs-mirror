@@ -18,7 +18,7 @@ A *measure* is an aggregate property defined within the `PROPERTIES` clause of a
 
 - an aggregate expression
 - an expression that combines aggregate functions with scalar operations
-- a *derived measure* , which is a combinations of measures wrapped in the `AGG` function that are defined on the same element table
+- a *derived measure* , which is a combination of measures wrapped in the `AGG` function that are defined on the same element table
 
 Measures support the following aggregate functions:
 

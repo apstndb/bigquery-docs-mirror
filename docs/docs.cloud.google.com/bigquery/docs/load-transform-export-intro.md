@@ -61,7 +61,7 @@ For more information, see [Introduction to transformations](https://docs.cloud.g
 
 In the extract-transform-load (ETL) approach, you extract and transform data before it reaches BigQuery. This approach is beneficial if you have an existing process in place for data transformation, or if you aim to reduce resource usage in BigQuery.
 
-[Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs/concepts/overview) can help facilitate your ETL process. BigQuery also works with [3rd-party partners that transform and load data into BigQuery](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration) .
+[Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs/concepts/overview) can help facilitate your ETL process. BigQuery also works with [third-party partners that transform and load data into BigQuery](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration) .
 
 ## Exporting data
 

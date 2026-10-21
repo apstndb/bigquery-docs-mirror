@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigLake audit logging
 
-This document lists the audited methods for Lakehouse. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
+This document lists the audited methods for BigLake. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
 
 - [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
 - [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)
@@ -18,7 +18,7 @@ This document lists the audited methods for Lakehouse. Google Cloud services gen
 
 ## Service name
 
-To view the Lakehouse audit logs, do the following:
+To view the BigLake audit logs, do the following:
 
 1.  In the Google Cloud console, go to the Logs Explorer page:
 
@@ -30,18 +30,202 @@ To view the Lakehouse audit logs, do the following:
 
 ## Methods by permission type
 
-Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, Lakehouse generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigLake generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
 API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
-| Permission type | Methods                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ADMIN_READ`    | `google.cloud.biglake.v1.DeltaSharingService.GetDeltaSharingCatalog` `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingShares` `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingTables` `google.cloud.biglake.v1alpha.DeltaSharingService.GetDeltaSharingCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.GetTable` `google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs` `google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases` `google.cloud.bigquery.biglake.v1.MetastoreService.ListTables` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `ADMIN_WRITE`   | `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchCreatePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchDeletePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchUpdatePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveDatabases` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveTables` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListPartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchCreatePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchDeletePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchUpdatePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveDatabases` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveTables` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListPartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveTable` `google.cloud.biglake.v1.DeltaSharingService.CreateDeltaSharingCatalog` `google.cloud.biglake.v1.DeltaSharingService.DeleteDeltaSharingCatalog` `google.cloud.biglake.v1.DeltaSharingService.UpdateDeltaSharingCatalog` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergCatalogIamPolicy` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergNamespaceIamPolicy` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergTableIamPolicy` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergTable` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergTable` `google.cloud.biglake.v1.IcebergCatalogService.GetIcebergCatalogConfig` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergTable` `google.cloud.biglake.v1alpha.DeltaSharingService.CreateDeltaSharingCatalog` `google.cloud.biglake.v1alpha.DeltaSharingService.UpdateDeltaSharingCatalog` `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergTable` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergTable` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergTable` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable` `google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable` `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable` |
+| Permission type | Methods                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ADMIN_READ`    | `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveCatalog` `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveDatabase` `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveTable` `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveCatalogs` `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveDatabases` `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveTables` `google.cloud.biglake.hive.v1.HiveMetastoreService.ListPartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveDatabases` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListPartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveCatalogs` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveDatabases` `google.cloud.biglake.v1.IcebergCatalogService.GetIcebergCatalogConfig` `google.cloud.biglake.v1alpha.DeltaSharingService.GetDeltaSharingCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.GetCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.GetDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.GetTable` `google.cloud.bigquery.biglake.v1.MetastoreService.ListCatalogs` `google.cloud.bigquery.biglake.v1.MetastoreService.ListDatabases` `google.cloud.bigquery.biglake.v1.MetastoreService.ListTables` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.GetTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListCatalogs` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListDatabases` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListLocks` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.ListTables`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `ADMIN_WRITE`   | `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchCreatePartitions` `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchDeletePartitions` `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchUpdatePartitions` `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveCatalog` `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveDatabase` `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveTable` `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveCatalog` `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveDatabase` `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveTable` `google.cloud.biglake.hive.v1.HiveMetastoreService.FailoverHiveCatalog` `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveCatalog` `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveDatabase` `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchCreatePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchDeletePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.BatchUpdatePartitions` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.CreateHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.FailoverHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveTable` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveTables` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveCatalog` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveDatabase` `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.UpdateHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchCreatePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchDeletePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.BatchUpdatePartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.CreateHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveTable` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.FailoverHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveTables` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListPartitions` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveCatalog` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveDatabase` `google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveTable` `google.cloud.biglake.v1.DataProductSharingService.PublishDataProduct` `google.cloud.biglake.v1.DeltaSharingService.CreateDeltaSharingCatalog` `google.cloud.biglake.v1.DeltaSharingService.DeleteDeltaSharingCatalog` `google.cloud.biglake.v1.DeltaSharingService.UpdateDeltaSharingCatalog` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergCatalogIamPolicy` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergNamespaceIamPolicy` `google.cloud.biglake.v1.IcebergCatalogIamService.SetIcebergTableIamPolicy` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.CreateIcebergTable` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.DeleteIcebergTable` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergCatalog` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergNamespace` `google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergTable` `google.cloud.biglake.v1alpha.DataProductSharingService.PublishDataProduct` `google.cloud.biglake.v1alpha.DeltaSharingService.CreateDeltaSharingCatalog` `google.cloud.biglake.v1alpha.DeltaSharingService.DeleteDeltaSharingCatalog` `google.cloud.biglake.v1alpha.DeltaSharingService.UpdateDeltaSharingCatalog` `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergCatalog` `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergNamespace` `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergTable` `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergCatalog` `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergNamespace` `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergTable` `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergCatalog` `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergNamespace` `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergTable` `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergTable` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.DeleteIcebergTable` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergCatalog` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergNamespace` `google.cloud.biglake.v1beta.IcebergCatalogService.UpdateIcebergTable` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.CreateTable` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteCatalog` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.DeleteTable` `google.cloud.bigquery.biglake.v1.MetastoreService.RenameTable` `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateDatabase` `google.cloud.bigquery.biglake.v1.MetastoreService.UpdateTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CheckLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.CreateTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteCatalog` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteLock` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.DeleteTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.RenameTable` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateDatabase` `google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable` |
 
 ## API interface audit logs
 
-For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for Lakehouse.
+For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigLake.
+
+### `google.cloud.biglake.hive.v1.HiveMetastoreService`
+
+The following audit logs are associated with methods belonging to `google.cloud.biglake.hive.v1.HiveMetastoreService` .
+
+#### `BatchCreatePartitions`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchCreatePartitions`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.createPartitions - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.BatchCreatePartitions"`  
+
+#### `BatchDeletePartitions`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchDeletePartitions`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.deletePartitions - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.BatchDeletePartitions"`  
+
+#### `BatchUpdatePartitions`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.BatchUpdatePartitions`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.updatePartitions - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.BatchUpdatePartitions"`  
+
+#### `CreateHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.create - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveCatalog"`  
+
+#### `CreateHiveDatabase`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveDatabase`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.create - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveDatabase"`  
+
+#### `CreateHiveTable`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.create - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.CreateHiveTable"`  
+
+#### `DeleteHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveCatalog"`  
+
+#### `DeleteHiveDatabase`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveDatabase`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveDatabase"`  
+
+#### `DeleteHiveTable`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.DeleteHiveTable"`  
+
+#### `FailoverHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.FailoverHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.FailoverHiveCatalog"`  
+
+#### `GetHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveCatalog`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.catalogs.get - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveCatalog"`  
+
+#### `GetHiveDatabase`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveDatabase`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.namespaces.get - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveDatabase"`  
+
+#### `GetHiveTable`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveTable`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.tables.get - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.GetHiveTable"`  
+
+#### `ListHiveCatalogs`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveCatalogs`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.catalogs.list - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveCatalogs"`  
+
+#### `ListHiveDatabases`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveDatabases`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.namespaces.list - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveDatabases"`  
+
+#### `ListHiveTables`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveTables`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.tables.list - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.ListHiveTables"`  
+
+#### `ListPartitions`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.ListPartitions`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.tables.listPartitions - ADMIN_READ`
+- **Method is a long-running or streaming operation** : [**Streaming RPC**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#streaming)  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.ListPartitions"`  
+
+#### `UpdateHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveCatalog"`  
+
+#### `UpdateHiveDatabase`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveDatabase`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveDatabase"`  
+
+#### `UpdateHiveTable`
+
+- **Method** : `google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1.HiveMetastoreService.UpdateHiveTable"`  
 
 ### `google.cloud.biglake.hive.v1alpha.HiveMetastoreService`
 
@@ -128,6 +312,15 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1alpha.HiveMetastoreService.DeleteHiveTable"`  
 
+#### `FailoverHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.FailoverHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1alpha.HiveMetastoreService.FailoverHiveCatalog"`  
+
 #### `GetHiveCatalog`
 
 - **Method** : `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.GetHiveCatalog`  
@@ -160,7 +353,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method** : `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveDatabases`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
-  - `biglake.namespaces.list - ADMIN_WRITE`
+  - `biglake.namespaces.list - ADMIN_READ`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveDatabases"`  
 
@@ -178,7 +371,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method** : `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListPartitions`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
-  - `biglake.tables.listPartitions - ADMIN_WRITE`
+  - `biglake.tables.listPartitions - ADMIN_READ`
 - **Method is a long-running or streaming operation** : [**Streaming RPC**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#streaming)  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListPartitions"`  
 
@@ -294,6 +487,15 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.DeleteHiveTable"`  
 
+#### `FailoverHiveCatalog`
+
+- **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.FailoverHiveCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.FailoverHiveCatalog"`  
+
 #### `GetHiveCatalog`
 
 - **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveCatalog`  
@@ -306,27 +508,36 @@ The following audit logs are associated with methods belonging to `google.cloud.
 #### `GetHiveDatabase`
 
 - **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveDatabase`  
-- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
 - **Permissions** :
-  - `biglake.namespaces.get - ADMIN_WRITE`
+  - `biglake.namespaces.get - ADMIN_READ`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveDatabase"`  
 
 #### `GetHiveTable`
 
 - **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveTable`  
-- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
 - **Permissions** :
-  - `biglake.tables.get - ADMIN_WRITE`
+  - `biglake.tables.get - ADMIN_READ`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.GetHiveTable"`  
+
+#### `ListHiveCatalogs`
+
+- **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveCatalogs`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `biglake.catalogs.list - ADMIN_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveCatalogs"`  
 
 #### `ListHiveDatabases`
 
 - **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveDatabases`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
-  - `biglake.namespaces.list - ADMIN_WRITE`
+  - `biglake.namespaces.list - ADMIN_READ`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveDatabases"`  
 
@@ -342,7 +553,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 #### `ListPartitions`
 
 - **Method** : `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListPartitions`  
-- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
 - **Permissions** :
   - `biglake.tables.listPartitions - ADMIN_WRITE`
 - **Method is a long-running or streaming operation** : [**Streaming RPC**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#streaming)  
@@ -375,6 +586,19 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.hive.v1beta.HiveMetastoreService.UpdateHiveTable"`  
 
+### `google.cloud.biglake.v1.DataProductSharingService`
+
+The following audit logs are associated with methods belonging to `google.cloud.biglake.v1.DataProductSharingService` .
+
+#### `PublishDataProduct`
+
+- **Method** : `google.cloud.biglake.v1.DataProductSharingService.PublishDataProduct`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.DataProductSharingService.PublishDataProduct"`  
+
 ### `google.cloud.biglake.v1.DeltaSharingService`
 
 The following audit logs are associated with methods belonging to `google.cloud.biglake.v1.DeltaSharingService` .
@@ -396,33 +620,6 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - `biglake.catalogs.delete - ADMIN_WRITE`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.DeltaSharingService.DeleteDeltaSharingCatalog"`  
-
-#### `GetDeltaSharingCatalog`
-
-- **Method** : `google.cloud.biglake.v1.DeltaSharingService.GetDeltaSharingCatalog`  
-- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
-- **Permissions** :
-  - `biglake.catalogs.get - ADMIN_READ`
-- **Method is a long-running or streaming operation** : No.  
-- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.DeltaSharingService.GetDeltaSharingCatalog"`  
-
-#### `ListDeltaSharingShares`
-
-- **Method** : `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingShares`  
-- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
-- **Permissions** :
-  - `biglake.catalogs.get - ADMIN_READ`
-- **Method is a long-running or streaming operation** : No.  
-- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingShares"`  
-
-#### `ListDeltaSharingTables`
-
-- **Method** : `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingTables`  
-- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
-- **Permissions** :
-  - `biglake.namespaces.get - ADMIN_READ`
-- **Method is a long-running or streaming operation** : No.  
-- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingTables"`  
 
 #### `UpdateDeltaSharingCatalog`
 
@@ -527,7 +724,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method** : `google.cloud.biglake.v1.IcebergCatalogService.GetIcebergCatalogConfig`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
-  - `biglake.catalogs.get - ADMIN_WRITE`
+  - `biglake.catalogs.get - ADMIN_READ`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.IcebergCatalogService.GetIcebergCatalogConfig"`  
 
@@ -558,6 +755,19 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1.IcebergCatalogService.UpdateIcebergTable"`  
 
+### `google.cloud.biglake.v1alpha.DataProductSharingService`
+
+The following audit logs are associated with methods belonging to `google.cloud.biglake.v1alpha.DataProductSharingService` .
+
+#### `PublishDataProduct`
+
+- **Method** : `google.cloud.biglake.v1alpha.DataProductSharingService.PublishDataProduct`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.DataProductSharingService.PublishDataProduct"`  
+
 ### `google.cloud.biglake.v1alpha.DeltaSharingService`
 
 The following audit logs are associated with methods belonging to `google.cloud.biglake.v1alpha.DeltaSharingService` .
@@ -570,6 +780,15 @@ The following audit logs are associated with methods belonging to `google.cloud.
   - `biglake.catalogs.create - ADMIN_WRITE`
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.DeltaSharingService.CreateDeltaSharingCatalog"`  
+
+#### `DeleteDeltaSharingCatalog`
+
+- **Method** : `google.cloud.biglake.v1alpha.DeltaSharingService.DeleteDeltaSharingCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.DeltaSharingService.DeleteDeltaSharingCatalog"`  
 
 #### `GetDeltaSharingCatalog`
 
@@ -602,18 +821,81 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergCatalog"`  
 
+#### `CreateIcebergNamespace`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergNamespace`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.create - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergNamespace"`  
+
+#### `CreateIcebergTable`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.create - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergTable"`  
+
+#### `DeleteIcebergCatalog`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergCatalog"`  
+
+#### `DeleteIcebergNamespace`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergNamespace`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergNamespace"`  
+
+#### `DeleteIcebergTable`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.delete - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergTable"`  
+
+#### `UpdateIcebergCatalog`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergCatalog`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.catalogs.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergCatalog"`  
+
+#### `UpdateIcebergNamespace`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergNamespace`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.namespaces.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergNamespace"`  
+
+#### `UpdateIcebergTable`
+
+- **Method** : `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergTable`  
+- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
+- **Permissions** :
+  - `biglake.tables.update - ADMIN_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergTable"`  
+
 ### `google.cloud.biglake.v1beta.IcebergCatalogService`
 
 The following audit logs are associated with methods belonging to `google.cloud.biglake.v1beta.IcebergCatalogService` .
-
-#### `CreateIcebergCatalog`
-
-- **Method** : `google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergCatalog`  
-- **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
-- **Permissions** :
-  - `biglake.catalogs.create - ADMIN_WRITE`
-- **Method is a long-running or streaming operation** : No.  
-- **Filter for this method** : `protoPayload.methodName="google.cloud.biglake.v1beta.IcebergCatalogService.CreateIcebergCatalog"`  
 
 #### `CreateIcebergNamespace`
 
@@ -1001,6 +1283,16 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method is a long-running or streaming operation** : No.  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.biglake.v1alpha1.MetastoreService.UpdateTable"`  
 
+## System events
+
+System Event audit logs are generated by GCP systems, not direct user action. For more information, see [System Event audit logs](https://docs.cloud.google.com/logging/docs/audit#system-event) .
+
+| Method Name                                                              | Filter For This Event                                                                                | Notes |
+|--------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|-------|
+| google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshCatalog   | `protoPayload.methodName="google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshCatalog"`   |       |
+| google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshNamespace | `protoPayload.methodName="google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshNamespace"` |       |
+| google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshTable     | `protoPayload.methodName="google.cloud.biglake.v1.IcebergCatalogService.BackgroundRefreshTable"`     |       |
+
 ## Methods that don't produce audit logs
 
 A method might not produce audit logs for one or more of the following reasons:
@@ -1012,21 +1304,14 @@ A method might not produce audit logs for one or more of the following reasons:
 The following methods don't produce audit logs:
 
 - `google.cloud.biglake.hive.v1alpha.HiveMetastoreService.ListHiveCatalogs`
-- `google.cloud.biglake.hive.v1beta.HiveMetastoreService.ListHiveCatalogs`
 - `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingCatalogs`
 - `google.cloud.biglake.v1.DeltaSharingService.ListDeltaSharingSchemas`
-- `google.cloud.biglake.v1alpha.DeltaSharingService.DeleteDeltaSharingCatalog`
 - `google.cloud.biglake.v1alpha.DeltaSharingService.ListDeltaSharingCatalogs`
 - `google.cloud.biglake.v1alpha.DeltaSharingService.ListDeltaSharingSchemas`
 - `google.cloud.biglake.v1alpha.DeltaSharingService.ListDeltaSharingShares`
 - `google.cloud.biglake.v1alpha.DeltaSharingService.ListDeltaSharingTables`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.CheckIcebergNamespaceExists`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.CheckIcebergTableExists`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergNamespace`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.CreateIcebergTable`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergCatalog`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergNamespace`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.DeleteIcebergTable`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.FailoverIcebergCatalog`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.GetIcebergCatalog`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.GetIcebergCatalogConfig`
@@ -1038,9 +1323,6 @@ The following methods don't produce audit logs:
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.LoadIcebergTableCredentials`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.RegisterIcebergTable`
 - `google.cloud.biglake.v1alpha.IcebergCatalogService.ReportIcebergTableMetrics`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergCatalog`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergNamespace`
-- `google.cloud.biglake.v1alpha.IcebergCatalogService.UpdateIcebergTable`
 - `google.cloud.biglake.v1beta.IcebergCatalogService.CheckIcebergNamespaceExists`
 - `google.cloud.biglake.v1beta.IcebergCatalogService.CheckIcebergTableExists`
 - `google.cloud.biglake.v1beta.IcebergCatalogService.FailoverIcebergCatalog`

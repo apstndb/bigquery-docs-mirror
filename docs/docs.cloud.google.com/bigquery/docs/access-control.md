@@ -8,17 +8,16 @@ data_source: docs.cloud.google.com
 
 # BigQuery IAM roles and permissions
 
-This document provides a list of Identity and Access Management (IAM) predefined roles and permissions for BigQuery. This page includes roles and permissions for the following:
+Identity and Access Management (IAM) lets you control access to BigQuery resources by using predefined roles and granular permissions. This document describes roles and permissions that apply to the following BigQuery resources:
 
-- BigQuery: Roles and permissions that apply to BigQuery resources such as datasets, tables, views, and routines. Many of these roles and permissions can also be granted to Resource Manager resources like projects, folders, and organizations.
-- BigQuery Connection API: Role that grants a [service agent](https://docs.cloud.google.com/iam/docs/service-agents) access to a Cloud SQL connection.
-- BigQuery Continuous Query: Role that grants a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) access to a continuous query.
-- BigQuery Data Policy: Roles and permissions that apply to Data Policies in BigQuery.
-- BigQuery Data Transfer Service: Role that grants a [service agent](https://docs.cloud.google.com/iam/docs/service-agents) access to create jobs that transfer data.
-- BigQuery Engine for Apache Flink: Roles and permissions that apply to BigQuery Engine for Apache Flink resources.
-- BigQuery Migration Service API: Roles and permissions that apply to BigQuery Migration Service resources.
-- BigQuery Omni: Role that grants a [service agent](https://docs.cloud.google.com/iam/docs/service-agents) access to tables.
-- BigQuery sharing: Roles and permissions that apply to BigQuery sharing resources.
+- BigQuery Connection API
+- BigQuery continuous queries
+- BigQuery Data Policy
+- BigQuery Data Transfer Service
+- BigQuery Engine for Apache Flink
+- BigQuery Migration Service
+- BigQuery Omni
+- BigQuery sharing
 
 ## BigQuery predefined IAM roles
 
@@ -385,6 +384,65 @@ For information on granting predefined roles on BigQuery resources like datasets
 <p><code>dataplex.operations.get</code></p>
 <p><code>dataplex.operations.list</code></p>
 <p><code>dataplex.projects.search</code></p>
+<p><code>developerconnect. accountConnectors.*</code></p>
+<ul>
+<li><code>developerconnect. accountConnectors. create</code></li>
+<li><code>developerconnect. accountConnectors. delete</code></li>
+<li><code>developerconnect. accountConnectors. fetchUserRepositories</code></li>
+<li><code>developerconnect. accountConnectors. get</code></li>
+<li><code>developerconnect. accountConnectors. gitProxyRead</code></li>
+<li><code>developerconnect. accountConnectors. gitProxyWrite</code></li>
+<li><code>developerconnect. accountConnectors. httpProxyRead</code></li>
+<li><code>developerconnect. accountConnectors. httpProxyWrite</code></li>
+<li><code>developerconnect. accountConnectors. list</code></li>
+<li><code>developerconnect. accountConnectors. update</code></li>
+</ul>
+<p><code>developerconnect. connections. constructGitHubAppManifest</code></p>
+<p><code>developerconnect. connections. create</code></p>
+<p><code>developerconnect. connections. delete</code></p>
+<p><code>developerconnect. connections. fetchGitHubInstallations</code></p>
+<p><code>developerconnect. connections. fetchLinkableGitRepositories</code></p>
+<p><code>developerconnect. connections. generateGitHubStateToken</code></p>
+<p><code>developerconnect. connections. get</code></p>
+<p><code>developerconnect. connections. list</code></p>
+<p><code>developerconnect. connections. processGitHubAppCreationCallback</code></p>
+<p><code>developerconnect. connections. processGitHubOAuthCallback</code></p>
+<p><code>developerconnect. connections. update</code></p>
+<p><code>developerconnect. gitRepositoryLinks.*</code></p>
+<ul>
+<li><code>developerconnect. gitRepositoryLinks. create</code></li>
+<li><code>developerconnect. gitRepositoryLinks. delete</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchGitRefs</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchReadToken</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchReadWriteToken</code></li>
+<li><code>developerconnect. gitRepositoryLinks. get</code></li>
+<li><code>developerconnect. gitRepositoryLinks. gitProxyRead</code></li>
+<li><code>developerconnect. gitRepositoryLinks. gitProxyWrite</code></li>
+<li><code>developerconnect. gitRepositoryLinks. list</code></li>
+</ul>
+<p><code>developerconnect.locations.*</code></p>
+<ul>
+<li><code>developerconnect.locations.get</code></li>
+<li><code>developerconnect. locations. list</code></li>
+</ul>
+<p><code>developerconnect.operations.*</code></p>
+<ul>
+<li><code>developerconnect. operations. cancel</code></li>
+<li><code>developerconnect. operations. delete</code></li>
+<li><code>developerconnect. operations. get</code></li>
+<li><code>developerconnect. operations. list</code></li>
+</ul>
+<p><code>developerconnect. providers. list</code></p>
+<p><code>developerconnect.users.*</code></p>
+<ul>
+<li><code>developerconnect.users.delete</code></li>
+<li><code>developerconnect. users. deleteSelf</code></li>
+<li><code>developerconnect. users. fetchAccessToken</code></li>
+<li><code>developerconnect. users. finishOAuth</code></li>
+<li><code>developerconnect.users.getSelf</code></li>
+<li><code>developerconnect.users.list</code></li>
+<li><code>developerconnect. users. startOAuth</code></li>
+</ul>
 <p><code>resourcemanager.projects.get</code></p>
 <p><code>resourcemanager.projects.list</code></p></td>
 </tr>
@@ -779,6 +837,7 @@ For information on granting predefined roles on BigQuery resources like datasets
 <p>This role can only be granted on Resource Manager resources (projects, folders, and organizations).</p></td>
 <td><p><code>bigquery.config.get</code></p>
 <p><code>bigquery.jobs.create</code></p>
+<p><code>cloudaicompanion.topics.create</code></p>
 <p><code>dataform.folders.create</code></p>
 <p><code>dataform.locations.*</code></p>
 <ul>
@@ -1524,6 +1583,65 @@ For information on granting predefined roles on BigQuery resources like datasets
 <li><code>dataprocrm.workloads.get</code></li>
 <li><code>dataprocrm.workloads.list</code></li>
 </ul>
+<p><code>developerconnect. accountConnectors.*</code></p>
+<ul>
+<li><code>developerconnect. accountConnectors. create</code></li>
+<li><code>developerconnect. accountConnectors. delete</code></li>
+<li><code>developerconnect. accountConnectors. fetchUserRepositories</code></li>
+<li><code>developerconnect. accountConnectors. get</code></li>
+<li><code>developerconnect. accountConnectors. gitProxyRead</code></li>
+<li><code>developerconnect. accountConnectors. gitProxyWrite</code></li>
+<li><code>developerconnect. accountConnectors. httpProxyRead</code></li>
+<li><code>developerconnect. accountConnectors. httpProxyWrite</code></li>
+<li><code>developerconnect. accountConnectors. list</code></li>
+<li><code>developerconnect. accountConnectors. update</code></li>
+</ul>
+<p><code>developerconnect. connections. constructGitHubAppManifest</code></p>
+<p><code>developerconnect. connections. create</code></p>
+<p><code>developerconnect. connections. delete</code></p>
+<p><code>developerconnect. connections. fetchGitHubInstallations</code></p>
+<p><code>developerconnect. connections. fetchLinkableGitRepositories</code></p>
+<p><code>developerconnect. connections. generateGitHubStateToken</code></p>
+<p><code>developerconnect. connections. get</code></p>
+<p><code>developerconnect. connections. list</code></p>
+<p><code>developerconnect. connections. processGitHubAppCreationCallback</code></p>
+<p><code>developerconnect. connections. processGitHubOAuthCallback</code></p>
+<p><code>developerconnect. connections. update</code></p>
+<p><code>developerconnect. gitRepositoryLinks.*</code></p>
+<ul>
+<li><code>developerconnect. gitRepositoryLinks. create</code></li>
+<li><code>developerconnect. gitRepositoryLinks. delete</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchGitRefs</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchReadToken</code></li>
+<li><code>developerconnect. gitRepositoryLinks. fetchReadWriteToken</code></li>
+<li><code>developerconnect. gitRepositoryLinks. get</code></li>
+<li><code>developerconnect. gitRepositoryLinks. gitProxyRead</code></li>
+<li><code>developerconnect. gitRepositoryLinks. gitProxyWrite</code></li>
+<li><code>developerconnect. gitRepositoryLinks. list</code></li>
+</ul>
+<p><code>developerconnect.locations.*</code></p>
+<ul>
+<li><code>developerconnect.locations.get</code></li>
+<li><code>developerconnect. locations. list</code></li>
+</ul>
+<p><code>developerconnect.operations.*</code></p>
+<ul>
+<li><code>developerconnect. operations. cancel</code></li>
+<li><code>developerconnect. operations. delete</code></li>
+<li><code>developerconnect. operations. get</code></li>
+<li><code>developerconnect. operations. list</code></li>
+</ul>
+<p><code>developerconnect. providers. list</code></p>
+<p><code>developerconnect.users.*</code></p>
+<ul>
+<li><code>developerconnect.users.delete</code></li>
+<li><code>developerconnect. users. deleteSelf</code></li>
+<li><code>developerconnect. users. fetchAccessToken</code></li>
+<li><code>developerconnect. users. finishOAuth</code></li>
+<li><code>developerconnect.users.getSelf</code></li>
+<li><code>developerconnect.users.list</code></li>
+<li><code>developerconnect. users. startOAuth</code></li>
+</ul>
 <p><code>geminicloudassist. agents. invoke</code></p>
 <p><code>geminidataanalytics.*</code></p>
 <ul>
@@ -1683,6 +1801,34 @@ For information on granting predefined roles on BigQuery resources like datasets
 <li><code>dataprocrm.workloads.get</code></li>
 <li><code>dataprocrm.workloads.list</code></li>
 </ul>
+<p><code>developerconnect. accountConnectors. fetchUserRepositories</code></p>
+<p><code>developerconnect. accountConnectors. get</code></p>
+<p><code>developerconnect. accountConnectors. gitProxyRead</code></p>
+<p><code>developerconnect. accountConnectors. gitProxyWrite</code></p>
+<p><code>developerconnect. accountConnectors. httpProxyRead</code></p>
+<p><code>developerconnect. accountConnectors. httpProxyWrite</code></p>
+<p><code>developerconnect. accountConnectors. list</code></p>
+<p><code>developerconnect. connections. fetchGitHubInstallations</code></p>
+<p><code>developerconnect. connections. fetchLinkableGitRepositories</code></p>
+<p><code>developerconnect. connections. get</code></p>
+<p><code>developerconnect. connections. list</code></p>
+<p><code>developerconnect. gitRepositoryLinks. fetchGitRefs</code></p>
+<p><code>developerconnect. gitRepositoryLinks. get</code></p>
+<p><code>developerconnect. gitRepositoryLinks. gitProxyRead</code></p>
+<p><code>developerconnect. gitRepositoryLinks. gitProxyWrite</code></p>
+<p><code>developerconnect. gitRepositoryLinks. list</code></p>
+<p><code>developerconnect.locations.*</code></p>
+<ul>
+<li><code>developerconnect.locations.get</code></li>
+<li><code>developerconnect. locations. list</code></li>
+</ul>
+<p><code>developerconnect. operations. get</code></p>
+<p><code>developerconnect. operations. list</code></p>
+<p><code>developerconnect. users. deleteSelf</code></p>
+<p><code>developerconnect. users. fetchAccessToken</code></p>
+<p><code>developerconnect. users. finishOAuth</code></p>
+<p><code>developerconnect.users.getSelf</code></p>
+<p><code>developerconnect. users. startOAuth</code></p>
 <p><code>geminicloudassist. agents. invoke</code></p>
 <p><code>geminidataanalytics. dataAgents. get</code></p>
 <p><code>geminidataanalytics. dataAgents. list</code></p>
@@ -2223,6 +2369,7 @@ BigQuery Data Transfer Service offers the following service agent roles. Service
 <td><p><code>bigquery.config.get</code></p>
 <p><code>bigquery.connections.delegate</code></p>
 <p><code>bigquery.jobs.create</code></p>
+<p><code>cloudaicompanion.topics.create</code></p>
 <p><code>compute.networkAttachments.get</code></p>
 <p><code>compute. networkAttachments. update</code></p>
 <p><code>compute.regionOperations.get</code></p>
@@ -2466,6 +2613,7 @@ This table lists the predefined IAM roles and permissions for BigQuery Migration
 <li><code>bigquerymigration.subtasks.get</code></li>
 <li><code>bigquerymigration. subtasks. list</code></li>
 </ul>
+<p><code>bigquerymigration. translation. translate</code></p>
 <p><code>bigquerymigration. workflows. create</code></p>
 <p><code>bigquerymigration. workflows. delete</code></p>
 <p><code>bigquerymigration. workflows. enableAiOutputTypes</code></p>
@@ -6831,6 +6979,7 @@ This table lists the IAM permissions for BigQuery Migration Service and the role
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioAdmin">BigQuery Studio Admin</a> ( <code>roles/ bigquery.studioAdmin</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user">BigQuery User</a> ( <code>roles/ bigquery.user</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.admin">Bigquerymigration Admin</a> ( <code>roles/ bigquerymigration.admin</code> )</p>
+<p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor">MigrationWorkflow Editor</a> ( <code>roles/ bigquerymigration.editor</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.translationUser">Migration Translation User</a> ( <code>roles/ bigquerymigration.translationUser</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.orgdriver">DLP Organization Data Profiles Driver</a> ( <code>roles/ dlp.orgdriver</code> )</p>
 <p><a href="https://docs.cloud.google.com/iam/docs/roles-permissions/dlp#dlp.projectdriver">DLP Project Data Profiles Driver</a> ( <code>roles/ dlp.projectdriver</code> )</p>

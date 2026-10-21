@@ -175,7 +175,7 @@ GROUP BY item;
 WITH DIFFERENTIAL_PRIVACY ...
   COUNT(
     expression,
-    [contribution_bounds_per_group => (lower_bound, upper_bound)]
+    [ contribution_bounds_per_group => (lower_bound, upper_bound) ]
   )
 ```
 

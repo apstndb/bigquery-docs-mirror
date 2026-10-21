@@ -398,7 +398,7 @@ JDBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="odd">
 <td><code>JobTimeout</code></td>
-<td>The job timeout (in seconds) after which the job is cancelled on the server.</td>
+<td>The job timeout (in seconds) after which the job is canceled on the server.</td>
 <td><code>0</code></td>
 <td>Long</td>
 <td>No</td>
@@ -651,7 +651,7 @@ JDBC driver connection properties are configuration parameters that you include 
 </tr>
 <tr class="even">
 <td><code>ServiceAccountImpersonationScopes</code></td>
-<td>A comma-separated list of OAuth2 scopes to use with the impersonated account.</td>
+<td>A comma-separated list of OAuth 2.0 scopes to use with the impersonated account.</td>
 <td><code>https://www.googleapis.com/auth/bigquery</code></td>
 <td>String</td>
 <td>No</td>

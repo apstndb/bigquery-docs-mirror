@@ -31,7 +31,7 @@ There are three kinds of external data source tables:
 
 ### BigLake tables
 
-BigLake tables let you query structured data in external data stores with access delegation. Access delegation decouples access to the BigLake table from access to the underlying data store. An [external connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) associated with a service account is used to connect to the data store. Because the service account handles retrieving data from the data store, you only have to grant users access to the BigLake table. This lets you enforce fine-grained security at the table level, including [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [column-level](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) security. For BigLake tables based on Cloud Storage, you can also use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) . To learn more about multi-cloud analytic solutions using BigLake tables with Amazon S3 or Blob Storage data, see [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
+BigLake tables let you query structured data in external datastores with access delegation. Access delegation decouples access to the BigLake table from access to the underlying datastore. An [external connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) associated with a service account is used to connect to the datastore. Because the service account handles retrieving data from the datastore, you only have to grant users access to the BigLake table. This lets you enforce fine-grained security at the table level, including [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [column-level](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) security. For BigLake tables based on Cloud Storage, you can also use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) . To learn more about multi-cloud analytic solutions using BigLake tables with Amazon S3 or Blob Storage data, see [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
 For more information, see [Introduction to BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
 
@@ -45,7 +45,7 @@ For more information, see [Introduction to object tables](https://docs.cloud.goo
 
 ### External tables
 
-External tables let you query structured data in external data stores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
+External tables let you query structured data in external datastores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
 
 - `bigquery.tables.getData`
 - `bigquery.jobs.create`

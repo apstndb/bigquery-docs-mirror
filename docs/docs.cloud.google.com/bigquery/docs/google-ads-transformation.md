@@ -1769,7 +1769,7 @@ Google Ads API Resource: [customer](https://developers.google.com/google-ads/api
 
 | Google Ads Field Name         | Description                                                                                                         | Adwords Mapped Field Name                      |
 |-------------------------------|---------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
-| customer_auto_tagging_enabled | Whether auto-tagging is enabled for the customer.                                                                   | IsAutoTaggingEnabled                           |
+| customer_auto_tagging_enabled | Whether autotagging is enabled for the customer.                                                                    | IsAutoTaggingEnabled                           |
 | customer_currency_code        | The currency in which the account operates. A subset of the currency codes from the ISO 4217 standard is supported. | AccountCurrencyCode                            |
 | customer_descriptive_name     | Optional, non-unique descriptive name of the customer.                                                              | AccountDescriptiveName,CustomerDescriptiveName |
 | customer_id                   | The ID of the customer.                                                                                             | ExternalCustomerId                             |

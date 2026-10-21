@@ -2136,16 +2136,18 @@ Request for a table.
   "connectionId": string,
   "storageUri": string,
   "fileFormat": enum (FileFormat),
-  "tableFormat": enum (TableFormat)
+  "tableFormat": enum (TableFormat),
+  "metadataExportMode": enum (MetadataExportMode)
 }
 ```
 
-| Fields         |                                                                                                                                                                                                                                                                                             |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `connectionId` | `string` Optional. The connection specifying the credentials to be used to read and write to external storage, such as Cloud Storage. The connection_id can have the form `{project}.{location}.{connection_id}` or \`projects/{project}/locations/{location}/connections/{connection_id}". |
-| `storageUri`   | `string` Optional. The fully qualified location prefix of the external folder where table data is stored. The '\*' wildcard character is not allowed. The URI should be in the format `gs://bucket/path_to_table/`                                                                          |
-| `fileFormat`   | `enum ( `[`FileFormat`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.FileFormat)` )` Optional. The file format the table data is stored in.                                                                                            |
-| `tableFormat`  | `enum ( `[`TableFormat`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TableFormat)` )` Optional. The table format the metadata only snapshots are stored in.                                                                           |
+| Fields               |                                                                                                                                                                                                                                                                                             |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `connectionId`       | `string` Optional. The connection specifying the credentials to be used to read and write to external storage, such as Cloud Storage. The connection_id can have the form `{project}.{location}.{connection_id}` or \`projects/{project}/locations/{location}/connections/{connection_id}". |
+| `storageUri`         | `string` Optional. The fully qualified location prefix of the external folder where table data is stored. The '\*' wildcard character is not allowed. The URI should be in the format `gs://bucket/path_to_table/`                                                                          |
+| `fileFormat`         | `enum ( `[`FileFormat`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.FileFormat)` )` Optional. The file format the table data is stored in.                                                                                            |
+| `tableFormat`        | `enum ( `[`TableFormat`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.TableFormat)` )` Optional. The table format the metadata only snapshots are stored in.                                                                           |
+| `metadataExportMode` | `enum ( `[`MetadataExportMode`](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_list/get_table_info#Output.Schema.MetadataExportMode)` )` Optional. The type of Metadata Export for BigLake Managed Tables.                                                                 |
 
 ### Streamingbuffer
 
@@ -2563,6 +2565,16 @@ Supported table formats for BigQuery tables for Apache Iceberg.
 |----------------------------|------------------------|
 | `TABLE_FORMAT_UNSPECIFIED` | Default Value.         |
 | `ICEBERG`                  | Apache Iceberg format. |
+
+### MetadataExportMode
+
+Supported metadata export modes for BigQuery tables for Apache Iceberg.
+
+| Enums                              |                                                       |
+|------------------------------------|-------------------------------------------------------|
+| `METADATA_EXPORT_MODE_UNSPECIFIED` | No export type specified. This will default to ASYNC. |
+| `ASYNC`                            | Async export mode.                                    |
+| `MANUAL`                           | Manual metadata export.                               |
 
 ### ManagedTableType
 

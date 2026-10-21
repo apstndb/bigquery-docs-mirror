@@ -8,15 +8,9 @@ data_source: docs.cloud.google.com
 
 # Add labels to resources
 
-This document describes how to add labels to BigQuery resources, including the following resources:
+BigQuery labels let you attach key-value metadata to your resources. This metadata helps you organize workloads, filter assets, and track billing costs across projects.
 
-- [datasets](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_dataset_labels)
-- [tables and views](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels)
-- [jobs](https://docs.cloud.google.com/bigquery/docs/adding-labels#job-label)
-- [job sessions](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session)
-- [reservations](https://docs.cloud.google.com/bigquery/docs/adding-labels#reservation)
-
-For more information about labels in BigQuery, see [Introduction to labels](https://docs.cloud.google.com/bigquery/docs/labels-intro) .
+You can add labels to [datasets](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_dataset_labels) , [tables and views](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels) , [jobs](https://docs.cloud.google.com/bigquery/docs/adding-labels#job-label) , [job sessions](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session) , and [reservations](https://docs.cloud.google.com/bigquery/docs/adding-labels#reservation) . For more information about labels in BigQuery, see [Introduction to labels](https://docs.cloud.google.com/bigquery/docs/labels-intro) .
 
 ## Before you begin
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to BigLake tables
 
-This document provides an overview of BigLake and assumes familiarity with database tables and Identity and Access Management (IAM). To query data stored in the [supported data stores](https://docs.cloud.google.com/bigquery/docs/biglake-intro#supported-data-stores) , you must first create BigLake tables and then query them using GoogleSQL syntax:
+This document provides an overview of BigLake and assumes familiarity with database tables and Identity and Access Management (IAM). To query data stored in the [supported datastores](https://docs.cloud.google.com/bigquery/docs/biglake-intro#supported-data-stores) , you must first create BigLake tables and then query them using GoogleSQL syntax:
 
 - [Create Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) and then [query](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) .
 - [Create Amazon S3 BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and then [query](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) .
@@ -16,9 +16,9 @@ This document provides an overview of BigLake and assumes familiarity with datab
 
 You can also upgrade an external table to BigLake. For more information, see [Upgrade an external table to BigLake](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#upgrade-external-tables-to-biglake-tables) .
 
-BigLake tables let you query structured data in external data stores with access delegation. Access delegation decouples access to the BigLake table from access to the underlying data store. An [external connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) associated with a service account is used to connect to the data store. Because the service account handles retrieving data from the data store, you only have to grant users access to the BigLake table. This lets you enforce fine-grained security at the table level, including [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [column-level](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) security. For BigLake tables based on Cloud Storage, you can also use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) . To learn more about multi-cloud analytic solutions using BigLake tables with Amazon S3 or Blob Storage data, see [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
+BigLake tables let you query structured data in external datastores with access delegation. Access delegation decouples access to the BigLake table from access to the underlying datastore. An [external connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) associated with a service account is used to connect to the datastore. Because the service account handles retrieving data from the datastore, you only have to grant users access to the BigLake table. This lets you enforce fine-grained security at the table level, including [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [column-level](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) security. For BigLake tables based on Cloud Storage, you can also use [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) . To learn more about multi-cloud analytic solutions using BigLake tables with Amazon S3 or Blob Storage data, see [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
-## Supported data stores
+## Supported datastores
 
 You can use BigLake tables with the following datastores:
 

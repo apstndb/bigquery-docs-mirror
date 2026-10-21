@@ -86,7 +86,7 @@ You can use an alias—an identifier assigned to an expression—in a `WHERE` cl
 
 ### Example
 
-This example shows you how to use reusable column aliases to calculate a value based on another calculation you defined earlier in the `SELECT` list. The query also shows you and how to refer to the alias in the `WHERE` clause:
+This example shows you how to use reusable column aliases to calculate a value based on another calculation you defined earlier in the `SELECT` list. The query also shows you how to refer to the alias in the `WHERE` clause:
 
 ```
 SELECT

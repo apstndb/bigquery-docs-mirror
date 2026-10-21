@@ -1783,7 +1783,7 @@ The following JSON functions are now [generally available](https://cloud.google.
 
 Feature
 
-The [quantitive `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) is now in [preview](https://cloud.google.com/products#product-launch-stages) . With this operator, you can check a search value for matches against several patterns, using one of these conditions:
+The [quantified `LIKE` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) is now in [preview](https://cloud.google.com/products#product-launch-stages) . With this operator, you can check a search value for matches against several patterns, using one of these conditions:
 
 - `LIKE ANY` : Checks if at least one pattern matches.
 - `LIKE SOME` : Synonym for `LIKE ANY` .

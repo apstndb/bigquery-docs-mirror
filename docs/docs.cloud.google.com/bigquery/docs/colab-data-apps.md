@@ -21,7 +21,7 @@ Data Apps provide the following:
 - **Self-service insights** . Business users can adjust parameters such as date ranges or filters to see the data that they need without editing code.
 - **No setup for app viewers** . Consumers access your app using a URL. They don't need to navigate the Google Cloud console or run notebooks.
 - **Flexibility** . Integrate any Python visualization library or widget to build custom, complex Data Apps with ease. To save time, use the integrated agent to generate the code for you.
-- **Managed life cycle** . Administrators and authors retain control over sharing, versions, and resource usage.
+- **Managed lifecycle** . Administrators and authors retain control over sharing, versions, and resource usage.
 
 ## Before you begin
 

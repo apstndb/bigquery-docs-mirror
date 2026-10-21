@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Authorize accounts for data transfer
 
-This document provides an overview of how BigQuery Data Transfer Service interacts with different account types, the types of account authorization that you need to perform general transfer tasks, and troubleshooting steps for common permission errors.
-
-To start using the BigQuery Data Transfer Service, ensure that the accounts associated with your project—both user accounts and service accounts—are authenticated and authorized with the correct permissions to perform your transfer needs. For information about data source-specific permissions, see the transfer guide for each data source.
+The BigQuery Data Transfer Service lets you authenticate and authorize user accounts, service accounts, and service agents to manage transfer configurations and run automated data transfers. Granting the required permissions for your project accounts helps you control access to source data and destination datasets and troubleshoot common permission errors. For information about data source-specific permissions, see the transfer documentation for each data source.
 
 ## Key concepts
 

@@ -1647,7 +1647,7 @@ The **BigQuery Steady State** section contains the following views:
 
 The **Migration Hints** section contains the following views:
 
-- Database Objects Compatibility: provides the overview of database objects compatibility with BigQuery, including the number of objects that can be automatically migrated with Google provided tools or require manual action. This information is shown for each database, schemma, and database object type.
+- Database Objects Compatibility: provides the overview of database objects compatibility with BigQuery, including the number of objects that can be automatically migrated with Google provided tools or require manual action. This information is shown for each database, schema, and database object type.
 - Database Objects Migration Effort: shows the estimate of migration effort in hours for each database, schema, or database object type. In addition it shows the percentage of small, medium, and large objects based on the migration effort.
 - Database Schema Migration Effort: provides the list of all detected database object types, their number, compatibility with BigQuery and the estimated migration effort in hours.
 - Database Schema Migration Effort Detailed: provides more deep dive insight into the database schema migration effort, including the information for each single object.

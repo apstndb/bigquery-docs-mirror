@@ -152,9 +152,6 @@ The following [Anthropic Claude models](https://docs.cloud.google.com/vertex-ai/
 - `claude-opus-4-5`
 - `claude-haiku-4-5`
 - `claude-sonnet-4-5`
-- `claude-opus-4-1`
-- `claude-opus-4`
-- `claude-sonnet-4`
 
 You must enable Claude models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 

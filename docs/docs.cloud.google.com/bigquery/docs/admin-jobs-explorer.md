@@ -8,18 +8,20 @@ data_source: docs.cloud.google.com
 
 # Monitor jobs
 
-As a BigQuery administrator, you can monitor jobs across your organization through an administrative jobs explorer in the Google Cloud console. The jobs explorer provides filters and sorting options to identify, compare, and troubleshoot problematic jobs. You don't need to write `INFORMATION_SCHEMA` queries to view job details, such as the owner, project, slot usage, duration, and more.
+The BigQuery administrative jobs explorer in the Google Cloud console lets you monitor, filter, and troubleshoot jobs across your organization without writing manual `INFORMATION_SCHEMA` queries. You can track execution trends, compare job performance, and inspect query metrics such as slot usage, duration, and execution graphs to resolve bottlenecks.
 
 To monitor capacity, slot commitments, and long-term reservation utilization across your organization, see [Monitor health and resource utilization](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
+## Capabilities
+
 With the jobs explorer, you can do the following:
 
-- **Filter and identify jobs.** Search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria like job status, duration, owner, or slot usage.
-- **Analyze timeline metrics.** Track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
-- **Aggregate jobs by resource.** [Group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
-- **Troubleshoot jobs.** Select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-- **Compare performance.** [Compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
-- **Get AI assistance.** [Use Gemini Code Assist directly from the jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
+- **Filter and identify jobs** : search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria such as job status, duration, owner, or slot usage.
+- **Analyze timeline metrics** : track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
+- **Aggregate jobs by resource** : [group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
+- **Troubleshoot jobs** : select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+- **Compare performance** : [compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
+- **Get AI assistance** : [use Gemini Code Assist to troubleshoot jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
 
 BigQuery provides the job details and insights from the following `INFORMATION_SCHEMA` views:
 

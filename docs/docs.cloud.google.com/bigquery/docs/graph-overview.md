@@ -52,7 +52,7 @@ You can use BigQuery Graph to build many types of analytic graph workloads, incl
 
 - **Manufacturing and supply chain management** . Use graph patterns for efficient impact analysis, cost rollups, and compliance checks by modeling parts, suppliers, orders, availability, and defects in the graph.
 
-- **Health care** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
+- **Healthcare** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
 
 - **Transportation** . Model places, connections, distances, and costs in the graph, and then use graph queries to find the optimal route.
 

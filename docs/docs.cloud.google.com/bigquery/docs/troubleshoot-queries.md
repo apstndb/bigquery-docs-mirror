@@ -549,7 +549,7 @@ Error string: `Transaction is aborted due to concurrent update against table [ta
 
 This error can occur when two different mutating DML statements attempt to concurrently update the same table. For example, suppose you start a [transaction](https://docs.cloud.google.com/bigquery/docs/transactions) in a session that contains a mutating DML statement followed by an error. If there is no exception handler, then BigQuery automatically rolls back the transaction when the session ends, which takes up to 24 hours. During this time, other attempts to run a mutating DML statement on the table fail.
 
-To address this error, [list your active sessions](https://docs.cloud.google.com/bigquery/docs/sessions#list-sessions) and check whether any of them contains a query job with status `ERROR` that ran a mutating DML statement on the table. Then, terminate that session.
+To address this error, [list your active sessions](https://docs.cloud.google.com/bigquery/docs/sessions#list-sessions) and check whether any of them contains a query job with status `ERROR` that ran a mutating DML statement on the table. Roll back the uncommitted transaction by running `ROLLBACK TRANSACTION;` in that session, or [terminate that session](https://docs.cloud.google.com/bigquery/docs/sessions#terminate-session) by running `CALL BQ.ABORT_SESSION( `` SESSION_ID `` );` . To prevent failed multi-statement transactions from holding table locks until the session expires, include an `EXCEPTION WHEN ERROR THEN ROLLBACK TRANSACTION;` handler in your [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions#transaction_scope) .
 
 ## Error 412: The job references a table that belongs to a failover dataset
 

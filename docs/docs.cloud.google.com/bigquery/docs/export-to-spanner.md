@@ -576,7 +576,7 @@ To optimize the export of records from BigQuery to Spanner, you can try the foll
   FROM my_dataset.sales_export AS s;
   ```
 
-- To prevent long running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
+- To prevent long-running jobs, export data by partition. Shard your BigQuery data using a partition key, such as a timestamp in your query:
 
   ```
   EXPORT DATA OPTIONS (

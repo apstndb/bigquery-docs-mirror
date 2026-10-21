@@ -110,7 +110,7 @@ To use Colab notebook runtime templates when scheduling pipelines, you need the 
 
 You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
-> **Note:** For pipelines stored in BigQuery Studio Git folders, scheduling is managed through [Dataform eployments](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy-git-pipelines) .
+> **Note:** For pipelines stored in BigQuery Studio Git folders, scheduling is managed through [Dataform deployments](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy-git-pipelines) .
 
 To create a pipeline schedule, follow these steps:
 

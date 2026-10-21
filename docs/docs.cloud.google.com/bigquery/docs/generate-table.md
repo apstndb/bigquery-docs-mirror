@@ -2,72 +2,81 @@
 name: documents/docs.cloud.google.com/bigquery/docs/generate-table
 uri: https://docs.cloud.google.com/bigquery/docs/generate-table
 title: Generate structured data by using the AI.GENERATE_TABLE function
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Generate structured data by using the AI.GENERATE_TABLE function and a Gemini model in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Generate structured data by using the AI.GENERATE_TABLE function
+The [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) lets you extract structured attributes from unstructured text into typed table columns in BigQuery. In this tutorial, you create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over a Gemini model and extract sentiment and keywords from a public dataset of movie reviews.
 
-This document shows you how to generate structured data using a Gemini model, and then format the model's response using a SQL schema.
+## Objectives
 
-You do this by completing the following tasks:
+- Create a dataset and a Cloud resource connection.
+- Grant permissions to the connection's service account.
+- Create a BigQuery ML remote model.
+- Generate structured data from unstructured text by using the `AI.GENERATE_TABLE` function.
 
-- Creating a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
-- Using the model with the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) to generate structured data based on data from [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+## Costs
 
-## Required roles
+In this document, you use the following billable components of Google Cloud:
 
-To create a remote model and use the `AI.GENERATE_TABLE` function, you need the following Identity and Access Management (IAM) roles:
+- **BigQuery** : You incur costs for the data that you process in BigQuery.
+- **Gemini Enterprise Agent Platform** : You incur costs for calls to the Agent Platform model.
 
-- Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on your project.
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-- Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` ) on your project.
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-  If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
-
-- Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` ) on the project that contains the Gemini Enterprise Agent Platform endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
-
-- Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` ) on your project.
-
-These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-- Create a dataset: `bigquery.datasets.create`
-- Create, delegate, and use a connection: `bigquery.connections.*`
-- Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
-- Create a model and run inference:
-  - `bigquery.jobs.create`
-  - `bigquery.models.create`
-  - `bigquery.models.getData`
-  - `bigquery.models.updateData`
-  - `bigquery.models.updateMetadata`
-- Query table data: `bigquery.tables.getData`
-
-You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) and [Agent Platform pricing](https://cloud.google.com/vertex-ai/generative-ai/pricing) .
 
 ## Before you begin
 
-1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
+### Console
 
-    **Roles required to select or create a project**
+1.  Make sure that you have the following role or roles on the project: **BigQuery Admin** , **Project IAM Admin**
 
-    - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-    - **Create a project** : To create a project, you need the Project Creator role ( `roles/resourcemanager.projectCreator` ), which contains the `resourcemanager.projects.create` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    #### Check for the roles
 
-    > **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    1.  In the Google Cloud console, go to the **IAM** page.
 
-2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+    2.  Select the project.
 
-3.  Enable the BigQuery, BigQuery Connection, and Agent Platform API APIs, if any are not already enabled.
+    3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
 
-    **Roles required to enable APIs**
+    4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
 
-    To enable APIs, you need the `serviceusage.services.enable` permission. If you created the project, then you likely already have this permission through the Owner role ( `roles/owner` ). Otherwise, you can get this permission through the Service Usage Admin role ( `roles/serviceusage.serviceUsageAdmin` ). [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    #### Grant the roles
+
+    1.  In the Google Cloud console, go to the **IAM** page.
+
+    2.  Select the project.
+
+    3.  Click person_add **Grant access** .
+
+    4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
+
+    5.  Click **Select a role** , then search for the role.
+
+    6.  To grant additional roles, click add **Add another role** and add each additional role.
+
+    7.  Click **Save** .
+
+### gcloud
+
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
+
+    ```
+    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : Your project ID.
+    - `USER_IDENTIFIER` : The identifier for your user account. For example, `myemail@example.com` .
+    - `ROLE` : The IAM role that you grant to your user account.
 
 ## Create a dataset
 
-Create a BigQuery dataset to contain your resources:
+To create a BigQuery dataset, select one of the following options:
 
 ### Console
 
@@ -79,33 +88,32 @@ Create a BigQuery dataset to contain your resources:
 
     If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click your project name.
+3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  On the **Datasets** page, click add **Create dataset** .
 
-5.  On the **Create dataset** page, do the following:
+5.  In the **Create dataset** pane, do the following:
 
-    1.  For **Dataset ID** , type a name for the dataset.
+    - For **Dataset ID** , enter `bqml_tutorial` .
 
-    2.  For **Location type** , select **Region** or **Multi-region** .
+    - For **Data location** , select **US** .
 
-        - If you selected **Region** , then select a location from the **Region** list.
-        - If you selected **Multi-region** , then select **US** or **Europe** from the **Multi-region** list.
+    Leave the remaining default settings as they are.
 
-    3.  Click **Create dataset** .
+6.  Click **Create dataset** .
 
 ### bq
 
-1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
 
     ```
-    bq --location=LOCATION mk -d DATASET_ID
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
     ```
-
-    Replace the following:
-
-    - `LOCATION` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-    - `DATASET_ID` : the ID of the dataset that you're creating.
 
 2.  Confirm that the dataset was created:
 
@@ -113,11 +121,21 @@ Create a BigQuery dataset to contain your resources:
     bq ls
     ```
 
+### API
+
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
+
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
+
 ## Create a connection
 
-Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) for the remote model to use, and get the connection's service account. Create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the dataset that you created in the previous step.
-
-You can skip this step if you either have a default connection configured, or you have the BigQuery Admin role.
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the `US` multiregion, where you created the dataset. Then get the connection's service account.
 
 Select one of the following options:
 
@@ -214,9 +232,9 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [Vertex AI quickstart using client libraries](https://docs.cloud.google.com/vertex-ai/docs/start/client-libraries) . For more information, see the [Vertex AI Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/aiplatform/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+To authenticate to Vertex AI, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```python
 import google.api_core.exceptions
@@ -268,9 +286,9 @@ def create_connection(
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [Vertex AI quickstart using client libraries](https://docs.cloud.google.com/vertex-ai/docs/start/client-libraries) . For more information, see the [Vertex AI Node.js API reference documentation](https://docs.cloud.google.com/nodejs/docs/reference/aiplatform/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+To authenticate to Vertex AI, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```javascript
 const {ConnectionServiceClient} =
@@ -417,183 +435,160 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 > **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
 
-### Give the service account access
+## Grant permissions to the connection's service account
 
-Grant the connection's service account the Agent Platform User role.
-
-If you plan to specify the endpoint as a URL when you create the remote model— for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-3.5-flash-lite'` — grant this role in the same project you specify in the URL.
-
-If you plan to specify the endpoint by using the model name when you create the remote model, for example `endpoint = 'gemini-3.5-flash-lite'` , grant this role in the same project where you plan to create the remote model.
-
-Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
+Grant the connection's service account the Agent Platform User ( `roles/aiplatform.user` ) role. You must grant this role in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/generate-table#before_you_begin) section. Granting the role in a different project results in the error `bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 
 To grant the role, follow these steps:
 
-### Console
-
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
-
-    The **Add principals** dialog opens.
+2.  Click person_add **Grant Access** .
 
 3.  In the **New principals** field, enter the service account ID that you copied earlier.
 
-4.  In the **Select a role** field, search for **Agent Platform User** .
+4.  In the **Select a role** field, search for the **Agent Platform User role** .
 
 5.  Click **Save** .
 
-### gcloud
+## Create the remote model
 
-Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) .
-
-```
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
-```
-
-Replace the following:
-
-- `PROJECT_NUMBER` : your project number
-- `MEMBER` : the service account ID that you copied earlier
-
-## Create a BigQuery ML remote model
+Use the [`CREATE MODEL`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Agent Platform model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
+2.  In the query editor, run the following statement:
 
     ```
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
+    CREATE OR REPLACE MODEL `bqml_tutorial.gemini_model`
+      REMOTE WITH CONNECTION `LOCATION.CONNECTION_ID`
+      OPTIONS (ENDPOINT = 'gemini-3.5-flash-lite');
     ```
 
     Replace the following:
 
-    - `PROJECT_ID` : your project ID
-
-    - `DATASET_ID` : the ID of the dataset to contain the model. This dataset must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the connection that you are using
-
-    - `MODEL_NAME` : the name of the model
-
-    - `REGION` : the region used by the connection
+    - `LOCATION` : the connection location
 
     - `CONNECTION_ID` : the ID of your BigQuery connection
 
       When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`*
 
-    - `ENDPOINT` : the name of the Gemini model to use. For supported Gemini models, you can specify the [global endpoint](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#global-endpoint) to improve availability. For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+    The query takes several seconds to complete, after which the model `gemini_model` appears in the `bqml_tutorial` dataset. There are no query results.
 
 ## Generate structured data
 
-Generate structured data by using the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) with a remote model, and using prompt data from a table column:
+Extract structured sentiment and keywords from movie reviews by using the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) and the remote model:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, run the following statement to extract sentiment and keywords from five movie reviews:
+
+    ```
+    SELECT
+      movie_id,
+      sentiment,
+      keywords
+    FROM
+      AI.GENERATE_TABLE(
+        MODEL `bqml_tutorial.gemini_model`,
+        (
+          SELECT
+            CONCAT(
+              """Analyze the following movie review. Extract a sentiment
+              (positive or negative) and up to 3 keywords: """,
+              review) AS prompt,
+            movie_id
+          FROM
+            `bigquery-public-data.imdb.reviews`
+          LIMIT 5
+        ),
+        STRUCT(
+          "sentiment STRING, keywords ARRAY<STRING>" AS output_schema));
+    ```
+
+    The output is similar to the following:
+
+    ```console
+    +-----------+-----------+----------------------------------------------+
+    | movie_id  | sentiment | keywords                                     |
+    +-----------+-----------+----------------------------------------------+
+    | tt0369053 | positive  | ["cinematography", "performances", "comedy"] |
+    | tt0328400 | negative  | ["disregarded", "disappointing", "poorly"]   |
+    | ...       | ...       | ...                                          |
+    +-----------+-----------+----------------------------------------------+
+    ```
+
+## Clean up
+
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
+
+### Delete the project
+
+> **Caution** : Deleting a project has the following effects:
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+
+Delete a Google Cloud project:
 
 ```
-SELECT *
-FROM AI.GENERATE_TABLE(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  [TABLE `PROJECT_ID.DATASET_ID.TABLE_NAME` / (PROMPT_QUERY)],
-  STRUCT(TOKENS AS max_output_tokens, TEMPERATURE AS temperature,
-  TOP_P AS top_p, STOP_SEQUENCES AS stop_sequences,
-  SAFETY_SETTINGS AS safety_settings,
-  OUTPUT_SCHEMA AS output_schema)
-);
+gcloud projects delete PROJECT_ID
 ```
 
-Replace the following:
+### Delete individual resources
 
-- `PROJECT_ID` : your project ID.
+If you want to reuse the project, then delete the resources that you created for the tutorial:
 
-- `DATASET_ID` : the ID of the dataset that contains the model.
+### Console
 
-- `MODEL_NAME` : the name of the model.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-- `TABLE_NAME` : the name of the table that contains the prompt. This table must have a column that's named `prompt` , or you can use an alias to use a differently named column.
+2.  Delete the `bqml_tutorial` dataset. Deleting the dataset also deletes the remote model.
 
-- `PROMPT_QUERY` : the GoogleSQL query that generates the prompt data. The prompt value itself can be pulled from a column, or you can specify it as a struct value with an arbitrary number of string and column name subfields. For example, `SELECT ('Analyze the sentiment in ', feedback_column, 'using the following categories: positive, negative, neutral') AS prompt` .
+    1.  In the **Explorer** pane, expand your project and click **Datasets** .
 
-- `TOKENS` : an `INT64` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `[1,8192]` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `128` .
+    2.  In the **Datasets** list, click the `bqml_tutorial` dataset.
 
-- `TEMPERATURE` : a `FLOAT64` value in the range `[0.0,2.0]` that controls the degree of randomness in token selection. The default is `1.0` .
+    3.  In the details pane, click delete **Delete** .
 
-  Lower values for `temperature` are good for prompts that require a more deterministic and less open-ended or creative response, while higher values for `temperature` can lead to more diverse or creative results. A value of `0` for `temperature` is deterministic, meaning that the highest probability response is always selected.
+    4.  In the **Delete dataset** dialog, click **Delete** .
 
-- `TOP_P` : a `FLOAT64` value in the range `[0.0,1.0]` helps determine the probability of the tokens selected. Specify a lower value for less random responses and a higher value for more random responses. The default is `0.95` .
+3.  Delete the connection.
 
-- `STOP_SEQUENCES` : an `ARRAY<STRING>` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
+    1.  In the **Explorer** pane, expand your project and click **Connections** .
 
-- `SAFETY_SETTINGS` : an `ARRAY<STRUCT<STRING AS category, STRING AS threshold>>` value that configures content safety thresholds to filter responses. The first element in the struct specifies a harm category, and the second element in the struct specifies a corresponding blocking threshold. The model filters out content that violate these settings. You can only specify each category once. For example, you can't specify both `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_MEDIUM_AND_ABOVE' AS threshold)` and `STRUCT('HARM_CATEGORY_DANGEROUS_CONTENT' AS category, 'BLOCK_ONLY_HIGH' AS threshold)` . If there is no safety setting for a given category, the `BLOCK_MEDIUM_AND_ABOVE` safety setting is used.
+    2.  In the **Connections** list, click the connection that you created.
 
-  Supported categories are as follows:
+    3.  In the details pane, click delete **Delete** .
 
-  - `HARM_CATEGORY_HATE_SPEECH`
-  - `HARM_CATEGORY_DANGEROUS_CONTENT`
-  - `HARM_CATEGORY_HARASSMENT`
-  - `HARM_CATEGORY_SEXUALLY_EXPLICIT`
+    4.  In the **Delete connection** dialog, enter `delete` to confirm deletion.
 
-  Supported thresholds are as follows:
+    5.  Click **Delete** .
 
-  - `BLOCK_NONE` ( [Restricted](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how_to_configure_content_filters) )
-  - `BLOCK_LOW_AND_ABOVE`
-  - `BLOCK_MEDIUM_AND_ABOVE` (Default)
-  - `BLOCK_ONLY_HIGH`
-  - `HARM_BLOCK_THRESHOLD_UNSPECIFIED`
+### gcloud
 
-  For more information, see [Harm categories](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#harm_categories) and [How to configure content filters](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how_to_configure_content_filters) .
+1.  Delete the `bqml_tutorial` dataset and the remote model:
 
-- `OUTPUT_SCHEMA` : a `STRING` value that specifies the format for the model's response. The `output_schema` value must be a SQL schema definition, similar to that used in the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . The following data types are supported:
+    ```
+    bq rm --dataset --recursive bqml_tutorial
+    ```
 
-  - `INT64`
-  - `FLOAT64`
-  - `BOOL`
-  - `STRING`
-  - `ARRAY`
-  - `STRUCT`
+2.  Delete the connection:
 
-  When using the `output_schema` argument to generate structured data based on prompts from a table, it is important to understand the prompt data in order to specify an appropriate schema.
+    ```
+    bq rm --connection <var>PROJECT_ID</var>.<var>LOCATION</var>.<var>CONNECTION_ID</var>
+    ```
 
-  For example, say you are analyzing movie review content from a table that has the following fields:
+    Replace the following:
 
-  - movie_id
-  - review
-  - prompt
+    - `<var>PROJECT_ID</var>` : your Google Cloud project ID
+    - `<var>LOCATION</var>` : the connection location
+    - `<var>CONNECTION_ID</var>` : the connection ID
 
-  Then you might create prompt text by running a query similar to the following:
+## What's next
 
-  ```
-  UPDATE mydataset.movie_review
-  SET prompt = CONCAT('Extract the key words and key sentiment from the text below: ', review)
-  WHERE review IS NOT NULL;
-  ```
-
-  And you might specify a `output_schema` value similar to `"keywords ARRAY<STRING>, sentiment STRING" AS output_schema` .
-
-### Examples
-
-The following example shows a request that takes prompt data from a table and provides a SQL schema to format the model's response:
-
-```
-SELECT
-*
-FROM
-AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
-  TABLE `mydataset.mytable`,
-  STRUCT("keywords ARRAY<STRING>, sentiment STRING" AS output_schema));
-```
-
-The following example shows a request that takes prompt data from a query and provides a SQL schema to format the model's response:
-
-```
-SELECT *
-FROM
-  AI.GENERATE_TABLE(
-    MODEL `mydataset.gemini_model`,
-    (
-      SELECT
-        'John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033. He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.'
-          AS prompt
-    ),
-    STRUCT("address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>, weight_in_pounds FLOAT64"
-        AS output_schema, 8192 AS max_output_tokens));
-```
+- Learn more about the [`AI.GENERATE_TABLE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
+- Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Learn how to [choose a text generation function](https://docs.cloud.google.com/bigquery/docs/choose-text-generation-function) .

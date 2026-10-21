@@ -643,7 +643,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>Domo's Business Cloud is the world's first customizable platform that enables you to identify and act on strategic opportunities in real time. With Domo you can bring all your people together around your Google Cloud data - with Domo's pre-built BigQuery, Cloud Storage and SQL connectors - for seamless collaboration and real-time business insights.</td>
+<td>Domo's Business Cloud is the world's first customizable platform that enables you to identify and act on strategic opportunities in real time. With Domo you can bring all your people together around your Google Cloud data - with Domo's prebuilt BigQuery, Cloud Storage and SQL connectors - for seamless collaboration and real-time business insights.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
@@ -1386,11 +1386,11 @@ This document lists the partner solutions that have been validated as part of th
 
 ### PuppyGraph
 
-| **Solution**           | [PuppyGraph](https://www.puppygraph.com/)                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Category**           | BI, ML, & Advanced Analytics                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Description**        | PuppyGraph is the first and only graph analytics engine in the market, empowering companies to transform existing relational data stores into a unified graph model in under 10 minutes, bypassing traditional graph database costs, latency, and maintenance hurdles. Capable of scaling with petabytes of data and executing complex 10-hop queries in seconds, PuppyGraph supports use cases from enhancing LLMs with knowledge graphs to fraud detection, cybersecurity and more. |
-| **Partner references** | [Connecting to BigQuery](https://docs.puppygraph.com/connecting/connecting-to-bigquery/)                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Solution**           | [PuppyGraph](https://www.puppygraph.com/)                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Category**           | BI, ML, & Advanced Analytics                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Description**        | PuppyGraph is the first and only graph analytics engine in the market, empowering companies to transform existing relational datastores into a unified graph model in under 10 minutes, bypassing traditional graph database costs, latency, and maintenance hurdles. Capable of scaling with petabytes of data and executing complex 10-hop queries in seconds, PuppyGraph supports use cases from enhancing LLMs with knowledge graphs to fraud detection, cybersecurity and more. |
+| **Partner references** | [Connecting to BigQuery](https://docs.puppygraph.com/connecting/connecting-to-bigquery/)                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### Pxdata.ai
 
@@ -2711,7 +2711,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td><p>SecuPi offers a Data Centric, Privacy, Governance and Security Platform and helps protect, monitor and manage access to sensitive data over on-premise and cloud platforms.</p></td>
+<td><p>SecuPi offers a Data Centric, Privacy, Governance and Security Platform and helps protect, monitor and manage access to sensitive data over on-premises and cloud platforms.</p></td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
@@ -3715,7 +3715,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>Automic Automation is a market-leading enterprise automation solution benefitting from over 25 years of evolution with the scale, agility, speed, and reliability required by the most demanding Fortune 100 organizations. From a single unified platform and a large catalog of integrations for cloud services, data pipeline tools, ERP solutions, and more, Automic Automation unifies automation from mainframe to microservices, simplifies workload orchestration, and boosts visibility across hybrid cloud environments.</td>
+<td>Automic Automation is a market-leading enterprise automation solution benefiting from over 25 years of evolution with the scale, agility, speed, and reliability required by the most demanding Fortune 100 organizations. From a single unified platform and a large catalog of integrations for cloud services, data pipeline tools, ERP solutions, and more, Automic Automation unifies automation from mainframe to microservices, simplifies workload orchestration, and boosts visibility across hybrid cloud environments.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
@@ -4741,7 +4741,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>A cloud-based ELT (Extract, Load, Transform) platform that enables no-code data pipeline creation. It offers a vast library of pre-built connectors to integrate data from various business applications with data warehouses.</td>
+<td>A cloud-based ELT (Extract, Load, Transform) platform that enables no-code data pipeline creation. It offers a vast library of prebuilt connectors to integrate data from various business applications with data warehouses.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>
@@ -5178,7 +5178,7 @@ This document lists the partner solutions that have been validated as part of th
 </tr>
 <tr class="even">
 <td><strong>Description</strong></td>
-<td>Stelo is an enterprise-class Change Data Capture (CDC) tool that delivers data dynamically from anywhere to anywhere for BI analysis, reporting, and managing business operations and supply chains. Stelo is designed to future-proof data management infrastructure by skillfully mirroring and streaming data into both relational and No-SQL environments without any complex programing.</td>
+<td>Stelo is an enterprise-class Change Data Capture (CDC) tool that delivers data dynamically from anywhere to anywhere for BI analysis, reporting, and managing business operations and supply chains. Stelo is designed to future-proof data management infrastructure by skillfully mirroring and streaming data into both relational and NoSQL environments without any complex programming.</td>
 </tr>
 <tr class="odd">
 <td><strong>Partner references</strong></td>

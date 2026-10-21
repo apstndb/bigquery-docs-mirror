@@ -28,6 +28,16 @@ Colab Enterprise notebooks offer the following benefits:
 - **Integrated visualizations:** use interactive DataFrame visualizations or libraries like `matplotlib` and `seaborn` directly in your workflow.
 - **SQL-Python interoperability:** execute SQL in cells that reference Python variables.
 
+### Data Science Agent
+
+The [Colab Enterprise Data Science Agent (DSA)](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent) lets you automate exploratory data analysis, perform machine learning tasks, and deliver insights all within a Colab Enterprise notebook. You can use the DSA for:
+
+- **Machine learning workflows:** engineer new features, split data into training, validation, and testing datasets, and handle the full lifecycle of model training, optimization, evaluation, and inference.
+- **Large-scale data processing:** use BigQuery ML, BigQuery DataFrames, or Managed Service for Apache Spark to perform distributed data processing on large datasets.
+- **Generating a plan:** generate and modify a plan to complete a particular task using common tools such as Python, SQL, Managed Service for Apache Spark, and BigQuery DataFrames.
+- **Data exploration, cleaning, and wrangling:** explore a dataset to understand its structure, identify potential issues like missing values and outliers, and examine the distribution of key variables. You can also convert categorical features into numerical representations using techniques like one-hot encoding.
+- **Data analysis and visualization:** analyze the relationships between different variables, calculate correlations, and create visualizations such as histograms, box plots, scatter plots, and bar charts.
+
 ### Understand cells
 
 A notebook is made up of cells that you can edit. The following types of cells are supported in Colab Enterprise notebooks:

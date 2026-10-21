@@ -201,7 +201,7 @@ This design is different from a conventional data mart approach because decentra
 
 The project configuration in figure 5 includes the following projects:
 
-- **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations admininistration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
+- **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
 - **Organizational unit data projects** : the owners of self-managed data marts within the broader organization. The core governance project manages restricted scope for the organizational unit data projects.
 - **Analytics team projects** : the projects that are used by consumers of the data marts. These projects use their own provisioned infrastructure and slots to access and process data within the data mart.
 

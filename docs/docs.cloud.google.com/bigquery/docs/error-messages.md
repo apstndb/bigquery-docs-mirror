@@ -265,7 +265,7 @@ If the uptime is below the value presented in the SLA, [contact support](https:/
 
 ## Authentication errors
 
-Errors thrown by the OAuth token generation system return the following JSON object, as defined by the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-5.2) .
+Errors thrown by the OAuth token generation system return the following JSON object, as defined by the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749#section-5.2) .
 
 `{"error" : "_description_string_"}`
 

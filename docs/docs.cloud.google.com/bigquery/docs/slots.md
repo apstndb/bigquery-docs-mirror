@@ -70,7 +70,7 @@ In the event of contention in a region, Standard edition and on-demand capacity 
 
 BigQuery allocates slot capacity within a single reservation using an algorithm called *fair scheduling* .
 
-The BigQuery scheduler enforces the equal sharing of slots among projects with running queries within a reservation, and then within jobs of a given project. The scheduler provides eventual fairness. During short periods, some jobs might get a disproportionate share of slots, but the scheduler eventually corrects this. The goal of the scheduler is to find a balance between aggressively evicting running tasks (which results in wasting slot time) and being too lenient (which results in jobs with long running tasks getting a disproportionate share of the slot time).
+The BigQuery scheduler enforces the equal sharing of slots among projects with running queries within a reservation, and then within jobs of a given project. The scheduler provides eventual fairness. During short periods, some jobs might get a disproportionate share of slots, but the scheduler eventually corrects this. The goal of the scheduler is to find a balance between aggressively evicting running tasks (which results in wasting slot time) and being too lenient (which results in jobs with long-running tasks getting a disproportionate share of the slot time).
 
 Fair scheduling ensures that every query has access to all available slots at any time, and capacity is dynamically and automatically re-allocated among active queries as each query's capacity demands change. Queries complete and new queries get submitted for execution under the following conditions:
 

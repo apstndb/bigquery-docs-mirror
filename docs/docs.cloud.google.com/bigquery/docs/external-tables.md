@@ -10,14 +10,14 @@ data_source: docs.cloud.google.com
 
 This document describes how to work with data stored outside of BigQuery in external tables. To work with external data sources, you can also use [External datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro#external_datasets) .
 
-External tables let you query structured data in external data stores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
+External tables let you query structured data in external datastores. To query an external table, you must have permissions to both the external table and the external data source. For example, to query an external table that uses a data source in Cloud Storage, you must have the following permissions:
 
 - `bigquery.tables.getData`
 - `bigquery.jobs.create`
 - `storage.buckets.get`
 - `storage.objects.get`
 
-## Supported data stores
+## Supported datastores
 
 You can use non-BigLake external tables with the following datastores:
 

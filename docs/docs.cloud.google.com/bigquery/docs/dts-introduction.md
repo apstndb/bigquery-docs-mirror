@@ -8,21 +8,9 @@ data_source: docs.cloud.google.com
 
 # Introduction to the BigQuery Data Transfer Service
 
-The BigQuery Data Transfer Service automates data movement into [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) on a scheduled, managed basis. Your analytics team can lay the foundation for a BigQuery data warehouse without writing a single line of code.
+The BigQuery Data Transfer Service lets you automate scheduled, managed data transfers into [BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) . After you configure a data transfer, the BigQuery Data Transfer Service automatically loads data into BigQuery on a regular basis. You can also initiate data backfills to recover from outages or gaps, perform [dataset copies](https://docs.cloud.google.com/bigquery/docs/copying-datasets) , and run [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) . You can't use BigQuery Data Transfer Service to transfer data out of BigQuery.
 
-You can access the BigQuery Data Transfer Service using the:
-
-- [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui)
-- [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference)
-- [BigQuery Data Transfer Service API](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest)
-
-> **Tip:** You can also use the **Pipelines & Connections** page to create a transfer using a [streamlined workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-
-After you configure a data transfer, the BigQuery Data Transfer Service automatically loads data into BigQuery on a regular basis. You can also initiate data backfills to recover from any outages or gaps. You cannot use the BigQuery Data Transfer Service to transfer data out of BigQuery.
-
-In addition to loading data into BigQuery, BigQuery Data Transfer Service is used for two BigQuery operations: [dataset copies](https://docs.cloud.google.com/bigquery/docs/copying-datasets) and [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
-
-> **Note:** Subscribe to the [BigQuery DTS announcements group](https://groups.google.com/g/bigquery-dts-announcements) to receive announcements related to the BigQuery Data Transfer Service.
+To configure and manage transfers, you can use the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) , the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) , or the [BigQuery Data Transfer Service API](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest) . The **Pipelines & Connections** page also provides a [streamlined workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) ( [preview](https://cloud.google.com/products/#product-launch-stages) ) for creating transfers. To receive service updates, subscribe to the [BigQuery DTS announcements group](https://groups.google.com/g/bigquery-dts-announcements) .
 
 ## Supported data sources
 
