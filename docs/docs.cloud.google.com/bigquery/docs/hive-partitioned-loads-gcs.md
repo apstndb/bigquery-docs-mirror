@@ -2,15 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs
 uri: https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs
 title: Load externally partitioned data
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to load externally partitioned data from Cloud Storage that uses a Hive partitioning layout into BigQuery.
 data_source: docs.cloud.google.com
 ---
 
 # Load externally partitioned data
 
-BigQuery can load data that is stored in Cloud Storage using a Hive partitioning layout. *Hive partitioning* means that the external data is organized into multiple files, with a naming convention to separate files into different partitions. For more information, see [Supported data layouts](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#supported_data_layouts) .
+BigQuery lets you load data from Cloud Storage that uses a Apache Hive partitioning layout and include the partition keys as columns in your table. *Hive partitioning* means that the external data is organized into multiple files, with a naming convention that separates files into different partitions.
 
-By default, the data is not partitioned in BigQuery after you load it, unless you explicitly create a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
+By default, the data is not partitioned in BigQuery after you load it, unless you explicitly create a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) . For more information, see [Supported data layouts](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs#supported_data_layouts) .
 
 ## Load Hive partitioned data
 

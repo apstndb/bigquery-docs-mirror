@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Export data to Spanner (reverse ETL)
 
-This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to Spanner. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from BigQuery data sources, including [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table.
+A reverse extract, transform, and load (reverse ETL) workflow from BigQuery to Spanner lets you combine analytic capabilities in BigQuery with low latency and high throughput in Spanner. You can serve data to application users without exhausting quotas and limits on BigQuery.
 
-This reverse ETL workflow combines analytic capabilities in BigQuery with low latency and high throughput in Spanner. This workflow lets you serve data to application users without exhausting quotas and limits on BigQuery.
+To set up this workflow, you use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from BigQuery data sources, including [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table.
 
 ## Before you begin
 

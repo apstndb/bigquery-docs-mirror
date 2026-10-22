@@ -66,25 +66,12 @@ For more information about viewing and managing quotas, see [View and manage quo
 
 ## Returned error messages
 
-After you set a custom quota, BigQuery returns an error when you exceed it:
+After you set a custom quota, BigQuery returns a [`quotaExceeded`](https://docs.cloud.google.com/bigquery/docs/error-messages#errortable) error when you exceed it. The message names the quota that you exceeded: `QueryUsagePerDay` for a project-level custom quota, or `QueryUsagePerUserPerDay` for a user-level custom quota:
 
-- If you exceed a project-level custom quota, BigQuery returns the [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error:
+- `Custom quota exceeded: Your usage exceeded the custom quota for QueryUsagePerDay, which is set by your administrator.`
+- `Custom quota exceeded: Your usage exceeded the custom quota for QueryUsagePerUserPerDay, which is set by your administrator.`
 
-  ```
-  Custom quota exceeded: Your usage exceeded the custom quota for
-  QueryUsagePerDay, which is set by your administrator. For more information,
-  see https://cloud.google.com/bigquery/cost-controls
-  ```
-
-- If the user exceeds a user-level custom quota, BigQuery returns a [`usageQuotaExceeded`](https://docs.cloud.google.com/bigquery/troubleshooting-errors#quotaExceeded) error with a different error message:
-
-  ```
-  Custom quota exceeded: Your usage exceeded the custom quota for
-  QueryUsagePerUserPerDay, which is set by your administrator. For more
-  information, see https://cloud.google.com/bigquery/cost-controls
-  ```
-
-You can run your query from another project that has access to your datasets and that doesn't have a custom quota or hasn't yet exceeded it.
+To diagnose and resolve these errors, see [Troubleshoot custom daily query quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-custom-daily-query-quota) .
 
 ## Example
 

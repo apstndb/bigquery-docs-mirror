@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Export query results to a file
 
-This document describes how to save query results as a file, such as CSV or JSON.
+You can save BigQuery query results to a local file, Google Drive, Google Sheets, or Cloud Storage so that you can share the results or analyze them in other tools. For local files, you can choose formats such as CSV and newline-delimited JSON.
 
 ## Limitations
 

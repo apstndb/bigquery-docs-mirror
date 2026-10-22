@@ -2,21 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore
 uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore
 title: Load data from Datastore exports
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to load Datastore export data from Cloud Storage into a new or existing BigQuery table for analysis.
 data_source: docs.cloud.google.com
 ---
 
 # Load data from Datastore exports
 
-BigQuery supports loading data from [Datastore](https://docs.cloud.google.com/datastore) exports created using the Datastore managed import and export service. You can use the managed import and export service to export Datastore entities into a Cloud Storage bucket. You can then load the export into BigQuery as a table.
+BigQuery lets you load [Datastore](https://docs.cloud.google.com/datastore) entities from a Cloud Storage bucket into a BigQuery table for analysis. After you export entities by using the Datastore managed import and export service, you can load all entity data or select specific properties to import.
 
-To learn how to create a Datastore export file, see [Exporting and importing entities](https://docs.cloud.google.com/datastore/docs/export-import-entities) in the Datastore documentation. For information on scheduling exports, see [Scheduling an export](https://docs.cloud.google.com/datastore/docs/schedule-export) .
-
-> **Note:** If you intend to load a Datastore export into BigQuery, you must specify an entity filter in your [export command](https://docs.cloud.google.com/datastore/docs/export-import-entities#exporting_entities) . Data exported without specifying an entity filter cannot be loaded into BigQuery.
-
-You can control which properties BigQuery should load by setting the [`projectionFields` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) in the API or by using the `--projection_fields` flag in the bq command-line tool.
-
-If you prefer to skip the loading process, you can query the export directly by setting it up as an external data source. For more information, see [External data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
+To load a Datastore export into BigQuery, you must specify an entity filter in your [export command](https://docs.cloud.google.com/datastore/docs/export-import-entities#exporting_entities) . For more information about creating and scheduling exports, see [Exporting and importing entities](https://docs.cloud.google.com/datastore/docs/export-import-entities) and [Scheduling an export](https://docs.cloud.google.com/datastore/docs/schedule-export) . To query export files directly without loading them into BigQuery, see [External data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
 ## Limitations
 
@@ -235,7 +229,7 @@ Set the following properties to load data from the [API](https://docs.cloud.goog
 
 ## Datastore options
 
-To change how BigQuery parses Datastore export data, specify the following option:
+You can control which properties BigQuery loads and how it parses Datastore export data by setting the [`projectionFields` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.projection_fields) in the API or by using the `--projection_fields` flag in the bq command-line tool:
 
 | Console option | bq tool flag          | BigQuery API property                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                         |
 |----------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

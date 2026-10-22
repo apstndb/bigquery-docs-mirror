@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Stream sharing with Pub/Sub
 
-You can share Pub/Sub topics through BigQuery sharing (formerly Analytics Hub) to curate and distribute a library of streaming data across multiple internal and external organizational boundaries. Real-time streaming data is shared using BigQuery sharing exchanges and listings, which lets you logically categorize and group large sets of Pub/Sub topics and provision access at scale.
+BigQuery sharing (formerly Analytics Hub) lets you share Pub/Sub topics to curate and distribute real-time streaming data across internal and external organizations. Using data exchanges and listings, you can categorize and group large sets of Pub/Sub topics and provision access at scale.
+
+## Use cases
 
 You can share streaming data to do the following:
 
@@ -427,4 +429,4 @@ For shared topics from projects with VPC Service Controls perimeters, set the ap
 - Learn about [managing your listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
 - Learn about [subscribing to listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
 - Learn about [monitoring your Pub/Sub resources](https://docs.cloud.google.com/pubsub/docs/monitoring) .
-- Learn about [configuring VPC Service Controls for BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .
+- Learn about [configuring VPC Service Controls rules for BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .

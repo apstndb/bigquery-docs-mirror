@@ -42,7 +42,7 @@ To enable the Analytics Hub API for your Google Cloud project, select one of the
 
 3.  If the API isn't already enabled, click **Enable** .
 
-### bq
+### gcloud
 
 Run the [`gcloud services enable` command](https://docs.cloud.google.com/sdk/gcloud/reference/services/enable) :
 
@@ -107,7 +107,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 As a query template creator, you can do the following:
 
 - [Add a listing to a data clean room](https://docs.cloud.google.com/bigquery/docs/query-templates#add-listing-to-dcr) .
-- [Add an existing TVF to a data clean room](https://docs.cloud.google.com/bigquery/docs/query-templates#add-existing-tvf-to-dcr)
+- [Add an existing TVF to a data clean room](https://docs.cloud.google.com/bigquery/docs/query-templates#add-existing-tvf-to-dcr) .
 - [Create a query template](https://docs.cloud.google.com/bigquery/docs/query-templates#create-query-template) .
 - [Update a query template](https://docs.cloud.google.com/bigquery/docs/query-templates#update-query-template) .
 - [Submit a query template for review](https://docs.cloud.google.com/bigquery/docs/query-templates#submit-query-template) .
@@ -146,8 +146,8 @@ Use the [`projects.locations.dataExchanges.listings.create` method](https://docs
 The following example shows how to call the `projects.locations.dataExchanges.listings.create` method by using the `curl` command:
 
 ```
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}]},"displayName":"LISTING_NAME"}'
+curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d \
+    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/routines/ROUTINE_ID"}]},"displayName":"LISTING_NAME"}'
 ```
 
 Replace the following:
@@ -208,11 +208,12 @@ You can [update the query template](https://docs.cloud.google.com/bigquery/docs/
 The following example shows how to create a query template by using the `curl` command:
 
 ```
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d
-  'query_template {
-  display_name: "DISPLAY_NAME",
-  routine {
-    definition_body: "QUERY_TEMPLATE_ID(TVF arguments) AS (TVF_DEFINITION)"
+curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID -d \
+'{
+  "displayName": "DISPLAY_NAME",
+  "routine": {
+    "routineType": "TABLE_VALUED_FUNCTION",
+    "definitionBody": "QUERY_TEMPLATE_ID(TVF arguments) AS (TVF_DEFINITION)"
   }
 }'
 ```
@@ -235,9 +236,11 @@ The following code sample shows a `definition_body` example for the API call. Yo
 The `definition_body` is analogous to the definition of a routine. The preceding `definition_body` translates to the following routine:
 
 ```
-  CREATE OR REPLACE TABLE FUNCTION <approvers_dataset>.query_template1(t1 TABLE, y INT64)
+  CREATE OR REPLACE TABLE FUNCTION APPROVERS_DATASET.query_template1(t1 TABLE, y INT64)
   AS (SELECT * FROM t1 WHERE year > y)
 ```
+
+Replace `APPROVERS_DATASET` with the ID of the dataset where the template approver creates the routine.
 
 You can [update the query template](https://docs.cloud.google.com/bigquery/docs/query-templates#update-query-template) or [submit the query template for review](https://docs.cloud.google.com/bigquery/docs/query-templates#submit-query-template) .
 
@@ -279,9 +282,7 @@ curl -H "Authorization: Bearer $(gcloud auth print-access-token)" \
  -H 'x-goog-user-project:DCR_PROJECT_ID' \
  -X PATCH "https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID?updateMask=description" \
  -d '{
-   "query_template": {
-     "description": "New query template"
-   }
+   "description": "New query template"
  }'
 ```
 
@@ -348,7 +349,7 @@ To delete a query template, select one of the following options:
 The following example shows how to delete a query template by using the `curl` command:
 
 ```
-curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates?queryTemplateId=QUERY_TEMPLATE_ID
+curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X DELETE https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/queryTemplates/QUERY_TEMPLATE_ID
 ```
 
 Replace the following:
@@ -390,7 +391,7 @@ To approve a query template, select one of the following options:
 
 ### API
 
-1.  Create the routine from the query template by calling the `jobserver.query` method:
+1.  Create the routine from the query template by calling the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) :
 
     ```
     curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -L -X POST https://bigquery.googleapis.com/bigquery/v2/projects/ROUTINE_PROJECT_ID/queries --data '{"query":"ROUTINE_CREATION_QUERY","useLegacySql":false}'
@@ -404,8 +405,8 @@ To approve a query template, select one of the following options:
 2.  Add the routine that you created to the data clean room:
 
     ```
-    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d
-    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/tables/ROUTINE_ID"}]},"displayName":"LISTING_NAME"}'
+    curl -H "Authorization: Bearer $(gcloud auth print-access-token)" -H "Content-Type: application/json" -H 'x-goog-user-project:DCR_PROJECT_ID' -X POST https://analyticshub.googleapis.com/v1/projects/DCR_PROJECT_ID/locations/LOCATION/dataExchanges/CLEAN_ROOM_ID/listings?listingId=LISTING_ID -d \
+    '{"bigqueryDataset":{"dataset":"projects/PROJECT_ID/datasets/DATASET_ID","selectedResources":[{"routine":"projects/PROJECT_ID/datasets/DATASET_ID/routines/ROUTINE_ID"}]},"displayName":"LISTING_NAME"}'
     ```
 
     Replace the following:
@@ -558,10 +559,10 @@ Because user A didn't add or doesn't own the `transactions` and `products` table
 
 The following table summarizes pricing for BigQuery data clean room query templates:
 
-| Role                | Pricing details                                                                                                                 |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| Data contributor    | Charged only for [data storage](https://docs.cloud.google.com/bigquery/pricing#storage) .                                       |
-| Template subscriber | Charged only for [compute (analysis)](https://docs.cloud.google.com/bigquery/pricing#overview_of_pricing) when running queries. |
+| Role                | Pricing details                                                                                                            |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Data contributor    | Charged only for [data storage](https://cloud.google.com/bigquery/pricing#storage) .                                       |
+| Template subscriber | Charged only for [compute (analysis)](https://cloud.google.com/bigquery/pricing#overview_of_pricing) when running queries. |
 
 ## What's next
 

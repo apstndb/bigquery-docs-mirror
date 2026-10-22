@@ -1,22 +1,22 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema
-title: Google Merchant Center Performance Table
+title: Google Merchant Center performance table
 description: Describes the BigQuery table names and schema for performance data.
 data_source: docs.cloud.google.com
 ---
 
-# Google Merchant Center Performance Table
+# Google Merchant Center performance table
 
 ## Overview
 
-The Performance Table contains columns that you can use to understand the distribution of the following metrics:
+The performance table contains columns that you can use to understand the distribution of the following metrics:
 
 - **Clicks:** The total number of clicks on your products on Google. Only visits to your product detail pages are counted.
 
 - **Impressions:** The total number of times your products were shown on Google. Only impressions where customers had the option to visit your product detail pages are counted. If your products show zero impressions, you should verify that the products are approved and wait a few days for impressions to appear. Impressions may also not show if they are below a minimum threshold for a category, which can lead to different totals than what is reported in other Google surfaces.
 
-Note that Performance data might get updated up to 3 days in the past to account for corrections. The variations are usually small.
+Note that performance data might get updated up to 3 days in the past to account for corrections. The variations are usually small.
 
 When you select `Performance` as one of the reports that are relevant to your transfer, the following table is created:
 

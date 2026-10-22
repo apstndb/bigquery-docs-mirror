@@ -362,9 +362,9 @@ The following general resource limitations apply to BigQuery sharing:
 
 If you're a publisher, the following BigQuery interoperability limitations apply:
 
-- You must grant subscribers explicit permissions to read the source dataset to query views within linked datasets. As a best practice, create [authorized views](https://docs.cloud.google.com/bigquery/docs/share-access-views) to grant subscribers access to view data without granting access to underlying source data.
+- You must grant subscribers explicit permissions to read the source dataset to query views within linked datasets. As a best practice, create [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) to grant subscribers access to view data without granting access to underlying source data.
 - The [query plan](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation) reveals the shared view query and routine query definitions, including project IDs and other datasets involved in authorized views. Don't include sensitive information, such as encryption keys, in the shared view or routine query.
-- Shared datasets are indexed in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) . Schema updates on a shared dataset become available to subscribers immediately. However, when there are more than 100 subscribers or tables in a shared dataset, updates might require up to 18 hours to index. Due to the indexing delay, subscribers can't search for updated resources in the Google Cloud console immediately.
+- Shared datasets are indexed in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/metadata-overview) . Schema updates on a shared dataset become available to subscribers immediately. However, when there are more than 100 subscribers or tables in a shared dataset, updates might require up to 18 hours to index. Due to the indexing delay, subscribers can't search for updated resources in the Google Cloud console immediately.
 - Shared topics are indexed in Knowledge Catalog, but you can't filter specifically for their resource type.
 - If you configure [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) or [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) policies on listed tables, subscribers must use an Enterprise or Enterprise Plus edition to run query jobs on the linked dataset. For information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
@@ -409,7 +409,7 @@ The following limitations apply to usage metrics:
 
 The following limitations apply to VPC Service Controls and Salesforce Data 360:
 
-- Don't publish shared data or host data exchanges in projects inside VPC Service Controls perimeters unless you configure appropriate [ingress and egress rules](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) for publisher projects, exchange projects, and subscriber projects. For more information, see [Sharing VPC Service Controls rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .
+- Don't publish shared data or host data exchanges in projects inside VPC Service Controls perimeters unless you configure appropriate [ingress and egress rules](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) for publisher projects, exchange projects, and subscriber projects. For more information, see [Configure VPC Service Controls rules for BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .
 - Data 360 data is shared as views. As a subscriber, you can't access the underlying tables that the views reference.
 
 ## What's next

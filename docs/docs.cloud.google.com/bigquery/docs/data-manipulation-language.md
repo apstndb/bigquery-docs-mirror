@@ -149,6 +149,8 @@ Mutating DML statements that run concurrently on a table cause DML statement con
 
 - A `MERGE` DML statement does not conflict with other concurrently running DML statements as long as the statement only inserts rows and does not delete or update any existing rows. This can include `MERGE` statements with `UPDATE` or `DELETE` clauses, as long as those clauses aren't invoked when the query runs.
 
+- Automatic DML queuing applies only to standalone DML statements that run outside of a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) . Mutating DML statements inside a multi-statement transaction acquire a table-level lock rather than locking individual partitions. Concurrent multi-statement transactions that modify the same table aren't queued and fail immediately, even if they target different partitions. If a stored procedure or multi-statement query runs only a single mutating DML statement, such as a `MERGE` statement, then don't wrap the statement in `BEGIN TRANSACTION` and `COMMIT TRANSACTION` statements. For more information, see [Transaction concurrency](https://docs.cloud.google.com/bigquery/docs/transactions#transaction_concurrency) .
+
 ## Fine-grained DML
 
 > **Preview**

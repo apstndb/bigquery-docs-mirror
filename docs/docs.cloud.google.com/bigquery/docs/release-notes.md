@@ -14,6 +14,14 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 21, 2026
+
+Feature
+
+The [`AI.CHUNK_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document) is a table-valued function that splits unstructured documents into semantically coherent text chunks optimized for vector embeddings and Retrieval-Augmented Generation (RAG) workflows.
+
+This function is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## October 16, 2026
 
 Feature

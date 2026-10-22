@@ -198,7 +198,7 @@ The following limits apply to query jobs created automatically by running intera
 <tr class="odd">
 <td>Daily query size limit</td>
 <td>Unlimited</td>
-<td>By default, there is no daily query size limit. However, you can set limits on the amount of data users can query by creating <a href="https://docs.cloud.google.com/bigquery/cost-controls#controlling_query_costs_using_bigquery_%20custom_quotas">custom quotas</a> to control <a href="https://docs.cloud.google.com/bigquery/quotas#query_usage_per_day">query usage per day</a> or <a href="https://docs.cloud.google.com/bigquery/quotas#query_usage_per_day_per_user">query usage per day per user</a> .</td>
+<td>By default, there is no daily query size limit. However, you can set limits on the amount of data users can query by creating <a href="https://docs.cloud.google.com/bigquery/docs/custom-quotas">custom quotas</a> to control <a href="https://docs.cloud.google.com/bigquery/quotas#query_usage_per_day">query usage per day</a> or <a href="https://docs.cloud.google.com/bigquery/quotas#query_usage_per_day_per_user">query usage per day per user</a> .</td>
 </tr>
 <tr class="even">
 <td>Daily destination table update limit</td>

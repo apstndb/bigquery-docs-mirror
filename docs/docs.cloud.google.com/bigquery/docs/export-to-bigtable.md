@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Export data to Bigtable (reverse ETL)
 
-This document describes how you can set up reverse ETL (RETL) from BigQuery to Bigtable. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from a BigQuery table to a [Bigtable](https://docs.cloud.google.com/bigtable/docs/overview) table.
+Reverse extract-transform-load (RETL) from BigQuery to Bigtable lets you combine analytics in BigQuery with the low latency and high throughput of Bigtable. You can serve data to application users without exhausting quotas and limits on BigQuery.
 
-You can use a RETL workflow to Bigtable to combine BigQuery's analytics capabilities with Bigtable's low latency and high throughput. This workflow lets you serve data to application users without exhausting quotas and limits on BigQuery.
+To set up this workflow, you use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export data from a BigQuery table to a [Bigtable](https://docs.cloud.google.com/bigtable/docs/overview) table.
 
 ## Characteristics of Bigtable tables
 

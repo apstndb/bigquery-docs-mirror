@@ -108,6 +108,7 @@ Diagnose failures when loading data, streaming records, or syncing external sour
 - **[Troubleshoot data transfers](https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers) .** Diagnose BigQuery Data Transfer Service issues, network connectivity for private transfers, and CSV data loading errors.
 - **[Troubleshoot transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .** Resolve BigQuery Data Transfer Service configuration errors across sources like Amazon Simple Storage Service (Amazon S3), Salesforce, Google Ads, and Cloud Storage.
 - **[Troubleshoot BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api) .** Debug BigQuery Storage Read API, BigQuery Storage Write API (gRPC), and BigQuery Storage Write API (REST) streaming ingestion failures, row-level insertion errors, and throughput quotas.
+- **[Troubleshoot schema errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas) .** Resolve schema mismatch errors from load, query, copy, and schema update operations (such as missing, duplicate, or incompatible column changes), and 15-level schema, file, and routine nesting depth limits.
 
 ### Data warehouse migration
 

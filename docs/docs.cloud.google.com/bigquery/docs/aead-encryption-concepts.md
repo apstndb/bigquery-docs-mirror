@@ -6,9 +6,9 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-GoogleSQL for BigQuery supports Authenticated Encryption with Associated Data (AEAD) encryption.
+Authenticated Encryption with Associated Data (AEAD) encryption in GoogleSQL for BigQuery lets you protect sensitive column-level data and control decryption directly within queries. By binding ciphertext to additional authenticated data, AEAD encryption verifies data integrity and prevents unauthorized tampering or ciphertext substitution.
 
-This topic explains the concepts behind AEAD encryption in GoogleSQL. For a description of the different AEAD encryption functions that GoogleSQL supports, see [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) .
+For a complete list of supported SQL functions, see [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) .
 
 ### Purpose of AEAD encryption
 

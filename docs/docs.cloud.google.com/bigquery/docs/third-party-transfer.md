@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use third party transfers
 
-Third party transfers for BigQuery Data Transfer Service allow you to automatically schedule and manage recurring load jobs for external data sources such as Salesforce CRM, Adobe Analytics, and Facebook Ads.
+Third-party transfers for BigQuery Data Transfer Service let you automatically schedule and manage recurring load jobs from external data sources into BigQuery. You can connect to external sources such as Salesforce CRM, Adobe Analytics, and Facebook Ads by enrolling in partner connectors through the Google Cloud Marketplace.
 
 ## Limitations
 

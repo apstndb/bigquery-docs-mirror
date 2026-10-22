@@ -837,3 +837,10 @@ For YouTube Content Manager reports, the user setting up the transfer must have 
 
 Error: `Quota exceeded: Your project exceeded quota for imports per project.`  
 **Resolution:** Verify you have not scheduled too many transfers in your project. For information on calculating the number of load jobs initiated by a transfer, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
+
+Error: `RESOURCE_EXHAUSTED: Rate limit exceeded.` (or similar rate limit errors when transferring data from third-party applications such as ServiceNow, Facebook Ads, Confluence, or PayPal)  
+**Resolution:** When using the BigQuery Data Transfer Service to ingest data from third-party applications, rate limit errors can originate from the external source application throttling data extraction rather than BigQuery ingestion limits. To resolve this error, do the following:
+
+- **Verify the source of the error:** Inspect the transfer run logs. If the error message references the external connector or third-party data source, the rate limit was enforced by the external platform.
+- **Check API rate limits in the third-party platform:** Sign in to your external platform to review API usage and rate limits (for example, upgrading a Facebook Ads app to Advanced Access or reviewing inbound REST API rate limits in ServiceNow), and ensure no parallel workflows are sharing the same credentials.
+- **Reduce transfer frequency or stagger schedules:** Modify your transfer configuration schedule to run less frequently and avoid running parallel transfers against the same external account simultaneously.

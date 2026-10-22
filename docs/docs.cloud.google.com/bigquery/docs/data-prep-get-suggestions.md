@@ -181,6 +181,8 @@ If existing suggestions don't meet your needs, add a step. Choose columns or a s
 
     Gemini generates a SQL expression and a new description based on your prompt.
 
+    > **Note:** The SQL expression uses the new natural language expressions experience when generating transformations.
+
 4.  In the **Target column** list, select or enter a column name.
 
 5.  Optional: To update the SQL expression, revise the prompt and click send **Send** , or manually enter a SQL expression.
@@ -251,10 +253,17 @@ To unnest arrays, follow these steps:
 To add a filter that removes rows, follow these steps:
 
 1.  In the data or schema view, choose the **Filter** option. You can also choose columns to help Gemini understand your data filter.
+
 2.  In the **Description** field, enter a prompt, such as `Column ID should not be NULL` .
+
 3.  Click **Generate** . Gemini generates a SQL expression and a new description based on your prompt.
+
+    > **Note:** The SQL expression uses the new natural language expressions experience when generating transformations.
+
 4.  Optional: To update the SQL expression, revise the prompt and click send **Send** , or enter a SQL expression manually.
+
 5.  Optional: Click **Preview** and review the step.
+
 6.  Click **Apply** .
 
 #### Filter expression format

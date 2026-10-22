@@ -144,7 +144,11 @@ COMMIT TRANSACTION;
 
 ## Transaction concurrency
 
-If a transaction mutates (update or deletes) rows in a table, then other transactions or DML statements that mutate rows in the same table cannot run concurrently. Conflicting transactions are canceled. Conflicting DML statements that run outside of a transaction are queued to run later, subject to [queuing limits](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
+If a transaction updates or deletes rows in a table, then the transaction acquires a table-level lock rather than locking individual partitions. Other transactions or DML statements that mutate rows in the same table can't run concurrently, even if they target different partitions of a partitioned table. BigQuery cancels conflicting transactions. However, BigQuery queues conflicting DML statements that run outside of a transaction to run later, subject to [queuing limits](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
+
+> **Warning:** BigQuery automatically queues up to 20 standalone mutating DML statements per table. However, multi-statement transactions have a concurrency limit of 1 mutating transaction per table, and BigQuery doesn't queue them. If a concurrent multi-statement transaction attempts to modify a locked table, then the transaction bypasses queuing and fails immediately with the following error message: `Transaction is aborted due to concurrent update against table` .
+
+When you run a mutating DML statement inside a multi-statement transaction, BigQuery holds the write lock on the target table until the transaction commits or rolls back, or until the parent multi-statement query or session ends. This behavior applies to transactions in a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) , a [stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) , or an active [session](https://docs.cloud.google.com/bigquery/docs/sessions-intro) , such as an ODBC or JDBC connection. BigQuery doesn't release the lock when the individual DML statement finishes. Long-running computations in the same open transaction keep the table locked and cause concurrent mutating transactions on that table to fail.
 
 Operations that read or append new rows can run concurrently with the transaction. For example, any of the following operations can be performed concurrently on a table while a transaction mutates data in the same table:
 
@@ -155,7 +159,14 @@ Operations that read or append new rows can run concurrently with the transactio
 - Load jobs that use `WRITE_APPEND` disposition to append rows
 - Streaming writes
 
-If a transaction only reads a table or appends new rows to it, any operation can be performed concurrently on that table.
+If a transaction only reads a table or appends new rows to it, any operation can be performed concurrently on that table because `INSERT` statements don't conflict with each other. To prevent multiple transactions that would otherwise only insert rows from running concurrently on a table, start each transaction with a `DELETE` statement that modifies no rows, such as `DELETE FROM `` TABLE_NAME `` WHERE FALSE;` . Including this statement causes BigQuery to acquire a table-level lock on the `DELETE` statement, so any other concurrent transaction that also runs a mutating statement on that table conflicts and is canceled.
+
+### Avoid and resolve concurrency conflicts
+
+To reduce transaction concurrency conflicts, use the following practices:
+
+- **Remove unnecessary transaction wrappers** : if a stored procedure or multi-statement query runs only a single mutating DML statement, such as a `MERGE` statement, then don't wrap the statement in `BEGIN TRANSACTION` and `COMMIT TRANSACTION` statements. A single DML statement is already atomic. Running the statement outside of a multi-statement transaction lets BigQuery apply [DML queuing](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
+- **Retry failed transactions with exponential backoff** : when a multi-statement transaction fails because of a concurrent update, BigQuery rolls back the transaction and releases the table lock. Because BigQuery can take several seconds to release the lock in the metadata layer, retry failed transactions by using an exponential backoff strategy. Wait at least 60 seconds before the first retry.
 
 ## Viewing transaction information
 
@@ -262,6 +273,61 @@ WHERE
   AND (statement_type = 'COMMIT_TRANSACTION'
        OR statement_type = 'ROLLBACK_TRANSACTION');
 ```
+
+### Find overlapping jobs for a failed transaction
+
+When a transaction or DML statement fails with a concurrent update error, a query history check of individual DML statements might not show an active DML statement at the time of the failure. This situation occurs when a parent multi-statement query or session runs an earlier DML statement inside a transaction and continues running other statements while holding the table lock.
+
+For cross-project workloads, you can query the [`INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-by-organization) view instead of `INFORMATION_SCHEMA.JOBS_BY_PROJECT` . The following query joins child DML jobs with their parent jobs in `INFORMATION_SCHEMA.JOBS_BY_PROJECT` to identify mutating jobs, scripts, or sessions that overlapped with a failed job:
+
+```
+SELECT
+  child_jobs.job_id,
+  child_jobs.parent_job_id,
+  child_jobs.transaction_id,
+  child_jobs.session_info.session_id,
+  child_jobs.statement_type,
+  child_jobs.start_time AS statement_start_time,
+  child_jobs.end_time AS statement_end_time,
+  parent_jobs.start_time AS parent_start_time,
+  parent_jobs.end_time AS parent_end_time,
+  COALESCE(parent_jobs.start_time, child_jobs.start_time) AS lock_window_start,
+  COALESCE(
+    parent_jobs.end_time, child_jobs.end_time, CURRENT_TIMESTAMP()
+  ) AS lock_window_end,
+  child_jobs.error_result.message AS error_message,
+  child_jobs.query
+FROM
+  `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS child_jobs
+LEFT JOIN
+  `region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT AS parent_jobs
+  ON child_jobs.parent_job_id = parent_jobs.job_id
+WHERE
+  child_jobs.creation_time
+    BETWEEN TIMESTAMP_SUB(TIMESTAMP 'START_TIME', INTERVAL 6 HOUR)
+    AND TIMESTAMP_ADD(TIMESTAMP 'END_TIME', INTERVAL 1 HOUR)
+  AND child_jobs.destination_table.project_id = 'PROJECT_ID'
+  AND child_jobs.destination_table.dataset_id = 'DATASET_NAME'
+  AND child_jobs.destination_table.table_id = 'TABLE_NAME'
+  AND child_jobs.statement_type IN (
+    'UPDATE', 'DELETE', 'MERGE', 'TRUNCATE_TABLE'
+  )
+  AND COALESCE(parent_jobs.start_time, child_jobs.start_time)
+    <= TIMESTAMP 'END_TIME'
+  AND COALESCE(parent_jobs.end_time, child_jobs.end_time, CURRENT_TIMESTAMP())
+    >= TIMESTAMP 'START_TIME'
+ORDER BY
+  lock_window_start;
+```
+
+Replace the following:
+
+- `REGION` : the dataset region (for example, `us` ).
+- `START_TIME` : the `start_time` timestamp of the failed job (for example, `2026-06-15 10:00:00 UTC` ).
+- `END_TIME` : the `end_time` timestamp of the failed job (for example, `2026-06-15 10:05:00 UTC` ).
+- `PROJECT_ID` : the ID of the project that contains the target table.
+- `DATASET_NAME` : the name of the dataset that contains the target table.
+- `TABLE_NAME` : the name of the target table.
 
 ## Limitations
 

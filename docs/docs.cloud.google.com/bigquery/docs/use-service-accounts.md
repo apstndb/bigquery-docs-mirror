@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Use service accounts with BigQuery Data Transfer Service
 
-Some data sources support data transfer authentication by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) through the Google Cloud console, API, or the `bq` command line. A service account is a Google Account associated with your Google Cloud project. A service account can run jobs, such as scheduled queries or batch processing pipelines by authenticating with the service account credentials rather than a user's credentials.
+BigQuery Data Transfer Service lets you authenticate data transfers for supported data sources by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) instead of individual user credentials. A service account is a Google Account associated with your Google Cloud project that can run jobs, such as scheduled queries or batch processing pipelines. You can configure service account authentication through the Google Cloud console, the API, or the `bq` command line, and you can [update existing transfers](https://docs.cloud.google.com/bigquery/docs/use-service-accounts#update_data_transfer_credentials) when credentials change.
 
-You can update an existing data transfer with the credentials of a service account. For more information, see [Update data transfer credentials](https://docs.cloud.google.com/bigquery/docs/use-service-accounts#update_data_transfer_credentials) .
-
-The following situations require updating credentials:
+The following error codes indicate situations where you must update credentials:
 
 - Your transfer failed to authorize the user's access to the data source:
 
@@ -70,6 +68,16 @@ Ensure that the service account you choose to run the transfer has the following
 - For Google Ads transfers, the service account must be granted domain-wide authority. For more information, see [Google Ads API Service Account guide](https://developers.google.com/google-ads/api/docs/oauth/service-accounts#service_account_access_setup) .
 
 ## Update data transfer credentials
+
+You can update an existing data transfer with the credentials of a service account. The following situations require updating credentials:
+
+- Your transfer failed to authorize the user's access to the data source:
+
+  `Error code 401 : Request is missing required authentication credential. UNAUTHENTICATED`
+
+- You receive an **INVALID_USER** error when you attempt to run the transfer:
+
+  `Error code 5 : Authentication failure: User Id not found. Error code: INVALID_USERID`
 
 ### Console
 

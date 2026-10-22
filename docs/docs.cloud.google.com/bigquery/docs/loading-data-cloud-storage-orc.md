@@ -2,17 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
 uri: https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc
 title: Load ORC data from Cloud Storage
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to load ORC data from Cloud Storage into a new or existing BigQuery table or partition.
 data_source: docs.cloud.google.com
 ---
 
 # Load ORC data from Cloud Storage
 
-This page provides an overview of loading ORC data from Cloud Storage into BigQuery.
-
-[ORC](http://orc.apache.org) is an open source column-oriented data format that is widely used in the Apache Hadoop ecosystem.
-
-When you load ORC data from Cloud Storage, you can load the data into a new table or partition, or you can append to or overwrite an existing table or partition. When your data is loaded into BigQuery, it is converted into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (BigQuery's storage format).
+BigQuery lets you load [ORC](http://orc.apache.org) data from Cloud Storage into a new table or partition, or append to or overwrite an existing table or partition. ORC is an open source column-oriented data format that is widely used in the Hadoop ecosystem. During ingestion, BigQuery converts your data into columnar format for [Capacitor](https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format) (the storage format for BigQuery) for querying and analysis.
 
 For information about loading ORC data from a local file, see [Loading data into BigQuery from a local data source](https://docs.cloud.google.com/bigquery/docs/loading-data-local) .
 

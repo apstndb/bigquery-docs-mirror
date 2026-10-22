@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema
-title: Google Merchant Center Product Targeting table
+title: Google Merchant Center product targeting table
 description: Describes the schema for Google Merchant Center product targeting tables in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Google Merchant Center Product Targeting table
+# Google Merchant Center product targeting table
 
 ## Overview
 
@@ -25,7 +25,7 @@ If you choose the **Product Targeting** report option when you [set up a Google 
 
 ## Schema
 
-The Product Targeting table has the following schema:
+The product targeting table has the following schema:
 
 <table>
 <colgroup>
@@ -60,7 +60,7 @@ The Product Targeting table has the following schema:
 <td>Whether the product is targeted by Ads campaigns.<br />
 
 <blockquote>
-<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code>destinations.status</code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">Products report</a> .
+<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code>destinations.status</code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">products report</a> .
 </blockquote></td>
 <td>TARGETED, NOT_TARGETED</td>
 </tr>

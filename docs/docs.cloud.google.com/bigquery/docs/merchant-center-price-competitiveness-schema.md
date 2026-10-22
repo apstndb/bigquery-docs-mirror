@@ -1,12 +1,12 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema
-title: Google Merchant Center Price Competitiveness table
+title: Google Merchant Center price competitiveness table
 description: View the BigQuery table names and schema for transferred Google Merchant Center price competitiveness data.
 data_source: docs.cloud.google.com
 ---
 
-# Google Merchant Center Price Competitiveness table
+# Google Merchant Center price competitiveness table
 
 ## Overview
 

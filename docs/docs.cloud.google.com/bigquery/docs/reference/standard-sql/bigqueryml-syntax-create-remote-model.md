@@ -173,25 +173,21 @@ You must enable Mistral AI models in Gemini Enterprise Agent Platform before you
 
 After you create a remote model based on a Mistral AI model, you can use the model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text based on a prompt you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
-### Llama models as MaaS
+### Open models as MaaS
 
-To create a Llama model in BigQuery ML, you must specify it as an [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) endpoint in the format `openapi/<publisher_name>/<model_name>` .
+To create an open model in BigQuery ML, you must specify it as an [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) endpoint in the format `openapi/<publisher_name>/<model_name>` .
 
-The following [Llama models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama) are supported:
+The following open models are supported:
 
-- Llama 4 Scout 17B-16E, endpoint `meta/llama-4-scout-17b-16e-instruct-maas`
-- Llama 4 Maverick 17B-128E, endpoint `meta/llama-4-maverick-17b-128e-instruct-maas`
-- Llama 3.3 70B (Preview), endpoint `openapi/meta/llama-3.3-70b-instruct-maas`
-- Llama 3.2 90B (Preview), endpoint `openapi/meta/llama-3.2-90b-vision-instruct-maas`
-- Llama 3.1 405B (GA), endpoint `openapi/meta/llama-3.1-405b-instruct-maas`
-- Llama 3.1 70B (Preview), endpoint `openapi/meta/llama-3.1-70b-instruct-maas`
-- Llama 3.1 8B (Preview), endpoint `openapi/meta/llama-3.1-8b-instruct-maas`
+- Llama 4 Scout 17B-16E, endpoint `openapi/meta/llama-4-scout-17b-16e-instruct-maas` , in `us-east5`
+- Llama 4 Maverick 17B-128E, endpoint `openapi/meta/llama-4-maverick-17b-128e-instruct-maas` , in `us-east5`
+- OpenAI gpt-oss 120B, endpoint `openapi/openai/gpt-oss-120b-maas` , in `us-central1`
 
-> **Important:** For Llama 4.0 and greater models, you must create the dataset and connection for the remote model in the same region as the Llama model endpoint.
+> **Important:** For these open MaaS models, you must create the dataset and connection for the remote model in the same region as the model endpoint.
 
 You must enable Llama models in Gemini Enterprise Agent Platform before you can use them. For more information, see [Enable a partner model](https://docs.cloud.google.com/bigquery/docs/generate-text#enable-model) .
 
-After you create a remote model based on a Llama model, you can use the model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text based on a prompt you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+After you create a remote model, you can use the model with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text based on a prompt you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models) .
 

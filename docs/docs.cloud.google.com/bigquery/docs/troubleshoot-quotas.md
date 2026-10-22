@@ -167,6 +167,24 @@ To resolve this quota error, do the following:
 
 For more information about streaming inserts, see [streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
+### Streaming table creation rate limit errors
+
+When a streaming pipeline ( `tabledata.insertAll` ) automatically creates new tables (for example, by using [template tables](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template-tables) with `templateSuffix` or dynamic destination tables) faster than the per-project [streaming table creation rate limit](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template_table_details) , BigQuery returns the following error:
+
+**Error message**
+
+```
+Exceeded rate limits: Your Project: PROJECT_ID exceeded quota for
+Streaming Table Creation Rate. For more information, see
+https://docs.cloud.google.com/bigquery/troubleshooting-errors
+```
+
+#### Resolution
+
+To resolve this error, do the following:
+
+- **Pre-create destination tables.** If your pipeline generates many sharded or rapidly rotating tables dynamically, run a DDL script or use the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) API to pre-create the tables ahead of time instead of relying on the streaming API to create them during insertion. For more information, see [Template table details](https://docs.cloud.google.com/bigquery/docs/write-api-rest#template_table_details) .
+
 ### Maximum number of concurrent queries that contain remote functions
 
 BigQuery returns this error when the number of concurrent queries that contain remote functions exceeds the limit.
@@ -306,14 +324,18 @@ One method of resolving this quota error is to create a slot [reservation](https
 
 For alternative approaches that allow exporting more *than* 50 TiB, see the notes section in [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
-### Maximum `tabledata.list` bytes per second per project quota errors
+### Maximum `tabledata.list` bytes or requests per second per project quota errors
 
-BigQuery returns this error when the project number mentioned in the error message reaches the maximum size of data that can be read through the `tabledata.list` API call in a project per second. For more information, see [Maximum `tabledata.list` bytes per minute](https://docs.cloud.google.com/bigquery/quotas#tabledata_list_bytes_per_minute) .
+BigQuery returns this error when the project number mentioned in the error message reaches the maximum size of data or maximum number of requests (QPS) that can be read through the `tabledata.list` API call in a project per second. For more information, see [Maximum `tabledata.list` bytes per minute](https://docs.cloud.google.com/bigquery/quotas#tabledata_list_bytes_per_minute) .
 
-**Error message**
+**Error messages**
 
 ```
 Your project:[project number] exceeded quota for tabledata.list bytes per second per project
+```
+
+```
+Exceeded rate limits: Your project:[project number] exceeded quota for tabledata.list qps per project
 ```
 
 #### Resolution
@@ -321,6 +343,8 @@ Your project:[project number] exceeded quota for tabledata.list bytes per second
 To resolve this error, do the following:
 
 - In general, we recommend trying to stay under this limit. For example, by spacing out requests over a longer period with delays. If the error doesn't happen frequently, implementing retries with exponential backoff solves this issue.
+
+- If you are reading data row by row or in small increments using `tabledata.list` , increase your batch size (for example, by using `maxResults` ) to retrieve larger chunks over fewer HTTP requests.
 
 - If the use case expects fast and frequent reading of a large amount of data from a table, we recommend using [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) instead of the `tabledata.list` API.
 
@@ -334,7 +358,7 @@ To resolve this error, do the following:
 
 ### Maximum number of API requests limit errors
 
-BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email.
+BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email—or when a user exceeds the rate limit for `INFORMATION_SCHEMA` queries.
 
 Most BigQuery API core methods have a maximum of 100 API requests per user per method; however, some of these core methods can have different rate limits; for example:
 
@@ -345,7 +369,24 @@ In addition, BigQuery API rate limits [don't apply](https://docs.cloud.google.co
 
 For more information on individual rate limits, see the [**Maximum number of API requests per second per user per method** rate limit](https://docs.cloud.google.com/bigquery/quotas#api_request_quotas) .
 
-**Error message**
+**Error messages**
+
+```
+Exceeded rate limits: too many api requests per user per method for this
+user_method. For more information, see
+https://cloud.google.com/bigquery/docs/troubleshoot-quotas
+```
+
+```
+Exceeded rate limits: too many rate INFORMATION_SCHEMA queries per user for
+this user. For more information, see
+https://cloud.google.com/bigquery/docs/troubleshoot-quotas
+```
+
+```
+Exceeded rate limits: Your user exceeded quota for rate INFORMATION_SCHEMA
+queries per user
+```
 
 ```
 Quota exceeded: Your user_method exceeded quota for concurrent api requests
@@ -387,8 +428,8 @@ Some API calls log errors in BigQuery audit logs in Cloud Logging. To identify t
     ```
      resource.type="bigquery_resource"
      protoPayload.authenticationInfo.principalEmail="<user email or service account>"
-     "Too many API requests per user per method for this user_method"
-     In the log entry, you can find the method name under the property protoPayload.method_name.
+     ("too many api requests per user per method" OR "too many rate INFORMATION_SCHEMA queries per user")
+     In the log entry, you can find the method name under the property protoPayload.methodName.
      
     ```
 
@@ -401,6 +442,8 @@ To resolve this quota error, do the following:
 - Reduce the number of API requests or add a delay between multiple API requests so that the number of requests stays under this limit.
 
 - If the limit is only exceeded occasionally, you can implement retries on this specific error with exponential backoff.
+
+- Avoid polling `INFORMATION_SCHEMA` views directly from live BI dashboards or high-frequency workflows. If your workflow requires frequent access to job history or metadata, schedule a periodic query that materializes the `INFORMATION_SCHEMA` output into a standard BigQuery table, and point your applications or dashboards to that materialized table. If you need to run many `INFORMATION_SCHEMA` queries, space them out over time instead of running them concurrently.
 
 - If you frequently insert data, consider using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) . Streaming data with this API isn't affected by the BigQuery API quota.
 
@@ -490,6 +533,54 @@ To resolve this error, try the following actions:
 - **Optimize UDF execution and query structure** : follow the [best practices for Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#best_practices) to reduce the execution time and request volume per query. For example, filter your data before invoking the UDF, keep input row payloads small, and structure your query to support batching.
 - **Request a capacity increase** : if the error persists after you optimize your UDF, contact [support](https://docs.cloud.google.com/bigquery/docs/getting-support) or [sales](https://cloud.google.com/contact) to request a higher container scaling limit. Include the priority, use case, and project ID in your request.
 
+### Custom daily query quota errors
+
+BigQuery returns this error ( `reason: quotaExceeded` ) when a project or user reaches a custom daily query usage quota ( `QueryUsagePerDay` or `QueryUsagePerUserPerDay` ) configured by an administrator. For more information about how custom query quotas work, see [Custom quotas](https://docs.cloud.google.com/bigquery/docs/custom-quotas) .
+
+**Error messages**
+
+- `Custom quota exceeded: Your usage exceeded the custom quota for QueryUsagePerDay, which is set by your administrator.`
+- `Custom quota exceeded: Your usage exceeded the custom quota for QueryUsagePerUserPerDay, which is set by your administrator.`
+
+#### Diagnosis
+
+If your query usage reached the custom daily quota earlier than expected, check the following common causes:
+
+- **Daily reset window and timezone alignment.** Custom daily query quotas reset at midnight Pacific Time (US and Canada). If your local timezone differs from Pacific Time, queries that ran on the previous calendar day in your local timezone might still fall within the current 24-hour Pacific Time quota window.
+- **Normalized usage for BigQuery ML statements.** The **Quotas & System Limits** page in the Google Cloud console reports normalized query usage, which can be higher than the billed bytes in `INFORMATION_SCHEMA.JOBS` . Certain BigQuery ML operations, such as creating a logistic regression model, are billed at a higher rate, as described in [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml) . For example, if an operation is priced at 50 times the standard on-demand rate, a `CREATE MODEL` job that reports 1 TiB of `total_bytes_billed` in `INFORMATION_SCHEMA.JOBS` counts as 50 TiB of query usage toward your custom daily quota. For more information, see [Set or modify custom quotas](https://docs.cloud.google.com/bigquery/docs/custom-quotas#set-custom-quotas) .
+
+To identify which jobs and users consumed the most billed bytes during the current Pacific Time day, query the [`INFORMATION_SCHEMA.JOBS_BY_PROJECT`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view:
+
+```
+SELECT
+  user_email,
+  job_id,
+  statement_type,
+  creation_time,
+  total_bytes_billed / POWER(1024, 4) AS tib_billed
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE
+  creation_time >= TIMESTAMP(
+    CURRENT_DATE('America/Los_Angeles'), 'America/Los_Angeles')
+  AND job_type = 'QUERY'
+ORDER BY
+  tib_billed DESC
+LIMIT 50;
+```
+
+Replace `REGION_NAME` with your dataset region (for example, `us` or `eu` ).
+
+Jobs with a `statement_type` of `CREATE_MODEL` might count toward the quota at a higher rate than `tib_billed` shows.
+
+#### Resolution
+
+To resolve or mitigate custom daily query quota errors, do the following:
+
+- **Optimize high-usage queries to scan fewer bytes.** For example, filter on partitioned and clustered columns, select only the columns you need instead of using `SELECT *` , and use a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) to preview bytes processed before you run a query. For more information, see [Reduce data processed](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#reduce-data-processed) .
+- **Run queries from a different billing project.** If your datasets are shared with another Google Cloud project that has access to the underlying tables and either doesn't have a custom daily quota or has remaining quota available, you can submit your query jobs from that alternative project.
+- **Increase the custom daily quota.** If your workload's daily query volume has grown, ask your Google Cloud administrator or Quota Administrator ( `roles/servicemanagement.quotaAdmin` ) to increase the **Query usage per day** or **Query usage per day per user** limit on the **Quotas & System Limits** page. For instructions, see [Set or modify custom quotas](https://docs.cloud.google.com/bigquery/docs/custom-quotas#set-custom-quotas) .
+
 ## Troubleshoot quotas or limits that can't be increased
 
 You can't increase the following quotas or limits, but you can apply the suggested workarounds or best practices to mitigate them.
@@ -531,8 +622,9 @@ This quota cannot be increased.
 
 To resolve this error, do the following:
 
-- **Reduce submission rate:** reduce the rate at which you submit jobs to BigQuery.
-- **Limit concurrency:** avoid submitting a large number of jobs in parallel that might get stuck in the pending state.
+- **Reduce submission rate.** Reduce the rate at which you submit jobs to BigQuery, and retry failed job submissions using [truncated exponential backoff](https://cloud.google.com/monitoring/api/troubleshooting#exponential-retry) .
+- **Limit concurrency and batch smaller operations.** Avoid submitting a large number of jobs in parallel that might accumulate in the `PENDING` state. Instead, combine smaller load, copy, or DML operations into fewer, larger jobs.
+- **Inspect active and pending jobs.** Query the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) for jobs with `state IN ('PENDING', 'RUNNING')` to identify the users, service accounts, or pipelines submitting the backlog of jobs.
 
 ### Query queue limit errors
 
@@ -576,6 +668,8 @@ This limit [can't be increased](https://docs.cloud.google.com/bigquery/quotas#jo
 - **Distribute queries.** Organize and distribute the load across different projects as informed by the nature of your queries and your business needs.
 
 - **Increase slots in your reservation.** [Increase slots](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#estimate-slots) or, if you have a high-demand workload, [switch](https://docs.cloud.google.com/bigquery/docs/reservations-intro#choosing_a_model) to reservations (capacity-based model) from on-demand (pay-per query model).
+
+- **Adjust the reservation concurrency target.** If you use reservations, you can [set the maximum concurrency target](https://docs.cloud.google.com/bigquery/docs/query-queues#set_the_maximum_concurrency_target) on your reservation to control how many queries run concurrently before additional queries are queued.
 
 ##### Avoid limits for high-volume interactive queries
 
@@ -654,14 +748,22 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 ### Maximum rate of table metadata update operations limit errors
 
-BigQuery returns this error when your table reaches the limit for maximum rate of table metadata update operations per table for standard tables. Table operations include the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination table or that use a [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) `DELETE` , `INSERT` , `MERGE` , `TRUNCATE TABLE` , or `UPDATE` to write data to a table.
+BigQuery returns this error when your table reaches the limit for maximum rate of table metadata update operations per table for standard or partitioned tables. Table operations include the combined total of all [load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) , [copy jobs](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) , and [query jobs](https://docs.cloud.google.com/bigquery/quotas#query_jobs) that append to or overwrite a destination table or that use a [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) `DELETE` , `INSERT` , `MERGE` , `TRUNCATE TABLE` , or `UPDATE` to write data to a table.
 
 To see the value of the **Maximum rate of table metadata update operations per table** limit, see [Standard tables](https://docs.cloud.google.com/bigquery/quotas#standard_tables) .
 
-**Error message**
+**Error messages**
 
 ```
-Exceeded rate limits: too many table update operations for this table
+Exceeded rate limits: too many table update operations for this table. For
+more information, see
+https://cloud.google.com/bigquery/docs/troubleshoot-quotas
+```
+
+```
+Exceeded rate limits: too many partitioned table update operations for this
+table. For more information, see
+https://cloud.google.com/bigquery/docs/troubleshoot-quotas
 ```
 
 When you encounter this error, [diagnose](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-update-table-metadata-limit-diagnose) the issue, and then [follow the recommended steps](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-maximum-update-table-metadata-limit-resolution) to resolve it.
@@ -711,7 +813,9 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - Reduce the update rate for the table metadata.
 
-- Add a delay between jobs or table operations to make sure that the update rate is within the limit.
+- Add a delay between jobs or table operations to make sure that the update rate is within the limit, and retry failed operations with truncated exponential backoff.
+
+- Consolidate consecutive DDL statements (such as multiple `ALTER TABLE` statements) into a single [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) or batch schema changes into a single table metadata update rather than running consecutive metadata update commands.
 
 - For data inserts or modification, consider using DML operations. DML operations are not affected by the **Maximum rate of table metadata update operations per table** rate limit.
 
@@ -728,6 +832,44 @@ This quota cannot be increased. To resolve this quota error, do the following:
 - To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
 - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
+
+### Maximum concurrent table and dataset metadata reads limit errors
+
+BigQuery returns this error when too many queries concurrently read the same table or concurrently query deprecated legacy dataset metadata tables ( `__TABLES__` or `__TABLES_SUMMARY__` ).
+
+**Error messages**
+
+- `Exceeded rate limits: too many concurrent reads on a table for this table. For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas`
+- `Exceeded rate limits: too many concurrent dataset meta table reads per dataset for this dataset. For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas`
+- `Exceeded rate limits: too many concurrent dataset meta table reads per project for this project. For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas`
+
+#### Resolution
+
+To resolve this error, do the following:
+
+- **Throttle concurrent reads and add jitter.** If an orchestrator (such as Apache Airflow or dbt) launches many parallel queries against the same table simultaneously, configure concurrency limits or add randomized start delays (jitter).
+- **Enable [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .** Use cached results for repeated identical read queries against the same table.
+- **Retry with exponential backoff.** Retry failed queries using truncated exponential backoff.
+- **Distribute high-concurrency read workloads.** If a table must serve a high number of concurrent readers, distribute the load by creating [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) to serve different queries, maintaining separate table copies to distribute the read load, or [partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) the table so that different queries read different partitions or clusters.
+- **Replace legacy `__TABLES__` and `__TABLES_SUMMARY__` views with `INFORMATION_SCHEMA` views.** If you encounter the `concurrent dataset meta table reads` error, migrate queries from the deprecated `__TABLES__` and `__TABLES_SUMMARY__` views to [`INFORMATION_SCHEMA.TABLES`](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) or [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) .
+
+### Maximum job creation rate limit errors
+
+BigQuery returns this error when your workload creates new jobs in a project and region faster than the per-project regional job creation rate limit allows, including when queries using [`jobCreationMode: JOB_CREATION_OPTIONAL`](https://docs.cloud.google.com/bigquery/docs/running-queries#optional-job-creation) fall back to creating standard BigQuery jobs.
+
+**Error messages**
+
+- `Exceeded rate limits: too many creating jobs for this project_and_region. For more information, see https://cloud.google.com/bigquery/docs/troubleshoot-quotas`
+- `Exceeded rate limits: Your project_and_region exceeded quota for creating jobs. For more information, see https://cloud.google.com/bigquery/troubleshooting-errors`
+
+#### Resolution
+
+To resolve this error, do the following:
+
+- **Retry with exponential backoff.** Catch HTTP `403` `rateLimitExceeded` errors in your client application and retry job submissions using truncated exponential backoff.
+- **Combine individual DML statements.** Instead of submitting many separate single-statement DML jobs concurrently, group them into a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) .
+- **Inspect and optimize `JOB_CREATION_OPTIONAL` fallback queries.** If your workload uses `JOB_CREATION_OPTIONAL` , query [`job_creation_reason.code` in `INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#optional-job-creation) to identify why queries fall back to creating a job (for example, `LARGE_RESULTS` or `LONG_RUNNING` ), and optimize those queries to return smaller result sets or execute faster. Alternatively, if your workload consistently requires full job creation, set [`jobCreationMode`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#JobCreationMode) to `JOB_CREATION_REQUIRED` (the default) and pace your job submission rate.
+- **Reduce slot contention or increase reservation capacity.** If queries running in a reservation fall back to `LONG_RUNNING` because of slot contention, smooth out query concurrency or [increase your reservation size](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#update_reservations) .
 
 ### Table imports or query appends quota errors
 

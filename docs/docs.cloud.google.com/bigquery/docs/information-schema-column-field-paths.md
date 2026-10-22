@@ -34,19 +34,87 @@ When you query the `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view, the query resul
 
 The `INFORMATION_SCHEMA.COLUMN_FIELD_PATHS` view has the following schema:
 
-| Column name          | Data type       | Value                                                                                                                                                                                                                                                                                                                                   |
-|----------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `table_catalog`      | `STRING`        | The project ID of the project that contains the dataset.                                                                                                                                                                                                                                                                                |
-| `table_schema`       | `STRING`        | The name of the dataset that contains the table also referred to as the `datasetId` .                                                                                                                                                                                                                                                   |
-| `table_name`         | `STRING`        | The name of the table or view also referred to as the `tableId` .                                                                                                                                                                                                                                                                       |
-| `column_name`        | `STRING`        | The name of the top-level column.                                                                                                                                                                                                                                                                                                       |
-| `field_path`         | `STRING`        | The name of the top-level column or the path to the column [nested](https://docs.cloud.google.com/bigquery/docs/nested-repeated) within a `RECORD` or `STRUCT` column.                                                                                                                                                                  |
-| `data_type`          | `STRING`        | The column's GoogleSQL [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .                                                                                                                                                                                                                     |
-| `description`        | `STRING`        | The column's description.                                                                                                                                                                                                                                                                                                               |
-| `collation_name`     | `STRING`        | The name of the [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) if it exists; otherwise, `NULL` . If a `STRING` , `ARRAY<STRING>` , or `STRING` field in a `STRUCT` is passed in, the collation specification is returned if it exists; otherwise, `NULL` is returned. |
-| `rounding_mode`      | `STRING`        | The mode of rounding that's used when applying precision and scale to parameterized `NUMERIC` or `BIGNUMERIC` values; otherwise, the value is `NULL` .                                                                                                                                                                                  |
-| `data_policies.name` | `STRING`        | The list of data policies that are attached to the column to control access and masking. This field is in ( [Preview](https://cloud.google.com/products#product-launch-stages) ).                                                                                                                                                       |
-| `policy_tags`        | `ARRAY<STRING>` | The list of policy tags that are attached to the column.                                                                                                                                                                                                                                                                                |
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="header">
+<th>Column name</th>
+<th>Data type</th>
+<th>Value</th>
+</tr>
+
+<tr class="odd">
+<td><code>table_catalog</code></td>
+<td><code>STRING</code></td>
+<td>The project ID of the project that contains the dataset.</td>
+</tr>
+<tr class="even">
+<td><code>table_schema</code></td>
+<td><code>STRING</code></td>
+<td>The name of the dataset that contains the table also referred to as the <code>datasetId</code> .</td>
+</tr>
+<tr class="odd">
+<td><code>table_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the table or view also referred to as the <code>tableId</code> .</td>
+</tr>
+<tr class="even">
+<td><code>column_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the top-level column.</td>
+</tr>
+<tr class="odd">
+<td><code>field_path</code></td>
+<td><code>STRING</code></td>
+<td>The name of the top-level column or the path to the column <a href="https://docs.cloud.google.com/bigquery/docs/nested-repeated">nested</a> within a <code>RECORD</code> or <code>STRUCT</code> column.</td>
+</tr>
+<tr class="even">
+<td><code>data_type</code></td>
+<td><code>STRING</code></td>
+<td>The column's GoogleSQL <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data type</a> .</td>
+</tr>
+<tr class="odd">
+<td><code>description</code></td>
+<td><code>STRING</code></td>
+<td>The column's description.</td>
+</tr>
+<tr class="even">
+<td><code>collation_name</code></td>
+<td><code>STRING</code></td>
+<td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code>NULL</code> .<br />
+<br />
+If a <code>STRING</code> , <code>ARRAY&lt;STRING&gt;</code> , or <code>STRING</code> field in a <code>STRUCT</code> is passed in, the collation specification is returned if it exists; otherwise, <code>NULL</code> is returned.</td>
+</tr>
+<tr class="odd">
+<td><code>rounding_mode</code></td>
+<td><code>STRING</code></td>
+<td>The mode of rounding that's used when applying precision and scale to parameterized <code>NUMERIC</code> or <code>BIGNUMERIC</code> values; otherwise, the value is <code>NULL</code> .</td>
+</tr>
+<tr class="even">
+<td><code>data_policies.name</code></td>
+<td><code>STRING</code></td>
+<td>The list of data policies that are attached to the column to control access and masking. This field is in ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ).</td>
+</tr>
+<tr class="odd">
+<td><code>data_governance_tags</code></td>
+<td><code>ARRAY&lt;STRUCT&gt;</code></td>
+<td>The list of <a href="https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags">data governance tags</a> that are attached to the column or nested field to control access and masking. Each <code>STRUCT</code> contains the following <code>STRING</code> fields:
+<ul>
+<li><code>key</code> : the namespaced tag key, in the format <var translate="no">PROJECT_ID </var><code> / </code><var translate="no"> TAG_KEY</var> or <var translate="no">ORGANIZATION_ID </var><code> / </code><var translate="no"> TAG_KEY</var> .</li>
+<li><code>value</code> : the short name of the tag value.</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>policy_tags</code></td>
+<td><code>ARRAY&lt;STRING&gt;</code></td>
+<td>The list of policy tags that are attached to the column.</td>
+</tr>
+</tbody>
+</table>
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 

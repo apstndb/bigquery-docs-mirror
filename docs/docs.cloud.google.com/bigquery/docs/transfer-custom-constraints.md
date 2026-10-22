@@ -26,7 +26,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Benefits
 
-You can use a custom organization policy to allow or deny specific operations on BigQuery Data Transfer Service transfer configurations in order to meet your organization's compliance and security requirements. If a request to create or update a transfer configuration fails to satisfy custom constraints set by your organization policy, then the request fails, and an error is returned to the caller.
+Custom organization policies let you allow or deny specific operations on BigQuery Data Transfer Service transfer configurations to help meet your organization's compliance and security requirements. When a request to create or update a transfer configuration doesn't satisfy your custom constraints, the policy denies the request and returns an error to the caller.
 
 ## Limitations
 

@@ -8,15 +8,17 @@ data_source: docs.cloud.google.com
 
 # Introduction to saved queries
 
-Use saved queries in BigQuery to securely store, manage, and collaborate on your SQL scripts. As you work in the query editor, your changes are automatically saved to prevent accidental work loss.
+Saved queries let you create, manage, and share SQL scripts in BigQuery. Changes to a saved query are automatically saved so that you don't lose your work when you close the query editor. Saved query capabilities are available only in the Google Cloud console.
 
-Because saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) , they offer advanced collaboration and version control features. You can:
+## About saved queries
 
-- **Collaborate securely:** [share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) with specific users and groups using Identity and Access Management (IAM).
-- **Track changes:** review a detailed version history of your query edits.
-- **Manage versions:** branch from or revert to previous versions of a query to safely test modifications.
+Saved queries improve collaboration and query management with the following options:
 
-Saved query capabilities are available only in the Google Cloud console.
+- [Share saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) with specific users and groups by using Identity and Access Management (IAM).
+- Review the query version history.
+- Revert to or branch from previous versions of the query.
+
+Saved queries are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
 
 ## Saved query security
 

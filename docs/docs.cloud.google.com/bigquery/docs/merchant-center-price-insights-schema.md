@@ -1,16 +1,16 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema
 uri: https://docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema
-title: Google Merchant Center Price Insights table
+title: Google Merchant Center price insights table
 description: View the BigQuery table names and schema for transferred Google Merchant Center price insights data.
 data_source: docs.cloud.google.com
 ---
 
-# Google Merchant Center Price Insights table
+# Google Merchant Center price insights table
 
 ## Overview
 
-The Price Insights report shows suggested sale prices for your products and predicts the performance that you can expect if you update your products' prices. You can use the Price Insights report to price your products more effectively. The report is similar to the [Price Insights Report from Google Merchant Center](https://support.google.com/merchants/answer/11916926) .
+The price insights report shows suggested sale prices for your products and predicts the performance that you can expect if you update your products' prices. You can use the price insights report to price your products more effectively. The report is similar to the [price insights report from Google Merchant Center](https://support.google.com/merchants/answer/11916926) .
 
 The data is written to a table named `PriceInsights_ `` MERCHANT_ID` if you are using an individual Merchant ID, or `PriceInsights_ `` AGGREGATOR_ID` if you're using an MCA account.
 

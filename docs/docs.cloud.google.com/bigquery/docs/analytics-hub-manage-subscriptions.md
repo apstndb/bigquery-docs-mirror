@@ -167,7 +167,7 @@ When you revoke a subscription as a BigQuery sharing publisher, the subscriber c
 
 When you revoke a subscription from a multi-region listing, subscribers can no longer query any primary or secondary linked dataset replicas.
 
-> **Caution:** Revoking [Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
+> **Caution:** Revoking [Google Cloud Marketplace-integrated commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) might affect your customers and violate the [Cloud Marketplace Terms of Service](https://cloud.google.com/terms/marketplace/launcher) .
 
 To revoke a subscription, select one of the following options:
 

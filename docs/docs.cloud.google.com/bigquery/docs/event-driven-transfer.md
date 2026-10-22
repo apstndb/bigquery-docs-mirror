@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Event-Driven Transfers
 
-You can use the BigQuery Data Transfer Service to create event-driven transfers that automatically loads data based on event notifications. We recommend using event-driven transfers if you require incremental data ingestion that optimizes cost efficiency.
-
-When you set up event-driven transfers, there can be a delay of a few minutes between each data transfer. If you require immediate data availability, we recommend using the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) that streams data directly into BigQuery with the lowest possible latency. The Storage Write API provides real-time updates for the most demanding use cases.
-
-When choosing between the two, consider whether you need to prioritize cost-effective incremental batch ingestion with event-driven transfers, or whether you prefer the flexibility of the Storage Write API.
+Event-driven transfers in the BigQuery Data Transfer Service let you automatically load data into BigQuery in response to event notifications. You can use this approach for cost-effective, incremental batch ingestion when your workload can tolerate a delay of a few minutes between transfer runs. If you require real-time data availability with lower latency, use the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) to stream data directly into BigQuery.
 
 ## Data sources with event-driven transfers support
 

@@ -14,11 +14,9 @@ data_source: docs.cloud.google.com
 
 > **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <bigquery-repositories-feedback@google.com> .
 
-You can manage SQL scripts and notebooks using BigQuery Studio Git repositories. This feature integrates version control directly into the BigQuery Studio file browser, allowing you to clone repositories, manage branches, and perform Git operations without leaving Google Cloud console.
+BigQuery Studio Git repositories let you version control SQL scripts, notebooks, and other code assets directly in the BigQuery Studio file browser. You can clone remote Git repositories, manage branches, and perform Git operations without leaving the Google Cloud console.
 
-BigQuery Studio Git repositories offer a more streamlined, folder-based experience when compared to classic [repositories](https://docs.cloud.google.com/bigquery/docs/repositories) . BigQuery Studio Git repositories appear directly within the left pane under your user root folder.
-
-By using BigQuery Studio Git repositories, you can interact with your code assets just like standard files and directories while maintaining a connection to a remote Git repository.
+Compared to classic [repositories](https://docs.cloud.google.com/bigquery/docs/repositories) , this integration provides a streamlined, folder-based experience under your user root folder in the left pane. You can interact with your code assets like standard files and directories while maintaining a connection to a remote Git repository.
 
 ## Limitations
 

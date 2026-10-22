@@ -187,7 +187,7 @@ As an extra layer of defense, you can use VPC Service Controls perimeters to res
 
 ## What's next
 
-- Learn more about [VPC Service Controls in BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .
+- Learn how to [configure VPC Service Controls rules for BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) .
 - Learn how to [restrict BigQuery Omni access with an external cloud service](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#vpc-service) .
 - Understand [risks and mitigation through VPC Service Controls](https://cloud.google.com/security/vpc-service-controls) .
 - Learn more about [VPC Service Controls support and limitations in BigQuery](https://docs.cloud.google.com/vpc-service-controls/docs/supported-products#table_bigquery) .

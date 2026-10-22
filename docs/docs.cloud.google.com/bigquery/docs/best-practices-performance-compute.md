@@ -384,6 +384,18 @@ WHERE
   t.my_key = u.my_key
 ```
 
+### Avoid transaction lock conflicts
+
+**Best practice:** Keep [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) short, avoid wrapping single DML statements in transaction blocks, and use exponential backoff when you retry failed transactions.
+
+Mutating DML statements inside a multi-statement transaction acquire a table-level lock and have a concurrency limit of 1 per table. By contrast, BigQuery automatically queues up to 20 standalone mutating DML statements per table. Concurrent multi-statement transactions that attempt to modify a locked table aren't queued and fail immediately with the error message: `Transaction is aborted due to concurrent update against table` .
+
+To minimize lock contention and transaction failures, use the following practices:
+
+- **Don't wrap a single DML statement in a transaction** : a single DML statement, such as a `MERGE` statement in a stored procedure, is already atomic. Running the statement without `BEGIN TRANSACTION` and `COMMIT TRANSACTION` statements lets BigQuery use [DML queuing](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#update_delete_merge_dml_concurrency) .
+- **Minimize transaction duration in scripts and sessions** : when you run a mutating DML statement inside a transaction in a multi-statement query or active [session](https://docs.cloud.google.com/bigquery/docs/sessions-intro) , BigQuery acquires a table-level lock on the target table. BigQuery holds this write lock until the transaction commits or rolls back, or until the parent script or session (such as an ODBC or JDBC connection) ends. Run long-running computations or staging queries before you start the transaction so that the table doesn't remain locked.
+- **Use exponential backoff for retries** : when a transaction fails because of a concurrent update, BigQuery can take several seconds to release the transaction lock in the metadata layer. When you retry failed transactions, use an exponential backoff strategy and wait at least 60 seconds before the first retry. To identify overlapping parent scripts or sessions that hold a lock on a table, see [Find overlapping jobs for a failed transaction](https://docs.cloud.google.com/bigquery/docs/transactions#find-overlapping-jobs) .
+
 ### Use alias names for similarly named columns
 
 **Best Practice:** Use column and table aliases when you work with similarly named columns across queries, including subqueries.

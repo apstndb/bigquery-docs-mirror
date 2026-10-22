@@ -383,6 +383,65 @@ Error string: `HttpError 403 when requesting returned: The caller does not have 
 
 This error might appear when you attempt to set up a scheduled query with a service account. To resolve this error, see the troubleshooting steps in [Authorization and permission issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#authorization_and_permission_issues) .
 
+## Destination table deleted or expired
+
+Error string: `Destination deleted/expired during operation: `` DETAILS`
+
+This HTTP `400 Bad Request` error ( `reason: invalid` ) occurs when a query, load, or copy job attempts to write to a destination table that is removed before the job finishes executing.
+
+### Diagnosis
+
+This error typically occurs for one of two reasons:
+
+1.  **Table or dataset expiration (TTL) reached.** The destination table (or the dataset's default table expiration) has an expiration timestamp configured. If a long-running job continues executing past the table's expiration timestamp, BigQuery deletes the expired table while the job is still running.
+2.  **Concurrent explicit deletion.** Another user, service account, or automated workflow (such as an orchestrator DAG or cleanup script) executes a `DROP TABLE` statement or `tables.delete` API call on the destination table while your job is in flight.
+
+To determine why the destination table was deleted, query the [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) view:
+
+```
+SELECT
+  table_name,
+  deleted,
+  table_deletion_time,
+  table_deletion_reason
+FROM
+  `PROJECT_ID`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
+WHERE
+  table_schema = "DATASET_ID"
+  AND table_name = "TABLE_ID"
+```
+
+Replace the following:
+
+- `PROJECT_ID` : your project ID.
+- `REGION` : the region of the dataset that contained the table.
+- `DATASET_ID` : the ID of the dataset that contained the table.
+- `TABLE_ID` : the ID of the destination table.
+
+The `table_deletion_reason` column contains `TABLE_EXPIRATION` if the table expired, `USER_DELETED` if a user deleted the table, or `DATASET_DELETION` if a user deleted the dataset that contained the table. For more information, see [Identify the cause of table deletion](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#identify-cause) .
+
+If the cause is `USER_DELETED` , query Cloud Audit Logs in Logs Explorer to find who deleted the table. Filter for entries around the time the job failed:
+
+```
+resource.type=("bigquery_resource" OR "bigquery_dataset")
+protoPayload.methodName=("tableservice.delete" OR "google.cloud.bigquery.v2.TableService.DeleteTable")
+protoPayload.resourceName:"YOUR_TABLE_NAME"
+```
+
+Replace `YOUR_TABLE_NAME` with the ID of the destination table.
+
+Inspect the `protoPayload.authenticationInfo.principalEmail` field in the matching log entries to identify the user or service account that deleted the table.
+
+If the cause is `DATASET_DELETION` , use the dataset filter in [Identify when a table was deleted](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables#identify_when_a_table_was_deleted) .
+
+### Resolution
+
+To resolve this error, do the following:
+
+- **Increase table and dataset expiration times.** Inspect the destination table's expiration time and the dataset's default table expiration setting. Ensure that any configured TTL is long enough to outlive the maximum expected runtime (including queue time and retries) of jobs writing to that table. For instructions, see [Update a table's expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) .
+- **Serialize pipeline tasks.** If an automated ETL pipeline (such as Managed Service for Apache Airflow, Apache Airflow, or Dataform) recreates or cleans up staging tables, configure strict task dependencies so that `DROP TABLE` or cleanup tasks never run concurrently with active write jobs targeting the same table.
+- **Use unique staging table names.** When running parallel pipeline instances, write intermediate results to uniquely named temporary or staging tables (for example, by using `CREATE TEMP TABLE` in a multi-statement query or appending a unique run ID) rather than sharing a single mutable staging table across concurrent runs.
+
 ## Invalid snapshot time
 
 Error string: `Invalid snapshot time`
@@ -496,8 +555,12 @@ Error string: `Not found: Table [project_id]:[dataset].[table_name] was not foun
 
 This error occurs when a table in your query can't be found in the dataset or region that you specified. To address this error, do the following:
 
-- Check that your query contains the correct project, dataset, and table name.
-- Check that the table exists in the region in which you ran the query.
+- Check that your query contains the correct project, dataset, and table name, and verify that the identifier uses the exact case (see [Case sensitivity](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#case_sensitivity) ). If your query omits the project ID, BigQuery defaults to the billing project executing the job. Specify the fully qualified `PROJECT_ID `` . `` DATASET_ID `` . `` TABLE_NAME` when querying tables in another project.
+- Check that the table exists in the location where the query runs. By default, every dataset that a query reads from or writes to must be in the same location as the query job. If you set the job location yourself (for example, with the `--location` flag or the `location` property in the job reference), make sure that it matches the location of your datasets. A single region, such as `us-central1` , doesn't match a multi-region, such as `US` . For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
+- To query tables in different locations in a single query, use [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries) [(Preview)](https://docs.cloud.google.com/products#product-launch-stages) . Global queries must be enabled for the project that runs the query and for the project that contains the data, and they aren't supported in sandbox mode.
+- Check whether the table or dataset expired or was deleted by querying [`INFORMATION_SCHEMA.TABLE_STORAGE`](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) or inspecting Cloud Audit Logs for `DeleteTable` or `InternalTableExpired` events. If the table was deleted within the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) (up to 7 days), you can [restore the deleted table](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) . If the parent dataset was also deleted, recreate an empty dataset with the exact same name and location before copying the historical snapshot.
+- If you are querying an anonymous cached result table in a hidden dataset starting with an underscore ( `_` ), note that cached result tables expire after approximately 24 hours. Rerun the original query or write the output to a persistent destination table.
+- If you are querying an external table backed by Cloud Storage or Google Drive, verify that the underlying source files still exist at the configured URI path ( `Not found: URI` , `Not found: Uris` , or `Not found: Files` ).
 - Make sure that the table wasn't dropped and recreated during the execution of the job. Otherwise, incomplete metadata propagation can cause this error.
 
 ## Too many DML statements
@@ -542,6 +605,20 @@ While the `limit is 20` error specifically restricts the `PENDING` queue for mut
 - *Increase Reservation Slots* : Increase the number of slots in your reservation to help jobs complete faster and reduce job concurrency. This reduces the number of pending jobs in the queue and helps avoid reaching the limit.
 - *Optimize Workflow Orchestration* : Limit the number of concurrent DML tasks in your orchestration tool to avoid exceeding table-level concurrency limits (including high-frequency `INSERT` queries targeting the same table).
 - *Batch DML Operations* : Combine multiple smaller DML statements into fewer, larger statements to reduce the total number of jobs queued against the table.
+
+## Too many nested views or persistent user-defined functions
+
+Error string: `Too many nested views/persistent user-defined functions or possible circular reference of views/persistent user-defined functions referenced in query. Only 16 levels of nested views/persistent user-defined functions are allowed.`
+
+This HTTP `400 Bad Request` error ( `reason: invalidQuery` ) occurs when a query or a view creation references a chain of views or persistent user-defined functions (UDFs) that exceeds the maximum supported nesting depth of 16 levels, or when a query references views or UDFs that reference each other in a circular dependency loop (for example, `view_a` queries `view_b` , which queries `view_a` ). For details on view and routine limits, see [View limits](https://docs.cloud.google.com/bigquery/quotas#view_limits) and [UDF limits](https://docs.cloud.google.com/bigquery/quotas#udf_limits) . For errors caused by exceeding the 15-level nesting limit on `STRUCT` ( `RECORD` ) columns, load files, or nested routine argument and return types, see [Troubleshoot schema, file, and routine nesting limit errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas#ts-schema-nested-too-deeply) .
+
+You can create views nested up to 16 levels, but queries can only reference views nested up to 15 levels.
+
+This limit cannot be increased. To resolve this error, do the following:
+
+- **Check for circular references.** Inspect the definitions of the views and persistent UDFs in your query chain to verify that no view or function directly or indirectly references itself.
+- **Consolidate nested views.** Refactor chains of nested views by combining intermediate logic into common table expressions ( `WITH` clauses) within a single view or query.
+- **Materialize intermediate layers.** Replace intermediate layers in a deep view hierarchy with scheduled queries that write to physical tables, or use [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) where supported.
 
 ## Transaction aborted due to concurrent update
 

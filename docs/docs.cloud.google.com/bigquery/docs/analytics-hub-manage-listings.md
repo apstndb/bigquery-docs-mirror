@@ -118,7 +118,7 @@ To create a listing, follow these steps:
 
 6.  Enter the following optional details:
 
-    - **Category** : select up to two categories that best represent your listing. Subscribers can [filter listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) using your selected categories.
+    - **Category** : select up to five categories that best represent your listing. Subscribers can [filter listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) using your selected categories.
 
     - **Data affinity** : specify the regions that you use for publishing data. This location setting helps subscribers minimize or avoid Pub/Sub network egress costs by reading data from the same region. For more information about egress costs, see [Data transfer costs](https://cloud.google.com/pubsub/pricing#egress_costs) .
 
@@ -163,7 +163,7 @@ To create a listing, follow these steps:
 Use the [`projects.locations.dataExchanges.listings.create` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/create) :
 
 ```
-POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings?listingId=LISTING_ID
+POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings?listingId=LISTING_ID
 ```
 
 Replace the following:
@@ -215,7 +215,7 @@ To create a listing directly from an existing dataset, follow these steps:
 
 10. Enter the following optional details:
 
-    - **Category** : select up to two categories that best represent your listing. Subscribers can [filter listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) using your selected categories.
+    - **Category** : select up to five categories that best represent your listing. Subscribers can [filter listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) using your selected categories.
 
     - **Data affinity** : specify the regions that you use for publishing data. This location setting helps subscribers minimize or avoid Pub/Sub network egress costs by reading data from the same region. For more information about egress costs, see [Data transfer costs](https://cloud.google.com/pubsub/pricing#egress_costs) .
 
@@ -357,7 +357,7 @@ To give users access to view or subscribe to your listing, follow these steps:
 3.  Update the policy by calling the [`projects.locations.dataExchanges.listings.setIamPolicy` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/setIamPolicy) . In the request body, pass the updated IAM policy from the previous step.
 
     ```
-    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:setIamPolicy
+    POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:setIamPolicy
     ```
 
     In the request body, pass the listing details. If the request succeeds, the response body returns the listing details with the updated policy.
@@ -398,7 +398,7 @@ To view all the current subscriptions to your listing, select one of the followi
 
 4.  To view all subscribers of your listing, click **Manage subscriptions** :
 
-    ![The highlighted Manage subscriptions option for an Analytics Hub listing.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-manage-subscription.png)
+    ![The highlighted Manage subscriptions option for a BigQuery sharing listing.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-manage-subscription.png)
 
 5.  Optional: You can filter results by subscriber details.
 
@@ -444,10 +444,10 @@ SELECT * FROM `myproject`.`region-eu`.INFORMATION_SCHEMA.SCHEMATA_LINKS;
 
 ### API
 
-Use the [projects.locations.dataExchanges.listings.listSubscriptions method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/listSubscriptions) .
+Use the [`projects.locations.dataExchanges.listings.listSubscriptions` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/listSubscriptions) .
 
 ```
-GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:listSubscriptions
+GET https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID:listSubscriptions
 ```
 
 Replace the following:
@@ -492,14 +492,14 @@ To remove a subscription created after July 25, 2023, follow these steps:
 Call the [`projects.locations.subscriptions.revoke` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/revoke) :
 
 ```
-POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
+POST https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/subscriptions/SUBSCRIPTION_ID:revoke
 ```
 
 Replace the following:
 
 - `PROJECT_ID` : the project ID of the subscription that you want to remove.
 - `LOCATION` : the location of the subscription that you want to remove.
-- `SUBSCRIPTION` : the ID of the [subscription](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#list_subscriptions) that you want to remove.
+- `SUBSCRIPTION_ID` : the ID of the [subscription](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#list_subscriptions) that you want to remove.
 
 ## Update a listing
 
@@ -539,7 +539,7 @@ To update a listing, follow these steps:
 Call the [`projects.locations.dataExchanges.listings.patch` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/patch) :
 
 ```
-PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID?updateMask=UPDATEMASK
+PATCH https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID?updateMask=UPDATEMASK
 ```
 
 Replace the following:
@@ -617,7 +617,7 @@ To delete a listing, follow these steps:
 Call the [`projects.locations.dataExchanges.listings.delete` method](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/delete) :
 
 ```
-DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/location/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID
+DELETE https://analyticshub.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/dataExchanges/DATAEXCHANGE_ID/listings/LISTING_ID
 ```
 
 Replace the following:

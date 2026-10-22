@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Export data to Pub/Sub (reverse ETL)
 
-Exporting data to Pub/Sub requires using BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) .
+Reverse extract-transform-load (RETL) from BigQuery to [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) lets you serve data to downstream applications and services in an event-driven manner. This workflow combines analytics capabilities in BigQuery with the asynchronous and scalable global messaging service in Pub/Sub.
 
-This document describes how you can set up reverse extract-transform-load (RETL) from BigQuery to [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) . You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) to export data from BigQuery to a [Pub/Sub topic](https://docs.cloud.google.com/pubsub/docs/create-topic) .
-
-You can use a RETL workflow to Pub/Sub to combine BigQuery's analytics capabilities with Pub/Sub's asynchronous and scalable global messaging service. This workflow lets you serve data to downstream applications and services in an event-driven manner.
+To export data to Pub/Sub, you use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) to export data from BigQuery to a [Pub/Sub topic](https://docs.cloud.google.com/pubsub/docs/create-topic) .
 
 ## Prerequisites
 

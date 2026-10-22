@@ -31,7 +31,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 - You can set up custom constraints for BigQuery sharing resources only by using the Google Cloud console or Google Cloud CLI.
 - You can enforce custom constraints only on the `CREATE` or `UPDATE` methods for BigQuery sharing resources.
-- New custom constraints don't automatically apply to existing resources. You must update existing resources for the constraint to apply. To find existing resources that need to be updated, enforce a [dry-run organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/dry-run-policy) . Existing [listings published to data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#add-data) aren't checked during the dry run of existing resources.
+- New custom constraints don't automatically apply to existing resources. You must update existing resources for the constraint to apply. To find existing resources that need to be updated, enforce a [dry-run organization policy](https://docs.cloud.google.com/organization-policy/test-policies) . Existing [listings published to data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms#add-data) aren't checked during the dry run of existing resources.
 - You must set the value in the `resource.bigqueryDataset.replicaLocations` field in lowercase letters. For more information, see [Supported resources](https://docs.cloud.google.com/bigquery/docs/analytics-hub-custom-constraints#supported_resources) .
 
 ## Before you begin

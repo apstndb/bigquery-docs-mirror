@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to data export
 
-This document describes the different ways of exporting data from BigQuery.
+BigQuery lets you export data so that you can use it in other tools, storage systems, and applications. You can save query results to a file, export tables to Cloud Storage, or set up reverse ETL (RETL) workflows to services such as Bigtable and Spanner.
 
 For more information about data integrations, see [Introduction to loading, transforming, and exporting data](https://docs.cloud.google.com/bigquery/docs/load-transform-export-intro) .
 

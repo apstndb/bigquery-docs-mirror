@@ -176,7 +176,7 @@ WHERE
 Replace the following:
 
 - `PROJECT_ID` : your Google Cloud project ID.
-- `LOG_DATASET` : the BigQuery linked dataset for Log Analytics or the log sink destination dataset.
+- `LOG_DATASET` : the BigQuery linked dataset for Observability Analytics or the log sink destination dataset.
 - `PARENT_JOB_ID` : the job ID of the parent global query job.
 
 ### INFORMATION_SCHEMA views

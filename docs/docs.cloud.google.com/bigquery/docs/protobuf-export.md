@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Export data as Protobuf columns
 
-This document describes how you can export BigQuery data as Protocol Buffers (Protobuf) columns by using BigQuery user-defined functions (UDFs).
+User-defined functions (UDFs) in BigQuery let you export data as Protocol Buffers (Protobuf) columns. Protobuf columns give your applications fully typed objects and can reduce data size, transfer time, and cost compared with JSON.
 
 ## When to use Protobuf columns
 

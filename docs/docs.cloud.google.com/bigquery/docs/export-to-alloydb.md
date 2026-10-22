@@ -14,9 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To provide feedback or request support for this feature, send email to <bq-alloydb-export-feedback@google.com> .
 
-This document describes how you can set up a reverse extract, transform, and load (reverse ETL) workflow from BigQuery to AlloyDB for PostgreSQL. You can do this by using the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) .
-
-You can also export data to AlloyDB by [syncing your BigQuery table to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#sync_a_table_for_export) .
+A reverse extract, transform, and load (reverse ETL) workflow from BigQuery to AlloyDB for PostgreSQL lets you move data from BigQuery into an AlloyDB database. You can use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to process or filter the data with a query before you export it, or you can [sync your BigQuery table to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#sync_a_table_for_export) to copy or mirror the full table.
 
 ## Before you begin
 

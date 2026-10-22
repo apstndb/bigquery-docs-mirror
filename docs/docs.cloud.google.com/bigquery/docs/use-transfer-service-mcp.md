@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use the BigQuery Data Transfer Service remote MCP server
 
-This document shows you how to use the BigQuery Data Transfer Service remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. The BigQuery Data Transfer Service MCP server provides a comprehensive set of capabilities that let you send natural language prompts to your AI application to perform a range of data transfer-related tasks, including the following:
+This document shows you how to use the BigQuery Data Transfer Service remote Model Context Protocol (MCP) server to connect with AI applications including Antigravity, ChatGPT, Claude, and custom applications you are developing. The BigQuery Data Transfer Service MCP server provides a comprehensive set of capabilities that let you send natural language prompts to your AI application to perform a range of data transfer-related tasks, including the following:
 
 - List and get details about available data sources.
 - Create, manage, and list data transfer configurations.
