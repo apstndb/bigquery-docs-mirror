@@ -8,20 +8,13 @@ data_source: docs.cloud.google.com
 
 # Create Google Drive external tables
 
-This document describes how to create an external table over data stored in Google Drive.
+Google Drive external tables let you query data in Drive files—such as CSV, newline-delimited JSON, Avro, and Google Sheets files— directly from BigQuery without loading the data into BigQuery storage. You can create external tables over both personal and shared Drive files.
 
-BigQuery supports external tables over both personal Drive files and shared files. For more information on Drive, see [Drive training and help](https://support.google.com/a/users/answer/9282958) .
-
-You can create external tables over files in Drive that have the following formats:
-
-- Comma-separated values (CSV)
-- Newline-delimited JSON
-- Avro
-- Google Sheets
+This document describes how to create and query Drive external tables.
 
 ## Before you begin
 
-Before you create an external table, gather some information and make sure you have permission to create the table.
+Before you create an external table, ensure that you have the required permissions to create the table. For more information on Drive, see [Drive training and help](https://support.google.com/a/users/answer/9282958) .
 
 ### Retrieve Drive URIs
 

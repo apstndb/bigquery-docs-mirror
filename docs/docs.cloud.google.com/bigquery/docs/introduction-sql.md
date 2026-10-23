@@ -8,13 +8,13 @@ data_source: docs.cloud.google.com
 
 # Introduction to SQL in BigQuery
 
-This document provides an overview of supported statements and SQL dialects in BigQuery.
+GoogleSQL in BigQuery lets you analyze massive datasets, manage database objects, and control access across your data warehouse. The supported SQL dialects and statement types let you effectively construct complex queries and use the full suite of data manipulation and administration features in BigQuery.
 
-GoogleSQL is an ANSI-compliant [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL) that includes the following types of supported statements:
+GoogleSQL is an ANSI-compliant [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL) that supports the following types of statements:
 
 - [Query statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) , also known as Data Query Language (DQL) statements, are the primary method to analyze data in BigQuery. They scan one or more tables or expressions and return the computed result rows. Query statements can include [pipe syntax](https://docs.cloud.google.com/bigquery/docs/pipe-syntax) .
 
-- [Procedural language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) are procedural extensions to GoogleSQL that allow you to execute multiple SQL statements in one request. Procedural statements can use variables and control-flow statements, and can have side effects.
+- [Procedural language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) are procedural extensions to GoogleSQL that let you execute multiple SQL statements in one request. Procedural statements can use variables and control-flow statements, and can have side effects.
 
 - [Data Definition Language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) let you create and modify objects such as the following:
 
@@ -27,13 +27,13 @@ GoogleSQL is an ANSI-compliant [Structured Query Language (SQL)](https://en.wiki
   - Capacity commitments, reservations, and assignments
   - Row-level access policies
 
-- [Data Manipulation Language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) enable you to update, insert, and delete data from your BigQuery tables.
+- [Data Manipulation Language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) let you update, insert, and delete data from your BigQuery tables.
 
 - [Data Control Language (DCL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) let you control BigQuery system resources such as access and capacity.
 
-- [Transaction Control Language (TCL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#transactions) allow you to manage transactions for data modifications.
+- [Transaction Control Language (TCL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#transactions) let you manage transactions for data modifications.
 
-- [Load statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) and [export statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to manage data coming in and out of BigQuery.
+- [Load statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) and [export statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) let you manage data coming in and out of BigQuery.
 
 ## BigQuery SQL dialects
 

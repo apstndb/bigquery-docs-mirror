@@ -593,28 +593,30 @@ LAST_DAY(datetime_expression[, date_part])
 
 **Description**
 
-Returns the last day from a datetime expression that contains the date. This is commonly used to return the last day of the month.
+Returns the last day from a datetime expression. This is commonly used to return the last day of the month.
 
 You can optionally specify the date part for which the last day is returned. If this parameter isn't used, the default value is `MONTH` . `LAST_DAY` supports the following values for `date_part` :
 
 - `YEAR`
 - `QUARTER`
 - `MONTH`
-- `WEEK` . Equivalent to 7 `DAY` s.
+- `WEEK` . Weeks begin on Sunday, so the last day of the week is Saturday. `WEEK` is equivalent to `WEEK(SUNDAY)` .
 - `WEEK(<WEEKDAY>)` . `<WEEKDAY>` represents the starting day of the week. Valid values are `SUNDAY` , `MONDAY` , `TUESDAY` , `WEDNESDAY` , `THURSDAY` , `FRIDAY` , and `SATURDAY` .
-- `ISOWEEK` . Uses [ISO 8601](https://en.wikipedia.org/wiki/ISO_week_date) week boundaries. ISO weeks begin on Monday.
-- `ISOYEAR` . Uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year boundary. The ISO year boundary is the Monday of the first week whose Thursday belongs to the corresponding Gregorian calendar year.
+- `ISOWEEK` . Uses [ISO 8601](https://en.wikipedia.org/wiki/ISO_week_date) week boundaries. ISO weeks begin on Monday, so the last day of the ISO week is Sunday.
+- `ISOYEAR` . Uses the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year boundary. The ISO year boundary is the Monday of the first week whose Thursday belongs to the corresponding Gregorian calendar year, so the last day of the ISO year is the Sunday before the next ISO year boundary.
+
+If `datetime_expression` is `NULL` , this function returns `NULL` . If the resulting date exceeds `9999-12-31` , this function returns an out-of-range error.
 
 **Return Data Type**
 
 `DATE`
 
-**Example**
+**Examples**
 
 These both return the last day of the month:
 
 ```
-SELECT LAST_DAY(DATETIME '2008-11-25', MONTH) AS last_day
+SELECT LAST_DAY(DATETIME '2008-11-25 15:30:00', MONTH) AS last_day
 
 /*------------+
  | last_day   |
@@ -624,7 +626,7 @@ SELECT LAST_DAY(DATETIME '2008-11-25', MONTH) AS last_day
 ```
 
 ```
-SELECT LAST_DAY(DATETIME '2008-11-25') AS last_day
+SELECT LAST_DAY(DATETIME '2008-11-25 15:30:00') AS last_day
 
 /*------------+
  | last_day   |

@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Specify nested and repeated columns in table schemas
 
-This page describes how to define a table schema with nested and repeated columns in BigQuery. For an overview of table schemas, see [Specify a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
+Nested and repeated columns let you store related data, such as a book and its authors, in a single BigQuery table instead of in separate tables that you join. Because BigQuery performs best with denormalized data, these columns help you maintain relationships without the performance cost of a normalized schema.
+
+This document describes how to define nested and repeated columns in a table schema, insert and modify data in them, and decide when to use them. For an overview of table schemas, see [Specify a schema](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
 ## Define nested and repeated columns
 

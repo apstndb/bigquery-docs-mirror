@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to clustered tables
 
-Clustered tables in BigQuery are tables that have a user-defined column sort order using *clustered columns* . Clustered tables can improve query performance and reduce query costs.
+Clustered tables in BigQuery sort data in storage blocks based on the values in user-defined clustered columns. Clustering can improve query performance and reduce costs, because queries that filter or aggregate by clustered columns scan only the relevant blocks, not the entire table or partition.
+
+Because the number of blocks to scan isn't known until a query runs, you don't receive an accurate cost estimate before execution. Clustering also doesn't guarantee a reduction in the slots required to query a table.
+
+## How clustering works
 
 In BigQuery, a *clustered column* is a user-defined table property that sorts [storage blocks](https://docs.cloud.google.com/bigquery/docs/storage_overview#storage_layout) based on the values in the clustered columns. The storage blocks are adaptively sized based on the size of the table. Colocation occurs at the level of the storage blocks, and not at the level of individual rows; for more information on colocation in this context, see [Clustering](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview#clustering) .
 
@@ -17,10 +21,6 @@ A clustered table maintains the sort properties in the context of each operation
 When you cluster a table using multiple columns, the column order determines which columns take precedence when BigQuery sorts and groups the data into storage blocks, as seen in the following example. Table 1 shows the logical storage block layout of an unclustered table. In comparison, table 2 is only clustered by the `Country` column, whereas table 3 is clustered by multiple columns, `Country` and `Status` .
 
 ![BigQuery sorts data in clustered tables to improve query performance.](https://docs.cloud.google.com/static/bigquery/images/clustering-tables.png)
-
-When you query a clustered table, you don't receive an accurate query cost estimate before query execution because the number of storage blocks to be scanned is not known before query execution. The final cost is determined after query execution is complete and is based on the specific storage blocks that were scanned.
-
-Clustering doesn't guarantee a reduction in the slots required to query a table.
 
 ## When to use clustering
 

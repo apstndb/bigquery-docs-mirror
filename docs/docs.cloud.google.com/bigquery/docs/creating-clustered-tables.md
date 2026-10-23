@@ -8,14 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create clustered tables
 
-You can reduce the amount of data processed by a query by using clustered tables in BigQuery.
+Clustered tables in BigQuery let you reduce the amount of data that your queries process. Because table data is sorted by the values of the clustering columns, queries that filter on those columns scan only the relevant blocks.
 
-With clustered tables, table data is organized based on the values of specified columns, also called the *clustering columns* . BigQuery sorts the data by the clustered columns, then stores the rows that have similar values in the same or nearby physical blocks. When a query filters on a clustered column, BigQuery efficiently scans only the relevant blocks and skips the data that doesn't match the filter.
-
-For more information, see the following:
-
-- To learn more about clustered tables in BigQuery, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
-- To learn about working with and controlling access to clustered tables, see [Manage clustered tables](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables) .
+This document describes how to create a clustered table as an empty table with a schema definition, from a query result, or when you load data. To learn more, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) and [Manage clustered tables](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables) .
 
 ## Before you begin
 

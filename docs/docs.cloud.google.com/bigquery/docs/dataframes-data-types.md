@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use the BigQuery DataFrames data type system
 
-The BigQuery DataFrames data type system is built upon BigQuery data types. This design ensures seamless integration and alignment with the Google Cloud data warehouse, reflecting the built-in types used for data storage in BigQuery.
+The BigQuery DataFrames data type system lets you work with data structures that align with built-in BigQuery storage types. Building your analyses upon these data types ensures seamless integration and reliable type mappings across your data warehouse.
 
 ## Type mappings
 

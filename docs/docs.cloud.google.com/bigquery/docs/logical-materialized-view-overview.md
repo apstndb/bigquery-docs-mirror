@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Overview of logical and materialized views
 
-This document describes and compares logical and materialized views in BigQuery. In modern data warehousing, views serve as an important abstraction layer between raw data and business intelligence. Within BigQuery, architects typically choose between two types: logical (standard) views and materialized views. While these views share a common interface, their underlying mechanics, performance profiles, and cost implications differ.
+BigQuery supports two types of views, logical (standard) views and materialized views, that share a common query interface but differ in their underlying mechanics, performance, and cost. This document compares the characteristics, benefits, and limitations of each type to help you choose the right view for your workload.
 
 ## Logical views
 

@@ -8,11 +8,13 @@ data_source: docs.cloud.google.com
 
 # Introduction to object tables
 
-This document describes object tables, which are read-only tables over unstructured data objects that reside in Cloud Storage.
+Object tables are read-only tables over unstructured data objects in Cloud Storage. They let you analyze unstructured data by using remote functions or BigQuery ML inference, and then join the results with the rest of your structured data in BigQuery.
 
-Object tables let you analyze unstructured data in Cloud Storage. You can perform analysis with remote functions or perform inference by using BigQuery ML, and then join the results of these operations with the rest of your structured data in BigQuery.
+Like BigLake tables, object tables use access delegation, so you grant users access to the object table instead of to the underlying Cloud Storage objects. This design lets you enforce row-level security and manage which objects users can access.
 
-Like BigLake tables, object tables use access delegation, which decouples access to the object table from access to the Cloud Storage objects. An [external connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections) associated with a service account is used to connect to Cloud Storage, so you only have to grant users access to the object table. This lets you enforce [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) security and manage which objects users have access to.
+> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
+
+## Create object tables
 
 You can use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) to create an object table, as shown in the following example:
 
@@ -23,8 +25,6 @@ OPTIONS ( object_metadata = 'SIMPLE', uris = ['gs://mybucket/*'] );
 ```
 
 To learn more about creating object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) .
-
-> **Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `user:kiran@example.com` , `group:support@example.com` , and `domain:example.com` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## Object table schema
 

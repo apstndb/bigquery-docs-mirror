@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Specify default column values
 
-This page describes how to set a default value for a column in a BigQuery table. When you add a row to a table that doesn't contain data for a column with a default value, the default value is written to the column instead.
+Default column values let you define the value that BigQuery writes to a column when a new row doesn't contain data for that column. This design keeps columns populated consistently without requiring every write to supply a value.
+
+This document describes how to set, change, and remove default values, and how default values work with data manipulation language (DML) statements, load jobs, and the streaming APIs.
 
 ## Default value expression
 

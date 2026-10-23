@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create Amazon S3 BigLake tables
 
-This document describes how to create an Amazon Simple Storage Service (Amazon S3) BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query data in Amazon S3. Access delegation decouples access to the BigLake table from access to the underlying datastore.
+Amazon Simple Storage Service (Amazon S3) BigLake tables let you query data in Amazon S3 from BigQuery by using access delegation. This approach decouples access to the [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) from access to the underlying data store, so users need permissions only on the table.
 
-For information about how data flows between BigQuery and Amazon S3, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
+This document describes how to create an Amazon S3 BigLake table. For information about how data flows between BigQuery and Amazon S3, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
 
 ## Before you begin
 

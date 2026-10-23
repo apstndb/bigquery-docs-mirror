@@ -76,7 +76,7 @@ Some ingestion behaviors differ between different Facebook Ads reports:
 
 - For `AdAccounts` , `AdCreatives` , `AdImages` , `AdLabels` , `Businesses` , and `CustomAudiences` tables, snapshots are taken once a day and stored in the partition of the last transfer run date.
 
-- Data transfers for the `AdInsights` , `AdInsightActions` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify a `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
+- Data transfers for the `AdInsights` , `AdInsightsActions` , `Ads` , `AdSets` and `Campaigns` tables will transfer Facebook Ads data that corresponds to the run date of the transfer. For these tables, if you specify an `insightsTimeIncrement` value that is more than 1, then the data transfer includes data from a number of days before the run date according to the `insightsTimeIncrement` value, including the run date. For example, if the `insightsTimeIncrement` value is 3, then the data transfer only includes data from the run date and data from 2 days before the run date, for a total of 3 days of data.
 
 - For `AdInsights` and `AdInsightsActions` tables, the table partition that the data is loaded into corresponds to the date from the data source.
 

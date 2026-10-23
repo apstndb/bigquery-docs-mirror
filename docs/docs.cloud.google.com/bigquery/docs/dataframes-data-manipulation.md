@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manipulate data with BigQuery DataFrames
 
-This document describes the data manipulation capabilities available with BigQuery DataFrames. You can find the functions that are described in the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library.
+BigQuery DataFrames lets you manipulate data using familiar pandas syntax patterns without transferring datasets out of your data warehouse. Because these operations are executed server-side, you can inspect, manipulate, and apply complex calculations directly on data stored within BigQuery.
+
+For more information about supported functions, see the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library.
 
 ## Required roles
 

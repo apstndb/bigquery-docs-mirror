@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create a Bigtable external table
 
-This page describes how to create a BigQuery permanent external table that can be used to query data stored in Bigtable. Querying data in Bigtable is available in all [Bigtable locations](https://docs.cloud.google.com/bigtable/docs/locations) .
+A BigQuery permanent external table lets you query data stored in Bigtable by using GoogleSQL without first loading the data into BigQuery storage. You can then analyze Bigtable data alongside your other BigQuery data.
+
+This document describes how to create a Bigtable external table. Querying Bigtable data is available in all [Bigtable locations](https://docs.cloud.google.com/bigtable/docs/locations) .
 
 ## Before you begin
 

@@ -8,11 +8,13 @@ data_source: docs.cloud.google.com
 
 # Create a table definition file for an external data source
 
-This page describes how to create a table definition file, which is a prerequisite for creating an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) by using the bq command-line tool. You create the external data source by running the [`bg mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) and using the `--external_table_definition` flag to specify the table definition file.
+A table definition file lets you create a [permanent or temporary external table](https://docs.cloud.google.com/bigquery/docs/external-tables#temporary_table_support) by using the bq command-line tool. The file contains the schema definition and metadata of the external table, such as its data format and related properties. For example, when you run the [`bq mk --table` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) , you specify the file with the `--external_table_definition` flag. You can set the same properties in a table definition file that are documented for the [`ExternalDataConfiguration` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the REST API.
 
-A table definition file contains an external table's schema definition and metadata, such as the table's data format and related properties. You can set the same properties in a table definition file that are documented for the [`ExternalDataConfiguration` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) in the REST API.
+This document describes how to create table definition files for Cloud Storage, Google Drive, and Bigtable data sources.
 
-You can create table definition files to describe a [permanent or temporary external table](https://docs.cloud.google.com/bigquery/docs/external-tables#temporary_table_support) for the following external data sources:
+## Supported data sources and formats
+
+You can create table definition files for the following [external data sources](https://docs.cloud.google.com/bigquery/docs/external-data-sources) :
 
 - Cloud Storage
 

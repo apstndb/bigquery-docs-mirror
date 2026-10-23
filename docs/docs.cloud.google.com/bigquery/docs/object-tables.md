@@ -8,14 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create object tables
 
-This document describes how to make unstructured data in Cloud Storage accessible in BigQuery by creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
-
-To create an object table, you must complete the following tasks:
-
-1.  Create a [dataset](https://docs.cloud.google.com/bigquery/docs/datasets-intro) to contain the object table.
-2.  Create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to read object information from Cloud Storage.
-3.  Grant the Storage Object Viewer ( `roles/storage.objectViewer` ) role to the service account associated with the connection.
-4.  Create the object table and associate it with the connection by using the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) .
+An [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) makes unstructured data in Cloud Storage accessible in BigQuery, so you can analyze it alongside your structured data. This document describes how to set up the dataset, connection, and IAM role that an object table requires, and how to create and query the table.
 
 ## Before you begin
 
@@ -64,7 +57,7 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 ## Create a dataset
 
-Create a BigQuery dataset to contain the object table:
+Create a BigQuery [dataset](https://docs.cloud.google.com/bigquery/docs/datasets-intro) to contain the object table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

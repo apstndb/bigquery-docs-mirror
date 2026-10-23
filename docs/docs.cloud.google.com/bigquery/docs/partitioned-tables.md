@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to partitioned tables
 
-A partitioned table is divided into segments, called partitions, that make it easier to manage and query your data. By dividing a large table into smaller partitions, you can improve query performance and control costs by reducing the number of bytes read by a query. You partition tables by specifying a partition column which is used to segment the table.
+A partitioned table is divided into segments, called partitions, that make it easier to manage and query your data. By dividing a large table into smaller partitions, you can improve query performance and control costs by reducing the number of bytes that a query reads. You partition a table by specifying a partitioning column that BigQuery uses to segment the table.
 
-If a query uses a qualifying filter on the value of the partitioning column, BigQuery can scan the partitions that match the filter and skip the remaining partitions. This process is called [pruning](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+If a query uses a qualifying filter on the value of the partitioning column, BigQuery can scan the partitions that match the filter and skip the rest. This process is called [pruning](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+
+## How partitioning works
 
 In a partitioned table, data is stored in physical blocks, each of which holds one partition of data. Each partitioned table maintains various metadata about the sort properties across all operations that modify it. The metadata lets BigQuery more accurately estimate a query cost before the query is run.
 

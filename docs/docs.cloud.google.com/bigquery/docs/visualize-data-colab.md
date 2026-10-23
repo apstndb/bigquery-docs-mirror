@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Visualize query results
 
-You can use [visualization cells](https://docs.cloud.google.com/colab/docs/visualization-cells) in Colab Enterprise notebooks to generate and customize charts and graphs for large-scale analysis without leaving your notebook environment.
+You can use [visualization cells](https://docs.cloud.google.com/colab/docs/visualization-cells) in Colab Enterprise notebooks to generate and customize charts and graphs from your BigQuery data without writing Python code. Exploring your query results visually within the notebook environment lets you identify trends and analyze large-scale datasets without interrupting your workflow.
 
-This guide shows you how to use visualization cells in Colab Enterprise notebooks to analyze data from the `bigquery-public-data.ml_datasets.penguins` public dataset. You will complete the following tasks:
+In this tutorial, you use visualization cells in Colab Enterprise notebooks to analyze data from the `bigquery-public-data.ml_datasets.penguins` public dataset. You will complete the following tasks:
 
 1.  Execute SQL queries directly in a notebook.
 2.  Filter query results using Python DataFrames.

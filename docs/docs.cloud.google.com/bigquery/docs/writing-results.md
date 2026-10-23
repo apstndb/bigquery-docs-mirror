@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Write query results
 
-This document describes how to write query results to temporary or permanent tables.
+Writing BigQuery query results to a permanent table lets you safely store, share, and download your analyzed data. While BigQuery automatically caches all query results in temporary tables, saving your output to a destination table lets you preserve large result sets and integrate them into downstream workflows.
 
 ## Temporary and permanent tables
 
@@ -34,7 +34,7 @@ BigQuery saves all query results to a table, which can be either permanent or te
 
 - Access to the temporary table data is restricted to the user or service account that created the query job.
 
-- You cannot share temporary tables, and they are not visible using any of the standard list or other table manipulation methods. If you need to share your query results, write the results to a permanent table, download them, or share them through Google Sheets or Google Drive.
+- You can't share temporary tables, and they aren't visible using any of the standard list or other table manipulation methods. If you need to share your query results, write the results to a permanent table, download them, or share them through Google Sheets or Google Drive.
 
 - Temporary tables are created in the same region as the table or tables being queried.
 
@@ -459,7 +459,7 @@ When you specify a destination table for large query results, you are charged fo
 In legacy SQL, writing large results is subject to these limitations:
 
 - You must specify a destination table.
-- You cannot specify a top-level `ORDER BY` , `TOP` or `LIMIT` clause. Doing so negates the benefit of using `allowLargeResults` , because the query output can no longer be computed in parallel.
+- You can't specify a top-level `ORDER BY` , `TOP` or `LIMIT` clause. Doing so negates the benefit of using `allowLargeResults` , because the query output can no longer be computed in parallel.
 - [Window functions](https://docs.cloud.google.com/bigquery/query-reference#windowfunctions) can return large query results only if used in conjunction with a `PARTITION BY` clause.
 
 ### Writing large results using legacy SQL

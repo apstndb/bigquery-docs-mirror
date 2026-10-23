@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to external data sources
 
-This page provides an overview of querying data stored outside of BigQuery.
+External data sources let you query data directly from BigQuery, even though the data isn't stored in BigQuery storage. For example, you can analyze data in a different Google Cloud database, in files in Cloud Storage, or in another cloud product without first migrating it.
 
-An external data source is a data source that you can query directly from BigQuery, even though the data is not stored in BigQuery storage. For example, you might have data in a different Google Cloud database, in files in Cloud Storage, or in a different cloud product altogether that you would like to analyze in BigQuery, but that you aren't prepared to migrate.
+This document provides an overview of the ways to query external data, including BigLake tables, object tables, external tables, and federated queries, and describes common use cases.
+
+## Use cases
 
 Use cases for external data sources include the following:
 

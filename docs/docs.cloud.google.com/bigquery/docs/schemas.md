@@ -8,20 +8,9 @@ data_source: docs.cloud.google.com
 
 # Specify a schema
 
-BigQuery lets you specify a table's schema when you load data into a table, and when you create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect#auto-detect) for supported data formats.
+A schema defines the column names, data types, and other properties of a BigQuery table, so your data is stored and queried with the structure that you expect. BigQuery lets you specify a schema when you load data into a table or create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect#auto-detect) for supported data formats.
 
-When you load Avro, Parquet, ORC, Firestore export files, or Datastore export files, the schema is automatically retrieved from the self-describing source data.
-
-You can specify a table's schema in the following ways:
-
-- Use the Google Cloud console.
-- Use the `CREATE TABLE` SQL statement.
-- Inline using the bq command-line tool.
-- Create a schema file in JSON format.
-- Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure the `schema` property in the `load` job configuration.
-- Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method and configure the schema in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) using the `schema` property.
-
-After loading data or creating an empty table, you can [modify the table's schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
+For self-describing formats, such as Avro, Parquet, ORC, Firestore export files, and Datastore export files, BigQuery retrieves the schema from the source data. After you load data or create an empty table, you can [modify the schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ## Schema components
 
@@ -243,6 +232,15 @@ The table `mytable` looks like the following:
 For more information, see `roundingMode` in the [`TableFieldSchema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema) .
 
 ## Specify schemas
+
+You can specify the schema of a table in the following ways:
+
+- Use the Google Cloud console.
+- Use the `CREATE TABLE` SQL statement.
+- Inline using the bq command-line tool.
+- Create a schema file in JSON format.
+- Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method and configure the `schema` property in the `load` job configuration.
+- Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method and configure the schema in the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) using the `schema` property.
 
 When you load data or create an empty table, you can specify the table's schema using the Google Cloud console or the bq command-line tool. Specifying a schema is supported when you load CSV and JSON (newline delimited) files. When you load Avro, Parquet, ORC, Firestore export data, or Datastore export data, the schema is automatically retrieved from the self-describing source data.
 

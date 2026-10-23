@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Specify ObjectRef columns in table schemas
 
-This document describes how to define a BigQuery standard table schema with columns that can store `ObjectRef` values.
+`ObjectRef` columns let you integrate unstructured data into a BigQuery standard table by storing metadata and connection information for objects in Cloud Storage. For example, in a products table, you can store each product image in the same row as the rest of the product information.
 
-`ObjectRef` values provide metadata and connection information for objects in Cloud Storage. Use `ObjectRef` values when you need to integrate unstructured data into a standard table. For example, in a products table, you could store product images in the same row with the rest of the product information by adding a column containing `ObjectRef` values. You can store `ObjectRef` values in `STRUCT` columns that use the [`ObjectRef` format](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) , which is `STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>` .
-
-For more information about working with multimodal data, see [Analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) . For a tutorial that shows how to work with `ObjectRef` data, see [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) .
-
-> **Note:** The examples in this document use the [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create and populate an `ObjectRef` column in a single operation, but you can also use the [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) to add a `STRUCT` column to an existing table and then use the [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) to populate that column in a separate operation.
+This document describes how to define a table schema with `STRUCT` columns that use the [`ObjectRef` format](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) . For more information about working with multimodal data, see [Analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) and the [Analyze multimodal data with SQL](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial) tutorial.
 
 ## Prerequisites
 
@@ -31,6 +27,10 @@ Similarly, if you already have a [Storage Insights dataset for object metadata](
 If you don't have an existing object table or Storage Insights dataset, you can use the [`OBJ.MAKE_REF`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) function to populate and update `ObjectRef` values by fetching object metadata directly from Cloud Storage. This approach might be less scalable, because it requires the retrieval of object metadata from Cloud Storage.
 
 ## Create an `ObjectRef` column
+
+You can store `ObjectRef` values in `STRUCT` columns that use the [`ObjectRef` format](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) , which is `STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>` .
+
+> **Note:** The examples in this document use the [`CREATE OR REPLACE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create and populate an `ObjectRef` column in a single operation, but you can also use the [`ALTER TABLE ADD COLUMN` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) to add a `STRUCT` column to an existing table and then use the [`UPDATE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement) to populate that column in a separate operation.
 
 To create and populate an `ObjectRef` column in a standard table, select one of the following options:
 

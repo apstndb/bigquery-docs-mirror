@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use Knowledge Catalog with BigQuery
 
-Knowledge Catalog, (formerly known as Dataplex Universal Catalog), interacts with BigQuery as a central data governance and agentic access layer for BigQuery's metadata. For more information, see the [Knowledge Catalog overview](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
+Knowledge Catalog (formerly known as Dataplex Universal Catalog) lets you centrally govern and provide agentic access to BigQuery metadata. For more information, see [Knowledge Catalog overview](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
 
 ## How do I use Knowledge Catalog with BigQuery?
 

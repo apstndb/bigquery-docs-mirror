@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Install BigQuery DataFrames
 
-BigQuery DataFrames provides a Python DataFrame and machine learning (ML) API powered by the BigQuery engine. BigQuery DataFrames is an open-source package.
+BigQuery DataFrames is an open-source package that lets you perform data analysis and machine learning (ML) tasks using familiar Python APIs. Installing this package lets you use the BigQuery engine to scale your pandas and scikit-learn workflows to process massive datasets.
 
 ## Install BigQuery DataFrames
 

@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Query partitioned tables
 
-This document describes some specific considerations for querying [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) in BigQuery.
+When you query a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) in BigQuery, filtering on the partitioning column lets BigQuery prune partitions, which reduces the bytes scanned and lowers query costs. This document describes how to query time-unit column-partitioned, ingestion-time partitioned, and integer-range partitioned tables, and gives best practices for partition pruning.
 
-For general information on running queries in BigQuery, see [Running interactive and batch queries](https://docs.cloud.google.com/bigquery/docs/running-queries) .
+For general information about running queries, see [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) .
 
 ## Overview
 

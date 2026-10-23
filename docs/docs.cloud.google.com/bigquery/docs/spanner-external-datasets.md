@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create Spanner external datasets
 
-This document describes how to create an external dataset (also known as a federated dataset) in BigQuery that's linked to an existing GoogleSQL or PostgreSQL database in [Spanner](https://docs.cloud.google.com/spanner/docs) .
+External datasets (also known as *federated datasets* ) let you query transactional data in Spanner from BigQuery by using GoogleSQL, without copying or importing the data into BigQuery storage. An external dataset links a BigQuery dataset to an existing GoogleSQL or PostgreSQL database in Spanner. Its read-only tables automatically reflect the tables and updates in that database.
 
-An external dataset is a connection between BigQuery and an external data source at the dataset level. It lets you query transactional data in Spanner databases with GoogleSQL without needing to copy or import all of the data from Spanner to BigQuery storage. These query results are [stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) .
-
-The tables in an external dataset are automatically populated from the tables in the corresponding external data source. You can query these tables directly in BigQuery, but you cannot make modifications, additions, or deletions. However, any updates that you make in the external data source are automatically reflected in BigQuery.
-
-When you query Spanner, query results are by default saved in temporary tables. They can also optionally be saved as a new BigQuery table, joined with other tables, or merged with existing tables using [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
+This document describes how to create, query, and manage a Spanner external dataset.
 
 ## Required permissions
 
@@ -575,6 +571,8 @@ To get information on the tables in your external dataset, such as schema detail
 [Querying tables](https://docs.cloud.google.com/bigquery/docs/running-queries) in external datasets is the same as querying tables in any other BigQuery dataset. However, data modification operations (DML) aren't supported.
 
 Queries against tables in Spanner external datasets use [Data Boost](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#data_boost) by default and it cannot be changed. Because of that you need [additional permissions](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#before_you_begin_2) to run such queries.
+
+Query results are [stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you query Spanner, query results are by default saved in temporary tables. They can also optionally be saved as a new BigQuery table, joined with other tables, or merged with existing tables using [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
 
 ## Create a view in an external dataset
 

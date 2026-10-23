@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create Apache Iceberg external tables
 
-Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables with finer-grained access control in a read-only format. These tables are no longer recommended for most use cases. Instead, see [Recommended alternatives](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#recommended-alternatives) .
-
-Iceberg is an open source table format that supports petabyte scale data tables. The Iceberg open specification lets you run multiple query engines on a single copy of data stored in an object store. Apache Iceberg external tables (hereafter called *Iceberg external tables* ) support [Iceberg version 2](https://iceberg.apache.org/spec/#version-2-row-level-deletes) , including merge-on-read. Support for [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors, is in [Preview](https://cloud.google.com/products/#product-launch-stages) . To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
-
-As a BigQuery administrator, you can enforce row- and column-level access control including data masking on tables. For information about how to set up access control at the table level, see [Set up access control policies](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#set-access-control) . Table access policies are also enforced when you use the BigQuery Storage API as a data source for the table in Managed Service for Apache Spark and Serverless Spark.
+Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables in a read-only format with finer-grained access control, including row-level and column-level security and data masking. These tables are no longer recommended for most use cases. Instead, see [Recommended alternatives](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#recommended-alternatives) .
 
 ## Recommended alternatives
 
@@ -20,6 +16,10 @@ Depending on where your data is stored, we recommend the following alternatives 
 
 - **Cloud Storage or Amazon Simple Storage Service (Amazon S3) data managed by remote catalogs such as AWS Glue, Databricks Unity Catalog, and Snowflake Horizon Catalog** . Use [Lakehouse runtime catalog with cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) . The cross-cloud data access feature of Lakehouse runtime catalog lets you query data in other cloud providers directly from Google Cloud without migrating files or building complex ETL pipelines.
 - **Azure Blob Storage or Apache Iceberg tables not managed by a supported remote catalog for Lakehouse runtime catalog with cross-cloud data access** . Continue with [Apache Iceberg external tables using Iceberg JSON metadata files](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#create-using-metadata-file) .
+
+## Iceberg format and version support
+
+Iceberg is an open source table format that supports petabyte scale data tables. The Iceberg open specification lets you run multiple query engines on a single copy of data stored in an object store. Iceberg external tables support [Iceberg version 2](https://iceberg.apache.org/spec/#version-2-row-level-deletes) , including merge-on-read. Support for [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors, is in [Preview](https://cloud.google.com/products/#product-launch-stages) . To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
 
 ## Before you begin
 
@@ -197,6 +197,8 @@ Replace `URI` with the latest Iceberg metadata file. For example, `gs://mybucket
 ## Set up access control policies
 
 You can control access to Iceberg external tables through [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , [row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) , and [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking) .
+
+As a BigQuery administrator, you can enforce row- and column-level access control including data masking on tables. Table access policies are also enforced when you use the BigQuery Storage API as a data source for the table in Managed Service for Apache Spark and Serverless Spark.
 
 ## Query Iceberg external tables
 

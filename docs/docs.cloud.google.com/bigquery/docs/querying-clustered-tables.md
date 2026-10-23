@@ -8,22 +8,39 @@ data_source: docs.cloud.google.com
 
 # Query clustered tables
 
-When you create a clustered table in BigQuery, the table data is automatically organized based on the contents of one or more columns in the table's schema. The columns you specify are used to colocate related data. When you cluster a table using multiple columns, the order of columns you specify is important. The order of the specified columns determines the sort order of the data.
+Filtering on clustered columns lets you improve performance and reduce costs when you query clustered tables in BigQuery. When a query filters on one or more clustered columns, BigQuery uses the clustering information to scan only the relevant blocks—a process called [block pruning](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning) .
 
-To optimize performance when you run queries against clustered tables, use an expression that filters on a clustered column or on multiple clustered columns in the order the clustered columns are specified. Queries that filter on clustered columns generally perform better than queries that filter only on non-clustered columns.
+This document describes the permissions and best practices for querying clustered tables, including why the order of clustered columns in your filters matters. You can query clustered tables only by using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) .
 
-BigQuery sorts the data in a clustered table based on the values in the clustering columns and organizes them into blocks.
+## Required permissions
 
-When you submit a query that contains a filter on a clustered column, BigQuery uses the clustering information to efficiently determine whether a block contains any data relevant to the query. This allows BigQuery to only scan the relevant blocks — a process referred to as [block pruning](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning) .
+To run a query [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) , you need the `bigquery.jobs.create` Identity and Access Management (IAM) permission on the project that runs the query job.
+
+Each of the following predefined IAM roles includes the permissions that you need to run a query job:
+
+- `roles/bigquery.admin`
+- `roles/bigquery.jobUser`
+- `roles/bigquery.user`
+
+You also need the `bigquery.tables.getData` permission on all tables and views that your query references. In addition, when querying a view you need this permission on all underlying tables and views. However, if you are using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
+
+Each of the following predefined IAM roles includes the permission that you need on all tables and views that the query references:
+
+- `roles/bigquery.admin`
+- `roles/bigquery.dataOwner`
+- `roles/bigquery.dataEditor`
+- `roles/bigquery.dataViewer`
+
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://cloud.google.com/bigquery/docs/access-control) .
+
+## Query a clustered table
 
 You can query clustered tables by:
 
 - Using the Google Cloud console
-- Using the bq command-line tool's `bq query` command
+- Using the `bq query` command in the bq command-line tool
 - Calling the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and configuring a [query job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery)
 - Using the client libraries
-
-You can only use [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) with clustered tables.
 
 ### Go
 
@@ -185,27 +202,6 @@ if table.clustering_fields == cluster_fields:
         "The destination table is written using the cluster_fields configuration."
     )
 ```
-
-## Required permissions
-
-To run a query [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) , you need the `bigquery.jobs.create` Identity and Access Management (IAM) permission on the project that runs the query job.
-
-Each of the following predefined IAM roles includes the permissions that you need to run a query job:
-
-- `roles/bigquery.admin`
-- `roles/bigquery.jobUser`
-- `roles/bigquery.user`
-
-You also need the `bigquery.tables.getData` permission on all tables and views that your query references. In addition, when querying a view you need this permission on all underlying tables and views. However, if you are using [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) or [authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.
-
-Each of the following predefined IAM roles includes the permission that you need on all tables and views that the query references:
-
-- `roles/bigquery.admin`
-- `roles/bigquery.dataOwner`
-- `roles/bigquery.dataEditor`
-- `roles/bigquery.dataViewer`
-
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://cloud.google.com/bigquery/docs/access-control) .
 
 ## Best practices
 

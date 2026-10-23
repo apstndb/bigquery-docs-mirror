@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create Cloud Storage BigLake tables
 
-This document describes how to create a Cloud Storage BigLake table. A [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) lets you use access delegation to query structured data in Cloud Storage. Access delegation decouples access to the BigLake table from access to the underlying datastore.
+Cloud Storage BigLake tables let you query structured data in Cloud Storage by using access delegation. This approach decouples access to the [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) from access to the underlying data store, so users need permissions only on the table.
+
+This document describes how to create a Cloud Storage BigLake table.
 
 ## Before you begin
 

@@ -178,6 +178,11 @@ The `INFORMATION_SCHEMA.JOBS_TIMELINE_BY_*` view has the following schema:
 <li><code>remote_regions</code> : An array of remote regions referenced by the global query.</li>
 </ul></td>
 </tr>
+<tr class="odd">
+<td><code>copy_job_statistics</code></td>
+<td><code>RECORD</code></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#CopyJobStatistics">Statistics for a copy job.</a></td>
+</tr>
 </tbody>
 </table>
 

@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Create partitioned tables
 
-This page describes how to create partitioned tables in BigQuery. For an overview of partitioned tables, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
+Partitioning a BigQuery table lets you improve query performance and control costs, because queries that filter on the partitioning column read only the relevant partitions. This document describes how to create an empty partitioned table, create one from a query result, and convert date-sharded tables into ingestion-time partitioned tables.
+
+For an overview, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
 ## Before you begin
 

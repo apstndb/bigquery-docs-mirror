@@ -8,15 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create logical views
 
-This document describes how to create logical views in BigQuery.
-
-You can create a logical view in the following ways:
-
-- Using the Google Cloud console.
-- Using the bq command-line tool's `bq mk` command.
-- Calling the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) API method.
-- Using the client libraries.
-- Submitting a [`CREATE VIEW`](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_view_statement) data definition language (DDL) statement.
+Logical views let you save a SQL query as a virtual table, which helps you reuse query logic and simplify access to your data. This document describes how to create logical views, including view naming rules and limitations.
 
 ## View limitations
 

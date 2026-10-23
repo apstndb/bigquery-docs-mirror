@@ -102,35 +102,35 @@ When you make changes to the table schema in your data source, incremental data 
 
 The following table maps Oracle data types to the corresponding BigQuery data types:
 
-| Oracle data type                                                               | BigQuery data type |
-|--------------------------------------------------------------------------------|--------------------|
-| `BFILE`                                                                        | `BYTES`            |
-| `BINARY_DOUBLE`                                                                | `FLOAT`            |
-| `BINARY_FLOAT`                                                                 | `FLOAT`            |
-| `BLOB`                                                                         | `BYTES`            |
-| `CHAR`                                                                         | `STRING`           |
-| `CLOB`                                                                         | `STRING`           |
-| `DATE`                                                                         | `DATETIME`         |
-| `FLOAT`                                                                        | `FLOAT`            |
-| `INTERVAL DAY TO SECOND`                                                       | `STRING`           |
-| `INTERVAL YEAR TO MONTH`                                                       | `STRING`           |
-| `LONG`                                                                         | `STRING`           |
-| `LONG RAW`                                                                     | `BYTES`            |
-| `NCHAR`                                                                        | `STRING`           |
-| `NCLOB`                                                                        | `STRING`           |
-| `NUMBER (without precision and scale)`                                         | `STRING`           |
-| `NUMBER (with precision and scale lower than the BigQuery Numeric range)`      | `NUMERIC`          |
-| `NUMBER (with precision and scale lower than the BigQuery BigNumeric range)`   | `BIGNUMERIC`       |
-| `NUMBER (with precision and scale greater than the BigQuery BigNumeric range)` | `STRING`           |
-| `NVARCHAR2`                                                                    | `STRING`           |
-| `RAW`                                                                          | `BYTES`            |
-| `ROWID`                                                                        | `STRING`           |
-| `TIMESTAMP`                                                                    | `DATETIME`         |
-| `TIMESTAMP WITH LOCAL TIME ZONE`                                               | `DATETIME`         |
-| `TIMESTAMP WITH TIME ZONE`                                                     | `TIMESTAMP`        |
-| `UROWID`                                                                       | `STRING`           |
-| `VARCHAR`                                                                      | `STRING`           |
-| `VARCHAR2`                                                                     | `STRING`           |
+| Oracle data type                                                                 | BigQuery data type |
+|----------------------------------------------------------------------------------|--------------------|
+| `BFILE`                                                                          | `BYTES`            |
+| `BINARY_DOUBLE`                                                                  | `FLOAT`            |
+| `BINARY_FLOAT`                                                                   | `FLOAT`            |
+| `BLOB`                                                                           | `BYTES`            |
+| `CHAR`                                                                           | `STRING`           |
+| `CLOB`                                                                           | `STRING`           |
+| `DATE`                                                                           | `DATETIME`         |
+| `FLOAT`                                                                          | `FLOAT`            |
+| `INTERVAL DAY TO SECOND`                                                         | `STRING`           |
+| `INTERVAL YEAR TO MONTH`                                                         | `STRING`           |
+| `LONG`                                                                           | `STRING`           |
+| `LONG RAW`                                                                       | `BYTES`            |
+| `NCHAR`                                                                          | `STRING`           |
+| `NCLOB`                                                                          | `STRING`           |
+| `NUMBER` (without precision and scale)                                           | `STRING`           |
+| `NUMBER` (with precision and scale lower than the BigQuery `NUMERIC` range)      | `NUMERIC`          |
+| `NUMBER` (with precision and scale lower than the BigQuery `BIGNUMERIC` range)   | `BIGNUMERIC`       |
+| `NUMBER` (with precision and scale greater than the BigQuery `BIGNUMERIC` range) | `STRING`           |
+| `NVARCHAR2`                                                                      | `STRING`           |
+| `RAW`                                                                            | `BYTES`            |
+| `ROWID`                                                                          | `STRING`           |
+| `TIMESTAMP`                                                                      | `DATETIME`         |
+| `TIMESTAMP WITH LOCAL TIME ZONE`                                                 | `DATETIME`         |
+| `TIMESTAMP WITH TIME ZONE`                                                       | `TIMESTAMP`        |
+| `UROWID`                                                                         | `STRING`           |
+| `VARCHAR`                                                                        | `STRING`           |
+| `VARCHAR2`                                                                       | `STRING`           |
 
 ## Transfer metadata
 

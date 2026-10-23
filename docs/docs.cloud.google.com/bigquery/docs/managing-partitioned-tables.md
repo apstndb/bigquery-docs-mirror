@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage partitioned tables
 
-This document describes how to manage partitioned tables in BigQuery.
+After you create a partitioned table in BigQuery, you can manage its partitions to control storage costs, require efficient queries, and maintain your data. This document describes how to get partition metadata, set partition expiration, require partition filters in queries, copy partitioned tables and individual partitions, and delete partitions.
 
-> **Note:** The information in [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) also applies to partitioned tables.
+For general table management tasks, which also apply to partitioned tables, see [Manage tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ## Get partition metadata
 

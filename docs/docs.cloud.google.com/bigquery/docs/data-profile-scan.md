@@ -8,11 +8,11 @@ data_source: docs.cloud.google.com
 
 # Profile your data
 
-This document explains how to use data profile scans to better understand your data. BigQuery uses Knowledge Catalog to analyze the statistical characteristics of your data, such as average values, unique values, and maximum values. Knowledge Catalog also uses this information to [recommend rules for data quality checks](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview) .
+Data profile scans help you better understand your data by analyzing its statistical characteristics, such as average, unique, and maximum values. Using these Knowledge Catalog-powered scans lets you uncover deep insights about your datasets and quickly establish [recommend rules for data quality checks](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview) .
 
 For more information about data profiling, see [About data profiling](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .
 
-> **Tip:** The steps in this document show how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see the [Manage data profile scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#start-from-table) section of this document.
+> **Tip:** This document explains how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see [Manage data profile scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#start-from-table) .
 
 ## Before you begin
 

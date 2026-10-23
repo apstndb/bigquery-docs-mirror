@@ -8,6 +8,12 @@ data_source: docs.cloud.google.com
 
 # Create Cloud Storage external tables
 
+Cloud Storage external tables let you query data in formats such as CSV, JSON, Avro, ORC, and Parquet directly from BigQuery, without loading it into BigQuery storage. This document describes how to create external tables on unpartitioned and partitioned data, query them, and upgrade them to BigLake tables.
+
+To query an external table, you need permissions on both the table and the Cloud Storage files. If possible, use a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) instead, because access delegation means that users need permissions only on the table.
+
+## Supported formats and storage classes
+
 BigQuery supports querying Cloud Storage data in the following formats:
 
 - Comma-separated values (CSV)
@@ -24,8 +30,6 @@ BigQuery supports querying Cloud Storage data from these [storage classes](https
 - Nearline
 - Coldline
 - Archive
-
-To query a Cloud Storage external table, you must have permissions on both the external table and the Cloud Storage files. We recommend using a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) instead if possible. BigLake tables provide access delegation, so that you only need permissions on the BigLake table in order to query the Cloud Storage data.
 
 Be sure to [consider the location](https://docs.cloud.google.com/bigquery/docs/locations#data-locations) of your dataset and Cloud Storage bucket when you query data stored in Cloud Storage.
 

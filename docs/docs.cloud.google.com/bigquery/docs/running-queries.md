@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Run a query
 
-This document shows you how to run a query in BigQuery and understand how much data the query will process before execution by performing a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) .
+BigQuery lets you run queries immediately (interactive), in batches, or continuously depending on your use case. To validate your SQL syntax and estimate how much data your query processes to better control your costs, you can perform a [dry run](https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run) .
 
 ## Types of queries
 

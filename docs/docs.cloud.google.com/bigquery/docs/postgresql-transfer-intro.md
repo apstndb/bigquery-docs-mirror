@@ -54,7 +54,7 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 ### Full or incremental transfers
 
-You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a PostgreSQL transfer](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#set-up) .
+You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up a PostgreSQL transfer](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer#set-up) .
 
 You can configure a *full* data transfer to transfer all data from your PostgreSQL datasets with each data transfer.
 

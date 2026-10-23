@@ -10,7 +10,9 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document describes how to create materialized views in BigQuery. Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
+Materialized views let you improve query performance and reduce costs by precomputing and caching the results of frequently run queries in BigQuery. This document describes how to create materialized views, including partitioned and clustered materialized views, non-incremental materialized views, and materialized views that use the `max_staleness` option.
+
+For more information about materialized views, see [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 
 ## Before you begin
 

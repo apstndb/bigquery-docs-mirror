@@ -8,12 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage clustered tables
 
-This document describes how to get information about and control access to clustered tables in BigQuery.
+After you create a clustered table in BigQuery, you can control who can access it, review its properties, and change its clustering columns as your query patterns evolve. This document describes how to control access to clustered tables, get information about them, list the clustered tables in a dataset, and modify the clustering specification.
 
-For more information, see the following:
-
-- To learn about clustered table support in BigQuery, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
-- To learn how to create clustered tables, see [Create clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
+To learn about clustered tables, see [Introduction to clustered tables](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . To create one, see [Create clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
 ## Before you begin
 

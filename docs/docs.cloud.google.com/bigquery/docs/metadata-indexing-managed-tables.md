@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Metadata indexing for BigQuery tables
 
-This document describes column metadata indexing in BigQuery and explains how to allocate dedicated resources to improve index freshness and query performance.
+BigQuery automatically indexes column metadata for BigQuery tables larger than 1 GiB and uses that index to accelerate your queries. The metadata includes file locations, partitioning information, and column-level attributes. By default, indexing is a free background operation, but index freshness depends on available free resources and has no performance service level objectives (SLOs).
 
-BigQuery automatically indexes metadata for BigQuery tables exceeding 1 GiB. This metadata includes file location, partitioning information, and column-level attributes, which BigQuery uses to optimize and accelerate your queries.
-
-By default, metadata indexing in BigQuery is a free background operation and requires no action on your part. However, index freshness depends on available free resources and doesn't have performance service level objectives (SLOs). If index freshness is critical for your use case, we recommend configuring a [`BACKGROUND` reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) , which shares resources across background optimization jobs.
+If index freshness is critical for your workload, you can allocate dedicated resources by configuring a [`BACKGROUND` reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) . This document describes how to monitor index freshness and usage, set up dedicated indexing resources, and configure indexing alerts.
 
 ## View the metadata index refresh time
 
@@ -71,7 +69,7 @@ WHERE
 
 To set up resources for metadata indexing updates in your project, you first need to have a reservation assigned to your project. To do so, do the following:
 
-1.  [Create a `BACKGROUND` reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
+1.  [Create a `BACKGROUND` reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) . A `BACKGROUND` reservation shares resources across background optimization jobs.
 2.  [Assign your project to the reservation](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) .
 
 After setting up your reservation, select one of the following methods to assign slots to your metadata indexing job. By default, slots that you allocate in this manner are shared with other jobs if the slots are idle. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .

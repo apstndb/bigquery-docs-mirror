@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Introduction to tables
 
-A BigQuery table contains individual records organized in rows. Each record is composed of columns (also called *fields* ).
+BigQuery tables let you store and query your data as individual records organized in rows, where each record is composed of columns, also called *fields* . Every table is defined by a schema that describes the column names, data types, and other information.
 
-Every table is defined by a *schema* that describes the column names, data types, and other information. You can specify the schema of a table when it is created, or you can create a table without a schema and declare the schema in the query job or load job that first populates it with data.
-
-Use the format `projectname.datasetname.tablename` to fully qualify a table name when using GoogleSQL, or the format `projectname:datasetname.tablename` to fully qualify a table name when using the bq command-line tool.
+This document describes the types of tables in BigQuery, along with their limitations, quotas, pricing, and security.
 
 ## Table types
 
@@ -21,6 +19,10 @@ The following sections describe the table types that BigQuery supports.
 - [Standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) : structured data stored in BigQuery storage.
 - [External tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#external_tables) : tables that reference data stored outside BigQuery.
 - [Views](https://docs.cloud.google.com/bigquery/docs/tables-intro#views) : logical tables that are created by using a SQL query.
+
+You can specify the schema of a table when it is created, or you can create a table without a schema and declare the schema in the query job or load job that first populates it with data.
+
+Use the format `projectname.datasetname.tablename` to fully qualify a table name when using GoogleSQL, or the format `projectname:datasetname.tablename` to fully qualify a table name when using the bq command-line tool.
 
 ### Standard BigQuery tables
 

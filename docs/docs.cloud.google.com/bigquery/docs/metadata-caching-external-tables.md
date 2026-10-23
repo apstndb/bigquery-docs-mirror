@@ -8,18 +8,19 @@ data_source: docs.cloud.google.com
 
 # Use metadata caching for external data sources
 
-This document describes how to use metadata caching (also known as *column metadata indexing* ) to improve query performance on object tables and some types of BigLake tables.
+Metadata caching, also called *column metadata indexing* , lets you improve query performance on object tables and on Amazon S3 and Cloud Storage BigLake tables. These tables can cache metadata about files in external data stores, such as file names, partitioning information, and row counts.
 
-Object tables and some types of BigLake tables can cache metadata information about files in external datastores—for example, Cloud Storage. The following types of BigLake tables support metadata caching:
+With metadata caching, queries can avoid listing files from the external data source, which can take several minutes for millions of files, and can partition and prune files more quickly. Queries over a large number of files and queries with Hive partition filters benefit the most.
 
+## Supported tables
+
+The following types of tables support metadata caching:
+
+- Object tables
 - Amazon S3 BigLake tables
 - Cloud Storage BigLake tables
 
-The metadata includes filenames, partitioning information, and metadata for files such as row counts. You can choose whether to enable metadata caching on a table. Queries with a large number of files and with Hive partition filters benefit the most from metadata caching.
-
-If you don't enable metadata caching, queries on the table must read the external data source to get object metadata. Reading this data increases the query latency; listing millions of files from the external data source can take several minutes. If you enable metadata caching, queries can avoid listing files from the external data source and can partition and prune files more quickly.
-
-You can enable metadata caching on a BigLake or object table when you create the table. For more information about creating object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) . For more information about creating BigLake tables, see one of the following topics:
+You can choose whether to enable metadata caching on a table. You can enable metadata caching on a BigLake or object table when you create the table. For more information about creating object tables, see [Create object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) . For more information about creating BigLake tables, see one of the following topics:
 
 - [Create Amazon S3 BigLake external tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table)
 - [Create BigLake external tables for Cloud Storage](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake)

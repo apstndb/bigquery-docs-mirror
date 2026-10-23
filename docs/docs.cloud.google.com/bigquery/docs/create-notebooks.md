@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create notebooks
 
-This document describes how to create [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+You can integrate Python into your BigQuery workflows using [Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/programmatic-analysis) . This document explains how to create these [Dataform](https://docs.cloud.google.com/dataform/docs/overview) -powered notebooks directly in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) so that you can analyze data and build machine learning models without exporting your datasets.
 
 ## Before you begin
 

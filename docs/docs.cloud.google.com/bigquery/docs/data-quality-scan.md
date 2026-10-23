@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Scan for data quality issues
 
-This document explains how to use BigQuery and Knowledge Catalog together to ensure that data meets your quality expectations. Knowledge Catalog automatic data quality lets you define and measure the quality of the data in your BigQuery tables. You can automate the scanning of data, validate data against defined rules, and log alerts if your data doesn't meet quality requirements.
+Knowledge Catalog automatic data quality lets you define and measure data quality in your BigQuery tables. You can automate data scans, validate data against defined rules, and log alerts if your data doesn't meet quality requirements.
 
-For more information about automatic data quality, see the [Auto data quality overview](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview) .
-
-> **Tip:** The steps in this document show how to manage data quality scans across your project. You can also create and manage data quality scans when working with a specific table. For more information, see the [Manage data quality scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#start-from-table) section of this document.
+You can manage data quality scans across your project, or [manage data quality scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-quality-scan#start-from-table) . For more information about automatic data quality, see [Auto data quality overview](https://docs.cloud.google.com/knowledge-catalog/docs/auto-data-quality-overview) .
 
 ## Before you begin
 

@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use ML and AI with BigQuery DataFrames
 
-BigQuery DataFrames provides ML and AI capabilities for BigQuery DataFrames using the `bigframes.ml` library.
-
-You can [preprocess data](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#preprocess-data) , [create estimators to train models](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#train-models) in BigQuery DataFrames, [create ML pipelines](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#create-pipelines) , and [split training and testing datasets](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#select-models) .
+The `bigframes.ml` library in BigQuery DataFrames lets you integrate AI and machine learning (ML) capabilities into your data analysis workflows. Preprocessing data, training models, and creating ML pipelines directly in BigQuery lets you scale your analytics without extracting datasets from your data warehouse.
 
 ## Required roles
 

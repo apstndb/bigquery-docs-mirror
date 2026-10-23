@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Feature serving
 
-This document describes your options for making [features](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) available for BigQuery ML model training and inference. For all options, you must save the features in BigQuery tables as a prerequisite first step.
+You can make [features](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) available for BigQuery ML model training and inference by using several serving options. For all options, you must save the features in BigQuery tables as a prerequisite first step.
 
 ## Point-in-time correctness
 
