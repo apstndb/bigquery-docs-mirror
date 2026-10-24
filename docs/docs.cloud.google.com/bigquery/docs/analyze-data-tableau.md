@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Analyze data with BI Engine and Tableau Desktop
 
-BigQuery BI Engine lets you perform fast, low-latency analysis services and interactive analytics with reports and dashboards backed by BigQuery.
-
-This introductory tutorial is intended for data analysts and business analysts who use the business intelligence (BI) tool Tableau Desktop to build reports and dashboards.
+Integrating BI Engine with Tableau Desktop lets you build fast, interactive reports and dashboards backed by BigQuery. You can connect Tableau to a BI Engine reservation to perform low-latency analysis and visualize massive datasets without compromising on query performance.
 
 ## Objectives
-
-In this tutorial, you complete the following tasks:
 
 - Create a dataset and copy data.
 - Create a BI reservation and add capacity using the Google Cloud console.

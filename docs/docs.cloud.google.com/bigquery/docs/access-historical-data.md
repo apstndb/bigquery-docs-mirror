@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Access historical data
 
-BigQuery lets you query and restore data stored in BigQuery that has been changed or deleted within your [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) window.
+BigQuery lets you query and restore data stored in BigQuery that was changed or deleted within your [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) window. Accessing this historical data lets you recover from accidental deletions or analyze the exact state of your data at a specific point in the past without needing to maintain separate backups.
 
 ## Query data at a point in time
 

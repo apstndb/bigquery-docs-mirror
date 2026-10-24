@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with stored procedures for Apache Spark
 
-This document is intended for data engineers, data scientists, and data analysts to create and call stored procedures for Spark in BigQuery.
-
-Using BigQuery, you can create and run [Spark](https://spark.apache.org/) stored procedures that are written in Python, Java, and Scala. You can then run these stored procedures in BigQuery using a GoogleSQL query, similar to running [SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
+You can use [Spark](https://spark.apache.org/) stored procedures in BigQuery to execute complex data processing workloads written in Python, Java, and Scala directly within your data warehouse. Running these procedures using standard GoogleSQL queries lets you integrate advanced data science and engineering tasks into your existing SQL pipelines, similar to running [SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
 ## Before you begin
 

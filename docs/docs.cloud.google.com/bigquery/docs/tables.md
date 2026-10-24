@@ -166,32 +166,32 @@ For more information about how to run queries, see [Run an interactive query](ht
     - For more information about `--clustering_fields` , see [clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
     - For more information about `--destination_kms_key` , see [customer-managed encryption keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) .
 
-    If you are creating a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
+    If you are creating a table in a project other than your default project, add the project ID to the dataset in the following format: `PROJECT_ID `` : `` DATASET` .
 
     To create an empty table in an existing dataset with a schema definition, enter the following:
 
     ```
     bq mk \
     --table \
-    --expiration=integer \
-    --description=description \
-    --label=key_1:value_1 \
-    --label=key_2:value_2 \
-    --add_tags=key_3:value_3[,...] \
-    project_id:dataset.table \
-    schema
+    --expiration=INTEGER \
+    --description=DESCRIPTION \
+    --label=KEY_1:VALUE_1 \
+    --label=KEY_2:VALUE_2 \
+    --add_tags=KEY_3:VALUE_3[,...] \
+    PROJECT_ID:DATASET.TABLE \
+    SCHEMA
     ```
 
     Replace the following:
 
-    - ` integer ` is the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. If you set the expiration time when you create a table, the dataset's default table expiration setting is ignored.
-    - ` description ` is a description of the table in quotes.
-    - ` key_1 ` : ` value_1 ` and ` key_2 ` : ` value_2 ` are key-value pairs that specify [labels](https://docs.cloud.google.com/bigquery/docs/labels) .
-    - ` key_3 ` : ` value_3 ` are key-value pairs that specify [tags](https://docs.cloud.google.com/bigquery/docs/tags) . Add multiple tags under the same flag with commas between key:value pairs.
-    - ` project_id ` is your project ID.
-    - ` dataset ` is a dataset in your project.
-    - ` table ` is the name of the table you're creating.
-    - ` schema ` is an inline schema definition in the format ` field:data_type,field:data_type ` or the path to the JSON schema file on your local machine.
+    - `INTEGER` is the default lifetime (in seconds) for the table. The minimum value is 3600 seconds (one hour). The expiration time evaluates to the current UTC time plus the integer value. If you set the expiration time when you create a table, the dataset's default table expiration setting is ignored.
+    - `DESCRIPTION` is a description of the table in quotes.
+    - `KEY_1 `` : `` VALUE_1` and `KEY_2 `` : `` VALUE_2` are key-value pairs that specify [labels](https://docs.cloud.google.com/bigquery/docs/labels) .
+    - `KEY_3 `` : `` VALUE_3` are key-value pairs that specify [tags](https://docs.cloud.google.com/bigquery/docs/tags) . Add multiple tags under the same flag with commas between key:value pairs.
+    - `PROJECT_ID` is your project ID.
+    - `DATASET` is a dataset in your project.
+    - `TABLE` is the name of the table you're creating.
+    - `SCHEMA` is an inline schema definition in the format `FIELD `` : `` DATA_TYPE `` , `` FIELD `` : `` DATA_TYPE` or the path to the JSON schema file on your local machine.
 
     When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type, you cannot include a column description, and you cannot specify the column mode. All modes default to `NULLABLE` . To include descriptions, modes, and `RECORD` types, [supply a JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
 
@@ -1246,20 +1246,20 @@ To get information about tables:
 
 2.  Issue the [`bq show`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command to display all table information. Use the `--schema` flag to display only table schema information. The `--format` flag can be used to control the output.
 
-    If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
+    If you are getting information about a table in a project other than your default project, add the project ID to the dataset in the following format: `PROJECT_ID `` : `` DATASET` .
 
     ```
     bq show \
     --schema \
     --format=prettyjson \
-    project_id:dataset.table
+    PROJECT_ID:DATASET.TABLE
     ```
 
     Where:
 
-    - ` project_id ` is your project ID.
-    - ` dataset ` is the name of the dataset.
-    - ` table ` is the name of the table.
+    - `PROJECT_ID` is your project ID.
+    - `DATASET` is the name of the dataset.
+    - `TABLE` is the name of the table.
 
     Examples:
 
@@ -2790,7 +2790,7 @@ To list the tables in a dataset:
 
     At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-2.  Issue the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command. The `--format` flag can be used to control the output. If you are listing tables in a project other than your default project, add the project ID to the dataset in the following format: `project_id:dataset` .
+2.  Issue the [`bq ls`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) command. The `--format` flag can be used to control the output. If you are listing tables in a project other than your default project, add the project ID to the dataset in the following format: `PROJECT_ID `` : `` DATASET` .
 
     Additional flags include:
 
@@ -2799,15 +2799,15 @@ To list the tables in a dataset:
     ```
     bq ls \
     --format=pretty \
-    --max_results integer \
-    project_id:dataset
+    --max_results INTEGER \
+    PROJECT_ID:DATASET
     ```
 
     Where:
 
-    - ` integer ` is an integer representing the number of tables to list.
-    - ` project_id ` is your project ID.
-    - ` dataset ` is the name of the dataset.
+    - `INTEGER` is an integer representing the number of tables to list.
+    - `PROJECT_ID` is your project ID.
+    - `DATASET` is the name of the dataset.
 
     When you run the command, the `Type` field displays either `TABLE` or `VIEW` . For example:
 

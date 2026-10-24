@@ -8,14 +8,7 @@ data_source: docs.cloud.google.com
 
 # Optimize BigQuery DataFrames performance
 
-BigQuery DataFrames helps you analyze and transform data in BigQuery using a pandas-compatible API. To make your data processing faster and more cost-effective, you can use several techniques to improve performance.
-
-This document describes the following ways to optimize performance:
-
-- [Use partial ordering mode](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode) .
-- [Cache results after expensive operations](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#cache) .
-- [Preview data by using the `peek()` method](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#preview-peek) .
-- [Defer the `repr()` data retrieval](https://docs.cloud.google.com/bigquery/docs/dataframes-performance#defer) .
+You can optimize your BigQuery DataFrames workflows to analyze and transform data using a pandas-compatible API while keeping execution times and costs low. Applying specific optimization techniques, such as partial ordering mode and result caching, lets you process data faster and more cost-effectively.
 
 ## Use partial ordering mode
 

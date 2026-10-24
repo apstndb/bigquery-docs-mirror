@@ -49,7 +49,7 @@ The following JSON schema definitions represent the tables used in the examples 
     ]
 ```
 
-In examples where ` COLUMN_ID ` appears, replace it with the name of the column you wish to operate on.
+In examples where `COLUMN_ID` appears, replace it with the name of the column you wish to operate on.
 
 ## Inserting data
 

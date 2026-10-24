@@ -30,7 +30,7 @@ You must have the following information when creating a Salesforce Marketing Clo
 
 | Parameter Name                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                         |
 |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `subdomain`                                      | The API subdomain, found in the base URI. For example, in the authentication base URI `https:// `` SUBDOMAIN `` .auth.marketingcloudapis.com/` , ` SUBDOMAIN ` is your subdomain value.                                                                                                                                                                                                                             |
+| `subdomain`                                      | The API subdomain, found in the base URI. For example, in the authentication base URI `https:// `` SUBDOMAIN `` .auth.marketingcloudapis.com/` , `SUBDOMAIN` is your subdomain value.                                                                                                                                                                                                                               |
 | `instance`                                       | The API server instance, found in the URL after you sign into the Salesforce Marketing Cloud application. The instance value includes \`s\` followed by a numeric value. For example, in the URL \`https://mc.s4.exacttarget.com/\`, the instance value is \`s4\`. For more information, see [Find the stack location for a Marketing Cloud account](https://help.salesforce.com/s/articleView?id=000383566&type=1) |
 | `clientId`                                       | The client ID from the API integration. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client ID is listed under **Components** .                                                                                                                                                                                                                               |
 | `clientSecret`                                   | The app integration client secret. Navigate to **Setup** \> **Apps** \> **Installed Packages** , and then click the package name. The client secret is listed under **Components** .                                                                                                                                                                                                                                |
@@ -169,11 +169,11 @@ bq mk
 
 Replace the following:
 
-- ` PROJECT_ID ` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
-- ` DATA_SOURCE ` : the data source (for example, `saphana` ).
-- ` DISPLAY_NAME ` : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
-- ` DATASET ` : the target dataset for the transfer configuration.
-- ` PARAMETERS ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Salesforce Marketing Cloud transfer:
+- `PROJECT_ID` (optional): your Google Cloud project ID. If `--project_id` isn't supplied to specify a particular project, the default project is used.
+- `DATA_SOURCE` : the data source (for example, `saphana` ).
+- `DISPLAY_NAME` : the display name for the transfer configuration. The data transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- `DATASET` : the target dataset for the transfer configuration.
+- `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` . The following are the parameters for a Salesforce Marketing Cloud transfer:
   - `connector.subdomain` : The API subdomain.
   - `connector.instance` : The API instance value.
   - `connector.authentication.oauth.clientId` : The app ID name for the OAuth client.

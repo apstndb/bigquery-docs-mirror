@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use raster data to analyze temperature
 
-This tutorial describes how to perform geospatial analysis on [raster data](https://docs.cloud.google.com/bigquery/docs/raster-data) .
+Performing geospatial analysis on [raster data](https://docs.cloud.google.com/bigquery/docs/raster-data) lets you calculate and visualize real-world climate metrics, such as the average temperature across different countries. You can use the `ST_REGIONSTATS` function with Google Earth Engine datasets to extract these regional insights and map your results using BigQuery Geo Viz.
 
 ## Objectives
 

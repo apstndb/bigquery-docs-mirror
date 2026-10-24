@@ -136,7 +136,7 @@ To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement
 
 ## View indexing job information
 
-After you set up your dedicated indexing jobs, you can view information about the indexing jobs with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following SQL sample shows the five most recent refresh jobs in ` PROJECT_NAME ` .
+After you set up your dedicated indexing jobs, you can view information about the indexing jobs with the [`JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following SQL sample shows the five most recent refresh jobs in `PROJECT_NAME` .
 
 ```
 SELECT *

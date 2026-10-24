@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage BigQuery DataFrames sessions and I/O
 
-This document explains how to manage sessions and perform input and output (I/O) operations when you use BigQuery DataFrames. You will learn how to create and use sessions, work with in-memory data, and read from and write to files and BigQuery tables.
+Managing sessions and I/O operations in BigQuery DataFrames lets you control your execution environment and move data in and out of your workflows. You can configure your sessions to control where your queries run, and you can perform I/O operations to read and write in-memory data, Cloud Storage files, and BigQuery tables.
 
 ## BigQuery sessions
 

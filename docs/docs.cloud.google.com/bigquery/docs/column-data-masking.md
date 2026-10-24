@@ -242,6 +242,83 @@ def create_data_policy(project_id: str, location: str, data_policy_id: str) -> N
         print(f"An unexpected error occurred: {e}")
 ```
 
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.AlreadyExistsException;
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.CreateDataPolicyRequest;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicy.DataPolicyType;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import com.google.cloud.bigquery.datapolicies.v2.LocationName;
+import java.io.IOException;
+
+public class CreateDataPolicy {
+
+  /**
+   * Creates a data policy to apply a data masking rule to a specific BigQuery table column.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policy (for example, "us-central1").
+   * @param dataPolicyId The user-assigned ID for the new data policy (for example,
+   *     "example_data_policy").
+   */
+  public static void createDataPolicy(String projectId, String location, String dataPolicyId) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    DataMaskingPolicy dataMaskingPolicy =
+        DataMaskingPolicy.newBuilder()
+            .setPredefinedExpression(PredefinedExpression.SHA256)
+            .build();
+
+    DataPolicy dataPolicy =
+        DataPolicy.newBuilder()
+            .setDataPolicyType(DataPolicyType.DATA_MASKING_POLICY)
+            .setDataMaskingPolicy(dataMaskingPolicy)
+            .build();
+
+    CreateDataPolicyRequest request =
+        CreateDataPolicyRequest.newBuilder()
+            .setParent(parent.toString())
+            .setDataPolicyId(dataPolicyId)
+            .setDataPolicy(dataPolicy)
+            .build();
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      DataPolicy response = client.createDataPolicy(request);
+
+      System.out.printf("Successfully created data policy: %s%n", response.getName());
+      System.out.printf("Data Policy ID: %s%n", response.getDataPolicyId());
+      System.out.printf("Data Policy Type: %s%n", response.getDataPolicyType());
+      if (response.hasDataMaskingPolicy()) {
+        System.out.printf(
+            "Data Masking Predefined Expression: %s%n",
+            response.getDataMaskingPolicy().getPredefinedExpression());
+      }
+    } catch (AlreadyExistsException err) {
+      System.err.printf(
+          "error: data policy '%s' already exists in location '%s' for project '%s': %s%n",
+          dataPolicyId, location, projectId, err.getMessage());
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: project '%s' or location '%s' was not found: %s%n",
+          projectId, location, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to create data policy '%s' in location '%s' for project '%s': %s%n",
+          dataPolicyId, location, projectId, err.getMessage());
+    }
+  }
+```
+
 ### Set policy tags on columns
 
 Set a data policy on a column by attaching the policy tag associated with the data policy to the column.
@@ -450,6 +527,68 @@ def get_data_policy(
         print(f"An unexpected error occurred: {e}")
 ```
 
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyName;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import java.io.IOException;
+
+public class GetDataPolicy {
+
+  /**
+   * Gets a specific data policy from the BigQuery Data Policy API by its name.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policy (for example, "us-central1").
+   * @param dataPolicyId The user-assigned ID of the data policy (for example,
+   *     "example_data_policy").
+   */
+  public static void getDataPolicy(String projectId, String location, String dataPolicyId) {
+    DataPolicyName dataPolicyName = DataPolicyName.of(projectId, location, dataPolicyId);
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      DataPolicy response = client.getDataPolicy(dataPolicyName);
+
+      System.out.printf("Successfully retrieved data policy: %s%n", response.getName());
+      System.out.printf("  Data Policy ID: %s%n", response.getDataPolicyId());
+      System.out.printf("  Data Policy Type: %s%n", response.getDataPolicyType());
+      if (!response.getPolicyTag().isEmpty()) {
+        System.out.printf("  Policy Tag: %s%n", response.getPolicyTag());
+      }
+      if (!response.getGranteesList().isEmpty()) {
+        System.out.printf("  Grantees: %s%n", String.join(", ", response.getGranteesList()));
+      }
+      if (response.hasDataMaskingPolicy()) {
+        DataMaskingPolicy maskingPolicy = response.getDataMaskingPolicy();
+        if (maskingPolicy.getPredefinedExpression()
+            != PredefinedExpression.PREDEFINED_EXPRESSION_UNSPECIFIED) {
+          System.out.printf(
+              "  Data Masking Predefined Expression: %s%n",
+              maskingPolicy.getPredefinedExpression());
+        } else if (!maskingPolicy.getRoutine().isEmpty()) {
+          System.out.printf("  Data Masking Routine: %s%n", maskingPolicy.getRoutine());
+        }
+      }
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: data policy '%s' not found: %s%n", dataPolicyName, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to get data policy '%s': %s%n", dataPolicyName, err.getMessage());
+    }
+  }
+```
+
 ### Check IAM permissions on a data policy
 
 Follow these steps to get the IAM policy for a data policy:
@@ -568,6 +707,64 @@ def get_data_policy_iam_policy(
         print(f"An API error occurred: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+```
+
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyName;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import com.google.iam.v1.Binding;
+import com.google.iam.v1.GetIamPolicyRequest;
+import com.google.iam.v1.Policy;
+import java.io.IOException;
+
+public class GetIamPolicy {
+
+  /**
+   * Gets the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policy (for example, "us-central1").
+   * @param dataPolicyId The ID of the data policy (for example, "example_data_policy").
+   */
+  public static void getIamPolicy(String projectId, String location, String dataPolicyId) {
+    DataPolicyName resourceName = DataPolicyName.of(projectId, location, dataPolicyId);
+
+    GetIamPolicyRequest request =
+        GetIamPolicyRequest.newBuilder().setResource(resourceName.toString()).build();
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      Policy policy = client.getIamPolicy(request);
+
+      System.out.printf("Successfully retrieved IAM policy for data policy: %s%n", resourceName);
+      System.out.printf("Policy Version: %d%n", policy.getVersion());
+      if (policy.getBindingsCount() > 0) {
+        System.out.println("Policy Bindings:");
+        for (Binding binding : policy.getBindingsList()) {
+          System.out.printf("  Role: %s%n", binding.getRole());
+          System.out.printf("  Members: %s%n", String.join(", ", binding.getMembersList()));
+          if (binding.hasCondition() && !binding.getCondition().getExpression().isEmpty()) {
+            System.out.printf("  Condition: %s%n", binding.getCondition().getExpression());
+          }
+        }
+      } else {
+        System.out.println("No bindings found in the policy.");
+      }
+    } catch (NotFoundException err) {
+      System.err.printf("error: data policy '%s' not found: %s%n", resourceName, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to get IAM policy for data policy '%s': %s%n",
+          resourceName, err.getMessage());
+    }
+  }
 ```
 
 ### List data policies
@@ -712,6 +909,71 @@ def list_data_policies(project_id: str, location: str) -> None:
         )
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+```
+
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient.ListDataPoliciesPagedResponse;
+import com.google.cloud.bigquery.datapolicies.v2.ListDataPoliciesRequest;
+import com.google.cloud.bigquery.datapolicies.v2.LocationName;
+import java.io.IOException;
+
+public class ListDataPolicies {
+
+  /**
+   * Lists all data policies in a specified project and location.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policies (for example, "us-central1").
+   */
+  public static void listDataPolicies(String projectId, String location) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    ListDataPoliciesRequest request =
+        ListDataPoliciesRequest.newBuilder().setParent(parent.toString()).build();
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      System.out.printf(
+          "Listing data policies for project '%s' in location '%s':%n", projectId, location);
+      ListDataPoliciesPagedResponse pageResult = client.listDataPolicies(request);
+
+      boolean foundPolicies = false;
+      for (DataPolicy dataPolicy : pageResult.iterateAll()) {
+        foundPolicies = true;
+        System.out.printf("  Data Policy Name: %s%n", dataPolicy.getName());
+        System.out.printf("  Data Policy ID: %s%n", dataPolicy.getDataPolicyId());
+        System.out.printf("  Data Policy Type: %s%n", dataPolicy.getDataPolicyType());
+        if (!dataPolicy.getPolicyTag().isEmpty()) {
+          System.out.printf("  Policy Tag: %s%n", dataPolicy.getPolicyTag());
+        }
+        if (!dataPolicy.getGranteesList().isEmpty()) {
+          System.out.printf("  Grantees: %s%n", String.join(", ", dataPolicy.getGranteesList()));
+        }
+        System.out.println("--------------------");
+      }
+
+      if (!foundPolicies) {
+        System.out.println("No data policies found.");
+      }
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: project '%s' or location '%s' was not found: %s%n",
+          projectId, location, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to list data policies in location '%s' for project '%s': %s%n",
+          location, projectId, err.getMessage());
+    }
+  }
 ```
 
 ### Update data policies
@@ -879,6 +1141,77 @@ def update_data_policy(project_id: str, location: str, data_policy_id: str) -> N
         print(f"An unexpected error occurred: {e}")
 ```
 
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataMaskingPolicy.PredefinedExpression;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicy;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyName;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import com.google.cloud.bigquery.datapolicies.v2.UpdateDataPolicyRequest;
+import com.google.protobuf.FieldMask;
+import java.io.IOException;
+
+public class UpdateDataPolicy {
+
+  /**
+   * Updates the data masking configuration of an existing data policy.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policy (for example, "us-central1").
+   * @param dataPolicyId The ID of the data policy to update (for example, "example_data_policy").
+   */
+  public static void updateDataPolicy(String projectId, String location, String dataPolicyId) {
+    DataPolicyName dataPolicyName = DataPolicyName.of(projectId, location, dataPolicyId);
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      // Retrieve the existing policy so its etag can be used to prevent race conditions.
+      DataPolicy existingPolicy = client.getDataPolicy(dataPolicyName);
+
+      DataPolicy updatedDataPolicy =
+          DataPolicy.newBuilder()
+              .setName(dataPolicyName.toString())
+              .setDataMaskingPolicy(
+                  DataMaskingPolicy.newBuilder()
+                      .setPredefinedExpression(PredefinedExpression.SHA256)
+                      .build())
+              .setEtag(existingPolicy.getEtag())
+              .build();
+
+      FieldMask updateMask = FieldMask.newBuilder().addPaths("data_masking_policy").build();
+
+      UpdateDataPolicyRequest request =
+          UpdateDataPolicyRequest.newBuilder()
+              .setDataPolicy(updatedDataPolicy)
+              .setUpdateMask(updateMask)
+              .build();
+
+      DataPolicy response = client.updateDataPolicy(request);
+
+      System.out.printf("Successfully updated data policy: %s%n", response.getName());
+      System.out.printf("New data policy type: %s%n", response.getDataPolicyType());
+      if (response.hasDataMaskingPolicy()) {
+        System.out.printf(
+            "New masking expression: %s%n",
+            response.getDataMaskingPolicy().getPredefinedExpression());
+      }
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: data policy '%s' not found: %s%n", dataPolicyName, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to update data policy '%s': %s%n", dataPolicyName, err.getMessage());
+    }
+  }
+```
+
 ### Delete data policies
 
 The user or service account that creates a data policy must have the `bigquery.dataPolicies.delete` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
@@ -972,6 +1305,44 @@ def delete_data_policy(project_id: str, location: str, data_policy_id: str) -> N
         print(f"Data policy '{name}' not found. It may have already been deleted.")
     except Exception as e:
         print(f"Error deleting data policy '{name}': {e}")
+```
+
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyName;
+import com.google.cloud.bigquery.datapolicies.v2.DataPolicyServiceClient;
+import java.io.IOException;
+
+public class DeleteDataPolicy {
+
+  /**
+   * Deletes a data policy from the BigQuery Data Policy API.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the data policy (for example, "us-central1").
+   * @param dataPolicyId The ID of the data policy to delete (for example, "example_data_policy").
+   */
+  public static void deleteDataPolicy(String projectId, String location, String dataPolicyId) {
+    DataPolicyName name = DataPolicyName.of(projectId, location, dataPolicyId);
+
+    try (DataPolicyServiceClient client = DataPolicyServiceClient.create()) {
+      client.deleteDataPolicy(name);
+      System.out.printf("Successfully deleted data policy: %s%n", name);
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: data policy '%s' not found: %s%n", name, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to delete data policy '%s': %s%n", name, err.getMessage());
+    }
+  }
 ```
 
 ## Mask data by applying data policies to a column

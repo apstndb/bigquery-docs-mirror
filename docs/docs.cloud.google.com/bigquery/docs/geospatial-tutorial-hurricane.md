@@ -6,16 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This tutorial introduces you to geospatial analytics. Geospatial analytics let you easily analyze and visualize geospatial data in BigQuery.
+Using geospatial analytics in BigQuery lets you analyze and visualize geographic data, such as mapping a storm's trajectory over time. You can convert raw latitude and longitude coordinates into geographical points to query a hurricane's chronological path and plot the results using integrated visualization tools.
 
 ## Objectives
 
-In this tutorial, you:
-
-- Use a geospatial analytics function to convert latitude and longitude columns into geographical points
-- Run a query that plots the path of a hurricane
-- Visualize your results in BigQuery
-- Visualize your results in [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize)
+- Use a geospatial analytics function to convert latitude and longitude columns into geographical points.
+- Run a query that plots the path of a hurricane.
+- Visualize your results in BigQuery.
+- Visualize your results in [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
 
 ## Costs
 

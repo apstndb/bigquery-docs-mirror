@@ -235,7 +235,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
 - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 

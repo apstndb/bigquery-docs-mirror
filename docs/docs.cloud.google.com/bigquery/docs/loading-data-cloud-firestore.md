@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Load data from Firestore exports
 
-BigQuery supports loading data from [Firestore](https://docs.cloud.google.com/firestore) exports created using the Firestore [managed import and export service](https://docs.cloud.google.com/firestore/docs/manage-data/export-import) . The managed import and export service exports Firestore documents into a Cloud Storage bucket. You can then load the exported data into a BigQuery table.
-
-> **Note:** Not all Firestore exports can be loaded. Reference the BigQuery [limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore#limitations) to create a Firestore export which can be loaded into a BigQuery table.
+BigQuery lets you load [Firestore](https://docs.cloud.google.com/firestore) document exports into tables so that you can query and analyze your application data with SQL. After the Firestore [managed import and export service](https://docs.cloud.google.com/firestore/docs/manage-data/export-import) writes documents to a Cloud Storage bucket, you can load the export files into a BigQuery table.
 
 ## Limitations
 

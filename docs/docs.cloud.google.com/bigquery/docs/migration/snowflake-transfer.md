@@ -280,22 +280,22 @@ Enter the `bq mk` command and supply the transfer creation flag `--transfer_conf
 ```
 bq mk \
     --transfer_config \
-    --project_id=project_id \
-    --data_source=data_source \
-    --target_dataset=dataset \
-    --display_name=name \
-    --service_account_name=service_account \
-    --params='parameters'
+    --project_id=PROJECT_ID \
+    --data_source=DATA_SOURCE \
+    --target_dataset=DATASET \
+    --display_name=NAME \
+    --service_account_name=SERVICE_ACCOUNT \
+    --params='PARAMETERS'
 ```
 
 Replace the following:
 
-- ` project_id ` : your Google Cloud project ID. If `--project_id` isn't specified, the default project is used.
-- ` data_source ` : the data source, `snowflake_migration` .
-- ` dataset ` : the BigQuery target dataset for the transfer configuration.
-- ` name ` : the display name for the transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-- ` service_account ` : (Optional) the service account name used to authenticate your transfer. The service account should be owned by the same `project_id` used to create the transfer and it should have all of the [required roles](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required-roles) .
-- ` parameters ` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
+- `PROJECT_ID` : your Google Cloud project ID. If `--project_id` isn't specified, the default project is used.
+- `DATA_SOURCE` : the data source, `snowflake_migration` .
+- `DATASET` : the BigQuery target dataset for the transfer configuration.
+- `NAME` : the display name for the transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+- `SERVICE_ACCOUNT` : (Optional) the service account name used to authenticate your transfer. The service account should be owned by the same `PROJECT_ID` used to create the transfer and it should have all of the [required roles](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required-roles) .
+- `PARAMETERS` : the parameters for the created transfer configuration in JSON format. For example: `--params='{"param":"param_value"}'` .
 
 You can configure the following parameters for your Snowflake transfer configuration:
 

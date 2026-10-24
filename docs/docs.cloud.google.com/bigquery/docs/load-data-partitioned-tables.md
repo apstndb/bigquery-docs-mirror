@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Load data into partitioned tables
 
-This document describes how to load data into partitioned tables.
+BigQuery lets you load batch data or write query results directly into a specific segment of a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) without affecting other partitions. Targeting individual partitions helps you backfill historical records, align ingestion-time partitions with local time zones, and improve write performance.
 
 ## Write data to a specific partition
 

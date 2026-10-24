@@ -339,8 +339,8 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
     Replace the following:
 
-    - ` PROJECT_ID ` : your project name.
-    - ` ENDPOINT_ID ` : the endpoint ID that you copied previously.
+    - `PROJECT_ID` : your project name.
+    - `ENDPOINT_ID` : the endpoint ID that you copied previously.
 
     When the operation is complete, you see a message similar to `Successfully created model named bert_sentiment` .
 
@@ -363,8 +363,8 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
     Replace the following:
 
-    - ` PROJECT_ID ` : your project name.
-    - ` ENDPOINT_ID ` : the endpoint ID that you copied previously.
+    - `PROJECT_ID` : your project name.
+    - `ENDPOINT_ID` : the endpoint ID that you copied previously.
 
 2.  After you create the model, verify that the model appears in the dataset:
 

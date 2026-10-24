@@ -199,37 +199,49 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.InvalidArgumentException;
+import com.google.cloud.bigquery.connection.v1.Connection;
 import com.google.cloud.bigquery.connection.v1.ListConnectionsRequest;
 import com.google.cloud.bigquery.connection.v1.LocationName;
 import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
 import java.io.IOException;
 
-// Sample to get list of connections
 public class ListConnections {
 
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String location = "MY_LOCATION";
-    listConnections(projectId, location);
-  }
+  /**
+   * Lists all BigQuery connections in a given project and location.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connections (for example, "us-central1").
+   */
+  public static void listConnections(String projectId, String location) {
+    LocationName parent = LocationName.of(projectId, location);
 
-  static void listConnections(String projectId, String location) throws IOException {
+    ListConnectionsRequest request =
+        ListConnectionsRequest.newBuilder().setParent(parent.toString()).setPageSize(100).build();
+
     try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
-      LocationName parent = LocationName.of(projectId, location);
-      int pageSize = 10;
-      ListConnectionsRequest request =
-          ListConnectionsRequest.newBuilder()
-              .setParent(parent.toString())
-              .setPageSize(pageSize)
-              .build();
-      client
-          .listConnections(request)
-          .iterateAll()
-          .forEach(con -> System.out.println("Connection Id :" + con.getName()));
+      System.out.printf(
+          "Listing connections in project '%s' and location '%s':%n", projectId, location);
+
+      for (Connection connection : client.listConnections(request).iterateAll()) {
+        System.out.printf("Connection Name: %s%n", connection.getName());
+        System.out.printf("Friendly Name: %s%n", connection.getFriendlyName());
+        System.out.printf("Has Credential: %b%n", connection.getHasCredential());
+      }
+
+      System.out.println("Finished listing connections.");
+    } catch (InvalidArgumentException err) {
+      System.err.printf(
+          "error: invalid argument listing connections in location '%s' for project '%s': %s%n",
+          location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to list connections in location '%s' for project '%s': %s%n",
+          location, projectId, err.getMessage());
     }
   }
-}
 ```
 
 ## View connection details
@@ -367,34 +379,50 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.bigquery.connection.v1.Connection;
 import com.google.cloud.bigquery.connection.v1.ConnectionName;
-import com.google.cloud.bigquery.connection.v1.GetConnectionRequest;
 import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
 import java.io.IOException;
 
-// Sample to get connection
 public class GetConnection {
 
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String location = "MY_LOCATION";
-    String connectionId = "MY_CONNECTION_ID";
-    getConnection(projectId, location, connectionId);
-  }
+  /**
+   * Retrieves metadata about a specified BigQuery connection.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to retrieve (for example,
+   *     "example-connection-id").
+   */
+  public static void getConnection(String projectId, String location, String connectionId) {
+    ConnectionName name = ConnectionName.of(projectId, location, connectionId);
 
-  static void getConnection(String projectId, String location, String connectionId)
-      throws IOException {
     try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
-      ConnectionName name = ConnectionName.of(projectId, location, connectionId);
-      GetConnectionRequest request =
-          GetConnectionRequest.newBuilder().setName(name.toString()).build();
-      Connection response = client.getConnection(request);
-      System.out.println("Connection info retrieved successfully :" + response.getName());
+      Connection connection = client.getConnection(name);
+
+      System.out.printf("Successfully retrieved connection: %s%n", connection.getName());
+      System.out.printf("Friendly name: %s%n", connection.getFriendlyName());
+      System.out.printf("Description: %s%n", connection.getDescription());
+      if (connection.hasCloudResource()) {
+        System.out.printf(
+            "Service Account: %s%n", connection.getCloudResource().getServiceAccountId());
+      }
+      if (connection.hasCloudSql()) {
+        System.out.printf(
+            "Cloud SQL instance ID: %s%n", connection.getCloudSql().getInstanceId());
+      }
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: connection '%s' not found in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to get connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
     }
   }
-}
 ```
 
 ## Get the Identity and Access Management (IAM) policy for a connection
@@ -504,6 +532,65 @@ async function getIamPolicy(projectId, location, connectionId) {
     }
   }
 }
+```
+
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
+import com.google.cloud.bigquery.connection.v1.ConnectionName;
+import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
+import com.google.iam.v1.Binding;
+import com.google.iam.v1.GetIamPolicyRequest;
+import com.google.iam.v1.Policy;
+import java.io.IOException;
+
+public class GetIamPolicy {
+
+  /**
+   * Retrieves the IAM policy of a specified BigQuery connection.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection (for example, "example-connection-id").
+   */
+  public static void getIamPolicy(
+      String projectId, String location, String connectionId) {
+    ConnectionName resource = ConnectionName.of(projectId, location, connectionId);
+
+    GetIamPolicyRequest request =
+        GetIamPolicyRequest.newBuilder().setResource(resource.toString()).build();
+
+    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
+      Policy policy = client.getIamPolicy(request);
+
+      System.out.printf("Successfully retrieved IAM policy for connection: %s%n", resource);
+      if (policy.getBindingsList().isEmpty()) {
+        System.out.println("Policy is empty and has no bindings.");
+      }
+
+      for (Binding binding : policy.getBindingsList()) {
+        System.out.printf("Role: %s%n", binding.getRole());
+        System.out.println("Members:");
+        for (String member : binding.getMembersList()) {
+          System.out.printf("  - %s%n", member);
+        }
+      }
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: connection '%s' not found in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to get IAM policy for connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    }
+  }
 ```
 
 ## Share a connection with users
@@ -779,44 +866,60 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.bigquery.connection.v1.Connection;
 import com.google.cloud.bigquery.connection.v1.ConnectionName;
 import com.google.cloud.bigquery.connection.v1.UpdateConnectionRequest;
 import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
 import com.google.protobuf.FieldMask;
-import com.google.protobuf.util.FieldMaskUtil;
 import java.io.IOException;
 
-// Sample to update connection
 public class UpdateConnection {
 
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String location = "MY_LOCATION";
-    String connectionId = "MY_CONNECTION_ID";
-    String description = "MY_DESCRIPTION";
-    Connection connection = Connection.newBuilder().setDescription(description).build();
-    updateConnection(projectId, location, connectionId, connection);
-  }
+  /**
+   * Updates a BigQuery connection's friendly name and description.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to update (for example, "example-connection-id").
+   */
+  public static void updateConnection(String projectId, String location, String connectionId) {
+    ConnectionName name = ConnectionName.of(projectId, location, connectionId);
 
-  static void updateConnection(
-      String projectId, String location, String connectionId, Connection connection)
-      throws IOException {
+    Connection connection =
+        Connection.newBuilder()
+            .setFriendlyName("Example Updated BigQuery Connection")
+            .setDescription("Updated description for the connection.")
+            .build();
+
+    // Specify only metadata fields in the FieldMask so existing credentials are not reset.
+    FieldMask updateMask =
+        FieldMask.newBuilder().addPaths("friendly_name").addPaths("description").build();
+
+    UpdateConnectionRequest request =
+        UpdateConnectionRequest.newBuilder()
+            .setName(name.toString())
+            .setConnection(connection)
+            .setUpdateMask(updateMask)
+            .build();
+
     try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
-      ConnectionName name = ConnectionName.of(projectId, location, connectionId);
-      FieldMask updateMask = FieldMaskUtil.fromString("description");
-      UpdateConnectionRequest request =
-          UpdateConnectionRequest.newBuilder()
-              .setName(name.toString())
-              .setConnection(connection)
-              .setUpdateMask(updateMask)
-              .build();
       Connection response = client.updateConnection(request);
-      System.out.println("Connection updated successfully :" + response.getDescription());
+
+      System.out.printf("Connection '%s' updated successfully.%n", response.getName());
+      System.out.printf("Friendly Name: %s%n", response.getFriendlyName());
+      System.out.printf("Description: %s%n", response.getDescription());
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: connection '%s' not found in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to update connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
     }
   }
-}
 ```
 
 ## Delete a connection
@@ -938,33 +1041,37 @@ Before trying this sample, follow the Java setup instructions in the [BigQuery q
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 ```java
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.NotFoundException;
 import com.google.cloud.bigquery.connection.v1.ConnectionName;
-import com.google.cloud.bigquery.connection.v1.DeleteConnectionRequest;
 import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
 import java.io.IOException;
 
-// Sample to delete a connection
 public class DeleteConnection {
 
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String location = "MY_LOCATION";
-    String connectionName = "MY_CONNECTION_NAME";
-    deleteConnection(projectId, location, connectionName);
-  }
+  /**
+   * Deletes a specified BigQuery connection.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to delete (for example, "example-connection-id").
+   */
+  public static void deleteConnection(String projectId, String location, String connectionId) {
+    ConnectionName name = ConnectionName.of(projectId, location, connectionId);
 
-  static void deleteConnection(String projectId, String location, String connectionName)
-      throws IOException {
     try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
-      ConnectionName name = ConnectionName.of(projectId, location, connectionName);
-      DeleteConnectionRequest request =
-          DeleteConnectionRequest.newBuilder().setName(name.toString()).build();
-      client.deleteConnection(request);
-      System.out.println("Connection deleted successfully");
+      client.deleteConnection(name);
+      System.out.printf("Connection '%s' was deleted.%n", connectionId);
+    } catch (NotFoundException err) {
+      System.err.printf(
+          "error: connection '%s' not found in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to delete connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
     }
   }
-}
 ```
 
 ## What's next

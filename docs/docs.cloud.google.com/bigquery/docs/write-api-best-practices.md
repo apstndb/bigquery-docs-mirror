@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # BigQuery Storage Write API (gRPC) best practices
 
-This document gives best practices for using the BigQuery Storage Write API (gRPC). Before reading this document, read [Overview of the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
+You can maximize write throughput and avoid quota bottlenecks with the BigQuery Storage Write API (gRPC) by tuning how your application creates streams, pools connections, and batches requests. Careful offset and schema-update handling also helps keep your ingestion pipelines resilient as table schemas evolve. For foundational stream concepts, see [Overview of the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
 
 ## Limit the rate of stream creation
 

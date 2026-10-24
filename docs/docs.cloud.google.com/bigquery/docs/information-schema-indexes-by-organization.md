@@ -109,7 +109,7 @@ The `INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION` view has the following s
 <tr class="odd">
 <td><code>use_background_reservation</code></td>
 <td><code>BOOL</code></td>
-<td>Indicates whether the index maintenance uses the <a href="https://cloud.google.com/bigquery/docs/reservations-workload-management#assignments"><code>BACKGROUND</code></a> reservation. This is set to <code>FALSE</code> when the index maintenance uses the limit.</td>
+<td>Indicates whether the index maintenance uses the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments"><code>BACKGROUND</code></a> reservation. This is set to <code>FALSE</code> when the index maintenance uses the limit.</td>
 </tr>
 </tbody>
 </table>

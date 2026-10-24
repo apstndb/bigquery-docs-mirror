@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Customize Python functions for BigQuery DataFrames
 
-BigQuery DataFrames lets you turn your custom Python functions into BigQuery artifacts that you can run on BigQuery DataFrames objects at scale. This extensibility support lets you perform operations beyond what is possible with BigQuery DataFrames and SQL APIs, so you can potentially take advantage of open source libraries.
-
-There are two variants of this extensibility mechanism: [user-defined functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions#udf) and [remote functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions#remote-functions) .
+Customizing Python functions for BigQuery DataFrames lets you turn your code into scalable BigQuery artifacts, such as [user-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions#udf) or [remote functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions#remote-functions) . You can deploy these custom functions to leverage open-source libraries and perform operations beyond the capabilities of standard SQL APIs.
 
 ## Required roles
 

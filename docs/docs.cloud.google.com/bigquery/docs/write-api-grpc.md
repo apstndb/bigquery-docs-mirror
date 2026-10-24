@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Introduction to the Storage Write API (gRPC)
 
-You can use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) to stream data into BigQuery. This document describes the architecture, capabilities, and use cases of the Storage Write API (gRPC).
+The [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) lets you stream and batch load records into BigQuery over bidirectional gRPC connections.
 
-For new projects, we recommend using the Storage Write API (gRPC) instead of the Storage Write API (REST). The Storage Write API (gRPC) has lower pricing and more robust features, including exactly-once delivery semantics.
+For new projects, we recommend using the Storage Write API (gRPC) instead of the Storage Write API (REST). The Storage Write API (gRPC) has lower ingestion pricing and more robust features, including stream-level transactions and exactly-once delivery semantics.
 
 ## Required permissions
 

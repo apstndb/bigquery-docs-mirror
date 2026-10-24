@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this preview feature, contact <bq-xregion-support@google.com> .
 
-Global queries let you run SQL queries that reference data stored in more than one region. For example, you can run a global query that joins a table located in `us-central1` with a table located in `europe-central2` . This document explains how to enable and run global queries in your project.
+You can use global queries to run SQL queries that reference data stored in multiple regions. Joining tables across different geographic locations lets you analyze your distributed data without needing to manually move or consolidate your datasets.
 
 ## Before you begin
 

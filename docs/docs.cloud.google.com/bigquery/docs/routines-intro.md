@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to routines
 
-This document describes how to choose a routine, which is a resource type that you use to create functions or stored procedures in BigQuery.
+Creating routines in BigQuery lets you encapsulate complex logic by using reusable functions and stored procedures. Choosing the right routine for your workload lets you efficiently aggregate data, automate management tasks, and integrate with external services directly from your queries.
 
 ## Supported routines
 

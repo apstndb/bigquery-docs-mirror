@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data with BI Engine and Looker
 
-Looker is an enterprise platform for business intelligence, data applications, and embedded analytics. Looker helps you explore, share, and visualize your company's data so that you can make better business decisions.
+Integrating BigQuery with Looker lets you efficiently build interactive business intelligence dashboards and data applications. You can accelerate your BigQuery queries with a BI Engine reservation to explore, share, and visualize your company's data to make better business decisions.
 
 ## How Looker works
 

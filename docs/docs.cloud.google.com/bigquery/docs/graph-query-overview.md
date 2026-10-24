@@ -155,7 +155,7 @@ The edge pattern in the following query uses a label expression and a property f
 
 ```
 GRAPH graph_db.FinGraph
-MATCH -[e:Transfers {order_number: "304120005529714"}]->
+MATCH -[e:Transfers {order_number: "30412000552971>4"}]-
 RETURN e.Id AS src_account, e.order_number;
 ```
 

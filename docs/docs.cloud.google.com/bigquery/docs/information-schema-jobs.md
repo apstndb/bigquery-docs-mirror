@@ -57,7 +57,7 @@ The `INFORMATION_SCHEMA.JOBS` view has the following schema:
 <tr class="odd">
 <td><code>bi_engine_statistics</code></td>
 <td><code>RECORD</code></td>
-<td>If the project is configured to use the <a href="https://cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code>NULL</code> .</td>
+<td>If the project is configured to use the <a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code>NULL</code> .</td>
 </tr>
 <tr class="even">
 <td><code>cache_hit</code></td>
@@ -77,7 +77,7 @@ The `INFORMATION_SCHEMA.JOBS` view has the following schema:
 <tr class="odd">
 <td><code>destination_table</code></td>
 <td><code>RECORD</code></td>
-<td>Destination <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference">table</a> for results, if any.</td>
+<td>Destination <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/TableReference">table</a> for results, if any.</td>
 </tr>
 <tr class="even">
 <td><code>dml_statistics</code></td>
@@ -100,7 +100,7 @@ This column is present in the <code>INFORMATION_SCHEMA.JOBS_BY_USER</code> and <
 <tr class="even">
 <td><code>error_result</code></td>
 <td><code>RECORD</code></td>
-<td>Details of any errors as <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
+<td>Details of any errors as <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
 </tr>
 <tr class="odd">
 <td><code>global_query_info</code></td>
@@ -132,7 +132,7 @@ Possible values are:
 <tr class="even">
 <td><code>job_stages</code></td>
 <td><code>RECORD REPEATED</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="odd">
@@ -215,7 +215,7 @@ In this output:
 <tr class="even">
 <td><code>session_info</code></td>
 <td><code>RECORD</code></td>
-<td>Details about the <a href="https://cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
+<td>Details about the <a href="https://docs.cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
 </tr>
 <tr class="odd">
 <td><code>start_time</code></td>
@@ -230,12 +230,12 @@ In this output:
 <tr class="odd">
 <td><code>statement_type</code></td>
 <td><code>STRING</code></td>
-<td>The type of query statement. For example, <code>DELETE</code> , <code>INSERT</code> , <code>SCRIPT</code> , <code>SELECT</code> , or <code>UPDATE</code> . See <a href="https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
+<td>The type of query statement. For example, <code>DELETE</code> , <code>INSERT</code> , <code>SCRIPT</code> , <code>SELECT</code> , or <code>UPDATE</code> . See <a href="https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
 </tr>
 <tr class="even">
 <td><code>timeline</code></td>
 <td><code>RECORD</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
 </tr>
 <tr class="odd">
 <td><code>total_bytes_billed</code></td>
@@ -267,7 +267,7 @@ In this output:
 <tr class="even">
 <td><code>transaction_id</code></td>
 <td><code>STRING</code></td>
-<td>ID of the <a href="https://cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
+<td>ID of the <a href="https://docs.cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
 </tr>
 <tr class="odd">
 <td><code>user_email</code></td>
@@ -294,7 +294,7 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <tr class="odd">
 <td><code>query_info.performance_insights</code></td>
 <td><code>RECORD</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
 </tr>
 <tr class="even">
 <td><code>query_info.optimization_details</code></td>
@@ -338,7 +338,7 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <tr class="even">
 <td><code>continuous</code></td>
 <td><code>BOOLEAN</code></td>
-<td>Whether the job is a <a href="https://cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
+<td>Whether the job is a <a href="https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
 </tr>
 <tr class="odd">
 <td><code>continuous_query_info.output_watermark</code></td>
@@ -376,7 +376,7 @@ A multi-statement query job is a query job that uses the [procedural language](h
 
 ### Child jobs
 
-Each of a multi-statement query job's child jobs has a `parent_job_id` pointing to the multi-statement query job itself. This includes summary values for all child jobs that were executed as part of this job.
+Each child job of a multi-statement query job has a `parent_job_id` pointing to the multi-statement query job itself. This includes summary values for all child jobs that were executed as part of this job.
 
 If you query `INFORMATION_SCHEMA.JOBS` to find a summary cost of query jobs, then you should exclude the `SCRIPT` statement type. Otherwise, some values such as `total_slot_ms` might be counted twice.
 
@@ -425,7 +425,172 @@ For example, `` `myproject`.`region-us-central1`.INFORMATION_SCHEMA.JOBS `` .
 
 > **Note:** For maximum query efficiency, filter on the `creation_time` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
 
-### Compare on-demand job usage to billing data
+### Billing and pricing
+
+The following examples show how to estimate costs, track billed bytes, and identify expensive queries.
+
+#### Bytes processed per user identity
+
+The following example shows the total bytes billed for query jobs per user:
+
+```
+SELECT
+  user_email,
+  SUM(total_bytes_billed) AS bytes_billed
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  job_type = 'QUERY'
+  AND statement_type != 'SCRIPT'
+GROUP BY
+  user_email;
+```
+
+> **Note:** This column's values are empty for queries that read from tables with row-level access policies. For more information, see [Best practices for row-level security in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security) .
+
+The result is similar to the following:
+
+```
++---------------------+--------------+
+| user_email          | bytes_billed |
++---------------------+--------------+
+| bob@example.com     | 2847932416   |
+| alice@example.com   | 1184890880   |
+| charles@example.com | 10485760     |
++---------------------+--------------+
+```
+
+#### Hourly breakdown of bytes processed
+
+The following example shows total bytes billed for query jobs, in hourly intervals:
+
+```
+SELECT
+  TIMESTAMP_TRUNC(end_time, HOUR) AS time_window,
+  SUM(total_bytes_billed) AS bytes_billed
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  job_type = 'QUERY'
+  AND statement_type != 'SCRIPT'
+GROUP BY
+  time_window
+ORDER BY
+  time_window DESC;
+```
+
+The result is similar to the following:
+
+```
++-------------------------+--------------+
+| time_window             | bytes_billed |
++-------------------------+--------------+
+| 2022-05-17 20:00:00 UTC | 1967128576   |
+| 2022-05-10 21:00:00 UTC | 0            |
+| 2022-04-15 17:00:00 UTC | 41943040     |
++-------------------------+--------------+
+```
+
+#### Most expensive queries by project
+
+The following example lists the most expensive queries in `my_project` by slot usage time:
+
+```
+SELECT
+ job_id,
+ query,
+ user_email,
+ total_slot_ms
+FROM `my_project`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE EXTRACT(DATE FROM  creation_time) = current_date()
+ORDER BY total_slot_ms DESC
+LIMIT 3
+```
+
+You can also list the most expensive queries by data processed with the following example:
+
+```
+SELECT
+ job_id,
+ query,
+ user_email,
+ total_bytes_processed
+FROM `my_project`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE EXTRACT(DATE FROM  creation_time) = current_date()
+ORDER BY total_bytes_processed DESC
+LIMIT 3
+```
+
+The result for either example is similar to the following:
+
+```
++-----------+---------------------------------+-----------------------+---------------+
+| job_id    | query                           | user_email            | total_slot_ms |
++-----------+---------------------------------+-----------------------+---------------+
+| bquxjob_1 | SELECT ... FROM dataset.table1  | bob@example.com       | 80,000        |
+| bquxjob_2 | SELECT ... FROM dataset.table2  | alice@example.com     | 78,000        |
+| bquxjob_3 | SELECT ... FROM dataset.table3  | charles@example.com   | 75,000        |
++-----------+---------------------------------+-----------------------+---------------+
+```
+
+#### Estimate slot usage and cost for queries
+
+The following example computes the average slots and max slots for each job by using `estimated_runnable_units` values.
+
+The `reservation_id` is `NULL` if you don't have any reservations.
+
+```
+SELECT
+  project_id,
+  job_id,
+  reservation_id,
+  EXTRACT(DATE FROM creation_time) AS creation_date,
+  TIMESTAMP_DIFF(end_time, start_time, SECOND) AS job_duration_seconds,
+  job_type,
+  user_email,
+  total_bytes_billed,
+
+  -- Average slot utilization per job is calculated by dividing total_slot_ms by the millisecond duration of the job
+
+  SAFE_DIVIDE(job.total_slot_ms,(TIMESTAMP_DIFF(job.end_time, job.start_time, MILLISECOND))) AS job_avg_slots,
+  query,
+
+  -- Determine the max number of slots used at ANY stage in the query.
+  -- The average slots might be 55. But a single stage might spike to 2000 slots.
+  -- This is important to know when estimating number of slots to purchase.
+
+  MAX(SAFE_DIVIDE(unnest_job_stages.slot_ms,unnest_job_stages.end_ms - unnest_job_stages.start_ms)) AS jobstage_max_slots,
+
+  -- Check if there's a job that requests more units of works (slots). If so, you need more slots.
+  -- Estimated_runnable_units = Units of work that can be scheduled immediately.
+  -- Providing additional slots for these units of work accelerates the query.
+  -- If no other query in the reservation needs additional slots.
+
+  MAX(unnest_timeline.estimated_runnable_units) AS estimated_runnable_units
+FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS AS job
+  CROSS JOIN UNNEST(job_stages) as unnest_job_stages
+  CROSS JOIN UNNEST(timeline) AS unnest_timeline
+WHERE
+  DATE(creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
+  AND project_id = 'my_project'
+  AND (statement_type != 'SCRIPT' OR statement_type IS NULL)
+GROUP BY 1,2,3,4,5,6,7,8,9,10
+ORDER BY job_id;
+```
+
+The result is similar to the following:
+
+```
++-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
+|project_id | job_id    | reservation_id | creation_date | job_duration_seconds | job_type | user_email      | total_bytes_billed | job_avg_slots| query                          | jobstage_max_slots | estimated_runnable_units |
++-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
+| project1  | bquxjob1  | reservation1   | 2020-10-10    | 160                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 2779.1534          | 1000                     |
+| project1  | bquxjob2  | reservation2   | 2020-12-10    | 120                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 2779.1534          | 1000                     |
+| project1  | bquxjob3  | reservation1   | 2020-12-10    | 120                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 1279.1534          | 998                     |
++-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
+```
+
+#### Compare on-demand job usage to billing data
 
 For projects using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , you can use the `INFORMATION_SCHEMA.JOBS` view to review compute charges over a given period.
 
@@ -519,7 +684,7 @@ GROUP BY billing_date
 ORDER BY billing_date;
 ```
 
-#### Limitations
+##### Limitations
 
 - BigQuery [hides some statistics](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) for queries over tables with row-level security. The provided query counts the number of jobs impacted as `jobs_using_row_level_security` , but does not have access to the billable usage.
 
@@ -527,7 +692,278 @@ ORDER BY billing_date;
 
 - Apache Spark procedures use a [similar pricing model](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pricing) , but charges are reported as [BigQuery Enterprise edition pay-as-you-go SKU](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) . `INFORMATION_SCHEMA.JOBS` tracks this usage as `total_bytes_billed` , but cannot determine which SKU the usage represents.
 
-### Calculate average slot utilization
+### Troubleshooting and query performance
+
+The following examples show how to troubleshoot failed or slow jobs, inspect resource warnings, and analyze query performance.
+
+#### Get the last few failed jobs
+
+The following example shows the last three failed jobs:
+
+```
+SELECT
+   job_id,
+  creation_time,
+  user_email,
+   error_result
+ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE
+  error_result.reason != "Null"
+ORDER BY
+  creation_time DESC
+LIMIT 3;
+```
+
+The result is similar to the following:
+
+```
++------------+--------------------------+------------------+-------------------------------------+
+| job_id     | creation_time            | user_email       | error_result                        |
++------------+--------------------------+------------------+-------------------------------------+
+| bquxjob_1  | 2020-10-10 00:00:00 UTC  | abc@example.com  | Column 'col1' has mismatched type...|
+| bquxjob_2  | 2020-10-11 00:00:00 UTC  | xyz@example.com  | Column 'col1' has mismatched type...|
+| bquxjob_3  | 2020-10-11 00:00:00 UTC  | bob@example.com  | Column 'col1' has mismatched type...|
++------------+--------------------------+------------------+-------------------------------------+
+```
+
+#### Query the list of long-running jobs
+
+The following example shows the list of long-running jobs that are in the `RUNNING` or `PENDING` state for more than 30 minutes:
+
+```
+SELECT
+  job_id,
+  job_type,
+  state,
+  creation_time,
+  start_time,
+  user_email
+ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+ WHERE
+  state!="DONE" AND
+  creation_time <= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+ORDER BY
+  creation_time ASC;
+```
+
+The result is similar to the following:
+
+```
++-----------+----------+---------+--------------------------------+--------------------------------+------------------+
+| job_id    | job_type | state   | creation_time                  | start_time                     | user_email       |
++-----------+----------+---------+--------------------------------+--------------------------------+------------------+
+| bquxjob_1 | QUERY    | RUNNING | 2023-05-03 05:07:22.818000 UTC | 2023-05-03 05:07:22.905000 UTC | abc@example.com  |
+| bquxjob_2 | QUERY    | PENDING | 2023-05-01 02:05:47.925000 UTC | 2023-05-01 02:05:47.998000 UTC | xyz@example.com  |
+| bquxjob_3 | QUERY    | PENDING | 2023-05-01 02:05:47.925000 UTC | 2023-05-01 02:05:47.998000 UTC | abc@example.com  |
++-----------+----------+---------+--------------------------------+--------------------------------+------------------+
+```
+
+#### Get details about a resource warning
+
+If you get a `Resources exceeded` error message, you can inquire about the queries in a time window:
+
+```
+SELECT
+  query,
+  query_info.resource_warning
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+ creation_time BETWEEN TIMESTAMP("2022-12-01")
+ AND TIMESTAMP("2022-12-08")
+ AND query_info.resource_warning IS NOT NULL
+LIMIT 3;
+```
+
+#### Monitor resource warnings grouped by date
+
+If you get a `Resources exceeded` error message, you can monitor the total number of resource warnings grouped by date to know if there are any changes to workload:
+
+```
+WITH resource_warnings AS (
+  SELECT
+    EXTRACT(DATE FROM creation_time) AS creation_date
+  FROM
+    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+  WHERE
+    creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 14 DAY)
+    AND query_info.resource_warning IS NOT NULL
+)
+SELECT
+  creation_date,
+  COUNT(1) AS warning_counts
+FROM
+  resource_warnings
+GROUP BY creation_date
+ORDER BY creation_date DESC;
+```
+
+#### Get jobs with the same query hash
+
+The following query returns the job IDs with the same query hash as a specific job:
+
+```
+SELECT
+  j.job_id,
+  j.creation_time,
+  j.query
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS j
+WHERE
+  j.job_id != "JOB_IDENTIFIER"
+  AND j.query_info.query_hashes.normalized_literals = (
+    SELECT
+      sub.query_info.query_hashes.normalized_literals
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS sub
+    WHERE
+      sub.job_id = "JOB_IDENTIFIER"
+    LIMIT 1
+  )
+ORDER BY
+  j.creation_time DESC;
+```
+
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
+
+The result is similar to the following:
+
+```
++--------------+---------------------------+------------------------------------------------+
+| job_id       |  creation_time            |  query                                         |
++--------------+---------------------------+------------------------------------------------+
+| bquxjob_1    |  2019-10-10 00:00:00 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "a"  |
+| bquxjob_2    |  2019-10-10 00:00:01 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "b"  |
+| bquxjob_3    |  2019-10-10 00:00:02 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "c"  |
++--------------+---------------------------+------------------------------------------------+
+```
+
+#### Analyze performance over time for identical queries
+
+The following example returns the top 10 slowest jobs over the past 7 days that have run the same query:
+
+```
+DECLARE querytext STRING DEFAULT(
+  SELECT query
+  FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+  WHERE job_id = 'JOB_ID'
+  LIMIT 1
+);
+
+SELECT
+  start_time,
+  end_time,
+  project_id,
+  job_id,
+  TIMESTAMP_DIFF(end_time, start_time, SECOND) AS run_secs,
+  total_bytes_processed / POW(1024, 3) AS total_gigabytes_processed,
+  query
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  query = querytext
+  AND total_bytes_processed > 0
+  AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
+ORDER BY 5 DESC
+LIMIT 3;
+```
+
+Replace `JOB_ID` with any `job_id` value that ran the query you are analyzing.
+
+#### View performance insights for queries
+
+The following example returns all query jobs that have performance insights from your project in the last 30 days, along with a URL that links to the query execution graph in the Google Cloud console:
+
+```
+SELECT
+  `bigquery-public-data`.persistent_udfs.job_url(
+    project_id || ':us.' || job_id) AS job_url,
+  query_info.performance_insights
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE
+  DATE(creation_time) >= CURRENT_DATE - 30 -- scan 30 days of query history
+  AND job_type = 'QUERY'
+  AND state = 'DONE'
+  AND error_result IS NULL
+  AND statement_type != 'SCRIPT'
+  AND EXISTS ( -- Only include queries which had performance insights
+    SELECT 1
+    FROM UNNEST(
+      query_info.performance_insights.stage_performance_standalone_insights
+    )
+    WHERE
+      slot_contention
+      OR insufficient_shuffle_quota
+      OR bi_engine_reasons IS NOT NULL
+      OR high_cardinality_joins IS NOT NULL
+      OR partition_skew IS NOT NULL
+    UNION ALL
+    SELECT 1
+    FROM UNNEST(
+      query_info.performance_insights.stage_performance_change_insights
+    )
+    WHERE input_data_change.records_read_diff_percentage IS NOT NULL
+  );
+```
+
+#### View average concurrent jobs running alongside a particular job in the same project
+
+The following example demonstrates how to calculate the average number of jobs running at the same time as a specific query job in the same project.
+
+This calculation helps determine if an increased number of concurrent jobs within the same project caused [slot contention](https://docs.cloud.google.com/bigquery/docs/query-insights#slot_contention) problems. Gather this data when troubleshooting slow queries or comparing slow and fast query runs.
+
+If there are far more concurrent queries running than expected, check if more jobs were started, queried data changed, or both.
+
+```
+WITH job_metadata AS (
+ SELECT creation_time, end_time, job_type
+ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+ WHERE job_id = 'JOB_ID'
+-- If you know the date the job was created, add the following line to speed up the query by providing the date in UTC:
+-- AND DATE(creation_time) = 'YYYY-MM-DD'
+),
+intervals AS (
+ SELECT TIMESTAMP_ADD(creation_time, INTERVAL (seconds_offset) SECOND) AS ts,
+ job_type
+ FROM job_metadata,
+ UNNEST (GENERATE_ARRAY(0, IF(TIMESTAMP_DIFF(end_time, creation_time, SECOND) > 0, TIMESTAMP_DIFF(end_time, creation_time, SECOND), 1))) as seconds_offset
+),
+concurrent_jobs AS (
+ SELECT int.ts, COUNT(*) as concurrent_jobs_count
+ FROM intervals int JOIN
+ `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT j
+ ON int.ts BETWEEN j.creation_time and j.end_time
+ WHERE job_id != 'JOB_ID'
+ AND j.job_type = int.job_type
+ GROUP BY int.ts)
+
+SELECT ROUND(AVG(concurrent_jobs_count),1) as average_concurrent_jobs FROM concurrent_jobs
+```
+
+> **Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `SECOND` with `MILLISECOND` in the query body for milliseconds sampling.
+
+Replace the following:
+
+- `JOB_ID` : the job ID of the query that you are analyzing.
+
+- `REGION_NAME` : the region for your project.
+
+The result is similar to the following:
+
+```
++-------------------------+
+| average_concurrent_jobs |
++-------------------------+
+|                     2.8 |
++-------------------------+
+```
+
+### Slot utilization
+
+The examples in the following sections show how to calculate slot utilization and identify slot contention across your project or reservation.
+
+#### Calculate average slot utilization
 
 The following example calculates average slot utilization for all queries over the past 7 days for a given project. Note that this calculation is most accurate for projects that have consistent slot usage throughout the week. If your project does not have consistent slot usage, this number might be lower than expected.
 
@@ -563,36 +999,71 @@ You can check usage for a particular reservation with `WHERE reservation_id = "â
 
 If instead you would like to check the average slot utilization for individual jobs, use `total_slot_ms / TIMESTAMP_DIFF(end_time, start_time, MILLISECOND)` .
 
-### Count recent active queries by query priority
+#### Average number of slots per millisecond used by a job
 
-The following example displays the number of queries, grouped by priority (interactive or batch) that were started within the last 7 hours:
+The following example shows how to calculate the average number of slots used by a job throughout the execution. This can be helpful when troubleshooting slow queries and comparing a slow execution of a query to a faster execution of the same query. Comparing this value with the total reservation size and the average number of concurrent jobs executed within the project or reservation can help you to understand whether multiple queries were competing for slots at the same time during the execution.
+
+A higher average number of slots means more resources allocated to the job, which generally results in a faster execution.
 
 ```
-SELECT
-  priority,
-  COUNT(*) active_jobs
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 hour)
-  AND job_type = 'QUERY'
-GROUP BY priority;
+SELECT ROUND(SAFE_DIVIDE(total_slot_ms,TIMESTAMP_DIFF(end_time, start_time, MILLISECOND)), 1) as avg_slots_per_ms
+FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+WHERE job_id = 'JOB_ID'
 ```
+
+Replace `JOB_ID` with the `job_id` value for the job you are investigating.
+
+> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
 
 The result is similar to the following:
 
 ```
-+-------------+-------------+
-| priority    | active_jobs |
-+-------------+-------------+
-| INTERACTIVE |           2 |
-| BATCH       |           3 |
-+-------------+-------------+
++------------------+
+| avg_slots_per_ms |
++------------------+
+|             17.0 |
++------------------+
 ```
 
-The `priority` field indicates whether a query is `INTERACTIVE` or `BATCH` .
+#### View jobs with slot contention insights
 
-### View load job history
+To view jobs with their slot contention insights, run the following query:
+
+```
+SELECT
+  job_id,
+  creation_time,
+  query_info.performance_insights,
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS j,
+  UNNEST(query_info.performance_insights.stage_performance_standalone_insights) i
+WHERE
+  (j.statement_type != "SCRIPT" OR j.statement_type IS NULL)
+  AND i IS NOT NULL
+  AND i.slot_contention
+```
+
+The output shows different performance insights about jobs, including slot contention:
+
+```
++------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
+| job_id     | creation_time           | performance_insights.avg_previous_execution_ms  | performance_insightsstage_performance_standalone_insights.slot_contention  |
++------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
+| bquxjob_1  | 2025-08-08 00:00:00 UTC | null                                            | true                                                                       |
+| bquxjob_2  | 2025-08-08 00:00:00 UTC | 42689                                           | true                                                                       |
+| bquxjob_3  | 2025-08-08 00:00:00 UTC | 42896                                           | true                                                                       |
++------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
+```
+
+#### Match slot usage behavior from administrative resource charts
+
+To explore slot usage behavior similar to the information in administrative resource charts, query the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .
+
+### Load, extract, and copy jobs
+
+The examples in the following sections show how to monitor job history and quota usage for load, extract, and copy jobs.
+
+#### View load job history
 
 The following example lists all users or service accounts that submitted a batch load job for a given project. Because no time boundary is specified, this query scans all available history.
 
@@ -622,9 +1093,30 @@ The result is similar to the following:
 +--------------+
 ```
 
-### Get the number of load jobs to determine the daily job quota used
+#### Get bytes processed by extract jobs
 
-The following example returns the number of jobs by day, dataset, and table so that you can determine how much of the daily job quota is used.
+The following example computes the `total_bytes_processed` value for `EXTRACT` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data#quota_policy) . You can use the `total_bytes_processed` value to monitor the aggregate usage and verify that extract jobs stay below the 50 TiB per-day limit:
+
+```
+SELECT
+    DATE(creation_time) as day,
+    project_id as source_project_id,
+    SUM(total_bytes_processed) AS total_bytes_processed
+ FROM
+   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+ WHERE
+    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 8 DAY) AND CURRENT_TIMESTAMP()
+    AND job_type = "EXTRACT"
+GROUP BY
+    day,
+    source_project_id
+ORDER BY
+    day DESC;
+```
+
+#### Get the number of load jobs to determine the daily job quota used
+
+The following example returns the number of jobs by day, dataset, and table so that you can determine how much of the daily job quota is used:
 
 ```
 SELECT
@@ -661,69 +1153,137 @@ The result is similar to the following:
 +-------------+------------+-------------+----------+-----------------+
 ```
 
-### Get the last few failed jobs
+#### Get usage of copy jobs
 
-The following example shows the last three failed jobs:
-
-```
-SELECT
-   job_id,
-  creation_time,
-  user_email,
-   error_result
- FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE
-  error_result.reason != "Null"
-ORDER BY
-  creation_time DESC
-LIMIT 3;
-```
-
-The results should look similar to the following:
-
-```
-+------------+--------------------------+------------------+-------------------------------------+
-| job_id     | creation_time            | user_email       | error_result                        |
-+------------+--------------------------+------------------+-------------------------------------+
-| bquxjob_1  | 2020-10-10 00:00:00 UTC  | abc@example.com  | Column 'col1' has mismatched type...|
-| bquxjob_2  | 2020-10-11 00:00:00 UTC  | xyz@example.com  | Column 'col1' has mismatched type...|
-| bquxjob_3  | 2020-10-11 00:00:00 UTC  | bob@example.com  | Column 'col1' has mismatched type...|
-+------------+--------------------------+------------------+-------------------------------------+
-```
-
-### Query the list of long-running jobs
-
-The following example shows the list of long-running jobs that are in the `RUNNING` or `PENDING` state for more than 30 minutes:
+For information about copy jobs, see [Copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) . The following example provides the usage of copy jobs:
 
 ```
 SELECT
-  job_id,
-  job_type,
-  state,
-  creation_time,
-  start_time,
-  user_email
- FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+    DATE(creation_time) as day,
+    project_id as source_project_id,
+CONCAT(destination_table.project_id,":",destination_table.dataset_id,".",destination_table.table_id) as destination_table,
+    COUNT(job_id) AS copy_job_count
+ FROM
+   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
  WHERE
-  state!="DONE" AND
-  creation_time <= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 MINUTE)
+    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 8 DAY) AND CURRENT_TIMESTAMP()
+    AND job_type = "COPY"
+GROUP BY
+    day,
+    source_project_id,
+    destination_table
 ORDER BY
-  creation_time ASC;
+    day DESC;
+```
+
+### Query and table activity
+
+The examples in the following sections show how to analyze query activity, table and partition usage, and Connected Sheets jobs.
+
+#### Count recent active queries by query priority
+
+The following example displays the number of queries, grouped by priority (interactive or batch) that were started within the last 7 hours:
+
+```
+SELECT
+  priority,
+  COUNT(*) active_jobs
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 hour)
+  AND job_type = 'QUERY'
+GROUP BY priority;
 ```
 
 The result is similar to the following:
 
 ```
-+-----------+----------+---------+--------------------------------+--------------------------------+------------------+
-| job_id    | job_type | state   | creation_time                  | start_time                     | user_email       |
-+-----------+----------+---------+--------------------------------+--------------------------------+------------------+
-| bquxjob_1 | QUERY    | RUNNING | 2023-05-03 05:07:22.818000 UTC | 2023-05-03 05:07:22.905000 UTC | abc@example.com  |
-| bquxjob_2 | QUERY    | PENDING | 2023-05-01 02:05:47.925000 UTC | 2023-05-01 02:05:47.998000 UTC | xyz@example.com  |
-| bquxjob_3 | QUERY    | PENDING | 2023-05-01 02:05:47.925000 UTC | 2023-05-01 02:05:47.998000 UTC | abc@example.com  |
-+-----------+----------+---------+--------------------------------+--------------------------------+------------------+
++-------------+-------------+
+| priority    | active_jobs |
++-------------+-------------+
+| INTERACTIVE |           2 |
+| BATCH       |           3 |
++-------------+-------------+
 ```
 
-### Queries using optional job creation mode
+The `priority` field indicates whether a query is `INTERACTIVE` or `BATCH` .
+
+#### Number of partitions modified by query and load jobs per table
+
+The following example shows the number of partitions modified by queries with DML statements and load jobs, per table. Note that this query doesn't show the `total_modified_partitions` for copy jobs.
+
+```
+SELECT
+  destination_table.table_id,
+  SUM(total_modified_partitions) AS total_modified_partitions
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  DATE(creation_time, "America/Los_Angeles") = CURRENT_DATE()
+GROUP BY
+  table_id
+ORDER BY
+  total_modified_partitions DESC
+```
+
+#### Query jobs per table
+
+The following example shows how many times each table queried in `my_project` was referenced by a query job:
+
+```
+SELECT
+  t.project_id,
+  t.dataset_id,
+  t.table_id,
+  COUNT(*) AS num_references
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS, UNNEST(referenced_tables) AS t
+GROUP BY
+  t.project_id,
+  t.dataset_id,
+  t.table_id
+ORDER BY
+  num_references DESC;
+```
+
+The result is similar to the following:
+
+```
++------------+------------+----------+----------------+
+| project_id | dataset_id | table_id | num_references |
++------------+------------+----------+----------------+
+| my_project | dataset1   | orders   | 58             |
+| my_project | dataset1   | products | 40             |
+| other_proj | dataset1   | accounts | 12             |
++------------+------------+----------+----------------+
+```
+
+#### Legacy SQL query jobs count per project
+
+The 'query_dialect' field in the INFORMATION_SCHEMA has been available since May 2025. The following example shows how many legacy SQL query jobs are executed by projects.
+
+```
+SELECT
+  project_id,
+  -- Implicitly defaulted to Legacy SQL since the query dialect was not specified
+  -- in the request.
+  COUNTIF(query_dialect = 'DEFAULT_LEGACY_SQL') AS default_legacysql_query_jobs,
+  -- Explicitly requested Legacy SQL.
+  COUNTIF(query_dialect = 'LEGACY_SQL') AS legacysql_query_jobs,
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
+WHERE
+  query_dialect = 'DEFAULT_LEGACY_SQL'
+  OR query_dialect = 'LEGACY_SQL'
+GROUP BY
+  project_id
+ORDER BY
+  default_legacysql_query_jobs DESC,
+  legacysql_query_jobs DESC;
+```
+
+#### Queries using optional job creation mode
 
 The following example shows a list of queries that were executed in optional job creation mode for which BigQuery did not create jobs.
 
@@ -738,7 +1298,7 @@ WHERE
 LIMIT 3;
 ```
 
-The results should look like the following:
+The result is similar to the following:
 
 ```
 +-----------+
@@ -771,9 +1331,9 @@ WHERE
  AND job_id = '2Lm09bHxDEsoVK8zwzWJomLHU_Ud%1910479b151' -- queryId
 ```
 
-**Note** : The `job_id` field contains the `queryId` of the query when a job was not created for this query.
+> **Note:** The `job_id` field contains the `queryId` of the query when a job was not created for this query.
 
-The results should look like the following:
+The result is similar to the following:
 
 ```
 +-----------+----------------+-------------+-----------+--------------------------+--------------------+---------------------+---------------+-------+----------------------+
@@ -798,7 +1358,7 @@ WHERE
 LIMIT 3
 ```
 
-The results should look like the following:
+The result is similar to the following:
 
 ```
 +-----------+--------------------------+
@@ -810,38 +1370,7 @@ The results should look like the following:
 +-----------+--------------------------+
 ```
 
-### Bytes processed per user identity
-
-The following example shows the total bytes billed for query jobs per user:
-
-```
-SELECT
-  user_email,
-  SUM(total_bytes_billed) AS bytes_billed
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  job_type = 'QUERY'
-  AND statement_type != 'SCRIPT'
-GROUP BY
-  user_email;
-```
-
-**Note** : See the caveat for the `total_bytes_billed` column in the schema documentation for the `JOBS` views.
-
-The results should look like the following:
-
-```
-+---------------------+--------------+
-| user_email          | bytes_billed |
-+---------------------+--------------+
-| bob@example.com     | 2847932416   |
-| alice@example.com   | 1184890880   |
-| charles@example.com | 10485760     |
-+---------------------+--------------+
-```
-
-### Aggregate Connected Sheets usage by user at the project level
+\#### Aggregate Connected Sheets usage by user at the project level
 
 If you don't have organization-level permissions or only need to monitor a specific project, run the following query to identify the top Connected Sheets users within a project over the last 30 days. The query aggregates the total number of queries, total bytes billed, and total slot milliseconds for each user. This information is useful for understanding adoption and for identifying top consumers of resources.
 
@@ -886,7 +1415,7 @@ The result looks similar to the following:
 +---------------------+---------------+--------------------+-----------------+
 ```
 
-### Find job logs of Connected Sheets queries at the project-level
+\#### Find job logs of Connected Sheets queries at the project-level
 
 If you don't have organization-level permissions or only need to monitor a specific project, run the following query to see a detailed log of all Connected Sheets queries for the current project:
 
@@ -926,314 +1455,11 @@ The result looks similar to the following:
 +---------------------------------+---------------------------------+------------------+--------------------+-----------------+---------------------------------+
 ```
 
-### Hourly breakdown of bytes processed
+### Metadata and storage optimization jobs
 
-The following example shows total bytes billed for query jobs, in hourly intervals:
+The following examples show how to monitor metadata cache refresh jobs, storage optimization jobs, and metadata export jobs.
 
-```
-SELECT
-  TIMESTAMP_TRUNC(end_time, HOUR) AS time_window,
-  SUM(total_bytes_billed) AS bytes_billed
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  job_type = 'QUERY'
-  AND statement_type != 'SCRIPT'
-GROUP BY
-  time_window
-ORDER BY
-  time_window DESC;
-```
-
-The result is similar to the following:
-
-```
-+-------------------------+--------------+
-| time_window             | bytes_billed |
-+-------------------------+--------------+
-| 2022-05-17 20:00:00 UTC | 1967128576   |
-| 2022-05-10 21:00:00 UTC | 0            |
-| 2022-04-15 17:00:00 UTC | 41943040     |
-+-------------------------+--------------+
-```
-
-### Query jobs per table
-
-The following example shows how many times each table queried in `my_project` was referenced by a query job:
-
-```
-SELECT
-  t.project_id,
-  t.dataset_id,
-  t.table_id,
-  COUNT(*) AS num_references
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS, UNNEST(referenced_tables) AS t
-GROUP BY
-  t.project_id,
-  t.dataset_id,
-  t.table_id
-ORDER BY
-  num_references DESC;
-```
-
-The result is similar to the following:
-
-```
-+------------+------------+----------+----------------+
-| project_id | dataset_id | table_id | num_references |
-+------------+------------+----------+----------------+
-| my_project | dataset1   | orders   | 58             |
-| my_project | dataset1   | products | 40             |
-| other_proj | dataset1   | accounts | 12             |
-+------------+------------+----------+----------------+
-```
-
-### Legacy SQL query jobs count per project
-
-The 'query_dialect' field in the INFORMATION_SCHEMA has been available since May 2025. The following example shows how many legacy SQL query jobs are executed by projects.
-
-```
-SELECT
-  project_id,
-  -- Implicitly defaulted to LegacySQL since the query dialect was not specified
-  -- in the request.
-  COUNTIF(query_dialect = 'DEFAULT_LEGACY_SQL') AS default_legacysql_query_jobs,
-  -- Explicitly requested LegacySQL.
-  COUNTIF(query_dialect = 'LEGACY_SQL') AS legacysql_query_jobs,
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  query_dialect = 'DEFAULT_LEGACY_SQL'
-  OR query_dialect = 'LEGACY_SQL'
-GROUP BY
-  project_id
-ORDER BY
-  default_legacysql_query_jobs DESC,
-  legacysql_query_jobs DESC;
-```
-
-### Number of partitions modified by query and load jobs per table
-
-The following example shows the number of partitions modified by queries with DML statements and load jobs, per table. Note that this query doesn't show the `total_modified_partitions` for copy jobs.
-
-```
-SELECT
-  destination_table.table_id,
-  SUM(total_modified_partitions) AS total_modified_partitions
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  DATE(creation_time, "America/Los_Angeles") = CURRENT_DATE()
-GROUP BY
-  table_id
-ORDER BY
-  total_modified_partitions DESC
-```
-
-### Average number of slots per millisecond used by a job
-
-The following example shows how to calculate the average number of slots used by a job throughout the execution. This can be helpful when troubleshooting slow queries and comparing a slow execution of a query to a faster execution of the same query. Comparing this value with the total reservation size and the average number of concurrent jobs executed within the project or reservation can help you to understand whether multiple queries were competing for slots at the same time during the execution.
-
-A higher average number of slots means more resources allocated to the job, which generally results in a faster execution.
-
-```
-SELECT ROUND(SAFE_DIVIDE(total_slot_ms,TIMESTAMP_DIFF(end_time, start_time, MILLISECOND)), 1) as avg_slots_per_ms
-FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE job_id = 'JOB_ID'
-```
-
-Replace `JOB_ID` with the `job_id` you are investigating.
-
-> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
-
-The result will be similar to the following:
-
-```
-+------------------+
-| avg_slots_per_ms |
-+------------------+
-|             17.0 |
-+------------------+
-```
-
-### Most expensive queries by project
-
-The following example lists the most expensive queries in `my_project` by slot usage time:
-
-```
-SELECT
- job_id,
- query,
- user_email,
- total_slot_ms
-FROM `my_project`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE EXTRACT(DATE FROM  creation_time) = current_date()
-ORDER BY total_slot_ms DESC
-LIMIT 3
-```
-
-You can also list the most expensive queries by data processed with the following example:
-
-```
-SELECT
- job_id,
- query,
- user_email,
- total_bytes_processed
-FROM `my_project`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE EXTRACT(DATE FROM  creation_time) = current_date()
-ORDER BY total_bytes_processed DESC
-LIMIT 3
-```
-
-The result for either example is similar to the following:
-
-```
-+-----------+---------------------------------+-----------------------+---------------+
-| job_id    | query                           | user_email            | total_slot_ms |
-+-----------+---------------------------------+-----------------------+---------------+
-| bquxjob_1 | SELECT ... FROM dataset.table1  | bob@example.com       | 80,000        |
-| bquxjob_2 | SELECT ... FROM dataset.table2  | alice@example.com     | 78,000        |
-| bquxjob_3 | SELECT ... FROM dataset.table3  | charles@example.com   | 75,000        |
-+-----------+---------------------------------+-----------------------+---------------+
-```
-
-### Get details about a resource warning
-
-If you get a **Resources exceeded** error message, you can inquire about the queries in a time window:
-
-```
-SELECT
-  query,
-  query_info.resource_warning
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
- creation_time BETWEEN TIMESTAMP("2022-12-01")
- AND TIMESTAMP("2022-12-08")
- AND query_info.resource_warning IS NOT NULL
-LIMIT 3;
-```
-
-### Monitor resource warnings grouped by date
-
-If you get a **Resources exceeded** error message, you can monitor the total number of resource warnings grouped by date to know if there are any changes to workload:
-
-```
-WITH resource_warnings AS (
-  SELECT
-    EXTRACT(DATE FROM creation_time) AS creation_date
-  FROM
-    `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-  WHERE
-    creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 14 DAY)
-    AND query_info.resource_warning IS NOT NULL
-)
-SELECT
-  creation_date,
-  COUNT(1) AS warning_counts
-FROM
-  resource_warnings
-GROUP BY creation_date
-ORDER BY creation_date DESC;
-```
-
-### Estimate slot usage and cost for queries
-
-The following example computes the average slots and max slots for each job by using `estimated_runnable_units` .
-
-The `reservation_id` is `NULL` if you don't have any reservations.
-
-```
-SELECT
-  project_id,
-  job_id,
-  reservation_id,
-  EXTRACT(DATE FROM creation_time) AS creation_date,
-  TIMESTAMP_DIFF(end_time, start_time, SECOND) AS job_duration_seconds,
-  job_type,
-  user_email,
-  total_bytes_billed,
-
-  -- Average slot utilization per job is calculated by dividing total_slot_ms by the millisecond duration of the job
-
-  SAFE_DIVIDE(job.total_slot_ms,(TIMESTAMP_DIFF(job.end_time, job.start_time, MILLISECOND))) AS job_avg_slots,
-  query,
-
-  -- Determine the max number of slots used at ANY stage in the query.
-  -- The average slots might be 55. But a single stage might spike to 2000 slots.
-  -- This is important to know when estimating number of slots to purchase.
-
-  MAX(SAFE_DIVIDE(unnest_job_stages.slot_ms,unnest_job_stages.end_ms - unnest_job_stages.start_ms)) AS jobstage_max_slots,
-
-  -- Check if there's a job that requests more units of works (slots). If so you need more slots.
-  -- estimated_runnable_units = Units of work that can be scheduled immediately.
-  -- Providing additional slots for these units of work accelerates the query,
-  -- if no other query in the reservation needs additional slots.
-
-  MAX(unnest_timeline.estimated_runnable_units) AS estimated_runnable_units
-FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS AS job
-  CROSS JOIN UNNEST(job_stages) as unnest_job_stages
-  CROSS JOIN UNNEST(timeline) AS unnest_timeline
-WHERE
-  DATE(creation_time) BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE()
-  AND project_id = 'my_project'
-  AND (statement_type != 'SCRIPT' OR statement_type IS NULL)
-GROUP BY 1,2,3,4,5,6,7,8,9,10
-ORDER BY job_id;
-```
-
-The result for example is similar to the following:
-
-```
-+-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
-|project_id | job_id    | reservation_id | creation_date | job_duration_seconds | job_type | user_email      | total_bytes_billed | job_avg_slots| query                          | jobstage_max_slots | estimated_runnable_units |
-+-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
-| project1  | bquxjob1  | reservation1   | 2020-10-10    | 160                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 2779.1534          | 1000                     |
-| project1  | bquxjob2  | reservation2   | 2020-12-10    | 120                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 2779.1534          | 1000                     |
-| project1  | bquxjob3  | reservation1   | 2020-12-10    | 120                  | LOAD     | abc@example.com | 161480704          | 2890         | SELECT ... FROM dataset.table1 | 1279.1534          | 998                     |
-+-----------+-----------+----------------+---------------+----------------------+----------+-----------------+--------------------+--------------+--------------------------------+--------------------+--------------------------+
-```
-
-### View performance insights for queries
-
-The following example returns all query jobs that have performance insights from your project in the last 30 days, along with a URL that links to the query execution graph in the Google Cloud console.
-
-```
-SELECT
-  `bigquery-public-data`.persistent_udfs.job_url(
-    project_id || ':us.' || job_id) AS job_url,
-  query_info.performance_insights
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE
-  DATE(creation_time) >= CURRENT_DATE - 30 -- scan 30 days of query history
-  AND job_type = 'QUERY'
-  AND state = 'DONE'
-  AND error_result IS NULL
-  AND statement_type != 'SCRIPT'
-  AND EXISTS ( -- Only include queries which had performance insights
-    SELECT 1
-    FROM UNNEST(
-      query_info.performance_insights.stage_performance_standalone_insights
-    )
-    WHERE
-      slot_contention
-      OR insufficient_shuffle_quota
-      OR bi_engine_reasons IS NOT NULL
-      OR high_cardinality_joins IS NOT NULL
-      OR partition_skew IS NOT NULL
-    UNION ALL
-    SELECT 1
-    FROM UNNEST(
-      query_info.performance_insights.stage_performance_change_insights
-    )
-    WHERE input_data_change.records_read_diff_percentage IS NOT NULL
-  );
-```
-
-### View metadata refresh jobs
+#### View metadata refresh jobs
 
 The following example lists the metadata refresh jobs in last six hours:
 
@@ -1251,205 +1477,7 @@ LIMIT 10;
 
 Replace ` REGION_NAME ` with your region.
 
-### Analyze performance over time for identical queries
-
-The following example returns the top 10 slowest jobs over the past 7 days that have run the same query:
-
-```
-DECLARE querytext STRING DEFAULT(
-  SELECT query
-  FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-  WHERE job_id = 'JOB_ID'
-  LIMIT 1
-);
-
-SELECT
-  start_time,
-  end_time,
-  project_id,
-  job_id,
-  TIMESTAMP_DIFF(end_time, start_time, SECOND) AS run_secs,
-  total_bytes_processed / POW(1024, 3) AS total_gigabytes_processed,
-  query
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
-WHERE
-  query = querytext
-  AND total_bytes_processed > 0
-  AND creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY)
-ORDER BY 5 DESC
-LIMIT 3;
-```
-
-Replace `JOB_ID` with any `job_id` that ran the query you are analyzing.
-
-### View jobs with slot contention insights
-
-To view jobs with their slot contention insights, run the following query:
-
-```
-SELECT
-  job_id,
-  creation_time,
-  query_info.performance_insights,
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS j,
-  UNNEST(query_info.performance_insights.stage_performance_standalone_insights) i
-WHERE
-  (j.statement_type != "SCRIPT" OR j.statement_type IS NULL)
-  AND i IS NOT NULL
-  AND i.slot_contention
-```
-
-The output shows different performance insights about jobs, including slot contention:
-
-```
-+------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
-| job_id     | creation_time           | performance_insights.avg_previous_execution_ms  | performance_insightsstage_performance_standalone_insights.slot_contention  |
-+------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
-| bquxjob_1  | 2025-08-08 00:00:00 UTC | null                                            | true                                                                       |
-| bquxjob_2  | 2025-08-08 00:00:00 UTC | 42689                                           | true                                                                       |
-| bquxjob_3  | 2025-08-08 00:00:00 UTC | 42896                                           | true                                                                       |
-+------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
-```
-
-### Get jobs with the same query hash
-
-The following query returns the job IDs with the same query hash as a specific job:
-
-```
-SELECT
-  j.job_id,
-  j.creation_time,
-  j.query
-FROM
-  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS j
-WHERE
-  j.job_id != "JOB_IDENTIFIER"
-  AND j.query_info.query_hashes.normalized_literals = (
-    SELECT
-      sub.query_info.query_hashes.normalized_literals
-    FROM
-      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS sub
-    WHERE
-      sub.job_id = "JOB_IDENTIFIER"
-    LIMIT 1
-  )
-ORDER BY
-  j.creation_time DESC;
-```
-
-> **Note:** `INFORMATION_SCHEMA` view names are case-sensitive.
-
-The result is similar to the following:
-
-```
-+--------------+---------------------------+------------------------------------------------+
-| job_id       |  creation_time            |  query                                         |
-+--------------+---------------------------+------------------------------------------------+
-| bquxjob_1    |  2019-10-10 00:00:00 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "a"  |
-| bquxjob_2    |  2019-10-10 00:00:01 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "b"  |
-| bquxjob_3    |  2019-10-10 00:00:02 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "c"  |
-+--------------+---------------------------+------------------------------------------------+
-```
-
-### View average concurrent jobs running alongside a particular job in the same project
-
-The following example demonstrates how to calculate the average number of jobs running at the same time as a specific query job in the same project.
-
-This calculation helps determine if an increased number of concurrent jobs within the same project caused [slot contention](https://docs.cloud.google.com/bigquery/docs/query-insights#slot_contention) problems. Gather this data when troubleshooting slow queries or comparing slow and fast query runs.
-
-If there are far more concurrent queries running than expected, check if more jobs were started, queried data changed, or both.
-
-```
-WITH job_metadata AS (
- SELECT creation_time, end_time, job_type
- FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
- WHERE job_id = 'JOB_ID'
--- If you know the date the job was created, add the following line to speed up the query by providing the date in UTC:
--- AND DATE(creation_time) = 'YYYY-MM-DD'
-),
-intervals AS (
- SELECT TIMESTAMP_ADD(creation_time, INTERVAL (seconds_offset) SECOND) AS ts,
- job_type
- FROM job_metadata,
- UNNEST (GENERATE_ARRAY(0, IF(TIMESTAMP_DIFF(end_time, creation_time, SECOND) > 0, TIMESTAMP_DIFF(end_time, creation_time, SECOND), 1))) as seconds_offset
-),
-concurrent_jobs AS (
- SELECT int.ts, COUNT(*) as concurrent_jobs_count
- FROM intervals int JOIN
- `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT j
- ON int.ts BETWEEN j.creation_time and j.end_time
- WHERE job_id != 'JOB_ID'
- AND j.job_type = int.job_type
- GROUP BY int.ts)
-
-SELECT ROUND(AVG(concurrent_jobs_count),1) as average_concurrent_jobs FROM concurrent_jobs
-```
-
-> **Note:** The granularity for metadata aggregation is set to seconds. If you require a more precise granularity for shorter running jobs, replace `SECOND` with `MILLISECOND` in the query body for milliseconds sampling.
-
-Replace the following:
-
-- `JOB_ID` : the job ID of the query that you are analyzing
-
-- `REGION_NAME` : the region for your project
-
-The result is similar to the following:
-
-```
-+-------------------------+
-| average_concurrent_jobs |
-+-------------------------+
-|                     2.8 |
-+-------------------------+
-```
-
-### Get bytes processed by extract jobs
-
-The following example computes the `total_bytes_processed` value for `EXTRACT` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](https://docs.cloud.google.com/bigquery/docs/exporting-data#quota_policy) . The total bytes processed can be used to monitor the aggregate usage and verify that extract jobs stays below the 50 TiB per-day limit:
-
-```
-SELECT
-    DATE(creation_time) as day,
-    project_id as source_project_id,
-    SUM(total_bytes_processed) AS total_bytes_processed
- FROM
-   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
- WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 8 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "EXTRACT"
-GROUP BY
-    day,
-    source_project_id
-ORDER BY
-    day DESC;
-```
-
-### Get usage of copy jobs
-
-For information about copy jobs, see [Copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) . The following example provides the usage of copy jobs:
-
-```
-SELECT
-    DATE(creation_time) as day,
-    project_id as source_project_id,
-CONCAT(destination_table.project_id,":",destination_table.dataset_id,".",destination_table.table_id) as destination_table,
-    COUNT(job_id) AS copy_job_count
- FROM
-   `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS
- WHERE
-    creation_time BETWEEN TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 8 DAY) AND CURRENT_TIMESTAMP()
-    AND job_type = "COPY"
-GROUP BY
-    day,
-    source_project_id,
-    destination_table
-ORDER BY
-    day DESC;
-```
-
-### Get usage of Apache Iceberg managed tables storage optimization
+#### Get usage of Apache Iceberg managed tables storage optimization
 
 The following example provides the usage of Iceberg managed table storage optimization.
 
@@ -1463,7 +1491,7 @@ WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 HOUR)
     AND query LIKE "CALL BQ.OPTIMIZE_STORAGE(%)";
 ```
 
-### Get usage of Iceberg managed table export table metadata
+#### Get usage of Iceberg managed table export table metadata
 
 The following example provides the usage of Iceberg `EXPORT TABLE METADATA FROM` .
 
@@ -1493,7 +1521,3 @@ SELECT
    start_time DESC
  LIMIT 3;
 ```
-
-### Match slot usage behavior from administrative resource charts
-
-To explore slot usage behavior similar to the information in administrative resource charts, query the [`INFORMATION_SCHEMA.JOBS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline#charts_example) .

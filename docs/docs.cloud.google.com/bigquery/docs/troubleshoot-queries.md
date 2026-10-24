@@ -75,7 +75,7 @@ If the query references any [materialized views](https://docs.cloud.google.com/b
 
 #### Metadata caching statistics
 
-For queries that involve Amazon S3 BigLake tables or Cloud Storage BigLake tables with metadata caching enabled, compare the output of the [`MetadataCacheStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics) to check whether there is a difference in metadata cache usage between the slow and fast query and corresponding reasons. For example, the metadata cache might be outside the table's `maxStaleness` window.
+For queries that involve Amazon S3 BigLake tables or Cloud Storage BigLake tables with metadata caching enabled, compare the output of the [`MetadataCacheStatistics`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics) to check whether there is a difference in metadata cache usage between the slow and fast query and corresponding reasons. For example, the metadata cache might be outside the `maxStaleness` time interval configured for the table.
 
 #### Comparing BigQuery BI Engine statistics
 

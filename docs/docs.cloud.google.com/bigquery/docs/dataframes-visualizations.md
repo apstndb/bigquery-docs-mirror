@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Visualize graphs using BigQuery DataFrames
 
-This document demonstrates how to plot various types of graphs by using the BigQuery DataFrames visualization library.
-
-The [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) provides a full ecosystem of tools for Python. The API supports advanced statistical operations, and you can visualize the aggregations generated from BigQuery DataFrames. You can also switch from BigQuery DataFrames to a `pandas` DataFrame with built-in sampling operations.
+You can use the BigQuery DataFrames visualization library to plot various types of graphs to visually explore and understand your data. The [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) lets you seamlessly combine advanced statistical operations with familiar Python plotting tools, including built-in sampling for large datasets.
 
 ## Histogram
 

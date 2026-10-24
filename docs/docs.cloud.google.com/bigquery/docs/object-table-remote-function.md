@@ -8,17 +8,9 @@ data_source: docs.cloud.google.com
 
 # Analyze object tables by using remote functions
 
-This document describes how to analyze unstructured data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
+You can analyze [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) with [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) to extract insights from unstructured data using external tools and libraries. Integrating your queries with Cloud Run or Cloud Run functions lets you apply Google's pre-trained AI models, open-source libraries, or your own custom models directly to your BigQuery data.
 
-## Overview
-
-You can analyze the unstructured data represented by an object table by using a remote function. A remote function lets you call a function running on Cloud Run functions or Cloud Run, which you can program to access resources such as:
-
-- Google's pre-trained AI models, including Cloud Vision API and Document AI.
-- Open source libraries such as [Apache Tika](https://tika.apache.org/) .
-- Your own custom models.
-
-To analyze object table data by using a remote function, you must generate and pass in [signed URLs](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#signed_urls) for the objects in the object table when you call the remote function. These signed URLs are what grant the remote function access to the objects.
+To analyze object table data by using a remote function, you must generate and pass in [signed URLs](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#signed_urls) for the objects in the object table when you call the remote function. These signed URLs grant the remote function access to the objects.
 
 ## Required permissions
 

@@ -8,13 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage routines
 
-In BigQuery, *routines* are a resource type that includes the following:
-
-- [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#writing_a_procedure) .
-- [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) (UDFs), including [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) and [user-defined aggregate functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) .
-- [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) .
-
-This document describes tasks that are common to all routine types in BigQuery.
+Managing routines in BigQuery lets you organize, maintain, and reuse your custom logic across your data warehouse. Understanding how to create, view, and delete these resources lets you effectively administer your [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#writing_a_procedure) , [user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) (UDFs), and [table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) .
 
 ## Permissions
 

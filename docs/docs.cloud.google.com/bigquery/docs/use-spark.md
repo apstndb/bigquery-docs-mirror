@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Run PySpark code in BigQuery Studio notebooks
 
-This document shows you how to run PySpark code in a BigQuery Python notebook.
+You can create a Spark session in a BigQuery Studio notebook to use PySpark code to analyze and transform your data at a larger scale. Using this managed integration lets you dynamically add Python packages and process large datasets without leaving your notebook environment.
 
 ## Before you begin
 

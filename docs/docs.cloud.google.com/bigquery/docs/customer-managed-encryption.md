@@ -1753,7 +1753,7 @@ With customer-managed encryption keys, specifying permissions repeatedly is not 
 
 ### Which service account is used?
 
-The BigQuery service account associated with the Google Cloud project of the table is used to decrypt that table's data. The BigQuery service accounts are unique for each project. For a job that writes data into a Cloud KMS-protected anonymous table, the job's project's service account is used.
+The BigQuery service account associated with the Google Cloud project of the table is used to decrypt that table's data. The BigQuery service accounts are unique for each project. For a job that writes data into a Cloud KMS-protected anonymous table, the service account of the job's project is used.
 
 As an example, consider three CMEK-protected tables: `table1` , `table2` , and `table3` . To query data from `{project1.table1, project2.table2}` with destination table `{project3.table3}` :
 

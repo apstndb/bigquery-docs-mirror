@@ -6,16 +6,14 @@ description: A fully managed, petabyte-scale analytics data warehouse that lets 
 data_source: docs.cloud.google.com
 ---
 
-This tutorial introduces you to geospatial analytics. Geospatial analytics lets you analyze and visualize geospatial data in BigQuery.
+Geospatial analytics in BigQuery lets you seamlessly analyze and visualize location-based data. Converting raw latitude and longitude coordinates into geographical points lets you execute spatial queries and plot interactive maps directly from your data warehouse.
 
 ## Objectives
 
-In this tutorial, you:
-
-- Use a geospatial analytics function to convert latitude and longitude columns into geographical points
-- Run a query that finds all the Citi Bike stations with more than 30 bikes available for rental
-- Visualize your results in BigQuery
-- Visualize your results in [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize)
+- Use a geospatial analytics function to convert latitude and longitude columns into geographical points.
+- Run a query that finds all the Citi Bike stations with more than 30 bikes available for rental.
+- Visualize your results in BigQuery.
+- Visualize your results in [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
 
 ## Costs
 

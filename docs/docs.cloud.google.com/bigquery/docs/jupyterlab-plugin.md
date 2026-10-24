@@ -14,13 +14,9 @@ data_source: docs.cloud.google.com
 
 To request feedback or support for this feature, send an email to <bigquery-ide-plugin@google.com> .
 
-This document shows you how to install and use the BigQuery JupyterLab plugin to do the following:
+The BigQuery JupyterLab plugin lets you explore your datasets and use the BigQuery DataFrames API directly from your local development environment. Integrating this plugin into your workflow lets you manage notebooks, develop with Apache Spark, and deploy your code to [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
 
-- Explore your BigQuery data.
-- Use the BigQuery DataFrames API.
-- Deploy a BigQuery DataFrames notebook to [Managed Service for Apache Airflow](https://docs.cloud.google.com/composer/docs/concepts/overview) .
-
-The BigQuery JupyterLab plugin includes all the functionality of the [Managed Service for Apache Spark JupyterLab plugin](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) , such as creating a Managed Service for Apache Spark Serverless runtime template, launching and managing notebooks, developing with Apache Spark, deploying your code, and managing your resources.
+The BigQuery JupyterLab plugin includes all the functionality of the [Managed Service for Apache Spark JupyterLab plugin](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/jupyterlab-sessions) .
 
 ## Install the BigQuery JupyterLab plugin
 

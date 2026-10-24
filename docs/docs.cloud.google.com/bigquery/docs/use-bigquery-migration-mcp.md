@@ -88,7 +88,7 @@ AI applications and agents, such as Claude or Antigravity, can instantiate an MC
 You can automatically register the BigQuery Migration Service MCP server into supported AI clients by using [`add-mcp`](https://github.com/neon-solutions/add-mcp) without manually locating configuration file paths. The tool detects your installed AI clients automatically. The following example shows how to use `add-mcp` to register the BigQuery Migration Service MCP server:
 
 ```
-npx add-mcp https://bigquerymigration.googleapis.com/mcp --name bqms --header "x-goog-user-project: <var>PROJECT_ID</var>" --scopes "https://www.googleapis.com/auth/bigquerymigration,https://www.googleapis.com/auth/devstorage.read_only" --timeout 30000
+npx add-mcp https://bigquerymigration.googleapis.com/mcp --name bqms --header "x-goog-user-project: PROJECT_ID" --scopes "https://www.googleapis.com/auth/bigquerymigration,https://www.googleapis.com/auth/devstorage.read_only" --timeout 30000
 ```
 
 > > **Note:** When you use `google_credentials` for authentication, `add-mcp` hardens written configurations by emitting standard MCP fields and dropping vendor-specific properties like `authProviderType: "google_credentials"` . For clients that require Google Cloud OAuth credentials (such as Antigravity or Gemini CLI), ensure that `"authProviderType": "google_credentials"` and `"oauth": { "scopes": [...] }` are included in your JSON configuration.

@@ -449,7 +449,7 @@ To resolve this quota error, do the following:
 
 - While loading data to BigQuery using Dataflow with the [BigQuery I/O connector](https://beam.apache.org/documentation/io/built-in/google-bigquery/) , you might encounter this error for the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) . To resolve this issue, do the following:
 
-  - Set the destination table's create disposition to `CREATE_NEVER` . For more information, see [Create disposition](https://beam.apache.org/documentation/io/built-in/google-bigquery/#create-disposition) .
+  - Set the create disposition of the destination table to `CREATE_NEVER` . For more information, see [Create disposition](https://beam.apache.org/documentation/io/built-in/google-bigquery/#create-disposition) .
 
   - Use the Apache Beam SDK version 2.24.0 or higher. In the previous versions of the SDK, the `CREATE_IF_NEEDED` disposition calls the `tables.get` method to check if the table exists.
 
@@ -742,7 +742,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
 - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
@@ -829,7 +829,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
 - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 
@@ -921,7 +921,7 @@ This quota cannot be increased. To resolve this quota error, do the following:
 
 - To append data at a high rate, consider using [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) . It is a recommended solution for high-performance data ingestion. The BigQuery Storage Write API (gRPC) has robust features, including exactly-once delivery semantics. To learn about limits and quotas, see [Storage Write API](https://cloud.google.com/bigquery/quotas#write-api-limits) and to see costs of using this API, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
-- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
+- To monitor the number of modified partitions on a table, use the [`INFORMATION_SCHEMA` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#partitions-modified-by) .
 
 - For information about optimizing table load jobs to avoid reaching quota limits, see [Optimize load jobs](https://docs.cloud.google.com/bigquery/docs/optimize-load-jobs) .
 

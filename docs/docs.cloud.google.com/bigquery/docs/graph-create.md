@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document shows you how to use [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) to create a graph with financial information and run graph queries using the [Graph Query Language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) (GQL).
+[BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) lets you model relational data as nodes and edges to query complex relationships by using [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) . In this tutorial, you create node and edge tables for a financial dataset, define a property graph, and run graph pattern queries.
 
 ## Required roles
 

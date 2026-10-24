@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Build a cross-cloud property graph over an open borderless Lakehouse
 
-The following tutorial shows you how to build a single BigQuery Graph that unifies data silos across two different clouds using an open borderless Lakehouse and Apache Iceberg REST catalog endpoints without moving data.
+The following tutorial shows you how to build a single BigQuery Graph that unifies data silos across two different clouds using an open borderless Lakehouse and Apache Iceberg REST catalog endpoint endpoints without moving data.
 
 ## Before you begin
 
@@ -39,7 +39,7 @@ Before you begin, set up your environment and enable the required APIs.
 
 ## Create the Google Cloud spoke
 
-Set up an open Apache Iceberg REST catalog backed by a Cloud Storage bucket, and load three Iceberg tables into it.
+Set up an open Apache Iceberg REST catalog endpoint backed by a Cloud Storage bucket, and load three Iceberg tables into it.
 
 1.  Create the bucket and catalog:
 

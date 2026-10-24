@@ -253,7 +253,7 @@ The result looks similar to the following:
 +---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
 ```
 
-### Aggregate Connected Sheets usage by user at the project level
+\### Aggregate Connected Sheets usage by user at the project level
 
 If you don't have organization-level permissions or only need to monitor a specific project, run the following query to identify the top Connected Sheets users within a project over the last 30 days. The query aggregates the total number of queries, total bytes billed, and total slot milliseconds for each user. This information is useful for understanding adoption and for identifying top consumers of resources.
 
@@ -298,7 +298,7 @@ The result looks similar to the following:
 +---------------------+---------------+--------------------+-----------------+
 ```
 
-### Find job logs of Connected Sheets queries at the project-level
+\### Find job logs of Connected Sheets queries at the project-level
 
 If you don't have organization-level permissions or only need to monitor a specific project, run the following query to see a detailed log of all Connected Sheets queries for the current project:
 

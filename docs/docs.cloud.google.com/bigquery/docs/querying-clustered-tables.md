@@ -31,7 +31,7 @@ Each of the following predefined IAM roles includes the permission that you need
 - `roles/bigquery.dataEditor`
 - `roles/bigquery.dataViewer`
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://cloud.google.com/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Query a clustered table
 

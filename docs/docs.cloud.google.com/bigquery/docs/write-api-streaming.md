@@ -8,18 +8,11 @@ data_source: docs.cloud.google.com
 
 # Stream data using the Storage Write API (gRPC)
 
-This document describes how to use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) to stream data into BigQuery.
-
-In streaming scenarios, data arrives continuously and should be available for reads with minimal latency. When using the BigQuery Storage Write API (gRPC) for streaming workloads, consider what guarantees you need:
-
-- If your application only needs at-least-once semantics, then use the **default stream** .
-- If you need exactly-once semantics, then create one or more streams in **committed type** and use stream offsets to guarantee exactly-once writes.
-
-In committed type, data written to the stream is available for query as soon as the server acknowledges the write request. The default stream also uses committed type, but does not provide exactly-once guarantees.
+The [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) lets you continuously stream data into BigQuery tables so that records are available to query with minimal latency. Depending on your workload requirements, you can use the default stream for at-least-once writes or create streams in committed type with stream offsets for exactly-once delivery.
 
 ## Use the default stream for at-least-once semantics
 
-If your application can accept the possibility of duplicate records appearing in the destination table, then we recommend using the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) for streaming scenarios.
+If your application can accept the possibility of duplicate records appearing in the destination table, then we recommend using the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) for streaming scenarios. The default stream uses committed type, so records are available to query as soon as the server acknowledges the write request, without exactly-once delivery.
 
 The following code shows how to write data to the default stream:
 

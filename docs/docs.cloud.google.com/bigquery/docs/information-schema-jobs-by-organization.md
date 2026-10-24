@@ -45,7 +45,7 @@ The `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` view has the following schema:
 <tr class="odd">
 <td><code>bi_engine_statistics</code></td>
 <td><code>RECORD</code></td>
-<td>If the project is configured to use the <a href="https://cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code>NULL</code> .</td>
+<td>If the project is configured to use the <a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-intro">BI Engine</a> , then this field contains <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics">BiEngineStatistics</a> . Otherwise <code>NULL</code> .</td>
 </tr>
 <tr class="even">
 <td><code>cache_hit</code></td>
@@ -65,7 +65,7 @@ The `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` view has the following schema:
 <tr class="odd">
 <td><code>destination_table</code></td>
 <td><code>RECORD</code></td>
-<td>Destination <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/TableReference">table</a> for results, if any.</td>
+<td>Destination <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/TableReference">table</a> for results, if any.</td>
 </tr>
 <tr class="even">
 <td><code>end_time</code></td>
@@ -75,7 +75,7 @@ The `INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION` view has the following schema:
 <tr class="odd">
 <td><code>error_result</code></td>
 <td><code>RECORD</code></td>
-<td>Details of any errors as <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
+<td>Details of any errors as <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> objects.</td>
 </tr>
 <tr class="even">
 <td><code>global_query_info</code></td>
@@ -107,7 +107,7 @@ Possible values are:
 <tr class="odd">
 <td><code>job_stages</code></td>
 <td><code>RECORD REPEATED</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
 <p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="even">
@@ -185,7 +185,7 @@ In this output:
 <tr class="even">
 <td><code>session_info</code></td>
 <td><code>RECORD</code></td>
-<td>Details about the <a href="https://cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
+<td>Details about the <a href="https://docs.cloud.google.com/bigquery/docs/sessions-intro">session</a> in which this job ran, if any.</td>
 </tr>
 <tr class="odd">
 <td><code>start_time</code></td>
@@ -200,12 +200,12 @@ In this output:
 <tr class="odd">
 <td><code>statement_type</code></td>
 <td><code>STRING</code></td>
-<td>The type of query statement. For example, <code>DELETE</code> , <code>INSERT</code> , <code>SCRIPT</code> , <code>SELECT</code> , or <code>UPDATE</code> . See <a href="https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
+<td>The type of query statement. For example, <code>DELETE</code> , <code>INSERT</code> , <code>SCRIPT</code> , <code>SELECT</code> , or <code>UPDATE</code> . See <a href="https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType">QueryStatementType</a> for list of valid values.</td>
 </tr>
 <tr class="even">
 <td><code>timeline</code></td>
 <td><code>RECORD</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample">Query timeline</a> of the job. Contains snapshots of query execution.</td>
 </tr>
 <tr class="odd">
 <td><code>total_bytes_billed</code></td>
@@ -237,7 +237,7 @@ In this output:
 <tr class="even">
 <td><code>transaction_id</code></td>
 <td><code>STRING</code></td>
-<td>ID of the <a href="https://cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
+<td>ID of the <a href="https://docs.cloud.google.com/bigquery/docs/transactions">transaction</a> in which this job ran, if any.</td>
 </tr>
 <tr class="odd">
 <td><code>user_email</code></td>
@@ -264,7 +264,7 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <tr class="odd">
 <td><code>query_info.performance_insights</code></td>
 <td><code>RECORD</code></td>
-<td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights">Performance insights</a> for the job.</td>
 </tr>
 <tr class="even">
 <td><code>transferred_bytes</code></td>
@@ -303,7 +303,7 @@ This field appears for successful <a href="https://docs.cloud.google.com/bigquer
 <tr class="odd">
 <td><code>continuous</code></td>
 <td><code>BOOLEAN</code></td>
-<td>Whether the job is a <a href="https://cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
+<td>Whether the job is a <a href="https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction">continuous query</a> .</td>
 </tr>
 <tr class="even">
 <td><code>continuous_query_info.output_watermark</code></td>

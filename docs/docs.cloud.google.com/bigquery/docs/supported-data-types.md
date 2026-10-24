@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Supported protocol buffer and Arrow data types
 
-This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
+The BigQuery Storage Write API (gRPC) maps each BigQuery column data type to specific protocol buffer and Apache Arrow input types and encoding formats. The reference tables in this document list the supported type mappings, value ranges, and conversion parameters. For foundational API concepts, see [Overview of the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
 
 ## Supported protocol buffer data types
 

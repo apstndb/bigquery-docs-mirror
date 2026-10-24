@@ -305,7 +305,7 @@ To delete a saved query, do the following:
 
 > **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
 
-Use the following sections to learn how to manage [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) .
+Use the following sections to learn how to manage [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries_deprecated) .
 
 > **Note:** If you have not enabled BigQuery Studio, then classic saved queries appear in the **Saved queries ( ` NUMBER ` )** folder in the **Classic Explorer** pane instead of the **(Classic) Queries** folder.
 

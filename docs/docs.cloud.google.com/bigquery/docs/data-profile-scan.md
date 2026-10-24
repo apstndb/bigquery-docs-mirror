@@ -38,9 +38,9 @@ To get the permissions that you need to create and manage data profile scans, as
   - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project running the scan (all table types)
   - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) on the BigQuery tables being scanned
 - Run data profile scans against BigQuery external tables that use Cloud Storage data:
-  - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket (Cloud Storage, Apache Hive, and Iceberg REST catalog)
+  - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on the Cloud Storage bucket (Cloud Storage, Apache Hive catalog endpoint, and Apache Iceberg REST catalog endpoint)
   - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on the Cloud Storage bucket
-- Run data profile scans for Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive tables on Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
+- Run data profile scans for Apache Iceberg, Apache Hive, and SAP BDC Delta Lake tables managed by Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
 - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -91,7 +91,7 @@ To ensure that the execution identity has the necessary permissions to run data 
 - Run data profile scans for BigQuery external tables that use Cloud Storage data:
   - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) on Cloud Storage bucket
   - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `roles/storage.legacyBucketReader` ) on the Cloud Storage bucket
-- Run data profile scans for Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive tables on Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
+- Run data profile scans for Apache Iceberg, Apache Hive, and SAP BDC Delta Lake tables managed by Google Cloud Lakehouse: [BigLake Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.viewer) ( `roles/biglake.viewer` ) on the tables being scanned
 - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
@@ -174,7 +174,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 5.  Optional: Enter a **Description** .
 
-6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery, Iceberg REST Catalog, SAP BDC Delta Lake, and Apache Hive on Google Cloud Lakehousetables are supported.
+6.  In the **Table** field, click **Browse** . Choose the table to scan, and then click **Select** . Only standard BigQuery tables and Apache Iceberg, Apache Hive, and SAP BDC Delta Lake tables managed by Google Cloud Lakehouse are supported.
 
     For tables in multi-region datasets, choose a region where to create the data scan.
 
