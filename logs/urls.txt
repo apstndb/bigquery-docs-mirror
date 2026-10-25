@@ -1378,8 +1378,8 @@ https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control	2026-10-
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-data-transfers	2026-10-15T05:16:41Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-intro	2026-10-22T03:26:18Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-migrations	2026-10-14T16:08:03Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-10-23T20:55:43Z
-https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-10-23T20:55:43Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries	2026-10-24T18:37:43Z
+https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas	2026-10-24T18:37:43Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas	2026-10-22T03:26:18Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api	2026-10-20T05:10:10Z
 https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management	2026-10-19T08:10:37Z

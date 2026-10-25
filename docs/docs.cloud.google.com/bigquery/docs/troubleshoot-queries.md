@@ -267,9 +267,17 @@ To address this error, ensure that the last alphabetical file in the load job co
 
 ## Conflicting concurrent queries
 
-Error string: `Concurrent jobs in the same session are not allowed`
+Error strings:
 
-This error can occur when multiple queries are running concurrently in a session, which is not supported. See session [limitations](https://docs.cloud.google.com/bigquery/docs/sessions-intro#limitations) .
+- `Resources exceeded during query execution: Another job `` JOB_ID `` is currently running in the session `` SESSION_ID `` . Concurrent jobs in the same session are not allowed.`
+- `Session `` SESSION_ID `` has expired and is no longer available.`
+
+This error occurs when multiple queries run concurrently in the same [session](https://docs.cloud.google.com/bigquery/docs/sessions-intro) , which isn't supported, or when a session has been automatically terminated after 24 hours of inactivity or 7 days after creation. See session [limitations](https://docs.cloud.google.com/bigquery/docs/sessions-intro#limitations) and [auto-terminate a session](https://docs.cloud.google.com/bigquery/docs/sessions#auto-terminate_a_session) .
+
+To resolve this issue, do one of the following:
+
+- Space out queries that share a `session_id` and start the next query only after the earlier job ( `JOB_ID` ) finishes, or run concurrent queries in separate sessions.
+- If the session has expired or was terminated, create a new session (and update `--session_id` in `.bigqueryrc` or `connectionProperties` if configured). See [Create a session](https://docs.cloud.google.com/bigquery/docs/sessions#create-session) .
 
 ## Conflicting DML statements
 
@@ -582,13 +590,13 @@ SELECT
 FROM
   `region-us`.INFORMATION_SCHEMA.JOBS
 WHERE
-  statement_type IN ('UPDATE', 'DELETE', 'MERGE')
+  statement_type IN ('UPDATE', 'DELETE', 'MERGE', 'TRUNCATE_TABLE')
   AND state IN ('RUNNING', 'PENDING')
 ORDER BY
   creation_time DESC;
 ```
 
-> **Note:** The `limit is 20` queue length applies specifically to mutating DML statements ( `UPDATE` , `DELETE` , and `MERGE` ). `INSERT` statements maintain a separate queue with a limit of 100, and `TRUNCATE TABLE` is a DML operation that doesn't use the mutating DML queue.
+> **Note:** The `limit is 20` queue length applies specifically to mutating DML ( `UPDATE` , `DELETE` , and `MERGE` ) and to `TRUNCATE TABLE` statements. `INSERT` statements maintain a separate queue with a limit of 100.
 
 One possible solution is to group multiple smaller DML operations into larger but fewer jobs—for example, by batching updates and inserts. When you group smaller jobs into larger ones, the cost to run the larger jobs is amortized and the execution is faster. Consolidating DML statements that affect the same data generally improves the efficiency of DML jobs, and is less likely to exceed the queue size quota limit. For more information about optimizing your DML operations, see [Avoid DML statements that update or insert single rows](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid-dml-update-single-rows) .
 
@@ -803,19 +811,25 @@ For additional information on how to resolve these issues, see [Troubleshoot res
 
 ### Query is too complex
 
-Error string: `Resources exceeded during query execution: Not enough resources for query planning - too many subqueries or query is too complex`
+Error strings:
 
-This error occurs when a query is too complex. The primary causes of complexity are:
+- `Resources exceeded during query execution: Not enough resources for query planning - too many subqueries or query is too complex.`
+- `Resources exceeded during query execution: Not enough resources for query planning - too many fields accessed or query is too complex.`
+- `Resources exceeded during query execution: Not enough resources for query planning - query is too complex.`
+- `Resources exceeded during query execution: The query is too complex.`
+
+This error occurs when a query is too complex after views, `WITH` clauses, and SQL user-defined functions (UDFs) are expanded during query planning. The primary causes of complexity are:
 
 - `WITH` clauses that are deeply nested or used repeatedly.
 - Views that are deeply nested or used repeatedly.
 - Repeated use of the [`UNION ALL` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#union_example) .
+- Complex [SQL UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) or wide referenced tables where many columns have been added.
 
 To address this error, try the following options:
 
 - Split the query into multiple queries, then use [procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) to run those queries in a sequence with shared state.
-- Use temporary tables instead of `WITH` clauses.
-- Rewrite your query to reduce the number of referenced objects and comparisons.
+- Use temporary tables instead of `WITH` clauses or deeply nested views. See [Avoid multiple evaluations of the same CTEs](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute#avoid_multiple_evaluations_of_the_same_ctes) .
+- Rewrite your query to reduce the number of referenced objects, columns, and comparisons.
 
 You can proactively monitor queries that are approaching the complexity limit by using the `query_info.resource_warning` field in the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . The following example returns queries with high resource usage for the last three days:
 
@@ -842,17 +856,26 @@ For additional information on how to resolve these issues, see [Troubleshoot res
 
 To optimize your queries, try the following steps:
 
-- Try removing an `ORDER BY` clause.
-- If your query uses `JOIN` , ensure that the larger table is on the left side of the clause. Also ensure that your data does not contain duplicate join keys.
+- Try removing an `ORDER BY` clause (especially inside subqueries or `WITH` clauses), add a `LIMIT` clause, or paginate with `ROW_NUMBER() OVER (ORDER BY ...)` instead of a large `OFFSET` when `Top memory consumer(s): ORDER BY operations` is reported. See [Query exceeds memory resources](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#query_not_executed) .
+- If your query fails with `Top memory consumer(s): sort operations used for analytic OVER() clauses` or `analytic OVER() clauses` , rewrite the query to reduce the amount of data in each window partition (add or refine the `PARTITION BY` key), or replace `RANGE BETWEEN` with a bounded `ROWS BETWEEN` window frame when applicable.
+- If your query uses `JOIN` (or fails with `Top memory consumer(s): JOIN operations` ), ensure that the larger table is on the left side of the clause and that your data does not contain duplicate join keys. If a `CROSS JOIN` followed by `GROUP BY` exceeds memory, save the intermediate result of the `CROSS JOIN` to a temporary table before running `GROUP BY` .
+- If a mutating DML statement fails with `Top memory consumer(s): sort operation used for table update (UPDATE/DELETE/MERGE)` , split the `UPDATE` or `MERGE` statement to update fewer rows or columns at a time (or replace a `MERGE` that uses `ON FALSE` with an `INSERT` and `DELETE` inside a [multi-statement transaction](https://docs.cloud.google.com/bigquery/docs/transactions) ).
+- If your query fails with `Top memory consumer(s): query parsing and optimization` , store large hardcoded literal lists in a temporary table instead of inline in the query text, or split the query into smaller queries.
+- If your query fails with `UDF out of memory` or `Top memory consumer(s): non-SQL user-defined functions` , avoid accumulating excessive local state in JavaScript UDFs, process input data in smaller chunks, or rewrite the UDF using [SQL UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) or built-in GoogleSQL functions. See [Best practices for JavaScript UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#best-practices-for-javascript-udfs) .
 - If your query uses `FLATTEN` , determine if it's necessary for your use case. For more information, see [nested and repeated data](https://docs.cloud.google.com/bigquery/docs/data#nested) .
-- If your query uses `EXACT_COUNT_DISTINCT` , consider using [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/query-reference#countdistinct) instead.
-- If your query uses `COUNT(DISTINCT <value>, <n>)` with a large `<n>` value, consider using `GROUP BY` instead. For more information, see [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/query-reference#countdistinct) .
-- If your query uses `UNIQUE` , consider using `GROUP BY` instead, or a [window function](https://docs.cloud.google.com/bigquery/query-reference#windowfunctions) inside of a subselect.
+- If your query uses `EXACT_COUNT_DISTINCT` , consider using [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) instead.
+- If your query uses `COUNT(DISTINCT <value>, <n>)` with a large `<n>` value, consider using `GROUP BY` instead. For more information, see [`COUNT(DISTINCT)`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count) .
+- If your query uses `UNIQUE` , consider using `GROUP BY` instead, or a [window function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) inside of a subselect.
 - If your query materializes many rows using a `LIMIT` clause, consider filtering on another column, for example `ROW_NUMBER()` , or removing the `LIMIT` clause altogether to allow write parallelization.
 - If your query used deeply nested views and a `WITH` clause, this can cause an exponential growth in complexity, thereby reaching the limits.
 - Use temporary tables instead of `WITH` clauses. A `WITH` clause might have to be recalculated several times, which can make the query complex and therefore slow. Persisting intermediate results in temporary tables instead reduces complexity.
 - Avoid using `UNION ALL` queries.
 - If your query uses `MATCH_RECOGNIZE` , modify the [`PARTITION BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#match_recognize_partition_by) to reduce the size of the partitions, or add a `PARTITION BY` clause if one doesn't exist.
+- If your job fails with `Table `` TABLE_NAME `` will have `` N `` partitions when the job finishes, exceeding limit 10000` , check the table's partition count in [`INFORMATION_SCHEMA.PARTITIONS`](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) , configure a [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) , or explicitly delete unneeded partitions (because recently expired partitions can take time to be reflected unless explicitly deleted). See [partitioned table quotas](https://docs.cloud.google.com/bigquery/quotas#partitioned_tables) .
+- If your job fails with `Too many DML statements outstanding against table `` TABLE_NAME `` , limit is 20` , group multiple smaller `UPDATE` , `DELETE` , or `MERGE` statements into fewer, larger jobs, or partition and cluster the target table. See [Too many DML statements](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#too_many_DML) and [Too many DML statements outstanding against table](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas#ts-too-many-dml-statements-against-table-quota) .
+- If your job fails with `All our servers are busy processing data transferred between regions. Please try again shortly.` , retry the query or reduce the concurrent rate of cross-cloud ( `BigQuery Omni` ) join, `CREATE TABLE AS SELECT` , `INSERT INTO SELECT` , or `LOAD DATA` queries (or [contact Support](https://docs.cloud.google.com/bigquery/docs/getting-support) to request a higher cross-region transfer query rate limit). See [BigQuery Omni join limitations](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_join_limitations) and [Load data using a cross-cloud transfer](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .
+- If your job fails with `Google Sheets service overloaded for spreadsheet id: `` SPREADSHEET_ID` , retry transient Google Sheets overload, or copy the spreadsheet data into a permanent [BigQuery table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) (and restructure views or stagger [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) to reduce concurrent reads to the same spreadsheet).
+- If a BigQuery Omni query fails with `Response too large. Query returned `` ACTUAL_MB `` MB, and limit is `` LIMIT_MB `` MB.` , the query output exceeded the [BigQuery Omni maximum query result size](https://docs.cloud.google.com/bigquery/quotas#max_result_size_query_omni) or [cross-cloud transfer limit](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#filter-data) . Filter or aggregate your query to return smaller results, or use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) to export large results directly to external storage instead of a destination table.
 
 For more information, see the following resources:
 
