@@ -1422,7 +1422,7 @@ https://docs.cloud.google.com/bigquery/docs/working-with-time-series	2026-10-02T
 https://docs.cloud.google.com/bigquery/docs/working-with-transfers	2026-10-19T18:11:24Z
 https://docs.cloud.google.com/bigquery/docs/workspaces	2026-10-02T03:44:00Z
 https://docs.cloud.google.com/bigquery/docs/workspaces-intro	2026-10-22T05:08:37Z
-https://docs.cloud.google.com/bigquery/docs/write-api-batch	2026-10-02T03:44:00Z
+https://docs.cloud.google.com/bigquery/docs/write-api-batch	2026-10-26T03:39:28Z
 https://docs.cloud.google.com/bigquery/docs/write-api-batch-load	2026-10-24T03:38:53Z
 https://docs.cloud.google.com/bigquery/docs/write-api-best-practices	2026-10-24T03:38:53Z
 https://docs.cloud.google.com/bigquery/docs/write-api-grpc	2026-10-24T03:38:53Z
