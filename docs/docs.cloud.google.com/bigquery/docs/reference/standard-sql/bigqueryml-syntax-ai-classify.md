@@ -148,7 +148,7 @@ AI.CLASSIFY(
 
 - `OPTIMIZATION_MODE` : a `STRING` value that specifies the optimization strategy to use. Supported values are as follows:
 
-  - `MINIMIZE_COST` (default): uses a local, distilled model to process the majority of rows, reducing latency and cost. This mode requires input embeddings and that the input to the AI function contain approximately 3,000 rows to ensure enough data for model training. Note that `output_mode => 'multi'` is not supported in this mode.
+  - `MINIMIZE_COST` (default): uses a local, distilled model to process the majority of rows, reducing latency and cost. This mode requires input embeddings and that the input to the AI function contain approximately 3,000 rows to ensure enough data for model training.
   - `MAXIMIZE_QUALITY` : always uses the remote LLM for inference.
 
 - `MAX_ERROR_RATIO` : a `FLOAT64` value between `0.0` and `1.0` that contains the maximum acceptable ratio of row-level inference failures to rows processed on this function. If this value is exceeded, then the query fails and BigQuery returns an error message that describes the most frequent types of errors. For example, if the value is `0.3` then the query fails if more than 30% of rows processed have failed to return results. If `max_error_ratio` is set for multiple functions, the query fails if the ratio is exceeded on any function. The default value is `1.0` . However, the query still fails if inference fails for every row. This argument isn't supported when `optimization_mode` is set to `MINIMIZE_COST` .

@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Running jobs programmatically
 
-To run a BigQuery job programmatically using the REST API or client libraries, you:
-
-1.  Call the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method.
-2.  Periodically request the job resource and examine the status property to learn when the job is complete.
-3.  Check to see whether the job finished successfully.
+The BigQuery REST API and client libraries let you create and manage asynchronous jobs to automate load, query, extract, and copy operations from your applications. After you start a job by calling the [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method, you can poll the job resource's status property to track when execution completes and confirm whether the operation succeeded.
 
 ## Before you begin
 

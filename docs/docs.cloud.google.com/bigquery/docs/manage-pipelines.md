@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage pipelines
 
-This document describes how to manage [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) , including how to view, schedule, deploy, and delete pipelines.
-
-This document also describes how to view and manage pipeline metadata in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
-
-Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . You can organize and manage pipelines stored in **Files and Folders** (user folders and team folders) or in **BigQuery Studio Git repositories (Git Folders)** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+[BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) let you inspect run history, configure failure alerts, and control code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . You can also enrich workflow metadata in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) to track data quality and delete obsolete workflows to keep your project organized. Depending on where your team stores code, you can access pipelines in **Files and Folders** , including user folders and team folders, or in **BigQuery Studio Git repositories (Git Folders)** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 ## Before you begin
 

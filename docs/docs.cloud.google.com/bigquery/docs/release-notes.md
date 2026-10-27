@@ -14,6 +14,22 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 26, 2026
+
+Feature
+
+Conversation logging for [Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can log data agent conversations to a BigQuery table in the agent's project. For more information, see [Conversation logging overview](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) and [Configure settings](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) .
+
+Feature
+
+Python user-defined functions now support [volume mounts](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#volume-mounts) , which let you access dependency files from Cloud Storage directly from your Python UDF code. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
+Feature
+
+The [`REGEXP_EXTRACT_GROUPS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_groups) produces substrings that match multiple capturing groups in a regular expression.
+
+This function is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
 ## October 22, 2026
 
 Feature

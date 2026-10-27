@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document provides an overview of the graph query language (GQL) and how to write graph queries for BigQuery Graph. You can run graph queries to find patterns, traverse relationships, and gain insights from your property graph. The examples in this document refer to a graph called `FinGraph` , which shows the relationships between people, accounts they own, and transfers between accounts. For information about the definition of the graph, see [`FinGraph` example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) .
+[BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) lets you write graph queries to match node, edge, and path patterns and traverse relationships by using [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) . The examples in this document refer to a graph called `FinGraph` , which shows the relationships between people, accounts they own, and transfers between accounts. For information about the definition of the graph, see [`FinGraph` example](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#fin_graph) .
 
 ## Query structure
 
@@ -155,7 +155,7 @@ The edge pattern in the following query uses a label expression and a property f
 
 ```
 GRAPH graph_db.FinGraph
-MATCH -[e:Transfers {order_number: "30412000552971>4"}]-
+MATCH -[e:Transfers {order_number: "304120005529714"}]->
 RETURN e.Id AS src_account, e.order_number;
 ```
 

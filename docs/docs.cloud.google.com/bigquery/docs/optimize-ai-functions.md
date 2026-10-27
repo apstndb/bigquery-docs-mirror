@@ -58,8 +58,6 @@ The process works as follows:
 The optimized mode has the following limitations:
 
 - **Minimum row count** : the input to the AI function must contain approximately 3,000 rows to ensure enough data for model training.
-- **Data types** : for prompts that reference multiple columns, only string columns are supported for optimization.
-- **Multi-label classification** : `AI.CLASSIFY` with `output_mode => 'multi'` isn't supported in optimized mode.
 - **Function support** : only `AI.IF` and `AI.CLASSIFY` functions support optimized mode; however, when using optimized mode with `AI.CLASSIFY` , queries can fail if distilled model quality is insufficient.
 - **Error ratio** : The `max_error_ratio` argument isn't supported in optimized mode.
 

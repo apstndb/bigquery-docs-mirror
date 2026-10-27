@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Integrate with third-party tools
 
-This document describes initial configuration steps you might need to take to manage the connection between BigQuery and your third-party business intelligence (BI) solutions. If you need assistance with a solution, consider contacting a [Google Cloud Ready - BigQuery partner](https://console.cloud.google.com/bigquery/partner-center) . Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended.
+You can integrate BigQuery with your preferred third-party business intelligence (BI) solutions to analyze and visualize your data using your existing tools. Configuring your network connectivity, authentication, and ODBC or JDBC drivers lets you securely manage the connection between BigQuery and your external analytics platforms.
+
+If you need assistance with a solution, consider contacting a [Google Cloud Ready - BigQuery partner](https://console.cloud.google.com/bigquery/partner-center) . Third-party software isn't supported by Cloud Customer Care when it has been identified that BigQuery is working as intended.
 
 ### Network connectivity
 

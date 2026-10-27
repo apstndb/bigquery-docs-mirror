@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Graph query best practices
 
-This document describes best practices for optimizing your BigQuery Graph queries.
+You can optimize [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) query performance by structuring your [Graph Query Language (GQL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-intro) queries to minimize scanned data and intermediate results.
 
 ## Start path traversal from low-cardinality nodes
 

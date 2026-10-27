@@ -37,6 +37,7 @@ To capture your agent's interaction telemetry (requests, responses, tool calls, 
 - **Orchestration framework plugins** : use standard logging plugins provided by your agent orchestration toolkit. For example, the `BigQueryAgentAnalyticsPlugin` in the Agent Development Kit (ADK) hooks into the agent runner to automatically intercept, serialize, and stream events.
 - **Framework callback handlers** : integrate standard callbacks in popular agent environments. For example, you can use the built-in BigQuery handler in LangGraph and LangChain to intercept and forward traces.
 - **Direct API ingestion** : for custom or proprietary frameworks, use the Google Cloud client libraries to stream structured events directly to your events table using the Storage Write API (gRPC).
+- **Conversational analytics data agents** : enable built-in conversation logging when you [configure settings for a BigQuery data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) in BigQuery Studio or through the Conversational Analytics API to automatically stream [conversation events](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) to a destination BigQuery table and [analyze conversation logs](https://docs.cloud.google.com/bigquery/docs/analyze-conversation-logs) .
 
 Regardless of the method, all logging options use the low-latency, high-throughput **[BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)** . This API provides a robust streaming endpoint that buffers and serializes rows (using the PyArrow engine) asynchronously in memory before committing them, ensuring that observability pipeline tasks don't block your user-facing agent execution turns.
 
@@ -116,7 +117,7 @@ Integrating the SDK into your agent workflows typically involves the following s
 3.  **Reconstruct a session trace** : Fetch a specific conversation session to visualize and review the exact sequence of events:
 
     ```
-    trace = client.get_trace(
+    trace = client.get_session_trace(
         session_id="YOUR_SESSION_ID"
     )
     trace.render()
@@ -130,25 +131,24 @@ Integrating the SDK into your agent workflows typically involves the following s
 4.  **Run automated evaluations** : Programmatically score session trajectories or check for regression against a golden test suite:
 
     ```
-    from bigquery_agent_analytics.evaluators import CodeEvaluator, LLMAsJudge
-    from bigquery_agent_analytics.grader_pipeline import GraderPipeline
-
-    # Create a grader pipeline with deterministic and semantic metrics
-    evaluator = GraderPipeline(
-        graders=[
-            CodeEvaluator.latency(threshold_ms=5000),
-            LLMAsJudge.correctness(),
-        ]
+    from bigquery_agent_analytics import (
+        LLMAsJudge,
+        TraceFilter,
     )
-    report = client.evaluate(evaluator, session_ids=["session_1", "session_2"])
+
+    # Run semantic evaluations across target sessions
+    evaluator = LLMAsJudge.correctness()
+    filters = TraceFilter(session_ids=["session_1", "session_2"])
+
+    report = client.evaluate(evaluator, filters=filters)
     print(f"Evaluation Pass Rate: {report.pass_rate:.2%}")
     ```
 
     The snippet uses the following components:
 
-    - `evaluator` : the structured `GraderPipeline` compiled logic composing heterogeneous rule-based and semantic evaluation metrics.
-    - `session_ids` : the list of session ID strings to run batch evaluations against in BigQuery.
-    - `report` : the resulting `EvaluationReport` object containing raw session grades, metric summaries, trial stats, and auto-rater feedback.
+    - `evaluator` : the semantic ( `LLMAsJudge` ) evaluator used to score sessions (you can also run rule-based `SystemEvaluator` checks or combine evaluators into a weighted `GraderPipeline` ).
+    - `filters` : the `TraceFilter` instance specifying the `session_ids` list (or time window and agent filters) to run batch evaluations against in BigQuery.
+    - `report` : the resulting `EvaluationReport` object containing raw session grades, metric summaries, and auto-rater feedback.
 
 ## Integrate BigQuery agent analytics into your workflow
 

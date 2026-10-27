@@ -8,13 +8,11 @@ data_source: docs.cloud.google.com
 
 # Schedule pipelines
 
-This document describes how to schedule [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) , including how to schedule pipelines and inspect scheduled pipeline runs.
+Scheduling [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) lets you automate multi-step SQL and notebook workflows powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) on a recurring interval or in response to table updates. You can authenticate scheduled runs with your Google Account user credentials or a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) , and then inspect execution history to monitor workflow health.
 
-Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . Each pipeline schedule is run using your Google Account user credentials or a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) that you select when you configure the schedule.
+BigQuery automatically saves your changes to the pipeline, and these changes are available to you and to users who have the Dataform Admin role on the project. To update the schedule with a new version of the pipeline, you need to [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) . Schedules always run the latest deployed version.
 
-Changes you make to a pipeline are automatically saved, but are available only to you and to users granted the Dataform Admin role on the project. To update the schedule with a new version of the pipeline, you need to [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) . Deploying updates the schedule to use your current version of the pipeline. Schedules always run the latest deployed version.
-
-Schedules of pipelines that contain notebooks use a [default runtime specification](https://docs.cloud.google.com/colab/docs/runtimes#default_runtime_specifications) . During a scheduled run of a pipeline containing notebooks, BigQuery writes notebook output to the [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets) selected during schedule creation.
+For workflows that include notebooks, scheduled runs use a [default runtime specification](https://docs.cloud.google.com/colab/docs/runtimes#default_runtime_specifications) and write output to the [Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/buckets) that you select during setup.
 
 ## Before you begin
 

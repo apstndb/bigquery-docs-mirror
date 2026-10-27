@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # VPC Service Controls for BigQuery
 
-This page explains how to enhance security around BigQuery resources by creating perimeters with VPC Service Controls. These perimeters restrict access to and from BigQuery and are independent from Identity and Access Management (IAM) controls. They're useful in the following use cases:
+VPC Service Controls lets you create security perimeters around BigQuery resources to help restrict access to and from your data. These perimeters are independent of Identity and Access Management (IAM) controls and are useful in the following use cases:
 
 - Preventing data leakage by restricting access to resources, except those specifically allowed in the ingress and egress rules.
 - Securely loading data into BigQuery from third-party sources or Google Cloud services, such as Cloud Storage.

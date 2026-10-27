@@ -8,13 +8,13 @@ data_source: docs.cloud.google.com
 
 # Control access to resources with IAM
 
-This document describes how to view, grant, and revoke access controls for BigQuery datasets and for the resources within datasets: tables, views, and routines. Although models are also dataset-level resources, you cannot grant access to individual models using IAM roles.
+To help secure BigQuery datasets and their underlying resources, you can view, grant, and revoke access controls for datasets, tables, views, and routines. Although models are also dataset-level resources, you can't grant access to individual models using Identity and Access Management (IAM) roles.
 
-You can grant access to Google Cloud resources by using *allow policies* , also known as *Identity and Access Management (IAM) policies* , which are attached to resources. You can attach only one allow policy to each resource. The allow policy controls access to the resource itself, as well as any descendants of that resource that [inherit the allow policy](https://docs.cloud.google.com/iam/docs/allow-policies#inheritance) .
+You can grant access to Google Cloud resources by using *allow policies* , also known as *IAM policies* , which are attached to resources. You can attach only one allow policy to each resource. The allow policy controls access to the resource itself, as well as to any descendants of that resource that [inherit the allow policy](https://docs.cloud.google.com/iam/docs/allow-policies#inheritance) .
 
 For more information on allow policies, see [Policy structure](https://docs.cloud.google.com/iam/docs/allow-policies#structure) in the IAM documentation.
 
-This document assumes familiarity with the [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/overview) in Google Cloud.
+This document assumes familiarity with [IAM](https://docs.cloud.google.com/iam/docs/overview) in Google Cloud.
 
 ## Limitations
 

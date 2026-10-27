@@ -39,6 +39,11 @@ To work with data agents, you must have Identity and Access Management (IAM) per
   - To interact with the Gemini-powered chat interface in Data Studio: BigQuery Studio User ( `roles/bigquery.studioUser` ) or Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ), each of which provide the `cloudaicompanion.topics.create` permission. Grant these roles at the project level. Users also require the Data Studio Asset Viewer ( `roles/datastudio.viewer` ) role.
 - **Add knowledge sources to an agent:**
   - Data Catalog Viewer ( `roles/datacatalog.viewer` ) on the project.
+- **Configure and view conversation logs:**
+  - To create the log dataset and grant access in the agent's project: `bigquery.datasets.create` , and BigQuery Data Owner ( `roles/bigquery.dataOwner` ) or BigQuery Admin ( `roles/bigquery.admin` ) on the log dataset.
+  - To change an agent's conversation logging settings: `geminidataanalytics.dataAgents.update` , included in [Gemini Data Analytics Data Agent Editor](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/access-control#data-agent-editor) ( `roles/geminidataanalytics.dataAgentEditor` ).
+  - For the Conversational Analytics API service agent ( `service- `` PROJECT_NUMBER `` @gcp-sa-geminidataanalytics.iam.gserviceaccount.com` ) to create the log table and write rows: BigQuery Data Editor ( `roles/bigquery.dataEditor` ) on the log dataset. If the log dataset uses [customer-managed Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) (CMEK), grant the BigQuery encryption service account ( `bq- `` PROJECT_NUMBER `` @bigquery-encryption.iam.gserviceaccount.com` ) the Cloud KMS CryptoKey Encrypter/Decrypter ( `roles/cloudkms.cryptoKeyEncrypterDecrypter` ) role on the Cloud KMS key.
+  - For analysts who query conversation logs: BigQuery Data Viewer ( `roles/bigquery.dataViewer` ) on the log dataset and BigQuery Job User ( `roles/bigquery.jobUser` ) on a project to run queries.
 
 To have conversations, see the [required roles for conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
@@ -383,7 +388,19 @@ In the **Settings** section, you can configure the following optional settings:
     5.  To delete a label, click **Delete** .
     6.  When you're finished, click **Add** . The new agent page reopens.
 
-3.  Set a size limit for the queries processed by the data agent. In the **Settings** section, type a value in the **Maximum bytes billed** field. You must set this limit to `10485760` or higher, otherwise you receive the following error message:
+3.  To write the agent's conversation events to a BigQuery table in the agent's project for [monitoring and analysis](https://docs.cloud.google.com/bigquery/docs/create-data-agents#analyze-conversation-logs) , in the **Conversation logging** section, turn on **Enable conversation logging** :
+
+    1.  If the conversation logging settings are unavailable when editing an existing agent, switch the view selector to **Draft** , and make sure that specific BigQuery tables are selected as knowledge sources.
+
+    2.  Under **Set a destination for the logs to be stored** , select an existing destination dataset in the agent's project in **Dataset ID** . In **Table ID** , select an existing table, or click **Select or create a table** \> **+ New table** , enter a table name under **Specify new table** (for example, `agent_events` ), and click **Save** .
+
+    3.  Review the **Data logging & user disclosure notice** .
+
+    4.  Wait for the settings to be validated. If the dataset doesn't exist, create it in BigQuery first. If the Conversational Analytics API service agent ( `service- `` PROJECT_NUMBER `` @gcp-sa-geminidataanalytics.iam.gserviceaccount.com` ) lacks access to the dataset, click **Grant Access** to grant `roles/bigquery.dataEditor` on the dataset, or ask your administrator to grant it.
+
+    After you publish the agent, ask a test question from the published agent's main chat screen (the **Preview** section isn't logged) and refresh the destination dataset in BigQuery Studio to confirm that the log table appears. To update the destination or turn off logging later, [edit the agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) and publish your changes (existing rows aren't deleted). For more information, see [Conversation logging overview](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) .
+
+4.  Set a size limit for the queries processed by the data agent. In the **Settings** section, type a value in the **Maximum bytes billed** field. You must set this limit to `10485760` or higher, otherwise you receive the following error message:
 
 ```
 Value error. In BigQuery on-demand pricing charges are
@@ -907,6 +924,10 @@ Replace the following:
 
 - `SETTING_NAME` : The name of the observability setting that you created to enable observability. If you enabled observability by using the Google Cloud console, then the setting name is `default` .
 - `PROJECT_ID` : Your project ID.
+
+## Analyze conversation logs in BigQuery
+
+In addition to project-level observability metrics in Cloud Monitoring and spans in Cloud Trace, you can enable per-agent [conversation logging](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) in BigQuery Studio to write each conversation turn—including the user's question, the agent's answer, latency, and model token usage—to a BigQuery table in your agent's project. You can then query and evaluate the logged events using GoogleSQL, interactive Colab notebooks, or the [BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics) Python SDK. For more information, see [Conversation logging overview](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) .
 
 ## What's next
 

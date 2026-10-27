@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Schedule workloads
 
-BigQuery tasks are usually part of larger workloads, with external tasks triggering and then being triggered by BigQuery operations. Workload scheduling helps data administrators, analysts, and developers organize and optimize this chain of actions, creating a seamless connection across data resources and processes. Scheduling methods and tools assist in designing, building, implementing, and monitoring these complex data workloads.
+Workload scheduling in BigQuery lets you coordinate, automate, and monitor chains of data tasks across BigQuery and external services. Whether you are a data administrator, analyst, or developer, you can use time-driven and event-driven scheduling tools to manage dependencies and run multi-step workloads in sequence.
 
 ## Choose a scheduling method
 

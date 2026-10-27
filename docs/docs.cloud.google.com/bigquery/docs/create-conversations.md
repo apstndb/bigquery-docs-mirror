@@ -48,12 +48,20 @@ To create conversations, you must have one of the following [Conversational Anal
 Additionally, in the following situations, you must have the following roles:
 
 - If a data agent uses a dataset as a knowledge source, you need the [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) role on the dataset.
+
 - If a data agent runs a SQL query for you, you need the [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` ) role on the project.
+
 - If a data agent uses a table or view as a knowledge source, you need the [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) role on the table or view.
+
 - If a table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you need the [Fine-Grained Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.categoryFineGrainedReader) ( `roles/datacatalog.categoryFineGrainedReader` ) role. This role is assigned to principals as part of configuring a policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
+
 - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must be granted access through the role-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
+
 - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , you must be granted the [Masked Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerydatapolicy#bigquerydatapolicy.maskedReader) ( `roles/bigquerydatapolicy.maskedReader` ) role through the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
+
 - To converse with a dataset or project, you need the [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` ) on the project.
+
+- If a data agent has [conversation logging](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) enabled, you need the [BigQuery Data Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) ( `roles/bigquery.dataViewer` ) role on the knowledge-source tables and the [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `roles/bigquery.jobUser` ) role on the project that runs your queries so that the pre-turn [privacy check](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview#conversation-logging-privacy) can verify that the tables don't use row-level security, column-level security, or data masking. Alternatively, a custom role with the `bigquery.tables.get` and `bigquery.rowAccessPolicies.list` permissions on the knowledge-source tables also satisfies this check. You don't need write access to the log dataset.
 
 If you don't have appropriate roles on the source data tables used by the data agent, the system returns the following error when you chat with the data agent:
 

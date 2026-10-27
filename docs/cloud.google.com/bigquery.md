@@ -16,9 +16,9 @@ BigQuery is the autonomous data to AI platform, automating the entire data life 
 
 [**Gemini in BigQuery**](https://cloud.google.com/gemini/docs/bigquery/overview) features are now included in BigQuery pricing models.
 
-[Get started for free](https://console.cloud.google.com/freetrial?redirectPath=/bigquery)
+[Try BigQuery free](https://console.cloud.google.com/freetrial?redirectPath=/bigquery)
 
-[Contact sales](https://cloud.google.com/contact)
+[View documentation](https://docs.cloud.google.com/bigquery/docs)
 
 Store 10 GiB of data and run up to 1 TiB of queries for free per month. **New customers also get \$300 in free credits** to try BigQuery and other Google Cloud products.
 

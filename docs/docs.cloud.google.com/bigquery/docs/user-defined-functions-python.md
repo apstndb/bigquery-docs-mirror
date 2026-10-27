@@ -23,6 +23,7 @@ Python UDFs are built and run on BigQuery managed resources.
 - Containers that run Python UDFs can only be configured up to [4 vCpu and 16 GiB](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits) .
 - Encrypting Python UDF code with [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) isn't supported.
 - Python UDFs support VPC Service Controls, but [VPC networks](https://docs.cloud.google.com/vpc/docs/vpc) aren't supported.
+- Python UDFs aren't supported with [default connections](https://docs.cloud.google.com/bigquery/docs/default-connections) .
 
 ## Required roles
 
@@ -1209,6 +1210,94 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
     +--------------------------+-------------------------------+
     ```
 
+### Create a Python UDF with volume mounts
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To provide feedback or ask questions that are related to this Preview feature, contact <bq-python-udf-feedback@google.com> .
+
+If you have volume mount dependency files in a Cloud Storage bucket, you can include them in your Python UDF using the `volume_mounts` parameter.
+
+#### Before you begin
+
+Before you create a Python UDF with volume mounts, do the following:
+
+- [Create a Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the same region that you plan to create the Python UDF.
+- Grant your service account the [required Identity and Access Management roles](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#required_roles_vm) .
+
+##### Required roles
+
+To ensure that your connection service account has the necessary permissions to create a Python UDF with volume mounts, ask your administrator to grant the [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `roles/storage.objectViewer` ) IAM role to your connection service account on your Cloud Storage bucket. As a security best practice, restrict this role through prefix matching to only target the subfolder where you are creating the volume mount—for example, with the `resource.name.startsWith("projects/_/buckets/BUCKET_NAME/objects/SUBFOLDER_NAME/"))` condition. This best practice ensures that the UDF container can't read unauthorized objects or subfolders in the bucket.
+
+> **Important:** You must grant this role to your connection service account, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+This predefined role contains the permissions required to create a Python UDF with volume mounts. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to create a Python UDF with volume mounts:
+
+- `storage.objects.get` on your Cloud Storage folder.
+- `storage.objects.list` on your Cloud Storage folder.
+
+Your administrator might also be able to give your connection service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+
+#### Volume mounts example
+
+The following statement creates a Python UDF with volume mounts on the `gs://my-udf-deps-bucket` bucket:
+
+```
+CREATE OR REPLACE FUNCTION `my-project.my-dataset`.my-udf-name(x STRING)
+RETURNS STRING
+LANGUAGE python
+WITH CONNECTION `my-project`.us-central1.`my-connection`
+OPTIONS (
+  entry_point="python_func",
+  runtime_version="python-3.11",
+  volume_mounts=['{"source_path": "gs://my-udf-deps-bucket", "mount_path": "/mnt"}'])
+AS r"""
+# User needs to add the mount_path to sys.path in their code
+import sys
+sys.path.append('/mnt')
+
+# common-utils is a direct subfolder of gs://my-udf-deps-bucket
+from common-utils import string_helpers
+
+def python_func(x):
+  suffix = string_helpers.functionA()
+  return x + suffix
+
+""";
+```
+
+You can also create a function with volume mounts on a specific folder in the bucket. To do so in the previous example, replace `gs://my-udf-deps-bucket` with `gs://my-udf-deps-bucket/common-utils` .
+
+#### Volume mounts formatting
+
+Mount paths must adhere to the following formatting:
+
+- Path names must start with the forward slash ( `/` ) character.
+- Path names can't end with the forward slash ( `/` ) character.
+- Path names must be at most 256 characters.
+- Paths can't be within subdirectories of the `/dev` , `/opt` , `/proc` , `/root` , `/srv` , `/sys` , `/udf_modules` , `/user_site_packages` , or `/usr` folders.
+- Path components can't be empty.
+- Subdirectories within the path can't contain the period ( `.` ) character.
+
+#### Volume mounts limitations
+
+The following limitations apply to Python UDFs with volume mounts:
+
+- Using volume mounts doesn't provide managed version control. If there is a change in the Cloud Storage resource, it can be reflected in the UDF automatically, even during a query run and without updating the function.
+- Volume mounted files are read-only.
+- UDFs can have a maximum of 10 volume mounts.
+- If defined, container memory must be at least 512 MiB.
+- If defined, container CPU must be at least 1.0 CPU.
+- There must be a strict one-to-one map between each source path and mount path.
+
 ## Use VPC Service Controls
 
 Python UDFs inherit the VPC Service Controls perimeter of the project that runs the query job. This perimeter protects your jobs from data exfiltration, and it ensures that service interactions are secure.
@@ -1230,6 +1319,14 @@ For more details on configuring a VPC Service Controls perimeter, see:
 
 - [VPC Service Controls for BigQuery](https://docs.cloud.google.com/bigquery/docs/vpc-sc)
 - [Overview of VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview)
+
+### Configure VPC Service Controls settings for volume mounts
+
+If your Python UDF includes volume mounts, do the following:
+
+- If the BigQuery query execution project is protected by a perimeter, create an [egress rule](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) that allows outbound calls to `storage.googleapis.com` targeting the Cloud Storage bucket owner's project.
+- If the Cloud Storage bucket owner's project is protected by a perimeter, create an [ingress rule](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) that allows inbound calls to `storage.googleapis.com` targeting the Cloud Storage bucket owner's project from the BigQuery connection owner project or connection service account.
+- If the BigQuery query execution project and the Cloud Storage bucket owner's project reside within the same perimeter, no ingress or egress rules are required.
 
 ## Use logging
 

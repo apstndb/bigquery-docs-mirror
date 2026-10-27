@@ -539,18 +539,189 @@ In the Cloud Logging logs, the `protoPayload.serviceData` information is not set
 [BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) uses the [`AuditLog`](https://docs.cloud.google.com/logging/docs/reference/audit/auditlog/rest/Shared.Types/AuditLog) format when reporting requests. Logs contain information such as:
 
 - `resource.type` is set to:
-
   - `bigquery_dataset` for `CreateReadSession` .
   - `bigquery_table` for `ReadRows` , `SplitReadStream` and `AppendRows` .
 
-- `protoPayload.methodName` is set to one of the following values:
+This document lists the audited methods for BigQuery Storage API. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
 
-  - `google.cloud.bigquery.storage.v1.BigQueryRead.CreateReadSession`
-  - `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession`
-  - `google.cloud.bigquery.storage.v1beta2.BigQueryRead.CreateReadSession`
-  - `google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows`
-  - `google.cloud.bigquery.storage.v1.BigQueryRead.SplitReadStream`
-  - `google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows`
+- [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
+- [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)
+- [Storing and routing audit logs](https://docs.cloud.google.com/logging/docs/audit#storing_and_routing_audit_logs)
+- [Cloud Logging pricing summary](https://docs.cloud.google.com/stackdriver/pricing#logs-pricing-summary)
+- [Enable Data Access audit logs](https://docs.cloud.google.com/logging/docs/audit/configure-data-access)
+
+## Notes
+
+Data Access audit logs for BigQuery Storage API use the service name `bigquery.googleapis.com` ( `protoPayload.serviceName="bigquery.googleapis.com"` ), while Policy Denied audit logs use `bigquerystorage.googleapis.com` .
+
+## Service name
+
+To view the BigQuery Storage API audit logs, do the following:
+
+1.  In the Google Cloud console, go to the Logs Explorer page:
+
+2.  Copy and paste the following query into the **Query** field of the Logs Explorer, and then click **Run query** .
+
+    ```
+    protoPayload.serviceName="bigquerystorage.googleapis.com"
+    ```
+
+## Methods by permission type
+
+Each IAM permission has a `type` property, whose value is an enum that can be one of four values: `ADMIN_READ` , `ADMIN_WRITE` , `DATA_READ` , or `DATA_WRITE` . When you call a method, BigQuery Storage API generates an audit log whose category is dependent on the `type` property of the permission required to perform the method. Methods that require an IAM permission with the `type` property value of `DATA_READ` , `DATA_WRITE` , or `ADMIN_READ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `type` property value of `ADMIN_WRITE` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
+
+API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
+
+| Permission type | Methods                                                                                                                                                                                                                                                                                                                                 |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ADMIN_WRITE`   | `google.cloud.bigquery.storage.v1.BigQueryRead.CreateReadSession` `google.cloud.bigquery.storage.v1.BigQueryRead.SplitReadStream` `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession` `google.cloud.bigquery.storage.v1beta2.BigQueryRead.CreateReadSession`                                                      |
+| `DATA_READ`     | `google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows`                                                                                                                                                                                                                                                                                |
+| `DATA_WRITE`    | `google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows` `google.cloud.bigquery.storage.v1.BigQueryWrite.BatchCommitWriteStreams` `google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream` `google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream` `google.cloud.bigquery.storage.v1.BigQueryWrite.FlushRows` |
+
+## API interface audit logs
+
+For information about how and which permissions are evaluated for each method, see the [Identity and Access Management documentation](https://docs.cloud.google.com/bigquery/docs/access-control) for BigQuery Storage API.
+
+### `google.cloud.bigquery.storage.v1.BigQueryRead`
+
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.storage.v1.BigQueryRead` .
+
+#### `CreateReadSession`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryRead.CreateReadSession`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.readsessions.create - ADMIN_WRITE`
+  - `bigquery.tables.getData - DATA_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryRead.CreateReadSession"`  
+
+#### `ReadRows`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.readsessions.getData - DATA_READ`
+  - `bigquery.tables.getData - DATA_READ`
+- **Method is a long-running or streaming operation** : [**Streaming RPC**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#streaming)  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows"`  
+
+#### `SplitReadStream`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryRead.SplitReadStream`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.readsessions.update - ADMIN_WRITE`
+  - `bigquery.tables.getData - DATA_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryRead.SplitReadStream"`  
+
+### `google.cloud.bigquery.storage.v1.BigQueryWrite`
+
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.storage.v1.BigQueryWrite` .
+
+#### `AppendRows`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.tables.updateData - DATA_WRITE`
+- **Method is a long-running or streaming operation** : [**Streaming RPC**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#streaming)  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows"`  
+
+#### `BatchCommitWriteStreams`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.BatchCommitWriteStreams`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.tables.updateData - DATA_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.BatchCommitWriteStreams"`  
+
+#### `CreateWriteStream`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.tables.updateData - DATA_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.CreateWriteStream"`  
+
+#### `FinalizeWriteStream`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.tables.updateData - DATA_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.FinalizeWriteStream"`  
+
+#### `FlushRows`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.FlushRows`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.tables.updateData - DATA_WRITE`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.FlushRows"`  
+
+#### `GetWriteStream`
+
+- **Method** : `google.cloud.bigquery.storage.v1.BigQueryWrite.GetWriteStream`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1.BigQueryWrite.GetWriteStream"`  
+
+### `google.cloud.bigquery.storage.v1beta1.BigQueryStorage`
+
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.storage.v1beta1.BigQueryStorage` .
+
+#### `CreateReadSession`
+
+- **Method** : `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.readsessions.create - ADMIN_WRITE`
+  - `bigquery.tables.getData - DATA_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1beta1.BigQueryStorage.CreateReadSession"`  
+
+### `google.cloud.bigquery.storage.v1beta2.BigQueryRead`
+
+The following audit logs are associated with methods belonging to `google.cloud.bigquery.storage.v1beta2.BigQueryRead` .
+
+#### `CreateReadSession`
+
+- **Method** : `google.cloud.bigquery.storage.v1beta2.BigQueryRead.CreateReadSession`  
+- **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
+- **Permissions** :
+  - `bigquery.readsessions.create - ADMIN_WRITE`
+  - `bigquery.tables.getData - DATA_READ`
+- **Method is a long-running or streaming operation** : No.  
+- **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.storage.v1beta2.BigQueryRead.CreateReadSession"`  
+
+## Methods that don't produce audit logs
+
+A method might not produce audit logs for one or more of the following reasons:
+
+- It is a high volume method involving significant log generation and storage costs.
+- It has low auditing value.
+- Another audit or platform log already provides method coverage.
+
+The following methods don't produce audit logs:
+
+- `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.BatchCreateReadSessionStreams`
+- `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.FinalizeStream`
+- `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.ReadRows`
+- `google.cloud.bigquery.storage.v1beta1.BigQueryStorage.SplitReadStream`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryRead.ReadRows`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryRead.SplitReadStream`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryWrite.BatchCommitWriteStreams`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryWrite.CreateWriteStream`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryWrite.FinalizeWriteStream`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryWrite.FlushRows`
+- `google.cloud.bigquery.storage.v1beta2.BigQueryWrite.GetWriteStream`
 
 ## Mapping audit entries to log streams
 

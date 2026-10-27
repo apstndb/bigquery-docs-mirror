@@ -8,12 +8,7 @@ data_source: docs.cloud.google.com
 
 # Remote functions and Translation API tutorial
 
-This tutorial describes how to create a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) , invoke the [Cloud Translation API](https://docs.cloud.google.com/translate/docs/reference/api-overview) , and perform content translation from any language to Spanish using SQL and Python.
-
-Use cases for this function include the following:
-
-- Translate user comments on a website into a local language
-- Translate support requests from many languages into one common language for support case workers
+You can combine BigQuery remote functions with the Cloud Translation API to perform content translation from any language directly using SQL and Python. Translating your data within BigQuery lets you translate website user comments or consolidate multi-lingual support requests into a common language for your case workers.
 
 ## Objectives
 

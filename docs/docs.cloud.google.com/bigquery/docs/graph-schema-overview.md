@@ -10,9 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document explains the components of a graph schema and shows you how to create and manage a graph schema.
-
-Graphs let you model connected data that represents information as a network of nodes and edges. A graph schema consists of nodes and edges, along with labels that classify type their type, and properties that describe them. You define a graph schema by mapping rows from input tables to graph nodes and edges and defining custom labels and properties. To learn more about BigQuery Graph, see the [BigQuery Graph overview](https://docs.cloud.google.com/bigquery/docs/graph-overview) .
+A property graph schema in [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) lets you map rows from input tables or views to graph nodes and edges to model connected data. A graph schema consists of nodes and edges, labels that classify their types, and properties that describe them. You can create and manage a graph schema and define custom labels and properties by using the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .
 
 ## Understand the graph data model
 

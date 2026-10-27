@@ -28,6 +28,8 @@ data_source: docs.cloud.google.com
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#PythonOptions.SCHEMA_REPRESENTATION)
 - [ExternalRuntimeOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions)
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
+- [ExternalVolumeMount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalVolumeMount)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalVolumeMount.SCHEMA_REPRESENTATION)
 - [RoutineBuildStatus](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineBuildStatus)
   - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineBuildStatus.SCHEMA_REPRESENTATION)
 - [BuildState](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#BuildState)
@@ -467,7 +469,12 @@ Options for the runtime of the external system.
   "runtimeConnection": string,
   "maxBatchingRows": string,
   "runtimeVersion": string,
-  "containerRequestConcurrency": string
+  "containerRequestConcurrency": string,
+  "volumeMounts": [
+    {
+      object (ExternalVolumeMount)
+    }
+  ]
 }
 ```
 
@@ -479,6 +486,25 @@ Options for the runtime of the external system.
 | `maxBatchingRows`             | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Optional. Maximum number of rows in each batch sent to the external runtime. If absent or if 0, BigQuery dynamically decides the number of rows in a batch.                                                                                                                                                                     |
 | `runtimeVersion`              | `string` Optional. Language runtime version. Example: `python-3.11` .                                                                                                                                                                                                                                                                                                                                                  |
 | `containerRequestConcurrency` | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Optional. Maximum number of requests that a Python UDF instance can handle concurrently. If absent or if `0` , the default concurrency value is used. For more information, see [Configure container limits for Python UDFs](https://cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits) . |
+| `volumeMounts[]`              | `object ( `[`ExternalVolumeMount`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalVolumeMount)` )` Optional. tabledata.list of volume mounts for the Python UDF container that executes the managed function.                                                                                                                                                                          |
+
+## ExternalVolumeMount
+
+Configuration of a volume mount for the Python UDF container that executes the managed function.
+
+**JSON representation**
+
+```
+{
+  "sourcePath": string,
+  "mountPath": string
+}
+```
+
+| Fields       |                                                                                                                                                                                                                                                 |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sourcePath` | `string` Optional. The absolute path of the source to be mounted, only support Google Cloud Storage bucket or folder now. Eg: gs://bucket-xxx for Google Cloud Storage bucket, gs://bucket-xxx/folder1/folder2 for Google Cloud Storage folder. |
+| `mountPath`  | `string` Optional. The absolute path within the container where the volume should be mounted.                                                                                                                                                   |
 
 ## RoutineBuildStatus
 

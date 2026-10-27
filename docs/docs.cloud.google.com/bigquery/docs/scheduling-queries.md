@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Scheduling queries
 
-This page describes how to schedule recurring queries in BigQuery.
-
-You can schedule queries to run on a recurring basis. Scheduled queries must be written in [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) , which can include [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) and [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) statements. You can organize query results by date and time by parameterizing the query string and destination table.
-
-When you create or update the schedule for a query, the scheduled time for the query is converted from your local time to UTC. UTC is not affected by daylight saving time.
+BigQuery scheduled queries let you automate recurring [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) workloads, including [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) and [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) statements. To organize results by date and time, you can parameterize both your query string and the destination table. When you create or update a schedule, BigQuery converts the scheduled time from your local time to UTC, which isn't affected by daylight saving time.
 
 ## Before you begin
 
