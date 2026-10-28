@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Optimize load jobs
 
-The strategies and best practices described in this document help you optimize batch loading or streaming data into BigQuery to avoid reaching [the limit for the number of load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) per table, per day.
-
-Because the limit for load jobs is fixed and can't be increased, you should optimize your load jobs by structuring your tables through methods such as table partitions, or by managing your loads through methods such as batch loading or streaming.
+You can stay within [per-table load job limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) in BigQuery by batching writes, streaming frequent updates, and partitioning destination tables. Daily modification quotas are fixed and can't be increased, so using fewer and larger writes with built-in client retries help prevent `quotaExceeded` errors.
 
 ## How table operations quotas work
 

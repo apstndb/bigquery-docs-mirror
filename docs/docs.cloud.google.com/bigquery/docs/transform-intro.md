@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to data transformation
 
-This document describes the different ways you can transform data in your BigQuery tables.
-
-For more information about data integrations, see [Introduction to loading, transforming, and exporting data](https://docs.cloud.google.com/bigquery/docs/load-transform-export-intro) .
+BigQuery lets you clean, enrich, and aggregate raw data directly within your data warehouse to prepare datasets for analytics and downstream applications. Depending on your latency and workflow needs, you can run ad hoc SQL updates, cache incremental views, process real-time streams, or schedule automated pipelines. For an end-to-end overview of data integration workflows, see [Introduction to loading, transforming, and exporting data](https://docs.cloud.google.com/bigquery/docs/load-transform-export-intro) .
 
 ## Methods of transforming data
 

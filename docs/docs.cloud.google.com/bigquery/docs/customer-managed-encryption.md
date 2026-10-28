@@ -28,7 +28,7 @@ Learn more about [encryption options on Google Cloud](https://docs.cloud.google.
   - `PROJECT_NUMBER` : the project number of the project running BigQuery
   - `KMS_PROJECT_ID` : the project ID of the project running Cloud KMS (even if this is the same project running BigQuery)
 
-  For information about Google Cloud project IDs and project numbers, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
+  For information about Google Cloud project IDs and project numbers, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects) .
 
 - BigQuery is automatically enabled in new projects. If you are using a pre-existing project to run BigQuery, [enable the BigQuery API](https://console.cloud.google.com/apis/enableflow?apiid=bigquery) .
 
@@ -246,7 +246,7 @@ bq query --destination_table=DATASET_ID.TABLE_ID \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 ### Terraform
 
@@ -569,7 +569,7 @@ bq query \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 ### Go
 
@@ -961,7 +961,7 @@ if table.encryption_configuration.kms_key_name == kms_key_name:
 
 You can stream data into your CMEK-protected BigQuery table without specifying any additional parameters. Note that this data is encrypted using your Cloud KMS key in the buffer as well as in the final location. Before using streaming with a CMEK table, review the requirements on [key availability and accessibility](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_access) .
 
-Learn more about streaming at [Streaming data using the BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) .
+Learn more about streaming at [Introduction to the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-grpc) .
 
 ## Change a table from default encryption to Cloud KMS protection
 
@@ -987,7 +987,7 @@ DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
 
 If you want to change a table from Cloud KMS protection to default encryption, copy the file to itself by running `bq cp` without using the `--destination_kms_key` flag.
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 ### Go
 
@@ -1512,7 +1512,7 @@ bq cp -f \
 DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 ### Determine if a model is protected by Cloud KMS
 
@@ -1700,7 +1700,7 @@ The following sections describe impact to streaming inserts and long-term inacce
 
 #### Impact to streaming inserts
 
-The Cloud KMS key must be available and accessible for at least 24 consecutive hours in the 48-hour period following a streaming insertion request. If the key is not available and accessible, the streamed data might not be fully persisted and can be lost. For more information about streaming inserts, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+The Cloud KMS key must be available and accessible for at least 24 consecutive hours in the 48-hour period following a streaming insertion request. If the key is not available and accessible, the streamed data might not be fully persisted and can be lost. For more information about streaming inserts, see [Use the Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-rest) .
 
 #### Impact to long-term inaccessible data
 

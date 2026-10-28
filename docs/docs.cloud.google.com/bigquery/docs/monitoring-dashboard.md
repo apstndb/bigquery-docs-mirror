@@ -17,8 +17,6 @@ Before you use Cloud Monitoring, ensure that you have the following:
 - A Cloud Billing account.
 - A BigQuery project with billing enabled.
 
-One way to ensure that you have both is to complete the [Quickstart using the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-web-ui) .
-
 ## View and create dashboards, charts, and alerts
 
 ### View the Cloud Monitoring dashboard

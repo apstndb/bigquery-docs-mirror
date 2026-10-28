@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # AlloyDB federated queries
 
-As a data analyst, you can query data in AlloyDB for PostgreSQL from BigQuery using [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
-
-BigQuery AlloyDB federation lets BigQuery query data residing in AlloyDB in real time without copying or moving the data.
+[Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) in BigQuery let you query data stored in AlloyDB for PostgreSQL in real time without copying or moving the data. You can use the `EXTERNAL_QUERY` function to send SQL queries to AlloyDB and join the results with your BigQuery tables.
 
 ## Before you begin
 

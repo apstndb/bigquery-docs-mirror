@@ -76,7 +76,7 @@ For more information, see [BigQuery storage pricing](https://cloud.google.com/bi
 
 - You can't overwrite an existing table or table snapshot when you create a table snapshot.
 
-- If you snapshot a table that has data in [write-optimized storage (streaming buffer)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataavailability) , the data in the write-optimized storage is not included in the table snapshot.
+- If you snapshot a table that has data in [write-optimized storage (streaming buffer)](https://docs.cloud.google.com/bigquery/docs/write-api-rest#dataavailability) , the data in the write-optimized storage is not included in the table snapshot.
 
 - If you snapshot a table that has data in [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) , the data in time travel is not included in the table snapshot.
 

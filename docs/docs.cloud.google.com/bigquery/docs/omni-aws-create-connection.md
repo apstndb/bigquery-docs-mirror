@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Connect to Amazon S3
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to let data analysts access data stored in Amazon Simple Storage Service (Amazon S3) buckets.
+An Amazon Simple Storage Service (Amazon S3) [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets data analysts [query data stored in Amazon S3 buckets](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and [export query results from BigQuery to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) . You can create a connection so that [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) can securely access your Amazon S3 data.
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) accesses Amazon S3 data through connections. Each connection has its unique Amazon Web Services (AWS) Identity and Access Management (IAM) user. You grant permissions to users through AWS IAM roles. The policies within the AWS IAM roles determine what data BigQuery can access for each connection.
-
-Connections are required to [query the Amazon S3 data](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and [export query results from BigQuery to your Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) .
+Each connection has a unique Amazon Web Services (AWS) Identity and Access Management (IAM) user. You grant permissions to that user through AWS IAM roles, whose policies determine what data BigQuery can access for each connection.
 
 ## Before you begin
 

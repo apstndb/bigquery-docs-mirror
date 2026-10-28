@@ -14,11 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this preview feature, contact <bq-sap-federation-support@google.com> .
 
-As a data analyst, you can query relational data in SAP Datasphere from BigQuery using federated queries.
-
-BigQuery SAP Datasphere federation lets BigQuery query data residing in SAP Datasphere in real time, without copying or moving data.
-
-To run a SQL query in SAP Datasphere, specify that SQL query within BigQuery in a `EXTERNAL_QUERY` function. The results are then transferred from SAP Datasphere to BigQuery.
+[Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) in BigQuery let you query relational data residing in SAP Datasphere in real time without copying or moving data. To run a query in SAP Datasphere, you specify the SQL query inside an `EXTERNAL_QUERY` function in BigQuery, which transfers the results from SAP Datasphere to BigQuery.
 
 ## Limitations
 

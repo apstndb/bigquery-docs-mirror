@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Export query results to Blob Storage
 
-This document describes how to export the result of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to your Azure Blob Storage.
+BigQuery lets you export the results of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) directly to your Azure Blob Storage by using the `EXPORT DATA` statement. Exporting query results lets you store and use processed data in your external cloud storage without transferring the results through BigQuery storage.
 
 For information about how data flows between BigQuery and Azure Blob Storage, see [Data flow when exporting data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#export-data) .
 

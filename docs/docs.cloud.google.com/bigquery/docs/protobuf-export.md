@@ -28,7 +28,7 @@ However, there are limitations to exporting BigQuery data as Protobuf columns:
 
 If these limitations apply to the export workflow, you might consider other methods of exporting BigQuery data:
 
-- Use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) with [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
+- Use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) with [`EXPORT DATA` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
 - Use [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview) to export BigQuery data in either the Avro or CSV file format.
 
 ## Required roles

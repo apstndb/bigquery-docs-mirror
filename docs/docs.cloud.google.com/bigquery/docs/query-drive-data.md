@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Query Drive external tables
 
-This document describes how to query data stored in an [Google Drive external table](https://docs.cloud.google.com/bigquery/docs/external-data-drive) .
+BigQuery lets you run GoogleSQL queries on data stored in a [Google Drive external table](https://docs.cloud.google.com/bigquery/docs/external-data-drive) so that you can analyze spreadsheets and comma-separated value (CSV) files directly from Drive. You can query both personal and shared Drive files using either a [permanent external table](https://docs.cloud.google.com/bigquery/docs/query-drive-data#permanent-tables) or a [temporary external table](https://docs.cloud.google.com/bigquery/docs/query-drive-data#temporary-tables) that you create when you run the query.
 
-BigQuery supports queries against both personal Drive files and shared files. For more information on Drive, see [Google Drive training and help](https://support.google.com/a/users/answer/9282958) .
-
-You can query Drive data from a [permanent external table](https://docs.cloud.google.com/bigquery/docs/query-drive-data#permanent-tables) or from a [temporary external table](https://docs.cloud.google.com/bigquery/docs/query-drive-data#temporary-tables) that you create when you run the query.
+For more information about Drive, see [Google Drive training and help](https://support.google.com/a/users/answer/9282958) .
 
 ## Limitations
 

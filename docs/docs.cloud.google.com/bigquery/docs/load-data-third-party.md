@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Load data using a third-party application
 
-Some third-party applications and services provide connectors that can ingest data into BigQuery. For example, [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) lets you load data from external sources into BigQuery's storage.
+Partner connectors such as [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) and Fivetran let you ingest data from external databases and cloud storage into BigQuery. Starting these third-party integrations from BigQuery helps you centralize external data for analysis without building custom ingestion pipelines.
 
 ## Load data using Informatica
 

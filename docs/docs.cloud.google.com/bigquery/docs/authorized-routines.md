@@ -178,7 +178,7 @@ The following is an end-to-end example of creating and using an authorized UDF.
     ((SELECT COUNT(1) FROM private_dataset.private_table t WHERE t.key = input_key));
     ```
 
-4.  Grant the `bigquery.dataViewer` role to a user on the `public_dataset` dataset. This role includes the `bigquery.routines.get` permission, which lets the user call the routine. For information about how to assign access controls to a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+4.  Grant the `bigquery.dataViewer` role to a user on the `public_dataset` dataset. This role includes the `bigquery.routines.get` permission, which lets the user call the routine. For information about how to assign access controls to a dataset, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) .
 
     > **Note:** Instead of using a built-in role, consider creating a custom role with minimal permissions. For more information, see [Creating and managing custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 

@@ -8,14 +8,7 @@ data_source: docs.cloud.google.com
 
 # Spanner federated queries
 
-As a data analyst, you can query data in Spanner from BigQuery using [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
-
-BigQuery Spanner federation lets BigQuery query data residing in Spanner in real time, without copying or moving data.
-
-You can query Spanner data in two ways:
-
-- Create a Spanner external dataset.
-- Use an [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
+[Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) in BigQuery let you query data residing in Spanner in real time without copying or moving data. You can query Spanner data by creating a Spanner external dataset or by using the [`EXTERNAL_QUERY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) function.
 
 ## Understand roles and permissions
 

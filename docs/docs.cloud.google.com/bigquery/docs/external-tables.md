@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to external tables
 
-External tables let you query structured data in external data stores, such as Cloud Storage, Bigtable, and Google Drive, without loading it into BigQuery storage. Unlike [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , external tables don't use access delegation, so users need permissions on both the external table and the external data source.
+External tables let you query structured data in external datastores, such as Cloud Storage, Bigtable, and Google Drive, without loading it into BigQuery storage. Unlike [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , external tables don't use access delegation, so users need permissions on both the external table and the external data source.
 
 To work with external data at the dataset level, you can also use [external datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro#external_datasets) .
 

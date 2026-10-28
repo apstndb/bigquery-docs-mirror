@@ -468,5 +468,6 @@ Iceberg managed tables have the following limitations:
   - `DELETE FROM` table `WHERE` true
 - The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) doesn't support Iceberg managed tables.
 - Iceberg metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
+- When streaming data to Iceberg managed tables using the BigQuery Storage Write API (gRPC), the table's `lastModifiedTime` might not be immediately updated and can be stale. The metadata export timestamp in BigLake status reflects the read snapshot time used when generating the Iceberg metadata, rather than the table's `lastModifiedTime` .
 - Record-based paginated access using `tabledata.list` doesn't support Iceberg managed tables.
 - Only one concurrent mutating DML statement ( `UPDATE` , `DELETE` , and `MERGE` ) runs for each Iceberg managed table. Additional mutating DML statements are queued.

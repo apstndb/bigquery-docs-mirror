@@ -14,6 +14,28 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## October 27, 2026
+
+Feature
+
+You can manage and version control SQL scripts and notebooks with [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) , which provide a streamlined, folder-based integration with remote Git repositories. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+The [Data Engineering Agent now integrates with Google Drive](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview#google-drive-integration) , letting you provide Google Sheets files, CSV, or JSONL files as input for your data engineering pipelines.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use [conversational analytics in Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets#use-ca-in-connected-sheets) to ask questions and analyze your BigQuery data using natural language. The Gemini side panel can help you translate your questions into optimized SQL queries and execute them, summarize key trends, and insert live, refreshable database objects directly into your workbook.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+The [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) , which estimates the token count of a text string, is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## October 26, 2026
 
 Feature

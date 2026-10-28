@@ -7483,5 +7483,5 @@ The following table describes the permissions needed for common BigQuery ML task
 
 ## What's next
 
-- For more information about assigning roles at the dataset level, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
-- For more information about assigning roles at the table or view level, see [Controlling access to tables and views](https://docs.cloud.google.com/bigquery/docs/table-access-controls) .
+- For more information about assigning roles at the dataset level, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) .
+- For more information about assigning roles at the table or view level, see [Work with table and view controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_table_and_view_access_controls) .

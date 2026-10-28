@@ -85,7 +85,7 @@ BigQuery supports the following system variables for [multi-statement queries](h
 <td><code>STRING</code></td>
 <td>Read and write</td>
 <td>Lets you specify or override the reservation to use for running the following statements. Must be in the following format: <code>projects/ </code><var translate="no"> project_id </var><code> /locations/ </code><var translate="no"> location </var><code> /reservations/ </code><var translate="no"> reservation_id</var> .
-<p>Forces the query to use on-demand billing when set to <code>'none'</code> . This requires the project or organization to have <code>reservation_override_mode</code> set to <code>ALLOW_ANY_OVERRIDE</code> .</p>
+<p>Forces the query to use on-demand billing when set to <code>'none'</code> . This requires the project or organization to have <code>reservation_override_mode</code> set to <code>ALLOW_ANY_OVERRIDE</code> . This value can be set using <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement"><code>ALTER PROJECT SET OPTIONS</code></a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement"><code>ALTER ORGANIZATION SET OPTIONS</code></a> statements. In case of any issues, <a href="https://docs.cloud.google.com/bigquery/docs/getting-support">request support</a> .</p>
 <p>The location of the reservation must match the location where the query is running. If <code>@@reservation</code> is <code>NULL</code> , the reservation is automatically detected based on <a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments">assignment settings</a> matching the query properties.</p></td>
 </tr>
 <tr class="even">

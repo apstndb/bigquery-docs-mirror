@@ -22,7 +22,7 @@ BigQuery provides several interfaces you can use for administration tasks. Often
 
   You can use stored procedures to automate administration tasks that use SQL statements. For more information, see [Work with stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
-- **`bq` commands.** The bq command-line tool lets you do many administrative tasks by using `bq` commands. You can use the bq command-line tool to do tasks that aren't supported in the Google Cloud console, to prototype capabilities before encoding them in queries or API methods, or if you prefer working in a command-line interface. For more information, see [Use the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
+- **`bq` commands.** The bq command-line tool lets you do many administrative tasks by using `bq` commands. You can use the bq command-line tool to do tasks that aren't supported in the Google Cloud console, to prototype capabilities before encoding them in queries or API methods, or if you prefer working in a command-line interface. For more information, see [Use the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 ## Manage resources
 
@@ -37,7 +37,7 @@ Datasets are containers for tables. You can create tables in a dataset, and then
 Refer to the following documents for more information about dataset administration:
 
 - For more information about creating, copying, moving, and updating datasets, see [Introduction to datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro) .
-- For more information about dataset-level access control, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) and [Authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) .
+- For more information about dataset-level access control, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) and [Authorized datasets](https://docs.cloud.google.com/bigquery/docs/authorized-datasets) .
 
 ### Manage tables
 
@@ -104,7 +104,7 @@ BigQuery does many tasks on behalf of your users, including ingesting, querying,
 
 ### Manage jobs
 
-Jobs are actions that BigQuery runs on a user's behalf to load, export, query, or copy data. When a user initiates one of these tasks by using the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) , the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) , a [SQL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical) , or an [API call](https://docs.cloud.google.com/bigquery/docs/running-jobs) , BigQuery automatically creates a job to execute the task.
+Jobs are actions that BigQuery runs on a user's behalf to load, export, query, or copy data. When a user initiates one of these tasks by using the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) , the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) , a [SQL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical) , or an [API call](https://docs.cloud.google.com/bigquery/docs/running-jobs) , BigQuery automatically creates a job to execute the task.
 
 As a BigQuery administrator, you can monitor, manage, and troubleshoot your organization's jobs to ensure they are running smoothly.
 
@@ -129,7 +129,7 @@ Refer to the following documents for more information about managing compute cap
 
 - For slots, and the trade-offs between on-demand billing and capacity-based billing, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
-- For the different options for capacity-based billing (monthly or annual commitments), see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
+- For the different options for capacity-based billing (monthly or annual commitments), see [Manage workload commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
 
 - For creating pools of capacity-based slots, called *slot reservations* , see [Work with slot reservations](https://docs.cloud.google.com/bigquery/docs/reservations-tasks) .
 

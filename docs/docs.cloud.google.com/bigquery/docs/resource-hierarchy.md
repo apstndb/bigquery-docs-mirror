@@ -14,6 +14,26 @@ BigQuery resources are organized hierarchically, like other Google Cloud service
 
 BigQuery inherits the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) and adds an additional grouping mechanism called *datasets* , which are specific to BigQuery. This section describes the elements of this hierarchy.
 
+### Organizations
+
+The [Organization resource](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) represents an organization (for example, a company) and is the root node in the Google Cloud resource hierarchy.
+
+You don't need an Organization resource to get started using BigQuery, but we recommend creating one. Using an Organization resource allows administrators to centrally control your BigQuery resources, rather than individual users controlling the resources they create.
+
+### Folders
+
+Folders are an additional grouping mechanism above projects. Projects and folders inside a folder automatically inherit the access policies of their parent folder. Folders can be used to model different legal entities, departments, and teams within a company.
+
+Folders as discussed here are part of the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . They shouldn't be confused with [BigQuery folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) , which you can use to organize code assets.
+
+### Projects
+
+Every BigQuery dataset is associated with a project. To use Google Cloud, you must create at least one project. Projects form the basis for creating, enabling, and using all Google Cloud services. For more information, see [Resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . A project can hold multiple datasets, and datasets with different locations can exist in the same project.
+
+When you perform operations on your BigQuery data, such as running a query or ingesting data into a table, you create a [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) . A job is always associated with a project, but it doesn't have to run in the same project that contains the data. In fact, a job might reference tables from datasets in multiple projects. A query job, load job, or extract job always runs in the same location as the tables that it references.
+
+Each project has a [Cloud Billing account](https://docs.cloud.google.com/billing/docs/concepts#billing_account) attached to it. The costs accrued to a project are billed to that account. If you use [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , your queries are billed to the project that runs the query. If you use [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , your slot reservations are billed to the administration project used to purchase the slots. Storage is charged to the project where the dataset resides.
+
 ### Datasets
 
 Datasets are logical containers that are used to organize and control access to your BigQuery resources. Datasets are similar to schemas in other database systems.
@@ -22,25 +42,7 @@ Most BigQuery resources that you create — including tables, views, functions, 
 
 A dataset has a [location](https://docs.cloud.google.com/bigquery/docs/locations) . When you create a table, the table data is stored in the location of the dataset. Before you create tables for production data, think about your [location requirements](https://docs.cloud.google.com/bigquery/docs/locations#data-locations) . You cannot change the location of a dataset after it is created.
 
-### Projects
-
-Every dataset is associated with a project. To use Google Cloud, you must create at least one project. Projects form the basis for creating, enabling, and using all Google Cloud services. For more information, see [Resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . A project can hold multiple datasets, and datasets with different locations can exist in the same project.
-
-When you perform operations on your BigQuery data, such as running a query or ingesting data into a table, you create a [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) . A job is always associated with a project, but it doesn't have to run in the same project that contains the data. In fact, a job might reference tables from datasets in multiple projects. A query job, load job, or extract job always runs in the same location as the tables that it references.
-
-Each project has a [Cloud Billing account](https://docs.cloud.google.com/billing/docs/concepts#billing_account) attached to it. The costs accrued to a project are billed to that account. If you use [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , your queries are billed to the project that runs the query. If you use [capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) , your slot reservations are billed to the administration project used to purchase the slots. Storage is charged to the project where the dataset resides.
-
-### Folders
-
-Folders are an additional grouping mechanism above projects. Projects and folders inside a folder automatically inherit the access policies of their parent folder. Folders can be used to model different legal entities, departments, and teams within a company.
-
-Folders as discussed here are part of the [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy) . They shouldn't be confused with [BigQuery folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) , which you can use to organize code assets.
-
-### Organizations
-
-The [Organization resource](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) represents an organization (for example, a company) and is the root node in the Google Cloud resource hierarchy.
-
-You don't need an Organization resource to get started using BigQuery, but we recommend creating one. Using an Organization resource allows administrators to centrally control your BigQuery resources, rather than individual users controlling the resources they create.
+## Example resource hierarchy
 
 The following diagram shows an example of the resource hierarchy. In this example, the organization has a project inside a folder. The project is associated with a billing account, and it contains three datasets.
 

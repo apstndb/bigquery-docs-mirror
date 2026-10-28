@@ -8,15 +8,11 @@ data_source: docs.cloud.google.com
 
 # Discover and catalog Cloud Storage data
 
-This document explains how to use Knowledge Catalog automatic discovery, a feature in BigQuery that lets you scan data in Cloud Storage buckets to extract and then catalog metadata. As part of the discovery scan, automatic discovery creates BigLake or external tables for structured data and object tables for unstructured data. BigLake tables and external tables let you query structured data in external datastores (see [Introduction to BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) and [Introduction to external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) ), while object tables provide a metadata index over unstructured data in Cloud Storage (see [Introduction to object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) ). This centralized table data eases AI-powered data insights, data security, and governance.
-
-To use automatic discovery of Cloud Storage data, you create and run a discovery scan.
-
-Automatic discovery is also called standalone discovery.
+Knowledge Catalog automatic discovery in BigQuery, also called *standalone discovery* , lets you scan Cloud Storage buckets to extract and catalog file metadata. Discovery scans register structured data as [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) or [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) and index unstructured data as [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) . Centralizing these tables in BigQuery helps you query external data, apply security and governance policies, and generate AI-powered insights.
 
 ## Discovery scan overview
 
-A discovery scan does the following:
+To use automatic discovery of Cloud Storage data, you create and run a discovery scan. A discovery scan does the following:
 
 - Scans the data in the Cloud Storage bucket or path.
 - Groups structured and semi-structured data into tables.

@@ -288,7 +288,7 @@ OBJ.LIST(
 
 **Description**
 
-The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage. `OBJ.LIST` lets you perform ad-hoc discovery and analysis of unstructured data. The Cloud Storage data can include documents, images, and audio. The `OBJ.LIST` function can discover objects across all [Cloud Storage classes](https://docs.cloud.google.com/storage/docs/storage-classes) .
+The `OBJ.LIST` function returns a table of metadata and `ObjectRef` values for files stored in Cloud Storage. `OBJ.LIST` lets you perform ad hoc discovery and analysis of unstructured data. The Cloud Storage data can include documents, images, and audio. The `OBJ.LIST` function can discover objects across all [Cloud Storage classes](https://docs.cloud.google.com/storage/docs/storage-classes) .
 
 Using `OBJ.LIST` replaces the need to manually construct `ObjectRef` values. You can quickly add Cloud Storage objects into AI functions to build ETL pipelines that handle converting unstructured data to structured data. If you require a persistent, self-updating table that continuously tracks new objects that arrive in a bucket over time, you should create a standard [BigQuery object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) instead.
 

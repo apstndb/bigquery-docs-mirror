@@ -588,7 +588,7 @@ SCHEMA
 
 Replace the following:
 
-- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `FORMAT` : the format of the schema. `NEWLINE_DELIMITED_JSON` , `CSV` , `AVRO` , `PARQUET` , `ORC` , or `DATASTORE_BACKUP` .
 - `PROJECT_ID` : your project ID.
 - `DATASET` : the name of the dataset that contains the table you're updating.
@@ -948,7 +948,7 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . Note that you cannot append query results to a table in another location.
+- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) . Note that you cannot append query results to a table in another location.
 - `PROJECT_ID` : your project ID.
 - `dataset` : the name of the dataset that contains the table you're appending.
 - `TABLE` : the name of the table you're appending.
@@ -1799,7 +1799,7 @@ SCHEMA
 
 Replace the following:
 
-- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `FORMAT` : `NEWLINE_DELIMITED_JSON` , `CSV` , `PARQUET` , `ORC` , or `AVRO` . `DATASTORE_BACKUP` files don't require column relaxation. The columns in tables created from Datastore export files are always `NULLABLE` .
 - `PROJECT_ID` : your project ID.
 - ` dataset ` is the name of the dataset that contains the table.
@@ -2153,7 +2153,7 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `PROJECT_ID` : your project ID.
 - `DATASET` : the name of the dataset that contains the table you're appending.
 - `TABLE` : the name of the table you're appending.

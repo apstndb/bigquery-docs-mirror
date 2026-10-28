@@ -296,7 +296,7 @@ Assume you have two datasets, named `private_dataset` and `public_dataset` . The
 
 You can give a user access to the data returned by the `private_table_filtered` view, but not all of the data in the `private_table` table, as follows:
 
-1.  Grant the `bigquery.dataViewer` role to the user for the `public_dataset` dataset. This role includes the `bigquery.tables.getData` permission, which lets the user query the views in the `public_dataset` dataset. For information about how to grant a role to a user for a dataset, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+1.  Grant the `bigquery.dataViewer` role to the user for the `public_dataset` dataset. This role includes the `bigquery.tables.getData` permission, which lets the user query the views in the `public_dataset` dataset. For information about how to grant a role to a user for a dataset, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) .
 
     The user now has permission to query views in the `public_dataset` , but they still cannot access the `private_table` table in `private_dataset` . If the user tries to query the `private_table` table directly, or if they try to access the `private_table` table indirectly by querying the `private_table_filtered` view, they get an error message similar to the following:
 
@@ -319,4 +319,4 @@ You can give a user access to the data returned by the `private_table_filtered` 
 
 - For information about authorizing an individual view to access data in a dataset, see [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
-- For information about authorizing a table function or a user-defined function to access data in a dataset, see [Authorized functions](https://docs.cloud.google.com/bigquery/docs/authorized-functions) .
+- For information about authorizing a table function or a user-defined function to access data in a dataset, see [Authorized functions](https://docs.cloud.google.com/bigquery/docs/authorized-routines) .

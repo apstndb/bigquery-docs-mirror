@@ -135,7 +135,7 @@ The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery
 </tbody>
 </table>
 
-For more information on assigning roles at the dataset level, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+For more information on assigning roles at the dataset level, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) .
 
 When you create a new dataset, BigQuery adds default dataset access for the following entities. Roles that you specify on dataset creation overwrite the default values.
 

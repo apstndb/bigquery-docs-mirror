@@ -18,7 +18,7 @@ A dataset is contained within a specific [project](https://docs.cloud.google.com
 
 You specify a location for storing your BigQuery data when you create a dataset. For a list of BigQuery dataset locations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . BigQuery stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . For example, if you choose `EU` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU.
 
-After you create the dataset, the location cannot be changed, but you can [copy datasets to different locations](https://docs.cloud.google.com/bigquery/docs/copying-datasets) , or manually [move (recreate) the dataset in a different location](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset) .
+After you create the dataset, the location cannot be changed, but you can [copy datasets to different locations](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets) , or manually [move (recreate) the dataset in a different location](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset) .
 
 If you don't [explicitly specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) , the location is determined in one of the following ways:
 
@@ -99,4 +99,4 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
 ## What's next
 
 - For more information on creating datasets, see [Creating datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
-- For more information on assigning access controls to datasets, see [Controlling access to datasets](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) .
+- For more information on assigning access controls to datasets, see [Work with dataset access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#work_with_dataset_access_controls) .

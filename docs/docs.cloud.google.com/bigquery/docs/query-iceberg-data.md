@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Query Apache Iceberg external tables
 
-This document describes how to query data stored in [Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) .
+BigQuery lets you query data stored in [Iceberg external tables](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables) by using GoogleSQL. Querying Iceberg external tables lets you analyze Apache Iceberg tables stored in Cloud Storage without loading or copying the data into native BigQuery storage.
 
 ## Required roles
 

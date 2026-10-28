@@ -134,7 +134,7 @@ bq --location=LOCATION mk --dataset \
 
 Replace the following:
 
-- `LOCATION` : the location of your new dataset in BigQuery—for example, `aws-us-east-1` . After you create a dataset, you can't change its location. You can set a default location value by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `LOCATION` : the location of your new dataset in BigQuery—for example, `aws-us-east-1` . After you create a dataset, you can't change its location. You can set a default location value by using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `AWS_GLUE_SOURCE` : the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html) of the AWS Glue database—for example, `arn:aws:glue:us-east-1:123456789:database/test_database` .
 - `PROJECT_ID` : your BigQuery project ID.
 - `CONNECTION_LOCATION` : the location of your AWS connection—for example, `aws-us-east-1` .

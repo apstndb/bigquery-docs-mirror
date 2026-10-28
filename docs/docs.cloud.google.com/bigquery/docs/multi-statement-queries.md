@@ -2,17 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/multi-statement-queries
 uri: https://docs.cloud.google.com/bigquery/docs/multi-statement-queries
 title: Work with multi-statement queries
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use multi-statement queries in BigQuery to execute a sequence of SQL statements, define variables, and implement control flow.
 data_source: docs.cloud.google.com
 ---
 
 # Work with multi-statement queries
 
-A *multi-statement query* is a collection of SQL statements that you can execute in a sequence, with shared state.
-
-This document describes how to use multi-statement queries in BigQuery, such as how to write multi-statement queries, use temporary tables in multi-statement queries, reference variables in multi-statement queries, and debug multi-statement queries.
-
-Multi-statement queries are often used in [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) and support [procedural language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) , which let you do things like define variables and implement control flow. Multi-statement queries can contain DDL and DML statements that have side effects, such as creating or modifying tables or table data.
+Multi-statement queries in BigQuery let you execute a collection of SQL statements in a sequence with shared state. You can combine standard SQL with [procedural language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) to define variables, implement control flow, and run complex Data Definition Language (DDL) and Data Manipulation Language (DML) operations in a single request. Multi-statement queries are often used in [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
 ## Write, run, and save multi-statement queries
 
@@ -113,7 +109,7 @@ You don't create system variables, but you can override the default value for so
 SET @@dataset_project_id = 'MyProject';
 ```
 
-You can also set and implicitly use a system variable in a multi-statement query. For example, in the following query you must include the project each time you wish to create a new table:
+You can also set and implicitly use a system variable in a multi-statement query. For example, in the following query you must include the project each time you want to create a new table:
 
 ```
 BEGIN

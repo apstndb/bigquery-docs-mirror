@@ -6,13 +6,9 @@ description: Use ObjectRef values, SQL functions, and Generative AI functions to
 data_source: docs.cloud.google.com
 ---
 
-This tutorial shows you how to use SQL queries, the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) from the Cymbal pet store public dataset.
+Analyzing multimodal data with SQL and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) lets you combine structured and unstructured data to extract deeper insights. You can call generative AI functions on your [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) to create embeddings, analyze content, and perform semantic [vector searches](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to find similar entities across your data.
 
-The `AI.GENERATE` function lets you analyze any combination of structured and unstructured data, and the `AI.EMBED` function lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#embeddings) from text or image data in BigQuery.
-
-You find similar images by using the [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) function. The `VECTOR_SEARCH` function lets you perform a semantic search or a hybrid search on embeddings to find similar entities.
-
-This tutorial uses a persistent [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that stores `ObjectRef` values.
+In this tutorial, you use SQL queries, the [`AI.GENERATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , the [`AI.EMBED` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) from the `cymbal_pets` public dataset.
 
 ## Objectives
 

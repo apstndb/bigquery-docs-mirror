@@ -480,4 +480,4 @@ To delete the project:
 - Learn how to [accelerate ARIMA_PLUS to enable forecast 1 million time series within hours](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
 - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
 - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
-- To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .
+- To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .

@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Generate dataset insights
 
-This document describes how to generate dataset insights for BigQuery datasets and Apache Iceberg namespaces (which are represented as datasets in BigQuery). Dataset insights help you understand relationships between tables in a dataset or namespace by generating relationship graphs and cross-table queries.
-
-Dataset insights help you accelerate the exploration of datasets and namespaces with multiple tables by automatically discovering and visualizing relationships between tables in a graph, identifying primary-key and foreign-key relationships, and generating sample cross-table queries. This is useful for understanding data structure without documentation, discovering schema-defined, usage-based, or AI-inferred relationships between tables, and generating complex queries that join multiple tables.
+Data insights help you understand relationships between tables in BigQuery datasets and Apache Iceberg namespaces by discovering and visualizing relationships between tables in a graph, identifying schema-defined, usage-based, or AI-inferred relationships, and generating sample cross-table queries.
 
 For an overview of table and dataset insights, see [Data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 

@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Use the Storage Write API (REST)
 
-This document describes how to stream data into BigQuery by using the [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) , which was previously known as the *legacy `tabledata.insertAll` method* .
+The [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll) , previously known as the *legacy `tabledata.insertAll` method* , lets you stream rows into BigQuery tables without running a load job. Streamed data becomes available for real-time GoogleSQL analysis as soon as BigQuery acknowledges the write request.
 
-For new projects, we recommend using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) instead of the Storage Write API (REST). The Storage Write API (gRPC) has lower pricing and more robust features, including exactly-once delivery semantics and streaming into Apache Iceberg managed tables. If you are migrating an existing project from the Storage Write API (REST) to the Storage Write API (gRPC), we recommend selecting the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) . The Storage Write API (REST) is still fully supported.
+For new projects, use the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api) for lower pricing, exactly-once delivery semantics, and streaming into Apache Iceberg managed tables. If you're migrating an existing project from the Storage Write API (REST) to the Storage Write API (gRPC), select the [default stream](https://docs.cloud.google.com/bigquery/docs/write-api-streaming#at-least-once) .
 
 ## Before you begin
 

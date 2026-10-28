@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # BigQuery Data Policy audit logging
 
-This document lists the audited methods for BigQuery Data Policy. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
+Cloud Audit Logs for BigQuery Data Policy let you track administrative and data-access operations on your resources to help you monitor access and configuration changes. You can query these logs in the Logs Explorer and check which BigQuery Data Policy API methods generate Cloud Audit Logs.
+
+For more information about Cloud Audit Logs, see the following documents:
 
 - [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
 - [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)

@@ -56,7 +56,6 @@ You can use [VPC Service Controls](https://docs.cloud.google.com/vpc-service-con
 Learn about [configuring ingress and egress policies](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies) and [configuring access levels](https://docs.cloud.google.com/vpc-service-controls/docs/use-access-levels) to properly configure the [rules](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) . To configure a perimeter to allow the required data copying, use the following YAML file:
 
 ```
-# Allows egress to Sheets through the Connected Sheets feature
 - egressTo:
     operations:
     - serviceName: 'bigquery.googleapis.com'
@@ -86,7 +85,11 @@ If you don't have a Google Cloud project that is set up for billing, follow thes
 
 To avoid continued billing, you can delete the resources that you created. See [Cleaning up](https://docs.cloud.google.com/bigquery/docs/connected-sheets#clean-up) for more detail.
 
-## Open BigQuery datasets from Connected Sheets
+## Open BigQuery data in Connected Sheets
+
+You can open datasets, tables, and saved queries in Connected Sheets.
+
+### Open datasets
 
 The following example uses a public dataset to show you how to connect to BigQuery from Google Sheets:
 
@@ -132,7 +135,7 @@ When you use Connected Sheets to create a chart, pivot table, formula, or other 
 
     The query opens in the Google Cloud console.
 
-## Open tables in Connected Sheets
+### Open tables
 
 To open a table in Connected Sheets, follow these steps:
 
@@ -148,7 +151,7 @@ To open a table in Connected Sheets, follow these steps:
 
 4.  Click **Overview \> Tables** , and next to your table name, click more_vert **View actions** , and then select **Open in \> Connected Sheets** .
 
-## Open saved queries in Connected Sheets
+### Open saved queries
 
 Ensure you have a [saved query](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#view_all_saved_queries) . For more information, see [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) .
 
@@ -165,6 +168,53 @@ To open a saved query in Connected Sheets, follow these steps:
 4.  Click more_vert **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
 
     Alternatively, click the name of the saved query to open it in the details pane, and then click **Open in \> Connected Sheets** .
+
+## Use conversational analytics in Connected Sheets
+
+You can use [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) in Connected Sheets to ask questions about and analyze your BigQuery data using natural language. Gemini translates your questions into optimized SQL queries, executes them and summarizes key trends, and lets you drop live, refreshable database objects directly into your workbook.
+
+To analyze data and create database objects in Connected Sheets, complete the following steps:
+
+1.  Open the Gemini side panel.
+
+    On your first use of conversational analytics, you might see a prompt to authorize BigQuery access. To continue, click **Get connected** .
+
+2.  In the text field, enter your question. You can maintain context across multiple questions.
+
+3.  Ask Gemini to build live, refreshable objects.
+
+4.  To add the results directly to your spreadsheet, click **Insert** . You can refresh your objects manually at any time or [schedule a refresh](https://support.google.com/docs/answer/9703214#zippy=%2Cschedule-a-refresh) .
+
+## Prepare your data for analysis
+
+You can sort and filter billions of rows of BigQuery data directly in Google Sheets to make it easier to work with. Click the **Filter** icon at the top of a column to sort the data or apply filters by condition and value. For more information, see [Sort & filter your BigQuery data in Google Sheets](https://support.google.com/docs/answer/9702999) .
+
+To make your data more readable without modifying the underlying BigQuery schema, you can assign custom names (aliases) to your column headers. To set up an alias, do the following:
+
+1.  At the top of the column that you want to rename, click the **down arrow** .
+2.  Select **Rename column with alias** .
+3.  Enter the new name.
+4.  Click **Save** .
+
+You can't assign an alias to calculated columns, and any alias that you create only persists within a single BigQuery connection in a single workbook. For more information, see [Get started with BigQuery data in Google Sheets](https://support.google.com/docs/answer/9702507) .
+
+## Analyze data in Connected Sheets
+
+You can perform in-depth analysis on your BigQuery data using familiar Google Sheets tools. You can create charts, build pivot tables that support up to 100,000 results, and apply supported spreadsheet functions to summarize your dataset. You can also extract up to 500,000 rows or 10 MB of your BigQuery data for offline analysis.
+
+For more information, see [Analyze & refresh BigQuery data in Google Sheets](https://support.google.com/docs/answer/9703214) .
+
+## Write a custom query in Connected Sheets
+
+To perform more complex analysis, such as joining data from multiple BigQuery tables, you can write custom [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql#bigquery-sql-dialects) queries directly within Connected Sheets.
+
+To write a query, do the following:
+
+1.  Click **Saved queries** \> **Query editor** .
+2.  Enter your query. You can configure parameters to use the value of specific spreadsheet cells inside your query.
+3.  Click **Insert results** .
+
+For more information and to view example queries, see [Write & edit a query](https://support.google.com/docs/answer/9703000) .
 
 ## Monitor BigQuery usage from Connected Sheets
 
@@ -338,7 +388,7 @@ The result looks similar to the following:
 +---------------------------------+---------------------------------+------------------+--------------------+-----------------+---------------------------------+
 ```
 
-## Cleaning up
+## Clean up
 
 To avoid incurring charges to your Google Cloud account for the resources used in this tutorial:
 
@@ -355,12 +405,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 
 ## What's next
 
-- Get more information from the Google Workspace [Get started with BigQuery data in Google Sheets](https://support.google.com/docs/answer/9702507) topic.
-
-- View videos from the [Using Connected Sheets playlist](https://www.youtube.com/playlist?list=PLU8ezI8GYqs74i8hy_qln3FvkAuSpE-r1) on YouTube.
-
-- Ready to get hands-on? Try a lab:
-
-  - [Connected Sheets: Qwik Start](https://www.skills.google/focuses/18108?&parent=catalog)
-  - [Examining BigQuery Billing Data in Google Sheets](https://www.skills.google/focuses/6916?&parent=catalog)
-  - Show your mastery: complete the [Analyze BigQuery Data in Connected Sheets skill badge](https://www.skills.google/course_templates/632+doc)
+- [Get started with BigQuery data in Google Sheets](https://support.google.com/docs/answer/9702507) .
+- View videos from the [using Connected Sheets playlist](https://www.youtube.com/playlist?list=PLU8ezI8GYqs74i8hy_qln3FvkAuSpE-r1) .
+- Complete the [Connected Sheets: Qwik Start](https://www.skills.google/focuses/18108?&parent=catalog) lab.
+- Complete the [Examining BigQuery Billing Data in Google Sheets](https://www.skills.google/focuses/6916?&parent=catalog) lab.
+- Earn the [Analyze BigQuery Data in Connected Sheets skill badge](https://www.skills.google/course_templates/632+doc) .

@@ -295,9 +295,9 @@ Follow these steps to move a folder or code asset in BigQuery:
 
 > **Note:** Bulk move operations are independent. If one resource fails to move, the operation still attempts to complete the move for all other selected resources.
 
-## Copy a folder or code asset
+## Copy a code asset
 
-Follow these steps to copy a folder or code asset in BigQuery:
+Follow these steps to copy a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
@@ -305,7 +305,7 @@ Follow these steps to copy a folder or code asset in BigQuery:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Select the folder or code asset that you want to copy.
+3.  Select the code asset that you want to copy.
 
 4.  Click more_vert **View actions** \> **Copy** .
 

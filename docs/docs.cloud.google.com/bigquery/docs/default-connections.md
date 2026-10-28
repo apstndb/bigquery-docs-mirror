@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Default connection overview
 
-To simplify your workflow, you can configure a default [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in BigQuery for creating external tables and BigQuery ML remote models. An administrator configures the default connection, and then users can reference it during resource creation instead of having to specify connection details.
+A default [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in BigQuery lets you create external tables and BigQuery ML remote models without specifying individual connection details or managing service account permissions each time. After you configure a default connection for a project, users can reference it by specifying the `DEFAULT` keyword in SQL statements.
+
+## Supported resources and SQL clauses
 
 BigQuery supports default connections in the following resources:
 

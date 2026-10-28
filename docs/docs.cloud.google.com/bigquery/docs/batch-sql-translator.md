@@ -736,7 +736,7 @@ To download the output files after the job completes, use `gcloud storage cp` as
 
 Learn more about the following steps in data warehouse migration:
 
-- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration-intro)
 - [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
 - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
 - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)

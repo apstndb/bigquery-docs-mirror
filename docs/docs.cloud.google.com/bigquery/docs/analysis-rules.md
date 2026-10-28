@@ -20,7 +20,7 @@ The following analysis rules are supported:
 
 - [Aggregation threshold analysis rule](https://docs.cloud.google.com/bigquery/docs/analysis-rules#agg_analysis_rules) : Enforces the minimum number of distinct entities that must be present in a dataset. You can enforce this rule on a view, using DDL statements or data clean rooms. This rule supports the aggregation threshold policy and the join restriction policy.
 
-- [Differential privacy analysis rule](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_analysis_rules) : Enforces a privacy budget, which limits the data that is revealed to a subscriber when the data is protected with [differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy) . You can enforce this rule on a view, using DDL statements or data clean rooms. This rule supports the differential privacy policy and the join restriction policy.
+- [Differential privacy analysis rule](https://docs.cloud.google.com/bigquery/docs/analysis-rules#dp_analysis_rules) : Enforces a privacy budget, which limits the data that is revealed to a subscriber when the data is protected with [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) . You can enforce this rule on a view, using DDL statements or data clean rooms. This rule supports the differential privacy policy and the join restriction policy.
 
 - [List overlap analysis rule](https://docs.cloud.google.com/bigquery/docs/analysis-rules#list_overlap_rules) : Overlapping rows can only be queried after a join operation, which conforms to the rule. You can enforce this rule on a view, using DDL statements or data clean rooms. This rule supports the join restriction policy.
 
@@ -156,7 +156,7 @@ To review additional examples for the `AGGREGATION_THRESHOLD` clause, see [`AGGR
 
 ## Differential privacy analysis rule
 
-The differential privacy analysis rule enforces a privacy budget, which limits the data that is revealed to a subscriber when the data is protected with [differential privacy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/differential-privacy) . A privacy budget prevents any subscriber from querying shared data when the sum of all queries' epsilon or delta reaches the total epsilon or total delta value. You can use this analysis rule in a view.
+The differential privacy analysis rule enforces a privacy budget, which limits the data that is revealed to a subscriber when the data is protected with [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) . A privacy budget prevents any subscriber from querying shared data when the sum of all queries' epsilon or delta reaches the total epsilon or total delta value. You can use this analysis rule in a view.
 
 A view that includes this analysis rule must include the [differential privacy policy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy) and can optionally include the [join restriction policy](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy) .
 

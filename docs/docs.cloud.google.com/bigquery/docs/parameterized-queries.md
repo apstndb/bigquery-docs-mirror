@@ -2,24 +2,21 @@
 name: documents/docs.cloud.google.com/bigquery/docs/parameterized-queries
 uri: https://docs.cloud.google.com/bigquery/docs/parameterized-queries
 title: Run parameterized queries
-description: Configure BigQuery query parameters for GoogleSQL. Protect against SQL injection.
+description: Configure BigQuery query parameters for GoogleSQL to help protect against SQL injection.
 data_source: docs.cloud.google.com
 ---
 
 # Run parameterized queries
 
-When querying BigQuery data using GoogleSQL syntax, you can use parameters to protect queries made from user input against [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) . The parameters substitute arbitrary expressions in your GoogleSQL queries.
+Parameterized queries in BigQuery let you substitute arbitrary expressions directly into your GoogleSQL statements. Passing parameters for data types like arrays, timestamps, structs, and ranges lets you securely execute queries made from user input while helping to protect your data against [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks.
 
-You pass query parameters for various data types, including the following:
+## Limitations
 
-- Arrays
-- Timestamps
-- Structs
-- Ranges
+- Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) .
+- Parameters can't be used as substitutes for identifiers, column names, table names, or other parts of the query.
+- A query parameter value can't be `NULL` .
 
 ## Pass a parameter in a query
-
-Query parameters are only supported in [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) . Parameters cannot be used as substitutes for identifiers, column names, table names, or other parts of the query. A query parameter value can't be `NULL` .
 
 To specify a named parameter, use the `@` character followed by an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) , such as `@param_name` . Alternatively, use the placeholder value `?` to specify a positional parameter. A query can use positional or named parameters, but not both.
 

@@ -135,7 +135,7 @@ Setting up a Campaign Manager data transfer requires a:
 
 ### Find your Campaign Manager ID
 
-To retrieve your Campaign Manager ID, you can use the Cloud Storage [console](https://console.cloud.google.com/storage) to examine the files in your Campaign Manager Data Transfer Cloud Storage bucket. The Campaign Manager ID is used to match files in the provided Cloud Storage bucket. The ID is embedded in the **file name** , not the Cloud Storage bucket name.
+To retrieve your Campaign Manager ID, you can use the Cloud Storage [console](https://console.cloud.google.com/storage) to examine the files in your Campaign Manager Data Transfer Cloud Storage bucket. The Campaign Manager ID is used to match files in the provided Cloud Storage bucket. The ID is embedded in the **filename** , not the Cloud Storage bucket name.
 
 For example:
 

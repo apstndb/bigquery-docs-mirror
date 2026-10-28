@@ -8,22 +8,13 @@ data_source: docs.cloud.google.com
 
 [Video](https://www.youtube.com/watch?v=t_q-qLa1lX0)
 
-In this tutorial, you visualize geospatial analytics data from BigQuery by using a Colab notebook.
-
-This tutorial uses the following BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) :
+Visualizing geospatial analytics data in a Colab notebook lets you explore your location data with familiar Python data science tools. In this tutorial, you query the following public datasets directly from your notebook to uncover geographic patterns by rendering interactive scatter plots, polygons, choropleth maps, and heatmaps:
 
 - [San Francisco Ford GoBike Share](https://console.cloud.google.com/bigquery(cameo:product/san-francisco-public-data/sf-bike-share))
 - [San Francisco Neighborhoods](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2ssan_francisco_neighborhoods)
 - [San Francisco Police Department (SFPD) Reports](https://console.cloud.google.com/bigquery(cameo:product/san-francisco-public-data/sfpd-reports))
 
 For information on accessing these public datasets, see [Access public datasets in the Google Cloud console](https://docs.cloud.google.com/bigquery/public-data#public-ui) .
-
-You use the public datasets to create the following visualizations:
-
-- A **scatter plot** of all bike share stations from the Ford GoBike Share dataset
-- **Polygons** in the San Francisco Neighborhoods dataset
-- A **choropleth map** of the number of bike share stations by neighborhood
-- A **heatmap** of incidents from the San Francisco Police Department Reports dataset
 
 ## Objectives
 

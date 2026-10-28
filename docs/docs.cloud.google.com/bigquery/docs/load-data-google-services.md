@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Load data from other Google and Google Cloud services
 
-You can use a number of Google Cloud services to load data into BigQuery where you can then perform further analysis. These services typically require that you initiate extract jobs from the respective console or API of the service. Once enabled, data is loaded into BigQuery according to the cadence defined in the service's extract job. Some extract jobs run in real time and others provide batch data loads.
+Many Google and Google Cloud services let you export operational, analytics, and billing data directly to BigQuery. After exporting this data, you can join records across services, run SQL queries, and build custom reports. Depending on the source service, you initiate real-time or scheduled batch exports from that service's console or API.
 
-For Google Cloud databases and services, including Google Drive and Google Sheets, data queries originate from BigQuery. For more information, see [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
-
-If a service is not listed, you might still be able to export data from the service, but this might require using additional functionality. For more information about how to set up custom exports or how to create load jobs and queries from BigQuery, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
+To query data directly in external databases, Google Drive, or Google Sheets without exporting it, see [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) . For services not listed in this document, or to create load jobs and queries directly from BigQuery, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
 
 ## Cloud services that support data exports
 

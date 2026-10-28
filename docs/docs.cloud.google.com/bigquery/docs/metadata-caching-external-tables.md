@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use metadata caching for external data sources
 
-Metadata caching, also called *column metadata indexing* , lets you improve query performance on object tables and on Amazon S3 and Cloud Storage BigLake tables. These tables can cache metadata about files in external data stores, such as file names, partitioning information, and row counts.
+Metadata caching, also called *column metadata indexing* , lets you improve query performance on object tables and on Amazon S3 and Cloud Storage BigLake tables. These tables can cache metadata about files in external datastores, such as filenames, partitioning information, and row counts.
 
 With metadata caching, queries can avoid listing files from the external data source, which can take several minutes for millions of files, and can partition and prune files more quickly. Queries over a large number of files and queries with Hive partition filters benefit the most.
 

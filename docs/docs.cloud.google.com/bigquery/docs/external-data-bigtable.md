@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Query Bigtable external tables
 
-This document describes how to use BigQuery to query data stored in a [Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) . For information on how to query data directly from Bigtable, see [GoogleSQL for Bigtable overview](https://docs.cloud.google.com/bigtable/docs/googlesql-overview) .
+BigQuery lets you run GoogleSQL queries on data stored in a [Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) so that you can analyze NoSQL data in Bigtable alongside your BigQuery tables without copying or moving data. You can query permanent external tables or create a temporary external table when you run a query.
 
-[Bigtable](https://docs.cloud.google.com/bigtable/docs) is Google's sparsely populated NoSQL database that can scale to billions of rows, thousands of columns, and petabytes of data. For information on the Bigtable data model, see [Storage model](https://docs.cloud.google.com/bigtable/docs/overview#storage-model) .
+[Bigtable](https://docs.cloud.google.com/bigtable/docs) is a sparsely populated NoSQL database that scales to billions of rows, thousands of columns, and petabytes of data. For information about the Bigtable data model or querying Bigtable directly, see [Storage model](https://docs.cloud.google.com/bigtable/docs/overview#storage-model) and [GoogleSQL for Bigtable overview](https://docs.cloud.google.com/bigtable/docs/googlesql-overview) .
 
 ## Query permanent external tables
 

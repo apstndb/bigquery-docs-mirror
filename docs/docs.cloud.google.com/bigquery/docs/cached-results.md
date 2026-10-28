@@ -23,7 +23,7 @@ Using the query cache is subject to the following limitations:
 
 ## Pricing and quotas
 
-Cached query results are stored as temporary tables. You aren't charged for the storage of cached query results in temporary tables. When query results are retrieved from a cached results table, the job statistics property `statistics.query.cacheHit` returns as `true` , and you are not charged for the query. Though you are not charged for queries that use cached results, the queries are subject to the BigQuery [quota policies](https://docs.cloud.google.com/bigquery/quota-policy) .
+Cached query results are stored as temporary tables. You aren't charged for the storage of cached query results in temporary tables. When query results are retrieved from a cached results table, the job statistics property `statistics.query.cacheHit` returns as `true` , and you are not charged for the query. Though you are not charged for queries that use cached results, the queries are subject to the BigQuery [quota policies](https://docs.cloud.google.com/bigquery/quotas) .
 
 In addition to reducing costs, queries that use cached results are significantly faster because BigQuery does not need to compute the result set.
 
@@ -37,7 +37,7 @@ Query results are not cached:
 - If the query uses non-deterministic functions; for example, date and time functions such as `CURRENT_TIMESTAMP()` and `CURRENT_DATE` , and other functions such as `SESSION_USER()` , it returns different values depending on when a query is executed.
 - If you are querying multiple tables using a [wildcard](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
 - If the cached results have expired; typical cache lifetime is 24 hours, but the cached results are best-effort and may be invalidated sooner.
-- If the query runs against an [external data source](https://docs.cloud.google.com/bigquery/external-data-sources) . other than Cloud Storage. (GoogleSQL queries on Cloud Storage are supported by cached query results.)
+- If the query runs against an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) . other than Cloud Storage. (GoogleSQL queries on Cloud Storage are supported by cached query results.)
 - If the query runs against a table protected by [row-level security](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) , then the results are not cached.
 - If the query runs against a table protected by [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , including data masking, results might not be cached.
 - If the query text has changed in any way, including modified whitespace or comments.

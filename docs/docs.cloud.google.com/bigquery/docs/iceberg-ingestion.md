@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can use the BigQuery Data Transfer Service to transfer data from external sources, such as Amazon Simple Storage Service (Amazon S3), Azure Blob Storage, or Cloud Storage into Iceberg managed table.
+The BigQuery Data Transfer Service lets you automate append-only data transfers from external sources, such as Amazon Simple Storage Service (Amazon S3), Azure Blob Storage, and Cloud Storage, into Iceberg managed table.
 
 ## Data sources supported
 

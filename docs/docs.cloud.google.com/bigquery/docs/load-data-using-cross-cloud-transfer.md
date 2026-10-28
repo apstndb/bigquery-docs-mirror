@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Load data with BigQuery Omni operations
 
-As a BigQuery administrator or analyst, you can load data from an Amazon Simple Storage Service (Amazon S3) bucket or Azure Blob Storage into [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . You can either join the transferred data with the data present in Google Cloud regions or take advantage of BigQuery features like [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) . You can also create materialized view replicas of certain external sources to make that data available in BigQuery.
+BigQuery Omni lets you load cross-cloud data from Amazon Simple Storage Service (Amazon S3) buckets and Azure Blob Storage into [BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+
+You can bring external data into BigQuery, or replicate it locally with materialized view replicas to help you join datasets across Google Cloud regions and use [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) . To transfer large files from Amazon S3 or Blob Storage on a recurring schedule, use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) instead.
+
+## Supported transfer methods
 
 You can transfer data into BigQuery in the following ways:
 

@@ -8,20 +8,9 @@ data_source: docs.cloud.google.com
 
 # Control access with tags
 
-This document describes how to use tags with BigQuery resources for access control.
+Attaching tags to BigQuery resources lets you conditionally manage permissions across your tables, views, and datasets. With [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) , you can use tags, which are key-value pairs, to grant roles or [deny access](https://docs.cloud.google.com/iam/docs/deny-access) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) through [deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) . You can also attach [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to table columns and use data policies to restrict column data access.
 
-A tag is a key-value pair you can attach to a Google Cloud resource. You can use tags with BigQuery in the following ways:
-
-- **Conditionally grant or deny policies** : You can attach tags to BigQuery tables, views, and datasets and use [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/tags-access-control) to conditionally grant roles or [deny access](https://docs.cloud.google.com/iam/docs/deny-access) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to those resources based on their tags. For more information about deny policies, see [Deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) .
-- **Column-level access control** : You can attach [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) (Preview) to table columns and use them with data policies to restrict access to column data.
-
-You can attach tags directly to a resource, or tags can be [inherited](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance) from parent resources in the Google Cloud resource hierarchy.
-
-This document focuses on using tags with IAM to conditionally grant or deny access to BigQuery tables, views, and datasets.
-
-For more information about using tags across the Google Cloud resource hierarchy, see [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) .
-
-To grant permissions to many related BigQuery resources at the same time, including resources that don't exist yet, consider using [IAM Conditions](https://docs.cloud.google.com/bigquery/docs/conditions) .
+Tags can be attached directly to a resource or inherited from parent resources in the Google Cloud hierarchy. For organization-level tag management, see the [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) . To grant permissions across multiple related resources simultaneously—including future assets—consider using [IAM Conditions](https://docs.cloud.google.com/bigquery/docs/conditions) .
 
 ## Limitations
 

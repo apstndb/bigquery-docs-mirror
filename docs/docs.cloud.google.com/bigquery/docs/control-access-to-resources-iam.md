@@ -3046,10 +3046,10 @@ Consider the following scenarios when you create [IAM deny policies](https://doc
 
   To deny access to these resources, add one of the following values to the [`deniedPrincipal`](https://docs.cloud.google.com/iam/docs/deny-overview#deny-rules) field when you create the deny policy:
 
-  | Value                                                                      | Use case                                                                                                                                                                                                                                                                |
-  |----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `principalSet://goog/public:all`                                           | Blocks all principals, including BigQuery resources.                                                                                                                                                                                                                    |
-  | `principalSet://bigquery.googleapis.com/projects/ `` PROJECT_NUMBER `` /*` | Blocks all BigQuery authorized resources in the specified project. [`PROJECT_NUMBER`](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) is an automatically generated unique identifier for your project of type `INT64` . |
+  | Value                                                                      | Use case                                                                                                                                                                                                                                           |
+  |----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `principalSet://goog/public:all`                                           | Blocks all principals, including BigQuery resources.                                                                                                                                                                                               |
+  | `principalSet://bigquery.googleapis.com/projects/ `` PROJECT_NUMBER `` /*` | Blocks all BigQuery authorized resources in the specified project. [`PROJECT_NUMBER`](https://docs.cloud.google.com/resource-manager/docs/view-update-projects) is an automatically generated unique identifier for your project of type `INT64` . |
 
   For a list of allowed principals, see [Principal identifiers for deny policies](https://docs.cloud.google.com/iam/docs/principal-identifiers#deny) .
 
@@ -3065,7 +3065,7 @@ Consider the following scenarios when you create [IAM deny policies](https://doc
 
   Replace the following:
 
-  - `PROJECT_NUMBER` : Your [Google Cloud project number](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
+  - `PROJECT_NUMBER` : Your [Google Cloud project number](https://docs.cloud.google.com/resource-manager/docs/view-update-projects) .
   - `DATASET_ID` : The [ID of the dataset](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
 
 - BigQuery [caches query results](https://docs.cloud.google.com/bigquery/docs/cached-results#how_cached_results_are_stored) of a job owner for 24 hours, which the job owner can access without needing the `bigquery.tables.getData` permission on the table containing the data. Hence, adding an IAM deny policy to the `bigquery.tables.getData` permission doesn't block access to cached results for the job owner until the cache expires. To block the job owner access to cached results, create a separate deny policy on the `bigquery.jobs.create` permission.

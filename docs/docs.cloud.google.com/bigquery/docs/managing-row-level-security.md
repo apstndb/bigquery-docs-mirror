@@ -277,7 +277,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
 - `roles/bigquery.admin`
 - `roles/bigquery.dataOwner`
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### List table row-level access policies
 
@@ -343,7 +343,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
 - `roles/bigquery.admin`
 - `roles/bigquery.dataOwner`
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### Delete row-level access policies
 

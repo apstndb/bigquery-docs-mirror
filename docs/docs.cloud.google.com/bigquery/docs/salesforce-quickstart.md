@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with Salesforce Data 360 data in BigQuery
 
-This document describes how to access and analyze Salesforce Data 360 data in BigQuery using BigQuery Omni. The document shows how to link your Data 360 datasets in BigQuery to run queries, join data with tables in Google Cloud, and replicate data using BigQuery Omni materialized views.
-
-This document is intended for Data 360 users who want to use BigQuery for deep analytics on their Data 360 data, or combine it with data in Google Cloud for cross-cloud analytics—all without building and maintaining extract, transform, and load (ETL) pipelines.
+BigQuery Omni lets you access and analyze Salesforce Data 360 data in BigQuery without building and maintaining extract, transform, and load (ETL) pipelines. You can link your Data 360 datasets in BigQuery to run queries, join Data 360 data with tables in Google Cloud, and replicate data by using BigQuery Omni materialized views.
 
 ## Before you begin
 

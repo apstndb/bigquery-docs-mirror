@@ -311,7 +311,7 @@ The `cp` command does not support the `--time_partitioning_field` or `--time_par
 
 If the source or destination dataset is in a project other than your default project, add the project ID to the dataset names in the following format: `project_id:dataset` .
 
-(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+(Optional) Supply the `--location` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ```
 bq --location=location cp \
@@ -322,7 +322,7 @@ project_id:dataset.destination_table$destination_partition
 
 Where:
 
-- ` location ` is the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- ` location ` is the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - ` project_id ` is your project ID.
 - ` dataset ` is the name of the source or destination dataset.
 - ` source_table ` is the table you're copying.

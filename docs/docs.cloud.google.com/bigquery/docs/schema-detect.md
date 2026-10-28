@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Using schema auto-detection
 
-## Schema auto-detection
-
-Schema auto-detection enables BigQuery to infer the schema for CSV, JSON, or Google Sheets data. Schema auto-detection is available when you [load](https://docs.cloud.google.com/bigquery/docs/loading-data) data into BigQuery and when you query an [external data source](https://docs.cloud.google.com/bigquery/external-data-sources) .
+BigQuery schema auto-detection lets you automatically infer the schema for CSV, JSON, or Google Sheets data without defining column types manually. You can use schema auto-detection when you [load](https://docs.cloud.google.com/bigquery/docs/loading-data) data into BigQuery or when you query an [external data source](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
 When auto-detection is enabled, BigQuery infers the data type for each column. BigQuery selects a random file in the data source and scans up to the first 500 rows of data to use as a representative sample. BigQuery then examines each field and attempts to assign a data type to that field based on the values in the sample. If all of the rows in a column are empty, auto-detection will default to `STRING` data type for the column.
 

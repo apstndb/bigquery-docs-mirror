@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Create and set up a Cloud resource connection
 
-As a BigQuery administrator, you can create a Cloud resource connection that enables data analysts to perform the following tasks:
+A Cloud resource connection in BigQuery lets you connect BigQuery to other Google Cloud services and external storage by using a dedicated service account with delegated access. You can create and share a Cloud resource connection so that data analysts can query external data, run remote functions, and use remote models without managing credentials directly.
+
+## Supported tasks
+
+With a Cloud resource connection, data analysts can perform the following tasks:
 
 - [Query structured Cloud Storage data](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) using BigLake tables. [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) enable you to query external data with access delegation.
 - [Query unstructured data in Cloud Storage](https://docs.cloud.google.com/bigquery/docs/object-tables) using [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .

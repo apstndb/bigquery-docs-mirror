@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data with Data Studio
 
-You can use BigQuery to explore data with Data Studio, a self-service business intelligence platform that lets you build and consume data visualizations, dashboards, and reports. With Data Studio, you can connect to your BigQuery data, create visualizations, and share your insights with others.
+Connecting your BigQuery data to Data Studio lets you build and consume interactive data visualizations, dashboards, and reports. Exploring your query results in this self-service business intelligence platform lets you derive insights and share them with others.
 
 Data Studio offers a premium version, Data Studio Pro, which includes enhanced enterprise capabilities, including permissions management with Identity and Access Management, team workspaces for collaboration, a mobile app, and technical support.
 

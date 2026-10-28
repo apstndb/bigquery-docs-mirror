@@ -58,7 +58,7 @@ The following sections describe the configuration options.
 
 The query string must be valid and written in [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . Each run of a scheduled query can receive the following [query parameters](https://docs.cloud.google.com/bigquery/docs/parameterized-queries#parameterized-timestamps) .
 
-To manually test a query string with `@run_time` and `@run_date` parameters before scheduling a query, use the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) .
+To manually test a query string with `@run_time` and `@run_date` parameters before scheduling a query, use the [bq command-line tool](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference) .
 
 #### Available parameters
 
@@ -968,7 +968,7 @@ If you're scheduling an existing query, you might need to update the user creden
 
 Some other situations that could require updating credentials include the following:
 
-- You want to [query Google Drive data](https://docs.cloud.google.com/bigquery/external-data-drive) in a scheduled query.
+- You want to [query Google Drive data](https://docs.cloud.google.com/bigquery/docs/external-data-drive) in a scheduled query.
 
 - You receive an **INVALID_USER** error when you attempt to schedule the query:
 

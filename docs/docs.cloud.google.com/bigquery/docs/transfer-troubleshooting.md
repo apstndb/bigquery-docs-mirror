@@ -96,7 +96,7 @@ gcloud iam service-accounts add-iam-policy-binding service_account \
 Where:
 
 - ` service_account ` is the email of the account used to authorize the transfer.
-- ` destination_project_number ` is the project number where the transfer configuration resides. To learn how to identify your project number, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects#identifying_projects) .
+- ` destination_project_number ` is the project number where the transfer configuration resides. To learn how to identify your project number, see [Find the project name, number, and ID](https://docs.cloud.google.com/resource-manager/docs/view-update-projects) .
 
 Error: `For asset " `` ASSET `` ", no eligible column found for splitting (Reason: Primary or Indexed Key columns found, but none are of supported types (INTEGER, TINYINT, SMALLINT, FLOAT, REAL, DOUBLE, NUMERIC, BIGINT, DECIMAL, DATE, BOOLEAN))`  
 **Resolution:** This error can occur when you are trying to transfer more than 2,000,000 records from a source table to a BigQuery table and there isn't a primary key or indexed column of supported data type in the source table. To resolve this issue, configure a column with one of the supported data types as primary key or indexed column in your source table. For more information, see the limitations section of your transfer source guide.

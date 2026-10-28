@@ -23,7 +23,7 @@ You can update the following elements of a table:
 - [Description](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_description)
 - [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time)
 - [Schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas)
-- [Labels](https://docs.cloud.google.com/bigquery/docs/labels#creating_or_updating_a_table_or_view_label)
+- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels)
 - [Table name](https://docs.cloud.google.com/bigquery/docs/managing-tables#renaming-table)
 - [Tags](https://docs.cloud.google.com/bigquery/docs/tags)
 
@@ -824,7 +824,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
     Replace the following:
 
-    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
     - `project_id` : your project ID.
     - `dataset` : the name of the source or destination dataset.
     - `source_table` : the table you're copying.
@@ -1188,7 +1188,7 @@ To copy multiple source tables, select one of the following choices:
 
     Replace the following:
 
-    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    - `location` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [`.bigqueryrc` file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
     - `project_id` : your project ID.
     - `dataset` : the name of the source or destination dataset.
     - `source_table` : the table that you're copying.

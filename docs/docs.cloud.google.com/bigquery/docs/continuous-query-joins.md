@@ -35,7 +35,7 @@ The following JOIN types are unsupported by continuous queries:
 
 ## Join data from multiple streams
 
-The following query shows you how to join a taxi rides table to a taxi requests table and identify the closest available taxi to the requestor within a 5-minute time window, and export this data into another BigQuery table:
+The following query shows you how to join a taxi rides table to a taxi requests table and identify the closest available taxi to the requester within a 5-minute time window, and export this data into another BigQuery table:
 
 ```
 INSERT INTO

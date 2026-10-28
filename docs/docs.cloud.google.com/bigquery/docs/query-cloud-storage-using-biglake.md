@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Query Cloud Storage BigLake tables
 
-This document describes how to query data stored in a [Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
+BigQuery lets you run GoogleSQL queries on structured data stored in [Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) . Querying Cloud Storage BigLake tables lets you analyze data in Cloud Storage using fine-grained access control and access delegation without copying the data into BigQuery storage.
 
 ## Before you begin
 

@@ -138,7 +138,7 @@ Search indexes are fully managed by BigQuery and automatically refreshed when th
 
 - The [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#update_the_partition_expiration) is updated.
 - An indexed column is updated due to a [table schema change](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
-- The index is stale due to a lack of `BACKGROUND` reservation slots for incremental refreshes. To prevent staleness, you can use [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) and monitor the workload to determine the best baseline and max reservation size.
+- The index is stale due to a lack of `BACKGROUND` reservation slots for incremental refreshes. To prevent staleness, you can use [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) and monitor the workload to determine the best baseline and max reservation size.
 
 In case an indexed column's data is updated in every row, such as during a backfill operation, the whole index needs to be updated, equivalent to a full refresh. We recommend that you perform backfills slowly, such as partition by partition, to minimize potential negative impact.
 

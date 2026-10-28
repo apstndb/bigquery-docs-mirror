@@ -12,7 +12,7 @@ Hive partitioning support lets you query externally partitioned data in Cloud St
 
 This document describes the supported Hive partitioning layouts and formats, partition pruning, and limitations. We recommend BigLake tables because they let you enforce fine-grained security at the table level.
 
-## Supported data stores and formats
+## Supported datastores and formats
 
 You can use BigQuery external tables to query partitioned data in the following datastores:
 

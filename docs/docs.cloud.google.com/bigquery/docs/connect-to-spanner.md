@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Connect to Spanner
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access Spanner data. This connection enables data analysts to [query data in Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) .
+A Spanner [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets users [query data in Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) in real time without copying or moving data into BigQuery. You can create a Spanner connection and share it with users.
 
 ## Before you begin
 

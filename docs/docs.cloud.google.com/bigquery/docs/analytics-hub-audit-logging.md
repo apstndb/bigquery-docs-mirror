@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Sharing audit logging
 
-This document describes audit logging for BigQuery sharing. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
+Cloud Audit Logs for BigQuery sharing let you track administrative and data-access operations on your resources to help you monitor access and configuration changes. You can query these logs in the Logs Explorer and check which BigQuery sharing API methods generate Cloud Audit Logs.
+
+For more information about Cloud Audit Logs, see the following documents:
 
 - [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
 - [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)
@@ -18,11 +20,15 @@ This document describes audit logging for BigQuery sharing. Google Cloud service
 
 ## Service name
 
-BigQuery sharing audit logs use the service name `analyticshub.googleapis.com` . Filter for this service:
+To view the BigQuery sharing audit logs, do the following:
 
-```
-protoPayload.serviceName="analyticshub.googleapis.com"
-```
+1.  In the Google Cloud console, go to the Logs Explorer page:
+
+2.  Copy and paste the following query into the **Query** field of the Logs Explorer, and then click **Run query** .
+
+    ```
+    protoPayload.serviceName="analyticshub.googleapis.com"
+    ```
 
 ## Methods by permission type
 
@@ -84,6 +90,7 @@ The following audit logs are associated with methods belonging to `google.cloud.
 - **Method** : `google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription`  
 - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
 - **Permissions** :
+  - `analyticshub.listings.subscribe - ADMIN_WRITE`
   - `analyticshub.subscriptions.delete - ADMIN_WRITE`
 - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
 - **Filter for this method** : `protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription"`  

@@ -8,22 +8,9 @@ data_source: docs.cloud.google.com
 
 # Introduction to data governance in BigQuery
 
-BigQuery has built-in governance capabilities that simplify how you discover, manage, monitor, govern, and use your data and AI assets.
+Built-in governance capabilities in BigQuery let you discover, manage, monitor, and govern data and AI assets across the data lifecycle. Data teams can curate datasets, enrich metadata, track quality, and enforce compliance policies while sharing assets securely at scale.
 
-Administrators, data stewards, data governance managers, and data custodians can use the governance capabilities in BigQuery to do the following:
-
-- Discover data.
-- Curate data.
-- Gather and enrich metadata.
-- Manage data quality.
-- Ensure that data is used consistently and in compliance with organizational policies.
-- Share data at scale and in a secure fashion.
-
-BigQuery governance capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , a centralized inventory of all data assets in your organization. Knowledge Catalog holds business, technical, and operational metadata for all of your data. It helps you discover relationships and semantics in the metadata by applying artificial intelligence and machine learning.
-
-Lakehouse runtime catalog lets you use multiple data processing engines to query a single copy of data with a single schema, without data duplication. The data processing engines that you can use include BigQuery, Apache Spark, Apache Flink, and Apache Hive. Your data can be stored in locations like BigQuery storage tables, Apache Iceberg managed tables, or BigLake external tables.
-
-BigQuery supports an end-to-end data lifecycle, from discovery to use of data. Governance features are also available in Knowledge Catalog.
+These capabilities are powered by [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , a universal, always-on context engine that uses technical metadata and business semantics across your entire data estate to create a self-learning context graph for downstream applications and data analysts.
 
 ## Data discovery
 

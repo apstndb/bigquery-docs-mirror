@@ -29,7 +29,7 @@ Reservations have the following features:
 
 The capacity pricing model offers several [*editions*](https://docs.cloud.google.com/bigquery/docs/editions-intro) , which all offer a pay-as-you-go option that's charged in slot hours. Enterprise and Enterprise Plus editions also provide optional one- or three-year slot commitments that can save money over the pay-as-you-go rate.
 
-You can also set [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) using the pay-as-you-go option. For more information, see the following:
+You can also set [autoscaling reservations](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) using the pay-as-you-go option. For more information, see the following:
 
 - To compare pricing models, see [Choosing a model](https://docs.cloud.google.com/bigquery/docs/reservations-intro#choosing_a_model) .
 - For pricing details, see [On-demand compute pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) and [Capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
@@ -338,7 +338,7 @@ Estimating individual query costs before execution is difficult due to dynamic r
 
 - **Dynamic slot allocation** : the number of slots allocated to a query depends on query complexity, runtime optimization, and resource availability.
 - **Concurrency** : multiple queries dynamically share the slots available in the reservation.
-- **Autoscaling behavior** : if [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) is enabled, the reservation scales up and down based on aggregate workload demand rather than single query execution.
+- **Autoscaling behavior** : if [slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) is enabled, the reservation scales up and down based on aggregate workload demand rather than single query execution.
 
 After query execution, you can view the actual compute resources consumed by the query in slot-milliseconds ( `total_slot_ms` ) by inspecting the query execution details or querying the [`INFORMATION_SCHEMA.JOBS` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .
 
@@ -424,7 +424,7 @@ For non-clustered tables, applying a `LIMIT` clause to a query doesn't affect th
 
 If you create a large, multi-stage query, each time you run it, BigQuery reads all the data that is required by the query. You are billed for all the data that is read each time the query is run.
 
-Instead, break your query into stages where each stage materializes the query results by writing them to a [destination table](https://docs.cloud.google.com/bigquery/querying-data#permanent-table) . Querying the smaller destination table reduces the amount of data that is read and lowers costs. The cost of storing the materialized results is much less than the cost of processing large amounts of data.
+Instead, break your query into stages where each stage materializes the query results by writing them to a [destination table](https://docs.cloud.google.com/bigquery/docs/writing-results#permanent-table) . Querying the smaller destination table reduces the amount of data that is read and lowers costs. The cost of storing the materialized results is much less than the cost of processing large amounts of data.
 
 ### Use Rapid Cache to query Cloud Storage with external tables
 
@@ -540,7 +540,7 @@ You can use the `INFORMATION_SCHEMA` views to determine the storage billing mode
 
 When you overwrite a table, for example by using the `--replace` parameter in [batch load jobs](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#appending_to_or_overwriting_a_table) or using the [`TRUNCATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) SQL statement, the replaced data is kept for the duration of the time travel and failsafe windows. If you overwrite a table frequently, you will incur additional storage charges.
 
-Instead, you can incrementally load data into a table by using the `WRITE_APPEND` parameter in load jobs, the `MERGE` SQL statement, or using the [storage write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
+Instead, you can incrementally load data into a table by using the `WRITE_APPEND` parameter in load jobs, the `MERGE` SQL statement, or using the [storage write API](https://docs.cloud.google.com/bigquery/docs/write-api-grpc) .
 
 ### Reduce the time travel window
 
@@ -606,11 +606,11 @@ Troubleshooting unexpected charges related to job execution depends on the origi
 
 - If you see an increase in on-demand analysis costs, this can be related to an increase in the number of jobs that were launched or the change in the amount of data that needs to be processed by jobs. Investigate this using the [`INFORMATION_SCHEMA.JOBS`](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view.
 - If there is an increase in charges for committed slots, investigate this by querying [`INFORMATION_SCHEMA.CAPACITY_COMMITMENT_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitment-changes) to see if new commitments have been purchased or modified.
-- For increases in charges originating from reservation usage look into changes to reservations that are recorded in [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes) . To match autoscaling reservation usage with billing data follow [the autoscaling example](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#monitor_autoscaling_with_information_schema) .
+- For increases in charges originating from reservation usage look into changes to reservations that are recorded in [`INFORMATION_SCHEMA.RESERVATION_CHANGES`](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-changes) . To match autoscaling reservation usage with billing data follow [the autoscaling example](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) .
 
 #### Slot-hours billed larger than INFORMATION_SCHEMA.JOBS view calculated slot-hours
 
-When using an autoscaling reservation, billing is calculated according to the number of scaled slots, not the number of slots used. BigQuery autoscales in multiples of 50 slots, which leads to billing for the nearest multiple even if less than the autoscaled amount is actually used. Autoscaler has a 1 minute minimum period before scaling down by default, which translates into at least 1 minute being charged even if the query used the slots for less time, for example, for only 10 seconds out of the minute. To avoid these charges, you can opt in to BigQuery fluid scaling at the reservation level for per-second billing with no minimum duration. The correct way to estimate charges for an autoscaling reservation is documented in the [Slots Autoscaling page](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#monitor_autoscaling_with_information_schema) . For more information about using autoscaling efficiently, see [autoscaling best practices](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#autoscaling_best_practices) to use autoscaling efficiently.
+When using an autoscaling reservation, billing is calculated according to the number of scaled slots, not the number of slots used. BigQuery autoscales in multiples of 50 slots, which leads to billing for the nearest multiple even if less than the autoscaled amount is actually used. Autoscaler has a 1 minute minimum period before scaling down by default, which translates into at least 1 minute being charged even if the query used the slots for less time, for example, for only 10 seconds out of the minute. To avoid these charges, you can opt in to BigQuery fluid scaling at the reservation level for per-second billing with no minimum duration. The correct way to estimate charges for an autoscaling reservation is documented in the [Slots Autoscaling page](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) . For more information about using autoscaling efficiently, see [autoscaling best practices](https://docs.cloud.google.com/bigquery/docs/slots#slot-autoscaling) to use autoscaling efficiently.
 
 A similar scenario will be observed for non-autoscaling reservations—billing is calculated according to the number of slots provisioned, not the number of slots used. If you want to estimate charges for a non-autoscaling reservation, you can query the [`RESERVATIONS_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#examples) directly.
 
@@ -650,7 +650,7 @@ Inspect the SKU to better understand what services are charged. If the SKU bille
 
 #### Project is assigned to a reservation, but still seeing BigQuery Analysis on-demand costs
 
-Read through the [Troubleshooting issues with reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#troubleshoot_issues_with_reservations) section to identify where the `Analysis` charges might be coming from.
+Read through the [Troubleshooting issues with reservations](https://docs.cloud.google.com/bigquery/docs/troubleshoot-workload-management#troubleshoot_issues_with_reservations) section to identify where the `Analysis` charges might be coming from.
 
 #### Unexpected charges for pay-as-you go (PAYG) slots for the BigQuery Standard edition
 

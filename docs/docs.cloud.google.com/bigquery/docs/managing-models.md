@@ -82,7 +82,7 @@ bq --location=LOCATION cp -f -n PROJECT_ID:DATASET.SOURCE_MODEL PROJECT_ID:DATAS
 
 Replace the following:
 
-- ` LOCATION ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) . For a full list of locations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) .
+- ` LOCATION ` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) . For a full list of locations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 - ` PROJECT_ID ` : your project ID.
 - ` DATASET ` : the name of the source or destination dataset.
 - ` SOURCE_MODEL ` : the model you're copying.

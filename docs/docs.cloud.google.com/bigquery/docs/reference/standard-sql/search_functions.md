@@ -749,7 +749,7 @@ You can also use the `VECTOR_SEARCH` function with `ObjectRef` input. For more i
 
     You can't specify `fraction_lists_to_search` when `use_brute_force` is set to `true` .
 
-  - `use_brute_force` : A JSON boolean that determines whether to use brute force search by skipping the vector index if one is available. For example, `options => '{"use_brute_force":true}'` . The default is `false` . If you specify `use_brute_force=false` and there is no useable vector index available, brute force is used anyway.
+  - `use_brute_force` : A JSON boolean that determines whether to use brute force search by skipping the vector index if one is available. For example, `options => '{"use_brute_force":true}'` . The default is `false` . If you specify `use_brute_force=false` and there is no usable vector index available, brute force is used anyway.
 
   `options` defaults to `'{}'` to denote that all underlying options use their corresponding default values.
 

@@ -8,17 +8,7 @@ data_source: docs.cloud.google.com
 
 # Batch load data
 
-You can load data into BigQuery from Cloud Storage or from a local file as a batch operation. The source data can be in any of the following formats:
-
-- Avro
-- Comma-separated values (CSV)
-- JSON (newline-delimited)
-- ORC
-- Parquet
-- [Datastore](https://docs.cloud.google.com/datastore) exports stored in Cloud Storage
-- [Firestore](https://docs.cloud.google.com/firestore) exports stored in Cloud Storage
-
-You can also use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) to set up recurring loads from Cloud Storage into BigQuery.
+BigQuery batch loading lets you ingest data from Cloud Storage or a local file into a new or existing table in a single load job. You can load Avro, comma-separated values (CSV), newline-delimited JSON, ORC, or Parquet files, as well as [Datastore](https://docs.cloud.google.com/datastore) and [Firestore](https://docs.cloud.google.com/firestore) exports stored in Cloud Storage. To automate recurring loads from Cloud Storage into BigQuery, you can use the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
 
 ## Before you begin
 
@@ -94,7 +84,7 @@ To learn how to configure a recurring load from Cloud Storage into BigQuery, see
 
 You cannot change the location of a dataset after it is created, but you can make a copy of the dataset or manually move it. For more information, see:
 
-- [Copying datasets](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
+- [Copying datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#copy-datasets)
 - [Moving a dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#recreate-dataset)
 
 ### Retrieving the Cloud Storage URI
@@ -249,7 +239,7 @@ SCHEMA
 
 Replace the following:
 
-- `LOCATION` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+- `LOCATION` : your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `FORMAT` : `CSV` , `AVRO` , `PARQUET` , `ORC` , or `NEWLINE_DELIMITED_JSON` .
 - `project_id` : your project ID.
 - `dataset` : an existing dataset.

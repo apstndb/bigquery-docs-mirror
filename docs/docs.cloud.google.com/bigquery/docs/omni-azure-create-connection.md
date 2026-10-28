@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Connect to Blob Storage
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to let data analysts access data stored in Azure Blob Storage.
+An Azure [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets users [query data stored in Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) and [export query results to Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) . You can create a connection so that [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) can securely access your Blob Storage data.
 
-[BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) accesses Blob Storage data through connections. BigQuery Omni supports [Azure workload identity federation](https://docs.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation) . BigQuery Omni support of Azure workload identity federation lets you grant access for an Azure application in your tenant to a Google service account. There are no application client secrets to be managed by you or Google.
-
-After you create a BigQuery Azure connection, you can either [query the Blob Storage data](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) or [export query results to Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage) .
+BigQuery Omni supports [Azure workload identity federation](https://docs.microsoft.com/en-us/azure/active-directory/develop/workload-identity-federation) , which lets you grant access for an Azure application in your tenant to a Google service account without managing application client secrets.
 
 ## Before you begin
 

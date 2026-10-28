@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this preview feature, contact <bq-sap-federation-support@google.com> .
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access SAP Datasphere data. This connection enables data analysts to [query data in SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) .
+An SAP Datasphere [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets users [query data in SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) in real time without copying or moving data into BigQuery. You can configure a network attachment, create the connection, and share it with users.
 
 ## Before you begin
 

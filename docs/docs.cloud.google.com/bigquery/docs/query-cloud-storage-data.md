@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Query Cloud Storage data in external tables
 
-This document describes how to query data stored in a [Cloud Storage external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) .
+BigQuery lets you run GoogleSQL queries on data stored in a [Cloud Storage external table](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) . Querying Cloud Storage external tables lets you analyze structured data in Cloud Storage—using either permanent or temporary external tables without loading the data into BigQuery storage.
 
 ## Before you begin
 

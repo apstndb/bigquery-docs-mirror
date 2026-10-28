@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Manage connections
 
-This document describes how to view, list, share, edit, delete, and troubleshoot a BigQuery connection.
+Managing [connections](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets you control how BigQuery connects to external data sources and services so that analysts can query external data without moving or copying it into BigQuery. You can view, list, share, update, delete, and troubleshoot connections across your projects.
 
-As a BigQuery administrator, you can create and manage connections that are used to connect to services and external data sources. BigQuery analysts use these connections to submit queries against external data sources without moving or copying data into BigQuery. You can create the following types of connections:
+## Supported connection types
+
+You can create the following types of connections:
 
 - [Amazon S3 connections](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection)
 - [Apache Spark connections](https://docs.cloud.google.com/bigquery/docs/connect-to-spark)

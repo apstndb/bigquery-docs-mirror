@@ -15,7 +15,7 @@ This document describes how to update dataset properties in BigQuery. After you 
 - Default [partition expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#partition-expiration) for new partitioned tables
 - Default [rounding mode](https://docs.cloud.google.com/bigquery/docs/updating-datasets#update_rounding_mode) for new tables
 - [Description](https://docs.cloud.google.com/bigquery/docs/updating-datasets#update-dataset-description)
-- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-using-labels#adding_dataset_labels)
+- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_dataset_labels)
 - [Time travel windows](https://docs.cloud.google.com/bigquery/docs/updating-datasets#update_time_travel_windows)
 
 ## Before you begin

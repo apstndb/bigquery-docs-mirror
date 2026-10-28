@@ -621,7 +621,7 @@ SELECT CONTAINS_SUBSTR(('abc', ['def', 'ghi', 'jkl'], 'mno'), 'jk');
  +--------*/
 ```
 
-The following query returns `TRUE` because `NULL` s are ignored when a match is found found inside a `STRUCT` or `ARRAY` .
+The following query returns `TRUE` because `NULL` s are ignored when a match is found inside a `STRUCT` or `ARRAY` .
 
 ```
 SELECT CONTAINS_SUBSTR((23, NULL, 41), '41') AS result;

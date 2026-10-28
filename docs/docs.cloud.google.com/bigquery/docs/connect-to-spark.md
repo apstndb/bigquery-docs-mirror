@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Connect to Apache Spark
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to enable data analysts to [run stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) .
+An Apache Spark [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets users connect BigQuery to Managed Service for Apache Spark so that you can [run stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . You can create this connection, grant the required permissions to its service account, and share the connection with users.
 
 ## Before you begin
 

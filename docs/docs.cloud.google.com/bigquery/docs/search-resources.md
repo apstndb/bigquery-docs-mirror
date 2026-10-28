@@ -14,13 +14,7 @@ data_source: docs.cloud.google.com
 >
 > For information about access to this release, see the [access request page](https://docs.google.com/forms/d/e/1FAIpQLSfeucdQXFDYl88JsxPCylt-iU0KxuQMN6VZRalS1vM4ZD0U0Q/viewform) .
 
-Use Knowledge Catalog search to find Google Cloud resources from within BigQuery, such as BigQuery datasets and tables.
-
-Knowledge Catalog search supports natural language search queries (also known as semantic search queries), which let you search for resources using everyday language.
-
-Similar to keyword search, natural language search emphasizes the discovery of resources by analyzing the metadata that's associated with the resources within your organization. Search takes into account a broad range of metadata that describes the resources, including metadata that you create.
-
-Natural language search focuses on enhancing recall rather than precision.
+Use Knowledge Catalog search in BigQuery to find Google Cloud resources, such as datasets and tables, using natural language queries. Searching with everyday language against metadata that you create lets you discover the data assets you need without relying on exact keyword matches.
 
 For more information about how to search for table data in BigQuery, see [Introduction to search in BigQuery](https://docs.cloud.google.com/bigquery/docs/search-intro) .
 

@@ -8,10 +8,7 @@ data_source: docs.cloud.google.com
 
 # Connect to Cloud SQL
 
-As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access Cloud SQL data. This connection enables data analysts to [query data in Cloud SQL](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) . To connect to Cloud SQL, you must follow these steps:
-
-1.  [Create a Cloud SQL connection](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#create-sql-connection)
-2.  [Grant access to the **BigQuery Connection Service Agent**](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#access-sql) .
+A Cloud SQL [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) in BigQuery lets users [query data in Cloud SQL](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) in real time without copying or moving data into BigQuery. You can set up this connection by [creating a Cloud SQL connection](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#create-sql-connection) and [granting access to the BigQuery Connection Service Agent](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#access-sql) .
 
 ## Before you begin
 

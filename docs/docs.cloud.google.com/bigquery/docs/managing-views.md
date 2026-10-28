@@ -26,7 +26,7 @@ After creating a view, you can update the following view properties:
 - [SQL query](https://docs.cloud.google.com/bigquery/docs/managing-views#update-sql)
 - [Expiration time](https://docs.cloud.google.com/bigquery/docs/managing-views#view-expiration)
 - [Description](https://docs.cloud.google.com/bigquery/docs/managing-views#update-description)
-- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-using-labels#adding_table_and_view_labels)
+- [Labels](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_table_and_view_labels)
 
 ### Required permissions
 
@@ -122,7 +122,7 @@ Replace the following:
 
 **Examples**
 
-Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
+Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in your default project. The example query used to update the view queries data from the USA Name Data [public dataset](https://docs.cloud.google.com/bigquery/public-data) .
 
 ```
 bq update \
@@ -140,7 +140,7 @@ bq update \
     mydataset.myview
 ```
 
-Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in `myotherproject` , not your default project. The example query used to update the view queries data from the [USA Name Data](https://docs.cloud.google.com/bigquery/public-data/usa-names) public dataset.
+Enter the following command to update the SQL query for a view named `myview` in `mydataset` . `mydataset` is in `myotherproject` , not your default project. The example query used to update the view queries data from the USA Name Data [public dataset](https://docs.cloud.google.com/bigquery/public-data) .
 
 ```
 bq update \
@@ -833,7 +833,7 @@ Using any available method, you can only delete one view at a time.
 
 To automatically delete views after a specified period of time, set the default [expiration time](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) at the dataset level or set the expiration time when you [create the view](https://docs.cloud.google.com/bigquery/docs/views) .
 
-When you delete an [authorized view](https://docs.cloud.google.com/bigquery/docs/share-access-views) , it might take up to 24 hours to remove the deleted view from the *authorized views* list of the source dataset.
+When you delete an [authorized view](https://docs.cloud.google.com/bigquery/docs/authorized-views) , it might take up to 24 hours to remove the deleted view from the *authorized views* list of the source dataset.
 
 > **Caution:** Deleting a view cannot be undone. If you recreate an authorized view with the same name as the deleted view, you must add the new view to the *authorized views* list of the source dataset.
 

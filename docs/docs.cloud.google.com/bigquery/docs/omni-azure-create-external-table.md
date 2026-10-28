@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create Azure Blob Storage BigLake tables
 
-Azure Blob Storage BigLake tables let you query data in Blob Storage from BigQuery by using access delegation. This approach decouples access to the [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) from access to the underlying data store, so users need permissions only on the table.
+Azure Blob Storage BigLake tables let you query data in Blob Storage from BigQuery by using access delegation. This approach decouples access to the [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) from access to the underlying datastore, so users need permissions only on the table.
 
 This document describes how to create an Azure Blob Storage BigLake table. For information about how data flows between BigQuery and Blob Storage, see [Data flow when querying data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#query-data) .
 
@@ -155,8 +155,8 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.
     CREATE EXTERNAL TABLE DATASET_NAME.TABLE_NAME
     WITH CONNECTION `AZURE_LOCATION.CONNECTION_NAME`
       OPTIONS (
-        format = &#39;DATA_FORMAT',
-        uris = [&#39;azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
+        format = 'DATA_FORMAT',
+        uris = ['azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH']);
     ```
 
     Replace the following:
@@ -318,8 +318,8 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
     )
     WITH CONNECTION `PROJECT_ID.REGION.CONNECTION_ID`
     OPTIONS (
-      hive_partition_uri_prefix = &quot;HIVE_PARTITION_URI_PREFIX",
-      uris=['FILE_PATH&#39;],
+      hive_partition_uri_prefix = "HIVE_PARTITION_URI_PREFIX",
+      uris=['FILE_PATH'],
       format ="TABLE_FORMAT"
     );
     ```
@@ -393,7 +393,7 @@ bq mkdef \
 --hive_partitioning_mode=PARTITIONING_MODE \
 --hive_partitioning_source_uri_prefix=URI_SHARED_PREFIX \
 --require_hive_partition_filter=BOOLEAN \
- URIS &gt; DEFINITION_FILE
+ URIS > DEFINITION_FILE
 ```
 
 Replace the following:
@@ -809,9 +809,9 @@ Run the following command to add a network rule to your storage account that spe
 
 ```
 Add-AzStorageAccountNetworkRule`
-   -ResourceGroupName &quot;RESOURCE_GROUP_NAME"`
+   -ResourceGroupName "RESOURCE_GROUP_NAME"`
    -Name "STORAGE_ACCOUNT_NAME"`
-   -VirtualNetworkResourceId &quot;SUBNET_ID1","SUBNET_ID2"
+   -VirtualNetworkResourceId "SUBNET_ID1","SUBNET_ID2"
 ```
 
 Replace the following:
@@ -826,10 +826,10 @@ Add the following to your Terraform configuration file:
 
 ```
 resource "azurerm_storage_account_network_rules" "example" {
-    storage_account_name       = &quot;STORAGE_ACCOUNT_NAME"
+    storage_account_name       = "STORAGE_ACCOUNT_NAME"
     resource_group_name        = "RESOURCE_GROUP_NAME"
     default_action             = "Allow"
-    bypass                     = ["Logging", &quot;Metrics&quot;, ";AzureServices"]
+    bypass                     = ["Logging", "Metrics", "AzureServices"]
     virtual_network_subnet_ids = ["SUBNET_ID1","SUBNET_ID2"]
   }
 ```

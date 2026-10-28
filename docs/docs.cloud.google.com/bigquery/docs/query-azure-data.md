@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Query Blob Storage BigLake tables
 
-This document describes how to query data stored in an [Azure Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
+BigQuery lets you run GoogleSQL queries on data stored in [Azure Blob Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) by using BigQuery Omni. Querying Blob Storage BigLake tables lets you analyze data in Blob Storage and join it with other tables without copying or moving the underlying files.
 
 ## Before you begin
 

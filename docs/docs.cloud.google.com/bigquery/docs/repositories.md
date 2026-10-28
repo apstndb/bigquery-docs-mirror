@@ -16,7 +16,7 @@ data_source: docs.cloud.google.com
 
 BigQuery repositories let you version control your code files and collaborate with your team. You can create, share, and delete BigQuery repositories, or connect them to a third-party Git repository.
 
-For a more streamlined, folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) [(Preview)](https://cloud.google.com/products/#product-launch-stages) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+For a more streamlined, folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
 
 ## Before you begin
 

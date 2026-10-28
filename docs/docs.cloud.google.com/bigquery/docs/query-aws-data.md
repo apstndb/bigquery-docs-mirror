@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Query Amazon S3 BigLake tables
 
-This document describes how to query data stored in an [Amazon Simple Storage Service (Amazon S3) BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .
+BigQuery lets you run GoogleSQL queries on data stored in [Amazon Simple Storage Service (Amazon S3) BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) by using BigQuery Omni. Querying Amazon S3 BigLake tables lets you analyze data in Amazon S3 and join it with other tables without copying or moving the underlying files.
 
 ## Before you begin
 

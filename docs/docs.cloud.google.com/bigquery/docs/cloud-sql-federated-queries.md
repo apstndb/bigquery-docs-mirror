@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Cloud SQL federated queries
 
-As a data analyst, you can query data in Cloud SQL from BigQuery using [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
+[Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) in BigQuery let you query data residing in Cloud SQL in real time without copying or moving data. Query federation supports both MySQL (2nd generation) and PostgreSQL instances in Cloud SQL.
 
-BigQuery Cloud SQL federation enables BigQuery to query data residing in Cloud SQL in real time, without copying or moving data. Query federation supports both MySQL (2nd generation) and PostgreSQL instances in Cloud SQL.
-
-Alternatively, to replicate data into BigQuery, you can also use Cloud Data Fusion or [Datastream](https://docs.cloud.google.com/datastream/docs/overview) . For more about using Cloud Data Fusion, see [Replicating data from MySQL to BigQuery](https://docs.cloud.google.com/data-fusion/docs/tutorials/replicating-data/mysql-to-bigquery) .
+Alternatively, to replicate data into BigQuery, you can use Cloud Data Fusion or [Datastream](https://docs.cloud.google.com/datastream/docs/overview) . For more information about using Cloud Data Fusion, see [Replicating data from MySQL to BigQuery](https://docs.cloud.google.com/data-fusion/docs/tutorials/replicating-data/mysql-to-bigquery) .
 
 ## Before you begin
 
