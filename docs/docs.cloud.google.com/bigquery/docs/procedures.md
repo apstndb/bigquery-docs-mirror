@@ -199,7 +199,7 @@ A procedure can also have input/output parameters. An input/output parameter ret
 
 ## Authorize routines
 
-You can authorize stored procedures as *routines* . Authorized routines let you share query results with specific users or groups without giving them access to the underlying tables that generated the results. For example, an authorized routine can compute an aggregation over data or look up a table value and use that value in a computation.
+You can authorize stored procedures as *routines* . Authorized routines let you share query results with specific users or groups without granting direct access to the underlying tables. For example, a routine can compute aggregations or look up a table value and use that value in a computation.
 
 Authorized routines can [create](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , [drop](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement) , and [manipulate tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) , as well as [invoke other stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures#call_a_stored_procedure) on the underlying table.
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create pipelines
 
-This document describes how to create [pipelines in BigQuery](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) . Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+You can create [pipelines in BigQuery](https://docs.cloud.google.com/bigquery/docs/pipelines-introduction) , which let you orchestrate and automate workflows such as scheduling SQL queries, notebooks, and data preparation tasks to run in sequence.
 
 ## Before you begin
 

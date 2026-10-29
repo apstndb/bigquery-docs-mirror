@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Authorized datasets
 
-This document describes how to use *authorized datasets* in BigQuery. An authorized dataset lets you authorize all of the views in a specified dataset to access the data in a second dataset. With an authorized dataset, you don't need to configure individual [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
+In BigQuery, an *authorized dataset* lets you authorize all views in a specified dataset to have access to the data in a second dataset. With an authorized dataset, you don't need to configure individual [authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
 ## Overview
 

@@ -171,6 +171,9 @@ Describes the format of the jobs.query request.
   "requestId": string,
   "createSession": boolean,
   "jobCreationMode": enum (JobCreationMode),
+  "secureContext": {
+    object (SecureContext)
+  },
   "jobTimeoutMs": string,
   "reservation": string
 }
@@ -303,11 +306,16 @@ Describes the format of the jobs.query request.
 <p>If set, the query request will follow the behavior described JobCreationMode.</p></td>
 </tr>
 <tr class="odd">
+<td><code>secureContext</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/SecureContext"><code>SecureContext</code></a><code> )</code></p>
+<p>Optional. A set of key-value pairs representing the secure context. This can be used to pass sensitive or context-specific information. They can be retrieved via the SECURE_CONTEXT() function and used to modify the run-time behavior of a query.</p></td>
+</tr>
+<tr class="even">
 <td><code>jobTimeoutMs</code></td>
 <td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
 <p>Optional. Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop a longer job, but may not always succeed in canceling it before the job completes. For example, a job that takes more than 60 seconds to complete has a better chance of being stopped than a job that takes 10 seconds to complete. This timeout applies to the query even if a job does not need to be created.</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>reservation</code></td>
 <td><p><code>string</code></p>
 <p>Optional. The reservation that jobs.query request would use. User can specify a reservation to execute the job.query. The expected format is <code>projects/{project}/locations/{location}/reservations/{reservation}</code> . Forces the query to use on-demand billing when set to <code>none</code> . This requires the project or organization to have <code>reservation_override_mode</code> set to <code>ALLOW_ANY_OVERRIDE</code> .</p></td>

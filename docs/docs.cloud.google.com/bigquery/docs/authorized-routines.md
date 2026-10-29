@@ -8,15 +8,9 @@ data_source: docs.cloud.google.com
 
 # Authorized routines
 
-Authorized routines let you share query results with specific users or groups without giving them access to the underlying tables that generated the results. For example, an authorized routine can compute an aggregation over data or look up a table value and use that value in a computation.
+Authorized routines let you share query results with specific users or groups without granting direct access to the underlying tables. For example, a routine can compute aggregations or look up a table value and use that value in a computation.
 
-By default, if a user invokes a routine, the user must have access to read the data in the table. As an alternative, you can *authorize* the routine to access the dataset that contains the referenced table. An authorized routine can query the tables in the dataset, even if the user who calls the routine can't query those tables directly.
-
-The following types of routines can be authorized:
-
-- [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions)
-- [User-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
-- [Stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures)
+By default, to run a routine, users must have read access to the referenced data. Alternatively, you can *authorize* the routine to access the containing dataset directly, which lets users run the routine without table-level permissions. You can authorize [table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) , [user-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) , and [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
 > **Caution:** Stored procedures authorized as routines have DDL and DML access. These procedures can create, modify, and delete database objects. Principals with access to authorized stored procedures can bypass Identity and Access Management (IAM) permissions and perform actions that are normally denied to them. Only grant authorized stored procedure access to principals that you trust to run the procedure in its entirety.
 

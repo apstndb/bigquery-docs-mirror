@@ -18,19 +18,22 @@ The following services are enabled by default for every new Google Cloud project
 
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th><strong>Service</strong></th>
+<th><strong>API name</strong></th>
 <th><strong>Which features rely on it</strong></th>
 <th><strong>Effects of disabling this service</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>BigQuery sharing</td>
 <td><code>analyticshub.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction">Publish data exchanges</a></li>
@@ -46,6 +49,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
+<td>BigQuery Connection API</td>
 <td><code>bigqueryconnection.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/federated-queries-intro">Federated queries</a> to data stored outside of BigQuery</li>
@@ -60,6 +64,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
+<td>BigQuery Migration Service</td>
 <td><code>bigquerymigration.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/migration-assessment">Data migration assessment</a></li>
@@ -72,6 +77,7 @@ The following services are enabled by default for every new Google Cloud project
 <p><strong>Note:</strong> Usually you can disable this service after completing data migration.</p></td>
 </tr>
 <tr class="even">
+<td>BigQuery Data Policy</td>
 <td><code>bigquerydatapolicy.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro">Data masking</a></li>
@@ -82,6 +88,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
+<td>BigQuery Data Transfer Service</td>
 <td><code>bigquerydatatransfer.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/dts-introduction">Scheduled data transfers</a></li>
@@ -92,6 +99,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
+<td>BigQuery Reservation API</td>
 <td><code>bigqueryreservation.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/reservations-get-started">Capacity-based workload management</a></li>
@@ -104,6 +112,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
+<td>BigQuery Storage API</td>
 <td><code>bigquerystorage.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/write-api-streaming">Streaming data ingestion</a></li>
@@ -115,6 +124,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="even">
+<td>Dataform</td>
 <td><code>dataform.googleapis.com</code></td>
 <td><ul>
 <li>Dataform provides code repositories that are leveraged by the following features:
@@ -134,6 +144,7 @@ The following services are enabled by default for every new Google Cloud project
 </ul></td>
 </tr>
 <tr class="odd">
+<td>Knowledge Catalog</td>
 <td><code>dataplex.googleapis.com</code></td>
 <td><ul>
 <li>Knowledge Catalog provides data cataloging and governance capabilities that are used by the following:
@@ -163,12 +174,12 @@ The following services are enabled by default for every new Google Cloud project
 
 Disabling the BigQuery API also disables the following services which are dependent upon BigQuery API:
 
-- binaryauthorization.googleapis.com
-- container.googleapis.com
-- cloudapis.googleapis.com
-- dataprep.googleapis.com
-- servicebroker.googleapis.com
-- telecomdatafabric.googleapis.com
+- Binary Authorization ( `binaryauthorization.googleapis.com` )
+- Google Kubernetes Engine ( `container.googleapis.com` )
+- Google Cloud APIs ( `cloudapis.googleapis.com` )
+- Dataprep by Trifacta ( `dataprep.googleapis.com` )
+- Open Service Broker for Google Cloud ( `servicebroker.googleapis.com` )
+- Telecom Data Fabric ( `telecomdatafabric.googleapis.com` )
 
 ## Services enabled by BigQuery Unified API
 
@@ -178,19 +189,22 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th><strong>Service</strong></th>
+<th><strong>API name</strong></th>
 <th><strong>Which features rely on it</strong></th>
 <th><strong>Effects of disabling this service</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>Vertex AI</td>
 <td><code>aiplatform.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/programmatic-analysis">Colab notebooks</a></li>
@@ -203,6 +217,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 </ul></td>
 </tr>
 <tr class="even">
+<td>BigQuery Unified API</td>
 <td><code>bigqueryunified.googleapis.com</code></td>
 <td><ul>
 <li>Provides a single-click activation of the BigQuery dependent services listed in this document, excluding the <strong>cloudaicompanion</strong> , <strong>composer</strong> and <strong>datalineage</strong> APIs.</li>
@@ -213,6 +228,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 </ul></td>
 </tr>
 <tr class="odd">
+<td>Compute Engine</td>
 <td><code>compute.googleapis.com</code></td>
 <td><ul>
 <li>Google Compute Engine provides a runtime environment for all features provided by Managed Service for Apache Spark and Gemini Enterprise Agent Platform.</li>
@@ -224,6 +240,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 </ul></td>
 </tr>
 <tr class="even">
+<td>Managed Service for Apache Spark</td>
 <td><code>dataproc.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc">Query data with open source engines such as Apache Spark.</a></li>
@@ -237,6 +254,7 @@ For instructions on enabling `bigqueryunified.googleapis.com` , see [Enabling an
 </ul></td>
 </tr>
 <tr class="odd">
+<td>Datastream</td>
 <td><code>datastream.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/datastream/docs/overview">Provides change data capture and replication to BigQuery.</a></li>
@@ -254,19 +272,22 @@ You must manually enable the following services for the corresponding capabiliti
 
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th><strong>Service</strong></th>
+<th><strong>API name</strong></th>
 <th><strong>Which features rely on it</strong></th>
 <th><strong>Effects of disabling this service</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>Gemini for Google Cloud API</td>
 <td><code>cloudaicompanion.googleapis.com</code></td>
 <td><ul>
 <li>Gemini in BigQuery features</li>
@@ -277,6 +298,7 @@ You must manually enable the following services for the corresponding capabiliti
 </ul></td>
 </tr>
 <tr class="even">
+<td>Managed Service for Apache Airflow</td>
 <td><code>composer.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads">Schedule workloads</a></li>
@@ -287,6 +309,7 @@ You must manually enable the following services for the corresponding capabiliti
 </ul></td>
 </tr>
 <tr class="odd">
+<td>Data Lineage API</td>
 <td><code>datalineage.googleapis.com</code></td>
 <td><ul>
 <li><a href="https://docs.cloud.google.com/knowledge-catalog/docs/use-lineage#view-lineage">Data lineage</a> capture and viewing</li>

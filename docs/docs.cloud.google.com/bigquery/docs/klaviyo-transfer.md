@@ -135,6 +135,8 @@ Replace the following:
   - `assets` : the path to the Klaviyo objects to be transferred to BigQuery.
   - `connector.authentication.privateApiKey` : the private API key for the Klaviyo account.
   - `connector.startDate` : (Optional) a start date for new records to be included in the data transfer, in the format `YYYY-MM-DD` . Only records created on or after this date are included in the data transfer. The default value is 3 months before the transfer run date.
+  - `ingestionType` : (Optional) specifies the data loading method. The allowed values are `full` (replaces all data in the destination table) or `incremental` (loads only new or modified data since the last transfer).
+  - `writeMode` : (Optional) when `ingestionType` is set to `incremental` , specifies how data is written to the destination table. The allowed values are `WRITE_MODE_APPEND` (appends new records) or `WRITE_MODE_UPSERT` (updates existing records and inserts new records).
 
 The following command creates a Klaviyo data transfer in the default project.
 

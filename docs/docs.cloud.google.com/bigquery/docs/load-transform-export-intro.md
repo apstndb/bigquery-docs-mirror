@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to loading, transforming, and exporting data
 
-This document describes the data integration approaches to load and transform data in BigQuery using the extract, load, and transform (ELT) or the extract, transform, load (ETL) processes. It also describes exporting data from BigQuery to apply insights in other systems, known as *reverse ETL* .
+BigQuery lets you load, transform, and export data to integrate your data sources and analytics workflows. You can load and transform data in BigQuery using the extract, load, and transform (ELT) or the extract, transform, load (ETL) processes. You can also export data from BigQuery to apply insights in other systems—a process known as *reverse ETL* .
 
 ## Deciding between ELT or ETL
 

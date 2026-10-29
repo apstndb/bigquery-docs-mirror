@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Authorized views
 
-This document describes how to create authorized views and authorized materialized views in BigQuery. As a data administrator, you can create an *authorized view* to share a subset of data in a dataset to specific users and groups (principals). Principals can view the data you share and run queries on it, but they can't access the source dataset directly.
+In BigQuery, authorized views and authorized materialized views let you share a subset of data from a dataset with specific users and groups (principals). Principals can view the shared data and run queries on it, but they can't access the source dataset directly.
 
-### View types
+## View types
 
 A logical view is the default view type for BigQuery, and a materialized view is a precomputed view that periodically caches the results of a query for increased performance and efficiency.
 
@@ -18,7 +18,7 @@ An authorized view for a logical view is called an authorized view, but an autho
 
 If a logical view relies on [a large or computationally expensive query](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#use_cases) , then you can create a materialized view instead. To understand the use cases of a logical and materialized view, see [Overview of logical and materialized views](https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview) .
 
-### High-level steps for creating authorized views
+## High-level steps for creating authorized views
 
 To create and share a view, review these high-level steps, which are the same for authorized logical views and authorized materialized views.
 

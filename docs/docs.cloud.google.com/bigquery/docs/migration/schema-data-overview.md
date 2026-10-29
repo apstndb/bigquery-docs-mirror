@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Schema and data transfer overview
 
-This document discusses the concepts and tasks for transferring the schema and data from your existing data warehouse to BigQuery.
-
-Migrating your data warehouse to the cloud is a complex process that requires planning, resources, and time. To tame this complexity, you should approach data warehouse migration in a staged and iterative manner. Doing several iterations of schema and data migration can improve the result.
+Migrating your schema and data from an existing data warehouse to BigQuery lets you modernize your analytics workloads in the cloud. Because migrating a data warehouse requires careful planning, resources, and time, you can reduce complexity and improve outcomes by transferring your schema and data in staged iterations.
 
 ## Schema and data migration process
 

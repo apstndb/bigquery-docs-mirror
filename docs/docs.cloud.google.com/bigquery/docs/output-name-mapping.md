@@ -12,9 +12,9 @@ data_source: docs.cloud.google.com
 >
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-> **Note:** Object name mapping using JSON is only supported by the legacy batch API. If you are using the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) or starting batch jobs from the Google Cloud console, use [YAML-based object name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
+Object name mapping lets you configure JSON rules to rename SQL objects—such as databases, schemas, tables, and columns during [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to match your BigQuery naming conventions.
 
-This document describes how to configure *name mapping* to rename SQL objects during [batch translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
+Object name mapping using JSON is supported only by the legacy batch API. If you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) or start batch jobs from the Google Cloud console, use [YAML-based object name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
 
 ## Overview
 

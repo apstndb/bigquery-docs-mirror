@@ -158,16 +158,16 @@ Static lists of contacts/profiles.
 - Endpoint: `/lists`
 - Klaviyo API reference: [Get Lists](https://developers.klaviyo.com/en/reference/get_lists)
 
-| Field Name          | Type            | JSON Path                                  | Description                                                |
-|---------------------|-----------------|--------------------------------------------|------------------------------------------------------------|
-| `type`              | STRING          | `$.type`                                   | Resource type (always `list` ).                            |
-| `id`                | STRING          | `$.id`                                     | Unique identifier for the list.                            |
-| `name`              | STRING          | `$.attributes.name`                        | Name of the contact list.                                  |
-| `created`           | TIMESTAMP       | `$.attributes.created`                     | Creation timestamp.                                        |
-| `updated`           | TIMESTAMP       | `$.attributes.updated`                     | Last modification timestamp.                               |
-| `opt_in_process`    | STRING          | `$.attributes.opt_in_process`              | Opt-in setting (e.g., 'single_opt_in' or 'double_opt_in'). |
-| `tag_ids`           | REPEATED STRING | `$.relationships.tags.data[*].id`          | IDs of tags assigned to this list.                         |
-| `flow_triggers_ids` | REPEATED STRING | `$.relationships.flow-triggers.data[*].id` | IDs of flows triggered by adding profiles to this list.    |
+| Field Name          | Type            | JSON Path                                  | Description                                             |
+|---------------------|-----------------|--------------------------------------------|---------------------------------------------------------|
+| `type`              | STRING          | `$.type`                                   | Resource type (always `list` ).                         |
+| `id`                | STRING          | `$.id`                                     | Unique identifier for the list.                         |
+| `name`              | STRING          | `$.attributes.name`                        | Name of the contact list.                               |
+| `created`           | TIMESTAMP       | `$.attributes.created`                     | Creation timestamp.                                     |
+| `updated`           | TIMESTAMP       | `$.attributes.updated`                     | Last modification timestamp.                            |
+| `opt_in_process`    | STRING          | `$.attributes.opt_in_process`              | Opt-in setting (e.g., 'singleoptin' or 'doubleoptin').  |
+| `tag_ids`           | REPEATED STRING | `$.relationships.tags.data[*].id`          | IDs of tags assigned to this list.                      |
+| `flow_triggers_ids` | REPEATED STRING | `$.relationships.flow-triggers.data[*].id` | IDs of flows triggered by adding profiles to this list. |
 
 ## Metrics
 
@@ -301,19 +301,19 @@ Dynamic groups of profiles based on specific criteria.
 - Endpoint: `/segments`
 - Klaviyo API reference: [Get Segments](https://developers.klaviyo.com/en/reference/get_segments)
 
-| Field Name          | Type            | JSON Path                                       | Description                                      |
-|---------------------|-----------------|-------------------------------------------------|--------------------------------------------------|
-| `type`              | STRING          | `$.type`                                        | Resource type (always `segment` ).               |
-| `id`                | STRING          | `$.id`                                          | Unique identifier for the segment.               |
-| `name`              | STRING          | `$.attributes.name`                             | Segment name.                                    |
-| `created`           | TIMESTAMP       | `$.attributes.created`                          | Creation timestamp.                              |
-| `updated`           | TIMESTAMP       | `$.attributes.updated`                          | Last modification timestamp.                     |
-| `is_active`         | BOOLEAN         | `$.attributes.is_active`                        | Whether the segment is active.                   |
-| `is_processing`     | BOOLEAN         | `$.attributes.is_processing`                    | Whether the segment is being processed.          |
-| `is_starred`        | BOOLEAN         | `$.attributes.is_starred`                       | Whether the segment is starred/favorited.        |
-| `tag_ids`           | REPEATED STRING | `$.relationships.tags.data[*].id`               | IDs of associated tags.                          |
-| `flow_triggers_ids` | REPEATED STRING | `$.relationships.flow-triggers.data[*].id`      | IDs of flows triggered by this segment.          |
-| `condition_groups`  | REPEATED RECORD | `$.attributes.definition.condition_groups[*` \] | Groups of logic conditions defining the segment. |
+| Field Name          | Type                    | JSON Path                                       | Description                                      |
+|---------------------|-------------------------|-------------------------------------------------|--------------------------------------------------|
+| `type`              | STRING                  | `$.type`                                        | Resource type (always `segment` ).               |
+| `id`                | STRING                  | `$.id`                                          | Unique identifier for the segment.               |
+| `name`              | STRING                  | `$.attributes.name`                             | Segment name.                                    |
+| `created`           | TIMESTAMP               | `$.attributes.created`                          | Creation timestamp.                              |
+| `updated`           | TIMESTAMP               | `$.attributes.updated`                          | Last modification timestamp.                     |
+| `is_active`         | BOOLEAN                 | `$.attributes.is_active`                        | Whether the segment is active.                   |
+| `is_processing`     | BOOLEAN                 | `$.attributes.is_processing`                    | Whether the segment is being processed.          |
+| `is_starred`        | BOOLEAN                 | `$.attributes.is_starred`                       | Whether the segment is starred/favorited.        |
+| `tag_ids`           | REPEATED STRING         | `$.relationships.tags.data[*].id`               | IDs of associated tags.                          |
+| `flow_triggers_ids` | REPEATED STRING         | `$.relationships.flow-triggers.data[*].id`      | IDs of flows triggered by this segment.          |
+| `condition_groups`  | REPEATED ConditionGroup | `$.attributes.definition.condition_groups[*` \] | Groups of logic conditions defining the segment. |
 
 ### ConditionGroup
 
@@ -508,9 +508,168 @@ Specific variants of catalog items (e.g., sizes, colors).
 | `inventory_quantity`  | FLOAT           | `$.attributes.inventory_quantity`  | Current stock quantity.             |
 | `price`               | FLOAT           | `$.attributes.price`               | Price.                              |
 | `url`                 | STRING          | `$.attributes.url`                 | URL to variant.                     |
-| `image_full_url`      | BOOLEAN         | `$.attributes.image_full_url`      | Full image URL available (Boolean). |
+| `image_full_url`      | STRING          | `$.attributes.image_full_url`      | Full image URL available (Boolean). |
 | `image_thumbnail_url` | STRING          | `$.attributes.image_thumbnail_url` | Thumbnail image URL.                |
 | `images`              | REPEATED STRING | `$.attributes.images[*` \]         | List of images.                     |
 | `published`           | BOOLEAN         | `$.attributes.published`           | Publication status.                 |
 | `created`             | TIMESTAMP       | `$.attributes.created`             | Creation timestamp.                 |
 | `updated`             | TIMESTAMP       | `$.attributes.updated`             | Last update timestamp.              |
+
+## FlowActions
+
+Flow actions associated with a flow.
+
+- Table name: FlowActions
+- Endpoint: `/flows/{id}/flow-actions`
+- Klaviyo API reference: [Get Flow Actions](https://developers.klaviyo.com/en/reference/get_actions_for_flow)
+
+| Field Name             | Type                    | JSON Path                                                                 | Description                                                    |
+|------------------------|-------------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|
+| `type`                 | STRING                  | `$.type`                                                                  | Resource type. Always `flow-action` .                          |
+| `id`                   | STRING                  | `$.id`                                                                    | Unique identifier for the flow action.                         |
+| `created`              | TIMESTAMP               | `$.attributes.created`                                                    | Creation timestamp.                                            |
+| `updated`              | TIMESTAMP               | `$.attributes.updated`                                                    | Last modification timestamp.                                   |
+| `message_id`           | STRING                  | `$.attributes.definition.id`                                              | Unique ID for the action message definition.                   |
+| `message_temporary_id` | STRING                  | `$.attributes.definition.temporary_id`                                    | Temporary ID assigned to the message definition.               |
+| `message_type`         | STRING                  | `$.attributes.definition.type`                                            | Type of message, such as `email` , `sms` .                     |
+| `condition_groups`     | REPEATED ConditionGroup | `$.attributes.definition.data.action_output_filter.condition_groups[*` \] | Conditions associated with the flow action output filter.      |
+| `next_if_true`         | STRING                  | `$.attributes.definition.links.next_if_true`                              | ID of the next flow action if condition evaluates to `true` .  |
+| `next_if_false`        | STRING                  | `$.attributes.definition.links.next_if_false`                             | ID of the next flow action if condition evaluates to `false` . |
+
+## FormVersions
+
+Form versions for a given form.
+
+- Table name: FormVersions
+- Endpoint: `/forms/{id}/form-versions`
+- Klaviyo API reference: [Get Form Versions](https://developers.klaviyo.com/en/reference/get_versions_for_form)
+
+| Field Name       | Type      | JSON Path                     | Description                                                        |
+|------------------|-----------|-------------------------------|--------------------------------------------------------------------|
+| `type`           | STRING    | `$.type`                      | Resource type. Always `form-version` .                             |
+| `id`             | STRING    | `$.id`                        | Unique identifier for the form version.                            |
+| `form_type`      | STRING    | `$.attributes.form_type`      | Type of form, such as `popup` , `embed` , `banner` .               |
+| `variation_name` | STRING    | `$.attributes.variation_name` | Name of the form variation.                                        |
+| `ab_test`        | JSON      | `$.attributes.ab_test`        | A/B test configuration and variation settings.                     |
+| `status`         | STRING    | `$.attributes.status`         | Operational status of the form version, such as `draft` , `live` . |
+| `created_at`     | TIMESTAMP | `$.attributes.created_at`     | Creation timestamp.                                                |
+| `updated_at`     | TIMESTAMP | `$.attributes.updated_at`     | Last modification timestamp.                                       |
+
+## PushTokens
+
+Push tokens associated with mobile app profiles for push notifications.
+
+- Table name: PushTokens
+- Endpoint: `/push-tokens`
+- Klaviyo API reference: [Get Push Tokens](https://developers.klaviyo.com/en/reference/get_push_tokens)
+
+| Field Name          | Type      | JSON Path                         | Description                                                                  |
+|---------------------|-----------|-----------------------------------|------------------------------------------------------------------------------|
+| `type`              | STRING    | `$.type`                          | Resource type. Always `push-token` .                                         |
+| `id`                | STRING    | `$.id`                            | Unique identifier for the push token.                                        |
+| `created`           | TIMESTAMP | `$.attributes.created`            | Creation timestamp.                                                          |
+| `token`             | STRING    | `$.attributes.token`              | Device push token string.                                                    |
+| `enablement_status` | STRING    | `$.attributes.enablement_status`  | Push notification enablement status, such as `AUTHORIZED` , `UNAUTHORIZED` . |
+| `platform`          | STRING    | `$.attributes.platform`           | Mobile platform, such as `ios` , `android` .                                 |
+| `vendor`            | STRING    | `$.attributes.vendor`             | Vendor service provider, such as `apns` , `fcm` .                            |
+| `background`        | STRING    | `$.attributes.background`         | Background refresh status for push notifications.                            |
+| `recorded_date`     | TIMESTAMP | `$.attributes.recorded_date`      | Date when the push token was recorded.                                       |
+| `metadata`          | JSON      | `$.attributes.metadata`           | Custom device or push token metadata.                                        |
+| `profile_id`        | STRING    | `$.relationships.profile.data.id` | ID of the customer profile associated with this push token.                  |
+
+## TagGroups
+
+Tag groups used to organize and categorize tags.
+
+- Table name: TagGroups
+- Endpoint: `/tag-groups`
+- Klaviyo API reference: [Get Tag Groups](https://developers.klaviyo.com/en/reference/get_tag_groups)
+
+| Field Name  | Type    | JSON Path                | Description                                            |
+|-------------|---------|--------------------------|--------------------------------------------------------|
+| `type`      | STRING  | `$.type`                 | Resource type. Always `tag-group` .                    |
+| `id`        | STRING  | `$.id`                   | Unique identifier for the tag group.                   |
+| `name`      | STRING  | `$.attributes.name`      | Name of the tag group.                                 |
+| `exclusive` | BOOLEAN | `$.attributes.exclusive` | Whether tags within this group are mutually exclusive. |
+| `default`   | BOOLEAN | `$.attributes.default`   | Whether this is the default tag group for the account. |
+
+## UniversalContent
+
+Reusable universal content blocks for messages and templates.
+
+- Table name: UniversalContent
+- Endpoint: `/template-universal-content`
+- Klaviyo API reference: [Get Universal Content](https://developers.klaviyo.com/en/reference/get_all_universal_content)
+
+| Field Name                | Type      | JSON Path                              | Description                                                                |
+|---------------------------|-----------|----------------------------------------|----------------------------------------------------------------------------|
+| `type`                    | STRING    | `$.type`                               | Resource type. Always `template-universal-content` .                       |
+| `id`                      | STRING    | `$.id`                                 | Unique identifier for the universal content block.                         |
+| `name`                    | STRING    | `$.attributes.name`                    | Name of the universal content block.                                       |
+| `definition_content_type` | STRING    | `$.attributes.definition.content_type` | Content type of the definition, such as `block` , `template` .             |
+| `definition_type`         | STRING    | `$.attributes.definition.type`         | Component type of the content, such as `text` , `button` , `image` .       |
+| `definition_data`         | JSON      | `$.attributes.definition.data`         | Structural data and payload of the content definition.                     |
+| `created`                 | TIMESTAMP | `$.attributes.created`                 | Creation timestamp.                                                        |
+| `updated`                 | TIMESTAMP | `$.attributes.updated`                 | Last modification timestamp.                                               |
+| `screenshot_status`       | STRING    | `$.attributes.screenshot_status`       | Status of preview screenshot generation, such as `completed` , `pending` . |
+| `screenshot_url`          | STRING    | `$.attributes.screenshot_url`          | Public URL of the content preview screenshot.                              |
+
+## MetricProperties
+
+Properties and structural attributes defined for specific metrics.
+
+- Table name: MetricProperties
+- Endpoint: `/metrics/{id}/metric-properties`
+- Klaviyo API reference: [Get Metric Properties](https://developers.klaviyo.com/en/reference/get_properties_for_metric)
+
+| Field Name      | Type   | JSON Path                        | Description                                                                                 |
+|-----------------|--------|----------------------------------|---------------------------------------------------------------------------------------------|
+| `type`          | STRING | `$.type`                         | Resource type. Always `metric-property` .                                                   |
+| `id`            | STRING | `$.id`                           | Unique identifier for the metric property.                                                  |
+| `sample_values` | JSON   | `$.attributes.sample_values`     | Sample data values captured for this metric property.                                       |
+| `label`         | STRING | `$.attributes.label`             | Human-readable label for the property.                                                      |
+| `property`      | STRING | `$.attributes.property`          | Key name of the event property.                                                             |
+| `inferred_type` | STRING | `$.attributes.inferred_type`     | Data type inferred by Klaviyo for this property, such as `string` , `boolean` , `numeric` . |
+| `metric_id`     | STRING | `$.relationships.metric.data.id` | ID of the parent metric definition.                                                         |
+
+## TrackingSettings
+
+Account-level UTM tracking parameters for campaigns and flows.
+
+- Table name: TrackingSettings
+- Endpoint: `/tracking-settings`
+- Klaviyo API reference: [Get Tracking Settings](https://developers.klaviyo.com/en/reference/get_tracking_settings)
+
+| Field Name            | Type                     | JSON Path                          | Description                                                             |
+|-----------------------|--------------------------|------------------------------------|-------------------------------------------------------------------------|
+| `type`                | STRING                   | `$.type`                           | Resource type. Always `tracking-setting` .                              |
+| `id`                  | STRING                   | `$.id`                             | Unique identifier for the tracking settings.                            |
+| `auto_add_parameters` | BOOLEAN                  | `$.attributes.auto_add_parameters` | Whether UTM parameters are automatically added to message links.        |
+| `utm_source`          | UtmParameter             | `$.attributes.utm_source`          | Configuration for the `_utm_source parameter` in flows and campaigns.   |
+| `utm_medium`          | UtmParameter             | `$.attributes.utm_medium`          | Configuration for the `_utm_medium parameter` in flows and campaigns.   |
+| `utm_campaign`        | UtmParameter             | `$.attributes.utm_campaign`        | Configuration for the `_utm_campaign` parameter in flows and campaigns. |
+| `utm_id`              | UtmParameter             | `$.attributes.utm_id`              | Configuration for the `_utm_id` parameter in flows and campaigns.       |
+| `utm_term`            | UtmParameter             | `$.attributes.utm_term`            | Configuration for the `_utm_term` parameter in flows and campaigns.     |
+| `custom_parameters`   | REPEATED CustomParameter | `$.attributes.custom_parameters`   | Custom tracking parameters appended to campaign and flow links.         |
+
+### UtmParameter
+
+| Field Name | Type             | JSON Path  | Description                                   |
+|------------|------------------|------------|-----------------------------------------------|
+| `flow`     | ParameterContext | `flow`     | UTM parameter settings context for flows.     |
+| `campaign` | ParameterContext | `campaign` | UTM parameter settings context for campaigns. |
+
+### ParameterContext
+
+| Field Name | Type   | JSON Path | Description                                                                        |
+|------------|--------|-----------|------------------------------------------------------------------------------------|
+| `type`     | STRING | `type`    | Resource type.                                                                     |
+| `value`    | STRING | `value`   | Parameter template value or attribute key, such as `emailsubject` , `campaignid` . |
+
+### CustomParameter
+
+| Field Name | Type             | JSON Path  | Description                                      |
+|------------|------------------|------------|--------------------------------------------------|
+| `flow`     | ParameterContext | `flow`     | Custom tracking parameter context for flows.     |
+| `campaign` | ParameterContext | `campaign` | Custom tracking parameter context for campaigns. |
+| `name`     | STRING           | `name`     | Name of the custom tracking parameter.           |

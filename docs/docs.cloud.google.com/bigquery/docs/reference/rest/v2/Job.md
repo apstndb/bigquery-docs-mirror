@@ -284,6 +284,9 @@ JobConfigurationQuery configures a BigQuery query job.
     }
   ],
   "createSession": boolean,
+  "secureContext": {
+    object (SecureContext)
+  },
   "systemVariables": {
     object (SystemVariables)
   }
@@ -446,6 +449,11 @@ JobConfigurationQuery configures a BigQuery query job.
 <p>The new session's location will be set to <code>Job.JobReference.location</code> if it is present, otherwise it's set to the default location based on existing routing logic.</p></td>
 </tr>
 <tr class="even">
+<td><code>secureContext</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/SecureContext"><code>SecureContext</code></a><code> )</code></p>
+<p>Optional. A set of key-value pairs representing the secure context. This can be used to pass sensitive or context-specific information. They can be retrieved via the SECURE_CONTEXT() function and used to modify the run-time behavior of a query.</p></td>
+</tr>
+<tr class="odd">
 <td><code>systemVariables</code></td>
 <td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SystemVariables"><code>SystemVariables</code></a><code> )</code></p>
 <p>Output only. System variables for GoogleSQL queries. A system variable is output if the variable is settable and its value differs from the system default. "@@" prefix is not included in the name of the System variables.</p></td>

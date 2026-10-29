@@ -66,9 +66,12 @@ The following table maps Klaviyo data types to the corresponding BigQuery data t
 | `String`                     | `STRING`           |
 | `Text`                       | `STRING`           |
 | `Integer`                    | `INTEGER`          |
+| `Float`                      | `FLOAT`            |
 | `Boolean`                    | `BOOLEAN`          |
 | `Date (YYYY-MM-DD HH:MM:SS)` | `TIMESTAMP`        |
 | `List`                       | `ARRAY`            |
+| `JSON`                       | `JSON`             |
+| `Record`                     | `RECORD`           |
 
 ## Pricing
 

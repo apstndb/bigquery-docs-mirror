@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Transform data with data manipulation language (DML)
 
-The BigQuery data manipulation language (DML) lets you update, insert, and delete data from your BigQuery tables.
+The BigQuery data manipulation language (DML) lets you update, insert, and delete data in your BigQuery tables so that you can modify existing records and maintain current datasets. You can run DML statements in the same way that you run `SELECT` statements.
 
-You can execute DML statements just as you would a `SELECT` statement, with the following conditions:
+## Execution requirements
+
+When you run DML statements, the following conditions apply:
 
 - You must use GoogleSQL. To enable GoogleSQL, see [Switching SQL dialects](https://docs.cloud.google.com/bigquery/sql-reference/enabling-standard-sql) .
 - You cannot specify a destination table for the query.

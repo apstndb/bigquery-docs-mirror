@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Migrate code with the batch SQL translator
 
-This document describes how to use the batch SQL translator in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. You can submit and review the results of a translation job from the Google Cloud console or from the command line.
+The batch SQL translator in BigQuery lets you translate scripts written in other SQL dialects into GoogleSQL queries in bulk. You can submit and review the results of a batch translation job from the Google Cloud console or from the command line to accelerate large-scale workload migrations.
 
-> **Note:** To build a custom software integration, an automated CI/CD pipeline, or another programmatic workflow, we recommend that you [call the BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) directly.
-
-For a list of SQL dialects supported by this SQL translator, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
-
-For a list of supported processing locations, see [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
+To build a custom software integration, an automated CI/CD pipeline, or another programmatic workflow, [call the BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) directly. For information about supported dialects and processing locations, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) and [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
 
 ## Before you begin
 

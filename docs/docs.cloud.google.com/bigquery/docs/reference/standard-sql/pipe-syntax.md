@@ -478,7 +478,16 @@ In pipe syntax, the `WHERE` operator also replaces the [`HAVING` clause](https:/
 ```
 -- Aggregation with grouping
 |> AGGREGATE [aggregate_expression [[AS] alias] [, ...]]
-   GROUP BY groupable_items [[AS] alias] [, ...]
+   GROUP BY group_by_specification
+
+group_by_specification:
+  {
+    groupable_item [[AS] alias] [, ...]
+    | grouping_sets_specification
+    | rollup_specification
+    | cube_specification
+    | ()
+  }
 ```
 
 ```
@@ -499,9 +508,21 @@ With the `GROUP BY` clause, the `AGGREGATE` operator performs aggregation with g
 
 The `AGGREGATE` expression list corresponds to the aggregated expressions in a `SELECT` list in standard syntax. Each expression in the `AGGREGATE` list must include an aggregate function. Aggregate expressions can also include scalar expressions (for example, `sqrt(SUM(x*x))` ). Column aliases can be assigned using the [`AS` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#as_pipe_operator) . Window functions aren't allowed, but the [`EXTEND` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) can be used before the `AGGREGATE` operator to compute window functions.
 
-The `GROUP BY` clause in the `AGGREGATE` operator corresponds to the `GROUP BY` clause in standard syntax. Unlike in standard syntax, aliases can be assigned to `GROUP BY` items. Standard grouping operators like `GROUPING SETS` , `ROLLUP` , and `CUBE` are supported.
+**Grouping**
 
-The output columns from the `AGGREGATE` operator include all grouping columns first, followed by all aggregate columns, using their assigned aliases as the column names.
+The `GROUP BY` clause in the `AGGREGATE` operator corresponds to the [`GROUP BY` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause) in standard syntax, with the following differences:
+
+- Unlike in standard syntax, you can't use a column ordinal (such as `GROUP BY 1, 2` ), an alias from the `AGGREGATE` expression list, or `GROUP BY ALL` . Each `groupable_item` must be a [groupable](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties) expression evaluated on the input table.
+- Unlike in standard syntax, you can assign a column alias ( `[AS] alias` ) to a standalone `groupable_item` in the `GROUP BY` clause.
+- Standard grouping specifications such as [`GROUPING SETS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_grouping_sets) , [`ROLLUP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_rollup) , [`CUBE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_cube) , and `()` are supported, with the following rules:
+  - `()` can't be combined with other grouping items.
+  - Column aliases ( `[AS] alias` ) can't be applied to `GROUPING SETS` , `ROLLUP` , `CUBE` , or `()` clauses, or to expressions inside them.
+  - Every `groupable_item` inside `GROUPING SETS` , `ROLLUP` , or `CUBE` must have an [implicit alias](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#implicit_aliases) (such as a column name or field path), which becomes its output column name. Anonymous expressions (such as `x + 1` or `MOD(x, 3)` ) aren't allowed inside these clauses.
+  - When the `GROUP BY` clause contains `GROUPING SETS` , `ROLLUP` , or `CUBE` , standalone `groupable_item` expressions outside them must also have an alias (implicit or explicit). For example, `GROUP BY ROLLUP(item), sales + 1` produces an error, but `GROUP BY ROLLUP(item), sales + 1 AS s` is supported.
+  - To group by a computed expression in `GROUPING SETS` , `ROLLUP` , or `CUBE` , use the [`EXTEND` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#extend_pipe_operator) before the `AGGREGATE` operator to compute the expression and assign an alias, and then reference that column by name. To rename an existing column when grouping with these clauses, use the [`RENAME` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#rename_pipe_operator) before or after the `AGGREGATE` operator.
+  - Duplicate grouping expressions in `GROUPING SETS` , `ROLLUP` , or `CUBE` are deduplicated in the output table, so each unique grouping column appears once in the output column list, in order of first appearance.
+
+The output columns from the `AGGREGATE` operator include all grouping columns first, followed by all aggregate columns, using their assigned or implicit aliases as the column names.
 
 Unlike in standard syntax, grouping expressions aren't repeated across `SELECT` and `GROUP BY` clauses. In pipe syntax, the grouping expressions are listed once, in the `GROUP BY` clause, and are automatically included as output columns for the `AGGREGATE` operator.
 
@@ -565,6 +586,29 @@ FROM table1
  +---------+-----------+-------------*/
 ```
 
+```
+-- Aggregation with ROLLUP on a column computed with EXTEND
+(
+  SELECT 'apples' AS item, 2 AS sales
+  UNION ALL
+  SELECT 'bananas' AS item, 5 AS sales
+  UNION ALL
+  SELECT 'apples' AS item, 7 AS sales
+)
+|> EXTEND UPPER(item) AS bucket
+|> AGGREGATE COUNT(*) AS num_items, SUM(sales) AS total_sales
+   GROUP BY ROLLUP(bucket)
+|> ORDER BY bucket;
+
+/*---------+-----------+-------------+
+ | bucket  | num_items | total_sales |
+ +---------+-----------+-------------+
+ | NULL    | 3         | 14          |
+ | APPLES  | 2         | 9           |
+ | BANANAS | 1         | 5           |
+ +---------+-----------+-------------*/
+```
+
 #### Shorthand ordering syntax with `AGGREGATE`
 
 The `AGGREGATE` operator supports a shorthand ordering syntax, which is equivalent to applying the [`ORDER BY` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator) as part of the `AGGREGATE` operator without repeating the column list:
@@ -577,11 +621,13 @@ The `AGGREGATE` operator supports a shorthand ordering syntax, which is equivale
 order_suffix: {ASC | DESC} [{NULLS FIRST | NULLS LAST}]
 ```
 
-The `GROUP AND ORDER BY` clause is equivalent to an `ORDER BY` clause on all `groupable_items` . By default, each `groupable_item` is sorted in ascending order with `NULL` values first. Other ordering suffixes like `DESC` or `NULLS LAST` can be used for other orders.
+The `GROUP AND ORDER BY` clause is equivalent to an `ORDER BY` clause on all `groupable_item` s. By default, each `groupable_item` is sorted in ascending order with `NULL` values first. Other ordering suffixes like `DESC` or `NULLS LAST` can be used for other orders.
 
 Without the `GROUP AND ORDER BY` clause, the `ASC` or `DESC` suffixes can be added on individual columns in the `GROUP BY` list or `AGGREGATE` list or both. The `NULLS FIRST` and `NULLS LAST` suffixes can be used to further modify `NULL` sorting.
 
 Adding these suffixes is equivalent to adding an `ORDER BY` clause that includes all of the suffixed columns with the suffixed grouping columns first, matching the left-to-right output column order.
+
+The `GROUP AND ORDER BY` clause and ordering suffixes on `GROUP BY` items are supported only on standalone `groupable_item` expressions, and can't be used with `GROUPING SETS` , `ROLLUP` , `CUBE` , or `()` . To sort by grouping columns from these specifications, use a separate [`ORDER BY` operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax#order_by_pipe_operator) after the `AGGREGATE` operator.
 
 **Examples**
 

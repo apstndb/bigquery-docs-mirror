@@ -8,15 +8,9 @@ data_source: docs.cloud.google.com
 
 # Use the Data Engineering Agent to build and modify data pipelines
 
-This document shows you how to use the [Data Engineering Agent](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview) in BigQuery and Dataform to create and modify data pipelines.
+The [Data Engineering Agent](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview) in BigQuery and Dataform lets you build, modify, and manage data pipelines to load and process data in BigQuery. You can use natural language prompts to generate data pipelines from various data sources or adapt existing data pipelines to suit your data engineering needs.
 
-The Data Engineering Agent lets you build, modify, and manage data pipelines to load and process data in BigQuery. With the Data Engineering Agent, you can use natural language prompts to generate data pipelines from various data sources or adapt existing data pipelines to suit your data engineering needs.
-
-The agent generates and organizes data pipeline code directly within Dataform repositories. The agent operates in the Dataform workspace, so Dataform pipelines are automatically available to the agent.
-
-For more examples of prompts you can use with the Data Engineering Agent, see [Sample prompts](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#sample_prompts) .
-
-You can also use the [Data Engineering Agent API](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/api-overview) , which uses the A2A protocol, to interact with the agent.
+The agent generates and organizes data pipeline code directly within Dataform repositories and operates in the Dataform workspace, so Dataform pipelines are automatically available to the agent. You can also interact with the agent using the [Data Engineering Agent API](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/api-overview) , which uses the A2A protocol. For examples of prompts that you can use, see [Sample prompts](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#sample_prompts) .
 
 ## Limitations
 

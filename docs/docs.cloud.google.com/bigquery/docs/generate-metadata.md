@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Generate metadata for translation and assessment
 
-This document describes how to create metadata and query log files by using the `dwh-migration-dumper` command-line extraction tool. The metadata files describe the SQL objects in your source system.
+The `dwh-migration-dumper` command-line extraction tool lets you extract metadata and query log files from your existing data warehouse so that you can assess and migrate your workloads to BigQuery. The metadata files describe the SQL objects in your source system.
 
-BigQuery Migration Service uses this information to improve the translation of your SQL scripts from your source system dialect to GoogleSQL.
-
-The BigQuery migration assessment uses metadata files and query log files to analyze your existing data warehouse and help assess the effort of moving your data warehouse to BigQuery.
+BigQuery Migration Service uses this metadata to improve the accuracy of translating your SQL scripts into GoogleSQL. In addition, the BigQuery migration assessment analyzes the metadata and query log files to help you evaluate your existing data warehouse and estimate the effort of migrating to BigQuery.
 
 ## Overview
 

@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Migrate data pipelines
 
-This document describes how you can migrate your upstream data pipelines, which load data into your data warehouse. You can use this document to better understand what a data pipeline is, what procedures and patterns a pipeline can employ, and which migration options and technologies are available for a data warehouse migration.
+Migrating your upstream data pipelines to BigQuery lets you ingest and transform data directly in Google Cloud so that you can retire older data warehouses and reduce operational overhead. When you plan your migration, you can choose the pipeline patterns, migration approaches, and orchestration technologies that best fit your data warehouse architecture.
 
-### What is a data pipeline?
+## What is a data pipeline?
 
 In computing, a [data pipeline](https://wikipedia.org/wiki/Pipeline_(computing)) is a type of application that processes data through a sequence of connected processing steps. As a general concept, data pipelines can be applied, for example, to data transfer between information systems, [extract, transform, and load](https://wikipedia.org/wiki/Extract,_transform,_load) (ETL), data enrichment, and real-time data analysis. Typically, data pipelines are operated as a *batch* process that executes and processes data when run, or as a *streaming* process that executes continuously and processes data as it becomes available to the pipeline.
 
@@ -18,7 +18,7 @@ In the context of data warehousing, data pipelines are commonly used to read dat
 
 In the context of data pipelines, sources are usually transactional systems—for example, an RDBMS—and the sink connects to a data warehouse. This type of graph is referred to as a *data flow DAG* . You can also use DAGs to orchestrate data movement between data pipelines and other systems. This usage is referred to as an *orchestration* or *control flow DAG* .
 
-### When to migrate the data pipelines
+## When to migrate the data pipelines
 
 When you migrate a [*use case*](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#use-case) to BigQuery, you can choose to [*offload*](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#offload) or [*fully migrate*](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview#full-migration) .
 
@@ -36,7 +36,7 @@ During an iteration, you can choose one of the following options:
 
 When all of your use cases are fully migrated, you can elect to switch off the old warehouse, which is an important step for reducing overhead and costs.
 
-### How to migrate the data pipelines
+## How to migrate the data pipelines
 
 The rest of this document addresses how to migrate your data pipelines, including which approach and procedures to use and which technologies to employ. Options range from repurposing existing data pipelines (redirecting them to load to BigQuery) to rewriting the data pipelines in order to take advantage of Google Cloud-managed services.
 

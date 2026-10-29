@@ -8,15 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use Connected Sheets
 
-Connected Sheets brings the scale of BigQuery to the familiar Google Sheets interface. With Connected Sheets, you can preview your BigQuery data and use it in pivot tables, formulas, and charts built from the entire set of data.
-
-You can also do the following:
-
-- Collaborate with partners, analysts, or other stakeholders in a familiar spreadsheet interface.
-
-- Ensure a single source of truth for data analysis without additional spreadsheet exports.
-
-- Streamline your reporting and dashboard workflows.
+You can use Connected Sheets to analyze BigQuery datasets directly within the familiar Google Sheets interface. Explore your data with charts, formulas, and pivot tables, collaborate with stakeholders, and maintain a single source of truth without relying on manual spreadsheet exports.
 
 Connected Sheets runs BigQuery queries on your behalf either upon your request or on a defined schedule. Results of those queries are saved in your spreadsheet for analysis and sharing.
 

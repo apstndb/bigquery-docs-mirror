@@ -163,7 +163,7 @@ DROP TABLE FUNCTION mydataset.names_by_year
 
 ## Authorize routines
 
-You can authorize table functions as *routines* . Authorized routines let you share query results with specific users or groups without giving them access to the underlying tables that generated the results. For example, an authorized routine can compute an aggregation over data or look up a table value and use that value in a computation. For more information, see [Authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) .
+You can authorize table functions as *routines* . Authorized routines let you share query results with specific users or groups without granting direct access to the underlying tables. For example, a routine can compute aggregations or look up a table value and use that value in a computation. For more information, see [Authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) .
 
 ## Limitations
 

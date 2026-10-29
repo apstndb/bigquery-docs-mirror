@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to BigQuery migration
 
-The BigQuery Migration Service is a comprehensive solution for migrating your data warehouse to BigQuery. It includes features that help you with each phase of migration, including assessment and planning, SQL translation for [a variety of SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) , and data transfer.
+The BigQuery Migration Service is a comprehensive solution that lets you migrate your data warehouse to BigQuery. It provides tools for each phase of migration—including assessment and planning, SQL translation for [a variety of SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) , and data transfer to help you transition your workloads with minimal manual effort.
 
-You can find the BigQuery Migration Service in the BigQuery console when you navigate to **Migration** \> **Services** .
+To access BigQuery Migration Service, in the Google Cloud console, go to the **BigQuery** page, and then select **Migration \> Services** .
+
+## Migration capabilities and tools
 
 With the BigQuery Migration Service, you can do the following:
 

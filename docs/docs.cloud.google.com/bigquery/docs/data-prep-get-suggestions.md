@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Prepare data with Gemini
 
-This document explains how to clean and transform your data within BigQuery data preparations using SQL code suggestions from Gemini.
+Gemini in BigQuery lets you clean and transform your data within BigQuery data preparations by generating context-aware SQL code suggestions. Using these suggestions helps you build data preparation steps and standardize table data for analysis without writing complex SQL expressions manually.
 
 For more information, see [BigQuery data preparation overview](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) .
 

@@ -326,6 +326,7 @@ The prices used in the pricing variables for this query are for the `us-central1
          SUM(IF(deleted=false, long_term_logical_bytes, 0)) / power(1024, 3) AS long_term_logical_gib,
          -- Physical
          SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
+         -- Retained to calculate active_compression_ratio below:
          SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
          SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
          -- Restorable previously deleted physical
@@ -355,11 +356,11 @@ The prices used in the pricing variables for this query are for the `us-central1
       ROUND(active_logical_gib * active_logical_gib_price, 2) AS forecast_active_logical_cost,
       ROUND(long_term_logical_gib * long_term_logical_gib_price, 2) AS forecast_long_term_logical_cost,
       -- Forecast costs physical
-      ROUND((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
+      ROUND((active_physical_gib + fail_safe_physical_gib) * active_physical_gib_price, 2) AS forecast_active_physical_cost,
       ROUND(long_term_physical_gib * long_term_physical_gib_price, 2) AS forecast_long_term_physical_cost,
       -- Forecast costs total
       ROUND(((active_logical_gib * active_logical_gib_price) + (long_term_logical_gib * long_term_logical_gib_price)) -
-         (((active_no_tt_physical_gib + time_travel_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
+         (((active_physical_gib + fail_safe_physical_gib) * active_physical_gib_price) + (long_term_physical_gib * long_term_physical_gib_price)), 2) AS forecast_total_cost_difference
     FROM
       storage_sizes
     ORDER BY

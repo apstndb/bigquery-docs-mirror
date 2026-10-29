@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to loading data
 
-This document explains how you can load data into BigQuery. The two common approaches to data integration are to extract, load, and transform (ELT) or to extract, transform, load (ETL) data.
+BigQuery lets you load data from various sources so that you can store and analyze your datasets in BigQuery storage. The two common approaches to data integration are to extract, load, and transform (ELT) or to extract, transform, load (ETL) data.
 
 For an overview of ELT and ETL approaches, see [Introduction to loading, transforming, and exporting data](https://docs.cloud.google.com/bigquery/docs/load-transform-export-intro) .
 

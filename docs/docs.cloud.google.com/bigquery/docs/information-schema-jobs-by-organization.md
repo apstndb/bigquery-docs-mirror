@@ -227,7 +227,7 @@ In this output:
 <tr class="even">
 <td><code>total_slot_ms</code></td>
 <td><code>INTEGER</code></td>
-<td>Slot milliseconds for the job over its entire duration in the <code>RUNNING</code> state, including retries.</td>
+<td>Slot milliseconds for the last execution of the job, excluding prior retries, if any.</td>
 </tr>
 <tr class="odd">
 <td><code>total_services_sku_slot_ms</code></td>

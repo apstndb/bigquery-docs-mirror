@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Control access with IAM Conditions
 
-This document describes how to use [IAM Conditions](https://docs.cloud.google.com/iam/docs/conditions-overview) to control access to BigQuery resources.
+[IAM Conditions](https://docs.cloud.google.com/iam/docs/conditions-overview) let you give access to BigQuery resources only when specific requirements are met, such as for a limited duration or during scheduled hours. You can apply conditional access at the organization, folder, project, and dataset levels, with allow policies automatically inherited by child resources. For more details, see [resource hierarchies](https://docs.cloud.google.com/iam/docs/overview#resource-hierarchy) .
 
-IAM Conditions let you grant access to BigQuery resources only if specified conditions are met. For example, you can grant access to a resource for a limited duration or periodically for certain hours of the day. You can add IAM Conditions at the organization, folder, project, and dataset levels of resources. Allow policies with conditions are inherited by child resources. For more information about resource levels, see [resource hierarchies](https://docs.cloud.google.com/iam/docs/overview#resource-hierarchy) .
-
-IAM Conditions are useful for granting Identity and Access Management (IAM) permissions to many related resources simultaneously, including resources that don't exist yet. To grant permissions to unrelated groups of BigQuery resources, consider using [IAM tags](https://docs.cloud.google.com/bigquery/docs/tags) .
+These rules help you manage permissions across multiple related resources simultaneously, including future assets. To manage access for unrelated collections of BigQuery resources, consider using [Identity and Access Management (IAM) tags](https://docs.cloud.google.com/bigquery/docs/tags) .
 
 ## Before you begin
 

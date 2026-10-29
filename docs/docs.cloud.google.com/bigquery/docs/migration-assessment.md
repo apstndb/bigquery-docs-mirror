@@ -8,27 +8,27 @@ data_source: docs.cloud.google.com
 
 # Migration assessment
 
-The BigQuery migration assessment lets you plan and review the migration of your existing data warehouse into BigQuery. You can run the BigQuery migration assessment to generate a report to assess the cost to store your data in BigQuery, to see how BigQuery can optimize your existing workload for cost savings, and to prepare a migration plan that outlines the time and effort required to complete your data warehouse migration to BigQuery.
-
-This document describes how to use the BigQuery migration assessment and the different ways you can review the assessment results. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
+The BigQuery migration assessment lets you plan and evaluate the migration of your existing data warehouse to BigQuery. You can run an assessment to estimate storage costs, identify workload optimizations, and generate a migration plan that outlines the time and effort required for your migration.
 
 ## Before you begin
 
 To prepare and run a BigQuery migration assessment, follow these steps:
 
-1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
+1.  Ensure that you are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
+
+2.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
 
     > **Note:** [Use the `--pap` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
 
-2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse.
+3.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse.
 
-3.  [Upload your metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload) to your Cloud Storage bucket.
+4.  [Upload your metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload) to your Cloud Storage bucket.
 
-4.  [Run the migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run-migration-assessment) .
+5.  [Run the migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run-migration-assessment) .
 
-5.  [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
+6.  [Review the Data Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
 
-6.  Optional: [Query the assessment results](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) to find detailed or specific assessment information.
+7.  Optional: [Query the assessment results](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) to find detailed or specific assessment information.
 
 ## Extract metadata and query logs from your data warehouse
 

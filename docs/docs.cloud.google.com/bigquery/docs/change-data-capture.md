@@ -35,7 +35,7 @@ To use BigQuery CDC ingestion, your workflow must meet the following conditions:
 
 ## Specify changes to existing records
 
-In BigQuery CDC ingestion, the pseudocolumn `_CHANGE_TYPE` indicates the type of change to be processed for each row. To use CDC, set `_CHANGE_TYPE` when you stream row modifications using the Storage Write API (gRPC). The pseudocolumn `_CHANGE_TYPE` only accepts the values `UPSERT` and `DELETE` . A table is considered *active with CDC* while the Storage Write API (gRPC) is streaming row modifications to the table in this manner.
+In BigQuery CDC ingestion, the pseudocolumn `_CHANGE_TYPE` indicates the type of change to be processed for each row. To use CDC, set `_CHANGE_TYPE` when you stream row modifications using the Storage Write API (gRPC). The pseudocolumn `_CHANGE_TYPE` only accepts the values `UPSERT` and `DELETE` . A table is considered *active with CDC* while the Storage Write API (gRPC) is streaming row modifications to the table in this manner or while pending row modifications are being applied.
 
 ### Example with `UPSERT` and `DELETE` values
 
@@ -327,7 +327,7 @@ Replace `REGION` with the [region name](https://docs.cloud.google.com/bigquery/d
 - Primary keys cannot exceed 16 columns.
 - Tables with active CDC cannot have more than 2,000 top-level columns defined by the table's schema.
 - Tables with active CDC don't support the following:
-  - Mutating [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) statements such as `DELETE` , `UPDATE` , and `MERGE`
+  - Mutating [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) statements such as `DELETE` , `UPDATE` , and `MERGE` . Mutating DML statements are blocked while a table is actively receiving CDC streams or while unmerged changes remain on the table. When there are no active upsert streams and all pending changes are merged into the baseline table, mutating DML statements are supported. If you modify a destination table with DML, ensure that changes do not cause data drift with your source database if CDC streaming resumes.
   - Querying [wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables)
   - [Search indexes](https://docs.cloud.google.com/bigquery/docs/search-index)
 - Tables with active CDC that perform runtime merge jobs because the table's `max_staleness` value is too low cannot support the following:

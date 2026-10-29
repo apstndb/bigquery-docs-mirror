@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Analyze data with Gemini assistance
 
-This tutorial describes how you can use AI-powered assistance in [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to analyze data.
+You can use AI-powered assistance from [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to analyze datasets and generate complex SQL using natural language prompts. Engaging with this AI assistant helps you find relevant tables, understand unfamiliar queries, and build machine learning (ML) forecasting models to predict trends in your data.
 
-For the example in this tutorial, consider that you're a data analyst who needs to analyze and predict product sales from a dataset.
+In this tutorial, consider that you're a data analyst who needs to analyze and predict product sales from a dataset.
 
 This tutorial assumes that you're familiar with SQL and basic data analytics tasks. Knowledge of Google Cloud products is not assumed. If you're new to BigQuery, see the [BigQuery quickstarts](https://docs.cloud.google.com/bigquery/docs/quickstarts) .
 

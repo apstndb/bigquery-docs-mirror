@@ -205,7 +205,7 @@ bq mk \
 --project_id=project_id \
 --target_dataset=dataset \
 --display_name=name \
---params=&#39;parameters' \
+--params='parameters' \
 --data_source=data_source
 --service_account_name=service_account_name
 ```
@@ -270,15 +270,15 @@ public class CreatePlayTransfer {
     final String projectId = "MY_PROJECT_ID";
     String datasetId = "MY_DATASET_ID";
     String bucket = "gs://cloud-sample-data";
-    String <tableSuffix => "_test";
- <>   MapString, Value params = new HashMap();
+    String tableSuffix = "_test";
+    Map<String, Value> params = new HashMap<>();
     params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
     params.put("table_suffix", Value.newBuilder().setStringValue(tableSuffix).build());
     TransferConfig transferConfig =
         TransferConfig.newBuilder()
             .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Play Config Name&quot;)
-          .setDataSourceId("play")
+            .setDisplayName("Your Play Config Name")
+            .setDataSourceId("play")
             .setParams(Struct.newBuilder().putAllFields(params).build())
             .build();
     createPlayTransfer(projectId, transferConfig);
@@ -289,11 +289,12 @@ public class CreatePlayTransfer {
     try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
       ProjectName parent = ProjectName.of(projectId);
       CreateTransferConfigRequest request =
-   CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString()) .setTransferConfig(transferConfig)
+          CreateTransferConfigRequest.newBuilder()
+              .setParent(parent.toString())
+              .setTransferConfig(transferConfig)
               .build();
       TransferConfig config = client.createTransferConfig(request);
-      System.out.println(";play transfer created successfully :" + config.getName());
+      System.out.println("play transfer created successfully :" + config.getName());
     } catch (ApiException ex) {
       System.out.print("play transfer was not created." + ex.toString());
     }

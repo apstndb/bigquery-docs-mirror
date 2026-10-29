@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Update partitioned table data using DML
 
-This page provides an overview of data manipulation language (DML) support for partitioned tables.
+Data manipulation language (DML) in BigQuery lets you insert, update, and delete data in partitioned tables so that you can modify specific partitions while minimizing the amount of data scanned.
 
-For more information on DML, see:
-
-- [Introduction to DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language)
-- [DML syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax)
-- [Updating table data using data manipulation language](https://docs.cloud.google.com/bigquery/docs/updating-data)
+For more information about DML, see [Introduction to DML](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) , [DML syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) , and [Updating table data using data manipulation language](https://docs.cloud.google.com/bigquery/docs/updating-data) .
 
 ## Tables used in examples
 

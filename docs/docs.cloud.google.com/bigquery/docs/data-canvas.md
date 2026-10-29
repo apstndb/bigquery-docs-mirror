@@ -8,17 +8,9 @@ data_source: docs.cloud.google.com
 
 # Analyze with BigQuery data canvas
 
-This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) .
+BigQuery data canvas lets you find, transform, query, and visualize your data using natural language prompts and a graphical interface. You can interact with this [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) feature to iterate on query results and explore multiple branches of inquiry in a single place.
 
-BigQuery data canvas, which is a [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) feature, lets you find, transform, query, and visualize data by using natural language prompts and a graphic interface for analysis workflows.
-
-For analysis workflows, BigQuery data canvas uses a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG), which provides a graphical view of your workflow. In BigQuery data canvas, you can iterate on query results and work with multiple branches of inquiry in a single place.
-
-BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. It doesn't require that you have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) metadata to identify appropriate tables based on natural language.
-
-BigQuery data canvas isn't intended for direct use by business users.
-
-BigQuery data canvas uses Gemini in BigQuery to find your data, create SQL, generate charts, and create data summaries.
+For analysis workflows, BigQuery data canvas uses a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG), which provides a graphical view of your workflow. BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. You don't need to have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/introduction) metadata to identify appropriate tables based on natural language.
 
 Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
 
@@ -51,6 +43,8 @@ BigQuery data canvas lets you do the following:
   - Complex functions and data types such as `DATETIME` and `TIMEZONE`
 
 - Data visualizations don't work with geomap charts.
+
+- BigQuery data canvas isn't intended for direct use by business users.
 
 ## Prompting best practices
 

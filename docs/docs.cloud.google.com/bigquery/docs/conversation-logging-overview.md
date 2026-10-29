@@ -62,7 +62,7 @@ Logging errors never fail a turn, and the privacy check and log write can add la
 
 ## Privacy, data governance, and security
 
-When you enable conversation logging for an agent, review how end-user notices, data access, encryption, and network controls apply to your logs.
+When you enable conversation logging for an agent, review how end-user notices, data access, encryption, network controls, and audit logging apply to your logs.
 
 ### End-user notices and logged content
 
@@ -98,7 +98,7 @@ You can manage retention, access, encryption, and perimeter security for your co
 
   - **Column-level and row-level controls on the log table** : you can apply [policy tags](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , or [row access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) to the log table itself, such as on `content` or `user_id` . These log-table controls don't affect the knowledge-source privacy check.
 
-  - **Audit logging** : changes to a data agent are recorded in [Admin Activity audit logs](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/audit-logging) . In BigQuery audit logs, table creation and metadata updates by the service agent are logged under `bigquery.googleapis.com` , and row appends through the Storage Write API (gRPC) are logged under `bigquerystorage.googleapis.com` .
+  - **Audit logging** : data agent configuration changes and log table operations are recorded in audit logs. For more information, see [Audited operations](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview#conversation-logging-audited-operations) .
 
 - **CMEK, VPC Service Controls, and data residency** : the following encryption, perimeter, and location controls apply to conversation logging:
 
@@ -128,6 +128,38 @@ You can manage retention, access, encryption, and perimeter security for your co
 
   - **Data residency** : log rows and the auto-created table are stored in the log dataset's location, where resource-location organization policies ( `gcp.resourceLocations` ) apply.
 
+### Service agent and caller attribution
+
+The Conversational Analytics API service agent, not the chatting user, creates and updates the log table and appends rows to it. To perform these operations, the service agent needs the [BigQuery Data Editor](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) role on the log dataset.
+
+In audit log entries that [Cloud Audit Logs](https://docs.cloud.google.com/logging/docs/audit) records, the `authenticationInfo.principalEmail` field (or `authenticationInfo.principalSubject` for federated identities) identifies the principal that performed each operation:
+
+- **Log table creation, schema updates, and row appends** : the service agent, `service- `` PROJECT_NUMBER `` @gcp-sa-geminidataanalytics.iam.gserviceaccount.com` .
+
+- **Data agent configuration requests ( `CreateDataAgent` , `CreateDataAgentSync` , `UpdateDataAgent` , and `UpdateDataAgentSync` )** : the user, service account, or federated identity that calls the API. When delegated service account credentials apply, these entries also include `authenticationInfo.serviceAccountDelegationInfo` .
+
+### Audited operations
+
+Cloud Audit Logs records conversation logging configuration changes and log table operations for the following services:
+
+- **Conversational Analytics API** : the following methods generate audit logs under `geminidataanalytics.googleapis.com` :
+
+  - `CreateDataAgent` , `CreateDataAgentSync` , `UpdateDataAgent` , and `UpdateDataAgentSync` generate Admin Activity audit logs that record an agent's `bigqueryAgentAnalyticsEnabled` and `bigqueryAgentAnalyticsTable` fields, including the destination project, dataset, and table.
+
+  - `SetAgentOpsObservability` generates Admin Activity audit logs that record the request's `dataSourceType` , `telemetryEnabled` , `bqaaEnabled` , and `updateMask` fields.
+
+  - `RetrieveAgentOpsObservability` generates Data Access audit logs when the corresponding `ADMIN_READ` or `DATA_READ` audit log type is enabled for `geminidataanalytics.googleapis.com` .
+
+- **BigQuery** : the service agent's operations on the log table and the queries that you run against it generate the following audit logs:
+
+  - Log table creation and schema updates generate Admin Activity audit logs under `bigquery.googleapis.com` .
+
+  - Row appends through the Storage Write API (gRPC) generate Data Access audit logs for the `google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows` method, including `TableDataChange` metadata ( `WRITE_API_APPEND_ROWS` ). These entries use the `bigquery.googleapis.com` service name, not `bigquerystorage.googleapis.com` ; only Policy Denied audit logs use `bigquerystorage.googleapis.com` .
+
+  - Queries against the log table generate Data Access audit logs under `bigquery.googleapis.com` , such as `JobInsertion` , `JobChange` , and `TableDataRead` entries.
+
+For more information, see [Conversational Analytics API audit logging](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/audit-logging) and [BigQuery audit logs overview](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) .
+
 ## Limitations
 
 Conversation logging has the following limitations:
@@ -136,13 +168,13 @@ Conversation logging has the following limitations:
 
 - Direct conversations without a data agent aren't logged.
 
-- Agents that use a search scope instead of specific tables, or that don't declare any BigQuery tables, aren't logged. Agents that configure BigQuery property graphs as knowledge sources aren't logged.
+- Agents that use a search scope instead of specific tables, or that don't declare any BigQuery tables, aren't logged. Agents that configure only BigQuery property graphs (without BigQuery tables) as knowledge sources aren't logged.
 
 - Generated SQL, tool calls, and Agent Development Kit (ADK) tool or request events ( `TOOL_STARTING` , `TOOL_COMPLETED` , `TOOL_ERROR` , and `LLM_REQUEST` ) aren't logged; only the answer and the names of its data results and charts are logged. Turns answered directly from a verified query don't write `LLM_RESPONSE` rows, and failed verified-query turns aren't logged.
 
 - Thumbs-up or thumbs-down user feedback isn't logged.
 
-- Turns aren't logged if knowledge sources use row access policies, column-level security (policy tags), or data masking, or if the privacy check can't complete. The check doesn't look through views to the tables behind them.
+- Turns aren't logged if knowledge sources use row access policies, column-level security (policy tags), or data masking, including data policies attached directly to columns. Turns also aren't logged if the privacy check can't verify these policies, such as when the chatting user lacks permission to inspect a table's policy metadata or the check times out. The check doesn't look through views to the tables behind them.
 
 - Only BigQuery table agents are supported; Looker, Data Studio, AlloyDB, Spanner, and Cloud SQL data sources aren't supported.
 

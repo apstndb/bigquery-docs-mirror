@@ -8,12 +8,16 @@ data_source: docs.cloud.google.com
 
 # Quotas and limits
 
-This document lists the quotas and system limits that apply to BigQuery.
+BigQuery uses quotas and system limits to maintain fair resource allocation, prevent service overloads, and help you manage resource use.
+
+Quotas and system limits are similar but differ in the following ways:
 
 - *Quotas* have default values, but you can typically request adjustments.
 - *System limits* are fixed values that can't be changed.
 
-Google Cloud uses quotas to help ensure fairness and reduce spikes in resource use and availability. A quota restricts how much of a Google Cloud resource your Google Cloud project can use. Quotas apply to a range of resource types, including hardware, software, and network components. For example, quotas can restrict the number of API calls to a service, the number of load balancers used concurrently by your project, or the number of projects that you can create. Quotas protect the community of Google Cloud users by preventing the overloading of services. Quotas also help you to manage your own Google Cloud resources.
+### Capabilities
+
+Google Cloud uses quotas to help maintain fairness and reduce spikes in resource use and availability. A quota restricts how much of a Google Cloud resource your Google Cloud project can use. Quotas apply to a range of resource types, including hardware, software, and network components. For example, quotas can restrict the number of API calls to a service, the number of load balancers used concurrently by your project, or the number of projects that you can create. Quotas protect the community of Google Cloud users by preventing the overloading of services. Quotas also help you to manage your own Google Cloud resources.
 
 The Cloud Quotas system does the following:
 

@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Transform SQL translations with YAML
 
-This document shows you how to use configuration YAML files to transform SQL code while migrating it to BigQuery. It provides guidelines to create your own configuration YAML files, and provides examples for various translation transformations that are supported by this feature.
+configuration YAML files let you customize how BigQuery translates SQL code from your source database during a migration. When you use the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , or perform a [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) , you can provide configuration YAML files to modify object names, data types, and SQL expressions in your translated queries.
 
-When using the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , using the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , or performing a [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) , you can provide configuration YAML files to modify a SQL query translation. Using configuration YAML files allows for further customization when translating SQL queries from your source database.
+## How to specify a configuration YAML file
 
 You can specify a configuration YAML file to use in a SQL translation in the following ways:
 
