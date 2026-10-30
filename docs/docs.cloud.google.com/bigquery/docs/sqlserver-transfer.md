@@ -208,10 +208,6 @@ To troubleshoot issues for your data transfer, see [Microsoft SQL Server transfe
 
 ## Transfer metadata
 
-> **Preview**
->
-> This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 You can also use the Microsoft SQL Server connector to [transfer metadata to Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/connectors) . For more information, see [Load Microsoft SQL Server metadata into Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/sql-server-transfer) .
 
 ## What's next

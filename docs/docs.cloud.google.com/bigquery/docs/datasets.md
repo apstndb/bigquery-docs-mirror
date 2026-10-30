@@ -54,6 +54,17 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 > **Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `roles/bigquery.dataOwner` ) role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
 
+## Plan your dataset names
+
+When you create a dataset in BigQuery, the dataset name must be unique for each project. The dataset name can contain the following:
+
+- Up to 1,024 characters.
+- Letters (uppercase or lowercase), numbers, and underscores.
+
+Dataset names are case-sensitive by default. `mydataset` and `MyDataset` can coexist in the same project, unless one of them has case-sensitivity turned off. For examples, see [Creating a case-insensitive dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) and [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#resource:-dataset) .
+
+Dataset names cannot contain spaces or special characters such as `-` , `&` , `@` , or `%` .
+
 ## Create datasets
 
 When you create a dataset, you typically specify a location where the data is stored. If you don't specify a location, the [default location](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) is used. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
@@ -66,12 +77,10 @@ To create a dataset:
 
 1.  Open the BigQuery page in the Google Cloud console.
 2.  In the left pane, click explore **Explorer** .
-3.  Select the project where you want to create the dataset.
-4.  Click more_vert **View actions** , and then click **Create dataset** .
-
-![Use the action menu of the project to create a dataset](https://docs.cloud.google.com/static/bigquery/images/create-dataset-action-menu.png)
-
-1.  On the **Create dataset** page:
+3.  Expand the project where you want to create the dataset.
+4.  Click **Datasets** .
+5.  On the **Datasets** page, click add **Create dataset** .
+6.  On the **Create dataset** page:
     1.  For **Dataset ID** , enter a unique dataset [name](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) .
     2.  For **Location type** , choose a geographic [location](https://docs.cloud.google.com/bigquery/docs/locations) for the dataset. After a dataset is created, the location can't be changed.
     3.  Optional: Select **Link to an external dataset** if you're creating an [external dataset](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
@@ -647,20 +656,17 @@ def create_dataset dataset_id = "my_dataset", location = "US"
 end
 ```
 
-## Name datasets
+## Hidden datasets
 
-When you create a dataset in BigQuery, the dataset name must be unique for each project. The dataset name can contain the following:
+A hidden dataset is a dataset whose name begins with an underscore. Hidden datasets aren't visible in the Google Cloud console which makes them useful for storing staging and administrative datasets.
 
-- Up to 1,024 characters.
-- Letters (uppercase or lowercase), numbers, and underscores.
+Hidden datasets can be created manually by adding an underscore to the beginning of the dataset name when it's created. Hidden datasets are also created automatically for [cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results#how_cached_results_are_stored) .
 
-Dataset names are case-sensitive by default. `mydataset` and `MyDataset` can coexist in the same project, unless one of them has case-sensitivity turned off. For examples, see [Creating a case-insensitive dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) and [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#resource:-dataset) .
+You can query tables and views in hidden datasets by using the bq command-line tool or the BigQuery API in the same way you would in any other dataset.
 
-Dataset names cannot contain spaces or special characters such as `-` , `&` , `@` , or `%` .
+### Restrictions for hidden datasets
 
-### Hidden datasets
-
-A hidden dataset is a dataset whose name begins with an underscore. You can query tables and views in hidden datasets the same way you would in any other dataset. Hidden datasets have the following restrictions:
+Hidden datasets have the following restrictions:
 
 - They are hidden from the **Explorer** panel in the Google Cloud console.
 - They don't appear in any `INFORMATION_SCHEMA` views.
@@ -670,7 +676,7 @@ A hidden dataset is a dataset whose name begins with an underscore. You can quer
   - [Authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines)
   - [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views)
 - They don't appear in Knowledge Catalog.
-- They can't be used as a source dataset for creating a [dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#dataset_replication)
+- They can't be used as a source dataset for creating a [dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#dataset_replication) .
 
 ## Dataset security
 

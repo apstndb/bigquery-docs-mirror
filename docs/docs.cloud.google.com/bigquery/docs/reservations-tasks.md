@@ -557,7 +557,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 ### Enable BigQuery fluid scaling
 
-To enable per-second billing with no minimum duration for a reservation, enable it at the administration-project level by listing the reservation in the `preflight_fluid_autoscaling_reservations` option. Changes to the BigQuery fluid scaling configuration can take a few minutes to propagate.
+To enable per-second billing with no minimum duration for a reservation, enable it at the administration-project level by listing the reservation in the `preflight_fluid_autoscaling_reservations` option. Enabling or disabling BigQuery fluid scaling doesn't cause downtime or interrupt running queries. The configuration applies only to the specified reservations and doesn't affect other reservations or projects. Changes to the BigQuery fluid scaling configuration can take a few minutes to propagate.
 
 For reservations using [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) , you must enable BigQuery fluid scaling in both the primary and secondary regions to ensure per-second billing after a failover.
 

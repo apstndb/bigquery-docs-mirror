@@ -55,13 +55,14 @@ You can install and configure the JDBC driver for BigQuery by either directly do
 
 To configure the JDBC driver through direct download, do the following:
 
-1.  Download the [1.6.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.6.0-all.jar) .
+1.  Download the [1.7.0 version of the driver](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.7.0-all.jar) .
 2.  Copy the downloaded file to the location specified by your software.
 
-For information on feature changes and workflow updates, see [the changelog](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/CHANGELOG.md) .
+For information on feature changes and workflow updates, see [the release notes](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/RELEASE_NOTES.md) and [the changelog](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/CHANGELOG.md) .
 
 ### Previous JDBC driver for BigQuery versions
 
+- [1.6.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.6.0-all.jar)
 - [1.5.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.5.0-all.jar)
 - [1.4.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.4.0-all.jar)
 - [1.3.0](https://storage.googleapis.com/bq-driver-releases/jdbc/google-cloud-bigquery-jdbc-1.3.0-all.jar)
@@ -83,7 +84,7 @@ Add the following dependency to your `pom.xml` file:
 <dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-bigquery-jdbc</artifactId>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
 </dependency>
 ```
 
@@ -95,7 +96,7 @@ Add the following dependency to your `pom.xml` file:
 <dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-bigquery-jdbc</artifactId>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
     <classifier>all</classifier>
     <exclusions>
       <exclusion>
@@ -113,7 +114,7 @@ Add the following to your `build.gradle` file:
 ```
 dependencies {
 // ... other dependencies
-implementation("com.google.cloud:google-cloud-bigquery-jdbc:1.6.0")
+implementation("com.google.cloud:google-cloud-bigquery-jdbc:1.7.0")
 }
 ```
 
@@ -1093,6 +1094,7 @@ You can download the JDBC driver for BigQuery at no cost. However, when you use 
 ## What's next
 
 - For additional setup instructions, connection URL property reference manuals, code samples, and local build instructions, visit the open-source repository on GitHub:
+  - [Release Notes ( `RELEASE_NOTES.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/RELEASE_NOTES.md)
   - [User Guide ( `docs/USER_GUIDE.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/docs/USER_GUIDE.md)
   - [Development Guide ( `DEVELOPMENT.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/DEVELOPMENT.md)
   - [BigQuery Storage APIs Deep Dive ( `docs/STORAGE_APIS.md` )](https://github.com/googleapis/google-cloud-java/blob/main/java-bigquery-jdbc/docs/STORAGE_APIS.md)

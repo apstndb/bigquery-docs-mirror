@@ -14,16 +14,50 @@ You can load data from Display & Video 360 to BigQuery using the [BigQuery Data 
 
 The BigQuery Data Transfer Service for the Display & Video 360 connector supports the following options for your data transfer.
 
-| Data transfer options      | Support                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Supported reports          | The Display & Video 360 connector supports the transfer of data from the reports in [Data Transfer v2 (Display & Video DTv2) files](https://developers.google.com/bid-manager/dtv2/reference/file-format) . For information about how Display & Video 360 reports are transformed into BigQuery tables and views, see [Display & Video 360 report transformation](https://docs.cloud.google.com/bigquery/docs/display-video-transformation) .              |
-| Repeat frequency           | The Display & Video 360 connector supports daily data transfers. By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you [set up your data transfer](https://docs.cloud.google.com/bigquery/docs/display-video-transfer#set_up_dv_360_transfer) .                                                                                                                     |
-| Refresh window             | The Display & Video 360 connector retrieves Display & Video 360 data from up to 2 days at the time the data transfer is run. You cannot configure the refresh window for this connector. For more information, see [Refresh windows](https://docs.cloud.google.com/bigquery/docs/display-video-transfer#refresh) .                                                                                                                                         |
-| Backfill data availability | [Run a data backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows. For information about the data retention policy for Display & Video 360, see [Report data freshness and availability](https://support.google.com/displayvideo/answer/6110224) . |
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data transfer options</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Supported reports</td>
+<td>The Display &amp; Video 360 connector supports the transfer of data from the reports in <a href="https://developers.google.com/bid-manager/dtv2/reference/file-format">Data Transfer v2 (Display &amp; Video DTv2) files</a> .
+<p>For information about how Display &amp; Video 360 reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transformation">Display &amp; Video 360 report transformation</a> .</p></td>
+</tr>
+<tr class="even">
+<td>Repeat frequency</td>
+<td>The Display &amp; Video 360 connector supports daily data transfers.<br />
+<br />
+By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transfer#set_up_dv_360_transfer">set up your data transfer</a> .</td>
+</tr>
+<tr class="odd">
+<td>Refresh window</td>
+<td>The Display &amp; Video 360 connector retrieves Display &amp; Video 360 data from up to 2 days at the time the data transfer is run. You cannot configure the refresh window for this connector.<br />
+<br />
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transfer#refresh">Refresh windows</a> .</td>
+</tr>
+<tr class="even">
+<td>Backfill data availability</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. Backfill behavior and data retention depend on the table type:
+<ul>
+<li><strong>Reporting data tables ( <code>Impression</code> , <code>Click</code> , and <code>Activity</code> ):</strong> backfills load Data Transfer v2 (DTv2) files from your Cloud Storage bucket that match the requested run date. If no matching DTv2 files exist in your bucket for a backfill date, the transfer run completes with a <code>SUCCEEDED</code> status and loads 0 rows. For more information about DTv2 file delivery and retention, see <a href="https://developers.google.com/bid-manager/dtv2/overview">Data Transfer v2.0</a> .</li>
+<li><strong>Configuration data tables:</strong> <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transfer#supported_configuration_data">configuration data tables</a> capture resource settings from the Display &amp; Video 360 API. The connector updates these tables only when the run date is within 24 hours of the scheduled transfer time, and it doesn't update them during historical backfills.</li>
+</ul>
+<p>For information about data retention in standard Display &amp; Video 360 reporting, see <a href="https://support.google.com/displayvideo/answer/6110224">Report data freshness and availability</a> .</p></td>
+</tr>
+</tbody>
+</table>
 
 ## Supported configuration data
 
-In addition to the reporting data, BigQuery Data Transfer Service also transfers the following configuration data from Display & Video 360. Configuration data is retrieved from [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3) .
+In addition to the reporting data, BigQuery Data Transfer Service also transfers the following configuration data from Display & Video 360. Configuration data is retrieved from [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3) only when the transfer run date is within 24 hours of the scheduled transfer time. Configuration data tables aren't updated during historical backfills.
 
 - [Partner](https://developers.google.com/display-video/api/reference/rest/v3/partners#resource:-partner)
 - [Advertiser](https://developers.google.com/display-video/api/reference/rest/v3/advertisers#resource:-advertiser)

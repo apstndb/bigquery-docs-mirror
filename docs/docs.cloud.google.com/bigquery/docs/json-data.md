@@ -2,19 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/json-data
 uri: https://docs.cloud.google.com/bigquery/docs/json-data
 title: Work with JSON data in GoogleSQL
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use the JSON data type in BigQuery to store, ingest, and query semi-structured data without providing a fixed schema.
 data_source: docs.cloud.google.com
 ---
 
 # Work with JSON data in GoogleSQL
 
-This document describes how to create a table with a `JSON` column, insert JSON data into a BigQuery table, and query JSON data.
+You can use the [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) data type in BigQuery to analyze semi-structured data that doesn't always adhere to fixed schemas. Loading JSON data directly into your tables lets you process each field individually and write cost-efficient queries without enforcing a rigid `STRUCT` schema.
 
-BigQuery natively supports JSON data using the [`JSON`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) data type.
-
-JSON is a widely used format that allows for semi-structured data, because it does not require a schema. Applications can use a "schema-on-read" approach, where the application ingests the data and then queries based on assumptions about the schema of that data. This approach differs from the `STRUCT` type in BigQuery, which requires a fixed schema that is enforced for all values stored in a column of `STRUCT` type.
-
-By using the `JSON` data type, you can load semi-structured JSON into BigQuery without providing a schema for the JSON data upfront. This lets you store and query data that doesn't always adhere to fixed schemas and data types. By ingesting JSON data as a `JSON` data type, BigQuery can encode and process each JSON field individually. You can then query the values of fields and array elements within the JSON data by using the field access operator, which makes JSON queries intuitive and cost efficient.
+`JSON` data types let you use a "schema-on-read" approach, where the application ingests the data and then queries based on assumptions about the schema of that data. This approach differs from the `STRUCT` type in BigQuery, which requires a fixed schema that is enforced for all values stored in a column of `STRUCT` type.
 
 ## Limitations
 

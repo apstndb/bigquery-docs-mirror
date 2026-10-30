@@ -58,6 +58,8 @@ data_source: docs.cloud.google.com
 - [`UpdateBiReservationRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest) (message)
 - [`UpdateCapacityCommitmentRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest) (message)
 - [`UpdateReservationRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpdateReservationRequest) (message)
+- [`UpgradeEditionRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpgradeEditionRequest) (message)
+- [`UpgradeEditionResponse`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpgradeEditionResponse) (message)
 
 ## ReservationService
 
@@ -574,6 +576,26 @@ For more information, see the [Authentication Overview](https://docs.cloud.googl
 `rpc UpdateReservation( `[`UpdateReservationRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpdateReservationRequest)` ) returns ( `[`Reservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.Reservation)` )`
 
 Updates an existing reservation resource.
+
+Authorization scopes  
+Requires one of the following OAuth scopes:
+
+- `https://www.googleapis.com/auth/bigquery`
+- `https://www.googleapis.com/auth/cloud-platform`
+
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
+
+**UpgradeEdition**
+
+`rpc UpgradeEdition( `[`UpgradeEditionRequest`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpgradeEditionRequest)` ) returns ( `[`UpgradeEditionResponse`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.UpgradeEditionResponse)` )`
+
+Upgrades the [`edition`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.Edition) for a list of reservations and capacity commitments.
+
+You can only upgrade to a higher edition (from `STANDARD` to `ENTERPRISE` or `ENTERPRISE_PLUS` , from `ENTERPRISE` to `ENTERPRISE_PLUS` , or from `EDITION_UNSPECIFIED` to `ENTERPRISE` or `ENTERPRISE_PLUS` ). You can't downgrade an edition.
+
+The upgrade must not cause an overall flexible slot increase across the original and target editions (for example, by upgrading a reservation without upgrading its corresponding capacity commitment). Otherwise, the method fails with a `google.rpc.Code.FAILED_PRECONDITION` error.
+
+Before the upgrade, the service validates that the resources meet the requirements of the target edition (for example, all reservations within a reservation group must be upgraded together).
 
 Authorization scopes  
 Requires one of the following OAuth scopes:
@@ -1868,3 +1890,61 @@ The request for [`ReservationService.UpdateReservation`](https://docs.cloud.goog
 </tr>
 </tbody>
 </table>
+
+## UpgradeEditionRequest
+
+The request for [`ReservationService.UpgradeEdition`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpgradeEdition) . You must specify at least one reservation or capacity commitment.
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fields</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>parent</code></td>
+<td><p><code>string</code></p>
+<p>The parent resource name that identifies the admin project and location, in the format <code>projects/{project}/locations/{location}</code> . For example, <code>projects/myproject/locations/us-west1</code> .</p></td>
+</tr>
+<tr class="even">
+<td><code>target_edition</code></td>
+<td><p><a href="https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.Edition"><code>Edition</code></a></p>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.Edition"><code>edition</code></a> to upgrade the capacity commitments and reservations to. Supported values are <code>ENTERPRISE</code> and <code>ENTERPRISE_PLUS</code> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>capacity_commitments[]</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The resource names of the capacity commitments to upgrade, in the format <code>projects/{project}/locations/{location}/capacityCommitments/{capacity_commitment}</code> . For example, <code>projects/myproject/locations/us-west1/capacityCommitments/123</code> .</p>
+<p>These capacity commitments must be in the <code>ACTIVE</code> state and must exist under the specified <code>parent</code> . The <code>commitment_start_time</code> and <code>commitment_end_time</code> fields don't change after the upgrade.</p>
+<p>Authorization requires the following <a href="https://cloud.google.com/iam/docs/">IAM</a> permission on the specified resource <code>capacityCommitments</code> :</p>
+<ul>
+<li><code>bigquery.capacityCommitments.update</code></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><code>reservations[]</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The resource names of the reservations to upgrade, in the format <code>projects/{project}/locations/{location}/reservations/{reservation}</code> . For example, <code>projects/myproject/locations/us-west1/reservations/team1-prod</code> .</p>
+<p>These reservations must exist under the specified <code>parent</code> .</p>
+<p>Authorization requires the following <a href="https://cloud.google.com/iam/docs/">IAM</a> permission on the specified resource <code>reservations</code> :</p>
+<ul>
+<li><code>bigquery.reservations.update</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+## UpgradeEditionResponse
+
+The response for [`ReservationService.UpgradeEdition`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.ReservationService.UpgradeEdition) .
+
+| Fields                   |                                                                                                                                                                                                                                                 |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `capacity_commitments[]` | [`CapacityCommitment`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.CapacityCommitment) The updated capacity commitments after the upgrade. |
+| `reservations[]`         | [`Reservation`](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc/google.cloud.bigquery.reservation.v1#google.cloud.bigquery.reservation.v1.Reservation) The updated reservations after the upgrade.                       |

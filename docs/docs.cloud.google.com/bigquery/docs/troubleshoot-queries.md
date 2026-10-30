@@ -450,6 +450,96 @@ To resolve this error, do the following:
 - **Serialize pipeline tasks.** If an automated ETL pipeline (such as Managed Service for Apache Airflow, Apache Airflow, or Dataform) recreates or cleans up staging tables, configure strict task dependencies so that `DROP TABLE` or cleanup tasks never run concurrently with active write jobs targeting the same table.
 - **Use unique staging table names.** When running parallel pipeline instances, write intermediate results to uniquely named temporary or staging tables (for example, by using `CREATE TEMP TABLE` in a multi-statement query or appending a unique run ID) rather than sharing a single mutable staging table across concurrent runs.
 
+## DML statements on tables with a streaming buffer
+
+Error string: `UPDATE or DELETE statement over table `` PROJECT_ID `` . `` DATASET_ID `` . `` TABLE_NAME `` would affect rows in the streaming buffer, which is not supported`
+
+This HTTP `400 Bad Request` error ( `reason: invalidQuery` ) occurs when a mutating DML statement ( `UPDATE` , `DELETE` , or `MERGE` ) attempts to modify or delete rows that were recently ingested by using the legacy [`tabledata.insertAll`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) streaming API and are still in the streaming buffer. Rows can remain in the streaming buffer for a few minutes, or up to 90 minutes in rare cases. For more information, see [Streaming data availability](https://docs.cloud.google.com/bigquery/docs/write-api-rest#dataavailability) and [DML limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) .
+
+To resolve this error, do one of the following:
+
+- **Migrate to the BigQuery Storage Write API (gRPC).** Stream data by using the [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api-grpc#use_data_manipulation_language_dml_with_recently_streamed_data) , which makes recently written rows immediately available for mutating DML statements ( `UPDATE` , `DELETE` , and `MERGE` ) without streaming buffer restrictions.
+- **Wait for the streaming buffer to flush, or filter out recent rows.** Check the [`tables.get`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) response for the [`streamingBuffer`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Streamingbuffer) section. If `streamingBuffer` is absent, all rows are available for DML. You can also inspect `streamingBuffer.oldestEntryTime` and add a `WHERE` filter to your DML statement so that it only targets rows older than the streaming buffer window.
+
+## Invalid query errors
+
+When BigQuery returns an HTTP `400 Bad Request` error with the `invalidQuery` error reason, the SQL query failed validation or execution checks. Use the specific error message returned by BigQuery to diagnose the issue across the following four categories:
+
+### Syntax and grammar errors
+
+Error strings:
+
+- `Syntax error: Expected `` TOKEN `` but got `` INPUT `` at [ `` LINE `` : `` COLUMN `` ]`
+- `Syntax error: Unexpected keyword `` KEYWORD `` at [ `` LINE `` : `` COLUMN `` ]`
+- `Unrecognized name: `` IDENTIFIER `` at [ `` LINE `` : `` COLUMN `` ]` or `Function not found: `` FUNCTION_NAME `` at [ `` LINE `` : `` COLUMN `` ]`
+
+To resolve syntax and identifier errors, do the following:
+
+- **Inspect the `[ `` LINE `` : `` COLUMN `` ]` location.** Check the line and column in the error message (and the token immediately preceding it) for unclosed parentheses, missing commas, trailing commas, unescaped quotes, or missing `END` keywords in `CASE` expressions.
+- **Verify SQL clause ordering and dialect.** Confirm that SQL clauses follow the required [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) order ( `SELECT` → `FROM` → `WHERE` → `GROUP BY` → `HAVING` → `QUALIFY` → `ORDER BY` → `LIMIT` ), and verify that your request uses GoogleSQL ( `useLegacySql=false` ). For legacy SQL errors, see [Legacy SQL errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#legacy-sql-errors) .
+- **Verify column, alias, and function scope.** If the error reports `Unrecognized name` or `Function not found` , check the following cases:
+  - **Misspelled or case-mismatched identifier.** Verify the column or table spelling and case against the table schema.
+  - **`SELECT` alias referenced in `WHERE` .** Don't reference aliases defined in the `SELECT` list within the same `WHERE` clause. Repeat the expression, use a subquery or CTE, or filter in `QUALIFY` (for window functions).
+  - **Unqualified persistent user-defined function (UDF).** Qualify persistent UDFs with `PROJECT_ID `` . `` DATASET_ID `` . `` FUNCTION_NAME` .
+  - **Special characters or reserved keywords.** Enclose table or column names that contain special characters or reserved keywords in backticks ( `` ` `` ). You can also use the query validator in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) to catch syntax issues before running the query.
+
+### Data type compatibility errors
+
+Error strings:
+
+- `No matching signature for operator `` OPERATOR `` for argument types: `` TYPE_A `` , `` TYPE_B`
+- `No matching signature for function `` FUNCTION_NAME `` for argument types: `` ARG_TYPES`
+- `Query column `` COLUMN_NUMBER `` has type `` SOURCE_TYPE `` which cannot be inserted into column `` TARGET_COLUMN `` , which has type `` TARGET_TYPE`
+- `Unsupported type `` TYPE`
+
+To resolve data type mismatches, do the following:
+
+- **Align types in comparisons, joins, and functions.** Query `INFORMATION_SCHEMA.COLUMNS` or inspect the table schema in the Google Cloud console to verify that all inputs use compatible [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) in the following locations:
+  - `WHERE` filters and `JOIN ... ON` keys
+  - `COALESCE` and `IFNULL` arguments
+  - `UNION` and `INSERT ... SELECT` column positions
+  - UDF arguments and return types (including JavaScript UDF `RETURNS` types)
+  - BigQuery ML functions ( `ML.EVALUATE` , `ML.PREDICT` )
+- **Apply explicit type conversions.** Use [`CAST()` or `SAFE_CAST()`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions) or date and time parsing functions (such as `PARSE_DATE` , `PARSE_TIMESTAMP` , and `TIMESTAMP_SECONDS` ) to convert values explicitly rather than relying on implicit coercion.
+- **Handle unsupported export or federated types.** When running `EXPORT DATA` or federated queries over unsupported complex or geographic types (such as `GEOGRAPHY` , `INTERVAL` , or `BIGNUMERIC` ), choose one of the following options:
+  - Cast the column to `STRING` in your `SELECT` list.
+  - Switch the `EXPORT DATA` format to `AVRO` or `PARQUET` to preserve type fidelity.
+
+### Feature and architectural restrictions
+
+Error strings:
+
+- `Invalid table-valued function `` FUNCTION_NAME` or `Missing required option `` OPTION_NAME`
+- `Unsupported aggregate function in materialized view`
+- `Cannot query over table ' `` TABLE_NAME `` ' without a filter over column(s) ' `` COLUMN_NAME `` ' that can be used for partition elimination`
+- `UPDATE/MERGE must match at most one source row for each target row`
+- `Invalid snapshot time`
+- `Too many nested views/persistent user-defined functions...`
+
+To resolve feature, DDL, and query restriction errors, do the following:
+
+- **Verify required `OPTIONS(...)` in DDL statements.** When creating external tables, remote functions, or models, verify that all required options (such as `format` and `uris` for external tables) are specified with valid types in the `OPTIONS` clause. See [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
+- **Check materialized view SQL limitations.** Materialized views support a restricted subset of SQL aggregations and cannot reference non-deterministic functions such as `CURRENT_DATE()` , `RAND()` , or `SESSION_USER()` . See [Supported materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#supported-mvs) .
+- **Include required partition filters.** If the target table enforces `require_partition_filter = true` , include a `WHERE` predicate on the partitioning column that can prune partitions. See [Query partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
+- **Deduplicate `UPDATE` or `MERGE` source rows.** If an `UPDATE` or `MERGE` statement fails because multiple source rows match a single target row, aggregate or deduplicate the `FROM` or `USING` source (for example, by using `GROUP BY` or `QUALIFY ROW_NUMBER() OVER (...) = 1` ). See [DML limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) .
+- **Check time travel, view nesting, and subquery limits.** Depending on the error message, see one of the following sections:
+  - **`FOR SYSTEM_TIME AS OF` outside the retention window.** See [Invalid snapshot time](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#invalid_snapshot_time) .
+  - **Views or routines exceeding the 16-level nesting depth limit.** See [Too many nested views or persistent user-defined functions](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#ts-nested-views-udfs) .
+  - **Unsupported correlated subqueries.** See [Correlated subqueries](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#correlated-subqueries) .
+
+### Execution state and concurrency constraints
+
+Error strings:
+
+- `Concurrent conflicting update to DML transaction conflict` or `Could not serialize access to table `` TABLE_NAME `` due to concurrent update`
+- `Transaction is aborted due to concurrent update against table `` TABLE_NAME`
+- `UPDATE or DELETE statement over table `` TABLE_NAME `` would affect rows in the streaming buffer, which is not supported`
+
+To resolve execution state and concurrency errors, see the dedicated section for your error message:
+
+- **Concurrent DML or transaction conflicts.** See [Conflicting DML statements](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#could_not_serialize) and [Transaction aborted due to concurrent update](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#transaction_aborted_due_to_concurrent_update) .
+- **DML on tables with active streaming buffers.** See [DML statements on tables with a streaming buffer](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries#streaming-dml) .
+
 ## Invalid snapshot time
 
 Error string: `Invalid snapshot time`
