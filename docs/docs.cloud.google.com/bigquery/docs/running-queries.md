@@ -1208,7 +1208,7 @@ If BigQuery determines that a job is required to complete the query, a `jobRefer
 
 When you use the `JOB_CREATION_OPTIONAL` value, the `jobReference` field might not be present in the response. Check if the field exists before accessing it.
 
-When `JOB_CREATION_OPTIONAL` is specified for multi-statement queries (scripts), BigQuery might optimize the execution process. As part of this optimization, BigQuery might determine that it can complete the script by creating fewer job resources than the number of individual statements, potentially even executing the entire script without creating any job at all. This optimization depends on BigQuery's assessment of the script, and the optimization might not be applied in every case. The optimization is fully automated by the system. No user controls or actions are required.
+When `JOB_CREATION_OPTIONAL` is specified for multi-statement queries (scripts), BigQuery might optimize the execution process. As part of this optimization, BigQuery might determine that it can complete the script by creating fewer job resources than the number of individual statements, potentially even executing the entire script without creating any job at all. This optimization depends on the BigQuery assessment of the script, and the optimization might not be applied in every case. The optimization is fully automated by the system. No user controls or actions are required.
 
 To run a query using optional job creation mode, select one of the following options:
 
@@ -1564,6 +1564,105 @@ Requires setting `JobCreationMode=2` in the `.ini` file.
 ```
 
 > **Note:** you may append `LogLevel=6` and `LogPath=log.txt` to the `.ini` file to enable detailed level logging and extract troubleshooting information, including `queryId` , if needed.
+
+## Return query results in the Arrow format
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To request support or provide feedback for this feature, send email to <bq-arrow-support-in-query-results-preview@google.com> .
+
+You can retrieve query results directly in the Apache Arrow format, which improves serialization efficiency and retrieval speed compared to key-value pair encoding ( `STRUCT_ENCODING` ). You can request the Arrow format when running a query with `jobs.query` , or stream results directly from a BigQuery job using the BigQuery Storage Read API `ReadRows` method.
+
+### Arrow support in `jobs.query`
+
+When you execute a query using the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) , you can set the [`queryResultsFormat` property](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest.FIELDS.query_results_format) in [`QueryRequest`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) to `ARROW` . You can also configure Arrow buffer compression using the [`arrowSerializationOptions` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#ArrowSerializationOptions) :
+
+- **`bufferCompression`** : The compression codec to use for Arrow buffers ( `COMPRESSION_UNSPECIFIED` , `LZ4_FRAME` , or `ZSTD` ).
+
+When `queryResultsFormat` is set to `ARROW` , the [`QueryResponse`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#response-body) returns:
+
+- [**`arrowSchema.serializedSchema`**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.arrow_schema) : The IPC-serialized Arrow schema of the results (if present).
+- [**`arrowRecordBatch.serializedRecordBatch`**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.arrow_record_batch) : The IPC-serialized Arrow `RecordBatch` for the first page of results (if present).
+- [**`pageRowCount`**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.page_row_count) : The number of rows returned in the first page.
+
+The following behavior occurs when using `ARROW` with `jobs.query` :
+
+- The standard `rows` and `schema` fields in `QueryResponse` aren't populated.
+- The first page of `QueryResponse` might return empty serialized Arrow data if results don't fit in the initial response.
+- The [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) method doesn't support the Arrow format. To retrieve remaining pages of query results not returned in the initial `jobs.query` response, you must stream the results using the Storage Read API ( `ReadRows` ).
+
+### Direct streaming with `ReadRows`
+
+You can stream the results of any BigQuery query job directly using the Storage Read API `ReadRows` method by reading from the job's special `_default` stream:
+
+`projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /jobs/ `` JOB_ID `` /streams/_default`
+
+When reading from a job's `_default` stream:
+
+- **Automatic Arrow default** : Output from a job `_default` stream always defaults to the Arrow format, regardless of whether the Arrow format was explicitly requested when the query job was created.
+- **Automatic job waiting** : If the query job is still running when `ReadRows` is called, the Storage Read API automatically waits for the job to complete before streaming results.
+- **Total estimated row count** : When reading from a job stream, the `ReadRowsResponse` populates `total_estimated_row_count` with the estimated number of rows in the query results.
+- **Override options** : You can override Arrow serialization options (such as compression) when calling `ReadRows` by setting the `arrow_serialization_options` field in [`ReadRowsRequest`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.ReadRowsRequest) (supported for job `_default` streams).
+
+For more information, see [Stream query results using ReadRows](https://docs.cloud.google.com/bigquery/docs/reference/storage#stream-query-results) .
+
+### Examples
+
+To retrieve query results in the Arrow format, select one of the following options:
+
+### API
+
+To run a query and retrieve results in the Arrow format using the API, [run a query synchronously](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) and populate the [`QueryRequest`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) property. Include the `queryResultsFormat` property and set its value to `ARROW` . Optionally, populate `arrowSerializationOptions` to specify `bufferCompression` (for example, `LZ4_FRAME` or `ZSTD` ).
+
+Check the response. If `jobComplete` equals `true` , read the schema from the [`arrowSchema.serializedSchema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.arrow_schema) field and the record batch from the [`arrowRecordBatch.serializedRecordBatch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.arrow_record_batch) field in the [`QueryResponse`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#response-body) . The number of rows in the first page is returned in [`pageRowCount`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#body.QueryResponse.FIELDS.page_row_count) . The standard `rows` and `schema` fields aren't populated.
+
+If the query results don't fit in the initial response page or `arrowRecordBatch` is empty, stream the remaining results using the Storage Read API `ReadRows` method on the job's `_default` stream. [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) doesn't support the Arrow format.
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```python
+from typing import Iterable
+
+import pyarrow
+from google.cloud.bigquery import enums
+
+from google.cloud import bigquery
+
+
+def query_and_wait_arrow() -> Iterable[pyarrow.RecordBatch]:
+    """Queries BigQuery and returns results as an iterable of Apache Arrow RecordBatches.
+
+    Returns:
+        Iterable[pyarrow.RecordBatch]: An iterable of Apache Arrow RecordBatch objects.
+    """
+    # Initialize a BigQuery client.
+    client = bigquery.Client()
+
+    query = """
+        SELECT name, number, state
+        FROM `bigquery-public-data.usa_names.usa_1910_current`
+        LIMIT 100000
+    """
+
+    # Run the query and wait for results returned directly in Arrow format
+    # compressed with LZ4_FRAME.
+    results = client.query_and_wait(
+        query,
+        query_results_format=enums.QueryResultsFormat.ARROW,
+        compression_codec=enums.QueryResultsCompressionCodec.LZ4_FRAME,
+    )
+
+    # Return results as an iterable of pyarrow.RecordBatch objects.
+    # Each batch contains a slice of the rows in Apache Arrow format.
+    batches = results.to_arrow_iterable()
+    return batches
+```
 
 ## Global queries
 

@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Best practices for spatial analysis
 
-This document describes best practices for optimizing geospatial query performance in BigQuery. You can use these best practices to improve performance and reduce cost and latency.
+When you analyze complex geospatial features in BigQuery, datasets can contain large collections of polygons, multipolygon shapes, and linestrings to represent complex features—for example, roads, land parcels, and flood zones. Each shape can contain thousands of points. In most spatial operations in BigQuery (for example, intersections and distance calculations), the underlying algorithm usually visits the majority of points in each shape to produce a result. For some operations, the algorithm visits all points.
 
-Datasets can contain large collections of polygons, multipolygon shapes, and linestrings to represent complex features—for example, roads, land parcels, and flood zones. Each shape can contain thousands of points. In most spatial operations in BigQuery (for example, intersections and distance calculations), the underlying algorithm usually visits the majority of points in each shape to produce a result. For some operations, the algorithm visits all points. For complex shapes, visiting each point can increase the cost and duration of the spatial operations. You can use the strategies and methods presented in this guide to optimize these common spatial operations for improved performance and reduced cost.
+Processing shapes with thousands of points can drastically increase your query costs and duration. To optimize your geospatial query performance and reduce latency, you can apply specific spatial analysis best practices to your datasets.
 
 This document assumes that your BigQuery geospatial tables are [clustered on a geography column](https://docs.cloud.google.com/bigquery/docs/geospatial-data#partitioning_and_clustering_geospatial_data) .
 

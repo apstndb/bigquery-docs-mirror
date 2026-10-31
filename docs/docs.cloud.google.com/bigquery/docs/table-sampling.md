@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/table-sampling
 uri: https://docs.cloud.google.com/bigquery/docs/table-sampling
 title: Table sampling
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use table sampling in BigQuery to query random subsets of data, letting you explore large tables while reducing query costs.
 data_source: docs.cloud.google.com
 ---
 
@@ -12,9 +12,9 @@ data_source: docs.cloud.google.com
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Table sampling lets you query random subsets of data from large BigQuery tables. Sampling returns a variety of records while avoiding the costs associated with scanning and processing an entire table.
+Table sampling in BigQuery lets you query random subsets of data from large tables. Analyzing a variety of records using the [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator) clause lets you explore large datasets while avoiding the costs associated with scanning and processing an entire table.
 
-## Using table sampling
+## Use table sampling
 
 To use table sampling in a query, include the [`TABLESAMPLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#tablesample_operator) clause. For example, the following query selects approximately 10% of a table's data:
 

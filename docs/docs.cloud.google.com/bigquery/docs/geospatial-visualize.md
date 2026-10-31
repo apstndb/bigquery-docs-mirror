@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Visualize geospatial data
 
-Geospatial analytics lets you visualize geographic location data by using the following:
+Visualizing geospatial data in BigQuery lets you confirm data alignment, identify outliers, and assess the correctness of your spatial information. You can use the following tools to perform inspections and derive conclusions from your geographic location data:
 
 - [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#bigquery_studio)
 - [Data Studio](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize#data_studio)

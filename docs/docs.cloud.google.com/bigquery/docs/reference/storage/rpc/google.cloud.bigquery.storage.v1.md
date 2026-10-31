@@ -366,15 +366,15 @@ Contains options specific to Arrow Serialization.
 
 Compression codec's supported by Arrow.
 
-| Enums                     |                                                                             |
-|---------------------------|-----------------------------------------------------------------------------|
-| `COMPRESSION_UNSPECIFIED` | If unspecified no compression will be used.                                 |
-| `LZ4_FRAME`               | LZ4 Frame ( <https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md> ) |
-| `ZSTD`                    | Zstandard compression.                                                      |
+| Enums                     |                                                                          |
+|---------------------------|--------------------------------------------------------------------------|
+| `COMPRESSION_UNSPECIFIED` | If unspecified no compression will be used.                              |
+| `LZ4_FRAME`               | [LZ4 Frame](https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md) |
+| `ZSTD`                    | Zstandard compression.                                                   |
 
 ## PicosTimestampPrecision
 
-The precision of the timestamp value in the Avro message. This precision will **only** be applied to the column(s) with the `TIMESTAMP_PICOS` type.
+The precision of the timestamp value in the Avro message. This precision is only applied to the column(s) with the `TIMESTAMP_PICOS` type.
 
 | Enums                                   |                                                                                                                                                                |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -764,6 +764,17 @@ Request message for `ReadRows` .
 <td><p><code>int64</code></p>
 <p>The offset requested must be less than the last row read from Read. Requesting a larger offset is undefined. If not specified, start reading from offset zero.</p></td>
 </tr>
+<tr class="odd">
+<td><p>Union field <code>output_format_serialization_options</code> . Specifies output serialization options. Only job <code>_default</code> streams are supported.</p>
+<p><a href="https://cloud.google.com/products/#product-launch-stages">Preview</a> <code>output_format_serialization_options</code> can be only one of the following:</p></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>arrow_serialization_options</code></td>
+<td><p><a href="https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.ArrowSerializationOptions"><code>ArrowSerializationOptions</code></a></p>
+<p>Optional. Options specific to the Apache Arrow output format.</p>
+<p><a href="https://cloud.google.com/products/#product-launch-stages">Preview</a></p></td>
+</tr>
 </tbody>
 </table>
 
@@ -782,6 +793,7 @@ Response from calling `ReadRows` may include row data, progress and throttling i
 | Union field `schema` . The schema for the read. If read_options.selected_fields is set, the schema may be different from the table schema as it will only contain the selected fields. This schema is equivalent to the one returned by CreateSession. This field is only populated in the first ReadRowsResponse RPC. `schema` can be only one of the following: |                                                                                                                                                                                                                                                                     |
 | `avro_schema`                                                                                                                                                                                                                                                                                                                                                     | [`AvroSchema`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.AvroSchema) Output only. Avro schema.                                                                            |
 | `arrow_schema`                                                                                                                                                                                                                                                                                                                                                    | [`ArrowSchema`](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.ArrowSchema) Output only. Arrow schema.                                                                         |
+| `total_estimated_row_count`                                                                                                                                                                                                                                                                                                                                       | `int64` Output only. The total estimated number of rows in the query results. Only populated when reading data from a BigQuery job. [Preview](https://cloud.google.com/products/#product-launch-stages)                                                             |
 
 ## ReadSession
 

@@ -2,17 +2,20 @@
 name: documents/docs.cloud.google.com/bigquery/docs/geospatial-data
 uri: https://docs.cloud.google.com/bigquery/docs/geospatial-data
 title: Work with geospatial data
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to load, transform, and analyze geospatial data in BigQuery using formats like GeoJSON and WKT to extract location-based insights.
 data_source: docs.cloud.google.com
 ---
 
 # Work with geospatial data
 
-Geospatial analytics let you analyze geographic data in BigQuery. Geographic data is also known as *geospatial data* .
+Geospatial analytics lets you load, transform, and analyze geographic data, also known as *geospatial data* , in BigQuery. You can use standard formats like GeoJSON and WKT to run optimized spatial joins and extract location-based insights directly from BigQuery.
+
+## Data types
 
 Common types of objects when working with geospatial data include the following:
 
-- A *geometry* represents a surface area on the Earth. It is often described using points, lines, polygons, or a collection of points, lines, and polygons. A *geometry collection* is a geometry that represents the spatial union of all shapes in the collection.
+- A *geometry* represents a surface area on the Earth. A geometry is often described using points, lines, polygons, or a collection of points, lines, and polygons.
+- A *geometry collection* is a geometry that represents the spatial union of all shapes in the collection.
 - A *spatial feature* represents a logical spatial object. It combines a geometry with additional attributes that are application-specific.
 - A *spatial feature collection* is a set of spatial features.
 
@@ -281,7 +284,7 @@ If you use the [`ST_GEOGFROMTEXT`](https://docs.cloud.google.com/bigquery/docs/r
 
 - `FALSE` : Interpret the input as the polygon with the smaller area. This is the default behavior.
 
-- `TRUE` : Use the left-hand orientation rule described previously. This option allows you to load polygons with an area larger than a hemisphere.
+- `TRUE` : Use the left-hand orientation rule described previously. This option lets you load polygons with an area larger than a hemisphere.
 
 Because GeoJSON strings are defined on a planar map, the orientation can be determined without ambiguity, even if the input does not follow the orientation rule defined in the GeoJSON format specification, [RFC 7946](https://tools.ietf.org/html/rfc7946) .
 
@@ -364,7 +367,7 @@ GROUP BY zip
 ORDER BY bike_stations DESC
 ```
 
-Spatial joins perform better when your geography data is persisted. The example above creates the geography values in the query. It is more performant to store the geography values in a BigQuery table.
+Spatial joins perform better when your geography data is persisted. The previous example creates the geography values in the query. It is more performant to store the geography values in a BigQuery table.
 
 For example, the following query retrieves longitude, latitude pairs and converts them to geographic points. When you run this query, you specify a new destination table to store the query results:
 

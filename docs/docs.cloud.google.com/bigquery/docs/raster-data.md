@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with raster data using Earth Engine in BigQuery
 
-This document explains how to combine raster and vector data by using the [`ST_REGIONSTATS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) , which uses Google Earth Engine to get access to image and raster data in BigQuery.
+Combining raster and vector data with the `ST_REGIONSTATS` function lets you calculate zonal statistics, such as average air quality or fire risk, across specific geographic regions. You can use Google Earth Engine directly in BigQuery to analyze satellite imagery and weather forecasts alongside your existing vector boundaries.
 
 ## Overview
 

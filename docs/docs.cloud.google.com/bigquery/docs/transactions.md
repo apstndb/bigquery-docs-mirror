@@ -2,22 +2,18 @@
 name: documents/docs.cloud.google.com/bigquery/docs/transactions
 uri: https://docs.cloud.google.com/bigquery/docs/transactions
 title: Multi-statement transactions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use multi-statement transactions in BigQuery to perform atomic data mutations across multiple tables and guarantee ACID properties.
 data_source: docs.cloud.google.com
 ---
 
 # Multi-statement transactions
 
-BigQuery supports multi-statement transactions inside a single query, or across multiple queries when using sessions. A multi-statement transaction lets you perform mutating operations, such as inserting or deleting rows on one or more tables, and either commit or roll back the changes atomically.
+Multi-statement transactions in BigQuery let you perform mutating operations, such as inserting or deleting rows, across multiple tables and either commit or roll back the changes atomically. Grouping your data manipulation statements into a single transaction lets you maintain strict [ACID](https://en.wikipedia.org/wiki/ACID) properties and ensure data integrity through snapshot isolation during complex, multi-stage updates.
 
-Uses for multi-statement transactions include:
+You can use multi-statement transactions to complete the following tasks:
 
 - Performing DML mutations on multiple tables as a single transaction. The tables can span multiple datasets or projects.
 - Performing mutations on a single table in several stages, based on intermediate computations.
-
-Transactions guarantee [ACID](https://en.wikipedia.org/wiki/ACID) properties and support snapshot isolation. During a transaction, all reads return a consistent snapshot of the tables referenced in the transaction. If a statement in a transaction modifies a table, the changes are visible to subsequent statements within the same transaction.
-
-> **Note:** Reads from external data sources are not guaranteed to be consistent within a transaction if the underlying data source changes during the transaction.
 
 ## Transaction scope
 
@@ -331,14 +327,10 @@ Replace the following:
 
 ## Limitations
 
-- Transactions cannot use DDL statements that affect permanent entities.
-
+- Reads from external data sources are not guaranteed to be consistent within a transaction if the underlying data source changes during the transaction.
+- Transactions can't use DDL statements that affect permanent entities.
 - Within a transaction, [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) are interpreted as logical views. You can still query a materialized view inside a transaction, but it doesn't result in any performance improvement or cost reduction compared with the equivalent logical view.
-
 - A multi-statement transaction that fails triggers a rollback operation, undoing all pending changes and precluding retries.
-
 - A transaction can mutate data in at most 100 tables and can perform at most 100,000 partition modifications.
-
 - [BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) does not accelerate queries inside a transaction.
-
 - Metadata for external data sources can't be refreshed within a transaction using [a system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) .

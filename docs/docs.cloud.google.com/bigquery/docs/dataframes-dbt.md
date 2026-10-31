@@ -8,11 +8,15 @@ data_source: docs.cloud.google.com
 
 # Use BigQuery DataFrames in dbt
 
-[dbt](https://www.getdbt.com/) (data build tool) is an open-source command-line framework engineered for data transformation within modern data warehouses. dbt facilitates modular data transformations through the creation of reusable SQL and Python based models. The tool orchestrates the execution of these transformations within the target data warehouse, focusing on the transformation step of the ELT pipeline. For more information, see the [dbt documentation](https://docs.getdbt.com/) .
+To execute modular Python data transformations directly within BigQuery, integrate BigQuery DataFrames with the open-source [data build tool (dbt)](https://www.getdbt.com/) . Using the [`dbt-bigquery` adapter](https://github.com/dbt-labs/dbt-adapters/tree/main/dbt-bigquery) to run [Python models](https://docs.getdbt.com/docs/build/python-models) lets you perform complex extract, load, and transform (ELT) transformations that are inefficient to express in SQL, while still benefiting from dbt's robust orchestration, dependency management, and testing features.
+
+## dbt overview
+
+[dbt](https://www.getdbt.com/) is an open-source command-line framework engineered for data transformation within modern data warehouses. dbt facilitates modular data transformations through the creation of reusable SQL- and Python-based models. The tool orchestrates the execution of these transformations within the target data warehouse, focusing on the transformation step of the ELT pipeline. For more information, see the [dbt documentation](https://docs.getdbt.com/) .
 
 In dbt, a Python model is a data transformation that is defined and executed using Python code within your dbt project. Instead of writing SQL for the transformation logic, you write Python scripts that dbt then orchestrates to run within the data warehouse environment. A Python model lets you perform data transformations that might be complex or inefficient to express in SQL. This leverages the capabilities of Python while still benefiting from dbt's project structure, orchestration, dependency management, testing, and documentation features. For more information, see [Python models](https://docs.getdbt.com/docs/build/python-models) .
 
-The [`dbt-bigquery` adapter](https://github.com/dbt-labs/dbt-adapters/tree/main/dbt-bigquery) supports running Python code that's defined in BigQuery DataFrames. This feature is available in [dbt Cloud](https://www.getdbt.com/product/dbt-cloud) and [dbt Core](https://docs.getdbt.com/docs/core/installation-overview) . You can also get this feature by cloning the latest version of the `dbt-bigquery` adapter.
+The [`dbt-bigquery` adapter](https://github.com/dbt-labs/dbt-adapters/tree/main/dbt-bigquery) supports running Python code that's defined in BigQuery DataFrames. This feature is available in [dbt Cloud](https://www.getdbt.com/product/dbt-cloud) and [dbt Core](https://docs.getdbt.com/docs/core/installation-overview) .
 
 ## Before you begin
 

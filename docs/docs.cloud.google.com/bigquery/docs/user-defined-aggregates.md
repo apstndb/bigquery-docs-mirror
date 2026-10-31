@@ -2,15 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/user-defined-aggregates
 uri: https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates
 title: User-defined aggregate functions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to create, call, and delete user-defined aggregate functions (UDAFs) in BigQuery using SQL or JavaScript.
 data_source: docs.cloud.google.com
 ---
 
 # User-defined aggregate functions
 
-This document describes how to create, call, and delete user-defined aggregate functions (UDAFs) in BigQuery.
-
-A UDAF lets you create an aggregate function by using an expression that contains code. A UDAF accepts columns of input, performs a calculation on a group of rows at a time, and then returns the result of that calculation as a single value.
+User-defined aggregate functions (UDAFs) in BigQuery let you build custom aggregation logic using SQL or JavaScript code. You can process your input columns as a group to perform specialized calculations on multiple rows at a time and return the result as a single value.
 
 ## Create a SQL UDAF
 

@@ -2,15 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/working-with-time-series
 uri: https://docs.cloud.google.com/bigquery/docs/working-with-time-series
 title: Work with time series data
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use SQL functions in BigQuery to analyze time series data, including aggregating time buckets, filling data gaps, and aligning metrics.
 data_source: docs.cloud.google.com
 ---
 
 # Work with time series data
 
-This document describes how to use SQL functions to support time series analysis.
+Analyzing time series data in BigQuery lets you extract meaningful trends from sequences of data points over time. You can use specialized SQL functions to aggregate time buckets, fill missing data gaps, and align your unaligned metrics to prepare them for complex joins and analysis.
 
-## Introduction
+## Time series tables
 
 A time series is a sequence of data points, each consisting of a time and a value associated with that time. Usually, a time series also has an identifier, which uniquely names the time series.
 

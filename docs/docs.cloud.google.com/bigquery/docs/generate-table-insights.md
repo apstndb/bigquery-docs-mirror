@@ -115,27 +115,51 @@ To generate insights for a BigQuery table, you must access the table entry in Bi
 
 2.  In the **Explorer** pane, select the project, dataset, and then the table you want to generate insights for.
 
-3.  Click the **Insights** tab. If the tab is empty, it means that the insights for this table are not generated yet.
+3.  Click the **Insights** tab.
 
-4.  To generate insights and publish them to Knowledge Catalog, click **Generate and publish** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+    If the tab is empty, insights haven't been generated for this table yet.
 
-    To generate insights without publishing them to Knowledge Catalog, click **Generate without publishing** .
+4.  To generate insights, click **Generate** .
 
-    For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#modes_for_generating_table_data_insights) .
+5.  Select the publish condition:
 
-5.  Select a region to generate insights and click **Generate** .
+    - To generate and permanently attach insights to the asset as metadata aspects, turn on the **Publish condition** toggle. This makes the insights indexable, searchable, and visible to other users in your organization.
+
+    - To generate and view insights temporarily during your current session, turn off the **Publish condition** toggle.
+
+    For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating data insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#modes-table-insights) .
+
+6.  Optional: In the **Custom instructions** field, provide guidance and domain context to customize how Gemini generates insights.
+
+    For example, you can enforce naming conventions, specify business definitions, or describe join keys:
+
+    ```
+    LANGUAGE: Always write column descriptions in uppercase.
+
+    DOMAIN_CONTEXT:
+    - This dataset supports the Order-to-Cash process for the EMEA commercial
+      sales team.
+    - Primary consumers are finance analysts and regional sales managers, not
+      engineers.
+
+    RELATIONSHIPS:
+    - returns.order_item_id → order_items.id (one-to-one; use LEFT JOIN to
+      preserve unreturned items)
+    ```
+
+7.  Select a region to generate insights and click **Generate** .
 
     It takes a few minutes for the insights to be populated.
 
-    If published data profiling results for the table are available, they're used to generate insights. Otherwise, insights are generated based on the column names and descriptions. For more information, see [Best practices to improve generated insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#best_practices_for_generating_data_insights) .
+    If published data profiling results for the table are available, they're used to generate insights. Otherwise, insights are generated based on the column names and descriptions. For more information, see [Best practices for generating data insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#best_practices_for_generating_data_insights) .
 
-6.  In the **Insights** tab, explore the generated natural language questions.
+8.  In the **Insights** tab, explore the generated natural language questions.
 
-7.  To view the SQL query that answers a question, click the question.
+9.  To view the SQL query that answers a question, click the question.
 
-8.  To open a query in BigQuery, click **Copy to Query** .
+10. To open a query in BigQuery, click **Copy to Query** .
 
-9.  To ask follow-up questions, do the following:
+11. To ask follow-up questions, do the following:
 
     1.  Click **Ask a follow-up** . The query opens in a new [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
 
@@ -143,7 +167,7 @@ To generate insights for a BigQuery table, you must access the table entry in Bi
 
     3.  To ask a follow-up question, enter a prompt in the **Natural language** prompt field or edit the SQL in the query editor.
 
-10. To generate a new set of queries, click **Generate insights** and trigger the pipeline again.
+12. To generate a new set of queries, click **Generate insights** and trigger the pipeline again.
 
 After you have generated insights for a table, anyone with the `dataplex.datascans.getData` permission and access to the table can view those insights.
 
@@ -359,11 +383,11 @@ Gemini in BigQuery automatically generates table and column descriptions when yo
 
 ### Control generation language
 
-You can guide Gemini to generate table and column descriptions in a specific language. To do this, add a short directive (for example, "Generate table and column descriptions using the French language") to your table's existing description before you generate the data insights.
+You can guide Gemini to generate table and column descriptions in a specific language. To do this, use the **Custom Instruction** field to add a short directive (for example, "Generate table and column descriptions using the French language") to your table's existing description before you generate the data insights.
 
-> **Note:** To help Gemini understand your request, include the word "language" in your prompt.
+> **Note:** To help Gemini understand your request, include the word "language" in your custom instructions.
 
-When you generate insights, Gemini interprets this directive and produces the metadata in the requested language. This mechanism works because Gemini uses existing table descriptions as context when generating new ones.
+When you generate insights, Gemini interprets these instructions and produces the metadata in the requested language. This mechanism works because Gemini uses existing table descriptions as context when generating new ones.
 
 For a list of supported languages, see [Gemini language support](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#language_support) .
 

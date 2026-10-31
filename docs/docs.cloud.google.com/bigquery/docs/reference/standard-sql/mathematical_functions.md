@@ -247,7 +247,7 @@ CBRT(X)
 
 **Description**
 
-Computes the cube root of `X` . `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) . Supports the `SAFE.` prefix.
+Computes the cube root of `X` . `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 
 | X      | CBRT(X) |
 |--------|---------|
@@ -503,7 +503,7 @@ COT(X)
 
 **Description**
 
-Computes the cotangent for the angle of `X` , where `X` is specified in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) . Supports the `SAFE.` prefix.
+Computes the cotangent for the angle of `X` , where `X` is specified in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 
 | X      | COT(X)  |
 |--------|---------|
@@ -537,7 +537,7 @@ COTH(X)
 
 **Description**
 
-Computes the hyperbolic cotangent for the angle of `X` , where `X` is specified in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) . Supports the `SAFE.` prefix.
+Computes the hyperbolic cotangent for the angle of `X` , where `X` is specified in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 
 | X      | COTH(X) |
 |--------|---------|
@@ -571,7 +571,7 @@ CSC(X)
 
 **Description**
 
-Computes the cosecant of the input angle, which is in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) . Supports the `SAFE.` prefix.
+Computes the cosecant of the input angle, which is in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 
 | X      | CSC(X)  |
 |--------|---------|
@@ -605,7 +605,7 @@ CSCH(X)
 
 **Description**
 
-Computes the hyperbolic cosecant of the input angle, which is in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) . Supports the `SAFE.` prefix.
+Computes the hyperbolic cosecant of the input angle, which is in radians. `X` can be any data type that [coerces to `FLOAT64`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) .
 
 | X      | CSCH(X) |
 |--------|---------|

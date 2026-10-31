@@ -2,19 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/geospatial-intro
 uri: https://docs.cloud.google.com/bigquery/docs/geospatial-intro
 title: Introduction to geospatial analytics
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use geospatial analytics in BigQuery to analyze and visualize location data using the GEOGRAPHY data type and GoogleSQL functions.
 data_source: docs.cloud.google.com
 ---
 
 # Introduction to geospatial analytics
 
-In a data warehouse like BigQuery, location information is common and can influence critical business decisions. You can use geospatial analytics to analyze and visualize geospatial data in BigQuery by using the [`GEOGRAPHY` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) and [GoogleSQL geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
-
-For example, you might record the latitude and longitude of your delivery vehicles or packages over time. You might also record customer transactions and join the data to another table with store location data. You can use this type of location data to do the following:
-
-- Estimate when a package is likely to arrive.
-- Determine which customers should receive a mailer for a particular store location.
-- Combine your data with percent tree cover from satellite imagery to decide if delivery by aerial drone is feasible.
+Geospatial analytics in BigQuery lets you analyze and visualize location information to influence critical business decisions. You can use the [`GEOGRAPHY` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) and [GoogleSQL geography functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) to track delivery vehicles, map customer transactions, and extract actionable insights from your spatial data.
 
 ## Limitations
 
@@ -38,8 +32,8 @@ For more information on all quotas and limits, see [Quotas and limits](https://d
 
 When you use geospatial analytics, your charges are based on the following factors:
 
-- How much data is stored in the tables that contain geospatial data
-- The queries you run against the data
+- How much data is stored in the tables that contain geospatial data.
+- The queries you run against the data.
 
 For information on storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 

@@ -447,6 +447,28 @@ The BigQuery Data Transfer Service for Google Analytics connector periodically u
 
 The following sections outline the changes introduced by the Google Analytics Data API. Changes are organized by release date, and each entry provides information on the changes you need to make to continue receiving data from Google Analytics.
 
+### February 28, 2027
+
+In early 2027 (no earlier than February 28, 2027), the Google Analytics Data API is updating how it handles empty dimension fields. Once the API update takes effect, when Google Analytics doesn't receive data for a dimension, the [Google Analytics connector](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer) populates the corresponding field in newly transferred BigQuery tables with `null` instead of `(not set)` .
+
+This change affects all standard and custom report tables. Existing data already transferred to your BigQuery tables, as well as any data transferred before the API rollout completes, continues to use `(not set)` unless you run a backfill for those dates after the update takes effect.
+
+To prepare before the rollout begins, update your SQL queries that filter or group by `(not set)` by February 28, 2027, so that they handle both `(not set)` and `null` values. For example, if your SQL query includes the following `WHERE` clause:
+
+```
+WHERE DIMENSION_COLUMN = '(not set)'
+```
+
+Update the query to check for both values:
+
+```
+WHERE
+  DIMENSION_COLUMN = '(not set)'
+  OR DIMENSION_COLUMN IS NULL
+```
+
+Replace ` DIMENSION_COLUMN ` with the name of the dimension column in your BigQuery table.
+
 ### June 1, 2026
 
 Effective June 1, 2026, backfills for Google Analytics data using BigQuery Data Transfer Service will be limited to the most recent 37 months. This change is in response to the [New Data Retention Policy for Google Ads starting June 1, 2026](https://ads-developers.googleblog.com/2026/05/new-data-retention-policy-for-google.html) .

@@ -170,6 +170,8 @@ These workflows are for data engineers, analytics engineers, and others who buil
 
   - Generate dataset insights for key datasets, especially those with complex relationships.
 
+  - Tailor the generated insights to your organization's specific business context by supplying custom instructions that define key objectives, domain knowledge, and terminology. For example, you can enforce naming conventions, specify business definitions, or describe join keys.
+
   - Ensure data profile scans run on tables to provide rich context for more accurate and useful insights.
 
   For more information, see [Generate dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](https://docs.cloud.google.com/knowledge-catalog/docs/data-profiling-overview) .

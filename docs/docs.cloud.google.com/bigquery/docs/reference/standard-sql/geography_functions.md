@@ -123,7 +123,7 @@ This is advanced functionality for interoperability with systems utilizing the [
 - Can return negative cell IDs.
 - Valid S2 cell levels are 0 to 30.
 - `level` defaults to 30 if not explicitly specified.
-- The function only supports a single point GEOGRAPHY. Use the `SAFE` prefix if the input can be multipoint, linestring, polygon, or an empty `GEOGRAPHY` .
+- The function only supports a single point GEOGRAPHY.
 - To compute the covering of a complex `GEOGRAPHY` , use [S2_COVERINGCELLIDS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#s2_coveringcellids) .
 
 **Return type**
@@ -1022,7 +1022,7 @@ ST_ENDPOINT(linestring_geography)
 
 **Description**
 
-Returns the last point of a linestring geography as a point geography. Returns an error if the input isn't a linestring or if the input is empty. Use the `SAFE` prefix to obtain `NULL` for invalid input instead of an error.
+Returns the last point of a linestring geography as a point geography. Returns an error if the input isn't a linestring or if the input is empty.
 
 **Return Type**
 
@@ -1130,8 +1130,6 @@ Returns a linestring geography that corresponds to the outermost ring of a polyg
 - If the input geography is a polygon, gets the outermost ring of the polygon geography and returns the corresponding linestring.
 - If the input is the full `GEOGRAPHY` , returns an empty geography.
 - Returns an error if the input isn't a single polygon.
-
-Use the `SAFE` prefix to return `NULL` for invalid input instead of an error.
 
 **Return type**
 
@@ -1699,8 +1697,6 @@ Returns an array of linestring geographies that corresponds to the interior ring
 - If the input polygon has no holes, returns an empty array.
 - Returns an error if the input isn't a single polygon.
 
-Use the `SAFE` prefix to return `NULL` for invalid input instead of an error.
-
 **Return type**
 
 `ARRAY<LineString GEOGRAPHY>`
@@ -1994,7 +1990,7 @@ Details:
 `NULL` and error handling:
 
 - Returns `NULL` if any input argument is `NULL` .
-- Returns an error if `linestring_geography` isn't a linestring or if `point_geography` isn't a point. Use the `SAFE` prefix to obtain `NULL` for invalid input instead of an error.
+- Returns an error if `linestring_geography` isn't a linestring or if `point_geography` isn't a point.
 
 **Return Type**
 
@@ -2350,7 +2346,7 @@ ST_POINTN(linestring_geography, index)
 
 **Description**
 
-Returns the Nth point of a linestring geography as a point geography, where N is the index. The index is 1-based. Negative values are counted backwards from the end of the linestring, so that -1 is the last point. Returns an error if the input isn't a linestring, if the input is empty, or if there is no vertex at the given index. Use the `SAFE` prefix to obtain `NULL` for invalid input instead of an error.
+Returns the Nth point of a linestring geography as a point geography, where N is the index. The index is 1-based. Negative values are counted backwards from the end of the linestring, so that -1 is the last point. Returns an error if the input isn't a linestring, if the input is empty, or if there is no vertex at the given index.
 
 **Return Type**
 
@@ -2551,7 +2547,7 @@ ST_STARTPOINT(linestring_geography)
 
 **Description**
 
-Returns the first point of a linestring geography as a point geography. Returns an error if the input isn't a linestring or if the input is empty. Use the `SAFE` prefix to obtain `NULL` for invalid input instead of an error.
+Returns the first point of a linestring geography as a point geography. Returns an error if the input isn't a linestring or if the input is empty.
 
 **Return Type**
 
@@ -2685,7 +2681,7 @@ ST_X(point_geography_expression)
 
 Returns the longitude in degrees of the single-point input `GEOGRAPHY` .
 
-For any input `GEOGRAPHY` that isn't a single point, including an empty `GEOGRAPHY` , `ST_X` returns an error. Use the `SAFE.` prefix to obtain `NULL` .
+For any input `GEOGRAPHY` that isn't a single point, including an empty `GEOGRAPHY` , `ST_X` returns an error.
 
 **Return type**
 
@@ -2723,7 +2719,7 @@ ST_Y(point_geography_expression)
 
 Returns the latitude in degrees of the single-point input `GEOGRAPHY` .
 
-For any input `GEOGRAPHY` that isn't a single point, including an empty `GEOGRAPHY` , `ST_Y` returns an error. Use the `SAFE.` prefix to return `NULL` instead.
+For any input `GEOGRAPHY` that isn't a single point, including an empty `GEOGRAPHY` , `ST_Y` returns an error.
 
 **Return type**
 

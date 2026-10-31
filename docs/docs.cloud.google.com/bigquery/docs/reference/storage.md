@@ -20,7 +20,7 @@ Historically, users of BigQuery have had two mechanisms for accessing BigQuery-m
 
 The BigQuery Storage Read API provides a third option that represents an improvement over prior options. When you use the Storage Read API, structured data is sent over the wire in a binary serialization format. This allows for additional parallelism among multiple consumers for a set of results.
 
-The Storage Read API does not provide functionality related to managing BigQuery resources such as datasets, jobs, or tables.
+The Storage Read API does not provide functionality related to managing BigQuery resources such as datasets, jobs, or tables, but it supports streaming query results from BigQuery jobs using the `ReadRows` method.
 
 ## Key features
 
@@ -77,6 +77,39 @@ To support dynamic work rebalancing, the Storage Read API provides an additional
 Row blocks must be deserialized once they are received. Users of the Storage Read API may specify all data in a session to be serialized using either Apache Avro format, or Apache Arrow.
 
 The reference schema is sent as part of the initial `ReadSession` response, appropriate for the data format selected. In most cases, decoders can be long-lived because the schema and serialization are consistent among all streams and row blocks in a session.
+
+## Stream query results in the Arrow format
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To request support or provide feedback for this feature, send email to <bq-arrow-support-in-query-results-preview@google.com> .
+
+In addition to reading table data through read sessions, you can stream query results directly from a BigQuery query job using the `ReadRows` method. This process lets you to retrieve query results in the Apache Arrow format with high throughput.
+
+### Stream name format
+
+To stream results from a query job, invoke `ReadRows` and provide the job's special `_default` stream identifier:
+
+`projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /jobs/ `` JOB_ID `` /streams/_default`
+
+Replace the following:
+
+- `PROJECT_ID` : The project ID that ran the query job.
+- `LOCATION` : The location where the query job ran (for example, `us` or `us-central1` ).
+- `JOB_ID` : The ID of the BigQuery query job.
+
+### Stream behavior
+
+When you call `ReadRows` on a job's `_default` stream, the following behavior applies:
+
+- **Automatic Arrow format default** : The stream always defaults to the Apache Arrow format, regardless of whether it was requested when the query job was created.
+- **Automatic job completion waiting** : If the query job is still executing when `ReadRows` is called, the Storage Read API automatically waits for the query job to complete before streaming results.
+- **Total estimated row count** : When reading from a job stream, `ReadRowsResponse` populates `total_estimated_row_count` with the estimated number of rows in the query results.
+- **Arrow serialization options** : You can customize Arrow serialization settings (such as buffer compression) by setting the `arrow_serialization_options` field in `ReadRowsRequest` .
+
+For code samples, see [Stream query results from a query job](https://docs.cloud.google.com/bigquery/docs/reference/storage/libraries#stream-query-results) . For more information about query execution with Arrow results, see [Return query results in the Apache Arrow format](https://docs.cloud.google.com/bigquery/docs/running-queries#arrow-format) .
 
 ## Schema conversion
 

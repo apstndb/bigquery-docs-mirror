@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Grid systems for spatial analysis
 
-This document explains the purpose and methods of using geospatial grid systems (such as [S2](http://s2geometry.io/) and [H3](https://h3geo.org/) ) in BigQuery to organize spatial data in standardized geographic areas. It also explains how to choose the right grid system for your application. This document is useful for anyone who works with spatial data and performs spatial analysis in BigQuery.
+Geospatial grid systems, such as [S2](http://s2geometry.io/) and [H3](https://h3geo.org/) , let you organize spatial data into standardized geographic areas for analysis. Choosing the right multi-resolution grid system lets you reliably aggregate data, compare localized areas, and track changes over time without relying on inconsistent administrative boundaries.
 
 ## Overview and challenges of using spatial analysis
 

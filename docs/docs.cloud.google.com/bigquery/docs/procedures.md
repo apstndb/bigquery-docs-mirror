@@ -8,11 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with SQL stored procedures
 
-A *stored procedure* is a collection of statements that can be called from other queries or other stored procedures. A procedure can take input arguments and return values as output. You name and store a procedure in a BigQuery dataset. A stored procedure can access or modify data across multiple datasets by multiple users. It can also contain a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) .
-
-Some stored procedures are built into BigQuery and don't need to be created. These are called *system procedures* and you can learn more about them in the [System procedures reference](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures) .
-
-Stored procedures support *procedural language statements* , which let you do things like define variables and implement control flow. You can learn more about procedural language statements in the [Procedural language reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) .
+You can use SQL stored procedures in BigQuery to encapsulate and reuse collections of statements across multiple queries. Building these routines in your datasets lets you accept input arguments, return values, and modify data across multiple datasets and users. Stored procedures can also contain a [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) . You can create your own procedures using [procedural language](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) to define variables and implement control flow, or use BigQuery built-in [system procedures](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures) .
 
 ## Create a stored procedure
 

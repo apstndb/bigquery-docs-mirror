@@ -57,20 +57,18 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/d
 
 ## Supported configuration data
 
-In addition to the reporting data, BigQuery Data Transfer Service also transfers the following configuration data from Display & Video 360. Configuration data is retrieved from [Display & Video 360 API v3](https://developers.google.com/display-video/api/reference/rest/v3) only when the transfer run date is within 24 hours of the scheduled transfer time. Configuration data tables aren't updated during historical backfills.
+In addition to the reporting data, BigQuery Data Transfer Service also transfers the following configuration data from Display & Video 360. Configuration data is retrieved from [Display & Video 360 API v4](https://developers.google.com/display-video/api/reference/rest/v4) only when the transfer run date is within 24 hours of the scheduled transfer time. Configuration data tables aren't updated during historical backfills.
 
-- [Partner](https://developers.google.com/display-video/api/reference/rest/v3/partners#resource:-partner)
-- [Advertiser](https://developers.google.com/display-video/api/reference/rest/v3/advertisers#resource:-advertiser)
-- [LineItem](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.lineItems#LineItem)
-- [LineItemTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.lineItems/bulkListAssignedTargetingOptions#LineItemAssignedTargetingOption)
-- [Campaign](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.campaigns#Campaign)
-- [CampaignTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.campaigns.targetingTypes.assignedTargetingOptions#AssignedTargetingOption)
-- [InsertionOrder](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.insertionOrders#InsertionOrder)
-- [InsertionOrderTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.insertionOrders.targetingTypes.assignedTargetingOptions#AssignedTargetingOption)
-- [AdGroup](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroups#AdGroup)
-- [AdGroupTargeting](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroups/bulkListAdGroupAssignedTargetingOptions#AdGroupAssignedTargetingOption)
-- [AdGroupAd](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.adGroupAds#AdGroupAd)
-- [Creative](https://developers.google.com/display-video/api/reference/rest/v3/advertisers.creatives#resource:-creative)
+- [Partner](https://developers.google.com/display-video/api/reference/rest/v4/partners#Partner)
+- [Advertiser](https://developers.google.com/display-video/api/reference/rest/v4/advertisers#Advertiser)
+- [LineItem](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.lineItems#LineItem)
+- [LineItemTargeting](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.lineItems/bulkListAssignedTargetingOptions#LineItemAssignedTargetingOption)
+- [Campaign](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.campaigns#Campaign)
+- [InsertionOrder](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.insertionOrders#InsertionOrder)
+- [AdGroup](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroups#AdGroup)
+- [AdGroupTargeting](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroups/bulkListAssignedTargetingOptions#AdGroupAssignedTargetingOption)
+- [AdGroupAd](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.adGroupAds#AdGroupAd)
+- [Creative](https://developers.google.com/display-video/api/reference/rest/v4/advertisers.creatives#Creative)
 
 For more information about each type of configuration data, see the following links:
 

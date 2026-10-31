@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Specify a schema
 
-A schema defines the column names, data types, and other properties of a BigQuery table, so your data is stored and queried with the structure that you expect. BigQuery lets you specify a schema when you load data into a table or create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect#auto-detect) for supported data formats.
+A schema defines the column names, data types, and other properties of a BigQuery table, so your data is stored and queried with the structure that you expect. BigQuery lets you specify a schema when you load data into a table or create an empty table. Alternatively, you can use schema [auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) for supported data formats.
 
 For self-describing formats, such as Avro, Parquet, ORC, Firestore export files, and Datastore export files, BigQuery retrieves the schema from the source data. After you load data or create an empty table, you can [modify the schema definition](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 

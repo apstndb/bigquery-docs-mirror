@@ -938,6 +938,72 @@ The following list contains links to more resources related to the client librar
 - [`google-bigquery` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
 - [Source code](https://github.com/googleapis/google-cloud-ruby)
 
+## Stream query results from a query job using the BigQuery Storage Read API
+
+> **Preview**
+>
+> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+> **Note:** To request support or provide feedback for this feature, send email to <bq-arrow-support-in-query-results-preview@google.com> .
+
+The following example demonstrates how to run a query in BigQuery and stream the results in the Apache Arrow format directly using the Storage Read API `ReadRows` method on the job's `_default` stream:
+
+```python
+from typing import Iterable, Optional
+
+import pyarrow
+
+from google.cloud import bigquery, bigquery_storage_v1
+
+
+def read_rows_query_job() -> Iterable[pyarrow.RecordBatch]:
+    """Queries BigQuery and yields batches directly via BigQueryReadClient using a job stream.
+
+    Yields:
+        pyarrow.RecordBatch: Apache Arrow RecordBatch objects streamed from BigQuery.
+    """
+    # Initialize BigQuery and BigQuery Storage clients.
+    client = bigquery.Client()
+    read_client = bigquery_storage_v1.BigQueryReadClient()
+
+    query = """
+        SELECT name, number, state
+        FROM `bigquery-public-data.usa_names.usa_1910_current`
+        LIMIT 20000
+    """
+
+    # Start the query job.
+    job = client.query(query)
+
+    # Construct the job default stream name.
+    # Format: projects/{project_id}/locations/{location}/jobs/{job_id}/streams/_default
+    stream = f"projects/{job.project}/locations/{job.location}/jobs/{job.job_id}/streams/_default"
+
+    # Read rows directly from the stream using the Storage Read API.
+    schema: Optional[pyarrow.Schema] = None
+
+    for chunk in read_client.read_rows(name=stream, offset=0):
+        # Extract the schema from the first chunk that provides it.
+        if (
+            schema is None
+            and chunk.arrow_schema
+            and chunk.arrow_schema.serialized_schema
+        ):
+            schema = pyarrow.ipc.read_schema(
+                pyarrow.py_buffer(chunk.arrow_schema.serialized_schema)
+            )
+
+        # Deserialize and yield each record batch using the schema.
+        if (
+            chunk.arrow_record_batch
+            and chunk.arrow_record_batch.serialized_record_batch
+        ):
+            yield pyarrow.ipc.read_record_batch(
+                pyarrow.py_buffer(chunk.arrow_record_batch.serialized_record_batch),
+                schema,
+            )
+```
+
 ### What's next?
 
 For users of the pandas and integration to BigQuery, see the tutorial [Visualizing BigQuery data in a Jupyter notebook](https://docs.cloud.google.com/bigquery/docs/visualize-jupyter) .

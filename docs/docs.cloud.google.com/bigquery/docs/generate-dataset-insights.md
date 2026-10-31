@@ -123,13 +123,37 @@ To see the exact permissions that are required to generate insights, expand the 
 
 3.  Click the **Insights** tab.
 
-4.  To generate insights and publish them to Knowledge Catalog, click **Generate and publish** .
+    If the tab is empty, insights haven't been generated for this dataset yet.
 
-    To generate insights without publishing them to Knowledge Catalog, click **Generate without publishing** .
+4.  Click **Generate** .
 
-    For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating dataset insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#modes-dataset-insights) .
+5.  Select the publish condition:
 
-5.  If your dataset is in a multi-region, you might be prompted to select a region to generate insights. Select a region corresponding to the multi-region where the insights scan is going to be created.
+    - To generate and permanently attach insights to the asset as metadata aspects, turn on the **Publish condition** toggle. This makes the insights indexable, searchable, and visible to other users in your organization.
+
+    - To generate and view insights temporarily during your current session, turn off the **Publish condition** toggle.
+
+    For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating data insights](https://docs.cloud.google.com/bigquery/docs/generate-dataset-insights#modes-dataset-insights) .
+
+6.  Optional: In the **Custom instructions** field, provide guidance and domain context to customize how Gemini generates insights.
+
+    For example, you can enforce naming conventions, specify business definitions, or describe join keys:
+
+    ```
+    LANGUAGE: Always write column descriptions in uppercase.
+
+    DOMAIN_CONTEXT:
+    - This dataset supports the Order-to-Cash process for the EMEA commercial
+      sales team.
+    - Primary consumers are finance analysts and regional sales managers, not
+      engineers.
+
+    RELATIONSHIPS:
+    - returns.order_item_id → order_items.id (one-to-one; use LEFT JOIN to
+      preserve unreturned items)
+    ```
+
+7.  If your dataset is in a multi-region, you might be prompted to select a region to generate insights. Select a region corresponding to the multi-region where the insights scan is going to be created.
 
     It takes a few minutes for the insights to be populated. The quality of insights improves if the tables in the dataset have [data profiling results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .
 

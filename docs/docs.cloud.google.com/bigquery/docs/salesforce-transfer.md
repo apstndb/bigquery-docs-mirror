@@ -82,7 +82,6 @@ You must [create a Salesforce Connected App](https://help.salesforce.com/s/artic
     - For a sandbox environment, enter `https://test.salesforce.com/services/oauth2/token` .
   - Verify that the **Issue JSON Web Token (JWT)-based access tokens for named users** checkbox isn't selected.
 - In the **Selected OAuth Scopes** section, select **Manage user data via APIs (api)** .
-- Clear the **Required Proof Key for Code Exchange (PKCE) Extension for Supported Authorization Flows** checkbox.
 - Select the **Enable Client Credentials Flow** , then click **OK** on the notice that appears.
 
 Once you have configured the Connected App with the required configurations, click **Save** . You are redirected to the detail page of your newly created Connected App.

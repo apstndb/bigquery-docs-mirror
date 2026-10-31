@@ -263,9 +263,9 @@ To resolve this issue, ensure that the region selected for the saved query match
 
 ## Classic saved queries
 
-> **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic-saved-queries-deprecation) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
+> **Deprecated:** Saved queries, available in [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/enable-assets) , will fully replace classic saved queries in the future. The deprecation timeline is being reviewed. For more information, see [Deprecation of classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries_deprecated) . To learn how to migrate to saved queries, see [Migrate classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#migrate_classic_saved_queries) .
 
-Use the following sections to learn how to create and update [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries) . For more information on sharing, migrating, and deleting classic saved queries, see [Classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#classic_saved_queries) .
+Use the following sections to learn how to create and update [classic saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#classic_saved_queries_deprecated) . For more information on sharing, migrating, and deleting classic saved queries, see [Classic saved queries](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#classic_saved_queries) .
 
 > **Note:** If you have not enabled BigQuery Studio, classic saved queries appear in the **Saved queries ( ` NUMBER ` )** folder in the **Explorer** pane instead of the **(Classic) Queries** folder.
 

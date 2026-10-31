@@ -2,17 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/remote-functions
 uri: https://docs.cloud.google.com/bigquery/docs/remote-functions
 title: Work with remote functions
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use BigQuery remote functions to execute custom logic in other languages and integrate external services through Cloud Run.
 data_source: docs.cloud.google.com
 ---
 
 # Work with remote functions
 
-A BigQuery remote function allows you to implement your function in other languages than SQL and JavaScript or with the libraries or services which are not allowed in BigQuery [user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) .
-
-## Overview
-
-A BigQuery remote function lets you incorporate GoogleSQL functionality with software outside of BigQuery by providing a direct integration with [Cloud Run functions](https://docs.cloud.google.com/functions/docs/concepts/overview) and [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) . With BigQuery remote functions, you can deploy your functions in Cloud Run functions or Cloud Run implemented with any supported language, and then invoke them from GoogleSQL queries.
+You can use BigQuery remote functions to implement custom functions using languages, libraries, or services that aren't supported by standard [user-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) . You can deploy your remote functions to [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) or [Cloud Run functions](https://docs.cloud.google.com/functions/docs/concepts/overview) to invoke them directly from your GoogleSQL queries.
 
 ### Workflow
 
@@ -36,7 +32,7 @@ A BigQuery remote function lets you incorporate GoogleSQL functionality with sof
   - Timestamp
   - JSON
 
-  Remote functions do not support `ARRAY` , `STRUCT` , `INTERVAL` , or `GEOGRAPHY` types.
+  Remote functions don't support `ARRAY` , `STRUCT` , `INTERVAL` , or `GEOGRAPHY` types.
 
 - You cannot create table-valued remote functions.
 
@@ -137,7 +133,7 @@ Your endpoint should return the HTTP response code 200 for a successful response
 
 ### JSON encoding of SQL data type
 
-JSON encoding in HTTP request/response follows [the existing BigQuery JSON encoding](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings) for [TO_JSON_STRING function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json_string) .
+JSON encoding in HTTP request and response follows [the existing BigQuery JSON encoding](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings) for [TO_JSON_STRING function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json_string) .
 
 ### Sample Cloud Run function code
 
@@ -168,7 +164,7 @@ def batch_add(request):
     return jsonify( { "errorMessage": str(e) } ), 400
 ```
 
-Assuming that the function is deployed in the project `my_gcf_project` in region `us-east1` as the function name `remote_add` , it can be accessed via the endpoint `https://us-east1-my_gcf_project.cloudfunctions.net/remote_add` .
+Assuming that the function is deployed in the project `my_gcf_project` in region `us-east1` as the function name `remote_add` , it can be accessed using the endpoint `https://us-east1-my_gcf_project.cloudfunctions.net/remote_add` .
 
 ### Sample Cloud Run code
 
@@ -205,9 +201,9 @@ if __name__ == "__main__":
 
 See the [guide](https://docs.cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service) on how to build and deploy the code.
 
-Assuming that the Cloud Run service is deployed in the project `my_gcf_project` in region `us-east1` as the service name `remote_add` , it can be accessed via the endpoint `https://remote_add-<project_id_hash>-ue.a.run.app` .
+Assuming that the Cloud Run service is deployed in the project `my_gcf_project` in region `us-east1` as the service name `remote_add` , it can be accessed using the endpoint `https://remote_add-<project_id_hash>-ue.a.run.app` .
 
-The following Python example implements a different route path `/subtract_list` (see [custom URL path limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ) in the above web service:
+The following Python example implements a different route path `/subtract_list` (see [custom URL path limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ) in the previously deployed web service:
 
 ```
 @app.route("/subtract_list", methods=['POST'])
@@ -447,6 +443,71 @@ async function createConnection(projectId, location, connectionId) {
 }
 ```
 
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+
+```java
+import com.google.api.gax.rpc.AlreadyExistsException;
+import com.google.api.gax.rpc.ApiException;
+import com.google.cloud.bigquery.connection.v1.CloudResourceProperties;
+import com.google.cloud.bigquery.connection.v1.Connection;
+import com.google.cloud.bigquery.connection.v1.CreateConnectionRequest;
+import com.google.cloud.bigquery.connection.v1.LocationName;
+import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
+import java.io.IOException;
+
+public class CreateConnection {
+
+  /**
+   * Creates a BigQuery connection to a Cloud Resource. A Cloud Resource connection provisions a
+   * service account that can be granted access to other Google Cloud resources for federated
+   * queries.
+   *
+   * @param projectId The Google Cloud project ID (for example, "example-project-id").
+   * @param location The geographic location of the connection (for example, "us-central1").
+   * @param connectionId The ID of the connection to create (for example, "example-connection-id").
+   */
+  public static void createConnection(String projectId, String location, String connectionId) {
+    LocationName parent = LocationName.of(projectId, location);
+
+    // CloudResourceProperties provisions a managed Google Cloud service account on creation.
+    CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
+    Connection connection =
+        Connection.newBuilder()
+            .setFriendlyName("Example Connection")
+            .setDescription("Cloud Resource connection for federated queries.")
+            .setCloudResource(cloudResourceProperties)
+            .build();
+
+    CreateConnectionRequest request =
+        CreateConnectionRequest.newBuilder()
+            .setParent(parent.toString())
+            .setConnectionId(connectionId)
+            .setConnection(connection)
+            .build();
+
+    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
+      Connection response = client.createConnection(request);
+
+      System.out.printf("Successfully created connection: %s%n", response.getName());
+      System.out.printf("Friendly name: %s%n", response.getFriendlyName());
+      System.out.printf(
+          "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
+    } catch (AlreadyExistsException err) {
+      System.err.printf(
+          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    } catch (ApiException | IOException err) {
+      System.err.printf(
+          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
+          connectionId, location, projectId, err.getMessage());
+    }
+  }
+```
+
 ### Terraform
 
 Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
@@ -586,113 +647,16 @@ Run the following [`CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/doc
     Replace the following:
 
     - `DATASET_ID` : the ID of your BigQuery dataset.
+    - `ENDPOINT_URL` : a URL of your Cloud Run function or Cloud Run remote function endpoint. Remote functions support a custom path in the endpoint URL (see [custom path limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ). Different remote functions can be created on each route path in the same application. The `endpoint` option in the `CREATE FUNCTION` statement can include a route path immediately following a Cloud Run URL (for example, `https:// `` service_name `` - `` project_number `` . `` region `` .run.app/subtract_list` ).
 
-    - `ENDPOINT_URL` : a URL of your Cloud Run function or Cloud Run remote function endpoint. Remote functions support a custom path in the endpoint URL (see [limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ). Different remote functions can be created on each route path in the same application. The `endpoint` option in the `CREATE FUNCTION` statement can include a route path immediately following a Cloud Run URL (for example, `https:// `` service_name `` - `` project_number `` . `` region `` .run.app/subtract_list` ).
-
-    - Click play_circle **Run** .
+3.  Click play_circle **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### BigQuery DataFrames
 
 1.  Enable the required APIs and make sure you have been granted the required roles, as described in the **Requirements** section of [Remote functions](https://docs.cloud.google.com/bigquery/docs/dataframes-custom-python-functions#remote-function-requirements) .
-
-2.  Use the [`remote_function` decorator](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.remote_function.html#bigframes.pandas.remote_function) :
-
-    ```
-    import bigframes.pandas as bpd
-
-    # Set BigQuery DataFrames options
-    bpd.options.bigquery.project = your_gcp_project_id
-    bpd.options.bigquery.location = "US"
-
-    # BigQuery DataFrames gives you the ability to turn your custom scalar
-    # functions into a BigQuery remote function. It requires the GCP project to
-    # be set up appropriately and the user having sufficient privileges to use
-    # them. One can find more details about the usage and the requirements via
-    # `help` command.
-    help(bpd.remote_function)
-
-    # Read a table and inspect the column of interest.
-    df = bpd.read_gbq("bigquery-public-data.ml_datasets.penguins")
-    df["body_mass_g"].head(10)
-
-    # Define a custom function, and specify the intent to turn it into a remote
-    # function. It requires a BigQuery connection. If the connection is not
-    # already created, BigQuery DataFrames will attempt to create one assuming
-    # the necessary APIs and IAM permissions are setup in the project. In our
-    # examples we will be letting the default connection `bigframes-default-connection`
-    # be used. We will also set `reuse=False` to make sure we don't
-    # step over someone else creating remote function in the same project from
-    # the exact same source code at the same time. Let's try a `pandas`-like use
-    # case in which we want to apply a user defined scalar function to every
-    # value in a `Series`, more specifically bucketize the `body_mass_g` value
-    # of the penguins, which is a real number, into a category, which is a
-    # string.
-    @bpd.remote_function(
-        reuse=False,
-        cloud_function_service_account="default",
-    )
-    def get_bucket(num: float) -> str:
-        if not num:
-            return "NA"
-        boundary = 4000
-        return "at_or_above_4000" if num >= boundary else "below_4000"
-
-    # Then we can apply the remote function on the `Series` of interest via
-    # `apply` API and store the result in a new column in the DataFrame.
-    df = df.assign(body_mass_bucket=df["body_mass_g"].apply(get_bucket))
-
-    # This will add a new column `body_mass_bucket` in the DataFrame. You can
-    # preview the original value and the bucketized value side by side.
-    df[["body_mass_g", "body_mass_bucket"]].head(10)
-
-    # The above operation was possible by doing all the computation on the
-    # cloud. For that, there is a google cloud function deployed by serializing
-    # the user code, and a BigQuery remote function created to call the cloud
-    # function via the latter's http endpoint on the data in the DataFrame.
-
-    # The BigQuery remote function created to support the BigQuery DataFrames
-    # remote function can be located via a property `bigframes_remote_function`
-    # set in the remote function object.
-    print(f"Created BQ remote function: {get_bucket.bigframes_remote_function}")
-
-    # The cloud function can be located via another property
-    # `bigframes_cloud_function` set in the remote function object.
-    print(f"Created cloud function: {get_bucket.bigframes_cloud_function}")
-
-    # Warning: The deployed cloud function may be visible to other users with
-    # sufficient privilege in the project, so the user should be careful about
-    # having any sensitive data in the code that will be deployed as a remote
-    # function.
-
-    # Let's continue trying other potential use cases of remote functions. Let's
-    # say we consider the `species`, `island` and `sex` of the penguins
-    # sensitive information and want to redact that by replacing with their hash
-    # code instead. Let's define another scalar custom function and decorate it
-    # as a remote function. The custom function in this example has external
-    # package dependency, which can be specified via `packages` parameter.
-    @bpd.remote_function(
-        reuse=False,
-        packages=["cryptography"],
-        cloud_function_service_account="default",
-    )
-    def get_hash(input: str) -> str:
-        from cryptography.fernet import Fernet
-
-        # handle missing value
-        if input is None:
-            input = ""
-
-        key = Fernet.generate_key()
-        f = Fernet(key)
-        return f.encrypt(input.encode()).decode()
-
-    # We can use this remote function in another `pandas`-like API `map` that
-    # can be applied on a DataFrame
-    df_redacted = df[["species", "island", "sex"]].map(get_hash)
-    df_redacted.head(10)
-    ```
+2.  Use the [`remote_function` decorator](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.remote_function.html#bigframes.pandas.remote_function) .
 
 You need to have the permission `bigquery.routines.create` on the dataset where you create the remote function, and the `bigquery.connections.delegate` permission (available from the BigQuery Connection Admin role) on the connection that is used by the remote function.
 
@@ -791,11 +755,11 @@ For either a single-region location or multi-region location, you can only creat
 
 - Standard [BigQuery pricing](https://cloud.google.com/bigquery/pricing) applies.
 
-- In addition, costs may be incurred for Cloud Run functions and Cloud Run by using this feature. Please review the [Cloud Run functions](https://cloud.google.com/functions/pricing-overview) and [Cloud Run](https://cloud.google.com/run/pricing) pricing pages for details.
+- In addition, costs may be incurred for Cloud Run functions and Cloud Run by using this feature. Review the [Cloud Run functions](https://cloud.google.com/functions/pricing-overview) and [Cloud Run](https://cloud.google.com/run/pricing) pricing pages for details.
 
 ## Using VPC Service Controls
 
-[VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls) is a Google Cloud feature that allows you to set up a secure perimeter to guard against data exfiltration. To use VPC Service Controls with remote functions for additional security, or to use endpoints with `internal traffic` [ingress settings](https://docs.cloud.google.com/functions/docs/networking/network-settings#ingress_settings) , follow the [VPC Service Controls guide](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters#create_a_service_perimeter) to:
+[VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls) is a Google Cloud feature that lets you set up a secure perimeter to guard against data exfiltration. To use VPC Service Controls with remote functions for additional security, or to use endpoints with `internal traffic` [ingress settings](https://docs.cloud.google.com/functions/docs/networking/network-settings#ingress_settings) , follow the [VPC Service Controls guide](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters#create_a_service_perimeter) to:
 
 1.  Create a service perimeter.
 
@@ -805,7 +769,7 @@ For either a single-region location or multi-region location, you can only creat
 
 ## Best practices for remote functions
 
-- Prefilter your input: If your input can be easily filtered down before being passed to a remote function, your query will likely be faster and cheaper.
+- Prefilter your input: If you can filter your input before passing it to a remote function, your query will likely be faster and cheaper.
 
 - Keep your Cloud Run function scalable. Scalability is a function of [minimum instances](https://docs.cloud.google.com/functions/docs/configuring/min-instances) , [maximum instances](https://docs.cloud.google.com/functions/docs/configuring/max-instances) , and [concurrency](https://docs.cloud.google.com/functions/docs/configuring/concurrency) .
 
