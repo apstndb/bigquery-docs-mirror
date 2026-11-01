@@ -112,7 +112,7 @@ Select one of the following:
 
 4.  Click **Overview \> Tables** , and then select a table.
 
-5.  In the details pane, click upload **Export / sync** \> **Cloud Storage** .
+5.  In the details pane, click **More \> Export to Google Cloud Storage** .
 
 6.  In the **Export to Google Cloud Storage** dialog:
 

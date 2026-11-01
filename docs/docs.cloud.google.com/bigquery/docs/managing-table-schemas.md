@@ -50,17 +50,15 @@ To add empty columns to a table's schema definition:
 
 4.  Click **Overview \> Tables** , and then select the table.
 
-5.  In the details pane, click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
-
-7.  In the **Current schema** page, under **New fields** , click **Add field** .
+6.  In the **Current schema** page, under **New fields** , click **Add field** .
 
     - For **Name** , type the column name.
     - For **Type** , choose the [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
     - For [**Mode**](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.mode) , choose `NULLABLE` or `REPEATED` .
 
-8.  When you are done adding columns, click **Save** .
+7.  When you are done adding columns, click **Save** .
 
 > **Note:** You can't use the Google Cloud console to add a column to an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
@@ -1423,15 +1421,13 @@ To change a column's mode from `REQUIRED` to `NULLABLE` , select one of the foll
 
 4.  Click **Overview \> Tables** , and then select the table.
 
-5.  In the details panel, click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
+6.  In the **Current schema** page, locate the field that you want to change.
 
-7.  In the **Current schema** page, locate the field that you want to change.
+7.  In the **Mode** drop-down list for that field, select `NULLABLE` .
 
-8.  In the **Mode** drop-down list for that field, select `NULLABLE` .
-
-9.  To update the settings, click **Save** .
+8.  To update the settings, click **Save** .
 
 > **Note:** You can't use the Google Cloud console to alter a column in an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
@@ -2401,15 +2397,13 @@ To change the default value for a column, select one of the following options:
 
 4.  Click **Overview \> Tables** , and then click a table.
 
-5.  Click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
+6.  In the **Current schema** page, locate the top-level field that you want to change.
 
-7.  In the **Current schema** page, locate the top-level field that you want to change.
+7.  Enter the default value for that field.
 
-8.  Enter the default value for that field.
-
-9.  Click **Save** .
+8.  Click **Save** .
 
 ### SQL
 
@@ -2444,15 +2438,13 @@ To change the description for a column, select one of the following options:
 
 4.  Click **Overview \> Tables** , and then select the table.
 
-5.  In the details panel, click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
+6.  In the **Current schema** page, locate the field that you want to change.
 
-7.  In the **Current schema** page, locate the field that you want to change.
+7.  Enter the description for that field.
 
-8.  Enter the description for that field.
-
-9.  Click **Save** .
+8.  Click **Save** .
 
 ### SQL
 
@@ -2486,17 +2478,15 @@ For more information about data insights, including setup steps, required IAM ro
 
 3.  In the **Explorer** pane, expand your project and dataset, then select the table.
 
-4.  In the details panel, click the **Schema** tab.
+4.  In the details pane, click the **Details** tab.
 
-5.  Click **Generate** .
-
-    > **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
+5.  Next to **Table info** , click **Describe data** .
 
     Gemini generates column descriptions and insights about the table. It takes a few minutes for the information to be populated. You can view the generated insights on the table's **Insights** tab.
 
 6.  To edit and save the generated column descriptions, do the following:
 
-    1.  Click **View column descriptions** .
+    1.  Next to **Table info** , click **View descriptions** .
 
     2.  In the **Column descriptions** section, click **Save to schema** .
 

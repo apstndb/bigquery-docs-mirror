@@ -48,6 +48,8 @@ The following permissions are required to create translation jobs with the inter
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+To restrict specific translation workflow configurations in your organization, such as disallowing Gemini AI suggestions or restricting translation output types, configure [Custom Org Policies for BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies#example_constraints) .
+
 ### Collect source files
 
 Source files must be text files that contain valid SQL for the source dialect. Source files can also include comments. Do your best to ensure the SQL is valid, using whatever methods are available to you.

@@ -54,9 +54,7 @@ You can restore a table snapshot into a new table by using one of the following 
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
-5.  In the table snapshot pane that appears, click update **Restore** .
-
-    ![Restore table from snapshot](https://docs.cloud.google.com/static/bigquery/images/snapshot-restore.png)
+5.  In the table snapshot pane, click **More \> Restore snapshot** .
 
 6.  In the **Restore snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the new table.
 
@@ -184,9 +182,7 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
-5.  In the table snapshot pane that appears, click **Restore** .
-
-    ![Restore table from snapshot](https://docs.cloud.google.com/static/bigquery/images/snapshot-restore.png)
+5.  In the table snapshot pane, click **More \> Restore snapshot** .
 
 6.  In the **Restore snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the existing table.
 

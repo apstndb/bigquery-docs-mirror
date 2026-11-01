@@ -73,9 +73,9 @@ To view a resource's labels, select one of the following options:
 
 ### Console
 
-1.  For datasets, the dataset details page is automatically opened. For tables and views, click **Details** to open the details page. Label information appears in the information table for the resource.
+1.  In the Google Cloud console, select the dataset, table, or view.
 
-    ![Table details](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
+2.  Click the **Details** tab. Label information appears in the **Labels** row.
 
 ### SQL
 

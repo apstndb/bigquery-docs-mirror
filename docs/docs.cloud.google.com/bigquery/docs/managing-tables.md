@@ -71,7 +71,7 @@ You can't add a description when you create a table using the Google Cloud conso
 
 3.  Click **Overview \> Tables** , and then select a table.
 
-4.  Click the **Details** tab, and then click **Edit details** .
+4.  In the details pane, click **Edit \> Edit details** .
 
 5.  In the **Description** section, add a new description or edit an existing description.
 
@@ -254,17 +254,15 @@ For more information about data insights, including setup steps, required IAM ro
 
 3.  In the **Explorer** pane, expand your project and dataset, then select the table.
 
-4.  In the details panel, click the **Schema** tab.
+4.  In the details pane, click the **Details** tab.
 
-5.  Click **Generate** .
-
-    > **Note:** If you don't see the **Generate** button, click **Describe data** . You might need to scroll to see this button.
+5.  Next to **Table info** , click **Describe data** .
 
     Gemini generates a table description and insights about the table. It takes a few minutes for the information to be populated. You can view the generated insights on the table's **Insights** tab.
 
 6.  To edit and save the generated table description, do the following:
 
-    1.  Click **View column descriptions** .
+    1.  Next to **Table info** , click **View descriptions** .
 
         The current table description and the generated description are displayed.
 
@@ -310,7 +308,7 @@ You can't add an expiration time when you create a table using the Google Cloud 
 
 3.  Click **Overview \> Tables** , and then select a table.
 
-4.  Click the **Details** tab and the click **Edit details** .
+4.  In the details pane, click **Edit \> Edit details** .
 
 5.  For **Expiration time** , select **Specify date** . Then select the expiration date using the calendar widget.
 
@@ -769,7 +767,7 @@ To copy a single source table:
 
 3.  Click **Overview \> Tables** , and then select a table.
 
-4.  In the details pane, click **Copy** .
+4.  In the details pane, click **More \> Make a copy of table** .
 
 5.  In the **Copy table** dialog, under **Destination** :
 
@@ -1858,7 +1856,7 @@ To delete a table:
 
 3.  Click **Overview \> Tables** , and then select a table.
 
-4.  In the details pane, click **Delete** .
+4.  In the details pane, click **More \> Delete** .
 
 5.  Type `"delete"` in the dialog, then click **Delete** to confirm.
 

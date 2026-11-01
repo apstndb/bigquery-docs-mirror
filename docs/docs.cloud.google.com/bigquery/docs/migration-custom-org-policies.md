@@ -347,6 +347,57 @@ Replace ` ``PROJECT_ID`` ` with your project ID.
 
 If you see a permission denied error, then your policy is successfully applied.
 
+## Example custom organization policies for common use cases
+
+The following table provides syntax examples of custom constraints for common BigQuery Migration Service governance use cases, such as restricting AI-generated SQL translation suggestions or non-default translation output types.
+
+The following examples use the CEL macro `exists` . For more information about CEL macros, see [Macros](https://github.com/google/cel-spec/blob/master/doc/langdef.md#macros) .
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Constraint syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Disallow AI-generated SQL translation suggestions in migration workflows.</td>
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.disableMigrationAiSuggestions
+resourceTypes:
+- bigquerymigration.googleapis.com/MigrationWorkflow
+methodTypes:
+- CREATE
+condition: &gt;-
+  resource.tasks.exists(k,
+  (has(resource.tasks[k].translationDetails) &amp;&amp; &#39;suggestion&#39; in resource.tasks[k].translationDetails.targetTypes) ||
+  (has(resource.tasks[k].translationConfigDetails) &amp;&amp; &#39;suggestion&#39; in resource.tasks[k].translationConfigDetails.targetTypes))
+actionType: DENY
+displayName: Disallow AI-generated SQL translation suggestions
+description: Deny creating migration workflows that request AI-generated translation suggestions.</code></pre></td>
+</tr>
+<tr class="even">
+<td>Disallow non-SQL translation output types in migration workflows.</td>
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.restrictTranslationTargetTypes
+resourceTypes:
+- bigquerymigration.googleapis.com/MigrationWorkflow
+methodTypes:
+- CREATE
+condition: &gt;-
+  resource.tasks.exists(k,
+  (has(resource.tasks[k].translationDetails) &amp;&amp; resource.tasks[k].translationDetails.targetTypes.exists(t, t != &#39;sql&#39;)) ||
+  (has(resource.tasks[k].translationConfigDetails) &amp;&amp; resource.tasks[k].translationConfigDetails.targetTypes.exists(t, t != &#39;sql&#39;)))
+actionType: DENY
+displayName: Restrict translation workflows to SQL output
+description: Deny creating translation workflows that specify output types other than translated SQL.</code></pre></td>
+</tr>
+</tbody>
+</table>
+
 ## What's next
 
 - Learn more about [Organization Policy Service](https://docs.cloud.google.com/organization-policy/overview) .

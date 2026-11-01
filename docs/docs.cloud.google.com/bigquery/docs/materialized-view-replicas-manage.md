@@ -153,6 +153,6 @@ For more information about BigQuery Identity and Access Management (IAM), see [P
 
 3.  Click **Overview \> Tables** , and then click the materialized view replica.
 
-4.  Click **Delete** .
+4.  In the details pane, click **More \> Delete** .
 
 5.  In the **Delete materialized view?** dialog, type `delete` into the field, and then click **Delete** .

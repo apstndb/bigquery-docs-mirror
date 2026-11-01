@@ -52,7 +52,7 @@ You can delete a table snapshot by using one of the following options:
 
 3.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
-4.  In the details pane that appears, click **Delete** .
+4.  In the details pane, click **More \> Delete** .
 
 5.  In the dialog that appears, type `delete` , and then click **Delete** again.
 

@@ -55,6 +55,8 @@ The following permissions are required to create translation jobs with the inter
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+To restrict specific translation workflow configurations in your organization, such as disallowing Gemini AI suggestions or restricting translation output types, configure [Custom Org Policies for BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies#example_constraints) .
+
 ### Upload input files to Cloud Storage
 
 For batch translation jobs, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files.

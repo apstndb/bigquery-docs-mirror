@@ -42,16 +42,11 @@ To add a label to a dataset after it is created:
 
 1.  In the Google Cloud console, select the dataset.
 
-2.  On the dataset details page, in the **Labels** section, click edit **Edit** .
+2.  Click the **Details** tab, and then click mode_edit **Edit details** .
 
-    ![Pencil icon next to the Labels section.](https://docs.cloud.google.com/static/bigquery/images/label-pencil.png)
+3.  In the **Labels** section, click **Add labels** , and then enter a key and value in the **Key** and **Value** fields. To apply additional labels, click **Add labels** . Each key can be used only once per dataset, but you can use the same key in different datasets within the same project.
 
-3.  In the **Edit labels** dialog:
-
-    - Click **Add label**
-    - Enter the key and value in the appropriate fields. To apply additional labels, click **Add label** . Each key can be used only once per dataset, but you can use the same key in different datasets within the same project.
-    - To update a label, modify the existing keys or values.
-    - To save your changes, click **Update** .
+4.  Click **Save** .
 
 ### SQL
 
@@ -281,22 +276,13 @@ To add a label to an existing table or view:
 
 ### Console
 
-1.  In the Google Cloud console, select the table, or view.
+1.  In the Google Cloud console, select the table or view.
 
-2.  Click the **Details** tab.
+2.  In the details pane, click **Edit \> Edit details** .
 
-    ![Table details page in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
+3.  In the **Labels** section, click **Add labels** , and then enter a key and value in the **Key** and **Value** fields. To apply additional labels, click **Add labels** . Each key can be used only once per table or view, but you can use the same key in different tables or views.
 
-3.  In the **Labels** section, click edit **Edit** .
-
-    ![Pencil icon next to the Labels section.](https://docs.cloud.google.com/static/bigquery/images/label-pencil.png)
-
-4.  In the **Edit labels** dialog:
-
-    - Click **Add label**
-    - Enter the key and value in the appropriate fields. To apply additional labels, click **Add label** . Each key can be used only once per dataset, but you can use the same key in different datasets within the same project.
-    - Modify existing keys or values to update a label.
-    - Click **Update** to save your changes.
+4.  Click **Save** .
 
 ### SQL
 
@@ -719,21 +705,18 @@ To add a label without a value:
 
 ### Console
 
-1.  In the Google Cloud console, select the appropriate resource (a dataset, table, or view).
+1.  In the Google Cloud console, select the dataset, table, or view.
 
-2.  For datasets, the dataset details page opens automatically. For tables and views, click **Details** to open the details page.
+2.  Open the **Edit details** pane:
 
-    ![Table details page in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
+    - For a dataset, click the **Details** tab, and then click mode_edit **Edit details** .
+    - For a table or view, in the details pane, click **Edit \> Edit details** .
 
-3.  On the details page, in the **Labels** section, click edit **Edit** .
+3.  In the **Labels** section, click **Add labels** .
 
-    ![Pencil icon next to the Labels section.](https://docs.cloud.google.com/static/bigquery/images/label-pencil.png)
+4.  Enter a key in the **Key** field and leave the **Value** field blank. To apply additional labels, click **Add labels** and repeat.
 
-4.  In the **Edit labels** dialog:
-
-    - Click **Add label** .
-    - Enter a new key in the appropriate field and leave the value field blank. To apply additional labels, click **Add label** and repeat.
-    - To save your changes, click **Update** .
+5.  Click **Save** .
 
 ### SQL
 

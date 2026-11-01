@@ -60,15 +60,13 @@ Select one of the following options:
 
 ### Console
 
-1.  In the Google Cloud console, go to the **Resources** pane.
+1.  In the Google Cloud console, go to the **Explorer** pane.
 
-2.  Click your dataset name to expand it, and then click the table name that you want to view.
+2.  Expand your project and dataset, and then click the table that you want to view.
 
-3.  Click **Details** .
+3.  Click the **Details** tab.
 
     The table's details are displayed, including the clustering columns.
-
-    ![Table details.](https://docs.cloud.google.com/static/bigquery/images/table-details.png)
 
 ### SQL
 

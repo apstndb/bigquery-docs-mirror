@@ -401,13 +401,13 @@ To generate table and column descriptions, follow these steps:
     - [Generate insights for a BigQuery external table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-bigquery-external-table)
     - [Generate insights for a BigLake table](https://docs.cloud.google.com/bigquery/docs/generate-table-insights#insights-biglake-table)
 
-2.  Click the **Schema** tab.
+2.  Click the **Details** tab.
 
-3.  Click **View column descriptions** .
+3.  Next to **Table info** , click **View descriptions** .
 
-    > **Note:** If you don't see the **View column descriptions** button, click **Describe data** . You might need to scroll to see this button.
+    > **Note:** If you don't see the **View descriptions** button, click **Describe data** .
 
-    The table description and column descriptions that were generated are displayed.
+    The generated table description and column descriptions are displayed.
 
 4.  To edit and save the generated table description, do the following:
 

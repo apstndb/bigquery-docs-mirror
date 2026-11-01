@@ -50,7 +50,7 @@ To scan a BigQuery table using Sensitive Data Protection:
 
 4.  Click **Overview \> Tables** , and then select your table.
 
-5.  Click **Open \> Scan with Sensitive Data Protection** . The Sensitive Data Protection job creation page opens in a new tab.
+5.  In the details pane, click **More \> Scan with Sensitive Data Protection** . The Sensitive Data Protection job creation page opens in a new tab.
 
 6.  For **Step 1: Choose input data** , enter a job ID. The values in the **Location** section are automatically generated. Also, the **Sampling** section is automatically configured to run a sample scan against your data, but you can adjust the settings as needed.
 

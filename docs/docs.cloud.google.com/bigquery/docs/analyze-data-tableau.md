@@ -106,9 +106,7 @@ To create your table, follow these steps:
 
 5.  Click the `311_service_requests` table.
 
-6.  In the toolbar, click **Copy** .
-
-    ![Highlight of the copy option.](https://docs.cloud.google.com/static/bigquery/images/looker-311-table-copy.png)
+6.  In the details pane, click **More \> Make a copy of table** .
 
 7.  In the **Copy table** dialog, in the **Destination** section, do the following:
 

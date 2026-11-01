@@ -335,9 +335,9 @@ Set the policy tag by [modifying a schema](https://docs.cloud.google.com/bigquer
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the BigQuery Explorer, locate and select the table that you want to update. The table schema for that table opens.
+2.  In the BigQuery **Explorer** pane, locate and select the table that you want to update.
 
-3.  Click **Edit Schema** .
+3.  In the details pane, click **Edit \> Edit schema** .
 
 4.  In the **Current schema** screen, select the target column and click **Add policy tag** .
 

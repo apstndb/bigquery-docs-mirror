@@ -86,15 +86,13 @@ To change the default value for a column, select one of the following options:
 
 4.  Click **Overview \> Tables** , and then click a table.
 
-5.  Click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
+6.  In the **Current schema** page, locate the top-level field that you want to change.
 
-7.  In the **Current schema** page, locate the top-level field that you want to change.
+7.  Enter the default value for that field.
 
-8.  Enter the default value for that field.
-
-9.  Click **Save** .
+8.  Click **Save** .
 
 ### SQL
 
@@ -155,15 +153,13 @@ To remove the default value for a column, select one of the following options:
 
 4.  Click **Overview \> Tables** , and then select the table.
 
-5.  In the details pane, click the **Schema** tab.
+5.  In the details pane, click **Edit \> Edit schema** .
 
-6.  Click **Edit schema** . You might need to scroll to see this button.
+6.  In the **Current schema** page, locate the top-level field that you want to change.
 
-7.  In the **Current schema** page, locate the top-level field that you want to change.
+7.  Enter `NULL` for the default value.
 
-8.  Enter `NULL` for the default value.
-
-9.  Click **Save** .
+8.  Click **Save** .
 
 ### SQL
 

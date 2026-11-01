@@ -48,6 +48,8 @@ The following permissions are required to create translation jobs with the inter
 
 You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
+To restrict specific translation workflow configurations in your organization, such as disallowing Gemini AI suggestions or restricting translation output types, configure [Custom Org Policies for BigQuery Migration Service](https://docs.cloud.google.com/bigquery/docs/migration-custom-org-policies#example_constraints) .
+
 ## Handling unsupported SQL functions with helper UDFs
 
 When translating SQL from a source dialect to BigQuery, some functions might not have a direct equivalent. To address this, the BigQuery Migration Service (and the broader BigQuery community) provide helper user-defined functions (UDFs) that replicate the behavior of these unsupported source dialect functions.

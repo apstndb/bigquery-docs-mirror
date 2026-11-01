@@ -377,11 +377,13 @@ To update a published BigLake table, follow these steps:
 
 5.  Click **Overview \> Tables** , and then select the table.
 
-6.  In the **Details** tab, in the **Labels** section, make sure that the **metadata-managed-mode** label is set to **user_managed** . If it is set to a different value, follow these steps:
+6.  In the **Details** tab, in the **Labels** section, check whether the **metadata-managed-mode** label is set to `user_managed` . If it's set to a different value, follow these steps:
 
-    1.  Click edit **Edit details** .
+    1.  Click **Edit \> Edit details** .
 
-    2.  Next to the **metadata-managed-mode** key, in the **value** field, enter `user_managed` .
+    2.  In the **Labels** section, next to the **metadata-managed-mode** key, in the **Value** field, enter `user_managed` .
+
+    3.  Click **Save** .
 
 > **Note:** A table with an updated schema becomes available for SQL and Spark queries. When the next discovery scans run, the table metadata remains unchanged.
 
@@ -401,13 +403,15 @@ To delete a published BigLake table, follow these steps:
 
 5.  Click **Overview \> Tables** , and then select the table.
 
-6.  In the **Details** pane, in the **Labels** section, make sure the **metadata-managed-mode** label isn't set to `user_managed` . If it's set to `user_managed` , follow these steps:
+6.  In the **Details** tab, in the **Labels** section, make sure the **metadata-managed-mode** label isn't set to `user_managed` . If it's set to `user_managed` , follow these steps:
 
-    1.  Click **Edit details** edit .
+    1.  Click **Edit \> Edit details** .
 
-    2.  Next to the **metadata-managed-mode** key, in the **value** field, enter `discovery-managed` .
+    2.  In the **Labels** section, next to the **metadata-managed-mode** key, in the **Value** field, enter `discovery_managed` .
 
-        > **Note:** If the **metadata-managed-mode** label is set to `user_managed` , the discovery scan doesn't override the table metadata, which causes your table not to be deleted.
+    3.  Click **Save** .
+
+    > **Note:** If the **metadata-managed-mode** label is set to `user_managed` , the discovery scan doesn't override the table metadata, which causes your table not to be deleted.
 
 7.  Click **Run** . The discovery scan runs on demand.
 

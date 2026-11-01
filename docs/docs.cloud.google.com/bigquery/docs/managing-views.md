@@ -86,13 +86,9 @@ To update a view's SQL query:
 
 3.  Click **Overview \> Tables** , and then select a view.
 
-4.  Click the **Details** tab.
+4.  In the details pane, click **Edit \> Edit query** . This opens the query in the query editor.
 
-5.  Above the **Query** box, click **Edit query** . This opens the query in the query editor.
-
-    ![Edit query](https://docs.cloud.google.com/static/bigquery/images/edit-query-button.png)
-
-6.  Edit the SQL query and then click **Save view \> Save view** :
+5.  Edit the SQL query and then click **Save view \> Save view** :
 
     ![Save a view in editor](https://docs.cloud.google.com/static/bigquery/images/save-view-button.png)
 
@@ -354,9 +350,9 @@ To update a view's expiration time:
 
 3.  Click **Overview \> Tables** , and then select the view.
 
-4.  Click the **Details** tab and then click **Edit details** .
+4.  In the details pane, click **Edit \> Edit details** .
 
-5.  In the **Edit detail** dialog, in the **Expiration time** menu, select **Specify date** .
+5.  In the **Edit details** pane, in the **Expiration time** menu, select **Specify date** .
 
 6.  In the **Expiration time** field, select a date and time using the date picker tool.
 
@@ -570,13 +566,11 @@ You cannot add a description when you create a view using the Google Cloud conso
 
 3.  Click **Overview \> Tables** , and then select the view.
 
-4.  Click the **Details** tab.
+4.  In the details pane, click **Edit \> Edit details** .
 
-5.  Click **Edit details** in the **View info** section.
+5.  In the **Edit details** pane, in the **Description** field, enter a new description or edit an existing description.
 
-6.  In the **Edit detail** dialog, in the **Description** field, enter a new description or edit an existing description.
-
-7.  To save the new description, click **Save** .
+6.  To save the new description, click **Save** .
 
 ### SQL
 
@@ -797,7 +791,7 @@ To copy a view, follow these steps:
 
 3.  Click **Overview \> Tables** , and then select the view.
 
-4.  In the details pane, click **Copy** .
+4.  In the details pane, click **More \> Make a copy of view** .
 
 5.  In the **Copy view** dialog, do the following:
 
@@ -876,7 +870,7 @@ To delete a view:
 
 4.  Click **Overview \> Tables** , and then click the view.
 
-5.  In the details pane, click **Delete** .
+5.  In the details pane, click **More \> Delete** .
 
 6.  Type `"delete"` in the dialog, and click **Delete** to confirm.
 

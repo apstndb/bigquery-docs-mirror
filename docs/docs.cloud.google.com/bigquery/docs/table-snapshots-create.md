@@ -68,9 +68,7 @@ You can create a snapshot of a table that expires after 24 hours by using one of
 
 4.  Click **Overview \> Tables** , and then click the name of the table that you want to snapshot.
 
-5.  In the details pane that appears, click **Snapshot** .
-
-    ![A screenshot showing the Snapshot button in the BigQuery console.](https://docs.cloud.google.com/static/bigquery/images/snapshot-create.png)
+5.  In the details pane, click **More \> Create snapshot** .
 
 6.  In the **Create table snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the new table snapshot.
 
@@ -212,9 +210,7 @@ You can create a table snapshot of a table as it was one hour ago by using one o
 
 4.  Click **Overview \> Tables** , and then click the name of the table that you want to snapshot.
 
-5.  In the details pane that appears, click **Snapshot** .
-
-    ![A screenshot showing the Snapshot button in the BigQuery console.](https://docs.cloud.google.com/static/bigquery/images/snapshot-create.png)
+5.  In the details pane, click **More \> Create snapshot** .
 
 6.  In the **Create table snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the new table snapshot.
 

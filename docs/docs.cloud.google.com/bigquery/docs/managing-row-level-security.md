@@ -287,9 +287,7 @@ To list row-level access policies, do the following:
 
 1.  To view row-level access policies, go to the BigQuery page in the Google Cloud console.
 
-2.  Click the table name to see its details, and then click **View row access policies** .
-
-    ![View row access policies](https://docs.cloud.google.com/static/bigquery/images/view-row-access-policies-console.png)
+2.  Click the table name to open its details pane, and then click **More \> View row access policies** .
 
 3.  When the **Row access policies** panel opens, you see a list of all the row-level access policies on the table, by name, and the `filter_expression` for each policy.
 

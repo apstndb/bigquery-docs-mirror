@@ -56,7 +56,7 @@ You can change the description for a table snapshot by using one of the followin
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot that you want to update.
 
-5.  Go to the **Details** tab, and then click **Edit Details** .
+5.  In the details pane, click **Edit \> Edit details** .
 
 6.  In the **Description** field, add or update the description for the table snapshot.
 
@@ -108,7 +108,7 @@ You can change the expiration of a table snapshot by using one of the following 
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot that you want to update.
 
-5.  Go to the **Details** tab and then click **Edit Details** .
+5.  In the details pane, click **Edit \> Edit details** .
 
 6.  In the **Expiration time** field, enter the new expiration time for the table snapshot.
 

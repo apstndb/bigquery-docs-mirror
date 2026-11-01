@@ -1472,7 +1472,7 @@ To grant access to a table or view, select one of the following options:
 
 4.  Click **Overview \> Tables** , and then click a table or a view.
 
-5.  Click person_add **Share \> Manage permissions** .
+5.  Click **Share \> Manage permissions** .
 
 6.  Click person_add **Add principal** .
 
@@ -2077,7 +2077,7 @@ To view the access controls for a table or view, choose one of the following opt
 
 4.  Click **Overview \> Tables** , and then click a table or a view.
 
-5.  Click person_add **Share** .
+5.  Click **Share \> Manage permissions** .
 
     The table or view access controls appear in the **Share** pane.
 
