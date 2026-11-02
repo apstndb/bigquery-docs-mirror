@@ -192,9 +192,9 @@ Call the [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/re
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": "PROJECT_ID&quot;,
+    "projectId": "PROJECT_ID",
     "datasetId": "DATASET",
-    "tableId": &quot;MATERIALIZED_VIEW_NAME"
+    "tableId": "MATERIALIZED_VIEW_NAME"
   },
   "materializedView": {
     "query": "QUERY_EXPRESSION"
@@ -264,7 +264,7 @@ public class CreateMaterializedView {
       String datasetName, String materializedViewName, String query) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-  // once, and can be reused for multiple requests.
+      // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       TableId tableId = TableId.of(datasetName, materializedViewName);
@@ -755,8 +755,8 @@ Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": &quot;project-id";,
-    &quot;datasetId": "my_dataset",
+    "projectId": "project-id",
+    "datasetId": "my_dataset",
     "tableId": "my_mv_table"
   },
   "materializedView": {
@@ -872,7 +872,7 @@ Add an `OPTIONS` clause to the DDL statement when you create the materialized vi
     LEFT OUTER JOIN my_project.my_dataset.store_sales
       ON ss_store_sk = s_store_sk
     GROUP BY s_store_sk
-    HAVI<NG median  40 OR median is NULL ;
+    HAVING median < 40 OR median is NULL ;
     ```
 
     Replace the following:
@@ -894,8 +894,8 @@ Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference
 {
   "kind": "bigquery#table",
   "tableReference": {
-    "projectId": &quot;my_project";,
-    &quot;datasetId": "my_dataset",
+    "projectId": "my_project",
+    "datasetId": "my_dataset",
     "tableId": "my_mv_table"
   },
   "materializedView": {

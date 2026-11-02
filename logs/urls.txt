@@ -423,7 +423,7 @@ https://docs.cloud.google.com/bigquery/docs/logical-materialized-view-overview	2
 https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction	2026-10-16T17:26:58Z
 https://docs.cloud.google.com/bigquery/docs/looker	2026-11-01T03:48:12Z
 https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer	2026-10-02T03:43:46Z
-https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models	2026-10-04T03:48:21Z
+https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models	2026-11-02T03:47:55Z
 https://docs.cloud.google.com/bigquery/docs/making-predictions-with-pytorch-models-in-onnx-format	2026-10-13T04:32:26Z
 https://docs.cloud.google.com/bigquery/docs/making-predictions-with-sklearn-models-in-onnx-format	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables	2026-11-01T03:48:12Z
@@ -447,7 +447,7 @@ https://docs.cloud.google.com/bigquery/docs/managing-tables	2026-11-01T03:48:12Z
 https://docs.cloud.google.com/bigquery/docs/managing-views	2026-11-01T03:48:12Z
 https://docs.cloud.google.com/bigquery/docs/manual-preprocessing	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-manage	2026-11-01T03:48:12Z
-https://docs.cloud.google.com/bigquery/docs/materialized-views-create	2026-11-01T03:48:12Z
+https://docs.cloud.google.com/bigquery/docs/materialized-views-create	2026-11-02T03:52:20Z
 https://docs.cloud.google.com/bigquery/docs/materialized-views-intro	2026-10-06T17:47:38Z
 https://docs.cloud.google.com/bigquery/docs/materialized-views-manage	2026-10-02T03:43:46Z
 https://docs.cloud.google.com/bigquery/docs/materialized-views-monitor	2026-10-02T03:43:46Z
