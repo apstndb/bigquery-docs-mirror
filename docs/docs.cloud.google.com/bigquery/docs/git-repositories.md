@@ -108,8 +108,12 @@ To create a Git repository, do the following:
 5.  BigQuery Studio detects if an existing [Developer Connect account connector](https://docs.cloud.google.com/developer-connect/docs/configure-connectors) is available. You have the following options:
 
     - If an account connector is found, the display name for the Git repository is prefilled. You can edit these values.
+
     - If no account connector exists, click **Create account connector** to create a new account connector.
+
     - If you prefer not to use a Developer Connect account connector, click **Use a different connection type** to [connect using HTTPS or SSH](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
+
+      > **Note:** BigQuery Studio Git repositories use Developer Connect [account connectors](https://docs.cloud.google.com/developer-connect/docs/account-connectors) rather than [Git repository connections](https://docs.cloud.google.com/developer-connect/docs/git-repo-connections) . For more information, see [The difference between Git repositories connections and account connectors](https://docs.cloud.google.com/developer-connect/docs/overview#difference_between) .
 
 6.  Optional: To create a shallow clone repository with limited commit history, click **Advanced options** , and then select the **Shallow clone** checkbox.
 

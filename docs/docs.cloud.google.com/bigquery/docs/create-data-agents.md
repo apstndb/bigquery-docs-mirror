@@ -656,12 +656,6 @@ After you've discovered the agent, you can interact with it by performing the fo
 
 ## Monitor agents and conversations
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
-
 You can monitor the performance, adoption, latency, and costs of your data agents and their conversations by using Google Cloud Observability in BigQuery. When you enable agent observability, you can view metrics such as the following:
 
 - The number of agents used in conversations

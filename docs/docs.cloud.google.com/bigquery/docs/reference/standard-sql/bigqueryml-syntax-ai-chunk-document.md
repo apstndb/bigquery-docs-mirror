@@ -33,6 +33,7 @@ The `AI.CHUNK_DOCUMENT` function accepts the following input sources:
 - A Cloud Storage URI string literal with optional wildcard matching.
 - An object table.
 - A subquery that contains an `ObjectRef` column named `ref` .
+- A table or subquery that contains a `JSON` column named `parsed_document` that contains the output of the [`AI.PARSE_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) with the `raw-docai` schema.
 
 The `AI.CHUNK_DOCUMENT` function supports the [file formats](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk#parser-types) handled by the Document AI layout parser and is subject to the [layout parser limitations](https://docs.cloud.google.com/document-ai/docs/layout-parse-chunk#limitations) .
 
@@ -52,9 +53,9 @@ The `AI.CHUNK_DOCUMENT` function takes the following arguments:
 
 - `STORAGE_URI` : A `STRING` literal that specifies the Cloud Storage URI to list and chunk objects from. You can use a single wildcard character ( `*` ) at the end of a directory path, such as `'gs://my-bucket/docs/*'` , or you can filter by a file extension, such as `'gs://my-bucket/docs/*.pdf'` . When you specify a URI, you must authenticate with your end-user credentials (EUC). For more information, read about [authentication with EUC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#euc) .
 
-- `TABLE `` INPUT_TABLE` : The name of an existing table or object table that contains an [`ObjectRef` column](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) named `ref` . When you use an object table, the `connection_id` argument is required and must match the connection ID configured on the object table. If you use a standard table, the `connection_id` argument must match the authorizer of the `ObjectRef` column. For more information, read about [authentication with a connection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#connection) .
+- `TABLE `` INPUT_TABLE` : The name of an existing table or object table that contains an [`ObjectRef` column](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) named `ref` or a `JSON` column named `parsed_document` that contains the output of the `AI.PARSE_DOCUMENT` function with the `raw-docai` schema. When you use an object table, the `connection_id` argument is required and must match the connection ID configured on the object table. If you use a standard table, the `connection_id` argument must match the authorizer of the `ObjectRef` column. For more information, read about [authentication with a connection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#connection) .
 
-- `QUERY_STATEMENT` : A subquery that returns an `ObjectRef` column named `ref` .
+- `QUERY_STATEMENT` : A subquery that returns an `ObjectRef` column named `ref` or a `JSON` column named `parsed_document` that contains the output of the `AI.PARSE_DOCUMENT` function with the `raw-docai` schema.
 
   - If the `ObjectRef` value has an authorizer, it must match the `connection_id` value.
   - If the `ObjectRef` value doesn't have an authorizer, omit the `connection_id` argument.
@@ -206,6 +207,49 @@ OPTIONS (
 
 SELECT *
 FROM AI.CHUNK_DOCUMENT(TABLE cymbal_pets.product_manual, connection_id => 'us.example_connection');
+```
+
+### Parse and chunk documents
+
+The following query parses documents using the `raw-docai` schema and passes the result to `AI.CHUNK_DOCUMENT` to produce semantic chunks:
+
+```
+SELECT
+  uri,
+  chunk_id,
+  start_page,
+  end_page,
+  content
+FROM
+  AI.CHUNK_DOCUMENT(
+    (
+      SELECT
+        uri,
+        AI.PARSE_DOCUMENT(
+          ref,
+          options => JSON '{"schema": "raw-docai"}'
+        ) AS parsed_document # Required for AI.CHUNK_DOCUMENT
+      FROM
+        OBJ.LIST(
+          'gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf'
+        )
+    )
+  );
+```
+
+The output is similar to the following:
+
+```
++---------------------------------------------------+----------+------------+----------+----------------------------------------------+
+| uri                                               | chunk_id | start_page | end_page | content                                      |
++---------------------------------------------------+----------+------------+----------+----------------------------------------------+
+| gs://...crittercuisine_5000_user_manual_page3.pdf | 1        | 1          | 1        | Regular Monitoring: While the feeder is      |
+|                                                   |          |            |          | automatic, regularly check the food level... |
+| gs://...crittercuisine_5000_user_manual_page5.pdf | 1        | 1          | 1        | 2. Speak clearly into the microphone...      |
+| gs://...crittercuisine_5000_user_manual_page1.pdf | 1        | 1          | 1        | # CritterCuisine Pro 5000 - Automatic Pet    |
+|                                                   |          |            |          | Feeder - User Manual                         |
+| ...                                               | ...      | ...        | ...      | ...                                          |
++---------------------------------------------------+----------+------------+----------+----------------------------------------------+
 ```
 
 ## Pricing

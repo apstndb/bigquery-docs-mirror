@@ -42,7 +42,7 @@ The following operations add rows to the `APPENDS` change history:
 
 **Definitions**
 
-- `table` : the BigQuery table name. This must be a regular BigQuery table. This argument must be preceded by the word `TABLE` .
+- `table` : the BigQuery table name. This must be a regular BigQuery table or an [Apache Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) . This argument must be preceded by the word `TABLE` .
 
 - `start_timestamp` : a [`TIMESTAMP`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) value indicating the earliest time at which a change is included in the output. If the value is `NULL` , all changes since the table creation are returned. If the table was created after the `start_timestamp` value, the actual table creation time is used instead. An error is returned if the time specified is earlier than allowed by [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
 
@@ -72,7 +72,7 @@ The `APPENDS` function returns a table with the following columns:
 - The data returned by the `APPENDS` function is limited to the table's current schema.
 - You can't call the `APPENDS` function within a multi-statement transaction.
 - `APPENDS` function may not capture all rows appended within a multi-statement transaction if some appended rows are updated or deleted within the same transaction.
-- You can only use the `APPENDS` function with regular BigQuery tables. Clones, snapshots, views, materialized views, external tables, and wildcard tables aren't supported.
+- You can only use the `APPENDS` function with regular BigQuery tables and [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) . Clones, snapshots, views, materialized views, external tables, and wildcard tables aren't supported.
 - Partition pseudo-columns for ingestion-time partitioned tables, such as `_PARTITIONTIME` and `_PARTITIONDATE` , aren't included in the function's output.
 - Rows inserted through the [Storage Write API (gRPC) pending stream](https://docs.cloud.google.com/bigquery/docs/write-api#pending_type) or [Storage Write API (gRPC) buffered stream](https://docs.cloud.google.com/bigquery/docs/write-api#buffered_type) can have inconsistent timestamps, so repeatable reads aren't guaranteed. If you require repeatable reads for streaming ingestion workloads, use either the [Storage Write API (gRPC) default stream](https://docs.cloud.google.com/bigquery/docs/write-api#default_stream) or the [Storage Write API (gRPC) committed stream](https://docs.cloud.google.com/bigquery/docs/write-api#committed_type) . If you require repeatable reads for batch ingestion workloads, use [BigQuery load jobs](https://docs.cloud.google.com/bigquery/docs/loading-data) instead.
 

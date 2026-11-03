@@ -23,6 +23,13 @@ If a table has, or has had, [row-level access policies](https://docs.cloud.googl
 
 If a table has column-level security, you can only view the change history on the columns that you have access to.
 
+To view the `APPENDS` change history on [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) , you also need the following permissions:
+
+- `bigquery.connections.delegate` permission on the Google Cloud resource connection associated with the table, which is included in the [BigQuery Connection User ( `roles/bigquery.connectionUser` )](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) role
+- [`roles/storage.objectUser`](https://docs.cloud.google.com/storage/docs/access-control/iam-roles#storage.objectUser) and `roles/storage.legacyBucketReader` roles granted to the connection's service account on the underlying Cloud Storage bucket
+
+For more information, see [Work with change history in Lakehouse](https://docs.cloud.google.com/lakehouse/docs/change-history) .
+
 ## Change history functions
 
 You can use the following functions to understand a table's change history:

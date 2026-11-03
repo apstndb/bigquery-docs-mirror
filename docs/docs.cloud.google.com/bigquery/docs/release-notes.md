@@ -14,6 +14,57 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 02, 2026
+
+Feature
+
+*Lakehouse* [caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) for cross-cloud data access is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). Cross-cloud caching is disabled by default. You can opt in to caching on a Lakehouse federated catalog or a BigQuery cross-cloud connection to cache remote files in your Google Cloud region. This helps reduce cross-cloud egress costs and accelerate subsequent queries.
+
+For more information, see [About cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) and [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
+
+Feature
+
+*Lakehouse* supports the following remote catalog providers for cross-cloud data access. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+- [Databricks Unity Catalog](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-databricks) on Amazon Web Services (AWS), Microsoft Azure, or Google Cloud
+- [AWS Glue Data Catalog](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-aws-glue) on AWS
+- [Snowflake Horizon Catalog](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-snowflake) on AWS, Microsoft Azure, or Google Cloud
+- [Workday Data Lake](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-workday) on AWS or Google Cloud
+
+This feature lets you configure federated catalog endpoints to synchronize catalog metadata and query Apache Iceberg tables in remote catalogs directly from Google Cloud using BigQuery, Managed Service for Apache Spark, and Apache Spark without migrating data or building complex ETL pipelines. You can route metadata synchronization and queries over the public internet or privately over Cross-Cloud Interconnect, and protect cross-cloud data access with VPC Service Controls service perimeters. For Databricks Unity Catalog, you can also use [user identity federation](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-databricks#configure-user-identity-federation) to propagate end-user identities on queries for permission enforcement and audit logging.
+
+For more information, see [About cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) , [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) , and [Use VPC Service Controls with federated catalog endpoints](https://docs.cloud.google.com/lakehouse/docs/vpc-sc-federated-catalogs) .
+
+Feature
+
+You can now [monitor](https://docs.cloud.google.com/bigquery/docs/create-data-agents#monitor_agents_and_conversations) the performance, adoption, latency, and costs of your data agents and their conversations by using Google Cloud Observability in BigQuery. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can use the [`AI.PARSE_DOCUMENT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document) to extract layout elements such as titles, headings, paragraphs, lists, tables, and images by using the Document AI layout parser to convert unstructured documents into structured `JSON` data.
+
+This function is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can now use BigQuery change history and continuous queries for [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) in Lakehouse.
+
+You can use the `APPENDS` table-valued function (TVF) to track rows appended to Apache Iceberg managed tables over a specified time range, and use [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries) to read incoming data from and write output rows to Apache Iceberg managed tables.
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+For more information, see [Work with change history](https://docs.cloud.google.com/lakehouse/docs/change-history) and [Introduction to continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) .
+
+Feature
+
+The [`SECURE_CONTEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#secure_context) is now available in [Preview](https://cloud.google.com/products#product-launch-stages) . `SECURE_CONTEXT` returns the value of a request-scoped secure context parameter provided at query runtime, allowing logical views to dynamically filter and evaluate data based on context variables such as user attributes, department IDs, or tenant identifiers.
+
+Feature
+
+The Data Engineering Agent now supports [BigQuery AI, ML, and object functions and statements in generated Dataform SQLX pipelines and agent instruction files](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#bigquery-ai-ml-support) .
+
+This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## October 30, 2026
 
 Feature

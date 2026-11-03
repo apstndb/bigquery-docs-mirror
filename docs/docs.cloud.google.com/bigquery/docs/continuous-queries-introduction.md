@@ -18,7 +18,7 @@ BigQuery continuous queries are SQL statements that run continuously. Continuous
 - Bigtable tables
 - Spanner tables
 
-Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by using one of the following methods:
+Continuous queries can process data that has been written to [standard BigQuery tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) or [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) by using one of the following methods:
 
 - The [BigQuery Storage Write API (gRPC)](https://docs.cloud.google.com/bigquery/docs/write-api)
 - The [BigQuery Storage Write API (REST)](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery)
@@ -88,9 +88,9 @@ The following operations are supported in continuous queries:
 
 - Using [stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) —for example [`JOIN` s, aggregations, and window aggregations](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) . In stateful operations, the state of ingested data is retained across multiple rows or time intervals in order to compute an accurate result.
 
-- Using the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to process appended data from a specific point in time.
+- Using the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) change history function to process appended data from a specific point in time on standard BigQuery tables or [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
-- Using the [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to process changed data, including both appends and mutations, from a specific point in time when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) . However, `CHANGES` is not supported when using a [stateful operation](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) .
+- Using the [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to process changed data, including both appends and mutations, from a specific point in time when [exporting data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) . However, `CHANGES` is not supported when using a [stateful operation](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) or when querying [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
 - Querying [views](https://docs.cloud.google.com/bigquery/docs/views) , as long as the view's underlying SQL query is a valid continuous query.
 
@@ -162,7 +162,6 @@ Continuous queries are subject to the following limitations:
 
   - [External tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources) .
   - [Information schema views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) .
-  - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) . Note that while Iceberg managed tables are not supported as data sources, they are supported as destinations for continuous query output.
   - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
   - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
   - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .

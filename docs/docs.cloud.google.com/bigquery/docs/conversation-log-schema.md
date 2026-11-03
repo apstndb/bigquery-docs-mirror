@@ -42,15 +42,63 @@ The following table describes the columns in the conversation logging destinatio
 
 The following table describes the values that can appear in the `event_type` column and the columns or JSON fields that store the data for each event.
 
-| `event_type` value                               | Description                                                                                                                                                                                                        | Populated columns and JSON fields                                                                                                                                                                                                                                                          |
-|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INVOCATION_STARTING`                            | Start of a turn.                                                                                                                                                                                                   | None                                                                                                                                                                                                                                                                                       |
-| `USER_MESSAGE_RECEIVED`                          | The user's question.                                                                                                                                                                                               | `content.text_summary`                                                                                                                                                                                                                                                                     |
-| `AGENT_RESPONSE`                                 | The agent's answer, as a structured object.                                                                                                                                                                        | `content.text_summary` (plain text) and `content.response` (see [Structure of `AGENT_RESPONSE`](https://docs.cloud.google.com/bigquery/docs/conversation-log-schema#conversation-logging-agent-response) )                                                                                 |
-| `LLM_RESPONSE`                                   | One row for each model call, including calls that requested a tool (not written when a turn is answered directly from a verified query, where `attributes.fast_path` is `true` ). The model's output isn't stored. | Tokens: `content.usage.prompt` , `content.usage.completion` , `content.usage.total` . Model: `attributes.model_version` . Finish reason: `attributes.finish_reason` . Detailed usage: `attributes.usage_metadata` (for example, `cached_content_token_count` and `thoughts_token_count` ). |
-| `INVOCATION_COMPLETED`                           | End of a turn, with per-turn latency. `content` is empty.                                                                                                                                                          | `latency_ms.total_ms`                                                                                                                                                                                                                                                                      |
-| `EMBEDDING_SUGGESTION`                           | Suggestions for the agent owner about columns that could benefit from embeddings. It appears only for some agents.                                                                                                 | `content.reason` , `content.suggested_columns`                                                                                                                                                                                                                                             |
-| `INVOCATION_ERROR` , `AGENT_ERROR` , `LLM_ERROR` | Failed turn. `status` is `ERROR` and `content` is `NULL` .                                                                                                                                                         | `error_message` (one-line summary with SQL statements and table names redacted)                                                                                                                                                                                                            |
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>event_type</code> value</th>
+<th>Description</th>
+<th>Populated columns and JSON fields</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th><code>INVOCATION_STARTING</code></th>
+<td>Start of a turn.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th><code>USER_MESSAGE_RECEIVED</code></th>
+<td>The user's question.</td>
+<td><code>content.text_summary</code></td>
+</tr>
+<tr class="odd">
+<th><code>AGENT_RESPONSE</code></th>
+<td>The agent's answer, as a structured object.</td>
+<td><code>content.text_summary</code> (plain text) and <code>content.response</code> (see <a href="https://docs.cloud.google.com/bigquery/docs/conversation-log-schema#conversation-logging-agent-response">Structure of <code>AGENT_RESPONSE</code></a> )</td>
+</tr>
+<tr class="even">
+<th><code>LLM_RESPONSE</code></th>
+<td>One row for each model call, including calls that requested a tool (not written when a turn is answered directly from a verified query, where <code>attributes.fast_path</code> is <code>true</code> ). The model's output isn't stored.</td>
+<td><ul>
+<li>Tokens: <code>content.usage.prompt</code> , <code>content.usage.completion</code> , and <code>content.usage.total</code> .</li>
+<li>Detailed token usage: <code>attributes.usage_metadata</code> , including <code>tool_use_prompt_token_count</code> , <code>thoughts_token_count</code> , and <code>cached_content_token_count</code> .</li>
+<li>Total tokens: the <code>content.usage.total</code> value equals the <code>content.usage.prompt</code> + <code>tool_use_prompt_token_count</code> + <code>content.usage.completion</code> + <code>thoughts_token_count</code> values, with the <code>cached_content_token_count</code> value included in the <code>content.usage.prompt</code> value. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/conversation-log-schema#conversation-logging-attributes">Fields inside <code>attributes</code></a> .</li>
+<li>Model: <code>attributes.model_version</code> .</li>
+<li>Finish reason: <code>attributes.finish_reason</code> .</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<th><code>INVOCATION_COMPLETED</code></th>
+<td>End of a turn, with per-turn latency. <code>content</code> is empty.</td>
+<td><code>latency_ms.total_ms</code></td>
+</tr>
+<tr class="even">
+<th><code>EMBEDDING_SUGGESTION</code></th>
+<td>Suggestions for the agent owner about columns that could benefit from embeddings. It appears only for some agents.</td>
+<td><code>content.reason</code> , <code>content.suggested_columns</code></td>
+</tr>
+<tr class="odd">
+<th><code>INVOCATION_ERROR</code> , <code>AGENT_ERROR</code> , <code>LLM_ERROR</code></th>
+<td>Failed turn. <code>status</code> is <code>ERROR</code> and <code>content</code> is <code>NULL</code> .</td>
+<td><code>error_message</code> (one-line summary with SQL statements and table names redacted)</td>
+</tr>
+</tbody>
+</table>
 
 ## User identity
 
@@ -62,13 +110,24 @@ To attribute turns to your own end users when you call the API through a service
 
 The following table shows the GoogleSQL expressions used to extract metadata fields from the `attributes` JSON column.
 
-| What you need                          | GoogleSQL expression                                                   |
-|----------------------------------------|------------------------------------------------------------------------|
-| Data agent ID                          | `JSON_VALUE(attributes, '$.session_metadata.state."data-agent-id"')`   |
-| Data agent full resource name          | `JSON_VALUE(attributes, '$.adk.app_name')`                             |
-| Conversation ID                        | `JSON_VALUE(attributes, '$.session_metadata.state."conversation-id"')` |
-| Internal user key                      | `JSON_VALUE(attributes, '$.session_metadata.user_id')`                 |
-| Model version (on `LLM_RESPONSE` rows) | `JSON_VALUE(attributes, '$.model_version')`                            |
+| What you need                                   | GoogleSQL expression                                                                         |
+|-------------------------------------------------|----------------------------------------------------------------------------------------------|
+| Data agent ID                                   | `JSON_VALUE(attributes, '$.session_metadata.state."data-agent-id"')`                         |
+| Data agent full resource name                   | `JSON_VALUE(attributes, '$.adk.app_name')`                                                   |
+| Conversation ID                                 | `JSON_VALUE(attributes, '$.session_metadata.state."conversation-id"')`                       |
+| Internal user key                               | `JSON_VALUE(attributes, '$.session_metadata.user_id')`                                       |
+| Model version (on `LLM_RESPONSE` rows)          | `JSON_VALUE(attributes, '$.model_version')`                                                  |
+| Tool-use prompt tokens (on `LLM_RESPONSE` rows) | `SAFE_CAST(JSON_VALUE(attributes, '$.usage_metadata.tool_use_prompt_token_count') AS INT64)` |
+| Thinking tokens (on `LLM_RESPONSE` rows)        | `SAFE_CAST(JSON_VALUE(attributes, '$.usage_metadata.thoughts_token_count') AS INT64)`        |
+| Cached prompt tokens (on `LLM_RESPONSE` rows)   | `SAFE_CAST(JSON_VALUE(attributes, '$.usage_metadata.cached_content_token_count') AS INT64)`  |
+
+On `LLM_RESPONSE` rows, token counts split into the input tokens and the output tokens that add up to the `content.usage.total` value:
+
+- **Input tokens** : the `content.usage.prompt` value plus the `attributes.usage_metadata.tool_use_prompt_token_count` value, which counts tokens from tool execution results that are sent back to the model as input. If you use context caching, the `attributes.usage_metadata.cached_content_token_count` value is already included in the `content.usage.prompt` value.
+
+- **Output tokens** : the `content.usage.completion` value plus the `attributes.usage_metadata.thoughts_token_count` value, which counts reasoning tokens generated by thinking models.
+
+- **Total tokens** : the `content.usage.total` value equals the `content.usage.prompt` + `tool_use_prompt_token_count` + `content.usage.completion` + `thoughts_token_count` values. Optional `usage_metadata` fields are omitted or `null` when a model call doesn't use them. Wrap extracted counts in `COALESCE(..., 0)` before adding row values together (such as `prompt` + `completion` ) or to prevent aggregate functions like `SUM(...)` from producing `null` . For an example query, see [Token use by model and by agent](https://docs.cloud.google.com/bigquery/docs/analyze-conversation-logs#recipe-token-use-by-model) .
 
 ## Structure of `AGENT_RESPONSE`
 

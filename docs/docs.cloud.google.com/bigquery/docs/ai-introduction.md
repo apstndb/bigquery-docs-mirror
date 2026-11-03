@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/ai-introduction
 uri: https://docs.cloud.google.com/bigquery/docs/ai-introduction
 title: Introduction to AI in BigQuery
-description: Provides an overview of machine learning, AI functions, search, AI assistance, and agents in BigQuery.
+description: Provides an overview of AI assistance, SQL AI functions, search, machine learning, and agent tools in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
@@ -10,16 +10,88 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-BigQuery offers various AI capabilities that let you do the following:
+BigQuery provides AI, machine learning (ML), and agent capabilities across several workflows:
 
-- Do predictive machine learning (ML).
-- Run inference against large language models (LLMs) such as Gemini.
-- Build applications using embeddings and vector search.
-- Use built-in agents to assist with coding.
-- Create data pipelines.
-- Access BigQuery functionality with agent tools.
+- **In-console assistance and analysis** : write and explain code, prepare data, ask questions about your tables in natural language, build pipelines, and administer BigQuery resources in the Google Cloud console.
+- **AI, search, and ML in SQL queries** : call large language models (LLMs) such as Gemini, perform text and vector search, and train or run predictive ML models directly in GoogleSQL.
+- **Tools for building agents** : connect custom agents to BigQuery using Model Context Protocol (MCP) servers, agent frameworks, and skills, and stream agent interaction logs into BigQuery for analysis.
+- **Agents in your IDE or terminal** : query data, manage pipelines, and run workflows from development environments such as Antigravity, VS Code, and command-line interfaces.
 
-## Machine learning
+## Choose an AI tool
+
+The following table maps common tasks to their corresponding BigQuery feature and where you use it.
+
+| Use case                                                                                                                  | Feature                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Where to use it                                                                                                                                            |
+|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generate, complete, or explain SQL queries                                                                                | [SQL code assist](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_a_sql_query)                                                                                                                                                                                                                                                                                                                                                                                                                               | Google Cloud console query editor                                                                                                                          |
+| Ask questions about your data in natural language and get answers and charts                                              | [Conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics)                                                                                                                                                                                                                                                                                                                                                                                                                                   | Google Cloud console ( **Agents** page) or [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) |
+| Find tables, join data, run SQL or natural language queries, and visualize results in a graphical workflow                | [BigQuery data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas)                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Google Cloud console                                                                                                                                       |
+| Generate automated questions and SQL queries from table metadata                                                          | [Data insights](https://docs.cloud.google.com/bigquery/docs/data-insights)                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Google Cloud console                                                                                                                                       |
+| Get AI-generated recommendations to clean, transform, and enrich data                                                     | [Data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)                                                                                                                                                                                                                                                                                                                                                                                                                                             | Google Cloud console                                                                                                                                       |
+| Create custom rules to translate other SQL dialects to GoogleSQL                                                          | [Interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)                                                                                                                                                                                                                                                                                                                                                                                                                               | Google Cloud console                                                                                                                                       |
+| Analyze and troubleshoot jobs, manage reservations, trace lineage, discover resources, or optimize queries                | [Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist) ( [Preview](https://cloud.google.com/products#product-launch-stages) )                                                                                                                                                                                                                                                                                                                                                                         | Google Cloud console toolbar chat pane                                                                                                                     |
+| Generate, complete, or explain Python code                                                                                | [Python code assist](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_python_code)                                                                                                                                                                                                                                                                                                                                                                                                                            | Colab Enterprise notebooks in BigQuery                                                                                                                     |
+| Automate exploratory data analysis, ML workflows, and visualizations in a notebook                                        | [Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent)                                                                                                                                                                                                                                                                                                                                                                                                                                         | Colab Enterprise notebooks in BigQuery                                                                                                                     |
+| Build, modify, and manage data pipelines using natural language prompts                                                   | [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines)                                                                                                                                                                                                                                                                                                                                                                                                                             | Google Cloud console and Dataform workspaces                                                                                                               |
+| Generate text, extract structured data, classify, score, filter, or aggregate table data with LLMs                        | [Generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview)                                                                                                                                                                                                                                                                                                                                                                                                                                      | GoogleSQL queries                                                                                                                                          |
+| Perform translation, document processing, audio transcription, or computer vision on table data                           | [Task-specific AI functions](https://docs.cloud.google.com/bigquery/docs/ai-application-overview)                                                                                                                                                                                                                                                                                                                                                                                                                                  | GoogleSQL queries                                                                                                                                          |
+| Generate embeddings and run semantic or keyword search over structured, unstructured, or multimodal data                  | [Embeddings and vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) and [text search](https://docs.cloud.google.com/bigquery/docs/search)                                                                                                                                                                                                                                                                                                                                                              | GoogleSQL queries                                                                                                                                          |
+| Train, evaluate, and run predictive ML models (forecasting, anomaly detection, classification, regression, clustering)    | [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction)                                                                                                                                                                                                                                                                                                                                                                                                                                                       | GoogleSQL queries, Google Cloud console, bq command-line tool, REST API, or notebooks                                                                      |
+| Connect custom AI applications or agents to BigQuery to inspect metadata, run queries, translate SQL, or manage transfers | [BigQuery MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) , [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) , [BigQuery Data Transfer Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-transfer-service-mcp) , [MCP Toolbox for Databases](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) , or [Agent Development Kit (ADK)](https://google.github.io/adk-docs/integrations/bigquery/) | MCP clients and agent frameworks                                                                                                                           |
+| Give agents reusable instructions and reference files for BigQuery tasks                                                  | [BigQuery agent skills](https://docs.cloud.google.com/bigquery/docs/agent-skills-overview)                                                                                                                                                                                                                                                                                                                                                                                                                                         | Agentic clients and terminals                                                                                                                              |
+| Log, monitor, and evaluate agent interactions, token usage, and latency                                                   | [BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics)                                                                                                                                                                                                                                                                                                                                                                                                                                   | ADK, LangGraph, or BigQuery Storage Write API (gRPC)                                                                                                       |
+| Explore BigQuery resources, run queries, and build pipelines from an IDE or CLI                                           | [Google Cloud Data Agent Kit](https://docs.cloud.google.com/data-agent-kit/overview) , [MCP IDE integrations](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) , or [Antigravity CLI](https://antigravity.google/docs/getting-started?tab=cli)                                                                                                                                                                                                                                                        | Antigravity, VS Code, Cursor, or command-line tools                                                                                                        |
+
+## In-console assistance and agents
+
+When you work in the Google Cloud console or Colab Enterprise notebooks, you can use assistive features and built-in agents to write code, explore data, build pipelines, and manage BigQuery resources.
+
+### Assistive features
+
+[Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) provides in-console assistance for authoring queries, preparing data, and exploring tables:
+
+- **[SQL code assist](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_a_sql_query)** : generate, complete, and explain SQL queries in the query editor.
+- **[Python code assist](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_python_code)** : generate, complete, and explain Python code, including PySpark and BigQuery DataFrames, in notebooks.
+- **[Data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas)** : find tables, join and query data using natural language, and visualize results in a directed acyclic graph (DAG) workspace.
+- **[Data insights](https://docs.cloud.google.com/bigquery/docs/data-insights)** : generate natural language questions about a table and the SQL queries to answer them based on table metadata.
+- **[Data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)** : generate context-aware recommendations to clean, transform, and enrich your data.
+- **[Interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)** : create translation rules to customize how queries from other SQL dialects are translated into GoogleSQL.
+
+### Chat experiences
+
+BigQuery offers two distinct chat experiences in the Google Cloud console, depending on whether you want to analyze data in your tables or manage your BigQuery environment:
+
+- **[Conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics)** : answers questions about the data stored in your tables. You can chat directly with data sources or create configured [data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) with custom metadata, glossary terms, instructions, and verified queries. The agent writes and runs SQL queries on your behalf and returns answers and visualizations.
+- **[Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist)** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): helps you operate and administer BigQuery. Use the chat pane in the Google Cloud console toolbar to discover resources, trace data lineage, debug failed or slow jobs, analyze slot capacity and reservations, and optimize or schedule queries.
+
+### Notebook and pipeline agents
+
+You can use the following built-in agents for data science and data engineering workflows:
+
+- **[Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent)** : automates exploratory data analysis, data cleaning, ML tasks, and visualizations for BigQuery tables and CSV files within a Colab Enterprise notebook.
+- **[Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines)** : builds, modifies, and troubleshoots Dataform data pipelines to load and process data in BigQuery using natural language prompts.
+
+## AI, search, and ML in SQL queries
+
+You can run generative AI models, search unstructured and structured data, and train predictive ML models directly in GoogleSQL.
+
+### AI functions
+
+BigQuery provides SQL functions that call Gemini, partner, and open models on Gemini Enterprise Agent Platform, Cloud AI APIs, or built-in models:
+
+- **[General-purpose AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#general_purpose_ai)** : use these functions when you want full control over the model, prompt, output schema, and parameters.
+- **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions)** : use these functions for routine filtering, rating, classification, and aggregation tasks with a simplified syntax. BigQuery can choose a model for you to optimize for cost and quality.
+- **[Task-specific functions](https://docs.cloud.google.com/bigquery/docs/ai-application-overview)** : call Cloud AI APIs from SQL for natural language processing, machine translation, document processing, audio transcription, and computer vision.
+
+### Search and embeddings
+
+BigQuery supports keyword and semantic search across structured, semi-structured, and multimodal data:
+
+- **[Text search](https://docs.cloud.google.com/bigquery/docs/search)** : use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) to perform tokenized search on unstructured text or semi-structured `JSON` data. You can improve search performance by creating a [search index](https://docs.cloud.google.com/bigquery/docs/search-index) , which lets BigQuery optimize queries that use the `SEARCH` function, as well as other functions and operators.
+- **[Embedding generation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)** : generate embeddings, which are high-dimensional numerical vectors that represent entities such as text or images, by using models provided by or hosted on Agent Platform, or by using models imported and run in BigQuery. You can also have BigQuery automatically maintain a column of embeddings by enabling [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) .
+- **[Vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)** : find semantically similar items for retrieval-augmented generation (RAG) or recommendations using [`VECTOR_SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) , [`AI.SEARCH`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) , and [vector indexes](https://docs.cloud.google.com/bigquery/docs/vector-index) .
+
+### Machine learning
 
 With BigQuery ML, you can train, evaluate, and run inference on models for tasks such as time series forecasting, anomaly detection, classification, regression, clustering, dimensionality reduction, and recommendations.
 
@@ -28,78 +100,38 @@ You can work with BigQuery ML capabilities through the Google Cloud console, the
 - [Create and run ML models](https://docs.cloud.google.com/bigquery/docs/model-overview) by using GoogleSQL queries.
 - [Create Colab Enterprise notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) to perform ML workflows. Notebooks let you use SQL and Python interchangeably, and use any AI or ML Python libraries for your development.
 - Understand the results of your predictive ML models with [explainable AI](https://docs.cloud.google.com/bigquery/docs/xai-overview) .
-- Use the `TimesFM` , `ARIMA_PLUS` , and `ARIMA_PLUS_XREG` models to perform [forecasting](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) and [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) on time series data.
+- Use the [`TimesFM`](https://docs.cloud.google.com/bigquery/docs/timesfm-model) , `ARIMA_PLUS` , and `ARIMA_PLUS_XREG` models to perform [forecasting](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) and [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) on time series data.
+- Use the [`TabFM` model](https://docs.cloud.google.com/bigquery/docs/tabfm-model) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform zero-shot classification and regression [predictions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-predict) on tabular data.
 - Generate insights about changes to key metrics in your multi-dimensional data with [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) .
 
 To learn more, see the [Introduction to ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
 
-## AI functions
+## Tools for building and monitoring agents
 
-BigQuery offers various SQL functions that you can use for AI tasks such as text generation, text or unstructured data analysis, and translation. These functions access Gemini and partner LLM models available from Gemini Enterprise Agent Platform, Cloud AI APIs, or built-in BigQuery models to perform these tasks.
+If you're developing custom AI applications or agents that interact with BigQuery, you can use the following tools:
 
-There are several categories of AI functions:
+- **Managed MCP servers** : connect MCP-compatible agents to managed HTTPS endpoints:
+  - [BigQuery MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) to list resources, inspect table metadata, and run SQL queries.
+  - [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) to translate SQL queries into GoogleSQL and generate DDL.
+  - [BigQuery Data Transfer Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-transfer-service-mcp) to configure and monitor data transfers.
+- **[MCP Toolbox for Databases](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox)** : run an open source local MCP server to connect agents to BigQuery or define custom tools over parameterized SQL queries.
+- **[ADK integrations](https://google.github.io/adk-docs/integrations/bigquery/)** : build agents in ADK with prebuilt BigQuery toolsets.
+- **[BigQuery agent skills](https://docs.cloud.google.com/bigquery/docs/agent-skills-overview)** : install reusable skill packages ( `bigquery-basics` and `bigquery-ai-ml` ) that provide agents with instructions and references for common BigQuery tasks.
+- **[BigQuery agent analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics)** : stream agent interaction logs—including requests, responses, tool calls, and errors—from ADK or LangGraph into BigQuery to analyze token usage, latency, and execution traces.
 
-- **Generative AI functions.** These functions help you perform tasks such as content generation, analysis, summarization, structured data extraction, classification, embedding generation, and data enrichment. There are two types of generative AI functions:
+## Agents in your IDE or terminal
 
-  - [General-purpose AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#general_purpose_ai) give you full control and transparency on the choice of model, prompt, and parameters to use.
-  - [Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) offer a streamlined syntax for routine tasks such as filtering, rating, and classification. BigQuery can choose a model for you to optimize for cost and quality.
+You can interact with BigQuery from your local development environment or command line using the following tools:
 
-- **Task-specific functions.** These functions help you use Cloud AI APIs for tasks such as the following:
-
-  - [Natural language processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#natural_language_processing)
-  - [Machine translation](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#machine_translation)
-  - [Document processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#document_processing)
-  - [Audio transcription](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#audio_transcription)
-  - [Computer vision](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#computer_vision)
-
-For more information, see [Task-specific solutions overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
-
-## Search
-
-BigQuery offers a variety of search functions and features to help you efficiently find specific data or discover similarities between data including multimodal data.
-
-- **Text search.** You can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) to perform tokenized search on unstructured text or semi-structured `JSON` data. You can improve search performance by creating a [search index](https://docs.cloud.google.com/bigquery/docs/search-index) , which lets BigQuery optimize queries that use the `SEARCH` function, as well as other functions and operators. For more information, see [Search indexed data](https://docs.cloud.google.com/bigquery/docs/search) .
-
-- **Embedding generation.** Embeddings are high-dimensional numerical vectors that represent entities such as text or images, and are often generated by ML models. You can [generate multimodal embeddings](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) by using models provided by or hosted on Agent Platform, or by using models imported and run in BigQuery.
-
-  You can also have BigQuery automatically maintain a column of embeddings by enabling [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-
-- **Vector search.** You can use the [`VECTOR_SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) to search embeddings to find semantically similar items. You can use the [`AI.SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to search on tables that have autonomous embedding generation enabled. You can improve vector search performance by creating a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) , which uses Approximate Nearest Neighbor search techniques to provide faster, more approximate results.
-
-  Common use cases for vector search include semantic search, recommendation, and retrieval-augmented generation (RAG). For more information, see [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
-
-## Assistive AI features
-
-AI-powered assistance features in BigQuery, collectively referred to as [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) , help you discover, prepare, query, and visualize your data.
-
-- [**Data insights.**](https://docs.cloud.google.com/bigquery/docs/data-insights) Generate natural language questions about your data, along with the SQL queries to answer those questions.
-- [**Data preparation.**](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction) Generate context aware recommendations to clean, transform, and enrich your data.
-- [**SQL code assist.**](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_a_sql_query) Generate, complete, and explain SQL queries.
-- [**Python code assist.**](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#generate_python_code) Generate, complete, and explain Python code, including PySpark and BigQuery DataFrames.
-- [**Data canvas.**](https://docs.cloud.google.com/bigquery/docs/data-canvas) Query your data using natural language, visualize results with charts, and ask follow-up questions.
-- [**SQL translator.**](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) Create Gemini-enhanced SQL translation rules to help you migrate queries written in a different dialect to GoogleSQL.
-
-## Agents
-
-Agents are software tools that can use AI to complete tasks on your behalf. You can use built-in agents or create your own agents to help you process, manage, analyze, and visualize your data:
-
-- Use the [Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent) to automate exploratory data analysis, data processing, ML tasks, and visualization insights within a Colab Enterprise notebook.
-
-- Use the [Data Engineering Agent](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines) to build, modify, and manage data pipelines to load and process data in BigQuery. You can use natural language prompts to generate data pipelines from various data sources or adapt existing data pipelines to suit your data engineering needs.
-
-- Use the [Conversational Analytics Agent](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) to chat with your data using conversational language. This agent consists of one or more data sources and a set of use case-specific instructions for processing that data. Conversation analytics supports the use of [some BigQuery ML functions](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
-
-- Use the [Gemini CLI](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli) to interact with BigQuery data in your terminal by using natural language prompts.
-
-- Build using the [Open source MCP toolbox](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) or [ADK tools](https://google.github.io/adk-docs/integrations/bigquery/) for quick, iterative agent development.
+- **[Data Agent Kit](https://docs.cloud.google.com/data-agent-kit/overview)** : use the IDE extension (for VS Code, Antigravity, and Cursor) or the coding agent plugin (for Antigravity CLI, Gemini CLI, Claude Code, and Codex CLI) to explore datasets, run queries, build pipelines, and train ML models.
+- **[MCP IDE integrations](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox)** : connect IDEs such as Antigravity, VS Code, Cursor, Windsurf, and Claude Code to BigQuery using the Antigravity MCP Store or MCP Toolbox for Databases.
+- **[Antigravity CLI](https://antigravity.google/docs/getting-started?tab=cli)** : use the Antigravity CLI to run queries, manage pipelines, and interact with BigQuery resources.
 
 ## What's next
 
-- For more information about ML, see [Introduction to ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- For more information about assistive AI features, see [Gemini in BigQuery overview](https://docs.cloud.google.com/bigquery/docs/gemini-overview) and [Use Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist) .
+- For more information about conversational analytics, see [Conversational analytics overview](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
 - For more information about generative AI functions in SQL, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
-- For more information about searching your data, see [Search indexed data](https://docs.cloud.google.com/bigquery/docs/search) and [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
-- For more information about assistive AI features, see [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
-- For more information about using agents with BigQuery, see:
-  - [Use the BigQuery MCP Server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) .
-  - [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) using IDEs such as Antigravity.
-  - [Analyze data with the Gemini CLI](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli) .
+- For more information about searching your data, see [Search indexed data](https://docs.cloud.google.com/bigquery/docs/search) and [Introduction to embeddings and vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
+- For more information about ML in BigQuery, see [Introduction to ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+- For more information about connecting agents to BigQuery, see [Use the BigQuery MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp) and [Data Agent Kit overview](https://docs.cloud.google.com/data-agent-kit/overview) .

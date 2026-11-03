@@ -229,7 +229,7 @@ To add a notebook to your pipeline, do the following in the **Notebook options**
 
     > **Note:** A notebook runtime template must be located in the same region as the pipeline that specifies it.
 
-    > **Note:** When you include a notebook in a BigQuery pipeline, you can't change the network of the Gemini Enterprise Agent Platform runtime instance. The runtime is restricted to the default network, and selecting a different network isn't supported.
+    > **Note:** If you use the default runtime for a notebook in a BigQuery pipeline, you can't change the network of the Gemini Enterprise Agent Platform runtime instance. The runtime is restricted to the default network, and selecting a different network isn't supported. If you use a custom runtime template, the runtime uses the network and subnetwork configured in the template. If your project enforces the `compute.requireShieldedVm` organization policy, ensure that your custom runtime template has Secure Boot enabled to avoid VM creation failures.
 
 2.  In the **Cloud Storage bucket** field, click **Browse** and select or create a Cloud Storage bucket for storing the output of notebooks in your pipeline.
 

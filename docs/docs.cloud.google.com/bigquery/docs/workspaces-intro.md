@@ -16,6 +16,8 @@ data_source: docs.cloud.google.com
 
 Workspaces in BigQuery let you edit and manage code stored in [repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) . Within a workspace, you can create and modify files while the parent repository uses Git to record changes and manage file versions.
 
+For a folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+
 ## View workspaces
 
 On the BigQuery page, your workspaces are displayed in alphabetical order under the repository they are associated with. To view repositories, do the following:
@@ -60,5 +62,6 @@ For more information on BigQuery pricing, see [Pricing](https://cloud.google.com
 
 ## What's next
 
+- To learn how to manage code with BigQuery Studio Git repositories, see [Manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
 - To learn how to create and use repositories, see [Create a repository](https://docs.cloud.google.com/bigquery/docs/repositories) .
 - To learn how to create and use workspaces, see [Create a workspace](https://docs.cloud.google.com/bigquery/docs/workspaces) .

@@ -466,7 +466,7 @@ Iceberg managed tables have the following limitations:
 - `TRUNCATE TABLE` doesn't support Iceberg managed tables. There are two alternatives:
   - [`CREATE OR REPLACE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) , using the same table creation options.
   - `DELETE FROM` table `WHERE` true
-- The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) doesn't support Iceberg managed tables.
+- The [`APPENDS` table-valued function (TVF)](https://docs.cloud.google.com/bigquery/docs/change-history) supports Iceberg managed tables, but the `CHANGES` TVF doesn't.
 - Iceberg metadata might not contain data that was streamed to BigQuery by the Storage Write API within the last 90 minutes.
 - When streaming data to Iceberg managed tables using the BigQuery Storage Write API (gRPC), the table's `lastModifiedTime` might not be immediately updated and can be stale. The metadata export timestamp in BigLake status reflects the read snapshot time used when generating the Iceberg metadata, rather than the table's `lastModifiedTime` .
 - Record-based paginated access using `tabledata.list` doesn't support Iceberg managed tables.

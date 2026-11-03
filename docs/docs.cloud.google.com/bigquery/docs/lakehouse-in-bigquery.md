@@ -76,54 +76,51 @@ Instead of creating a table containing data, you can create an empty Lakehouse t
 
 ## Access cross-cloud data
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** For support during the preview, email <biglake-help@google.com> .
-
-The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) lets you query data stored with other cloud providers directly from BigQuery, without migrating files or building complex ETL pipelines. For configuration information, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
+The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) lets you query external Iceberg tables across Amazon Web Services (AWS) and Microsoft Azure directly from BigQuery without migrating files or building ETL pipelines. You can route query reads, background catalog metadata synchronization, or both privately over Cross-Cloud Interconnect, while optional local caching in Google Cloud helps reduce recurring egress costs. For query syntax and configuration details, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
 
 ## Iceberg table capabilities comparison
 
 Use the following table to compare capabilities between Apache Iceberg tables managed by the Lakehouse runtime catalog and Apache Iceberg tables managed by BigQuery.
 
-| Capability                                                                 | Apache Iceberg tables managed by Lakehouse runtime catalog  | Apache Iceberg tables managed by BigQuery          |
-|----------------------------------------------------------------------------|-------------------------------------------------------------|----------------------------------------------------|
-| **Catalog**                                                                | Lakehouse runtime catalog (Iceberg REST catalog compatible) | BigQuery                                           |
-| **Storage**                                                                | Cloud Storage                                               | Cloud Storage                                      |
-| **Accessible through the Iceberg REST catalog endpoint**                   | Yes                                                         | Yes, using BigQuery catalog federation             |
-| **Read/Write Interoperability**                                            |                                                             |                                                    |
-| BigQuery read queries (SELECT, BQML, AI functions)                         | Supported                                                   | Supported                                          |
-| BigQuery DML (INSERT, UPDATE, DELETE, MERGE)                               | Supported (Preview)                                         | Supported (GA)                                     |
-| OSS engine reads                                                           | Supported (GA)                                              | Supported (GA) (using BigQuery catalog federation) |
-| OSS engine writes                                                          | Supported (GA)                                              | Not supported                                      |
-| OSS engine streaming writes (Kafka, Spark, Dataflow with Iceberg I/O sink) | Supported (GA)                                              | Not supported                                      |
-| **Managed and Advanced Capabilities**                                      |                                                             |                                                    |
-| Table management (compaction, garbage collection)                          | Supported (Preview)                                         | Supported (GA)                                     |
-| BigQuery streaming writes (storage write API)                              | Not supported                                               | Supported (GA)                                     |
-| Pub/Sub streaming/subscription, Dataflow streaming with BigQuery I/O sink  | Not supported                                               | Supported (GA)                                     |
-| BigQuery Change Data Capture (CDC)                                         | Supported (Preview)                                         | Supported                                          |
-| BigQuery multi-statement transactions                                      | Not supported                                               | Supported (Preview)                                |
-| Managed disaster recovery                                                  | Not supported                                               | Not supported                                      |
-| Search index                                                               | Not supported                                               | Not supported                                      |
-| Vector index (including auto embedding generation)                         | Not supported                                               | Not supported                                      |
-| **Time Travel**                                                            |                                                             |                                                    |
-| Time travel (using OSS engines)                                            | Flexible (configured through table properties)              | Not supported                                      |
-| Time travel (using BigQuery)                                               | Limited to 7 days                                           | Limited to 7 days                                  |
-| Snapshot history and rollback to previous snapshot                         | Supported                                                   | Not supported                                      |
-| **Governance, Security and Sharing**                                       |                                                             |                                                    |
-| BigQuery Authorized Views                                                  | Not supported                                               | Not supported                                      |
-| BigQuery column level security                                             | Not supported                                               | Supported (GA)                                     |
-| BigQuery data masking and policy tags                                      | Not supported                                               | Supported (GA)                                     |
-| BigQuery row level security                                                | Not supported                                               | Supported (GA)                                     |
-| Analytics Hub integration                                                  | Not supported                                               | Supported                                          |
-| **Knowledge catalog capabilities**                                         |                                                             |                                                    |
-| Metadata cataloging, search and discovery                                  | Supported                                                   | Supported                                          |
-| Lineage                                                                    | Supported                                                   | Supported                                          |
-| Data quality/profiling                                                     | Supported                                                   | Supported                                          |
-| Insights                                                                   | Supported                                                   | Supported                                          |
-| AI-based column and table descriptions generation                          | Supported                                                   | Supported                                          |
+| Capability                                                                 | Apache Iceberg tables managed by Lakehouse runtime catalog  | Apache Iceberg tables managed by BigQuery |
+|----------------------------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------|
+| **Catalog**                                                                | Lakehouse runtime catalog (Iceberg REST catalog compatible) | BigQuery                                  |
+| **Storage**                                                                | Cloud Storage                                               | Cloud Storage                             |
+| **Accessible through the Iceberg REST catalog endpoint**                   | Yes                                                         | Yes (read-only)                           |
+| **Read/Write Interoperability**                                            |                                                             |                                           |
+| BigQuery read queries (SELECT, BQML, AI functions)                         | Supported                                                   | Supported                                 |
+| BigQuery DML (INSERT, UPDATE, DELETE, MERGE)                               | Supported (Preview)                                         | Supported (GA)                            |
+| OSS engine reads                                                           | Supported (GA)                                              | Supported (GA)                            |
+| OSS engine writes                                                          | Supported (GA)                                              | Not supported                             |
+| OSS engine streaming writes (Kafka, Spark, Dataflow with Iceberg I/O sink) | Supported (GA)                                              | Not supported                             |
+| **Managed and Advanced Capabilities**                                      |                                                             |                                           |
+| Table management (compaction, garbage collection)                          | Supported (Preview)                                         | Supported (GA)                            |
+| BigQuery streaming writes (storage write API)                              | Not supported                                               | Supported (GA)                            |
+| Pub/Sub streaming/subscription, Dataflow streaming with BigQuery I/O sink  | Not supported                                               | Supported (GA)                            |
+| BigQuery Change Data Capture (CDC)                                         | Supported (Preview)                                         | Supported                                 |
+| BigQuery change history (APPENDS)                                          | Not supported                                               | Supported                                 |
+| BigQuery change history (CHANGES)                                          | Not supported                                               | Not supported                             |
+| BigQuery continuous queries                                                | Not supported                                               | Supported                                 |
+| BigQuery multi-statement transactions                                      | Not supported                                               | Supported (Preview)                       |
+| Managed disaster recovery                                                  | Not supported                                               | Not supported                             |
+| Search index                                                               | Not supported                                               | Not supported                             |
+| Vector index (including auto embedding generation)                         | Not supported                                               | Not supported                             |
+| **Time Travel**                                                            |                                                             |                                           |
+| Time travel (using OSS engines)                                            | Flexible (configured through table properties)              | Not supported                             |
+| Time travel (using BigQuery)                                               | Limited to 7 days                                           | Limited to 7 days                         |
+| Snapshot history and rollback to previous snapshot                         | Supported                                                   | Not supported                             |
+| **Governance, Security and Sharing**                                       |                                                             |                                           |
+| BigQuery Authorized Views                                                  | Not supported                                               | Not supported                             |
+| BigQuery column level security                                             | Not supported                                               | Supported (GA)                            |
+| BigQuery data masking and policy tags                                      | Not supported                                               | Supported (GA)                            |
+| BigQuery row level security                                                | Not supported                                               | Supported (GA)                            |
+| Analytics Hub integration                                                  | Not supported                                               | Supported                                 |
+| **Knowledge catalog capabilities**                                         |                                                             |                                           |
+| Metadata cataloging, search and discovery                                  | Supported                                                   | Supported                                 |
+| Lineage                                                                    | Supported                                                   | Supported                                 |
+| Data quality/profiling                                                     | Supported                                                   | Supported                                 |
+| Insights                                                                   | Supported                                                   | Supported                                 |
+| AI-based column and table descriptions generation                          | Supported                                                   | Supported                                 |
 
 ## What's next
 

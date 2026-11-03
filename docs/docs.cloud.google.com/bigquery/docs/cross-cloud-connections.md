@@ -8,19 +8,13 @@ data_source: docs.cloud.google.com
 
 # Create cross-cloud connections
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request support or provide feedback for this feature, send an email to <biglake-help@google.com> .
-
 Cross-cloud connections are BigQuery connections that bring data from Amazon Web Services (AWS), Microsoft Azure, and Salesforce Data 360 into BigQuery for querying. These connections are an alternative to standard BigQuery connections that use BigQuery Omni, where BigQuery deploys lightweight compute workers to remote regions to make data in other clouds available for querying without any data movement.
 
 Workloads can benefit from cross-cloud connections versus standard connections for the following reasons:
 
 - **Feature consistency.** By bringing your data from other clouds into BigQuery, you gain direct access to BigQuery AI capabilities, Gemini Enterprise Agent Platform, materialized views, user-defined functions, and other features that aren't available through standard connections.
 - **Cost efficiency.** Workloads that use cross-cloud connections consume standard slot reservations and commitments, eliminating the need to manage separate compute capacities.
-- **Intelligent caching.** While data is transferred across clouds, BigQuery automatically caches fragments locally, avoiding significant cross-cloud egress fees on subsequent queries. For more information, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
+- **Intelligent caching.** When you enable cross-cloud caching on your connection, BigQuery caches retrieved file blocks locally within the connection's Google Cloud region. Subsequent queries targeting the same file blocks read directly from the local cache instead of refetching the files from the remote cloud, helping reduce cross-cloud egress costs and accelerate query performance. By default, cross-cloud caching is disabled. For more information, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
 
 If your workload involves Apache Iceberg catalogs or you need query support across engines other than BigQuery, consider using the [cross-cloud data access capability of borderless Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) instead.
 
@@ -49,36 +43,61 @@ To create an AWS cross-cloud connection, do the following:
 
 2.  [Create an AWS IAM role for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-role) as you would for standard BigQuery connections.
 
-3.  To create a connection resource, use the [`bq mk --connection` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) :
+3.  Create the connection resource and retrieve its service account identity using the Google Cloud console or the bq command-line tool:
 
-    ```
-    bq mk --connection \
-        --connection_type='AWS' \
-        --location=LOCATION \
-        --project_id=PROJECT_ID \
-        --properties='{"accessRole":{"iamRoleId":"arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME"}}' \
-        CONNECTION_ID
-    ```
+    ### Console
 
-    Replace the following:
+    1.  Go to the **BigQuery** page.
 
-    - `LOCATION` : a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) , not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
-    - `PROJECT_ID` : the ID of your Google Cloud project.
-    - `AWS_ACCOUNT_ID` : the ID of the AWS IAM user from the previous step.
-    - `ROLE_NAME` : the AWS role policy name that you chose.
-    - `CONNECTION_ID` : an ID to give to this connection resource.
+    2.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
-    For more information about AWS connection properties, see [AwsProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#awsproperties) .
+    3.  On the **Connections** page, click **Create connection** .
 
-4.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+    4.  In the **External data source** pane, enter the following information:
 
-    ```
-    bq show --connection \
-        --location=LOCATION \
-        PROJECT_ID.LOCATION.CONNECTION_ID
-    ```
+        - For **Connection type** , select **BigLake on AWS (via BigQuery Omni)** .
+        - For **Connection ID** , enter an identifier for the connection resource.
+        - For **Region** , select a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) (for example, `us-east4` ), not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
+        - For **AWS role ID** , enter the full IAM role ARN: `arn:aws:iam:: `` AWS_ACCOUNT_ID `` :role/ `` ROLE_NAME` .
+        - Optional: Under **Cross-cloud caching** , select **Enable cross-cloud caching** to cache remote files in the connection's Google Cloud region and accelerate query performance. You can also update this setting later on the connection's **Connection info** page by clicking **Edit details** . For more information about how caching works, retention, and pricing, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
 
-5.  [Add a trust policy to the AWS role](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#add-trust-policy) using the service account information, as you would for standard BigQuery connections.
+    5.  Click **Create connection** , and then click **Go to connection** .
+
+    6.  In the **Connection info** pane, copy the **BigQuery Google identity** value.
+
+    ### bq
+
+    1.  To create a connection resource, use the [`bq mk --connection` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) :
+
+        ```
+        bq mk --connection \
+           --connection_type='AWS' \
+           --location=LOCATION \
+           --project_id=PROJECT_ID \
+           --properties='{"accessRole":{"iamRoleId":"arn:aws:iam::AWS_ACCOUNT_ID:role/ROLE_NAME"},"crossCloudCacheOptions":{"enabled":CROSS_CLOUD_CACHE_ENABLED}}' \
+           CONNECTION_ID
+        ```
+
+        Replace the following:
+
+        - `LOCATION` : a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) , not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
+        - `PROJECT_ID` : the ID of your Google Cloud project.
+        - `AWS_ACCOUNT_ID` : the ID of the AWS IAM user from the previous step.
+        - `ROLE_NAME` : the AWS role policy name that you chose.
+        - `CROSS_CLOUD_CACHE_ENABLED` : Optional: whether to enable cross-cloud caching on the connection ( `true` or `false` ). Defaults to `false` . When set to `true` , BigQuery caches remote files in the connection's Google Cloud region. For more information, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
+        - `CONNECTION_ID` : an ID to give to this connection resource.
+
+        For more information about AWS connection properties, see [AwsProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#awsproperties) .
+
+    2.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+
+        ```
+        bq show --connection \
+           --location=LOCATION \
+           PROJECT_ID.LOCATION.CONNECTION_ID
+        ```
+
+4.  [Add a trust policy to the AWS role](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#add-trust-policy) using the service account information, as you would for standard BigQuery connections.
 
 With your established AWS cross-cloud connection, you can now create tables and datasets to query your remote data.
 
@@ -118,38 +137,65 @@ To create an Azure cross-cloud connection, do the following:
 
 2.  [Assign a role to the Azure application](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#assigning-a-role) as you would for standard BigQuery connections.
 
-3.  To create a connection resource, use the [`bq mk --connection` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) :
+3.  Create the connection resource and retrieve its service account identity using the Google Cloud console or the bq command-line tool:
 
-    ```
-    bq mk --connection \
-        --connection_type='Azure' \
-        --tenant_id=TENANT_ID \
-        --location=LOCATION \
-        --federated_azure=true \
-        --federated_app_client_id=APP_ID \
-        --project_id=PROJECT_ID \
-        CONNECTION_ID
-    ```
+    ### Console
 
-    Replace the following:
+    1.  Go to the **BigQuery** page.
 
-    - `TENANT_ID` : the tenant ID of the Azure directory that contains the Azure account.
-    - `LOCATION` : a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) , not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
-    - `APP_ID` : the Azure Application (client) ID.
-    - `PROJECT_ID` : the ID of your Google Cloud project.
-    - `CONNECTION_ID` : an ID to give to this connection resource.
+    2.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
-    For more information about Azure connection properties, see [AzureProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#azureproperties) .
+    3.  On the **Connections** page, click **Create connection** .
 
-4.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+    4.  In the **External data source** pane, enter the following information:
 
-    ```
-    bq show --connection \
-        --location=LOCATION \
-        PROJECT_ID.LOCATION.CONNECTION_ID
-    ```
+        - For **Connection type** , select **BigLake on Azure (via BigQuery Omni)** .
+        - For **Connection ID** , enter an identifier for the connection resource.
+        - For **Region** , select a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) (for example, `us-east4` ), not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
+        - For **Azure tenant ID** , enter the Azure Directory (tenant) ID.
+        - Select **Use federated identity** , and then in the **Azure federated application (client) ID** field, enter the Azure Application (client) ID.
+        - Optional: Under **Cross-cloud caching** , select **Enable cross-cloud caching** to cache remote files in the connection's Google Cloud region and accelerate query performance. You can also update this setting later on the connection's **Connection info** page by clicking **Edit details** . For more information about how caching works, retention, and pricing, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
 
-5.  [Add a federated credential](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#add-a-federated-credential) using the service account information, as you would for standard BigQuery connections.
+    5.  Click **Create connection** , and then click **Go to connection** .
+
+    6.  In the **Connection info** pane, copy the **BigQuery Google identity** value.
+
+    ### bq
+
+    1.  To create a connection resource, use the [`bq mk --connection` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) :
+
+        ```
+        bq mk --connection \
+           --connection_type='Azure' \
+           --tenant_id=TENANT_ID \
+           --location=LOCATION \
+           --federated_azure=true \
+           --federated_app_client_id=APP_ID \
+           --project_id=PROJECT_ID \
+           --properties='{"crossCloudCacheOptions":{"enabled":CROSS_CLOUD_CACHE_ENABLED}}' \
+           CONNECTION_ID
+        ```
+
+        Replace the following:
+
+        - `TENANT_ID` : the tenant ID of the Azure directory that contains the Azure account.
+        - `LOCATION` : a standard [BigQuery location](https://docs.cloud.google.com/bigquery/docs/locations) , not a BigQuery Omni location. For guidance on selecting a region, see [Region recommendations](https://docs.cloud.google.com/bigquery/docs/cross-cloud-connections#region_recommendations) .
+        - `APP_ID` : the Azure Application (client) ID.
+        - `PROJECT_ID` : the ID of your Google Cloud project.
+        - `CROSS_CLOUD_CACHE_ENABLED` : Optional: whether to enable cross-cloud caching on the connection ( `true` or `false` ). Defaults to `false` . When set to `true` , BigQuery caches remote files in the connection's Google Cloud region. For more information, see [Intelligent caching](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access#intelligent-caching) .
+        - `CONNECTION_ID` : an ID to give to this connection resource.
+
+        For more information about Azure connection properties, see [AzureProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rpc/google.cloud.bigquery.connection.v1#azureproperties) .
+
+    2.  To note the service account information, use the [`bq show` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
+
+        ```
+        bq show --connection \
+           --location=LOCATION \
+           PROJECT_ID.LOCATION.CONNECTION_ID
+        ```
+
+4.  [Add a federated credential](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection#add-a-federated-credential) using the service account information, as you would for standard BigQuery connections.
 
 With your established Azure cross-cloud connection, you can now create tables and datasets to query your remote data.
 

@@ -18,6 +18,8 @@ This document describes BigQuery repositories, which provide version control for
 
 BigQuery repositories function as Git repositories. You can use the built-in Git capabilities of BigQuery or connect to an existing third-party Git repository. Within each repository, you create [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) to edit the code stored there.
 
+For a folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+
 To view repositories, on the BigQuery page, in the left pane, click explore **Explorer** , and then click **Repositories** . Your repositories are displayed in alphabetical order in a new tab in the details pane.
 
 > **Important:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in a BigQuery repository. For scheduling and executing Dataform workflows, you need to use Dataform repositories. For scheduling queries and notebooks, use BigQuery Studio. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .

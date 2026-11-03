@@ -235,7 +235,7 @@ If you begin a function with the `SAFE.` prefix, it will return `NULL` instead o
 
 - [Operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators) , such as `+` and `=` , don't support the `SAFE.` prefix. To prevent errors from a division operation, use [SAFE_DIVIDE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide) .
 - Some operators, such as `IN` , `ARRAY` , and `UNNEST` , resemble functions but don't support the `SAFE.` prefix.
-- The `CAST` and `EXTRACT` functions don't support the `SAFE.` prefix. To prevent errors from casting, use [SAFE_CAST](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
+- The `CAST` , `EXTRACT` , and `SECURE_CONTEXT` functions don't support the `SAFE.` prefix. To prevent errors from casting, use [SAFE_CAST](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
 
 **Example**
 

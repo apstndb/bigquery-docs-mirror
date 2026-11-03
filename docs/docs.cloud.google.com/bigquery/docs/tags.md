@@ -1335,7 +1335,7 @@ To create and manage data governance tags in the Google Cloud console, you can u
     gcloud init
     ```
 
-4.  To create and manage data governance tags, you must use the [BigQuery Enterprise edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+4.  To create and manage data governance tags, you must use [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) , or the [BigQuery Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 #### Required roles for data governance tags
 

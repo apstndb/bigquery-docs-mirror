@@ -94,14 +94,6 @@ info
 
 - [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
 
-Solution
-
-Training and tutorials
-
-### [Data Warehouse with BigQuery Jump Start Solution](https://cloud.google.com/architecture/big-data-analytics/data-warehouse)
-
-Deploy and use a sample data warehouse with BigQuery.
-
 Training
 
 Training and tutorials

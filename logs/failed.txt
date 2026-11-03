@@ -1,2 +1,9 @@
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate-batch
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate-metadata
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation/describe
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation/generate-source-ddl
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo

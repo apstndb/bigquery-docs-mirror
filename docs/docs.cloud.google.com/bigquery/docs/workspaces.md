@@ -16,6 +16,8 @@ data_source: docs.cloud.google.com
 
 When you use BigQuery [repositories](https://docs.cloud.google.com/bigquery/docs/repository-intro) to version control your files, you use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) to edit the code within those repositories. This document shows you how to create, delete, and manage files in a workspace.
 
+For a folder-based version control experience, we recommend using [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) . This integration lets you work with Git branches directly in the BigQuery Studio file browser and clone multiple repositories at once without managing separate workspaces.
+
 ## Before you begin
 
 If you haven't done so already, [create a BigQuery repository](https://docs.cloud.google.com/bigquery/docs/repositories) .
@@ -439,4 +441,5 @@ To delete a workspace and all its contents, follow these steps:
 
 ## What's next
 
+- Learn how to [manage code with BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) .
 - Learn how to [create repositories](https://docs.cloud.google.com/bigquery/docs/repositories) .

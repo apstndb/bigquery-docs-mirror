@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use BigQuery agent analytics
 
-BigQuery agent analytics is an open source solution that lets you capture, analyze, and visualize multimodal agent interaction data at scale by streaming raw agent interactions—such as requests, responses, tool calls, and errors—directly into BigQuery. This solution lets you perform AI-powered evaluations, optimize agent prompts, and extract long-term memory to enhance future interactions. BigQuery agent analytics is supported in [Agent Development Kit (ADK)](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/) and [LangGraph](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) (Preview).
+BigQuery agent analytics is an open source solution that lets you capture, analyze, and visualize multimodal agent interaction data at scale by streaming raw agent interactions—such as requests, responses, tool calls, and errors—directly into BigQuery. This solution lets you perform AI-powered evaluations, optimize agent prompts, and extract long-term memory to enhance future interactions. BigQuery agent analytics is supported in [Agent Development Kit (ADK)](https://adk.dev/integrations/bigquery-agent-analytics/) and [LangGraph](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) (Preview).
 
 ## Architecture
 
@@ -16,7 +16,7 @@ BigQuery agent analytics streams agent activity data to BigQuery using the [BigQ
 
 The data flow consists of these stages:
 
-1.  **Capture** . Use plugins in the Agent Development Kit (ADK) or callbacks in LangGraph intercept interaction events to capture agent events.
+1.  **Capture** . Use a logging plugin in ADK or a callback handler in LangGraph to intercept and capture agent interaction events.
 2.  **Stream** . Interaction events are sent to BigQuery through the Storage Write API (gRPC). If a standardized schema doesn't exist, the agent creates one automatically.
 3.  **Consume** . Analyze and evaluate logged agent data. You can query raw data with SQL, track metrics on custom dashboards, or use the [BigQuery agent analytics SDK](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK) to reconstruct and evaluate complex multi-turn agent execution traces.
 
@@ -30,12 +30,31 @@ The data flow consists of these stages:
 - Identify optimization opportunities by using BigQuery generative AI functions and vector search.
 - Secure agent logs with granular access controls, data masking, and encryption.
 
+### Choose a library for each workflow stage
+
+BigQuery agent analytics has two logging integrations and one analysis SDK. The logging integrations and the analysis SDK serve different stages of your workflow:
+
+- **Log agent events** : use the logging integration for your agent framework, either the ADK plugin or the LangGraph and LangChain callback handler. You need only one logging integration, and you don't need the analysis SDK to log events. For other frameworks, or to enable built-in conversation logging for conversational analytics data agents, see [Ways to capture agent log data](https://docs.cloud.google.com/bigquery/docs/bigquery-agent-analytics#capture-agent-logs) .
+- **Analyze agent events** : use the [BigQuery agent analytics SDK](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK) to query, reconstruct, and evaluate the logged events. You can also analyze the events with SQL queries and dashboards.
+
+The following diagram shows which library to use at each workflow stage:
+
+![The ADK plugin or the LangGraph and LangChain callback handler streams agent events to a BigQuery events table that you analyze with the BigQuery agent analytics SDK, SQL queries, or dashboards.](https://docs.cloud.google.com/static/bigquery/images/agent-analytics-libraries-by-stage.svg)
+
+The following table describes each logging integration and the analysis SDK:
+
+| Workflow stage       | Integration or SDK                                                                                                                          | Package and entry point                                                                                                                                                                                      | When to use it                                                                                                                                                                              |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Log agent events     | [ADK BigQuery agent analytics plugin](https://adk.dev/integrations/bigquery-agent-analytics/)                                               | `google-adk[bigquery-analytics]` Python package `BigQueryAgentAnalyticsPlugin` class For other languages, such as Java, see the [ADK plugin guide](https://adk.dev/integrations/bigquery-agent-analytics/) . | Use in an ADK agent to stream LLM requests, tool calls, and workflow events to BigQuery.                                                                                                    |
+| Log agent events     | [LangGraph and LangChain BigQuery callback handler](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) (Preview) | `langchain-google-community[bigquery]` Python package `BigQueryCallbackHandler` class                                                                                                                        | Use in a LangGraph or LangChain application to stream agent execution events to BigQuery.                                                                                                   |
+| Analyze agent events | [BigQuery agent analytics SDK](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK)                                         | `bigquery-agent-analytics` Python package `Client` and `GraderPipeline` classes                                                                                                                              | Use in evaluation pipelines, notebooks, or audit services to read the events table that your logging integration writes to, reconstruct multi-turn sessions, and run automated evaluations. |
+
 ## Ways to capture agent log data
 
 To capture your agent's interaction telemetry (requests, responses, tool calls, and error logs) natively into BigQuery, you can log event data in several ways:
 
-- **Orchestration framework plugins** : use standard logging plugins provided by your agent orchestration toolkit. For example, the `BigQueryAgentAnalyticsPlugin` in the Agent Development Kit (ADK) hooks into the agent runner to automatically intercept, serialize, and stream events.
-- **Framework callback handlers** : integrate standard callbacks in popular agent environments. For example, you can use the built-in BigQuery handler in LangGraph and LangChain to intercept and forward traces.
+- **Orchestration framework plugins** : use standard logging plugins provided by your agent orchestration toolkit. For example, the `BigQueryAgentAnalyticsPlugin` in ADK hooks into the agent runner to automatically intercept, serialize, and stream events.
+- **Framework callback handlers** : integrate standard callbacks in popular agent environments. For example, you can use the `BigQueryCallbackHandler` from the `langchain-google-community` package in LangGraph and LangChain to intercept and forward traces to BigQuery.
 - **Direct API ingestion** : for custom or proprietary frameworks, use the Google Cloud client libraries to stream structured events directly to your events table using the Storage Write API (gRPC).
 - **Conversational analytics data agents** : enable built-in conversation logging when you [configure settings for a BigQuery data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) in BigQuery Studio or through the Conversational Analytics API to automatically stream [conversation events](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) to a destination BigQuery table and [analyze conversation logs](https://docs.cloud.google.com/bigquery/docs/analyze-conversation-logs) .
 
@@ -66,9 +85,9 @@ The following are common use cases and examples of working with agent log data i
 
 ### Business insights and contextualization
 
-To contextualize agent data, join the `agent_events` table with other business tables . For example, show the average order value (AOV) for customers who interacted with the AI agent versus customers who used the search bar.
+To contextualize agent data, join the `agent_events` table with other business tables. For example, show the average order value (AOV) for customers who interacted with the AI agent versus customers who used the search bar.
 
-For more examples, see [Advanced analysis queries](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/#advanced-analysis-queries) .
+For more examples, see the [query recipes](https://adk.dev/integrations/bigquery-agent-analytics/#query-recipes) .
 
 ### Use a Jupyter notebook to work with agent logs
 
@@ -90,11 +109,11 @@ You can perform the following tasks using the BigQuery agent analytics SDK. For 
 
 ### Log and analyze agent activity
 
-Integrating the SDK into your agent workflows typically involves the following steps:
+The SDK reads and evaluates events that a logging integration writes. A typical workflow involves the following steps:
 
-1.  **Log interactions** : Attach a logger plugin (such as the `BigQueryAgentAnalyticsPlugin` in ADK) or a callback handler in your agent orchestration framework. When users interact with your agent, the logs are streamed asynchronously to BigQuery using the high-throughput Storage Write API (gRPC).
+1.  **Log interactions** : in your agent orchestration framework, attach a logging integration, such as the `BigQueryAgentAnalyticsPlugin` in ADK or the `BigQueryCallbackHandler` in LangGraph. When users interact with your agent, the integration streams the events asynchronously to BigQuery by using the high-throughput Storage Write API (gRPC). This step doesn't require the SDK.
 
-2.  **Initialize the client** : Connect to your log dataset from the Python SDK:
+2.  **Initialize the client** : connect to your log dataset from the Python SDK:
 
     ```
     from google.cloud import bigquery
@@ -112,9 +131,9 @@ Integrating the SDK into your agent workflows typically involves the following s
     - `client` : the parent `Client` instance that programmatically routes queries and manages active database connections.
     - `project_id` : the Google Cloud project ID housing the target dataset.
     - `dataset_id` : the BigQuery dataset name storing logs.
-    - `table_id` : the specific table storing telemetry events ( `agent_events` by default).
+    - `table_id` : the table that stores the logged events ( `agent_events` by default). This value must match the table that your logging integration writes to. For example, `BigQueryCallbackHandler` in `langchain-google-community` version 4.0.0 and earlier writes to `agent_events_v2` by default.
 
-3.  **Reconstruct a session trace** : Fetch a specific conversation session to visualize and review the exact sequence of events:
+3.  **Reconstruct a session trace** : fetch a specific conversation session to visualize and review the exact sequence of events:
 
     ```
     trace = client.get_session_trace(
@@ -128,7 +147,7 @@ Integrating the SDK into your agent workflows typically involves the following s
     - `trace` : the hydrated `Trace` object housing the reconstructed causally linked hierarchical DAG span tree of all user and agent actions.
     - `YOUR_SESSION_ID` : the unique ID of the session you want to inspect.
 
-4.  **Run automated evaluations** : Programmatically score session trajectories or check for regression against a golden test suite:
+4.  **Run automated evaluations** : programmatically score session trajectories or check for regression against a golden test suite:
 
     ```
     from bigquery_agent_analytics import (
@@ -152,10 +171,14 @@ Integrating the SDK into your agent workflows typically involves the following s
 
 ## Integrate BigQuery agent analytics into your workflow
 
-To integrate BigQuery agent analytics into your workflow, see the documentation for your framework:
+To integrate BigQuery agent analytics into your workflow, do the following:
 
-- [ADK BigQuery Analytics plugin guide](https://google.github.io/adk-docs/integrations/bigquery-agent-analytics/)
-- [BigQuery callback handler integration](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) (LangChain and LangGraph)
+1.  Set up the logging integration for your agent framework:
+
+    - [ADK BigQuery agent analytics plugin guide](https://adk.dev/integrations/bigquery-agent-analytics/)
+    - [LangGraph and LangChain BigQuery callback handler guide](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery)
+
+2.  Analyze the logged events with the [BigQuery agent analytics SDK](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK) , the [example Colab notebook](https://github.com/GoogleCloudPlatform/BigQuery-Agent-Analytics-SDK/blob/main/examples/dashboard_v2.ipynb) , or the [SQL query recipes](https://adk.dev/integrations/bigquery-agent-analytics/#query-recipes) .
 
 ## What's next
 
