@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 03, 2026
+
+Change
+
+In [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#studio-overview) , the left pane has been updated with new tab names. The **Classic Explorer** tab has been renamed to the **Data** tab, and the **Repository** tab has been renamed to the **Source control** tab. The **Data** tab now includes the **Add data** button and focuses on data hierarchies. These changes are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## November 02, 2026
 
 Feature
@@ -31,7 +37,7 @@ Feature
 - [Snowflake Horizon Catalog](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-snowflake) on AWS, Microsoft Azure, or Google Cloud
 - [Workday Data Lake](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-workday) on AWS or Google Cloud
 
-This feature lets you configure federated catalog endpoints to synchronize catalog metadata and query Apache Iceberg tables in remote catalogs directly from Google Cloud using BigQuery, Managed Service for Apache Spark, and Apache Spark without migrating data or building complex ETL pipelines. You can route metadata synchronization and queries over the public internet or privately over Cross-Cloud Interconnect, and protect cross-cloud data access with VPC Service Controls service perimeters. For Databricks Unity Catalog, you can also use [user identity federation](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-databricks#configure-user-identity-federation) to propagate end-user identities on queries for permission enforcement and audit logging.
+This feature lets you configure federated catalog endpoints to synchronize catalog metadata and query Apache Iceberg tables in remote catalogs directly from Google Cloud using BigQuery, Managed Service for Apache Spark, and Apache Spark without migrating data or building complex ETL pipelines. You can route background metadata refresh and queries over the public internet or privately over Cross-Cloud Interconnect, and protect cross-cloud data access with VPC Service Controls service perimeters. For Databricks Unity Catalog, you can also use [user identity federation](https://docs.cloud.google.com/lakehouse/docs/set-up-cross-cloud-connection-databricks#configure-user-identity-federation) to propagate end-user identities on queries for permission enforcement and audit logging.
 
 For more information, see [About cross-cloud data access](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) , [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) , and [Use VPC Service Controls with federated catalog endpoints](https://docs.cloud.google.com/lakehouse/docs/vpc-sc-federated-catalogs) .
 
@@ -72,10 +78,6 @@ Feature
 You can now retrieve query results [directly in the Apache Arrow format](https://docs.cloud.google.com/bigquery/docs/running-queries#arrow-format) for faster retrieval speed and improved serialization efficiency. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 27, 2026
-
-Feature
-
-You can manage and version control SQL scripts and notebooks with [BigQuery Studio Git repositories](https://docs.cloud.google.com/bigquery/docs/git-repositories) , which provide a streamlined, folder-based integration with remote Git repositories. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 

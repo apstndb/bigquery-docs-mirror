@@ -256,7 +256,7 @@ To create a model:
 
 11. In the **Required options** section, do one of the following:
 
-    - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-2.0-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+    - For remote models over Google models and partner models, specify the endpoint to use. This is the name of the model, for example `gemini-3.5-flash` . For more information about supported models, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
     - For remote models over open models, copy and paste in the endpoint to use. This is the shared public endpoint of a model deployed to Agent Platform, in the format `https:// `` location `` -aiplatform.googleapis.com/v1/projects/ `` project `` /locations/ `` location `` /endpoints/ `` endpoint_id` . For more information, see [`ENDPOINT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint) .
 
 12. Click **Create model** .

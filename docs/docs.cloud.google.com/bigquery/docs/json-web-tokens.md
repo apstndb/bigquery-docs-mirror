@@ -75,11 +75,11 @@ public class Example {
 
 ### Create JWTs with REST or the gcloud CLI
 
-For system-managed service accounts, you must manually assemble the JWT, then use the REST method [`projects.serviceAccounts.signJwt`](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt) or the Google Cloud CLI command [`gcloud beta iam service-accounts sign-jwt`](https://cloud.google.com/sdk/gcloud/reference/beta/iam/service-accounts/sign-jwt) to sign the JWT. To use either of these approaches, you must be a member of the [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) Identity and Access Management role.
+For system-managed service accounts, you must manually assemble the JWT, then use the REST method [`projects.serviceAccounts.signJwt`](https://docs.cloud.google.com/iam/docs/reference/credentials/rest/v1/projects.serviceAccounts/signJwt) or the Google Cloud CLI command [`gcloud iam service-accounts sign-jwt`](https://docs.cloud.google.com/sdk/gcloud/reference/iam/service-accounts/sign-jwt) to sign the JWT. To use either of these approaches, you must be a member of the [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) Identity and Access Management role.
 
 #### gcloud CLI example
 
-The following example shows a bash script that assembles a JWT and then uses the `gcloud beta iam service-accounts sign-jwt` command to sign it.
+The following example shows a bash script that assembles a JWT and then uses the `gcloud iam service-accounts sign-jwt` command to sign it.
 
 ```
 #!/bin/bash
@@ -104,7 +104,7 @@ cat <<EOF > $JWT_FILE
 }
 EOF
 
-gcloud beta iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
+gcloud iam service-accounts sign-jwt --iam-account $SA_EMAIL_ADDRESS $JWT_FILE $SIGNED_JWT_FILE
 
 echo "Datasets:"
 curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \

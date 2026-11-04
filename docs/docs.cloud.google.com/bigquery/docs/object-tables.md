@@ -90,11 +90,11 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click database **Data Explorer** :
 
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-3.  In the **Explorer** pane, click add **Add data** .
+3.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 

@@ -601,7 +601,7 @@ Subscribing to a data clean room gives you query access to the data in the listi
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add_box **Add data** .
+2.  In the **Data** pane, click add **Add data** .
 
 3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
 
@@ -712,7 +712,7 @@ To find all the data clean rooms that you have access to, do the following:
 
   1.  In the Google Cloud console, go to the **BigQuery** page.
 
-  2.  In the **Explorer** pane, click add_box **Add data** .
+  2.  In the **Data** pane, click add **Add data** .
 
   3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
 

@@ -22,10 +22,6 @@ As you are translating your SQL queries, carefully review the translated queries
 
 ### Migrate schema and code
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 To migrate schema and data from Snowflake, use the Snowflake connector in the BigQuery Data Transfer Service to set up a data transfer. When you set up the data transfer, you can specify specific Snowflake tables to include, and also have the connector automatically detect your table schema and data types during a transfer.
 
 For more information about setting up a Snowflake data transfer, see [Schedule a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer) .
@@ -80,7 +76,7 @@ Roles are the entities to which privileges on securable objects can be granted a
 
 In IAM, permissions are grouped into roles. IAM provides three types of roles:
 
-- **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-primitive-roles) :** These roles include the Owner, Editor, and Viewer roles. You can apply these roles at the project or service resource levels by using the Google Cloud console, the Identity and Access Management API, or the `gcloud CLI` . In general, for the strongest security, we recommend that you use predefined roles to follow the principle of least privilege.
+- **[Basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) :** These roles include the Owner, Editor, and Viewer roles. You can apply these roles at the project or service resource levels by using the Google Cloud console, the Identity and Access Management API, or the `gcloud CLI` . In general, for the strongest security, we recommend that you use predefined roles to follow the principle of least privilege.
 - **[Predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) :** These roles provide more granular access to features in a product (such as BigQuery) and are meant to support common use cases and access control patterns.
 - **[Custom roles](https://docs.cloud.google.com/iam/docs/understanding-custom-roles) :** These roles are composed of user-specified permissions.
 
@@ -88,7 +84,7 @@ In IAM, permissions are grouped into roles. IAM provides three types of roles:
 
 Snowflake lets you grant roles to other roles, creating a hierarchy of roles. IAM doesn't support a role hierarchy but implements a resource hierarchy. The [IAM hierarchy](https://docs.cloud.google.com/iam/docs/resource-hierarchy-access-control) includes the organization level, folder level, project level, and resource level. You can set IAM roles at any level of the hierarchy, and resources inherit all the policies of their parent resources.
 
-BigQuery supports [table-level access control](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro) . Table-level permissions determine the users, groups, and service accounts that can access a table or view. You can give a user access to specific tables or views without giving the user access to the complete dataset.
+BigQuery supports [table-level access control](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) . Table-level permissions determine the users, groups, and service accounts that can access a table or view. You can give a user access to specific tables or views without giving the user access to the complete dataset.
 
 For more granular access, you can also use [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) or [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) . This type of control provides fine-grained access to sensitive columns by using policy tags or type-based data classifications.
 
@@ -105,19 +101,19 @@ Snowflake can export data in the following file formats. You can load the follow
 - [Load CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv) .
 - [Load Parquet data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet) .
 - [Load JSON data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json) .
-- [Query data from Apache Iceberg](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) .
+- [Query data from Apache Iceberg](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery) .
 
 ## Migration tools
 
 The following list describes the tools that you can use to migrate data from Snowflake to BigQuery. For examples of how these tools can be used together in a Snowflake migration pipeline, see [Snowflake migration pipeline examples](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials#pipeline-examples) .
 
 - **[`COPY INTO <location>` command](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location.html) :** Use this command in Snowflake to extract data from a Snowflake table directly into a specified Cloud Storage bucket. For an end-to-end example, see [Snowflake to BigQuery (snowflake2bq)](https://github.com/GoogleCloudPlatform/professional-services/tree/master/tools/snowflake2bq) on GitHub.
-- **[Apache Sqoop](https://sqoop.apache.org/) :** To extract data from Snowflake into either HDFS or Cloud Storage, submit Hadoop jobs with the JDBC driver from Sqoop and Snowflake. Sqoop runs in a [Managed Service for Apache Spark](https://docs.cloud.google.com/dataproc/docs) environment.
+- **[Apache Sqoop](https://sqoop.apache.org/) :** To extract data from Snowflake into either HDFS or Cloud Storage, submit Hadoop jobs with the JDBC driver from Sqoop and Snowflake. Sqoop runs in a [Managed Service for Apache Spark](https://docs.cloud.google.com/managed-spark/docs) environment.
 - **[Snowflake JDBC](https://docs.snowflake.com/en/user-guide/jdbc.html) :** Use this driver with most client tools or applications that support JDBC.
 
 You can use the following generic tools to migrate data from Snowflake to BigQuery:
 
-- **[The BigQuery Data Transfer Service for Snowflake connector](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer)** ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Perform an automated batch transfer of Cloud Storage data into BigQuery.
+- **[The BigQuery Data Transfer Service for Snowflake connector](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer)** : Perform an automated batch transfer of Cloud Storage data into BigQuery.
 - **The [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud/reference/storage) :** Copy downloaded Snowflake files into Cloud Storage with this command-line tool.
 - **[bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) :** Interact with BigQuery using this command-line tool. Common use cases include creating BigQuery table schemas, loading Cloud Storage data into tables, and running queries.
 - **[Cloud Storage client libraries](https://docs.cloud.google.com/storage/docs/reference/libraries) :** Copy downloaded Snowflake files into Cloud Storage with a custom tool that uses the Cloud Storage client libraries.

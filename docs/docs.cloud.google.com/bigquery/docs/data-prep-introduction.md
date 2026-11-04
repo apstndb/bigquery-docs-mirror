@@ -262,7 +262,7 @@ BigQuery data processing during development and execution time is always perform
 
 Running data preparations and creating data preview samples use BigQuery resources, which are charged at the rates shown in [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-Data preparation is included in the [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) . You can use BigQuery data preparation during Preview at no additional cost. For more information, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
+Data preparation is included in the [Gemini in BigQuery pricing](https://cloud.google.com/products/gemini/pricing#gemini-in-bigquery-pricing) . For more information, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 ## What's next
 

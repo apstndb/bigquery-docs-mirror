@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `ML.FORECAST` function, which you can use to forecast a time series based on a trained `ARIMA_PLUS` or `ARIMA_PLUS_XREG` model.
 
-If you don't want to manage your own times series forecasting model, you can use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to perform forecasting.
+If you don't want to manage your own time series forecasting model, you can use the [`AI.FORECAST` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to perform forecasting.
 
 ## Syntax
 

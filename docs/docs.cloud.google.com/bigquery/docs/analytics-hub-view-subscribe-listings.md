@@ -228,13 +228,13 @@ To view linked datasets in your project, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Classic Explorer** pane, click category **Classic Explorer** :
+2.  In the left pane, click database **Data Explorer** :
 
-    ![Highlighted button for the Classic Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/classic-explorer-tab.png)
+    ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-    If the **Classic Explorer** pane isn't visible, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-3.  In the **Classic Explorer** pane, click the project name that contains the ![Sharing linked dataset icon.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
+3.  In the **Data** pane, click the project name that contains the ![Sharing linked dataset icon.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
 
 Alternatively, you can search for and view linked datasets with [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets) . To match all the BigQuery sharing linked datasets in your search query, use the `type=dataset.linked` predicate. For more information, see [Knowledge Catalog search syntax](https://docs.cloud.google.com/knowledge-catalog/docs/search-syntax) .
 

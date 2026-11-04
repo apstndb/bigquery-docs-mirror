@@ -515,7 +515,7 @@ You can set a default partition expiration time at the dataset level that affect
 
 If you set the partition expiration time when the partitioned table is created, that value overrides the dataset-level default partition expiration if it exists.
 
-If you do not set a default partition expiration at the dataset level, and you do not set a partition expiration when the table is created, the partitions never expire and you must [delete](https://docs.cloud.google.com/bigquery/docs/updating-datasets#deleting_a_table) the partitions manually.
+If you do not set a default partition expiration at the dataset level, and you do not set a partition expiration when the table is created, the partitions never expire and you must [delete](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition) the partitions manually.
 
 When you set a default partition expiration on a dataset, the expiration applies to all partitions in all partitioned tables created in the dataset. When you set the partition expiration on a table, the expiration applies to all partitions created in the specified table. You cannot apply different expiration times to different partitions in the same table.
 

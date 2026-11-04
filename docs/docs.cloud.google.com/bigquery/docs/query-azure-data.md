@@ -79,7 +79,7 @@ When you [query a BigLake table](https://docs.cloud.google.com/bigquery/docs/que
 To query a BigLake table using the API, follow these steps:
 
 1.  Create a [Job object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
-2.  Call the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/insert) to run the query asynchronously or the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `Job` object.
+2.  Call the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) to run the query asynchronously or the [`jobs.query` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) to run the query synchronously, passing in the `Job` object.
 3.  Read rows with the [`jobs.getQueryResults`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) by passing the given job reference, and the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) methods by passing the given table reference of the query result.
 
 ## Query the `_FILE_NAME` pseudocolumn

@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 Filtering on clustered columns lets you improve performance and reduce costs when you query clustered tables in BigQuery. When a query filters on one or more clustered columns, BigQuery uses the clustering information to scan only the relevant blocks—a process called [block pruning](https://docs.cloud.google.com/bigquery/docs/clustered-tables#block-pruning) .
 
-This document describes the permissions and best practices for querying clustered tables, including why the order of clustered columns in your filters matters. You can query clustered tables only by using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) .
+This document describes the permissions and best practices for querying clustered tables, including why the order of clustered columns in your filters matters. You can query clustered tables only by using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/introduction-sql) .
 
 ## Required permissions
 

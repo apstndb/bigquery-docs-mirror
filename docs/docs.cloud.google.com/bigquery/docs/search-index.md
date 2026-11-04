@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manage search indexes
 
-A search index is a data structure designed to enable very efficient search with the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/search) . A search index can also optimize some queries that use [supported functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) .
-
-Much like the index you'd find in the back of a book, a search index for a column of string data acts like an auxiliary table that has one column for unique words and another for where in the data those words occur.
+You can create a search index in BigQuery to perform efficient text searches across your string data using the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/search) . Building these auxiliary data structures lets you significantly optimize overall query performance for [supported functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) .
 
 ## Create a search index
 

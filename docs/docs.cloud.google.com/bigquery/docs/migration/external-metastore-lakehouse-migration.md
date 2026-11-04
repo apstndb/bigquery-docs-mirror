@@ -132,7 +132,7 @@ Replace the following:
 
 ### Configure secret
 
-If you are migrating to a Apache Iceberg REST catalog, you must create a secret to authorize the migration. The secret must be formatted in the following format:
+If you are migrating to an Apache Iceberg REST catalog, you must create a secret to authorize the migration. The secret must be formatted in the following format:
 
 ```
 {

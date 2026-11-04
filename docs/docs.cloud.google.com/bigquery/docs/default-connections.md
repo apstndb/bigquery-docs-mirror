@@ -16,7 +16,7 @@ BigQuery supports default connections in the following resources:
 
 - [Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake)
 - [Object tables](https://docs.cloud.google.com/bigquery/docs/object-tables)
-- [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)
+- [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables)
 - [Remote models](https://docs.cloud.google.com/bigquery/docs/bqml-introduction#remote_models)
 
 To use the default connection, specify the `DEFAULT` keyword in the following SQL clauses:
@@ -123,7 +123,7 @@ The following roles are granted to the default connection's service account:
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------|
 | [Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake)                                                                            | Cloud Storage                             | `roles/storage.legacyBucketReader` `roles/storage.legacyObjectReader` |
 | [Object Table](https://docs.cloud.google.com/bigquery/docs/object-tables)                                                                                                                | Cloud Storage                             | `roles/storage.legacyBucketReader` `roles/storage.legacyObjectReader` |
-| [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables)                                                                               | Cloud Storage                             | `roles/storage.legacyBucketWriter` `roles/storage.legacyObjectOwner`  |
+| [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables)                                                           | Cloud Storage                             | `roles/storage.legacyBucketWriter` `roles/storage.legacyObjectOwner`  |
 | [BigQuery ML remote models over Gemini Enterprise Agent Platform models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) | Google owned models                       | `roles/aiplatform.user`                                               |
 | Deployable to an endpoint from Model Garden                                                                                                                                              |                                           |                                                                       |
 | User models                                                                                                                                                                              |                                           |                                                                       |
@@ -164,7 +164,7 @@ OPTIONS (
 
 ### Example: Create a Iceberg managed tables with a default connection
 
-The following SQL expression creates a [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables#create-iceberg-tables) with a default connection:
+The following SQL expression creates a [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) with a default connection:
 
 ```
 CREATE TABLE `myproject.tpch_clustered.nation` (
@@ -191,7 +191,7 @@ The following SQL expression creates a [remote model](https://docs.cloud.google.
 ```
 CREATE OR REPLACE MODEL `mydataset.flash_model`
   REMOTE WITH CONNECTION DEFAULT
-  OPTIONS(ENDPOINT = 'gemini-2.0-flash');
+  OPTIONS(ENDPOINT = 'gemini-3.5-flash');
 ```
 
 ### Example: Create a remote model over a Cloud AI service

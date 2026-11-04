@@ -26,7 +26,7 @@ You might also be able to get the required permissions through [custom roles](ht
 
 ## User-defined functions (UDFs)
 
-With UDFs ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), you can turn your custom Python function into a [Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) . For an example usage, see [Create a persistent Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#bigquery-dataframes) .
+With UDFs ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), you can turn your custom Python function into a [Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) . For an example usage, see [Create a persistent Python UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#create-python-udf) .
 
 Creating a UDF in BigQuery DataFrames creates a BigQuery routine as the Python UDF in the specified dataset. For a full set of supported parameters, see [bigframes.pandas.udf](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.udf.html#bigframes.pandas.udf) .
 
@@ -50,7 +50,7 @@ The BigQuery DataFrames UDF deploys a user-defined BigQuery Python function, and
 
 ## Remote functions
 
-BigQuery DataFrames lets you turn your custom scalar functions into [BigQuery remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) . For an example usage, see [Create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#bigquery-dataframes) . For a full set of supported parameters, see [remote_function](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.remote_function.html#bigframes.pandas.remote_function) .
+BigQuery DataFrames lets you turn your custom scalar functions into [BigQuery remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) . For an example usage, see [Create a remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function) . For a full set of supported parameters, see [remote_function](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.remote_function.html#bigframes.pandas.remote_function) .
 
 Creating a remote function in BigQuery DataFrames creates the following:
 

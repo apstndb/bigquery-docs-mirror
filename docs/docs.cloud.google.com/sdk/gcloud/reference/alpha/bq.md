@@ -34,6 +34,9 @@ GROUPS
 [`jobs`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/jobs)  
 `(ALPHA)` Interact with and manage jobs in Google BigQuery.
 
+[`migration`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration)  
+`(ALPHA)` Manage BigQuery Migration Service resources.
+
 [`migration-workflows`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration-workflows)  
 `(ALPHA)` Manage Migration Workflow resources.
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Optimize load jobs
 
-You can stay within [per-table load job limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) in BigQuery by batching writes, streaming frequent updates, and partitioning destination tables. Daily modification quotas are fixed and can't be increased, so using fewer and larger writes with built-in client retries help prevent `quotaExceeded` errors.
+You can stay within [per-table load job limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) in BigQuery by batching writes, streaming frequent updates, and partitioning destination tables. Daily modification quotas are fixed and can't be increased, so using fewer and larger writes with built-in client retries helps prevent `quotaExceeded` errors.
 
 ## How table operations quotas work
 

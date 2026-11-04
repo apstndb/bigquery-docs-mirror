@@ -968,7 +968,7 @@ Since the amount of data that needs to be read is small, use the [`tabledata.lis
 
 For information on extract job quotas, see [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) on the Quotas and limits page.
 
-Usage for extract jobs are available in the `INFORMATION_SCHEMA` . The job entry in the `JOBS_BY_*` system tables for the extract job contains a `total_bytes_processed` value that can be used to monitor the aggregate usage to ensure that it stays under 50 TiB per-day. To learn how to query the `INFORMATION_SCHEMA.JOBS` view to get the `total_bytes_processed` value, see [`INFORMATION_SCHEMA.JOBS` schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema)
+Usage for extract jobs is available in the `INFORMATION_SCHEMA` . The job entry in the `JOBS_BY_*` system tables for the extract job contains a `total_bytes_processed` value that can be used to monitor the aggregate usage to ensure that it stays under 50 TiB per-day. To learn how to query the `INFORMATION_SCHEMA.JOBS` view to get the `total_bytes_processed` value, see [`INFORMATION_SCHEMA.JOBS` schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema)
 
 ### View current quota usage
 

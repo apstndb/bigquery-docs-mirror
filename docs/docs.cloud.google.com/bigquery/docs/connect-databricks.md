@@ -162,7 +162,7 @@ BigQuery provides a list of available [public datasets](https://docs.cloud.googl
 
     > **Note:** The output is in tabular format by default. To change it to a bar graph, click the bar graph icon to select from the available Databricks visualizations.
 
-    The cell runs a Apache Spark SQL query against the dataframe in your Databricks cluster, not in BigQuery. The benefit of this approach is that data analysis occurs on a Apache Spark level, no further BigQuery API calls are issued, and you incur no additional BigQuery costs.
+    The cell runs an Apache Spark SQL query against the dataframe in your Databricks cluster, not in BigQuery. The benefit of this approach is that data analysis occurs on an Apache Spark level, no further BigQuery API calls are issued, and you incur no additional BigQuery costs.
 
 3.  As an alternative, you can delegate the execution of a SQL query to BigQuery with the `query()` API and optimize for reducing the transfer size of the resulting data frame. Unlike in the previous example, where the processing was done in Apache Spark, if you use this approach, pricing and query optimizations apply for executing the query on BigQuery.
 
@@ -200,7 +200,7 @@ BigQuery tables exist in [datasets](https://docs.cloud.google.com/bigquery/docs/
 
 2.  Expand the more_vert **Actions** option, click **Create dataset** , and then name it `together` .
 
-3.  In the Databricks Python notebook, create a Apache Spark dataframe from a Python list with three string entries using the following code snippet:
+3.  In the Databricks Python notebook, create an Apache Spark dataframe from a Python list with three string entries using the following code snippet:
 
     ```
     from pyspark.sql.types import StringType

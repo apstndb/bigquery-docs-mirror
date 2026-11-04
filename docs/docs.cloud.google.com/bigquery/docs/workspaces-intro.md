@@ -22,13 +22,13 @@ For a folder-based version control experience, we recommend using [BigQuery Stud
 
 On the BigQuery page, your workspaces are displayed in alphabetical order under the repository they are associated with. To view repositories, do the following:
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+2.  In the left pane, click fork_right **Source control** .
+
+    ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
     If you don't see the left pane, click last_page **Expand left pane** to open the pane.
-
-2.  In the **Explorer** pane, click **Repositories** .
 
 ## Supported file types
 

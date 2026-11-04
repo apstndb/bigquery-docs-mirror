@@ -65,7 +65,7 @@ Incurs charges for calls to the Cloud Translation API. For more information, see
 <tr class="odd">
 <td>Requests per minute</td>
 <td>Not applicable for Gemini models. Between 25 and 60 for partner models. For more information, see <a href="https://docs.cloud.google.com/bigquery/quotas#requests_per_minute_limits">Requests per minute limits</a> .</td>
-<td>200. For more information, see <a href="https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions">Cloud AI service functions</a> .</td>
+<td>6,000. For more information, see <a href="https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions">Cloud AI service functions</a> .</td>
 <td>600. For more information, see <a href="https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions">Cloud AI service functions</a> .</td>
 </tr>
 <tr class="even">

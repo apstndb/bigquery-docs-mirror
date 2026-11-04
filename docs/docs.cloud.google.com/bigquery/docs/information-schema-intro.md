@@ -129,7 +129,7 @@ Specifying a project qualifier for organization-level views (for example, `STREA
 - `INFORMATION_SCHEMA` views cannot be used in DDL statements.
 - `INFORMATION_SCHEMA` views don't contain information about [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) .
 - `INFORMATION_SCHEMA` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .
-- When you list resources from an `INFORMATION_SCHEMA` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.
+- When you list resources from an `INFORMATION_SCHEMA` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) that conditionally targets an individual row using tags is ignored.
 
 ## What's next
 

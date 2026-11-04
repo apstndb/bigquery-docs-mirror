@@ -252,7 +252,7 @@ SELECT
 FROM
   region-US.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE
-  job_id = '<my-query-job-id>';
+  job_id = &<#39;my-query-jo>b-id';
 ```
 
 To view the usage of a materialized view over time, query the [`INFORMATION_SCHEMA.JOBS_BY_*` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) .

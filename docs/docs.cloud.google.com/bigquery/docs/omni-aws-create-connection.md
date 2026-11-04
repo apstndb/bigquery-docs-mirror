@@ -306,7 +306,7 @@ To connect to your Amazon S3 bucket, use the Google Cloud console, the bq comman
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add data** .
+2.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 

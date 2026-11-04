@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data with the Gemini CLI
 
-This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.
+Using the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) with dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) lets you interact with your data in the terminal using natural language prompts. When you bring AI-driven assistance directly to your command line, you can analyze personal and public tables and extract insights without switching to a different environment.
 
 These first-party extensions provide some common tools for data analysis and insights. To build your own tools, see [Use BigQuery with MCP, Gemini CLI, and other agents](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
 
@@ -47,14 +47,14 @@ The [BigQuery Data Analytics extension](https://github.com/gemini-cli-extensions
 | Time-series forecasting       | `forecast`                                                               | Using bigquery-public-data.pypi.file_downloads, forecast the downloads for the last four months of 2025 for package urllib3   |
 | Contribution analysis         | `analyze_contribution`                                                   | Analyze the contribution of country to revenue in the bigquery-public-data.google_analytics_sample.ga_sessions_20170801 table |
 
-### Conversational Analytics tools
+### Conversational analytics tools
 
-The [Conversational Analytics extension](https://github.com/gemini-cli-extensions/bigquery-conversational-analytics) provides the following tools:
+The [conversational analytics extension](https://github.com/gemini-cli-extensions/bigquery-conversational-analytics) provides the following tools:
 
 | Category                 | Tool                | Example natural language prompt                                                                                                                    |
 |--------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | Search                   | `search_catalog`    | Find tables related to PyPi downloads                                                                                                              |
-| Conversational analytics | `ask_data_insights` | Using the tool ask_data_insights and the tables under bigquery-public-data.google_analytics_sample, tell me the channels I should focus on and why |
+| conversational analytics | `ask_data_insights` | Using the tool ask_data_insights and the tables under bigquery-public-data.google_analytics_sample, tell me the channels I should focus on and why |
 
 ## Before you begin
 
@@ -67,7 +67,7 @@ Before you begin, you need the following:
   - BigQuery
   - To use the `search_catalog` tool: Knowledge Catalog
 
-- For the Conversational Analytics extension, enable the following APIs:
+- For the conversational analytics extension, enable the following APIs:
 
   - BigQuery
   - Knowledge Catalog
@@ -79,7 +79,7 @@ To get the permissions that you need to use the BigQuery extensions with Gemini 
 
 - Run BigQuery queries in a Google Cloud project: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `roles/bigquery.user` )
 - Use the foundational metadata tools to get BigQuery dataset and table metadata: [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
-- Use the Conversational Analytics extension: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
+- Use the conversational analytics extension: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -104,7 +104,7 @@ Install the BigQuery extensions and then use them to explore and analyze your da
     - `BIGQUERY_LOCATION` : the dataset location—for example: `export BIGQUERY_LOCATION="us"`
     - `BIGQUERY_USE_CLIENT_OAUTH` : whether to use client-side OAuth—for example: `export BIGQUERY_USE_CLIENT_OAUTH=true`
 
-3.  Install the BigQuery Data Analytics or Conversational Analytics extension using the `gemini extension install` command:
+3.  Install the BigQuery Data Analytics or conversational analytics extension using the `gemini extension install` command:
 
     - Optional: install the BigQuery Data Analytics extension:
 
@@ -112,7 +112,7 @@ Install the BigQuery extensions and then use them to explore and analyze your da
       gemini extensions install https://github.com/gemini-cli-extensions/bigquery-data-analytics
       ```
 
-    - Optional: install the BigQuery Conversational Analytics extension:
+    - Optional: install the BigQuery conversational analytics extension:
 
       ```
       gemini extensions install https://github.com/gemini-cli-extensions/bigquery-conversational-analytics
@@ -126,7 +126,7 @@ Install the BigQuery extensions and then use them to explore and analyze your da
 
     The CLI automatically loads the BigQuery extension and its tools, which you can use to interact with your data.
 
-> **Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using Conversational Analytics tools. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#pricing) .
+> **Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using conversational analytics tools. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#pricing) .
 
 ## Example prompts to explore and analyze your data
 

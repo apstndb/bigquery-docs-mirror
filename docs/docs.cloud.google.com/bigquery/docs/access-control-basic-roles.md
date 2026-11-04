@@ -91,10 +91,10 @@ The following basic roles apply at the dataset level.
 <td><ul>
 <li>Can read, query, copy or export tables in the dataset. Can read routines in the dataset
 <ul>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/get">get</a> on the dataset</li>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/get">get</a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/list">list</a> on tables in the dataset</li>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/routines/get">get</a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/routines/list">list</a> on routines in the dataset</li>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/list">list</a> on table data for tables in the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get">get</a> on the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get">get</a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list">list</a> on tables in the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/get">get</a> and <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/list">list</a> on routines in the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list">list</a> on table data for tables in the dataset</li>
 </ul></li>
 </ul>
 <blockquote>
@@ -108,9 +108,9 @@ The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery
 <ul>
 <li>Can edit or append data in the dataset
 <ul>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert">insert</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll">insertAll</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/update">update</a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/delete">delete</a> on tables</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert">insert</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll">insertAll</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/update">update</a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete">delete</a> on tables</li>
 <li>Can use tables in the dataset as destinations for load, copy or query jobs</li>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/routines/insert">insert</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/routines/update">update</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/routines/delete">delete</a> on routines</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/insert">insert</a> , <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/update">update</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines/delete">delete</a> on routines</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -123,8 +123,8 @@ The <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery
 <td><ul>
 <li>Same as <code>WRITER</code> , plus:
 <ul>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/update">update</a> on the dataset</li>
-<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets/delete">delete</a> on the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update">update</a> on the dataset</li>
+<li>Can call <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete">delete</a> on the dataset</li>
 </ul></li>
 </ul>
 <p>A dataset must have at least one entity with the <code>OWNER</code> role. A user with the <code>OWNER</code> role can't remove their own <code>OWNER</code> role.</p>

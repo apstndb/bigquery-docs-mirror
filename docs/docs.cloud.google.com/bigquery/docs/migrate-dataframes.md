@@ -126,12 +126,12 @@ Replace ` LOCATION ` with the name of the BigQuery location that you want to con
 
 ## Use the `bigframes.ml.llm` module
 
-In BigQuery DataFrames version 2.0, the default `model_name` for `GeminiTextGenerator` has been updated to `"gemini-2.0-flash-001"` . It is recommended that you supply a `model_name` directly to avoid breakages if the default model changes in the future.
+It is recommended that you supply a supported `model_name` directly (such as `"gemini-3.5-flash"` ) to avoid breakages if the default model changes in the future.
 
 ```
 import bigframes.ml.llm
 
-model = bigframes.ml.llm.GeminiTextGenerator(model_name="gemini-2.0-flash-001")
+model = bigframes.ml.llm.GeminiTextGenerator(model_name="gemini-3.5-flash")
 ```
 
 ## What's next

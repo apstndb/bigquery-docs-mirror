@@ -165,7 +165,7 @@ To resolve this quota error, do the following:
 
   - You might also want to consider replacing streaming inserts with the newer [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) , which has higher throughput, lower price, and many useful features.
 
-For more information about streaming inserts, see [streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
+For more information about streaming inserts, see [streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/write-api-rest) .
 
 ### Streaming table creation rate limit errors
 
@@ -360,7 +360,7 @@ To resolve this error, do the following:
 
 BigQuery returns this error when you reach the rate limit for the number of API requests to a BigQuery API per user per method—for example, the [`tables.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) calls from a service account, or the [`jobs.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) calls from a different user email—or when a user exceeds the rate limit for `INFORMATION_SCHEMA` queries.
 
-Most BigQuery API core methods have a maximum of 100 API requests per user per method; however, some of these core methods can have different rate limits; for example:
+Most BigQuery API core methods have a maximum of 100 API requests per second per user per method; however, some of these core methods can have different rate limits; for example:
 
 - The [`jobs.get` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) has a limit of 1000 API requests per user per second.
 - The [`projects.list` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/list) and the [`tables.insert` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) both have a limit of 10 requests per user per second.

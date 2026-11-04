@@ -16,7 +16,7 @@ To load data using Informatica Data Loader, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add** .
+2.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 
@@ -36,7 +36,7 @@ To load data using Fivetran Data Pipelines, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add** .
+2.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 

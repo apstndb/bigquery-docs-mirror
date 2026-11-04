@@ -260,7 +260,7 @@ BigQuery ML now offers the following AI features:
 
   Try this feature with the [Transcribe audio files with the `ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/transcribe) how-to.
 
-These BigQuery ML feature are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+These BigQuery ML features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## September 23, 2024
 
@@ -1113,7 +1113,7 @@ Feature
 The following BigQuery cross-cloud features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA):
 
 - You can take advantage of the benefits of [materialized views over Amazon S3 metadata cache-enabled BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
-- You can create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_view_replicas) of materialized views over Amazon S3 metadata cache-enabled Biglake tables. Materialized view replicas let you use the materialized view data in queries while avoiding data egress costs and improving query performance.
+- You can create [materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_view_replicas) of materialized views over Amazon S3 metadata cache-enabled BigLake tables. Materialized view replicas let you use the materialized view data in queries while avoiding data egress costs and improving query performance.
 - You can [get information about materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-manage#get-info) by using SQL, the bq command-line tool, or the BigQuery API.
 - You can use [cross-cloud joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) to run queries that span both Google Cloud and BigQuery Omni regions.
 
@@ -1365,6 +1365,13 @@ You can now see query performance insights about [partition skew](https://docs.c
 
 Feature
 
+The following BigQuery ML point-in-time lookup functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://www.kaggle.com/code/dansbecker/data-leakage/notebook) .
+
+- Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
+- Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
+
+Feature
+
 The following AI features in BigQuery are now in [preview](https://cloud.google.com/products#product-launch-stages) :
 
 - The ability to process documents from BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) by doing the following:
@@ -1381,13 +1388,6 @@ The following AI features in BigQuery are now in [preview](https://cloud.google.
   - Using the [`ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transcribe) with a Speech-to-Text-based remote model to transcribe the audio files.  
       
     Try this feature with the [Transcribe audio files with the `ML.TRANSCRIBE` function](https://docs.cloud.google.com/bigquery/docs/transcribe) how-to.
-
-Feature
-
-The following BigQuery ML point-in-time lookup functions are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). These functions let you specify a point-in-time cutoff when retrieving features for training a model or running inference, in order to avoid [data leakage](https://www.kaggle.com/code/dansbecker/data-leakage/notebook) .
-
-- Use the [`ML.FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
-- Use the [`ML.ENTITY_FEATURES_AT_TIME` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-entity-feature-time) to retrieve features from multiple points in time for multiple entities.
 
 ## November 07, 2023
 

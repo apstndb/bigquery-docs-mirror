@@ -1208,9 +1208,9 @@ The BigQuery migration assessment writes the assessment results to tables in Big
 
 ### API
 
-Call the [`create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) method with a defined [workflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows) .
+Call the [`create`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) method with a defined [workflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows) .
 
-Then call the [`start`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start) method to start the assessment workflow.
+Then call the [`start`](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/start) method to start the assessment workflow.
 
 The assessment creates tables in the BigQuery dataset you created earlier. You can query these for information about the tables and queries used in your existing data warehouse. For information about the output files of the translation, see [Batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
 
@@ -1224,7 +1224,7 @@ For Amazon Redshift, Teradata, and Snowflake assessments, in addition to the pre
 
 To find, inspect, and securely share the dataset with other users, see [Query the migration assessment output tables](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) .
 
-The feature is on by default, but you can opt out using the [public API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) .
+The feature is on by default, but you can opt out using the [public API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) .
 
 ### Assessment details
 
@@ -1943,7 +1943,7 @@ For more information about the `dwh-migration-dumper` tool, see [dwh-migration-t
 
 You can also learn more about the following steps in data warehouse migration:
 
-- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+- [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration-intro)
 - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
 - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
 - [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)

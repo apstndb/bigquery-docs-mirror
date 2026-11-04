@@ -23,8 +23,8 @@ You can use BigLake tables with the following datastores:
 To query data stored in these datastores, you must first create BigLake tables and then query them using GoogleSQL syntax:
 
 - [Create Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) and then [query](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake) .
-- [Create Amazon S3 BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and then [query](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) .
-- [Create Azure Blob Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) and then [query](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) .
+- [Create Amazon S3 BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and then [query](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
+- [Create Azure Blob Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) and then [query](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
 You can also upgrade an external table to BigLake. For more information, see [Upgrade an external table to BigLake](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage#upgrade-external-tables-to-biglake-tables) .
 
@@ -34,8 +34,8 @@ BigLake tables let you query structured data in external datastores with access 
 
 You can use BigLake tables with the following datastores:
 
-- [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)
-- [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)
+- [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)
+- [Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-introduction) by using [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction)
 - [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/query-cloud-storage-using-biglake)
 
 ## Temporary table support
@@ -189,7 +189,7 @@ For example, the following diagram demonstrates how the [BigQuery Storage API](h
 
 ![BigLake architecture.](https://docs.cloud.google.com/static/bigquery/images/biglake_arch.png)
 
-For more information about connectors supported by BigQuery, see [BigQuery connectors](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery) .
+For more information about connectors supported by BigQuery, see [BigQuery connectors](https://docs.cloud.google.com/managed-spark/docs/concepts/connectors/bigquery) .
 
 ## BigLake tables on object stores
 
@@ -205,7 +205,7 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
 
 - BigLake tables on object stores are subject to the same limitations as BigQuery tables. For more information, see [Quotas](https://docs.cloud.google.com/bigquery/quotas#external_tables) .
 
-- BigLake does not support downscoped credentials from [Managed Service for Apache Spark Personal Cluster Authentication](https://docs.cloud.google.com/dataproc/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://docs.cloud.google.com/managed-spark/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `--access-boundary=<(echo -n "{}")` flag. For example, the following command enables a credential propagation session in a project named `myproject` for the cluster named `mycluster` :
+- BigLake does not support downscoped credentials from [Managed Service for Apache Spark Personal Cluster Authentication](https://docs.cloud.google.com/managed-spark/docs/concepts/iam/personal-auth) . As a workaround, to use clusters with Personal Cluster Authentication, you must inject your credentials using an empty [Credential Access Boundary](https://docs.cloud.google.com/managed-spark/docs/concepts/iam/personal-auth#create_a_cluster_and_enable_an_interactive_session) with the `--access-boundary=<(echo -n "{}")` flag. For example, the following command enables a credential propagation session in a project named `myproject` for the cluster named `mycluster` :
 
   ```
   gcloud dataproc clusters enable-personal-auth-session \
@@ -217,7 +217,7 @@ You can use [external tables](https://docs.cloud.google.com/bigquery/docs/extern
 
   > **Caution:** Using an empty credential access boundary removes one layer of protection against attacks through stolen credentials from Managed Service for Apache Spark clusters. Stolen credentials have a larger blast radius without downscoping.
   >
-  > As an alternative, you can disable Personal Cluster Authentication and use the [Managed Service for Apache Spark virtual machine (VM) service account](https://docs.cloud.google.com/dataproc/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
+  > As an alternative, you can disable Personal Cluster Authentication and use the [Managed Service for Apache Spark virtual machine (VM) service account](https://docs.cloud.google.com/managed-spark/docs/concepts/configuring-clusters/service-accounts) as a proxy for user groups.
 
 - BigLake tables are read-only. You cannot modify BigLake tables using DML statements or other methods.
 
@@ -317,9 +317,9 @@ ORDER BY start_time DESC
 LIMIT 10;
 ```
 
-For Cloud Storage BigLake tables that are based on Parquet files, [table statistics](https://docs.cloud.google.com/bigquery/docs/metadata-caching#table_statistics) are collected during the metadata cache refresh and used to improve query plans.
+For Cloud Storage BigLake tables that are based on Parquet files, [table statistics](https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables#table_statistics) are collected during the metadata cache refresh and used to improve query plans.
 
-To learn more, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching) .
+To learn more, see [Metadata caching](https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables) .
 
 For more information on setting metadata caching options, see [Create Amazon S3 BigLake tables](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) or [Create Cloud Storage BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
 
@@ -375,4 +375,4 @@ When BigQuery interacts with Cloud Storage, you might incur the following Cloud 
 - Learn how to [create a Cloud Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake) .
 - Learn how to [create an Amazon S3 BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) .
 - Learn how to [create a Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
-- Learn how to [create data quality checks with Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/dataplex-shared-introduction) .
+- Learn how to [create data quality checks with Knowledge Catalog](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .

@@ -16,7 +16,7 @@ You must [enable MCP servers](https://docs.cloud.google.com/mcp/enable-disable-m
 
 ### Server Endpoints
 
-An MCP service endpoint is the network address and communication interface (usually a URL) of the MCP server that an AI application (the Host for the MCP client) uses to establish a secure, standardized connection. It is the point of contact for the LLM to request context, call a tool, or access a resource. Google MCP endpoints can be global or regional.
+An MCP service endpoint is the network address and communication interface (usually a URL) of the MCP server that an AI application (the Host for the MCP client) uses to establish a secure, standardized connection. It is the point of contact for the LLM to request context, call a tool, or access a resource.
 
 The BigQuery Data Transfer API MCP server has the following global MCP endpoint:
 

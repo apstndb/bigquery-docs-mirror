@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Search Ads 360 migration guide
 
-The Search Ads 360 connector (formerly known as *Doubleclick Search* ) relies on the new [Search Ads 360 reporting API](https://developers.google.com/search-ads/reporting/overview) . The [old Search Ads 360 reporting API](https://developers.google.com/search-ads/v2/how-tos/reporting) is no longer supported, so you should migrate your BigQuery Data Transfer Service workflows to be compatible with the new Search Ads 360 reporting API. This document shows you the changes of the new Search Ads 360 from the old Search Ads 360 and provides mapping information to migrate your existing resources to the new Search Ads 360.
+The Search Ads 360 connector (formerly known as *DoubleClick Search* ) relies on the new [Search Ads 360 reporting API](https://developers.google.com/search-ads/reporting/overview) . The [old Search Ads 360 reporting API](https://developers.google.com/search-ads/v2/how-tos/reporting) is no longer supported, so you should migrate your BigQuery Data Transfer Service workflows to be compatible with the new Search Ads 360 reporting API. This document shows you the changes of the new Search Ads 360 from the old Search Ads 360 and provides mapping information to migrate your existing resources to the new Search Ads 360.
 
 ## What's new with Search Ads 360
 

@@ -271,7 +271,7 @@ The following command loads a local CSV file ( `mydata.csv` ) into a table named
     qtr:STRING,sales:FLOAT,year:STRING
 ```
 
-> **Note:** When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#struct-type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#specifying_a_schema_file) instead.
+> **Note:** When you specify the schema on the command line, you cannot include a `RECORD` ( [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) ) type, you cannot include a field description, and you cannot specify the field mode. All field modes default to `NULLABLE` . To include field descriptions, modes, and `RECORD` types, supply a [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file) instead.
 
 The following command loads a local CSV file ( `mydata.csv` ) into a table named `mytable` in `mydataset` in your default project. The schema is defined using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
 

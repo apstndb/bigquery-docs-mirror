@@ -299,13 +299,13 @@ After you [create a stored procedure](https://docs.cloud.google.com/bigquery/doc
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click category **Classic Explorer** :
+2.  In the left pane, click database **Data Explorer** :
 
-    ![Highlighted button for the Classic Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/classic-explorer-tab.png)
+    ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
     If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-3.  In the **Classic Explorer** pane, expand your project and select the stored procedure for Spark that you want to run.
+3.  In the **Data** pane, expand your project and select the stored procedure for Spark that you want to run.
 
 4.  In the **Stored procedure info** window, click **Invoke stored procedure** . Alternatively, you can expand the **View actions** option and click **Invoke** .
 

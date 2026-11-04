@@ -59,7 +59,7 @@ Conversational analytics automatically runs queries on your behalf to answer you
 
 ### Generate insights
 
-You can optionally [generate data insights](https://docs.cloud.google.com/knowledge-catalog/docs/data-insights) in Knowledge Catalog for any table that you want to use as a knowledge source.
+You can optionally [generate data insights](https://docs.cloud.google.com/knowledge-catalog/docs/data-insights-structured-data) in Knowledge Catalog for any table that you want to use as a knowledge source.
 
 Generated insights provide table metadata that the data agent can use to help generate responses to your questions.
 
@@ -193,7 +193,7 @@ For even more examples of instructions, click **Show examples** .
 </tr>
 <tr class="even">
 <td>Join relationships</td>
-<td>How two or more tables are related to each other, and which columns are used to join them. The agent must use standard SQL JOINs on column pairs to combine data. See the example column.</td>
+<td>How two or more tables are related to each other, and which columns are used to join them. The agent must use GoogleSQL JOINs on column pairs to combine data. See the example column.</td>
 <td><strong>Customer Activity</strong>
 <ul>
 <li><code>order_items.user_id</code> = <code>users.id</code><br />
@@ -842,7 +842,7 @@ To retain your trace data, do the following:
 2.  Find the location of your `_Trace` bucket:
 
     ```
-    gcloud beta observability buckets list --location=-
+    gcloud observability buckets list --location=-
     ```
 
     Note the location of your `_Trace` bucket for the next step.
@@ -850,7 +850,7 @@ To retain your trace data, do the following:
 3.  Create a [linked dataset](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) in your BigQuery project that points to your `_Trace` bucket:
 
     ```
-    gcloud beta observability buckets datasets links create \
+    gcloud observability buckets datasets links create \
         projects/PROJECT_ID/locations/LOCATION/buckets/_Trace/datasets/Spans/links/LINK_NAME \
         --dataset=Spans \
         --bucket=_Trace \
@@ -926,6 +926,6 @@ In addition to project-level observability metrics in Cloud Monitoring and spans
 ## What's next
 
 - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
-- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) .
 - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
 - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.

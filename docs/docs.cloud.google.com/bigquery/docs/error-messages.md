@@ -12,7 +12,7 @@ This document describes error messages that you might encounter when working wit
 
 For more information about query errors, see [Troubleshoot query errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-queries) .
 
-For more information about streaming insert errors, see [Troubleshoot streaming inserts](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#troubleshooting) .
+For more information about streaming insert errors, see [Troubleshoot streaming inserts](https://docs.cloud.google.com/bigquery/docs/write-api-rest#troubleshooting) .
 
 ## Error table
 
@@ -49,7 +49,7 @@ If you use the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-
 <td>accessDenied</td>
 <td>403</td>
 <td><p>This error returns when you try to access a resource such as a <a href="https://docs.cloud.google.com/bigquery/docs/datasets">dataset</a> , <a href="https://docs.cloud.google.com/bigquery/docs/tables">table</a> , <a href="https://docs.cloud.google.com/bigquery/docs/views-intro">view</a> , or <a href="https://docs.cloud.google.com/bigquery/docs/managing-jobs">job</a> that you don't have access to. This error also returns when you try to modify a read-only object.</p></td>
-<td><p>Contact the resource owner and <a href="https://docs.cloud.google.com/bigquery/access-control">request access to the resource</a> for the user identified by the <code>principalEmail</code> value in the error's audit log.</p></td>
+<td><p>Contact the resource owner and <a href="https://docs.cloud.google.com/bigquery/docs/access-control">request access to the resource</a> for the user identified by the <code>principalEmail</code> value in the error's audit log.</p></td>
 </tr>
 <tr class="even">
 <td>attributeError</td>
@@ -79,15 +79,15 @@ If you use the [bq command-line tool](https://docs.cloud.google.com/bigquery/bq-
 <p><strong><code>jobs.insert</code> calls</strong><br />
 If you receive this error when making a <code>jobs.insert</code> call, it's unclear if the job succeeded. In this situation, you'll need to retry the job.<br />
 </p>
-<p>If the retries are not effective and the issues persist, you can <a href="https://docs.cloud.google.com/bigquery/docs/error-messages#calculate-rate-of-failing-requests">calculate the rate of failing requests</a> and <a href="https://cloud.google.com/support">contact support</a> .<br />
+<p>If the retries are not effective and the issues persist, you can <a href="https://docs.cloud.google.com/bigquery/docs/error-messages#calculate_rate_of_failing_requests_and_uptime">calculate the rate of failing requests</a> and <a href="https://cloud.google.com/support">contact support</a> .<br />
 Also, if you observe a specific request to BigQuery persistently fail with a 5xx error, even when retried using exponential backoff on multiple workflow restart attempts, you should escalate this to <a href="https://cloud.google.com/support">support</a> to troubleshoot the issue from the BigQuery side, regardless of the overall calculated error rate. Make sure to clearly communicate the <a href="https://docs.cloud.google.com/support/docs/customer-care-procedures#support_case_priority">business impact</a> so that the issue can be triaged correctly.</p></td>
 </tr>
 <tr class="even">
 <td>badRequest</td>
 <td>400</td>
-<td><p>The error <code>'UPDATE or DELETE statement over table </code><var translate="no"> project </var><code> . </code><var translate="no"> dataset </var><code> . </code><var translate="no"> table </var><code> would affect rows in the streaming buffer, which is not supported'</code> can occur when some recently streamed rows in a table might not be available for DML operations ( <code>DELETE</code> , <code>UPDATE</code> , <code>MERGE</code> ), typically for a few minutes, but in rare cases, up to 90 minutes. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery#dataavailability">Streaming data availability</a> and <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations">DML Limitations.</a></p></td>
+<td><p>The error <code>'UPDATE or DELETE statement over table </code><var translate="no"> project </var><code> . </code><var translate="no"> dataset </var><code> . </code><var translate="no"> table </var><code> would affect rows in the streaming buffer, which is not supported'</code> can occur when some recently streamed rows in a table might not be available for DML operations ( <code>DELETE</code> , <code>UPDATE</code> , <code>MERGE</code> ), typically for a few minutes, but in rare cases, up to 90 minutes. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/write-api-rest#dataavailability">Streaming data availability</a> and <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations">DML Limitations.</a></p></td>
 <td><p>Wait a few minutes and try again, or filter your statement to only operate on older data that is outside of the streaming buffer. To see if data is available for table DML operations, check the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get"><code>tables.get</code> response</a> for the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#streamingbuffer">streamingBuffer section</a> . If the streamingBuffer section is absent, then table data is available for DML operations. You can also use the <code>streamingBuffer.oldestEntryTime</code> field to identify the age of records in the streaming buffer.</p>
-<p>Alternatively, consider streaming data with the <a href="https://docs.cloud.google.com/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data">BigQuery Storage Write API (gRPC)</a> , which doesn't have this limitation.</p></td>
+<p>Alternatively, consider streaming data with the <a href="https://docs.cloud.google.com/bigquery/docs/write-api-grpc#use_data_manipulation_language_dml_with_recently_streamed_data">BigQuery Storage Write API (gRPC)</a> , which doesn't have this limitation.</p></td>
 </tr>
 <tr class="odd">
 <td>billingNotEnabled</td>
@@ -129,7 +129,7 @@ Also, if you observe a specific request to BigQuery persistently fail with a 5xx
 <td>invalidQuery</td>
 <td>400</td>
 <td><p>This error returns when you attempt to run an invalid query.</p></td>
-<td><p>Check your query for syntax errors. The <a href="https://docs.cloud.google.com/bigquery/query-reference">query reference</a> contains descriptions and examples of how to construct valid queries.</p></td>
+<td><p>Check your query for syntax errors. The <a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql">query reference</a> contains descriptions and examples of how to construct valid queries.</p></td>
 </tr>
 <tr class="even">
 <td>invalidUser</td>
@@ -158,7 +158,7 @@ Also, if you observe a specific request to BigQuery persistently fail with a 5xx
 <tr class="even">
 <td>notFound</td>
 <td>404</td>
-<td><p>This error returns when you refer to a resource (a dataset, a table, or a job) that doesn't exist, or when the location in the request does not match the location of the resource (for example, the location in which a job is running). This can also occur when using <a href="https://docs.cloud.google.com/bigquery/docs/table-decorators">table decorators</a> to refer to deleted tables that have recently been <a href="https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery">streamed to</a> .</p></td>
+<td><p>This error returns when you refer to a resource (a dataset, a table, or a job) that doesn't exist, or when the location in the request does not match the location of the resource (for example, the location in which a job is running). This can also occur when using <a href="https://docs.cloud.google.com/bigquery/docs/table-decorators">table decorators</a> to refer to deleted tables that have recently been <a href="https://docs.cloud.google.com/bigquery/docs/write-api-rest">streamed to</a> .</p></td>
 <td><p>Fix the resource names, correctly specify the location, or wait at least 6 hours after streaming before querying a deleted table.</p></td>
 </tr>
 <tr class="odd">
@@ -176,14 +176,14 @@ Also, if you observe a specific request to BigQuery persistently fail with a 5xx
 <tr class="odd">
 <td>quotaExceeded</td>
 <td>403</td>
-<td><p>This error returns when your project exceeds a <a href="https://docs.cloud.google.com/bigquery/quota-policy">BigQuery quota</a> , a <a href="https://docs.cloud.google.com/bigquery/docs/custom-quotas">custom quota</a> , or when you haven't set up billing and you have exceeded the <a href="https://cloud.google.com/bigquery/pricing#free-tier">free tier for queries</a> .</p></td>
+<td><p>This error returns when your project exceeds a <a href="https://docs.cloud.google.com/bigquery/quotas">BigQuery quota</a> , a <a href="https://docs.cloud.google.com/bigquery/docs/custom-quotas">custom quota</a> , or when you haven't set up billing and you have exceeded the <a href="https://cloud.google.com/bigquery/pricing#free-tier">free tier for queries</a> .</p></td>
 <td><p>View the <code>message</code> property of the error object for more information about which quota was exceeded. To reset or raise a BigQuery quota, <a href="https://cloud.google.com/support">contact support</a> . To modify a custom quota, submit a request from the <a href="https://console.cloud.google.com/iam-admin/quotas">Quotas</a> page. If you receive this error using the BigQuery sandbox, you can <a href="https://docs.cloud.google.com/bigquery/docs/sandbox#upgrade">upgrade from the sandbox</a> .<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas">Troubleshooting BigQuery quota errors</a> .</p></td>
 </tr>
 <tr class="even">
 <td>rateLimitExceeded</td>
 <td>403, 429</td>
-<td><p>This error returns if your project exceeds a short-term rate limit by sending too many requests too quickly. For example, see the <a href="https://docs.cloud.google.com/bigquery/quota-policy#query_jobs">rate limits for query jobs</a> and <a href="https://docs.cloud.google.com/bigquery/quota-policy#api_requests">rate limits for API requests</a> .</p></td>
+<td><p>This error returns if your project exceeds a short-term rate limit by sending too many requests too quickly. For example, see the <a href="https://docs.cloud.google.com/bigquery/quotas#query_jobs">rate limits for query jobs</a> and <a href="https://docs.cloud.google.com/bigquery/quota-policy#api_requests">rate limits for API requests</a> .</p></td>
 <td><p>Slow down the request rate.<br />
 If you believe that your project did not exceed one of these limits, <a href="https://cloud.google.com/support">contact support</a> .<br />
 For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas">Troubleshooting BigQuery quota errors</a> .</p></td>
@@ -203,7 +203,7 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/t
 <tr class="odd">
 <td>responseTooLarge</td>
 <td>403</td>
-<td><p>This error returns when your query's results are larger than the <a href="https://docs.cloud.google.com/bigquery/quota-policy#query_jobs">maximum response size</a> . Some queries execute in multiple stages, and this error returns when any stage returns a response size that is too large, even if the final result is smaller than the maximum. This error commonly returns when queries use an <code>ORDER BY</code> clause.</p></td>
+<td><p>This error returns when your query's results are larger than the <a href="https://docs.cloud.google.com/bigquery/quotas#query_jobs">maximum response size</a> . Some queries execute in multiple stages, and this error returns when any stage returns a response size that is too large, even if the final result is smaller than the maximum. This error commonly returns when queries use an <code>ORDER BY</code> clause.</p></td>
 <td><p>Adding a <code>LIMIT</code> clause can sometimes help, or removing the <code>ORDER BY</code> clause. If you want to ensure that large results can return, you can set the <code>allowLargeResults</code> property to <code>true</code> and specify a destination table. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/writing-results#large-results">Writing large query results</a> .</p></td>
 </tr>
 <tr class="even">

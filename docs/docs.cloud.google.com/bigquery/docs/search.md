@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Search indexed data
 
-This page provides examples of searching for table data in BigQuery. When you index your data, BigQuery can optimize some queries that use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) or other [functions and operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) , such as `=` , `IN` , `LIKE` , and `STARTS_WITH` .
-
-SQL queries return correct results from all ingested data, even if some of the data isn't indexed yet. However, query performance can be greatly improved with an index. Savings in [bytes processed](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) and [slot milliseconds](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) are maximized when the number of search results make up a relatively small fraction of the total rows in your table because less data is scanned. To determine whether an index was used for a query, see [search index usage](https://docs.cloud.google.com/bigquery/docs/search#search_index_usage) .
+Searching indexed data in BigQuery lets you improve query performance while minimizing the amount of data scanned. You can use the [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) and [supported operators](https://docs.cloud.google.com/bigquery/docs/search#operator_and_function_optimization) on your indexed tables to maximize savings in [bytes processed](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) and [slot milliseconds](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) , especially when retrieving a small fraction of your total rows.
 
 ## Create a search index
 

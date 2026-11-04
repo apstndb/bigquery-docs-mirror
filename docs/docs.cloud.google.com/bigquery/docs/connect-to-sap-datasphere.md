@@ -93,7 +93,7 @@ You can connect BigQuery to SAP Datasphere in the Google Cloud console or the bq
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add data** .
+2.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 

@@ -176,7 +176,7 @@ The following columns are returned for TabFM classification predictions:
 
 The following examples show how to use the `AI.EVALUATE` function.
 
-### Evaluate a single times series
+### Evaluate a single time series
 
 The following example evaluates historical bike trips against actual bike trips for a single time series:
 

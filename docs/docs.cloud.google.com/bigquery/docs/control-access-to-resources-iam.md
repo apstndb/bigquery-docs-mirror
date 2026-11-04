@@ -22,7 +22,7 @@ This document assumes familiarity with [IAM](https://docs.cloud.google.com/iam/d
 - Routines inside external or linked datasets don't support access controls.
 - Tables inside external or linked datasets don't support access controls.
 - Routine access controls can't be set with Terraform.
-- Routine access controls can't be set with the Google Cloud SDK.
+- Routine access controls can't be set with the Google Cloud CLI.
 - Routine access controls can't be set using the [BigQuery data control language (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) .
 - The [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) doesn't show access controls for routines.
 
@@ -1839,7 +1839,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Call the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_) to retrieve the current IAM policy for a table or view, modify the policy by adding new bindings, and then use [`Table#setIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) to save changes to the access policy.
+Call the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_) to retrieve the current IAM allow policy for a table or view, modify the policy by adding new bindings, and then use [`Table#setIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) to save changes to the access policy.
 
 ```javascript
 /**
@@ -2273,7 +2273,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Retrieve the IAM policy for a table or view using the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) . The access policy details are available in the returned policy object.
+Retrieve the IAM allow policy for a table or view using the [`Table#getIamPolicy()` function](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) . The access policy details are available in the returned policy object.
 
 ```javascript
 /**
@@ -2577,7 +2577,7 @@ Before trying this sample, follow the Node.js setup instructions in the [BigQuer
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Retrieve the current IAM policy for a table or view using the [`Table#getIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) method. Modify the policy to remove the desired role or principal, and then apply the updated policy using the [`Table#setIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) method.
+Retrieve the current IAM allow policy for a table or view using the [`Table#getIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#_google_cloud_bigquery_Table_getIamPolicy_member_1_y) method. Modify the policy to remove the desired role or principal, and then apply the updated policy using the [`Table#setIamPolicy()`](https://docs.cloud.google.com/nodejs/docs/reference/bigquery/latest/bigquery/table#setiampolicy) method.
 
 ```javascript
 /**
@@ -3018,7 +3018,7 @@ You can examine the inherited IAM roles for a resource by using the BigQuery web
 
     ![The Inherited from a parent resource icon](https://docs.cloud.google.com/bigquery/images/inherited-icon.png)
 
-> **Note:** You can also [view all allow and deny policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#applicable-policies) for a resource's parent project, folder, and organization by using the [`gcloud beta projects get-ancestors-iam-policy` command](https://docs.cloud.google.com/sdk/gcloud/reference/beta/projects/get-ancestors-iam-policy) .
+> **Note:** You can also [view all allow and deny policies](https://docs.cloud.google.com/iam/docs/troubleshoot-policies#applicable-policies) for a resource's parent project, folder, and organization by using the [`gcloud projects get-ancestors-iam-policy` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/get-ancestors-iam-policy) .
 
 ## Deny access to a resource
 

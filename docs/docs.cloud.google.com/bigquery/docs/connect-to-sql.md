@@ -35,7 +35,7 @@ Select one of the following options to create a Cloud SQL connection:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add** .
+2.  In the **Data** pane, click add **Add data** .
 
     The **Add data** dialog opens.
 

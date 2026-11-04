@@ -492,9 +492,9 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 You must grant the Agent Platform User role to the service account of the connection that the remote model uses.
 
-If you plan to specify the remote model's endpoint as a URL, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-2.0-flash'` , grant this role in the same project you specify in the URL.
+If you plan to specify the remote model's endpoint as a URL, for example `endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/gemini-3.5-flash'` , grant this role in the same project you specify in the URL.
 
-If you plan to specify the remote model's endpoint by using the model name, for example `endpoint = 'gemini-2.0-flash'` , grant this role in the same project where you plan to create the remote model.
+If you plan to specify the remote model's endpoint by using the model name, for example `endpoint = 'gemini-3.5-flash'` , grant this role in the same project where you plan to create the remote model.
 
 Granting the role in a different project results in the error `bqcx-1234567890-wxyz@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource` .
 

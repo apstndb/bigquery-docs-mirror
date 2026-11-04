@@ -8,9 +8,7 @@ data_source: docs.cloud.google.com
 
 # Work with text analyzers
 
-The [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , and [`TEXT_ANALYZE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) support advanced text analyzer configuration options. Understanding BigQuery's text analyzers and their options lets you refine your search experience.
-
-This document provides an overview of the different text analyzers available in BigQuery and their configuration options, as well as examples of how text analyzers work with [search](https://docs.cloud.google.com/bigquery/docs/search) in BigQuery. For more information about text analyzer syntax, see [Text analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) .
+Configuring advanced text analyzers in BigQuery lets you refine your search experience by controlling exactly how string data is tokenized. Applying custom configurations to your search indexes, such as regular expression patterns and stop word filters, lets you precisely dictate how the function evaluates and matches your text. You can configure advanced text analyzers for the [`CREATE SEARCH INDEX` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , [`SEARCH` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , and [`TEXT_ANALYZE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) .
 
 ## Text analyzers
 

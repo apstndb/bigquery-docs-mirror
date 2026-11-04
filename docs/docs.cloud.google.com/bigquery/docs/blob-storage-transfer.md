@@ -93,7 +93,7 @@ Select one of the following options:
 
       - For **Dataset** , select the dataset that you created to store your data.
       - Select **Native table** if you want to transfer to a BigQuery table.
-      - Select **Iceberg Managed** if you want to transfer to a Iceberg managed table.
+      - Select **Iceberg Managed** if you want to transfer to an Iceberg managed table.
 
     - In the **Data source details** section, do the following:
 

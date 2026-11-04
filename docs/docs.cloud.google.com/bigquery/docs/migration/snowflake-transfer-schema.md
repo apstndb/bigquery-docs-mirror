@@ -98,7 +98,7 @@ You can manually define your schema mapping with the following steps:
       },
       }" \
       -H "Content-Type:application/json" \
-      -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/project_id/locations/location/workflows
+      -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2/projects/project_id/locations/location/workflows
     ```
 
     - You can check the status of this command in the [SQL Translation page](https://console.cloud.google.com/bigquery/migrations/batch-translation) in BigQuery. The output of the batch translation job is stored in `gs://translation_target_base_uri/metadata/config/` .

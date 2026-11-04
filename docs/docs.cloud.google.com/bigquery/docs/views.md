@@ -92,11 +92,11 @@ To create a view:
 5.  In the **Save view** dialog:
 
     - In the **Project** menu, select a project to store the view.
-    - In the **Dataset** menu, select a dataset or create a new dataset to store the view. The destination dataset for a saved view must be in the same [region](https://docs.cloud.google.com/bigquery/docs/dataset-locations) as the source.
+    - In the **Dataset** menu, select a dataset or create a new dataset to store the view. The destination dataset for a saved view must be in the same [region](https://docs.cloud.google.com/bigquery/docs/locations) as the source.
     - In the **Table** field, enter the name of the view.
     - Click **Save** .
 
-> **Note:** When you create a view using Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a view using the API or bq command-line tool. After you create a view using the Google Cloud console, you can add an expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/updating-views) .
+> **Note:** When you create a view using Google Cloud console, you cannot add a label, description, or expiration time. You can add these optional properties when you create a view using the API or bq command-line tool. After you create a view using the Google Cloud console, you can add an expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/managing-views) .
 
 ### SQL
 
@@ -132,7 +132,7 @@ If your query references external user-defined function (UDF) resources stored i
 
 If you are creating a view in a project other than your default project, specify the project ID using the `--project_id` flag.
 
-> **Note:** The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
+> **Note:** The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ```
 bq mk \
@@ -152,7 +152,7 @@ Replace the following:
 - `PATH_TO_FILE` is the URI or local file system path to a code file to be loaded and evaluated immediately as a UDF resource used by the view. Repeat the flag to specify multiple files.
 - `INTEGER` sets the lifetime (in seconds) for the view. If `INTEGER` is `0` , the view doesn't expire. If you don't include the `--expiration` flag, BigQuery creates the view with the dataset's default table lifetime.
 - `DESCRIPTION` is a description of the view in quotes.
-- `KEY_1:VALUE_1` is the key-value pair that represents a [label](https://docs.cloud.google.com/bigquery/docs/labels) . Repeat the `--label` flag to specify multiple labels.
+- `KEY_1:VALUE_1` is the key-value pair that represents a [label](https://docs.cloud.google.com/bigquery/docs/adding-labels) . Repeat the `--label` flag to specify multiple labels.
 - `KEY_2:VALUE_2` is the key-value pair that represents a [tag](https://docs.cloud.google.com/bigquery/docs/labels) . Add multiple tags under the same flag with commas between key:value pairs.
 - `QUERY` is a valid query.
 - `PROJECT_ID` is your project ID (if you don't have a default project configured).
@@ -203,7 +203,7 @@ ORDER BY
 mydataset.myview
 ```
 
-After the view is created, you can update the view's expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/updating-views) .
+After the view is created, you can update the view's expiration, description, and labels. For more information, see [Updating views](https://docs.cloud.google.com/bigquery/docs/managing-views) .
 
 ### Terraform
 
@@ -314,7 +314,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables/insert) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) that contains a `view` property.
+Call the [`tables.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables) that contains a `view` property.
 
 ### Go
 

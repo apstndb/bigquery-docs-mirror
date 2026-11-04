@@ -22,7 +22,7 @@ You can use the `ML.EVALUATE` function with all model types except for the follo
 
 The `ML.EVALUATE` function syntax differs depending on the type of model that you use the function with. Choose the option appropriate for your use case.
 
-### Times series
+### Time series
 
 ```sql
 ML.EVALUATE(

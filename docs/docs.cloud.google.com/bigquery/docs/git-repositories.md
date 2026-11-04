@@ -204,7 +204,7 @@ To synchronize your local edits with your remote repository, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** to open the **Source control** panel.
+2.  In the left pane, click fork_right **Source control** .
 
 3.  Optional: Hover over a modified file and click **Show diff** to see a line-by-line comparison between your local version and the last committed version.
 
@@ -226,9 +226,9 @@ To check out a new branch, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Open the **Source control** panel.
+2.  In the left pane, click fork_right **Source control** .
 
-3.  In the **Branches** section, next to **Branches** , click more_vert **Actions** \> **Check out new branch** .
+3.  In the **Branches** section, next to **Branches** , click more_vert **Actions \> Check out new branch** .
 
 4.  In the **Source branch** menu, select the branch you want to base your new branch on, for example, `origin/main` .
 
@@ -251,7 +251,7 @@ To view the commit history, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Open the **Source control** panel.
+2.  In the left pane, click fork_right **Source control** .
 
 3.  Next to the primary version control action button, click the expander_arrow arrow drop-down, and then click **View commit history** .
 

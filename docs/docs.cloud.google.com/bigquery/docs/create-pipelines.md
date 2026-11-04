@@ -385,12 +385,6 @@ You can either create a new data preparation or import an existing one.
 
 ### Table
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
-
 1.  Do one of the following:
 
 - Click **Add task** , and then select **Table** .
@@ -452,12 +446,6 @@ The following example configuration shows you how to add an overview and generic
 3.  In **Query results** , inspect the data preview.
 
 ### View
-
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To provide feedback or request support, contact <dataform-preview-support@google.com> .
 
 1.  Do one of the following:
 

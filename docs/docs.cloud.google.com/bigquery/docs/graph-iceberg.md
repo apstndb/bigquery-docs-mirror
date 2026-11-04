@@ -209,7 +209,7 @@ Surface a Databricks Unity Catalog into BigQuery through an open borderless Lake
     export DBX_HOST="<your-workspace-host-without-https>"
     export UC_CATALOG="<CATALOG>"
 
-    gcloud alpha biglake iceberg catalogs create dbx_fed_catalog \
+    gcloud biglake iceberg catalogs create dbx_fed_catalog \
       --project="$PROJECT_ID" \
       --catalog-type=federated \
       --federated-catalog-type=unity \
@@ -352,7 +352,7 @@ To avoid ongoing charges, remove the resources that you created.
 2.  Delete the federated catalog:
 
     ```
-    gcloud alpha biglake iceberg catalogs delete dbx_fed_catalog --project="$PROJECT_ID"
+    gcloud biglake iceberg catalogs delete dbx_fed_catalog --project="$PROJECT_ID"
     ```
 
 3.  Save the following script as `drop_gcs.py` to drop the GCS tables and namespace:

@@ -20,7 +20,7 @@ You can use the following types of models with `ML.DETECT_ANOMALIES` , depending
   - [Principal component analysis (PCA) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
   - [Autoencoder models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
-If you don't want to manage your own times series anomaly detection model, you can use the [`AI.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to perform anomaly detection.
+If you don't want to manage your own time series anomaly detection model, you can use the [`AI.DETECT_ANOMALIES` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to perform anomaly detection.
 
 ## Syntax
 

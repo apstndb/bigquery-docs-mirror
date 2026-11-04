@@ -173,7 +173,7 @@ To configure permissions for a Hive Metastore transfer, do the steps in the foll
 
 ### Generate metadata file for Apache Hive
 
-Run the `dwh-migration-dumper` tool to [extract metadata](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata#apache-hive) for Apache Hive. The tool generates a file named `hive-dumper-output.zip` which can be uploaded to a Cloud Storage bucket. This Cloud Storage bucket is referred to in this document as `DUMPER_BUCKET` .
+Run the `dwh-migration-dumper` tool to [extract metadata](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata#extracting_metadata_for_migration) for Apache Hive. The tool generates a file named `hive-dumper-output.zip` which can be uploaded to a Cloud Storage bucket. This Cloud Storage bucket is referred to in this document as `DUMPER_BUCKET` .
 
 You can also schedule periodic uploads using a script. For more information, see [Automate dumper tool execution with a `cron` job](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#automate-dumper) .
 
@@ -195,9 +195,9 @@ To set up the agent, do the following:
 
 Transfers from Amazon S3 are agentless transfers.
 
-To configure the Storage Transfer Service for a Amazon S3 transfer, do the following:
+To configure the Storage Transfer Service for an Amazon S3 transfer, do the following:
 
-1.  [Setup access credentials for AWS Amazon S3](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#access_credentials) .
+1.  [Set up access credentials for AWS Amazon S3](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#access_credentials) .
 2.  Note the access key ID and secret access key after setting up your access credentials.
 3.  [Add IP ranges](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your AWS project uses IP restrictions.
 
@@ -304,7 +304,7 @@ Replace the following:
 - ` ``AZURE_SAS_TOKEN`` ` : the SAS token from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-sts) . Required if `storage_type` is `AZURE` .
 - ` ``FILTER_GCS_PATH`` ` : (Optional) A full Cloud Storage path to a custom filter JSON file to [filter partitions](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#filter-partitions) .
 
-Run this command to create the transfer configuration and start the Hive managed tables transfer. Transfers are scheduled to run every 24 hours by default, but can be configured with [transfer scheduling options](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#transfer_scheduling_options) .
+Run this command to create the transfer configuration and start the Hive managed tables transfer. Transfers are scheduled to run every 24 hours by default, but can be configured with [transfer scheduling options](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#schedule-transfer) .
 
 When the transfer is complete, your tables in Hadoop cluster will be migrated to `MIGRATION_BUCKET` .
 
@@ -318,7 +318,7 @@ Before using this automation script, you must do the following:
 
 1.  Complete all [prerequisites for the dumper tool](https://docs.cloud.google.com/bigquery/docs/generate-metadata#prerequisites) .
 
-2.  [Install the Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) . The script uses the `gsutil` command-line tool to upload dumper output to Cloud Storage.
+2.  [Install the Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install-sdk) . The script uses the `gsutil` command-line tool to upload dumper output to Cloud Storage.
 
 3.  To authenticate with Google Cloud to allow `gsutil` to upload files to Cloud Storage, run the following command:
 

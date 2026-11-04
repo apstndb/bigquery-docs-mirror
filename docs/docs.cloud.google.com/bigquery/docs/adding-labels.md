@@ -770,4 +770,4 @@ Because views are treated like table resources, you use the `tables.patch` metho
 - Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
 - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
 - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
-- Read about [Using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.
+- Read about [Using labels](https://docs.cloud.google.com/resource-manager/docs/creating-managing-labels) in the Resource Manager documentation.

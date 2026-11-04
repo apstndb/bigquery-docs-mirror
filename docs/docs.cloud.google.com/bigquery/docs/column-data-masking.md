@@ -14,7 +14,7 @@ You implement data masking by adding a data policy to a column. To add a data ma
 
 1.  Create a taxonomy with at least one policy tag.
 2.  Optional: Grant the Data Catalog Fine-Grained Reader role to one or more principals on one or more of the policy tags you created.
-3.  Create up to three data policies for the policy tag, to map masking rules and principals (which represent users or groups) to that tag.
+3.  Create up to eight data policies for the policy tag, to map masking rules and principals (which represent users or groups) to that tag.
 4.  Set the policy tag on a column. That maps the data policies associated with the policy tag to the selected column.
 5.  Assign users who should have access to masked data to the BigQuery Masked Reader role. As a best practice, assign the BigQuery Masked Reader role at the data policy level. Assigning the role at the project level or higher grants users permissions to all data policies under the project, which can lead to issues caused by excess permissions.
 

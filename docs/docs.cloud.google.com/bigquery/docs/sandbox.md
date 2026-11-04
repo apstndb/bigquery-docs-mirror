@@ -90,13 +90,13 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 
 1.  In the Google Cloud console, go to **BigQuery Studio** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click database **Data Explorer** :
 
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
     If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click **add Add data** .
+3.  In the **Data** pane, click **add Add data** .
 
 4.  In the **Add data** dialog, click ![Public dataset icon on the Filter by page](https://docs.cloud.google.com/static/bigquery/images/icon-public-dataset.png) **Public datasets** .
 

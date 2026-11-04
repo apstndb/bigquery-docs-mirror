@@ -264,7 +264,7 @@ gcloud storage buckets notifications list gs://BUCKET_NAME
 
 Replace `BUCKET_NAME` with the name of the bucket that you use for notification. For information on configuring a Pub/Sub notification for Cloud Storage, see [Configure Pub/Sub notification for Cloud Storage](https://docs.cloud.google.com/storage/docs/reporting-changes) .
 
-If there are messages, check if the same Pub/Sub subscription is used in another event-driven transfer configs. The same Pub/Sub subscription cannot be reused by multiple event-driven transfer configs. For more information about event-driven transfers, see [Event-driven transfers](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) .
+If there are messages, check if the same Pub/Sub subscription is used in another event-driven transfer config. The same Pub/Sub subscription cannot be reused by multiple event-driven transfer configs. For more information about event-driven transfers, see [Event-driven transfers](https://docs.cloud.google.com/bigquery/docs/event-driven-transfer) .
 
 ## Amazon S3 transfer issues
 
@@ -389,7 +389,7 @@ Error: `AuthorizationError.TWO_STEP_VERIFICATION_NOT_ENROLLED`
 **Resolution:** If the user account associated with this transfer does not have 2-step verification (or multi-factor authentication) enabled, [enable 2-step verification](https://support.google.com/google-ads/answer/12864186) for this account and then rerun the failed transfer job. Service accounts are exempted from the 2-step verification requirement.
 
 Error: `Quota exceeded: Your project exceeded quota for imports per project`  
-**Resolution:** Transfers are subject to BigQuery [quotas on load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) . If you hit the quota limit for load job, try to reduce unnecessary loadings by using [table_filter](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) , deleting unused transfer configs or reducing the refresh window. If you need to increase your quota, contact your Google Cloud sales representative. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
+**Resolution:** Transfers are subject to BigQuery [quotas on load jobs](https://docs.cloud.google.com/bigquery/quotas#load_jobs) . If you hit the quota limit for load jobs, try to reduce unnecessary loadings by using [table_filter](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) , deleting unused transfer configs or reducing the refresh window. If you need to increase your quota, contact your Google Cloud sales representative. For more information, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
 
 ## Google Ad Manager transfer issues
 

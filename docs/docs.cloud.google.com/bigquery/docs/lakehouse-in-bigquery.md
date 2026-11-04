@@ -23,7 +23,7 @@ The following are key differences between Lakehouse and standard BigQuery resour
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add data** .
+2.  In the **Data** pane, click add **Add data** .
 
 3.  Click the **Google Cloud Storage** data source card.
 
@@ -53,7 +53,7 @@ Instead of creating a table containing data, you can create an empty Lakehouse t
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add **Add data** .
+2.  In the **Data** pane, click add **Add data** .
 
 3.  Click the **Google Cloud Storage** data source card.
 
@@ -76,7 +76,7 @@ Instead of creating a table containing data, you can create an empty Lakehouse t
 
 ## Access cross-cloud data
 
-The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) lets you query external Iceberg tables across Amazon Web Services (AWS) and Microsoft Azure directly from BigQuery without migrating files or building ETL pipelines. You can route query reads, background catalog metadata synchronization, or both privately over Cross-Cloud Interconnect, while optional local caching in Google Cloud helps reduce recurring egress costs. For query syntax and configuration details, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
+The [cross-cloud data access capability of Lakehouse](https://docs.cloud.google.com/lakehouse/docs/about-cross-cloud-data-access) lets you query external Iceberg tables across Amazon Web Services (AWS) and Microsoft Azure directly from BigQuery without migrating files or building ETL pipelines. You can route query reads, background metadata refresh, or both privately over Cross-Cloud Interconnect, while optional local caching in Google Cloud helps reduce recurring egress costs. For query syntax and configuration details, see [Query remote data](https://docs.cloud.google.com/lakehouse/docs/query-remote-data) .
 
 ## Iceberg table capabilities comparison
 

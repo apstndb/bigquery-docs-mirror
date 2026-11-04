@@ -74,11 +74,11 @@ To view and update your daily token quotas, select one of the following options:
 
 2.  Filter the quotas by entering `Service: BigQuery API` .
 
-3.  Search for a specific quota from the list of quotas (for example, search for `AI input tokens per day` or `GenAiInputTokensPerDay` ).
+3.  Search for a specific quota from the list of quotas, such as **AI input tokens per day** ( `GenAiInputTokensPerDay` ), or sort the **Name** column to bring the AI token quotas to the top of the list.
 
-4.  Click **Edit** .
+4.  Click more_vert **More actions** \> **Edit quota** .
 
-5.  To increase or decrease the quota, in the **Quota changes** pane, enter a new value.
+5.  To increase or decrease the quota, in the **Quota changes** pane, enter a new value in the **New value** field, and then click **Done** . Lowering a quota takes effect immediately without requiring approval.
 
 6.  Click **Submit request** .
 
@@ -319,6 +319,28 @@ When you manage token quotas with Terraform, specify `bigquery.googleapis.com` a
     terraform apply
     ```
 
+## Monitor quotas
+
+To prevent unexpected query failures, detect usage spikes, and manage costs, monitor your token quota consumption in the Google Cloud console by doing the following:
+
+1.  In the Google Cloud console, go to the **IAM & Admin \> Quotas & System Limits** page.
+
+2.  Filter the quotas by entering `Service: BigQuery API` .
+
+3.  View the **Current usage percentage** and **Current usage** columns to check your project's daily token consumption for the **AI input tokens per day** ( `GenAiInputTokensPerDay` ) and **AI output tokens per day** ( `GenAiOutputTokensPerDay` ) quotas.
+
+4.  To view historical token consumption over time, in the row for a project-level token quota, click monitoring **Show usage chart** .
+
+    The usage card displays your configured limit, current usage percentage, and peak usage percentage, along with a historical consumption chart for selectable **7 days** , **14 days** , **30 days** , and **Custom** time ranges:
+
+    ![Usage chart for the AI input tokens per day quota in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/token-quota-usage.png)
+
+5.  Optional: [Set up basic quota usage alerts](https://docs.cloud.google.com/docs/quotas/set-up-quota-alerts#basic) to notify you by email, SMS, or Pub/Sub when token consumption reaches a specified percentage of your daily limit.
+
+6.  Optional: [Create charts](https://docs.cloud.google.com/docs/quotas/set-up-quota-alerts#charts) in Cloud Monitoring to visualize token usage trends and build custom dashboards. For more information about monitoring quotas and configuring alerting policies, see [Set up quota alerts and monitoring](https://docs.cloud.google.com/docs/quotas/set-up-quota-alerts) .
+
+To estimate input token usage before you run a query, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) . You can also [view the number of tokens processed by an individual query](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#token_usage) in the **Job information** tab of the **Query results** pane.
+
 ## Quota enforcement behavior
 
 BigQuery monitors your token consumption at multiple stages of query execution:
@@ -342,3 +364,4 @@ BigQuery monitors your token consumption at multiple stages of query execution:
 
 - Learn more about [optimizing AI function costs](https://docs.cloud.google.com/bigquery/docs/optimize-ai-functions) .
 - Read an [overview of generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- Learn how to [set up quota alerts and monitoring](https://docs.cloud.google.com/docs/quotas/set-up-quota-alerts) .

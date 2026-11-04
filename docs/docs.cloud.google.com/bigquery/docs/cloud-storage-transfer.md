@@ -120,7 +120,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
 
     - For **Dataset** , select the dataset that you created to store your data. ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
     - Select **Native table** if you want to transfer to a BigQuery table.
-    - Select **Iceberg Managed** if you want to transfer to a Iceberg managed table.
+    - Select **Iceberg Managed** if you want to transfer to an Iceberg managed table.
 
 7.  In the **Data source details** section:
 

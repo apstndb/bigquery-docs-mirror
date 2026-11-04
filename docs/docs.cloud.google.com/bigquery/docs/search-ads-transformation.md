@@ -1605,7 +1605,7 @@ Search Ads 360 API Resource: [visit](https://developers.google.com/search-ads/re
 | segments_device                 | Device to which metrics apply.                                                                                                                                             |
 | visit_ad_id                     | Ad ID. A value of 0 indicates that the ad is unattributed.                                                                                                                 |
 | visit_click_id                  | A unique string for each visit that is passed to the landing page as the click id URL parameter.                                                                           |
-| visit_criterion_id              | Search Ads 360 keyword ID. A value of 0 indicates that the keyword is unattributed..                                                                                       |
+| visit_criterion_id              | Search Ads 360 keyword ID. A value of 0 indicates that the keyword is unattributed.                                                                                        |
 | visit_id                        | The ID of the visit.                                                                                                                                                       |
 | visit_merchant_id               | The Search Ads 360 inventory account ID containing the product that was clicked on. Search Ads 360 generates this ID when you link an inventory account in Search Ads 360. |
 | visit_product_channel           | The sales channel of the product that was clicked on: Online or Local.                                                                                                     |

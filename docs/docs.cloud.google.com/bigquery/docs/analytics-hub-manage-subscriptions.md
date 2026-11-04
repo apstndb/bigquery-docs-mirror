@@ -81,15 +81,21 @@ To refresh a subscription, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click add_box **Add data** .
+2.  In the left pane, click database **Data Explorer** :
 
-3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
+    ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-4.  Find and click the data clean room or data exchange that you're subscribed to.
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-5.  Click **Subscribe** . Because you already have an active subscription, the console presents a **Refresh** option.
+3.  In the **Data** pane, click add **Add data** .
 
-6.  Click **Refresh** to update your linked dataset with the latest resources.
+4.  Select **Sharing (Analytics Hub)** . A discovery page opens.
+
+5.  Find and click the data clean room or data exchange that you're subscribed to.
+
+6.  Click **Subscribe** . Because you already have an active subscription, the console presents a **Refresh** option.
+
+7.  Click **Refresh** to update your linked dataset with the latest resources.
 
 ### API
 

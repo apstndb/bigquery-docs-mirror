@@ -14,7 +14,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
 
-This document shows how you can use the `dwh-migration-dumper` tool to extract the necessary metadata before running a Apache Hive data or permissions migration.
+This document shows how you can use the `dwh-migration-dumper` tool to extract the necessary metadata before running an Apache Hive data or permissions migration.
 
 This document covers metadata extraction from the following data sources:
 
