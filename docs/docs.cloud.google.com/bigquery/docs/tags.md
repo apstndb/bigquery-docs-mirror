@@ -2244,17 +2244,7 @@ To set or view the `default_data_policy_projects` option at the organization lev
 - For `STRUCT` fields, you can apply data governance tags only to the leaf fields.
 - You can delete tag values that are attached to columns. If you delete a tag value, the tag binding persists on the column, but because the tag value no longer exists, access to the column might be lost.
 
-### Troubleshoot data governance tags
-
-This section describes how to troubleshoot common issues when controlling access to columns with data governance tags.
-
-#### Incorrectly formatted tag names
-
-When you create tags, you define a short name (for example, `ssn` ). However, when you attach tags to columns in your schema or use them in conditions, the tag key must use the namespaced format ( `PROJECT_ID/TAG_KEY` or `ORGANIZATION_ID/TAG_KEY` ), while the tag value still uses the short name. Supplying only the short name for the tag key produces an `Invalid tagKey` or `Invalid tagValue` error.
-
-#### Cross-project policy application
-
-By default, only the data policies of the table's project are evaluated. Policies from other projects don't apply unless a default data policy project is configured at the organization level. For more information about configuring and evaluating cross-project policies, see [Configure a default data policy project](https://docs.cloud.google.com/bigquery/docs/tags#configure-default-data-policy-project) .
+For more information about troubleshooting common issues with data governance tags, see [Troubleshoot data governance tags](https://docs.cloud.google.com/bigquery/docs/troubleshoot-access-control#troubleshoot-gov-tags) .
 
 ## What's next
 

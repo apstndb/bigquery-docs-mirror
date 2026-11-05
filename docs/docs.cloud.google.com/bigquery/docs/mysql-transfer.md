@@ -14,10 +14,10 @@ To learn about how a MySQL transfer works, see [Introduction to MySQL data trans
 
 ## Limitations
 
-MySQL data transfers are subject to following limitations:
+MySQL data transfers are subject to the following limitations:
 
 - The maximum number of simultaneous connections to a MySQL database is determined by the MySQL configuration parameter `max_connections` . By default, this is set to 151 connections, but it can be configured to a higher limit as needed. As a result, the number of simultaneous transfer runs to a single MySQL database is limited to that maximum amount. This limitation also means that the number of concurrent transfer jobs should be limited to a value less than the maximum number of concurrent connections supported by the MySQL database.
-- A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
+- A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer are skipped.
   - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** option.
 - During a data transfer, the MySQL connector identifies indexed and partitioned key columns to transfer your data in parallel batches. For this reason, we recommend that you specify primary key columns or use indexed columns in your table to improve the performance and reduce the error rate in your data transfers.
   - If you have indexed or primary key constraints, only the following column types are supported for creating parallel batches:
@@ -158,7 +158,7 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 8.  Optional: In the **Notification options** section, do the following:
 
     - To enable email notifications, click the **Email notifications** toggle to the on position. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-    - To configure Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/admin) name or click **Create a topic** to create one.
+    - To configure Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/create-topic) name or click **Create a topic** to create one.
 
 9.  Click **Save** .
 
@@ -193,15 +193,14 @@ Replace the following:
   - `connector.endpoint.host` : the hostname or IP address of the database.
   - `connector.endpoint.port` : the port number of the database.
   - `connector.authentication.username` : the username of the database user.
-  - `connector.authentication.password` : the password of the database user. connector.connectionType
-  - `connector.connectionType` (optional): the connection type to determine the connection URL. This can be `SERVICE` , `SID` , or `TNS` . When not provided, this defaults to `SERVICE` .
+  - `connector.authentication.password` : the password of the database user.
   - `connector.legacyMapping` : set to `true` (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro#data-type-mapping) . Set to `false` to use the updated data type mapping. If you are making an incremental transfer, this value must be `false` . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-mysql) .
   - `connector.tls.mode` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro#tls-configuration) to use with this transfer:
     - `ENCRYPT_VERIFY_CA_AND_HOST` to encrypt data, and verify CA and hostname
     - `ENCRYPT_VERIFY_CA` to encrypt data, and verify CA only
     - `ENCRYPT_VERIFY_NONE` for data encryption only
     - `DISABLE` for no encryption or verification
-  - `connector.tls.trustedServerCertificate` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro#trusted_server_certificate_pem) . Required only if `connector.tls.mode` is `ENCRYPT_VERIFY_CA_AND_HOST` or `ENCRYPT_VERIFY_CA` .
+  - `connector.tls.trustedPemCertificate` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro#trusted_server_certificate_pem) . Required only if `connector.tls.mode` is `ENCRYPT_VERIFY_CA_AND_HOST` or `ENCRYPT_VERIFY_CA` .
   - `ingestionType` : specify either `full` or `incremental` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/mysql-transfer-intro#full-incremental-transfers) .
   - `writeMode` : specify either `WRITE_MODE_APPEND` or `WRITE_MODE_UPSERT` .
   - `watermarkColumns` : specify columns in your table as watermark columns. This field is required for incremental transfers.
@@ -219,23 +218,23 @@ bq mk
     --params='{"assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
         "connector.authentication.username": "User1",
         "connector.authentication.password":"ABC12345",
-        "connector.encryptionMode":"FULL",
         "connector.database":"DB1",
         "connector.endpoint.host":"54.74.220.23",
-        "connector.endpoint.port":3306
+        "connector.endpoint.port":3306,
+        "connector.legacyMapping":false,
         "ingestionType":"incremental",
         "writeMode":"WRITE_MODE_APPEND",
         "watermarkColumns":["createdAt","createdAt"],
-        "primaryKeys":[['dep_id'], ['report_by','report_title']],
+        "primaryKeys":[["dep_id"], ["report_by","report_title"]],
         "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
-        "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
+        "connector.tls.trustedPemCertificate": "PEM-encoded certificate"}'
 ```
 
-When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `dep_id` corresponds to the table `DB1/USER1/DEPARTMENT` , while `report_by` and `report_title` corresponds to the table `DB1/USER1/EMPLOYEES` .
+When specifying multiple assets during an incremental transfer, the values of the `watermarkColumns` and `primaryKeys` fields correspond to the position of values in the `assets` field. In the following example, `dep_id` corresponds to the table `DB1/DEPARTMENT` , while `report_by` and `report_title` correspond to the table `DB1/EMPLOYEES` .
 
 ```
-"primaryKeys":[['dep_id'], ['report_by','report_title']],
-      "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
+"primaryKeys":[["dep_id"], ["report_by","report_title"]],
+      "assets":["DB1/DEPARTMENT","DB1/EMPLOYEES"],
 ```
 
 ### API

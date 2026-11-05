@@ -16,7 +16,7 @@ When you use data masking in combination with column-level access control, you c
 
 This document describes using policy tags for data masking. As an alternative, you can use [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) , which are Resource Manager tags used for data masking and column-level access control.
 
-> **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and cataloging features are deprecated and transitioning to Knowledge Catalog, the specific Data Catalog API functionality for policy tags isn't deprecated.
+> **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and catalog features are deprecated and transitioning to Knowledge Catalog, the Policy Tag Manager service (taxonomies and policy tags), its `datacatalog.googleapis.com` API methods and audit logs, and the `roles/datacatalog` Identity and Access Management (IAM) roles aren't deprecated.
 
 ## Benefits
 

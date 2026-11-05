@@ -30,7 +30,7 @@ When you replicate them, the taxonomy and policy tags retain the same IDs in eac
 
 > **Caution:** Syncing a taxonomy across locations syncs only the taxonomy and policy tags in the taxonomy. The permissions granted to a policy tag and the columns governed by that policy tag are not synced, and can vary by location.
 
-The taxonomy and policy tags can be synced again, to keep them unified across multiple locations. Explicit replication of a taxonomy is accomplished by a call to the [Data Catalog](https://docs.cloud.google.com/data-catalog/docs) API. Future syncs of the replicated taxonomy use the same API command, which overwrites the previous taxonomy.
+The taxonomy and policy tags can be synced again, to keep them unified across multiple locations. Explicit replication of a taxonomy is accomplished by a call to the [Data Catalog API](https://docs.cloud.google.com/data-catalog/docs/reference/rest) . Future syncs of the replicated taxonomy use the same API command, which overwrites the previous taxonomy.
 
 To facilitate syncing of the taxonomy, you can use [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs) to periodically perform a sync of the taxonomy across regions, either on a set schedule or with a manual button push. To use Cloud Scheduler, you need to set up a service account.
 

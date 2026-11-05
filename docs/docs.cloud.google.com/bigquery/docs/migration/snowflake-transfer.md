@@ -226,7 +226,7 @@ Select one of the following options:
 
 7.  In the **Storage Configuration** section, do the following:
 
-    1.  For **Storage integration object name** , enter the name of the Snowflake storage integration object.
+    1.  For **Storage integration object name** , enter the name of the Snowflake storage integration object. This is a required field unless you are specifying a pre-configured Snowflake external stage using the `bq mk` command or the API to create the transfer configuration.
 
     2.  Optional: For **Max file size** , specify the maximum size of each file unloaded from Snowflake to the staging location (in MB).
 

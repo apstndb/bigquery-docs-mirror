@@ -10,9 +10,9 @@ data_source: docs.cloud.google.com
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-A *capacity commitment* is a purchase of BigQuery compute capacity for some minimum duration of time. Purchasing a capacity commitment is optional when creating a reservation with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , but can provide cost savings.
+BigQuery capacity commitments let you purchase dedicated compute capacity ( [slots](https://docs.cloud.google.com/bigquery/docs/slots) ) for a minimum duration to save on costs when using an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-Commitments are a regional resource. Commitments purchased in one region or multi-region cannot be used in any other regions or multi-regions. Commitments cannot be moved between regions or between regions and multi-regions. Commitments cannot be moved between projects.
+This document explains how to purchase and view capacity commitments, and manage commitment expiration. It also covers how to renew, convert, split, merge, or upgrade commitments, control commitment creation with IAM deny policies, and troubleshoot pending slots. For conceptual details, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
 ## Enable the Reservations API
 

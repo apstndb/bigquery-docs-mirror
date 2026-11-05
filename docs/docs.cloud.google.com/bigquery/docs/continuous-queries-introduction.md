@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to continuous queries
 
-This document describes BigQuery continuous queries.
+BigQuery continuous queries are SQL statements that run continuously to let you analyze incoming data in BigQuery in real time. You can use continuous queries for time-sensitive tasks such as generating immediate insights, applying real-time machine learning (ML) inference, and replicating data to other platforms. This capability lets you use BigQuery as an event-driven data processing engine for decision logic in your applications.
 
-BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time. You can write or export the output rows produced by a continuous query to the following destinations:
+## Supported destinations and data sources
+
+You can write or export the output rows produced by a continuous query to the following destinations:
 
 - BigQuery tables
 - [Apache Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery)
@@ -31,8 +33,6 @@ Continuous queries can process data that has been written to [standard BigQuery 
 - Writes from [Dataflow to BigQuery](https://docs.cloud.google.com/dataflow/docs/guides/write-to-bigquery)
 - Writes from Datastream to BigQuery using [append-only write mode](https://docs.cloud.google.com/datastream/docs/destination-bigquery#append-only_write_mode)
 
-You can use continuous queries to perform time-sensitive tasks, such as creating and immediately acting on insights, applying real-time machine learning (ML) inference, and replicating data into other platforms. This lets you use BigQuery as an event-driven data processing engine for your application's decision logic.
-
 The following diagram shows common continuous query workflows:
 
 ![Diagram illustrating common BigQuery continuous query workflows, including data ingestion, processing, and export to destinations like Bigtable and Pub/Sub.](https://docs.cloud.google.com/static/bigquery/images/continuous-queries.png)
@@ -44,7 +44,7 @@ Common use cases where you might want to use continuous queries are as follows:
 - **Personalized customer interaction services** : use generative AI to create tailored messages customized for each customer interaction.
 - **Anomaly detection** : build solutions that let you perform anomaly and threat detection on complex data in real time, so that you can react to issues more quickly.
 - **Customizable event-driven pipelines** : use continuous query integration with Pub/Sub to trigger downstream applications based on incoming data.
-- **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions and ML models.
+- **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions, SQL user-defined functions (UDFs), and ML models.
 - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable, Spanner, or Apache Iceberg managed tables for application serving.
 - **Autonomous agent triggering** : trigger agentic data pipelines in real-time based on complex events detected in live data streams. For an example, refer to the [Build an Event-Driven Data Agent with BigQuery and Agent Development Kit (ADK) codelab](https://codelabs.developers.google.com/bigquery-adk-event-driven-agents) .
 - **Autonomous agent monitoring** : develop real-time automated monitoring and alerting for real-time agentic interactions using the [BigQuery agent analytics plugin](https://adk.dev/integrations/bigquery-agent-analytics/) , which streams all agent trace data, tool usage, and operational logs directly into BigQuery for deep observability into your AI workforce.
@@ -85,6 +85,8 @@ The following operations are supported in continuous queries:
 - Analyzing and processing `JSON` data, including support for [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) and [JSON unnesting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator) .
 
 - Using stateless GoogleSQL functions—for example, [conversion functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions) . In stateless functions, each row is processed independently from other rows in the table.
+
+- Calling persistent or temporary [SQL UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) , as long as the underlying SQL expression of the UDF is valid in a continuous query.
 
 - Using [stateful operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_stateful_operations) —for example [`JOIN` s, aggregations, and window aggregations](https://docs.cloud.google.com/bigquery/docs/continuous-queries#join-agg-window-example) . In stateful operations, the state of ingested data is retained across multiple rows or time intervals in order to compute an accurate result.
 
@@ -140,13 +142,13 @@ Continuous queries are subject to the following limitations:
 
   - [Recursive CTEs](https://docs.cloud.google.com/bigquery/docs/recursive-ctes)
 
-  - [User-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions)
+  - Non-SQL [user-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) , such as [JavaScript UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#javascript-udf-structure) , [Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) , [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) , and [user-defined aggregate functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) . Only [SQL UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) are supported, and the UDF's SQL expression is subject to all continuous query limitations.
 
   - [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls)
 
   - BigQuery ML functions other than those listed in [Supported functionality](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_functionality)
 
-  - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
+  - [Data definition language (DDL) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) , except for `CREATE TEMP FUNCTION` when defining a temporary SQL UDF.
 
   - [Data manipulation language (DML) statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) except for `INSERT` .
 
@@ -165,7 +167,7 @@ Continuous queries are subject to the following limitations:
   - [Wildcard tables](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
   - [Change Data Capture (CDC) upsert](https://docs.cloud.google.com/bigquery/docs/change-data-capture) data.
   - [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
-  - [Views](https://docs.cloud.google.com/bigquery/docs/views) where the underlying SQL query uses unsupported features, such as user-defined functions, external tables, or CDC-enabled tables.
+  - [Views](https://docs.cloud.google.com/bigquery/docs/views) where the underlying SQL query uses unsupported features, such as non-SQL user-defined functions, external tables, or CDC-enabled tables.
 
 - Continuous queries don't support the [column-](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) security features.
 
@@ -176,6 +178,8 @@ Continuous queries are subject to the following limitations:
 - You can't run a continuous query from a [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .
 
 - You can't modify the SQL used in a continuous query while the continuous query job is running. For more information, see [Modify the SQL of a continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries#modify_the_sql_of_a_continuous_query) .
+
+- If you update or delete a persistent [SQL UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure) while a continuous query that references it is running, BigQuery terminates the continuous query job. To apply an updated UDF definition, start a new continuous query from the point in time at which the previous job stopped. For more information, see [Use SQL UDFs](https://docs.cloud.google.com/bigquery/docs/continuous-queries#use-sql-udfs) .
 
 - If a continuous query job falls behind in processing incoming data and has an [output watermark lag](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) of more than 48 hours, then it fails. You can run the query again and use the [`APPENDS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) or [`CHANGES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes) change history function to resume processing from the point in time at which you stopped the previous continuous query job. For more information, see [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
 

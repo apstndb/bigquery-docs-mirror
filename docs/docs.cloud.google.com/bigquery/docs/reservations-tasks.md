@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-Reservations allow you to assign a dedicated number of slots to a workload. For example, you might not want a production workload to compete with test workloads for slots. You could create a reservation named `prod` and assign your production workloads to this reservation. For more information, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
+This document explains how to create, update, and delete dedicated and predictable reservations. It also covers how to enable reservation-based fairness and BigQuery fluid scaling, configure and prioritize idle slots with reservation groups, and control access to reservations. For conceptual details, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
 ## Create reservations
 

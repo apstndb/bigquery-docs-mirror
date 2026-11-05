@@ -40,7 +40,7 @@ Use policy tags to selectively obscure sensitive data.
 
 2.  If you are creating a data policy that references a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) , create the associated masking UDF so that it is available in the following steps.
 
-> **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and cataloging features are deprecated and transitioning to Knowledge Catalog, the specific Data Catalog API functionality for policy tags isn't deprecated.
+> **Note:** The `datacatalog.googleapis.com` API must remain enabled to create and manage the Data Catalog policy tags and taxonomies used for data masking and column-level security. Although Data Catalog metadata search and catalog features are deprecated and transitioning to Knowledge Catalog, the Policy Tag Manager service (taxonomies and policy tags), its `datacatalog.googleapis.com` API methods and audit logs, and the `roles/datacatalog` Identity and Access Management (IAM) roles aren't deprecated.
 
 ### Create taxonomies
 

@@ -38,7 +38,7 @@ Make sure that Gemini in BigQuery is enabled for your Google Cloud project. For 
 
 ### Enable the required APIs
 
-> **Note:** If you don't have permission to enable the APIs, ask your project administrator to enable the APIs for you from the [APIs & Services dashboard](https://console.cloud.google.com/apis/dashboard) . Alternatively, your project administrator can grant you the [Service Usage Admin ( `roles/serviceusage.serviceUsageAdmin` )](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) role, which lets you manage APIs for the current project.
+> **Note:** If you don't have permission to enable the APIs, ask your project administrator to enable the APIs for you from the [APIs & Services dashboard](https://console.cloud.google.com/apis/dashboard) . Alternatively, your project administrator can grant you the [Service Usage Admin ( `roles/serviceusage.serviceUsageAdmin` )](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role, which lets you manage APIs for the current project.
 
 ### console
 

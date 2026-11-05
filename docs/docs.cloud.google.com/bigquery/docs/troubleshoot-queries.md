@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Troubleshoot query issues
 
-This document is intended to help you troubleshoot common issues related to running queries, such as identifying reasons for slow queries, or providing resolution steps for common errors returned by failed queries.
+When you run queries in BigQuery, you might encounter slow execution times, resource quota errors, or failed query jobs. You can diagnose and resolve these common query issues by inspecting query execution details, using automated diagnostic tools, and applying targeted fixes.
 
 ## Troubleshoot slow queries
 

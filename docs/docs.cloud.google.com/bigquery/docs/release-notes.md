@@ -16,6 +16,10 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 ## November 03, 2026
 
+Feature
+
+You can now use persistent and temporary [SQL user-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#continuous-queries) in [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries#use-sql-udfs) to encapsulate and reuse custom real-time transformation logic. Only SQL UDFs are supported in continuous queries.
+
 Change
 
 In [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#studio-overview) , the left pane has been updated with new tab names. The **Classic Explorer** tab has been renamed to the **Data** tab, and the **Repository** tab has been renamed to the **Source control** tab. The **Data** tab now includes the **Add data** button and focuses on data hierarchies. These changes are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).

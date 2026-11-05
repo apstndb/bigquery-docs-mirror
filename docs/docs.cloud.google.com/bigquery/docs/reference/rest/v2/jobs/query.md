@@ -93,6 +93,7 @@ If successful, the response body contains data with the following structure:
     object (DmlStats)
   },
   "pageRowCount": string,
+  "statementType": string,
   "totalBytesBilled": string,
   "totalSlotMs": string,
   "creationTime": string,
@@ -115,36 +116,248 @@ If successful, the response body contains data with the following structure:
 }
 ```
 
-| Fields                                                                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `kind`                                                                                                                                                                                                                                                                                                         | `string` The resource type.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `schema`                                                                                                                                                                                                                                                                                                       | `object ( `[`TableSchema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema)` )` The schema of the results. Present only when the query completes successfully.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `jobReference`                                                                                                                                                                                                                                                                                                 | `object ( `[`JobReference`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference)` )` Reference to the Job that was created to run the query. This field will be present even if the original request timed out, in which case jobs.getQueryResults can be used to read the results once the query has completed. Since this API only returns the first page of results, subsequent pages can be fetched via the same mechanism (jobs.getQueryResults). If jobCreationMode was set to `JOB_CREATION_OPTIONAL` and the query completes without creating a job, this field will be empty. |
-| `jobCreationReason`                                                                                                                                                                                                                                                                                            | `object ( `[`JobCreationReason`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobCreationReason)` )` Optional. The reason why a Job was created. Only relevant when a jobReference is present in the response. If jobReference is not present it will always be unset.                                                                                                                                                                                                                                                                                                                       |
-| `queryId`                                                                                                                                                                                                                                                                                                      | `string` Auto-generated ID for the query.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `location`                                                                                                                                                                                                                                                                                                     | `string` Output only. The geographic location of the query. For more information about BigQuery locations, see: <https://cloud.google.com/bigquery/docs/locations>                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `totalRows`                                                                                                                                                                                                                                                                                                    | `string ( `[`UInt64Value`](https://developers.google.com/discovery/v1/type-format)` format)` The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results.                                                                                                                                                                                                                                                                                                                                                                             |
-| `pageToken`                                                                                                                                                                                                                                                                                                    | `string` A token used for paging results. A non-empty token indicates that additional results are available. To see additional results, query the [`jobs.getQueryResults`](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults) method. For more information, see [Paging through table data](https://cloud.google.com/bigquery/docs/paging-results) .                                                                                                                                                                                                                              |
-| `rows[]`                                                                                                                                                                                                                                                                                                       | `object ( `[`Struct`](https://protobuf.dev/reference/protobuf/google.protobuf/#struct)` format)` An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call jobs.getQueryResults and specify the jobReference returned above.                                                                                                                                                                                                                                                                                                       |
-| `totalBytesProcessed`                                                                                                                                                                                                                                                                                          | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` The total number of bytes processed for this query. If this query was a dry run, this is the number of bytes that would be processed if the query were run.                                                                                                                                                                                                                                                                                                                                                       |
-| `jobComplete`                                                                                                                                                                                                                                                                                                  | `boolean` Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `errors[]`                                                                                                                                                                                                                                                                                                     | `object ( `[`ErrorProto`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto)` )` Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see [Error messages](https://cloud.google.com/bigquery/docs/error-messages) .                                                                                                                    |
-| `cacheHit`                                                                                                                                                                                                                                                                                                     | `boolean` Whether the query result was fetched from the query cache.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `numDmlAffectedRows`                                                                                                                                                                                                                                                                                           | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.                                                                                                                                                                                                                                                                                                                                                                                            |
-| `sessionInfo`                                                                                                                                                                                                                                                                                                  | `object ( `[`SessionInfo`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/SessionInfo)` )` Output only. Information of the session if this job is part of one.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `dmlStats`                                                                                                                                                                                                                                                                                                     | `object ( `[`DmlStats`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats)` )` Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `pageRowCount`                                                                                                                                                                                                                                                                                                 | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. The number of rows out of `totalRows` returned in this response. [Preview](https://cloud.google.com/products/#product-launch-stages)                                                                                                                                                                                                                                                                                                                                                                      |
-| `totalBytesBilled`                                                                                                                                                                                                                                                                                             | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.                                                                                                                                                                                                                                                        |
-| `totalSlotMs`                                                                                                                                                                                                                                                                                                  | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of slot ms the user is actually billed for.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `creationTime`                                                                                                                                                                                                                                                                                                 | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Creation time of this query, in milliseconds since the epoch. This field will be present on all queries.                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `startTime`                                                                                                                                                                                                                                                                                                    | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Start time of this query, in milliseconds since the epoch. This field will be present when the query job transitions from the PENDING state to either RUNNING or DONE.                                                                                                                                                                                                                                                                                                                                    |
-| `endTime`                                                                                                                                                                                                                                                                                                      | `string ( `[`int64`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. End time of this query, in milliseconds since the epoch. This field will be present whenever a query job is in the DONE state.                                                                                                                                                                                                                                                                                                                                                                            |
-| The schema if `query_results_format` has been specified with value other than default `STRUCT_ENCODING` . [Preview](https://cloud.google.com/products/#product-launch-stages) The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `arrowSchema`                                                                                                                                                                                                                                                                                                  | `object ( `[`ArrowSchema`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#ArrowSchema)` )` Output only. Arrow schema                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| End of mutually exclusive fields.                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Row data is returned in format when `query_results_format` has been specified with value other than default `STRUCT_ENCODING` . [Preview](https://cloud.google.com/products/#product-launch-stages) The following is a list of mutually exclusive fields. At most one of the fields will be set in a response: |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `arrowRecordBatch`                                                                                                                                                                                                                                                                                             | `object ( `[`ArrowRecordBatch`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#ArrowRecordBatch)` )` Output only. Serialized row data in Arrow RecordBatch format.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| End of mutually exclusive fields.                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fields</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>kind</code></td>
+<td><p><code>string</code></p>
+<p>The resource type.</p></td>
+</tr>
+<tr class="even">
+<td><code>schema</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema"><code>TableSchema</code></a><code> )</code></p>
+<p>The schema of the results. Present only when the query completes successfully.</p></td>
+</tr>
+<tr class="odd">
+<td><code>jobReference</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference"><code>JobReference</code></a><code> )</code></p>
+<p>Reference to the Job that was created to run the query. This field will be present even if the original request timed out, in which case jobs.getQueryResults can be used to read the results once the query has completed. Since this API only returns the first page of results, subsequent pages can be fetched via the same mechanism (jobs.getQueryResults).</p>
+<p>If jobCreationMode was set to <code>JOB_CREATION_OPTIONAL</code> and the query completes without creating a job, this field will be empty.</p></td>
+</tr>
+<tr class="even">
+<td><code>jobCreationReason</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobCreationReason"><code>JobCreationReason</code></a><code> )</code></p>
+<p>Optional. The reason why a Job was created.</p>
+<p>Only relevant when a jobReference is present in the response. If jobReference is not present it will always be unset.</p></td>
+</tr>
+<tr class="odd">
+<td><code>queryId</code></td>
+<td><p><code>string</code></p>
+<p>Auto-generated ID for the query.</p></td>
+</tr>
+<tr class="even">
+<td><code>location</code></td>
+<td><p><code>string</code></p>
+<p>Output only. The geographic location of the query.</p>
+<p>For more information about BigQuery locations, see: <a href="https://cloud.google.com/bigquery/docs/locations">https://cloud.google.com/bigquery/docs/locations</a></p></td>
+</tr>
+<tr class="odd">
+<td><code>totalRows</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>UInt64Value</code></a><code> format)</code></p>
+<p>The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results.</p></td>
+</tr>
+<tr class="even">
+<td><code>pageToken</code></td>
+<td><p><code>string</code></p>
+<p>A token used for paging results. A non-empty token indicates that additional results are available. To see additional results, query the <a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults"><code>jobs.getQueryResults</code></a> method. For more information, see <a href="https://cloud.google.com/bigquery/docs/paging-results">Paging through table data</a> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>rows[]</code></td>
+<td><p><code>object ( </code><a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct"><code>Struct</code></a><code> format)</code></p>
+<p>An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call jobs.getQueryResults and specify the jobReference returned above.</p></td>
+</tr>
+<tr class="even">
+<td><code>totalBytesProcessed</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>Int64Value</code></a><code> format)</code></p>
+<p>The total number of bytes processed for this query. If this query was a dry run, this is the number of bytes that would be processed if the query were run.</p></td>
+</tr>
+<tr class="odd">
+<td><code>jobComplete</code></td>
+<td><p><code>boolean</code></p>
+<p>Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.</p></td>
+</tr>
+<tr class="even">
+<td><code>errors[]</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto"><code>ErrorProto</code></a><code> )</code></p>
+<p>Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see <a href="https://cloud.google.com/bigquery/docs/error-messages">Error messages</a> .</p></td>
+</tr>
+<tr class="odd">
+<td><code>cacheHit</code></td>
+<td><p><code>boolean</code></p>
+<p>Whether the query result was fetched from the query cache.</p></td>
+</tr>
+<tr class="even">
+<td><code>numDmlAffectedRows</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>Int64Value</code></a><code> format)</code></p>
+<p>Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.</p></td>
+</tr>
+<tr class="odd">
+<td><code>sessionInfo</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/SessionInfo"><code>SessionInfo</code></a><code> )</code></p>
+<p>Output only. Information of the session if this job is part of one.</p></td>
+</tr>
+<tr class="even">
+<td><code>dmlStats</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats"><code>DmlStats</code></a><code> )</code></p>
+<p>Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE.</p></td>
+</tr>
+<tr class="odd">
+<td><code>pageRowCount</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. The number of rows out of <code>totalRows</code> returned in this response.</p>
+<p><a href="https://cloud.google.com/products/#product-launch-stages">Preview</a></p></td>
+</tr>
+<tr class="even">
+<td><code>statementType</code></td>
+<td><p><code>string</code></p>
+<p>Output only. The type of query statement, if valid. Possible values:</p>
+<ul>
+<li><code>SELECT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list"><code>SELECT</code></a> statement.</li>
+<li><code>ASSERT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements#assert"><code>ASSERT</code></a> statement.</li>
+<li><code>INSERT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement"><code>INSERT</code></a> statement.</li>
+<li><code>UPDATE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement"><code>UPDATE</code></a> statement.</li>
+<li><code>DELETE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language"><code>DELETE</code></a> statement.</li>
+<li><code>MERGE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language"><code>MERGE</code></a> statement.</li>
+<li><code>TRUNCATE_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement"><code>TRUNCATE TABLE</code></a> statement.</li>
+<li><code>CREATE_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement"><code>CREATE TABLE</code></a> statement, without <code>AS SELECT</code> .</li>
+<li><code>CREATE_TABLE_AS_SELECT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement"><code>CREATE TABLE AS SELECT</code></a> statement.</li>
+<li><code>CREATE_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement"><code>CREATE VIEW</code></a> statement.</li>
+<li><code>CREATE_MODEL</code> : <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_statement"><code>CREATE MODEL</code></a> statement.</li>
+<li><code>CREATE_MATERIALIZED_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement"><code>CREATE MATERIALIZED VIEW</code></a> statement.</li>
+<li><code>CREATE_FUNCTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement"><code>CREATE FUNCTION</code></a> statement.</li>
+<li><code>CREATE_TABLE_FUNCTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement"><code>CREATE TABLE FUNCTION</code></a> statement.</li>
+<li><code>CREATE_PROCEDURE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure"><code>CREATE PROCEDURE</code></a> statement.</li>
+<li><code>CREATE_ROW_ACCESS_POLICY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement"><code>CREATE ROW ACCESS POLICY</code></a> statement.</li>
+<li><code>CREATE_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement"><code>CREATE SCHEMA</code></a> statement.</li>
+<li><code>CREATE_EXTERNAL_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_schema_statement"><code>CREATE EXTERNAL SCHEMA</code></a> statement.</li>
+<li><code>CREATE_EXTERNAL_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement"><code>CREATE EXTERNAL TABLE</code></a> statement.</li>
+<li><code>CREATE_SNAPSHOT_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement"><code>CREATE SNAPSHOT TABLE</code></a> statement.</li>
+<li><code>CREATE_SEARCH_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement"><code>CREATE SEARCH INDEX</code></a> statement.</li>
+<li><code>CREATE_VECTOR_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement"><code>CREATE VECTOR INDEX</code></a> statement.</li>
+<li><code>CREATE_CONNECTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement"><code>CREATE CONNECTION</code></a> statement.</li>
+<li><code>CREATE_DATA_POLICY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_data_policy_statement"><code>CREATE DATA_POLICY</code></a> statement.</li>
+<li><code>CREATE_PROPERTY_GRAPH</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph"><code>CREATE PROPERTY GRAPH</code></a> statement.</li>
+<li><code>CREATE_CAPACITY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement"><code>CREATE CAPACITY</code></a> statement.</li>
+<li><code>CREATE_RESERVATION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_reservation_statement"><code>CREATE RESERVATION</code></a> statement.</li>
+<li><code>CREATE_ASSIGNMENT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_assignment_statement"><code>CREATE ASSIGNMENT</code></a> statement.</li>
+<li><code>DROP_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement"><code>DROP TABLE</code></a> statement.</li>
+<li><code>DROP_EXTERNAL_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_external_table_statement"><code>DROP EXTERNAL TABLE</code></a> statement.</li>
+<li><code>DROP_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement"><code>DROP VIEW</code></a> statement.</li>
+<li><code>DROP_MODEL</code> : <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-drop-model"><code>DROP MODEL</code></a> statement.</li>
+<li><code>DROP_MATERIALIZED_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement"><code>DROP MATERIALIZED VIEW</code></a> statement.</li>
+<li><code>DROP_FUNCTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement"><code>DROP FUNCTION</code></a> statement.</li>
+<li><code>DROP_TABLE_FUNCTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function"><code>DROP TABLE FUNCTION</code></a> statement.</li>
+<li><code>DROP_PROCEDURE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement"><code>DROP PROCEDURE</code></a> statement.</li>
+<li><code>DROP_SEARCH_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index"><code>DROP SEARCH INDEX</code></a> statement.</li>
+<li><code>DROP_VECTOR_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_vector_index"><code>DROP VECTOR INDEX</code></a> statement.</li>
+<li><code>DROP_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement"><code>DROP SCHEMA</code></a> statement.</li>
+<li><code>UNDROP_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#undrop_schema_statement"><code>UNDROP SCHEMA</code></a> statement.</li>
+<li><code>DROP_SNAPSHOT_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement"><code>DROP SNAPSHOT TABLE</code></a> statement.</li>
+<li><code>DROP_ROW_ACCESS_POLICY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement"><code>DROP [ALL] ROW ACCESS POLICY|POLICIES</code></a> statement.</li>
+<li><code>DROP_CONNECTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_connection_statement"><code>DROP CONNECTION</code></a> statement.</li>
+<li><code>DROP_DATA_POLICY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_data_policy"><code>DROP DATA_POLICY</code></a> statement.</li>
+<li><code>DROP_PROPERTY_GRAPH</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_drop_graph"><code>DROP PROPERTY GRAPH</code></a> statement.</li>
+<li><code>DROP_CAPACITY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_capacity_statement"><code>DROP CAPACITY</code></a> statement.</li>
+<li><code>DROP_RESERVATION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_reservation_statement"><code>DROP RESERVATION</code></a> statement.</li>
+<li><code>DROP_ASSIGNMENT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_assignment_statement"><code>DROP ASSIGNMENT</code></a> statement.</li>
+<li><code>ALTER_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement"><code>ALTER TABLE</code></a> statement.</li>
+<li><code>ALTER_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement"><code>ALTER VIEW</code></a> statement.</li>
+<li><code>ALTER_MATERIALIZED_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement"><code>ALTER MATERIALIZED VIEW</code></a> statement.</li>
+<li><code>ALTER_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement"><code>ALTER SCHEMA</code></a> statement.</li>
+<li><code>ALTER_MODEL</code> : <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-alter-model"><code>ALTER MODEL</code></a> statement.</li>
+<li><code>ALTER_SEARCH_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_search_index_statement"><code>ALTER SEARCH INDEX</code></a> statement.</li>
+<li><code>ALTER_VECTOR_INDEX</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_vector_index_rebuild_statement"><code>ALTER VECTOR INDEX</code></a> statement.</li>
+<li><code>ALTER_CONNECTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_connection_set_options_statement"><code>ALTER CONNECTION</code></a> statement.</li>
+<li><code>ALTER_DATA_POLICY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_data_policy_statement"><code>ALTER DATA_POLICY</code></a> statement.</li>
+<li><code>ALTER_PROJECT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement"><code>ALTER PROJECT</code></a> statement.</li>
+<li><code>ALTER_ORGANIZATION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement"><code>ALTER ORGANIZATION</code></a> statement.</li>
+<li><code>ALTER_BI_CAPACITY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_bi_capacity_set_options_statement"><code>ALTER BI_CAPACITY</code></a> statement.</li>
+<li><code>ALTER_CAPACITY</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_capacity_set_options_statement"><code>ALTER CAPACITY</code></a> statement.</li>
+<li><code>ALTER_RESERVATION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement"><code>ALTER RESERVATION</code></a> statement.</li>
+<li><code>SCRIPT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language"><code>SCRIPT</code></a> statement.</li>
+<li><code>CALL</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call"><code>CALL</code></a> statement.</li>
+<li><code>BEGIN_TRANSACTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#begin_transaction"><code>BEGIN TRANSACTION</code></a> statement.</li>
+<li><code>COMMIT_TRANSACTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#commit_transaction"><code>COMMIT TRANSACTION</code></a> statement.</li>
+<li><code>ROLLBACK_TRANSACTION</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction"><code>ROLLBACK TRANSACTION</code></a> statement.</li>
+<li><code>EXPORT_DATA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement"><code>EXPORT DATA</code></a> statement.</li>
+<li><code>EXPORT_MODEL</code> : <a href="https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-export-model"><code>EXPORT MODEL</code></a> statement.</li>
+<li><code>EXPORT_METADATA</code> : <a href="https://cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery"><code>EXPORT TABLE METADATA</code></a> statement, for BigLake Iceberg tables.</li>
+<li><code>LOAD_DATA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_data_statement"><code>LOAD DATA</code></a> statement.</li>
+<li><code>GRANT_ON_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement"><code>GRANT ... ON SCHEMA</code></a> statement.</li>
+<li><code>GRANT_ON_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement"><code>GRANT ... ON TABLE</code></a> statement. Also used for <code>GRANT ... ON EXTERNAL TABLE</code> .</li>
+<li><code>GRANT_ON_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement"><code>GRANT ... ON VIEW</code></a> statement.</li>
+<li><code>GRANT_ON_PROJECT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement"><code>GRANT ... ON PROJECT</code></a> statement.</li>
+<li><code>REVOKE_ON_SCHEMA</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement"><code>REVOKE ... ON SCHEMA</code></a> statement.</li>
+<li><code>REVOKE_ON_TABLE</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement"><code>REVOKE ... ON TABLE</code></a> statement. Also used for <code>REVOKE ... ON EXTERNAL TABLE</code> .</li>
+<li><code>REVOKE_ON_VIEW</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement"><code>REVOKE ... ON VIEW</code></a> statement.</li>
+<li><code>REVOKE_ON_PROJECT</code> : <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#revoke_statement"><code>REVOKE ... ON PROJECT</code></a> statement.</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td><code>totalBytesBilled</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.</p></td>
+</tr>
+<tr class="even">
+<td><code>totalSlotMs</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. Number of slot ms the user is actually billed for.</p></td>
+</tr>
+<tr class="odd">
+<td><code>creationTime</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. Creation time of this query, in milliseconds since the epoch. This field will be present on all queries.</p></td>
+</tr>
+<tr class="even">
+<td><code>startTime</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. Start time of this query, in milliseconds since the epoch. This field will be present when the query job transitions from the PENDING state to either RUNNING or DONE.</p></td>
+</tr>
+<tr class="odd">
+<td><code>endTime</code></td>
+<td><p><code>string ( </code><a href="https://developers.google.com/discovery/v1/type-format"><code>int64</code></a><code> format)</code></p>
+<p>Output only. End time of this query, in milliseconds since the epoch. This field will be present whenever a query job is in the DONE state.</p></td>
+</tr>
+<tr class="even">
+<td><p>The schema if <code>query_results_format</code> has been specified with value other than default <code>STRUCT_ENCODING</code> .</p>
+<p><a href="https://cloud.google.com/products/#product-launch-stages">Preview</a> The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:</p></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>arrowSchema</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#ArrowSchema"><code>ArrowSchema</code></a><code> )</code></p>
+<p>Output only. Arrow schema</p></td>
+</tr>
+<tr class="even">
+<td>End of mutually exclusive fields.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><p>Row data is returned in format when <code>query_results_format</code> has been specified with value other than default <code>STRUCT_ENCODING</code> .</p>
+<p><a href="https://cloud.google.com/products/#product-launch-stages">Preview</a> The following is a list of mutually exclusive fields. At most one of the fields will be set in a response:</p></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>arrowRecordBatch</code></td>
+<td><p><code>object ( </code><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#ArrowRecordBatch"><code>ArrowRecordBatch</code></a><code> )</code></p>
+<p>Output only. Serialized row data in Arrow RecordBatch format.</p></td>
+</tr>
+<tr class="odd">
+<td>End of mutually exclusive fields.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 ### Authorization scopes
 

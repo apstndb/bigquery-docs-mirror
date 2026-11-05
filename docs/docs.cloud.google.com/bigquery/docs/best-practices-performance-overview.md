@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Introduction to optimizing query performance
 
-This document provides an overview of optimization techniques that can improve query performance in BigQuery. In general, queries that do less work perform better. They run faster and consume fewer resources, which can result in lower costs and fewer failures.
+Optimizing your queries in BigQuery lets you reduce execution time, lower resource consumption, and minimize costs and query failures. In general, queries that do less work run faster and consume fewer compute and storage resources.
 
 ## Query performance
 

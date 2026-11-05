@@ -1075,7 +1075,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 You need the service account ID you copied previously when you configure permissions for the connection. When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
 
-To grant the Cloud resource connection service account access to your projects, grant the service account the [Service usage consumer role](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) in `my_query_project` and the [Cloud Translation API user role](https://docs.cloud.google.com/translate/docs/access-control#cloudtranslate.user) ( `roles/cloudtranslate.user` ) in `my_translate_project` .
+To grant the Cloud resource connection service account access to your projects, grant the service account the [Service usage consumer role](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) in `my_query_project` and the [Cloud Translation API user role](https://docs.cloud.google.com/translate/docs/access-control#cloudtranslate.user) ( `roles/cloudtranslate.user` ) in `my_translate_project` .
 
 ### Console
 
@@ -1105,7 +1105,7 @@ To grant the Cloud resource connection service account access to your projects, 
 
 ### SQL
 
-Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) to grant the [Service usage consumer role](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) to the service account in `my_query_project` :
+Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) to grant the [Service usage consumer role](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` ) to the service account in `my_query_project` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

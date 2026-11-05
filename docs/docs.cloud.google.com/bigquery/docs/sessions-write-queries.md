@@ -8,13 +8,9 @@ data_source: docs.cloud.google.com
 
 # Write queries in sessions
 
-This document describes how to write queries in a BigQuery session. It is intended for users who already have a general understanding of BigQuery [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) and know how to [run queries in a session](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) .
+Writing queries in a BigQuery [session](https://docs.cloud.google.com/bigquery/docs/sessions-intro) lets you store and reuse state across multiple query entries. For example, if you create a temporary table or variable in one query entry, you can reference it in subsequent queries throughout the rest of the session.
 
-A session stores state. State created in a session is maintained and usable throughout the entire session. So, if you create a temporary table in one query entry, you can use that temporary table in other query entries for the rest of the session.
-
-A session includes support for [session variables](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_variables) , [session system variables](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_system_variables) , [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_scripting) , and [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#multi_transactions) .
-
-Before you complete these steps, ensure you have the necessary [permissions](https://docs.cloud.google.com/bigquery/docs/sessions-intro#roles_and_permissions) to work in a session.
+Sessions support [session variables](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_variables) , [session system variables](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_system_variables) , [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#session_scripting) , and [multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#multi_transactions) . Before you complete these steps, make sure that you know how to [run queries in a session](https://docs.cloud.google.com/bigquery/docs/sessions#run-queries) and have the required [permissions](https://docs.cloud.google.com/bigquery/docs/sessions-intro#roles_and_permissions) .
 
 ## Use system variables in a session
 

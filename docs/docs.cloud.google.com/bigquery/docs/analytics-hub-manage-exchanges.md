@@ -30,7 +30,7 @@ To enable the Analytics Hub API, you need the following Identity and Access Mana
 
 The following predefined IAM role includes the permissions that you need to enable the Analytics Hub API:
 
-- [Service Usage Admin](https://docs.cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageAdmin) ( `roles/serviceusage.serviceUsageAdmin` )
+- [Service Usage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) ( `roles/serviceusage.serviceUsageAdmin` )
 
 To enable the Analytics Hub API, select one of the following options:
 

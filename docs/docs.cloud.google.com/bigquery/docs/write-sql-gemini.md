@@ -639,7 +639,7 @@ To generate Gemini Code Assist code in your notebook, do the following:
 
 - To let Gemini Code Assist fetch relevant tables and schemas, turn on [Data Catalog sync](https://docs.cloud.google.com/dataproc-metastore/docs/data-catalog-sync) for Dataproc Metastore instances.
 
-- Make sure your user account has access to Data Catalog to query tables. To do this, assign the [`DataCatalog.Viewer` role](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
+- Make sure your user account has access to Knowledge Catalog to query tables. To do this, grant the [Dataplex Catalog Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogViewer) ( `roles/dataplex.catalogViewer` ).
 
 ## Turn off Gemini query assistant features
 

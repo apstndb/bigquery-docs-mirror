@@ -15,7 +15,7 @@ A VPN and network attachment let you establish a reliable, security-enhanced con
 Ensure that you have the following:
 
 - Access to AWS and Google Cloud accounts with appropriate permissions.
-- Existing [Virtual Private Clouds](https://docs.cloud.google.com/vpc/docs/overview) in both AWS and Google Cloud.
+- Existing [Virtual Private Cloud (VPC) networks](https://docs.cloud.google.com/vpc/docs/overview) in both AWS and Google Cloud.
 
 ## Set up networking on AWS
 
@@ -30,7 +30,7 @@ The setup on Google Cloud requires creating the VPN gateway and VPN tunnels, con
 
 ### Create the VPN gateway
 
-> **Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
+> **Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create an HA VPN gateway instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
 
 1.  In the Google Cloud console, go to the **Cloud VPN gateways** page.
 

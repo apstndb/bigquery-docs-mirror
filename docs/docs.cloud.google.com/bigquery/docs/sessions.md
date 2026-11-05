@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Work with sessions
 
-This document describes how to create, use, terminate, and list your [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
+[Sessions](https://docs.cloud.google.com/bigquery/docs/sessions-intro) in BigQuery let you maintain state—such as temporary tables, temporary functions, and variables—across multiple SQL queries. You can create, run queries in, list, and terminate sessions in the Google Cloud console, the bq command-line tool, or the BigQuery API.
 
-Before you complete these steps, ensure you have the necessary [permissions](https://docs.cloud.google.com/bigquery/docs/sessions-intro#roles_and_permissions) .
+Before you complete these steps, make sure that you have the necessary [permissions](https://docs.cloud.google.com/bigquery/docs/sessions-intro#roles_and_permissions) .
 
 ## Create a session
 

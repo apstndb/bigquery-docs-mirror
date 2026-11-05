@@ -88,7 +88,7 @@ To trace and view a migration lineage on a BigQuery database, do the following:
 
 1.  Grant the account or service account the following roles:
     - [BigQuery Metadata Viewer](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.metadataViewer) ( `roles/bigquery.metadataViewer` )
-    - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `roles/datacatalog.viewer` )
+    - [Dataplex Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogViewer) ( `roles/dataplex.catalogViewer` )
 
 2.  Install the [`dwh-migration-dumper` tool](https://docs.cloud.google.com/bigquery/docs/generate-metadata#install-dumper) .
 

@@ -15,7 +15,7 @@ A site-to-site VPN connection and network attachment let you establish private c
 Ensure you have the following:
 
 - Access to Azure and Google Cloud accounts with appropriate permissions.
-- Existing VPCs in both Azure and Google Cloud.
+- Existing [Virtual Private Cloud (VPC) networks](https://docs.cloud.google.com/vpc/docs/overview) in both Azure and Google Cloud.
 
 ## Set up networking on Google Cloud
 
@@ -37,7 +37,7 @@ For more information, see [Create and manage VPC networks](https://docs.cloud.go
 
 ### Create the VPN gateway
 
-> **Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
+> **Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create an HA VPN gateway instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
 
 1.  In the Google Cloud console, go to the **Cloud VPN gateways** page.
 
@@ -74,7 +74,7 @@ For more information, see [Create a gateway and tunnel](https://docs.cloud.googl
 
 ## Create the Google Cloud network attachment
 
-To attach the network to the Private Service Connect, do the following:
+To attach the network to Private Service Connect, do the following:
 
 1.  In the Google Cloud console, go to the **Private Service Connect** page.
 

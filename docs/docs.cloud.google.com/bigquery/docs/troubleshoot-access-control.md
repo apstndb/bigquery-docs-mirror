@@ -8,7 +8,11 @@ data_source: docs.cloud.google.com
 
 # Troubleshoot access control issues
 
-This document shows you how to troubleshoot security issues with Identity and Access Management (IAM) permissions, column-level access control, and customer-managed encryption keys (CMEK) in BigQuery. IAM permission issues typically result in `Access Denied` errors like the following:
+Use this document to troubleshoot BigQuery security and permission issues, including Identity and Access Management (IAM) permissions, column-level access control, customer-managed encryption keys (CMEK), and policy violations. Access control failures typically produce `Access Denied` or `403 Forbidden` errors when principals run jobs or access resources.
+
+## Common access denied errors
+
+The following are examples of common access denied errors:
 
 - `Access Denied: Project `` PROJECT_ID `` : User does not have bigquery.jobs.create permission in project `` PROJECT_ID `` .`
 - `Access Denied: Project `` PROJECT_ID `` : User does not have bigquery.datasets.get permission on dataset `` DATASET `` .`
@@ -349,6 +353,18 @@ Policy tags and taxonomies are homed within a specific Google Cloud organization
 - Existing column-level access controls might appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
 
 Resolving this issue requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](https://docs.cloud.google.com/support) .
+
+## Troubleshoot data governance tags
+
+The following sections describe how to troubleshoot common issues when controlling access to columns with [data governance tags](https://docs.cloud.google.com/bigquery/docs/tags#data-governance-tags) .
+
+### Incorrectly formatted tag names
+
+When you create tags, you define a short name (for example, `ssn` ). However, when you attach tags to columns in your schema or use them in conditions, the tag key must use the namespaced format ( `PROJECT_ID/TAG_KEY` or `ORGANIZATION_ID/TAG_KEY` ), while the tag value still uses the short name. Supplying only the short name for the tag key produces an `Invalid tagKey` or `Invalid tagValue` error.
+
+### Cross-project policy application
+
+By default, only the data policies of the table's project are evaluated. Policies from other projects don't apply unless a default data policy project is configured at the organization level. For more information about configuring and evaluating cross-project policies, see [Configure a default data policy project](https://docs.cloud.google.com/bigquery/docs/tags#configure-default-data-policy-project) .
 
 ## Troubleshoot customer-managed encryption keys
 

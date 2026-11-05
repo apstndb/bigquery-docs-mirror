@@ -133,12 +133,6 @@ FROM
 
 ## Sync a table for export
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
->
-> For information about access to this release, see the [access request page](https://forms.gle/qoq87WBbnTvmegTN9) .
-
 For full-table copies or automated mirroring without the need for SQL-based transformations, you can sync your BigQuery table directly to AlloyDB. While the `EXPORT DATA` statement lets you use a `SELECT` query to process, alias, or filter data before it is moved, you can use table syncs for a one-for-one migration of a BigQuery table.
 
 Table syncs are available in the following modes:

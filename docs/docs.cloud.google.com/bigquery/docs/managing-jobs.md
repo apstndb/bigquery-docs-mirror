@@ -8,7 +8,9 @@ data_source: docs.cloud.google.com
 
 # Manage jobs
 
-This document describes how to manage jobs in BigQuery, including how to [view job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) , [list jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) , [cancel a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) , [repeat a job](https://docs.cloud.google.com/bigquery/docs/managing-jobs#repeat_jobs) , and [delete job metadata](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) .
+In BigQuery, *jobs* are asynchronous operations that run on your behalf to load, export, query, or copy data.
+
+This document explains how to [view job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) , [list jobs in a project](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) , [cancel running jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) , [delete job metadata](https://docs.cloud.google.com/bigquery/docs/managing-jobs#delete_job_metadata) , and [repeat completed jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs#repeat_jobs) .
 
 To monitor, aggregate, and troubleshoot jobs across your organization, see [Monitor jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) .
 

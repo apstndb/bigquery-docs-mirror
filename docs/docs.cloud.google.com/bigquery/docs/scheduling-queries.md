@@ -768,13 +768,13 @@ def list_transfer_configs(project_id: str, location: str) -> None:
 
 To update a scheduled query, follow these steps:
 
-1.  In the navigation menu, click **Scheduled queries** or **Scheduling** .
+1.  In the navigation menu, click **Pipelines & Connections** and select the **Pipelines** tab. If your navigation menu doesn't have this option, click **Scheduled queries** .
 2.  In the list of scheduled queries, click the name of the query that you want to change.
 3.  On the **Scheduled query details** page that opens, click **Edit** . ![Edit scheduled query details.](https://docs.cloud.google.com/static/bigquery/images/edit-scheduled-query-details.png)
 4.  Optional: Change the query text in the query editing pane.
-5.  Click **Schedule query** and then select **Update scheduled query** .
+5.  Click **File \> Schedule \> Update scheduled query** .
 6.  Optional: Change any other scheduling options for the query.
-7.  Click **Update** .
+7.  Click **Save** .
 
 ### bq
 
@@ -1100,7 +1100,7 @@ After [setting up a scheduled query](https://docs.cloud.google.com/bigquery/docs
 
 ### Console
 
-After clicking **Schedule** to save your scheduled query, you can click the **Scheduled queries** button to see the list of scheduled queries. Click any display name to see the query schedule's details. At the top right of the page, click **Schedule backfill** to specify a historical date range.
+To view the list of scheduled queries after clicking **Save** , go to the main navigation menu for BigQuery, click **Pipelines & Connections** and select the **Pipelines** tab. If your menu doesn't have this option, click **Scheduled queries** . Click any display name to see the query details of the scheduled query. At the top of the page, click **Schedule backfill** to specify a historical date range.
 
 ![Schedule backfill button.](https://docs.cloud.google.com/static/bigquery/images/scheduled-query-manual-run-button-console.png)
 

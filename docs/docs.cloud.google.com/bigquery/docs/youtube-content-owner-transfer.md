@@ -56,7 +56,9 @@ For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/y
 </tr>
 <tr class="even">
 <td>Backfill data availability</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
+<td>During each scheduled transfer run, the YouTube Content Owner connector automatically backfills newly generated or updated reports from up to 60 days prior to the transfer run date. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#automatic-backfills">Automatic backfills</a> .<br />
+<br />
+You can also <a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">run a data backfill</a> to manually retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
 <br />
 YouTube reports containing historical data are available for 30 days from the time that they are generated. (Reports that contain non-historical data are available for 60 days.) For more information, see <a href="https://developers.google.com/youtube/reporting/v1/reports/#historical-data">Historical data</a> .</td>
 </tr>
@@ -73,7 +75,11 @@ A *refresh window* is the number of days that a data transfer retrieves data whe
 
 When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window. For example, if the refresh window is three days and you run the data transfer for the first time, the BigQuery Data Transfer Service retrieves all source data within three days.
 
-To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+This connector [automatically backfills](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#automatic-backfills) delayed or updated reports from the past 60 days. To retrieve other data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can manually initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+
+### Automatic backfills
+
+When YouTube Content Owner reports are delayed or regenerated for a previous date, BigQuery Data Transfer Service automatically backfills the reports. During each scheduled transfer run, BigQuery Data Transfer Service checks for reports that cover dates within the past 60 days and were generated after the previous scheduled transfer run. For each date with newly available reports, BigQuery Data Transfer Service automatically schedules a backfill transfer run to load the updated data into the corresponding table partition. You don't need to manually trigger a backfill when YouTube reports are delayed or updated within this 60 day window.
 
 ## Limitations
 

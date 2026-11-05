@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 The `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` view shows time slices of reservation metadata for each reservation administration project for every minute in real time. Additionally, the `per_second_details` array shows autoscale details for each second.
 
-> **Note:** The view names `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` and `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
+> **Note:** The view names `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` , `INFORMATION_SCHEMA.RESERVATIONS_TIMELINE_BY_PROJECT` , `INFORMATION_SCHEMA.RESERVATION_TIMELINE` , and `INFORMATION_SCHEMA.RESERVATION_TIMELINE_BY_PROJECT` are synonymous and can be used interchangeably.
 
 ## Required permission
 

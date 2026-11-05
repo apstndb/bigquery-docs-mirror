@@ -5381,7 +5381,7 @@ Renames a clone, snapshot, or table.
 
 The `ALTER TABLE RENAME TO` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
-> **Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/catalog-overview) , respectively.
+> **Caution:** Renaming a table deletes all [aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that might be attached to it or its columns in [Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/metadata-overview) .
 
 ### Syntax
 
@@ -5429,7 +5429,7 @@ ALTER TABLE mydataset.mytable RENAME TO mynewtable
 
 ## `ALTER TABLE RENAME COLUMN` statement
 
-> **Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
+> **Caution:** Renaming a column deletes all [Knowledge Catalog aspects](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
 
 Renames one or more columns in an existing table schema.
 

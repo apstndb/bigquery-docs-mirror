@@ -194,6 +194,12 @@ AS (
 
 The `@@session_id` and `@@location` [system variables](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) are supported with SQL UDFs. You can include these system variables anywhere in your function creation statement to return the session ID or location of the current query. All other system variables aren't supported.
 
+### Use SQL UDFs in continuous queries
+
+You can call persistent or temporary SQL UDFs in [BigQuery continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) to encapsulate and reuse custom real-time transformation logic. Only SQL UDFs are supported in continuous queries. JavaScript UDFs, [Python UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python) , [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) , and [user-defined aggregate functions](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) aren't supported.
+
+When you use a SQL UDF in a continuous query, the UDF's SQL expression must adhere to all [continuous query limitations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#limitations) . In addition, if you update or delete a persistent SQL UDF while a continuous query that references it is running, BigQuery terminates the continuous query job. For more information and examples, see [Use SQL UDFs](https://docs.cloud.google.com/bigquery/docs/continuous-queries#use-sql-udfs) .
+
 ## JavaScript UDFs
 
 A JavaScript UDF lets you call code written in JavaScript from a SQL query. JavaScript UDFs typically consume more slot resources as compared to standard SQL queries, decreasing job performance. If the function can be expressed in SQL, it is often more optimal to run the code as a standard SQL query job.
@@ -640,6 +646,7 @@ The following limitations apply to temporary and persistent user-defined functio
 - A JavaScript UDF can time out and prevent your query from completing. Timeouts can be as short as 5 minutes, but can vary depending on several factors, including how much user CPU time your function consumes and how large your inputs and outputs to the JavaScript function are.
 - Bitwise operations in JavaScript handle only the most significant 32 bits.
 - UDFs are subject to certain rate limits and quota limits. For more information, see [UDF limits](https://docs.cloud.google.com/bigquery/quotas#udf_limits) .
+- In [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) , only SQL UDFs are supported. JavaScript UDFs aren't supported in continuous queries. For more information, see [Use SQL UDFs](https://docs.cloud.google.com/bigquery/docs/continuous-queries#use-sql-udfs) .
 
 The following limitations apply to persistent user-defined functions:
 

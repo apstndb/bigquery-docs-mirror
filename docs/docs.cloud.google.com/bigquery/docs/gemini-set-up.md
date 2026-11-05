@@ -16,7 +16,7 @@ To learn more about using Gemini in BigQuery features, see [Gemini in BigQuery p
 
 ## Enable required APIs and grant roles
 
-To use Gemini in BigQuery, you must enable required APIs and grant required Identity and Access Management (IAM) roles. A service administrator or project owner with the [`serviceusage.services.enable` IAM permission](https://docs.cloud.google.com/service-usage/docs/access-control#predefined_roles) usually performs this step. For a list of APIs and services used by BigQuery, see [Manage BigQuery API dependencies](https://docs.cloud.google.com/bigquery/docs/service-dependencies) .
+To use Gemini in BigQuery, you must enable required APIs and grant required Identity and Access Management (IAM) roles. A service administrator or project owner with the [`serviceusage.services.enable` IAM permission](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.services.enable) usually performs this step. For a list of APIs and services used by BigQuery, see [Manage BigQuery API dependencies](https://docs.cloud.google.com/bigquery/docs/service-dependencies) .
 
 1.  In the Google Cloud console, with your project selected, go to the **BigQuery Studio** page.
 

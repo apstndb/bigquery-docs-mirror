@@ -1,28 +1,23 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/output-name-mapping
 uri: https://docs.cloud.google.com/bigquery/docs/output-name-mapping
-title: Map SQL object names for batch translation
-description: Describes how to specify output name mapping rules for use in batch translation.
+title: Map SQL object names for translation
+description: Describes how to specify output name mapping rules for use in SQL translation.
 data_source: docs.cloud.google.com
 ---
 
-# Map SQL object names for batch translation
+# Map SQL object names for translation
 
 > **Preview**
 >
 > This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Object name mapping lets you configure JSON rules to rename SQL objects—such as databases, schemas, tables, and columns during [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to match your BigQuery naming conventions.
+Name mapping lets you map SQL object names in your source files to target names in BigQuery by using a [configuration YAML](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) file. During SQL translation, all references to each source name across your SQL statements update to the target name in the translated output.
 
-Object name mapping using JSON is supported only by the legacy batch API. If you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) or start batch jobs from the Google Cloud console, use [YAML-based object name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
-
-## Overview
-
-Name mapping lets you identify the names of SQL objects in your source files, and specify target names for those objects in BigQuery. You can use some or all of the following components to configure name mapping for an object:
+You can use some or all of the following components to configure name mapping for an object:
 
 - A name mapping rule, composed of:
   - Source [name parts](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#name_parts) that provide the fully qualified name of the object in the source system.
-  - A [type](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#object_types) that identifies the source object's type.
   - Target name parts that provide the name of the object in BigQuery.
 - A [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) name to use with any source objects that don't specify one.
 - A [default schema](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) name to use with any source objects that don't specify one.
@@ -31,47 +26,23 @@ Name mapping lets you identify the names of SQL objects in your source files, an
 
 You provide the values for the source and target object names in a name mapping rule by using a combination of the following name parts:
 
-- **Database** : The top level of the naming hierarchy. Your source platform might use an alternative term for this, for example *project* .
-- **Schema** : The second level of the naming hierarchy. Your source platform might use an alternative term for this, for example *dataset* .
-- **Relation** : The third level of the naming hierarchy. Your source platform might use an alternative term for this, for example *table* .
-- **Attribute** : The lowest level of the naming hierarchy. Your source platform might use an alternative term for this, for example *column* .
+- `Database` : A top-level object in the object hierarchy, for example **`database`** `.schema.relation.attribute` . Your source platform might use an alternative term for this, for example *project* .
+- `Schema` : A second-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *dataset* .
+- `Relation` : A third-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *table* or *view* .
+- `Function` : A third-level object in the object hierarchy representing a user-defined function or stored procedure, for example `create procedure db.test.function1(a int)` .
+- `Attribute` : A fourth-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *column* .
 
-### Object types
-
-You must also specify the type of source object you are renaming in a name mapping rule. The following object types are supported:
-
-- `Database` : A top-level object in the object hierarchy, for example **`database`** `.schema.relation.attribute` . Your source platform might use an alternative term for this, for example *project* . Specifying `database` as the object type changes all references to the source string in both DDL and DML statements.
-- `Schema` : A second-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *dataset* . Specifying `schema` as the object type changes all references to the source string in both DDL and DML statements.
-- `Relation` : A third-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *table* . Specifying `relation` as the object type changes all references to the source string in DDL statements.
-- `Relation alias` : An alias for a third-level object. For example, in the query `SELECT t.field1, t.field2 FROM myTable t;` , `t` is a relation alias. In the query `SELECT field1, field2 FROM schema1.table1` , `table1` is also a relation alias. Specifying `relation alias` as the object type creates aliases for all references to the source string in DML statements. For example, if `tableA` is specified as the target name, the preceding examples are translated as `SELECT tableA.field1, tableA.field2 FROM myTable AS tableA;` and `SELECT tableA.field1, tableA.field2 FROM schema1.table1 AS tableA` , respectively.
-- `Function` : A procedure, for example `create procedure db.test.function1(a int)` . Specifying `function` as the object type changes all references to the source string in both DDL and DML statements.
-- `Attribute` : A fourth-level object in the object hierarchy. Your source platform might use an alternative term for this, for example *column* . Specifying `attribute` as the object type changes all references to the source string in DDL statements.
-- `Attribute alias` : An alias for a fourth-level object. For example, in the query `SELECT field1 FROM myTable;` , `field1` is an attribute alias. Specifying `attribute alias` as the object type changes all references to the source string in DML statements.
-
-#### Required name parts for object types
-
-To describe an object in a name mapping rule, use the name parts identified for each object type in the following table:
-
-| **Type**          | **Source object name** | **Target object name** |                        |                         |                        |                      |                        |                         |
-|-------------------|------------------------|------------------------|------------------------|-------------------------|------------------------|----------------------|------------------------|-------------------------|
-|                   | **Database name part** | **Schema name part**   | **Relation name part** | **Attribute name part** | **Database name part** | **Schema name part** | **Relation name part** | **Attribute name part** |
-| `Database`        | X                      |                        |                        |                         | X                      |                      |                        |                         |
-| `Schema`          | X                      | X                      |                        |                         | X                      | X                    |                        |                         |
-| `Relation`        | X                      | X                      | X                      |                         | X                      | X                    | X                      |                         |
-| `Function`        | X                      | X                      | X                      |                         | X                      | X                    | X                      |                         |
-| `Attribute`       | X                      | X                      | X                      | X                       |                        |                      |                        | X                       |
-| `Attribute alias` | X                      | X                      | X                      | X                       |                        |                      |                        | X                       |
-| `Relation alias`  |                        |                        | X                      |                         |                        |                      | X                      |                         |
+When configuring name mapping rules in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) , you only need to include the target name parts that you want to change. Any omitted target name parts remain unchanged.
 
 ### Default database
 
-If you want to append a BigQuery project name to all translated objects, the easiest thing to do is to specify a default database name when you [create a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) . This works for source files where three-part naming is used, or where four-part naming is used but the highest level object name isn't specified.
+If you want to append a BigQuery project name to all translated objects, the easiest thing to do is to specify a default database name in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#specifying_default_database_and_schema_search_path) . This works for source files where three-part naming is used, or where four-part naming is used but the highest level object name isn't specified.
 
 For example, if you specify the default database name `myproject` , then a source statement like `SELECT * FROM database.table` is translated to `SELECT * FROM myproject.database.table` . If you have objects that already use a database name part, like `SELECT * FROM database.schema.table` , then you have to use a name mapping rule to rename `database.schema.table` to `myproject.schema.table` .
 
 ### Default schema
 
-If you want to fully qualify all object names in the source files that don't use four-part naming, you can provide both a [default database name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and a default schema name when you [create a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) . The default schema name is provided as the first schema name in the schema search path option.
+If you want to fully qualify all object names in the source files that don't use four-part naming, you can provide both a [default database name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and a default schema name in a [configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#specifying_default_database_and_schema_search_path) . The default schema name is provided as the first schema name in the schema search path option.
 
 For example, if you specify the default database name `myproject` and the default schema name `myschema` , then the following source statements:
 
@@ -131,10 +102,6 @@ You can't specify more than one name mapping rule with the same type and source 
 | Relation      | `table1`                     |                              | `table1`   |            |
 | Attribute     | `lname`                      | `last_name`                  | `lname`    | `lastname` |
 
-### Create matching `attribute` and `attribute alias` name mapping rules
-
-When you use an `attribute` type name mapping rule to change an attribute name in DDL statements, you must create an `attribute alias` name mapping rule to change that attribute's name in DML statements as well.
-
 ### Name changes don't cascade
 
 Name changes don't cascade across name rules. For example, if you created a name mapping rule that renames `database1` to `project1` , and another that renames `project1` to `project2` , the translator doesn't map `database1` to `project2` .
@@ -147,7 +114,7 @@ For examples of using name mapping rules with a default database name or a defau
 
 ## Name mapping examples
 
-Use the examples in this section to see how name mapping rules work for common use cases.
+Use the examples in this section to see how name mapping rules work for common use cases. For YAML configuration syntax and examples, see [Output name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) .
 
 ### Change the database name part for fully qualified objects
 
@@ -180,7 +147,7 @@ The following example renames the database name part from `td_project` to `bq_pr
 
 The following example renames database name part `project` to `bq_project` for all object types, and also adds `bq_project` as the database name part for objects that don't specify one.
 
-To do this, you must specify a default database value when configuring the translation job, in addition to specifying name mapping rules. For more information on specifying a default database name, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+To do this, you must specify a default database value in addition to specifying name mapping rules. For more information on specifying a default database name, see [Specifying default database and schema search path](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#specifying_default_database_and_schema_search_path) .
 
 **Default database value**
 
@@ -292,34 +259,9 @@ The following example renames `myschema.mytable` to `mydb.myschema.table1` .
 
 - `CREATE table mydb.myschema.table1(id integer, name string(64));`
 
-### Change a `relation alias` object name
-
-The following example renames all instances of the `relation alias` object `table` to `t` .
-
-**Source and target name parts**
-
-| **Name part** | **Source** | **Target** |
-|---------------|------------|------------|
-| Database      |            |            |
-| Schema        |            |            |
-| Relation      | `table`    | `t`        |
-| Attribute     |            |            |
-
-**Type**
-
-- `relation alias`
-
-**Example input**
-
-- `SELECT table.id, table.name FROM mydb.myschema.mytable table`
-
-**Example output**
-
-- `SELECT t.id, t.name FROM mydb.myschema.mytable AS t`
-
 ### Change a `function` object name
 
-The following example renames `mydb.myschema.myfunction` to `mydb.myschema.function1` .
+The following example renames `mydb.myschema.myprocedure` to `mydb.myschema.procedure1` .
 
 **Source and target name parts**
 
@@ -327,7 +269,7 @@ The following example renames `mydb.myschema.myfunction` to `mydb.myschema.funct
 |---------------|---------------|--------------|
 | Database      | `mydb`        | `mydb`       |
 | Schema        | `myschema`    | `myschema`   |
-| Relation      | `myprocedure` | `procedure1` |
+| Function      | `myprocedure` | `procedure1` |
 | Attribute     |               |              |
 
 **Type**
@@ -364,139 +306,9 @@ The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.
 **Example input**
 
 - `CREATE table mydb.myschema.mytable(myfield int, name varchar(64), revenue int);`
-
-**Example output**
-
-- `CREATE table mydb.myschema.mytable(field1 int, name varchar(64), revenue int);`
-
-### Change an `attribute alias` object name
-
-The following example renames `mydb.myschema.mytable.myfield` to `mydb.myschema.mytable.field1` . Because `attribute alias` objects are at the lowest level of the object hierarchy, this name mapping does not change the name of any other object.
-
-**Source and target name parts**
-
-| **Name part** | **Source** | **Target** |
-|---------------|------------|------------|
-| Database      | `mydb`     |            |
-| Schema        | `myschema` |            |
-| Relation      | `mytable`  |            |
-| Attribute     | `myfield`  | `field1`   |
-
-**Type**
-
-- `attribute alias`
-
-**Example input**
-
 - `SELECT myfield, name FROM mydb.myschema.mytable;`
 
 **Example output**
 
+- `CREATE table mydb.myschema.mytable(field1 int, name varchar(64), revenue int);`
 - `SELECT field1, name FROM mydb.myschema.mytable;`
-
-## JSON file format
-
-If you choose to specify name mapping rules by using a JSON file rather than the Google Cloud console, the JSON file must follow this format:
-
-```
-{
-  "name_map": [
-    {
-      "source": {
-        "type": "string",
-        "database": "string",
-        "schema": "string",
-        "relation": "string",
-        "attribute": "string"
-      },
-      "target": {
-        "database": "string",
-        "schema": "string",
-        "relation": "string",
-        "attribute": "string"
-      }
-    }
-  ]
-}
-```
-
-The file size must be less than 5 MB.
-
-For more information on specifying name mapping rules for a translation job, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
-
-### JSON examples
-
-The following examples show how to specify name mapping rules by using JSON files.
-
-#### Example 1
-
-The name mapping rules in this example make the following object name changes:
-
-- Rename instances of the `project.dataset2.table2` `relation` object to `bq_project.bq_dataset2.bq_table2` .
-- Renames all instances of the `project` `database` object to `bq_project` . For example, `project.mydataset.table2` becomes `bq_project.mydataset.table2` , and `CREATE DATASET project.mydataset` becomes `CREATE DATASET bq_project.mydataset` .
-
-```
-{
-  "name_map": [{
-    "source": {
-      "type": "RELATION",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2"
-    }
-  }, {
-    "source": {
-      "type": "DATABASE",
-      "database": "project"
-    },
-    "target": {
-      "database": "bq_project"
-    }
-  }]
-}
-```
-
-#### Example 2
-
-The name mapping rules in this example make the following object name changes:
-
-- Rename instances of the `project.dataset2.table2.field1` `attribute` object to `bq_project.bq_dataset2.bq_table2.bq_field` in both DDL and DML statements.
-
-```
-{
-  "name_map": [{
-    "source": {
-      "type": "ATTRIBUTE",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2",
-      "attribute": "field1"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2",
-      "attribute": "bq_field"
-    }
-  }, {
-    "source": {
-      "type": "ATTRIBUTE_ALIAS",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2",
-      "attribute": "field1"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2",
-      "attribute": "bq_field"
-    }
-  }]
-}
-```

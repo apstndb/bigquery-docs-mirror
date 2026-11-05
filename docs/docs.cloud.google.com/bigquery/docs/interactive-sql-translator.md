@@ -117,10 +117,10 @@ Follow these steps to translate a query into GoogleSQL:
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-To translate a query from the Google Cloud CLI, use the [`gcloud alpha bq translation translate` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation/translate) :
+To translate a query from the Google Cloud CLI, use the [`gcloud alpha bq migration translate` command](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translate) :
 
 ```
-gcloud alpha bq translation translate \
+gcloud alpha bq migration translate \
   --source-dialect=SOURCE_DIALECT \
   --target-dialect=TARGET_DIALECT \
   --location=LOCATION \
@@ -139,7 +139,7 @@ The command prints the translated query to the gcloud CLI. To write the translat
 To translate a query without creating a file, pipe it through standard input and omit the `--input-file` flag:
 
 ```
-echo 'SELECT 1;' | gcloud alpha bq translation translate \
+echo 'SELECT 1;' | gcloud alpha bq migration translate \
   --source-dialect=teradata \
   --target-dialect=bigquery \
   --location=us
@@ -277,7 +277,7 @@ To specify translation configurations by providing a location to the translation
 
 2.  In the **Translation Configuration Source Location** field, specify the path to the translation configuration files stored in a Cloud Storage folder.
 
-    The BigQuery interactive SQL translator supports metadata ZIP files containing [translation metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) and [object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#json_file_format) . For information on how to upload files to Cloud Storage, see [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
+    The BigQuery interactive SQL translator supports metadata ZIP files containing [translation metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) and [object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) . For information on how to upload files to Cloud Storage, see [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 3.  Click **Save** .
 

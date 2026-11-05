@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Use cached query results
 
-BigQuery writes all query results to a table. The table is either explicitly identified by the user (a destination table), or it is a temporary, cached results table. If you run the exact same query again, BigQuery returns the results from the cached table, if it exists. Temporary, cached results tables are maintained per-user, per-project. Depending on your edition, you might have access to [cached results from other users](https://docs.cloud.google.com/bigquery/docs/cached-results#cross-user-caching) running queries in the same project. There are no storage costs for cached query result tables, but if you write query results to a permanent table, you are charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data.
+BigQuery automatically writes query results to a temporary, cached results table unless you specify a permanent destination table. When you run an identical query again, BigQuery can return the results directly from the cached table to accelerate query execution and avoid additional compute charges.
 
-All query results, including both [interactive and batch queries](https://docs.cloud.google.com/bigquery/docs/running-queries) , are cached in temporary tables for approximately 24 hours with some [exceptions](https://docs.cloud.google.com/bigquery/docs/cached-results#cache-exceptions) .
+Temporary cached results tables are maintained per user and per project for approximately 24 hours for both [interactive and batch queries](https://docs.cloud.google.com/bigquery/docs/running-queries) , with some [exceptions](https://docs.cloud.google.com/bigquery/docs/cached-results#cache-exceptions) . Depending on your edition, you might also have access to [cached results from other users](https://docs.cloud.google.com/bigquery/docs/cached-results#cross-user-caching) in the same project. You aren't charged for storing cached result tables, unlike permanent tables that incur [storage costs](https://cloud.google.com/bigquery/pricing#storage) .
 
 ## Limitations
 

@@ -8,9 +8,11 @@ data_source: docs.cloud.google.com
 
 # Introduction to sessions
 
-This guide describes how to enable, create, and track changes in a BigQuery session. It is intended for users who are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
+A BigQuery session lets you capture your SQL activities and maintain state across multiple queries. Within a session, you can define temporary tables, temporary functions, and variables once and reuse them as you interactively build queries or run multi-statement transactions.
 
-You can capture your SQL activities in a BigQuery session. Temporary tables, temporary functions, and variables can be used throughout the session to interactively build one or more queries. Multiple sessions can be active at the same time and the history for each session is saved. You can view the history of a session for up to 20 days after the session is terminated.
+Multiple sessions can be active at the same time, and BigQuery saves the history of each session for up to 20 days after the session ends. Before you work with sessions, make sure that you are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
+
+## Use cases
 
 Typical uses for a session include the following:
 

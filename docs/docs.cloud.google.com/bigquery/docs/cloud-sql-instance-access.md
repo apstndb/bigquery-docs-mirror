@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access
 uri: https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access
 title: Configure Cloud SQL instance access
-description: Learn how to set up Virtual Private Cloud peering, install a Cloud SQL proxy, and connect to an internal Cloud SQL IP across different projects.
+description: Learn how to set up Virtual Private Cloud peering, install the Cloud SQL Auth Proxy, and connect to an internal Cloud SQL IP across different projects.
 data_source: docs.cloud.google.com
 ---
 
 # Configure Cloud SQL instance access
 
-BigQuery Data Transfer Service lets you transfer data from a private Cloud SQL instance across different Google Cloud projects over an internal IP address. To establish this private connection for the [BigQuery Data Transfer Service MySQL connector](https://docs.cloud.google.com/bigquery/docs/mysql-transfer) or the [BigQuery Data Transfer Service PostgreSQL connector](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer) , you configure Virtual Private Cloud peering, a Cloud SQL proxy, and a network attachment.
+BigQuery Data Transfer Service lets you transfer data from a private Cloud SQL instance across different Google Cloud projects over an internal IP address. To establish this private connection for the [BigQuery Data Transfer Service MySQL connector](https://docs.cloud.google.com/bigquery/docs/mysql-transfer) or the [BigQuery Data Transfer Service PostgreSQL connector](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer) , you configure Virtual Private Cloud peering, a Cloud SQL Auth Proxy, and a network attachment.
 
 ## Architecture overview
 
@@ -26,7 +26,7 @@ Ensure you have the following:
 
 - Access to a Google Cloud project with the BigQuery Data Transfer Service connector and another Google Cloud project with the Cloud SQL instance.
 - An existing MySQL or PostgreSQL database in a Google Cloud project.
-- The appropriate permissions to [create a VPC](https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks) , [create firewall rules](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/configuring-firewall-rules) , and install software.
+- The appropriate permissions to [create a VPC network](https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks) , [create firewall rules](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/configuring-firewall-rules) , and install software.
 - A [virtual machine (VM) instance](https://docs.cloud.google.com/compute/docs/instances/create-start-instance) .
 
 ## Set up VPC peering
@@ -35,7 +35,7 @@ To set up VPC peering, you must create VPC peering from the BigQuery Data Transf
 
 ### Create VPC peering from the BigQuery Data Transfer Service connector project
 
-1.  In the Google Cloud console, go to the **VPC network peering** page for your BigQuery Data Transfer Service connector project.
+1.  In the Google Cloud console, go to the **VPC Network Peering** page for your BigQuery Data Transfer Service connector project.
 
 2.  Click add **Create peering connection** .
 
@@ -55,7 +55,7 @@ To set up VPC peering, you must create VPC peering from the BigQuery Data Transf
 
 To create VPC peering in the Cloud SQL database project to the BigQuery Data Transfer Service project, do the following:
 
-1.  In the Google Cloud console, go to the **VPC Network Peering** page for your BigQuery Data Transfer Service connector project.
+1.  In the Google Cloud console, go to the **VPC Network Peering** page for your Cloud SQL database project.
 
 2.  Click add **Create peering connection** .
 
@@ -85,29 +85,32 @@ If you didn't select import-export routes while configuring the peering connecti
 
 6.  Configure routes and firewall rules for your project with the Cloud SQL instance as you did in the previous steps.
 
-## Set up the Cloud SQL proxy
+## Set up the Cloud SQL Auth Proxy
 
 1.  Use SSH to connect to a virtual machine (VM) instance in the BigQuery Data Transfer Service connector project.
 
-2.  In the terminal, download the Cloud SQL proxy:
+2.  In the terminal, download the Cloud SQL Auth Proxy:
 
     ```
-    wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+    wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.26.2/cloud-sql-proxy.linux.amd64 -O cloud-sql-proxy
     ```
 
-3.  Update the permissions for the downloaded files:
+3.  Update the permissions for the downloaded file:
 
     ```
-    chmod +x cloud_sql_proxy
+    chmod +x cloud-sql-proxy
     ```
 
-4.  Run the Cloud SQL proxy:
+4.  Run the Cloud SQL Auth Proxy:
 
     ```
-    ./cloud_sql_proxy -instances=NAME=tcp:3306 or 5432 &
+    ./cloud-sql-proxy --address 0.0.0.0 --port PORT NAME &
     ```
 
-    Replace `NAME` with the name of your Cloud SQL instance connection.
+    Replace the following:
+
+    - `PORT` : the port number ( `3306` for MySQL or `5432` for PostgreSQL)
+    - `NAME` : the connection name of your Cloud SQL instance
 
 ## Connect to the internal Cloud SQL IP address
 
@@ -136,7 +139,7 @@ To create the network attachment in the BigQuery Data Transfer Service connector
 
 ## Test the connection
 
-1.  Verify that the VM with the Cloud SQL proxy can connect to the Cloud SQL instance:
+1.  Verify that the VM with the Cloud SQL Auth Proxy can connect to the Cloud SQL instance:
 
     ```
     mysql -u USERNAME -p -h IP_ADDRESS
