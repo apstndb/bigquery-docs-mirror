@@ -68,6 +68,8 @@ AI.GENERATE_EMBEDDING(
 
 - `MODEL_NAME` : the name of a remote model over an [Agent Platform text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#google-models) .
 
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
+
   You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
 - `TABLE_NAME` : the name of the BigQuery table that contains a `STRING` column to embed. The text in the column that's named `content` is sent to the model. If your table doesn't have a `content` column, use a `SELECT` statement for this argument to provide an alias for an existing table column. An error occurs if no `content` column exists.
@@ -145,6 +147,8 @@ AI.GENERATE_EMBEDDING(
 - `DATASET` : the BigQuery dataset that contains the resource.
 
 - `MODEL_NAME` : the name of a remote model over an Gemini Enterprise Agent Platform model. Supported models include `multimodalembedding@001` and `gemini-embedding-2` .
+
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
 
   You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 

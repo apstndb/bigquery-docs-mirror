@@ -1139,7 +1139,7 @@ The following limits apply to [BigQuery sharing (formerly Analytics Hub)](https:
 
 ## Knowledge Catalog automatic discovery
 
-The following limits apply to [Knowledge Catalog automatic discovery](https://docs.cloud.google.com/bigquery/docs/automatic-discovery) :
+The following limits apply to [Knowledge Catalog automatic discovery](https://docs.cloud.google.com/knowledge-catalog/docs/cloud-storage-discovery) :
 
 | System limit                                                                                          | Default                         | Notes                                                                |
 |-------------------------------------------------------------------------------------------------------|---------------------------------|----------------------------------------------------------------------|

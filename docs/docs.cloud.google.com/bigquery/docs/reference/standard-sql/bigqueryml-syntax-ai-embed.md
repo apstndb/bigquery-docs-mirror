@@ -61,9 +61,11 @@ AI.EMBED(
 
   The `content` value can be a string literal, the name of a table column, or the output of an expression that evaluates to a string.
 
-- `endpoint` : a `STRING` value that specifies a supported Gemini Enterprise Agent Platform [text embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api) endpoint to use for the text embedding model. The function incurs charges in Agent Platform each time it's called.
+- `endpoint` : a `STRING` value that specifies a supported Gemini Enterprise Agent Platform [text embedding model](https://docs.cloud.google.com/gemini-enterprise-agent-platform/reference/models/text-embeddings-api) endpoint to use. The function incurs charges in Agent Platform each time it's called.
 
-  The endpoint value that you specify must include the model version, for example, `text-embedding-005` . If you specify the model name rather than a URL, BigQuery automatically identifies the model and uses the model's full endpoint. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
+
+  The endpoint value that you specify must include the model version, for example, `gemini-embedding-001` . If you specify the model name rather than a URL, BigQuery automatically identifies the model and uses the model's full endpoint. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed#choose_a_model) .
 
   The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
 
@@ -159,7 +161,11 @@ AI.EMBED(
 
   You need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
 
-- `endpoint` : a `STRING` value that specifies a supported Agent Platform [multimodal embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/multimodal-embeddings-api) endpoint to use for the multimodal embedding model. The endpoint value that you specify must include the model version, for example `gemini-embedding-2` . If you specify the model name rather than a URL, BigQuery automatically identifies the model and uses the model's full endpoint.
+- `endpoint` : a `STRING` value that specifies a supported Agent Platform [multimodal embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/multimodal-embeddings-api) endpoint to use for the multimodal embedding model.
+
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
+
+  The endpoint value that you specify must include the model version, for example `gemini-embedding-2` . If you specify the model name rather than a URL, BigQuery automatically identifies the model and uses the model's full endpoint.
 
   The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
 

@@ -187,6 +187,7 @@ Conversational analytics supports the following locations, which determine where
 
 - US MREP
 - EU MREP
+- `asia-northeast1` (Tokyo)
 - `northamerica-northeast1` (Montréal)
 - `northamerica-northeast2` (Toronto)
 - `us-east4` (Northern Virginia)

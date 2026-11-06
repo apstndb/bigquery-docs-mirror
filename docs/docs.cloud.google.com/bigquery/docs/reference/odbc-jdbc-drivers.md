@@ -51,22 +51,29 @@ You might also be able to get these permissions with [custom roles](https://docs
 
 > **Note:** As an alternative to the Simba ODBC driver, consider using the [Google-developed ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) .
 
-1.  Download the 3.4.1.3004 version of the driver for your operating system:
+1.  Download the 3.4.4.1008 version of the driver for your operating system:
 
-    - [Windows 32-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.1.3004.msi) ( `.msi` file)
-    - [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.1.3004.msi) ( `.msi` file)
-    - [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.1.3004-Linux.tar.gz) ( `.tar.gz` file)
-    - [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.1.3004.dmg) ( `.dmg` file)
+    - [Windows 32-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.4.1008.msi) ( `.msi` file)
+    - [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.4.1008.msi) ( `.msi` file)
+    - [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.4.1008-Linux.tar.gz) ( `.tar.gz` file)
+    - [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.4.1008.dmg) ( `.dmg` file)
 
     By downloading the Simba ODBC driver for BigQuery, you agree to the applicable [Google Terms of Service](https://cloud.google.com/terms) . Sublicensing or OEM redistribution may require separate licensing.
 
-2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.4.1.3004.pdf) .
+2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/odbc/Simba%20Google%20BigQuery%20ODBC%20Connector%20Install%20and%20Configuration%20Guide-3.4.4.1008.pdf) .
 
-For information on feature changes and workflow updates, see [Simba Google BigQuery ODBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/odbc/release-notes-3.4.1.3004.txt) .
+For information on feature changes and workflow updates, see [Simba Google BigQuery ODBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/odbc/release-notes-3.4.4.1008.txt) .
 
 To see a list of previous driver versions, expand the following section:
 
 ### Previous Simba ODBC driver versions
+
+#### 3.4.1.3004
+
+- [Windows 32-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery32_3.4.1.3004.msi)
+- [Windows 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery64_3.4.1.3004.msi)
+- [Linux 32-bit and 64-bit](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery_3.4.1.3004-Linux.tar.gz)
+- [macOS](https://storage.googleapis.com/simba-bq-release/odbc/SimbaODBCDriverforGoogleBigQuery-3.4.1.3004.dmg)
 
 #### 3.3.1.3003
 
@@ -254,18 +261,19 @@ To see a list of previous driver versions, expand the following section:
 
 > **Note:** As an alternative to the Simba JDBC driver, consider using the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
 
-1.  Download the [1.8.1.1003 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.1.1003.zip) .
+1.  Download the [1.8.3.1002 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.3.1002.zip) .
 
     By downloading the Simba JDBC driver for BigQuery, you agree to the applicable [Google Terms of Service](https://cloud.google.com/terms) . Sublicensing or OEM redistribution may require separate licensing.
 
-2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.1.1003.pdf) .
+2.  Follow the instructions in the [insightsoftware installation and configuration guide](https://storage.googleapis.com/simba-bq-release/jdbc/Simba%20Google%20BigQuery%20JDBC%20Connector%20Install%20and%20Configuration%20Guide_1.8.3.1002.pdf) .
 
-For information on feature changes and workflow updates, see [Simba Google BigQuery JDBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.1.1003.txt) .
+For information on feature changes and workflow updates, see [Simba Google BigQuery JDBC Data Connector Release Notes](https://storage.googleapis.com/simba-bq-release/jdbc/release-notes_1.8.3.1002.txt) .
 
 To see a list of previous driver versions, expand the following section:
 
 ### Previous Simba JDBC driver versions
 
+- [1.8.1.1003](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.1.1003.zip)
 - [1.8.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.8.0.1001.zip)
 - [1.7.0.1001](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.7.0.1001.zip)
 - [1.6.5.1002](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1002.zip)

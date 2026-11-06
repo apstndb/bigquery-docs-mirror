@@ -55,7 +55,9 @@ AI.SIMILARITY(
 
 - `CONTENT2` : a `STRING` value that provides the second value to compare. The value of `CONTENT2` can be a string literal, the name of a table column, or the output of an expression that evaluates to a string.
 
-- `ENDPOINT` : a `STRING` value that specifies the Gemini Enterprise Agent Platform endpoint to use for the text embedding model. If you specify the model name, such as `'text-embedding-005'` , rather than a URL, then BigQuery ML automatically identifies the model and uses the model's full endpoint. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#choose-a-model) .
+- `ENDPOINT` : a `STRING` value that specifies the Gemini Enterprise Agent Platform endpoint to use for the text embedding model. If you specify the model name, such as `'gemini-embedding-001'` , rather than a URL, then BigQuery automatically identifies the model and uses the model's full endpoint. For more information, see [Choose a model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#choose-a-model) .
+
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
 
   The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
 
@@ -145,7 +147,9 @@ AI.SIMILARITY(
 
   You need to grant the [Agent Platform User role](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/general/access-control#aiplatform.user) to the connection's service account in the project where you run the function.
 
-- `ENDPOINT` : a `STRING` value that specifies the Agent Platform endpoint to use for the multimodal embedding model. If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
+- `ENDPOINT` : a `STRING` value that specifies the Agent Platform endpoint to use for the multimodal embedding model. If you specify the model name rather than a URL, BigQuery automatically identifies the model and uses the model's full endpoint.
+
+  Different embedding models are generally mathematically incompatible. For information about model retirement dates and how to migrate to a replacement model, see [Handle embedding model deprecation](https://docs.cloud.google.com/bigquery/docs/vector-search-intro#handle-model-deprecation) .
 
   The `gemini-embedding-2` model is only available in multi-regional or global endpoints. If you specify the short endpoint name `gemini-embedding-2` , then BigQuery selects an endpoint according to the following rules:
 

@@ -10,11 +10,13 @@ data_source: docs.cloud.google.com
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-> **Caution:** The assignee and the reservation must be in the same organization and in the same location. If you move the assignee to a different organization after the assignment is created, [reservations monitoring](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) will be inaccurate.
+This document explains how to create, find, move, and delete reservation assignments for organizations, folders, projects, and individual principals. It also shows how to perform tasks, such as configuring project caps and scheduling policy overrides. For conceptual details, see [Understand reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
 ## Create reservation assignments
 
 To use the slots that you purchase, you create an *assignment* which assigns a project, folder, organization, or principal to a slot reservation. You can't assign or allocate a specific number of slots at the assignment level; slots are managed and assigned at the reservation level.
+
+> **Caution:** The assignee and the reservation must be in the same organization and in the same location. If you move the assignee to a different organization after the assignment is created, [reservations monitoring](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) will be inaccurate.
 
 ### Assignment logic and criteria
 
