@@ -72,11 +72,7 @@ The following tutorials show how to use BigQuery Graph in different scenarios:
 
 ## Pricing
 
-BigQuery Graph uses the BigQuery capacity-based [pricing model](https://cloud.google.com/bigquery/pricing) to ensure that you only pay for what you use across compute and storage.
-
-### Compute
-
-To run GQL queries, you must have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) . If you use on-demand pricing, you can call the `GRAPH_EXPAND` function to run SQL queries on your graph. Graph queries use [BigQuery capacity compute pricing](https://cloud.google.com/bigquery/pricing#capacity-compute-pricing) measured in slots.
+To run GQL queries, you must use on-demand pricing or have a [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) that uses the [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 ### Storage
 

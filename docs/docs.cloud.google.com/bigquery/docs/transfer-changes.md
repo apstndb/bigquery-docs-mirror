@@ -693,6 +693,21 @@ You can continue to use the deprecated data type mapping in the transfer configu
 
 Starting September 16, 2026, all transfer configurations will use the updated data type mapping by default. Support for the deprecated data type mapping will end on March 16, 2027.
 
+## Shopify
+
+The BigQuery Data Transfer Service for Shopify connector periodically updates to adapt to new changes introduced by Shopify.
+
+The following sections outline the changes organized by release date.
+
+### January 31, 2027
+
+On January 31, 2027, the [Shopify connector](https://docs.cloud.google.com/bigquery/docs/shopify-transfer) is no longer supporting the following fields from the following dataset schemas:
+
+- The `legacyMode` field from the `DeliveryProfile` dataset schema
+- The `permitSkuSharing` field from the `FulfillmentService` dataset schema
+
+These changes are in response to changes to the Shopify API. Starting January 31, 2027, all transfer configurations will no longer support these fields.
+
 ## YouTube Reporting API
 
 The BigQuery Data Transfer Service for YouTube Content Owner connector and YouTube Channel connector periodically updates to support new reports introduced by [YouTube Reporting API](https://developers.google.com/youtube/reporting) and deprecate old reports.

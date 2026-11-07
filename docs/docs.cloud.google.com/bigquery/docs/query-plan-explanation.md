@@ -41,7 +41,7 @@ The **Execution graph** panel is organized as follows:
 ![The execution graph layout.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-layout.png)
 
 - In the center is the **execution graph** . It shows stages as nodes and shuffle memory exchanged between stages as edges.
-- The left panel has the **query text heatmap** . It shows the main query text that the query executed along with any referenced views.
+- The left panel has the **query text heatmap** . It shows the main query text that the query executed along with any referenced views or SQL user-defined functions.
 - The right panel has the query or stage details.
 
 #### Navigating the execution graph
@@ -112,11 +112,20 @@ The following image shows how the query text relates to the step details:
 
 ![The execution graph associates the query text with the step.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-query-text-step-details.png)
 
-In a stage's **Step details** section, if a step maps to query text, the step has a code icon. Clicking on the code icon highlights the mapped portion of query text on the left.
+In a stage's **Step details** section, if a step maps to query text, the step has a code icon. The behavior of the code icon depends on the number of mapped locations:
+
+- Single location: Clicking the icon directly navigates to and highlights the mapped portion of query text.
+- Multiple locations or hierarchy: Clicking the icon opens a dialog with a hierarchical list of context references, such as nested function calls or view references. Selecting a location from this menu navigates to and highlights the relevant code lines.
+
+The following image shows the hierarchical menu and the highlighted query text:
+
+![The execution graph hierarchical context menu.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-context-menu.png)
+
+When navigated to, the BigQuery console highlights the code lines and scrolls to them.
 
 It is important to keep in mind that the heatmap color is based on the entire stage's slot-time. Because BigQuery does not measure the slot-time of steps, the heatmap does not represent the actual slot-time for that specific portion of mapped query text. In most cases, a stage performs just a single complex step, like a join or aggregate. Thus the heatmap color is appropriate. However, when a stage is made up of steps that perform multiple complex operations, the heatmap color may overrepresent the actual slot-time in the heatmap. In such cases, it is important to understand the other steps that make up the stage to get a more complete understanding of the query's performance.
 
-If a query uses views, and the stage's steps have mappings to a view's query text, then the query text heatmap shows the view's name and view's query text with their mappings. However, if the view is deleted, or if you lose the `bigquery.tables.get` [IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control) on the view, then the query text heatmap doesn't show the stage steps' mappings for the view.
+If a query uses views or persistent routines, and the stage's steps have mappings to a view's or routine's query text, then the query text heatmap shows the view's or routine's name and query text with their mappings. However, if the resource is deleted, or if you lose the `bigquery.tables.get` [IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control) on the view or the `bigquery.routines.get` IAM permission on the routine, then the query text heatmap doesn't show the stage steps' mappings for that resource.
 
 ### Stage overview
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use organization policies to apply custom constraints to BigQuery resources
 
-> **Preview — Constraints on tables, data access policies, row access policies, routines, reservations, assignments, capacity commitments, and BI reservations**
+> **Preview — Constraints on tables, models, data access policies, row access policies, routines, reservations, assignments, capacity commitments, and BI reservations**
 >
 > This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
@@ -67,6 +67,9 @@ The following table lists the BigQuery resources that you can reference in custo
 | `resource.location`                                                |                                                   |
 | `resource.maxTimeTravelHours`                                      |                                                   |
 | `resource.storageBillingModel`                                     |                                                   |
+| bigquery.googleapis.com/Model                                      | `resource.modelReference.datasetId`               |
+| `resource.modelReference.modelId`                                  |                                                   |
+| `resource.modelReference.projectId`                                |                                                   |
 | bigquery.googleapis.com/Routine                                    | `resource.routineReference.datasetId`             |
 | `resource.routineReference.projectId`                              |                                                   |
 | `resource.routineReference.routineId`                              |                                                   |
@@ -370,6 +373,19 @@ This table provides syntax examples for some common custom constraints.
 </thead>
 <tbody>
 <tr class="odd">
+<td>Deny new models with names that contain 'model'.</td>
+<td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceModelId
+    resourceTypes:
+    - bigquery.googleapis.com/Model
+    methodTypes:
+    - CREATE
+    - UPDATE
+    condition: &quot;resource.modelReference.modelId.contains(&#39;test&#39;)&quot;
+    actionType: DENY
+    displayName: Reject models with names that contain &#39;model&#39;.
+    description: Deny new models with names that contain &#39;model&#39;.</code></pre></td>
+</tr>
+<tr class="even">
 <td>Deny new tables with names that begin with 'test'.</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceTableId
     resourceTypes:
@@ -381,7 +397,7 @@ This table provides syntax examples for some common custom constraints.
     displayName: Reject test tables.
     description: Deny new table names that begin with &#39;test&#39;.</code></pre></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Deny new row access policies with names that begin with 'test'.</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRowAccessPolicyId
     resourceTypes:
@@ -393,7 +409,7 @@ This table provides syntax examples for some common custom constraints.
     displayName: Reject &#39;test&#39; row access policies.
     description: Deny new row access policies with names that begin with &#39;test&#39;.</code></pre></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Deny new data access policies with predefined expressions that begin with 'SHA256' (Secure Hash Algorithm 256-bit).</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforcePredefinedExpression
     resourceTypes:
@@ -407,7 +423,7 @@ This table provides syntax examples for some common custom constraints.
     begin with &#39;SHA256&#39;.
     expression.</code></pre></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Deny new routines with names that begin with 'test'.</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRoutineId
     resourceTypes:
@@ -419,7 +435,7 @@ This table provides syntax examples for some common custom constraints.
     displayName: Reject test routines.
     description: Deny new routines with names that begin with &#39;test&#39;.</code></pre></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Deny BigQuery reservations with more than 200 slots</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.bqReservationLimitSlots
     resourceTypes:
@@ -434,7 +450,7 @@ This table provides syntax examples for some common custom constraints.
     description: Deny BigQuery reservations with more than 200
     slots.</code></pre></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Disallow pipeline jobs from using reservations</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.bqAssignmentDenyPipelineJobs
     resourceTypes:
@@ -448,7 +464,7 @@ This table provides syntax examples for some common custom constraints.
     description: Deny the creation of BigQuery reservation
     assignments for jobs that are of type PIPELINE.</code></pre></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Only allow annual term capacity commitments</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.bqCapacityCommitmentAnnualOnly
     resourceTypes:
@@ -463,7 +479,7 @@ This table provides syntax examples for some common custom constraints.
     description: Only allow the creation of BigQuery capacity
     commitments when there is an annual commitment plan and renewal cadence.</code></pre></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Limit BI reservations to 5 GB or less</td>
 <td><pre data-fenced=""><code>name: organizations/ORGANIZATION_ID/customConstraints/custom.bqBiReservationUnder5GB
     resourceTypes:

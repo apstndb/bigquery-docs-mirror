@@ -60,7 +60,7 @@ Data Apps are subject to the following limitations:
 
 The components you can add to your Data Apps are derived from the underlying notebook. If you're working with an existing notebook, you can add any of its existing cells to your Data Apps.
 
-You can add to Data Apps any supported [cell types](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) that you can create in a Colab notebook, including SQL cells, code cells, text cells, and visualization cells. You can create cell types manually, or you can use the [Colab Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent) or [Gemini](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to generate cells for you.
+You can add to Data Apps any supported cell types that you can create in a [Colab notebook](https://docs.cloud.google.com/bigquery/docs/create-notebooks) , including SQL cells, code cells, text cells, and visualization cells. You can create cell types manually, or you can use the [Colab Data Science Agent](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent) or [Gemini](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to generate cells for you.
 
 For information on adding different cell types to notebooks, see the following tutorials:
 

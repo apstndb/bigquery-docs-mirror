@@ -260,6 +260,10 @@ Data lake administrators are responsible for creating connections and sharing th
 > - The ability to bind tables to connections (like the BigQuery Connection Administrator).
 >
 >   Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
+>
+> - The [`bigquery.objectRefs.read`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefs.read) permission on the table's connection (granted by roles such as [BigQuery ObjectRef Reader](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefReader) and [BigQuery ObjectRef Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefAdmin) ).
+>
+>   This permission lets data analysts use [ObjectRef functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions) to read any Cloud Storage object that the connection's service account can access, circumventing table-level and row-level access controls.
 
 ## Metadata caching for performance
 

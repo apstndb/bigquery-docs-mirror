@@ -160,7 +160,9 @@ With this row-level access policy in place, the following outcomes are true for 
 
 - Running the query `SELECT * FROM my_dataset.my_object_table;` only returns rows that have an `updated` value prior to June 25, 2022.
 - Running inference on `my_dataset.my_object_table` only returns predictions for objects that have an `updated` value prior to June 25, 2022.
-- Generating signed URLs for `my_dataset.my_object_table` only creates URLs for objects that have an `updated` value prior to June 25, 2022.
+- Generating signed URLs for `my_dataset.my_object_table` by using the [`EXTERNAL_OBJECT_TRANSFORM` function](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#signed_urls) only creates URLs for objects that have an `updated` value prior to June 25, 2022.
+
+> **Warning:** Do not use the [`bigquery.objectRefs.read`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefs.read) or [`bigquery.objectRefs.write`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefs.write) permissions on the object table's connection with row-level access policies, because these permissions are designed to grant connection-level access to any object accessible to the connection's service account, bypassing row-level access policies.
 
 You can also restrict access to object table rows by using custom metadata. For example, the following statement restricts the `users` group to only access rows where the object has been tagged as not containing any personally identifiable information:
 
@@ -189,6 +191,10 @@ Data lake administrators are responsible for creating connections and sharing th
 > - The ability to bind tables to connections (like the BigQuery Connection Administrator).
 >
 >   Otherwise, data analysts can create new tables that do not have any access controls, thus circumventing controls placed by data warehouse administrators.
+>
+> - The [`bigquery.objectRefs.read`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefs.read) permission on the table's connection (granted by roles such as [BigQuery ObjectRef Reader](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefReader) and [BigQuery ObjectRef Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefAdmin) ).
+>
+>   This permission lets data analysts use [ObjectRef functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions) to read any Cloud Storage object that the connection's service account can access, circumventing table-level and row-level access controls.
 
 ## Supported object files
 

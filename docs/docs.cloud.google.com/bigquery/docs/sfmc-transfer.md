@@ -17,6 +17,7 @@ Salesforce Marketing Cloud data transfers are subject to the following limitatio
 - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
   - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
 - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
+- You must set up client secret rotation every 180 days to avoid authentication failures. For more information, see [Rotate client secrets](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#rotate_client_secrets) .
 - Salesforce Marketing Cloud transfers don't support data extensions that contain binary or large blob fields.
 - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Salesforce Marketing Cloud.
 
@@ -54,8 +55,8 @@ Once you have set up the IP ranges, you can now specify the static IP when you [
 To include data extension objects in your data transfer, the object must meet the following requirements:
 
 - The name of the data extension object must include the `DataExtensionObject` prefix followed by the object name. For example, `DataExtensionObject_ `` DATA_EXTENSION_NAME` .
-- You must enable the `Read` scope for the data extension object.
-- The file locations of the data extension object must have the `Read` and `Write` scopes.
+- You must enable the `Data Extensions` : `Read` and `Provisioning > Accounts` : `Read` scope for the data extension object.
+  - Custom Data Extensions appear as `DataExtensionObject_ `` Name` for the authenticated Business Unit or Shared Data Extensions folder.
 
 ### Install and configure Salesforce Marketing Cloud API integration package
 
@@ -74,8 +75,8 @@ Once you've installed the API integration package, you must add the following pe
 - Journeys: `Read`
 - Audiences: `Read`
 - List and Subscribers: `Read`
-- Date Extensions: `Read`
-- File Locations `Read`
+- Data Extensions: `Read`
+- Accounts: `Read`
 - Tracking Events: `Read`
 - Callbacks: `Read`
 - Subscriptions: `Read`
@@ -241,6 +242,28 @@ The following table maps Salesforce Marketing Cloud data types to the correspond
 | `Date`                               | `DATE`             |
 | `DateTime`                           | `TIMESTAMP`        |
 | `Locale`                             | `STRING`           |
+
+## Rotate client secrets
+
+To prevent authentication failures in your future data transfers, you must rotate your Salesforce Marketing Cloud client secrets every 180 days. The BigQuery Data Transfer Service will fail if the client secret has expired and you have not rotated your client secret.
+
+You can rotate your client secret by doing the following:
+
+1.  [Generate and stage a client secret](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html) in your installed package settings.
+
+2.  Update your BigQuery Data Transfer Service configuration to use the new client secret by doing the following:
+
+    1.  Go to the Data transfers page in the Google Cloud console.
+
+    2.  Click the Salesforce Marketing Cloud transfer in the data transfers list.
+
+    3.  Click **EDIT** to update the transfer configuration.
+
+    4.  In the **Client ID** and **staged Client Secret** field, update the value to the new client secret.
+
+    5.  Click **Save** .
+
+3.  [Activate the new staged secret](https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/rotate-oauth2-secret.html#activate-a-staged-secret) in Salesforce Marketing Cloud, which deactivates the current secret and replaces it with the staged secret.
 
 ## Troubleshoot transfer setup
 

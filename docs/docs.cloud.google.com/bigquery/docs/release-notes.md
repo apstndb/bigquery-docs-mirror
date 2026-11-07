@@ -14,7 +14,34 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 06, 2026
+
+Announcement
+
+You can now use [BigQuery Graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) and run Graph Query Language (GQL) queries when you use on-demand pricing.
+
+Breaking
+
+Starting January 31, 2027, the [BigQuery Data Transfer Service for Shopify connector](https://docs.cloud.google.com/bigquery/docs/shopify-transfer) will no longer support the following fields:
+
+- The `legacyMode` field from the `DeliveryProfile` dataset schema
+- The `permitSkuSharing` field from the `FulfillmentService` dataset schema
+
+For more information, see [January 31, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Jan31-shopify) .
+
+Feature
+
+You can now use a [custom organization policy](https://docs.cloud.google.com/bigquery/docs/custom-constraints) to allow or deny specific operations on models in BigQuery. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## November 05, 2026
+
+Feature
+
+In the query execution graph's [query text heatmap](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#query_text_heatmap) , you can now view and navigate through a hierarchical list of context references, such as nested function calls or view references, for stage steps. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+In the query execution graph, the [query text heatmap](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#query_text_heatmap) now supports displaying the SQL text for persistent and temporary user-defined functions (UDFs). This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Change
 

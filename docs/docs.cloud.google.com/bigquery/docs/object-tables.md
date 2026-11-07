@@ -52,8 +52,9 @@ You might also be able to get these permissions with [custom roles](https://docs
 >
 > - The ability to read objects directly from Cloud Storage, granted by the Storage Object Viewer role.
 > - The ability to bind tables to connections, granted by the BigQuery Connection Administrator role.
+> - The [`bigquery.objectRefs.read`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.objectRefs.read) permission on the object table's connection, granted by roles such as BigQuery ObjectRef Reader and BigQuery ObjectRef Admin.
 >
-> Otherwise, users can create new object tables that don't have any access controls, thus circumventing controls placed by data warehouse administrators.
+> Otherwise, users can read underlying Cloud Storage objects or create new object tables without restrictions, circumventing table-level and row-level access controls placed by data warehouse administrators.
 
 ## Create a dataset
 

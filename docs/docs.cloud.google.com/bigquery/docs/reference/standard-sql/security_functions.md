@@ -80,7 +80,7 @@ Returns the value of a request-scoped secure context parameter provided at query
 
   For a comparison of the isolation strength of authorized views, row-level security, and separate tables, see the following resources:
 
-  - [Comparison of authorized views, row-level security, and separate tables](https://docs.cloud.google.com/bigquery/docs/authorized-views-row-level-security-comparison)
+  - [Comparison of authorized views, row-level security, and separate tables](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#comparison_of_authorized_views_row-level_security_and_separate_tables)
   - [Best practices for multi-tenant workloads on BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-for-multi-tenant-workloads-on-bigquery)
 
 **Return type**
