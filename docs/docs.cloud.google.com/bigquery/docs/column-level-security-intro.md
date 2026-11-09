@@ -321,6 +321,12 @@ You can't use references across organizations. A table and any policy tags that 
 
 - A table can have at most 1,000 unique policy tags.
 
+- A project can have at most 40 taxonomies per location.
+
+- A taxonomy can have at most 100 policy tags.
+
+- A taxonomy name or policy tag name can be at most 200 bytes when encoded in UTF-8.
+
 - You can't use legacy SQL if you enabled column-level access control. Any legacy SQL queries are rejected if there are any policy tags on the target tables.
 
 - A policy tag hierarchy can be no more than five levels deep from the root node to the lowest-level subtag, as shown in the following screenshot:
