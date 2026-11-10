@@ -19,8 +19,8 @@ With the jobs explorer, you can do the following:
 - **Filter and identify jobs** : search for specific queries across your organization by [applying filters](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) based on criteria such as job status, duration, owner, or slot usage.
 - **Analyze timeline metrics** : track job execution trends and concurrency over time with the [metric chart](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view-metric-chart) .
 - **Aggregate jobs by resource** : [group jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#group-jobs) by owner, project, or reservation to view summary statistics and drill down into filtered tables.
-- **Troubleshoot jobs** : select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
-- **Compare performance** : [compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to highlight significant metric differences and address potential performance issues.
+- **Troubleshoot jobs** : select individual jobs to view their query execution graphs, SQL text, and execution history on the [**Job details**](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#view_job_details) page.
+- **Compare performance** : [compare jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) to highlight significant metric differences and address potential performance issues.
 - **Get AI assistance** : [use Gemini Code Assist to troubleshoot jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#troubleshoot-with-ai) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to analyze job statistics or explain slow-running queries.
 
 BigQuery provides the job details and insights from the following `INFORMATION_SCHEMA` views:
@@ -140,12 +140,6 @@ To inspect the individual jobs associated with a specific resource, click the pa
 
 ## Troubleshoot job performance
 
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
-
 To diagnose and troubleshoot queries, you can view execution metrics, SQL text, and historical performance variances on the **Job details** page.
 
 ### View job details
@@ -175,12 +169,6 @@ To help you diagnose query performance, the **Performance** tab in the job detai
 - **System load during execution** : a summary of the compute resources and reservation settings allocated during job execution.
 
 ## Diagnose performance regressions by comparing jobs and systems
-
-> **Preview**
->
-> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com> .
 
 The performance comparison tool lets you analyze performance differences between two query jobs or across two system intervals. The analysis shows query details, resource utilization shifts, and system environment settings that differ significantly between your baseline and target environments.
 

@@ -392,7 +392,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`model.score()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) to evaluate the model.
+Use the [`bigframes.bigquery.ml.evaluate`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.evaluate.html#bigframes.bigquery.ml.evaluate) function to evaluate the model.
 
 ```python
 import bigframes.pandas as bpd
@@ -463,7 +463,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`model.predict()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
+Use the [`bigframes.bigquery.ml.recommend`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.recommend.html#bigframes.bigquery.ml.recommend) function to get predicted ratings.
 
 ```python
 import bigframes.pandas as bpd
@@ -567,7 +567,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`model.predict()`](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
+Use the [`bigframes.bigquery.ml.recommend`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.recommend.html#bigframes.bigquery.ml.recommend) function to get predicted ratings, and then join them with the movie information to select the top five results per user.
 
 ```python
 import bigframes.pandas as bpd

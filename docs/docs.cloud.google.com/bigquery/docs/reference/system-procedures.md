@@ -126,14 +126,23 @@ For more information, see [Manual refresh](https://docs.cloud.google.com/bigquer
 **Syntax**
 
 ```
-CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(graph_name, output_schema);
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(
+  graph_name
+  [, start_node [, flatten_results] ]
+  , output_schema);
 ```
 
 **Description**
 
 Populates the `output_schema` variable that you provide with the schema of the table returned by calling the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) on `graph_name` .
 
-Specify the name of the [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) as a string with the format `'[project_id.]dataset.graph'` . Each column returned by the `GRAPH_EXPAND` TVF represents as property in the graph. The output includes the name, type, and mode for each column. If the property has a description or synonyms defined on it, then those appear in a `description` field for the column. If the property defines a measure, then the output includes `"is_measure":true` for that field.
+Each column returned by the `GRAPH_EXPAND` TVF represents as property in the graph. The output includes the name, type, and mode for each column. If the property has a description or synonyms defined on it, then those appear in a `description` field for the column. If the property defines a [measure](https://docs.cloud.google.com/bigquery/docs/graph-measures) , then the output includes `"is_measure":true` for that field.
+
+- `graph_name` : A `STRING` containing the name of the [graph](https://docs.cloud.google.com/bigquery/docs/graph-overview) in the form `'[project_id.]dataset.graph'` .
+- `start_node` : An optional `STRING` specifying the name of the starting node for traversal. This argument is required if the graph has multiple root node tables.
+- `flatten_results` : An optional `BOOL` value that indicates how to structure the output schema:
+  - `TRUE` : Flattens all node and edge properties into top-level columns of the form `<element>_<property>` . `TRUE` is the default value.
+  - `FALSE` : Returns the root node properties as un-prefixed top-level columns and joined neighbor tables as `STRUCT` columns.
 
 **Examples**
 

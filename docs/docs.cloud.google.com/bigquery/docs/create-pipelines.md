@@ -776,6 +776,7 @@ To run selected tasks in a pipeline, do the following:
     - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
     - **Run with full refresh** : select this option to rebuild all tables from scratch.
     - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+    - **Limit concurrent actions** : to limit how many tasks can run concurrently during the execution, select this option. Then, in the **Maximum concurrent actions** field, enter a whole number between 1 and 5000. Ready tasks exceeding the limit remain queued until a concurrency slot becomes available.
 
 9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
@@ -832,6 +833,7 @@ To run tasks with selected tags in a pipeline, do the following:
     - **Include dependents** : select this option to run the selected tasks and their transitive downstream dependents.
     - **Run with full refresh** : select this option to rebuild all tables from scratch.
     - **Run as interactive job with high priority (default)** : select this option to set the BigQuery query job priority. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
+    - **Limit concurrent actions** : to limit how many tasks can run concurrently during the execution, select this option. Then, in the **Maximum concurrent actions** field, enter a whole number between 1 and 5000. Ready tasks exceeding the limit remain queued until a concurrency slot becomes available.
 
 9.  Click **Run** . If you selected **Run with user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 

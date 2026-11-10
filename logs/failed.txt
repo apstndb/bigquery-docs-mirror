@@ -1,3 +1,9 @@
-200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/compression-functions
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/metadata
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/metadata/extract
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/query-logs
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/query-logs/extract
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/validation
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/validation/configure
+200 https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/validation/run
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo

@@ -258,9 +258,9 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
     - **Job failures** : sends a report when the job itself fails, regardless of the data quality results.
     - **Job completion (success or failure)** : sends a report when the job ends, regardless of the data quality results.
 
-8.  Click **Create** .
+8.  To create the scan, click **Create** .
 
-    After the scan is created, you can run it at any time by clicking **Run now** .
+    If you set the schedule to radio_button_checked **On-demand** , you can also run the scan now by clicking **Run scan** .
 
 ### gcloud
 

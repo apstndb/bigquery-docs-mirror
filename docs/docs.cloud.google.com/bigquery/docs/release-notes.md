@@ -14,6 +14,30 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 09, 2026
+
+Feature
+
+To support your FinOps practices, you can now opt in to [compute cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) in BigQuery editions. This feature attributes billed compute charges directly to the query projects that use your administration project's reservation capacity. Allocating costs based on actual commitment and autoscaling slot usage lets you accurately track project-level costs and manage internal chargebacks. This feature is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+Query performance troubleshooting and job and system performance comparison in the BigQuery jobs explorer are [generally available](https://cloud.google.com/products#product-launch-stages) (GA). For more information, see [Troubleshoot job performance](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#get-job-details) and [Diagnose performance regressions by comparing jobs and systems](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#compare-jobs) .
+
+Feature
+
+When you [create](https://docs.cloud.google.com/bigquery/docs/create-pipelines) or [schedule](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) a pipeline, you can specify the maximum number of concurrently executed pipeline tasks. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can use [compression functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/compression-functions) in GoogleSQL to compress or decompress bytes or string values by using the Zstandard (Zstd) lossless data compression algorithm. The following functions are supported:
+
+- [`ZSTD_COMPRESS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/compression-functions#zstd_compress)
+- [`ZSTD_DECOMPRESS_TO_BYTES`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/compression-functions#zstd_decompress_to_bytes)
+- [`ZSTD_DECOMPRESS_TO_STRING`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/compression-functions#zstd_decompress_to_string)
+
+These functions are in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## November 06, 2026
 
 Announcement

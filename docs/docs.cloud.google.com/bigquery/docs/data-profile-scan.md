@@ -247,7 +247,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 14. To create the scan, click **Create** .
 
-    If you set the schedule to on-demand, you can also run the scan now by clicking **Run scan** .
+    If you set the schedule to radio_button_checked **On-demand** , you can also run the scan now by clicking **Run scan** .
 
 ### gcloud
 
@@ -620,7 +620,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 
 17. To create the scans, click **Create** .
 
-    If you set the schedule to on-demand, you can also run the scans now by clicking **Run scan** .
+    If you set the schedule to radio_button_checked **On-demand** , you can also run the scans now by clicking **Run scan** .
 
 ## Run a data profile scan
 

@@ -455,12 +455,31 @@ Both measures replace a `NULL` budget with `0` . The inline form also replaces t
 To view the schema of the table returned by the `GRAPH_EXPAND` function without calling the function, use the [`BQ.SHOW_GRAPH_EXPAND_SCHEMA` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqshow_graph_expand_schema) :
 
 ```
-DECLARE schema STRING DEFAULT '';
-CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('university.SchoolGraph', schema);
-SELECT schema;
+DECLARE result_schema STRING DEFAULT '';
+
+-- View default flattened schema for a single-root graph:
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA('university.SchoolGraph', result_schema);
+SELECT result_schema;
+
+-- View flattened schema for a specific subgraph:
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(
+  'university.SchoolGraph',
+  'Course',
+  result_schema
+);
+SELECT result_schema;
+
+-- View nested STRUCT schema for a specific subgraph:
+CALL BQ.SHOW_GRAPH_EXPAND_SCHEMA(
+  'university.SchoolGraph',
+  'Course',
+  FALSE,
+  result_schema
+);
+SELECT result_schema;
 ```
 
-This procedure populates the `schema` variable with the name, type, and mode of each column. It also indicates whether the property referenced by the column is a measure, and lists any description or synonyms that you defined on it.
+This procedure populates the `result_schema` variable with a JSON object that includes the name, type, and mode of each column, indicates whether the property referenced by the column is a measure ( `"is_measure": true` ), lists any options defined on the properties, and reflects nested `STRUCT` definitions when the `flatten_results` argument is set to `FALSE` .
 
 ## What's next
 

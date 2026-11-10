@@ -177,6 +177,11 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 ```python
 import bigframes.pandas as bpd
 
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
 df = bpd.read_gbq("bigquery-public-data.new_york.citibike_trips")
 
 features = bpd.DataFrame(
@@ -271,16 +276,13 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 ```python
-from bigframes.ml import forecasting
 import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-model = forecasting.ARIMAPlus(
-    # To reduce the query runtime with the compromise of a potential slight
-    # drop in model quality, you could decrease the value of the
-    # auto_arima_max_order. This shrinks the search space of hyperparameter
-    # tuning in the auto.ARIMA algorithm.
-    auto_arima_max_order=5,
-)
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
 
 df = bpd.read_gbq("bigquery-public-data.new_york.citibike_trips")
 
@@ -301,22 +303,25 @@ num_trips = features.groupby(
     as_index=False,
 ).count()
 
-X = num_trips["date"].to_frame()
-y = num_trips["num_trips"].to_frame()
-
-model.fit(
-    X,
-    y,
-    # The input data that you want to get forecasts for,
-    # in this case the Citi Bike station, as represented by the
-    # start_station_name column.
-    id_col=num_trips["start_station_name"].to_frame(),
-)
-
-# The model.fit() call above created a temporary model.
-# Use the to_gbq() method to write to a permanent location.
-model.to_gbq(
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.create_model.html#bigframes.bigquery.ml.create_model
+ml.create_model(
     your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
+    options={
+        "model_type": "ARIMA_PLUS",
+        "time_series_timestamp_col": "date",
+        "time_series_data_col": "num_trips",
+        # The input data that you want to get forecasts for,
+        # in this case the Citi Bike station, as represented by the
+        # start_station_name column.
+        "time_series_id_col": "start_station_name",
+        # To reduce the query runtime with the compromise of a potential slight
+        # drop in model quality, you could decrease the value of the
+        # auto_arima_max_order. This shrinks the search space of hyperparameter
+        # tuning in the auto.ARIMA algorithm.
+        "auto_arima_max_order": 5,
+    },
+    training_data=num_trips,
     replace=True,
 )
 ```
@@ -355,11 +360,19 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 ```python
-# Evaluate the time series models by using the summary() function. The summary()
-# function shows you the evaluation metrics of all the candidate models evaluated
-# during the process of automatic hyperparameter tuning.
-summary = model.summary()
-print(summary.peek())
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_evaluate.html#bigframes.bigquery.ml.arima_evaluate
+ml.arima_evaluate(
+    your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
+)
 
 # Expected output:
 #    start_station_name                  non_seasonal_p  non_seasonal_d   non_seasonal_q  has_drift  log_likelihood           AIC     variance ...
@@ -407,15 +420,26 @@ Follow these steps to retrieve the model's coefficients:
 
 ### BigQuery DataFrames
 
-Inspect the time series model's coefficients by using the `coef_` function.
+Inspect the time series model's coefficients by using the [`bigframes.bigquery.ml.arima_coefficients` function](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_coefficients.html#bigframes.bigquery.ml.arima_coefficients) .
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 ```python
-coef = model.coef_
-print(coef.peek())
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
+
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.arima_coefficients.html#bigframes.bigquery.ml.arima_coefficients
+ml.arima_coefficients(
+    your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
+)
 
 # Expected output:
 #    start_station_name                                              ar_coefficients                                   ma_coefficients intercept_or_drift
@@ -462,16 +486,28 @@ For more information about the output columns, see [`ML.FORECAST` function](http
 
 ### BigQuery DataFrames
 
-Forecast future time series values by using the `predict` function.
+Forecast future time series values by using the [`bigframes.bigquery.ml.forecast` function](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.forecast.html#bigframes.bigquery.ml.forecast) .
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 ```python
-prediction = model.predict(horizon=3, confidence_level=0.9)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-print(prediction.peek())
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.forecast.html#bigframes.bigquery.ml.forecast
+ml.forecast(
+    your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
+    horizon=3,
+    confidence_level=0.9,
+)
 # Expected output:
 #            forecast_timestamp                             start_station_name  forecast_value  standard_error  confidence_level ...
 # 4   2016-10-01 00:00:00+00:00                         Central Park S & 6 Ave      302.377201       32.572948               0.9 ...
@@ -513,24 +549,36 @@ Follow these steps to explain the model's results:
 
     The first thousand rows returned are all history data. You must scroll through the results to see the forecast data.
 
-    The output rows are ordered first by `start_station_name` , then chronologically by the `time_series_timestamp` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
+    The output rows are ordered first by `start_station_name` , then chronologically by the `time_series_timestamp` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the forecast value. For rows that have a value of `forecast` in the `time_series_type` column, the `time_series_data` column contains the forecast value. The prediction interval depends on the `standard_error` and `confidence_level` column values.
 
     For more information about the output columns, see [`ML.EXPLAIN_FORECAST`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 ### BigQuery DataFrames
 
-You can get explainability metrics in addition to forecast data by using the `predict_explain` function. The `predict_explain` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `predict` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
+You can get explainability metrics in addition to forecast data by using the [`bigframes.bigquery.ml.explain_forecast` function](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_forecast.html#bigframes.bigquery.ml.explain_forecast) . The `bigframes.bigquery.ml.explain_forecast` function forecasts future time series values and also returns all the separate components of the time series. If you just want to return forecast data, use the `bigframes.bigquery.ml.forecast` function instead, as shown in [Use the model to forecast data](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial#use_the_model_to_forecast_data) .
 
-The `horizon=3, confidence_level=0.9` clause used in the `predict_explain` function indicates that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
+The `horizon=3, confidence_level=0.9` arguments used in the `bigframes.bigquery.ml.explain_forecast` function indicate that the query forecasts 3 future time points and generates a prediction interval with 90% confidence.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 ```python
-explain = model.predict_explain(horizon=3, confidence_level=0.9)
+import bigframes.pandas as bpd
+from bigframes.bigquery import ml
 
-print(explain.peek(5))
+# Set partial ordering mode for BigQuery DataFrames.
+# For more information, see the BigQuery DataFrames performance documentation:
+# https://cloud.google.com/bigquery/docs/dataframes-performance#partial-ordering-mode
+bpd.options.bigquery.ordering_mode = "partial"
+
+# For more information, see the BigQuery DataFrames API reference documentation:
+# https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.ml.explain_forecast.html#bigframes.bigquery.ml.explain_forecast
+ml.explain_forecast(
+    your_model_id,  # For example: "bqml_tutorial.nyc_citibike_arima_model",
+    horizon=3,
+    confidence_level=0.9,
+)
 # Expected output:
 #   time_series_timestamp           start_station_name              time_series_type        time_series_data        time_series_adjusted_data       standard_error      confidence_level        prediction_interval_lower_bound     prediction_interval_upper_bound     trend       seasonal_period_yearly      seasonal_period_quarterly       seasonal_period_monthly     seasonal_period_weekly      seasonal_period_daily       holiday_effect      spikes_and_dips     step_changes        residual
 # 0 2013-07-01 00:00:00+00:00   Central Park S & 6 Ave                  history                   69.0                     154.168527                 32.572948              <NA>                         <NA>                              <NA>                   0.0              35.477484                        <NA>                           <NA>                    -28.402102                     <NA>                 <NA>                 0.0           -85.168527         147.093145
@@ -540,7 +588,7 @@ print(explain.peek(5))
 # 4 2013-07-03 00:00:00+00:00   Central Park S & 6 Ave                  history                   115.0                    205.968236                 32.572948              <NA>                         <NA>                              <NA>                 191.32754          59.220766                        <NA>                           <NA>                    -44.580071                     <NA>                 <NA>                 0.0           -85.168527         -5.799709
 ```
 
-The output rows are ordered first by `time_series_timestamp` , then chronologically by the `start_station_name` column value. In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the `forecast_value` column value. The `forecast_value` value is the middle point of the prediction interval. The prediction interval depends on the `standard_error` and `confidence_level` column values.
+The output contains one row per time point for each `start_station_name` . In time series forecasting, the prediction interval, as represented by the `prediction_interval_lower_bound` and `prediction_interval_upper_bound` column values, is as important as the forecast value. For rows that have a value of `forecast` in the `time_series_type` column, the `time_series_data` column contains the forecast value. The prediction interval depends on the `standard_error` and `confidence_level` column values.
 
 ## Clean up
 

@@ -135,6 +135,8 @@ Refer to the following documents for more information about managing compute cap
 
 - For allocating slot reservations to specific projects, see [Work with reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
+- For attributing compute capacity charges from an administrative project directly to your query consumption projects, see [Compute cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) (Preview).
+
 - For estimating the right number of slots to allocate to your workloads, see [Estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
 
 ## Monitor resources
@@ -205,4 +207,4 @@ If you need additional assistance, see [Get support](https://docs.cloud.google.c
 
 ## What's next
 
-- [BigQuery Admin reference guide: recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap)
+- View the [BigQuery Admin reference guide: recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap)

@@ -158,7 +158,11 @@ To create a pipeline schedule, follow these steps:
 
 11. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+12. Optional: To limit how many tasks can run concurrently during scheduled pipeline runs, select **Limit concurrent actions** , and in the **Maximum concurrent actions** field, enter a whole number between `1` and `5000` .
+
+    If the number of executed tasks exceeds the limit, BigQuery places the remaining tasks in a queue until a concurrency slot becomes available.
+
+13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 When you create the schedule, the current version of the pipeline is automatically deployed. To update the schedule with a new version of the pipeline, [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) .
 
@@ -214,7 +218,11 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 11. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
+12. Optional: To limit how many tasks can run concurrently during scheduled pipeline runs, select **Limit concurrent actions** , and in the **Maximum concurrent actions** field, enter a whole number between `1` and `5000` .
+
+    If the number of executed tasks exceeds the limit, BigQuery places the remaining tasks in a queue until a concurrency slot becomes available.
+
+13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 When you create the schedule, the current version of the pipeline is automatically deployed. To update the schedule with a new version of the pipeline, [deploy the pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#deploy) .
 
@@ -264,7 +272,11 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 10. Set the BigQuery query job priority with the **Execute as interactive job with high priority (default)** option. By default, BigQuery runs queries as [interactive query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which are intended to start running as quickly as possible. Clearing this option runs the queries as [batch query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries#interactive-batch) , which have lower priority.
 
-11. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
+11. Optional: To limit how many tasks can run concurrently during scheduled pipeline runs, select **Limit concurrent actions** , and in the **Maximum concurrent actions** field, enter a whole number between `1` and `5000` .
+
+    If the number of executed tasks exceeds the limit, BigQuery places the remaining tasks in a queue until a concurrency slot becomes available.
+
+12. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 > **Note:** If a scheduled pipeline run doesn't finish before the start of the next scheduled run, the next scheduled run is skipped and marked with an error.
 
@@ -359,7 +371,11 @@ To create a trigger, follow these steps:
 
 12. (Optional) For **Min Execution Duration** , select a duration to prevent triggers from activating more frequently than this minimum duration. Supports values between 3 minutes to 24 hours. If not specified, the default value is 3 minutes.
 
-13. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
+13. Optional: To limit how many actions can run concurrently during trigger-based executions, select **Limit concurrent actions** , and in **Maximum concurrent actions** , enter a whole number between `1` and `5000` .
+
+    If the number of ready actions exceeds the limit, BigQuery places the remaining actions in a queue until a concurrency slot becomes available.
+
+14. Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines#authorize-google-account) .
 
 ### Troubleshooting trigger-based schedules
 

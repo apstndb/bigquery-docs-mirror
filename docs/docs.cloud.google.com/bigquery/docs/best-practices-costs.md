@@ -42,6 +42,12 @@ When you use the capacity pricing model using slot reservations, you specify the
 
 You can use editions fully on demand by setting the baseline of the reservation to 0 and the maximum to a setting that meets your workload needs. BigQuery automatically scales up to the number of slots needed for your workload, never exceeding the maximum that you set. For more information, see [Workload management using reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management) .
 
+### Attribute capacity costs to consumption projects
+
+If your organization uses BigQuery editions capacity-based pricing and separates workloads across multiple query projects ( `consumption projects` ), consider enabling [compute cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) in your administration project.
+
+Attributing capacity charges directly to the projects where queries execute lets you view project-level compute costs in Cloud Billing and perform better FinOps internal chargebacks.
+
 ## Control query costs
 
 To control the costs of individual queries, we recommend that you first follow best practices for [optimizing query computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) and [optimizing storage](https://docs.cloud.google.com/bigquery/docs/best-practices-storage) .

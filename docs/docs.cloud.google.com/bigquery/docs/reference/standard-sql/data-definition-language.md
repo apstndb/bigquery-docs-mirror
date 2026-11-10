@@ -6729,6 +6729,16 @@ The following options are supported:
 <p>Example: <code>`region-us.reusable_column_aliases_mode` = "on"</code></p></td>
 </tr>
 <tr class="odd">
+<td><code>reservation_attribution_mode</code> (Preview)</td>
+<td><code>STRING</code></td>
+<td><p>Specifies the reservation cost attribution mode for the project. This option determines whether compute costs are attributed to the administrative project (default) or the individual projects that run the queries. This option can be one of the following:</p>
+<ul>
+<li><code>'RESERVATION_ATTRIBUTION_MODE_PROJECT_LEVEL'</code> : Attributes reservation compute costs directly to the projects executing the jobs.</li>
+<li><code>'RESERVATION_ATTRIBUTION_MODE_NO_ATTRIBUTION'</code> (default): No attribution; costs are attributed to the administrative project holding the capacity.</li>
+</ul>
+<p>Example: <code>`region-us.reservation_attribution_mode` = 'RESERVATION_ATTRIBUTION_MODE_PROJECT_LEVEL'</code></p></td>
+</tr>
+<tr class="even">
 <td><code>default_location</code></td>
 <td><code>STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>
