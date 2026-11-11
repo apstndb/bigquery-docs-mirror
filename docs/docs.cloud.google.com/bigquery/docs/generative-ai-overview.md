@@ -144,6 +144,7 @@ Supported locations for text generation and embedding models vary based on the m
 
 BigQuery supports the following models:
 
+- `gemini-4-carbon`
 - `gemini-4-argon`
 - `gemini-3.8-flash`
 - `gemini-3.7-flash`

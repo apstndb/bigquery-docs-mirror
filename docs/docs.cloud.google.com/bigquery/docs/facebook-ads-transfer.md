@@ -34,6 +34,8 @@ Facebook Ads data transfers are subject to the following limitations:
 
 - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
 
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
+
 - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Facebook Ads.
 
 ## Before you begin

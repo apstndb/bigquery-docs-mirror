@@ -85,11 +85,11 @@ By default, in BigQuery editions capacity-based pricing, all compute charges are
 To help you estimate project-level budgets and perform internal chargebacks, BigQuery provides two ways to track resource consumption across the individual query projects that use the reservation:
 
 - **Informational slot attribution (default):** an informational line item in your billing report that shows the slot hours used per project. Actual compute charges remain billed to the administration project.
-- **Billed cost attribution (Preview):** an opt-in feature that shifts the actual billed compute charges from the administration project directly to the individual query projects based on their slot usage.
+- **Billed cost attribution ( [Preview](https://cloud.google.com/products#product-launch-stages) ):** an opt-in feature that shifts the actual billed compute charges from the administration project directly to the individual query projects based on their slot usage.
 
 ### Informational slot attribution
 
-By default, the query projects where SQL jobs execute show `$0` for compute spend. However, all [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) customers have an **Analysis Slots Attribution** line item in their Cloud Billing data. This line item is included on the **Billing** page and in the Cloud Billing export.
+By default, the query projects where SQL jobs execute show `$0` for compute spend. However, all [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) customers have an **Analysis Slots Attribution** line item in their Cloud Billing data. This line item is included on the **Billing** page in the Google Cloud console and in the Cloud Billing export.
 
 This line item shows the slot hours used per project. It incurs no cost and doesn't affect your invoice totals.
 
@@ -135,7 +135,7 @@ To enable compute cost attribution across your query projects, run the [`ALTER P
     - `ADMIN_PROJECT_ID` : the project ID of your administration project.
     - `LOCATION` : the location of your reservation.
 
-3.  Click play_circle **Run** .
+3.  Click play_circle_filled **Run** .
 
 After you enable compute cost attribution, shifts in cost allocation begin appearing in individual query projects on the next billing day (billing days start at 00:00 in the `America/Los_Angeles` time zone). The changes are also reflected in daily Cloud Billing reports within approximately one day.
 

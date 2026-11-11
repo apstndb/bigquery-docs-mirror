@@ -442,7 +442,7 @@ Use the [`google_bigquery_reservation`](https://registry.terraform.io/providers/
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a predictable reservation group named `my-reservation` :
+The following example creates a predictable reservation named `my-reservation` :
 
 ```terraform
 resource "google_bigquery_reservation" "default" {
@@ -1002,7 +1002,7 @@ For more information about IAM, see [Manage access to other resources](https://d
 
 You can control which reservations get priority access to idle slots by creating a reservation group. Reservations within a reservation group will share idle slots with each other before they are available to other reservations in the project.
 
-Before you create a reservation group, you must first enable [reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) .
+Before you create a reservation group, [reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the administration project. For administration projects created after October 10, 2026, reservation-based fairness is enabled by default.
 
 ### Required permissions
 
@@ -1032,9 +1032,32 @@ To create a reservation group:
 
 The new reservation group is visible in the **Slot reservations** tab.
 
+### SQL
+
+To create a reservation group, use the `CREATE RESERVATION_GROUP` data definition language (DDL) statement:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+
+    ```
+    CREATE RESERVATION_GROUP
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_GROUP_NAME`;
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation group resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group.
+    - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
+
+3.  Click play_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
 ### bq
 
-To create a reservation, use the `bq mk` command with the `--reservation` flag:
+To create a reservation group, use the `bq mk` command with the `--reservation_group` flag:
 
 ```
 bq mk \
@@ -1047,7 +1070,7 @@ bq mk \
 Replace the following:
 
 - `ADMIN_PROJECT_ID` : the project ID
-- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group.
 - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
 ### Terraform
@@ -1157,6 +1180,32 @@ To add a reservation to a reservation group, update the `reservation_group` prop
 
 The reservation group is updated with the latest member reservations.
 
+### SQL
+
+To update the reservation and set the reservation group, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+
+    ```
+    ALTER RESERVATION
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+    SET OPTIONS (
+      reservation_group = 'RESERVATION_GROUP_NAME');
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+    - `RESERVATION_NAME` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
+    - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
+
+3.  Click play_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
 ### bq
 
 To update the reservation and set the reservation group, use the `bq update` command with the `--reservation` flag:
@@ -1191,6 +1240,15 @@ To list the reservation group information for your reservations, do the followin
 4.  Click the expansion button next to a reservation group, the reservation group row is expanded to show the member reservations in the following rows.
 
 ### bq
+
+To list the reservation groups in your project, use the `bq ls` command with the `--reservation_group` flag:
+
+```
+bq ls \
+    --project_id=ADMIN_PROJECT_ID \
+    --location=LOCATION \
+    --reservation_group
+```
 
 To list the reservations and include the reservation group information, use the `bq ls` command with the `--reservation` flag:
 
@@ -1240,6 +1298,31 @@ If the reservation to be removed is the last one in the group:
 
 The reservation group is deleted.
 
+### SQL
+
+To remove the reservation from the reservation group, use the [`ALTER RESERVATION SET OPTIONS` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_set_options_statement) :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+
+    ```
+    ALTER RESERVATION
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_NAME`
+    SET OPTIONS (
+      reservation_group = '');
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+    - `RESERVATION_NAME` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
+
+3.  Click play_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
 ### bq
 
 To remove the reservation from the reservation group, use the `bq update` command with the `--reservation` flag:
@@ -1256,7 +1339,6 @@ Replace the following:
 
 - `ADMIN_PROJECT_ID` : the project ID
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
-- `NUMBER_OF_BASELINE_SLOTS` : the number of baseline slots to allocate to the reservation
 - `RESERVATION_NAME` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
 ### Remove an empty reservation group
@@ -1277,6 +1359,29 @@ A reservation group can only be deleted if it does not contain any member reserv
 
 6.  Click **Ungroup** in the **Edit reservation group** pane.
 
+### SQL
+
+To delete an empty reservation group, use the `DROP RESERVATION_GROUP` DDL statement:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+
+    ```
+    DROP RESERVATION_GROUP
+      `ADMIN_PROJECT_ID.region-LOCATION.RESERVATION_GROUP_NAME`;
+    ```
+
+    Replace the following:
+
+    - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation group resource.
+    - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group.
+    - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
+
+3.  Click play_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
+
 ### bq
 
 To delete an empty reservation group, use the `bq rm` command with the `--reservation_group` flag:
@@ -1291,7 +1396,7 @@ bq rm \
 Replace the following:
 
 - `ADMIN_PROJECT_ID` : the project ID
-- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group
 - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
 To learn more about reservation groups, see [Reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#groups) .

@@ -18,6 +18,7 @@ Salesforce Marketing Cloud data transfers are subject to the following limitatio
   - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
 - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connections-with-network-attachment) .
 - You must set up client secret rotation every 180 days to avoid authentication failures. For more information, see [Rotate client secrets](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer#rotate_client_secrets) .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 - Salesforce Marketing Cloud transfers don't support data extensions that contain binary or large blob fields.
 - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Salesforce Marketing Cloud.
 

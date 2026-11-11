@@ -20,6 +20,10 @@ To learn about how a Klaviyo transfer works, see [Introduction to Klaviyo data t
 
 ## Limitations
 
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
+
+### Incremental transfer limitations
+
 Incremental Klaviyo transfers are subject to the following limitations:
 
 - You can only choose `TIMESTAMP` columns as watermark columns.

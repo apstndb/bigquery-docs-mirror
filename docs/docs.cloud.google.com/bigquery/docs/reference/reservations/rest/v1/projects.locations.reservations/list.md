@@ -51,10 +51,11 @@ The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
 
 ### Query parameters
 
-| Parameters  |                                                                                 |
-|-------------|---------------------------------------------------------------------------------|
-| `pageSize`  | `integer` The maximum number of items to return per page.                       |
-| `pageToken` | `string` The nextPageToken value returned from a previous List request, if any. |
+| Parameters  |                                                                                                                                                     |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pageSize`  | `integer` The maximum number of items to return per page.                                                                                           |
+| `pageToken` | `string` The nextPageToken value returned from a previous List request, if any.                                                                     |
+| `filter`    | `string` Optional. The filter to apply to the list results. Only filtering by reservation group is supported. Examples: "reservationGroup=my-group" |
 
 ### Request body
 

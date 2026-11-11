@@ -24,6 +24,7 @@ Microsoft SQL Server data transfer jobs are subject to the following limitations
 
 - There is a limited number of simultaneous connections to a Microsoft SQL Server database. Therefore, the number of simultaneous transfer runs to a single Microsoft SQL Server database is also limited. Ensure that the number of concurrent transfer jobs is less than the maximum number of concurrent connections supported by the Microsoft SQL Server database.
 - Some Microsoft SQL Server data types might be mapped to the `STRING` type in BigQuery to avoid data loss. For example, certain numeric types in Microsoft SQL Server that don't have precision and scale defined might be mapped to `STRING` in BigQuery. For more information, see [Data type mapping](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer-intro#data-type-mapping) .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ### Incremental transfer limitations
 

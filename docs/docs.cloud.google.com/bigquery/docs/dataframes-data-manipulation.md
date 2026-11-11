@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Manipulate data with BigQuery DataFrames
 
-BigQuery DataFrames lets you manipulate data using familiar pandas syntax patterns without transferring datasets out of your data warehouse. Because these operations are executed server-side, you can inspect, manipulate, and apply complex calculations directly on data stored within BigQuery.
+BigQuery DataFrames lets you manipulate data using familiar pandas syntax patterns without transferring datasets out of BigQuery. Because these operations are executed server-side, you can inspect, manipulate, and apply complex calculations directly on data stored within BigQuery.
 
 For more information about supported functions, see the [`bigframes.bigquery`](https://dataframes.bigquery.dev/reference/api/bigframes.bigquery.html#module-bigframes.bigquery) library.
 
@@ -31,13 +31,13 @@ When you perform end user authentication in an interactive environment like a no
 
 ## pandas API
 
-A notable feature of BigQuery DataFrames is that the [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) is designed to be similar to APIs in the pandas library. This design lets you employ familiar syntax patterns for data manipulation tasks. Operations defined through the BigQuery DataFrames API are executed server-side, operating directly on data stored within BigQuery and eliminating the need to transfer datasets out of BigQuery.
+The [`bigframes.pandas` API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) is designed to be similar to APIs in the pandas library. This design lets you use familiar syntax patterns for data manipulation tasks. Operations defined through the BigQuery DataFrames API are executed server-side, operating directly on data stored within BigQuery and eliminating the need to transfer datasets out of BigQuery.
 
 To check which pandas APIs are supported by BigQuery DataFrames, see [Supported pandas APIs](https://dataframes.bigquery.dev/supported_pandas_apis.html) .
 
 ## Inspect and manipulate data
 
-You can use the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) API to perform data inspection and calculation operations. The following code sample uses the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
+You can use the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) API to perform data inspection and calculation operations. The following example uses the [`bigframes.pandas`](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html#module-bigframes.pandas) library to inspect the `body_mass_g` column, calculate the mean `body_mass` , and calculate the mean `body_mass` by `species` :
 
 ```
 import bigframes.pandas as bpd

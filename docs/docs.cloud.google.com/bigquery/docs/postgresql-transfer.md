@@ -37,6 +37,8 @@ PostgreSQL data transfers are subject to following limitations:
     - `DATE`
   - PostgreSQL data transfers that don't use primary key or indexed columns can't support more than 2,000,000 records per table.
 
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
+
 ### Incremental transfer limitations
 
 Incremental PostgreSQL transfers are subject to the following limitations:

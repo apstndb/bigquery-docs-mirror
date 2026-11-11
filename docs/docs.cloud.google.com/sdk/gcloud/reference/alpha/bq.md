@@ -43,9 +43,6 @@ GROUPS
 [`tables`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/tables)  
 `(ALPHA)` Interact with and manage Google BigQuery tables.
 
-[`translation`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/translation)  
-`(ALPHA)` Manage BigQuery Migration Service translations.
-
 COMMANDS
 
 `COMMAND` is one of the following:

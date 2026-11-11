@@ -58,7 +58,7 @@ When you finish the tasks that are described in this document, you can avoid con
 1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
 
     ```
-    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER&quot; --role=ROLE
+    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
     ```
 
     Replace the following:
@@ -170,7 +170,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
     OPTIONS (
       connection_type = "CLOUD_RESOURCE",
-      friendly_name = &quot;FRIENDLY_NAME";,
+      friendly_name = "FRIENDLY_NAME",
       description = "DESCRIPTION"
       );
     ```
@@ -250,7 +250,7 @@ def create_connection(
         project_id: The Google Cloud project ID.
         location: The location of the connection (for example, "us-central1").
         connection_id: The ID of the connection to create.
-    """span>
+    """
 
     parent = client.common_location_path(project_id, location)
 
@@ -285,7 +285,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ```javascript
 const {ConnectionServiceClient} =
-  require(&#39;@google-cloud/bigquery-connection').v1;
+  require('@google-cloud/bigquery-connection').v1;
 const {status} = require('@grpc/grpc-js');
 
 const client = new ConnectionServiceClient();
@@ -368,14 +368,14 @@ public class CreateConnection {
     CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
     Connection connection =
         Connection.newBuilder()
-            .setFriendlyName(";Example Connection")
+            .setFriendlyName("Example Connection")
             .setDescription("Cloud Resource connection for federated queries.")
             .setCloudResource(cloudResourceProperties)
             .build();
 
     CreateConnectionRequest request =
         CreateConnectionRequest.newBuilder()
-     .setParent(parent.toString())
+            .setParent(parent.toString())
             .setConnectionId(connectionId)
             .setConnection(connection)
             .build();
@@ -389,11 +389,11 @@ public class CreateConnection {
           "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
     } catch (AlreadyExistsException err) {
       System.err.printf(
-          "error: connection '%s' already exists in location '%s' for project &#39;%s': %s%n",
+          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
           connectionId, location, projectId, err.getMessage());
     } catch (ApiException | IOException err) {
       System.err.printf(
-          "error: failed to create connection &#39;%s' in location '%s' for project '%s': %s%n",
+          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
           connectionId, location, projectId, err.getMessage());
     }
   }

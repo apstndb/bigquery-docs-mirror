@@ -14,6 +14,31 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 10, 2026
+
+Feature
+
+You can use [graph measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) to lock an aggregation to a key in order to perform complex aggregations without overcounting. [Measure expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) can include the following:
+
+- Aggregate function calls
+- Expressions within aggregate functions
+- Conditional logic within aggregate functions
+- Conditional distinct counting
+- Scalar operations and expressions outside of aggregate functions
+- Combinations of measures wrapped in the `AGG` function
+
+To query measures, you transform your graph into a flattened table by using the [`GRAPH_EXPAND` TVF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-sql-queries#graph_expand) , and then query measures in that table with the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . The `GRAPH_EXPAND` function now supports multiple fact tables. To view the output schema of the `GRAPH_EXPAND` function, use the [`BQ.SHOW_GRAPH_EXPAND_SCHEMA` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqshow_graph_expand_schema) .
+
+You can define [extensions](https://docs.cloud.google.com/bigquery/docs/graph-schema-overview#specify_options) in the `OPTIONS` clause of the labels and properties in your graphs, which are string pairs that represent custom metadata for natural language querying.
+
+Measures and graphs are supported in Data Studio through the [BigQuery connector](https://docs.cloud.google.com/data-studio/connect-to-google-bigquery) . Measures and graphs are also automatically cataloged in Knowledge Catalog, which makes them searchable by natural language or domain synonyms.
+
+These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-4-carbon` model. This model is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## November 09, 2026
 
 Feature

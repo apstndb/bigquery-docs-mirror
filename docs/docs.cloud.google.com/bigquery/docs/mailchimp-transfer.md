@@ -23,6 +23,7 @@ You can load data from Mailchimp to BigQuery using the [BigQuery Data Transfer S
   - For more information, see [Error glossary](https://mailchimp.com/developer/marketing/docs/errors/#error-glossary) .
 - The `Integer` data type in Mailchimp has a maximum supported value of 2,147,483,647 across all objects.
   - However, some Mailchimp fields support higher values, such as the `Quantity` field in `EcommerceOrderLines` and `EcommerceCartLines` .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ### Array field limitations
 

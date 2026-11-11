@@ -2,19 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/extend-differential-privacy
 uri: https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy
 title: Extend differential privacy
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to extend BigQuery differential privacy to multi-cloud data sources with BigQuery Omni, remote functions, and PipelineDP on Apache Spark.
 data_source: docs.cloud.google.com
 ---
 
 # Extend differential privacy
 
-This document provides examples of how to extend differential privacy for BigQuery differential privacy.
+BigQuery lets you extend [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) to multi-cloud data sources and external privacy libraries to help protect sensitive data across environments. You can apply differential privacy to multi-cloud data sources like Amazon Web Services (AWS) S3 with BigQuery Omni, call external libraries using remote functions, or run Python aggregations with [PipelineDP](https://pipelinedp.io/) on Apache Spark and Apache Beam.
 
-BigQuery lets you extend [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) to multi-cloud data sources and external differential privacy libraries. This document provides examples of how to apply differential privacy for multi-cloud data sources like AWS S3 with BigQuery Omni, how to call an external differential privacy library using a remote function, and how to perform differential privacy aggregations with [PipelineDP](https://pipelinedp.io/) , a Python library that can run with Apache Spark and Apache Beam.
-
-> **Note:** In this document, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
-
-For more information about differential privacy, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
+The privacy parameters in this document's examples aren't recommendations, so work with your privacy or security officer to determine the optimal parameters for your dataset and organization. For more information about core concepts and syntax, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
 
 ## Differential privacy with BigQuery Omni
 
@@ -49,7 +45,7 @@ For more information about BigQuery Omni limitations, see [Limitations](https://
 
 You can call external differential privacy libraries using [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) . The following link uses a remote function to call an external library hosted by [Tumult Analytics](https://www.tmlt.dev) to use zero-concentrated differential privacy on a retail sales dataset.
 
-For information about working with Tumult Analytics, see the [Tumult Analytics launch post](https://www.tmlt.io/resources/gcp-launch-post) {: .external}.
+For information about working with Tumult Analytics, see the [Tumult Analytics launch post](https://www.tmlt.io/resources/gcp-launch-post) .
 
 ## Differential privacy aggregations with PipelineDP
 

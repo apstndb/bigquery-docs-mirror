@@ -1754,9 +1754,7 @@ Feature
 The following features are now [generally available](https://cloud.google.com/products#product-launch-stages) (GA) in queries and [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#aggregate_requirements) :
 
 - `HAVING MAX` and `HAVING MIN` clauses for the [`ANY_VALUE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value) function.
-
 - [`MAX_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by) function, which is a synonym for `ANY_VALUE(x HAVING MAX y)` .
-
 - [`MIN_BY`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by) function, which is a synonym for `ANY_VALUE(x HAVING MIN y)` .
 
 ## August 07, 2023
@@ -2365,15 +2363,15 @@ You can now [run `bq` commands using service account impersonation](https://docs
 
 Feature
 
+You can now make a dataset and the tables in that dataset [case-insensitive](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) when you [create a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) or [alter a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
 In the **Explorer** pane, the [resource corresponding to the focused tab](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#details_panel) is now selected. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 Feature
 
 In the **Explorer** pane, you can now see all the [resources in the searched resource's level](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#explorer_panel) by clicking **Show more** . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now make a dataset and the tables in that dataset [case-insensitive](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) when you [create a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) or [alter a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## February 13, 2023
 

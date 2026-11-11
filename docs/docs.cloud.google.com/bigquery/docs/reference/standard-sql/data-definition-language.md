@@ -6550,6 +6550,12 @@ The following options are supported:
 <p>Example: <code>`region-us.disable_on_demand_billing` = true</code></p></td>
 </tr>
 <tr class="odd">
+<td><code>exclude_biglake_in_datasets_list</code></td>
+<td><code>BOOL</code></td>
+<td><p>Determines whether BigLake namespaces in the region are excluded from <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list"><code>datasets.list</code></a> results for the organization. The default value is <code>false</code> , which includes BigLake namespaces. Set to <code>true</code> to exclude BigLake namespaces.</p>
+<p>Example: <code>`region-us.exclude_biglake_in_datasets_list` = true</code></p></td>
+</tr>
+<tr class="even">
 <td><code>default_location</code></td>
 <td><code>STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
@@ -6672,7 +6678,7 @@ The following options are supported:
 <tr class="odd">
 <td><code>default_cloud_resource_connection_id</code></td>
 <td><code>STRING</code></td>
-<td><p>The default connection to use when creating tables and models ( <a href="https://docs.cloud.google.com/products#product-launch-stages">Preview</a> ). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/default-connections">Default connection overview</a> .</p>
+<td><p>The default connection to use when creating tables and models ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/default-connections">Default connection overview</a> .</p>
 <p>Example: <code>`region-us.default_cloud_resource_connection_id` = "connection_1"</code> . Sets the default connection to <code>connection_1</code> in the <code>us</code> region.</p></td>
 </tr>
 <tr class="even">
@@ -6712,7 +6718,7 @@ The following options are supported:
 <p>Example: <code>`region-us.enable_global_queries_data_access` = true</code> .</p></td>
 </tr>
 <tr class="odd">
-<td><code>reservation_override_mode</code> (Preview)</td>
+<td><code>reservation_override_mode</code> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 <td><code>STRING</code></td>
 <td><p>Specifies how query reservations can be overridden in the region. This option can be one of the following:</p>
 <ul>
@@ -6729,7 +6735,7 @@ The following options are supported:
 <p>Example: <code>`region-us.reusable_column_aliases_mode` = "on"</code></p></td>
 </tr>
 <tr class="odd">
-<td><code>reservation_attribution_mode</code> (Preview)</td>
+<td><code>reservation_attribution_mode</code> ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 <td><code>STRING</code></td>
 <td><p>Specifies the reservation cost attribution mode for the project. This option determines whether compute costs are attributed to the administrative project (default) or the individual projects that run the queries. This option can be one of the following:</p>
 <ul>
@@ -6739,6 +6745,12 @@ The following options are supported:
 <p>Example: <code>`region-us.reservation_attribution_mode` = 'RESERVATION_ATTRIBUTION_MODE_PROJECT_LEVEL'</code></p></td>
 </tr>
 <tr class="even">
+<td><code>exclude_biglake_in_datasets_list</code></td>
+<td><code>BOOL</code></td>
+<td><p>Determines whether BigLake namespaces in the region are excluded from <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list"><code>datasets.list</code></a> results for the project. The default value is <code>false</code> , which includes BigLake namespaces. Set to <code>true</code> to exclude BigLake namespaces.</p>
+<p>Example: <code>`region-us.exclude_biglake_in_datasets_list` = true</code></p></td>
+</tr>
+<tr class="odd">
 <td><code>default_location</code></td>
 <td><code>STRING</code></td>
 <td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>

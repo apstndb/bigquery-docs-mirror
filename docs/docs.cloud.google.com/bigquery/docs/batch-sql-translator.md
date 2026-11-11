@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Migrate code with the batch SQL translator
 
-The batch SQL translator in BigQuery lets you translate scripts written in other SQL dialects into GoogleSQL queries in bulk. You can submit and review the results of a batch translation job from the Google Cloud console or from the command line to accelerate large-scale workload migrations.
+The batch SQL translator in BigQuery lets you translate scripts written in other SQL dialects into GoogleSQL queries in bulk. You can submit and review the results of a batch translation job from the Google Cloud console, from the command line, or with the [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) to accelerate large-scale workload migrations.
 
 To build a custom software integration, an automated CI/CD pipeline, or another programmatic workflow, [call the BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) directly. For information about supported dialects and processing locations, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) and [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
 
@@ -99,9 +99,13 @@ gcloud alpha bq migration translate-batch \
 Replace the following:
 
 - `LOCAL_CONFIG_YAML` : the local path to the configuration YAML file, such as `./configs/change-case.config.yaml` .
-- `CONFIG_YAML_URI` : the Cloud Storage URI that the command uploads the configuration YAML file to, such as `gs://my_data_bucket/teradata/configs/change-case.config.yaml` . This URI must be outside the `SOURCE_URI` directory.
+- `CONFIG_YAML_URI` : the Cloud Storage URI that the command uploads the configuration YAML file to, such as `gs://my_data_bucket/configs/change-case.config.yaml` . This URI must be outside the `SOURCE_URI` directory.
 
 For descriptions of the other placeholders, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+### MCP
+
+[Upload the configuration YAML file to the Cloud Storage directory that contains your source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) . When you translate that directory with the [`translate_batch_queries` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_batch_queries) , the translation job includes the configuration YAML file automatically. If the configuration YAML file is stored in a separate Cloud Storage location outside your source directory, specify its Cloud Storage URI in your prompt. For more information, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
 ### Upload input files to Cloud Storage
 
@@ -109,13 +113,15 @@ Upload the source files containing the queries and scripts that you want to tran
 
 ### Choose how to submit the translation job
 
-You have two options for submitting a batch translation job:
+You have three options for submitting a batch translation job:
 
 - **Google Cloud console** : Configure and submit a job using a user interface. This approach requires you to upload source files to Cloud Storage.
 
 - **Google Cloud CLI** : Submit a job from the command line using the gcloud CLI. The `translate-batch` command accepts your source and target locations as flags, and can upload local directories and files to Cloud Storage for you. For more information, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
-Both options require your source files to be accessible in Cloud Storage, and both create the same kind of translation job. A job that you submit from the command line still appears in the translation jobs list in the Google Cloud console.
+- **BigQuery Migration Service MCP server** : Submit a job from an AI application or agent connected to the [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) . This approach requires your source files to be in Cloud Storage. For more information, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+All options require your source files to be accessible in Cloud Storage, and all create the same kind of translation job. A job that you submit from the command line or from an MCP client still appears in the translation jobs list in the Google Cloud console.
 
 ## Submit a translation job
 
@@ -182,8 +188,8 @@ Replace the following:
 - `SOURCE_DIALECT` : the dialect of the source SQL files, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 - `TARGET_DIALECT` : the dialect to translate the source files into. For example, `bigquery` .
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
-- `SOURCE_URI` : the Cloud Storage directory that contains the source files, such as `gs://my_data_bucket/teradata/input/` .
-- `TARGET_URI` : the Cloud Storage directory that receives the translated files, such as `gs://my_data_bucket/teradata/output/` .
+- `SOURCE_URI` : the Cloud Storage directory that contains the source files, such as `gs://my_data_bucket/input/` .
+- `TARGET_URI` : the Cloud Storage directory that receives the translated files, such as `gs://my_data_bucket/output/` .
 
 #### Translate SQL files on your local machine
 
@@ -198,7 +204,7 @@ gcloud alpha bq migration translate-batch \
     --target-gcs-path=TARGET_URI
 ```
 
-Replace `LOCAL_DIR` with the local directory that contains the source files, such as `./teradata_queries` . For descriptions of the other placeholders, see [Translate SQL files in Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#translate-gcs-files) .
+Replace `LOCAL_DIR` with the local directory that contains the source files, such as `./input_queries` . For descriptions of the other placeholders, see [Translate SQL files in Cloud Storage](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#translate-gcs-files) .
 
 To map individual files instead of directories, use the `--source-local-files` flag.
 
@@ -225,10 +231,30 @@ gcloud storage cp --recursive TARGET_URI LOCAL_DIRECTORY
 
 Replace the following:
 
-- `TARGET_URI` : your target base URI, such as `gs://my_data_bucket/teradata/output/` .
+- `TARGET_URI` : your target base URI, such as `gs://my_data_bucket/output/` .
 - `LOCAL_DIRECTORY` : the local directory that receives the files.
 
 Your job also appears in the translation jobs list in the Google Cloud console, even though you submitted it from the command line. To review the quality of a translation output, see [Explore the translation output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
+
+### MCP
+
+To submit a batch translation job from an AI application or agent, connect your MCP client to the BigQuery Migration Service MCP server. For setup instructions and required roles, see [Configure an MCP client to use the BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp#configure-client) .
+
+[Upload your input SQL files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) and any [metadata ZIP files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to Cloud Storage, and then prompt your MCP client to translate the files:
+
+```
+Translate the DIALECT SQL files in SOURCE_URI into GoogleSQL and write the output to TARGET_URI. Use PROJECT_NUMBER and LOCATION.
+```
+
+Replace the following:
+
+- `DIALECT` : the dialect of the SQL files that you're translating, such as `Teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
+- `SOURCE_URI` : the Cloud Storage directory that contains the input files, such as `gs://my_data_bucket/input/` .
+- `TARGET_URI` : an empty Cloud Storage directory that receives the outputs, such as `gs://my_data_bucket/output/` .
+- `PROJECT_NUMBER` : your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
+
+When you use this prompt, the MCP client calls the [`translate_batch_queries` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_batch_queries) , and then periodically calls the [`fetch_batch_translation` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_translation) until the translation state is `SUCCEEDED` or `FAILED` . The server writes the translated SQL files and the `translation_report.csv` summary report to `TARGET_URI` . Your job also appears in the translation jobs list in the Google Cloud console. For more sample prompts, see [Use the BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp#sample-prompts) .
 
 ## Translate metadata
 
@@ -240,7 +266,7 @@ As well as translating SQL scripts, you can translate the metadata that describe
 
 The input is one or more metadata ZIP files. To learn how to produce these files with the `dwh-migration-dumper` tool, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
-You can translate metadata using either the Google Cloud console or the gcloud CLI. Select one of the following options:
+You can translate metadata using the Google Cloud console, the gcloud CLI, or the BigQuery Migration Service MCP server. Select one of the following options:
 
 ### Console
 
@@ -274,8 +300,8 @@ Replace the following:
 - `SOURCE_DIALECT` : the dialect of the source metadata, such as `teradata` . For the supported values, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) .
 - `TARGET_DIALECT` : the dialect of the target tables. For example, `bigquery` .
 - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) that processes the job, such as `us` .
-- `SOURCE_URI` : the Cloud Storage directory that contains the metadata ZIP files, such as `gs://my_data_bucket/teradata/metadata/` .
-- `TARGET_URI` : the Cloud Storage directory that receives the translated DDL statements, such as `gs://my_data_bucket/teradata/ddl_output/` .
+- `SOURCE_URI` : the Cloud Storage directory that contains the metadata ZIP files, such as `gs://my_data_bucket/metadata/` .
+- `TARGET_URI` : the Cloud Storage directory that receives the translated DDL statements, such as `gs://my_data_bucket/ddl_output/` .
 
 To point at individual metadata ZIP files rather than a directory, use the `--source-gcs-files` flag. To upload metadata files from your local machine as part of the job, use the `--source-local-dirs` or `--source-local-files` flag.
 
@@ -297,6 +323,18 @@ gcloud alpha bq migration translate-batch \
 
 For the other flags that the [`translate-batch` command](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) accepts, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
+### MCP
+
+To translate a metadata ZIP file in Cloud Storage from an MCP client connected to the [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) , prompt your MCP client:
+
+```
+Translate the DIALECT metadata file METADATA_FILE_URI into BigQuery DDL. Write the output to TARGET_URI. Use PROJECT_NUMBER and LOCATION.
+```
+
+Replace `METADATA_FILE_URI` with the Cloud Storage path of your metadata ZIP file, such as `gs://my_data_bucket/metadata.zip` . For descriptions of the other placeholders, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+When you use this prompt, the MCP client calls the [`translate_metadata` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_metadata) , and then periodically calls the [`fetch_batch_translation` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_translation) until the state is `SUCCEEDED` or `FAILED` . The server writes the generated DDL statements and table mappings to `TARGET_URI` .
+
 ## Generate source DDL
 
 > **Preview**
@@ -309,7 +347,7 @@ The best way to resolve these issues is to supply the real definitions of your s
 
 If you can't extract metadata, for example when you no longer have access to the source system, then you can ask Gemini to infer the missing DDL statements from your source SQL instead. Gemini infers these DDL statements from how the objects are used in your queries, so always review and verify these statements before using them.
 
-You can generate source DDL for your translations using either the Google Cloud console or the gcloud CLI. Select one of the following options:
+You can generate source DDL for your translations using the Google Cloud console, the gcloud CLI, or the BigQuery Migration Service MCP server. Select one of the following options:
 
 ### Console
 
@@ -338,19 +376,43 @@ Replace `SOURCE_URI` with the Cloud Storage directory that contains the source S
 
 To generate suggestions as part of a translation job instead, add the `--enable-ai-suggestion` flag to the [`translate-batch` command](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
+### MCP
+
+To generate source DDL suggestions for your SQL files in Cloud Storage from an MCP client connected to the [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) , prompt your MCP client:
+
+```
+Generate DDL for the DIALECT SQL files in SOURCE_URI and write the output to TARGET_URI. Use PROJECT_NUMBER and LOCATION.
+```
+
+For descriptions of the placeholders, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+
+When you use this prompt, the MCP client calls the [`generate_batch_ddl_suggestion` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/generate_batch_ddl_suggestion) , and then periodically calls the [`fetch_batch_ddl_suggestion` tool](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_batch_ddl_suggestion) until the state is `SUCCEEDED` or `FAILED` . The server writes the suggested DDL statements to the Cloud Storage directory returned in the `fetch_batch_ddl_suggestion` response. To retranslate with the suggested DDL statements, copy them as unzipped SQL files to a directory under `SOURCE_URI` and run `translate_batch_queries` again.
+
 You can then supply the generated DDL statements as input to a later translation job to improve translation quality. For more information, see [`RelationNotFound` or `AttributeNotFound` translation issues](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#batch-relation-attribute-not-found) .
 
 ## Explore the translation output
 
-You can review the results of a translation job in the Google Cloud console, regardless of whether the job was submitted from the command line or the Google Cloud console. The batch SQL translator outputs the following files to the specified destination:
+When you run a batch translation job, the batch SQL translator writes the translated files, the summary report, and any Gemini suggestion files to the destination Cloud Storage path that you specified. The Google Cloud console also provides an interface to view these output files, inspect translation issues, and manage your configuration files, regardless of whether you submitted the job from the Google Cloud console, from the command line, or from an MCP client.
 
-- The translated files.
-- The translation summary report in CSV format.
-- The AI suggestion files.
+### Translation output files
+
+The translation job writes output files to the destination Cloud Storage path under the following directories:
+
+- `sql/` : the translated SQL files that the translation engine produces after applying any rules in `*.config.yaml` files. If `SOURCE_SQL` rules in `*.ai_config.yaml` files apply, then the engine translates the rewritten SQL files from `source_sql_query_customization_suggestion/` instead of the original input SQL files.
+- `metadata/` : SQL files that contain the [translated DDL statements](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#translate_metadata) for the tables and views in your input metadata ZIP files when you enable metadata translation. This directory also includes a `config/` subdirectory that contains the translated table metadata in YAML format.
+- `report/` : job-level report files. This directory includes the [`translation_report.csv` summary report](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#summary_report) .
+- `source_sql_query_customization_suggestion/` : rewritten source SQL files that Gemini produces before translation by applying `SOURCE_SQL` rules in `*.ai_config.yaml` files to the original input SQL files.
+- `target_sql_query_customization_suggestion/` : rewritten target SQL files that Gemini produces by applying `TARGET_SQL` rules in `*.ai_config.yaml` files to the translated SQL files in `sql/` .
+- `translation_explanation_suggestion/` : text files that contain Gemini-generated explanations of the translated SQL files in `sql/` .
+- `source_sql_metadata_generation_suggestion/` : a `generated_metadata.sql` file that contains [Gemini-suggested source DDL statements](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#generate_source_ddl) for unresolved source objects in the input SQL files.
+
+The job writes the `*_suggestion/` directories only when you enable Gemini AI suggestions. In the `sql/` , `source_sql_query_customization_suggestion/` , `target_sql_query_customization_suggestion/` , and `translation_explanation_suggestion/` directories, each output file preserves the relative path of its source SQL file from the input directory. Files in the `translation_explanation_suggestion/` directory are text files named after their source SQL files, with the filename extension replaced. For example, the explanation for `queries/report.sql` is `translation_explanation_suggestion/queries/report.txt` .
+
+> **Important:** Translation is done on a best effort basis. Whenever possible, validate the translated queries.
 
 ### Google Cloud console output
 
-To see translation job details, follow these steps:
+You can use the Google Cloud console to view the output files in Cloud Storage and review the translation results. To see translation job details, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
 
@@ -446,12 +508,6 @@ To edit an existing configuration file:
 3.  Click **Re-run** to run a new translation job that uses the edited configuration YAML files.
 
 You can rename an existing configuration file by clicking more_vert **More options** \> **Rename** .
-
-### Translated files
-
-For each source file, a corresponding output file is generated in the destination path. The output file contains the translated query.
-
-> **Important:** Translation is done on a best effort basis. Whenever possible, validate the translated queries.
 
 ## Handling unsupported SQL functions with helper UDFs
 
@@ -739,5 +795,6 @@ Learn more about the following steps in data warehouse migration:
 - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
 - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
 - [Interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
+- [Use the BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp)
 - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
 - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)

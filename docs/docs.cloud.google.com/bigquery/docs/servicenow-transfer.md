@@ -22,6 +22,7 @@ ServiceNow data transfers are subject to the following limitations:
 - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
   - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
 - To use a network attachment with this data transfer, you must first [create a network attachment by defining a static IP address](https://docs.cloud.google.com/bigquery/docs/connect-to-sap-datasphere#create-network-attachment) .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ### Incremental transfer limitations
 

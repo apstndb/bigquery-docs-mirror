@@ -47,6 +47,8 @@ Salesforce data transfers are subject to the following limitations:
 
 - If you are using network attachments with your data transfer, you must [set up a public network address translation (NAT)](https://docs.cloud.google.com/nat/docs/set-up-manage-network-address-translation) with a static IP address. For more information, see [Set up IP allowlist for Salesforce transfers](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer#salesforce-allowlist) .
 
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
+
 - If your configured network attachment and virtual machine (VM) instance are located in different regions, there might be cross-region data movement when you transfer data from Salesforce.
 
 ### Incremental transfer limitations

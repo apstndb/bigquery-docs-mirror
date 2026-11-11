@@ -15,6 +15,7 @@ BigQuery offers the following SQL translation as part of the BigQuery Migration 
 - [Interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
 - [Translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator)
 - [Batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
+- [BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp)
 
 Before you translate your source SQL, we recommend that you [use the `dwh-migration-dumper` tool to extract DDL schema metadata from your source data warehouses](https://docs.cloud.google.com/bigquery/docs/generate-metadata) . The extracted metadata can be used with the SQL translators to improve SQL translation accuracy.
 

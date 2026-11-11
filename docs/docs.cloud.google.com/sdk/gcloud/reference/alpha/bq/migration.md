@@ -28,8 +28,17 @@ GROUPS
 
 `GROUP` is one of the following:
 
+[`metadata`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/metadata)  
+`(ALPHA)` Manage source metadata for BigQuery migrations.
+
+[`query-logs`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/query-logs)  
+`(ALPHA)` Manage source query logs for BigQuery migrations.
+
 [`translation`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/translation)  
 `(ALPHA)` Manage BigQuery Migration Service translations.
+
+[`validation`](https://docs.cloud.google.com/sdk/gcloud/reference/alpha/bq/migration/validation)  
+`(ALPHA)` Validate data migrated to BigQuery against its source.
 
 COMMANDS
 

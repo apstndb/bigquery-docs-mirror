@@ -18,9 +18,8 @@ You can load data from HubSpot to BigQuery using the [BigQuery Data Transfer Ser
 
 ## Limitations
 
-The HubSpot connector requires a private app access token for authentication.
-
-- You must have a HubSpot private app to have a private app access token before you can set up a HubSpot data transfer. For more information, see [HubSpot prerequisites](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer#hubspot-prerequisites) .
+- The HubSpot connector requires a private app access token for authentication. You must have a HubSpot private app to have a private app access token before you can set up a HubSpot data transfer. For more information, see [HubSpot prerequisites](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer#hubspot-prerequisites) .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ## Before you begin
 

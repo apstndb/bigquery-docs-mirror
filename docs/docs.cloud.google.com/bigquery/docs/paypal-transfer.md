@@ -47,6 +47,7 @@ PayPal data transfers are subject to the following limitations:
 - The PayPal connector can only transfer up to 2,000,000 records for catalog [products data](https://docs.cloud.google.com/bigquery/docs/paypal-transfer#supported_objects) . If the product count in PayPal exceeds this limit, the transfer fails.
 - PayPal APIs use different page size limits for each data object. The PayPal connector uses the maximum page size allowed by PayPal in a data transfer.
   - However, some objects like `Payments` or `Payment Transactions` use smaller page size limits. This can lead to slower data transfers, especially when dealing with large datasets.
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ## Before you begin
 

@@ -103,7 +103,7 @@ You can manually define your schema mapping with the following steps:
 
     - You can check the status of this command in the [SQL Translation page](https://console.cloud.google.com/bigquery/migrations/batch-translation) in BigQuery. The output of the batch translation job is stored in `gs://translation_target_base_uri/metadata/config/` .
 
-### Custom Schema File
+## Custom schema file
 
 We recommend specifying custom schema if you need to capture important information about a table, like the primary key, that would otherwise be lost in the migration. For example, when making an [incremental transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-incremental) , we recommend specifying a custom schema file so that data from subsequent transfers can be properly partitioned when loaded into BigQuery. Without a schema file, all information about primary keys and change tracking can be lost as the BigQuery Data Transfer Service automatically applies a table schema by using the source data being transferred.
 
@@ -120,47 +120,53 @@ Columns have the following fields:
 - `usageType` : information about the way the column is used by the system. The following usage types are supported:
 
   - `DEFAULT` : You can annotate multiple columns in one target table with this usage type. The `DEFAULT` usage type indicates that the column has no special use in the source system. This is the default value.
-  - `PRIMARY_KEY` : You can annotate columns in each target table with this usage type. Use the `PRIMARY_KEY` usage type to identify just one column as the primary key, or in the case of a composite key, use the same usage type on multiple columns to identify the unique entities of a table. These columns work together with `COMMIT_TIMESTAMP` to extract rows created or updated since the last transfer run.
+  - `PRIMARY_KEY` : You can annotate columns in each target table with this usage type. Use the `PRIMARY_KEY` usage type to identify one column as the primary key, or for a composite key, use the same usage type on multiple columns to identify the unique entities of a table. These columns work together with Snowflake change tracking ( `CHANGE_TRACKING = TRUE` on the table) to extract rows created or updated since the last transfer run. Without a `PRIMARY_KEY` column, the BigQuery Data Transfer Service runs incremental transfers in append-only mode, and updates and deletes aren't applied.
 
-The following example shows a custom schema file to transfer a Snowflake table called `orders` in the `my_db` database, to rename the `O_ORDERKEY` column to `ORDERKEY` , and to identify `O_ORDERSTATUS` as the primary key.
+The following example shows a custom schema file to transfer a Snowflake table called `orders` in the `my_db` database, to rename the `O_ORDERKEY` column to `order_id` , and to identify `O_ORDERKEY` as the primary key:
 
 ```
 {
-  "databases": [
-    {
-      "name": "my_db",
-      "originalName": "my_db",
-      "tables": [
+      "databases": [
         {
-          "name": "orders",
-          "originalName": "orders",
-          "columns": [
+          "name": "my_db",
+          "originalName": "my_db",
+          "tables": [
             {
-              "name": "ORDERKEY",
-              "originalName": "O_ORDERKEY",
-              "type": "INT64",
-              "originalType": "NUMERIC",
-              "usageType": [
-                "PRIMARY_KEY"
-              ],
-              "isRequired": true,
-              "originalColumnLength": 4
-            },
-            {
-              "name": "O_ORDERSTATUS",
-              "originalName": "O_ORDERSTATUS",
-              "type": "STRING",
-              "originalType": "VARCHAR",
-              "usageType": [
-                "DEFAULT"
-              ],
-              "isRequired": true,
-              "originalColumnLength": 1
+              "name": "orders",
+              "originalName": "orders",
+              "columns": [
+                {
+                  "name": "order_id",
+                  "originalName": "O_ORDERKEY",
+                  "type": "INT64",
+                  "originalType": "NUMBER",
+                  "usageType": [
+                    "PRIMARY_KEY"
+                  ],
+                  "isRequired": true
+                },
+                {
+                  "name": "order_date",
+                  "originalName": "O_ORDERDATE",
+                  "type": "DATE",
+                  "originalType": "DATE",
+                  "usageType": [
+                    "DEFAULT"
+                  ]
+                },
+                {
+                  "name": "order_status",
+                  "originalName": "O_ORDERSTATUS",
+                  "type": "STRING",
+                  "originalType": "VARCHAR",
+                  "usageType": [
+                    "DEFAULT"
+                  ]
+                }
+              ]
             }
           ]
         }
       ]
     }
-  ]
-}
 ```

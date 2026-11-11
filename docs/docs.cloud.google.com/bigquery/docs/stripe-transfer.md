@@ -34,6 +34,7 @@ Stripe data transfers are subject to the following limitations:
   - For a list of supported objects, see [Objects with `StartDate` filter support](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#objects_with_startdate_filter_support) .
 - A single transfer configuration can only support one data transfer run at a given time. If a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
   - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ## Before you begin
 

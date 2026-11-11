@@ -35,9 +35,9 @@ To schedule a query, you need the following IAM permissions:
 
 To modify or delete a scheduled query, you must have one of the following:
 
-- The `bigquery.transfers.update` and `bigquery.transfers.get` permissions on the project.
+- The `bigquery.transfers.update` permission on the project.
 - If you're running a scheduled query using user credentials, the user needs ownership of the scheduled query, and you need the `bigquery.jobs.create` permission on the project.
-- If you're running a scheduled query as a service account, the user that calls the scheduled query must have the `bigquery.transfers.update` and `bigquery.transfers.get` permissions on the project. Granting the [IAM Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `iam.serviceAccountUser` ) role lets a user run jobs as the service account, but it does not grant management permissions over the scheduled query configuration.
+- If you're running a scheduled query as a service account, the user that calls the scheduled query must have the `bigquery.transfers.update` permission on the project. Granting the [IAM Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `iam.serviceAccountUser` ) role lets a user run jobs as the service account, but it does not grant management permissions over the scheduled query configuration.
 
 The predefined [BigQuery Admin ( `roles/bigquery.admin` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin) IAM role includes the permissions that you need in order to schedule or modify a query.
 

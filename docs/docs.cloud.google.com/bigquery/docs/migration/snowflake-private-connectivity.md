@@ -59,9 +59,13 @@ To create and configure a proxy VM for a Snowflake private transfer, do the foll
     1.  Specify a port. For example, `443` .
     2.  Forward all incoming TCP traffic to the private hostname and port on the Snowflake instance.
 3.  Configure the VMs to resolve the Snowflake private hostname through the DNS configured in the consumer VPC network.
-4.  Set up an internal passthrough load balancer by doing the following:
-    1.  [Group the proxy VMs into a managed instance groups (MIG)](https://docs.cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances) .
-    2.  [Set up an internal passthrough Network Load Balancer with VM instance group backends](https://docs.cloud.google.com/load-balancing/docs/internal/setting-up-internal) .
+
+## Create internal passthrough load balancer
+
+Set up an [internal passthrough load balancer](https://docs.cloud.google.com/load-balancing/docs/internal) for the control plane by doing the following:
+
+1.  [Group the proxy VMs into a managed instance groups (MIG)](https://docs.cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances) .
+2.  [Set up an internal passthrough Network Load Balancer with VM instance group backends](https://docs.cloud.google.com/load-balancing/docs/internal/setting-up-internal) .
 
 ## Create service attachment
 
@@ -93,7 +97,7 @@ Storage Transfer Service requires the `*.blob.core.windows.net` endpoint. The `*
 
 Once created, note the endpoint's IP address. You'll need to specify the IP address when creating your load balancer in the following section.
 
-## Create a network load balancer
+## Create a proxy regional load balancer
 
 In Google Cloud, set up a regional internal proxy Network Load Balancer with hybrid connectivity. This provides an internal IP address that's restricted to clients running in the same VPC network as the load balancer, and that routes traffic to the S3 VPC endpoints or Azure Storage private endpoints that you created in the previous section.
 

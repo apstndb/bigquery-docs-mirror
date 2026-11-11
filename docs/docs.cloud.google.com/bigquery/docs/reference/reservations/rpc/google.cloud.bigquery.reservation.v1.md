@@ -1425,6 +1425,11 @@ The request for [`ReservationService.ListReservations`](https://docs.cloud.googl
 <td><p><code>string</code></p>
 <p>The next_page_token value returned from a previous List request, if any.</p></td>
 </tr>
+<tr class="even">
+<td><code>filter</code></td>
+<td><p><code>string</code></p>
+<p>Optional. The filter to apply to the list results. Only filtering by reservation group is supported. Examples: "reservation_group=my-group"</p></td>
+</tr>
 </tbody>
 </table>
 

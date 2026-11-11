@@ -292,9 +292,9 @@ In the prompts, replace the following:
 - ` ``DIALECT`` ` : the dialect of the SQL query, files, or metadata that you're translating.
 - ` ``QUERY`` ` : the query you're translating.
 - ` ``FILENAME`` ` : the file that contains the query you're translating.
-- ` ``SOURCE_URI`` ` : the Cloud Storage directory that contains the input files, such as `gs://my_bucket/teradata/input/` .
-- ` ``TARGET_URI`` ` : the Cloud Storage directory that receives the outputs, such as `gs://my_bucket/teradata/output/` .
-- ` ``METADATA_FILE_URI`` ` : the Cloud Storage path of the metadata ZIP file, such as `gs://my_bucket/teradata/metadata.zip` . To create this file, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
+- ` ``SOURCE_URI`` ` : the Cloud Storage directory that contains the input files, such as `gs://my_bucket/input/` .
+- ` ``TARGET_URI`` ` : the Cloud Storage directory that receives the outputs, such as `gs://my_bucket/output/` .
+- ` ``METADATA_FILE_URI`` ` : the Cloud Storage path of the metadata ZIP file, such as `gs://my_bucket/metadata.zip` . To create this file, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 - ` ``PROJECT_NUMBER`` ` : your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
 - ` ``LOCATION`` ` : the location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
 

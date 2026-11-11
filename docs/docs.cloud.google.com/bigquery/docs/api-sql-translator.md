@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 The BigQuery Migration API in BigQuery lets you programmatically translate scripts written in other SQL dialects into GoogleSQL queries. You can use the BigQuery Migration API when you build custom software integrations, automated CI/CD pipelines, or other programmatic migration workflows.
 
-To run a translation job from the Google Cloud console or from the command line instead, see [Translate SQL queries with the batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) . For information about supported dialects and processing locations, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) and [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
+To run a translation job from the Google Cloud console, from the command line, or from an MCP client instead, see [Translate SQL queries with the batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) or [Use the BigQuery Migration Service MCP server](https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp) . For information about supported dialects and processing locations, see [Supported SQL dialects](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#supported_sql_dialects) and [Locations](https://docs.cloud.google.com/bigquery/docs/enable-sql-translations#locations) .
 
 ## Before you begin
 

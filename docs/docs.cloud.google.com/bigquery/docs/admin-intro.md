@@ -135,7 +135,7 @@ Refer to the following documents for more information about managing compute cap
 
 - For allocating slot reservations to specific projects, see [Work with reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
-- For attributing compute capacity charges from an administrative project directly to your query consumption projects, see [Compute cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) (Preview).
+- For attributing compute capacity charges from an administrative project directly to your query consumption projects, see [Compute cost attribution](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring#reservation_cost_attribution) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 - For estimating the right number of slots to allocate to your workloads, see [Estimate slot capacity requirements](https://docs.cloud.google.com/bigquery/docs/slot-estimator) .
 
@@ -163,7 +163,7 @@ For more information, see [Creating an alert](https://docs.cloud.google.com/bigq
 
 ### Monitor reservations
 
-You can monitor your slot usage on the **Workload management** page of the Google Cloud console. You can view your capacity commitments and see where your slot reservations have been assigned. You can also use the **Slot estimator** ( [Preview](https://cloud.google.com/products#section-22) ) to help you estimate your organization's capacity requirements based on historical performance metrics.
+You can monitor your slot usage on the **Workload management** page of the Google Cloud console. You can view your capacity commitments and see where your slot reservations have been assigned. You can also use the **Slot estimator** ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to help you estimate your organization's capacity requirements based on historical performance metrics.
 
 For more information, see [Monitoring BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) .
 
@@ -207,4 +207,4 @@ If you need additional assistance, see [Get support](https://docs.cloud.google.c
 
 ## What's next
 
-- View the [BigQuery Admin reference guide: recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap)
+- View the [BigQuery Admin reference guide: Recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap) .

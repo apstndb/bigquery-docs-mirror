@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Restrict data access using analysis rules
 
-This document provides general information about analysis rules in GoogleSQL for BigQuery.
+Analysis rules in GoogleSQL for BigQuery let you enforce privacy policies and conditions when sharing sensitive data. You can apply analysis rules to a view, either directly or in a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) , to restrict queries based on aggregation thresholds, differential privacy budgets, or join requirements.
 
 ## What is an analysis rule?
 
@@ -299,7 +299,7 @@ Example:
 In the following example, a differential privacy analysis rule is queried on a view called [`ExamView`](https://docs.cloud.google.com/bigquery/docs/analysis-rules#define_privacy_view) . The differentially private data should be successfully returned from `ExamView` because `epsilon` , `delta` , and `max_groups_contributed` all satisfy the conditions of the differential analysis rule in `ExamView` .
 
 ```
--- Query an analysis–rule enforced view called ExamView.
+-- Query an analysis rule enforced view called ExamView.
 SELECT
   WITH DIFFERENTIAL_PRIVACY
     test_id,

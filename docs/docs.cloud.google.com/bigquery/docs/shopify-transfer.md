@@ -33,6 +33,7 @@ Shopify data transfers are subject to following limitations:
 - To include the following Shopify data objects that require a [discount function](https://shopify.dev/docs/apps/build/functions) , you must use the [Shopify CLI](https://shopify.dev/docs/api/shopify-cli) to create a Shopify app.
   - `DiscountsCodeApp`
   - `DiscountsCodeBasic`
+- If your network attachment was created in a Google Cloud project that is different from the Google Cloud project of the data transfer, you must grant the `compute.networkAttachments.get` and `compute.networkAttachments.update` permissions to the [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) that belongs to the Google Cloud project where the data transfer was created.
 
 ## Before you begin
 

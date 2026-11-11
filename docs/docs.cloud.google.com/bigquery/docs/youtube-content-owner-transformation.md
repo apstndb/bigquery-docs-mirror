@@ -1091,10 +1091,12 @@ The following reports track active reference files and metadata.
 YouTube report: [Weekly references](https://developers.google.com/youtube/reporting/v1/reports/system_managed/references#weekly-references)
 
 BigQuery table:  
-p_content_owner_active_references_a1\_ ` suffix `
+p_content_owner_active_references_a2\_ ` suffix `
 
 BigQuery view:  
-content_owner_active_references_a1\_ ` suffix `
+content_owner_active_references_a2\_ ` suffix `
+
+> **Caution:** Existing transfers for deprecated Version 1.0 continue writing to `p_content_owner_active_references_a1_ `` suffix` and `content_owner_active_references_a1_ `` suffix` until January 15, 2027.
 
 ### Claims reports
 
