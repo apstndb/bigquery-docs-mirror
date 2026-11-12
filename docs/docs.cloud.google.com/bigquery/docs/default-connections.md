@@ -162,9 +162,9 @@ OPTIONS (
   uris = ['BUCKET_PATH']);
 ```
 
-### Example: Create a Iceberg managed tables with a default connection
+### Example: Create an Iceberg managed table with a default connection
 
-The following SQL expression creates a [Iceberg managed tables](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) with a default connection:
+The following SQL expression creates an [Iceberg managed table](https://docs.cloud.google.com/bigquery/docs/biglake-iceberg-tables-in-bigquery#create-iceberg-tables) with a default connection:
 
 ```
 CREATE TABLE `myproject.tpch_clustered.nation` (

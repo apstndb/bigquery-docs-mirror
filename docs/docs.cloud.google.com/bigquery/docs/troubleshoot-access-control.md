@@ -292,7 +292,7 @@ The access token, service account key, or Application Default Credentials (ADC) 
 - **Verify service account keys and OAuth scopes.** If your application uses `GOOGLE_APPLICATION_CREDENTIALS` , verify that the variable points to a valid, unrevoked JSON key file, that the service account is enabled in the Google Cloud console, and that the credential includes the required `https://www.googleapis.com/auth/bigquery` or `https://www.googleapis.com/auth/cloud-platform` scope.
 - **Use current client libraries and synchronize system clocks.** Update your [BigQuery client library](https://docs.cloud.google.com/bigquery/docs/reference/libraries) or [ODBC](https://docs.cloud.google.com/bigquery/docs/odbc-for-bigquery) or [JDBC](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) driver to the latest version so that OAuth 2.0 token refreshes and federated credentials are handled automatically. Also ensure that the host machine's system clock is synchronized using NTP.
 
-### Missing end-user credentials or service account impersonation permission
+### Missing Google Account user credentials or service account impersonation permission
 
 Error strings:
 
@@ -301,12 +301,12 @@ Error strings:
 
 #### Diagnosis
 
-The job or continuous query is configured to run as a custom service account that the caller doesn't have permission to act as, or the target table or security policy requires end-user credentials (EUC) so that BigQuery can evaluate access against an interactive user identity.
+The job or continuous query is configured to run as a custom service account that the caller doesn't have permission to act as, or the target table or security policy requires Google Account user credentials so that BigQuery can evaluate access against an interactive user identity.
 
 #### Resolution
 
 - **Grant service account impersonation permissions.** When running a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries) or job configured with a custom service account, grant the caller the Service Account User role ( `roles/iam.serviceAccountUser` , which includes the `iam.serviceAccounts.actAs` permission) on that service account. When impersonating a service account or exchanging federated credentials for a short-lived token, grant the caller the Service Account Token Creator role ( `roles/iam.serviceAccountTokenCreator` ) on the target service account.
-- **Authenticate with end-user credentials.** When the target resource requires end-user credentials, authenticate the request using an interactive user's OAuth 2.0 credentials (for example, by running `gcloud auth application-default login` or configuring user OAuth in your BI tool) rather than standalone service account credentials.
+- **Authenticate with Google Account user credentials.** When the target resource requires Google Account user credentials, authenticate the request using an interactive user's OAuth 2.0 credentials (for example, by running `gcloud auth application-default login` or configuring user OAuth in your BI tool) rather than standalone service account credentials.
 - **Verify VPC Service Controls ingress and egress rules.** If the request crosses a VPC Service Controls boundary, verify that the perimeter's ingress and egress rules permit the caller identity and target resource.
 
 ### Account restricted, suspended, or deleted

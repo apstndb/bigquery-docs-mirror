@@ -619,7 +619,7 @@ When you create the external datasets with a `CLOUD_RESOURCE` connection, you ne
 
 ## Control access to tables
 
-Spanner external datasets support end-user credentials (EUC). That means that access to the Spanner tables from external datasets is controlled by Spanner. Users can query these tables only if they have access granted in Spanner.
+Spanner external datasets support Google Account user credentials. That means that access to the Spanner tables from external datasets is controlled by Spanner. Users can query these tables only if they have access granted in Spanner.
 
 Spanner external datasets also support access delegation. Access delegation decouples access to the Spanner tables from external datasets and the direct access to the underlying Spanner tables. A Cloud resource connection associated with a service account is used to connect to the Spanner. Users can query these Spanner tables from external datasets even if they don't have access granted in Spanner.
 
@@ -685,7 +685,7 @@ AS
 - SQL auto completion does not work with Spanner external tables when you write queries.
 - [Scan with Sensitive Data Protection](https://docs.cloud.google.com/bigquery/docs/scan-with-dlp#scanning-bigquery-data-using-the-cloud-console) isn't supported for external datasets.
 - Sharing with BigQuery sharing (formerly Analytics Hub) isn't supported for external datasets.
-- If the Spanner external dataset uses end-user credentials (EUC), you can create an authorized view that references the external dataset. However, when this view is queried, then EUC of a person who executes a query will be sent to Spanner.
+- If the Spanner external dataset uses Google Account user credentials, you can create an authorized view that references the external dataset. However, when this view is queried, then the Google Account user credentials of a person who executes a query will be sent to Spanner.
 - If the Spanner external dataset uses a Cloud resource connection for access delegation, you can create an authorized view or an authorized routine that references the external dataset.
 
 ## What's next

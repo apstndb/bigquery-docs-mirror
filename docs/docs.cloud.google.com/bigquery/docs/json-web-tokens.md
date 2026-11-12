@@ -115,4 +115,4 @@ curl -L -H "Authorization: Bearer $(cat $SIGNED_JWT_FILE)" \
 ## What's next
 
 - Learn more about [BigQuery authentication](https://docs.cloud.google.com/bigquery/docs/authentication) .
-- Learn how to [authenticate with end-user credentials](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed) .
+- Learn how to [authenticate with Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/authentication/end-user-installed) .

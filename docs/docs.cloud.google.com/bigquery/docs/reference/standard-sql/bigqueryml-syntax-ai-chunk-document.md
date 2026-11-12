@@ -51,7 +51,7 @@ AI.CHUNK_DOCUMENT(
 
 The `AI.CHUNK_DOCUMENT` function takes the following arguments:
 
-- `STORAGE_URI` : A `STRING` literal that specifies the Cloud Storage URI to list and chunk objects from. You can use a single wildcard character ( `*` ) at the end of a directory path, such as `'gs://my-bucket/docs/*'` , or you can filter by a file extension, such as `'gs://my-bucket/docs/*.pdf'` . When you specify a URI, you must authenticate with your end-user credentials (EUC). For more information, read about [authentication with EUC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#euc) .
+- `STORAGE_URI` : A `STRING` literal that specifies the Cloud Storage URI to list and chunk objects from. You can use a single wildcard character ( `*` ) at the end of a directory path, such as `'gs://my-bucket/docs/*'` , or you can filter by a file extension, such as `'gs://my-bucket/docs/*.pdf'` . When you specify a URI, you must authenticate with your Google Account user credentials. For more information, read about [authentication with Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#user-credentials) .
 
 - `TABLE `` INPUT_TABLE` : The name of an existing table or object table that contains an [`ObjectRef` column](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) named `ref` or a `JSON` column named `parsed_document` that contains the output of the `AI.PARSE_DOCUMENT` function with the `raw-docai` schema. When you use an object table, the `connection_id` argument is required and must match the connection ID configured on the object table. If you use a standard table, the `connection_id` argument must match the authorizer of the `ObjectRef` column. For more information, read about [authentication with a connection](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#connection) .
 
@@ -60,17 +60,17 @@ The `AI.CHUNK_DOCUMENT` function takes the following arguments:
   - If the `ObjectRef` value has an authorizer, it must match the `connection_id` value.
   - If the `ObjectRef` value doesn't have an authorizer, omit the `connection_id` argument.
 
-- `CONNECTION_ID` : A `STRING` value that specifies the BigQuery Cloud resource connection ID used to authenticate to Document AI and access Cloud Storage, in the format `[ `` PROJECT_ID `` .] `` LOCATION `` . `` CONNECTION_ID` or `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /connections/ `` CONNECTION_ID` . For example, `'myproject.us.my_connection'` . If omitted, BigQuery uses EUC by default. For more information, read about [authentication](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#authentication) .
+- `CONNECTION_ID` : A `STRING` value that specifies the BigQuery Cloud resource connection ID used to authenticate to Document AI and access Cloud Storage, in the format `[ `` PROJECT_ID `` .] `` LOCATION `` . `` CONNECTION_ID` or `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /connections/ `` CONNECTION_ID` . For example, `'myproject.us.my_connection'` . If omitted, BigQuery uses Google Account user credentials by default. For more information, read about [authentication](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-chunk-document#authentication) .
 
 - `CHUNK_SIZE` : An `INT64` value that specifies the target maximum chunk size, measured in tokens. The value must be between `1` and `2000` . The default value is `1000` .
 
 ## Authentication
 
-The following sections describe how to authenticate with end-user credentials (EUC) or a Cloud resource connection.
+The following sections describe how to authenticate with Google Account user credentials or a Cloud resource connection.
 
-### End-user credentials (EUC)
+### Google Account user credentials
 
-To authenticate using EUC, you must have the following roles:
+To authenticate using Google Account user credentials, you must have the following roles:
 
 - To create and use the `bq-created-layout-parser` processor, you must have the **Document AI Editor** ( `roles/documentai.editor` ) role on the project. If the processor already exists in the project, then you only need the **Document AI Viewer** ( `roles/documentai.viewer` ) role.
 - You must have the **Storage Object Viewer** ( `roles/storage.objectViewer` ) or **Storage Object User** ( `roles/storage.objectUser` ) role on the Cloud Storage bucket that contains the documents.
@@ -180,7 +180,7 @@ The output is similar to the following:
 
 You can pass an `ObjectRef` column into `AI.CHUNK_DOCUMENT` . You can create an `ObjectRef` value by passing a Cloud Storage URI to the [`OBJ.MAKE_REF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) or by using an `ObjectRef` column from a table.
 
-The following query shows how to parse a PDF file into chunks by using the `OBJ.MAKE_REF` function and EUC authentication:
+The following query shows how to parse a PDF file into chunks by using the `OBJ.MAKE_REF` function and Google Account user credentials:
 
 ```
 SELECT

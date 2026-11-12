@@ -174,19 +174,21 @@ To replicate a dataset, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click the dataset that you want to replicate.
+2.  In the **Explorer** pane, expand your project, and then click **Datasets** .
 
-3.  Click the **Details** tab.
+3.  On the **Datasets** page, click the dataset you want to replicate. You can also use the search and filter options to find your dataset.
 
-4.  In the **Replicas** section, click **Create replica** .
+4.  Click the **Details** tab.
 
-5.  In the **Create dataset replica** pane, do the following:
+5.  In the **Replicas** section, click **Create replica** .
+
+6.  In the **Create dataset replica** pane, do the following:
 
     1.  In the **Location type** section, select a location type for the replica.
     2.  In the **Region** list, select a region for the replica.
     3.  Optional: To use customer-managed encryption keys (CMEK), expand the **Advanced options** section, and then select the **Customer-managed encryption key (CMEK)** option.
 
-6.  Click **Create replica** .
+7.  Click **Create replica** .
 
 ### SQL
 
@@ -225,13 +227,15 @@ To promote a replica to be the primary replica, select one of the following opti
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click the dataset you want to promote.
+2.  In the **Explorer** pane, expand your project, and then click **Datasets** .
 
-3.  Click the **Details** tab.
+3.  On the **Datasets** page, click the dataset you want to promote. You can also use the search and filter options to find your dataset.
 
-4.  In the **Replicas** section, find the replica that you want to promote, and then click **Make primary** .
+4.  Click the **Details** tab.
 
-5.  In the **Promote replica** dialog, type `confirm` in the text field, and then click **Confirm** .
+5.  In the **Replicas** section, find the replica that you want to promote, and then click **Make primary** .
+
+6.  In the **Promote replica** dialog, type `confirm` in the text field, and then click **Confirm** .
 
 ### SQL
 
@@ -257,13 +261,15 @@ To remove a replica and stop replicating the dataset, select one of the followin
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click the dataset where you want to remove a replica.
+2.  In the **Explorer** pane, expand your project, and then click **Datasets** .
 
-3.  Click the **Details** tab.
+3.  On the **Datasets** page, click the dataset where you want to remove a replica. You can also use the search and filter options to find your dataset.
 
-4.  In the **Replicas** section, find the replica that you want to remove, click more_vert **More actions** , and then click **Delete** .
+4.  Click the **Details** tab.
 
-5.  In the **Delete dataset replica?** dialog, type `delete` in the text field, and then click **Delete** .
+5.  In the **Replicas** section, find the replica that you want to remove, click more_vert **More actions** , and then click **Delete** .
+
+6.  In the **Delete dataset replica?** dialog, type `delete` in the text field, and then click **Delete** .
 
 ### SQL
 
@@ -298,11 +304,13 @@ To view the replication status and latency for a dataset in the Google Cloud con
 
 2.  In the **Explorer** pane, expand your project.
 
-3.  Click the dataset that you want to monitor.
+3.  Click **Datasets** .
 
-4.  In the dataset details pane, click the **Details** tab.
+4.  Click the dataset that you want to monitor. You can also use the search and filter options to find your dataset.
 
-5.  In the **Replicas** section, view **Replication latency** and **Status** . To view more details, including a replication latency chart, click **View details** .
+5.  On the dataset page, click the **Details** tab.
+
+6.  In the **Replicas** section, view **Replication latency** and **Status** . To view more details, including a replication latency chart, click **View details** .
 
 ### View replication status with Cloud Monitoring
 
@@ -340,7 +348,7 @@ You can use cross-region dataset replication to migrate your datasets from one r
 To begin the migration process, first replicate the dataset in the region that you want to migrate the data to. In this scenario, you are migrating the `my_migration` dataset to the `EU` multi-region.
 
 ```
--- Create a replica in the secondary region.
+-- Create a replica in the secondary region. 
 ALTER SCHEMA my_migration
 ADD REPLICA `eu`
 OPTIONS(location='eu');
@@ -381,7 +389,7 @@ Replicating datasets with CMEK behaves as described in the following scenarios:
 
 - If you are using [Cloud KMS key rotation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_rotation) on either (or both) of the `default_kms_key` or the `replica_kms_key` the replicated dataset is still queryable after the key rotation.
 
-  - Key rotation in the primary region updates the key version only in tables created after the rotation, tables that existed prior to the key rotation still use the key version that was set prior to the rotation.
+  - Key rotation in the primary region updates the key version only in tables created after the rotation. Tables that existed prior to the key rotation still use the key version that was set prior to the rotation.
   - Key rotation in the secondary region updates all tables in the secondary replica to the new key version.
   - Switching the primary replica to secondary replica updates all tables in the secondary replica (formerly the primary replica) to the new key version.
   - If the key version set on tables in the primary replica prior to key rotation is deleted, any tables still using the key version set prior to key rotation cannot be queried until the key version is updated. In order to update the key version, the old key version must be active (not disabled or deleted).

@@ -15,7 +15,7 @@ You can monitor BigQuery [continuous queries](https://docs.cloud.google.com/bigq
 - [Job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job)
 - [Jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer)
 
-Due to the long running nature of a BigQuery continuous query, metrics that are usually generated upon the completion of a SQL query might be absent or inaccurate.
+Due to the long-running nature of a BigQuery continuous query, metrics that are usually generated upon the completion of a SQL query might be absent or inaccurate.
 
 ## Use `INFORMATION_SCHEMA` views
 

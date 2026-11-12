@@ -79,7 +79,7 @@ To create a new data preparation from a file in Cloud Storage or Google Drive, f
     - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `STORAGE_BUCKET_NAME `` / `` FILE_NAME `` .csv` . Wildcard searches, such as `*.csv` , are supported.
     - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
 
-    > **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    > **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) . Google Account user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
 
     The file format is automatically detected. Supported formats are Avro, CSV, JSONL, ORC, and Parquet. Other compatible file types, such as DAT, TSV, and TXT, are read as the CSV format. The Google Drive option also supports the Google Sheets format.
 

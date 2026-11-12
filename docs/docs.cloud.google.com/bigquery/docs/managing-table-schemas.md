@@ -1798,7 +1798,7 @@ Replace the following:
 - `LOCATION` : the name of your location. The `--location` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `asia-northeast1` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) .
 - `FORMAT` : `NEWLINE_DELIMITED_JSON` , `CSV` , `PARQUET` , `ORC` , or `AVRO` . `DATASTORE_BACKUP` files don't require column relaxation. The columns in tables created from Datastore export files are always `NULLABLE` .
 - `PROJECT_ID` : your project ID.
-- ` dataset ` is the name of the dataset that contains the table.
+- `DATASET` : the name of the dataset that contains the table.
 - `TABLE` : the name of the table you're appending.
 - `PATH_TO_SOURCE` : a fully-qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) , a comma-separated list of URIs, or the path to a data file on your local machine.
 - `SCHEMA` : the path to a local JSON schema file. This option is used only for CSV and JSON files. Relaxed columns are automatically inferred from Avro files.

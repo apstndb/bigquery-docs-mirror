@@ -54,7 +54,7 @@ Data Apps are subject to the following limitations:
 
 - Regardless of which cells are visible in the app, all cells are run in order from first to last. If non-visible cells are running and consuming kernel resources, the app might appear unresponsive until kernel resources are freed.
 
-- You can't use a service account or End User Credentials (EUC) for data access or for viewing Data Apps.
+- You can't use a service account or Google Account user credentials for data access or for viewing Data Apps.
 
 ## Components of Data Apps
 

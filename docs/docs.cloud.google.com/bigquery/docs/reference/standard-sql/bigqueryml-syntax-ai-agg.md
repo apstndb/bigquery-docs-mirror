@@ -58,7 +58,7 @@ The `AI.AGG` function takes the following arguments:
 
 - `INSTRUCTION` : the natural language aggregation prompt to apply to the input data, as either a string or [query parameter](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) .
 
-- `CONNECTION` : a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the `[ `` PROJECT_ID `` .] `` LOCATION `` . `` CONNECTION_ID` format. This connection is used to communicate with Vertex AI and Cloud Storage. If you don't specify a connection, then your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) are used.
+- `CONNECTION` : a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) in the `[ `` PROJECT_ID `` .] `` LOCATION `` . `` CONNECTION_ID` format. This connection is used to communicate with Vertex AI and Cloud Storage. If you don't specify a connection, then your [Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) are used.
 
 - `ENDPOINT` : the [Vertex AI endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) to use, which can consist of any [Gemini model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models) that doesn't require thinking budget. If you only include the model ID, BigQuery automatically identifies and uses the full endpoint in the region where the query is processed. If you don't specify any endpoint information, BigQuery chooses a model for you.
 

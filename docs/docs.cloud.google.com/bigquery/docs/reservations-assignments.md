@@ -24,7 +24,7 @@ Projects use the single most specific reservation in the resource hierarchy to w
 
 1.  **Resource hierarchy priority:** BigQuery evaluates assignments based on the assignee resource ancestry (project \> folder \> organization). Folder and organization assignments aren't available to [standard edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) reservations.
 
-2.  **User-specific assignments using the `principal` property ( [Preview](https://cloud.google.com/products#product-launch-stages) ):** BigQuery reservation assignments support an optional `principal` property, which lets administrators route queries to specific reservations based on the identity of the user or service account executing the job. Within a specific assignee resource, an assignment with a matching principal takes priority over a generic assignment where the principal is unset.
+2.  **User-specific assignments using the `principal` property:** BigQuery reservation assignments support an optional `principal` property, which lets administrators route queries to specific reservations based on the identity of the user or service account executing the job. Within a specific assignee resource, an assignment with a matching principal takes priority over a generic assignment where the principal is unset.
 
     The default per-project limit of user-specific assignments is 100. For help changing the default limit, contact <bigquery-wlm-feedback@google.com> .
 
@@ -178,12 +178,6 @@ Replace the following:
 When you create a reservation assignment, wait at least 5 minutes before running a query. Otherwise the query might be billed using on-demand pricing.
 
 ### Configure project caps and scheduling policy overrides
-
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
 
 You can create project caps, which are a type of assignment rule, to configure project-specific overrides for a reservation's default [scheduling policies](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#scheduling-policies) . For example, you can limit the slot consumption and the number of concurrent queries for the project.
 
@@ -515,10 +509,6 @@ To make a project that only uses [idle slots](https://docs.cloud.google.com/bigq
 > **Note:** A project can be assigned to at most one reservation in a single region.
 
 ### User-specific assignments
-
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can assign a reservation to a specific principal such as a user or service account within a project, folder, or organization. This is useful for routing specific users' workloads to dedicated reservations.
 

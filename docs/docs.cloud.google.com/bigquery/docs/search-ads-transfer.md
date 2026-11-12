@@ -47,7 +47,7 @@ Before you create a Search Ads 360 data transfer:
 
 - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 - [Create a BigQuery Data Transfer Service dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Search Ads 360 reporting data.
-- If you intend to setup transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
+- If you intend to set up transfer run notifications for Pub/Sub, you must have `pubsub.topics.setIamPolicy` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 - [Enable access](https://console.developers.google.com/apis/api/searchads360.googleapis.com/) to the Search Ads 360 reporting API in your project.
 
 ## Required permissions

@@ -429,11 +429,13 @@ To view the replication status and latency for a dataset in the Google Cloud con
 
 2.  In the **Explorer** pane, expand your project.
 
-3.  Click the dataset that you want to monitor.
+3.  Click **Datasets** .
 
-4.  In the dataset details pane, click the **Details** tab.
+4.  Click the dataset that you want to monitor. You can also use the search and filter options to find your dataset.
 
-5.  In the **Replicas** section, view **Replication latency** and **Status** . To view more details, including a replication latency chart, click **View details** .
+5.  On the dataset page, click the **Details** tab.
+
+6.  In the **Replicas** section, view **Replication latency** and **Status** . To view more details, including a replication latency chart, click **View details** .
 
 ### View replication status with Cloud Monitoring
 

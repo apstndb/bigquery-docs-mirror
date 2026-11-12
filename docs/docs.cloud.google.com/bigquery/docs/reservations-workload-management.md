@@ -99,12 +99,6 @@ When you're on the **Workload management** page of the BigQuery Google Cloud con
 
 ## Project caps and scheduling policies
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request support or provide feedback for this feature, contact <bigquery-wlm-feedback@google.com> .
-
 Project caps (also known as scheduling policies) let you customize the default [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) behavior by setting usage and concurrency limits for projects using a reservation. These limits prevent projects from consuming excessive slots, even if they are eligible for more capacity under fair scheduling.
 
 You can set project caps as default limits at the reservation level, which apply to any project using that reservation unless overridden. Alternatively, you can configure project caps as [project-specific overrides](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments) for individual projects.

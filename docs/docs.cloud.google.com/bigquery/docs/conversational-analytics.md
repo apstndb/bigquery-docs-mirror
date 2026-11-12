@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/conversational-analytics
 uri: https://docs.cloud.google.com/bigquery/docs/conversational-analytics
 title: Conversational analytics overview
-description: Introduces conversational analytics in BigQuery.
+description: Learn how conversational analytics in BigQuery lets you build data agents with verified queries and glossaries, chat directly with data sources, and generate BigQuery AI, ML, and chart insights using natural language.
 data_source: docs.cloud.google.com
 ---
 
@@ -28,21 +28,6 @@ Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.g
 
 > As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
-## Prompt analytics and how to opt-out
-
-To improve the quality, accuracy, and reliability of conversational analytics, Google analyzes anonymized prompt data across customer interactions. This data helps identify common usage patterns, detect gaps in comprehension, and improve overall product performance. This data isn't used to train or fine tune Google's foundational AI models. This data processing is enabled by default.
-
-To opt out from prompt analytics, do one of the following:
-
-- To opt out *before* November 23, 2026, complete the following steps:
-  1.  Use the Resource Manager API, CLI, or the Google Cloud console to obtain project numbers, or find your organization ID to opt out all existing BigQuery projects in an organization.
-  2.  Submit the [opt-out form](https://docs.google.com/forms/d/e/1FAIpQLSc3Jtc0cM2t2HXcyN_yRQJ0xVm3giGDCXvHft_l1jid_Jp7tw/viewform) , including the project IDs that you want to exclude.
-- To opt out *on or after* November 23, 2026, apply the custom, hierarchical Organization Policy Service constraint `constraints/gcp.disablePromptAnalytics` to block prompt ingestion at the Organization, Folder, or Project level.
-
-You can re-enable prompt analytics within the Google Cloud console administrator settings. You must remove the custom Organization Policy Service constraint if you previously applied it.
-
-To learn more, see [Service Specific Terms](https://cloud.google.com/terms/service-terms) for BigQuery conversational analytics.
-
 ## Data agents
 
 Data agents consist of one or more knowledge sources, and a set of instructions specific to a use case for processing that data. When you create a data agent, you can configure it using the following options:
@@ -65,11 +50,11 @@ You can create, manage, and work with the following types of data agents in the 
 
 For more information, see [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
 
-Other services in the project that support data agents, such as the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) and [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-overview) , can access data agents that you create in BigQuery. You can also access an agent created in the Google Cloud console by calling it using the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+Other services in the project that support data agents, such as the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) and [Data Studio](https://docs.cloud.google.com/data-studio/conversational-analytics-overview) , can access data agents that you create in BigQuery. You can also access an agent created in the Google Cloud console by calling it using the Conversational Analytics API.
 
 ## Conversations
 
-Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
+Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or with data sources, such as tables, views, datasets, projects, or graphs. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
 
 - Determine which data sources to query.
 - Take advantage of optimizations, such as table partitions or search indexes.
@@ -83,9 +68,9 @@ The chat response returned to you provides the following features:
 - The agent's reasoning behind the results.
 - Metadata about the conversation, such as the agent and data sources used.
 
-When you create a direct conversation with a data source, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions that a data agent offers. Because of this, direct conversation results can be less accurate. Use data agents for cases that require greater accuracy.
+When you create a direct conversation with a data source, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) interprets your question without the context and processing instructions that a data agent offers. Because of this, direct conversation results can be less accurate. Use data agents for cases that require greater accuracy.
 
-You can create and manage conversations in BigQuery using the Google Cloud console. For more information, see [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
+You can create and manage conversations in BigQuery by using the Google Cloud console. For more information, see [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
 
 ## BigQuery AI and ML support
 
@@ -169,7 +154,7 @@ For example, you can use the `Look Graph` sample agent on the BigQuery [Agents p
 
 ## Security
 
-You can manage access to conversational analytics in BigQuery using [Conversational Analytics API IAM roles and permissions](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) . For information about the roles needed for specific operations, see the [data agent required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) and the [conversation required roles](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
+You can manage access to conversational analytics in BigQuery by using [Conversational Analytics API Identity and Access Management (IAM) roles and permissions](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/access-control) . For information about the roles needed for specific operations, see the [data agent required roles](https://docs.cloud.google.com/bigquery/docs/create-data-agents#required-roles) and the [conversation required roles](https://docs.cloud.google.com/bigquery/docs/create-conversations#required_roles) .
 
 Conversational analytics includes the following security features and safeguards:
 
@@ -180,6 +165,21 @@ Conversational analytics includes the following security features and safeguards
 - It can only access the knowledge sources that you explicitly select.
 - Your conversation history is only shared with you. You can't share it with other users.
 - When you create a data agent, you must have access to query every knowledge source that you add.
+
+### Prompt analytics and how to opt out
+
+To improve the quality, accuracy, and reliability of conversational analytics, Google analyzes anonymized prompt data across customer interactions. This data helps identify common usage patterns, detect gaps in comprehension, and improve overall product performance. This data isn't used to train or fine tune Google's foundational AI models. This data processing is enabled by default.
+
+To opt out from prompt analytics, do one of the following:
+
+- To opt out *before* November 23, 2026, complete the following steps:
+  1.  Use the Resource Manager API, CLI, or the Google Cloud console to obtain project numbers, or find your organization ID to opt out all existing BigQuery projects in an organization.
+  2.  Submit the [opt-out form](https://docs.google.com/forms/d/e/1FAIpQLSc3Jtc0cM2t2HXcyN_yRQJ0xVm3giGDCXvHft_l1jid_Jp7tw/viewform) , including the project IDs that you want to exclude.
+- To opt out *on or after* November 23, 2026, apply the custom, hierarchical Organization Policy Service constraint `constraints/gcp.disablePromptAnalytics` to block prompt ingestion at the Organization, Folder, or Project level.
+
+You can re-enable prompt analytics within the Google Cloud console administrator settings. You must remove the custom Organization Policy Service constraint if you previously applied it.
+
+To learn more, see [Service Specific Terms](https://cloud.google.com/terms/service-terms) for BigQuery conversational analytics.
 
 ## Locations
 
@@ -296,7 +296,7 @@ Replace the following:
 
 ## What's next
 
-- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+- Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) .
 - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .
 - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
 - [Use conversational analytics with Lakehouse](https://docs.cloud.google.com/lakehouse/docs/conversational-analytics) .

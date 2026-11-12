@@ -79,7 +79,7 @@ AI.IF(
 
 - `CONNECTION` : a `STRING` value specifying the connection to use to communicate with the model, in the format `[ `` PROJECT_ID `` ]. `` LOCATION `` . `` CONNECTION_ID` . For example, `myproject.us.myconnection` .
 
-  If you don't specify a connection, then the query uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
+  If you don't specify a connection, then the query uses your [Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
 
   For information about configuring permissions, see [Set permissions for BigQuery ML generative AI functions that call Vertex AI models](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 

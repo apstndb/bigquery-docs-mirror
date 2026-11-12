@@ -34,6 +34,8 @@ To get the permissions that you need to manage pipelines, ask your administrator
   - [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `roles/dataform.teamFolderViewer` ) on the team folder
 - To manage pipelines in Git repositories: [Developer Connect OAuth User](https://docs.cloud.google.com/iam/docs/roles-permissions/developerconnect#developerconnect.oauthUser) ( `roles/developerconnect.oauthUser` ) on the project
 - To view and manage metadata in Knowledge Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
+- To view data lineage for pipelines: [Data Lineage Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `roles/datalineage.viewer` ) on the project
+- To open pipelines from the lineage graph: [Dataform Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.viewer) ( `roles/dataform.viewer` ) on the project that contains the pipeline
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
@@ -48,6 +50,7 @@ If you use a custom service account to run pipelines, you must grant the followi
 - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `roles/bigquery.jobUser` ) on the project
 - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `roles/bigquery.dataEditor` ) on the project or specific BigQuery datasets
 - [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `roles/dataplex.catalogEditor` ) on the project or `@bigquery` entry group
+- [Data Lineage Events Producer](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.producer) ( `roles/datalineage.producer` ) on the project that contains the pipeline, to [report data lineage](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#data-lineage)
 
 ## View pipelines
 
@@ -206,6 +209,84 @@ Dataform assertions are automatically integrated with the [Knowledge Catalog dat
 To check the status of a metadata update, follow the instructions in [View past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
 After the metadata has been synchronized, you can search for and view the entry in Knowledge Catalog. For more information, see [Search for resources](https://docs.cloud.google.com/knowledge-catalog/docs/search-assets#search-data-assets) .
+
+## Track data lineage
+
+BigQuery reports table-level [data lineage](https://docs.cloud.google.com/knowledge-catalog/docs/about-data-lineage) to Knowledge Catalog for the actions that run in your BigQuery pipeline. For each executed action, the lineage graph in BigQuery and Knowledge Catalog shows a process between the tables that the action reads and the table that it writes. You don't need to change your SQLX files to report lineage.
+
+Tables, views, incremental tables, materialized views, assertions, property graphs, data preparations, and operations with `hasOutput: true` report table-to-table lineage. Operations without `hasOutput: true` report the process and run only. Declarations, notebooks, and SQL unit tests don't report lineage. Declarations appear only as inputs to other actions.
+
+Reporting lineage never causes a pipeline run to fail. If the Data Lineage API is disabled, a permission is missing, or a quota is exceeded, the pipeline run continues without reporting lineage.
+
+Data lineage ingestion is billed under the Knowledge Catalog Premium Processing SKU, and only events that write table-to-table lineage links are billed. Data lineage storage is billed under the metadata storage SKU. For more information, see [Knowledge Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+
+### Data lineage limitations
+
+Data lineage for pipelines is subject to the following limitations:
+
+- Only table-level lineage is reported. Column-level lineage isn't reported.
+
+- Data lineage reporting is subject to the [Data Lineage API quotas](https://docs.cloud.google.com/knowledge-catalog/docs/quotas) for writes per project, identity, and region.
+
+### Enable data lineage
+
+> **Note:** During the initial rollout period, data lineage reporting is opt-in.
+
+To enable data lineage for your pipeline, follow these steps:
+
+1.  Enable the Data Lineage API ( `datalineage.googleapis.com` ) in the project that contains the pipeline and in the project where users view lineage.
+
+2.  In the project that contains the pipeline, grant the [Data Lineage Events Producer role](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.producer) ( `roles/datalineage.producer` ) to the identity that runs the pipeline. This identity is the custom service account of the pipeline, or the Dataform service agent ( `service- `` PROJECT_NUMBER `` @gcp-sa-dataform.iam.gserviceaccount.com` ) if no custom service account is set.
+
+3.  In the `workflow_settings.yaml` file of your pipeline, add the following `lineage` block:
+
+    ```
+    lineage:
+      enabled: true
+    ```
+
+Pipeline runs that use end user credentials for a Google Account don't report lineage. To report lineage, run the pipeline with a custom service account.
+
+To stop data lineage reporting for a pipeline, set `enabled` to `false` in the `lineage` block. To stop data lineage reporting for a whole project, disable the Data Lineage API in the project. Disabling the API also stops data lineage reporting from other services in the project.
+
+### View data lineage
+
+To view data lineage for a table that a pipeline action produces, follow these steps:
+
+1.  In the Google Cloud console, go to **BigQuery Studio** .
+
+2.  In the **Explorer** pane, expand your project and dataset, and then select a table that a pipeline action produces.
+
+3.  Click the **Lineage** tab.
+
+4.  To view the action, the pipeline, and the runs, select the process node.
+
+5.  To open the pipeline, click **Open in Dataform** .
+
+For more information about navigating lineage graphs, see [View data lineage in Knowledge Catalog](https://docs.cloud.google.com/knowledge-catalog/docs/use-lineage) .
+
+### Troubleshoot data lineage
+
+The following table describes common data lineage issues for pipelines and how to fix them:
+
+| Symptom                                                           | Likely cause                                                                            | Fix                                                                                                                                                                                                                                              |
+|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| The **Lineage** tab doesn't show pipeline process nodes.          | The Data Lineage API is disabled.                                                       | Enable the API in the project that contains the pipeline and in the project where you view lineage.                                                                                                                                              |
+| A pipeline doesn't report lineage.                                | The identity that runs the pipeline doesn't have the Data Lineage Events Producer role. | Grant `roles/datalineage.producer` to the custom service account or to the Dataform service agent.                                                                                                                                               |
+| Pipeline runs that use end user credentials don't report lineage. | Lineage reporting doesn't support end user credentials.                                 | Run the pipeline with a custom service account.                                                                                                                                                                                                  |
+| A pipeline doesn't report lineage although the role is granted.   | Dataform can't act as the custom service account.                                       | Grant the Dataform service agent the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) on the custom service account. |
+| One pipeline doesn't report lineage.                              | The pipeline is opted out.                                                              | Remove `lineage.enabled: false` from `workflow_settings.yaml` .                                                                                                                                                                                  |
+| Lineage is missing for some runs.                                 | The Data Lineage API quota is exceeded.                                                 | Spread out pipeline runs or request a higher quota.                                                                                                                                                                                              |
+| Clicking **Open in Dataform** returns a permission error.         | The user doesn't have access to the pipeline.                                           | Grant the user the Dataform Viewer role ( `roles/dataform.viewer` ).                                                                                                                                                                             |
+
+After the first permission or API error in a pipeline run, BigQuery stops reporting lineage for the rest of that run. The next pipeline run tries to report lineage again.
+
+To check whether a pipeline run reported lineage, view the `dataform.googleapis.com/lineage_emission` log entries in Cloud Logging. To filter for skipped or failed lineage reporting in Logs Explorer, run the following query:
+
+```
+log_id("dataform.googleapis.com/lineage_emission")
+jsonPayload.outcome=("SKIPPED" OR "FAILED")
+```
 
 ## What's next
 

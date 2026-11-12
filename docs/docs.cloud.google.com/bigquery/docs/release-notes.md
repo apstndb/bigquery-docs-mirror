@@ -14,6 +14,26 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 12, 2026
+
+Feature
+
+You can track table-level data lineage in Knowledge Catalog for BigQuery pipelines. For more information, see [Track data lineage](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#data-lineage) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+## November 11, 2026
+
+Feature
+
+[Project caps (also known as scheduling policies)](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#scheduling-policies) let you limit maximum slots and concurrency per project within a BigQuery reservation. This feature is only supported in the [BigQuery Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) and is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can specify an optional `principal` property on [BigQuery reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) to route queries to specific reservations based on the identity of the user, service account, or third-party identity executing the job. This feature is only supported in the [BigQuery Enterprise and Enterprise Plus editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) and is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+You can use the [`JSON_FLATTEN` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_flatten) to extract all non-array values that are either directly in the input `JSON` value or children of one or more consecutively nested arrays in the input `JSON` value. This function is [generally available](https://cloud.google.com/products#product-launch-stages) . (GA).
+
 ## November 10, 2026
 
 Feature
@@ -166,40 +186,6 @@ This feature is [generally available](https://cloud.google.com/products#product-
 Feature
 
 You can now retrieve query results [directly in the Apache Arrow format](https://docs.cloud.google.com/bigquery/docs/running-queries#arrow-format) for faster retrieval speed and improved serialization efficiency. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
-
-## October 27, 2026
-
-Feature
-
-The [Data Engineering Agent now integrates with Google Drive](https://docs.cloud.google.com/gemini/data-agents/data-engineering-agent/agent-overview#google-drive-integration) , letting you provide Google Sheets files, CSV, or JSONL files as input for your data engineering pipelines.
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-You can now use [conversational analytics in Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets#use-ca-in-connected-sheets) to ask questions and analyze your BigQuery data using natural language. The Gemini side panel can help you translate your questions into optimized SQL queries and execute them, summarize key trends, and insert live, refreshable database objects directly into your workbook.
-
-This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-Feature
-
-The [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) , which estimates the token count of a text string, is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
-## October 26, 2026
-
-Feature
-
-Conversation logging for [Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA). You can log data agent conversations to a BigQuery table in the agent's project. For more information, see [Conversation logging overview](https://docs.cloud.google.com/bigquery/docs/conversation-logging-overview) and [Configure settings](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure_settings) .
-
-Feature
-
-Python user-defined functions now support [volume mounts](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#volume-mounts) , which let you access dependency files from Cloud Storage directly from your Python UDF code. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
-
-Feature
-
-The [`REGEXP_EXTRACT_GROUPS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_groups) produces substrings that match multiple capturing groups in a regular expression.
-
-This function is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## October 22, 2026
 
@@ -3777,14 +3763,6 @@ Libraries
 
 - MergeSchemaWithRows can be called with empty schema if result set is empty ( [\#1455](https://github.com/googleapis/nodejs-bigquery/issues/1455) ) ( [e608601](https://github.com/googleapis/nodejs-bigquery/commit/e608601157a95430a63ce0047194ba40190b2e42) )
 
-Announcement
-
-BigQuery now provides spend-based [committed use discounts](https://docs.cloud.google.com/bigquery/docs/bigquery-cud) (CUDs). Spend-based committed use discounts provide a discount in exchange for your commitment to spend a minimum amount per hour on PAYG compute resources [listed here](https://docs.cloud.google.com/bigquery/docs/bigquery-cud#usage) . You can purchase CUDs with a one or three year commitment period.
-
-Feature
-
-You can now enable [fine-grained access control on BigQuery metastore Iceberg tables](https://docs.cloud.google.com/bigquery/docs/bqms-features#set_access_control_policies) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
-
 Change
 
 You can get the required permissions to use BigQuery data preparation through the [BigQuery Studio User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `roles/bigquery.studioUser` ) and [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `roles/cloudaicompanion.user` ) roles, and permission to access the data you're preparing.
@@ -3795,6 +3773,14 @@ BigQuery data preparation no longer requires that you have the permissions grant
 - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
 
 For more information about the required roles, see [Manage data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .
+
+Announcement
+
+BigQuery now provides spend-based [committed use discounts](https://docs.cloud.google.com/bigquery/docs/bigquery-cud) (CUDs). Spend-based committed use discounts provide a discount in exchange for your commitment to spend a minimum amount per hour on PAYG compute resources [listed here](https://docs.cloud.google.com/bigquery/docs/bigquery-cud#usage) . You can purchase CUDs with a one or three year commitment period.
+
+Feature
+
+You can now enable [fine-grained access control on BigQuery metastore Iceberg tables](https://docs.cloud.google.com/bigquery/docs/bqms-features#set_access_control_policies) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## April 17, 2025
 

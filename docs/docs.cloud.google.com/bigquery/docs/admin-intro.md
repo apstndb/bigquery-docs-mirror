@@ -207,4 +207,8 @@ If you need additional assistance, see [Get support](https://docs.cloud.google.c
 
 ## What's next
 
-- View the [BigQuery Admin reference guide: Recap](https://cloud.google.com/blog/topics/developers-practitioners/bigquery-admin-reference-guide-recap) .
+- Learn how to [organize your resources into a hierarchy](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy) .
+- Learn how to [manage workloads and allocate compute capacity with reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+- Learn how to [secure and govern data resources](https://docs.cloud.google.com/bigquery/docs/data-governance) .
+- Learn how to [monitor BigQuery health and resource utilization](https://docs.cloud.google.com/bigquery/docs/monitoring) .
+- Learn how to [control and optimize query and storage costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .

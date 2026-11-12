@@ -720,7 +720,7 @@ This example produces the following output:
 +------+-----+
 ```
 
-> **Note:** For endpoints with `internal traffic` [ingress settings](https://docs.cloud.google.com/functions/docs/networking/network-settings#ingress_settings) , you can either use the same Cloud Run functions endpoint project to run the BigQuery query or [setup a VPC-SC perimeter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions#using_vpc_service_controls) .
+> **Note:** For endpoints with `internal traffic` [ingress settings](https://docs.cloud.google.com/functions/docs/networking/network-settings#ingress_settings) , you can either use the same Cloud Run functions endpoint project to run the BigQuery query or [set up a VPC-SC perimeter](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/remote-functions#using_vpc_service_controls) .
 
 ## Supported regions
 

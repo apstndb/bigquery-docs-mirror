@@ -8,9 +8,9 @@ data_source: docs.cloud.google.com
 
 # Analyze data with conversations
 
-This document describes how to create, edit, export, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables, views or graphs, that you select.
+This document describes how to create, edit, export, and delete conversations in BigQuery.
 
-Conversations are persisted chats with a data agent or data source. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
+Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or with data sources, such as tables, views, datasets, projects, or graphs. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
 
 - Determine which data sources to query.
 - Take advantage of optimizations, such as table partitions or search indexes.
@@ -24,9 +24,7 @@ The chat response returned to you provides the following features:
 - The agent's reasoning behind the results.
 - Metadata about the conversation, such as the agent and data sources used.
 
-When you create a direct conversation with a data source, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions that a data agent offers. Because of this, direct conversation results can be less accurate. Use data agents for cases that require greater accuracy.
-
-You can create and manage conversations in BigQuery using the Google Cloud console. For more information, see [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
+When you create a direct conversation with a data source, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) interprets your question without the context and processing instructions that a data agent offers. Because of this, direct conversation results can be less accurate. Use data agents for cases that require greater accuracy.
 
 ## Before you begin
 
@@ -40,7 +38,7 @@ You can create and manage conversations in BigQuery using the Google Cloud conso
 
 ### Required roles
 
-To create conversations, you must have one of the following [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) :
+To create conversations, you must have one of the following [Conversational Analytics API Identity and Access Management (IAM) roles](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/access-control) :
 
 - To view and create conversations with any data agent that has been shared with you, you must have the Gemini Data Analytics Data Agent User ( `roles/geminidataanalytics.dataAgentUser` ) role and the Gemini for Google Cloud User ( `roles/cloudaicompanion.user` ) role at the project level.
 - To create a direct conversation, you must have the Gemini Data Analytics Stateless Chat User ( `roles/geminidataanalytics.dataAgentStatelessUser` ) role.
@@ -104,7 +102,7 @@ To create a conversation with an existing data agent in the Google Cloud console
 
 ## Create a direct conversation with a data source
 
-You can create a direct conversation with these BigQuery data sources (also referred to as knowledge sources). When you create a direct conversation, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
+You can create a direct conversation with these BigQuery data sources (also referred to as knowledge sources). When you create a direct conversation, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
 
 You can create a conversation with the following data sources:
 
@@ -302,5 +300,5 @@ To manage your conversations, follow these steps:
 ## What's next
 
 - Learn about [Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
-- Learn about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+- Learn about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) .
 - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .

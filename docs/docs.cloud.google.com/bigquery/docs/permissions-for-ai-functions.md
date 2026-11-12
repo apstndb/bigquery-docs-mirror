@@ -12,14 +12,14 @@ This document shows you how to set up permissions for running generative AI quer
 
 There are two ways to set up permissions to run queries that use `AI.*` functions:
 
-- Run the query using your end-user credentials
+- Run the query using your Google Account user credentials
 - Create a BigQuery connection to run the query using a service account
 
-In most cases, you can use end-user credentials and leave the `CONNECTION` argument blank. If your query job is expected to run for 48 hours or longer, you should use a BigQuery connection and include it in the `CONNECTION` argument.
+In most cases, you can use Google Account user credentials and leave the `CONNECTION` argument blank. If your query job is expected to run for 48 hours or longer, you should use a BigQuery connection and include it in the `CONNECTION` argument.
 
-## Run generative AI queries with end-user credentials
+## Run generative AI queries with Google Account user credentials
 
-To run generative AI queries using end-user credentials, configure the necessary permissions using the Google Cloud console. Note that if you are the project owner, you already have all the required permissions so you don't need to do anything.
+To run generative AI queries using Google Account user credentials, configure the necessary permissions using the Google Cloud console. Note that if you are the project owner, you already have all the required permissions so you don't need to do anything.
 
 ### Required roles
 

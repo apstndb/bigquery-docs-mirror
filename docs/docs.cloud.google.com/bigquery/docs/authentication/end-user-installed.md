@@ -496,4 +496,4 @@ When you run the sample code, it launches a browser that requests access to the 
 ## What's next
 
 1.  Learn about [other ways to authenticate your app to access the BigQuery API](https://docs.cloud.google.com/bigquery/docs/authentication) .
-2.  Learn about [authentication with end user credentials for all Cloud APIs](https://docs.cloud.google.com/docs/authentication/use-cases#app-users) .
+2.  Learn about [authentication with Google Account user credentials for all Cloud APIs](https://docs.cloud.google.com/docs/authentication/use-cases#app-users) .

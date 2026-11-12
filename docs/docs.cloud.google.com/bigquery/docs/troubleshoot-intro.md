@@ -110,6 +110,12 @@ Diagnose failures when loading data, streaming records, or syncing external sour
 - **[Troubleshoot BigQuery Storage API](https://docs.cloud.google.com/bigquery/docs/troubleshoot-storage-api) .** Debug BigQuery Storage Read API, BigQuery Storage Write API (gRPC), and BigQuery Storage Write API (REST) streaming ingestion failures, row-level insertion errors, and throughput quotas.
 - **[Troubleshoot schema errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-schemas) .** Resolve schema mismatch errors from load, query, copy, and schema update operations (such as missing, duplicate, or incompatible column changes), and 15-level schema, file, and routine nesting depth limits.
 
+### Pipelines and data lineage
+
+Diagnose issues with BigQuery pipeline runs and data lineage reporting.
+
+- **[Troubleshoot pipeline data lineage](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#troubleshoot-lineage) .** Resolve missing lineage process nodes, service account permission errors, and Data Lineage API quota issues for pipelines.
+
 ### Data warehouse migration
 
 Diagnose issues when assessing, translating, or migrating external data warehouses to BigQuery.

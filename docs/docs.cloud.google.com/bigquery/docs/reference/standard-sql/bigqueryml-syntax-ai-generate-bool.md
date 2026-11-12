@@ -114,7 +114,7 @@ AI.GENERATE_BOOL(
 
 - `CONNECTION` : a `STRING` value specifying the connection to use to communicate with the model, in the format `[ `` PROJECT_ID `` ]. `` LOCATION `` . `` CONNECTION_ID` . For example, `myproject.us.myconnection` .
 
-  If you don't specify a connection, then the query uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
+  If you don't specify a connection, then the query uses your [Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
 
   For information about configuring permissions, see [Set permissions for BigQuery ML generative AI functions that call Vertex AI models](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) .
 
@@ -141,7 +141,7 @@ AI.GENERATE_BOOL(
 
 ## Examples
 
-The following examples assume that you have granted the [Agent Platform User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to your personal account. For more information, see [Run generative AI queries with end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
+The following examples assume that you have granted the [Agent Platform User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to your personal account. For more information, see [Run generative AI queries with Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) .
 
 ### Use string input
 

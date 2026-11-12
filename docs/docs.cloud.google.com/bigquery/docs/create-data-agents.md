@@ -24,7 +24,7 @@ In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery
 
 ### Required roles
 
-To work with data agents, you must have Identity and Access Management (IAM) permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents across various surfaces. For more information, see [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) .
+To work with data agents, you must have Identity and Access Management (IAM) permissions that match your use case. The following sections list required roles based on whether you are creating and publishing agents, provisioning agents in Gemini Enterprise, or discovering and using agents across various surfaces. For more information, see [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/access-control) .
 
 - **Create, edit, publish, share, and delete agents:**
   - To create data agents in a project: Gemini Data Analytics Data Agent Creator ( `roles/geminidataanalytics.dataAgentCreator` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
@@ -755,7 +755,8 @@ Agent observability is disabled by default. An administrator can enable it for y
         -H "Content-Type: application/json; charset=utf-8" \
         -d '{
               "conversational_analytics_setting": {
-                "metrics_enabled": true
+                "metrics_enabled": true,
+                "traces_enabled": true
               }
             }' \
         "https://cloudaicompanion.googleapis.com/v1/projects/PROJECT_ID/locations/global/gibqObservabilitySettings?gibq_observability_setting_id=SETTING_NAME"
@@ -928,4 +929,4 @@ In addition to project-level observability metrics in Cloud Monitoring and spans
 - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
 - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) .
 - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) .
-- Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.
+- Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `roles/geminidataanalytics.dataAgentViewer` )](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/access-control#data-agent-viewer) role gives permission to view the data agent.

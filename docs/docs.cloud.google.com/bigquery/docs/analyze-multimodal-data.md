@@ -28,7 +28,7 @@ BigQuery's multimodal data features offer the following benefits:
 
 ## `ObjectRef` values
 
-An `ObjectRef` value is a `STRUCT` value that uses the [`ObjectRef` schema](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#schema) . You can store Cloud Storage object metadata and an associated authorizer in a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by creating a `STRUCT` or `ARRAY<STRUCT>` column that uses this format. The authorizer value identifies the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that BigQuery uses to access the Cloud Storage object. If you set the authorizer to `NULL` , then BigQuery uses your end-user credentials.
+An `ObjectRef` value is a `STRUCT` value that uses the [`ObjectRef` schema](https://docs.cloud.google.com/bigquery/docs/work-with-objectref#schema) . You can store Cloud Storage object metadata and an associated authorizer in a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) by creating a `STRUCT` or `ARRAY<STRUCT>` column that uses this format. The authorizer value identifies the [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) that BigQuery uses to access the Cloud Storage object. If you set the authorizer to `NULL` , then BigQuery uses your Google Account user credentials.
 
 Use `ObjectRef` values when you need to integrate unstructured data into a standard table. For example, in a products table, you could store product images in the same row with the rest of the product information by adding a column containing an `ObjectRef` value.
 

@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 This document describes the `AI.TRANSLATE` function, which translates text strings between languages. `AI.TRANSLATE` brings high-quality [Translation LLM (TLLM)](https://docs.cloud.google.com/translate/docs/translation-llm) capabilities to your SQL workflows, while also supporting standard [Neural Machine Translation (NMT)](https://docs.cloud.google.com/translate/docs/advanced/nmt-model) workloads.
 
-The `AI.TRANSLATE` function uses your [end-user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) by default for standard translation tasks, reducing the need for additional set up steps and authentication.
+The `AI.TRANSLATE` function uses your [Google Account user credentials](https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions) by default for standard translation tasks, reducing the need for additional set up steps and authentication.
 
 ## Syntax
 

@@ -14,7 +14,7 @@ The `AI.PARSE_DOCUMENT` function uses the [Document AI layout parser](https://do
 
 - BigQuery automatically provisions and manages a Document AI layout parser; you don't have to create or train a model.
 - The function uses a single processor per project, which prevents redundant provisioning across queries.
-- You can parse documents stored in Cloud Storage and `ObjectRef` values, including Google Drive files, using end-user credentials (EUC).
+- You can parse documents stored in Cloud Storage and `ObjectRef` values, including Google Drive files, using Google Account user credentials.
 - You can choose between two task-specific output schemas depending on your workflow:
   - `layout-v1` (default): a flat list of blocks in reading order, such as headings, paragraphs, HTML tables, and images, each with its page number and location. This schema is compact and standardized for querying in SQL or passing to agentic workflows.
   - `raw-docai` : the full nested Document AI layout tree, which keeps sections and their child elements together. Use this schema when you need hierarchical relationships or when passing the output to `AI.CHUNK_DOCUMENT` .
@@ -66,9 +66,9 @@ The `AI.PARSE_DOCUMENT` function takes the following arguments:
 
     - Drive files must be passed as an `ObjectRef` value.
     - The function doesn't use the `ObjectRef` authorizer for access.
-    - Access to the object is authenticated by using the `connection_id` value if specified. Otherwise, end-user-credentials are used. We recommend that the `connection_id` value match the `ObjectRef` authorizer.
+    - Access to the object is authenticated by using the `connection_id` value if specified. Otherwise, Google Account user credentials are used. We recommend that the `connection_id` value match the `ObjectRef` authorizer.
 
-- `CONNECTION_ID` : a `STRING` value that specifies the BigQuery Cloud resource connection ID used to call Document AI and access Cloud Storage, in the format `PROJECT_ID `` . `` LOCATION `` . `` CONNECTION_ID` , `LOCATION `` . `` CONNECTION_ID` , or `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /connections/ `` CONNECTION_ID` . For example, `'myproject.us.my_connection'` . If omitted, BigQuery uses EUC by default. For more information, see [Authentication](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document#authentication) .
+- `CONNECTION_ID` : a `STRING` value that specifies the BigQuery Cloud resource connection ID used to call Document AI and access Cloud Storage, in the format `PROJECT_ID `` . `` LOCATION `` . `` CONNECTION_ID` , `LOCATION `` . `` CONNECTION_ID` , or `projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /connections/ `` CONNECTION_ID` . For example, `'myproject.us.my_connection'` . If omitted, BigQuery uses Google Account user credentials by default. For more information, see [Authentication](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-parse-document#authentication) .
 
 - `OPTIONS` : a `JSON` object that configures parsing options. The `JSON` object supports the following field:
 
@@ -76,11 +76,11 @@ The `AI.PARSE_DOCUMENT` function takes the following arguments:
 
 ## Authentication
 
-The following sections describe how to authenticate with end-user credentials (EUC) or a Cloud resource connection.
+The following sections describe how to authenticate with Google Account user credentials or a Cloud resource connection.
 
-### End-user credentials (EUC)
+### Google Account user credentials
 
-To authenticate using EUC, you must have the following roles and permissions:
+To authenticate using Google Account user credentials, you must have the following roles and permissions:
 
 - To create and use the `bq-created-layout-parser` processor, you must have the **Document AI Editor** ( `roles/documentai.editor` ) role on the project. If the processor already exists in the project, then you only need the **Document AI Viewer** ( `roles/documentai.viewer` ) role.
 - For documents in Cloud Storage, you must have the **Storage Object Viewer** ( `roles/storage.objectViewer` ) or **Storage Object User** ( `roles/storage.objectUser` ) role on the Cloud Storage bucket that contains the documents.

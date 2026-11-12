@@ -128,6 +128,15 @@ The `INFORMATION_SCHEMA.RESERVATIONS` view has the following schema:
 <td><code>STRING</code></td>
 <td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code>max_slots</code> . This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
+<tr class="odd">
+<td><code>scheduling_policy</code></td>
+<td><code>STRUCT</code></td>
+<td><p>The default <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#scheduling-policies">project caps</a> for each project using the reservation, or <code>NULL</code> if none are configured. Fields include the following:</p>
+<ul>
+<li><code>max_slots</code> : the default limit on the slot consumption of queries running for each project using the reservation, or <code>NULL</code> if unset.</li>
+<li><code>concurrency</code> : the default limit on the number of simultaneous queries admitted for each project using the reservation, or <code>NULL</code> if unset.</li>
+</ul></td>
+</tr>
 </tbody>
 </table>
 

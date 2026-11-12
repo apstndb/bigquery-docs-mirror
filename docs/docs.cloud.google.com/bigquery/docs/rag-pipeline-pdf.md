@@ -72,7 +72,7 @@ When you finish the tasks that are described in this document, you can avoid con
 1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/storage.admin, roles/documentai.editor, roles/bigquery.admin, roles/resourcemanager.projectIamAdmin`
 
     ```
-    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER&quot; --role=ROLE
     ```
 
     Replace the following:
@@ -159,7 +159,7 @@ Use the document processor with the `AI.CHUNK_DOCUMENT` function to parse the PD
     ```
     CREATE or REPLACE TABLE bqml_tutorial.chunked_pdf AS (
       SELECT *
-      FROM AI.CHUNK_DOCUMENT('gs://BUCKET_NAME/scf23.pdf', chunk_size => 250)
+      FROM AI.CHUNK_DOCUMENT('gs://BUCKET_NAME/scf23.pdf', chun>k_size = 250)
     );
     ```
 

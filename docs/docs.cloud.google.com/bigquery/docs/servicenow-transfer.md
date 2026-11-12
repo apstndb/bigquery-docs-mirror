@@ -96,7 +96,7 @@ Before you create a ServiceNow data transfer, do the following for ServiceNow an
 
 - To start a ServiceNow transfer, you must have the correct credentials to connect to the ServiceNow instance.
 
-  - To obtain your credentials to a ServiceNow developer instance, login to the [ServiceNow developer portal](https://developer.servicenow.com/dev.do) . You can use the username and password listed in the **Manage instance password** page. For information on resetting your ServiceNow password, see [Password Reset](https://www.servicenow.com/docs/csh?topicname=password-reset-landing-page.html&version=latest)
+  - To obtain your credentials to a ServiceNow developer instance, log in to the [ServiceNow developer portal](https://developer.servicenow.com/dev.do) . You can use the username and password listed in the **Manage instance password** page. For information on resetting your ServiceNow password, see [Password Reset](https://www.servicenow.com/docs/csh?topicname=password-reset-landing-page.html&version=latest)
   - To obtain your credentials to a ServiceNow production or sub-production instance, contact your ServiceNow customer administrator to request the username and password.
 
 ### BigQuery prerequisites

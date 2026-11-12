@@ -28,17 +28,80 @@ For more information about BigQuery permissions, see [Access control with IAM](h
 
 The `INFORMATION_SCHEMA.ASSIGNMENTS` view has the following schema:
 
-| Column name        | Data type | Value                                                                                                                        |
-|--------------------|-----------|------------------------------------------------------------------------------------------------------------------------------|
-| `ddl`              | `STRING`  | The DDL statement used to create this assignment.                                                                            |
-| `project_id`       | `STRING`  | ID of the administration project.                                                                                            |
-| `project_number`   | `INTEGER` | Number of the administration project.                                                                                        |
-| `assignment_id`    | `STRING`  | ID that uniquely identifies the assignment.                                                                                  |
-| `reservation_name` | `STRING`  | Name of the reservation that the assignment uses.                                                                            |
-| `job_type`         | `STRING`  | The type of job that can use the reservation. Can be `PIPELINE` , `QUERY` , `CONTINUOUS` , `ML_EXTERNAL` , or `BACKGROUND` . |
-| `assignee_id`      | `STRING`  | ID that uniquely identifies the assignee resource.                                                                           |
-| `assignee_number`  | `INTEGER` | Number that uniquely identifies the assignee resource.                                                                       |
-| `assignee_type`    | `STRING`  | Type of assignee resource. Can be `organization` , `folder` or `project` .                                                   |
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="header">
+<th>Column name</th>
+<th>Data type</th>
+<th>Value</th>
+</tr>
+
+<tr class="odd">
+<td><code>ddl</code></td>
+<td><code>STRING</code></td>
+<td>The DDL statement used to create this assignment.</td>
+</tr>
+<tr class="even">
+<td><code>project_id</code></td>
+<td><code>STRING</code></td>
+<td>ID of the administration project.</td>
+</tr>
+<tr class="odd">
+<td><code>project_number</code></td>
+<td><code>INTEGER</code></td>
+<td>Number of the administration project.</td>
+</tr>
+<tr class="even">
+<td><code>assignment_id</code></td>
+<td><code>STRING</code></td>
+<td>ID that uniquely identifies the assignment.</td>
+</tr>
+<tr class="odd">
+<td><code>reservation_name</code></td>
+<td><code>STRING</code></td>
+<td>Name of the reservation that the assignment uses.</td>
+</tr>
+<tr class="even">
+<td><code>job_type</code></td>
+<td><code>STRING</code></td>
+<td>The type of job that can use the reservation. Can be <code>PIPELINE</code> , <code>QUERY</code> , <code>CONTINUOUS</code> , <code>ML_EXTERNAL</code> , or <code>BACKGROUND</code> . When <code>assignment_type</code> is <code>SCHEDULING_POLICY</code> , this value is <code>JOB_TYPE_UNSPECIFIED</code> .</td>
+</tr>
+<tr class="odd">
+<td><code>assignee_id</code></td>
+<td><code>STRING</code></td>
+<td>ID that uniquely identifies the assignee resource.</td>
+</tr>
+<tr class="even">
+<td><code>assignee_number</code></td>
+<td><code>INTEGER</code></td>
+<td>Number that uniquely identifies the assignee resource.</td>
+</tr>
+<tr class="odd">
+<td><code>assignee_type</code></td>
+<td><code>STRING</code></td>
+<td>Type of assignee resource. Can be <code>organization</code> , <code>folder</code> or <code>project</code> .</td>
+</tr>
+<tr class="even">
+<td><code>assignment_type</code></td>
+<td><code>STRING</code></td>
+<td>Type of the assignment. Can be <code>RESERVATION_SELECTION</code> for assignments that route jobs to a reservation, or <code>SCHEDULING_POLICY</code> for <a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments">project caps and scheduling policy overrides</a> . If a reservation-selection assignment was created before <code>assignment_type</code> tracking was supported and hasn't been updated since, this value is <code>NULL</code> .</td>
+</tr>
+<tr class="odd">
+<td><code>scheduling_policy</code></td>
+<td><code>STRUCT</code></td>
+<td><p>Project-specific <a href="https://docs.cloud.google.com/bigquery/docs/reservations-assignments#scheduling-policy-assignments">project caps and scheduling policy overrides</a> for <code>assignee_id</code> within the reservation, or <code>NULL</code> if <code>assignment_type</code> isn't <code>SCHEDULING_POLICY</code> . Fields include the following:</p>
+<ul>
+<li><code>max_slots</code> : the limit on the slot consumption of queries running for <code>assignee_id</code> in the reservation, or <code>NULL</code> if unset.</li>
+<li><code>concurrency</code> : the limit on the number of simultaneous queries admitted for <code>assignee_id</code> in the reservation, or <code>NULL</code> if unset.</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `SELECT *` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
