@@ -2,47 +2,45 @@
 name: documents/docs.cloud.google.com/bigquery/docs/writing-results
 uri: https://docs.cloud.google.com/bigquery/docs/writing-results
 title: Write query results
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to write BigQuery query results to a permanent table to safely store, share, download, and manage large datasets.
 data_source: docs.cloud.google.com
 ---
 
 # Write query results
 
-Writing BigQuery query results to a permanent table lets you safely store, share, and download your analyzed data. While BigQuery automatically caches all query results in temporary tables, saving your output to a destination table lets you preserve large result sets and integrate them into downstream workflows.
+You can write BigQuery query results to a permanent table to safely store, share, and download your analyzed data. While BigQuery automatically caches all query results in temporary tables, saving your output to a destination table lets you preserve large result sets and integrate them into downstream workflows.
 
-## Temporary and permanent tables
+## Write query results to a temporary table
 
-BigQuery saves all query results to a table, which can be either permanent or temporary.
+BigQuery uses temporary tables to [cache query results](https://docs.cloud.google.com/bigquery/docs/cached-results) that aren't written to a permanent table. The tables are created in a special dataset and named randomly. You can also create temporary tables for your own use by using [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) and [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) .
 
-- BigQuery uses temporary tables to [cache query results](https://docs.cloud.google.com/bigquery/docs/cached-results) that aren't written to a permanent table. The tables are created in a special dataset and named randomly. You can also create temporary tables for your own use within [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) and [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . You aren't charged for [temporary cached query result tables](https://docs.cloud.google.com/bigquery/docs/cached-results) . You are charged for temporary tables that aren't cached query results.
+### Limitations
 
-- After a query finishes, the temporary table exists for up to 24 hours. To view table structure and data, do the following:
+Using temporary tables to store query results is subject to the following limitations:
 
-  1.  Go to the **BigQuery** page.
-
-  2.  In the left pane, click explore **Explorer** :
-
-      ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-
-      If you don't see the left pane, click last_page **Expand left pane** to open the pane.
-
-  3.  In the **Explorer** pane, click **Job history** .
-
-  4.  Click **Personal history** .
-
-  5.  Choose the query that created the temporary table. Then, in the **Destination table** row, click **Temporary table** .
-
+- Temporary tables are deleted after 24 hours.
 - Access to the temporary table data is restricted to the user or service account that created the query job.
-
-- You can't share temporary tables, and they aren't visible using any of the standard list or other table manipulation methods. If you need to share your query results, write the results to a permanent table, download them, or share them through Google Sheets or Google Drive.
-
+- You can't share temporary tables, and they aren't visible using any of the standard list or other table manipulation methods. To share your query results, write the results to a permanent table, download them, or share them through Google Sheets or Google Drive.
 - Temporary tables are created in the same region as the table or tables being queried.
+- You can't save query results in a temporary table when the [domain-restricted organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) is enabled. As a workaround, temporarily disable the domain-restricted organization policy, run the query, and then re-enable the policy. Alternatively, you can save query results in a destination table.
 
-- A permanent table can be a new or existing table in any dataset to which you have access. If you write query results to a new table, you are charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data. When you write query results to a permanent table, the tables you're querying must be in the same location as the dataset that contains the destination table.
+### View query results in a temporary table
 
-- You can't save query results in a temporary table when the [domain-restricted organization policy](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-domains) is enabled. As a workaround, temporarily disable the domain-restricted organization policy, run the query, and then again enable the policy. Alternatively, you can save query results in a destination table.
+After a query finishes, the temporary table exists for up to 24 hours. To view the table structure and data, complete the following steps:
 
-> **Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
+1.  Go to the **BigQuery** page.
+
+2.  In the left pane, click the explore **Explorer** tab.
+
+    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+
+3.  In the **Explorer** pane, click **Job history** .
+
+4.  Click **Personal history** .
+
+5.  Select the query that created the temporary table.
+
+6.  In the **Destination table** row, click **Temporary table** .
 
 ## Required permissions
 
@@ -74,7 +72,7 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 
 When you write query results to a permanent table, you can create a new table, append the results to an existing table, or overwrite an existing table.
 
-### Writing query results
+### Write query results
 
 Use the following procedure to write your query results to a permanent table. To help control costs, you can [preview data](https://docs.cloud.google.com/bigquery/docs/best-practices-costs#preview-data) before running the query.
 
@@ -452,8 +450,6 @@ Normally, queries have a [maximum response size](https://docs.cloud.google.com/b
 - In GoogleSQL, specify a destination table for the query results.
 - In legacy SQL, specify a destination table and set the `allowLargeResults` option.
 
-When you specify a destination table for large query results, you are charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data.
-
 ### Limitations
 
 In legacy SQL, writing large results is subject to these limitations:
@@ -462,7 +458,7 @@ In legacy SQL, writing large results is subject to these limitations:
 - You can't specify a top-level `ORDER BY` , `TOP` or `LIMIT` clause. Doing so negates the benefit of using `allowLargeResults` , because the query output can no longer be computed in parallel.
 - [Window functions](https://docs.cloud.google.com/bigquery/query-reference#windowfunctions) can return large query results only if used in conjunction with a `PARTITION BY` clause.
 
-### Writing large results using legacy SQL
+### Write large results using legacy SQL
 
 To write large result sets using legacy SQL:
 
@@ -478,7 +474,7 @@ To write large result sets using legacy SQL:
 
     ![Query settings](https://docs.cloud.google.com/static/bigquery/images/query-settings.png)
 
-5.  For **Destination** , check **Set a destination table for query results** .
+5.  For **Destination** , select **Set a destination table for query results** .
 
     ![Set destination](https://docs.cloud.google.com/static/bigquery/images/set-destination.png)
 
@@ -488,11 +484,11 @@ To write large result sets using legacy SQL:
 
 8.  If you are writing a large results set to an existing table, you can use the **Destination table write preference** options to control the write disposition of the destination table:
 
-    - **Write if empty:** Writes the query results to the table only if the table is empty.
-    - **Append to table:** Appends the query results to an existing table.
-    - **Overwrite table:** Overwrites an existing table with the same name using the query results.
+    - **Write if empty:** writes the query results to the table only if the table is empty.
+    - **Append to table:** appends the query results to an existing table.
+    - **Overwrite table:** overwrites an existing table with the same name using the query results.
 
-9.  For **Results Size** , check **Allow large results (no size limit)** .
+9.  For **Results Size** , select **Allow large results (no size limit)** .
 
 10. Optional: For **Data location** , choose the [location](https://docs.cloud.google.com/bigquery/docs/locations) of your data.
 
@@ -506,8 +502,8 @@ Use the `--allow_large_results` flag with the `--destination_table` flag to crea
 
 To control the write disposition for an existing destination table, specify one of the following optional flags:
 
-- `--append_table` : If the destination table exists, the query results are appended to it.
-- `--replace` : If the destination table exists, it is overwritten with the query results.
+- `--append_table` : if the destination table exists, the query results are appended to it.
+- `--replace` : if the destination table exists, it's overwritten with the query results.
 
 ```
 bq --location=location query \
@@ -526,7 +522,7 @@ Replace the following:
 
 Examples:
 
-> **Note:** These examples query a public dataset. Because the dataset is stored in the `US` multi-region location, your destination dataset must also be in the US. You cannot write public data query results to a table in another region.
+> **Note:** These examples query a public dataset. Because the dataset is stored in the `US` multi-region location, your destination dataset must also be in the US. You can't write public data query results to a table in another region.
 
 Enter the following command to write large query results to a destination table named `mytable` in `mydataset` . The dataset is in your default project. Since no write disposition flag is specified in the command, the table must be new or empty. Otherwise, an `Already exists` error is returned. The query retrieves data from the [USA Name Data public dataset](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=usa_names&page=dataset) . This query is used for example purposes only. The results set returned does not exceed the maximum response size.
 
@@ -654,7 +650,7 @@ func queryLegacyLargeResults(w io.Writer, projectID, datasetID, tableID string) 
 
 ### Java
 
-To enable large results, set [allow large results](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setAllowLargeResults_java_lang_Boolean_) to `true` and set the [destination table](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) to the desired [TableId](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) in a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
+To enable large results, set [allow large results](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration.Builder#com_google_cloud_bigquery_QueryJobConfiguration_Builder_setAllowLargeResults_java_lang_Boolean_) to `true` and set the [destination table](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) to the chosen [TableId](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.TableId) in a [QueryJobConfiguration](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.QueryJobConfiguration) .
 
 Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
@@ -794,19 +790,27 @@ query_job.result()  # Wait for the job to complete.
 print("Query results loaded to the table {}".format(table_id))
 ```
 
-## Downloading and saving query results from the Google Cloud console
+## Save query results
 
-After you run a SQL query by using the Google Cloud console, you can save the results to another location. You can use the Google Cloud console to download query results to a local file, Google Sheets, or Google Drive. If you first sort the query results by column, then the order is preserved in the downloaded data. Saving results to a local file, Google Sheets, or Google Drive is not supported by the bq command-line tool or the API.
+When you run a SQL query in the Google Cloud console, you can save your query results to a local file, Google Sheets, or Google Drive. If you first sort the query results by column, then the order is preserved in the downloaded data.
 
 ### Limitations
 
 Downloading and saving query results are subject to the following limitations:
 
+- Saving query results isn't supported by the bq command-line tool or the API. You must use the Google Cloud console.
 - You can download query results locally only in CSV or newline-delimited JSON format.
-- You cannot save query results containing nested and repeated data to Google Sheets.
-- To save query results to Google Drive using the Google Cloud console, the results set must be 1 GB or less. If your results are larger, you can save them to a table instead.
-- When saving query results to a local CSV file, the maximum download size is 10 MB. The maximum download size is based on the size of each row returned in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method response, and can vary based on the schema of the query results. As a result, the size of the downloaded CSV file can vary, and might be less than the maximum download size limit.
-- You can save query results to Google Drive only in CSV or newline-delimited JSON format.
+- You can't save query results containing nested and repeated data to Google Sheets.
+- To save query results to Google Drive, the results set must be 1 GB or less. If your results are larger, you can save them to a table instead.
+- When you save query results to a local CSV file, the maximum download size is 10 MB. The maximum download size is based on the size of each row returned in the [`tabledata.list`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) method response, and can vary based on the schema of the query results. As a result, the size of the downloaded CSV file can vary, and might be less than the maximum download size limit.
+
+## Pricing
+
+You aren't charged for [temporary cached query result tables](https://docs.cloud.google.com/bigquery/docs/cached-results) .
+
+A permanent table can be a new or existing table in any dataset to which you have access. If you write query results to a new table, or specify a table for large query results, you're charged for [storing](https://cloud.google.com/bigquery/pricing#storage) the data. When you write query results to a permanent table, the tables you're querying must be in the same location as the dataset that contains the destination table.
+
+If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
 
 ## What's next
 

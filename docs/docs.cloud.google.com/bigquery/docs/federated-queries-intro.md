@@ -2,15 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/federated-queries-intro
 uri: https://docs.cloud.google.com/bigquery/docs/federated-queries-intro
 title: Introduction to federated queries
-description: Describes federated queries in BigQuery, their syntax, and how they can be used to query external databases such as AlloyDB, Spanner, and Cloud SQL. Explains the quotas and limits for federated queries.
+description: Describes federated queries in BigQuery, their syntax, and how they can be used to query external databases such as AlloyDB, Spanner, Cloud SQL, Oracle, MySQL, and PostgreSQL. Explains the quotas and limits for federated queries.
 data_source: docs.cloud.google.com
 ---
 
 # Introduction to federated queries
 
-Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud SQL databases and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with AlloyDB, Spanner, or Cloud SQL. In your query, you use the `EXTERNAL_QUERY` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
-
-With federated queries, you can analyze operational data stored in Spanner, AlloyDB, Cloud SQL, and SAP Datasphere in real time without copying or moving data into BigQuery.
+Federated queries let you send a query statement to an external database (such as AlloyDB, Spanner, Cloud SQL, Oracle, MySQL, or PostgreSQL) and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with the external database. In your query, you use the `EXTERNAL_QUERY` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
 
 ## Supported datastores
 
@@ -19,6 +17,9 @@ You can use federated queries with the following datastores:
 - [Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries)
 - [Cloud SQL](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries)
 - [AlloyDB](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries)
+- [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+- [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+- [PostgreSQL](https://docs.cloud.google.com/bigquery/docs/postgresql-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
 - [SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
 
 ## Workflow
@@ -77,15 +78,29 @@ The [query processing location](https://docs.cloud.google.com/bigquery/docs/loca
 
 For [Spanner, both regional and multi-regional configurations](https://docs.cloud.google.com/spanner/docs/instance-configurations) are supported. A BigQuery single region/multi-region can query a Spanner instance in any supported Spanner region. For more details refer to [cross region queries](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#cross_region_queries) .
 
+### Oracle, MySQL, and PostgreSQL
+
+Federated queries to Oracle, MySQL, and PostgreSQL are supported in all BigQuery regions where you can create connection resources. The location where the query runs must match the region of the connection resource.
+
+If you route traffic through private networks using Private Service Connect network attachments, the network attachment and the BigQuery connection must reside in the same region.
+
 ## Data type mappings
 
-When you execute a federated query, the data from the external data source is converted to GoogleSQL types. For more information, see [Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) .
+When you execute a federated query, the data from the external data source is converted to GoogleSQL types. For data type mappings specific to each data source, see the following:
+
+- [Spanner to BigQuery data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping)
+- [Cloud SQL to BigQuery (MySQL) data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#mysql_mapping)
+- [Cloud SQL to BigQuery (PostgreSQL) data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#postgresql_mapping)
+- [AlloyDB to BigQuery data type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#postgresql_mapping)
+- [Oracle to BigQuery data type mapping](https://docs.cloud.google.com/bigquery/docs/oracle-federated-queries#data-type-mapping)
+- [MySQL to BigQuery data type mapping](https://docs.cloud.google.com/bigquery/docs/mysql-federated-queries#data-type-mapping)
+- [PostgreSQL to BigQuery data type mapping](https://docs.cloud.google.com/bigquery/docs/postgresql-federated-queries#data-type-mapping)
 
 ## Quotas and limits
 
 - **Cross-region federated querying** . If the [BigQuery query processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) and the external data source location are different, this is a cross-region query. You can run up to 1 TB in cross-region queries per project per day. The following is an example of a cross-region query.
   - The Cloud SQL instance is in `us-west1` while the BigQuery connection is based in the US multi-region. The BigQuery query processing location is `US` .
-- **Quota** . Users should control query quota in the external data source, such as Cloud SQL or AlloyDB. There is no extra quota setting for federated querying. To achieve workload isolation, it's recommended to only query a database read replica.
+- **Quota** . Users should control query quota in the external data source. There is no extra quota setting for federated querying. To achieve workload isolation, it's recommended to only query a database read replica.
 - **Maximum bytes billed allowed** . This field isn't supported for federated queries. Calculating the bytes billed before actually executing the federated queries isn't possible.
 - **Number of connections** . A federated query can have at most 10 unique connections.
 - **Cloud SQL [MySQL](https://docs.cloud.google.com/sql/docs/mysql/quotas) and [PostgreSQL](https://docs.cloud.google.com/sql/docs/postgres/quotas)** . Quotas and limitations apply.
@@ -160,8 +175,7 @@ SQL pushdowns have various limitations that vary depending on the external data 
 - Only column pruning and filter pushdowns are supported. Specifically, compute, join, limit, order by and aggregation pushdowns aren't supported.
 - For filter pushdowns, literals must be of one of the following types: `BOOL` , `INT64` , `FLOAT64` , `STRING` , `DATE` , `DATETIME` , `TIMESTAMP` . Literals that are structs aren't supported.
 - SQL function pushdowns are applied only for functions that are supported by both BigQuery and a destination database.
-- SQL pushdowns are only supported for AlloyDB, Cloud SQL, and Spanner.
-- SQL pushdowns aren't supported for SAP Datasphere.
+- SQL pushdowns are only supported for AlloyDB, Cloud SQL, and Spanner. For other databases, the query is sent without modifications.
 
 #### Limitations for query federation when using Spanner external datasets
 
@@ -171,7 +185,7 @@ SQL pushdowns have various limitations that vary depending on the external data 
 
 ### Supported functions by data source
 
-The following are supported SQL functions by data source. No functions are supported for SAP Datasphere.
+The following are supported SQL functions by data source:
 
 #### Cloud SQL MySQL
 
@@ -249,7 +263,7 @@ Replace `CONNECTION_ID` with the ID of the BigQuery connection.
 
 The preceding query returns rows where `flag` is `y` or `Y` because the query is executed on the external data source.
 
-However, for query federation with Cloud SQL, SAP Datasphere, or AlloyDB data sources, if you add a filter on your main query, the query is executed on the BigQuery side with the default collation. See the following query:
+However, for query federation with Cloud SQL, SAP Datasphere, AlloyDB, Oracle, MySQL, or PostgreSQL data sources, if you add a filter on your main query, the query is executed on the BigQuery side with the default collation. See the following query:
 
 ```
 SELECT * FROM
@@ -275,4 +289,7 @@ WHERE COLLATE(flag, 'und:ci') = 'Y'
 - Learn how to [create Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
 - Learn how to [query Cloud SQL data](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) .
 - Learn how to [query AlloyDB data](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) .
-- Learn how to [query SAP Datasphere data](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries)
+- Learn how to [query Oracle data](https://docs.cloud.google.com/bigquery/docs/oracle-federated-queries) .
+- Learn how to [query MySQL data](https://docs.cloud.google.com/bigquery/docs/mysql-federated-queries) .
+- Learn how to [query PostgreSQL data](https://docs.cloud.google.com/bigquery/docs/postgresql-federated-queries) .
+- Learn how to [query SAP Datasphere data](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) .

@@ -58,7 +58,7 @@ For more information, see [Introduction to external tables](https://docs.cloud.g
 
 ## Federated queries
 
-Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud SQL databases and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with AlloyDB, Spanner, or Cloud SQL. In your query, you use the `EXTERNAL_QUERY` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
+Federated queries let you send a query statement to an external database (such as AlloyDB, Spanner, Cloud SQL, Oracle, MySQL, or PostgreSQL) and get the result back as a temporary table. Federated queries use the BigQuery Connection API to establish a connection with the external database. In your query, you use the `EXTERNAL_QUERY` function to send a query statement to the external database, using that database's SQL dialect. The results are converted to GoogleSQL data types.
 
 For more information, see [Introduction to federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
 

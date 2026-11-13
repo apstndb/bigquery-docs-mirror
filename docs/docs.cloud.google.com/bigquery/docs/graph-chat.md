@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/graph-chat
 uri: https://docs.cloud.google.com/bigquery/docs/graph-chat
 title: Chat with a graph
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to chat with BigQuery graphs by using conversational analytics.
 data_source: docs.cloud.google.com
 ---
 

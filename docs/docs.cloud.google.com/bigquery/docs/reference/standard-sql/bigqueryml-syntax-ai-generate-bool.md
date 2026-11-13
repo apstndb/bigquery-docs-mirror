@@ -85,6 +85,7 @@ AI.GENERATE_BOOL(
 
   BigQuery supports the following models:
 
+  - `gemini-4-hydrogen`
   - `gemini-4-carbon`
   - `gemini-4-argon`
   - `gemini-3.8-flash`

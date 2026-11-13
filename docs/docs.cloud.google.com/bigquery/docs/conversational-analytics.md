@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Conversational analytics overview
 
-Conversational analytics in BigQuery lets you chat with agents about your data using natural language. To get answers about your data, you can do the following:
+Conversational analytics in BigQuery lets you chat with data agents or data sources about your data by using natural language in the Google Cloud console. In response to your questions, conversational analytics runs SQL or Graph Query Language (GQL) queries to find the answer and returns natural language summaries and explanations, tabular results, and generated charts. To get answers about your data, you can do the following:
 
 - Create [data agents](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#data-agents) that automatically define data context and query processing instructions for a set of knowledge sources, such as tables, views, graphs, or user-defined functions (UDFs) that you select.
 - If needed, you can create context and instructions for an agent in the form of custom table and field metadata, instructions to the agent for interpreting and querying the data, or by creating verified queries (previously known as *golden queries* ) to configure the data agent to effectively answer questions for specific use cases.
@@ -20,7 +20,7 @@ Some examples of context and instructions that you provide to the agent are the 
 - **Context** . A data agent for sales analysis can be configured to understand that "top performers" refers to sales representatives with the highest revenue, rather than just the most closed deals.
 - **Instructions** . You can instruct a data agent to always filter data to the most recent quarter when asked about "trends," or to group results by "product category" by default.
 
-After creating data agents, you can then have [conversations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#conversations) with them to ask questions about BigQuery data by using natural language. You can also create [direct conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with one or more data sources to answer basic, one-off questions.
+After creating data agents, you can then have [conversations](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#conversations) with them to ask questions about BigQuery data by using natural language. You can also create [direct conversations](https://docs.cloud.google.com/bigquery/docs/create-conversations) with one or more data sources to answer basic, one-off questions. To interact with data agents and conversations programmatically, see the [Conversational Analytics API](https://docs.cloud.google.com/gemini/data-agents/conversational-analytics-api/overview) documentation.
 
 Conversational analytics is powered by [Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/overview) and supports some BigQuery AI and ML functions. For more information, see [BigQuery AI and ML support](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#bigquery-ml-support) .
 

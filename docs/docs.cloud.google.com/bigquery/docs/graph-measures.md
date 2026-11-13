@@ -43,6 +43,50 @@ You can call the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/re
 
 You define measures within the [`PROPERTIES` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#element_table_property_definition) of a node or edge table definition by using the `MEASURE()` keyword around a measure expression.
 
+### Measure expressions
+
+A measure expression is an aggregate function over an expression, a scalar calculation over aggregates, or a composition of measures using the [`AGG` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#agg) . When you call the `AGG` function on a measure, the calculation is evaluated once per unique key. For information about supported measure expressions and limitations, see the [measure type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#measure_type) .
+
+A measure expression can include the following:
+
+- Aggregate function calls using the following functions: `SUM` , `AVG` , `MIN` , `MAX` , `COUNT` , and `AGG` . You can use the `DISTINCT` modifier with these functions, except for `AGG` .
+
+- Expressions within aggregate functions. For example, you can aggregate multiple columns:
+
+  - `MEASURE(SUM(principal + interest)) AS debt`
+
+- Conditional logic within aggregate functions:
+
+  - `MEASURE(AVG(CASE WHEN rate > 5.0 THEN balance ELSE 0.0 END)) AS high_rate_balance`
+
+- Conditional distinct counting:
+
+  - `MEASURE(COUNT(DISTINCT CASE WHEN is_active = TRUE THEN user_id ELSE NULL END)) AS active_user_count`
+
+- Scalar operations and expressions outside of aggregate function calls:
+
+  - `MEASURE(SUM(net_sales) * 1.15) AS sales_with_tax`
+
+- Combinations of measures wrapped in the `AGG` function that are defined on the same element table, also called *derived measures* :
+
+  - `MEASURE(AGG(total_revenue) - AGG(total_cost)) AS gross_profit`
+
+The following restrictions apply to measure expressions:
+
+- `COUNT(*)` / `COUNT(1)` is not allowed. You must explicitly specify a column or expression.
+
+- `GROUP BY` clauses, window functions ( `OVER (...)` ), and subqueries aren't allowed in a measure expression.
+
+- Aggregate function calls that contain a `WHERE` clause aren't supported.
+
+- Graph properties can only be referenced within aggregate function calls.
+
+- Compositions of measures can't contain circular dependencies.
+
+- User-defined aggregate functions aren't supported.
+
+### Example
+
 The following example creates a dataset called `university` and tables for colleges, departments, and courses:
 
 ```

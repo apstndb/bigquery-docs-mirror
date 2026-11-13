@@ -819,6 +819,36 @@ SELECT 42;
     bq query --reservation_id=project1.US:test-reservation 'SELECT 42;'
     ```
 
+### Python
+
+Set the `reservation` property on a [`QueryJobConfig`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig#google_cloud_bigquery_job_QueryJobConfig_reservation) object:
+
+```
+from google.cloud import bigquery
+
+# Construct a BigQuery client object.
+client = bigquery.Client()
+
+reservation = "projects/PROJECT_ID/locations/LOCATION/reservations/RESERVATION_NAME"
+
+# Set the job configuration.
+job_config = bigquery.QueryJobConfig(reservation=reservation)
+
+# Submit the query.
+query_job = client.query("SELECT 42;", job_config=job_config)
+
+# Wait for the query to finish.
+query_job.result()
+
+print(f"Job {query_job.job_id} executed in reservation {query_job.reservation_id}.")
+```
+
+Replace the following:
+
+- `PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation.
+- `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
+- `RESERVATION_NAME` : the name of the reservation.
+
 ### API
 
 To specify a reservation using the API, [insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the `query` job configuration property. Specify your reservation in the `reservation` field.

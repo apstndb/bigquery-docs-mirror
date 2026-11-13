@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Column-level encryption with Cloud KMS
 
-You can use [Cloud Key Management Service (Cloud KMS)](https://docs.cloud.google.com/kms/docs/concepts) to encrypt the keys that in turn encrypt the values within BigQuery tables. You can use the [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) with Cloud KMS [keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#keysets) or [wrapped keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) to provide a second layer of protection at the column level.
+[Cloud Key Management Service (Cloud KMS)](https://docs.cloud.google.com/kms/docs/concepts) lets you encrypt the data encryption keys that help protect individual column values in BigQuery tables. Using [AEAD encryption functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) with Cloud KMS keys and [wrapped keysets](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts#wrapped_keysets) provides a second layer of protection at the column level and helps reduce the risk of exposing plaintext keys in your queries.
 
 ## Introduction
 

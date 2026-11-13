@@ -20,6 +20,10 @@ Feature
 
 You can track table-level data lineage in Knowledge Catalog for BigQuery pipelines. For more information, see [Track data lineage](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#data-lineage) . This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
+Feature
+
+BigQuery [generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#locations) now support the `gemini-4-hydrogen` model. This model is [generally available](https://cloud.google.com/products#product-launch-stages) .
+
 ## November 11, 2026
 
 Feature
