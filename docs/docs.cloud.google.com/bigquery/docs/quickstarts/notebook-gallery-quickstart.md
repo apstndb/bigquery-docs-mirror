@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Create and run a notebook using the notebook gallery
 
-Get started analyzing data by using the notebook gallery in BigQuery Studio.
+You can use the notebook gallery in BigQuery Studio to discover and run prebuilt notebook templates for data preparation, analysis, and visualization. Starting your analytics workflows with these templates lets you explore new features, adopt best practices, and reduce your work time.
 
 ## Before you begin
 

@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Best practices for functions
 
-This document describes how to optimize queries that use SQL functions.
+You can apply best practices for SQL functions in BigQuery to improve query execution speed and reduce overall resource consumption. Optimizing your string comparisons, aggregations, and user-defined functions (UDFs) helps you avoid resource-exceeded errors and lower your computational costs.
 
 ## Optimize string comparison
 

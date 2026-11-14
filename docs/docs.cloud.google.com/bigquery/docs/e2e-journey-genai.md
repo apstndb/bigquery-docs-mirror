@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # End-to-end user journeys for generative AI models
 
-This document describes the user journeys for BigQuery ML remote models, including the statements and functions that you can use to work with remote models. BigQuery ML offers the following types of remote models:
+This document describes the user journeys for BigQuery ML remote or hosted models, including the statements and functions that you can use to work with those models. BigQuery ML offers the following types of remote models:
 
 - [Fine-tuned Google Gemini models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned)
 - [Google, partner, and open models as a service](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
@@ -17,9 +17,9 @@ This document describes the user journeys for BigQuery ML remote models, includi
 - [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 - [Custom models deployed to Gemini Enterprise Agent Platform](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
-## Remote model user journeys
+## Remote or hosted model user journeys
 
-The following table describes the statements and functions you can use to create, evaluate, and generate data from remote models:
+The following table describes the statements and functions you can use to create, evaluate, and generate data from remote or hosted models:
 
 <table style="width:100%;">
 <colgroup>
@@ -112,7 +112,10 @@ The following table describes the statements and functions you can use to create
 <td>Remote model over the Cloud Translation API</td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service"><code>CREATE MODEL</code></a></td>
 <td>N/A</td>
-<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate"><code>ML.TRANSLATE</code></a></td>
+<td><ul>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate"><code>AI.TRANSLATE</code></a> <sup>4</sup></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate"><code>ML.TRANSLATE</code></a></li>
+</ul></td>
 <td><a href="https://docs.cloud.google.com/bigquery/docs/translate-text">Translate text</a></td>
 <td></td>
 </tr>
@@ -159,3 +162,5 @@ The following table describes the statements and functions you can use to create
 <sup>2</sup> This function calls a hosted Gemini model, and doesn't require you to create a model separately using the `CREATE MODEL` statement.
 
 <sup>3</sup> You can automatically deploy an open model when you create the BigQuery ML remote model by specifying the model's Hugging Face or Agent Platform Model Garden ID. BigQuery manages the Agent Platform resources of open models deployed in this way, and lets you interact with those Agent Platform resources by using the BigQuery ML `ALTER MODEL` and `DROP MODEL` statements. It also lets you configure automatic undeployment of the model. For more information, see [Automatically deployed models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
+
+<sup>4</sup> This function calls the Cloud Translation API directly, and doesn't require you to create a model separately by using the `CREATE MODEL` statement.

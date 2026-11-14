@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Analyze data with conversations
 
-This document describes how to create, edit, export, and delete conversations in BigQuery.
+You can create conversations in BigQuery to explore your data sources and data agents using natural language chats.
 
 Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or with data sources, such as tables, views, datasets, projects, or graphs. You can ask data agents multi-part questions that use common terms like "sales" or "most popular," without having to specify table field names or define conditions to filter the data. You can also ask questions about data located in objects such as PDFs. An agent can do the following:
 

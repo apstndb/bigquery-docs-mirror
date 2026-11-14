@@ -36,7 +36,7 @@ When your graph data is represented as tables, you must perform self joins or re
 
 - **Performance and scalability** . Graph workloads are powered by BigQuery's scalable, cost-effective and distributed analytics engine.
 
-- **Integration with Spanner Graph** . BigQuery Graph and Spanner Graph share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
+- **Integration with Spanner Graph** . BigQuery Graph and [Spanner Graph](https://docs.cloud.google.com/spanner/docs/graph/overview) share the same graph schema and query language. You can execute operational graph workloads in Spanner and run complex graph analytics in BigQuery without needing to remodel your data or translate your queries.
 
 - **Query using natural language** . Ask questions about your graph using [conversational analytics](https://docs.cloud.google.com/bigquery/docs/conversational-analytics#graphs) . Agents can write SQL and GQL queries and provide visualizations of your output. Agents can also use descriptions, synonyms, and [measures](https://docs.cloud.google.com/bigquery/docs/graph-measures) defined on your graph to improve the quality of the results. To try chatting with an agent about a graph, use the `Look Graph` sample agent on the BigQuery on the [Agents page](https://console.cloud.google.com/bigquery/agents_hub) to ask questions about the [`bigquery-public-data.thelook_ecommerce.graph`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!18m3!1sbigquery-public-data!2sthelook_ecommerce!3sgraph) graph.
 
@@ -55,6 +55,25 @@ You can use BigQuery Graph to build many types of analytic graph workloads, incl
 - **Healthcare** . Capture patient relationships, conditions, diagnosis, and treatments to facilitate patient similarity analysis and treatment planning.
 
 - **Transportation** . Model places, connections, distances, and costs in the graph, and then use graph queries to find the optimal route.
+
+## How BigQuery Graph and Spanner Graph work together
+
+BigQuery Graph is designed for analytical graph workloads, focusing on deep analysis at scale. It's optimized for uncovering global patterns, identifying historical trends, and scanning petabytes of data using parallel processing. If your application requires real-time operations, predictable millisecond latency, or k-hop queries starting from a single node (such as live fraud detection or serving live recommendations), use [Spanner Graph](https://docs.cloud.google.com/spanner/docs/graph/overview) instead.
+
+BigQuery Graph and Spanner Graph work together to provide a comprehensive solution. The following customer 360 use case describes how they complement each other:
+
+1.  **Gather real-time insights** . A customer service agent uses Spanner Graph to handle user complaints about shipping the wrong product based on real-time purchase and delivery statistics.
+2.  **Replicate or query data** . You can replicate data from Spanner to BigQuery by using [Spanner Change Streams](https://docs.cloud.google.com/spanner/docs/change-streams) without complex extract, transform, and load (ETL) operations, or query Spanner data directly from BigQuery by using [BigQuery federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
+3.  **Analyze patterns** . A data scientist uses BigQuery Graph to identify a "churn hotspot" on that same data to label the customer as "at risk".
+4.  **Improve feedback loop** . The "at-risk" labels are pushed to Spanner Graph with reverse ETL support to generate a coupon code for this customer to prevent churn.
+
+### Move data between BigQuery Graph and Spanner Graph
+
+You can move data between Spanner Graph and BigQuery Graph to suit your workload requirements:
+
+- **Forward ETL** . To move data from Spanner to BigQuery for analytical queries, use a [Dataflow template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/cloud-spanner-to-bigquery) .
+
+- **Reverse ETL** . While you can query Spanner data directly from BigQuery Graph, there might be scenarios where you need to bring BigQuery data into Spanner Graph. Use the [`EXPORT DATA`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) SQL statement. For more details, see [Understand the reverse ETL pipeline](https://docs.cloud.google.com/spanner/docs/graph/reverse-etl#reverse-etl-pipeline) .
 
 ## Tutorials
 

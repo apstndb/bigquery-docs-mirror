@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Use history-based optimizations
 
-This guide describes how history-based optimizations work and how to estimate their impact for queries.
+You can use history-based optimizations in BigQuery to automatically improve the performance of recurring queries based on their past executions. Using this historical information lets you reduce query latency and slot time consumption without manually adjusting your SQL.
 
 ## About history-based optimizations
 

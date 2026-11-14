@@ -20,18 +20,18 @@ If you want to set a limit on your total token consumption to prevent budget ove
 
 To better understand your token consumption, you can [view the number of tokens used by a query](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#token_usage) in the Google Cloud console. To estimate this usage before you run a query, use the [`AI.COUNT_TOKENS` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-count-tokens) .
 
-The following example demonstrates how to use the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) with the optimized mode to identify news articles about natural disasters, using `text-embedding-005` as the embedding model:
+The following example demonstrates how to use the [`AI.IF` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) with the optimized mode to identify news articles about technology companies, using `text-embedding-005` as the embedding model:
 
 ```
 SELECT
   title,
   body,
   AI.IF(
-    ('The following news story is about a natural disaster: ', body),
+    ('The following news story is about technology companies: ', body),
     embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
     -- Optional, 'MINIMIZE_COST' is the default when embeddings are provided.
     optimization_mode => 'MINIMIZE_COST'
-   ) AS is_natural_disaster
+  ) AS is_tech_company
 FROM
   `bigquery-public-data.bbc_news.fulltext`;
 ```

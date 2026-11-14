@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Transform SQL translations with YAML
 
-configuration YAML files let you customize how BigQuery translates SQL code from your source database during a migration. The BigQuery Migration Service supports two kinds of configuration YAML files: `*.config.yaml` translation configuration files that give the translation engine deterministic rules, and `*.ai_config.yaml` Gemini-based configuration files that give Gemini natural-language rules.
+Configuration YAML files let you customize how BigQuery translates SQL code from your source database during a migration. The BigQuery Migration Service supports two kinds of configuration YAML files: `*.config.yaml` translation configuration files that give the translation engine deterministic rules, and `*.ai_config.yaml` Gemini-based configuration files that give Gemini natural-language rules.
 
 To customize a SQL translation with configuration YAML files, do the following:
 
@@ -74,7 +74,7 @@ The following table compares the two types of configuration YAML files:
 </tr>
 <tr class="odd">
 <th>Reference</th>
-<td>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines">Guidelines to create a configuration YAML file</a> and <a href="https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_examples">configuration YAML examples</a> on this page.</td>
+<td>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines">Guidelines to create a configuration YAML file</a> and <a href="https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_examples">Configuration YAML examples</a> on this page.</td>
 <td>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines">Create a Gemini-based configuration YAML file</a> on this page.</td>
 </tr>
 </tbody>
@@ -166,18 +166,29 @@ This section provides some general guidelines to create a configuration YAML fil
 
 ### Header
 
-Each configuration file must contain a header specifying the type of configuration. The `object_rewriter` type is used to specify SQL translations in a configuration YAML file. The following example uses the `object_rewriter` type to transform a name case:
+Each `*.config.yaml` file must include a top-level `type` header that specifies the category of configuration rules in the file:
+
+- `object_rewriter` : rewrites `relation` properties—such as `temporary` , `ephemeral` , `partitionLifetime` , `external` , `description` , `partition` , and `clustering` —and `attribute` data types ( `type` ).
+- `experimental_object_rewriter` : rewrites output object names with `outputName` across `global` , `database` , `schema` , `relation` , `attribute` , `function` , `index` , `sequence` , `variable` , and `projection` , and converts data types globally with `global.typeConvert` . For more information, see [Output name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) and [Global type conversion](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#global_type_conversion) .
+- `environment` : sets session-level defaults under `session` , such as `defaultDatabase` , `schemaSearchPath` , and `dateFormat` .
+- `metadata` : declares user-defined function (UDF) signatures ( `udfs` ) and strips input name prefixes, suffixes, or regular expression patterns during metadata lookup ( `nameAlias` ).
+- `statement_rewriter` : customizes statement output such as `SELECT *` expansion, `GROUP BY` and `ORDER BY` formatting ( `select` ), and decimal or string precision strictness ( `common` ).
+- `input_formats` : specifies the character encoding of input SQL files ( `formats` ).
+- `optimizer` : enables, disables, or configures optional query optimizations ( `transformations` ).
+
+The following example uses the `experimental_object_rewriter` type to convert all output object names to uppercase:
 
 ```
-type: object_rewriter
+type: experimental_object_rewriter
 global:
-  case:
-    all: UPPERCASE
+  outputName:
+    all:
+      case: UPPERCASE
 ```
 
 ### Entity selection
 
-To perform entity-specific transformations, specify the entity in the configuration file. All `match` properties are optional; only use the `match` properties needed for a transformation. The following configuration YAML exposes properties to be matched in order to select specific entities:
+To perform entity-specific transformations, specify the source SQL entity in the configuration file. All `match` properties are optional; only use the `match` properties needed for a transformation. The `match` field compares against source object names after resolving any configured `defaultDatabase` and `schemaSearchPath` , except in `outputName` rules when `global.outputName` is also configured. For more information, see [Output name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) . The following configuration YAML exposes properties to be matched in order to select specific entities:
 
 ```
 match:
@@ -193,14 +204,14 @@ match:
 
 Description of each `match` property:
 
-- `database` or `db` : the project_id component.
-- `schema` : the dataset component.
-- `relation` : the table component.
-- `attribute` : the column component. Only valid for attribute selection
-- `databaseRegex` or `dbRegex` : matches a `database` property with a regular expression ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-- `schemaRegex` : matches `schema` properties to regular expressions ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-- `relationRegex` : matches `relation` properties with regular expressions ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
-- `attributeRegex` : matches `attribute` properties with regular expressions. Only valid for attribute selection ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
+- `database` or `db` : matches the source database name, which corresponds to the `project_id` component in BigQuery.
+- `schema` : matches the source schema name, which corresponds to the `dataset` component in BigQuery.
+- `relation` : matches the source table or view name.
+- `attribute` : matches the source column name. This property is valid only for `attribute` selection.
+- `databaseRegex` or `dbRegex` : matches the entire `database` name against a case-insensitive regular expression.
+- `schemaRegex` : matches the entire `schema` name against a case-insensitive regular expression.
+- `relationRegex` : matches the entire `relation` name against a case-insensitive regular expression.
+- `attributeRegex` : matches the entire `attribute` name against a case-insensitive regular expression. This property is valid only for `attribute` selection.
 
 For example, the following configuration YAML specifies the `match` properties to select the `testdb.acme.employee` table for a temporary table transformation.
 
@@ -240,7 +251,7 @@ You can also specify fully-qualified entities using an equivalent short-string s
 type: object_rewriter
 relation:
 -
-  match : "testdb.acme.employee"
+  match: "testdb.acme.employee"
   temporary: true
 ```
 
@@ -257,13 +268,11 @@ relation:
   temporary: true
 ```
 
-The configuration YAML accepts `key` as an alias to `match` .
+A configuration YAML file also accepts `key` as an alias for `match` . Both `key` and `match` support explicit name-component subfields as well as the dot-delimited `"database.schema.relation"` or `"database.schema.relation.attribute"` short-string syntax. By convention, `key` is often used with the short-string syntax and `match` is used with explicit subfields.
 
 ### Default database
 
-Some input SQL dialects, notably Teradata, do not support `database-name` in the qualified name. In this case, the easiest way to match entities is to omit `database` property in `match` .
-
-However, you can set the `default_database` property of the BigQuery Migration Service and use that default database in the `match` .
+Some input SQL dialects, notably Teradata, don't support a database name in qualified identifiers ( `schema.table` ). In this case, use an object `match` and omit the `database` property. Alternatively, configure `defaultDatabase` —for example, under `type: environment` —so that you can match against that default database in object or short-string `match` rules.
 
 ### Supported target attribute types
 
@@ -290,7 +299,7 @@ You can use the configuration YAML file to [perform attribute type transformatio
 
 This section provides examples to create various configuration YAML files to use with your SQL translations. Each example outlines the YAML syntax to transform your SQL translation in specific ways, along with a brief description. Each example also provides the contents of a `teradata-input.sql` or `hive-input.sql` file and a `bq-output.sql` file so that you can compare the effects of a configuration YAML on a BigQuery SQL query translation.
 
-The following examples use Teradata or Apache Hive as the input SQL dialect and BigQuery SQL as the output dialect. The following examples also use `testdb` as the default database, and `testschema` as the schema search path.
+The following examples use Teradata or Apache Hive as the input SQL dialect and BigQuery SQL as the output dialect.
 
 ### Change object-name case
 
@@ -298,16 +307,21 @@ The following examples use Teradata or Apache Hive as the input SQL dialect and 
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes the upper or lower-casing of object names:
+The following configuration YAML changes the case of SQL object names to `UPPERCASE` or `LOWERCASE` . You can set `case` on `all` objects or override it for specific object types ( `database` , `schema` , `relation` , `attribute` , `function` , `sequence` , `index` , `variable` , or `projection` ):
 
 ```
-type: object_rewriter
+type: experimental_object_rewriter
 global:
-  case:
-    all: UPPERCASE
-    database: LOWERCASE
-    attribute: LOWERCASE
+  outputName:
+    all:
+      case: UPPERCASE
+    database:
+      case: LOWERCASE
+    attribute:
+      case: LOWERCASE
 ```
+
+> **Note:** The `global.outputName` field changes the case of SQL identifiers only. To convert the entire translated SQL query—including SQL keywords such as `SELECT` , `FROM` , and `WHERE` —to lowercase or uppercase, use a `TARGET_SQL` rule in a `*.ai_config.yaml` file. For more information, see [Create a Gemini-based configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -319,8 +333,8 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);
-      select * from x;</code></pre></td>
+<td><pre data-fenced=""><code>create table TESTDB.testschema.x(A int);
+      select * from TESTDB.testschema.x;</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -330,7 +344,7 @@ A SQL translation with this configuration YAML file might look like the followin
       )
       ;
       SELECT
-          X.a
+          X.*
         FROM
           testdb.TESTSCHEMA.X
       ;</code></pre></td>
@@ -364,7 +378,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -404,7 +418,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -446,16 +460,16 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int, b int) partition by (a);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a date, b int) partition by (a);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
 <td><pre data-fenced=""><code>CREATE TABLE testdb.testschema.x
     (
-      a INT64,
+      a DATE,
       b INT64
     )
-    CLUSTER BY a
+    PARTITION BY a
     OPTIONS(
       partition_expiration_days=1
     );</code></pre></td>
@@ -491,7 +505,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -536,7 +550,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -553,7 +567,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table partitioning
 
-The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) so that it partitions by a date column:
+The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) by using `add` , `remove` , or `set` , where `set` replaces any existing partition columns:
 
 ```
 type: object_rewriter
@@ -580,8 +594,8 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a date, b int);
-    create table y(a date, b int) partition by (a);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a date, b int);
+    create table testdb.testschema.y(a date, b int) partition by (a);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -607,7 +621,7 @@ The following configuration YAML changes the [partitioning scheme of a table](ht
 type: object_rewriter
 relation:
 -
-  key: "testdb.testschema.mytable"
+  match: "testdb.testschema.mytable"
   partition:
     range_bucket:
       column: "id"
@@ -628,19 +642,23 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>snowflake-input.sql</code></td>
-<td><pre data-fenced=""><code>create table testschema.mytable (date timestamp_ntz, id number, content variant);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.mytable (
+        date timestamp_ntz,
+        id number,
+        content variant
+      );</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>create table testdb.testschema.mytable
+<td><pre data-fenced=""><code>CREATE TABLE TESTDB.TESTSCHEMA.MYTABLE
       (
-        date datetime,
-        id int64,
-        content json
+        DATE DATETIME,
+        ID INT64,
+        CONTENT JSON
       )
-      partition by range_bucket(id, generate_array(0, 100, 10))
-      options(
-        require_partition_filter=true
+      PARTITION BY RANGE_BUCKET(ID, generate_array(0, 100, 10))
+      OPTIONS(
+        require_partition_filter=TRUE
       );</code></pre></td>
 </tr>
 </tbody>
@@ -648,7 +666,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table clustering
 
-The following configuration YAML changes the [clustering scheme of a table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) :
+The following configuration YAML changes the [clustering scheme of a table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) by using `add` , `remove` , or `set` , where `set` replaces any existing clustering columns:
 
 ```
 type: object_rewriter
@@ -673,8 +691,9 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>hive-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int, b int);
-    create table y(a int, b int) clustered by (b) into 16 buckets;</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int, b int);
+    create table testdb.testschema.y(a int, b int)
+      clustered by (b) into 16 buckets;</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -726,7 +745,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int, b int, aa int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int, b int, aa int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -741,7 +760,58 @@ A SQL translation with this configuration YAML file might look like the followin
 </tbody>
 </table>
 
-> **Note:** BigQuery translation increases numeric precision to the highest precision available for a given scale.
+> **Note:** BigQuery translation increases numeric precision to the highest precision available for a given scale. To retain the declared numeric precision instead, see [Setting decimal precision strictness](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#setting_decimal_precision_strictness) .
+
+When no direct cast exists between the source and target types—for example, when converting an `INT` column that stores `YYYYMMDD` dates into a `DATE` column—provide GoogleSQL `sourceToTarget` and `targetToSource` conversion expressions. Use `?` as the placeholder for the column or expression value. For example:
+
+```
+type: object_rewriter
+attribute:
+  -
+    match: "testdb.acme.employee.jd"
+    type:
+      target: DATE
+      sourceToTarget: "parse_date('%Y%m%d', cast(? as string))"
+      targetToSource: "cast(format_date('%Y%m%d', cast(? as date)) as int64)"
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>teradata-input.sql</code></td>
+<td><pre data-fenced=""><code>create table testdb.acme.employee(eid int, jd int);
+    insert into testdb.acme.employee select 42, 20011213;
+    select eid, jd from testdb.acme.employee e where jd &gt; 20010101;</code></pre></td>
+</tr>
+<tr class="even">
+<td><code>bq-output.sql</code></td>
+<td><pre data-fenced=""><code>CREATE TABLE testdb.acme.employee
+    (
+      eid INT64,
+      jd DATE
+    )
+    ;
+    INSERT INTO testdb.acme.employee
+      SELECT
+          42,
+          parse_date(&#39;%Y%m%d&#39;, CAST(20011213 as STRING))
+    ;
+    SELECT
+        eid,
+        CAST(format_date(&#39;%Y%m%d&#39;, jd) as INT64) AS jd
+      FROM
+        testdb.acme.employee AS e
+      WHERE CAST(format_date(&#39;%Y%m%d&#39;, jd) as INT64) &gt; 20010101
+    ;</code></pre></td>
+</tr>
+</tbody>
+</table>
 
 ### Add connection to external data lake
 
@@ -755,7 +825,7 @@ The following configuration YAML marks the source table as being an external tab
 type: object_rewriter
 relation:
 -
-  key: "testdb.acme.employee"
+  match: "testdb.testschema.x"
   external:
     connection_id: "connection_test"
 ```
@@ -770,7 +840,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>hive-input.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE x
+<td><pre data-fenced=""><code>CREATE TABLE testdb.testschema.x
     (
       a VARCHAR(150),
       b INT
@@ -778,7 +848,7 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE EXTERNAL TABLE x
+<td><pre data-fenced=""><code>CREATE EXTERNAL TABLE testdb.testschema.x
     (
       a STRING,
       b INT64
@@ -798,10 +868,10 @@ A SQL translation with this configuration YAML file might look like the followin
 
 By default, the BigQuery Migration Service attempts to automatically detect the character encoding of input files. In cases where BigQuery Migration Service might misidentify the encoding of a file, you can use a configuration YAML to specify the character encoding explicitly.
 
-The following configuration YAML specifies the explicit character encoding of the input file as `ISO-8859-1` .
+The following configuration YAML specifies the explicit character encoding of the input file as `ISO-8859-1` . You can match input files by using an exact path ( `path` ), a glob pattern ( `pathGlob` ), or a regular expression ( `pathRegex` ):
 
 ```
-type: experimental_input_formats
+type: input_formats
 formats:
 - source:
     pathGlob: "*.sql"
@@ -818,12 +888,13 @@ formats:
 
 The following configuration YAML changes a data type to another across all scripts, and specifies a source data type to avoid in the transpiled script. This is different from the [Change type of a column attribute](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_type_of_a_column_attribute) configuration, where only the data type for a single attribute is changed.
 
-BigQuery supports the following data type conversions:
+The translation service supports the following data type conversions:
 
 - `DATETIME` to `TIMESTAMP`
 - `TIMESTAMP` to `DATETIME` (accepts optional time zone)
-- `TIMESTAMP WITH TIME ZONE` to `DATETIME` (accepts optional time zone)
-- `CHAR` to `VARCHAR`
+- `TIMESTAMP WITH TIME ZONE` ( `timestamptz` ) to `DATETIME` (accepts optional time zone)
+- `CHAR` to `VARCHAR` (accepts optional `precisionAction` and `comparisonBehavior` )
+- `VARCHAR` to `VARCHAR` (accepts optional `precisionAction` and `comparisonBehavior` )
 
 In the following example, the configuration YAML converts a `TIMESTAMP` data type to `DATETIME` .
 
@@ -833,6 +904,70 @@ global:
   typeConvert:
     timestamp: DATETIME
 ```
+
+#### Convert `CHAR` and `VARCHAR` types
+
+In dialects such as Teradata, `CHAR(N)` values are right-padded with spaces, and string writes are truncated to the declared column length. String comparisons are case-insensitive ( `NOT CASESPECIFIC` ) by default and ignore trailing spaces. By default, the translation engine emulates these semantics in BigQuery. It adds right-padding ( `CONCAT` ) and truncation ( `SUBSTR` ) wrappers on casts and writes, `UPPER` and `RTRIM` wrappers on comparisons, and `UPPER` wrappers on `GROUP BY` keys.
+
+You can configure the `char` and `varchar` fields under `global.typeConvert` with the following properties:
+
+- `target` : must be set to `VARCHAR` . Configuring `target: VARCHAR` on `char` removes `CHAR` right-padding ( `CONCAT` ) even when `precisionAction` is `PRESERVE` .
+- `precisionAction` : controls character-length precision and `SUBSTR` truncation wrappers:
+  - `PRESERVE` (default): retains character-length precision on expressions and emits `SUBSTR` truncation wrappers when casting or inserting into `CHAR(N)` or `VARCHAR(N)` columns. To also emit `STRING(N)` column lengths in `CREATE TABLE` DDL, see [Setting string precision strictness](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#setting_string_precision_strictness) .
+  - `DROP` : drops character-length precision on expressions and omits `SUBSTR` truncation wrappers.
+- `comparisonBehavior` : controls `RTRIM` and `UPPER` wrappers for comparisons and `GROUP BY` keys. Setting a value other than `STRICT` on either `char` or `varchar` applies across both types, so set the same value on both keys when configuring both:
+  - `STRICT` (default): emulates both trailing-space padding ( `RTRIM` ) and case-insensitive collation ( `UPPER` ).
+  - `PADDING_AWARE` : emulates only trailing-space padding ( `RTRIM` ) and omits `UPPER` .
+  - `CASE_AWARE` : emulates only case-insensitive collation ( `UPPER` ) and omits `RTRIM` .
+  - `NONE` : omits both `RTRIM` and `UPPER` wrappers, so the output uses direct comparisons and `GROUP BY` expressions.
+
+The following configuration YAML converts `CHAR` to `VARCHAR` and removes truncation ( `SUBSTR` ), trailing-space ( `RTRIM` ), and case-insensitivity ( `UPPER` ) wrappers for both `CHAR` and `VARCHAR` columns:
+
+```
+type: experimental_object_rewriter
+global:
+  typeConvert:
+    char:
+      target: VARCHAR
+      precisionAction: DROP
+      comparisonBehavior: NONE
+    varchar:
+      target: VARCHAR
+      precisionAction: DROP
+      comparisonBehavior: NONE
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>teradata-input.sql</code></td>
+<td><pre data-fenced=""><code>create table r(a char(10), b varchar(20));
+      select cast(b as char(5)) from r where a = b group by 1;</code></pre></td>
+</tr>
+<tr class="even">
+<td><code>bq-output.sql</code></td>
+<td><pre data-fenced=""><code>CREATE TABLE r
+      (
+        a STRING,
+        b STRING
+      )
+      ;
+      SELECT
+          b
+        FROM
+          r
+        WHERE a = b
+        GROUP BY 1
+      ;</code></pre></td>
+</tr>
+</tbody>
+</table>
 
 ### Setting default time zone
 
@@ -884,30 +1019,30 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE x
+<td><pre data-fenced=""><code>CREATE TABLE X
       (
-        c_timestamp DATETIME,
-        c_timestamptz DATETIME,
-        c_datetime DATETIME
+        C_TIMESTAMP DATETIME,
+        C_TIMESTAMPTZ DATETIME,
+        C_DATETIME DATETIME
       )
       ;
       SELECT
-          x.c_timestamp
+          C_TIMESTAMP
         FROM
-          test.x
-        WHERE x.c_timestamp &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+          X
+        WHERE C_TIMESTAMP &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
       ;
       SELECT
-          x.c_timestamptz
+          X.C_TIMESTAMPTZ
         FROM
-          test.x
-        WHERE x.c_timestamptz &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+          X
+        WHERE X.C_TIMESTAMPTZ &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
       ;
       SELECT
-          x.c_datetime
+          C_DATETIME
         FROM
-          test.x
-        WHERE x.c_datetime &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+          X
+        WHERE C_DATETIME &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
       ;</code></pre></td>
 </tr>
 </tbody>
@@ -916,6 +1051,8 @@ A SQL translation with this configuration YAML file might look like the followin
 In the following example, the configuration YAML converts a `DATETIME` data type to `TIMESTAMP` .
 
 By default, `TIMESTAMPTZ` is converted to `TIMESTAMP` with no configuration required.
+
+> **Note:** Don't combine `datetime` to `TIMESTAMP` conversion with `timestamp` or `timestamptz` to `DATETIME` conversion in the same translation job, because applying both rules rewrites temporal columns in opposite directions.
 
 ```
 type: experimental_object_rewriter
@@ -943,30 +1080,30 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE x
+<td><pre data-fenced=""><code>CREATE TABLE X
       (
-        c_timestamp TIMESTAMP,
-        c_timestamptz TIMESTAMP,
-        c_datetime TIMESTAMP
+        C_TIMESTAMP TIMESTAMP,
+        C_TIMESTAMPTZ TIMESTAMP,
+        C_DATETIME TIMESTAMP
       )
       ;
       SELECT
-          x.c_timestamp
+          C_TIMESTAMP
         FROM
-          test.x
-        WHERE x.c_timestamp &gt; current_timestamp()
+          X
+        WHERE C_TIMESTAMP &gt; current_timestamp()
       ;
       SELECT
-          x.c_timestamptz
+          C_TIMESTAMPTZ
         FROM
-          test.x
-        WHERE x.c_timestamptz &gt; current_timestamp()
+          X
+        WHERE C_TIMESTAMPTZ &gt; current_timestamp()
       ;
       SELECT
-          x.c_datetime
+          X.C_DATETIME
         FROM
-          test.x
-        WHERE x.c_datetime &gt; current_timestamp()
+          X
+        WHERE X.C_DATETIME &gt; current_timestamp()
       ;</code></pre></td>
 </tr>
 </tbody>
@@ -980,22 +1117,22 @@ A SQL translation with this configuration YAML file might look like the followin
 
 The following configuration YAML changes the star projection, `GROUP BY` , and `ORDER BY` clauses in `SELECT` statements.
 
-`starProjection` supports the following configurations:
+The `select.starProjection` field supports the following values:
 
-- `ALLOW`
-- `PRESERVE` (default)
-- `EXPAND`
+- `ALLOW` : emits `SELECT *` when the source query uses `SELECT *` or lists all columns of the table in order.
+- `PRESERVE` (default): emits `SELECT *` only when the source query uses `SELECT *` .
+- `EXPAND` : expands `SELECT *` into individual column references when table metadata is available.
 
-`groupBy` and `orderBy` support the following configurations:
+The `select.groupBy` and `select.orderBy` fields support the following values:
 
-- `EXPRESSION`
-- `ALIAS`
-- `INDEX`
+- `EXPRESSION` : formats `GROUP BY` or `ORDER BY` items as full expressions.
+- `ALIAS` : formats `GROUP BY` or `ORDER BY` items using `SELECT` column aliases when available.
+- `INDEX` : formats `GROUP BY` or `ORDER BY` items using 1-based column positions, such as `GROUP BY 1` .
 
 In the following example, the configuration YAML configures the star projection to `EXPAND` .
 
 ```
-type: experimental_statement_rewriter
+type: statement_rewriter
 select:
   starProjection: EXPAND
 ```
@@ -1018,11 +1155,11 @@ A SQL translation with this configuration YAML file might look like the followin
 <td><pre data-fenced=""><code>CREATE TABLE x
       (
         a INT64,
-        b DATETIME
+        b TIMESTAMP
       )
       ;
       SELECT
-          x.a
+          x.a,
           x.b
         FROM
           x
@@ -1035,7 +1172,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 In most cases, the BigQuery SQL translator can automatically parse the data definition language (DDL) of external user-defined functions (UDFs) to determine their input and output data types, even if the UDF body is written in an external language. However, for certain source dialects, the translator might not be able to automatically compile the UDF signature. To ensure that SQL statements referencing these UDFs are translated accurately without having to supply the original DDL, you can use a YAML configuration file to explicitly register the UDF signatures.
 
-The following configuration YAML specifies the signature of user-defined functions (UDFs) that are used in the source scripts. Much like [metadata zip files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , UDF definitions can help to produce a more accurate translation of input scripts.
+The following configuration YAML specifies the signature of user-defined functions (UDFs) that are used in the source scripts. Specify each signature in the source dialect as `RETURN_TYPE `` `` FUNCTION_NAME `` ( `` ARG_NAME `` `` ARG_TYPE `` , ...)` , including a name for each parameter. Much like [metadata zip files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , UDF definitions can help produce a more accurate translation of input scripts.
 
 ```
 type: metadata
@@ -1064,9 +1201,70 @@ A SQL translation with this configuration YAML file might look like the followin
       )
       ;
       SELECT
-          date_add(parse_short_date(x.dt), interval 1 DAY)
+          date_add(parse_short_date(dt), interval 1 DAY)
         FROM
           x
+      ;</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Some source dialects support UDFs that share a name across different argument signatures, sometimes called *overloaded UDFs* . For overloaded UDFs, specify `udf` and a distinct target `name` so that each signature maps to a unique function name in BigQuery:
+
+```
+type: metadata
+udfs:
+  - "int custom_substr(pos int)"
+  - udf: "int custom_substr(pos int, len int)"
+    name: "custom_substr_with_len"
+```
+
+### Strip identifier patterns during metadata lookup
+
+> **Preview**
+>
+> This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Input SQL scripts might reference objects or columns with a prefix, suffix, or naming pattern that isn't in your metadata definitions—for example, referencing `a_dt` when the metadata DDL defines column `dt` . In this case, use `nameAlias` under `type: metadata` so that the translation engine strips the pattern when looking up object names in metadata. The original identifier is preserved in the output SQL.
+
+The `nameAlias` field supports the following properties. Each property accepts a single string or a list of strings, and the first matching entry in each list applies:
+
+- `stripPrefix` : strips a literal prefix before looking up metadata.
+- `stripSuffix` : strips a literal suffix before looking up metadata.
+- `stripRegex` : matches a case-sensitive regular expression and replaces each matched substring with its first capturing group `(...)` when looking up metadata. Anchor the pattern—for example, `^a_(.*)$` —to match only a prefix or the full identifier.
+
+The following configuration YAML strips the leading `a_` prefix from identifiers when looking up object names in metadata:
+
+```
+type: metadata
+nameAlias:
+  stripRegex: "^a_(.*)$"
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>teradata-input.sql</code></td>
+<td><pre data-fenced=""><code>create table t(dt date);
+      select a_dt + 1 from t;</code></pre></td>
+</tr>
+<tr class="even">
+<td><code>bq-output.sql</code></td>
+<td><pre data-fenced=""><code>CREATE TABLE t
+      (
+        dt DATE
+      )
+      ;
+      SELECT
+          date_add(a_dt, interval 1 DAY)
+        FROM
+          t
       ;</code></pre></td>
 </tr>
 </tbody>
@@ -1081,7 +1279,7 @@ A SQL translation with this configuration YAML file might look like the followin
 By default, BigQuery Migration Service increases numeric precision to the highest precision available for a given scale. The following configuration YAML overrides this behavior by configuring the precision strictness to retain the decimal precision of the source statement.
 
 ```
-type: experimental_statement_rewriter
+type: statement_rewriter
 common:
   decimalPrecision: STRICT
 ```
@@ -1122,7 +1320,7 @@ If your application doesn't rely on the source dialect's truncation behavior, co
 The following configuration YAML overrides this behavior by configuring the precision strictness to retain the string precision of the source statement.
 
 ```
-type: experimental_statement_rewriter
+type: statement_rewriter
 common:
   stringPrecision: STRICT
 ```
@@ -1156,7 +1354,13 @@ A SQL translation with this configuration YAML file might look like the followin
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-You can use configuration YAML to map SQL object names. You can change different parts of the name depending on the object being mapped.
+You can use `type: experimental_object_rewriter` in a configuration YAML file to map SQL object names ( `database` , `schema` , `relation` , `attribute` , `function` , `sequence` , `index` , `variable` , or `projection` ) statically or dynamically:
+
+- Each object type expands only its own name and parent hierarchy placeholders from `${database}` , `${schema}` , `${relation}` , `${attribute}` , `${function}` , `${sequence}` , `${index}` , `${variable}` , and `${projection}` . For example, a `schema` rule expands `${database}` and `${schema}` , while a `relation` rule expands `${database}` , `${schema}` , and `${relation}` .
+- When multiple rules of the same object type with distinct `match` criteria match an object, the last matching rule in the list applies.
+- Global `replace` and `case` rules under `global.outputName` run before object-specific `outputName` rules. An object-specific rule matches and can override the globally transformed name of its object. For `attribute` rules, `match` compares against the globally transformed `attribute` name alongside the source `database` , `schema` , and `relation` names. For more information, see [Global output name rewrite](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#global_output_name_rewrite) .
+
+For more information about how name mapping rules work across database, schema, relation, function, and attribute levels, see [Map SQL object names for translation](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) .
 
 #### Static name mapping
 
@@ -1191,7 +1395,8 @@ A SQL translation with this configuration YAML file might look like the followin
 <td><pre data-fenced=""><code>CREATE TABLE my_new_db.my_schema.my_new_table
       (
         a INT64
-      )</code></pre></td>
+      )
+      ;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1252,6 +1457,52 @@ A SQL translation with this configuration YAML file might look like the followin
 </tbody>
 </table>
 
+#### Column name mapping
+
+Use the `attribute` section under `type: experimental_object_rewriter` to rename columns across both table definitions and query references:
+
+```
+type: experimental_object_rewriter
+attribute:
+-
+  match:
+    relation: employee
+    attributeRegex: "\\d.*"
+  outputName:
+    attribute: "col_${attribute}"
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>teradata-input.sql</code></td>
+<td><pre data-fenced=""><code>create table employee(eid int, &quot;2name&quot; varchar(10));
+      select eid, &quot;2name&quot; from employee e;</code></pre></td>
+</tr>
+<tr class="even">
+<td><code>bq-output.sql</code></td>
+<td><pre data-fenced=""><code>CREATE TABLE employee
+      (
+        eid INT64,
+        col_2name STRING
+      )
+      ;
+      SELECT
+          eid,
+          col_2name
+        FROM
+          employee AS e
+      ;</code></pre></td>
+</tr>
+</tbody>
+</table>
+
 ### Specifying default database and schema search path
 
 > **Preview**
@@ -1277,13 +1528,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>SELECT * FROM database.table
-      SELECT * FROM table1</code></pre></td>
+<td><pre data-fenced=""><code>SELECT * FROM mydb.mytable;
+      SELECT * FROM table1;</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>SELECT * FROM myproject.database.table.
-      SELECT * FROM myproject.myschema1.table1</code></pre></td>
+<td><pre data-fenced=""><code>SELECT * FROM myproject.mydb.mytable;
+      SELECT * FROM myproject.myschema1.table1;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1317,12 +1568,12 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE testdb.testschema.x
+<td><pre data-fenced=""><code>CREATE TABLE X
       (
         DT DATETIME DEFAULT DATETIME &#39;1999-12-31 00:00:00&#39;
       )
       ;
-      INSERT INTO testdb.testschema.x (DT)
+      INSERT INTO X
         VALUES (DATETIME &#39;2000-01-01 00:00:00&#39;)
       ;</code></pre></td>
 </tr>
@@ -1335,19 +1586,22 @@ A SQL translation with this configuration YAML file might look like the followin
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes the output names of all objects (database, schema, relation, and attributes) in the script according to the configured rules.
+The following configuration YAML uses `replace` rules under `global.outputName` to rewrite the output names of all objects ( `all` ) or specific object types ( `database` , `schema` , `relation` , `attribute` , `function` , `sequence` , `index` , `variable` , or `projection` ). Each rule matches a case-sensitive regular expression and replaces matches with new text, including `$0` , `$1` , and other capture groups.
+
+Global `outputName` transformations ( `replace` followed by `case` ) run before object-specific `outputName` rules, such as `schema` , `relation` , or `attribute` . An object-specific rule matches and can override the globally transformed name of its object. For `attribute` rules, `match` compares against the globally transformed `attribute` name alongside the source `database` , `schema` , and `relation` names:
 
 ```
 type: experimental_object_rewriter
 global:
   outputName:
-    regex:
-      - match: '\s'
-        replaceWith: '_'
-      - match: '>='
-        replaceWith: 'gte'
-      - match: '^[^a-zA-Z_].*'
-        replaceWith: '_$0'
+    all:
+      replace:
+        - regex: '\s'
+          replaceWith: '_'
+        - regex: '>='
+          replaceWith: 'gte'
+        - regex: '^[^a-zA-Z_].*'
+          replaceWith: '_$0'
 ```
 
 A SQL translation with this configuration YAML file might look like the following:
@@ -1364,7 +1618,7 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE test_special_chars_employees_gte_12
+<td><pre data-fenced=""><code>CREATE TABLE test_special_chars_gte_12
       (
         _42eid INT64,
         custom_column STRING
@@ -1378,7 +1632,11 @@ A SQL translation with this configuration YAML file might look like the followin
 
 Optional transformations can be applied to translated SQL in order to introduce changes that can improve performance or cost. These optimizations are strictly case dependent and should be evaluated against unmodified SQL output to assess their actual effect on performance.
 
-The following configuration YAML enables optional transformations. The configuration accepts a list of optimizations and, for optimizations which accept parameters, a section with optional parameter values.
+The following configuration YAML enables optional transformations. Each entry in the `transformations` list supports the following fields:
+
+- `name` : the optimization name.
+- `enabled` (optional): a boolean that defaults to `true` . Set `enabled` to `false` to disable an optimization that is enabled by default for the source dialect.
+- `parameters` (optional): a map of optimization-specific parameters.
 
 ```
 type: optimizer
@@ -1391,10 +1649,10 @@ transformations:
 
 | Optimization                                 | Optional parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |----------------------------------------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PRECOMPUTE_INDEPENDENT_SUBSELECTS`          | `scope: [PREDICATE, PROJECTION]` | Rewrites the query by adding a `DECLARE` statement to replace an expression in either `PREDICATE` clauses or `PROJECTION` with a precomputed variable. This will be identified as a static predicate allowing for a reduction of the amount of data read. If the scope is omitted, the default value is `PREDICATE` (i.e. `WHERE` and `JOIN-ON` clause). Extracting a scalar subquery to a `DECLARE` statement will make the original predicate static and therefore qualify for improved execution planning. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `REWRITE_CTE_TO_TEMP_TABLE`                  | `threshold: N`                   | Rewrites common table expressions (CTE) to temporary tables when there are more than `N` references to the same common table expression. This reduces query complexity and forces single execution of the common table expression. If `N` is omitted, the default value is 4. We recommend using this optimization when non-trivial CTEs are referenced multiple times. Introducing temporary tables has an overhead that might be larger than eventual multiple executions of a low complexity or low cardinality CTE. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `PRECOMPUTE_INDEPENDENT_SUBSELECTS`          | `scope: [PREDICATE, PROJECTION]` | Rewrites the query by adding a `DECLARE` statement to replace an expression in `PREDICATE` clauses, `PROJECTION` clauses, or both with a precomputed variable. This rewrite turns the expression into a static predicate that can reduce the amount of data read. The `scope` parameter accepts a list containing `PREDICATE` , `PROJECTION` , or both. If `parameters` is omitted, then `scope` defaults to `[PREDICATE]` , which covers `WHERE` and `JOIN ON` clauses. Extracting a scalar subquery to a `DECLARE` statement will make the original predicate static and therefore qualify for improved execution planning. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                   |
+| `REWRITE_CTE_TO_TEMP_TABLE`                  | `threshold: N`                   | Rewrites common table expressions (CTEs) to temporary tables when there are at least `N` references to the same CTE. This rewrite reduces query complexity and forces single execution of the CTE. If `N` is omitted, then the default value is `4` . We recommend using this optimization when non-trivial CTEs are referenced multiple times. Introducing temporary tables has an overhead that might be larger than eventual multiple executions of a low complexity or low cardinality CTE. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER`      | `bigint: N`                      | Rewrites zero-scale `NUMERIC/BIGNUMERIC` attributes to `INT64` type if the precision is within `N` . If `N` is omitted, the default value is `18` . We recommend using this optimization when you translate from source dialects that don't have integer types. Changing column types requires reviewing all downstream uses for type compatibility and semantic changes. For example, fractional divisions becoming integer divisions, or code expecting numeric values. Snowflake translations have this optimization for zero-scale numerics up to precision 38 enabled by default. This optimization ensures that a Snowflake `INTEGER` , which is implicitly represented as `NUMBER(38,0)` in Snowflake, translates to a BigQuery `INT64` instead of a `BIGNUMERIC(38)` . If your application uses numbers with precisions that are over 18, we recommend disabling this functionality to ensure that BigQuery can process the full range of values needed by your application. |
-| `DROP_TEMP_TABLE`                            |                                  | Adds `DROP TABLE` statements for all temporary tables created in a script and not dropped by the end of it. This reduces the storage billing period for the temporary table from 24 hours to the script running time. This optimization will introduce new SQL statements. We recommend using this optimization when temporary tables are not accessed for any further processing after the end of script execution. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `DROP_TEMP_TABLE`                            |                                  | Adds `DROP TABLE` statements for all temporary tables created in a script and not dropped by the end of it. This reduces the storage billing period for the temporary table from 24 hours to the script running time. We recommend using this optimization when temporary tables are not accessed for any further processing after the end of script execution. This optimization will introduce new SQL statements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `REGEXP_CONTAINS_TO_LIKE`                    |                                  | Rewrites some categories of `REGEXP_CONTAINS` matching patterns to `LIKE` expressions. We recommend using this optimization when no other process, such as macro replacement, relies on the regular expression pattern literals being preserved unchanged in output SQL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `ADD_DISTINCT_TO_SUBQUERY_IN_SET_COMPARISON` |                                  | Adds `DISTINCT` clause to subqueries used as value set for `[NOT] IN` operator. We recommend using this optimization when the cardinality (distinct number of values) of the subquery result is significantly lower than the number of values. When this precondition is not met this transformation can have negative effects on performance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `APPROXIMATE_RANGE_PARTITIONS`               |                                  | Approximates non-contiguous or non-regular integer partitioning schemes by converting them to contiguous, equally sized partition ranges supported by BigQuery. By default, such partitioning schemes don't influence the table partitioning scheme in translated DDL statements. We recommend using this optimization when the source table uses a non-contiguous partitioning function like the Teradata `RANGE_N` function and would benefit from an equally sized partition scheme in BigQuery.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -1430,7 +1688,12 @@ A SQL translation with this optimization might look like the following:
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE numbers(i INT64, n INT64);</code></pre></td>
+<td><pre data-fenced=""><code>CREATE TABLE NUMBERS
+      (
+        I INT64,
+        N INT64
+      )
+      ;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1458,7 +1721,12 @@ A SQL translation with this optimization might look like the following:
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
-<td><pre data-fenced=""><code>CREATE TABLE numbers(i BIGNUMERIC(38), n NUMERIC(29));</code></pre></td>
+<td><pre data-fenced=""><code>CREATE TABLE NUMBERS
+      (
+        I BIGNUMERIC(38),
+        N NUMERIC(29)
+      )
+      ;</code></pre></td>
 </tr>
 </tbody>
 </table>
@@ -1595,7 +1863,7 @@ A SQL translation with these two configuration YAML files might look like the fo
 <tbody>
 <tr class="odd">
 <td><code>teradata-input.sql</code></td>
-<td><pre data-fenced=""><code>create table x(a int);</code></pre></td>
+<td><pre data-fenced=""><code>create table testdb.testschema.x(a int);</code></pre></td>
 </tr>
 <tr class="even">
 <td><code>bq-output.sql</code></td>
@@ -1607,3 +1875,5 @@ A SQL translation with these two configuration YAML files might look like the fo
 </tr>
 </tbody>
 </table>
+
+> **Note:** BigQuery translation increases numeric precision to the highest precision available for a given scale by default, so `NUMERIC(10,2)` becomes `NUMERIC(31, 2)` . To retain the declared numeric precision instead, see [Setting decimal precision strictness](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#setting_decimal_precision_strictness) .

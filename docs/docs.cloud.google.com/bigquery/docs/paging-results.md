@@ -1,16 +1,14 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/paging-results
 uri: https://docs.cloud.google.com/bigquery/docs/paging-results
-title: Using pagination with the BigQuery API
+title: Use pagination with the BigQuery API
 description: Shows how to page through the table data and query results using the BigQuery REST API, with examples in C#, Java, Go, Python, PHP, Node.js, and Ruby.
 data_source: docs.cloud.google.com
 ---
 
-# Using pagination with the BigQuery API
+# Use pagination with the BigQuery API
 
-This document describes how to read table data and query results in large datasets by using pagination with the BigQuery API.
-
-With *pagination* , BigQuery breaks a large dataset into smaller chunks called *pages* . For most users, Cloud Client Libraries handle this process automatically, but you can also manually control pagination for specific use cases like web applications.
+You can use pagination with the BigQuery API to efficiently read table data and query results from large datasets. Breaking large datasets into smaller, manageable pages helps you optimize your network usage, fit data into memory, and manually control the flow of results. For most users, Cloud Client Libraries handle this process automatically, but you can also manually control pagination for specific use cases, such as web applications.
 
 ## Use automatic pagination
 

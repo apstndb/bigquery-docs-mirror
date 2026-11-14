@@ -1,50 +1,84 @@
 ---
 name: documents/docs.cloud.google.com/bigquery/docs/translate-text
 uri: https://docs.cloud.google.com/bigquery/docs/translate-text
-title: Translate text with the ML.TRANSLATE function
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+title: Translate text with the AI.TRANSLATE function
+description: Use the AI.TRANSLATE function with the Cloud Translation API to translate text in BigQuery.
 data_source: docs.cloud.google.com
 ---
 
-# Translate text with the ML.TRANSLATE function
+The [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) lets you translate text between languages directly in BigQuery. For example, you can localize product catalogs, translate customer feedback for global support teams, or standardize multilingual survey responses without building separate data pipelines. The function connects BigQuery to the Cloud Translation API by using your end-user credentials, so you don't need to create a connection or a remote model.
 
-This document describes how to use the [`ML.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate) with a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) to translate text from a [BigQuery standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+In this tutorial, you create a sample table of multilingual customer feedback, translate text into English with automatic language detection, inspect translation metadata, and translate movie reviews into Spanish by using the [Translation LLM](https://docs.cloud.google.com/translate/docs/translation-llm) model.
 
-## Required roles
+## Objectives
 
-To create a remote model and translate text, you need the following Identity and Access Management (IAM) roles at the project level:
+- Create a dataset and a sample table of multilingual text.
+- Translate multilingual text into English with automatic language detection.
+- Return translation metadata and detected source language codes.
+- Translate nuanced text by using the Translation LLM model.
 
-- Create and use BigQuery datasets, tables, and models: BigQuery Data Editor ( `roles/bigquery.dataEditor` )
+## Costs
 
-- Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `roles/bigquery.connectionsAdmin` )
+In this document, you use the following billable components of Google Cloud:
 
-  If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `CREATE MODEL` statement. To do so, you must have BigQuery Admin ( `roles/bigquery.admin` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
+- **BigQuery.** You incur costs for the data that you process in BigQuery.
+- **Cloud Translation.** You incur costs for calls to the Cloud Translation API.
 
-- Grant permissions to the connection's service account: Project IAM Admin ( `roles/resourcemanager.projectIamAdmin` )
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-- Create BigQuery jobs: BigQuery Job User ( `roles/bigquery.jobUser` )
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-- Create a dataset: `bigquery.datasets.create`
-- Create, delegate, and use a connection: `bigquery.connections.*`
-- Set service account permissions: `resourcemanager.projects.getIamPolicy` and `resourcemanager.projects.setIamPolicy`
-- Create a model and run inference:
-  - `bigquery.jobs.create`
-  - `bigquery.models.create`
-  - `bigquery.models.getData`
-  - `bigquery.models.updateData`
-  - `bigquery.models.updateMetadata`
-
-You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-permissions) .
+For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) and [Translation pricing](https://cloud.google.com/translate/pricing) .
 
 ## Before you begin
 
+### Console
+
+1.  Make sure that you have the following role or roles on the project: **BigQuery Data Editor** , **BigQuery Job User** , **Cloud Translation API User** .
+
+    #### Check for the roles
+
+    1.  In the Google Cloud console, go to the **IAM** page.
+
+    2.  Select the project.
+
+    3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
+
+    4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
+
+    #### Grant the roles
+
+    1.  In the Google Cloud console, go to the **IAM** page.
+
+    2.  Select the project.
+
+    3.  Click person_add **Grant access** .
+
+    4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
+
+    5.  Click **Select a role** , then search for the role.
+
+    6.  To grant additional roles, click add **Add another role** and add each additional role.
+
+    7.  Click **Save** .
+
+### gcloud
+
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `roles/bigquery.dataEditor, roles/bigquery.jobUser, roles/cloudtranslate.user`
+
+    ```
+    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+    ```
+
+    Replace the following:
+
+    - `PROJECT_ID` : Your project ID.
+    - `USER_IDENTIFIER` : The identifier for your user account. For example, `myemail@example.com` .
+    - `ROLE` : The IAM role that you grant to your user account.
+
 ## Create a dataset
 
-Create a BigQuery dataset to contain your resources:
+To create a BigQuery dataset, select one of the following options:
 
 ### Console
 
@@ -56,33 +90,32 @@ Create a BigQuery dataset to contain your resources:
 
     If you don't see the left pane, click last_page **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click your project name.
+3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  On the **Datasets** page, click add **Create dataset** .
 
-5.  On the **Create dataset** page, do the following:
+5.  In the **Create dataset** pane, do the following:
 
-    1.  For **Dataset ID** , type a name for the dataset.
+    - For **Dataset ID** , enter `bqml_tutorial` .
 
-    2.  For **Location type** , select **Region** or **Multi-region** .
+    - For **Data location** , select **US** .
 
-        - If you selected **Region** , then select a location from the **Region** list.
-        - If you selected **Multi-region** , then select **US** or **Europe** from the **Multi-region** list.
+    Leave the remaining default settings as they are.
 
-    3.  Click **Create dataset** .
+6.  Click **Create dataset** .
 
 ### bq
 
-1.  To create a new dataset, use the [`bq mk`](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `--location` flag:
+To create a new dataset, use the [`bq mk --dataset` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+
+1.  Create a dataset named `bqml_tutorial` with the data location set to `US` :
 
     ```
-    bq --location=LOCATION mk -d DATASET_ID
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
     ```
-
-    Replace the following:
-
-    - `LOCATION` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
-    - `DATASET_ID` : the ID of the dataset that you're creating.
 
 2.  Confirm that the dataset was created:
 
@@ -90,493 +123,225 @@ Create a BigQuery dataset to contain your resources:
     bq ls
     ```
 
-## Create a connection
+### API
 
-Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. Create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the dataset you created in the previous step.
+Call the [`datasets.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) :
 
-You can skip this step if you either have a default connection configured, or you have the BigQuery Admin role.
+```
+{
+  "datasetReference": {
+     "datasetId": "bqml_tutorial"
+  }
+}
+```
 
-Select one of the following options:
+## Create a sample table
 
-### Console
-
-1.  Go to the **BigQuery** page.
-
-2.  In the left pane, click explore **Explorer** :
-
-    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
-
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
-
-3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
-
-4.  On the **Connections** page, click **Create connection** .
-
-5.  For **Connection type** , choose **Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)** .
-
-6.  In the **Connection ID** field, enter a name for your connection.
-
-7.  For **Location type** , select a location for your connection. The connection should be colocated with your other resources such as datasets.
-
-8.  Click **Create connection** .
-
-9.  Click **Go to connection** .
-
-10. In the **Connection info** pane, copy the service account ID for use in a later step.
-
-### SQL
-
-Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) to create a table of multilingual customer feedback in the `bqml_tutorial` dataset:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the query editor, enter the following statement:
+2.  In the query editor, run the following statement:
 
     ```
-    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
-    OPTIONS (
-      connection_type = "CLOUD_RESOURCE",
-      friendly_name = "FRIENDLY_NAME",
-      description = "DESCRIPTION"
-      );
+    CREATE OR REPLACE TABLE `bqml_tutorial.customer_feedback` AS (
+      SELECT
+        *
+      FROM
+        UNNEST(
+          [
+            STRUCT<feedback_id INT64, feedback_text STRING>(
+              1, 'El servicio de entrega fue rápido y confiable.'),
+            (2, 'Je suis très satisfait de la qualité de ce produit.'),
+            (3, 'Die Benutzeroberfläche der App ist sehr übersichtlich.'),
+            (4, 'O suporte ao cliente resolveu meu problema com rapidez.')
+          ])
+    );
     ```
 
-    Replace the following:
+## Translate multilingual text
 
-    - `CONNECTION_NAME` : the name of the connection in either the `PROJECT_ID `` . `` LOCATION `` . `` CONNECTION_ID` , `LOCATION `` . `` CONNECTION_ID` , or `CONNECTION_ID` format. If the project or location are omitted, then they are inferred from the project and location where the statement is run.
-    - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
-    - `DESCRIPTION` (optional): a description of the connection.
+Use the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) to translate the customer feedback into English ( `en` ). When you omit the `source_language` argument, the Cloud Translation API automatically detects the source language of each row and translates the text by using the default [Neural Machine Translation (NMT)](https://docs.cloud.google.com/translate/docs/advanced/nmt-model) model:
 
-3.  Click play_circle **Run** .
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
-
-### bq
-
-1.  In a command-line environment, create a connection:
+2.  In the query editor, run the following statement to translate the feedback into English:
 
     ```
-    bq mk --connection --location=REGION --project_id=PROJECT_ID \
-        --connection_type=CLOUD_RESOURCE CONNECTION_ID
+    SELECT
+      feedback_id,
+      feedback_text,
+      AI.TRANSLATE(feedback_text, 'en') AS translated_text
+    FROM
+      `bqml_tutorial.customer_feedback`;
     ```
 
-    The `--project_id` parameter overrides the default project.
+    For a list of valid target language codes, see the [supported languages](https://docs.cloud.google.com/translate/docs/languages) .
 
-    Replace the following:
-
-    - `REGION` : your [connection region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations)
-    - `PROJECT_ID` : your Google Cloud project ID
-    - `CONNECTION_ID` : an ID for your connection
-
-    When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
-
-    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
+    The output is similar to the following:
 
     ```console
-    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
+    +-------------+-----------------------------+-----------------------------+
+    | feedback_id | feedback_text               | translated_text             |
+    +-------------+-----------------------------+-----------------------------+
+    | 1           | El servicio de entrega fue  | The delivery service was    |
+    |             | rápido y confiable.         | fast and reliable.          |
+    +-------------+-----------------------------+-----------------------------+
+    | 2           | Je suis très satisfait de   | I am very satisfied with    |
+    |             | la qualité de ce produit.   | the quality of this         |
+    |             |                             | product.                    |
+    +-------------+-----------------------------+-----------------------------+
+    | 3           | Die Benutzeroberfläche der  | The app's user interface is |
+    |             | App ist sehr übersichtlich. | very clear.                 |
+    +-------------+-----------------------------+-----------------------------+
+    | 4           | O suporte ao cliente        | Customer support resolved   |
+    |             | resolveu meu problema com   | my issue quickly.           |
+    |             | rapidez.                    |                             |
+    +-------------+-----------------------------+-----------------------------+
     ```
 
-2.  Retrieve and copy the service account ID for use in a later step:
+## Return translation details and detected languages
+
+When you process text from multiple regions, you might want to record the detected source language alongside each translation or check for per-row errors. Set `return_details => TRUE` in the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) to return a `STRUCT` value that includes the translated text, execution status, and API response metadata:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, run the following statement to extract the detected language code, translated text, and status for each row:
 
     ```
-    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
+    WITH
+      translations AS (
+        SELECT
+          feedback_id,
+          AI.TRANSLATE(
+            feedback_text,
+            'en',
+            return_details => TRUE) AS translation
+        FROM
+          `bqml_tutorial.customer_feedback`
+      )
+    SELECT
+      feedback_id,
+      STRING(translation.details.detected_language_code) AS detected_language,
+      translation.result AS translated_text,
+      translation.status
+    FROM
+      translations;
     ```
 
     The output is similar to the following:
 
     ```console
-    name                          properties
-    1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
+    +-------------+-------------------+-----------------------------+--------+
+    | feedback_id | detected_language | translated_text             | status |
+    +-------------+-------------------+-----------------------------+--------+
+    | 1           | es                | The delivery service was    | OK     |
+    |             |                   | fast and reliable.          |        |
+    +-------------+-------------------+-----------------------------+--------+
+    | 2           | fr                | I am very satisfied with    | OK     |
+    |             |                   | the quality of this         |        |
+    |             |                   | product.                    |        |
+    +-------------+-------------------+-----------------------------+--------+
+    | 3           | de                | The app's user interface is | OK     |
+    |             |                   | very clear.                 |        |
+    +-------------+-------------------+-----------------------------+--------+
+    | 4           | pt                | Customer support resolved   | OK     |
+    |             |                   | my issue quickly.           |        |
+    +-------------+-------------------+-----------------------------+--------+
     ```
 
-### Python
+    When `return_details` is set to `TRUE` , the returned `STRUCT` contains the following fields:
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
+    - `result` : a `STRING` value that contains the translated text, or `NULL` if an error occurs.
+    - `status` : a `STRING` value that contains `OK` when the operation succeeds, or an error message if an error occurs.
+    - `details` : a `JSON` value that contains the Cloud Translation API response for the row, including `detected_language_code` when the source language is detected automatically, or error details if an error occurs.
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
+## Translate text with the Translation LLM
 
-```python
-import google.api_core.exceptions
-from google.cloud import bigquery_connection_v1
+For text that that contains informal language, slang, or complex sentiment, such as customer or movie reviews, set `model => 'translation-llm'` in the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) to use the [Translation LLM](https://docs.cloud.google.com/translate/docs/translation-llm) model instead of the default NMT model. When you know the language of the input column, you can also specify the `source_language` argument:
 
-client = bigquery_connection_v1.ConnectionServiceClient()
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
+2.  In the query editor, run the following statement to translate five English movie reviews from a public dataset into Spanish ( `es` ):
 
-def create_connection(
-    project_id: str,
-    location: str,
-    connection_id: str,
-):
-    """Creates a BigQuery connection to a Cloud Resource.
+    ```
+    SELECT
+      review,
+      AI.TRANSLATE(
+        review,
+        'es',
+        source_language => 'en',
+        model => 'translation-llm') AS translated_review
+    FROM
+      `bigquery-public-data.imdb.reviews`
+    LIMIT 5;
+    ```
 
-    Cloud Resource connection creates a service account which can then be
-    granted access to other Google Cloud resources for federated queries.
+    The output is similar to the following:
 
-    Args:
-        project_id: The Google Cloud project ID.
-        location: The location of the connection (for example, "us-central1").
-        connection_id: The ID of the connection to create.
-    """
+    ```console
+    +------------------------------------+------------------------------------+
+    | review                             | translated_review                  |
+    +------------------------------------+------------------------------------+
+    | Once again Mr. Costner has dragged | Una vez más, el Sr. Costner ha     |
+    | out a movie for far longer than... | alargado una película mucho más... |
+    +------------------------------------+------------------------------------+
+    | This movie is amazing because the  | Esta película es increíble porque  |
+    | fact that real people portray...   | las personas reales se...          |
+    +------------------------------------+------------------------------------+
+    | ...                                | ...                                |
+    +------------------------------------+------------------------------------+
+    ```
 
-    parent = client.common_location_path(project_id, location)
+## Clean up
 
-    connection = bigquery_connection_v1.Connection(
-        friendly_name="Example Connection",
-        description="A sample connection for a Cloud Resource.",
-        cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
-    )
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
 
-    try:
-        created_connection = client.create_connection(
-            parent=parent, connection_id=connection_id, connection=connection
-        )
-        print(f"Successfully created connection: {created_connection.name}")
-        print(f"Friendly name: {created_connection.friendly_name}")
-        print(
-            f"Service Account: {created_connection.cloud_resource.service_account_id}"
-        )
+### Delete the project
 
-    except google.api_core.exceptions.AlreadyExists:
-        print(f"Connection with ID '{connection_id}' already exists.")
-        print("Please use a different connection ID.")
-    except Exception as e:
-        print(f"An unexpected error occurred while creating the connection: {e}")
+> **Caution** : Deleting a project has the following effects:
+>
+> - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
+> - **Custom project IDs are lost.** When you created this project, you might have created a custom project ID that you want to use in the future. To preserve the URLs that use the project ID, such as an `appspot.com` URL, delete selected resources inside the project instead of deleting the whole project.
+>
+> If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
+
+Delete a Google Cloud project:
+
+```
+gcloud projects delete PROJECT_ID
 ```
 
-### Node.js
+### Delete individual resources
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-```javascript
-const {ConnectionServiceClient} =
-  require('@google-cloud/bigquery-connection').v1;
-const {status} = require('@grpc/grpc-js');
-
-const client = new ConnectionServiceClient();
-
-/**
- * Creates a new BigQuery connection to a Cloud Resource.
- *
- * A Cloud Resource connection creates a service account that can be granted access
- * to other Google Cloud resources.
- *
- * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
- * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
- * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
- */
-async function createConnection(projectId, location, connectionId) {
-  const parent = client.locationPath(projectId, location);
-
-  const connection = {
-    friendlyName: 'Example Connection',
-    description: 'A sample connection for a Cloud Resource',
-    // The service account for this cloudResource will be created by the API.
-    // Its ID will be available in the response.
-    cloudResource: {},
-  };
-
-  const request = {
-    parent,
-    connectionId,
-    connection,
-  };
-
-  try {
-    const [response] = await client.createConnection(request);
-
-    console.log(`Successfully created connection: ${response.name}`);
-    console.log(`Friendly name: ${response.friendlyName}`);
-
-    console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
-  } catch (err) {
-    if (err.code === status.ALREADY_EXISTS) {
-      console.log(`Connection '${connectionId}' already exists.`);
-    } else {
-      console.error(`Error creating connection: ${err.message}`);
-    }
-  }
-}
-```
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-```java
-import com.google.api.gax.rpc.AlreadyExistsException;
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.connection.v1.CloudResourceProperties;
-import com.google.cloud.bigquery.connection.v1.Connection;
-import com.google.cloud.bigquery.connection.v1.CreateConnectionRequest;
-import com.google.cloud.bigquery.connection.v1.LocationName;
-import com.google.cloud.bigqueryconnection.v1.ConnectionServiceClient;
-import java.io.IOException;
-
-public class CreateConnection {
-
-  /**
-   * Creates a BigQuery connection to a Cloud Resource. A Cloud Resource connection provisions a
-   * service account that can be granted access to other Google Cloud resources for federated
-   * queries.
-   *
-   * @param projectId The Google Cloud project ID (for example, "example-project-id").
-   * @param location The geographic location of the connection (for example, "us-central1").
-   * @param connectionId The ID of the connection to create (for example, "example-connection-id").
-   */
-  public static void createConnection(String projectId, String location, String connectionId) {
-    LocationName parent = LocationName.of(projectId, location);
-
-    // CloudResourceProperties provisions a managed Google Cloud service account on creation.
-    CloudResourceProperties cloudResourceProperties = CloudResourceProperties.newBuilder().build();
-    Connection connection =
-        Connection.newBuilder()
-            .setFriendlyName("Example Connection")
-            .setDescription("Cloud Resource connection for federated queries.")
-            .setCloudResource(cloudResourceProperties)
-            .build();
-
-    CreateConnectionRequest request =
-        CreateConnectionRequest.newBuilder()
-            .setParent(parent.toString())
-            .setConnectionId(connectionId)
-            .setConnection(connection)
-            .build();
-
-    try (ConnectionServiceClient client = ConnectionServiceClient.create()) {
-      Connection response = client.createConnection(request);
-
-      System.out.printf("Successfully created connection: %s%n", response.getName());
-      System.out.printf("Friendly name: %s%n", response.getFriendlyName());
-      System.out.printf(
-          "Service Account: %s%n", response.getCloudResource().getServiceAccountId());
-    } catch (AlreadyExistsException err) {
-      System.err.printf(
-          "error: connection '%s' already exists in location '%s' for project '%s': %s%n",
-          connectionId, location, projectId, err.getMessage());
-    } catch (ApiException | IOException err) {
-      System.err.printf(
-          "error: failed to create connection '%s' in location '%s' for project '%s': %s%n",
-          connectionId, location, projectId, err.getMessage());
-    }
-  }
-```
-
-### Terraform
-
-Use the [`google_bigquery_connection`](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
-
-> **Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
-
-The following example creates a Cloud resource connection named `my_cloud_resource_connection` in the `US` region:
-
-```terraform
-# This queries the provider for project information.
-data "google_project" "default" {}
-
-# This creates a cloud resource connection in the US region named my_cloud_resource_connection.
-# Note: The cloud resource nested object has only one output field - serviceAccountId.
-resource "google_bigquery_connection" "default" {
-  connection_id = "my_cloud_resource_connection"
-  project       = data.google_project.default.project_id
-  location      = "US"
-  cloud_resource {}
-}
-```
-
-To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
-
-## Prepare Cloud Shell
-
-1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
-
-2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
-
-    You only need to run this command once per project, and you can run it in any directory.
-
-    ```
-    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    ```
-
-    Environment variables are overridden if you set explicit values in the Terraform configuration file.
-
-## Prepare the directory
-
-Each Terraform configuration file must have its own directory (also called a *root module* ).
-
-1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `.tf` extension—for example `main.tf` . In this tutorial, the file is referred to as `main.tf` .
-
-    ```
-    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-    ```
-
-2.  If you are following a tutorial, you can copy the sample code in each section or step.
-
-    Copy the sample code into the newly created `main.tf` .
-
-    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
-
-3.  Review and modify the sample parameters to apply to your environment.
-
-4.  Save your changes.
-
-5.  Initialize Terraform. You only need to do this once per directory.
-
-    ```
-    terraform init
-    ```
-
-    Optionally, to use the latest Google provider version, include the `-upgrade` option:
-
-    ```
-    terraform init -upgrade
-    ```
-
-## Apply the changes
-
-1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
-
-    ```
-    terraform plan
-    ```
-
-    Make corrections to the configuration as necessary.
-
-2.  Apply the Terraform configuration by running the following command and entering `yes` at the prompt:
-
-    ```
-    terraform apply
-    ```
-
-    Wait until Terraform displays the "Apply complete!" message.
-
-3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
-
-> **Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
-
-### Grant access to the service account
-
-Select one of the following options:
+If you want to reuse the project, delete the dataset that you created for this tutorial:
 
 ### Console
 
-1.  Go to the **IAM & Admin** page.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click person_add **Add** .
+2.  Delete the `bqml_tutorial` dataset. Deleting the dataset also deletes the `customer_feedback` table:
 
-    The **Add principals** dialog opens.
+    1.  In the **Explorer** pane, expand your project, and then click **Datasets** .
 
-3.  In the **New principals** field, enter the service account ID that you copied earlier.
+    2.  In the **Datasets** list, click the `bqml_tutorial` dataset.
 
-4.  In the **Select a role** field, select **Service Usage** , and then select **Service Usage Consumer** .
+    3.  In the details pane, click delete **Delete** .
 
-5.  Click **Add another role** .
-
-6.  In the **Select a role** field, select **BigQuery** , and then select **BigQuery Connection User** .
-
-7.  Click **Add another role** .
-
-8.  In the **Select a role** field, select **Cloud Translation** , and then select **Cloud Translation API User** .
-
-9.  Click **Save** .
+    4.  In the **Delete dataset** dialog, click **Delete** .
 
 ### gcloud
 
-Use the [`gcloud projects add-iam-policy-binding` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) :
+- Delete the `bqml_tutorial` dataset and the `customer_feedback` table:
 
 ```
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/serviceusage.serviceUsageConsumer' --condition=None
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/bigquery.connectionUser' --condition=None
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/cloudtranslate.user' --condition=None
-```
-
-Replace the following:
-
-- `PROJECT_NUMBER` : your project number.
-- `MEMBER` : the service account ID that you copied earlier.
-
-Failure to grant the permission results in an error.
-
-## Create a model
-
-Create a remote model with a [`REMOTE_SERVICE_TYPE`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `CLOUD_AI_TRANSLATE_V3` :
-
-```
-CREATE OR REPLACE MODEL
-`PROJECT_ID.DATASET_ID.MODEL_NAME`
-REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-OPTIONS (REMOTE_SERVICE_TYPE = 'CLOUD_AI_TRANSLATE_V3');
-```
-
-Replace the following:
-
-- `PROJECT_ID` : your project ID.
-
-- `DATASET_ID` : the ID of the dataset to contain the model. This dataset must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the connection that you are using.
-
-- `MODEL_NAME` : the name of the model.
-
-- `REGION` : the region used by the connection.
-
-- `CONNECTION_ID` : the connection ID—for example, `myconnection` .
-
-  When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `projects/myproject/locations/connection_location/connections/ `*`myconnection`* .
-
-## Translate text
-
-Translate text with the `ML.TRANSLATE` function:
-
-```
-SELECT *
-FROM ML.TRANSLATE(
-  MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
-  { TABLE PROJECT_ID.DATASET_ID.TABLE_NAME | (QUERY) },
-  STRUCT('MODE' AS translate_mode, ['LANGUAGE' AS target_language_code])
-);
-```
-
-Replace the following:
-
-- `PROJECT_ID` : your project ID.
-- `DATASET_ID` : the ID of the dataset that contains the model.
-- `MODEL_NAME` : the name of the model.
-- `TABLE_NAME` : the name of the table that contains the text to translate in a column named `text_content` . If the text is in a column with a different name, specify `text_content` as an alias for that column.
-- `QUERY` : a query that contains the text to translate in a column named `text_content` . If the text is in a column with a different name, specify `text_content` as an alias for that column.
-- `MODE` : the name of a supported [translation mode](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate#translate-syntax) .
-- `LANGUAGE` : the name of a [supported language code](https://docs.cloud.google.com/translate/docs/languages) . This argument is only required when you use the `TRANSLATE_TEXT` translation mode.
-
-**Example 1**
-
-The following example translates the text from the table's `text_content` column into Hindi:
-
-```
-SELECT * FROM ML.TRANSLATE(
-  MODEL `mydataset.mytranslatemodel`,
-  TABLE mydataset.mytable,
-  STRUCT('translate_text' AS translate_mode, 'hi' AS target_language_code)
-);
-```
-
-**Example 2**
-
-The following example detects the language of the text in the table's `comment` column:
-
-```
-SELECT * FROM ML.TRANSLATE(
-  MODEL `mydataset.mytranslatemodel`,
-  (SELECT comment AS text_content from mydataset.mytable),
-  STRUCT('detect_language' AS translate_mode)
-);
+bq rm --dataset --recursive bqml_tutorial
 ```
 
 ## What's next
 
-- For more information about model inference in BigQuery ML, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview) .
-- For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
-- For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
-- Try the [Unstructured data analytics with BigQuery ML and Gemini Enterprise Agent Platform pre-trained models](https://github.com/GoogleCloudPlatform/vertex-ai-samples/blob/main/notebooks/community/bigquery_ml/bq_ml_with_vision_translation_nlp.ipynb) notebook.
+- Learn more about the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) .
+- Learn more about the [Translation LLM](https://docs.cloud.google.com/translate/docs/translation-llm) and [Neural Machine Translation](https://docs.cloud.google.com/translate/docs/advanced/nmt-model) models.
+- Compare text analysis options in [Choose a natural language processing function](https://docs.cloud.google.com/bigquery/docs/choose-ml-text-function) .
+- Learn more about [generative AI in BigQuery](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+- See supported SQL statements and functions in [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

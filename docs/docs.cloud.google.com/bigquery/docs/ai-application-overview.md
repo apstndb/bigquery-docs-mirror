@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/ai-application-overview
 uri: https://docs.cloud.google.com/bigquery/docs/ai-application-overview
 title: Task-specific solutions overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use Cloud AI APIs in BigQuery ML to build task-specific AI solutions like natural language processing and computer vision using SQL.
 data_source: docs.cloud.google.com
 ---
 
 # Task-specific solutions overview
 
-This document describes the artificial intelligence (AI) features that BigQuery ML supports. These features let you develop task-specific solutions in BigQuery ML by using Cloud AI APIs. Supported tasks include the following:
+You can integrate Cloud AI APIs with BigQuery ML to develop task-specific AI solutions directly within BigQuery. Supported tasks include the following:
 
 - [Natural language processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#natural_language_processing)
 - [Machine translation](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#machine_translation)
@@ -42,7 +42,7 @@ You can use machine translation to translate text data into other languages. For
 
 To perform machine translation tasks, you can create a reference to the [Cloud Translation API](https://docs.cloud.google.com/translate) by creating a remote model and specifying `CLOUD_AI_TRANSLATE_V3` for the `REMOTE_SERVICE_TYPE` value. You can then use the [`ML.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate) to interact with that service. `ML.TRANSLATE` works with data in [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) . All inference occurs in Agent Platform. The results are stored in BigQuery.
 
-To learn more, try [translating text with the `ML.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/translate-text) .
+You can also translate text without creating a remote model by using the [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) . To learn more, try [translating text with the `AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/translate-text) .
 
 ## Audio transcription
 

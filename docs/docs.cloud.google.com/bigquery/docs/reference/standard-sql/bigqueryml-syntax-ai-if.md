@@ -169,7 +169,7 @@ The result is similar to the following:
 
 ### Filter text by topic with optimized mode
 
-The following query uses `AI.IF` to find news that covers a natural disaster using optimized mode (Preview):
+The following query uses `AI.IF` to find news about technology companies using optimized mode (Preview):
 
 ```
 SELECT
@@ -179,7 +179,7 @@ FROM
   `bigquery-public-data.bbc_news.fulltext`
 WHERE
   AI.IF(
-    ('The following news story is about a natural disaster: ', body),
+    ('The following news story is about technology companies: ', body),
     embeddings => AI.EMBED(body, endpoint => 'text-embedding-005', task_type => 'CLASSIFICATION').result,
     optimization_mode => 'MINIMIZE_COST'
   );

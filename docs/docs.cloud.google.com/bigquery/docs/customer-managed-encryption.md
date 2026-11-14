@@ -10,11 +10,11 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-By default, BigQuery [encrypts your content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) . BigQuery handles and manages this default encryption for you without any additional actions on your part. First, data in a BigQuery table is encrypted using a *data encryption key* . Then, those data encryption keys are encrypted with *key encryption keys* , which is known as [envelope encryption](https://docs.cloud.google.com/kms/docs/envelope-encryption) . Key encryption keys don't directly encrypt your data but are used to encrypt the data encryption keys that Google uses to encrypt your data.
+Customer-managed encryption keys (CMEK) in [Cloud Key Management Service (Cloud KMS)](https://docs.cloud.google.com/kms/docs) let you control and manage the key encryption keys that help protect your BigQuery data at rest. Instead of Google owning and managing the key encryption keys that help protect your data, you create and manage them in Cloud KMS.
 
-If you want to control encryption yourself, you can use customer-managed encryption keys (CMEK) for BigQuery. Instead of Google owning and managing the key encryption keys that protect your data, you control and manage key encryption keys in [Cloud KMS](https://docs.cloud.google.com/kms/docs) . This document provides details about manually creating Cloud KMS keys for BigQuery.
+By default, BigQuery [encrypts your content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) without any additional action on your part. BigQuery uses [envelope encryption](https://docs.cloud.google.com/kms/docs/envelope-encryption) to encrypt table data with a *data encryption key* , which is then encrypted with a *key encryption key* .
 
-Learn more about [encryption options on Google Cloud](https://docs.cloud.google.com/docs/security/encryption/default-encryption) . For specific information about CMEK, including its advantages and limitations, see [Customer-managed encryption keys](https://docs.cloud.google.com/kms/docs/cmek) .
+For more information about encryption options on Google Cloud, including the advantages and limitations of CMEK, see [Customer-managed encryption keys](https://docs.cloud.google.com/kms/docs/cmek) .
 
 ## Before you begin
 

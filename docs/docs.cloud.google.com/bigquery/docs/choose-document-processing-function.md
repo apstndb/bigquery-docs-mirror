@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Choose a document processing function
 
-This document provides a comparison of the document processing functions available in BigQuery ML, which are [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) . You can use the information in this document to help you decide which function to use in cases where the functions have overlapping capabilities.
+You can compare the document processing functions available in BigQuery ML to choose the best tool for analyzing unstructured text and documents. Understanding the differences between the [`AI.GENERATE_TEXT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) and [`ML.PROCESS_DOCUMENT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-process-document) functions helps you optimize your data workflows for cost, language support, and structured document parsing.
 
 At a high level, the difference between these functions is as follows:
 

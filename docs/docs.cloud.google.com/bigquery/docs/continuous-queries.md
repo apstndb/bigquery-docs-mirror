@@ -168,7 +168,7 @@ Additional APIs, IAM permissions, and Google Cloud resources are required to use
 - [Generate text by using the `AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial)
 - [Generate text embeddings by using the `AI.GENERATE_EMBEDDING` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
 - [Understand text with the `ML.UNDERSTAND_TEXT` function](https://docs.cloud.google.com/bigquery/docs/understand-text)
-- [Translate text with the `ML.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/translate-text)
+- [Translate text with the `ML.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-translate)
 
 When you use an AI function in a continuous query, consider whether the query output will remain within the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for the function. If you exceed the quota, you might have to separately handle the records that don't get processed.
 

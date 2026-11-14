@@ -295,6 +295,8 @@ In the following example, there are three reservations and 1,200 idle slots. Wit
 
 Reservation groups are subject to the following limitations:
 
+- By default, you can create up to 10 reservation groups per administration project in each location. To request an increase, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
+
 - Reservations sharing a reservation group must belong to the same project and same region.
 
 - [Reservation-based fairness](https://docs.cloud.google.com/bigquery/docs/slots#fairness) must be enabled on the project.

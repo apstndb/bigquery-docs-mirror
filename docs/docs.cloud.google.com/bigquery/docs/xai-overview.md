@@ -2,15 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/xai-overview
 uri: https://docs.cloud.google.com/bigquery/docs/xai-overview
 title: BigQuery Explainable AI overview
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use Explainable AI (XAI) in BigQuery ML to understand feature attributions, recognize biases, and improve your predictive models.
 data_source: docs.cloud.google.com
 ---
 
 # BigQuery Explainable AI overview
 
-This document describes how BigQuery ML supports Explainable artificial intelligence (AI), sometimes called XAI.
-
-Explainable AI helps you understand the results that your predictive machine learning model generates for classification and regression tasks by defining how each feature in a row of data contributed to the predicted result. This information is often referred to as feature attribution. You can use this information to verify that the model is behaving as expected, to recognize biases in your models, and to inform ways to improve your model and your training data.
+You can use Explainable AI, also known as *XAI* , to understand the results that your machine learning (ML) model generates for classification and regression tasks. Explainable AI defines how each feature in a row of data contributed to the predicted result. You can use this information, often referred to as *feature attribution* , to verify that the model is behaving as expected, to recognize biases in your models, and to inform ways to improve your model and your training data.
 
 ## Local versus global explainability
 
@@ -21,7 +19,7 @@ There are two types of explainability: local explainability and global explainab
 
 ## Explainable AI offerings in BigQuery ML
 
-Explainable AI in BigQuery ML supports a variety of machine learning models, including both time series and non-time series models. Each of the models takes advantage of a different explainability method.
+Explainable AI in BigQuery ML supports a variety of ML models, including both time series and non-time series models. Each of the models takes advantage of a different explainability method.
 
 | Model category                                                                                                                                                                                                                                       | Model types                                                                                                                                                                               | Explainability method                                                                                                                                                                                                                                                                                                                                                                           | Basic explanation of the method                                                                                                                                                                                                                                                                                                                                            | Local explain functions                                                                                                                     | Global explain functions                                                                                                                |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|

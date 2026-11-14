@@ -10,6 +10,8 @@ data_source: docs.cloud.google.com
 
 This document describes the `ML.TRANSLATE` function, which lets you translate text stored in BigQuery tables by using the Cloud Translation API.
 
+> **Note:** For new translation queries, use the scalar [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) , which uses your Google Account user credentials and doesn't require a remote model.
+
 ## Syntax
 
 ```sql
@@ -162,7 +164,8 @@ SELECT * FROM `mydataset.translate_result_next`;
 
 ## What's next
 
-- Get step-by-step instructions on how to [translate text in a BigQuery table](https://docs.cloud.google.com/bigquery/docs/translate-text) using the `ML.TRANSLATE` function.
+- Learn more about the scalar [`AI.TRANSLATE` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-translate) .
+- Get step-by-step instructions on how to [translate text in BigQuery](https://docs.cloud.google.com/bigquery/docs/translate-text) by using the `AI.TRANSLATE` function.
 - Learn more about [other functions you can use](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models) to analyze BigQuery data.
 - For information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
 - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .
