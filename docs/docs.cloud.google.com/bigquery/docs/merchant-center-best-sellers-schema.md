@@ -8,8 +8,6 @@ data_source: docs.cloud.google.com
 
 # Google Merchant Center best sellers table
 
-## Overview
-
 You can use the best sellers report to view the best-selling products and brands on Google Shopping and in Shopping Ads. You can use the information from this report to understand which products are performing well on Google, and whether you carry them.
 
 Selecting the best sellers report for your transfer creates five tables. For a given merchant ID, the report creates the following tables:
@@ -20,7 +18,7 @@ Selecting the best sellers report for your transfer creates five tables. For a g
 - `BestSellersProductClusterMonthly_ `` MERCHANT_ID`
 - `BestSellersEntityProductMapping_ `` MERCHANT_ID`
 
-For an MCA account, the report generates the following tables:
+For a multi-client account (MCA), the report generates the following tables:
 
 - `BestSellersBrandWeekly_ `` AGGREGATOR_ID`
 - `BestSellersBrandMonthly_ `` AGGREGATOR_ID`

@@ -62,7 +62,7 @@ You can set up reverse ETL (RETL) workflows to move data from BigQuery to the fo
 - [Export to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable)
 - [Export to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner)
 - [Export to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub)
-- [Export to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) ( [preview](https://cloud.google.com/products#product-launch-stages) )
+- [Export to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb)
 
 ## What's next
 

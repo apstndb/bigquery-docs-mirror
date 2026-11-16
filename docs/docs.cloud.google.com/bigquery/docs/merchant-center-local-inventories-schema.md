@@ -8,15 +8,13 @@ data_source: docs.cloud.google.com
 
 # Google Merchant Center local inventories table
 
-## Overview
-
 Local inventories data allows merchants to export their local offers of their products to BigQuery. This data includes pricing, availability, and quantity of the product along with the information about pick-up and product in-store location.
 
 The format of local inventories data corresponds primarily to the format of the relevant fields of the Content API's [`localinventory`](https://developers.google.com/shopping-content/reference/rest/v2.1/localinventory) resource.
 
-Depending on the type of Merchant account that you use, the data is written to one of the following tables:
+Depending on the type of merchant account that you use, the data is written to one of the following tables:
 
-- If you are using an individual Merchant ID, then the data is written to the `LocalInventories_ `` MERCHANT_ID` table.
+- If you are using an individual merchant ID, then the data is written to the `LocalInventories_ `` MERCHANT_ID` table.
 - If you are using an MCA account, then the data is written to the `LocalInventories_ `` AGGREGATOR_ID` table.
 
 ## Schema
@@ -27,7 +25,7 @@ The `LocalInventories_` tables have the following schema:
 |-----------------------------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------------------|
 | **`product_id`**                  | `STRING`               | Content API's REST ID of the product in the form: `channel:content_language:feed_label:offer_id` . This field is a primary key. | online:en:AU:666840730  |
 | **`merchant_id`**                 | `INTEGER`              | Merchant account ID. This field is a primary key.                                                                               |                         |
-| `aggregator_id`                   | `INTEGER`              | ID of the [Multi Client Account (MCA)](https://support.google.com/merchants/answer/188487) .                                    |                         |
+| `aggregator_id`                   | `INTEGER`              | ID of the [multi-client account (MCA)](https://support.google.com/merchants/answer/188487) .                                    |                         |
 | `store_code`                      | `STRING`               | Store code of this local inventory resource.                                                                                    |                         |
 | `price`                           | `RECORD`               | Local price of the item.                                                                                                        |                         |
 | `price.value`                     | `NUMERIC`              | Local price of the item.                                                                                                        | 99                      |

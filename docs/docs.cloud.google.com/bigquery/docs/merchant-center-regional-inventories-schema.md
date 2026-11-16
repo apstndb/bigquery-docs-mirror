@@ -8,11 +8,9 @@ data_source: docs.cloud.google.com
 
 # Google Merchant Center regional inventories table
 
-## Overview
-
 Regional inventories table shows merchants their regional availability and pricing overrides of their products. The format of regional inventories data corresponds primarily to the format of the relevant fields of the Content API's [`regionalinventory`](https://developers.google.com/shopping-content/reference/rest/v2.1/regionalinventory) resource.
 
-The data is written to a table named `RegionalInventories_ `` MERCHANT_ID` if you are using an individual Merchant ID, or `RegionalInventories_ `` AGGREGATOR_ID` if you are using an MCA account.
+The data is written to a table named `RegionalInventories_ `` MERCHANT_ID` if you are using an individual merchant ID, or `RegionalInventories_ `` AGGREGATOR_ID` if you are using an MCA account.
 
 ## Schema
 

@@ -18,7 +18,7 @@ The `EXPORT DATA` statement exports the results of a query to an external storag
 - Spanner
 - Bigtable
 - Pub/Sub
-- AlloyDB ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+- AlloyDB
 
 ### Syntax
 
@@ -282,12 +282,6 @@ For more Spanner export examples and configuration options, see [Export data to 
 
 ## Export to AlloyDB
 
-> **Preview**
->
-> This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-> **Note:** To request access to this preview feature, complete the [BigQuery to AlloyDB Batch Exports - Preview Sign-Up](https://forms.gle/nTbRPvmMQLDGRsYr8) interest form. To provide feedback or request support for this feature, send email to <bq-alloydb-export-feedback@google.com> .
-
 You can export BigQuery data to an AlloyDB table by using the `EXPORT DATA` statement. For AlloyDB export examples and configuration options, see [Export data to AlloyDB](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb) .
 
 You aren't billed for the export operation, but you are billed for running the query and for storing data in AlloyDB. For more information, see [AlloyDB for PostgreSQL pricing](https://cloud.google.com/alloydb/pricing) .
@@ -296,17 +290,17 @@ You aren't billed for the export operation, but you are billed for running the q
 
 The option list specifies options for exporting to AlloyDB.
 
-| Options           |                                                                                                                                                                                                                                                                                                |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `format`          | `STRING` Required. When exporting to AlloyDB, the value must always be `ALLOYDB` .                                                                                                                                                                                                             |
-| `uri`             | `STRING` Required. The destination URI for the export. For AlloyDB, the URI must be provided in the following format: `https://alloydb.googleapis.com/v1/projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /clusters/ `` CLUSTER_ID `` /instances/ `` INSTANCE_ID`                         |
-| `alloydb_options` | `STRING` Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns. For more information, see [Configure exports with `alloydb_options` .](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#configure_exports_with_alloydb_options) |
+| Options           |                                                                                                                                                                                                                                                                                                                                                                    |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `format`          | `STRING` Required. When exporting to AlloyDB, the value must always be `ALLOYDB` .                                                                                                                                                                                                                                                                                 |
+| `uri`             | `STRING` Required. The destination URI for the export. For AlloyDB, the URI must be provided in the following format: `https://alloydb.googleapis.com/v1/projects/ `` PROJECT_ID `` /locations/ `` LOCATION `` /clusters/ `` CLUSTER_ID `` /instances/ `` INSTANCE_ID`                                                                                             |
+| `alloydb_options` | `STRING` Required. A JSON string containing configurations related to mapping exported fields to AlloyDB columns, schema, write mode ( `APPEND` or `UPSERT` ), and connection limits. For more information, see [Configure exports with `alloydb_options` .](https://docs.cloud.google.com/bigquery/docs/export-to-alloydb#configure_exports_with_alloydb_options) |
 
 ### Example
 
 #### Export data to AlloyDB
 
-The following example exports data to an AlloyDB table:
+The following example exports data to an AlloyDB table using `UPSERT` mode:
 
 ```
 EXPORT DATA
@@ -316,7 +310,8 @@ EXPORT DATA
     uri="https://alloydb.googleapis.com/v1/projects/myproject/locations/us-central1/clusters/my-cluster/instances/my-instance",
     alloydb_options="""{
       "schema": "public",
-      "table": "my_target_table"
+      "table": "my_target_table",
+      "write_mode": "UPSERT"
     }"""
   )
 AS SELECT

@@ -97,7 +97,7 @@ To create a persistent Python UDF, use the [`CREATE FUNCTION` statement](https:/
 
 ### Example
 
-To see an example of creating a persistent Python UDF, choose on of the following options:
+To see an example of creating a persistent Python UDF, choose one of the following options:
 
 ### Console
 
@@ -354,7 +354,7 @@ The following example creates a vectorized Python UDF named `multiplyInputs` wit
 
 ### Use Apache Arrow
 
-The following example uses the Apache Arrow [`RecordBatch` interface](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch) . When you use the `RecordBatch` interface, the function passes a batch of rows of columns of equal length to the entrypoint. The following example uses Apache Arrow to create a vectorized Python UDF named `multiplyVectorizedArrow` .
+The following example uses the Apache Arrow [`RecordBatch` interface](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatch.html#pyarrow.RecordBatch) . When you use the `RecordBatch` interface, the function passes a batch of rows of columns of equal length to the entrypoint. The function must return a `pyarrow.RecordBatch` that contains exactly one column with the same number of rows as the input. For `STRUCT` or `ARRAY` return types, that column is a `pyarrow.StructArray` or `pyarrow.ListArray` , not one column for each field or element. The following example uses Apache Arrow to create a vectorized Python UDF named `multiplyVectorizedArrow` .
 
 1.  Go to the **BigQuery** page.
 
@@ -378,7 +378,10 @@ The following example uses the Apache Arrow [`RecordBatch` interface](https://ar
         y = batch.column('y')
 
         # Use pyarrow.compute for vectorized operations
-        return pc.multiply(x, y)
+        product = pc.multiply(x, y)
+
+        # Return a RecordBatch with a single column
+        return pa.RecordBatch.from_arrays([product], names=['product'])
     ''';
     ```
 
@@ -528,7 +531,7 @@ The following table defines the mapping between BigQuery data types, Python data
 | `FLOAT64`          | `float`                                                                                                                            | `FloatDtype`                                                                                                                                       | `DataType(double)`                                            |
 | `STRING`           | `str`                                                                                                                              | `StringDtype`                                                                                                                                      | `DataType(string)`                                            |
 | `BYTES`            | `bytes`                                                                                                                            | `binary[pyarrow]`                                                                                                                                  | `DataType(binary)`                                            |
-| `TIMESTAMP`        | Function parameter: `datetime.datetime` (with UTC timezone set) Function return value: `datetime.datetime` (with any timezone set) | Function parameter: `timestamp[us, tz=UTC][pyarrow]` Function return value: `timestamp[us, tz=*][pyarrow]\(any timezone\)`                         | `TimestampType(timestamp[us])` , with timezone                |
+| `TIMESTAMP`        | Function parameter: `datetime.datetime` (with UTC timezone set) Function return value: `datetime.datetime` (with any timezone set) | Function parameter: `timestamp[us, tz=UTC][pyarrow]` Function return value: `timestamp[us, tz=*][pyarrow]` (any timezone)                          | `TimestampType(timestamp[us])` , with timezone                |
 | `DATE`             | `datetime.date`                                                                                                                    | `date32[pyarrow]`                                                                                                                                  | `DataType(date32[day])`                                       |
 | `TIME`             | `datetime.time`                                                                                                                    | `time64[pyarrow]`                                                                                                                                  | `Time64Type(time64[us])`                                      |
 | `DATETIME`         | `datetime.datetime` (without timezone)                                                                                             | `timestamp[us][pyarrow]`                                                                                                                           | `TimestampType(timestamp[us])` , without timezone             |

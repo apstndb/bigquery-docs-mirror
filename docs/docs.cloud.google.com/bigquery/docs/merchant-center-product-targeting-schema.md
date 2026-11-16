@@ -8,8 +8,6 @@ data_source: docs.cloud.google.com
 
 # Google Merchant Center product targeting table
 
-## Overview
-
 Product targeting data helps merchants understand which products are targeted by the Shopping and Performance Max campaigns in each linked advertiser account that they can access.
 
 - All campaign targeting parameters are considered, such as [listing groups](https://support.google.com/google-ads/answer/11596074) , [product groups](https://support.google.com/google-ads/answer/6275317) , and [feed labels](https://support.google.com/merchants/answer/14994087) .
@@ -57,10 +55,10 @@ The product targeting table has the following schema:
 <tr class="odd">
 <td><code>targeting_status</code></td>
 <td><code>STRING</code></td>
-<td>Whether the product is targeted by Ads campaigns.<br />
+<td>Whether the product is targeted by Google Ads campaigns.<br />
 
 <blockquote>
-<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code>destinations.status</code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">products report</a> .
+<strong>Note:</strong> Products targeted by Google Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code>destinations.approved_countries</code> , <code>destinations.pending_countries</code> , and <code>destinations.disapproved_countries</code> fields of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">products report</a> .
 </blockquote></td>
 <td>TARGETED, NOT_TARGETED</td>
 </tr>

@@ -121,6 +121,8 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) and paste in your private SSH key as the secret value. Your private SSH key should be stored in a file similar to `~/.ssh/id_ed25519` . Give a name to the secret so you can find it in the future.
 
+    > **Note:** BigQuery repositories support only [global Secret Manager secrets](https://docs.cloud.google.com/secret-manager/docs/secret-manager-secrets-comparison) . Regional secrets aren't supported. If you must restrict where secret data is stored, create a global secret with a [user-managed replication policy](https://docs.cloud.google.com/secret-manager/docs/choosing-replication#user-managed) and select the allowed regions.
+
 3.  [Grant access to the secret to the Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
 
     The Dataform service agent ID is in the following format:
@@ -283,6 +285,8 @@ To connect a remote repository to a BigQuery repository through HTTPS, follow th
     4.  Set a token expiration time appropriate to your needs.
 
 2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) containing the personal access token of your remote repository.
+
+    > **Note:** BigQuery repositories support only [global Secret Manager secrets](https://docs.cloud.google.com/secret-manager/docs/secret-manager-secrets-comparison) . Regional secrets aren't supported. If you must restrict where secret data is stored, create a global secret with a [user-managed replication policy](https://docs.cloud.google.com/secret-manager/docs/choosing-replication#user-managed) and select the allowed regions.
 
 3.  [Grant access to the secret to the Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
 
