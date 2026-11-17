@@ -12,8 +12,6 @@ BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective ana
 
 [Go to the BigQuery product page for more.](https://cloud.google.com/bigquery)
 
-format_list_numbered
-
 ### Guides
 
 - Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) , or [BigQuery DataFrames (Python)](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart)
@@ -42,8 +40,6 @@ format_list_numbered
 
 - [Introduction to BigQuery migration](https://docs.cloud.google.com/bigquery/docs/migration-intro)
 
-find_in_page
-
 ### Reference
 
 - [Functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all)
@@ -71,8 +67,6 @@ find_in_page
 - [Public datasets](https://docs.cloud.google.com/bigquery/public-data)
 
 - [Feature preprocessing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-preprocess-overview)
-
-info
 
 ### Resources
 

@@ -55,7 +55,7 @@ Use the [`CREATE MATERIALIZED VIEW` statement](https://docs.cloud.google.com/big
     - `MATERIALIZED_VIEW_NAME` : the name of the materialized view that you want to create—for example, `my_mv` .
     - `QUERY_EXPRESSION` : the GoogleSQL query expression that defines the materialized view—for example, `SELECT product_id, SUM(clicks) AS sum_clicks FROM mydataset.my_source_table` .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -364,8 +364,8 @@ Only the following aggregation functions are supported:
 
 The following SQL features are not supported in materialized views:
 
-- `UNION ALL` . ( [Support in science Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
-- `LEFT OUTER JOIN` ( [Support in science Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
+- `UNION ALL` . ( [Support in Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
+- `LEFT OUTER JOIN` ( [Support in Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
 - `RIGHT/FULL OUTER JOIN` .
 - Self-joins, also known as using a `JOIN` on the same table more than once.
 - [Window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
@@ -743,7 +743,7 @@ To create a materialized view with the `max_staleness` option, add an `OPTIONS` 
 
     - ` my_base_table ` is the ID of a table in your dataset that serves as the base table for your materialized view.
 
-    - Click play_circle **Run** .
+    - Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -882,7 +882,7 @@ Add an `OPTIONS` clause to the DDL statement when you create the materialized vi
     - ` my_mv_table ` is the ID of the materialized view that you're creating.
     - ` my_dataset.store ` and ` my_dataset.store_sales ` are the IDs of the tables in your dataset that serve as the base tables for your materialized view.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

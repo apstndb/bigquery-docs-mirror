@@ -53,9 +53,9 @@ To create a BigQuery repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Click **Add Repository** .
 
@@ -135,9 +135,9 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
 
 5.  In the Google Cloud console, go to the **BigQuery** page.
 
-6.  In the left pane, click fork_right **Source control** .
+6.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 7.  Select the BigQuery repository that you want to connect to the remote repository.
 
@@ -300,9 +300,9 @@ To connect a remote repository to a BigQuery repository through HTTPS, follow th
 
 5.  In the Google Cloud console, go to the **BigQuery** page.
 
-6.  In the left pane, click fork_right **Source control** .
+6.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 7.  Select the BigQuery repository that you want to connect to the remote repository.
 
@@ -328,9 +328,9 @@ To edit a connection between a BigQuery repository and a remote Git repository, 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the BigQuery repository whose connection you want to edit.
 
@@ -348,13 +348,13 @@ To share a repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Find the repository that you want to share.
 
-4.  Click more_vert **Open actions** and then click **Share** .
+4.  Click **Open actions** and then click **Share** .
 
 5.  In the **Share permissions** pane, click **Add User/Group** .
 
@@ -372,13 +372,13 @@ To delete a repository and all its contents, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Find the repository that you want to delete.
 
-4.  Click more_vert **Open actions** and then click **Delete** .
+4.  Click **Open actions** and then click **Delete** .
 
 5.  Click **Delete** .
 

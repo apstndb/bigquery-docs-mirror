@@ -46,17 +46,17 @@ You can delete a model in the Google Cloud console by using the **Delete Model**
 
 **Option one:** Use the **Delete Model** option.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click your dataset.
 
 3.  Click the **Models** tab, and then click a model name to select the model.
 
-4.  Click the options icon more_vert for the model and then click **Delete** .
+4.  Click the options icon for the model and then click **Delete** .
 
 5.  In the **Delete model** dialog, type `delete` and then click **Delete** .
 

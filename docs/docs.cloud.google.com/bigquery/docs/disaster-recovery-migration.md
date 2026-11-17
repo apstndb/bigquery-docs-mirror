@@ -2,7 +2,7 @@
 name: documents/docs.cloud.google.com/bigquery/docs/disaster-recovery-migration
 uri: https://docs.cloud.google.com/bigquery/docs/disaster-recovery-migration
 title: Migrate to managed disaster recovery
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Migrate from BigQuery cross-region replication to managed disaster recovery. Compare capabilities, review costs, and configure a failover reservation.
 data_source: docs.cloud.google.com
 ---
 
@@ -96,7 +96,7 @@ To enable disaster recovery, you must create a failover reservation in the prima
 
 9.  To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-10. To expand the **Advanced settings** section, click the expand_more expander arrow.
+10. To expand the **Advanced settings** section, click the expander arrow.
 
 11. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** . The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 
@@ -135,7 +135,7 @@ To create a reservation, use the [`CREATE RESERVATION` data definition language 
 
     - `SECONDARY_LOCATION` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -153,9 +153,9 @@ Once you've created the failover reservation, attach your cross-region dataset, 
 
 4.  Click the reservation that you want to attach a dataset to.
 
-5.  Click the **Disaster recovery** tab.
+5.  Click the **Connected failover datasets** tab.
 
-6.  Click **Add failover dataset** .
+6.  Click **Connect failover dataset** .
 
 7.  Enter the name of the dataset you want to associate with the reservation.
 
@@ -179,10 +179,9 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
     Replace the following:
 
     - `DATASET_NAME` : the name of the dataset.
-
     - `ADMIN_PROJECT_ID `` . `` RESERVATION_NAME` : the name of the reservation you want to associate the dataset to.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

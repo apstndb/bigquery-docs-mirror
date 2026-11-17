@@ -122,7 +122,7 @@ You can create a permanent external table by running the [`CREATE EXTERNAL TABLE
     - `URI` : the URI for the Bigtable table you want to use as a data source. This URI must follow the format described in [Retrieving the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
     - `BIGTABLE_OPTIONS` : the schema for the Bigtable table in JSON format. For a list of Bigtable table definition options, see [`BigtableOptions`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#bigtableoptions) in the REST API reference.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -27,7 +27,6 @@ This document shows you how to migrate metadata from external data catalogs to [
 - Nested namespaces aren't supported.
 - The Iceberg REST catalog only supports Parquet data files.
 - Borderless Lakehouse doesn't support Apache Iceberg V3 tables.
-- Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg only supports migrations of up to 10,000 tables. If your workload requires processing more than 10,000 tables, then we recommend splitting your workload across multiple migrations.
 - Metadata migrations from external data catalogs to Lakehouse REST catalog tables for Apache Iceberg don't support the use of organization policies to enforce [domain-restricted sharing](https://docs.cloud.google.com/organization-policy/domain-restricted-sharing) .
 
 ## Before you begin
@@ -46,89 +45,64 @@ A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-se
 
 ### Configure permissions
 
-1.  The user or the service account creating the transfer should be granted the BigQuery Admin role ( `roles/bigquery.admin` ). If you use a service account, it's only used to create the transfer.
+To migrate metadata from an external data catalog to Lakehouse REST catalog tables for Apache Iceberg, you must grant the required permissions to the following user accounts and service agents.
 
-2.  A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) (P4SA) is created upon enabling the Data Transfer API.
+By default, the Google Cloud console IAM page hides Google-managed service agents, including the BigQuery migration service agent and the BigQuery Data Transfer Service agent. To include these service agents, click the service account and under **Principals with access** , select **Include Google-provided role grants** .
 
-    To ensure that the service agent has the necessary permissions to run a Hive Metastore transfer, ask your administrator to grant the following IAM roles to the service agent on the project:
+![Include Google-provided role grants](https://docs.cloud.google.com/static/bigquery/images/lakehouse-migration-enable-service-account.png)
 
-    > **Important:** You must grant these roles to the service agent, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+#### Grant user account permissions
 
-    - [Storage Transfer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer#storagetransfer.admin) ( `roles/storagetransfer.admin` )
-    - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
-    - [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
-    - To migrate metadata to Lakehouse runtime catalog (Iceberg REST Catalog or Hive Catalog): [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
-
-    For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
-
-    Your administrator might also be able to give the service agent the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
-
-3.  If you are using a service account, grant the service agent the `roles/iam.serviceAccountTokenCreator` role with the following command:
-
-    ```
-    gcloud iam service-accounts add-iam-policy-binding
-    SERVICE_ACCOUNT --member
-    serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com --role
-    roles/iam.serviceAccountTokenCreator
-    ```
-
-4.  Grant the Storage Transfer Service service agent ( `project- `` PROJECT_NUMBER `` @storage-transfer-service.iam.gserviceaccount.com` ) the following roles in the project:
-
-    - `roles/storage.admin`
-    - If you're migrating from on-premises or HDFS, you must also grant the `roles/storagetransfer.serviceAgent` role.
-
-    You can also configure more granular permissions. For more information, see the following guide:
-
-    - [HDFS permissions](https://docs.cloud.google.com/storage-transfer/docs/file-system-permissions)
-    - [Amazon S3 and Microsoft Azure permissions](https://docs.cloud.google.com/storage-transfer/docs/iam-cloud)
-
-### Required user roles and permissions
-
-To ensure that the service agent has the necessary permissions to create, modify, and run a Lakehouse REST catalog tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the service agent on the user:
-
-> **Important:** You must grant these roles to the service agent, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+To get the permissions that you need to select and attach the custom service account to the migration job in the console, ask your administrator to grant you the following IAM roles on the custom service account at the resource level:
 
 - [Service Account User](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `roles/iam.serviceAccountUser` )
 - [Migration Management Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.migrationEditor) ( `roles/bigquerymigration.migrationEditor` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-Your administrator might also be able to give the service agent the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-### Required service account roles and permissions
+#### Grant custom service account permissions
 
-To ensure that the customer-provided service account has the necessary permissions to create, modify, and run a Lakehouse REST catalog tables for Apache Iceberg migration, ask your administrator to grant the following IAM roles to the customer-provided service account:
+To ensure that the custom service account has the necessary permissions to instantiate the transfer configuration, ask your administrator to grant the following IAM roles to the custom service account:
 
-> **Important:** You must grant these roles to the customer-provided service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+> **Important:** You must grant these roles to the custom service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
-- Access to the network attachment: [Compute Network Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkAdmin) ( `roles/compute.networkAdmin` ) on the service account
-- Access to the BigQuery Data Transfer Service: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) on the service account
-- Access to Lakehouse resources: [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.editor) ( `roles/biglake.editor` ) on the service account
+- Allow access to the network attachment: [Compute Network Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/compute#compute.networkAdmin) ( `roles/compute.networkAdmin` ) on the custom service account
+- Access to the BigQuery Data Transfer Service: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) on the custom service account
+- Allow access to Lakehouse resources: [BigLake Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.editor) ( `roles/biglake.editor` ) on the custom service account
 - Access to secrets: [Secret Manager Secret Accessor](https://docs.cloud.google.com/iam/docs/roles-permissions/secretmanager#secretmanager.secretAccessor) ( `roles/secretmanager.secretAccessor` ) on the customer-provided secret
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles to service accounts, see [Manage access to service accounts](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts) .
 
-Your administrator might also be able to give the customer-provided service account the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
+#### Grant BigQuery migration service agent permissions
 
-You must also create a service identity for the BigQuery Migration Service and grant it the `roles/iam.serviceAccountTokenCreator` role.
+To ensure that the BigQuery migration service agent has the necessary permissions to impersonate the custom service account to authorize against the Dataproc Metastore during discovery, ask your administrator to grant the [Service Account Token Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `roles/iam.serviceAccountTokenCreator` ) IAM role to the BigQuery migration service agent on the custom service account at the resource level.
 
-To create the service identity, run the following command:
+> **Important:** You must grant this role to the BigQuery migration service agent, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
 
-```
-gcloud beta services identity create --service=bigquerymigration.googleapis.com --project=PROJECT_ID
-```
+For more information about granting roles to service agents, see [Manage access to service accounts](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts) .
 
-To grant the role to the service agent, run the following command:
+You must also [create a service identity](https://docs.cloud.google.com/sdk/gcloud/reference/beta/services/identity/create) for the BigQuery Migration Service and grant it the `roles/iam.serviceAccountTokenCreator` role. To create the service identity, run the following command:
 
 ```
-gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member serviceAccount:service-PROJECT_NUMBER@gcp-sa-bqms.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator --project PROJECT_ID
+  gcloud beta services identity create --service=bigquerymigration.googleapis.com --project=PROJECT_ID
 ```
 
-Replace the following:
+Replace `PROJECT_ID` with your project ID.
 
-- `SERVICE_ACCOUNT` : the ID of the customer-provided service account
-- `PROJECT_ID` : the project ID
-- `PROJECT_NUMBER` : the project number
+#### Grant BigQuery Data Transfer Service agent permissions
+
+To ensure that the BigQuery Data Transfer Service agent has the necessary permissions to register tables into Lakehouse and orchestrate the transferring of files, ask your administrator to grant the following IAM roles to the BigQuery Data Transfer Service agent on the project level:
+
+> **Important:** You must grant these roles to the BigQuery Data Transfer Service agent, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+
+- [BigLake Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/biglake#biglake.admin) ( `roles/biglake.admin` )
+- [Storage Transfer Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storagetransfer#storagetransfer.admin) ( `roles/storagetransfer.admin` )
+- [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `roles/storage.admin` )
+- [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `roles/serviceusage.serviceUsageConsumer` )
+
+For more information about granting roles to service agents, see [Manage access to service accounts](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts) .
 
 ### Configure secret
 

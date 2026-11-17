@@ -232,7 +232,7 @@ To view linked datasets in your project, follow these steps:
 
     ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Data** pane, click the project name that contains the ![Sharing linked dataset icon.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-linked-dataset.png) linked dataset.
 
@@ -280,13 +280,13 @@ To update the description and labels of a linked dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click explore **Explorer** :
+2.  In the **Explorer** pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project name, click **Datasets** , and click the linked dataset name to open it.
 
-4.  In the details pane, click mode_edit **Edit details** and configure the following options:
+4.  In the details pane, click **Edit details** and configure the following options:
 
     1.  To add labels, see [Adding a label to a dataset](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding_a_label_to_a_dataset) .
 
@@ -321,7 +321,7 @@ To delete a linked dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Explorer** pane, click explore **Explorer** :
+2.  In the **Explorer** pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

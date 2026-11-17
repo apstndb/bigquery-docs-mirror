@@ -81,7 +81,7 @@ When you enabled the API for Cloud Run functions, a [Compute Engine default serv
 
 4.  Select your project.
 
-5.  Click person_add **Grant access** , and then in the **New principals** field, paste the Compute Engine default service account that you copied earlier.
+5.  Click **Grant access** , and then in the **New principals** field, paste the Compute Engine default service account that you copied earlier.
 
 6.  In the **Assign roles** list, search for and select **Cloud Translation API User** .
 

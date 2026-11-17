@@ -44,11 +44,11 @@ You can restore a table snapshot into a new table by using one of the following 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then click the dataset that contains the table snapshot that you want to restore from.
 
@@ -82,7 +82,7 @@ Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigqu
     - `SNAPSHOT_DATASET_NAME` : the name of the dataset that contains the snapshot you are restoring from.
     - `SNAPSHOT_NAME` : the name of the snapshot you are restoring from.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -174,7 +174,7 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -212,7 +212,7 @@ Use the [`CREATE TABLE CLONE` DDL statement](https://docs.cloud.google.com/bigqu
     - `SNAPSHOT_DATASET_NAME` : the name of the dataset that contains the snapshot you are restoring from.
     - `SNAPSHOT_NAME` : the name of the snapshot you are restoring from.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

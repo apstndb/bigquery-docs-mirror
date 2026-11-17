@@ -46,11 +46,11 @@ For more information on IAM roles and permissions in IAM, see [Predefined roles 
 
 To list the materialized view replicas in a dataset:
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 
@@ -97,7 +97,7 @@ To get information about materialized view replicas, query the [`INFORMATION_SCH
     - `PROJECT_ID` : the name of the project that contains the materialized view replicas
     - `DATASET_ID` : the name of the dataset that contains the materialized view replicas
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -145,7 +145,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

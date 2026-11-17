@@ -77,15 +77,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -136,7 +136,7 @@ To create the text embedding model, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  To create the model, paste this command into the query editor, and then click play_circle **Run** :
+2.  To create the model, paste this command into the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE MODEL `bqml_tutorial.embedding_model`
@@ -156,7 +156,7 @@ Embedding generation using the [`AI.GENERATE_EMBEDDING` function](https://docs.c
 
 For alternative text embedding generation methods in BigQuery, see the [Embed text with pretrained TensorFlow models tutorial](https://docs.cloud.google.com/bigquery/docs/generate-embedding-with-tensorflow-models) .
 
-To generate text embeddings, paste this command into the query editor, and then click play_circle **Run** :
+To generate text embeddings, paste this command into the query editor, and then click **Run** :
 
 ```
 CREATE OR REPLACE TABLE bqml_tutorial.embeddings AS
@@ -181,7 +181,7 @@ To create a vector index, you use the [`CREATE VECTOR INDEX`](https://docs.cloud
 
 To create and verify the vector index, follow these steps:
 
-1.  To create the vector index, paste this command into the query editor, and then click play_circle **Run** :
+1.  To create the vector index, paste this command into the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE VECTOR INDEX my_index
@@ -195,7 +195,7 @@ To create and verify the vector index, follow these steps:
 
     Creating a vector index typically takes only a few seconds. It takes another two to three minutes for the vector index to be populated asynchronously.
 
-2.  To verify that the index is ready to be used, paste this command into the query editor, and then click play_circle **Run** :
+2.  To verify that the index is ready to be used, paste this command into the query editor, and then click **Run** :
 
     ```
     SELECT table_name, index_name, index_status,
@@ -217,7 +217,7 @@ For more information about vector index lists, see the `num_lists` [vector index
 
 The model you use to generate the embeddings in this query must be the same as the one you use to generate the embeddings in the table you're comparing against, otherwise the search results won't be accurate.
 
-To perform a text similarity search, paste this command into the query editor, and then click play_circle **Run** :
+To perform a text similarity search, paste this command into the query editor, and then click **Run** :
 
 ```
 SELECT query.query, base.publication_number, base.title, base.abstract
@@ -248,7 +248,7 @@ The output is similar to the following:
 
 ## Create the remote model for text generation
 
-To create a remote model that represents a hosted Agent Platform text generation model, paste this command into the query editor, and then click play_circle **Run** :
+To create a remote model that represents a hosted Agent Platform text generation model, paste this command into the query editor, and then click **Run** :
 
 ```
 CREATE OR REPLACE MODEL bqml_tutorial.text_model
@@ -262,7 +262,7 @@ You receive a confirmation message similar to the following: `Successfully creat
 
 Feed the search results as prompts to generate text with the [`AI.GENERATE_TEXT` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) .
 
-To augment the vector search results, paste this command into the query editor, and then click play_circle **Run** :
+To augment the vector search results, paste this command into the query editor, and then click **Run** :
 
 ```
 SELECT result AS generated, prompt
@@ -328,13 +328,13 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
 2.  In the left pane, expand your project, and then click **Datasets** .
 
-3.  For the `bqml_tutorial` dataset, click more_vert **Open actions \> Delete** .
+3.  For the `bqml_tutorial` dataset, click **Open actions \> Delete** .
 
 4.  In the **Delete dataset** dialog, click **Delete** to confirm.
 
 5.  In the left pane, click **Connections** .
 
-6.  For the `__default_cloudresource_connection__` connection, click more_vert **Open actions \> Delete** .
+6.  For the `__default_cloudresource_connection__` connection, click **Open actions \> Delete** .
 
 7.  In the **Delete connection** dialog, enter `delete` , and then click **Delete** to confirm.
 

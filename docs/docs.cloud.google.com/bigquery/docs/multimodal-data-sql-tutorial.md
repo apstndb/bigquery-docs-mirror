@@ -81,15 +81,15 @@ Create a BigQuery dataset to contain the objects you create in this tutorial by 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -116,7 +116,7 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
 
     Replace `PROJECT_ID` with your project ID.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -126,7 +126,7 @@ You receive a confirmation message similar to the following: `The dataset named 
 
 Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -154,7 +154,7 @@ To grant the service account access to use Agent Platform models, follow these s
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Grant access** .
+2.  Click **Grant access** .
 
 3.  In the **Grant access** dialog, do the following:
 
@@ -174,7 +174,7 @@ To create a standard table that contains the Cymbal pets product information, fo
 
     ### SQL
 
-    Paste this command into the query editor, and then click play_circle **Run** :
+    Paste this command into the query editor, and then click **Run** :
 
     ```
     LOAD DATA OVERWRITE cymbal_pets.products
@@ -231,7 +231,7 @@ To create an object table ( `product_images` ) that contains the Cymbal pets pro
 
 ### SQL
 
-Paste this command into the query editor, and then click play_circle **Run** :
+Paste this command into the query editor, and then click **Run** :
 
 ```
 CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
@@ -341,7 +341,7 @@ To create and populate the `products_mm` table, follow these steps:
 
     ### SQL
 
-    Paste this command into the query editor, and then click play_circle **Run** :
+    Paste this command into the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE TABLE cymbal_pets.products_mm
@@ -379,7 +379,7 @@ To create and populate the `products_mm` table, follow these steps:
 
     ### SQL
 
-    Paste this command into the query editor, and then click play_circle **Run** :
+    Paste this command into the query editor, and then click **Run** :
 
     ```
     SELECT product_name, image
@@ -434,7 +434,7 @@ To generate the product data, follow these steps:
 
     ### SQL
 
-    To create and populate the `image_description` column, paste the following into the query editor, and then click play_circle **Run** :
+    To create and populate the `image_description` column, paste the following into the query editor, and then click **Run** :
 
     ```
     -- Add the column to the existing table
@@ -520,7 +520,7 @@ To generate the product data, follow these steps:
     ]
     ```
 
-2.  To view the contents of the `image_description` column, paste the following into the query editor, and then click play_circle **Run** :
+2.  To view the contents of the `image_description` column, paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT product_name, image_description
@@ -553,7 +553,7 @@ To generate the product data, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     UPDATE cymbal_pets.products_mm t
@@ -623,7 +623,7 @@ To generate the product data, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT
@@ -691,7 +691,7 @@ To generate the product data, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT
@@ -796,7 +796,7 @@ To create the embeddings and perform a vector search, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE TABLE cymbal_pets.products_embedding
@@ -839,7 +839,7 @@ To create the embeddings and perform a vector search, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT *
@@ -944,7 +944,7 @@ To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE EXTERNAL TABLE `cymbal_pets.product_manuals`
@@ -998,7 +998,7 @@ To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     -- Extract the file and chunks into a single table.
@@ -1062,7 +1062,7 @@ To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT *
@@ -1105,7 +1105,7 @@ To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     SELECT
@@ -1174,7 +1174,7 @@ To process ordered multimodal data using `ObjectRef` values, follow these steps:
 
     ### SQL
 
-    Paste the following into the query editor, and then click play_circle **Run** :
+    Paste the following into the query editor, and then click **Run** :
 
     ```
     WITH results AS (
@@ -1259,13 +1259,13 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
 2.  In the left pane, expand your project, and then click **Datasets** .
 
-3.  For the `bqml_tutorial` dataset, click more_vert **Open actions \> Delete** .
+3.  For the `bqml_tutorial` dataset, click **Open actions \> Delete** .
 
 4.  In the **Delete dataset** dialog, click **Delete** to confirm.
 
 5.  In the left pane, click **Connections** .
 
-6.  For the `cymbal_conn` connection, click more_vert **Open actions \> Delete** .
+6.  For the `cymbal_conn` connection, click **Open actions \> Delete** .
 
 7.  In the **Delete connection** dialog, enter `delete` , and then click **Delete** to confirm.
 

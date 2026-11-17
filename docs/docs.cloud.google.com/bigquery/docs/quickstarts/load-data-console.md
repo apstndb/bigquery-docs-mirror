@@ -46,9 +46,9 @@ You might also be able to get the required permissions through [custom roles](ht
 Use the Google Cloud console to create a dataset to store the data. You create your dataset in the US multi-region location. For information on BigQuery regions and multi-regions, see [Locations](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 1.  In the Google Cloud console, open the BigQuery page.
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 3.  In the **Explorer** pane, click your project name.
-4.  Click more_vert **View actions** .
+4.  Click **View actions** .
 5.  Select **Create dataset** .
 6.  On the **Create dataset** page, do the following:
     1.  For **Dataset ID** , enter `babynames` .
@@ -79,13 +79,13 @@ For more information about the data, see the Social Security Administration's [B
 
 Next, load the data into a new table.
 
-1.  In the left pane, click explore **Explorer** .
+1.  In the left pane, click **Explorer** .
 
 2.  In the **Explorer** pane, expand your project name.
 
-3.  Click **Datasets** and then next to the **babynames** dataset, click more_vert **View actions** and select **Open** .
+3.  Click **Datasets** and then next to the **babynames** dataset, click **View actions** and select **Open** .
 
-4.  Click add_box **Create table** .
+4.  Click **Create table** .
 
     Unless otherwise indicated, use the default values for all settings.
 
@@ -109,7 +109,7 @@ name:string,assigned_sex_at_birth:string,count:integer
 
 To preview the table data, follow these steps:
 
-1.  In the left pane, click explore **Explorer** .
+1.  In the left pane, click **Explorer** .
 2.  In the **Explorer** pane, expand your project and click **Datasets** .
 3.  Click the `babynames` dataset, and then select the `names_2024` table.
 4.  Click the **Preview** tab. BigQuery displays the first few rows of the table.
@@ -120,7 +120,7 @@ To preview the table data, follow these steps:
 
 Next, query the table.
 
-1.  Next to the **names_2024** tab, click the add_box **SQL query** option. A new editor tab opens.
+1.  Next to the **names_2024** tab, click the **SQL query** option. A new editor tab opens.
 
 2.  In the query editor, paste the following query. This query retrieves the top five names for babies born in the US that were assigned male at birth in 2024.  
 
@@ -149,9 +149,9 @@ You have successfully queried a table in a public dataset and then loaded your s
 To avoid incurring charges to your Google Cloud account for the resources used on this page, follow these steps.
 
 1.  In the Google Cloud console, open the BigQuery page.
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 3.  In the **Explorer** pane, click **Datasets** and then click the `babynames` dataset that you created.
-4.  Expand the more_vert **View actions** option and click **Delete** .
+4.  Expand the **View actions** option and click **Delete** .
 5.  In the **Delete dataset** dialog, confirm the delete command: type the word `delete` and then click **Delete** .
 
 ## What's next

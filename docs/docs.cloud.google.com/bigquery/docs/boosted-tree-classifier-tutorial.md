@@ -65,15 +65,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -174,11 +174,11 @@ Run the query that prepares the sample data:
       `bigquery-public-data.ml_datasets.census_adult_income`;
     ```
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 4.  In the **Explorer** pane, search for the `bqml_tutorial` dataset.
 

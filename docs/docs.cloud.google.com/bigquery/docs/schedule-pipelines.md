@@ -116,9 +116,9 @@ To create a pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -174,11 +174,11 @@ The latest deployed version of the pipeline runs at the selected time and freque
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -329,8 +329,8 @@ To create a trigger, follow these steps:
 
 2.  Open your pipeline in the Pipeline Viewer by doing one of the following:
 
-    - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
-    - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
+    - In the left pane, click **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+    - In the left pane, click **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
 3.  In the Pipeline Viewer toolbar, click **Trigger** .
 
@@ -406,8 +406,8 @@ To deploy standalone pipelines and pipelines stored in folders, follow these ste
 
 2.  Open your pipeline in the **Pipeline Viewer** by doing one of the following:
 
-    - In the left pane, click folder **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
-    - In the left pane, click explore **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
+    - In the left pane, click **Files** , expand your **User** folder or a **Team folder** , and then select a pipeline.
+    - In the left pane, click **Explorer** , expand your project, click **Pipelines** , and then select a pipeline.
 
 3.  In the **Pipeline Viewer** toolbar, click **Deploy** .
 
@@ -425,7 +425,7 @@ To deploy a pipeline stored in a Git repository:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the file tree, expand your connected Git repository folder, and select a pipeline or click the Git repository folder if it is a root-level pipeline.
 
@@ -447,7 +447,7 @@ To disable a schedule for a selected pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -459,7 +459,7 @@ To disable a schedule for a selected pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -485,7 +485,7 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -497,7 +497,7 @@ To resume scheduled runs of a disabled pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -533,7 +533,7 @@ To view all pipeline schedules in your Google Cloud project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  Optional: To display additional columns with pipeline schedule details, click view_column **Column display options** , and then select columns and click **OK** .
+2.  Optional: To display additional columns with pipeline schedule details, click **Column display options** , and then select columns and click **OK** .
 
 ## View pipeline schedule details
 
@@ -543,7 +543,7 @@ To view details for a selected pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -553,7 +553,7 @@ To view details for a selected pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -575,7 +575,7 @@ To view past runs of a selected pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the **Files** pane, expand your **User** folder, a **Team folder** , or a Git repository, and then select a pipeline.
 
@@ -587,7 +587,7 @@ To view past runs of a selected pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -615,7 +615,7 @@ To edit a pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** .
+2.  In the left pane, click **Files** .
 
 3.  In the **Files** pane, expand your **User** folder or a **Team folder** , and then select a pipeline.
 
@@ -627,7 +627,7 @@ To edit a pipeline schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -659,7 +659,7 @@ To permanently delete a pipeline schedule, follow these steps:
 
     - Click the name of the selected pipeline schedule, and then on the **Schedule details** page, click **Delete** .
 
-    - In the row that contains the selected pipeline schedule, click more_vert **View actions** in the **Actions** column, and then click **Delete** .
+    - In the row that contains the selected pipeline schedule, click **View actions** in the **Actions** column, and then click **Delete** .
 
 3.  In the dialog that appears, click **Delete** .
 

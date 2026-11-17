@@ -63,11 +63,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -108,7 +108,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -434,7 +434,7 @@ We recommend that you grant the connection resource service account the [Storage
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Grant access** .
+2.  Click **Grant access** .
 
     The **Add principals** dialog opens.
 
@@ -463,7 +463,7 @@ Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/referenc
     - `PROJECT_ID` : the project where your Cloud Storage buckets are.
     - `CONNECTION_NAME` : the name of the connection in either the `PROJECT_ID `` . `` LOCATION `` . `` CONNECTION_ID` or `LOCATION `` . `` CONNECTION_ID` format. If the project is omitted, then it is inferred from the project where the statement is run.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -593,11 +593,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Click your project, click **Connections** , and then select a connection.
 

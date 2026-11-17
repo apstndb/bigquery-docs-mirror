@@ -93,7 +93,7 @@ You can assign any project that's in the same organization and region as the adm
 
 3.  Click the **Slot reservations** tab.
 
-4.  In the **Actions** column for the reservation named **`test`** , click more_vert **Actions** .
+4.  In the **Actions** column for the reservation named **`test`** , click **Actions** .
 
     ![Assignments project picker.](https://docs.cloud.google.com/static/bigquery/images/reservations-assignments.png)
 
@@ -144,7 +144,7 @@ When you delete a reservation, any jobs that are currently executing with slots 
 
 5.  For each assignment in that reservation, click **Actions** , and then click **Delete** .
 
-6.  In the **Actions** column for the reservation named **`test`** , click more_vert **Actions** .
+6.  In the **Actions** column for the reservation named **`test`** , click **Actions** .
 
 7.  Click **Delete** .
 

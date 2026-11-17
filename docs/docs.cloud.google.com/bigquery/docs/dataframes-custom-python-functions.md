@@ -88,7 +88,7 @@ BigQuery connections are created in the same location as the BigQuery DataFrames
 
 2.  Select the project in which you created the remote function.
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -100,7 +100,7 @@ BigQuery remote functions are created in the dataset you specify, or they are cr
 
 2.  Select the project in which you created the remote function.
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

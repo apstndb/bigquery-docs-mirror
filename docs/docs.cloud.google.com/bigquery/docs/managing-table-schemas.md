@@ -40,11 +40,11 @@ To add empty columns to a table's schema definition:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -75,7 +75,7 @@ Use the [`ALTER TABLE ADD COLUMN` DDL statement](https://docs.cloud.google.com/b
     ADD COLUMN new_column STRING;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1368,7 +1368,7 @@ When using `CAST` , a query can fail if BigQuery is unable to perform the cast. 
 
 6.  To update the settings, click **Save** .
 
-7.  Click play_circle **Run** .
+7.  Click **Run** .
 
     When the query job completes, the data type of `column_one` is `STRING` .
 
@@ -1413,7 +1413,7 @@ To change a column's mode from `REQUIRED` to `NULLABLE` , select one of the foll
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1445,7 +1445,7 @@ Use the [`ALTER COLUMN DROP NOT NULL` DDL statement](https://docs.cloud.google.c
     DROP NOT NULL;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2387,11 +2387,11 @@ To change the default value for a column, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then select the dataset.
 
@@ -2418,7 +2418,7 @@ Use the [`ALTER COLUMN SET DEFAULT` DDL statement](https://docs.cloud.google.com
     ALTER COLUMN column_name SET DEFAULT default_expression;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2430,7 +2430,7 @@ To change the description for a column, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2460,7 +2460,7 @@ Use the [`ALTER COLUMN SET OPTIONS` DDL statement](https://docs.cloud.google.com
     SET OPTIONS (description = 'This is a column description.');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2472,7 +2472,7 @@ For more information about data insights, including setup steps, required IAM ro
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2496,7 +2496,7 @@ For more information about data insights, including setup steps, required IAM ro
 
         The column descriptions are updated immediately.
 
-    4.  To close the **Preview descriptions** panel, click close **Close** .
+    4.  To close the **Preview descriptions** panel, click **Close** .
 
 ## Delete a column
 

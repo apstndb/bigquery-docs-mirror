@@ -67,15 +67,15 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  Click person_add **Sharing** \> **Permissions** .
+4.  Click **Sharing** \> **Permissions** .
 
 5.  Next to the associated role, click **condition: `TITLE`** to see the condition for that role.
 
@@ -117,15 +117,15 @@ To add conditions to a dataset, select one of the following methods. When you bu
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the details pane, click person_add **Share \> Permissions** .
+4.  In the details pane, click **Share \> Permissions** .
 
-5.  Click person_add **Add Principal** .
+5.  Click **Add Principal** .
 
 6.  In the **New principals** field, enter a principal.
 
@@ -177,17 +177,17 @@ To remove conditions from a dataset, select one of the following methods. When y
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the details pane, click person_add **Share \> Permissions** .
+4.  In the details pane, click **Share \> Permissions** .
 
 5.  Select the principal whose access you want to revoke.
 
-6.  Click delete **Delete** .
+6.  Click **Delete** .
 
 7.  In the **Delete principal?** dialog, click **Delete** .
 

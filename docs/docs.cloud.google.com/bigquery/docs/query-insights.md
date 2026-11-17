@@ -51,23 +51,23 @@ Follow these steps to see query performance insights:
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Job history** .
 
 4.  Click either **Personal History** or **Project History** .
 
-5.  In the list of jobs, identify the query job that interests you. Click more_vert **Actions** , and choose **View job in editor** .
+5.  In the list of jobs, identify the query job that interests you. Click **Actions** , and choose **View job in editor** .
 
 6.  Select the **Execution graph** tab to see a graphical representation of each stage of the query:
 
     ![The graphical query plan in the execution graph.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-overview.png)
 
-    To determine if a query stage has performance insights, look at the icon it displays. Stages that have an info_outline information icon have performance insights. Stages that have a check_circle_outline check icon don't.
+    To determine if a query stage has performance insights, look at the icon it displays. Stages that have an information icon have performance insights. Stages that have a check icon don't.
 
 7.  Click a stage to open the stage details pane, where you can see the following information:
 
@@ -77,7 +77,7 @@ Follow these steps to see query performance insights:
 
     ![Query stage details.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-stage-details.png)
 
-8.  Optional: If you are inspecting a running query, click sync **Sync** to update the execution graph so that it reflects the query's current status.
+8.  Optional: If you are inspecting a running query, click **Sync** to update the execution graph so that it reflects the query's current status.
 
     ![Sync the graph to a running query.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-sync.png)
 
@@ -140,7 +140,7 @@ For any query that has performance regression issues, performance insights are a
       );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

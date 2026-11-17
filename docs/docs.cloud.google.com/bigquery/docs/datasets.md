@@ -2,13 +2,13 @@
 name: documents/docs.cloud.google.com/bigquery/docs/datasets
 uri: https://docs.cloud.google.com/bigquery/docs/datasets
 title: Create datasets
-description: Shows how to create datasets in BigQuery.
+description: Learn how to create datasets in BigQuery to securely store your data, organize your tables and views, and control resource access.
 data_source: docs.cloud.google.com
 ---
 
 # Create datasets
 
-This document describes how to create datasets that store data in BigQuery. Datasets are top-level containers that let you organize and control access to tables and views.
+You can create datasets in BigQuery to securely store your data in top-level containers. Organizing your tables and views into these datasets lets you manage and control access to your resources.
 
 To learn how to work with other dataset types, see the following resources:
 
@@ -76,10 +76,10 @@ To create a dataset:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 3.  Expand the project where you want to create the dataset.
 4.  Click **Datasets** .
-5.  On the **Datasets** page, click add **Create dataset** .
+5.  On the **Datasets** page, click **Create dataset** .
 6.  On the **Create dataset** page:
     1.  For **Dataset ID** , enter a unique dataset [name](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) .
     2.  For **Location type** , choose a geographic [location](https://docs.cloud.google.com/bigquery/docs/locations) for the dataset. After a dataset is created, the location can't be changed.
@@ -175,7 +175,7 @@ To create a dataset in a project other than your default project, add the projec
 
       Once you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

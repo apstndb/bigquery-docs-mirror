@@ -143,15 +143,15 @@ To load Avro data from Cloud Storage into a new BigQuery table, select one of th
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then click the name of your dataset.
 
-4.  In the details pane, click **Create table** add_box .
+4.  In the details pane, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section:
 
@@ -204,7 +204,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.avro']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -556,13 +556,13 @@ To append or overwrite a table with Avro data:
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then click the name of your dataset.
 
-4.  In the details pane, click **Create table** add_box .
+4.  In the details pane, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section:
 
@@ -613,7 +613,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.avro']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

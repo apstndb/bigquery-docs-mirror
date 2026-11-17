@@ -48,7 +48,7 @@ To create a new data preparation from an existing table, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -120,7 +120,7 @@ To open the editor for an existing data preparation, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.  
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, click your project name, and then click **Data preparations** .
 

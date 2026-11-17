@@ -96,7 +96,7 @@ To create a Cloud Storage data transfer in the BigQuery Data Transfer Service:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  In the **Source type** section, for **Source** , choose **Google Cloud Storage** .
 
@@ -367,7 +367,7 @@ To trigger a data transfer:
 
 1.  Go to the BigQuery page in the Google Cloud console.
 
-2.  Click sync_alt **Data transfers** .
+2.  Click **Data transfers** .
 
 3.  Select your data transfer from the list.
 

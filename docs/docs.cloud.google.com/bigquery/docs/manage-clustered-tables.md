@@ -85,7 +85,7 @@ For clustered tables, you can query the `CLUSTERING_ORDINAL_POSITION` column in 
       mydataset.INFORMATION_SCHEMA.COLUMNS;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

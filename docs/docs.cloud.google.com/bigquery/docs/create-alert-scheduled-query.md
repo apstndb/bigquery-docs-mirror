@@ -65,7 +65,7 @@ Use a [metric-threshold alert](https://docs.cloud.google.com/monitoring/alerts/u
 
 To set up an alert on the number of rows a scheduled query returns, follow these steps:
 
-1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
+1.  In the Google Cloud console, go to the **Alerting** page:
 
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

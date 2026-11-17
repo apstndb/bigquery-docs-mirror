@@ -610,7 +610,7 @@ If the [project](https://docs.cloud.google.com/bigquery/docs/resource-hierarchy#
 
 You can specify the location to run a job explicitly in the following ways:
 
-- When you query data using the Google Cloud console in the query editor, click settings **More \> Query settings** , expand **Advanced options** , and then select your **Data location** .
+- When you query data using the Google Cloud console in the query editor, click **More \> Query settings** , expand **Advanced options** , and then select your **Data location** .
 - When you write a SQL query, set the [`@@location` system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) in the first statement of your query.
 - When you use the bq command-line tool, supply the `--location` [global flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) and set the value to your location.
 - When you use the API, specify your region in the `location` property in the `jobReference` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .

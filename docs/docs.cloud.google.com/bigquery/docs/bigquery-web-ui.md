@@ -28,7 +28,7 @@ BigQuery in the Google Cloud console is a graphical interface where you can crea
 
 1.  Go to the Google Cloud console.
 
-2.  In the Google Cloud console toolbar, click menu **Navigation menu** .
+2.  In the Google Cloud console toolbar, click **Navigation menu** .
 
 3.  Click **Solutions \> All products** .
 
@@ -69,7 +69,7 @@ The BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-over
 
 2.  ***Data** tab of the left pane* : use the **Data** tab to browse and inspect data hierarchies, including datasets, tables, views, models, routines, property graphs, and connections, across your pinned projects. Code assets aren't listed in the **Data** pane; instead, you can access code assets in the **Files** tab for a single region or in the **Explorer** tab across all regions.
 
-    The **Data** pane also contains an option to add data to BigQuery. When you click add **Add data** , you can use search and filtering capabilities to find a data source that you want to work with. After you select a data source, you can do the following based on the capabilities available for your data source:
+    The **Data** pane also contains an option to add data to BigQuery. When you click **Add data** , you can use search and filtering capabilities to find a data source that you want to work with. After you select a data source, you can do the following based on the capabilities available for your data source:
 
     - **Set up BigQuery table over external data ( *federation* )** : enables BigQuery to access external data without ingesting it into BigQuery. You can [create a table to access external data](https://docs.cloud.google.com/bigquery/docs/external-data-sources) or [create a connection to an external source](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) .
     - **Load data to BigQuery** : lets you load data to BigQuery by setting up a [data transfer](https://docs.cloud.google.com/bigquery/docs/dts-introduction) or by using a [partner capability](https://docs.cloud.google.com/bigquery/docs/load-data-third-party) . Loading data to BigQuery is recommended for optimal data processing at scale.
@@ -96,7 +96,7 @@ The BigQuery [**Studio**](https://docs.cloud.google.com/bigquery/docs/query-over
 
 The **Studio** page in BigQuery is the central point for viewing your BigQuery resources and for performing common tasks such as creating datasets and creating and running notebooks.
 
-> **Note:** To see how to use keyboard shortcuts in Studio, click keyboard **BigQuery Studio shortcuts** in the BigQuery Studio toolbar:
+> **Note:** To see how to use keyboard shortcuts in Studio, click **BigQuery Studio shortcuts** in the BigQuery Studio toolbar:
 
 To explore the **Studio** page, follow these steps:
 
@@ -114,9 +114,9 @@ To explore the **Studio** page, follow these steps:
 
     The **Explorer** pane lists different code assets and data resources, and it lets you search for BigQuery resources.
 
-    > **Note:** You can expand and collapse the left pane by clicking first_page **Collapse left pane** or last_page **Expand left pane** .
+    > **Note:** You can expand and collapse the left pane by clicking **Collapse left pane** or **Expand left pane** .
 
-3.  Go to the `bigquery-public-data` project, click arrow_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
+3.  Go to the `bigquery-public-data` project, click **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
 
     BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) are stored in BigQuery and made available to the general public through the Google Cloud Public Dataset Program.
 
@@ -140,7 +140,7 @@ To explore the **Studio** page, follow these steps:
 
     2.  To view details of recent jobs in your project, click **Project history** .
 
-        > **Note:** To see the details of a job or to open a query from a query job, in the **Actions** column for a job or query, click more_vert **Actions** \> **Show job details** or **View job in editor** .
+        > **Note:** To see the details of a job or to open a query from a query job, in the **Actions** column for a job or query, click **Actions** \> **Show job details** or **View job in editor** .
 
 9.  In the left pane, click the fork_right **Source control** tab ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
 
@@ -148,25 +148,25 @@ To explore the **Studio** page, follow these steps:
 
     You can use workspaces within repositories to edit the code stored in the repository. When you click a [workspace](https://docs.cloud.google.com/bigquery/docs/workspaces) in the **Source control** pane, it opens in a tab in the details pane.
 
-10. In the left pane, click folder **Files** .
+10. In the left pane, click **Files** .
 
     The Files tab lets you create user and team folders that store and organize your code assets.
 
-11. Click the home **Home** tab.
+11. Click the **Home** tab.
 
     The Home tab provides links and templates that let you get started using BigQuery.
 
-    If you close the **Home** tab, you can open it by clicking home **Home** in the **Explorer** tab.
+    If you close the **Home** tab, you can open it by clicking **Home** in the **Explorer** tab.
 
 12. Click the query editor. This tab is labeled search_insights **Untitled query** .
 
     You use the query editor to create SQL queries, run SQL queries, and view the results.
 
-    If you close the query editor, you can open it by clicking the **Home** tab, and then in the **Create new** section, click add_box **SQL query** .
+    If you close the query editor, you can open it by clicking the **Home** tab, and then in the **Create new** section, click **SQL query** .
 
 ### Work with tabs in Studio
 
-Whenever you select a resource or click add_box **SQL query** in the details pane, a new tab opens. If more than one tab is open, you can split the tabs into two panes and view them side by side.
+Whenever you select a resource or click **SQL query** in the details pane, a new tab opens. If more than one tab is open, you can split the tabs into two panes and view them side by side.
 
 #### Prevent tabs from being replaced
 
@@ -182,7 +182,7 @@ To reduce tab proliferation, clicking a resource opens it within the same tab. T
 
 To split tabs into two panes, follow these steps:
 
-1.  Next to the tab name, click arrow_drop_down **Open menu** .
+1.  Next to the tab name, click **Open menu** .
 
 2.  Select one of the following options:
 
@@ -192,7 +192,7 @@ To split tabs into two panes, follow these steps:
 
     > **Note:** If only one tab is open, these menu options are unavailable.
 
-3.  To unsplit the tabs, select arrow_drop_down **Open menu** on one of the open tabs, and then select **Move tab to left pane** or **Move tab to right pane** .
+3.  To unsplit the tabs, select **Open menu** on one of the open tabs, and then select **Move tab to left pane** or **Move tab to right pane** .
 
 #### Query data using split tabs
 
@@ -216,7 +216,7 @@ The following image shows the details pane with two open tabs. One tab has a SQL
 
 To move a tab from one pane to the other pane, follow these steps:
 
-1.  Next to the tab name, click arrow_drop_down **Open menu** .
+1.  Next to the tab name, click **Open menu** .
 
 2.  Select **Move tab to right pane** or **Move tab to left pane** (whichever option is available).
 
@@ -224,9 +224,9 @@ To move a tab from one pane to the other pane, follow these steps:
 
 To close all tabs except for one, follow these steps:
 
-1.  Next to the tab name, click arrow_drop_down **Open menu** .
+1.  Next to the tab name, click **Open menu** .
 
-2.  Select cancel **Close other tabs** .
+2.  Select **Close other tabs** .
 
 ## The Overview page
 
@@ -273,13 +273,13 @@ You can customize the **Overview** page to show or hide information relevant to 
 
 3.  Optional: To tailor the content on the **Overview** page to your specific needs, hide individual cards:
 
-    1.  In the card, click more_vert **More options** .
+    1.  In the card, click **More options** .
 
     2.  Choose **Hide card** . Your preferences for hidden cards are saved per user.
 
     3.  To unhide the card, at the end of the section, click **Show hidden content** .
 
-4.  If an entire section is not relevant, click keyboard_arrow_up to collapse it. Your user preferences for collapsed sections are saved.
+4.  If an entire section is not relevant, click to collapse it. Your user preferences for collapsed sections are saved.
 
 ## The Search page
 

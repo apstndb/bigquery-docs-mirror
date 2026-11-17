@@ -58,11 +58,11 @@ You can create a snapshot of a table that expires after 24 hours by using one of
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 
@@ -101,7 +101,7 @@ Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bi
     - `TABLE_NAME` : the name of the table you are creating the snapshot from.
     - `TIMESTAMP_VALUE` : A [timestamp value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) representing the date and time 24 hours from now.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -202,7 +202,7 @@ You can create a table snapshot of a table as it was one hour ago by using one o
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -242,7 +242,7 @@ Use the [`CREATE SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bi
     - `TABLE_DATASET_NAME` : the name of the dataset that contains the table you are creating the snapshot from.
     - `TABLE_NAME` : the name of the table you are creating the snapshot from.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

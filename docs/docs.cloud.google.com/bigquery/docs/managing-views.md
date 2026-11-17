@@ -76,11 +76,11 @@ To update a view's SQL query:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
@@ -342,7 +342,7 @@ To update a view's expiration time:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -378,7 +378,7 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
     - ` MY_VIEW ` : the name of the view to be updated
     - ` NEW_TIMESTAMP ` : a [TIMESTAMP value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type)
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -558,7 +558,7 @@ To update a view's description:
 
 You cannot add a description when you create a view using the Google Cloud console. After the view is created, you can add a description on the **Details** page.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -592,7 +592,7 @@ Use the [`ALTER VIEW SET OPTIONS` DDL statement](https://docs.cloud.google.com/b
     - ` MY_VIEW ` : the name of the view to be updated
     - ` NEW_DESCRIPTION ` : the new view description
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -783,7 +783,7 @@ For more information on IAM roles and permissions in BigQuery, see [Predefined r
 
 To copy a view, follow these steps:
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -862,7 +862,7 @@ To delete a view:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -892,7 +892,7 @@ Use the [`DROP VIEW` DDL statement](https://docs.cloud.google.com/bigquery/docs/
     - ` MY_VIEW ` : the name of the view to be updated
     - ` NEW_DESCRIPTION ` : the new view description
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

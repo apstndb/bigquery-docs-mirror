@@ -35,7 +35,7 @@ In this tutorial, you use Google Ads as the example data source. For a full list
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  In the **Source type** section, for **Source** , choose **Google Ads** .
 
@@ -198,7 +198,7 @@ Create a Dataform repository to store the [SQLX queries](https://docs.cloud.goog
 
 1.  In the Google Cloud console, go to the **Dataform** page.
 
-2.  Click add **Create repository** .
+2.  Click **Create repository** .
 
 3.  On the **Create repository** page, do the following:
 
@@ -218,7 +218,7 @@ Create a Dataform development workspace so that you can work on the transformati
 
 2.  Click `marketing-tutorial-repository` .
 
-3.  Click add **Create development workspace** .
+3.  Click **Create development workspace** .
 
 4.  In the **Create development workspace** window, do the following:
 
@@ -279,7 +279,7 @@ Define your data transformations by create a SQLX file in the `definitions/` dir
 
 ### Create the transformation SQLX file
 
-1.  In the **Files** pane, next to `definitions/` , click the more_vert **More** menu, and then select **Create file** .
+1.  In the **Files** pane, next to `definitions/` , click the **More** menu, and then select **Create file** .
 2.  In the **Add a file path** field, enter `definitions/daily_performance.sqlx` .
 3.  Click **Create file** .
 
@@ -392,7 +392,7 @@ To avoid incurring charges for BigQuery assets, delete the dataset called `dataf
 
 2.  In the **Explorer** panel, expand your project and select `dataform` .
 
-3.  Click the more_vert **Actions** menu, and then select **Delete** .
+3.  Click the **Actions** menu, and then select **Delete** .
 
 4.  In the **Delete dataset** dialog, enter `delete` into the field, and then click **Delete** .
 
@@ -406,11 +406,11 @@ Dataform development workspace creation incurs no costs, but to delete the devel
 
 3.  Click the **Release & scheduling** tab.
 
-4.  Under the **Release configurations** section, click the more_vert **More** menu next to the `production` configuration, and then click **Delete** .
+4.  Under the **Release configurations** section, click the **More** menu next to the `production` configuration, and then click **Delete** .
 
-5.  Under the **Workflow configurations** section, click the more_vert **More** menu next to the `transformations` configuration, and then click **Delete** .
+5.  Under the **Workflow configurations** section, click the **More** menu next to the `transformations` configuration, and then click **Delete** .
 
-6.  In the **Development workspaces** tab, click the more_vert **More** menu by `quickstart-workspace` , and then select **Delete** .
+6.  In the **Development workspaces** tab, click the **More** menu by `quickstart-workspace` , and then select **Delete** .
 
 7.  To confirm, click **Delete** .
 
@@ -420,7 +420,7 @@ Dataform repository creation incurs no costs, but to delete the repository you c
 
 1.  In the Google Cloud console, go to the **Dataform** page.
 
-2.  By `quickstart-repository` , click the more_vert **More** menu, and then select **Delete** .
+2.  By `quickstart-repository` , click the **More** menu, and then select **Delete** .
 
 3.  In the **Delete repository** window, enter the name of the repository to confirm deletion.
 

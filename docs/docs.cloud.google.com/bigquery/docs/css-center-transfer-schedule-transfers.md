@@ -88,7 +88,7 @@ To create a data transfer for CSS Center reporting:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  On the **Create Transfer** page:
 

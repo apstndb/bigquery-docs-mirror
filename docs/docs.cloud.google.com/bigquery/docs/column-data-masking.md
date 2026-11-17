@@ -1222,7 +1222,7 @@ The user or service account that creates a data policy must have the `bigquery.d
 2.  Click the name of the taxonomy to open.
 3.  Select a policy tag.
 4.  Click **Manage Data Policies** .
-5.  Click delete next to the data policy to delete.
+5.  Click next to the data policy to delete.
 6.  Click **Submit** .
 7.  Click **Confirm** .
 

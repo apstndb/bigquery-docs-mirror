@@ -68,7 +68,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 4.  Find the reservation in the table of reservations.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Create assignment** .
 
@@ -134,7 +134,7 @@ To assign an organization to a reservation, use the [`CREATE ASSIGNMENT` DDL sta
       - Single identity in a workforce identity pool
       - Single identity in a workload identity pool
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -295,7 +295,7 @@ To view active scheduling policy overrides, check the `scheduling_policy` and `a
 
 4.  Find the reservation in the table of reservations.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Create assignment** .
 
@@ -359,7 +359,7 @@ To assign a project to a reservation, use the [`CREATE ASSIGNMENT` DDL statement
       - Single identity in a workforce identity pool
       - Single identity in a workload identity pool
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -617,7 +617,7 @@ To assign a project to `none` , use the [`CREATE ASSIGNMENT` DDL statement](http
 
     - `PROJECT_ID` : the ID of the project to assign to the reservation
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -750,7 +750,7 @@ To assign a query to run in a specific reservation, do one of the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
@@ -783,7 +783,7 @@ Set the `@@reservation` system variable in the session to assign the reservation
 
     - `QUERY` : the query you want to run.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -938,7 +938,7 @@ To find which reservation your project's query jobs are assigned to, query the [
     - `PROJECT_ID` : the ID of the project to assign to the reservation
     - `JOB_TYPE` : the [type of job](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) to assign to this reservation, such as `QUERY` , `CONTINUOUS` , `PIPELINE` , `BACKGROUND` , or `ML_EXTERNAL`
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1059,7 +1059,7 @@ To remove a project from a reservation:
 
 4.  In the table of reservations, expand the reservation to find the project.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Delete** .
 
@@ -1088,7 +1088,7 @@ Use the [`DROP ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigquery
 
       To find the assignment ID, see [List a project's reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#list-assignment) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

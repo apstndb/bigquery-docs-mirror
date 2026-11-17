@@ -34,15 +34,15 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project.
 
-4.  In the details pane, click more_vert **View actions** , and then click **Create dataset** .
+4.  In the details pane, click **View actions** , and then click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -68,7 +68,7 @@ To create your table, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -100,7 +100,7 @@ To create your table, follow these steps:
 
     > **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
-2.  Click add **Create reservation** .
+2.  Click **Create reservation** .
 
 3.  On the **Create Reservation** page, configure your BI Engine reservation:
 
@@ -188,7 +188,7 @@ To delete your reservation, follow these steps:
 
 2.  In the **Reservations** section, locate your reservation.
 
-3.  In the **Actions** column, click the more_vert icon to the right of your reservation and choose **Delete** .
+3.  In the **Actions** column, click the icon to the right of your reservation and choose **Delete** .
 
 4.  In the **Delete reservation?** dialog, enter **Delete** and then click **DELETE** .
 

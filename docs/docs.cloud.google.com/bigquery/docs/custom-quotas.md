@@ -50,7 +50,7 @@ To set or update a custom cost control, such as limiting the amount of BigQuery 
 
 3.  Select the quotas that you want to adjust. For example, to limit the amount of data that be queried per day at both the project level and user level, select **Query usage per day** and **Query usage per day per user** . You might need to page through the list to find them. After you select a quota, a toolbar appears.
 
-4.  In the toolbar, click edit **Edit** . The **Quota changes** dialog opens.
+4.  In the toolbar, click **Edit** . The **Quota changes** dialog opens.
 
 5.  If **Unlimited** is selected, deselect it.
 

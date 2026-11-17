@@ -63,15 +63,15 @@ Create a BigQuery dataset to contain your resources:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  Click **View actions \> Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -147,15 +147,15 @@ To create a model:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+4.  Click **View actions** next to the dataset, and then click **Create BQML Model** .
 
     The **Create new model** pane opens.
 
@@ -217,13 +217,13 @@ To create a model:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+4.  Click **View actions** next to the dataset, and then click **Create BQML Model** .
 
     The **Create new model** pane opens.
 
@@ -271,13 +271,13 @@ To create a model:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+4.  Click **View actions** next to the dataset, and then click **Create BQML Model** .
 
     The **Create new model** pane opens.
 
@@ -320,13 +320,13 @@ To create a model:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+4.  Click **View actions** next to the dataset, and then click **Create BQML Model** .
 
     The **Create new model** pane opens.
 
@@ -378,13 +378,13 @@ To create a model:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then click the dataset that you created.
 
-4.  Click more_vert **View actions** next to the dataset, and then click **Create BQML Model** .
+4.  Click **View actions** next to the dataset, and then click **Create BQML Model** .
 
     The **Create new model** pane opens.
 

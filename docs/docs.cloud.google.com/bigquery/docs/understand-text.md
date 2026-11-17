@@ -52,13 +52,13 @@ For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/p
 
     2.  Select the project.
 
-    3.  Click person_add **Grant access** .
+    3.  Click **Grant access** .
 
     4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
 
     5.  Click **Select a role** , then search for the role.
 
-    6.  To grant additional roles, click add **Add another role** and add each additional role.
+    6.  To grant additional roles, click **Add another role** and add each additional role.
 
     7.  Click **Save** .
 
@@ -84,15 +84,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -145,11 +145,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -190,7 +190,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -510,7 +510,7 @@ Select one of the following options:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
+2.  Click **Add** .
 
     The **Add principals** dialog opens.
 
@@ -665,7 +665,7 @@ If you want to reuse the project, then delete the resources that you created for
 
     2.  In the **Datasets** list, click the `bqml_tutorial` dataset.
 
-    3.  In the details pane, click delete **Delete** .
+    3.  In the details pane, click **Delete** .
 
     4.  In the **Delete dataset** dialog, click **Delete** .
 
@@ -675,7 +675,7 @@ If you want to reuse the project, then delete the resources that you created for
 
     2.  In the **Connections** list, click the connection that you created.
 
-    3.  In the details pane, click delete **Delete** .
+    3.  In the details pane, click **Delete** .
 
     4.  In the **Delete connection** dialog, enter `delete` to confirm deletion.
 

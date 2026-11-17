@@ -145,7 +145,7 @@ To add a shared topic to an exchange by creating a listing, select one of the fo
 
 2.  Click the name of the data exchange where you want to create the listing.
 
-3.  Click add_box **Create listing** .
+3.  Click **Create listing** .
 
 4.  On the **Create listing** page, in the **Resource type** list, select **Pub/Sub Topic** .
 
@@ -220,7 +220,7 @@ To update a listing, select one of the following options:
 
 3.  Click the listing that you want to update.
 
-4.  Click mode_edit **Edit listing** .
+4.  Click **Edit listing** .
 
 5.  Modify the field values. You can modify all values except the listing's shared topic.
 
@@ -260,7 +260,7 @@ To delete a listing, select one of the following options:
 
 3.  Click the listing that you want to delete.
 
-4.  Click delete **Delete** .
+4.  Click **Delete** .
 
 5.  In the **Delete listing?** dialog, enter `delete` to confirm deletion.
 
@@ -295,9 +295,9 @@ To give users access to view or subscribe to your listing, do the following:
 
 3.  Click the listing that you want to share.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter details based on the listing type:
 
@@ -323,15 +323,15 @@ To grant these roles on a listing, do the following:
 
 3.  Click the listing that you want to manage subscriptions for.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter the usernames or email addresses of the subscribers that you want to add.
 
 7.  In the **Select a role** menu, select **Analytics Hub \> Analytics Hub Subscriber** .
 
-8.  Click add_box **Add another role** .
+8.  Click **Add another role** .
 
 9.  In the **Select a role** menu, select **Analytics Hub \> Analytics Hub Subscription Owner** .
 

@@ -2,13 +2,15 @@
 name: documents/docs.cloud.google.com/bigquery/docs/materialized-views-use
 uri: https://docs.cloud.google.com/bigquery/docs/materialized-views-use
 title: Use materialized views
-description: A fully managed, petabyte-scale analytics data warehouse that lets you run analytics over vast amounts of data in near real time.
+description: Learn how to use materialized views in BigQuery to automatically improve query performance, reduce costs, and minimize latency using smart tuning.
 data_source: docs.cloud.google.com
 ---
 
 # Use materialized views
 
-This document provides additional information about materialized views and how to use them. Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) and [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) .
+Querying materialized views in BigQuery lets you retrieve consistently fresh data with lower latency and reduced computational costs. You can use automatic smart tuning and direct queries to integrate these views into your existing workflows.
+
+Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) and [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) .
 
 ## Query materialized views
 

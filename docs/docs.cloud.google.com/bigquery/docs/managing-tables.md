@@ -61,11 +61,11 @@ To update a table's description:
 
 You can't add a description when you create a table using the Google Cloud console. After the table is created, you can add a description on the **Details** page.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -91,7 +91,7 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
         description = 'Description of mytable');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -248,7 +248,7 @@ For more information about data insights, including setup steps, required IAM ro
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -274,7 +274,7 @@ For more information about data insights, including setup steps, required IAM ro
 
         The table description is updated immediately.
 
-    5.  To close the **Preview descriptions** panel, click close **Close** .
+    5.  To close the **Preview descriptions** panel, click **Close** .
 
 ### Update a table's expiration time
 
@@ -300,7 +300,7 @@ To update a table's expiration time:
 
 You can't add an expiration time when you create a table using the Google Cloud console. After a table is created, you can add or update a table expiration on the **Table Details** page.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -329,7 +329,7 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
         expiration_timestamp = TIMESTAMP '2025-02-03 12:34:56');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -759,7 +759,7 @@ To copy a single source table:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -790,7 +790,7 @@ Use the [`CREATE TABLE COPY` statement](https://docs.cloud.google.com/bigquery/d
     COPY myproject.mydataset.table1;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1848,7 +1848,7 @@ To delete a table:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1872,7 +1872,7 @@ Use the [`DROP TABLE` statement](https://docs.cloud.google.com/bigquery/docs/ref
     DROP TABLE mydataset.mytable;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

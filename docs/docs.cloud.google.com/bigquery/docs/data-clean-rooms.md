@@ -258,7 +258,7 @@ To delete a data clean room, select one of the following options:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  In the row of the data clean room that you want to delete, click more_vert **More actions \> Delete** .
+2.  In the row of the data clean room that you want to delete, click **More actions \> Delete** .
 
 3.  To confirm, enter `delete` , and then click **Delete** . You can't undo this action.
 
@@ -346,7 +346,7 @@ As a data clean room owner, you manage who can subscribe to your data clean room
 
 6.  For **Select a role** , select **Analytics Hub \> Analytics Hub Subscriber** .
 
-7.  Click add_box **Add another role** .
+7.  Click **Add another role** .
 
 8.  For **Select a role** , select **Analytics Hub \> Analytics Hub Subscription Owner** .
 
@@ -392,7 +392,7 @@ You can directly share a data clean room with data clean room subscribers:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  In the row of the data clean room that you want to share, click more_vert **More actions \> Copy share link** .
+2.  In the row of the data clean room that you want to share, click **More actions \> Copy share link** .
 
 3.  To let subscribers view and subscribe to the data clean room, share the copied link with them.
 
@@ -488,7 +488,7 @@ To update a listing, select one of the following options:
 
 2.  Click the display name of the data clean room that contains the listing.
 
-3.  In the row of the listing that you want to update, click more_vert **More actions \> Edit listing** .
+3.  In the row of the listing that you want to update, click **More actions \> Edit listing** .
 
 4.  Update the primary contact or description as needed.
 
@@ -531,7 +531,7 @@ To delete a listing, select one of the following options:
 
 2.  Click the display name of the data clean room that contains the listing.
 
-3.  In the row of the listing that you want to delete, click more_vert **More actions \> Delete listing** .
+3.  In the row of the listing that you want to delete, click **More actions \> Delete listing** .
 
 4.  To confirm, enter `delete` , and then click **Delete** . You can't undo this action.
 
@@ -560,7 +560,7 @@ You can directly share a data clean room with data clean room subscribers:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  In the row of the data clean room that you want to share, click more_vert **More actions \> Copy share link** .
+2.  In the row of the data clean room that you want to share, click **More actions \> Copy share link** .
 
 3.  To let subscribers view and subscribe to the data clean room, share the copied link with them.
 
@@ -574,7 +574,7 @@ To view your listing data clean room subscribers, do the following:
 
 2.  Click the display name of the data clean room.
 
-3.  In the row of a listing that you want to view, click more_vert **More actions \> View subscriptions** .
+3.  In the row of a listing that you want to view, click **More actions \> View subscriptions** .
 
 ## Data clean room subscriber workflows
 
@@ -601,7 +601,7 @@ Subscribing to a data clean room gives you query access to the data in the listi
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
 3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
 
@@ -712,7 +712,7 @@ To find all the data clean rooms that you have access to, do the following:
 
   1.  In the Google Cloud console, go to the **BigQuery** page.
 
-  2.  In the **Data** pane, click add **Add data** .
+  2.  In the **Data** pane, click **Add data** .
 
   3.  Select **Sharing (Analytics Hub)** . A discovery page opens.
 

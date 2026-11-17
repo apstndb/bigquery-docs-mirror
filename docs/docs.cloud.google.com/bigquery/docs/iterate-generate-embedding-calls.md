@@ -83,7 +83,7 @@ Create a BigQuery dataset to store your models and sample data:
 
 2.  In the **Explorer** pane, click your project name.
 
-3.  Click more_vert **View actions \> Create dataset** .
+3.  Click **View actions \> Create dataset** .
 
 4.  On the **Create dataset** page, do the following:
 

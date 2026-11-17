@@ -221,7 +221,7 @@ Error: `Data Transfer Service is not authorized to pull message from the provide
 
 ![Verify if the service agent has pubsub.subscriber on the subscription.](https://docs.cloud.google.com/static/bigquery/images/dts-event-driven-verify-pubsub-subscriber-permission.png)
 
-If the service agent doesn't have the `pubsub.subscriber` role granted. Click person_add **Add principal** to grant the `pubsub.subscriber` role to `service- `` PROJECT_NUMBER `` @gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`
+If the service agent doesn't have the `pubsub.subscriber` role granted. Click **Add principal** to grant the `pubsub.subscriber` role to `service- `` PROJECT_NUMBER `` @gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`
 
 Error: `Cloud Pub/Sub API has not been used in project `` PROJECT_NUMBER `` before or it is disabled.`  
 **Resolution:** Verify that Cloud Pub/Sub API is enabled for your project:

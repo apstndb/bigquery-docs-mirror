@@ -342,7 +342,7 @@ To enable required API dependencies for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
 
-2.  On the **Studio** , in the tab bar of the editor pane, click the arrow_drop_down arrow drop-down next to the **+** sign, hold the pointer over **Notebook** , and then select **Empty notebook** .
+2.  On the **Studio** , in the tab bar of the editor pane, click the arrow drop-down next to the **+** sign, hold the pointer over **Notebook** , and then select **Empty notebook** .
 
 3.  Click **Enable APIs** .
 

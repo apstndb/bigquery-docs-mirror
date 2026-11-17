@@ -85,7 +85,7 @@ To create an Amazon S3 data transfer:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  On the **Create Transfer** page:
 

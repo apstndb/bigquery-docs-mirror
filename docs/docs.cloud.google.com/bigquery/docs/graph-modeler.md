@@ -16,7 +16,7 @@ To request support or provide feedback for this feature, send an email to <bq-gr
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document describes how to use the visual graph modeler in BigQuery Studio to define nodes and edges from your BigQuery tables, and how to edit and query graph data. You can also create a graph by using the [`CREATE PROPERTY GRAPH` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .
+The BigQuery Graph visual modeler in BigQuery Studio lets you define node and edge tables directly from your BigQuery data sources and manage graph topologies without writing any DDL statements. In this document, you learn how to create, view, edit, and query graphs by using the visual modeler, or create graphs programmatically by using [schema statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/graph-schema-statements#gql_create_graph) .
 
 ## Required roles
 
@@ -30,7 +30,7 @@ To create a graph using the visual modeler, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  To open the gallery, in the editor tab bar, click the arrow_drop_down **arrow** next to add_box **SQL query** , and then click **Graph** .
+2.  To open the gallery, in the editor tab bar, click the **arrow** next to **SQL query** , and then click **Graph** .
 
 3.  In the **Graph name** field, enter a name for the graph.
 
@@ -49,7 +49,7 @@ To view an existing graph, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -73,7 +73,7 @@ To add a node, follow these steps. Changes that you make aren't applied until yo
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -89,7 +89,7 @@ To add a node, follow these steps. Changes that you make aren't applied until yo
 
 9.  In the **Select table** pane, select the dataset table that you want to add, and then click **Add** .
 
-10. Click edit **Edit primary key** .
+10. Click **Edit primary key** .
 
 11. Select the fields that you want to use as the primary keys, and then click **Add** .
 
@@ -119,7 +119,7 @@ To edit a node, follow these steps. Changes that you make aren't applied until y
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -131,9 +131,9 @@ To edit a node, follow these steps. Changes that you make aren't applied until y
 
 7.  In the graph, select the node that you want to edit.
 
-8.  In the **Node window** , click edit **Edit** .
+8.  In the **Node window** , click **Edit** .
 
-9.  In the **Edit node** panel, click edit **Edit primary key** .
+9.  In the **Edit node** panel, click **Edit primary key** .
 
 10. Select the fields that you want to use as the primary keys, and then click **Add** .
 
@@ -156,7 +156,7 @@ To remove a node, follow these steps. Changes that you make aren't applied until
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -168,7 +168,7 @@ To remove a node, follow these steps. Changes that you make aren't applied until
 
 7.  In the graph, select the node to remove.
 
-8.  In the **Node window** , click delete **Remove** .
+8.  In the **Node window** , click **Remove** .
 
 9.  Click **Delete** .
 
@@ -182,7 +182,7 @@ To add an edge, follow these steps. Changes that you make aren't applied until y
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -236,7 +236,7 @@ To edit an edge, follow these steps. Changes that you make aren't applied until 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -248,7 +248,7 @@ To edit an edge, follow these steps. Changes that you make aren't applied until 
 
 7.  In the graph, select the edge that you want to edit.
 
-8.  In the **Node window** , click edit **Edit** .
+8.  In the **Node window** , click **Edit** .
 
 9.  In the **Edit edge** panel, in the **Source node** list, select the node that you want to use as the source.
 
@@ -288,7 +288,7 @@ To remove an edge, follow these steps. Changes that you make aren't applied unti
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -300,7 +300,7 @@ To remove an edge, follow these steps. Changes that you make aren't applied unti
 
 7.  In the graph, select the edge to remove.
 
-8.  In the **Node window** , click delete **Remove** .
+8.  In the **Node window** , click **Remove** .
 
 9.  Confirm the deletion.
 
@@ -310,7 +310,7 @@ To save your modifications, publish them to the graph resource. Follow these ste
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the navigation pane, click explore **Explorer** :
+2.  In the navigation pane, click **Explorer** :
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 

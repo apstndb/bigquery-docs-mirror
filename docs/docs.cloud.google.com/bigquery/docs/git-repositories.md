@@ -103,11 +103,11 @@ To create a Git repository, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  Next to your user root node, click more_vert **View actions** \> **Create** \> **Git repository** .
+3.  Next to your user root node, click **View actions** \> **Create** \> **Git repository** .
 
 4.  Enter the URL for your remote Git repository.
 
@@ -135,7 +135,7 @@ Any changes you make are automatically saved.
 
 ## Manage files
 
-You can perform standard management tasks using the action menu associated with each item. To access these options, click more_vert **View actions** next to any directory or file.
+You can perform standard management tasks using the action menu associated with each item. To access these options, click **View actions** next to any directory or file.
 
 At the directory level, you can perform the following tasks:
 
@@ -160,11 +160,11 @@ To move a directory or file in a BigQuery Studio Git repository, do the followin
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
 3.  Depending on how many resources you want to move, do one of the following:
 
-    - To move a single resource, in the file browser, select the directory or file you want to move, and then click more_vert **View actions** \> **Move** .
+    - To move a single resource, in the file browser, select the directory or file you want to move, and then click **View actions** \> **Move** .
     - To move multiple resources, in the folder view, select the checkbox next to each resource that you want to move, and then click **Move** .
 
 4.  In the move resource dialog, select the target directory within the same Git repository. You can only move resources to locations within the same Git repository.
@@ -179,11 +179,11 @@ To copy a file in a BigQuery Studio Git repository, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
 3.  Select the file that you want to copy.
 
-4.  Click more_vert **View actions** \> **Copy** .
+4.  Click **View actions** \> **Copy** .
 
 5.  In the copy resource dialog, select the target directory within the same Git repository. You can only copy files to locations within the same Git repository.
 
@@ -195,11 +195,11 @@ To delete a directory or file in a BigQuery Studio Git repository, do the follow
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
 3.  Depending on how many resources you want to delete, do one of the following:
 
-    - To delete a single resource, in the file browser, select the directory or file you want to delete, and then click more_vert **View actions** \> **Delete** .
+    - To delete a single resource, in the file browser, select the directory or file you want to delete, and then click **View actions** \> **Delete** .
     - To delete multiple resources, in the folder view, select the checkbox next to each resource that you want to delete, and then click **Delete** .
 
 4.  In the delete confirmation dialog, click **Delete** .
@@ -210,7 +210,7 @@ To synchronize your local edits with your remote repository, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
 3.  Optional: Hover over a modified file and click **Show diff** to see a line-by-line comparison between your local version and the last committed version.
 
@@ -232,9 +232,9 @@ To check out a new branch, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-3.  In the **Branches** section, next to **Branches** , click more_vert **Actions \> Check out new branch** .
+3.  In the **Branches** section, next to **Branches** , click **Actions \> Check out new branch** .
 
 4.  In the **Source branch** menu, select the branch you want to base your new branch on, for example, `origin/main` .
 
@@ -247,7 +247,7 @@ To check out a new branch, do the following:
 To switch to an existing branch, do the following:
 
 1.  In the **Source control** panel, expand the **Branches** section.
-2.  Next to the branch you want to switch to, click more_vert **Actions** \> **Switch to ` BRANCH_NAME `** .
+2.  Next to the branch you want to switch to, click **Actions** \> **Switch to ` BRANCH_NAME `** .
 
 ## View commit history
 
@@ -257,15 +257,15 @@ To view the commit history, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
-3.  Next to the primary version control action button, click the expander_arrow arrow drop-down, and then click **View commit history** .
+3.  Next to the primary version control action button, click the arrow drop-down, and then click **View commit history** .
 
     The **Branch commit history** pane opens, displaying the commit history for your active branch.
 
 4.  Optional: To fetch commits from the remote repository, do one of the following:
 
-    - Next to the primary version control action button, click the expander_arrow arrow drop-down, and then click **Fetch from remote** .
+    - Next to the primary version control action button, click the arrow drop-down, and then click **Fetch from remote** .
     - In the **Branch commit history** pane, click **Fetch** .
 
     For shallow clone repositories, in the **Fetch (shallow clone)** dialog, in the **Additional commits to fetch** field, enter the number of additional commits to retrieve from the repository history.
@@ -286,8 +286,8 @@ To delete a Git repository, do the following:
 
 2.  Delete the repository using one of the following methods:
 
-    - To delete the repository from the file browser, in the left pane, click folder **Files** . Next to the Git repository that you want to delete, click more_vert **View actions** \> **Delete** .
-    - To delete the repository from the control panel, under the **Source control** panel header, click more_vert **Source control options** \> **Delete ` REPOSITORY_NAME `** .
+    - To delete the repository from the file browser, in the left pane, click **Files** . Next to the Git repository that you want to delete, click **View actions** \> **Delete** .
+    - To delete the repository from the control panel, under the **Source control** panel header, click **Source control options** \> **Delete ` REPOSITORY_NAME `** .
 
 3.  In the delete confirmation dialog, click **Delete** .
 

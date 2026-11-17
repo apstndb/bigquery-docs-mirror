@@ -42,7 +42,7 @@ To add a label to a dataset after it is created:
 
 1.  In the Google Cloud console, select the dataset.
 
-2.  Click the **Details** tab, and then click mode_edit **Edit details** .
+2.  Click the **Details** tab, and then click **Edit details** .
 
 3.  In the **Labels** section, click **Add labels** , and then enter a key and value in the **Key** and **Value** fields. To apply additional labels, click **Add labels** . Each key can be used only once per dataset, but you can use the same key in different datasets within the same project.
 
@@ -62,7 +62,7 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
       labels = [('sensitivity', 'high')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -298,7 +298,7 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
       labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -651,11 +651,11 @@ To add a label to a reservation:
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Edit** .
 
-7.  To expand the **Advanced settings** section, click the expand_more **expander arrow** .
+7.  To expand the **Advanced settings** section, click the **expander arrow** .
 
 8.  Click **Add Label** .
 
@@ -677,7 +677,7 @@ To add a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL st
       labels = [('sensitivity', 'high')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -709,7 +709,7 @@ To add a label without a value:
 
 2.  Open the **Edit details** pane:
 
-    - For a dataset, click the **Details** tab, and then click mode_edit **Edit details** .
+    - For a dataset, click the **Details** tab, and then click **Edit details** .
     - For a table or view, in the details pane, click **Edit \> Edit details** .
 
 3.  In the **Labels** section, click **Add labels** .
@@ -732,7 +732,7 @@ To add a label without a value, use the [`ALTER TABLE SET OPTIONS` DDL statement
       labels=[("key1", ""), ("key2", "")]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

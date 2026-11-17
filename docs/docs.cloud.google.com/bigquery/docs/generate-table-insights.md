@@ -429,7 +429,7 @@ To generate table and column descriptions, follow these steps:
 
         The column descriptions are updated immediately.
 
-6.  To close the preview panel, click close **Close** .
+6.  To close the preview panel, click **Close** .
 
 ## Best practices for generating data insights
 

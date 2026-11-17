@@ -35,7 +35,7 @@ To see the last metadata index refresh time of a table, query the `LAST_METADATA
     - `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
     - `REGION` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) where the project is located—for example, `region-us` .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 ## View column metadata index usage
 
@@ -78,7 +78,7 @@ After setting up your reservation, select one of the following methods to assign
 
 1.  In the Google Cloud console, go to the **Workload management** page.
 
-2.  Click more_vert **Reservation actions \> Create assignment** .
+2.  Click **Reservation actions \> Create assignment** .
 
 3.  Select your reservation project.
 
@@ -132,7 +132,7 @@ To assign a reservation to a project, use the [`CREATE ASSIGNMENT` DDL statement
     - `ASSIGNMENT_ID` : the ID of the assignment. The ID must be unique to the project and location, start and end with a lowercase letter or a number, and contain only lowercase letters, numbers, and dashes.
     - `PROJECT_ID` : the project ID containing the tables. This project is assigned to the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 ## View indexing job information
 

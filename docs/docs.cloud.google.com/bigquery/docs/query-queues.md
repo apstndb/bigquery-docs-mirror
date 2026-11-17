@@ -68,7 +68,7 @@ Select one of the following options:
 
 4.  Select your [reservation settings](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
 
-5.  To expand the **Advanced settings** section, click the expand_more expander arrow.
+5.  To expand the **Advanced settings** section, click the expander arrow.
 
 6.  To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -95,7 +95,7 @@ To set the maximum concurrency target for a new reservation, use the [`CREATE RE
     - `RESERVATION_NAME` : the name of the reservation
     - `CONCURRENCY` : the maximum concurrency target
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -153,11 +153,11 @@ Select one of the following options:
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Edit** .
 
-7.  To expand the **Advanced settings** section, click the expand_more expander arrow.
+7.  To expand the **Advanced settings** section, click the expander arrow.
 
 8.  To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -184,7 +184,7 @@ To update the maximum concurrency target for an existing reservation, use the [`
     - `RESERVATION_NAME` : the name of the reservation
     - `CONCURRENCY` : the maximum concurrency target
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

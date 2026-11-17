@@ -40,11 +40,11 @@ To update a model's description:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 
@@ -52,7 +52,7 @@ To update a model's description:
 
 5.  Click the **Details** tab.
 
-6.  To update the model's description, click **Edit** edit .
+6.  To update the model's description, click **Edit** .
 
 7.  In the **Edit detail** dialog, update the description and then click **Save** .
 
@@ -251,7 +251,7 @@ To update a model's labels:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -261,7 +261,7 @@ To update a model's labels:
 
 4.  Click the **Details** tab.
 
-5.  To update the model's labels, click **Edit** edit .
+5.  To update the model's labels, click **Edit** .
 
 6.  In the **Edit detail** dialog, add, delete, or modify labels, and then click **Save** .
 

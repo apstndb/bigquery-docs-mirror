@@ -79,15 +79,15 @@ Create a BigQuery dataset to contain your resources:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  Click **View actions \> Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -131,11 +131,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -176,7 +176,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -504,7 +504,7 @@ To grant the Agent Platform User role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
+2.  Click **Add** .
 
     The **Add principals** dialog opens.
 
@@ -535,11 +535,11 @@ To find the service account for the object table connection, follow these steps:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then select a dataset that contains the object table.
 
@@ -561,7 +561,7 @@ To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
+2.  Click **Add** .
 
     The **Add principals** dialog opens.
 

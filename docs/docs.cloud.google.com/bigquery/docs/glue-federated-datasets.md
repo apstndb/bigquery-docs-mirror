@@ -65,15 +65,15 @@ To create a federated dataset, do the following:
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, select the project where you want to create the dataset.
 
-4.  Click more_vert **View actions** , and then click **Create dataset** .
+4.  Click **View actions** , and then click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -117,7 +117,7 @@ Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](http
     - `AWS_GLUE_SOURCE` : the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html) of the AWS Glue database with a prefix identifying the source—for example, `aws-glue://arn:aws:glue:us-east-1:123456789:database/test_database` .
     - `LOCATION` : the location of your new dataset in BigQuery—for example, `aws-us-east-1` . After you create a dataset, you can't change its location.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

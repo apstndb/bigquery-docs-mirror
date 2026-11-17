@@ -194,9 +194,11 @@ Select one of the following:
 
 10. To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-11. To expand the **Advanced settings** section, click the expand_more expander arrow.
+11. To expand the **Advanced settings** section, click the expander arrow.
 
-12. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** . The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
+12. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on, and then enter a value for **Target Job Concurrency** .
+
+    The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 
 13. Click **Save** .
 
@@ -233,7 +235,7 @@ To create a reservation, use the [`CREATE RESERVATION` data definition language 
 
     - `SECONDARY_LOCATION` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -251,7 +253,7 @@ Select one of the following:
 
 4.  Find the reservation that you want to update.
 
-5.  Click more_vert **Reservations actions** , and then click **Edit** .
+5.  Click **Reservations actions** , and then click **Edit** .
 
 6.  In the **Secondary location** field, enter the secondary location.
 
@@ -279,7 +281,7 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
     - `RESERVATION_NAME` : the name of the reservation. The name must start and end with a lowercase letter or a number and contain only lowercase letters, numbers, and dashes.
     - `SECONDARY_LOCATION` : the secondary [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation. In the case of an outage, any datasets attached to this reservation will fail over to this location.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -287,7 +289,7 @@ For more information about how to run queries, see [Run an interactive query](ht
 
 To enable disaster recovery for the previously created reservation, complete the following steps. The dataset must already be configured for replication in the same primary and secondary regions as the reservation. For more information, see [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication#replicate_a_dataset) .
 
-> **Caution:** After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information see [Limitations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#limitations) .
+> **Caution:** After a dataset is attached to a failover reservation, only Enterprise Plus reservations can write to that dataset. You can read from datasets attached to a failover reservation with any capacity model. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery#limitations) .
 
 ### Console
 
@@ -299,9 +301,9 @@ To enable disaster recovery for the previously created reservation, complete the
 
 4.  Click the reservation that you want to attach a dataset to.
 
-5.  Click the **Disaster recovery** tab.
+5.  Click the **Connected failover datasets** tab.
 
-6.  Click **Add failover dataset** .
+6.  Click **Connect failover dataset** .
 
 7.  Enter the name of the dataset you want to associate with the reservation.
 
@@ -327,13 +329,13 @@ To attach a dataset to a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL st
     - `DATASET_NAME` : the name of the dataset.
     - `ADMIN_PROJECT_ID `` . `` RESERVATION_NAME` : the name of the reservation you want to associate the dataset to.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ## Detach a dataset from a reservation
 
-To stop managing the failover behavior of a dataset through a reservation, detach the dataset from the reservation. This doesn't change the current primary replica for the dataset nor does it remove any existing dataset replicas. For more information about removing dataset replicas after detaching a dataset, see [Remove dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
+To stop managing the failover behavior of a dataset through a reservation, detach the dataset from the reservation. This doesn't change the current primary replica for the dataset nor does it remove any existing dataset replicas. For more information about removing dataset replicas after detaching a dataset, see [Remove a dataset replica](https://docs.cloud.google.com/bigquery/docs/data-replication#remove_a_dataset_replica) .
 
 ### Console
 
@@ -343,11 +345,11 @@ To stop managing the failover behavior of a dataset through a reservation, detac
 
 3.  Click the reservation that you want to detach a dataset from.
 
-4.  Click the **Disaster recovery** tab.
+4.  Click the **Connected failover datasets** tab.
 
-5.  Expand the more_vert **Actions** option for the primary replica of the dataset.
+5.  In the row for the primary replica of the dataset, click **Disconnect** .
 
-6.  Click **Remove** .
+6.  In the **Remove failover dataset association?** dialog, click **Confirm** .
 
 ### SQL
 
@@ -368,7 +370,7 @@ To detach a dataset from a reservation, use the [`ALTER SCHEMA SET OPTIONS` DDL 
 
     - `DATASET_NAME` : the name of the dataset.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -384,9 +386,9 @@ In the event of a regional outage, you must manually failover your reservation t
 
 3.  Click the name of the reservation that you want to fail over to.
 
-4.  Select either **Hard failover mode (default)** or **Soft failover mode** .
+4.  Click **Failover** .
 
-5.  Click **Failover** .
+5.  In the **Failover reservation?** dialog, select either **Soft failover mode (default)** or **Hard failover mode** , enter `confirm` , and then click **Confirm** .
 
 ### SQL
 
@@ -411,7 +413,7 @@ To add or change a secondary location to a reservation, use the [`ALTER RESERVAT
     - `PRIMARY_STATUS` : a boolean status that declares whether the reservation is the primary replica.
     - `FAILOVER_MODE` : an optional parameter used to describe the failover mode. This can be set to either `HARD` or `SOFT` . If this parameter is not specified, `HARD` is used by default.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

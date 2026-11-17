@@ -80,7 +80,7 @@ To set IAM policies on a project, you must have the [Project IAM Admin role](htt
 
 1.  In the Google Cloud console, go to the **IAM** page.
 
-2.  Click person_add **Grant access** .
+2.  Click **Grant access** .
 
 3.  In the **New principals** field, enter the email address of the principal that you want to grant access to. You can specify any of the following principal types:
 
@@ -181,9 +181,9 @@ To grant roles for a data exchange, select one of the following options:
 
 3.  Click the **Details** tab.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter the email address of the principal that you want to grant access to. You can also use `allUsers` to make a resource public and accessible to everyone on the internet, or `allAuthenticatedUsers` to make it accessible only to signed-in Google users.
 
@@ -260,9 +260,9 @@ To grant roles for a listing, select one of the following options:
 
 3.  Click the listing that you want to set permissions for.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter the email address of the principal that you want to grant access to.
 

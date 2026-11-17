@@ -37,7 +37,7 @@ To set up VPC peering, you must create VPC peering from the BigQuery Data Transf
 
 1.  In the Google Cloud console, go to the **VPC Network Peering** page for your BigQuery Data Transfer Service connector project.
 
-2.  Click add **Create peering connection** .
+2.  Click **Create peering connection** .
 
 3.  In the **Name** field, enter a name for your peering configuration.
 
@@ -57,7 +57,7 @@ To create VPC peering in the Cloud SQL database project to the BigQuery Data Tra
 
 1.  In the Google Cloud console, go to the **VPC Network Peering** page for your Cloud SQL database project.
 
-2.  Click add **Create peering connection** .
+2.  Click **Create peering connection** .
 
 3.  In the **Name** field, enter a name for your peering configuration.
 
@@ -125,7 +125,7 @@ To create the network attachment in the BigQuery Data Transfer Service connector
 
 1.  In the Google Cloud console, go to the **Network attachments** page.
 
-2.  Click add **Create network attachment** .
+2.  Click **Create network attachment** .
 
 3.  Provide a name for the network attachment.
 

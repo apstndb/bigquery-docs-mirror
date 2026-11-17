@@ -58,13 +58,13 @@ Make sure that you have the following role or roles on the project: [BigQuery St
 
 2.  Select the project.
 
-3.  Click person_add **Grant access** .
+3.  Click **Grant access** .
 
 4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
 
 5.  Click **Select a role** , then search for the role.
 
-6.  To grant additional roles, click add **Add another role** and add each additional role.
+6.  To grant additional roles, click **Add another role** and add each additional role.
 
 7.  Click **Save** .
 
@@ -78,15 +78,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 

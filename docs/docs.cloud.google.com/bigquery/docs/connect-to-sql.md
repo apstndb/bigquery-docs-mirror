@@ -35,7 +35,7 @@ Select one of the following options to create a Cloud SQL connection:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
     The **Add data** dialog opens.
 
@@ -69,7 +69,7 @@ Select one of the following options to create a Cloud SQL connection:
 
     - For **Database password** , enter the password for the database.
 
-      - Optional: To see the password, click visibility_off **Show password** .
+      - Optional: To see the password, click **Show password** .
 
       > **Note:** If the same user credentials are valid for other databases in the external data source, that user can query those databases through the same connection resource.
 
@@ -203,7 +203,7 @@ You can grant the service agent associated with the connection the [Cloud SQL Cl
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Grant Access** .
+2.  Click **Grant Access** .
 
     The **Add principals** dialog opens.
 
@@ -246,11 +246,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Click your project, click **Connections** , and then select a connection.
 

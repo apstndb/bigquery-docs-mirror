@@ -66,7 +66,7 @@ Google Earth Engine publishes publicly available datasets that contain raster da
 
 1.  Go to the **Sharing (Analytics Hub)** page.
 
-2.  Click search **Search listings** .
+2.  Click **Search listings** .
 
 3.  In the **Search for listings** field, enter `"Google Earth Engine"` .
 

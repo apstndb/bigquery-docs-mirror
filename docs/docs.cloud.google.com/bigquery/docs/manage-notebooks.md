@@ -57,17 +57,17 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Find the notebook that you want to grant access to.
 
-5.  Click more_vert **Open actions** next to the notebook, and then click **Share** .
+5.  Click **Open actions** next to the notebook, and then click **Share** .
 
 6.  In the **Share permissions** pane, click **Add user/group** .
 
@@ -97,17 +97,17 @@ To run a notebook, users must have access to the data that the notebook accesses
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Find the notebook that you want to share. You can use the search feature or filters to find your notebook.
 
-5.  Click more_vert **View actions** next to the notebook, and then click **Share** \> **Copy link** .
+5.  Click **View actions** next to the notebook, and then click **Share** \> **Copy link** .
 
 6.  Share the link with other users.
 
@@ -126,11 +126,11 @@ To disable saving of output for a selected notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -162,13 +162,13 @@ To view a list of all notebooks in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click more_vert **View actions** next to **Notebooks** , and then do one of the following:
+3.  In the **Explorer** pane, click **View actions** next to **Notebooks** , and then do one of the following:
 
 - To open the list in the current tab, click **Show all** .
 - To open the list in a new tab, click **Show all in** \> **New tab** .
@@ -180,7 +180,7 @@ To view notebook metadata, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -208,13 +208,13 @@ To view notebook versions, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** . Click the name of the notebook you want to view version history for.
 
-4.  To see a list of the notebook versions in descending order by date, click schedule **Version history** .
+4.  To see a list of the notebook versions in descending order by date, click **Version history** .
 
 #### Compare notebook versions
 
@@ -222,7 +222,7 @@ To compare notebook versions, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -230,9 +230,9 @@ To compare notebook versions, follow these steps:
 
 4.  Click the name of the notebook that you want to compare version information for.
 
-5.  Click schedule **Version history** .
+5.  Click **Version history** .
 
-6.  Click more_vert **View actions** next to a notebook version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the current notebook version.
+6.  Click **View actions** next to a notebook version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the current notebook version.
 
 7.  Optional: To compare the versions inline instead of in separate panes, click **Compare** and then click **Inline** .
 
@@ -246,7 +246,7 @@ Restoring a notebook version from the comparison pane lets you compare the curre
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -254,9 +254,9 @@ Restoring a notebook version from the comparison pane lets you compare the curre
 
 4.  Click the name of the notebook that you want to restore a previous version of.
 
-5.  Click schedule **Version history** .
+5.  Click **Version history** .
 
-6.  Click more_vert **View actions** next to the version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the most recent notebook version.
+6.  Click **View actions** next to the version and then click **Compare** . The comparison pane opens, comparing the notebook version that you selected with the most recent notebook version.
 
 7.  If you want to restore the previous notebook version after comparison, click **Restore** .
 
@@ -268,7 +268,7 @@ To rename a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -288,7 +288,7 @@ To download a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -308,7 +308,7 @@ To delete a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -316,7 +316,7 @@ To delete a notebook, follow these steps:
 
 4.  Find the notebook that you want to delete.
 
-5.  Click more_vert **View actions** next to the notebook and then click **Delete** .
+5.  Click **View actions** next to the notebook and then click **Delete** .
 
 6.  To confirm deletion, type `delete` in the dialog.
 

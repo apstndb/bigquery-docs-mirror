@@ -126,7 +126,7 @@ To create a capacity commitment, use the [`CREATE CAPACITY` DDL statement](https
 
     - `RENEWAL_PLAN_TYPE` : the [renewal plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) . The options are `NONE` , `ANNUAL` or `THREE_YEAR` .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -209,7 +209,7 @@ To view the commitments for an administration project, query the [`INFORMATION_S
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitments
     - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the commitments
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -267,7 +267,7 @@ You can change your renewal plan for an annual commitment as follows:
 
 4.  Find the commitment you want to edit.
 
-5.  Click more_vert **Actions** , and then select the **Edit renewal plan** option.
+5.  Click **Actions** , and then select the **Edit renewal plan** option.
 
 6.  Select the new renewal plan.
 

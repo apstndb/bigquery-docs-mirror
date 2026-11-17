@@ -55,7 +55,7 @@ Select one of the following options:
 
 9.  To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-10. To expand the **Advanced settings** section, click the expand_more expander arrow.
+10. To expand the **Advanced settings** section, click the expander arrow.
 
 11. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -111,7 +111,7 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
 
     - `MAX_CONCURRENCY_PER_PROJECT` : the default limit on the number of simultaneous queries admitted for each project assigned to the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -340,7 +340,7 @@ To create a predictable reservation with a maximum number of slots, select one o
 
 8.  To disable [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) and use only the specified slot capacity, click the **Ignore idle slots** toggle.
 
-9.  To expand the **Advanced settings** section, click the expand_more expander arrow.
+9.  To expand the **Advanced settings** section, click the expander arrow.
 
 10. Optional: To set default project scheduling policies for the reservation, configure the following options:
 
@@ -430,7 +430,7 @@ To create a predictable reservation, use the [`CREATE RESERVATION` DDL statement
     - `MAX_SLOTS_PER_PROJECT` : the default limit on the slot consumption of queries running for each project assigned to the reservation.
     - `MAX_CONCURRENCY_PER_PROJECT` : the default limit on the number of simultaneous queries admitted for each project assigned to the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -605,7 +605,7 @@ You can add or remove slots from an existing reservation.
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Edit** .
 
@@ -613,7 +613,7 @@ You can add or remove slots from an existing reservation.
 
 8.  In the **Baseline slots** field, enter the number of baseline slots.
 
-9.  To expand the **Advanced settings** section, click the expand_more expander arrow.
+9.  To expand the **Advanced settings** section, click the expander arrow.
 
 10. Optional: To set the target job concurrency, click the **Override automatic target job concurrency** toggle to on and enter the **Target Job Concurrency** .
 
@@ -643,7 +643,7 @@ To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` da
     - `NUMBER_OF_BASELINE_SLOTS` : the number of baseline slots to allocate to the reservation.
     - `NUMBER_OF_AUTOSCALING_SLOTS` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -765,7 +765,7 @@ Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY
     - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resources
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservations
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -818,7 +818,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 4.  Find the reservation you want to delete.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Delete** .
 
@@ -843,7 +843,7 @@ To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
     - `RESERVATION_NAME` : the ID of the reservation
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -931,9 +931,9 @@ In the Google Cloud console, you can allow access to multiple reservation resour
 
     1.  On the **View by principals** tab, navigate to the appropriate principal or use the **Filter** option to find the principal.
 
-    2.  Click edit **Edit principal** .
+    2.  Click **Edit principal** .
 
-    3.  On the **Assign roles** page, click add **Add roles** .
+    3.  On the **Assign roles** page, click **Add roles** .
 
     4.  In the **Search for roles** field, enter `bigquery.resourceEditor` .
 
@@ -943,11 +943,11 @@ In the Google Cloud console, you can allow access to multiple reservation resour
 
 4.  Alternatively, to grant the `bigquery.resourceEditor` role to a principal who doesn't have a role on the reservation resources:
 
-    1.  Click person_add **Grant Access** .
+    1.  Click **Grant Access** .
 
     2.  On the **Add principals** page, in the **New principals** field, enter the principal's identifier — for example, `my-user@example.com` .
 
-    3.  Click add **Add roles** .
+    3.  Click **Add roles** .
 
     4.  In the **Search for roles** field, enter `bigquery.resourceEditor` .
 
@@ -1051,7 +1051,7 @@ To create a reservation group, use the `CREATE RESERVATION_GROUP` data definitio
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group.
     - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1170,7 +1170,7 @@ To add a reservation to a reservation group, update the `reservation_group` prop
 
 2.  In the navigation menu, click **Workload management** .
 
-3.  Expand the more_vert **Actions** option.
+3.  Expand the **Actions** option.
 
 4.  Click **Edit** .
 
@@ -1202,7 +1202,7 @@ To update the reservation and set the reservation group, use the [`ALTER RESERVA
     - `RESERVATION_NAME` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
     - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1274,7 +1274,7 @@ To remove a reservation from a reservation group, update the `reservation_group`
 
 2.  In the navigation menu, click **Workload management** .
 
-3.  Expand the more_vert **Actions** option.
+3.  Expand the **Actions** option.
 
 4.  Click **Edit** .
 
@@ -1290,7 +1290,7 @@ If the reservation to be removed is the last one in the group:
 
 2.  In the navigation menu, click **Workload management** .
 
-3.  Expand the more_vert **Actions** option.
+3.  Expand the **Actions** option.
 
 4.  Click **Edit** .
 
@@ -1319,7 +1319,7 @@ To remove the reservation from the reservation group, use the [`ALTER RESERVATIO
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation.
     - `RESERVATION_NAME` : the name of the reservation. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1353,7 +1353,7 @@ A reservation group can only be deleted if it does not contain any member reserv
 
 3.  Find the reservation group you want to delete. Ensure it has no reservations listed under it.
 
-4.  Expand the more_vert **Actions** option for the reservation group.
+4.  Expand the **Actions** option for the reservation group.
 
 5.  Click **Edit** .
 
@@ -1378,7 +1378,7 @@ To delete an empty reservation group, use the `DROP RESERVATION_GROUP` DDL state
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation group.
     - `RESERVATION_GROUP_NAME` : the name of the reservation group. The name can contain only lowercase alphanumeric characters or dashes, must start with a letter and must not end with a dash, and the maximum length is 64 characters.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -62,15 +62,15 @@ Create a BigQuery [dataset](https://docs.cloud.google.com/bigquery/docs/datasets
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  Click **View actions \> Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -95,7 +95,7 @@ Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs
 
     ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-3.  In the **Data** pane, click add **Add data** .
+3.  In the **Data** pane, click **Add data** .
 
     The **Add data** dialog opens.
 
@@ -130,7 +130,7 @@ Grant the connection's service account the Storage Object Viewer role:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
+2.  Click **Add** .
 
     The **Add principals** dialog opens.
 
@@ -213,7 +213,7 @@ Use the [`CREATE EXTERNAL TABLE` statement](https://docs.cloud.google.com/bigque
 
       You must set `CACHE_MODE` if `STALENESS_INTERVAL` is set to a value greater than 0.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

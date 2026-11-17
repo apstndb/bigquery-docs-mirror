@@ -91,13 +91,13 @@ In the Google Cloud console, they appear in the **(Classic) Queries** folder wit
 
 There are three types of classic saved queries:
 
-- **Personal** ( person ): visible only to the user who created them.
+- **Personal** ( ): visible only to the user who created them.
 
   - Note: If a personal query contains sensitive information, you must delete the query or remove the sensitive data prior to migration.
 
-- **Project-level** ( people ): visible to any principal with the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) .
+- **Project-level** ( ): visible to any principal with the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) .
 
-- **Public** ( share ): visible to anyone who has the link to the query.
+- **Public** ( ): visible to anyone who has the link to the query.
 
 ### IAM roles for migration and access
 

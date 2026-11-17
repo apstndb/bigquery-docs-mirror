@@ -117,7 +117,7 @@ You might also be able to get this permission with [custom roles](https://docs.c
 
 #### Enable compute cost attribution
 
-To enable compute cost attribution across your query projects, run the [`ALTER PROJECT SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options) data definition language (DDL) statement with the `reservation_attribution_mode` option.
+To enable compute cost attribution across your query projects, run the [`ALTER PROJECT SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) data definition language (DDL) statement with the `reservation_attribution_mode` option.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -135,7 +135,7 @@ To enable compute cost attribution across your query projects, run the [`ALTER P
     - `ADMIN_PROJECT_ID` : the project ID of your administration project.
     - `LOCATION` : the location of your reservation.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 After you enable compute cost attribution, shifts in cost allocation begin appearing in individual query projects on the next billing day (billing days start at 00:00 in the `America/Los_Angeles` time zone). The changes are also reflected in daily Cloud Billing reports within approximately one day.
 

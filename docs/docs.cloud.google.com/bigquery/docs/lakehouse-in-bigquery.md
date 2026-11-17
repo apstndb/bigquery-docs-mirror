@@ -23,7 +23,7 @@ The following are key differences between Lakehouse and standard BigQuery resour
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
 3.  Click the **Google Cloud Storage** data source card.
 
@@ -53,7 +53,7 @@ Instead of creating a table containing data, you can create an empty Lakehouse t
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
 3.  Click the **Google Cloud Storage** data source card.
 

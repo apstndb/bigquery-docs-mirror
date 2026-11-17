@@ -160,15 +160,15 @@ To create a one-time transfer, use the BigQuery copy function:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click content_copy **Copy** , and then do the following:
+4.  In the **Dataset info** section, click **Copy** , and then do the following:
 
     1.  In the **Dataset** field, either create a new dataset or select an existing dataset ID from the list.
 
@@ -424,7 +424,7 @@ To see the status and view details of a dataset copy job in the Google Cloud con
 
     1.  On the **Transfer details** page, select a transfer run.
 
-    2.  To refresh, click refresh **Refresh** .
+    2.  To refresh, click **Refresh** .
 
 ## Recreate datasets in another location
 
@@ -466,13 +466,13 @@ To delete a dataset, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 
-4.  In the details pane, click delete **Delete** .
+4.  In the details pane, click **Delete** .
 
 5.  In the **Delete dataset** dialog, type `delete` into the field, and then click **Delete** .
 
@@ -500,7 +500,7 @@ The following example deletes a dataset named `mydataset` :
     DROP SCHEMA IF EXISTS mydataset CASCADE;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

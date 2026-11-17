@@ -42,11 +42,11 @@ You can delete a table snapshot by using one of the following options:
 
 <!-- -->
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Image of the highlighted Explorer pane button.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
 
@@ -74,7 +74,7 @@ Use the [`DROP SNAPSHOT TABLE` DDL statement](https://docs.cloud.google.com/bigq
     - `DATASET_NAME` : the name of the dataset that contains the snapshot.
     - `SNAPSHOT_NAME` : the name of the snapshot.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

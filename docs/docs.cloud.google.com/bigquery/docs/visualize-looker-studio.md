@@ -26,17 +26,17 @@ You can construct an arbitrary SQL query and visualize the data in Data Studio. 
 
 2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 4.  In the **Explorer** pane, enter `bikeshare_trips` in the search field.
 
 5.  Go to **bigquery-public-data \> austin_bikeshare \> bikeshare_trips** .
 
-6.  Click more_vert **View actions** , and then click **Query** .
+6.  Click **View actions** , and then click **Query** .
 
 7.  In the query editor, construct your query. For example:
 
@@ -49,7 +49,7 @@ You can construct an arbitrary SQL query and visualize the data in Data Studio. 
       1000;
     ```
 
-8.  Click play_circle **Run** .
+8.  Click **Run** .
 
 9.  In the **Query results** section, click **Open in** \> **Data Studio** .
 
@@ -92,7 +92,7 @@ Data Studio charts are interactive. Now that your data is displayed in Data Stud
 
 Data Studio supports many different visualization types. To add more charts to the report, follow these steps:
 
-1.  In the toolbar, click add_chart **Add a chart** .
+1.  In the toolbar, click **Add a chart** .
 2.  Select the chart you want to add.
 3.  Click the canvas to add the chart to the report.
 4.  Use the **Chart** properties pane to configure the chart.
@@ -109,7 +109,7 @@ You can export table schema to see the metadata of your data in Data Studio. Thi
 
 2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -117,7 +117,7 @@ You can export table schema to see the metadata of your data in Data Studio. Thi
 
 5.  Go to **bigquery-public-data \> austin_bikeshare \> bikeshare_trips** .
 
-6.  In the toolbar, click file_upload **Export** . If Export is not visible, select more_vert **More actions** , and then click **Export** .
+6.  In the toolbar, click **Export** . If Export is not visible, select **More actions** , and then click **Export** .
 
 7.  Click **Explore with Data Studio** .
 
@@ -129,7 +129,7 @@ You can share reports with others by sending them an email invitation to visit D
 
 To share a report with another person, follow these steps:
 
-1.  In the **Data Studio** page header, click person_add **Share** .
+1.  In the **Data Studio** page header, click **Share** .
 2.  In the **Sharing with others** dialog, type the recipient's email address. You can enter multiple email addresses or Google Group addresses.
 3.  Specify whether recipients can view or edit the report.
 4.  Click **Send** .

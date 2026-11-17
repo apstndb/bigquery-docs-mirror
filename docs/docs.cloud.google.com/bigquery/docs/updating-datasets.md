@@ -48,15 +48,15 @@ To update a dataset's description:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
-3.  In the **Details** pane, click mode_edit **Edit details** to edit the description text.
+3.  In the **Details** pane, click **Edit details** to edit the description text.
 
     In the **Edit details** dialog that appears, do the following:
 
@@ -79,7 +79,7 @@ The following example sets the description on a dataset named `mydataset` :
          description = 'Description of mydataset');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -283,13 +283,13 @@ To update the default expiration time for a dataset:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
-3.  In the **Details** tab, click mode_edit **Edit details** to edit the expiration time.
+3.  In the **Details** tab, click **Edit details** to edit the expiration time.
 
 4.  In the **Edit details** dialog, in the **Default table expiration** section, select **Enable table expiration** and enter a value for **Default maximum table age** .
 
@@ -311,7 +311,7 @@ The following example updates the default table expiration for a dataset named `
          default_table_expiration_days = 3.75);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -551,7 +551,7 @@ The following example updates the default partition expiration for a dataset nam
          default_partition_expiration_days = 3.75);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -616,13 +616,13 @@ To update the time travel window for a dataset:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
-3.  In the **Details** tab, click mode_edit **Edit details** .
+3.  In the **Details** tab, click **Edit details** .
 
 4.  Expand **Advanced options** , then select the **Time travel window** to use.
 
@@ -647,7 +647,7 @@ Use the [`ALTER SCHEMA SET OPTIONS`](https://docs.cloud.google.com/bigquery/docs
     - `DATASET_NAME` : the name of the dataset that you're updating
     - `HOURS` with the time travel window's duration in hours.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -681,13 +681,13 @@ Once you change a dataset's storage billing model, you must wait 14 days before 
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
-3.  In the **Details** tab, click mode_edit **Edit details** .
+3.  In the **Details** tab, click **Edit details** .
 
 4.  Expand **Advanced options** .
 
@@ -714,7 +714,7 @@ To update the billing model for a dataset, use the [`ALTER SCHEMA SET OPTIONS` s
     - `DATASET_NAME` with the name of the dataset that you are changing
     - `BILLING_MODEL` with the type of storage you want to use, either `LOGICAL` or `PHYSICAL`
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

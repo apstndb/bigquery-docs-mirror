@@ -317,13 +317,13 @@ Select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, navigate to the project and dataset where you want to create the materialized view replica, and then click more_vert **Actions \> Create table** .
+3.  In the **Explorer** pane, navigate to the project and dataset where you want to create the materialized view replica, and then click **Actions \> Create table** .
 
 4.  In the **Source** section of the **Create table** dialog, do the following:
 

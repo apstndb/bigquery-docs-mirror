@@ -96,7 +96,7 @@ To create a reservation, use the [`CREATE RESERVATION` DDL statement](https://do
 
     - `NUMBER_OF_AUTOSCALING_SLOTS` : the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -213,7 +213,7 @@ You can add or remove slots from an existing reservation.
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Edit** .
 
@@ -249,7 +249,7 @@ To change the size of a reservation, use the [`ALTER RESERVATION SET OPTIONS` da
 
     - `NUMBER_OF_BASELINE_SLOTS` : the number of baseline slots to allocate to the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -369,7 +369,7 @@ Query the `ignore_idle_slots` column of the [`INFORMATION_SCHEMA.RESERVATIONS_BY
     - `ADMIN_PROJECT_ID` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation resources
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservations
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -420,7 +420,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 4.  Find the reservation you want to delete.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Delete** .
 
@@ -445,7 +445,7 @@ To delete a reservation, use the [`DROP RESERVATION` DDL statement](https://docs
     - `LOCATION` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the reservation
     - `RESERVATION_NAME` : the ID of the reservation
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

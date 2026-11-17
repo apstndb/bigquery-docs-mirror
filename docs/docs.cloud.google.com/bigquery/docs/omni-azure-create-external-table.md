@@ -39,11 +39,11 @@ Before you create an external table, you need to create a dataset in the [suppor
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, select the project where you want to create the dataset.
 
-4.  Click more_vert **View actions** , and then click **Create dataset** .
+4.  Click **View actions** , and then click **Create dataset** .
 
 5.  On the **Create dataset** page, specify the following details:
     1.  For **Dataset ID** enter a unique dataset [name](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming) .
@@ -66,7 +66,7 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
       location = 'azure-eastus2');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -102,15 +102,15 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section, do the following:
 
@@ -170,7 +170,7 @@ To create a BigLake table, use the [`CREATE EXTERNAL TABLE`](https://docs.cloud.
     - `CONTAINER_NAME` : the name of the Blob Storage container
     - `FILE_PATH` : the data path that points to the Blob Storage data
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -246,11 +246,11 @@ To create a BigLake table based on Hive partitioned data, select one of the foll
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -341,7 +341,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
       - `azure://mystorageaccount.blob.core.windows.net/mycontainer/*.parquet`
     - `TABLE_FORMAT` : the format of the table that you want to create—for example, `PARQUET`
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -598,7 +598,7 @@ To query `JOBS_*` and `RESERVATION*` system tables, select one of the following 
 
 1.  Go to the **BigQuery** page.
 
-2.  If the **Editor** tab isn't visible, then click add_box **Compose new query** .
+2.  If the **Editor** tab isn't visible, then click **Compose new query** .
 
 3.  Click **Edit** \> **Query settings** . The **Query settings** dialog opens.
 

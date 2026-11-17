@@ -1308,7 +1308,7 @@ Alternatively, you can delete a scheduled query on the **Scheduling** page of th
 
 1.  In the navigation menu, click **Scheduling** .
 
-2.  In the list of scheduled queries, click the more_vert **Actions** menu for the scheduled query that you want to delete.
+2.  In the list of scheduled queries, click the **Actions** menu for the scheduled query that you want to delete.
 
 3.  Select **Delete** .
 
@@ -1395,13 +1395,13 @@ To disable a schedule for a selected query, follow these steps:
 
 1.  In the navigation menu of the Google Cloud console, click **Scheduling** .
 
-2.  In the list of scheduled queries, click the more_vert **Actions** menu for the scheduled query that you want to disable.
+2.  In the list of scheduled queries, click the **Actions** menu for the scheduled query that you want to disable.
 
 3.  Select **Disable** .
 
     ![Disable a scheduled query on the Scheduling page.](https://docs.cloud.google.com/static/bigquery/images/disable-scheduled-query-scheduling-page.png)
 
-To enable a disabled scheduled query, click the more_vert **Actions** menu for the scheduled query that you want to enable and select **Enable** .
+To enable a disabled scheduled query, click the **Actions** menu for the scheduled query that you want to enable and select **Enable** .
 
 ## Quotas
 

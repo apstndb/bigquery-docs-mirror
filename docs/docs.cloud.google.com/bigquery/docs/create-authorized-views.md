@@ -56,13 +56,13 @@ To create your source dataset, choose one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, beside the project where you want to create the dataset, click more_vert **View actions** \> **Create dataset** .
+3.  In the **Explorer** pane, beside the project where you want to create the dataset, click **View actions** \> **Create dataset** .
 
 4.  On the **Create dataset** page, do the following:
 
@@ -86,7 +86,7 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
     CREATE SCHEMA github_source_data;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -219,13 +219,13 @@ To create a dataset to store your view, choose one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, select the project where you want to create the dataset.
 
-4.  Expand the more_vert **View actions** option and click **Create dataset** .
+4.  Expand the **View actions** option and click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -249,7 +249,7 @@ Use the [`CREATE SCHEMA` DDL statement](https://docs.cloud.google.com/bigquery/d
     CREATE SCHEMA shared_views;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -341,7 +341,7 @@ Use the [`CREATE VIEW` DDL statement](https://docs.cloud.google.com/bigquery/doc
 
     Replace `PROJECT_ID` with your project ID.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -398,7 +398,7 @@ To assign the data analysts group to the `bigquery.user` role on the project the
 
 2.  Ensure that the project your analysts use to run their jobs is selected in the project selector.
 
-3.  Click person_add **Grant access** .
+3.  Click **Grant access** .
 
 4.  In the **Grant access to** dialog, do the following:
 
@@ -420,13 +420,13 @@ To give your data analysts `bigquery.dataViewer` access to the dataset that cont
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click **Datasets** , and then select the `shared_views` dataset to open the **Details** tab.
 
-4.  Click person_add **Sharing** \> **Permissions** .
+4.  Click **Sharing** \> **Permissions** .
 
 5.  In the **Share permissions** pane, click **Add principal** .
 
@@ -479,7 +479,7 @@ To grant the authorized view access the source data, choose one of these options
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -542,7 +542,7 @@ To verify the configuration, a data analyst should run the following query:
 
     Replace `PROJECT_ID` with your project ID.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 The query results are similar to the following. Only the author name and committer name are visible in the results.
 

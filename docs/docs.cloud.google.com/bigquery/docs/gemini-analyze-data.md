@@ -150,7 +150,7 @@ To prompt Gemini in BigQuery to generate a query that lists your top products, f
 
 2.  In the navigation menu, click **Studio** .
 
-3.  Click add_box **SQL query** . The **Explorer** pane automatically loads the selected database.
+3.  Click **SQL query** . The **Explorer** pane automatically loads the selected database.
 
 4.  In the query editor, enter the following prompt, and then press <span class="kbd"> Enter </span> :
 

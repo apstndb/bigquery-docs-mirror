@@ -99,7 +99,7 @@ After you create an agent, you can [edit its settings](https://docs.cloud.google
 
 7.  In the **Recents** section, select any tables, views, graphs, or UDFs that you want to use as knowledge sources. UDFs are prefixed with an 'fx' indicator in the Google Cloud console.
 
-8.  To view additional knowledge sources, select keyboard_arrow_down **Show more** .
+8.  To view additional knowledge sources, select **Show more** .
 
 9.  Optional: Add a knowledge source that isn't listed in the **Recents** section:
 
@@ -281,7 +281,7 @@ The following instructions use a sample verified query to configure with paramet
 
 1.  In the **Verified Queries** section of a new or existing agent, click **Review suggestions** . The **Review suggested verified queries** page opens.
 2.  Select the checkbox next to a suggested verified query.
-3.  In the query window, click keyboard_arrow_down **Show more** to expand the query description.
+3.  In the query window, click **Show more** to expand the query description.
 4.  To open the existing query, click **Edit** .
 5.  To finish configuring the query, see [Configure the parameters for the verified query](https://docs.cloud.google.com/bigquery/docs/create-data-agents#configure-query-parameters) .
 
@@ -417,7 +417,7 @@ Continue to the next section to place the agent in draft mode or publish the age
 
 2.  Click **Save** .
 
-3.  To place the data agent in draft mode, which you can re-edit later, click arrow_back **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My draft agents** section on the **Agent Catalog** tab.
+3.  To place the data agent in draft mode, which you can re-edit later, click **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My draft agents** section on the **Agent Catalog** tab.
 
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
@@ -461,7 +461,7 @@ Follow these steps to edit a data agent:
 
 3.  Locate the agent card of the data agent that you want to modify.
 
-4.  To open the data agent in the agent editor, click more_vert **Open actions** \> click **Edit** on the agent card.
+4.  To open the data agent in the agent editor, click **Open actions** \> click **Edit** on the agent card.
 
 5.  Edit the data agent's configuration as needed.
 
@@ -469,7 +469,7 @@ Follow these steps to edit a data agent:
 
 7.  To publish your changes, click **Publish** . In the **Share** dialog, you can either [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with others, or click **Cancel** .
 
-8.  To return to the **Agents** pane, click arrow_back **Go back** .
+8.  To return to the **Agents** pane, click **Go back** .
 
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
@@ -483,7 +483,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 3.  Locate the agent card of the data agent that you want to modify.
 
-4.  To open the data agent in the agent editor, click more_vert **Open actions** \> click **Edit** on the agent card.
+4.  To open the data agent in the agent editor, click **Open actions** \> click **Edit** on the agent card.
 
 5.  To share the data agent with other users, click **Share** .
 
@@ -503,7 +503,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 11. To return to the agent editing page, click **Close** .
 
-12. To return to the **Agents** pane, click arrow_back **Go back** .
+12. To return to the **Agents** pane, click **Go back** .
 
     ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
@@ -515,7 +515,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 3.  In either the **My agents** or **My draft agents** section of the **Agent Catalog** tab, locate the agent card of the data agent that you want to delete.
 
-4.  Click more_vert **Open actions** \> **Delete** .
+4.  Click **Open actions** \> **Delete** .
 
 5.  In the **Delete agent?** dialog, click **Delete** .
 
@@ -537,8 +537,8 @@ You can share agents with Data Studio users directly by copying a link that open
 
 To share a direct link to the agent, you can copy the agent's dedicated URL in these ways:
 
-- From the agent catalog: Select more_vert **Open actions** \> select **Copy link** \> select **Data Studio** .
-- From the agent details view: Select content_copy **Copy agent link** \> select **Data Studio** .
+- From the agent catalog: Select **Open actions** \> select **Copy link** \> select **Data Studio** .
+- From the agent details view: Select **Copy agent link** \> select **Data Studio** .
 - From the **Share** overflow menu: Select **Copy link to agent in Data Studio** .
 - After clicking **Save** from the **Share permissions** panel: Select **Copy link** .
 
@@ -604,7 +604,7 @@ Follow these steps to import the registered agent:
     3.  For **Region** , select the region that matches your data agent and Agent Gateway configuration.
     4.  Select **Paste JSON** , paste the A2A endpoint JSON data from BigQuery, and then click **Save** .
 2.  In Gemini Enterprise, click the name of the app where you want to add the agent.
-3.  In the navigation menu, click **Agents** \> click add **Add agent** .
+3.  In the navigation menu, click **Agents** \> click **Add agent** .
 4.  In the **Choose an agent type** pane, locate **Agents from Agent Registry** and click **Add** .
 5.  In the **Add agent** pane, search for the agent by name, Agent Registry ID, type, producer, or use case, or locate the agent card in the list.
 6.  On the agent card, click **Add agent** .
@@ -625,7 +625,7 @@ Follow these steps to import the registered agent:
 If BigQuery and Gemini Enterprise are in different projects, follow these steps to import the agent using the A2A card JSON:
 
 1.  In Gemini Enterprise, click the name of the app where you want to add the agent.
-2.  In the navigation menu, click **Agents** \> click add **Add agent** .
+2.  In the navigation menu, click **Agents** \> click **Add agent** .
 3.  In the **Choose an agent type** pane, locate **Custom agent via A2A** and click **Add** .
 4.  In the **Agent card JSON** field, enter the agent card JSON received from the data analyst.
 5.  Click **Preview agent details** \> click **Next** .

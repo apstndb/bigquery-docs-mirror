@@ -166,7 +166,7 @@ To create a BigQuery Data Transfer Service data transfer for Google Ad Manager:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create a transfer** .
+2.  Click **Create a transfer** .
 
 3.  On the **Create Transfer** page:
 

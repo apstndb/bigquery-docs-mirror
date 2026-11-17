@@ -64,7 +64,7 @@ Create and populate an `ObjectRef` column based on output from the `OBJ.MAKE_REF
 
       The connection must be in the same project and region as the query where you are calling the function.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -92,7 +92,7 @@ Create and populate an `ObjectRef` column based on data from an object table `re
     - `TABLE_NAME` : the name of the standard table that you are recreating.
     - `OBJECT_TABLE` : the name of the object table that contains the object data that you want to integrate into the standard table.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -129,7 +129,7 @@ Update an `ObjectRef` column by using data from an object table `ref` column:
     - `TABLE_NAME` : the name of the standard table that you are recreating.
     - `OBJECT_TABLE` : the name of the object table that contains the same object data as the standard table `ObjectRef` column.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -161,7 +161,7 @@ Update an `ObjectRef` column by using output from the `OBJ.FETCH_METADATA` and `
 
       The connection must be in the same project and region as the query where you are calling the function.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

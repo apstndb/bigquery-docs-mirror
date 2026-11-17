@@ -8,7 +8,7 @@ data_source: docs.cloud.google.com
 
 # Cross-region dataset replication
 
-With BigQuery dataset replication, you can set up automatic replication of a dataset between two different regions or multi-regions.
+You can use cross-region dataset replication in BigQuery to automatically replicate your datasets between two different regions or multi-regions. Creating these secondary replicas helps you enhance your data availability, ensure geo-redundancy, and protect your data warehouse against regional outages.
 
 ## Overview
 
@@ -267,7 +267,7 @@ To remove a replica and stop replicating the dataset, select one of the followin
 
 4.  Click the **Details** tab.
 
-5.  In the **Replicas** section, find the replica that you want to remove, click more_vert **More actions** , and then click **Delete** .
+5.  In the **Replicas** section, find the replica that you want to remove, click **More actions** , and then click **Delete** .
 
 6.  In the **Delete dataset replica?** dialog, type `delete` in the text field, and then click **Delete** .
 

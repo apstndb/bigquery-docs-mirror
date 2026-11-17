@@ -32,7 +32,7 @@ Select one of the following options:
 
 1.  In the navigation menu, click **Studio** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -58,7 +58,7 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/big
     - `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
     - `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `us` .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -342,7 +342,7 @@ Select one of the following options:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -374,7 +374,7 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA` view](https://docs.cloud.google.com/big
     - `PROJECT_ID` : the ID of your Google Cloud project. If not specified, the default project is used.
     - `REGION` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `us` .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

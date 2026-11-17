@@ -81,7 +81,7 @@ By default, a node or edge displays its first property. If you want a node or ed
 
 2.  In the schema visualization, click a node of the type you want to update.
 
-3.  In the detail panel that appears for the selected node, click tune **Node display options** .
+3.  In the detail panel that appears for the selected node, click **Node display options** .
 
 4.  Click a color. All nodes in your query results that are of the type of node you selected display with the color you choose.
 

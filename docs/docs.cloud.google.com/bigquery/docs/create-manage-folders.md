@@ -83,11 +83,11 @@ Follow these steps to view folders and code assets in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Do one of the following to view folders and code assets in the selected project and code region:
 
@@ -109,11 +109,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -127,13 +127,13 @@ To ensure that any recent changes made by you or shared by others are visible in
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder that you want to refresh, such as your user root node, a team folder root, or an individual folder.
 
-4.  Click more_vert **View actions** \> **Refresh contents** .
+4.  Click **View actions** \> **Refresh contents** .
 
 ## Create a folder or code asset
 
@@ -149,13 +149,13 @@ Follow these steps to create a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the user root node or the folder in which you want to create the resource.
 
-4.  Click more_vert **View actions** \> **Create** , and then select the type of resource that you want to create.
+4.  Click **View actions** \> **Create** , and then select the type of resource that you want to create.
 
 5.  In the create resource pane, type a name for the new resource.
 
@@ -167,13 +167,13 @@ Follow these steps to create a team folder in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the team folder root node.
 
-4.  Click more_vert **View actions** \> **Create team folder** .
+4.  Click **View actions** \> **Create team folder** .
 
 5.  In the **Create team folder** dialog, type a name for the team folder.
 
@@ -185,13 +185,13 @@ Follow these steps to upload a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder to which you want to upload the code asset.
 
-4.  Click more_vert **View actions** \> **Upload** , and then select the type of code asset that you want to upload.
+4.  Click **View actions** \> **Upload** , and then select the type of code asset that you want to upload.
 
 5.  In the upload resource pane, do one of the following:
 
@@ -212,13 +212,13 @@ Follow these steps to download a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the code asset that you want to download.
 
-4.  Click more_vert **View actions** \> **Download** .
+4.  Click **View actions** \> **Download** .
 
 ## Rename a folder or code asset
 
@@ -226,13 +226,13 @@ Follow these steps to rename a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to rename.
 
-4.  Click more_vert **View actions** \> **Rename** .
+4.  Click **View actions** \> **Rename** .
 
 5.  In the resource renaming dialog, type a new name for the resource.
 
@@ -244,7 +244,7 @@ Follow these steps to share a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
@@ -280,13 +280,13 @@ Follow these steps to move a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Depending on how many resources you want to move, do one of the following:
 
-    - **Move a single resource** : In the file browser, select the folder or code asset you want to move, and then click more_vert **View actions** \> **Move** .
+    - **Move a single resource** : In the file browser, select the folder or code asset you want to move, and then click **View actions** \> **Move** .
     - **Move multiple resources** : In the folder view, select the checkbox next to each resource that you want to move, and then click **Move** .
 
 4.  In the move resource dialog, select the user folder or team folder to which you want to move the resource.
@@ -301,13 +301,13 @@ Follow these steps to copy a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the code asset that you want to copy.
 
-4.  Click more_vert **View actions** \> **Copy** .
+4.  Click **View actions** \> **Copy** .
 
 5.  In the copy resource dialog, select the user or team folder to which you want to copy the resource.
 
@@ -319,13 +319,13 @@ Follow these steps to delete a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Depending on how many resources you want to delete, do one of the following:
 
-    - **Delete a single resource** : In the file browser, select the folder or code asset you want to delete, and then click more_vert **View actions** \> **Delete** .
+    - **Delete a single resource** : In the file browser, select the folder or code asset you want to delete, and then click **View actions** \> **Delete** .
     - **Delete multiple resources** : In the folder view, select the checkbox next to each resource you want to delete, and then click **Delete** .
 
 4.  In the delete resource dialog, click **Delete** .

@@ -50,11 +50,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -76,17 +76,17 @@ You can run a SQL query and then use a notebook to explore the data. This approa
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
-3.  Go to the `bigquery-public-data` project, click arrow_right **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
+3.  Go to the `bigquery-public-data` project, click **Toggle node** to expand it, and then click **Datasets** . A new tab opens in the details pane that shows a list of all the datasets in the project.
 
-4.  In the filter_list **Filter** box, choose **Dataset ID** and enter **ml_datasets** .
+4.  In the **Filter** box, choose **Dataset ID** and enter **ml_datasets** .
 
     ![The Filter field on the Datasets page](https://docs.cloud.google.com/bigquery/images/public-dataset-filter.png)
 
 5.  On the **Datasets** page, click **ml_datasets \> penguins** .
 
-6.  Click search **Query** .
+6.  Click **Query** .
 
 7.  Add an asterisk ( `*` ) for field selection to the generated query, so that it looks like the following example:
 
@@ -94,7 +94,7 @@ You can run a SQL query and then use a notebook to explore the data. This approa
     SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
     ```
 
-8.  Click play_circle **Run** .
+8.  Click **Run** .
 
 9.  In the **Query results** section, click **Open in** , and then click **Notebook** .
 
@@ -104,11 +104,11 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 
 1.  In the notebook header, click **Connect** to [connect to the default runtime](https://docs.cloud.google.com/bigquery/docs/create-notebooks#connect_to_the_default_runtime) .
 
-2.  In the **Setup** code block, click play_circle **Run cell** .
+2.  In the **Setup** code block, click **Run cell** .
 
 ## Explore the data
 
-1.  Click arrow_drop_down **Insert code cell options \> Add SQL cell** .
+1.  Click **Insert code cell options \> Add SQL cell** .
 
     ![The Add SQL cell option in the Insert code cell menu](https://docs.cloud.google.com/bigquery/images/add-sql-cell-option.png)
 
@@ -118,7 +118,7 @@ Prepare the notebook for use by connecting to a runtime and setting application 
     SELECT * FROM `bigquery-public-data.ml_datasets.penguins` LIMIT 1000;
     ```
 
-3.  Click play_circle **Run cell** .
+3.  Click **Run cell** .
 
     The query results are displayed in a [BigQuery DataFrame](https://docs.cloud.google.com/bigquery/docs/reference/bigquery-dataframes) .
 
@@ -126,7 +126,7 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 
     1.  Go to the **Result set loaded from BigQuery job as a DataFrame** section.
 
-    2.  In the code block, click play_circle **Run cell** .
+    2.  In the code block, click **Run cell** .
 
         The query results are displayed in a BigQuery DataFrame.
 
@@ -134,7 +134,7 @@ Prepare the notebook for use by connecting to a runtime and setting application 
 
     1.  Go to the **Show descriptive statistics using describe()** section.
 
-    2.  In the code block, click play_circle **Run cell** .
+    2.  In the code block, click **Run cell** .
 
         The results are displayed in a BigQuery DataFrame.
 

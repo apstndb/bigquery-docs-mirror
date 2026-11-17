@@ -65,7 +65,7 @@ In the **Query editor** field, enter a GoogleSQL export query. GoogleSQL is the 
 
     - `QUERY` : the query to analyze the data that is stored in a BigLake table. The dataset that contains the BigLake table used in the query must be located in the same [Amazon S3 region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) as the target Amazon S3 bucket.
 
-    - Click play_circle **Run** .
+    - Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

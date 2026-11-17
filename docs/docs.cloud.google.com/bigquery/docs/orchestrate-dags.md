@@ -73,7 +73,7 @@ To manually trigger a selected Airflow DAG, follow these steps:
 
     - Click the name of the selected DAG, and then on the **DAG details** page, click **Trigger DAG** .
 
-    - In the row that contains the selected DAG, click more_vert **View actions** in the **Actions** column, and then click **Trigger DAG** .
+    - In the row that contains the selected DAG, click **View actions** in the **Actions** column, and then click **Trigger DAG** .
 
 ## View Airflow DAG run logs and details
 
@@ -89,7 +89,7 @@ To view details of a selected Airflow DAG, follow these steps:
 
     1.  Optional: The **Runs** tab displays DAG runs from the last 10 days by default. To filter DAG runs by a different time range, in the **10 days** drop-down menu, select a time range, and then click **OK** .
 
-    2.  Optional: To display additional columns with DAG run details in the list of all DAG runs, click view_column **Column display options** , and then select columns and click **OK** .
+    2.  Optional: To display additional columns with DAG run details in the list of all DAG runs, click **Column display options** , and then select columns and click **OK** .
 
     3.  To view details and logs for a selected DAG run, select a DAG run.
 
@@ -107,7 +107,7 @@ To view Airflow DAGs from all Managed Airflow 3 environments in your Google Clou
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  Optional: To display additional columns with DAG details, click view_column **Column display options** , and then select columns and click **OK** .
+2.  Optional: To display additional columns with DAG details, click **Column display options** , and then select columns and click **OK** .
 
 ## Pause an Airflow DAG
 
@@ -119,7 +119,7 @@ To pause a selected Airflow DAG, follow these steps:
 
     - Click the name of the selected DAG, and then on the **DAG details** page, click **Pause DAG** .
 
-    - In the row that contains the selected DAG, click more_vert **View actions** in the **Actions** column, and then click **Pause DAG** .
+    - In the row that contains the selected DAG, click **View actions** in the **Actions** column, and then click **Pause DAG** .
 
 ## Troubleshooting
 

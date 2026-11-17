@@ -245,11 +245,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -290,7 +290,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -610,7 +610,7 @@ To grant roles, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Add** .
+2.  Click **Add** .
 
     The **Add principals** dialog opens.
 
@@ -649,7 +649,7 @@ Run the following [`CREATE FUNCTION`](https://docs.cloud.google.com/bigquery/doc
     - `DATASET_ID` : the ID of your BigQuery dataset.
     - `ENDPOINT_URL` : a URL of your Cloud Run function or Cloud Run remote function endpoint. Remote functions support a custom path in the endpoint URL (see [custom path limitations](https://docs.cloud.google.com/bigquery/docs/remote-functions#custom-path-limitations) ). Different remote functions can be created on each route path in the same application. The `endpoint` option in the `CREATE FUNCTION` statement can include a route path immediately following a Cloud Run URL (for example, `https:// `` service_name `` - `` project_number `` . `` region `` .run.app/subtract_list` ).
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -25,7 +25,7 @@ The setup on Google Cloud requires creating the VPC network, the customer gatewa
 
 1.  In the Google Cloud console, go to the **VPC networks** page.
 
-2.  Click add **Create VPC network** .
+2.  Click **Create VPC network** .
 
 3.  Provide a name for the network.
 

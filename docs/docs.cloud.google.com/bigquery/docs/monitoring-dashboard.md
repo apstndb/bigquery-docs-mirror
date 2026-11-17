@@ -70,7 +70,7 @@ In Cloud Monitoring, you can view metrics for quota usage and limits:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
 
-2.  In the navigation pane, select bar_chart **Metrics explorer** .
+2.  In the navigation pane, select **Metrics explorer** .
 
 3.  In the toolbar, select **Explorer \> Configuration** .
 
@@ -78,7 +78,7 @@ In Cloud Monitoring, you can view metrics for quota usage and limits:
 
 5.  Select **Consumer Quota \> Quota \> Quota limit** , and then click **Apply** .
 
-6.  Click add_box **Add filter** , and then in the **Label** menu, select **limit_name** .
+6.  Click **Add filter** , and then in the **Label** menu, select **limit_name** .
 
 7.  In the **Value** menu, select the quota for which you want to view the metrics.
 
@@ -94,7 +94,7 @@ To create an alerting policy that triggers when the 99th percentile of the execu
 
 To create an alerting policy, do the following:
 
-1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
+1.  In the Google Cloud console, go to the **Alerting** page:
 
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

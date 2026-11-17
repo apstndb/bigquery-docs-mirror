@@ -98,11 +98,11 @@ To follow step-by-step guidance for this task directly in the Cloud Shell Editor
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
@@ -119,7 +119,7 @@ To follow step-by-step guidance for this task directly in the Cloud Shell Editor
           bq show --format=prettyjson dataset.table
           ```
 
-        - Option 2: Click add_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
+        - Option 2: Click **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
     4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
     5.  Click **Advanced options** and do the following:
         - For **Write preference** , leave **Write if empty** selected. This option creates a new table and loads your data into it.
@@ -162,7 +162,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.csv']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -992,11 +992,11 @@ If you load data into an existing table, the load job can append the data or ove
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
@@ -1018,7 +1018,7 @@ If you load data into an existing table, the load job can append the data or ove
       bq show --format=prettyjson dataset.table
       ```
 
-    - Option 2: Click add_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
+    - Option 2: Click **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
 
     > **Note:** It is possible to modify the table's schema when you append or overwrite it. For more information about supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
@@ -1061,7 +1061,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.csv']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

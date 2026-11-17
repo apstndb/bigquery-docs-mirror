@@ -135,11 +135,11 @@ To load Parquet data from Cloud Storage into a new BigQuery table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
@@ -176,7 +176,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.parquet']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -582,11 +582,11 @@ To append or overwrite a table with Parquet data:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
@@ -625,7 +625,7 @@ Use the [`LOAD DATA` DDL statement](https://docs.cloud.google.com/bigquery/docs/
       uris = ['gs://bucket/path/file.parquet']);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

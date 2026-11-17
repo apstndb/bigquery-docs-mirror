@@ -110,7 +110,7 @@ To turn on notifications, or edit an existing one, choose one of the following:
 
 2.  In the navigation menu, click **Data transfers** .
 
-3.  To turn on notifications for a new transfer, click add **Create transfer** . To adjust notifications for an existing transfer, click the name of the transfer and then click **Edit** .
+3.  To turn on notifications for a new transfer, click **Create transfer** . To adjust notifications for an existing transfer, click the name of the transfer and then click **Edit** .
 
 4.  In the **Notification options** section, click the toggles next to the notification types to enable.
 

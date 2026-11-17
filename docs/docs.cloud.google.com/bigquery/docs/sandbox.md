@@ -94,9 +94,9 @@ BigQuery public datasets are available by default in BigQuery Studio in a projec
 
     ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Data** pane, click **add Add data** .
+3.  In the **Data** pane, click **Add data** .
 
 4.  In the **Add data** dialog, click ![Public dataset icon on the Filter by page](https://docs.cloud.google.com/static/bigquery/images/icon-public-dataset.png) **Public datasets** .
 
@@ -114,7 +114,7 @@ The query uses the [ST_GEOGPOINT function](https://docs.cloud.google.com/bigquer
 
 1.  In the Google Cloud console, open **BigQuery Studio** .
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor , enter the following query:
 
@@ -154,7 +154,7 @@ The query uses the [ST_GEOGPOINT function](https://docs.cloud.google.com/bigquer
     1.  Verify that **Visualization type** is set to **Map** .
     2.  Verify that **Geography column** is set to **`geo_location`** .
     3.  For **Data column** , choose **`num_trips`** .
-    4.  Use the add **Zoom in** option to reveal the map of Manhattan.
+    4.  Use the **Zoom in** option to reveal the map of Manhattan.
 
     ![A heatmap generated on the Visualization tab](https://docs.cloud.google.com/static/bigquery/images/query-visualization-ui.png)
 

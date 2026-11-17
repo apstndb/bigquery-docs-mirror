@@ -133,7 +133,7 @@ The following example creates a persistent Python UDF named `multiplyInputs` and
 
     Replace ` PROJECT_ID ` . ` DATASET_ID ` with your project ID and dataset ID.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
     This example produces the following output:
 
@@ -287,7 +287,7 @@ To query the build status fields in the `INFORMATION_SCHEMA.ROUTINES` view, foll
 
 1.  Go to the BigQuery **Studio** page.
 
-2.  Switch to the query editor or click add_box **SQL query** .
+2.  Switch to the query editor or click **SQL query** .
 
 3.  Enter the following query to retrieve the `BUILD_STATUS` fields from the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/bigquery/docs/information-schema-routines) . The `BUILD_STATUS` column is a [`STRUCT`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) type in GoogleSQL:
 
@@ -350,7 +350,7 @@ The following example creates a vectorized Python UDF named `multiplyInputs` wit
 
     Calling the UDF is the same as in the previous example.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 ### Use Apache Arrow
 
@@ -389,7 +389,7 @@ The following example uses the Apache Arrow [`RecordBatch` interface](https://ar
 
     Calling the UDF is the same as in the previous examples.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 ## Call a Python UDF
 
@@ -422,7 +422,7 @@ If you have permission to invoke a Python UDF, then you can call it like any oth
     ])
     ```
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
     This example produces the following output:
 
@@ -578,7 +578,7 @@ The following example shows you how to create a Python UDF that installs the `sc
 
     Replace ` PROJECT_ID ` . ` DATASET_ID ` with your project ID and dataset ID.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 ### Import additional Python files as libraries
 
@@ -624,7 +624,7 @@ The following example shows you how to create a Python UDF that imports the `lib
     - ` BUCKET_NAME ` : the name of the Cloud Storage bucket that contains `lib1.py` .
     - ` PATH ` : the path to the Cloud Storage bucket.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 ## Configure container limits for Python UDFs
 
@@ -664,7 +664,7 @@ The following example creates a Python UDF using the `CREATE FUNCTION` option li
     - ` CONTAINER_CPU ` : the CPU value. Python UDFs support fractional CPU values between `0.33` and `1.0` and non-fractional CPU values of `1` , `2` , and `4` .
     - ` CONTAINER_REQUEST_CONCURRENCY ` : the maximum number of concurrent requests per Python UDF container instance. The value must be an integer from `1` to `1000` .
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
 ### Supported CPU values
 
@@ -717,11 +717,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -762,7 +762,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1086,7 +1086,7 @@ To grant the Cloud resource connection service account access to your projects, 
 
 2.  Verify that `my_query_project` is selected.
 
-3.  Click person_add **Grant Access** .
+3.  Click **Grant Access** .
 
 4.  In the **New principals** field, enter the Cloud resource connection's service account ID that you copied previously.
 
@@ -1098,7 +1098,7 @@ To grant the Cloud resource connection service account access to your projects, 
 
 8.  Go to the **IAM** page.
 
-9.  Click person_add **Grant Access** .
+9.  Click **Grant Access** .
 
 10. In the **New principals** field, enter the Cloud resource connection's service account ID that you copied previously.
 
@@ -1122,7 +1122,7 @@ Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/referenc
 
     Replace `SERVICE_ACCOUNT_ID` with the service account ID you copied previously.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1140,7 +1140,7 @@ Use the [`GRANT` statement](https://docs.cloud.google.com/bigquery/docs/referenc
 
     Replace `SERVICE_ACCOUNT_ID` with the service account ID you copied previously.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1199,7 +1199,7 @@ In `my_query_project` , create a Python UDF that calls the Cloud Translation ser
     - `REGION` : your connection's region.
     - `CONNECTION_ID` : the connection ID.
 
-3.  Click play_circle_filled **Run** .
+3.  Click **Run** .
 
     The output should look like the following:
 
@@ -1507,7 +1507,7 @@ To view Python UDF metrics using the monitoring dashboards, follow these steps:
 
 3.  To filter this dashboard, follow these steps:
 
-    1.  Click **add Filter** .
+    1.  Click **Filter** .
 
     2.  In the **Filter by resource** list, choose an option such as project ID, location, routine ID, or job ID.
 

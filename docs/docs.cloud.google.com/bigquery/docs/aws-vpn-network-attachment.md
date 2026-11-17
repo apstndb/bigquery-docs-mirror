@@ -62,7 +62,7 @@ For more information, see [Create a gateway and tunnel](https://docs.cloud.googl
 
 1.  In the Google Cloud console, go to the **Network attachments** page.
 
-2.  Click add **Create network attachment** .
+2.  Click **Create network attachment** .
 
 3.  Provide a name for the network attachment.
 

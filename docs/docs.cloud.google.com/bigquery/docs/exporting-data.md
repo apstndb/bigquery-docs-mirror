@@ -102,11 +102,11 @@ Select one of the following:
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click your dataset.
 
@@ -149,7 +149,7 @@ Use the [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/re
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -584,7 +584,7 @@ You can export your query results to Cloud Storage in the Google Cloud console w
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  Enter a valid GoogleSQL query in the **Query editor** text area.
 
@@ -648,7 +648,6 @@ BigQuery converts GoogleSQL data types to the following Parquet data types:
 | Floating point       | `FLOAT`                | `NONE`                                               |
 | Boolean              | `BOOLEAN`              | `NONE`                                               |
 | String               | `BYTE_ARRAY`           | `STRING` `(UTF8)`                                    |
-| JSON                 | `BYTE_ARRAY`           | `STRING` `(UTF8)`                                    |
 | Bytes                | `BYTE_ARRAY`           | `NONE`                                               |
 | Date                 | `INT32`                | `DATE`                                               |
 | Datetime             | `INT64`                | `TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)` |
@@ -658,7 +657,30 @@ BigQuery converts GoogleSQL data types to the following Parquet data types:
 
 The Parquet schema represents nested data as a group and repeated records as repeated groups. For more information about using nested and repeated data in BigQuery, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
-When you export a `JSON` column to Parquet format, it is exported as a `STRING` field. To load this Parquet file back into a `JSON` column in BigQuery, you must specify the schema in the load job (for example, by using the `--schema` flag). Auto schema detection with Parquet infers the column as a `STRING` type.
+> **Note:** You can't export `JSON` columns to Parquet format, including `JSON` fields that are nested in `STRUCT` or `ARRAY` columns.
+
+To export `JSON` data to Parquet, convert the `JSON` values to `STRING` values by using the [`TO_JSON_STRING` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#to_json_string) in an [`EXPORT DATA` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) . The following example converts a top-level `JSON` column and a `JSON` field that's nested in a repeated `STRUCT` column:
+
+```
+EXPORT DATA
+  OPTIONS (
+    uri = 'gs://BUCKET/FOLDER/*.parquet',
+    format = 'PARQUET')
+AS (
+  SELECT
+    * REPLACE (
+      TO_JSON_STRING(json_col) AS json_col,
+      ARRAY(
+        SELECT AS STRUCT
+          rec.* REPLACE (TO_JSON_STRING(rec.nested_json_col) AS nested_json_col)
+        FROM UNNEST(repeated_record_col) AS rec WITH OFFSET AS pos
+        ORDER BY pos
+      ) AS repeated_record_col)
+  FROM mydataset.mytable
+);
+```
+
+After you load the exported files back into BigQuery, you can use the [`PARSE_JSON` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#parse_json) to convert the `STRING` values back to `JSON` values.
 
 > **Caution:** If you export a `DATETIME` type to Parquet, you cannot load the Parquet file directly back into the same table schema, because the converted value won't match the schema.
 
@@ -986,7 +1008,7 @@ WHERE date(creation_time)= CURRENT_DATE()
 
 You can set up a [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) alerting policy that monitors the number of bytes exported.
 
-1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
+1.  In the Google Cloud console, go to the **Alerting** page:
 
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 

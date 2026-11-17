@@ -92,11 +92,11 @@ To create an empty table with a schema definition:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Empty table** in the **Create table from** list.
@@ -111,7 +111,7 @@ To create an empty table with a schema definition:
           bq show --format=prettyjson dataset.table
           ```
 
-        - Option 2: Click add_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
+        - Option 2: Click **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
     4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
     5.  Optional: In the **Advanced options** section, if you want to use a customer-managed encryption key, then select the **Use a customer-managed encryption key (CMEK)** option. By default, BigQuery [encrypts customer content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) by using a Google-owned and Google-managed encryption key.
     6.  Click **Create table** .
@@ -139,7 +139,7 @@ The following example creates a table named `newtable` that expires on January 1
         labels = [('org_unit', 'development')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -787,11 +787,11 @@ To create a table from a query result, write the results to a destination table.
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -840,7 +840,7 @@ The following example uses the [`CREATE TABLE` statement](https://docs.cloud.goo
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -72,17 +72,17 @@ To grant an IAM role access to a dataset without using conditions, select one of
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  Click person_add **Sharing** \> **Permissions** .
+4.  Click **Sharing** \> **Permissions** .
 
-5.  Click person_add **Add principal** .
+5.  Click **Add principal** .
 
 6.  In the **New principals** field, enter a principal.
 
@@ -116,7 +116,7 @@ To grant principals access to datasets, use the [`GRANT` DCL statement](https://
 
       For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -768,13 +768,13 @@ You can view the explicitly set access controls for a dataset by choosing one of
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  Click person_add **Sharing \> Permissions** .
+4.  Click **Sharing \> Permissions** .
 
     The dataset's access controls appear in the **Dataset Permissions** pane.
 
@@ -826,7 +826,7 @@ Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.googl
     - ` REGION ` : a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier)
     - ` DATASET ` : the name of a dataset in your project
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1051,7 +1051,7 @@ To revoke access to a dataset, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1061,7 +1061,7 @@ To revoke access to a dataset, select one of the following options:
 
 5.  In the **Dataset Permissions** dialog, expand the principal whose access you want to revoke.
 
-6.  Click delete **Remove principal** .
+6.  Click **Remove principal** .
 
 7.  In the **Remove role from principal?** dialog, click **Remove** .
 
@@ -1093,7 +1093,7 @@ To remove a principal's access to a dataset, use the [`REVOKE` DCL statement](ht
 
       For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1464,7 +1464,7 @@ To grant access to a table or view, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1474,7 +1474,7 @@ To grant access to a table or view, select one of the following options:
 
 5.  Click **Share \> Manage permissions** .
 
-6.  Click person_add **Add principal** .
+6.  Click **Add principal** .
 
 7.  In the **New principals** field, enter a principal.
 
@@ -1512,7 +1512,7 @@ To grant principals access to tables or views, use the [`GRANT` DCL statement](h
 
       For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2069,7 +2069,7 @@ To view the access controls for a table or view, choose one of the following opt
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2131,7 +2131,7 @@ Query the [`INFORMATION_SCHEMA.OBJECT_PRIVILEGES` view](https://docs.cloud.googl
     - ` DATASET ` : the name of a dataset that contains the table or view
     - ` TABLE ` : the name of the table or view
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2318,7 +2318,7 @@ To revoke access to a table or view, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2330,7 +2330,7 @@ To revoke access to a table or view, select one of the following options:
 
 6.  In the **Share** dialog, expand the principal whose access you want to revoke.
 
-7.  Click delete **Delete** .
+7.  Click **Delete** .
 
 8.  In the **Remove role from principal?** dialog, click **Remove** .
 
@@ -2366,7 +2366,7 @@ To remove access to tables or views from principals, use the [`REVOKE` DCL state
 
       For a list of valid formats, see [`user_list`](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language#user_list) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -2690,7 +2690,7 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2698,9 +2698,9 @@ Select one of the following options:
 
 4.  Go to the **Routines** tab and click a routine.
 
-5.  Click person_add **Share** .
+5.  Click **Share** .
 
-6.  Click person_add **Add members** .
+6.  Click **Add members** .
 
 7.  In the **New members** field, enter a principal.
 
@@ -2874,7 +2874,7 @@ To view the access controls for a routine, choose one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2882,7 +2882,7 @@ To view the access controls for a routine, choose one of the following options:
 
 4.  Go to the **Routines** tab and click a routine.
 
-5.  Click person_add **Share** .
+5.  Click **Share** .
 
     The routine's access controls appear in the **Share** pane.
 
@@ -2906,7 +2906,7 @@ To revoke access to a routine, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -2918,7 +2918,7 @@ To revoke access to a routine, select one of the following options:
 
 6.  In the **Routine Permissions** dialog, expand the principal whose access you want to revoke.
 
-7.  Click delete **Remove principal** .
+7.  Click **Remove principal** .
 
 8.  In the **Remove role from principal?** dialog, click **Remove** .
 
@@ -3000,7 +3000,7 @@ You can examine the inherited IAM roles for a resource by using the BigQuery web
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

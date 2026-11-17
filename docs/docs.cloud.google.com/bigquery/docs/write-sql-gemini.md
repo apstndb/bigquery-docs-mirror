@@ -43,7 +43,7 @@ This document is intended for data analysts, data scientists, and data developer
 
 5.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-6.  In the BigQuery toolbar, click pen_spark arrow_drop_down **Gemini** .
+6.  In the BigQuery toolbar, click pen_spark **Gemini** .
 
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/bigquery/images/duet-ai-assistant-link.png)
 
@@ -134,7 +134,7 @@ To use the SQL generation tool, follow these steps:
     - To edit your prompt, click **Edit** and then modify or replace your initial prompt. After you've edited your prompt, click **Update** to generate a new query.
     - To update the table sources that were used as context to generate the suggested SQL query, click **Edit Table Sources** , select the appropriate checkboxes, and then click **Apply** .
     - To view a natural language summary of the generated query, click **Query Summary** .
-    - To refine the suggested SQL query, enter any refinements in the **Refine** field, and then click send **Refine** . For example, enter `limit to 1000` to limit the number of query results. To compare the changes to your query, select the **Show diff** checkbox.
+    - To refine the suggested SQL query, enter any refinements in the **Refine** field, and then click **Refine** . For example, enter `limit to 1000` to limit the number of query results. To compare the changes to your query, select the **Show diff** checkbox.
     - To dismiss a suggested query, close the SQL generation tool.
 
 #### Turn off the SQL generation tool
@@ -147,7 +147,7 @@ You can generate SQL in the query editor by describing the query that you want i
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the query editor, click add_box **SQL query** .
+2.  In the query editor, click **SQL query** .
 
 3.  In the query editor, write a SQL comment about a table you have recently viewed or queried. For example, if you recently viewed the [`bigquery-public-data.austin_bikeshare.bikeshare_trips` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , then you might write the following comment:
 
@@ -189,7 +189,7 @@ Before you can use Gemini Cloud Assist chat to generate SQL, you must enable Gem
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the query editor, click add_box **SQL query** to open a new SQL query.
+2.  In the query editor, click **SQL query** to open a new SQL query.
 
 3.  In the Google Cloud toolbar, click spark **Open or close Gemini AI chat** to open Gemini Cloud Assist chat.
 
@@ -217,7 +217,7 @@ Before you can use Gemini Cloud Assist chat to generate SQL, you must enable Gem
 
 6.  Review the generated SQL query.
 
-7.  To run the generated SQL query, click content_copy **Copy to clipboard** , paste the generated code in the query editor, and then click play_circle **Run** .
+7.  To run the generated SQL query, click **Copy to clipboard** , paste the generated code in the query editor, and then click **Run** .
 
 8.  If the query editor is already open, you can select one of the following options:
 
@@ -369,7 +369,7 @@ You can use Gemini in BigQuery to fix and explain errors in your SQL queries. To
 
 1.  Highlight the text that contains the error.
 
-2.  Click auto_awesome **Refine** and then astrophotography_mode **Fix it** .
+2.  Click **Refine** and then astrophotography_mode **Fix it** .
 
 3.  The Gemini Cloud Assist pane opens and shows a suggested change to your query to fix the error.
 
@@ -393,11 +393,11 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the tab bar of the query editor, click the arrow_drop_down drop-down arrow next to add_box **SQL query** , and then click **Notebook** .
+2.  In the tab bar of the query editor, click the drop-down arrow next to **SQL query** , and then click **Notebook** .
 
     The new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
-3.  To insert a new code cell, in the toolbar, click add **Code** . The new code cell contains the message **Start coding or generate with AI** .
+3.  To insert a new code cell, in the toolbar, click **Code** . The new code cell contains the message **Start coding or generate with AI** .
 
 4.  In the new code cell, click **Generate** .
 
@@ -418,7 +418,7 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
     LIMIT 10
     ```
 
-7.  To run the code, press play_circle **Run cell** .
+7.  To run the code, press **Run cell** .
 
 ### Generate Python code with Gemini Cloud Assist
 
@@ -432,7 +432,7 @@ You can use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/ove
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the tab bar of the query editor, click the arrow_drop_down drop-down arrow next to add_box **SQL query** , and then click **Notebook** .
+2.  In the tab bar of the query editor, click the drop-down arrow next to **SQL query** , and then click **Notebook** .
 
 3.  In the Google Cloud toolbar, click spark **Open or close Gemini AI chat** to open Gemini Cloud Assist chat.
 
@@ -445,7 +445,7 @@ You can use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/ove
     table using bigquery magics
     ```
 
-5.  Click send **Send prompt** . Gemini returns Python code similar to the following:
+5.  Click **Send prompt** . Gemini returns Python code similar to the following:
 
     ```
     %%bigquery
@@ -456,7 +456,7 @@ You can use [Gemini Cloud Assist](https://docs.cloud.google.com/cloud-assist/ove
 
 6.  Review the generated Python code.
 
-7.  To run the Python code, click content_copy **Copy to clipboard** and then paste the generated code in the query editor, and then click play_circle **Run** .
+7.  To run the Python code, click **Copy to clipboard** and then paste the generated code in the query editor, and then click **Run** .
 
 ### Generate BigQuery DataFrames code
 
@@ -481,11 +481,11 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
 
 1.  In the Google Cloud console, go to the BigQuery Studio page.
 
-2.  In the tab bar of the query editor, click the arrow_drop_down drop-down arrow next to add_box **SQL query** , and then click **Notebook** .
+2.  In the tab bar of the query editor, click the drop-down arrow next to **SQL query** , and then click **Notebook** .
 
     A new notebook opens.
 
-3.  To insert a new code cell, in the toolbar, click add **Code** .
+3.  To insert a new code cell, in the toolbar, click **Code** .
 
 4.  The new code cell contains the message **Start coding or generate with AI.** In the new code cell, click **Generate** .
 
@@ -506,11 +506,11 @@ In the following example, you generate code for a BigQuery public dataset, `bigq
     result = bpd.read_gbd("bigquery-public-data.ml_datasets.penguins")
     ```
 
-7.  To run the code, press play_circle **Run cell** .
+7.  To run the code, press **Run cell** .
 
-8.  To preview the results, in the toolbar, click add **Code** to insert a new code cell.
+8.  To preview the results, in the toolbar, click **Code** to insert a new code cell.
 
-9.  In the new cell, call the `peek()` method—for example, `result.peek()` —and press play_circle **Run cell** . A number of rows of data are displayed.
+9.  In the new cell, call the `peek()` method—for example, `result.peek()` —and press **Run cell** . A number of rows of data are displayed.
 
 ## Complete Python code
 
@@ -520,7 +520,7 @@ To try Python code completion with Gemini in BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the tab bar of the query editor, click the arrow_drop_down drop-down arrow next to add_box **SQL query** , and then click **Notebook** .
+2.  In the tab bar of the query editor, click the drop-down arrow next to **SQL query** , and then click **Notebook** .
 
     A new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
@@ -542,11 +542,11 @@ To get an explanation for Python code in your notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -572,7 +572,7 @@ To fix or understand the code errors with Gemini assistance, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -647,7 +647,7 @@ To turn off specific features in Gemini in BigQuery, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the BigQuery toolbar, click pen_spark arrow_drop_down **Gemini** .
+2.  In the BigQuery toolbar, click pen_spark **Gemini** .
 
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/bigquery/images/duet-ai-assistant-link.png)
 
@@ -665,7 +665,7 @@ To turn off Gemini in Colab Enterprise for a specific user, an administrator nee
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the BigQuery toolbar, click pen_spark arrow_drop_down **Gemini** .
+2.  In the BigQuery toolbar, click pen_spark **Gemini** .
 
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/bigquery/images/duet-ai-assistant-link.png)
 
@@ -679,7 +679,7 @@ To share your prompt data, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the BigQuery toolbar, click pen_spark arrow_drop_down **Gemini** .
+2.  In the BigQuery toolbar, click pen_spark **Gemini** .
 
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/bigquery/images/duet-ai-assistant-link.png)
 

@@ -78,15 +78,15 @@ To create a BigLake table, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  Expand the more_vert **Actions** option and click **Create table** .
+4.  Expand the **Actions** option and click **Create table** .
 
 5.  In the **Source** section, specify the following details:
 
@@ -197,7 +197,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
       You must set `CACHE_MODE` if `STALENESS_INTERVAL` is set to a value greater than 0.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -535,11 +535,11 @@ To create a BigLake table based on Hive partitioned data in Cloud Storage, selec
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset.
 
@@ -644,7 +644,7 @@ Use the [`CREATE EXTERNAL TABLE` DDL statement](https://docs.cloud.google.com/bi
 
     - `TABLE_FORMAT` : the format of the table that you want to create—for example, `PARQUET`
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1141,7 +1141,7 @@ Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.go
 
       You must set `CACHE_MODE` if `STALENESS_INTERVAL` is set to a value greater than 0.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -69,7 +69,7 @@ INSERT INTO <projectID>.<datasetID>.<table1> (
     <column3>) (SELECT * FROM <projectID>.<datasetID>.<table2>)
 ```
 
-For more information on using query results to append to or overwrite data, see [Write query results](https://docs.cloud.google.com/bigquery/docs/writing-results#writing_query_results) .
+For more information on using query results to append to or overwrite data, see [Write query results](https://docs.cloud.google.com/bigquery/docs/writing-results#write_query_results) .
 
 ## Browsing table data
 
@@ -105,11 +105,11 @@ To browse table data:
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 

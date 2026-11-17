@@ -64,7 +64,7 @@ To query the table:
 
     - `TABLE_NAME` : the name of the [table that you created](https://docs.cloud.google.com/bigquery/docs/query-aws-data#create-biglake-table)
 
-    - Click play_circle **Run** .
+    - Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

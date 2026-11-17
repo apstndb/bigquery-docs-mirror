@@ -90,14 +90,14 @@ To work with your BigQuery data in JupyterLab, do the following:
 
 1.  In the JupyterLab sidebar, open the **Dataset Explorer** pane: click the ![Dataset Explorer icon.](https://docs.cloud.google.com/static/bigquery/images/dataset-explorer.png) datasets icon.
 
-2.  To expand a project, in the **Dataset Explorer** pane, click the arrow_right expander arrow next to the project name.
+2.  To expand a project, in the **Dataset Explorer** pane, click the expander arrow next to the project name.
 
     ![The Dataset Explorer pane shows an expanded project and a list of datasets.](https://docs.cloud.google.com/static/bigquery/images/jupyterlab-dataset-explorer.png)
 
     The **Dataset Explorer** pane shows all of the datasets in a project that are located in the BigQuery region that you configured for the session. You can interact with a project and dataset in various ways:
 
     - To view information about a dataset, click the name of the dataset.
-    - To display all of the tables in a dataset, click the arrow_right expander arrow next to the dataset.
+    - To display all of the tables in a dataset, click the expander arrow next to the dataset.
     - To view information about a table, click the name of the table.
     - To change the project or BigQuery region, [update your settings](https://docs.cloud.google.com/bigquery/docs/jupyterlab-plugin#configure) .
 

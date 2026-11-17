@@ -71,11 +71,11 @@ To analyze a CSV using the DSA in BigQuery, follow these steps.
 
 4.  Click the spark **Toggle Gemini in Colab** button to open the chat dialog.
 
-    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the collapse_content **Move** icon.
+    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the **Move** icon.
 
 5.  Upload your CSV file.
 
-    1.  In the chat dialog, click add_circle_outline **Add to Gemini \> Upload** .
+    1.  In the chat dialog, click **Add to Gemini \> Upload** .
 
     2.  If necessary, authorize your Google Account.
 
@@ -105,7 +105,7 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
 4.  Click the spark **Toggle Gemini in Colab** button to open the chat dialog.
 
-    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the collapse_content **Move** icon.
+    > **Note:** You can toggle between displaying the chat dialog in a separate panel and displaying the chat dialog inside your notebook by clicking the **Move** icon.
 
 5.  Enter your prompt in the chat window.
 
@@ -113,7 +113,7 @@ To analyze a BigQuery table, choose one or more tables in the table selector, pr
 
     1.  Choose one or more tables using the table selector:
 
-        1.  Click add_circle_outline **Add to Gemini \> BigQuery tables** .
+        1.  Click **Add to Gemini \> BigQuery tables** .
 
         2.  In the **BigQuery tables** window, select one or more tables in your project. You can search for tables across projects and filter tables by using the search bar.
 

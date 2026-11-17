@@ -30,9 +30,9 @@ After a query finishes, the temporary table exists for up to 24 hours. To view t
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click the explore **Explorer** tab.
+2.  In the left pane, click the **Explorer** tab.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Job history** .
 
@@ -80,11 +80,11 @@ Use the following procedure to write your query results to a permanent table. To
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -133,7 +133,7 @@ The following example uses the [`CREATE TABLE` statement](https://docs.cloud.goo
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

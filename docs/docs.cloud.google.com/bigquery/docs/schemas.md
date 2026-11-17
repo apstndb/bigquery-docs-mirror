@@ -252,15 +252,15 @@ In the Google Cloud console, you can specify a schema using the **Add field** op
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then click your dataset.
 
-4.  In the details pane, click **Create table** add_box .
+4.  In the details pane, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section, select **Empty table** .
 
@@ -295,7 +295,7 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
         description = 'My example table');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -103,11 +103,11 @@ To use Policy Analyzer for allow policies, you create an analysis query, specify
 
     2.  In the **Set the query parameters** section, for **Parameter 1** , choose **Principal** , and in the **Principal** field, enter the email of the user, group, or service account.
 
-    3.  Click add **Add parameter** .
+    3.  Click **Add parameter** .
 
     4.  For **Parameter 2** , choose **Permission** , and in the **Permission** field, click **Select** , choose the BigQuery permission, and then click **Add** . For example, select **`bigquery.tables.getData`** .
 
-    5.  Click add **Add parameter** .
+    5.  Click **Add parameter** .
 
     6.  For **Parameter 3** , choose **Resource** , and in the **Resource** field, enter the fully qualified resource name. The resource name must include the service prefix as in the following examples:
 

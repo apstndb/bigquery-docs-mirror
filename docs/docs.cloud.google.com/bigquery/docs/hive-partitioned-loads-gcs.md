@@ -20,11 +20,11 @@ To load Hive partitioned data, choose one of the following options:
 
 1.  In the Google Cloud console, go to **BigQuery** .
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  Click more_vert **Actions** , and then click **Create table** . This opens the **Create table** pane.
+4.  Click **Actions** , and then click **Create table** . This opens the **Create table** pane.
 
 5.  In the **Source** section, specify the following details:
     1.  For **Create table from** , select **Google Cloud Storage** .

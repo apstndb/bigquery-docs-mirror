@@ -92,7 +92,7 @@ To create a listing, follow these steps:
 
 2.  Click the data exchange name where you want to create the listing.
 
-3.  Click add_box **Create listing** .
+3.  Click **Create listing** .
 
 4.  In the **Configure data** section, in the **Resource type** menu, select **BigQuery dataset** or **Pub/Sub Topic** .
 
@@ -189,7 +189,7 @@ To create a listing directly from an existing dataset, follow these steps:
 
 2.  To view the dataset details, click a dataset name.
 
-3.  Click person_add **Sharing** \> **Publish as listing** .
+3.  Click **Sharing** \> **Publish as listing** .
 
     The **Create listing** dialog opens.
 
@@ -293,9 +293,9 @@ To give users access to view or subscribe to your listing, follow these steps:
 
 3.  Click the listing that you want to share.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter principals based on your listing type:
 
@@ -406,15 +406,15 @@ Alternatively, if you have access to the [shared dataset](https://docs.cloud.goo
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, click **Datasets** , and then click the name of the shared dataset.
 
-4.  In the person_add **Sharing** list, select **Manage subscriptions** .
+4.  In the **Sharing** list, select **Manage subscriptions** .
 
 ### SQL
 
@@ -467,7 +467,7 @@ To remove a subscription created before July 25, 2023, from your listing, follow
 
 1.  To list subscribers of a listing, follow the [View all subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#view_all_subscriptions) instructions for the Google Cloud console.
 
-2.  To remove a subscriber from a listing, click delete **Delete** . To remove all subscriptions, click **Remove all subscriptions** .
+2.  To remove a subscriber from a listing, click **Delete** . To remove all subscriptions, click **Remove all subscriptions** .
 
 3.  In the **Remove subscription?** dialog, confirm deletion by typing `remove` .
 
@@ -481,7 +481,7 @@ To remove a subscription created after July 25, 2023, follow these steps:
 
 2.  Click **Subscriptions** .
 
-3.  To select the subscriptions that you want to remove, select the checkboxes next to those subscriptions, and then click delete **Remove Subscriptions** .
+3.  To select the subscriptions that you want to remove, select the checkboxes next to those subscriptions, and then click **Remove Subscriptions** .
 
 4.  In the **Remove subscription?** dialog, confirm removal by typing `remove` .
 
@@ -517,7 +517,7 @@ To update a listing, follow these steps:
 
 3.  Click the listing that you want to update.
 
-4.  Click mode_edit **Edit listing** .
+4.  Click **Edit listing** .
 
 5.  Modify values in the fields. You can modify all values except the listing's shared dataset.
 
@@ -584,7 +584,7 @@ To request to add your listing to the **Featured** section, or to request to rem
 
 ## Delete a listing
 
-When you delete a listing, subscribers can no longer [view the listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) . Deleting a listing also [deletes all linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) and removes all subscriptions from subscriber projects. If a dataset remains linked, remove the dataset manually by clicking person_add **Sharing \> Manage Subscription** . On the **Subscriptions** page, remove specific subscriber datasets or all subscriber datasets at once.
+When you delete a listing, subscribers can no longer [view the listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#discover-listings) . Deleting a listing also [deletes all linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#remove_a_subscription) and removes all subscriptions from subscriber projects. If a dataset remains linked, remove the dataset manually by clicking **Sharing \> Manage Subscription** . On the **Subscriptions** page, remove specific subscriber datasets or all subscriber datasets at once.
 
 You can't delete [Cloud Marketplace-integrated listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-cloud-marketplace) that have active commercial subscriptions. You must [revoke all commercial subscriptions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions#revoke-subscription) before you delete the listing.
 
@@ -606,7 +606,7 @@ To delete a listing, follow these steps:
 
 3.  Click the listing that you want to delete.
 
-4.  Click delete **Delete** .
+4.  Click **Delete** .
 
 5.  In the **Delete listing?** dialog, confirm deletion by typing `delete` .
 

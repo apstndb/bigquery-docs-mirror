@@ -324,7 +324,7 @@ Use the [`CREATE OR REPLACE EXTERNAL TABLE` DDL statement](https://docs.cloud.go
 
       You must set `CACHE_MODE` if `STALENESS_INTERVAL` is set to a value greater than 0.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

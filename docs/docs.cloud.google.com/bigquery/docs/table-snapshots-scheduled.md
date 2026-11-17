@@ -115,11 +115,11 @@ To give the `snapshot-bot` service account the permissions that it needs to take
 
 1.  In Google Cloud console, open the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand the `PROJECT` project node.
 
@@ -163,7 +163,7 @@ Give the `snapshot-bot` service account the permissions that it needs to create 
 
 1.  In Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -321,7 +321,7 @@ To verify that the table snapshots are being created, follow these steps:
 
 1.  In Google Cloud console, go to the **BigQuery** page:
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

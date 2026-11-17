@@ -48,9 +48,9 @@ To delete a label from a dataset, choose one of the following options:
 
 1.  In the Google Cloud console, select the dataset.
 
-2.  Click the **Details** tab, and then click mode_edit **Edit details** .
+2.  Click the **Details** tab, and then click **Edit details** .
 
-3.  In the **Labels** section, next to each label that you want to delete, click delete **Delete label** .
+3.  In the **Labels** section, next to each label that you want to delete, click **Delete label** .
 
 4.  Click **Save** .
 
@@ -67,7 +67,7 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
     SET OPTIONS (labels = []);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -305,7 +305,7 @@ To delete a label from a table or view, choose one of the following options:
 
 2.  In the details pane, click **Edit \> Edit details** .
 
-3.  In the **Labels** section, next to each label that you want to delete, click delete **Delete label** .
+3.  In the **Labels** section, next to each label that you want to delete, click **Delete label** .
 
 4.  Click **Save** .
 
@@ -322,7 +322,7 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
     SET OPTIONS (labels = []);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -559,7 +559,7 @@ To delete a reservation label, use the [`ALTER RESERVATION SET OPTIONS` DDL stat
       labels = []);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

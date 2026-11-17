@@ -28,7 +28,7 @@ Select one of the following options to create an AlloyDB connection:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
     The **Add data** dialog opens.
 
@@ -59,7 +59,7 @@ Select one of the following options to create an AlloyDB connection:
     - For **Database username** , enter the username for the database.
 
     - For **Database password** , enter the password for the database.
-      - Optional: To see the password, click visibility_off **Show password** .
+      - Optional: To see the password, click **Show password** .
 
     - For **AlloyDB Instance** , enter the connection URI of the AlloyDB primary or read instance with the **//alloydb.googleapis.com** prefix.
 
@@ -137,7 +137,7 @@ You can grant the service account associated with the connection the [AlloyDB Cl
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Grant Access** .
+2.  Click **Grant Access** .
 
     The **Add principals** dialog opens.
 
@@ -180,11 +180,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name.
 

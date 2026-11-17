@@ -64,7 +64,7 @@ To create a data exchange, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  Click add_box **Create exchange** .
+2.  Click **Create exchange** .
 
 3.  In the **Create exchange** dialog, select a **Project** and a **Region** for your data exchange. You can't change the project and region after you create the data exchange.
 
@@ -136,7 +136,7 @@ To update a data exchange, follow these steps:
 
 3.  Click the **Details** tab.
 
-4.  Click mode_edit **Edit exchange** .
+4.  Click **Edit exchange** .
 
 5.  In the **Edit exchange** dialog, update the following fields:
 
@@ -230,9 +230,9 @@ To share a link to a data exchange, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  In the list of data exchanges, find the data exchange that you want to share, and then click more_vert **More options** .
+2.  In the list of data exchanges, find the data exchange that you want to share, and then click **More options** .
 
-3.  To copy the link to your clipboard, click content_copy **Copy share link** .
+3.  To copy the link to your clipboard, click **Copy share link** .
 
 ## Give users access to a data exchange
 
@@ -248,9 +248,9 @@ To give users access to a data exchange, set the IAM policy for that data exchan
 
 3.  Click the **Details** tab.
 
-4.  Click person **Set permissions** .
+4.  Click **Set permissions** .
 
-5.  To add principals, click person_add **Add principal** .
+5.  To add principals, click **Add principal** .
 
 6.  In the **New principals** field, enter the email address of the principal that you want to grant access to. You can also use `allUsers` to make a resource public and accessible to everyone on the internet, or `allAuthenticatedUsers` to make it accessible only to signed-in Google users.
 
@@ -345,7 +345,7 @@ To delete a data exchange, follow these steps:
 
 3.  Click the **Details** tab.
 
-4.  Click delete **Delete exchange** .
+4.  Click **Delete exchange** .
 
 5.  In the **Delete exchange?** dialog, confirm deletion by entering `delete` .
 

@@ -69,15 +69,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -126,7 +126,7 @@ In this section, you create the `patents` table that contains patents embeddings
 
 To create the tables, follow these steps:
 
-1.  To create the `patents` table, paste the following in the query editor, and then click play_circle **Run** :
+1.  To create the `patents` table, paste the following in the query editor, and then click **Run** :
 
     ```
     CREATE TABLE bqml_tutorial.patents AS
@@ -138,7 +138,7 @@ To create the tables, follow these steps:
 
     You receive a confirmation message like the following: `This statement created a new table named patents.`
 
-2.  To create the `patents2` table that contains a patent embedding to find nearest neighbors, paste the following in the query editor, and then click play_circle **Run** :
+2.  To create the `patents2` table that contains a patent embedding to find nearest neighbors, paste the following in the query editor, and then click **Run** :
 
     ```
     CREATE TABLE bqml_tutorial.patents2 AS
@@ -156,7 +156,7 @@ In this section, you create the `my_index` vector index on the `embedding_v1` co
 
 To create the vector index, follow these steps:
 
-1.  To create the `my_index` vector index on the `embedding_v1` column of the `patents` table, paste the following in the query editor, and then click play_circle **Run** :
+1.  To create the `my_index` vector index on the `embedding_v1` column of the `patents` table, paste the following in the query editor, and then click **Run** :
 
     ```
     CREATE OR REPLACE VECTOR INDEX my_index ON bqml_tutorial.patents(embedding_v1)
@@ -166,7 +166,7 @@ To create the vector index, follow these steps:
 
     You receive a confirmation message like the following: `The vector index creation on table bqml_tutorial.patents was initiated. Please query bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES to check the progress of the index.`
 
-2.  To confirm that the vector index is ready, paste the following in the query editor, and then click play_circle **Run** :
+2.  To confirm that the vector index is ready, paste the following in the query editor, and then click **Run** :
 
     ```
     SELECT * FROM bqml_tutorial.INFORMATION_SCHEMA.VECTOR_INDEXES;
@@ -180,7 +180,7 @@ After the vector index is created and populated, use the `VECTOR_SEARCH` functio
 
 > **Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `vector_search.patents` table](https://docs.cloud.google.com/bigquery/docs/vector-search#create_test_tables_to_store_data_and_embeddings) without the `LIMIT 1000000` clause, [recreate the vector index](https://docs.cloud.google.com/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
 
-To use the `VECTOR_SEARCH` function with an index, paste the following in the query editor, and then click play_circle **Run** :
+To use the `VECTOR_SEARCH` function with an index, paste the following in the query editor, and then click **Run** :
 
 ```
 SELECT query.publication_number AS query_publication_number,
@@ -216,7 +216,7 @@ The results look similar to the following:
 
 In this section, you use the `VECTOR_SEARCH` function to find the nearest neighbor for the embedding in the `embedding_v1` column in the `patents2` table. This query doesn't use the vector index in the search, so `VECTOR_SEARCH` finds the embedding's exact nearest neighbor.
 
-To use `VECTOR_SEARCH` with brute force, paste the following in the query editor, and then click play_circle **Run** :
+To use `VECTOR_SEARCH` with brute force, paste the following in the query editor, and then click **Run** :
 
 ```
 SELECT query.publication_number AS query_publication_number,
@@ -252,7 +252,7 @@ The results look similar to the following:
 
 When you perform a vector search with an index, it returns approximate results, but it reduces [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) . You can compute recall by comparing the results returned by vector search with an index, and the results returned by vector search with brute force. The `publication_number` value uniquely identifies a patent, so it is used for comparison in the following query.
 
-To evaluate recall, paste the following in the query editor, and then click play_circle **Run** :
+To evaluate recall, paste the following in the query editor, and then click **Run** :
 
 ```
 WITH approx_results AS (
@@ -321,7 +321,7 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
 2.  In the left pane, expand your project, and then click **Datasets** .
 
-3.  For the `bqml_tutorial` dataset, click more_vert **Open actions \> Delete** .
+3.  For the `bqml_tutorial` dataset, click **Open actions \> Delete** .
 
 4.  In the **Delete dataset** dialog, click **Delete** to confirm.
 

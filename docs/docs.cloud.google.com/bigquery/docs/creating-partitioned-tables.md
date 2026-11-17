@@ -52,11 +52,11 @@ To create an empty time-unit column-partitioned table with a schema definition:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Empty table** in the **Create table from** list.
@@ -71,7 +71,7 @@ To create an empty time-unit column-partitioned table with a schema definition:
           bq show --format=prettyjson dataset.table
           ```
 
-        - Option 2: Click add_box **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
+        - Option 2: Click **Add field** and enter the table schema. Specify each field's **Name** , [**Type**](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , and [**Mode**](https://docs.cloud.google.com/bigquery/docs/schemas#modes) .
     4.  In the **Partition and cluster settings** section, in the **Partitioning** list, select **Partition by field** , and then choose the partitioning column. This option is only available if the schema contains a `DATE` , `TIMESTAMP` , or `DATETIME` column.
     5.  Optional: To require a partition filter on all queries for this table, select the **Require partition filter** checkbox. A partition filter can reduce cost and improve performance. For more information, see [Set partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
     6.  Select the **Partitioning type** .
@@ -102,7 +102,7 @@ The following example creates a table with daily partitions based on the `transa
 
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -503,9 +503,9 @@ To create an empty ingestion-time partitioned table with a schema definition:
 
 2.  In the **Explorer** panel, expand your project and select a dataset.
 
-3.  Expand the more_vert **Actions** option and click **Open** .
+3.  Expand the **Actions** option and click **Open** .
 
-4.  In the details panel, click **Create table** add_box .
+4.  In the details panel, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section, select **Empty table.**
 
@@ -547,7 +547,7 @@ The following example creates a table with daily partitions:
 
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition expiration](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) and the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -742,9 +742,9 @@ To create an empty integer-range partitioned table with a schema definition:
 
 2.  In the **Explorer** panel, expand your project and select a dataset.
 
-3.  Expand the more_vert **Actions** option and click **Open** .
+3.  Expand the **Actions** option and click **Open** .
 
-4.  In the details panel, click **Create table** add_box .
+4.  In the details panel, click **Create table** .
 
 5.  On the **Create table** page, in the **Source** section, select **Empty table.**
 
@@ -792,7 +792,7 @@ The following example creates a table that is partitioned on the `customer_id` c
 
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1166,7 +1166,7 @@ The following example creates a table that is partitioned on the `transaction_da
 
     Use the [`OPTIONS` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) to set table options such as the [partition filter requirements](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter) .
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

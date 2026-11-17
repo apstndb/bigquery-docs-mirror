@@ -90,11 +90,11 @@ To create and publish Data Apps, follow these steps:
 
 2.  To open the template gallery, do one of the following:
 
-    - In the left pane, click explore **Explorer** , expand your project, and then select **Notebook \> more_vert View actions \> Create notebook \> All templates** .
+    - In the left pane, click **Explorer** , expand your project, and then select **Notebook \> View actions \> Create notebook \> All templates** .
 
       ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-      If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+      If you don't see the left pane, click **Expand left pane** to open the pane.
 
     - On the **Studio** page, click **View notebook gallery** :
 
@@ -113,7 +113,7 @@ To create and publish Data Apps, follow these steps:
 7.  To create new components, do the following:
 
     1.  To go back to the notebook, click arrow_back **Notebook** .
-    2.  To add new cells, click the drop-down arrow next to add **Code** or add **Text** .
+    2.  To add new cells, click the drop-down arrow next to **Code** or **Text** .
     3.  Click **Save** .
     4.  To return to the app, click dashboard **Data app** .
 

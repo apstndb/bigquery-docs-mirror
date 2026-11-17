@@ -39,11 +39,11 @@ To list the views in a dataset:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -64,7 +64,7 @@ Use the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigquery
 
     Replace `DATASET_ID` with the name of the dataset.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -200,7 +200,7 @@ To get information about views:
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -227,7 +227,7 @@ Query the [`INFORMATION_SCHEMA.VIEWS` view](https://docs.cloud.google.com/bigque
 
     Replace `DATASET_ID` with the name of the dataset.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

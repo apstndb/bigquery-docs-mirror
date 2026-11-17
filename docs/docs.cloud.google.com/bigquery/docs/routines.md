@@ -41,11 +41,11 @@ To list the routines in a dataset, you must have the `bigquery.routines.get` and
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -66,7 +66,7 @@ Query the [`INFORMATION_SCHEMA.ROUTINES` view](https://docs.cloud.google.com/big
        { DATASET | REGION }.INFORMATION_SCHEMA.ROUTINES;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -133,7 +133,7 @@ To view the body of a routine, you must have the `bigquery.routines.get` permiss
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -160,7 +160,7 @@ Select the `routine_definition` column of the [`INFORMATION_SCHEMA.ROUTINES` vie
       routine_name = ROUTINE_NAME;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -226,7 +226,7 @@ To delete a routine, you must have the `bigquery.routines.delete` permission.
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

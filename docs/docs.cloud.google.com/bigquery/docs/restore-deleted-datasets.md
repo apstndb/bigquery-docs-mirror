@@ -86,7 +86,7 @@ Use the [`UNDROP SCHEMA` data definition language (DDL) statement](https://docs.
     UNDROP SCHEMA DATASET_ID OPTIONS (location=location);
     ```
 
-4.  Click play_circle **Run** .
+4.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

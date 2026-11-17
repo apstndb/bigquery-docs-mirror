@@ -45,7 +45,7 @@ To update labels on a dataset, select one of the following options:
 
 1.  In the Google Cloud console, select the dataset.
 
-2.  Click the **Details** tab, and then click mode_edit **Edit details** .
+2.  Click the **Details** tab, and then click **Edit details** .
 
 3.  In the **Labels** section, modify the existing **Key** or **Value** fields to update a label. To apply additional labels, click **Add labels** . Each key can be used only once per dataset, but you can use the same key in different datasets in the same project.
 
@@ -64,7 +64,7 @@ Use the [`ALTER SCHEMA SET OPTIONS` DDL statement](https://docs.cloud.google.com
     SET OPTIONS (labels = [('sensitivity', 'high')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -300,7 +300,7 @@ Use the [`ALTER TABLE SET OPTIONS` DDL statement](https://docs.cloud.google.com/
       labels = [('department', 'shipping'), ('cost_center', 'logistics')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -524,11 +524,11 @@ To update a label to a reservation:
 
 4.  Find the reservation you want to update.
 
-5.  Expand the more_vert **Actions** option.
+5.  Expand the **Actions** option.
 
 6.  Click **Edit** .
 
-7.  To expand the **Advanced settings** section, click the expand_more expander arrow.
+7.  To expand the **Advanced settings** section, click the expander arrow.
 
 8.  Update the names of the key-value pair.
 
@@ -561,7 +561,7 @@ To update a label to a reservation, use the [`ALTER RESERVATION SET OPTIONS` DDL
       labels = [('sensitivity', 'high')]);
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -603,7 +603,7 @@ To convert a label to a tag:
 
 2.  Open the **Edit details** pane:
 
-    - For a dataset, click the **Details** tab, and then click mode_edit **Edit details** .
+    - For a dataset, click the **Details** tab, and then click **Edit details** .
     - For a table or view, in the details pane, click **Edit \> Edit details** .
 
 3.  In the **Labels** section, delete the value in the **Value** field for the label that you want to update.

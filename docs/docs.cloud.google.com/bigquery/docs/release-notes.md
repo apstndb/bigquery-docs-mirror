@@ -14,6 +14,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## November 16, 2026
+
+Feature
+
+You can create, manage, and query [Apache Iceberg views](https://docs.cloud.google.com/lakehouse/docs/manage-views) in the Lakehouse runtime catalog from Iceberg-compatible open source engines such as Apache Spark and Trino through the Apache Iceberg REST catalog endpoint ( [Preview](https://cloud.google.com/products#product-launch-stages) ). Iceberg views are open, non-materialized logical tables defined by SQL that you can use to build modular SQL pipelines and expose curated projections over Apache Iceberg tables.
+
 ## November 13, 2026
 
 Feature

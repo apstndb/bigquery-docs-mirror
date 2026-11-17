@@ -10,7 +10,7 @@ data_source: docs.cloud.google.com
 
 > **Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document shows you how to define and query measures on your graphs. You can use measures to ensure that aggregations are performed correctly across joins.
+Measures in BigQuery Graph let you define aggregate properties on node or edge tables to ensure that aggregations calculate correctly across joins. In this document, you learn how to define measures by using the `MEASURE` keyword, query them by using the `GRAPH_EXPAND` table-valued function (TVF), and aggregate results by using the `AGG` function.
 
 ## Overview
 

@@ -84,7 +84,7 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
 
 2.  In the query editor, add the sample code for the [`CREATE PROCEDURE` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) that appears.
 
-    Alternatively, in the **Explorer** pane, click the connection in the project that you used to create the connection resource. Then, to create a stored procedure for Spark, click search **Create stored procedure** .
+    Alternatively, in the **Explorer** pane, click the connection in the project that you used to create the connection resource. Then, to create a stored procedure for Spark, click **Create stored procedure** .
 
     **Python**
 
@@ -303,7 +303,7 @@ After you [create a stored procedure](https://docs.cloud.google.com/bigquery/doc
 
     ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Data** pane, expand your project and select the stored procedure for Spark that you want to run.
 
@@ -333,7 +333,7 @@ To call a stored procedure, use the [`CALL PROCEDURE` statement](https://docs.cl
     CALL `PROJECT_ID`.DATASET.PROCEDURE_NAME()
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

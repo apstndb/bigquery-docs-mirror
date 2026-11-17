@@ -233,7 +233,7 @@ You can use BigQuery data canvas in the Google Cloud console, a query, or a tabl
 
 1.  Go to the **BigQuery** page.
 
-2.  In the query editor, next to add_box **SQL query** , click arrow_drop_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
+2.  In the query editor, next to **SQL query** , click **Create new** , select **AI and knowledge** , and then click **Data canvas** .
 
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
@@ -286,13 +286,13 @@ To change the settings for your data canvas, follow these steps:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  Expand your project name, and then click **Data canvases** .
 
 4.  On the **Data canvases** page, click the link for the canvas you want to update.
 
-5.  Click settings **Canvas settings** .
+5.  Click **Canvas settings** .
 
 6.  In the **Location** section, choose from the following options:
 
@@ -340,7 +340,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 1.  In the Google Cloud console, go the **BigQuery** page.
 
-2.  In the query editor, next to add_box **SQL query** , click arrow_drop_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
+2.  In the query editor, next to **SQL query** , click **Create new** , select **AI and knowledge** , and then click **Data canvas** .
 
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
@@ -434,7 +434,7 @@ To edit the query that you generated, you can manually edit the query, or you ca
 
     - To modify the chart, click **Edit** , and then edit the chart in the **Edit visualization** pane.
     - To share the data canvas, click **Share** , then click **Share Link** to copy BigQuery data canvas link.
-    - To clean up the data canvas, select more_vert **More actions** , and then select gavel **Clear canvas** . This step results in a blank canvas.
+    - To clean up the data canvas, select **More actions** , and then select **Clear canvas** . This step results in a blank canvas.
 
 ### Example workflow: Join tables
 
@@ -698,7 +698,7 @@ In this example, you use natural language prompts with the Gemini assistant to f
 
 1.  In the Google Cloud console, go the **BigQuery** page.
 
-2.  In the query editor, next to add_box **SQL query** , click arrow_drop_down **Create new** , select **AI and knowledge** , and then click **Data canvas** .
+2.  In the query editor, next to **SQL query** , click **Create new** , select **AI and knowledge** , and then click **Data canvas** .
 
     ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
@@ -759,13 +759,13 @@ To view a list of all data canvases in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, click more_vert **View actions** next to **Data canvases** , and then do one of the following:
+3.  In the **Explorer** pane, click **View actions** next to **Data canvases** , and then do one of the following:
 
 - To open the list in the current tab, click **Show all** .
 - To open the list in a new tab, click **Show all in \> New tab** .
@@ -777,7 +777,7 @@ To view data canvas metadata, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -785,7 +785,7 @@ To view data canvas metadata, do the following:
 
 4.  Click the name of the data canvas you want to view metadata for.
 
-5.  Click info_outline **Details** to see information about the data canvas such as the [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) it uses and the date it was last modified.
+5.  Click **Details** to see information about the data canvas such as the [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) it uses and the date it was last modified.
 
 ## Work with data canvas versions
 
@@ -805,7 +805,7 @@ To view different versions of a data canvas and compare them with the current ve
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -813,9 +813,9 @@ To view different versions of a data canvas and compare them with the current ve
 
 4.  Click the name of the data canvas that you want to view version history for.
 
-5.  Click schedule **Version history** to see a list of the data canvas versions in descending order by date.
+5.  Click **Version history** to see a list of the data canvas versions in descending order by date.
 
-6.  Click more_vert **View actions** next to a data canvas version and then click **Compare** . The comparison pane opens, comparing the data canvas version that you selected with the current data canvas version.
+6.  Click **View actions** next to a data canvas version and then click **Compare** . The comparison pane opens, comparing the data canvas version that you selected with the current data canvas version.
 
 7.  Optional: To compare the versions inline instead of in separate panes, click **Compare** and then click **Inline** .
 
@@ -823,7 +823,7 @@ To view different versions of a data canvas and compare them with the current ve
 
 Restoring from the comparison pane lets you compare the previous version of the data canvas to the current version before choosing whether to restore it.
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -831,9 +831,9 @@ Restoring from the comparison pane lets you compare the previous version of the 
 
 3.  Click the name of the data canvas that you want to restore a previous version of.
 
-4.  Click schedule **Version history** .
+4.  Click **Version history** .
 
-5.  Click more_vert **View actions** next to the version of the data canvas that you want to restore, and then click **Compare** .
+5.  Click **View actions** next to the version of the data canvas that you want to restore, and then click **Compare** .
 
     The comparison pane opens, comparing the data canvas version that you selected with the most recent data canvas version.
 
@@ -883,7 +883,7 @@ You can use BigQuery data canvas in all [BigQuery locations](https://docs.cloud.
 
 You can help improve BigQuery data canvas suggestions by submitting feedback to Google. To provide feedback, do the following:
 
-1.  In the BigQuery data canvas toolbar, click more_vert **More actions** , and then click **Submit feedback** .
+1.  In the BigQuery data canvas toolbar, click **More actions** , and then click **Submit feedback** .
 2.  Click the category your feedback applies to.
 3.  In the **Describe your feedback (required)** field, enter your feedback.
 4.  Optional: To provide BigQuery with a screenshot of your data canvas, click screenshot_monitor **Capture screenshot** .

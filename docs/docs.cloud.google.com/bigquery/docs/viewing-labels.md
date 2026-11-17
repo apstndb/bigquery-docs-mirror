@@ -95,7 +95,7 @@ Query the [`INFORMATION_SCHEMA.SCHEMATA_OPTIONS` view](https://docs.cloud.google
       AND option_name = 'labels';
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -462,7 +462,7 @@ Query the [`INFORMATION_SCHEMA.JOB_BY_*` views](https://docs.cloud.google.com/bi
       INFORMATION_SCHEMA.JOBS_BY_USER;
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -524,7 +524,7 @@ Query the [`INFORMATION_SCHEMA.RESERVATIONS` views](https://docs.cloud.google.co
 
     - `RESERVATION_NAME` : the name of the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

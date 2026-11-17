@@ -126,15 +126,15 @@ Specify the nested and repeated `addresses` column:
 
 1.  In the Google Cloud console, open the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the details pane, click add_box **Create table** .
+4.  In the details pane, click **Create table** .
 
 5.  On the **Create table** page, specify the following details:
 
@@ -145,7 +145,7 @@ Specify the nested and repeated `addresses` column:
       - For **Dataset** , select the dataset in which you want to create the table.
       - For **Table** , enter the name of the table that you want to create.
 
-    - For **Schema** , click add_box **Add field** and enter the following table schema:
+    - For **Schema** , click **Add field** and enter the following table schema:
 
       - For **Field name** , enter `addresses` .
 
@@ -161,7 +161,7 @@ Specify the nested and repeated `addresses` column:
 
         - For **Mode** , leave the value set to **NULLABLE** .
 
-        - Click add_box **Add field** to add the following fields:
+        - Click **Add field** to add the following fields:
 
           | Field name      | Type     | Mode       |
           |-----------------|----------|------------|
@@ -200,7 +200,7 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
         description = 'Example name and addresses table');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

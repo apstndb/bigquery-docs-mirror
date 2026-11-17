@@ -59,11 +59,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 

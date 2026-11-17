@@ -68,15 +68,15 @@ Create a BigQuery dataset to store your k-means model:
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  Click **View actions \> Create dataset** .
 
     ![Create dataset.](https://docs.cloud.google.com/static/bigquery/images/create-dataset.png)
 
@@ -364,7 +364,7 @@ Follow these steps to view the model's evaluation information:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

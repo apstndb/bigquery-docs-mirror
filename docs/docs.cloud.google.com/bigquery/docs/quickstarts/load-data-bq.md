@@ -67,7 +67,7 @@ For more information about the data, see the Social Security Administration's [B
 
 4.  Move the file to your working directory.
 
-    - If you're working in Cloud Shell, click more_vert **More** **Upload** , click **Choose Files** , choose the `yob2024.txt` file, and then click **Upload** .
+    - If you're working in Cloud Shell, click **More** **Upload** , click **Choose Files** , choose the `yob2024.txt` file, and then click **Upload** .
 
     - If you're working in a local shell, copy or move the file `yob2024.txt` into the directory where you're running the bq tool.
 

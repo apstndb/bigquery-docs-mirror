@@ -69,7 +69,7 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
     - **Select datasets** : this limits search results to BigQuery resources that belong to the selected BigQuery datasets. In the **Type to filter** field, enter the name of the dataset.
     - **Annotations** : the Knowledge Catalog [aspect types](https://docs.cloud.google.com/knowledge-catalog/docs/enrich-entries-metadata#aspect-types) that are associated with the resource that you're searching for. To filter by aspect values, click **Filter on annotation values** , and then select the values.
 
-    To remove a filter, click clear **Clear** next to the specific filter that you want to remove. Or, to remove all filters, click **Clear Filters** .
+    To remove a filter, click **Clear** next to the specific filter that you want to remove. Or, to remove all filters, click **Clear Filters** .
 
     For more information about how filters are evaluated, see the [Filters](https://docs.cloud.google.com/bigquery/docs/search-resources#filters) section of this document.
 
@@ -79,8 +79,8 @@ To use search, ensure that you have enabled the Dataplex API. The Dataplex API i
 
     - To open the resource in the service that the resource belongs to, click **Open in ` PRODUCT_NAME `** for the resource. For example, to open a BigQuery dataset in BigQuery Studio, click **Open in Studio** . The options that are available depend on the resource.
     - To view the Knowledge Catalog metadata that's associated with a resource, click **Open in Knowledge Catalog** for the resource.
-    - If you have important search results that you want to bookmark, you can star them. Click star_border **Star** for the resource. You can view starred resources in BigQuery Studio.
-    - To close the resource summary in the split pane, click close **Close** .
+    - If you have important search results that you want to bookmark, you can star them. Click **Star** for the resource. You can view starred resources in BigQuery Studio.
+    - To close the resource summary in the split pane, click **Close** .
 
 Alternatively, you can [search for resources by using Gemini Cloud Assist](https://docs.cloud.google.com/bigquery/docs/use-cloud-assist#discover_resources) .
 

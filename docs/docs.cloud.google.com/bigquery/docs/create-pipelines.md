@@ -76,11 +76,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -105,14 +105,14 @@ To create a pipeline in a folder, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Do one of the following to create a pipeline:
 
     - Select the user folder or team folder where you want to place the pipeline, click the **+** (Create) button on the toolbar, and select **Pipeline** .
-    - In the file tree, click more_vert **View actions** next to a folder name, select **Create** \> **Pipeline** .
+    - In the file tree, click **View actions** next to a folder name, select **Create** \> **Pipeline** .
     - Open a folder to view its contents in the main panel, and click **Create Pipeline** .
 
 4.  In the creation dialog, enter a name for the pipeline.
@@ -137,11 +137,11 @@ To create a pipeline in a Git folder, follow these steps:
 
 2.  If you have not already connected your Git repository, [create and connect a BigQuery Studio Git repository](https://docs.cloud.google.com/bigquery/docs/git-repositories#create-git-repository) .
 
-3.  In the left pane, click folder **Files** to open the file browser.
+3.  In the left pane, click **Files** to open the file browser.
 
 4.  In the file tree, locate your connected Git repository folder or a nested directory within it.
 
-5.  Click more_vert **View actions** next to the folder name, and select **Create** \> **Pipeline** .
+5.  Click **View actions** next to the folder name, and select **Create** \> **Pipeline** .
 
 6.  In the dialog, enter the pipeline name and click **Save** .
 
@@ -160,7 +160,7 @@ To create a pipeline from the editor tab bar, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the tab bar of the editor pane, click the arrow_drop_down arrow next to the **+** sign, and then click **Pipeline** .
+2.  In the tab bar of the editor pane, click the arrow next to the **+** sign, and then click **Pipeline** .
 
 3.  Optional: To rename the pipeline, click the pipeline name, and then type a new name.
 
@@ -265,11 +265,11 @@ To add a task to a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -291,7 +291,7 @@ You can either create a new query or import an existing one.
 
 **Create a new query**
 
-1.  Click the arrow_drop_down arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
+1.  Click the arrow menu next to **Edit Query** and select either **In context** or **In new tab** .
 
 2.  Search for an existing query.
 
@@ -303,7 +303,7 @@ You can either create a new query or import an existing one.
 
 **Import an existing query**
 
-1.  Click the arrow_drop_down arrow menu next to **Edit Query** and click **Import a copy** .
+1.  Click the arrow menu next to **Edit Query** and click **Import a copy** .
 
 2.  Search for an existing query to import or select an existing query from the search pane. When you import a query, the original remains unchanged because the query's source file is copied into the pipeline.
 
@@ -327,7 +327,7 @@ You can either create a new notebook or import an existing one. To change settin
 
     **Create a new notebook**
 
-2.  Click the arrow_drop_down arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
+2.  Click the arrow menu next to **Edit Notebook** and select either **In context** or **In new tab** .
 
 3.  Search for an existing notebook.
 
@@ -339,7 +339,7 @@ You can either create a new notebook or import an existing one. To change settin
 
 **Import an existing notebook**
 
-1.  Click the arrow_drop_down arrow menu next to **Edit Notebook** and click **Import a copy** .
+1.  Click the arrow menu next to **Edit Notebook** and click **Import a copy** .
 
 2.  Search for an existing notebook to import or select an existing notebook from the search pane. When you import a notebook, the original remains unchanged because the notebook's source file is copied into the pipeline.
 
@@ -363,7 +363,7 @@ You can either create a new data preparation or import an existing one.
 
 **Create a new data preparation**
 
-1.  Click the arrow_drop_down arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
+1.  Click the arrow menu adjacent to **Edit Data preparation** and select either **In context** or **In new tab** .
 
 2.  Search for an existing data preparation.
 
@@ -375,7 +375,7 @@ You can either create a new data preparation or import an existing one.
 
 **Import an existing data preparation**
 
-1.  Click the arrow_drop_down arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
+1.  Click the arrow drop-down menu next to **Edit Data preparation** and click **Import a copy** .
 
 2.  Search for an existing data preparation to import or select an existing data preparation from the search pane. When you import a data preparation, the original remains unchanged because the data preparation's source file is copied into the pipeline.
 
@@ -577,11 +577,11 @@ To edit a pipeline task, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -599,11 +599,11 @@ To delete a task from a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -621,11 +621,11 @@ To share a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -643,11 +643,11 @@ To share a pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
@@ -667,15 +667,15 @@ To run all the tasks in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play_circle_filled **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) .
+4.  Click **Run** \> **Run all tasks** . If you selected **Run with my user credentials** for your [authentication](https://docs.cloud.google.com/bigquery/docs/create-pipelines#create_a_pipeline) , you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/create-pipelines#authorize-google-account) .
 
 5.  Optional: To inspect the run, [view past manual runs](https://docs.cloud.google.com/bigquery/docs/manage-pipelines#view-manual-runs) .
 
@@ -734,15 +734,15 @@ To run selected tasks in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play_circle_filled **Run** \> **Select tasks to run** .
+4.  Click **Run** \> **Select tasks to run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
 
@@ -788,18 +788,18 @@ To run tasks with selected tags in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play_circle_filled **Run** \> **Run by tag** , then do either of the following:
+4.  Click **Run** \> **Run by tag** , then do either of the following:
 
     - Click a tag that you want to run.
-    - Click checklist **Select tags to run** .
+    - Click **Select tags to run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account.
 
@@ -847,15 +847,15 @@ To run unit tests in a pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Pipelines** , and then select a pipeline.
 
-4.  Click play_circle_filled **Run** .
+4.  Click **Run** .
 
 5.  In the **Run** pane, in the **Authentication** section, authorize the execution with the user credentials for your Google Account or a service account:
 

@@ -93,15 +93,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -438,7 +438,7 @@ If you want to reuse the project, then delete the resources that you created for
 
     2.  In the **Datasets** list, click the `bqml_tutorial` dataset.
 
-    3.  In the details pane, click delete **Delete** .
+    3.  In the details pane, click **Delete** .
 
     4.  In the **Delete dataset** dialog, click **Delete** .
 

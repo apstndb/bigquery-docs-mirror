@@ -40,7 +40,7 @@ Use the [`CREATE TABLE`](https://docs.cloud.google.com/bigquery/docs/reference/s
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

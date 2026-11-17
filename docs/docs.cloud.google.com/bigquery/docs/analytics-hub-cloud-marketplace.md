@@ -92,7 +92,7 @@ To create a BigQuery sharing listing and publish it on Cloud Marketplace, do the
 
     > **Note:** A single BigQuery sharing listing supports both access-request and Cloud Marketplace-integrated flows. Because both flows are supported, you can create a Cloud Marketplace-integrated listing from an existing offline commercial listing without disrupting existing subscriptions.
 
-4.  In the row of your listing, click more_vert **More actions \> List on Marketplace** . You're redirected to the Cloud Marketplace Producer Portal.
+4.  In the row of your listing, click **More actions \> List on Marketplace** . You're redirected to the Cloud Marketplace Producer Portal.
 
 5.  To onboard your BigQuery sharing listing as a [data product](https://docs.cloud.google.com/marketplace/docs/partners/data) , follow the instructions in the Cloud Marketplace Producer Portal.
 
@@ -146,7 +146,7 @@ To subscribe to a BigQuery sharing listing on Cloud Marketplace, do the followin
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
 
-2.  Click search **Search listings** .
+2.  Click **Search listings** .
 
 3.  Search for the listing that you want to subscribe to. To discover commercial listings on Cloud Marketplace, apply the **Listings \> Marketplace** filter.
 

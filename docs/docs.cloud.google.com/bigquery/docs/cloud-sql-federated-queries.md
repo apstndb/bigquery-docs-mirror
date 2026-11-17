@@ -65,7 +65,7 @@ Select one of the following options to run the federated query:
 
     Replace `CONNECTION_ID` with the ID of your BigQuery connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
     The query results appear in the **Query results** pane.
 

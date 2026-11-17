@@ -43,11 +43,11 @@ You can view the metadata for a table snapshot by using one of the following opt
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that has the table snapshot.
 
@@ -82,7 +82,7 @@ To see metadata for a table snapshot, query the [`INFORMATION_SCHEMA.TABLE_SNAPS
     - `DATASET_NAME` : the name of the dataset that contains the snapshot.
     - `SNAPSHOT_NAME` : the name of the snapshot.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

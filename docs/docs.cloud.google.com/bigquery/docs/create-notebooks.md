@@ -97,11 +97,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -117,13 +117,13 @@ To create a notebook from a template in the notebook gallery, follow these steps
 
 1.  In the Google Cloud console, go to **BigQuery Studio** .
 
-2.  To open the gallery, in the tab bar of the editor pane, click the arrow_drop_down arrow next to add_box **SQL query** , and then click **Notebook \> All templates** .
+2.  To open the gallery, in the tab bar of the editor pane, click the arrow next to **SQL query** , and then click **Notebook \> All templates** .
 
 3.  In the notebook gallery, select a template. For example, you can select **Getting started with BigQuery DataFrames** .
 
     The new notebook opens, containing cells that show example queries against the `bigquery-public-data.ml_datasets.penguins` public dataset.
 
-4.  Alternatively, you can click the arrow_drop_down arrow next to add_box **SQL query** , and then click **Notebook \> Empty notebook** , **Notebook \> BigQuery template** , or **Notebook \> Spark template** to open these specific templates.
+4.  Alternatively, you can click the arrow next to **SQL query** , and then click **Notebook \> Empty notebook** , **Notebook \> BigQuery template** , or **Notebook \> Spark template** to open these specific templates.
 
 5.  To create a runnable notebook from the template, click **Use this template** .
 
@@ -141,17 +141,17 @@ To create a notebook containing a default query for a specific table, follow the
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click your dataset.
 
 4.  Click **Overview \> Tables** , and find the table that you want to query.
 
-5.  Next to the table, click more_vert **Actions** , and then click **Open in \> Python notebook** .
+5.  Next to the table, click **Actions** , and then click **Open in \> Python notebook** .
 
     The new notebook opens, containing cells that show example queries against the selected table.
 
@@ -173,7 +173,7 @@ To open any version of an existing notebook as a new notebook, follow these step
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -181,9 +181,9 @@ To open any version of an existing notebook as a new notebook, follow these step
 
 4.  Select a notebook.
 
-5.  Click schedule **Version history** .
+5.  Click **Version history** .
 
-6.  Click more_vert **View actions** next to a notebook version and then click **Open as new Python notebook** .
+6.  Click **View actions** next to a notebook version and then click **Open as new Python notebook** .
 
     A copy of the notebook is opened as a new notebook.
 
@@ -195,14 +195,14 @@ To upload a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, and then do one of the following:
 
-    - Next to **Notebooks** , click more_vert **View actions** \> **Upload notebook** .
-    - Next to the Google Cloud project name, click more_vert **View actions** \> **Upload to project** \> **Notebook** .
+    - Next to **Notebooks** , click **View actions** \> **Upload notebook** .
+    - Next to the Google Cloud project name, click **View actions** \> **Upload to project** \> **Notebook** .
 
 4.  In the **Upload Notebook** dialog, in the **Notebook** field, click **Browse** , and then select the notebook that you want to upload.
 
@@ -230,7 +230,7 @@ To connect to the default runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -250,7 +250,7 @@ To connect to non-default runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -258,7 +258,7 @@ To connect to non-default runtime, follow these steps:
 
 4.  Click the name of a notebook to open it.
 
-5.  In the notebook, click the arrow_drop_down drop-down next to **Connect** and then click **Connect to a runtime** .
+5.  In the notebook, click the drop-down next to **Connect** and then click **Connect to a runtime** .
 
 6.  Click **Connect to an existing runtime** .
 
@@ -272,7 +272,7 @@ To connect to a new runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -280,7 +280,7 @@ To connect to a new runtime, follow these steps:
 
 4.  Click the name of a notebook to open it.
 
-5.  In the notebook, click the arrow_drop_down drop-down next to **Connect** and then click **Connect to a runtime** .
+5.  In the notebook, click the drop-down next to **Connect** and then click **Connect to a runtime** .
 
 6.  Click **Create new runtime** .
 

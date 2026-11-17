@@ -110,9 +110,9 @@ To use tags in BigQuery, you need the following permissions:
 
 To list tag keys and key values in the Google Cloud console, you need the following permissions:
 
-- To list the tag keys that are associated with a parent organization or project, you need the `resourcemanager.tagKeys.list` permission at the tag key's parent level and the `resourcemanager.tagKeys.get` permission for each tag key. To view the list of tag keys in the BigQuery console, click the dataset name and then click mode_edit **Edit details** , or click the table or view name and then click **Edit \> Edit details** .
+- To list the tag keys that are associated with a parent organization or project, you need the `resourcemanager.tagKeys.list` permission at the tag key's parent level and the `resourcemanager.tagKeys.get` permission for each tag key. To view the list of tag keys in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Edit \> Edit details** .
 
-- To list the tag values of keys that are associated with a parent organization or project, you need the `resourcemanager.tagValues.list` permission at the tag value parent level and the `resourcemanager.tagValues.get` permission for each tag value. To view the list of tag key values in the BigQuery console, click the dataset name and then click mode_edit **Edit details** , or click the table or view name and then click **Edit \> Edit details** .
+- To list the tag values of keys that are associated with a parent organization or project, you need the `resourcemanager.tagValues.list` permission at the tag value parent level and the `resourcemanager.tagValues.get` permission for each tag value. To view the list of tag key values in the BigQuery console, click the dataset name and then click **Edit details** , or click the table or view name and then click **Edit \> Edit details** .
 
 To use tags in Cloud Resource Manager API or gcloud, you need the following permissions:
 
@@ -139,15 +139,15 @@ After you create a tag, you can attach it to a new BigQuery dataset. You can att
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, select the project where you want to create your dataset.
 
-4.  Click more_vert **View actions** \> **Create dataset** .
+4.  Click **View actions** \> **Create dataset** .
 
 5.  Enter the information for your new dataset. For more details, see [Create datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
 
@@ -196,7 +196,7 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -349,13 +349,13 @@ After you create a tag, you can attach it to an existing dataset. You can attach
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click mode_edit **Edit details** .
+4.  In the **Dataset info** section, click **Edit details** .
 
 5.  Expand the **Tags** section.
 
@@ -405,7 +405,7 @@ The following example overwrites all tags for an existing dataset.
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -431,7 +431,7 @@ The following example uses the `+=` operator to attach tags to a dataset without
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -484,7 +484,7 @@ The following steps provide a list of tag bindings attached directly to a datase
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -589,15 +589,15 @@ You can detach a tag from a resource by deleting the tag binding resource. If yo
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click mode_edit **Edit details** .
+4.  In the **Dataset info** section, click **Edit details** .
 
-5.  In the **Tags** section, click delete **Delete item** next to the tag you want to delete.
+5.  In the **Tags** section, click **Delete item** next to the tag you want to delete.
 
 6.  Click **Save** .
 
@@ -627,7 +627,7 @@ The following example detaches tags from a dataset using the `-=` operator. To d
     - `TAG_KEY_2` : the namespaced key name for the second tag you're detaching.
     - `TAG_VALUE_2` : the short name for the value of the second tag you're detaching.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -692,13 +692,13 @@ After you create a tag, you can attach it to a new table. You can attach only on
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  Enter the information for your new table. For more details, see [Create and use tables](https://docs.cloud.google.com/bigquery/docs/tables) .
 
@@ -748,7 +748,7 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -911,7 +911,7 @@ After you create a tag, you can attach it to an existing table. You can attach o
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -969,7 +969,7 @@ The following example overwrites all tags for an existing table.
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -995,7 +995,7 @@ The following example uses the `+=` operator to attach a tag to a table without 
     - `TAG_KEY_2` : the namespaced key name for the second tag.
     - `TAG_VALUE_2` : the short name for the second tag's value.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1049,7 +1049,7 @@ You can list tags that are attached directly to a table. This process doesn't li
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1156,7 +1156,7 @@ You can remove a tag association from a table by deleting the tag binding. If yo
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1166,7 +1166,7 @@ You can remove a tag association from a table by deleting the tag binding. If yo
 
 5.  In the details pane, click **Edit \> Edit details** .
 
-6.  In the **Tags** section, click delete **Delete item** next to the tag you want to delete.
+6.  In the **Tags** section, click **Delete item** next to the tag you want to delete.
 
 7.  Click **Save** .
 
@@ -1196,7 +1196,7 @@ The following example detaches tags from a table using the `-=` operator. To det
     - `TAG_KEY_2` : the namespaced key name for the second tag you're detaching.
     - `TAG_VALUE_2` : the short name for the value of the second tag you're detaching.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1272,7 +1272,7 @@ Suppose you are an administrator of an organization. Your data analysts are all 
 
 2.  In the Google Cloud console, go to the **IAM** page.
 
-3.  Locate the row that contains the intern whose dataset access you want to restrict, and click edit **Edit principal** in that row.
+3.  Locate the row that contains the intern whose dataset access you want to restrict, and click **Edit principal** in that row.
 
 4.  From the **Role** menu, select **BigQuery Data Viewer** .
 

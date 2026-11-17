@@ -57,7 +57,7 @@ To find the dataset used for this tutorial, follow these steps:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
 
-2.  Click search **Search listings** .
+2.  Click **Search listings** .
 
 3.  In the **Search for listings** field, enter `"ERA5-Land Daily Aggregated"` .
 

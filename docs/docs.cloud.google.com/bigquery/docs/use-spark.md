@@ -37,7 +37,7 @@ For pricing information, see BigQuery [Notebook runtime pricing](https://cloud.g
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the tab bar of the details pane, click the arrow_drop_down arrow next to the **+** sign, and then click **Notebook** .
+2.  In the tab bar of the details pane, click the arrow next to the **+** sign, and then click **Notebook** .
 
 ## Create a Spark session in a BigQuery Studio notebook
 
@@ -52,7 +52,7 @@ You can create a Spark session in a BigQuery Studio Python notebook in the follo
 
 To create a Spark session in a new notebook, do the following:
 
-1.  In the tab bar of the editor pane, click the arrow_drop_down drop-down arrow next to the **+** sign, and then click **Notebook** .
+1.  In the tab bar of the editor pane, click the drop-down arrow next to the **+** sign, and then click **Notebook** .
 
     ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/plus-python-notebook.png)
 
@@ -100,7 +100,7 @@ You can enter and run the code in a notebook cell to create a Spark session base
 
 To get started quickly, use the `Query using Spark` template to pre-populate your notebook with Spark session template code:
 
-1.  In the tab bar of the editor pane, click the arrow_drop_down drop-down arrow next to the **+** sign, and then click **Notebook** .
+1.  In the tab bar of the editor pane, click the drop-down arrow next to the **+** sign, and then click **Notebook** .
 
     ![](https://docs.cloud.google.com/static/dataproc-serverless/docs/images/plus-python-notebook.png)
 

@@ -427,7 +427,7 @@ Click **Execution details** to see the query plan:
 
 The color indicators show the relative timings for all steps across all stages.
 
-To learn more about the steps of the execution stages, click arrow_drop_down to expand the details for the stage:
+To learn more about the steps of the execution stages, click to expand the details for the stage:
 
 ![The hamlet query plan step details.](https://docs.cloud.google.com/static/bigquery/images/queryplan_hamlet_steps.png)
 

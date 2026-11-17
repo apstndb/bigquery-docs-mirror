@@ -71,15 +71,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -181,11 +181,11 @@ Run the query that creates your linear regression model:
 
     To see the model, follow these steps:
 
-    1.  In the left pane, click explore **Explorer** :
+    1.  In the left pane, click **Explorer** :
 
         ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-        If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+        If you don't see the left pane, click **Expand left pane** to open the pane.
 
     2.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -233,7 +233,7 @@ ml.create_model(
 
 It takes about 30 seconds to create the model. To see the model, follow these steps:
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -253,7 +253,7 @@ Loss is the penalty for a bad prediction. It is a number indicating how bad the 
 
 See the model training statistics that were generated when you ran the `CREATE MODEL` query:
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 

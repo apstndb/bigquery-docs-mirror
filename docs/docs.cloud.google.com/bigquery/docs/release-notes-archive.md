@@ -1253,7 +1253,7 @@ You can now use [tags](https://docs.cloud.google.com/bigquery/docs/tags) on BigQ
 
 Feature
 
-**Cloud console updates** : You can now sort query results by column. Click arrow_drop_down **Open sort menu** next to the column name and select a sort order. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+**Cloud console updates** : You can now sort query results by column. Click **Open sort menu** next to the column name and select a sort order. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## January 24, 2024
 
@@ -2391,7 +2391,7 @@ You can now apply four new types of [dynamic data masking](https://docs.cloud.go
 
 Feature
 
-**Cloud console updates** : In the **Explorer** pane, you can now refresh the contents of a resource (project or dataset). To refresh the contents of a resource, click more_vert **View actions** , and then click **Refresh contents** .
+**Cloud console updates** : In the **Explorer** pane, you can now refresh the contents of a resource (project or dataset). To refresh the contents of a resource, click **View actions** , and then click **Refresh contents** .
 
 ## February 06, 2023
 
@@ -2870,9 +2870,9 @@ Feature
 
 **Cloud console updates** : You can now copy BigQuery metadata to your clipboard by using the following options:
 
-- In the **Schema** view, to copy a table's schema, select any fields, and then click content_copy **Copy** .
+- In the **Schema** view, to copy a table's schema, select any fields, and then click **Copy** .
 
-- In the **Explorer** pane, to copy the ID of a resource, click more_vert **View actions** , and then click **Copy ID** .
+- In the **Explorer** pane, to copy the ID of a resource, click **View actions** , and then click **Copy ID** .
 
 Feature
 

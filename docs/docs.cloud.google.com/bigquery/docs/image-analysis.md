@@ -97,7 +97,7 @@ To perform BigQuery ML inference on object tables using [gemini-2.5-flash](https
 
 3.  In the **Slot reservations** table, find the reservation that you want to assign to your project.
 
-4.  Click more_vert **View actions \> Create assignment** .
+4.  Click **View actions \> Create assignment** .
 
 5.  In **Create an assignment** , click **Browse** and select your project.
 
@@ -113,15 +113,15 @@ To create a BigQuery dataset, select one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In **Explorer** , expand your project, and then click **Datasets** .
 
-4.  On the **Datasets** page, click add **Create dataset** .
+4.  On the **Datasets** page, click **Create dataset** .
 
 5.  In the **Create dataset** pane, do the following:
 
@@ -345,7 +345,7 @@ If you created a BigQuery reservation as part of this tutorial, you should remov
 
 3.  In the **Slot reservations** table, find **`bqml-tutorial-reservation`** .
 
-4.  Click more_vert **View actions** \> **Delete** .
+4.  Click **View actions** \> **Delete** .
 
 ### bq
 
@@ -361,11 +361,11 @@ bq rm --reservation --location=us bqml-tutorial-reservation
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** , locate your project, and then click **Connections** .
+2.  In the left pane, click **Explorer** , locate your project, and then click **Connections** .
 
 3.  In the table, find your connection.
 
-4.  Click more_vert **View actions \> Delete** .
+4.  Click **View actions \> Delete** .
 
 ### bq
 

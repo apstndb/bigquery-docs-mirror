@@ -1836,7 +1836,7 @@ After inspecting the dataset, if you would like to share it with a user that is 
 
 2.  Click the dataset to view its details.
 
-3.  Click person_add **Sharing** \> **Publish as listing** .
+3.  Click **Sharing** \> **Publish as listing** .
 
 4.  In the dialog that opens, create a listing as prompted.
 
@@ -1852,7 +1852,7 @@ After inspecting the dataset, if you would like to share it with a user that is 
 
     A private listing is created.
 
-8.  For your listing, select more_vert **More actions** under **Actions** .
+8.  For your listing, select **More actions** under **Actions** .
 
 9.  Click **Copy share link** .
 

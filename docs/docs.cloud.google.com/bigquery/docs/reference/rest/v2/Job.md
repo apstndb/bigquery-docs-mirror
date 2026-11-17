@@ -2919,14 +2919,16 @@ Statistics for a copy job.
 ```
 {
   "copiedRows": string,
-  "copiedLogicalBytes": string
+  "copiedLogicalBytes": string,
+  "remoteDestinationRegion": string
 }
 ```
 
-| Fields               |                                                                                                                                                                   |
-|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `copiedRows`         | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of rows copied to the destination table.          |
-| `copiedLogicalBytes` | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of logical bytes copied to the destination table. |
+| Fields                    |                                                                                                                                                                   |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `copiedRows`              | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of rows copied to the destination table.          |
+| `copiedLogicalBytes`      | `string ( `[`Int64Value`](https://developers.google.com/discovery/v1/type-format)` format)` Output only. Number of logical bytes copied to the destination table. |
+| `remoteDestinationRegion` | `string` Output only. Destination region for a cross-region copy job. Not set for in-region copy jobs.                                                            |
 
 ## ScriptStatistics
 

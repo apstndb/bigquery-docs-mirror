@@ -24,11 +24,11 @@ On the BigQuery page, your workspaces are displayed in alphabetical order under 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 ## Supported file types
 

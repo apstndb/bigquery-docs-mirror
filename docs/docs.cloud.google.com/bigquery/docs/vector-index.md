@@ -646,7 +646,7 @@ Use the [`CREATE ASSIGNMENT` DDL statement](https://docs.cloud.google.com/bigque
 
     - `PROJECT_ID` : the ID of the project containing the tables to index. This project is assigned to the reservation.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

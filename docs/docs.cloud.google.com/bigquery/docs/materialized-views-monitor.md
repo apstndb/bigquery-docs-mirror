@@ -136,7 +136,7 @@ Complete the following steps to create an alert policy that specifies the condit
 
 1.  In the Google Cloud console, go to the **Log-based Metrics** page.
 
-2.  Adjacent to your user-defined logs-based metric for materialized view refreshes, click more_vert **More actions** \> **Create alert from metric** .
+2.  Adjacent to your user-defined logs-based metric for materialized view refreshes, click **More actions** \> **Create alert from metric** .
 
 3.  In **Select a metric** , select the name of the metric you specified previously for **Log-based metric name** .
 

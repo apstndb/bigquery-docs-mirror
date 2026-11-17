@@ -198,7 +198,7 @@ BigQuery tables exist in [datasets](https://docs.cloud.google.com/bigquery/docs/
 
 1.  Go to the BigQuery page in the Google Cloud console.
 
-2.  Expand the more_vert **Actions** option, click **Create dataset** , and then name it `together` .
+2.  Expand the **Actions** option, click **Create dataset** , and then name it `together` .
 
 3.  In the Databricks Python notebook, create an Apache Spark dataframe from a Python list with three string entries using the following code snippet:
 

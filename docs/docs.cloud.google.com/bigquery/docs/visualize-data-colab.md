@@ -39,7 +39,7 @@ To create a new notebook, follow the instructions in [Create a notebook from the
 
 To run a SQL query in a notebook, follow these steps:
 
-1.  In your notebook, click the add **Code** drop-down and select **Add SQL cell** .
+1.  In your notebook, click the **Code** drop-down and select **Add SQL cell** .
 
 2.  Enter the following query:
 
@@ -47,7 +47,7 @@ To run a SQL query in a notebook, follow these steps:
     SELECT * FROM `bigquery-public-data.ml_datasets.penguins`;
     ```
 
-3.  Click play_circle **Run cell** .
+3.  Click **Run cell** .
 
     The results of the query are automatically saved in a DataFrame called `df` .
 
@@ -59,23 +59,23 @@ To run a SQL query in a notebook, follow these steps:
     SELECT * FROM {df} WHERE sex = 'FEMALE';
     ```
 
-6.  Click play_circle **Run cell** .
+6.  Click **Run cell** .
 
     The results of the query are automatically saved in a DataFrame called `female_penguins` .
 
 ## Visualize results in a Colab Enterprise notebook
 
-1.  In your notebook, click the add **Code** drop-down and select **Add visualization cell** .
+1.  In your notebook, click the **Code** drop-down and select **Add visualization cell** .
 
 2.  Click **Choose a dataframe** and then select `female_penguins` .
 
     A chart interface appears.
 
-3.  Click **Scatter chart** to open a chart menu, then select the bar_chart **Vertical bar chart** .
+3.  Click **Scatter chart** to open a chart menu, then select the **Vertical bar chart** .
 
-4.  In the **Metric** section, check that `culmen_length_mm` and `culmen_depth_mm` appear. If a metric is missing, click add_circle_outline **Add metric** and select it. To remove a metric, hold the pointer over the metric name and then click close **Close** .
+4.  In the **Metric** section, check that `culmen_length_mm` and `culmen_depth_mm` appear. If a metric is missing, click **Add metric** and select it. To remove a metric, hold the pointer over the metric name and then click **Close** .
 
-5.  Hold the pointer over the aggregation type (for example, **AVG** or **SUM** ) to reveal the edit icon, then click it to change the aggregation type to **Average** .
+5.  Hold the pointer over the aggregation type (for example, **AVG** or **SUM** ) to reveal the icon, then click it to change the aggregation type to **Average** .
 
 ![Bar chart showing visualization](https://docs.cloud.google.com/static/bigquery/images/penguin-visualization.png)
 

@@ -176,7 +176,7 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 
 2.  Click the name of the key ring that contains the key.
 
-3.  For the key whose resource ID you are retrieving, click **More** *more_vert* .
+3.  For the key whose resource ID you are retrieving, click **More** .
 
 4.  Click **Copy Resource Name** . The resource ID for the key is copied to your clipboard. The resource ID is also known as the resource name.
 
@@ -188,15 +188,15 @@ To create a table that is protected by Cloud KMS:
 
 1.  Open the **BigQuery** page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset. The dataset opens in a tab.
 
-4.  In the details pane, click add_box **Create table** .
+4.  In the details pane, click **Create table** .
 
 5.  On the **Create table** page, fill in the information needed to [create an empty table with a schema definition](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . Before you click **Create Table** , set the encryption type and specify the Cloud KMS key to use with the table:
 
@@ -222,7 +222,7 @@ Use the [`CREATE TABLE` statement](https://docs.cloud.google.com/bigquery/docs/r
           = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -744,7 +744,7 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 1.  Open the **BigQuery** page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -1190,7 +1190,7 @@ Use the [`ALTER TABLE SET OPTIONS` statement](https://docs.cloud.google.com/bigq
         = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1420,7 +1420,7 @@ Use the [`ALTER PROJECT SET OPTIONS` statement](https://docs.cloud.google.com/bi
         = 'projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY');
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -1605,7 +1605,7 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 2.  In the **Filter** field, enter `constraints/gcp.restrictNonCmekServices` , and then click **Restrict which services may create resources without CMEK** .
 
-3.  Click edit **Edit** .
+3.  Click **Edit** .
 
 4.  Select **Customize** , select **Replace** , and then click **Add Rule** .
 
@@ -1638,7 +1638,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 2.  In the **Filter** field, enter `constraints/gcp.restrictCmekCryptoKeyProjects` , and then click **Restrict which projects may supply KMS CryptoKeys for CMEK** .
 
-3.  Click edit **Edit** .
+3.  Click **Edit** .
 
 4.  Select **Customize** , select **Replace** , and then click **Add Rule** .
 

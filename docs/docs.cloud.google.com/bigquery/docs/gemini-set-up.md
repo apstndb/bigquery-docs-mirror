@@ -20,7 +20,7 @@ To use Gemini in BigQuery, you must enable required APIs and grant required Iden
 
 1.  In the Google Cloud console, with your project selected, go to the **BigQuery Studio** page.
 
-2.  View a Gemini in BigQuery feature in the the Google Cloud console. For example, in BigQuery Studio hover over the pen_spark arrow_drop_down **Gemini** icon.
+2.  View a Gemini in BigQuery feature in the the Google Cloud console. For example, in BigQuery Studio hover over the pen_spark **Gemini** icon.
 
     ![Gemini button in the BigQuery toolbar.](https://docs.cloud.google.com/static/gemini/images/gemini-assistant-link-disabled.png)
 

@@ -60,7 +60,7 @@ Run a query on the Blob Storage BigLake table:
 
     - `TABLE_NAME` : the BigLake table that name you created
 
-    - Click play_circle **Run** .
+    - Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -30,7 +30,7 @@ To reserve on-demand BI Engine capacity, follow these steps:
 
     > **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
-2.  Click add **Create reservation** .
+2.  Click **Create reservation** .
 
 3.  On the **Create reservation** page, for **Step 1** :
 
@@ -84,7 +84,7 @@ Use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.cloud.googl
     - `VALUE` : the `INT64` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `VALUE` replaces the existing value if there is one. Setting to `NULL` clears the value for that option.
     - `TABLE_PROJECT_ID `` . `` DATASET `` . `` TABLE` : the optional list of [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `TABLE_PROJECT_ID `` . `` DATASET `` . `` TABLE `` or `` DATASET `` . `` TABLE` . If the project is omitted, then the default project is used.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -192,7 +192,7 @@ You can use the [`ALTER BI_CAPACITY SET OPTIONS` DDL statement](https://docs.clo
     - `VALUE` : the `INT64` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `VALUE` replaces the existing value if there is one. Setting to `NULL` clears the value for that option.
     - `TABLE_PROJECT_ID. `` DATASET `` . `` TABLE` : optional list of [preferred tables](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `TABLE_PROJECT_ID `` . `` DATASET `` . `` TABLE `` or `` DATASET `` . `` TABLE` . If the project is omitted, then the default project is used.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -206,7 +206,7 @@ To delete a capacity reservation, follow these steps:
 
 2.  In the **Reservations** section, locate your reservation.
 
-3.  In the **Actions** column, click the more_vert icon to the right of your reservation and choose **Delete** .
+3.  In the **Actions** column, click the icon to the right of your reservation and choose **Delete** .
 
 4.  In the **Delete reservation?** dialog, enter **Delete** and then click **DELETE** .
 
@@ -231,7 +231,7 @@ Sets the options on BI Engine capacity.
 
     When you delete all capacity reservations in a project, BI Engine is disabled for that project.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

@@ -67,7 +67,7 @@ To alter a materialized view, use the [`ALTER MATERIALIZED VIEW SET OPTIONS` DDL
     - `DATASET` : the name of the dataset that contains the materialized view
     - `MATERIALIZED_VIEW` : the name of the materialized view you want to alter
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -155,11 +155,11 @@ The process to list materialized views is identical to the process for listing t
 
 ### Console
 
-1.  In the left pane, click explore **Explorer** :
+1.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 
@@ -314,7 +314,7 @@ To get information about materialized views, query the [`INFORMATION_SCHEMA.TABL
     - `PROJECT_ID` : the name of the project that contains the materialized views
     - `DATASET_ID` : the name of the dataset that contains the materialized views
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -382,7 +382,7 @@ To delete a materialized view, use the [`DROP MATERIALIZED VIEW` DDL statement](
     - `DATASET` : the name of the dataset that contains the materialized view
     - `MATERIALIZED_VIEW` : the name of the materialized view you want to delete
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

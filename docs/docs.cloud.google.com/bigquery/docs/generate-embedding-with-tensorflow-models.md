@@ -90,7 +90,7 @@ Use the [`CREATE SCHEMA` statement](https://docs.cloud.google.com/bigquery/docs/
 
     Replace `PROJECT_ID` with your project ID.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -251,7 +251,7 @@ Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/r
 
     Replace `BUCKET_NAME` with the name of the bucket that you previously created.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -272,7 +272,7 @@ Use the [`CREATE MODEL` statement](https://docs.cloud.google.com/bigquery/docs/r
 
     Replace `BUCKET_NAME` with the name of the bucket that you previously created.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -345,7 +345,7 @@ To create a remote model based on the Agent Platform endpoint, use the [`CREATE 
 
     - `ENDPOINT_ID` : the ID of your model endpoint
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

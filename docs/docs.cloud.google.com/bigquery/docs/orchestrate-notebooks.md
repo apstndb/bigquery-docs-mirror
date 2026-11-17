@@ -86,11 +86,11 @@ To create a notebook schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -98,7 +98,7 @@ To create a notebook schedule, follow these steps:
 
 5.  In the **Notebook** toolbar, click **Schedule** .
 
-    Alternatively, click calendar_month **Schedule** , and then click **Create schedule** .
+    Alternatively, click **Schedule** , and then click **Create schedule** .
 
 6.  In the **Schedule Notebook** pane, in the **Schedule name** field, enter a name for the schedule.
 
@@ -194,7 +194,7 @@ To deploy a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -224,7 +224,7 @@ To view all notebook schedules in your project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
 
-2.  Optional: To display additional columns with notebook schedule details, click view_column **Column display options** , and then select columns and click **OK** .
+2.  Optional: To display additional columns with notebook schedule details, click **Column display options** , and then select columns and click **OK** .
 
 ## View schedule details
 
@@ -236,7 +236,7 @@ To view schedule details for a selected notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -246,7 +246,7 @@ To view schedule details for a selected notebook, follow these steps:
 
 5.  In the **Notebook** toolbar, click **Schedule** .
 
-    Alternatively, click calendar_month **Schedule** :
+    Alternatively, click **Schedule** :
 
     ![Notebook schedule panel.](https://docs.cloud.google.com/static/bigquery/images/notebook-schedule-panel.png)
 
@@ -266,7 +266,7 @@ To view past executions of a selected notebook schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -296,7 +296,7 @@ To disable a schedule for a selected notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -306,7 +306,7 @@ To disable a schedule for a selected notebook, follow these steps:
 
 5.  In the **Notebook** toolbar, click **Schedule** .
 
-    Alternatively, click calendar_month **Schedule** :
+    Alternatively, click **Schedule** :
 
     ![Notebook schedule panel.](https://docs.cloud.google.com/static/bigquery/images/notebook-schedule-panel.png)
 
@@ -328,7 +328,7 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -338,7 +338,7 @@ To resume scheduled runs of a disabled notebook schedule, follow these steps:
 
 5.  In the **Notebook** toolbar, click **Schedule** .
 
-    Alternatively, click calendar_month **Schedule** .
+    Alternatively, click **Schedule** .
 
 6.  In the schedule details table, in the **Schedule state** row, click the **Schedule is disabled** toggle.
 
@@ -360,7 +360,7 @@ To edit a schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -394,7 +394,7 @@ To permanently delete a schedule for a selected notebook, follow these steps:
 
     - Click the name of the selected schedule, and then on the **Schedule details** page, click **Delete** .
 
-    - In the row that contains the selected schedule, click more_vert **View actions** in the **Actions** column, and then click **Delete** .
+    - In the row that contains the selected schedule, click **View actions** in the **Actions** column, and then click **Delete** .
 
 3.  In the dialog that appears, click **Delete** .
 

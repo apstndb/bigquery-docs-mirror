@@ -53,9 +53,9 @@ To grant the Policy Tag Admin role, you must have the `resourcemanager.projects.
 
 1.  In the Google Cloud console, go to the **IAM** page.
 
-2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . The **Edit access** pane opens. Click **Add another role** .
+2.  If the email address of the user to grant the role is in the list, select the email address and click **Edit** . The **Edit access** pane opens. Click **Add another role** .
 
-    If the user email address is not in the list, click person_add **Add** , then enter the email address in the **New principals** box.
+    If the user email address is not in the list, click **Add** , then enter the email address in the **New principals** box.
 
 3.  Click the **Select a role** drop-down list.
 
@@ -71,9 +71,9 @@ To grant either of these roles, you must have the `resourcemanager.projects.setI
 
 1.  In the Google Cloud console, go to the **IAM** page.
 
-2.  If the email address of the user to grant the role is in the list, select the email address and click edit **Edit** . Then click **Add another role** .
+2.  If the email address of the user to grant the role is in the list, select the email address and click **Edit** . Then click **Add another role** .
 
-    If the user email address is not in the list, click person_add **Add** , then enter the email address in the **New principals** box.
+    If the user email address is not in the list, click **Add** , then enter the email address in the **New principals** box.
 
 3.  Click the **Select a role** drop-down list.
 
@@ -1085,7 +1085,7 @@ To delete one or more policy tags in a taxonomy, follow these steps:
 1.  In the Google Cloud console, go to the **Policy tag taxonomies** page.
 2.  Click the name of the taxonomy containing the tags to delete.
 3.  Click **Edit** .
-4.  Click delete next to the policy tags to delete.
+4.  Click next to the policy tags to delete.
 5.  Click **Save** .
 6.  Click **Confirm** .
 

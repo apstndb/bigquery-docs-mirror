@@ -64,9 +64,9 @@ To view a pipeline stored in a folder or Git folder, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Expand your **User** folder, a **Team folder** , or a connected Git repository folder.
 
@@ -86,11 +86,11 @@ To view a list of standalone pipelines and pipelines stored in folders, do the f
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Pipelines** .
 
@@ -102,7 +102,7 @@ To view past manual runs of a selected pipeline, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -122,7 +122,7 @@ To find the Dataform repository ID of your pipeline, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -140,11 +140,11 @@ To permanently delete a pipeline, follow these steps:
 
 - To delete a pipeline stored in a folder or Git folder, do the following:
 
-  1.  In the left pane, click folder **Files** .
+  1.  In the left pane, click **Files** .
 
   2.  In the file tree, find the pipeline folder that you want to delete.
 
-  3.  Click more_vert **View actions** next to the pipeline folder, and then click **Delete** .
+  3.  Click **View actions** next to the pipeline folder, and then click **Delete** .
 
   4.  In the confirmation dialog, click **Delete** .
 
@@ -152,7 +152,7 @@ To permanently delete a pipeline, follow these steps:
 
 - To delete a pipeline listed in the **Explorer** pane, do the following:
 
-  1.  In the left pane, click explore **Explorer** :
+  1.  In the left pane, click **Explorer** :
 
       ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -160,7 +160,7 @@ To permanently delete a pipeline, follow these steps:
 
   3.  Find the pipeline that you want to delete.
 
-  4.  Click more_vert **View actions** next to the pipeline, and then click **Delete** .
+  4.  Click **View actions** next to the pipeline, and then click **Delete** .
 
   5.  Click **Delete** .
 

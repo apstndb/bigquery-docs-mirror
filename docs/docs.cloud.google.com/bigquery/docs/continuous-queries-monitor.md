@@ -183,7 +183,7 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 
 8.  In the navigation menu, click **Log-based metrics** . The metric you just created appears in the list of user-defined metrics.
 
-9.  In your metric's row, click more_vert **More actions** , and then click **Create alert from metric** .
+9.  In your metric's row, click **More actions** , and then click **Create alert from metric** .
 
 10. Click **Next** . You don't need to change the default settings on the **Policy configuration mode** page.
 

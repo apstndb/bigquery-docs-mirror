@@ -421,7 +421,7 @@ If you have not identified the method that has reached this rate limit, do the f
 
 Some API calls log errors in BigQuery audit logs in Cloud Logging. To identify the method that reached the limit, do the following:
 
-1.  In the Google Cloud console, go to the Google Cloud navigation menu menu and then select **Logging** \> **Logs Explorer** for your project:
+1.  In the Google Cloud console, go to the Google Cloud navigation menu and then select **Logging** \> **Logs Explorer** for your project:
 
 2.  Filter logs by running the following query:
 
@@ -777,7 +777,7 @@ Metadata table updates can originate from *API calls* that modify a table's meta
 
 ##### Identify API calls
 
-1.  Go to the Google Cloud navigation menu menu, and then select **Logging \> Logs Explorer** :
+1.  Go to the Google Cloud navigation menu, and then select **Logging \> Logs Explorer** :
 
 2.  Filter logs to view table operations by running the following query:
 

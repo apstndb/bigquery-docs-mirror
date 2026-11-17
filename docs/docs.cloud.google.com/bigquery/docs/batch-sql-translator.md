@@ -544,7 +544,7 @@ To start an interactive SQL translation by using a batch translation configurati
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the list of translation jobs, locate the job that you are interested in, and then click more_vert **More Options \> Open Interactive Translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, and then click **More Options \> Open Interactive Translation** .
 
     The BigQuery interactive SQL translator now opens with the corresponding batch translation configuration ID. To view the translation configuration ID for the interactive translation, click **Tools** \> **Query translation** \> **Translation settings** in the interactive SQL translator.
 

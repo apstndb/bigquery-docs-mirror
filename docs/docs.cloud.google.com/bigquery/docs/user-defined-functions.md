@@ -433,11 +433,11 @@ To add a description to a UDF, follow these steps:
 
 1.  Go to the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **Datasets** .
 
@@ -445,7 +445,7 @@ To add a description to a UDF, follow these steps:
 
 5.  Click the **Routines** tab, and then select the function.
 
-6.  In the details pane, click mode_edit **Edit Routine Details** to edit the description text.
+6.  In the details pane, click **Edit Routine Details** to edit the description text.
 
 7.  In the dialog, enter a description in the box or edit the existing description. Click **Save** to save the new description text.
 
@@ -466,7 +466,7 @@ To update the description of a function, recreate your function using the [`CREA
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

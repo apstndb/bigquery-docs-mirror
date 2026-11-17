@@ -66,13 +66,13 @@ Make sure that you have the following role or roles on the project:
 
 2.  Select the project.
 
-3.  Click person_add **Grant access** .
+3.  Click **Grant access** .
 
 4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
 
 5.  Click **Select a role** , then search for the role.
 
-6.  To grant additional roles, click add **Add another role** and add each additional role.
+6.  To grant additional roles, click **Add another role** and add each additional role.
 
 7.  Click **Save** .
 
@@ -98,7 +98,7 @@ This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API.
 
 ### Authenticate with Google Cloud
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To authenticate with your project, enter the following code:
 
@@ -117,7 +117,7 @@ This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API.
 
     Replace ` PROJECT_ID ` with your project ID.
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
 4.  When prompted, click **Allow** to give Colab access to your credentials, if you agree.
 
@@ -137,7 +137,7 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 1.  Get your Google Maps API key by following the instructions on the [Use API keys](https://developers.google.com/maps/documentation/javascript/get-api-key#create-api-keys) page in the Google Maps documentation.
 
-2.  Switch to your Colab notebook and then click vpn_key **Secrets** .
+2.  Switch to your Colab notebook and then click **Secrets** .
 
 3.  Click **Add new secret** .
 
@@ -147,7 +147,7 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 6.  Close the **Secrets** panel.
 
-7.  To insert a code cell, click add **Code** .
+7.  To insert a code cell, click **Code** .
 
 8.  To authenticate with the Maps API, enter the following code:
 
@@ -163,7 +163,7 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 9.  When prompted, click **Grant access** to give the notebook access to your key, if you agree.
 
-10. Click play_circle_filled **Run cell** .
+10. Click **Run cell** .
 
     After you complete the authorization flow, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
@@ -184,7 +184,7 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
 
 ### Install the `pydeck` and `h3` packages
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To install the `pydeck` and `h3` packages, enter the following code:
 
@@ -193,13 +193,13 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
     !pip install pydeck>=0.9 h3>=4.2
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you complete the installation, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
 ### Import the Python libraries
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To import the Python libraries, enter the following code:
 
@@ -213,13 +213,13 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
     import shapely
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
 ### Enable interactive tables for pandas DataFrames
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To enable `pandas` DataFrames, enter the following code:
 
@@ -229,7 +229,7 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
     data_table.enable_dataframe_formatter()
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
@@ -237,7 +237,7 @@ After importing the libraries, you enable interactive tables for [`pandas` DataF
 
 In this section, you create a shared routine that renders layers on a base map.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To create a shared routine for rendering layers on a map, enter the following code:
 
@@ -264,7 +264,7 @@ In this section, you create a shared routine that renders layers on a base map.
       return m
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
@@ -276,7 +276,7 @@ Scatter plots are useful when you need to review a subset of individual points (
 
 The following example demonstrates how to use a layer and a scatterplot layer to render individual points as circles.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To query the San Francisco Ford GoBike Share public dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
 
@@ -296,13 +296,13 @@ The following example demonstrates how to use a layer and a scatterplot layer to
       `bigquery-public-data.san_francisco_bikeshare.bikeshare_station_info`
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     The output is similar to the following:
 
     `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
-4.  To insert a code cell, click add **Code** .
+4.  To insert a code cell, click **Code** .
 
 5.  To get a summary of the DataFrame, including columns and data types, enter the following code:
 
@@ -311,7 +311,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     gdf_sf_bikestations.info()
     ```
 
-6.  Click play_circle_filled **Run cell** .
+6.  Click **Run cell** .
 
     The output should look like the following:
 
@@ -329,7 +329,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     memory usage: 14.9+ KB
     ```
 
-7.  To insert a code cell, click add **Code** .
+7.  To insert a code cell, click **Code** .
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
 
@@ -338,7 +338,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     gdf_sf_bikestations.head()
     ```
 
-9.  Click play_circle_filled **Run cell** .
+9.  Click **Run cell** .
 
     The output is similar to the following:
 
@@ -348,7 +348,7 @@ Rendering the points requires you to extract the longitude and latitude as x and
 
 Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are accessed directly from its `station_geom` geometry column. You can retrieve the longitude using the column's `.x` attribute and the latitude using its `.y` attribute. Then, you can store them in new longitude and latitude columns.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To extract the longitude and latitude values from the `station_geom` column, enter the following code:
 
@@ -358,11 +358,11 @@ Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are acce
     gdf_sf_bikestations["latitude"] = gdf_sf_bikestations["station_geom"].y
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
-4.  To insert a code cell, click add **Code** .
+4.  To insert a code cell, click **Code** .
 
 5.  To render the scatter plot of bike share stations based on the longitude and latitude values you extracted previously, enter the following code:
 
@@ -383,7 +383,7 @@ Since `gdf_sf_bikestations` is a `geopandas.GeoDataFrame` , coordinates are acce
     display_pydeck_map([scatterplot_layer], view_state)
     ```
 
-6.  Click play_circle_filled **Run cell** .
+6.  Click **Run cell** .
 
     The output is similar to the following:
 
@@ -406,7 +406,7 @@ If you are provided geospatial data without knowing the expected shapes, you can
 
 In this section, you query geographic data in the San Francisco Neighborhoods dataset and then visualize the polygons.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To query the geographic data from the `bigquery-public-data.san_francisco_neighborhoods.boundaries` table in the San Francisco Neighborhoods dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
 
@@ -422,13 +422,13 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
       `bigquery-public-data.san_francisco_neighborhoods.boundaries`
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     The output is similar to the following:
 
     `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
-4.  To insert a code cell, click add **Code** .
+4.  To insert a code cell, click **Code** .
 
 5.  To get a summary of the DataFrame, enter the following code:
 
@@ -437,7 +437,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     gdf_sanfrancisco_neighborhoods.info()
     ```
 
-6.  Click play_circle_filled **Run cell** .
+6.  Click **Run cell** .
 
     The results should look like the following:
 
@@ -460,7 +460,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     gdf_sanfrancisco_neighborhoods.head(1)
     ```
 
-8.  Click play_circle_filled **Run cell** .
+8.  Click **Run cell** .
 
     The output is similar to the following:
 
@@ -468,7 +468,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
     In the results, notice that the data is a polygon.
 
-9.  To insert a code cell, click add **Code** .
+9.  To insert a code cell, click **Code** .
 
 10. To visualize the polygons, enter the following code. `pydeck` is used to convert each `shapely` object instance in the geometry column into `GeoJSON` format:
 
@@ -489,7 +489,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     display_pydeck_map([geojson_layer], view_state)
     ```
 
-11. Click play_circle_filled **Run cell** .
+11. Click **Run cell** .
 
     The output is similar to the following:
 
@@ -501,7 +501,7 @@ If you are exploring data with polygons that are difficult to convert to `GeoJSO
 
 In this section, you use a polygon layer to render an array of points and use the results to render a choropleth map. The choropleth map shows the density of bike share stations by neighborhood by joining data from the San Francisco Neighborhoods dataset with the San Francisco Ford GoBike Share dataset.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To aggregate and count the number of stations per neighborhood and to create a `polygon` column that contains an array of points, enter the following code:
 
@@ -516,11 +516,11 @@ In this section, you use a polygon layer to render an array of points and use th
     gdf_stations_x_neighborhood['polygon'] = gdf_stations_x_neighborhood['geometry'].map(lambda g: list(g.exterior.coords))
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
-4.  To insert a code cell, click add **Code** .
+4.  To insert a code cell, click **Code** .
 
 5.  To add a `fill_color` column for each of the polygons, enter the following code:
 
@@ -536,11 +536,11 @@ In this section, you use a polygon layer to render an array of points and use th
       .map(lambda c: list(colormap.rgba_bytes_tuple(c)[:3]) + [0.7 * 255])   # force opacity of 0.7
     ```
 
-6.  Click play_circle_filled **Run cell** .
+6.  Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
-7.  To insert a code cell, click add **Code** .
+7.  To insert a code cell, click **Code** .
 
 8.  To render the polygon layer, enter the following code:
 
@@ -562,7 +562,7 @@ In this section, you use a polygon layer to render an array of points and use th
     display_pydeck_map([polygon_layer], view_state)
     ```
 
-9.  Click play_circle_filled **Run cell** .
+9.  Click **Run cell** .
 
     The output is similar to the following:
 
@@ -580,7 +580,7 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
 
 > **Note:** You can also use Carto's [Analytics toolbox for BigQuery](https://carto.com/blog/spatial-functions-bigquery-uber) to perform similar conversions.
 
-1.  To insert a code cell, click add **Code** .
+1.  To insert a code cell, click **Code** .
 
 2.  To query the data in the San Francisco Police Department (SFPD) Reports dataset, enter the following code. This code uses the [`%%bigquery` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
 
@@ -601,13 +601,13 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     WHERE year = 2015
     ```
 
-3.  Click play_circle_filled **Run cell** .
+3.  Click **Run cell** .
 
     The output is similar to the following:
 
     `Job ID 12345-1234-5678-1234-123456789 successfully executed: 100%`
 
-4.  To insert a code cell, click add **Code** .
+4.  To insert a code cell, click **Code** .
 
 5.  To compute the cell for each incident's latitude and longitude, aggregate the incidents for each cell, construct a `geopandas` DataFrame, and add the center of each hexagon for the heatmap layer, enter the following code:
 
@@ -628,7 +628,7 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     gdf_incidents_x_cell.info()
     ```
 
-6.  Click play_circle_filled **Run cell** .
+6.  Click **Run cell** .
 
     The output is similar to the following:
 
@@ -645,7 +645,7 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     memory usage: 23.8+ KB
     ```
 
-7.  To insert a code cell, click add **Code** .
+7.  To insert a code cell, click **Code** .
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
 
@@ -654,13 +654,13 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     gdf_incidents_x_cell.head()
     ```
 
-9.  Click play_circle_filled **Run cell** .
+9.  Click **Run cell** .
 
     The output is similar to the following:
 
     ![The first five rows of the DataFrame.](https://docs.cloud.google.com/bigquery/images/incidents-preview.png)
 
-10. To insert a code cell, click add **Code** .
+10. To insert a code cell, click **Code** .
 
 11. To convert the data into a JSON format that can be used by `HeatmapLayer` , enter the following code:
 
@@ -676,11 +676,11 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     heatmap_data = gdf_incidents_x_cell.apply(_make_heatmap_datum, axis='columns').values.tolist()
     ```
 
-12. Click play_circle_filled **Run cell** .
+12. Click **Run cell** .
 
     After you run the code, no output is generated in your Colab notebook. The check mark beside the cell indicates that the code ran successfully.
 
-13. To insert a code cell, click add **Code** .
+13. To insert a code cell, click **Code** .
 
 14. To render the heatmap, enter the following code:
 
@@ -700,7 +700,7 @@ In this example, quantizing is done using the `h3` Python library to aggregate t
     display_pydeck_map([heatmap_layer], view_state)
     ```
 
-15. Click play_circle_filled **Run cell** .
+15. Click **Run cell** .
 
     The output is similar to the following:
 
@@ -744,9 +744,9 @@ gcloud projects delete PROJECT_ID
 
 After you delete the Google Cloud project, if you used the Google Maps API, delete the Google Maps API key from your Colab Secrets and then optionally delete the notebook.
 
-1.  In your Colab, click vpn_key **Secrets** .
+1.  In your Colab, click **Secrets** .
 
-2.  At the end of the `GMP_API_KEY` row, click delete **Delete** .
+2.  At the end of the `GMP_API_KEY` row, click **Delete** .
 
 3.  Optional: To delete the notebook, click **File \> Move to trash** .
 

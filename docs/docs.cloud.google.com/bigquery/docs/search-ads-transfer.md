@@ -94,7 +94,7 @@ To create a data transfer for Search Ads 360 reporting, you need either your Sea
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  In the **Source type** section, for **Source** , choose **Search Ads 360** .
 

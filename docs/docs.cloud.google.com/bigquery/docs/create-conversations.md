@@ -146,7 +146,7 @@ To create a direct conversation with a dataset, table, view, or graph, follow th
 
 1.  In the Google Cloud console, go to the **BigQuery Studio** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset. The **Datasets** page opens.
 
@@ -205,7 +205,7 @@ After you click the **Chat** option for your data source, you can start your con
 
     ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
 
-4.  To see information about how the results were calculated, click keyboard_arrow_down **How was this calculated?**
+4.  To see information about how the results were calculated, click **How was this calculated?**
 
     ![The API's calculation details, including the generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
 
@@ -235,7 +235,7 @@ To export an answer provided by a data agent as a PDF or CSV file, complete the 
 
 1.  Navigate to the agent answer that you want to save.
 
-2.  Click the file_download **Download** button. Select from the following options:
+2.  Click the **Download** button. Select from the following options:
 
     - **PDF** : Includes up to 20 rows for each table.
     - **Detailed PDF** : Includes up to 1,000 rows for each table.
@@ -259,7 +259,7 @@ You can open, rename, or delete a conversation on the **Agents** page, and manag
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to rename.
 
-3.  Click more_vert **View actions** \> **Rename** .
+3.  Click **View actions** \> **Rename** .
 
 4.  In the **Rename conversation** dialog, enter a new name for the conversation in the **Conversation name** field.
 
@@ -273,7 +273,7 @@ Results from questions in a conversation persist even if the underlying data sou
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to delete.
 
-3.  Click more_vert **View actions** \> **Delete** .
+3.  Click **View actions** \> **Delete** .
 
 4.  In the **Delete conversation?** dialog, click **Delete** .
 
@@ -292,8 +292,8 @@ To manage your conversations, follow these steps:
 3.  Click **Conversations** .
 
     1.  To filter the conversation list, enter a property name or value in the filter field.
-    2.  To open a conversation, click more_vert **View actions** \> **Open** .
-    3.  To copy a conversation ID, click more_vert **View actions** \> **Copy ID** .
+    2.  To open a conversation, click **View actions** \> **Open** .
+    3.  To copy a conversation ID, click **View actions** \> **Copy ID** .
     4.  To create a conversation, in the menu bar, click **Create conversation** .
     5.  To refresh the list, in the menu bar, click **Refresh** .
 

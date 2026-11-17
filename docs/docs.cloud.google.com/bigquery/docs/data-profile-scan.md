@@ -247,7 +247,7 @@ To run data profile scans, Knowledge Catalog uses a service account that require
 
 14. To create the scan, click **Create** .
 
-    If you set the schedule to radio_button_checked **On-demand** , you can also run the scan now by clicking **Run scan** .
+    If you set the schedule to **On-demand** , you can also run the scan now by clicking **Run scan** .
 
 ### gcloud
 
@@ -620,7 +620,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 
 17. To create the scans, click **Create** .
 
-    If you set the schedule to radio_button_checked **On-demand** , you can also run the scans now by clicking **Run scan** .
+    If you set the schedule to **On-demand** , you can also run the scans now by clicking **Run scan** .
 
 ## Run a data profile scan
 
@@ -1109,11 +1109,11 @@ If the data profile scan results are published to the BigQuery and Knowledge Cat
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then click your dataset.
 
@@ -1496,8 +1496,8 @@ To let users in your organization view the scan results, do the following:
 
 4.  Do the following:
 
-    - To grant access to a principal, click person_add **Grant access** . Grant the **Dataplex DataScan DataViewer** role to the associated principal.
-    - To remove access from a principal, select the principal that you want to remove the **Dataplex DataScan DataViewer** role from. Click person_remove **Remove access** , and then confirm when prompted.
+    - To grant access to a principal, click **Grant access** . Grant the **Dataplex DataScan DataViewer** role to the associated principal.
+    - To remove access from a principal, select the principal that you want to remove the **Dataplex DataScan DataViewer** role from. Click **Remove access** , and then confirm when prompted.
 
 ## Manage data profile scans for a specific table
 

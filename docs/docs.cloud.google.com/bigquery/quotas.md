@@ -71,9 +71,9 @@ You can use the Google Cloud console or the Google Cloud CLI to find the metric 
 
 1.  In the Google Cloud console, go to the **Quotas & System Limits** page.
 
-2.  Click filter_list **Filter** , select **Service** , and then select the BigQuery service that you want to inspect (for example, **BigQuery API** , **BigQuery Reservation API** , or **BigQuery Storage API** ).
+2.  Click **Filter** , select **Service** , and then select the BigQuery service that you want to inspect (for example, **BigQuery API** , **BigQuery Reservation API** , or **BigQuery Storage API** ).
 
-3.  In the table header, click view_column **Column display options** , select **Metric** and **Limit name** , and then click **OK** .
+3.  In the table header, click **Column display options** , select **Metric** and **Limit name** , and then click **OK** .
 
 ### gcloud
 
@@ -1074,7 +1074,7 @@ The following list describes the quotas that apply to generative AI and Cloud AI
 
   - **Tokens per minute** . This quota is the limit on the number of tokens per minute that functions can send to the Agent Platform model's API. This limit applies to each project.
 
-    For functions that call an Agent Platform foundation model, the number of tokens per minute varies depending on the Agent Platform model endpoint, version, and region, and also your project's reputation. This quota is conceptually the same as the QPM quota used by Agent Platform.
+    For functions that call an Agent Platform foundation model, the number of tokens per minute varies depending on the Agent Platform model endpoint, version, and region, as well as criteria such as resource availability, user profile, and service usage history. This quota is conceptually the same as the QPM quota used by Agent Platform.
 
   - **Rows per job** . The `Rows per job` value serves as a performance benchmark, approximating the processing capacity when a single job has exclusive use of the project's model endpoint resources. The actual number of processed rows depends on many factors, including the size of the input request to the model, the size of output responses from the model, and availability of dynamic shared quota. The following examples show some common scenarios:
 

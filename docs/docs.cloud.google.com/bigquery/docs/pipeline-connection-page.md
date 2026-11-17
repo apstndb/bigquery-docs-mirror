@@ -35,7 +35,7 @@ To opt into using the **Pipelines & Connections** page, follow these steps:
 
 1.  Go to the Google Cloud console.
 
-2.  In the Google Cloud console toolbar, click menu **Navigation menu** .
+2.  In the Google Cloud console toolbar, click **Navigation menu** .
 
 3.  Click **Solutions \> All products** .
 

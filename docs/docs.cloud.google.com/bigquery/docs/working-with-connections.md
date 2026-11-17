@@ -69,11 +69,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name, and then click **Connections** to see a list of all connections.
 
@@ -258,7 +258,7 @@ Select one of the following options:
 
 2.  Connections are listed in your project, in a group called **Connections** .
 
-3.  In the left pane, click explore **Explorer** :
+3.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -613,11 +613,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Click your project, click **Connections** , and then select a connection.
 
@@ -701,7 +701,7 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -709,7 +709,7 @@ Select one of the following options:
 
 4.  To see the details, click the connection.
 
-5.  In the **Connection info** section, click mode_edit **Edit details** . Then do the following:
+5.  In the **Connection info** section, click **Edit details** . Then do the following:
 
     1.  In the **Edit connection** dialog, edit the connection details including the user credentials.
 
@@ -934,7 +934,7 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -942,7 +942,7 @@ Select one of the following options:
 
 4.  Click the connection to see the details.
 
-5.  In the details pane, click delete **Delete** to delete the connection.
+5.  In the details pane, click **Delete** to delete the connection.
 
 6.  In the **Delete connection?** dialog, enter `delete` to confirm deletion.
 

@@ -101,15 +101,15 @@ Create a BigQuery dataset to contain your resources:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click your project name.
 
-4.  Click more_vert **View actions \> Create dataset** .
+4.  Click **View actions \> Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -153,11 +153,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -198,7 +198,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -518,7 +518,7 @@ Select one of the following options:
 
 1.  Go to the **IAM & Admin** page.
 
-2.  Click person_add **Grant Access** .
+2.  Click **Grant Access** .
 
     The **Add principals** dialog opens.
 
@@ -698,13 +698,13 @@ If you plan to keep the project you used for this tutorial, you can avoid incurr
 
     - In the Google Cloud console, go to the [BigQuery page](https://console.cloud.google.com/bigquery) .
     - In the **Explorer** pane, expand your project and select the dataset you created.
-    - Click more_vert **View actions** , and then click **Delete** .
+    - Click **View actions** , and then click **Delete** .
     - In the dialog, type `delete` , and then click **Delete** .
 
 2.  **Delete the connection:**
 
     - In the **Explorer** pane, expand your project name and click **Connections** .
-    - Click the more_vert **View actions** icon next to the connection you created, and select **Delete** .
+    - Click the **View actions** icon next to the connection you created, and select **Delete** .
     - In the dialog, click **Delete** to confirm.
 
 3.  **Delete the Speech-to-Text recognizer (if created):**

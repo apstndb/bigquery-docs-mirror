@@ -368,19 +368,19 @@ To remove authorization to a view, select one of the following options:
 
 1.  Go to the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
 4.  Click **Overview \> Tables** , and then select a table.
 
-5.  Click person_add **Sharing** \> **Authorize views** .
+5.  Click **Sharing** \> **Authorize views** .
 
-6.  Click delete to **Remove authorization** .
+6.  Click to **Remove authorization** .
 
 7.  Click **Close** .
 

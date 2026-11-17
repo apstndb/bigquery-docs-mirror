@@ -74,11 +74,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -98,7 +98,7 @@ To create a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
 
@@ -144,13 +144,13 @@ To share a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to share.
 
-4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
@@ -170,7 +170,7 @@ To share a saved query, follow these steps:
 
 10. To return to the saved query details, click **Close** .
 
-11. To generate a link to the saved query, click more_vert **View actions** \> **Share** \> **Copy link** .
+11. To generate a link to the saved query, click **View actions** \> **Share** \> **Copy link** .
 
     The link is copied to your clipboard.
 
@@ -180,17 +180,17 @@ To open any version of an existing saved query as a new query, follow these step
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click Files to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to open.
 
-4.  Click the saved query, and then click history **Version history** .
+4.  Click the saved query, and then click **Version history** .
 
-5.  Click more_vert **View actions** next to a saved query version and then click **Open as new query** .
+5.  Click **View actions** next to a saved query version and then click **Open as new query** .
 
 ## Update saved queries
 
@@ -198,11 +198,11 @@ Changes that you make to the text of a saved query are automatically saved two s
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click Files to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to update.
 
@@ -222,13 +222,13 @@ To upload a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click Files to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Files** pane, click more_vert **View actions** next to the folder that you want to upload the query to, and then click **Upload** \> **Query** .
+3.  In the **Files** pane, click **View actions** next to the folder that you want to upload the query to, and then click **Upload** \> **Query** .
 
 4.  In the **Upload SQL** dialog, in the **SQL** field, click **Browse** , and then select the query that you want to upload.
 
@@ -287,7 +287,7 @@ For more information on IAM roles in BigQuery, see [Predefined roles and permiss
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid SQL query. For example, you can query a [public dataset](https://cloud.google.com/bigquery/public-data) :
 
@@ -327,15 +327,15 @@ If you are planning to share a classic saved query, consider including a comment
 
 To share a classic saved query, follow these steps:
 
-1.  In the left pane, click explore **Explorer** .
+1.  In the left pane, click **Explorer** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 3.  Find and click the classic saved query that you want to grant access to. You can use the search feature or filters to find your query.
 
-4.  Click more_vert **View actions** next to the query and then click **Copy link** .
+4.  Click **View actions** next to the query and then click **Copy link** .
 
 5.  Share the link with the users you want to grant access to the query.
 
@@ -343,11 +343,11 @@ To share a classic saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 

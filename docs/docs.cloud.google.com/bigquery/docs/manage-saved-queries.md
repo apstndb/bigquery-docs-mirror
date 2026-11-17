@@ -59,13 +59,13 @@ To share a saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to share.
 
-4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
@@ -85,7 +85,7 @@ To share a saved query, follow these steps:
 
 10. To return to the saved query details, click **Close** .
 
-11. To generate a link to the saved query, click more_vert **View actions** \> **Share** \> **Copy link** .
+11. To generate a link to the saved query, click **View actions** \> **Share** \> **Copy link** .
 
     The link is copied to your clipboard.
 
@@ -103,13 +103,13 @@ To grant public access to a BigQuery Studio saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to grant public access to.
 
-4.  Click more_vert **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
+4.  Click **View actions** next to the saved query, and then click **Share** \> **Manage permissions** .
 
 5.  In the **Manage permissions** pane, click **Add user/group** .
 
@@ -141,11 +141,11 @@ To set the default region for new code assets, do the following:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser:
+2.  In the left pane, click **Files** to open the file browser:
 
     ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
-3.  Next to the project name, click more_vert **View files panel actions** \> **Switch code region** .
+3.  Next to the project name, click **View files panel actions** \> **Switch code region** .
 
 4.  Select the code region that you want to use as a default.
 
@@ -165,11 +165,11 @@ To view a list of all saved queries across regions in your project, do the follo
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-3.  In the **Explorer** pane, click more_vert **View actions** next to **Queries** , and then do one of the following:
+3.  In the **Explorer** pane, click **View actions** next to **Queries** , and then do one of the following:
 
 - To open the list in the current tab, click **Show all** .
 - To open the list in a new tab, click **Show all in** \> **New tab** .
@@ -181,9 +181,9 @@ To view saved query metadata, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to view metadata for.
 
@@ -207,13 +207,13 @@ To view saved query versions, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to view version history for.
 
-4.  Click the saved query, and then click history **Version history** to see a list of the saved query versions in descending order by date.
+4.  Click the saved query, and then click **Version history** to see a list of the saved query versions in descending order by date.
 
 #### Compare saved query versions
 
@@ -221,15 +221,15 @@ To compare saved query versions, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to compare version history for.
 
-4.  Click the saved query, and then click history **Version history** .
+4.  Click the saved query, and then click **Version history** .
 
-5.  Click more_vert **View actions** next to a saved query version and then click **Compare** . The comparison pane opens, comparing the saved query version that you selected with the current query.
+5.  Click **View actions** next to a saved query version and then click **Compare** . The comparison pane opens, comparing the saved query version that you selected with the current query.
 
 6.  Optional: The current query also shows autosaved changes. To explicitly save these changes, click **Overwrite** .
 
@@ -241,15 +241,15 @@ Restoring from the comparison pane lets you compare the previous version of the 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to restore a previous version of.
 
-4.  Click the saved query, and then click history **Version history** .
+4.  Click the saved query, and then click **Version history** .
 
-5.  Click more_vert **View actions** next to the version of the saved query that you want to restore, and then click **Compare** . The comparison pane opens, comparing the saved query version you selected with the most recent query version, including any autosaved changes.
+5.  Click **View actions** next to the version of the saved query that you want to restore, and then click **Compare** . The comparison pane opens, comparing the saved query version you selected with the most recent query version, including any autosaved changes.
 
 6.  To restore the previous saved query version after comparison, click **Restore** .
 
@@ -261,13 +261,13 @@ To open a saved query in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to open in Connected Sheets.
 
-4.  Click more_vert **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
+4.  Click **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
 
 ## Download saved queries
 
@@ -275,9 +275,9 @@ To download a saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to download.
 
@@ -289,13 +289,13 @@ To delete a saved query, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click folder **Files** to open the file browser.
+2.  In the left pane, click **Files** to open the file browser.
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Files** pane, expand your project and subfolders to find the saved query that you want to delete.
 
-4.  Click more_vert **Open actions** next to the saved query and then click **Delete** .
+4.  Click **Open actions** next to the saved query and then click **Delete** .
 
 5.  To confirm deletion, type `delete` in the dialog.
 
@@ -319,15 +319,15 @@ If you are planning to share a classic saved query, consider including a comment
 
 To share a classic saved query, follow these steps:
 
-1.  In the left pane, click explore **Explorer** .
+1.  In the left pane, click **Explorer** .
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 2.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 3.  Find and click the classic saved query that you want to grant access to. You can use the search feature or filters to find your query.
 
-4.  Click more_vert **View actions** next to the query and then click **Copy link** .
+4.  Click **View actions** next to the query and then click **Copy link** .
 
 5.  Share the link with the users you want to grant access to the query.
 
@@ -335,11 +335,11 @@ To share a classic saved query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
@@ -358,10 +358,10 @@ To batch migrate classic saved queries, you must be granted the [required roles]
 You can batch migrate the following classic saved queries:
 
 Personal classic saved queries  
-Personal classic saved queries are visible only to the user who creates them. They are identified by the person icon. Personal classic saved queries can only be migrated by their owners.
+Personal classic saved queries are visible only to the user who creates them. They are identified by the icon. Personal classic saved queries can only be migrated by their owners.
 
 Public classic saved queries  
-Public classic saved queries are visible to anyone with a link to the query. They are identified by the share icon. Public classic saved queries can only be migrated by their owners.
+Public classic saved queries are visible to anyone with a link to the query. They are identified by the icon. Public classic saved queries can only be migrated by their owners.
 
 IAM permissions on public classic saved queries don't map to permissions on BigQuery Studio saved queries. This means that BigQuery Studio saved queries migrated from public classic saved queries are not publicly available by default. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during or after migration.
 
@@ -370,7 +370,7 @@ To set IAM permissions for the migrated BigQuery Studio saved queries during mig
 If you don't set IAM permissions during migration, only you will have access to the migrated BigQuery Studio saved queries.
 
 Project classic saved queries  
-Project-level saved queries are visible to principals that have the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified by the people icon. You can batch-migrate all project classic saved queries in your project.
+Project-level saved queries are visible to principals that have the [required permissions](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#required_permissions_for_classic_saved_queries) . They are identified by the icon. You can batch-migrate all project classic saved queries in your project.
 
 IAM permissions on project classic saved queries don't directly map to permissions on BigQuery Studio saved queries. You need to set IAM permissions for migrated BigQuery Studio saved queries, either during, or after migration.
 
@@ -399,13 +399,13 @@ To batch migrate classic saved queries in your project to BigQuery Studio saved 
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Explorer** pane, expand your project and click more_vert **View actions** next to **(Classic) Queries** , and then click **Migrate classic saved queries** .
+3.  In the **Explorer** pane, expand your project and click **View actions** next to **(Classic) Queries** , and then click **Migrate classic saved queries** .
 
 4.  In the **Classic saved queries migration** pane, in the **Check migration readiness** section, click **Next** to confirm that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/manage-saved-queries#required_roles) .
 
@@ -448,17 +448,17 @@ Migration can take over 15 minutes, depending on the number of migrating queries
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project and click **(Classic) Queries** .
 
 4.  Find the classic saved query you want to delete.
 
-5.  Click more_vert **View actions** next to the query and then click **Delete** .
+5.  Click **View actions** next to the query and then click **Delete** .
 
 6.  To confirm deletion, type `delete` in the dialog.
 

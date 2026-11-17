@@ -79,7 +79,7 @@ To create a view:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid SQL query.
 
@@ -120,7 +120,7 @@ Use the [`CREATE VIEW` statement](https://docs.cloud.google.com/bigquery/docs/re
     );
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 

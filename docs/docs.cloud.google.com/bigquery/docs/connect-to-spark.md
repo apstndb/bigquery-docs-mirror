@@ -46,7 +46,7 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the **Data** pane, click add **Add data** .
+2.  In the **Data** pane, click **Add data** .
 
     The **Add data** dialog opens.
 
@@ -187,11 +187,11 @@ Select one of the following options:
 
     Connections are listed in your project, in a group called **Connections** .
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Click your project, click **Connections** , and then select a connection.
 

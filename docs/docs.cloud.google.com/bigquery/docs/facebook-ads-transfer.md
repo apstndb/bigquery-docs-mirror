@@ -124,7 +124,7 @@ Select one of the following options:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  In the **Source type** section, for **Source** , select **Facebook Ads** .
 

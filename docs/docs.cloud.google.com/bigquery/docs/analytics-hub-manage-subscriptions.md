@@ -85,9 +85,9 @@ To refresh a subscription, select one of the following options:
 
     ![Highlighted button for the Data pane.](https://docs.cloud.google.com/static/bigquery/images/data-explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
-3.  In the **Data** pane, click add **Add data** .
+3.  In the **Data** pane, click **Add data** .
 
 4.  Select **Sharing (Analytics Hub)** . A discovery page opens.
 

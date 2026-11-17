@@ -63,35 +63,15 @@ If you reduce the time travel window duration, delete a table, and then realize 
 
 ### Time travel and row-level access
 
-If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , only a principal that is granted the following [Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) permission can access historical data for the table:
+If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , only a principal that is granted the `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission can access historical data for the table.
 
-| **Permission**                                                                                                                                                                      | **Resource**                                      |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| [`bigquery.rowAccessPolicies.overrideTimeTravelRestrictions`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions) | The table whose historical data is being accessed |
+To get the permission that you need to access historical data, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `roles/bigquery.admin` ) IAM role on the table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-The following predefined IAM roles provide `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission:
+This predefined role contains the `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission, which is required to access historical data.
 
-| **Role**                                                                                                               | **Resource**                                      |
-|------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| [`roles/bigquery.admin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)                    | The table whose historical data is being accessed |
-| [`roles/bigquery.studioAdmin`](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin)        | The table whose historical data is being accessed |
-| [`roles/iam.databasesAdmin`](https://docs.cloud.google.com/iam/docs/roles-permissions/jobfunctions#iam.databasesAdmin) | The table whose historical data is being accessed |
+You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-You can also grant `bigquery.rowAccessPolicies.overrideTimeTravelRestrictions` permission using a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
-
-> **Note:** The **`roles/owner`** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
-
-- Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
-
-  ```
-  date -d '2023-08-04 16:00:34.456789Z' +%s000
-  ```
-
-- Replace the UNIX epoch time `1691164834000` received from the previous command in the bq command-line tool. Run the following command to restore a copy of the deleted table `deletedTableID` in another table `restoredTable` , within the same dataset `myDatasetID` :
-
-  ```
-  bq cp myProjectID:myDatasetID.deletedTableID@1691164834000 myProjectID:myDatasetID.restoredTable
-  ```
+> **Note:** The legacy [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#basic) ( `roles/owner` ) doesn't include all the permissions granted by the BigQuery Admin ( `roles/bigquery.admin` ) role. You must grant an administrator role to any user who restores tables that have or had row-level access policies applied to them.
 
 ## Fail-safe
 

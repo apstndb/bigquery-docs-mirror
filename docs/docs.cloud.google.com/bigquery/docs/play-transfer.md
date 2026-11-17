@@ -85,9 +85,9 @@ Before you create a Google Play data transfer:
 - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Google Play data.
 - Find your Cloud Storage bucket:
-  1.  In the [Google Play console](https://play.google.com/apps/publish/) , click file_download **Download reports** and select **Reviews** , **Statistics** , or **Financial** .
+  1.  In the [Google Play console](https://play.google.com/apps/publish/) , click **Download reports** and select **Reviews** , **Statistics** , or **Financial** .
 
-  2.  To copy the ID for your Cloud Storage bucket, click content_copy **Copy Cloud Storage URI** . Your bucket ID begins with `gs://` . For example, for the reviews report, your ID is similar to the following:
+  2.  To copy the ID for your Cloud Storage bucket, click **Copy Cloud Storage URI** . Your bucket ID begins with `gs://` . For example, for the reviews report, your ID is similar to the following:
 
       ```
       gs://pubsite_prod_rev_01234567890987654321/reviews
@@ -150,7 +150,7 @@ To set up a Google Play data transfer:
 
 1.  Go to the Data transfers page in the Google Cloud console.
 
-2.  Click add **Create transfer** .
+2.  Click **Create transfer** .
 
 3.  On the **Create Transfer** page:
 

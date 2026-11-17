@@ -67,7 +67,7 @@ To open the *Introduction to notebooks in BigQuery Studio* template in notebook 
 
 1.  Go to the **Studio** page.
 
-2.  Click the arrow_drop_down arrow drop-down and then choose **Notebook \> All templates** .
+2.  Click the arrow drop-down and then choose **Notebook \> All templates** .
 
 3.  Alternatively, from the BigQuery Studio home page, click **View notebook gallery** .
 
@@ -101,7 +101,7 @@ Introduction to notebooks in BigQuery Studio contains text, SQL, visualization, 
 
 In this tutorial, you run the cells in the notebook individually so you can view the results in stages. To run the notebook:
 
-1.  In the **Query your data using SQL cells** section, hover over the SQL cell, and then click play_circle **Run cell** .
+1.  In the **Query your data using SQL cells** section, hover over the SQL cell, and then click **Run cell** .
 
     ![The run cell button in the SQL cell](https://docs.cloud.google.com/bigquery/images/run-sql-cell.png)
 
@@ -111,9 +111,9 @@ In this tutorial, you run the cells in the notebook individually so you can view
 
     ![The query results in BigQuery DataFrames](https://docs.cloud.google.com/bigquery/images/sql-cell-results.png)
 
-    > **Note:** To clear or copy the results, click more_horiz **Code cell output actions** .
+    > **Note:** To clear or copy the results, click **Code cell output actions** .
 
-3.  In the **Visualize data** section, hover over the visualization cell, and then click play_circle **Run cell** .
+3.  In the **Visualize data** section, hover over the visualization cell, and then click **Run cell** .
 
 4.  View the generated visualization.
 
@@ -121,7 +121,7 @@ In this tutorial, you run the cells in the notebook individually so you can view
 
     The result shows a time series chart that plots the daily average PM2.5 values in the `df` DataFrame you generated previously. This chart shows the trend in PM2.5 levels over time.
 
-5.  In the **Clean the data** section, hover over the code cell, and then click play_circle **Run cell** .
+5.  In the **Clean the data** section, hover over the code cell, and then click **Run cell** .
 
 6.  View the results. The results are displayed in a DataFrame.
 
@@ -137,7 +137,7 @@ In this tutorial, you run the cells in the notebook individually so you can view
     - Filter outliers.
     - Display the results in a BigQuery DataFrames named `df_cleaned` .
 
-7.  In the **Predict values using `AI.FORECAST`** section, hover over the SQL cell, and then click play_circle **Run cell** .
+7.  In the **Predict values using `AI.FORECAST`** section, hover over the SQL cell, and then click **Run cell** .
 
 8.  View the results. The query results are displayed in a DataFrame.
 
@@ -145,7 +145,7 @@ In this tutorial, you run the cells in the notebook individually so you can view
 
     This SQL cell runs a query that uses the `AI.FORECAST` function to forecast future average daily PM2.5 using the `df_cleaned` DataFrame you generated previously.
 
-9.  In the **Visualize data using Python** section, hover over the code cell, and then click play_circle **Run cell** .
+9.  In the **Visualize data using Python** section, hover over the code cell, and then click **Run cell** .
 
 10. View the results. The results are displayed in a chart.
 
@@ -181,7 +181,7 @@ Alternatively, to keep the project and delete the resources used in this tutoria
 
 2.  In the left pane, expand your project, and then click **Notebooks** .
 
-3.  For the notebook you're deleting, click more_vert **Open actions \> Delete** .
+3.  For the notebook you're deleting, click **Open actions \> Delete** .
 
 4.  In the **Delete notebook** dialog, click **Delete** to confirm.
 

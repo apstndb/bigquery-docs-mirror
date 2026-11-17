@@ -119,11 +119,11 @@ When you use Connected Sheets to create a chart, pivot table, formula, or other 
 
 1.  Select the cell or chart that you created.
 
-2.  Hold the pointer over refresh **Refresh** .
+2.  Hold the pointer over **Refresh** .
 
-3.  Optional: To refresh the query results in Connected Sheets, click refresh **Refresh** .
+3.  Optional: To refresh the query results in Connected Sheets, click **Refresh** .
 
-4.  To view the query in BigQuery, click info_outline **Query details on BigQuery** .
+4.  To view the query in BigQuery, click **Query details on BigQuery** .
 
     The query opens in the Google Cloud console.
 
@@ -133,15 +133,15 @@ To open a table in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset that contains the table that you want to open in Google Sheets.
 
-4.  Click **Overview \> Tables** , and next to your table name, click more_vert **View actions** , and then select **Open in \> Connected Sheets** .
+4.  Click **Overview \> Tables** , and next to your table name, click **View actions** , and then select **Open in \> Connected Sheets** .
 
 ### Open saved queries
 
@@ -151,13 +151,13 @@ To open a saved query in Connected Sheets, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Queries** . Find the saved query that you want to open in Connected Sheets.
 
-4.  Click more_vert **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
+4.  Click **Open actions** next to the saved query, and then click **Open in \> Connected Sheets** .
 
     Alternatively, click the name of the saved query to open it in the details pane, and then click **Open in \> Connected Sheets** .
 

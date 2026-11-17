@@ -252,7 +252,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
 
 6.  Optional: Add labels. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
 
-7.  Optional: Set up email notification reports to alert people about the status and results of a data quality scan job. In the **Notification report** section, click add **Add email ID** and enter up to five email addresses. Then, select the scenarios that you want to send reports for:
+7.  Optional: Set up email notification reports to alert people about the status and results of a data quality scan job. In the **Notification report** section, click **Add email ID** and enter up to five email addresses. Then, select the scenarios that you want to send reports for:
 
     - **Quality score (\<=)** : sends a report when a job succeeds with a data quality score that is lower than the specified target score. Enter a target quality score between 0 and 100.
     - **Job failures** : sends a report when the job itself fails, regardless of the data quality results.
@@ -260,7 +260,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
 
 8.  To create the scan, click **Create** .
 
-    If you set the schedule to radio_button_checked **On-demand** , you can also run the scan now by clicking **Run scan** .
+    If you set the schedule to **On-demand** , you can also run the scan now by clicking **Run scan** .
 
 ### gcloud
 
@@ -1209,11 +1209,11 @@ If the data quality scan results are published as Knowledge Catalog metadata, th
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Datasets** , and then click your dataset.
 
@@ -1550,8 +1550,8 @@ To enable the users in your organization to view the scan results, do the follow
 
 4.  Do the following:
 
-    - To grant access to a principal, click person_add **Grant access** . Grant the **Dataplex DataScan DataViewer** role to the associated principal.
-    - To remove access from a principal, select the principal that you want to remove the **Dataplex DataScan DataViewer** role from. Click person_remove **Remove access** , and then confirm when prompted.
+    - To grant access to a principal, click **Grant access** . Grant the **Dataplex DataScan DataViewer** role to the associated principal.
+    - To remove access from a principal, select the principal that you want to remove the **Dataplex DataScan DataViewer** role from. Click **Remove access** , and then confirm when prompted.
 
 ## Troubleshoot a data quality failure
 

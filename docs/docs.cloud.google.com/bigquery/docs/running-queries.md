@@ -27,7 +27,7 @@ You can run query jobs by using the following methods:
 - Programmatically call the [`jobs.query`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) or [`jobs.insert`](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method in the BigQuery [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) .
 - Use the BigQuery [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
-BigQuery saves query results to either a [temporary table (default) or permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you specify a permanent table as the destination table for the results, you can choose whether to append or overwrite an existing table, or create a new table with a unique name.
+BigQuery saves query results to either a [temporary table (default) or permanent table](https://docs.cloud.google.com/bigquery/docs/writing-results) . When you specify a permanent table as the destination table for the results, you can choose whether to append or overwrite an existing table, or create a new table with a unique name.
 
 > **Note:** If you query data from a project to data stored in a different project, the querying project is billed for the query job while the project storing the data is billed for the amount of data stored in BigQuery.
 
@@ -72,7 +72,7 @@ To run an interactive query, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
@@ -98,13 +98,13 @@ To run an interactive query, select one of the following options:
 
 5.  Optional: To select additional [query settings](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click **Edit** \> **Query settings** .
 
-6.  Click play_circle **Run** .
+6.  Click **Run** .
 
     If you don't specify a destination table, the query job writes the output to a temporary (cache) table.
 
     You can now explore the query results in the **Results** tab of the **Query results** pane.
 
-7.  Optional: To sort the query results by column, click arrow_drop_down **Open sort menu** next to the column name and select a sort order. If the estimated bytes processed for the sort is more than zero, then the number of bytes is displayed at the top of the menu.
+7.  Optional: To sort the query results by column, click **Open sort menu** next to the column name and select a sort order. If the estimated bytes processed for the sort is more than zero, then the number of bytes is displayed at the top of the menu.
 
 8.  Optional: To see visualization of your query results, go to the **Visualization** tab. You can zoom in or zoom out of the chart, download the chart as a PNG file, or toggle the legend visibility.
 
@@ -836,7 +836,7 @@ To run a batch query, select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
@@ -864,7 +864,7 @@ To run a batch query, select one of the following options:
 
 7.  Click **Save** .
 
-8.  Click play_circle **Run** .
+8.  Click **Run** .
 
     If you don't specify a destination table, the query job writes the output to a temporary (cache) table.
 
@@ -1158,13 +1158,13 @@ To construct a new query using the **Reference** panel, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  Click quick_reference_all **Reference** .
 
 4.  Click a recent or starred table or view. You can also use the search bar to find tables and views.
 
-5.  Click more_vert **View actions** , and then click **Insert query snippet** .
+5.  Click **View actions** , and then click **Insert query snippet** .
 
     ![Reference panel in query editor](https://docs.cloud.google.com/static/bigquery/images/reference-panel.png)
 
@@ -1216,7 +1216,7 @@ To run a query using optional job creation mode, select one of the following opt
 
 1.  Go to the **BigQuery** page.
 
-2.  Click add_box **SQL query** .
+2.  Click **SQL query** .
 
 3.  In the query editor, enter a valid GoogleSQL query.
 
@@ -1238,7 +1238,7 @@ To run a query using optional job creation mode, select one of the following opt
 
 4.  Click **Edit** \> **Query mode** \> **Optional job creation** . To confirm this choice, click **Confirm** .
 
-5.  Click play_circle **Run** .
+5.  Click **Run** .
 
 ### bq
 

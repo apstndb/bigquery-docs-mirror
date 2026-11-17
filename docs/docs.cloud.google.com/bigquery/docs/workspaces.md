@@ -36,11 +36,11 @@ To create a new workspace in a BigQuery repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository in which you want to create a workspace.
 
@@ -58,11 +58,11 @@ To create a new workspace in a third-party repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository in which you want to create a workspace.
 
@@ -86,19 +86,19 @@ To create a directory in a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  Click add **Open creation menu** .
+5.  Click **Open creation menu** .
 
 6.  Click **Create in repository \> Directory** .
 
@@ -124,19 +124,19 @@ To create a file in a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  Click add **Open creation menu** .
+5.  Click **Open creation menu** .
 
 6.  Click **Create in repository** and then click the type of file that you want to create.
 
@@ -152,19 +152,19 @@ To upload a file to a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  Click add **Open creation menu** .
+5.  Click **Open creation menu** .
 
 6.  Click **Upload to repository** and then click the type of file that you want to upload.
 
@@ -183,19 +183,19 @@ To delete a file from a workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  Select the file that you want to delete, click more_vert **View actions** , and then click **Delete** .
+5.  Select the file that you want to delete, click **View actions** , and then click **Delete** .
 
 6.  Click **Delete** to confirm.
 
@@ -235,17 +235,17 @@ To pull changes from your repository to your workspace, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
 5.  In the workspace pane, do the following:
 
@@ -266,17 +266,17 @@ To commit changes from your workspace to your repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
 5.  In the workspace pane, click **Commit ` X ` changes** .
 
@@ -300,17 +300,17 @@ To push changes from your workspace to your repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
 5.  In the workspace pane, do the following:
 
@@ -327,19 +327,19 @@ To revert uncommitted changes, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  In the workspace pane, click the arrow_drop_down arrow drop-down on the version control button, and then click **Revert to last commit** .
+5.  In the workspace pane, click the arrow drop-down on the version control button, and then click **Revert to last commit** .
 
 ### Resolve merge conflicts
 
@@ -361,17 +361,17 @@ To resolve a merge conflict, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
 5.  Select the affected file and edit it with your chosen changes.
 
@@ -385,19 +385,19 @@ To view commit history, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to work with.
 
 4.  Locate the workspace and then click **Open** .
 
-    This opens the workspace in the fork_right **Source control** pane.
+    This opens the workspace in the **Source control** pane.
 
-5.  In the workspace pane, click the arrow_drop_down arrow drop-down on the version control button, and then click **View commit history** .
+5.  In the workspace pane, click the arrow drop-down on the version control button, and then click **View commit history** .
 
 ## Delete a workspace
 
@@ -405,15 +405,15 @@ To delete a workspace and all its contents, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click fork_right **Source control** .
+2.  In the left pane, click **Source control** .
 
     ![Highlighted button for the Source control pane.](https://docs.cloud.google.com/static/bigquery/images/source-control-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  Select the repository that contains the workspace that you want to delete.
 
-4.  Locate your workspace, and then click more_vert **Open actions \> Delete** .
+4.  Locate your workspace, and then click **Open actions \> Delete** .
 
 5.  Click **Delete** .
 

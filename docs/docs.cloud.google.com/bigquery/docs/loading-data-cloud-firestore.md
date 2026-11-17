@@ -77,11 +77,11 @@ Sometimes Datastore terminology is used in the Google Cloud console and the bq c
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** .
+2.  In the left pane, click **Explorer** .
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
-4.  In the **Dataset info** section, click add_box **Create table** .
+4.  In the **Dataset info** section, click **Create table** .
 
 5.  In the **Create table** pane, specify the following details:
     1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:

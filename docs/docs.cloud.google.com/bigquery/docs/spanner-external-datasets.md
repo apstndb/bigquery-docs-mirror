@@ -38,11 +38,11 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
 
@@ -83,7 +83,7 @@ Use the [`CREATE CONNECTION` statement](https://docs.cloud.google.com/bigquery/d
     - `FRIENDLY_NAME` (optional): a descriptive name for the connection.
     - `DESCRIPTION` (optional): a description of the connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -426,15 +426,15 @@ To create an external dataset, do the following:
 
 1.  Open the BigQuery page in the Google Cloud console.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, select the project where you want to create the dataset.
 
-4.  Click more_vert **View actions** , and then click **Create dataset** .
+4.  Click **View actions** , and then click **Create dataset** .
 
 5.  On the **Create dataset** page, do the following:
 
@@ -484,7 +484,7 @@ Use the [`CREATE EXTERNAL SCHEMA` data definition language (DDL) statement](http
     - `LOCATION` : the location of your new dataset in BigQuery, for example, `us-central1` . After you create a dataset, you can't change its location.
     - (Optional) `CONNECTION_NAME` : the name of your Cloud resource connection.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -637,7 +637,7 @@ To get information on the tables in your external dataset, such as schema detail
 
 Queries against tables in Spanner external datasets use [Data Boost](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#data_boost) by default and it cannot be changed. Because of that you need [additional permissions](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#before_you_begin_2) to run such queries.
 
-Query results are [stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) . When you query Spanner, query results are by default saved in temporary tables. They can also optionally be saved as a new BigQuery table, joined with other tables, or merged with existing tables using [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
+Query results are [stored in BigQuery](https://docs.cloud.google.com/bigquery/docs/writing-results) . When you query Spanner, query results are by default saved in temporary tables. They can also optionally be saved as a new BigQuery table, joined with other tables, or merged with existing tables using [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) .
 
 ## Create a view in an external dataset
 

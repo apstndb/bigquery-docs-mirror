@@ -22,7 +22,7 @@ In the Google Cloud console, each session is assigned to an editor tab.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  Click add_box **Compose new query** . A new editor tab opens.
+2.  Click **Compose new query** . A new editor tab opens.
 
 3.  Click **Edit** \> **Query settings** . The **Query settings** panel appears.
 
@@ -176,7 +176,7 @@ Do the following to terminate your session:
     CALL BQ.ABORT_SESSION();
     ```
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -242,11 +242,11 @@ To get session IDs of active and inactive sessions, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
-    If you don't see the left pane, click last_page **Expand left pane** to open the pane.
+    If you don't see the left pane, click **Expand left pane** to open the pane.
 
 3.  In the **Explorer** pane, click **Job history** .
 
@@ -281,7 +281,7 @@ To get a list of your three most recent sessions including the active and termin
 
     Replace ` REGION_NAME ` with the name of the region in which to list sessions.
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
@@ -307,7 +307,7 @@ To view the history of a session in the Google Cloud console, you can filter you
 
 1.  In the Google Cloud console, go to the BigQuery page.
 
-2.  In the left pane, click explore **Explorer** :
+2.  In the left pane, click **Explorer** :
 
     ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
@@ -318,7 +318,7 @@ To view the history of a session in the Google Cloud console, you can filter you
     - To display information of your recent jobs, click **Personal history** .
     - To display information of recent jobs in your project, click **Project history** .
 
-5.  Click filter_list **Filter** and then select **Session ID** .
+5.  Click **Filter** and then select **Session ID** .
 
 6.  In the **Session ID** field, search for the session ID:
 
@@ -348,7 +348,7 @@ To view historical data for a specific session, first [get your session ID](http
     - ` REGION_NAME ` : the name of the region in which to view session data
     - ` SESSION_ID ` : the ID of the session for which to retrieve historical data
 
-3.  Click play_circle **Run** .
+3.  Click **Run** .
 
 For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
