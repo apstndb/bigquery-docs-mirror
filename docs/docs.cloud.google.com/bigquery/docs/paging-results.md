@@ -468,7 +468,7 @@ queryPagination();
 
 The [`QueryJob.result`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_result) method returns an iterable of the query results. Alternatively,
 
-1.  Read the [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_destination) property. If this property is not configured, it is set by the API to a reference to a [temporary anonymous table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) .
+1.  Read the [`QueryJob.destination`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_destination) property. If this property is not configured, it is set by the API to a reference to a [temporary anonymous table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary-table) .
 2.  Get the table schema with the [`Client.get_table`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_get_table) method.
 3.  Create an iterable over all rows in the destination table with the [`Client.list_rows`](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_list_rows) method.
 

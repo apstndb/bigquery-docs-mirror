@@ -1,4 +1,5 @@
 200 https://docs.cloud.google.com/bigquery/docs/migration/migration-validation
 200 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-rank
+200 https://docs.cloud.google.com/bigquery/docs/use-repositories-workspaces-intro
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo

@@ -358,7 +358,7 @@ A SQL translation with this configuration YAML file might look like the followin
 >
 > This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes a regular table to a [temporary table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) :
+The following configuration YAML changes a regular table to a [temporary table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary-table) :
 
 ```
 type: object_rewriter

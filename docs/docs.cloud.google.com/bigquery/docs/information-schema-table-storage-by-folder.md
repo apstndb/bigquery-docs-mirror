@@ -22,7 +22,7 @@ The `*_BYTES` columns in the table storage views include information about your 
 - Temporary tables created in [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . These tables are placed into datasets with generated names like "\_c018003e063d09570001ef33ae401fad6ab92a6a".
 - Temporary tables created in [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) ("scripts"). These tables are placed into datasets with generated names like "\_script72280c173c88442c3a7200183a50eeeaa4073719".
 
-Data stored in the [query results cache](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) is not billed to you and so is not included in the `*_BYTES` column values.
+Data stored in the [query results cache](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary-table) is not billed to you and so is not included in the `*_BYTES` column values.
 
 Clones and snapshots show `*_BYTES` column values as if they were complete tables, rather than showing the delta from the storage used by the base table, so they are an over-estimation. Your bill does account correctly for this delta in storage usage. For more information on the delta bytes stored and billed by clones and snapshots, see the [`TABLE_STORAGE_USAGE_TIMELINE` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) .
 
